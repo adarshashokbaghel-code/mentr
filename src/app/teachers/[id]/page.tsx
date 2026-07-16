@@ -6,6 +6,7 @@ import { SeoBreadcrumbs } from "@/components/seo/hub-page";
 import { breadcrumbJsonLd, JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { getTeacher, TEACHERS, type Teacher } from "@/lib/teachers";
+import { fetchLiveTeacher } from "@/lib/live-teacher-server";
 import {
   BadgeCheck,
   MapPin,
@@ -24,7 +25,6 @@ import {
 import { absoluteUrl } from "@/lib/seo";
 import { areaHubSlug, subjectHubSlug } from "@/lib/seo-hubs";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -36,34 +36,7 @@ export function generateStaticParams() {
 
 export const dynamicParams = true;
 
-/** Live faculty stored in MongoDB, served by the Express API. */
-async function fetchLiveTeacher(id: string): Promise<Teacher | null> {
-  if (!/^[a-f\d]{24}$/i.test(id)) return null;
-  try {
-    // The teachers API is auth-protected — forward the caller's session cookie
-    const cookieStore = await cookies();
-    const apiBase =
-      process.env.NODE_ENV === "development"
-        ? `http://localhost:${process.env.BACKEND_PORT || "5000"}`
-        : absoluteUrl("");
-    const res = await fetch(
-      `${apiBase}/api/teachers/${id}`,
-      { cache: "no-store", headers: { cookie: cookieStore.toString() } },
-    );
-    if (!res.ok) return null;
-    const data = (await res.json()) as {
-      teacher: Omit<Teacher, "lat" | "lng"> & {
-        lat: number | null;
-        lng: number | null;
-      };
-    };
-    return { ...data.teacher, lat: data.teacher.lat ?? NaN, lng: data.teacher.lng ?? NaN };
-  } catch {
-    return null;
-  }
-}
-
-/** Memoized so generateMetadata and the page hit the API only once */
+/** Memoized so generateMetadata and the page share one DB lookup. */
 const resolveTeacher = cache(async (id: string): Promise<Teacher | null> => {
   return getTeacher(id) ?? (await fetchLiveTeacher(id));
 });
