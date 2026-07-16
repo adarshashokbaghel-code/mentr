@@ -68,6 +68,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const logout = useCallback(async () => {
     try {
       await authApi.logout();
+    } catch {
+      // Clear local session even if the API is unreachable (CORS, offline, etc.)
     } finally {
       clearToken();
       setUser(null);
