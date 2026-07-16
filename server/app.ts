@@ -8,6 +8,8 @@ import connectionRoutes from "./routes/connections";
 import profileRoutes from "./routes/profile";
 import requirementRoutes from "./routes/requirements";
 import teacherRoutes from "./routes/teachers";
+import { getPublicTeacher } from "./public-teacher";
+import { getPublicTestimonialNames } from "./public-testimonial-names";
 
 const app = express();
 
@@ -75,6 +77,15 @@ app.get("/api/health", (_req, res) => {
 app.post("/api/auth/logout", (_req, res) => {
   clearAuthCookie(res);
   res.json({ message: "Logged out" });
+});
+
+// Public SEO profiles — mounted before the auth-gated teachers router.
+app.get("/api/teachers/public/:id", (req, res) => {
+  void getPublicTeacher(String(req.params.id || ""), res);
+});
+
+app.get("/api/testimonials/names", (_req, res) => {
+  void getPublicTestimonialNames(res);
 });
 
 app.use("/api/auth", authRoutes);
