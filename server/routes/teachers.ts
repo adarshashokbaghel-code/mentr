@@ -14,6 +14,29 @@ const router = Router();
 
 router.use(ensureDb);
 
+/** Public SEO profile — no auth, no phone number. Must stay above requireAuth. */
+router.get("/public/:id", async (req, res: Response) => {
+  try {
+    const id = String(req.params.id || "");
+    if (!/^[a-f\d]{24}$/i.test(id)) {
+      res.status(404).json({ error: "Teacher not found" });
+      return;
+    }
+
+    const user = await User.findById(id).lean();
+    if (!user || user.role === "parent" || !isProfileComplete(user)) {
+      res.status(404).json({ error: "Teacher not found" });
+      return;
+    }
+
+    const teacher = toPublicTeacher(user, NO_CONNECTION);
+    res.json({ teacher: JSON.parse(JSON.stringify(teacher)) });
+  } catch (error) {
+    console.error("public teacher error:", error);
+    res.status(500).json({ error: "Failed to load teacher" });
+  }
+});
+
 // Teacher data (names, phone numbers, availability) is for signed-in
 // users only — the find-teachers experience is fully login-gated.
 router.use(requireAuth);

@@ -7,6 +7,7 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 const backendPort = process.env.BACKEND_PORT || "5000";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["mongoose"],
   turbopack: {
     // Parent ~/package-lock.json was being picked as the workspace root,
     // breaking PostCSS/Tailwind resolution and hanging page loads.
