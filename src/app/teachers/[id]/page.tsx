@@ -39,12 +39,15 @@ export const dynamicParams = true;
 /** Live faculty stored in MongoDB, served by the Express API. */
 async function fetchLiveTeacher(id: string): Promise<Teacher | null> {
   if (!/^[a-f\d]{24}$/i.test(id)) return null;
-  const backendPort = process.env.BACKEND_PORT || "5000";
   try {
     // The teachers API is auth-protected — forward the caller's session cookie
     const cookieStore = await cookies();
+    const apiBase =
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:${process.env.BACKEND_PORT || "5000"}`
+        : absoluteUrl("");
     const res = await fetch(
-      `http://localhost:${backendPort}/api/teachers/${id}`,
+      `${apiBase}/api/teachers/${id}`,
       { cache: "no-store", headers: { cookie: cookieStore.toString() } },
     );
     if (!res.ok) return null;

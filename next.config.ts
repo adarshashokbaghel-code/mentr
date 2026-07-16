@@ -21,8 +21,12 @@ const nextConfig: NextConfig = {
     ],
   },
   async rewrites() {
-    // All /api traffic goes to the Express backend — there are no
-    // Next.js API routes in this app.
+    // Local dev: proxy /api to the standalone Express process (tsx watch).
+    // Production (Vercel): /api is served by pages/api/[[...all]].ts.
+    if (process.env.NODE_ENV !== "development") {
+      return [];
+    }
+
     return [
       {
         source: "/api/:path*",

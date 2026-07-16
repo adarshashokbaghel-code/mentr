@@ -89,7 +89,7 @@ export function ConnectButton({
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          openRoleChooser(pathname);
+          openRoleChooser(pathname ?? undefined);
         }}
         className={className}
       >

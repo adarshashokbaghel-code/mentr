@@ -17,7 +17,7 @@ function ParentProfilingContent() {
   const { user, loading, setUser } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || undefined;
+  const next = searchParams?.get("next") || undefined;
 
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");

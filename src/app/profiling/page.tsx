@@ -332,7 +332,7 @@ function ProfilingContent() {
   const canJumpSteps = Boolean(user?.profileCompleted);
   useEffect(() => {
     if (!canJumpSteps) return;
-    const slug = searchParams.get("step");
+    const slug = searchParams?.get("step");
     const idx = STEP_SLUGS.indexOf(slug as (typeof STEP_SLUGS)[number]);
     if (idx > 0) setStep(idx);
   }, [canJumpSteps, searchParams]);

@@ -12,7 +12,7 @@ function ParentLoginContent() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") || undefined;
+  const next = searchParams?.get("next") || undefined;
 
   useEffect(() => {
     if (!loading && user) {

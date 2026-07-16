@@ -188,7 +188,7 @@ export function TeacherConnectPanel({
             <button
               type="button"
               onClick={() =>
-                user ? setModalOpen(true) : openRoleChooser(pathname)
+                user ? setModalOpen(true) : openRoleChooser(pathname ?? undefined)
               }
               className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-coral text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-coral-dark active:scale-[0.98] sm:w-auto sm:px-8"
             >

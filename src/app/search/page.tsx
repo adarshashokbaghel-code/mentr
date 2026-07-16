@@ -127,10 +127,10 @@ function SearchAuthGate() {
 function SearchContent() {
   const { user, loading: authLoading } = useAuth();
   const searchParams = useSearchParams();
-  const initialSubject = searchParams.get("subject") || undefined;
-  const initialArea = searchParams.get("area") || undefined;
+  const initialSubject = searchParams?.get("subject") || undefined;
+  const initialArea = searchParams?.get("area") || undefined;
   const initialView =
-    searchParams.get("view") === "map" ? "map" : "list";
+    searchParams?.get("view") === "map" ? "map" : "list";
 
   const [filters, setFilters] = useState<SearchFiltersState>({
     ...DEFAULT_FILTERS,
