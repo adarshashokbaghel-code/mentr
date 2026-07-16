@@ -67,6 +67,10 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok", service: "champs-api" });
 });
 
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", service: "champs-api" });
+});
+
 // No MongoDB — must respond instantly on Vercel serverless.
 app.post("/api/auth/logout", (_req, res) => {
   clearAuthCookie(res);

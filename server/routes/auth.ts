@@ -24,7 +24,7 @@ import { ensureDb } from "../middleware/ensure-db";
 
 const router = Router();
 
-router.use(ensureDb);
+// ensureDb is per-route so /me returns 401 instantly when logged out (no Mongo wait).
 
 // ————————————————————————————————————————————————————————————————
 // Serialization & validation helpers
@@ -111,7 +111,7 @@ setInterval(() => {
 // POST /send-otp — { email, intent: "login" | "signup", role: "faculty" | "parent" }
 // ————————————————————————————————————————————————————————————————
 
-router.post("/send-otp", async (req: Request, res: Response) => {
+router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
   try {
     if (ipLimited(req.ip ?? "unknown", "send")) {
       res.status(429).json({ error: "Too many requests. Try again later." });
@@ -241,7 +241,7 @@ router.post("/send-otp", async (req: Request, res: Response) => {
 // the client cannot switch portals between send and verify.
 // ————————————————————————————————————————————————————————————————
 
-router.post("/verify-otp", async (req: Request, res: Response) => {
+router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
   try {
     if (ipLimited(req.ip ?? "unknown", "verify")) {
       res.status(429).json({ error: "Too many requests. Try again later." });
@@ -360,7 +360,7 @@ router.post("/verify-otp", async (req: Request, res: Response) => {
 // Session endpoints
 // ————————————————————————————————————————————————————————————————
 
-router.get("/me", requireAuth, async (req: AuthenticatedRequest, res: Response) => {
+router.get("/me", requireAuth, ensureDb, async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = await User.findById(req.auth!.sub);
     if (!user) {
