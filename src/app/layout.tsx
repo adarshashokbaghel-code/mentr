@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/auth/app-providers";
 import {
+  GOOGLE_SITE_VERIFICATION,
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
   SITE_BRAND,
@@ -61,6 +62,9 @@ export const metadata: Metadata = {
     },
   },
   formatDetection: { telephone: false },
+  ...(GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({
