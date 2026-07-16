@@ -22,6 +22,7 @@ const navLinks = [
   { label: "For parents", href: "/parents" },
   { label: "For faculty", href: "/for-faculty" },
   { label: "FAQ", href: "/faq" },
+  { label: "Blog", href: "/blog" },
 ];
 
 export function Navbar() {

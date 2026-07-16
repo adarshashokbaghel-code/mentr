@@ -420,7 +420,9 @@ export function LpTestimonialCard({
           {testimonialInitial(name)}
         </div>
         <div>
-          <p className="font-bold text-ink">{testimonialName(name)}</p>
+          {testimonialName(name) ? (
+            <p className="font-bold text-ink">{testimonialName(name)}</p>
+          ) : null}
           <p className="text-sm text-muted">{role}</p>
         </div>
       </div>

@@ -5,6 +5,7 @@ import {
   PARENT_AUTH_TESTIMONIALS,
   testimonialName,
 } from "@/lib/demo-users";
+import { useTestimonialNames } from "@/hooks/use-testimonial-names";
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import { TestimonialAvatar } from "@/components/ui/testimonial-avatar";
@@ -42,9 +43,11 @@ function AuthTestimonials({
             className="h-10 w-10 rounded-full"
           />
           <div>
-            <p className="text-sm font-semibold text-ink">
-              {testimonialName(current.name)}
-            </p>
+            {testimonialName(current.name) ? (
+              <p className="text-sm font-semibold text-ink">
+                {testimonialName(current.name)}
+              </p>
+            ) : null}
             <p className="text-xs text-muted">{current.role}</p>
           </div>
         </div>
@@ -77,6 +80,11 @@ export function FacultyAuthShell({
   variant?: "faculty" | "parent";
 }) {
   const isParent = variant === "parent";
+  const baseTestimonials = isParent
+    ? PARENT_AUTH_TESTIMONIALS
+    : FACULTY_AUTH_TESTIMONIALS;
+  const testimonials = useTestimonialNames(baseTestimonials);
+
   return (
     <div className="flex min-h-screen bg-white">
       <aside className="relative hidden w-[46%] flex-col overflow-hidden border-r border-hairline bg-cream-band px-10 py-10 lg:flex xl:px-12">
@@ -96,9 +104,7 @@ export function FacultyAuthShell({
               </>
             )}
           </h2>
-          <AuthTestimonials
-            testimonials={isParent ? PARENT_AUTH_TESTIMONIALS : FACULTY_AUTH_TESTIMONIALS}
-          />
+          <AuthTestimonials testimonials={testimonials} />
         </div>
 
         <p className="relative z-10 shrink-0 text-xs text-muted">
@@ -113,7 +119,7 @@ export function FacultyAuthShell({
             href={isParent ? "/faculty" : "/parent"}
             className="text-sm text-muted hover:text-ink"
           >
-            {isParent ? "Are you a tutor? List free" : "Need a teacher? Parent login"}
+            {isParent ? "Tutor? List free" : "Need a teacher? Parent login"}
           </Link>
         </header>
 

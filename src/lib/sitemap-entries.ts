@@ -1,3 +1,4 @@
+import { BLOG_PILLARS, BLOG_POSTS } from "@/lib/blog-posts";
 import { absoluteUrl } from "@/lib/seo";
 import {
   EXAM_PREP_PAGES,
@@ -41,6 +42,11 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/how-it-works", 0.8, "weekly"),
     entry("/pricing", 0.75, "monthly"),
     entry("/faq", 0.85, "weekly"),
+    entry("/blog", 0.85, "weekly"),
+    ...BLOG_PILLARS.map((p) =>
+      entry(`/blog/category/${p.id}`, 0.75, "weekly"),
+    ),
+    ...BLOG_POSTS.map((p) => entry(`/blog/${p.slug}`, 0.7, "monthly")),
     entry("/about", 0.7, "monthly"),
     entry("/contact", 0.5, "yearly"),
     entry("/faculty/signup", 0.7, "monthly"),

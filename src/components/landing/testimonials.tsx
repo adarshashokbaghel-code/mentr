@@ -1,7 +1,12 @@
 import { TestimonialAvatar } from "@/components/ui/testimonial-avatar";
 import { HOME_TESTIMONIALS, testimonialName } from "@/lib/demo-users";
+import { enrichTestimonials } from "@/lib/testimonial-names";
+import { fetchTestimonialNameMaps } from "@/lib/testimonial-names-server";
 
-export function Testimonials() {
+export async function Testimonials() {
+  const maps = await fetchTestimonialNameMaps();
+  const items = enrichTestimonials(HOME_TESTIMONIALS, maps);
+
   return (
     <section id="testimonials" className="bg-cream-band py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
@@ -22,7 +27,7 @@ export function Testimonials() {
         </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {HOME_TESTIMONIALS.map((item, i) => (
+          {items.map((item, i) => (
             <article
               key={i}
               className={`flex flex-col rounded-lg border border-hairline p-6 sm:p-7 ${item.tint}`}
@@ -33,9 +38,11 @@ export function Testimonials() {
               <div className="mt-6 flex items-center gap-3 border-t border-hairline/80 pt-5">
                 <TestimonialAvatar name={item.name} className="h-11 w-11" />
                 <div>
-                  <p className="font-semibold text-ink">
-                    {testimonialName(item.name)}
-                  </p>
+                  {testimonialName(item.name) ? (
+                    <p className="font-semibold text-ink">
+                      {testimonialName(item.name)}
+                    </p>
+                  ) : null}
                   <p className="text-sm text-muted">{item.role}</p>
                 </div>
               </div>

@@ -6,6 +6,7 @@ import { BrowserFrame } from "@/components/ui/browser-frame";
 import { Button } from "@/components/ui/button";
 import { ConnectButton } from "@/components/connect/connect-button";
 import { PARENT_LP_TESTIMONIALS } from "@/lib/demo-users";
+import { useTestimonialNames } from "@/hooks/use-testimonial-names";
 import { TEACHERS, type Teacher } from "@/lib/teachers";
 import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -791,12 +792,14 @@ function RequirementBoardSection() {
 }
 
 function ParentTestimonials() {
+  const items = useTestimonialNames(parentTestimonials);
+
   return (
     <section className="bg-cream-band py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="05" eyebrow="From the community" title="Parents & tutors." accent="Same free platform." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {parentTestimonials.map((item, i) => (
+          {items.map((item, i) => (
             <LpTestimonialCard key={i} {...item} />
           ))}
         </div>

@@ -35,6 +35,13 @@ const columns: Record<string, FooterLink[]> = {
     { label: "Terms", href: "/terms" },
     { label: "Contact", href: "/contact" },
   ],
+  Resources: [
+    { label: "All guides", href: "/blog" },
+    { label: "How to find a tutor", href: "/blog/how-to-find-a-good-home-tutor" },
+    { label: "Tutor fees in Bengaluru", href: "/blog/home-tutor-cost-bengaluru" },
+    { label: "Become a home tutor", href: "/blog/how-to-become-a-home-tutor-india" },
+    { label: "Mentr vs UrbanPro", href: "/blog/mentr-vs-urbanpro" },
+  ],
 };
 
 export function Footer() {
@@ -63,7 +70,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
             {Object.entries(columns).map(([title, links]) => (
               <div key={title}>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-white/40">

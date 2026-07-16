@@ -265,13 +265,13 @@ export const DEMO_REQUIREMENTS: DemoRequirement[] = [
   },
 ];
 
-/** Shown on marketing testimonials until we pull real parent / mentor names from the DB. */
+/** Fallback when a testimonial has no DB match — prefer hiding the label over showing this. */
 export const PLACEHOLDER_USER = "Unknown user";
 export const PLACEHOLDER_INITIAL = "U";
 
 export function testimonialName(name?: string | null): string {
   const trimmed = name?.trim();
-  return trimmed || PLACEHOLDER_USER;
+  return trimmed || "";
 }
 
 export function testimonialInitial(name?: string | null): string {
@@ -290,6 +290,10 @@ export type TestimonialItem = {
   tint: string;
   /** Optional — when set, avatar + label use the real DB name */
   name?: string;
+  /** Match a parent in the DB by area, e.g. "Jayanagar" */
+  parentArea?: string;
+  /** Match a faculty member in the DB by email */
+  facultyEmail?: string;
 };
 
 export const HOME_TESTIMONIALS: TestimonialItem[] = [
@@ -298,18 +302,21 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
       "Posted our Class 7 maths requirement and got two pitches the same evening. Connected on WhatsApp after the tutor accepted — no agent in between.",
     role: "Parent · Jayanagar",
     tint: "bg-lavender",
+    parentArea: "Jayanagar",
   },
   {
     quote:
       "Listed as a career coach and parents started reaching out within days. I keep every rupee — the dashboard for open slots is all I need.",
     role: "Faculty · Career guidance",
     tint: "bg-butter",
+    facultyEmail: "demo-mentor-suresh@mentr.local",
   },
   {
     quote:
       "As a JEE mentor I don't want a platform taking a cut. Mentr lists me, serious parents send connect requests, and we move to WhatsApp once I accept.",
     role: "Mentor · Exam prep",
     tint: "bg-sage-wash",
+    facultyEmail: "demo-mentor-vikram@mentr.local",
   },
 ];
 
@@ -319,18 +326,21 @@ export const PARENT_LP_TESTIMONIALS: TestimonialItem[] = [
       "Found a Class 10 English tutor in one evening. Sent a connect request, they accepted, and we started the same week on WhatsApp. Zero fees.",
     role: "Parent · HSR Layout",
     tint: "bg-lavender",
+    parentArea: "HSR Layout",
   },
   {
     quote:
       "Posted our requirement for physics prep. Two tutors pitched within a day. Picked one, connected, and arranged fees directly.",
     role: "Parent · Koramangala",
     tint: "bg-butter",
+    parentArea: "Koramangala",
   },
   {
     quote:
       "I was tired of lead platforms gating contact. Mentr let me search, read profiles, and send a connect request myself. Completely free.",
     role: "Parent · Whitefield",
     tint: "bg-sage-wash",
+    parentArea: "Whitefield",
   },
 ];
 
@@ -340,18 +350,21 @@ export const FACULTY_LP_TESTIMONIALS: TestimonialItem[] = [
       "I was spending on lead coins elsewhere for parents who never replied. On Mentr I listed free and started getting connect requests within a week. I keep every rupee.",
     role: "Faculty · JEE prep",
     tint: "bg-cream-band",
+    facultyEmail: "demo-mentor-vikram@mentr.local",
   },
   {
     quote:
       "The requirements board lets parents post what they need and I pitch. If they accept, we're connected — no agency taking a share of my fees.",
     role: "Faculty · English",
     tint: "bg-lavender",
+    facultyEmail: "demo-mentor-neha@mentr.local",
   },
   {
     quote:
       "Simple dashboard, toggle slots after WhatsApp bookings, and only serious parents reach out through connect requests.",
     role: "Faculty · Career guidance",
     tint: "bg-sage-wash",
+    facultyEmail: "demo-mentor-suresh@mentr.local",
   },
 ];
 
@@ -361,18 +374,21 @@ export const PARENT_AUTH_TESTIMONIALS: TestimonialItem[] = [
       "Found a physics tutor nearby and sent a connect request the same evening. Once they accepted, we arranged classes on WhatsApp.",
     role: "Parent · Koramangala",
     tint: "bg-lavender",
+    parentArea: "Koramangala",
   },
   {
     quote:
       "No middlemen, no lead fees baked into the rate. We talk directly and agree on everything.",
     role: "Parent · Indiranagar",
     tint: "bg-butter",
+    parentArea: "Indiranagar",
   },
   {
     quote:
       "The open-slots view is honest. If someone is booked, I just pick the next tutor nearby.",
     role: "Parent · HSR Layout",
     tint: "bg-sage-wash",
+    parentArea: "HSR Layout",
   },
 ];
 
@@ -382,17 +398,20 @@ export const FACULTY_AUTH_TESTIMONIALS: TestimonialItem[] = [
       "Listed my slots in a few minutes. Parents reach out after I accept their request — I keep what I earn.",
     role: "Faculty · Career guidance",
     tint: "bg-cream-band",
+    facultyEmail: "demo-mentor-suresh@mentr.local",
   },
   {
     quote:
       "I left platforms that charged for leads. Here parents find me and we connect on WhatsApp directly.",
     role: "Faculty · English",
     tint: "bg-lavender",
+    facultyEmail: "demo-mentor-neha@mentr.local",
   },
   {
     quote:
       "Dashboard is basic in a good way — open or taken. That's all I need.",
     role: "Faculty · Exam prep",
     tint: "bg-butter",
+    facultyEmail: "demo-mentor-vikram@mentr.local",
   },
 ];
