@@ -18,13 +18,25 @@ const allowedOrigins = new Set([
   "http://localhost:3000",
   "http://127.0.0.1:3000",
   "https://mentr.in",
+  "http://mentr.in",
+  "http://www.mentr.in",
+  "http://localhost:3001",
   "https://www.mentr.in",
 ]);
+
+/** Allow Next.js dev on any local port (3000, 3001, …). */
+function isLocalDevOrigin(origin: string): boolean {
+  return /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
+}
 
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.has(origin)) {
+      if (
+        !origin ||
+        allowedOrigins.has(origin) ||
+        (process.env.NODE_ENV !== "production" && isLocalDevOrigin(origin))
+      ) {
         callback(null, true);
         return;
       }

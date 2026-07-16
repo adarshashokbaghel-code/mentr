@@ -66,3 +66,7 @@ export function absoluteUrl(path = "/"): string {
 /** Paste the content value from Google Search Console → HTML tag method. */
 export const GOOGLE_SITE_VERIFICATION =
   process.env.GOOGLE_SITE_VERIFICATION || process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+
+/** Google Analytics measurement ID (gtag.js), e.g. G-ME7KM87RG4 */
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ME7KM87RG4";
