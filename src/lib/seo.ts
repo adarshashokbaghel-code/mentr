@@ -5,7 +5,7 @@
  * it feeds metadataBase, canonicals, the sitemap and robots.txt.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://mentr.in"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.mentr.in"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Mentr";
@@ -62,3 +62,7 @@ export const PARENT_ORG_JSON_LD = {
 export function absoluteUrl(path = "/"): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
+
+/** Paste the content value from Google Search Console → HTML tag method. */
+export const GOOGLE_SITE_VERIFICATION =
+  process.env.GOOGLE_SITE_VERIFICATION || process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;

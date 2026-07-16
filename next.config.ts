@@ -33,6 +33,12 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: "/:path*",
+        has: [{ type: "host", value: "mentr.in" }],
+        destination: "https://www.mentr.in/:path*",
+        permanent: true,
+      },
+      {
         source: "/become-a-mentor-bengaluru",
         destination: "/for-faculty",
         permanent: true,
@@ -40,6 +46,22 @@ const nextConfig: NextConfig = {
       {
         source: "/parents/bengaluru",
         destination: "/parents",
+        permanent: true,
+      },
+      // Legacy WordPress sitemaps (2021) → current Next.js sitemap index
+      {
+        source: "/sitemap_:segment(\\d+)_:segment2(\\d+).xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+      {
+        source: "/sitemapa_:segment(\\d+)_:segment2(\\d+).xml",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
+      {
+        source: "/wp-sitemap.xml",
+        destination: "/sitemap.xml",
         permanent: true,
       },
     ];
