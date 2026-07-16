@@ -1,13 +1,25 @@
-import serverless from "serverless-http";
+import type { NextApiRequest, NextApiResponse } from "next";
 import app from "../../../server/app";
 
 export const config = {
   api: {
     bodyParser: false,
-    // Required when Express/serverless-http owns res.end() — without this Next.js
-    // waits forever and Vercel returns FUNCTION_INVOCATION_TIMEOUT.
     externalResolver: true,
   },
 };
 
-export default serverless(app);
+/**
+ * Forward Next.js req/res to Express. Must resolve only after `res.finish`
+ * so Next/Vercel does not stall until FUNCTION_INVOCATION_TIMEOUT.
+ */
+export default function apiHandler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+): Promise<void> {
+  return new Promise((resolve, reject) => {
+    res.once("finish", resolve);
+    res.once("close", resolve);
+    res.once("error", reject);
+    app(req, res);
+  });
+}
