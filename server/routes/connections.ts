@@ -2,10 +2,12 @@ import { Router, Response } from "express";
 import { Connection, type IConnection } from "../models/Connection";
 import { User, type IUser } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
+import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
 
 const router = Router();
 
+router.use(ensureDb);
 router.use(requireAuth);
 
 const MESSAGE_MIN = 10;

@@ -10,9 +10,12 @@ import {
 } from "../models/User";
 import { ProfileView, type IProfileView } from "../models/ProfileView";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
+import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete, serializeUser } from "./auth";
 
 const router = Router();
+
+router.use(ensureDb);
 
 const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
 const PHONE_RE = /^\+?[\d\s-]{10,15}$/;

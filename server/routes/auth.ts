@@ -17,12 +17,14 @@ import { sendOtpEmail } from "../services/mail";
 import { signAuthToken } from "../services/jwt";
 import {
   AuthenticatedRequest,
-  clearAuthCookie,
   requireAuth,
   setAuthCookie,
 } from "../middleware/auth";
+import { ensureDb } from "../middleware/ensure-db";
 
 const router = Router();
+
+router.use(ensureDb);
 
 // ————————————————————————————————————————————————————————————————
 // Serialization & validation helpers
@@ -371,11 +373,6 @@ router.get("/me", requireAuth, async (req: AuthenticatedRequest, res: Response) 
     console.error("me error:", error);
     res.status(500).json({ error: "Failed to fetch session" });
   }
-});
-
-router.post("/logout", (_req: Request, res: Response) => {
-  clearAuthCookie(res);
-  res.json({ message: "Logged out" });
 });
 
 export default router;

@@ -10,9 +10,12 @@ import {
 } from "../models/Requirement";
 import { TEACHING_MODES, User, type TeachingMode } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
+import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
 
 const router = Router();
+
+router.use(ensureDb);
 
 router.use(requireAuth);
 
