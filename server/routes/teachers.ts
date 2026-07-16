@@ -3,9 +3,12 @@ import { Connection, type IConnection } from "../models/Connection";
 import { ProfileView } from "../models/ProfileView";
 import { User, type IUser, type IAvailabilitySlot } from "../models/User";
 import { requireAuth, type AuthenticatedRequest } from "../middleware/auth";
+import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
 
 const router = Router();
+
+router.use(ensureDb);
 
 // Teacher data (names, phone numbers, availability) is for signed-in
 // users only — the find-teachers experience is fully login-gated.

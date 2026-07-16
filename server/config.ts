@@ -27,7 +27,11 @@ export const config = {
   jwtSecret: requireEnv("JWT_SECRET"),
   emailUser: requireEnv("EMAIL_USER"),
   emailPass: requireEnv("EMAIL_PASS").replace(/\s/g, ""),
-  frontendUrl: process.env.FRONTEND_URL || "http://localhost:3000",
+  frontendUrl:
+    process.env.FRONTEND_URL ||
+    (process.env.VERCEL === "1"
+      ? "https://www.mentr.in"
+      : "http://localhost:3000"),
   cookieName: "champs_token",
   otp: {
     length: 6,

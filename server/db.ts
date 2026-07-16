@@ -6,17 +6,9 @@ import { Requirement } from "./models/Requirement";
 import { User } from "./models/User";
 
 let isConnected = false;
+let connectPromise: Promise<void> | null = null;
 
-export async function connectDb(): Promise<void> {
-  if (isConnected) return;
-
-  const uri = getMongoUriWithDb();
-  await mongoose.connect(uri);
-  isConnected = true;
-  console.log("MongoDB connected → champs database");
-
-  // Reconcile indexes with the schemas (drops stale ones, e.g. the old
-  // expiresAt TTL index that would purge rows before rate-limit accounting).
+async function syncIndexesOnce(): Promise<void> {
   try {
     await Promise.all([
       OtpSession.syncIndexes(),
@@ -27,6 +19,34 @@ export async function connectDb(): Promise<void> {
   } catch (err) {
     console.error("index sync failed:", err);
   }
+}
+
+export async function connectDb(): Promise<void> {
+  if (isConnected) return;
+
+  if (!connectPromise) {
+    const uri = getMongoUriWithDb();
+    connectPromise = mongoose
+      .connect(uri, {
+        serverSelectionTimeoutMS: 8_000,
+        connectTimeoutMS: 8_000,
+        maxPoolSize: 10,
+      })
+      .then(async () => {
+        isConnected = true;
+        console.log("MongoDB connected → champs database");
+
+        // Index reconciliation is slow on serverless cold starts — dev only.
+        if (process.env.VERCEL !== "1") {
+          await syncIndexesOnce();
+        }
+      })
+      .finally(() => {
+        connectPromise = null;
+      });
+  }
+
+  await connectPromise;
 }
 
 export async function disconnectDb(): Promise<void> {
