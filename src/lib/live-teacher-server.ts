@@ -7,22 +7,21 @@ export async function fetchLiveTeacher(id: string): Promise<Teacher | null> {
   try {
     const { connectDb } = await import("../../server/db");
     const { User } = await import("../../server/models/User");
-    const { isProfileComplete } = await import("../../server/routes/auth");
+    const { isProfileComplete } = await import(
+      "../../server/lib/profile-complete"
+    );
     const { toPublicTeacher } = await import("../../server/serialize-teacher");
 
     await connectDb();
 
-    const user = await User.findById(id);
+    const user = await User.findById(id).lean();
     if (!user || user.role === "parent" || !isProfileComplete(user)) {
       return null;
     }
 
     const teacher = toPublicTeacher(user);
-    return {
-      ...teacher,
-      lat: teacher.lat ?? NaN,
-      lng: teacher.lng ?? NaN,
-    };
+    // RSC requires plain JSON-serializable props for client components.
+    return JSON.parse(JSON.stringify(teacher)) as Teacher;
   } catch (err) {
     console.error("fetchLiveTeacher error:", err);
     return null;

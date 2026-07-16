@@ -30,6 +30,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return TEACHERS.map((t) => ({ id: t.id }));
 }

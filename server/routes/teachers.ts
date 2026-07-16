@@ -8,7 +8,7 @@ import {
 } from "../serialize-teacher";
 import { requireAuth, type AuthenticatedRequest } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
-import { isProfileComplete } from "./auth";
+import { isProfileComplete } from "../lib/profile-complete";
 
 const router = Router();
 

@@ -21,6 +21,7 @@ import {
   setAuthCookie,
 } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
+import { isProfileComplete } from "../lib/profile-complete";
 
 const router = Router();
 
@@ -30,14 +31,7 @@ const router = Router();
 // Serialization & validation helpers
 // ————————————————————————————————————————————————————————————————
 
-export function isProfileComplete(user: IUser): boolean {
-  if (user.profileCompleted) return true;
-  if (user.role === "parent") {
-    return Boolean(user.parentProfile?.name && user.parentProfile?.phoneNumber);
-  }
-  // Legacy faculty accounts created before the profiling flow
-  return Boolean(user.profile?.name && user.profile?.phoneNumber);
-}
+export { isProfileComplete } from "../lib/profile-complete";
 
 export function serializeUser(user: IUser) {
   return {

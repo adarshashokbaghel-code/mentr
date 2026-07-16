@@ -135,9 +135,9 @@ export function toPublicTeacher(
     timezone,
     timeFormat: fmt,
     availability: (p.availability || []).map((s) => ({
-      day: s.day,
-      start: s.start,
-      end: s.end,
+      day: String(s.day),
+      start: String(s.start),
+      end: String(s.end),
       booked: Boolean(s.booked),
     })),
     phone: conn.status === "accepted" ? conn.phone : null,
