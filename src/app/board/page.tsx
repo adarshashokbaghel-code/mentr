@@ -28,7 +28,7 @@ export default function BoardPage() {
       <>
         <Navbar />
         <main className="min-h-screen pb-20">
-          <div className="mx-auto w-full max-w-[1680px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
+          <div className="mx-auto w-full max-w-[1400px] px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
             <Skeleton className="h-14 rounded-lg bg-white" />
             <div className="mt-6 grid gap-6 2xl:grid-cols-[minmax(0,220px)_minmax(0,1fr)_minmax(0,260px)] xl:grid-cols-[minmax(0,1fr)_minmax(0,260px)]">
               <Skeleton className="hidden h-72 rounded-xl bg-white xl:block" />
@@ -54,7 +54,7 @@ export default function BoardPage() {
     <>
       <Navbar />
       <main className="min-h-screen pb-20">
-        <div className="mx-auto w-full max-w-[1680px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
+        <div className="mx-auto w-full max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
           <header className="mb-6 border-b border-hairline pb-5">
             <h1 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
               Requirements board

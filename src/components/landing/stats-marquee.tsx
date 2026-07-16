@@ -17,9 +17,9 @@ export function StatsMarquee() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className={`border-b border-r border-hairline px-6 py-9 text-center last:border-r-0 sm:px-8 sm:py-11 md:border-b-0 ${stat.tint}`}
+              className={`border-b border-r border-hairline px-4 py-6 text-center last:border-r-0 sm:px-6 sm:py-10 md:border-b-0 ${stat.tint}`}
             >
-              <p className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+              <p className="text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
                 {stat.value}
               </p>
               <p className="mt-2 text-sm font-medium text-muted">{stat.label}</p>

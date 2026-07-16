@@ -119,6 +119,8 @@ function WorldMapCanvas({ activeIdx }: { activeIdx: number }) {
         src={WORLD_MAP_URL}
         alt=""
         className="global-map-bg absolute inset-0 block h-full w-full"
+        loading="lazy"
+        decoding="async"
         draggable={false}
       />
 
@@ -212,19 +214,19 @@ export function GlobalReachMap({
     <section
       id={id}
       className={cn(
-        "border-y border-hairline bg-cream py-16 sm:py-20",
+        "border-y border-hairline bg-cream py-10 sm:py-16",
         className,
       )}
     >
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
-          <div>
+        <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-14">
+          <div className="text-center lg:text-left">
             <p className="text-sm font-semibold text-sage">Worldwide access</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[40px]">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[40px]">
               Local when you&apos;re nearby.
               <span className="block text-coral">Global when you&apos;re not.</span>
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-muted">
+            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted lg:mx-0">
               {GLOBAL_REACH_LINE}
             </p>
 

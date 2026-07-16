@@ -39,7 +39,7 @@ export default function ContactPage() {
     <>
       <Navbar />
       <main className="min-h-screen">
-        <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+        <section className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-16">
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral">
             Contact
           </p>

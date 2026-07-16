@@ -158,7 +158,7 @@ function HeroSearchPanel() {
             />
           </div>
 
-          <div className="flex gap-1.5 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex flex-wrap gap-1.5 sm:flex-nowrap sm:overflow-x-auto sm:pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {FILTERS.map((f) => (
               <button
                 key={f}
@@ -288,33 +288,35 @@ function HeroInteractiveMock() {
   const [mode, setMode] = useState<"search" | "board">("search");
 
   return (
-    <div className="space-y-3">
-      <div className="flex rounded-xl border-2 border-ink bg-white p-1 shadow-[3px_3px_0_0_#1c1a17]">
+    <div className="min-w-0 w-full max-w-full space-y-3">
+      <div className="flex w-full min-w-0 rounded-xl border-2 border-ink bg-white p-1 shadow-[3px_3px_0_0_#1c1a17]">
         <button
           type="button"
           onClick={() => setMode("search")}
           className={cn(
-            "flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold transition",
+            "flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-2.5 text-[11px] font-bold transition sm:gap-2 sm:px-3 sm:text-xs",
             mode === "search"
               ? "bg-ink text-white"
               : "text-muted hover:bg-cream",
           )}
         >
-          <Search className="h-3.5 w-3.5" />
-          Search tutors
+          <Search className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate">Search</span>
+          <span className="hidden truncate sm:inline">tutors</span>
         </button>
         <button
           type="button"
           onClick={() => setMode("board")}
           className={cn(
-            "flex flex-1 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold transition",
+            "flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-2.5 text-[11px] font-bold transition sm:gap-2 sm:px-3 sm:text-xs",
             mode === "board"
               ? "bg-ink text-white"
               : "text-muted hover:bg-cream",
           )}
         >
-          <Megaphone className="h-3.5 w-3.5" />
-          Requirements board
+          <Megaphone className="h-3.5 w-3.5 shrink-0" />
+          <span className="truncate sm:hidden">Board</span>
+          <span className="hidden truncate sm:inline">Requirements board</span>
         </button>
       </div>
 
@@ -351,9 +353,9 @@ export function Hero() {
       <LpBlob color="rgba(255,241,228,0.8)" size={300} className="-right-24 bottom-0" />
       <LpBlob color="rgba(230,246,238,0.55)" size={220} className="right-1/3 top-1/2 hidden lg:block" />
 
-      <div className="relative mx-auto max-w-[1400px] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.08fr] lg:gap-14">
-          <div className="space-y-7 text-center lg:text-left">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="grid w-full min-w-0 items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-14">
+          <div className="min-w-0 w-full max-w-full space-y-5 sm:space-y-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
               <LpBadge>
                 <ShieldCheck className="h-3.5 w-3.5 text-sage" />
@@ -365,16 +367,16 @@ export function Hero() {
               </LpBadge>
             </div>
 
-            <h1 className="text-[2.65rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[56px]">
+            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
               Find verified tutors
               <br />
               &amp; mentors worldwide.
-              <span className="mt-3 block text-[1.55rem] font-semibold leading-snug text-coral sm:text-[1.9rem] lg:text-[2.1rem]">
+              <span className="mt-3 block text-lg font-semibold leading-snug text-coral sm:text-xl lg:text-[2.1rem]">
                 Free for parents. Free for faculty.
               </span>
             </h1>
 
-            <p className="mx-auto max-w-lg text-base leading-relaxed text-muted lg:mx-0 sm:text-lg">
+            <p className="mx-auto max-w-lg text-base leading-relaxed text-pretty text-muted lg:mx-0 sm:text-lg">
               Search open slots near you or online, send a connect request, or
               post your requirement and review tutor pitches — WhatsApp unlocks
               once either side accepts. ₹0 platform fee, no commission, ever.
@@ -383,31 +385,31 @@ export function Hero() {
               {GLOBAL_REACH_LINE}
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+            <div className="flex w-full max-w-full flex-wrap items-center justify-center gap-2 lg:justify-start">
               <LpPill tint="sage">Search &amp; connect</LpPill>
               <LpPill tint="butter">Post &amp; get pitches</LpPill>
               <LpPill tint="coral">Faculty keep 100%</LpPill>
             </div>
 
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
-              <ParentActionLink href="/search" className="w-full sm:w-auto">
+            <div className="flex w-full max-w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
+              <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="h-13 w-full gap-2 px-8 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto"
+                  className="h-13 w-full max-w-full gap-2 px-5 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8"
                 >
-                  <Search className="h-4 w-4" />
+                  <Search className="h-4 w-4 shrink-0" />
                   Find a teacher
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Button>
               </ParentActionLink>
               <PostRequirementButton
                 size="lg"
                 variant="secondary"
-                className="h-13 w-full border-2 border-ink shadow-[3px_3px_0_0_#1c1a17] sm:w-auto"
+                className="h-13 w-full max-w-full border-2 border-ink px-5 shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8"
               />
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="grid w-full min-w-0 gap-3 sm:grid-cols-2">
               <Link
                 href="/parents"
                 className={cn(
@@ -468,7 +470,7 @@ export function Hero() {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0 w-full max-w-full overflow-hidden">
             <HeroInteractiveMock />
             <p className="mt-4 text-center text-xs leading-relaxed text-muted lg:text-left">
               Switch tabs to preview both paths — filter tutors, toggle open

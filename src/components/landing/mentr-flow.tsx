@@ -133,7 +133,7 @@ export function MentrFlow() {
   const c = content[role];
 
   return (
-    <section id="how-mentr-works" className="bg-white py-16 sm:py-24">
+    <section id="how-mentr-works" className="bg-white py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         {/* Header — matches "Switch to Mentr" */}
         <div className="mx-auto max-w-2xl text-center">

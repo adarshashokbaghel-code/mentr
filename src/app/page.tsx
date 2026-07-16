@@ -119,7 +119,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
-      <main>
+      <main className="w-full max-w-full overflow-x-clip">
         <Hero />
         <LpStatsBand stats={heroStats} />
         <StatsMarquee />

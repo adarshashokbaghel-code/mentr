@@ -78,6 +78,7 @@ export function SectionHeader({
       className={cn(
         "relative max-w-2xl",
         align === "center" && "mx-auto text-center",
+        align === "left" && "mx-auto text-center md:mx-0 md:text-left",
       )}
     >
       {number && (
@@ -86,6 +87,7 @@ export function SectionHeader({
             "relative mb-4 inline-flex items-center gap-2.5 rounded-xl border-2 border-ink bg-white px-3.5 py-2",
             hardShadowSm,
             align === "center" && "mx-auto",
+            align === "left" && "mx-auto md:mx-0",
           )}
         >
           <span className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-ink bg-coral text-sm font-bold text-white">
@@ -96,12 +98,17 @@ export function SectionHeader({
           </span>
         </div>
       )}
-      <p className="relative inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
+      <p
+        className={cn(
+          "relative inline-flex w-full items-center justify-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted md:w-auto md:justify-start",
+          align === "left" && "md:justify-start",
+        )}
+      >
         <span className="h-px w-5 bg-muted/50" aria-hidden />
         {eyebrow}
         <span className="h-px w-5 bg-muted/50" aria-hidden />
       </p>
-      <h2 className="relative mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[42px] lg:leading-[1.12]">
+      <h2 className="relative mt-4 text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[42px] lg:leading-[1.12]">
         {title}
         {accent && (
           <>
@@ -115,6 +122,7 @@ export function SectionHeader({
           className={cn(
             "relative mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg",
             align === "center" && "mx-auto",
+            align === "left" && "mx-auto md:mx-0",
           )}
         >
           {description}
@@ -221,7 +229,7 @@ export function LpStatsBand({
           <div
             key={stat.label}
             className={cn(
-              "group relative overflow-hidden border-b border-r border-hairline px-6 py-10 text-center transition-colors last:border-r-0 sm:px-8 sm:py-12 md:border-b-0",
+              "group relative overflow-hidden border-b border-r border-hairline px-4 py-6 text-center transition-colors last:border-r-0 sm:px-6 sm:py-10 md:border-b-0 lg:px-8",
               stat.tint,
             )}
           >
@@ -234,7 +242,7 @@ export function LpStatsBand({
             {stat.icon && (
               <stat.icon className="mx-auto mb-3 h-5 w-5 text-ink/40" />
             )}
-            <p className="relative text-3xl font-bold tracking-tight text-ink sm:text-[40px]">
+            <p className="relative text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[40px]">
               {stat.value}
             </p>
             <p className="relative mt-2 text-sm font-semibold text-ink/80">
@@ -346,7 +354,7 @@ export function LpDeltaRow({
   return (
     <div
       className={cn(
-        "group px-7 py-6 transition-colors sm:px-9 sm:py-7",
+        "group px-4 py-5 transition-colors sm:px-7 sm:py-6 lg:px-9 lg:py-7",
         highlight && "bg-coral-wash/40",
       )}
     >
@@ -468,7 +476,7 @@ export function LpMockStage({
   className?: string;
 }) {
   return (
-    <div className={cn("relative", className)}>
+    <div className={cn("relative min-w-0 w-full max-w-full", className)}>
       {chips?.map((chip) => (
         <div
           key={chip.label}
@@ -481,7 +489,9 @@ export function LpMockStage({
           {chip.label}
         </div>
       ))}
-      <div className={cn("relative", hardShadowLg)}>{children}</div>
+      <div className={cn("relative min-w-0 w-full max-w-full overflow-hidden", hardShadowLg)}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -512,7 +522,7 @@ export function LpFinalCta({
   return (
     <section
       className={cn(
-        "relative overflow-hidden py-20 sm:py-28",
+        "relative overflow-hidden py-12 sm:py-20 lg:py-28",
         dark ? "bg-ink text-white" : "border-t border-hairline bg-cream-band",
       )}
     >
@@ -525,7 +535,7 @@ export function LpFinalCta({
       <div className="relative mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-8">
         <div
           className={cn(
-            "rounded-2xl border-2 p-8 text-center sm:p-12 lg:p-14",
+            "rounded-2xl border-2 p-5 text-center sm:p-8 lg:p-14",
             dark
               ? cn("border-white/20 bg-white/[0.04]", hardShadow)
               : cn("border-ink bg-white", hardShadowLg),
@@ -534,7 +544,7 @@ export function LpFinalCta({
           <LpBadge variant={dark ? "dark" : "coral"} className="mx-auto">
             {eyebrow}
           </LpBadge>
-          <h2 className="mt-6 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[44px] lg:leading-[1.1]">
+          <h2 className="mt-6 text-2xl font-bold tracking-tight sm:text-3xl lg:text-[44px] lg:leading-[1.1]">
             {title}
           </h2>
           <p

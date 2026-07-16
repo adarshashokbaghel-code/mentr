@@ -14,9 +14,9 @@ const rows = [
 
 export function ZeroFees() {
   return (
-    <section className="bg-ink py-16 text-white sm:py-24">
+    <section className="bg-ink py-10 text-white sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-8 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="text-sm font-semibold text-butter">Free forever</p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[40px]">

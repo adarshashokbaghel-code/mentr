@@ -134,13 +134,13 @@ function FaqHero() {
       <LpBlob color="rgba(217,208,255,0.6)" size={320} className="-left-24 top-0" />
       <LpBlob color="rgba(255,241,228,0.7)" size={280} className="-right-20 bottom-0" />
 
-      <div className="relative mx-auto max-w-[900px] px-4 py-16 text-center sm:px-6 sm:py-24 lg:px-8">
+      <div className="relative mx-auto max-w-[900px] px-4 py-10 text-center sm:px-6 sm:py-16 lg:py-24 lg:px-8">
         <LpBadge className="mx-auto">
           <HelpCircle className="h-3.5 w-3.5 text-coral" />
           Help center
         </LpBadge>
 
-        <h1 className="mt-7 text-[2.75rem] font-bold leading-[1.06] tracking-tight text-ink sm:text-5xl lg:text-[56px]">
+        <h1 className="mt-7 text-4xl font-bold leading-[1.06] tracking-tight text-ink sm:text-5xl lg:text-[56px]">
           Everything you
           <br />
           need to know.
@@ -212,7 +212,7 @@ function AudienceCards() {
   ];
 
   return (
-    <section className="bg-white py-20 sm:py-28">
+    <section className="bg-white py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="02" eyebrow="Pick your path" title="Parents and faculty." accent="Both completely free." />
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
@@ -286,7 +286,7 @@ function FlowPreview() {
   ];
 
   return (
-    <section className="bg-cream-band py-20 sm:py-28">
+    <section className="bg-cream-band py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="03" eyebrow="How it works" title="One connector." accent="Both sides win." />
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
@@ -338,7 +338,7 @@ function ComparisonSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-ink py-12 text-white sm:py-20 lg:py-28">
       <LpBlob color="rgba(255,154,77,0.12)" size={280} className="-left-16 top-1/4" />
       <div className="relative mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8">
         <div className="text-center">
@@ -391,7 +391,7 @@ export function FaqLanding() {
       <LpStatsBand stats={faqStats} />
       <GlobalReachMap />
 
-      <section className="py-20 sm:py-28">
+      <section className="py-12 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8">
           <SectionHeader
             number="01"

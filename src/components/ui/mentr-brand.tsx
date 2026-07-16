@@ -23,7 +23,10 @@ export function MentrBrand({
 
   return (
     <span
-      className={cn("inline-flex items-center gap-2.5 sm:gap-3", className)}
+      className={cn(
+        "inline-flex min-w-0 max-w-full items-center gap-2 sm:gap-3",
+        className,
+      )}
     >
       <Link href={href} className="inline-flex shrink-0">
         <MentrLogo

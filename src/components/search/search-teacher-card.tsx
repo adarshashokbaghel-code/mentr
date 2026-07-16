@@ -47,6 +47,7 @@ export function SearchTeacherCard({
             src={teacher.imageUrl}
             alt={teacher.name}
             fill
+            loading="lazy"
             className="object-cover transition duration-300 group-hover:scale-[1.02]"
             sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, (max-width:1280px) 25vw, 20vw"
           />

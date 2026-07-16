@@ -70,7 +70,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
-      <body className="min-h-screen bg-cream font-sans text-ink antialiased">
+      <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

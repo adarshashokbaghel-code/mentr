@@ -40,8 +40,8 @@ const columns: Record<string, FooterLink[]> = {
 export function Footer() {
   return (
     <footer className="border-t border-hairline bg-ink text-white">
-      <div className="mx-auto max-w-[1400px] px-4 py-14 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr] lg:gap-16">
+      <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14 sm:px-6 lg:px-8">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1.2fr_2fr] lg:gap-16">
           <div>
             <MentrBrand variant="light" logoClassName="h-8" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">

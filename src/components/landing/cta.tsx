@@ -11,11 +11,11 @@ import Link from "next/link";
 
 export function CTA() {
   return (
-    <section className="border-t border-hairline bg-cream-band py-16 sm:py-20">
+    <section className="border-t border-hairline bg-cream-band py-10 sm:py-16">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 max-w-2xl">
+        <div className="mb-8 max-w-2xl text-center sm:mb-10 lg:text-left">
           <p className="text-sm font-semibold text-coral">Get started</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
+          <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
             Built for parents{" "}
             <span className="text-coral">and</span> faculty.
           </h2>
@@ -26,7 +26,7 @@ export function CTA() {
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
-          <div className="flex flex-col rounded-lg border border-hairline bg-white p-7 sm:p-9">
+          <div className="flex flex-col rounded-lg border border-hairline bg-white p-5 sm:p-7 lg:p-9">
             <span className="text-xs font-bold uppercase tracking-wider text-coral">
               Parents
             </span>
@@ -65,7 +65,7 @@ export function CTA() {
             </div>
           </div>
 
-          <div className="flex flex-col rounded-lg border border-ink bg-ink p-7 text-white sm:p-9">
+          <div className="flex flex-col rounded-lg border border-ink bg-ink p-5 text-white sm:p-7 lg:p-9">
             <span className="text-xs font-bold uppercase tracking-wider text-butter">
               Faculty
             </span>

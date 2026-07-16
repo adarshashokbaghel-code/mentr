@@ -23,17 +23,17 @@ const postSteps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 sm:py-24">
+    <section id="how-it-works" className="py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-2xl">
+        <div className="flex flex-col gap-4 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
+          <div className="mx-auto max-w-2xl lg:mx-0">
             <p className="text-sm font-semibold text-coral">How it works</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[40px]">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl lg:text-[40px]">
               Two sides.{" "}
               <span className="text-coral">One simple connector.</span>
             </h2>
           </div>
-          <p className="max-w-md text-base text-muted lg:text-right">
+          <p className="mx-auto max-w-md text-base text-muted lg:mx-0 lg:text-right">
             Parents search tutors locally or online worldwide, or post a
             requirement and get pitches — both free. Faculty accept who they
             want, then it&apos;s straight to WhatsApp.

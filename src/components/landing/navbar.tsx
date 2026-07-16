@@ -45,8 +45,8 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <MentrBrand logoClassName="h-7" priority />
+      <div className="mx-auto flex h-16 w-full min-w-0 max-w-[1400px] items-center justify-between gap-2 px-4 sm:px-6 lg:px-8">
+        <MentrBrand logoClassName="h-7" priority className="min-w-0 shrink" />
 
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (

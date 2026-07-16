@@ -17,7 +17,7 @@ export function BrowserFrame({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-lg border border-hairline bg-white shadow-[0_12px_40px_rgba(28,26,23,0.12)]",
+        "min-w-0 w-full max-w-full overflow-hidden rounded-lg border border-hairline bg-white shadow-[0_12px_40px_rgba(28,26,23,0.12)]",
         className,
       )}
     >

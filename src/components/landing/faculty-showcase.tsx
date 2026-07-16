@@ -31,16 +31,16 @@ const steps = [
 
 export function FacultyShowcase() {
   return (
-    <section id="for-faculty" className="bg-butter py-16 sm:py-24">
+    <section id="for-faculty" className="bg-butter py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="grid items-start gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
-          <div>
+        <div className="grid items-start gap-8 sm:gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+          <div className="text-center lg:text-left">
             <p className="text-sm font-semibold text-ink/70">For faculty & mentors</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-[40px]">
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[40px]">
               Get listed. Get contacted.{" "}
               <span className="text-coral">Keep every rupee.</span>
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-muted sm:text-lg">
+            <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted sm:text-lg lg:mx-0">
               No coins. No paying for leads that never reply. No cut. Parents
               worldwide message you directly — local or online.
             </p>
@@ -63,7 +63,7 @@ export function FacultyShowcase() {
               ))}
             </div>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center lg:justify-start">
               <FacultyActionLink href="/faculty/signup">
                 <Button size="lg">
                   <UserPlus className="h-4 w-4" />

@@ -93,11 +93,11 @@ function ParentDashboardHero({
         </Link>
       </div>
 
-      <div className="grid grid-cols-3 divide-x divide-hairline border-t border-hairline">
+      <div className="grid grid-cols-1 divide-y divide-hairline border-t border-hairline sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="flex items-center gap-2.5 px-3 py-3 sm:gap-3 sm:px-4"
+            className="flex items-center gap-2.5 px-4 py-3.5 sm:gap-3 sm:px-4"
           >
             <stat.icon className={cn("h-3.5 w-3.5 shrink-0 opacity-70", stat.tone)} />
             <div className="min-w-0">
@@ -157,7 +157,7 @@ export default function ParentDashboardPage() {
     return (
       <>
         <Navbar />
-        <main className="mx-auto max-w-[1400px] px-4 py-20 text-center text-muted">
+        <main className="mx-auto max-w-[1400px] px-4 py-12 sm:py-20 text-center text-muted">
           Loading…
         </main>
       </>
@@ -223,7 +223,7 @@ export default function ParentDashboardPage() {
                           type="button"
                           onClick={() => setHistoryTab(t.id)}
                           className={cn(
-                            "inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] font-bold transition",
+                            "inline-flex h-10 min-h-10 items-center gap-1.5 rounded-full px-3.5 text-[12px] font-bold transition touch-manipulation",
                             historyTab === t.id
                               ? "bg-ink text-white"
                               : "bg-white text-muted ring-1 ring-inset ring-hairline hover:text-ink",

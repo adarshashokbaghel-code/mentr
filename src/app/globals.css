@@ -49,11 +49,77 @@
   --font-sans: var(--font-sans-face);
 }
 
+html {
+  overflow-x: clip;
+  width: 100%;
+}
+
 body {
   background: var(--cream);
   color: var(--ink);
   font-family: var(--font-sans-face), "Plus Jakarta Sans", system-ui,
     sans-serif;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+/* Site-wide layout — consistent mobile padding */
+.champs-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1400px;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .champs-container {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .champs-container {
+    padding-inline: 2rem;
+  }
+}
+
+.section-y {
+  padding-block: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-y {
+    padding-block: 4rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-y {
+    padding-block: 6rem;
+  }
+}
+
+.section-y-lg {
+  padding-block: 3rem;
+}
+
+@media (min-width: 640px) {
+  .section-y-lg {
+    padding-block: 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-y-lg {
+    padding-block: 7rem;
+  }
 }
 
 /* Paprly parent brand — very light yellow + very light blue */
@@ -191,8 +257,9 @@ body {
 }
 .champs-map-popup .leaflet-popup-content {
   margin: 0;
-  width: 320px !important;
-  min-width: 300px;
+  width: min(320px, calc(100vw - 2rem)) !important;
+  min-width: 0;
+  max-width: calc(100vw - 2rem);
 }
 .champs-map-popup .leaflet-popup-tip {
   background: #fff;
@@ -205,10 +272,10 @@ body {
   font-size: 18px;
   top: 8px;
   right: 8px;
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   padding: 0;
-  line-height: 26px;
+  line-height: 42px;
   text-align: center;
   border-radius: 6px;
   background: rgba(26, 35, 28, 0.35);

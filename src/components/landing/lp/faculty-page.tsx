@@ -138,20 +138,20 @@ function FacultyHero() {
       <LpBlob color="rgba(47,158,110,0.08)" size={340} className="-right-24 -top-16" />
       <LpBlob color="rgba(255,154,77,0.08)" size={260} className="-left-16 bottom-0" />
 
-      <div className="relative mx-auto max-w-[1400px] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-          <div className="space-y-7 text-center lg:text-left">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="grid w-full min-w-0 items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
+          <div className="min-w-0 w-full max-w-full space-y-5 sm:space-y-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
               <LpBadge><ShieldCheck className="h-3.5 w-3.5 text-sage" /> Verified listings</LpBadge>
               <LpBadge><Zap className="h-3.5 w-3.5 text-coral" /> Worldwide</LpBadge>
               <LpBadge><Globe className="h-3.5 w-3.5 text-sage" /> Online or local</LpBadge>
             </div>
 
-            <h1 className="text-[2.75rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[56px]">
+            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
               Get found
               <br />
               by parents.
-              <span className="mt-3 block text-[1.65rem] font-semibold leading-snug text-coral sm:text-[2rem] lg:text-[2.25rem]">
+              <span className="mt-3 block text-lg font-semibold leading-snug text-coral sm:text-xl lg:text-[2.25rem]">
                 Keep 100% of your fees.
               </span>
             </h1>
@@ -171,24 +171,24 @@ function FacultyHero() {
               <LpPill tint="coral">0% commission</LpPill>
             </div>
 
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-start">
-              <FacultyActionLink href="/faculty/signup" className="w-full sm:w-auto">
+            <div className="flex w-full max-w-full flex-col gap-3 sm:flex-row sm:items-center lg:justify-start">
+              <FacultyActionLink href="/faculty/signup" className="block w-full max-w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="h-13 w-full gap-2 px-8 shadow-[3px_3px_0_0_#1c1a17] sm:w-auto"
+                  className="h-13 w-full max-w-full gap-2 px-5 shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8"
                 >
-                  <UserPlus className="h-4 w-4" />
+                  <UserPlus className="h-4 w-4 shrink-0" />
                   Register free
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight className="h-4 w-4 shrink-0" />
                 </Button>
               </FacultyActionLink>
-              <FacultyActionLink href="/board" className="w-full sm:w-auto">
+              <FacultyActionLink href="/board" className="block w-full max-w-full sm:w-auto">
                 <Button
                   size="lg"
                   variant="secondary"
-                  className="h-13 w-full sm:w-auto"
+                  className="h-13 w-full max-w-full px-5 sm:w-auto sm:px-8"
                 >
-                  <Megaphone className="h-4 w-4" />
+                  <Megaphone className="h-4 w-4 shrink-0" />
                   Requirements board
                 </Button>
               </FacultyActionLink>
@@ -207,6 +207,7 @@ function FacultyHero() {
             </div>
           </div>
 
+          <div className="min-w-0 w-full max-w-full overflow-hidden">
           <LpMockStage
             chips={[
               { label: "Verified ✓", className: "-left-3 top-10", style: { transform: "rotate(-3deg)" } },
@@ -254,6 +255,7 @@ function FacultyHero() {
               </div>
             </BrowserFrame>
           </LpMockStage>
+          </div>
         </div>
       </div>
     </section>
@@ -352,7 +354,7 @@ function FacultyDashboardSection() {
   const [step, setStep] = useState(0);
 
   return (
-    <section className="relative overflow-hidden border-y border-hairline bg-white py-20 sm:py-28">
+    <section className="relative overflow-hidden border-y border-hairline bg-white py-12 sm:py-20 lg:py-28">
       <LpBlob color="rgba(47,158,110,0.06)" size={280} className="right-0 top-1/4" />
       <div className="relative mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
@@ -392,7 +394,7 @@ function FacultySwitchSection() {
   const current = switchTabs.find((t) => t.id === active)!;
 
   return (
-    <section className="relative bg-cream py-20 sm:py-28">
+    <section className="relative bg-cream py-12 sm:py-20 lg:py-28">
       <LpGridBg className="opacity-15" />
       <div className="relative mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="02" eyebrow="Already on another platform?" title="Switch to Mentr" accent="and keep 100%." />
@@ -441,7 +443,7 @@ function RequirementsBoardSection() {
   ];
 
   return (
-    <section className="bg-white py-20 sm:py-28">
+    <section className="bg-white py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-14 lg:grid-cols-2">
           <LpMockStage chips={[{ label: "8 open reqs", className: "-right-3 top-8", style: {} }]}>
@@ -509,7 +511,7 @@ function RequirementsBoardSection() {
 
 function ZeroFeesSection() {
   return (
-    <section className="relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+    <section className="relative overflow-hidden bg-ink py-12 text-white sm:py-20 lg:py-28">
       <LpBlob color="rgba(255,154,77,0.15)" size={300} className="-left-20 top-0" />
       <LpBlob color="rgba(47,158,110,0.12)" size={240} className="-right-16 bottom-0" />
       <div className="relative mx-auto max-w-[1100px] px-4 sm:px-6 lg:px-8">
@@ -555,7 +557,7 @@ function ZeroFeesSection() {
 
 function FacultyTestimonials() {
   return (
-    <section className="bg-cream-band py-20 sm:py-28">
+    <section className="bg-cream-band py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="04" eyebrow="From the community" title="Parents & tutors." accent="Same free platform." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
@@ -577,7 +579,7 @@ function FacultyFaqPreview() {
   ];
 
   return (
-    <section className="bg-lavender py-20 sm:py-24">
+    <section className="bg-lavender py-12 sm:py-20">
       <div className="mx-auto max-w-[800px] px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow="Common questions" title="Everything faculty ask" accent="before listing." />
         <div className="mt-10 space-y-3">

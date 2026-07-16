@@ -541,7 +541,7 @@ export function RequirementsFeed() {
                 ))}
               </div>
             ) : visible.length === 0 ? (
-              <div className="px-6 py-16 text-center">
+              <div className="px-4 py-10 text-center sm:px-6 sm:py-16">
                 <Megaphone className="mx-auto h-8 w-8 text-muted" />
                 <p className="mt-4 text-base font-semibold text-ink">
                   {filtersActive

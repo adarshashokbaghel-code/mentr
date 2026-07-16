@@ -8,7 +8,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-lavender py-16 sm:py-24">
+    <section id="faq" className="bg-lavender py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[900px] px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-sm font-semibold text-coral">FAQ</p>

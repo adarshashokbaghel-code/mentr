@@ -46,7 +46,7 @@ export default function AboutPage() {
       <Navbar />
       <main className="min-h-screen">
         <section className="border-b border-hairline bg-white">
-          <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-16">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral">
               About Mentr by Paprly
             </p>
@@ -71,7 +71,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-cream py-16 sm:py-20">
+        <section className="bg-cream py-10 sm:py-16">
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
             <h2 className="text-2xl font-bold text-ink">What we believe</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2">

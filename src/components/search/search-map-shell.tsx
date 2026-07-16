@@ -67,7 +67,7 @@ export function SearchMapShell({
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="relative flex h-screen w-full overflow-hidden bg-cream">
+    <div className="relative flex h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-cream">
       <aside
         className={cn(
           "absolute inset-y-0 left-0 z-20 flex w-full max-w-[400px] flex-col border-r border-hairline bg-cream transition-transform duration-200",
@@ -126,7 +126,7 @@ export function SearchMapShell({
                     })
                   }
                   className={cn(
-                    "shrink-0 rounded-md px-2.5 py-1 text-xs font-semibold transition",
+                    "shrink-0 rounded-md px-3 py-2 text-xs font-semibold transition touch-manipulation min-h-9",
                     active
                       ? "bg-ink text-white"
                       : "bg-cream text-muted hover:bg-cream-band hover:text-ink",
@@ -192,7 +192,7 @@ export function SearchMapShell({
                     onChangeFilters({ radiusKm: km, sort: "distance" })
                   }
                   className={cn(
-                    "shrink-0 rounded-md px-2.5 py-1 text-[11px] font-semibold transition",
+                    "shrink-0 rounded-md px-3 py-2 text-xs font-semibold transition touch-manipulation min-h-9",
                     filters.radiusKm === km
                       ? "bg-coral text-white"
                       : "bg-cream text-muted hover:text-ink",
@@ -374,7 +374,7 @@ export function SearchMapShell({
         <button
           type="button"
           onClick={() => setSidebarOpen((open) => !open)}
-          className="absolute left-3 top-3 z-[500] flex h-10 w-10 items-center justify-center rounded-md border border-hairline bg-white shadow-sm transition hover:bg-cream"
+          className="absolute left-3 top-3 z-[500] flex h-11 w-11 touch-manipulation items-center justify-center rounded-md border border-hairline bg-white shadow-sm transition hover:bg-cream"
           aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
         >
           {sidebarOpen ? (

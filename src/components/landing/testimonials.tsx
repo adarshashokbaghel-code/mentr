@@ -3,7 +3,7 @@ import { HOME_TESTIMONIALS, testimonialName } from "@/lib/demo-users";
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="bg-cream-band py-16 sm:py-24">
+    <section id="testimonials" className="bg-cream-band py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">

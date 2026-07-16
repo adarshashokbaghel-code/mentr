@@ -329,7 +329,7 @@ export default function SearchPage() {
       fallback={
         <>
           <Navbar />
-          <main className="mx-auto max-w-[1400px] px-4 py-20 text-center text-sm text-muted">
+          <main className="mx-auto max-w-[1400px] px-4 py-12 text-center text-sm text-muted sm:py-20">
             Loading search…
           </main>
         </>

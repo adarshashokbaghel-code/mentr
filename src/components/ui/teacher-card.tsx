@@ -41,6 +41,7 @@ export function TeacherCard({
           src={teacher.imageUrl}
           alt={teacher.name}
           fill
+          loading="lazy"
           className="object-cover"
           sizes="(max-width: 640px) 100vw, 33vw"
         />

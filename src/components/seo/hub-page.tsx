@@ -58,6 +58,7 @@ function SeoTeacherRow({ teacher }: { teacher: Teacher }) {
             src={teacher.imageUrl}
             alt={alt}
             fill
+            loading="lazy"
             className="object-cover"
             sizes="64px"
           />

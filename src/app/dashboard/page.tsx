@@ -247,7 +247,7 @@ export default function DashboardPage() {
     return (
       <>
         <Navbar />
-        <main className="mx-auto max-w-[1400px] px-4 py-20 text-center text-muted">
+        <main className="mx-auto max-w-[1400px] px-4 py-12 sm:py-20 text-center text-muted">
           Loading…
         </main>
       </>
@@ -258,7 +258,7 @@ export default function DashboardPage() {
     return (
       <>
         <Navbar />
-        <main className="mx-auto max-w-md px-4 py-20 text-center">
+        <main className="mx-auto max-w-md px-4 py-12 sm:py-20 text-center">
           <h1 className="text-2xl font-bold">Faculty dashboard</h1>
           <p className="mt-2 text-muted">
             Sign in with your email OTP to manage your profile and slots.
@@ -341,9 +341,9 @@ export default function DashboardPage() {
     <>
       <Navbar />
       <main className="min-h-screen pb-16">
-        <div className="mx-auto max-w-[1400px] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1400px] px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
           {/* ------------------------------ header ------------------------------ */}
-          <div className="flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
             <div>
               <p className="text-sm font-semibold text-coral">Dashboard</p>
               <h1 className="mt-0.5 text-[26px] font-bold tracking-tight sm:text-3xl">
@@ -357,7 +357,7 @@ export default function DashboardPage() {
                 {user.profile?.designation} · {user.profile?.area}
               </p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
               <NotificationsBell data={views} requests={requests} />
               <Link href="/profiling">
                 <Button variant="secondary" size="sm">

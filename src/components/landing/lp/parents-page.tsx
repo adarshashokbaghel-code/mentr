@@ -279,9 +279,9 @@ function ParentsHero() {
       <LpBlob color="rgba(235,228,255,0.7)" size={360} className="-left-32 -top-20" />
       <LpBlob color="rgba(255,241,228,0.8)" size={300} className="-right-24 bottom-0" />
 
-      <div className="relative mx-auto max-w-[1400px] px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-          <div className="space-y-7 text-center lg:text-left">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+        <div className="grid w-full min-w-0 items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
+          <div className="min-w-0 w-full max-w-full space-y-5 sm:space-y-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
               <LpBadge>
                 <Globe className="h-3.5 w-3.5 text-sage" />
@@ -293,7 +293,7 @@ function ParentsHero() {
               </LpBadge>
             </div>
 
-            <h1 className="text-[2.75rem] font-bold leading-[1.05] tracking-tight text-ink sm:text-5xl lg:text-[56px]">
+            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
               Find a tutor
               <br />
               for your child.
@@ -317,15 +317,15 @@ function ParentsHero() {
               <LpPill tint="coral">Unlimited searches</LpPill>
             </div>
 
-            <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
-              <ParentActionLink href="/search" className="w-full sm:w-auto">
-                <Button size="lg" className="h-13 w-full gap-2 px-8 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto">
+            <div className="flex w-full max-w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
+              <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
+                <Button size="lg" className="h-13 w-full max-w-full gap-2 px-5 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8">
                   <Search className="h-4 w-4" />
                   Find a teacher
                   <ArrowRight className="h-4 w-4" />
                 </Button>
               </ParentActionLink>
-              <PostRequirementButton size="lg" variant="secondary" className="h-13 w-full sm:w-auto" />
+              <PostRequirementButton size="lg" variant="secondary" className="h-13 w-full max-w-full px-5 sm:w-auto sm:px-8" />
             </div>
 
             <div className="flex items-center justify-center gap-3 pt-2 lg:justify-start">
@@ -347,6 +347,7 @@ function ParentsHero() {
             </div>
           </div>
 
+          <div className="min-w-0 w-full max-w-full overflow-hidden">
           <LpMockStage
             chips={[
               { label: "✓ Verified", className: "-left-4 top-8", style: { transform: "rotate(-4deg)" } },
@@ -356,6 +357,7 @@ function ParentsHero() {
           >
             <HeroSearchMock />
           </LpMockStage>
+          </div>
         </div>
       </div>
     </section>
@@ -364,10 +366,10 @@ function ParentsHero() {
 
 function ParentsTrust() {
   return (
-    <section className="relative overflow-hidden border-b border-hairline bg-white py-20 sm:py-28">
+    <section className="relative overflow-hidden border-b border-hairline bg-white py-12 sm:py-20 lg:py-28">
       <LpBlob color="rgba(230,246,238,0.6)" size={240} className="right-0 top-0" />
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-end">
+        <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-end">
           <div>
             <SectionHeader
               align="left"
@@ -515,7 +517,7 @@ function ParentFlowSection() {
   const steps = path === "search" ? searchSteps : postSteps;
 
   return (
-    <section className="bg-white py-20 sm:py-28">
+    <section className="bg-white py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
           number="02"
@@ -580,7 +582,7 @@ function ParentSwitchSection() {
   const current = switchTabs.find((t) => t.id === active)!;
 
   return (
-    <section className="relative overflow-hidden bg-cream py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-cream py-12 sm:py-20 lg:py-28">
       <LpGridBg className="opacity-20" />
       <div className="relative mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
@@ -671,7 +673,7 @@ function RequirementBoardSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-lavender py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-lavender py-12 sm:py-20 lg:py-28">
       <LpBlob color="rgba(217,208,255,0.5)" size={300} className="-left-20 bottom-0" />
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
@@ -790,7 +792,7 @@ function RequirementBoardSection() {
 
 function ParentTestimonials() {
   return (
-    <section className="bg-cream-band py-20 sm:py-28">
+    <section className="bg-cream-band py-12 sm:py-20 lg:py-28">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="05" eyebrow="From the community" title="Parents & tutors." accent="Same free platform." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
@@ -812,7 +814,7 @@ function ParentFaqPreview() {
   ];
 
   return (
-    <section className="bg-lavender py-20 sm:py-24">
+    <section className="bg-lavender py-12 sm:py-20">
       <div className="mx-auto max-w-[800px] px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow="Common questions" title="Everything parents ask" accent="before signing up." />
         <div className="mt-10 space-y-3">
