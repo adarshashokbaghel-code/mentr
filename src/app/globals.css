@@ -78,6 +78,84 @@ main {
   padding-inline: 1rem;
 }
 
+/* Blog article typography */
+.blog-prose {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+@media (min-width: 640px) {
+  .blog-prose {
+    font-size: 1.0625rem;
+  }
+}
+
+.blog-prose .blog-lead {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .blog-prose .blog-lead {
+    font-size: 1.1875rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.blog-prose h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 2rem;
+  margin-bottom: 0.875rem;
+  color: var(--ink);
+}
+
+@media (min-width: 640px) {
+  .blog-prose h2 {
+    font-size: 1.375rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.blog-prose p {
+  margin-bottom: 1.25rem;
+  color: color-mix(in srgb, var(--ink) 88%, transparent);
+}
+
+.blog-prose ul,
+.blog-prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+  color: color-mix(in srgb, var(--ink) 88%, transparent);
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+}
+
+.blog-prose li::marker {
+  color: var(--coral);
+}
+
+.blog-callout {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--coral);
+  background: var(--coral-wash);
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.9375rem;
+}
+
+.blog-callout-title {
+  font-weight: 700;
+  color: var(--ink);
+}
+
 @media (min-width: 640px) {
   .champs-container {
     padding-inline: 1.5rem;
