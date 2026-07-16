@@ -18,27 +18,41 @@ async function request<T>(
       ? localStorage.getItem("champs_token")
       : null;
 
-  const res = await fetch(`/api${path}`, {
-    ...options,
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    },
-  });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12_000);
 
-  const data = await res.json().catch(() => ({}));
+  try {
+    const res = await fetch(`/api${path}`, {
+      ...options,
+      signal: controller.signal,
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+        ...options.headers,
+      },
+    });
 
-  if (!res.ok) {
-    throw new ApiError(
-      (data as { error?: string }).error || "Request failed",
-      res.status,
-      data as Record<string, unknown>,
-    );
+    const data = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      throw new ApiError(
+        (data as { error?: string }).error || "Request failed",
+        res.status,
+        data as Record<string, unknown>,
+      );
+    }
+
+    return data as T;
+  } catch (err) {
+    if (err instanceof ApiError) throw err;
+    if (err instanceof DOMException && err.name === "AbortError") {
+      throw new ApiError("Request timed out", 408);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  return data as T;
 }
 
 export type WeekDay =
