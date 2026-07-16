@@ -1,29 +1,5 @@
-const testimonials = [
-  {
-    quote:
-      "I posted our maths requirement and got three pitches the same day. Picked one, connected on WhatsApp — no agent, no fees.",
-    name: "Priya Sharma",
-    role: "Parent · Online",
-    initials: "PS",
-    tint: "bg-lavender",
-  },
-  {
-    quote:
-      "I registered in minutes, listed my slots, and parents started messaging on WhatsApp. I update availability on the dashboard and keep every rupee.",
-    name: "Dr. Aris Smith",
-    role: "Faculty · Maths & Physics",
-    initials: "AS",
-    tint: "bg-butter",
-  },
-  {
-    quote:
-      "As a career mentor I don't want a platform taking a cut. Mentr lists me, parents reach out, and my dashboard stays simple.",
-    name: "Prof. Meera Kapoor",
-    role: "Mentor · Career Guidance",
-    initials: "MK",
-    tint: "bg-sage-wash",
-  },
-];
+import { TestimonialAvatar } from "@/components/ui/testimonial-avatar";
+import { HOME_TESTIMONIALS, testimonialName } from "@/lib/demo-users";
 
 export function Testimonials() {
   return (
@@ -46,20 +22,20 @@ export function Testimonials() {
         </div>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
-          {testimonials.map((item) => (
+          {HOME_TESTIMONIALS.map((item, i) => (
             <article
-              key={item.name}
+              key={i}
               className={`flex flex-col rounded-lg border border-hairline p-6 sm:p-7 ${item.tint}`}
             >
               <p className="flex-1 text-base leading-relaxed text-ink sm:text-lg">
                 &ldquo;{item.quote}&rdquo;
               </p>
               <div className="mt-6 flex items-center gap-3 border-t border-hairline/80 pt-5">
-                <div className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-sm font-bold shadow-sm">
-                  {item.initials}
-                </div>
+                <TestimonialAvatar name={item.name} className="h-11 w-11" />
                 <div>
-                  <p className="font-semibold text-ink">{item.name}</p>
+                  <p className="font-semibold text-ink">
+                    {testimonialName(item.name)}
+                  </p>
                   <p className="text-sm text-muted">{item.role}</p>
                 </div>
               </div>

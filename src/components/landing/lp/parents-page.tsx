@@ -1,9 +1,11 @@
 "use client";
 
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
+import { ParentActionLink } from "@/components/auth/role-guard-link";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { Button } from "@/components/ui/button";
 import { ConnectButton } from "@/components/connect/connect-button";
+import { PARENT_LP_TESTIMONIALS } from "@/lib/demo-users";
 import { TEACHERS, type Teacher } from "@/lib/teachers";
 import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -151,32 +153,7 @@ const switchTabs = [
   },
 ];
 
-const parentTestimonials = [
-  {
-    quote:
-      "Found a Class 10 maths tutor in HSR in one evening. Sent a connect request, she accepted, and we started the same week on WhatsApp. Zero fees.",
-    name: "Ananya R.",
-    role: "Parent · HSR Layout",
-    initials: "AR",
-    tint: "bg-lavender",
-  },
-  {
-    quote:
-      "Posted our requirement for IIT Physics prep. Three tutors pitched within a day. Picked one, connected, and arranged fees directly.",
-    name: "Vikram S.",
-    role: "Parent · Koramangala",
-    initials: "VS",
-    tint: "bg-butter",
-  },
-  {
-    quote:
-      "I was tired of UrbanPro agents calling. Mentr let me search, read profiles, and message the tutor myself. Completely free.",
-    name: "Meera K.",
-    role: "Parent · Jayanagar",
-    initials: "MK",
-    tint: "bg-sage-wash",
-  },
-];
+const parentTestimonials = PARENT_LP_TESTIMONIALS;
 
 const trustPoints = [
   { icon: ShieldCheck, title: "Phone & identity verified", body: "Every tutor passes manual verification before going live." },
@@ -286,9 +263,9 @@ function HeroSearchMock() {
         </div>
         <div className="flex items-center justify-between border-t border-hairline bg-butter/40 px-4 py-2.5">
           <p className="text-[10px] font-semibold text-muted">Tap Connect → tutor accepts → WhatsApp</p>
-          <Link href="/search" className="text-[10px] font-bold text-coral hover:underline">
+          <ParentActionLink href="/search" className="text-[10px] font-bold text-coral hover:underline">
             Open full search →
-          </Link>
+          </ParentActionLink>
         </div>
       </div>
     </BrowserFrame>
@@ -341,13 +318,13 @@ function ParentsHero() {
             </div>
 
             <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
-              <Link href="/search" className="w-full sm:w-auto">
+              <ParentActionLink href="/search" className="w-full sm:w-auto">
                 <Button size="lg" className="h-13 w-full gap-2 px-8 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto">
                   <Search className="h-4 w-4" />
                   Find a teacher
                   <ArrowRight className="h-4 w-4" />
                 </Button>
-              </Link>
+              </ParentActionLink>
               <PostRequirementButton size="lg" variant="secondary" className="h-13 w-full sm:w-auto" />
             </div>
 
@@ -815,10 +792,10 @@ function ParentTestimonials() {
   return (
     <section className="bg-cream-band py-20 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <SectionHeader number="05" eyebrow="Loved by parents worldwide" title="Real parents." accent="Real results." />
+        <SectionHeader number="05" eyebrow="From the community" title="Parents & tutors." accent="Same free platform." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {parentTestimonials.map((item) => (
-            <LpTestimonialCard key={item.name} {...item} />
+          {parentTestimonials.map((item, i) => (
+            <LpTestimonialCard key={i} {...item} />
           ))}
         </div>
       </div>

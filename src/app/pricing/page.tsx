@@ -5,9 +5,9 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentr Pricing — Free Forever for Parents & Faculty",
+  title: "Mentr by Paprly Pricing — Free Forever for Parents & Faculty",
   description:
-    "Mentr charges ₹0 platform fee. Free to search, free to list, free to contact. Faculty keep 100% of their earnings.",
+    "Mentr by Paprly charges ₹0 platform fee. Free to search, free to list, free to contact. Faculty keep 100% of their earnings.",
   alternates: { canonical: "/pricing" },
 };
 

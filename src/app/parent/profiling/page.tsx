@@ -4,7 +4,7 @@ import { useAuth } from "@/components/auth/auth-provider";
 import { profileApi } from "@/lib/api";
 import { homeFor } from "@/lib/auth-routes";
 import { cn } from "@/lib/utils";
-import { MentrLogo } from "@/components/ui/mentr-logo";
+import { MentrBrand } from "@/components/ui/mentr-brand";
 import { Loader2, MapPin, Phone, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -79,9 +79,7 @@ function ParentProfilingContent() {
   return (
     <div className="flex min-h-screen flex-col bg-cream">
       <header className="flex items-center justify-between px-5 py-4 sm:px-8">
-        <Link href="/" className="flex items-center">
-          <MentrLogo className="h-6" />
-        </Link>
+        <MentrBrand href="/" logoClassName="h-6" />
         <span className="rounded-md bg-sage-wash px-2.5 py-1 text-xs font-semibold text-sage">
           Parent account
         </span>

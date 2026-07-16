@@ -17,13 +17,14 @@ export async function sendOtpEmail(
   const action = purpose === "signup" ? "complete your signup" : "log in";
 
   await transporter.sendMail({
-    from: `"Mentr Faculty" <${config.emailUser}>`,
+    from: `"Mentr by Paprly" <${config.emailUser}>`,
     to,
-    subject: `${code} is your Mentr verification code`,
-    text: `Your Mentr verification code is ${code}. Use it to ${action}. It expires in ${config.otp.expiryMinutes} minutes. If you didn't request this, ignore this email.`,
+    subject: `${code} is your Mentr by Paprly verification code`,
+    text: `Your Mentr by Paprly verification code is ${code}. Use it to ${action}. It expires in ${config.otp.expiryMinutes} minutes. If you didn't request this, ignore this email.`,
     html: `
       <div style="font-family: system-ui, sans-serif; max-width: 480px; margin: 0 auto; padding: 24px;">
-        <h2 style="margin: 0 0 8px;">Mentr Faculty</h2>
+        <h2 style="margin: 0 0 4px;">Mentr by Paprly</h2>
+        <p style="margin: 0 0 16px; color: #737373; font-size: 12px;">A product of <a href="https://www.paprly.in" style="text-decoration: none; font-weight: 700; letter-spacing: -0.03em;"><span style="color: #facc15;">Papr</span><span style="color: #67b5eb;">ly</span></a></p>
         <p style="color: #525252;">Use this code to ${action}:</p>
         <p style="font-size: 32px; font-weight: bold; letter-spacing: 8px; margin: 24px 0;">${code}</p>
         <p style="color: #525252; font-size: 14px;">Expires in ${config.otp.expiryMinutes} minutes. Do not share this code.</p>

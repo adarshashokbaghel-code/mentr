@@ -10,6 +10,12 @@ export const SITE_URL = (
 
 export const SITE_NAME = "Mentr";
 
+/** Full consumer-facing brand — use in titles, metadata, and lockups. */
+export const SITE_BRAND = "Mentr by Paprly";
+
+export const PARENT_COMPANY_NAME = "Paprly";
+export const PARENT_COMPANY_URL = "https://www.paprly.in";
+
 /** Primary launch hub — local SEO pages still target this city. */
 export const LAUNCH_HUB_CITY = "Bengaluru";
 
@@ -17,23 +23,23 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Mentr is the free platform to find verified tutors — search locally, post your requirement, or connect online from any country. WhatsApp unlocks after they accept. No fees, no commission, ever.";
-
-/** Short line for badges and hero chips. */
-export const GLOBAL_REACH_BADGE = "Worldwide · online or local";
+  "Mentr by Paprly is the free platform to find verified tutors — search locally, post your requirement, or connect online from any country. WhatsApp unlocks after they accept. No fees, no commission, ever.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
-  "Mentr is built for the world — parents and tutors connect in-person nearby or online across time zones, from any country.";
+  "Mentr by Paprly is built for the world — parents and tutors connect in-person nearby or online across time zones, from any country.";
 
 export const SITE_KEYWORDS = [
+  "Mentr by Paprly",
+  "Paprly Mentr",
+  "Paprly tutors",
   "best free platform to find mentors",
   "best free platform to find tutors",
   "100% free tutoring platform",
   "free tutor finder",
-    "online tutors worldwide",
-    "global mentor platform",
-    `tutors in ${LAUNCH_HUB_CITY}`,
+  "online tutors worldwide",
+  "global mentor platform",
+  `tutors in ${LAUNCH_HUB_CITY}`,
   "home tutors Bangalore",
   "online tutors India",
   "private tuition",
@@ -43,7 +49,15 @@ export const SITE_KEYWORDS = [
   "UrbanPro free alternative",
   "tuition teacher",
   "mentor for students free",
+  "Paprly",
 ];
+
+/** JSON-LD snippet for schema.org parentOrganization. */
+export const PARENT_ORG_JSON_LD = {
+  "@type": "Organization" as const,
+  name: PARENT_COMPANY_NAME,
+  url: PARENT_COMPANY_URL,
+};
 
 export function absoluteUrl(path = "/"): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;

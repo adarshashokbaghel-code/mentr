@@ -2,6 +2,8 @@
 
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { Button } from "@/components/ui/button";
+import { FacultyActionLink } from "@/components/auth/role-guard-link";
+import { FACULTY_LP_TESTIMONIALS } from "@/lib/demo-users";
 import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
@@ -20,7 +22,6 @@ import {
   Wallet,
   Zap,
 } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
 import {
@@ -120,32 +121,7 @@ const switchTabs = [
   },
 ];
 
-const facultyTestimonials = [
-  {
-    quote:
-      "I was spending ₹3,000/month on UrbanPro coins for leads that ghosted. On Mentr I listed free and parents started messaging within a week. I keep every rupee.",
-    name: "Dr. Aris Smith",
-    role: "Maths & Physics · Koramangala",
-    initials: "AS",
-    tint: "bg-cream-band",
-  },
-  {
-    quote:
-      "The requirements board is gold. Parents post what they need, I pitch, and they connect. No agency taking 20% of my fees.",
-    name: "Priya Nair",
-    role: "Mathematics · HSR Layout",
-    initials: "PN",
-    tint: "bg-lavender",
-  },
-  {
-    quote:
-      "Simple dashboard, toggle slots after WhatsApp bookings, and only serious parents reach out. Best free platform I've used.",
-    name: "Rahul Menon",
-    role: "IIT Prep · Indiranagar",
-    initials: "RM",
-    tint: "bg-sage-wash",
-  },
-];
+const facultyTestimonials = FACULTY_LP_TESTIMONIALS;
 
 const feeRows = [
   { label: "Cost to list profile", champs: "₹0", others: "₹5,000+/yr", win: true },
@@ -196,19 +172,26 @@ function FacultyHero() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:justify-start">
-              <Link href="/faculty/signup">
-                <Button size="lg" className="h-13 w-full gap-2 px-8 shadow-[3px_3px_0_0_#1c1a17] sm:w-auto">
+              <FacultyActionLink href="/faculty/signup" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="h-13 w-full gap-2 px-8 shadow-[3px_3px_0_0_#1c1a17] sm:w-auto"
+                >
                   <UserPlus className="h-4 w-4" />
                   Register free
                   <ArrowRight className="h-4 w-4" />
                 </Button>
-              </Link>
-              <Link href="/board">
-                <Button size="lg" variant="secondary" className="h-13 w-full sm:w-auto">
+              </FacultyActionLink>
+              <FacultyActionLink href="/board" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  variant="secondary"
+                  className="h-13 w-full sm:w-auto"
+                >
                   <Megaphone className="h-4 w-4" />
                   Requirements board
                 </Button>
-              </Link>
+              </FacultyActionLink>
             </div>
 
             <div className="flex items-center justify-center gap-4 rounded-xl border-2 border-ink/10 bg-white/70 px-4 py-3 backdrop-blur-sm lg:justify-start lg:w-fit">
@@ -284,9 +267,9 @@ function DashboardMock({ step }: { step: number }) {
         <div className="flex items-center justify-between gap-3">
           <div>
             <p className="flex items-center gap-1.5 text-sm font-bold text-ink">
-              Dr. Aris Smith <BadgeCheck className="h-4 w-4 text-sage" />
+              Your profile <BadgeCheck className="h-4 w-4 text-sage" />
             </p>
-            <p className="text-xs text-muted">Maths & Physics · Koramangala</p>
+            <p className="text-xs text-muted">Your subjects · Your area</p>
           </div>
           <LpLiveDot label="Live" />
         </div>
@@ -384,12 +367,12 @@ function FacultyDashboardSection() {
           <div className="bg-white p-6 sm:p-8 lg:p-10">
             <LpStepTimeline steps={facultySteps} activeIndex={step} onSelect={setStep} accent="sage" />
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/faculty/signup">
+              <FacultyActionLink href="/faculty/signup">
                 <Button size="lg"><UserPlus className="h-4 w-4" /> Register as faculty</Button>
-              </Link>
-              <Link href="/faculty">
+              </FacultyActionLink>
+              <FacultyActionLink href="/faculty">
                 <Button size="lg" variant="secondary">Faculty login</Button>
-              </Link>
+              </FacultyActionLink>
             </div>
           </div>
           <div className="border-t-2 border-ink bg-cream-band/60 lg:border-l-2 lg:border-t-0">
@@ -432,9 +415,9 @@ function FacultySwitchSection() {
               </h3>
               <p className="mt-4 max-w-md text-[15px] leading-relaxed text-ink/70">{current.description}</p>
             </div>
-            <Link href={current.ctaHref} className={cn("relative mt-8 inline-flex h-12 w-fit items-center gap-2 rounded-xl border-2 border-ink bg-coral px-6 text-sm font-bold text-white hover:bg-coral-dark", hardShadowSm)}>
+            <FacultyActionLink href={current.ctaHref} className={cn("relative mt-8 inline-flex h-12 w-fit items-center gap-2 rounded-xl border-2 border-ink bg-coral px-6 text-sm font-bold text-white hover:bg-coral-dark", hardShadowSm)}>
               {current.cta} <ArrowRight className="h-4 w-4" />
-            </Link>
+            </FacultyActionLink>
           </div>
           <div className="flex flex-col border-t-2 border-ink lg:border-l-2 lg:border-t-0">
             {current.deltas.map((row, i) => (
@@ -514,9 +497,9 @@ function RequirementsBoardSection() {
                 </div>
               ))}
             </div>
-            <Link href="/board" className="mt-8 inline-block">
+            <FacultyActionLink href="/board" className="mt-8 inline-block">
               <Button size="lg"><Megaphone className="h-4 w-4" /> View requirements board</Button>
-            </Link>
+            </FacultyActionLink>
           </div>
         </div>
       </div>
@@ -543,11 +526,11 @@ function ZeroFeesSection() {
             <p className="mt-4 rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white/70">
               <strong className="text-butter">How we make money:</strong> Optional profile boosts later — contact always stays free.
             </p>
-            <Link href="/faculty/signup" className="mt-8 inline-block">
+            <FacultyActionLink href="/faculty/signup" className="mt-8 inline-block">
               <Button size="lg" className="bg-butter text-ink shadow-[3px_3px_0_0_rgba(255,255,255,0.2)] hover:bg-butter-deep">
                 Register free
               </Button>
-            </Link>
+            </FacultyActionLink>
           </div>
 
           <div className={cn("overflow-hidden rounded-2xl border-2 border-white/25 bg-white text-ink", hardShadow)}>
@@ -574,10 +557,10 @@ function FacultyTestimonials() {
   return (
     <section className="bg-cream-band py-20 sm:py-28">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-        <SectionHeader number="04" eyebrow="Loved by tutors worldwide" title="Real tutors." accent="Real earnings." />
+        <SectionHeader number="04" eyebrow="From the community" title="Parents & tutors." accent="Same free platform." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {facultyTestimonials.map((item) => (
-            <LpTestimonialCard key={item.name} {...item} />
+          {facultyTestimonials.map((item, i) => (
+            <LpTestimonialCard key={i} {...item} />
           ))}
         </div>
       </div>

@@ -6,7 +6,7 @@ import {
   absoluteUrl,
   GLOBAL_REACH_LINE,
   LAUNCH_HUB_CITY,
-  SITE_NAME,
+  SITE_BRAND,
 } from "@/lib/seo";
 import type { Metadata } from "next";
 
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/parents" },
   openGraph: {
-    title: "Find a Tutor — Free on Mentr",
+    title: "Find a Tutor — Free on Mentr by Paprly",
     description:
       "Search locally or online worldwide. Post requirements, get pitches, connect on WhatsApp. Completely free for parents.",
     url: absoluteUrl("/parents"),
@@ -39,10 +39,10 @@ export const metadata: Metadata = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Find a Tutor for Your Child — Mentr",
+  name: "Find a Tutor for Your Child — Mentr by Paprly",
   description: GLOBAL_REACH_LINE,
   url: absoluteUrl("/parents"),
-  isPartOf: { "@type": "WebSite", name: SITE_NAME, url: absoluteUrl("/") },
+  isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },
   about: {
     "@type": "Service",
     name: "Free tutor search for parents",

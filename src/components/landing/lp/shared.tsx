@@ -1,3 +1,4 @@
+import { testimonialInitial, testimonialName } from "@/lib/demo-users";
 import { cn } from "@/lib/utils";
 import { ArrowRight, LucideIcon } from "lucide-react";
 import Link from "next/link";
@@ -377,13 +378,11 @@ export function LpTestimonialCard({
   quote,
   name,
   role,
-  initials,
   tint,
 }: {
   quote: string;
-  name: string;
+  name?: string;
   role: string;
-  initials: string;
   tint: string;
 }) {
   return (
@@ -410,10 +409,10 @@ export function LpTestimonialCard({
       <p className="relative flex-1 text-base leading-relaxed text-ink">{quote}</p>
       <div className="relative mt-8 flex items-center gap-4 border-t-2 border-ink/10 pt-6">
         <div className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink bg-white text-sm font-bold text-ink">
-          {initials}
+          {testimonialInitial(name)}
         </div>
         <div>
-          <p className="font-bold text-ink">{name}</p>
+          <p className="font-bold text-ink">{testimonialName(name)}</p>
           <p className="text-sm text-muted">{role}</p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { FacultyActionLink } from "@/components/auth/role-guard-link";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import {
   BadgeCheck,
@@ -9,7 +10,6 @@ import {
   MessageCircle,
   UserPlus,
 } from "lucide-react";
-import Link from "next/link";
 
 const steps = [
   {
@@ -64,18 +64,13 @@ export function FacultyShowcase() {
             </div>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link href="/faculty/signup">
+              <FacultyActionLink href="/faculty/signup">
                 <Button size="lg">
                   <UserPlus className="h-4 w-4" />
                   Register as faculty
                 </Button>
-              </Link>
-              <a
-                href="#faculty-dashboard"
-                className="text-sm font-semibold text-ink/70 hover:text-coral"
-              >
-                See the dashboard ↓
-              </a>
+              </FacultyActionLink>
+             
             </div>
           </div>
 
@@ -88,11 +83,11 @@ export function FacultyShowcase() {
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <p className="flex items-center gap-1.5 text-sm font-semibold text-ink">
-                      Dr. Aris Smith
+                      Your profile
                       <BadgeCheck className="h-4 w-4 text-sage" />
                     </p>
                     <p className="text-xs text-muted">
-                      Maths & Physics · Online · Koramangala
+                      Your subjects · Online · Your area
                     </p>
                   </div>
                   <span className="rounded-md bg-sage-wash px-2.5 py-1 text-[11px] font-bold text-sage">

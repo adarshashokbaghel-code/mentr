@@ -20,7 +20,7 @@ export function MentrLogo({
   return (
     <Image
       src={variant === "light" ? "/mentr-logo-light.png" : "/mentr-logo.png"}
-      alt="Mentr"
+      alt="Mentr by Paprly"
       width={RATIO.width}
       height={RATIO.height}
       priority={priority}

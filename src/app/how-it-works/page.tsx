@@ -7,9 +7,9 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "How Mentr Works — Connect Parents & Tutors Worldwide",
+  title: "How Mentr by Paprly Works — Connect Parents & Tutors Worldwide",
   description:
-    "See how Mentr connects parents and verified tutors globally: search locally or online, post requirements, send a connect request, then move to WhatsApp once accepted. Free for both sides.",
+    "See how Mentr by Paprly connects parents and verified tutors globally: search locally or online, post requirements, send a connect request, then move to WhatsApp once accepted. Free for both sides.",
   alternates: { canonical: "/how-it-works" },
 };
 

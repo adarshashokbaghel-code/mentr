@@ -1,8 +1,11 @@
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
+import {
+  FacultyActionLink,
+  ParentActionLink,
+} from "@/components/auth/role-guard-link";
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { MessageCircle, Megaphone, Search } from "lucide-react";
-import Link from "next/link";
 
 const searchSteps = [
   "Search by subject and area — nearby or online worldwide",
@@ -80,12 +83,12 @@ export function HowItWorks() {
                   </li>
                 ))}
               </ol>
-              <Link href="/search" className="mt-6 inline-block">
+              <ParentActionLink href="/search" className="mt-6 inline-block">
                 <Button size="sm">
                   <Search className="h-4 w-4" />
                   Find a teacher
                 </Button>
-              </Link>
+              </ParentActionLink>
             </div>
 
             {/* Path B — requirements board */}
@@ -140,19 +143,19 @@ export function HowItWorks() {
               profile. Your number stays private until you accept either way.
               Every rupee stays yours.
             </p>
-            <Link href="/faculty/signup" className="mt-6 inline-block">
+            <FacultyActionLink href="/faculty/signup" className="mt-6 inline-block">
               <Button variant="secondary">
                 Create free faculty account
               </Button>
-            </Link>
+            </FacultyActionLink>
           </div>
 
           <BrowserFrame url="wa.me / mentr-intro" headerClassName="bg-sage-wash">
             <div className="bg-[#ECE5DD] p-4">
               <div className="ml-auto max-w-[85%] rounded-lg rounded-tr-sm bg-[#DCF8C6] px-3 py-2 text-sm shadow-sm">
                 <p className="font-medium text-ink">
-                  Hi Dr. Aris Smith, I found you on Mentr for Mathematics &amp;
-                  Physics — are you available on weekends for online sessions?
+                  Hi, I found you on Mentr for Mathematics &amp; Physics —
+                  are you available on weekends for online sessions?
                 </p>
                 <p className="mt-1 text-right text-[10px] text-muted">12:04 ✓✓</p>
               </div>
@@ -185,12 +188,12 @@ export function HowItWorks() {
               chat on WhatsApp. Mentr never sits in the middle of fees or
               scheduling.
             </p>
-            <Link href="/search" className="mt-6 inline-block">
+            <ParentActionLink href="/search" className="mt-6 inline-block">
               <Button variant="whatsapp">
                 <MessageCircle className="h-4 w-4" />
                 Browse directory
               </Button>
-            </Link>
+            </ParentActionLink>
           </div>
 
           <BrowserFrame url="mentr.in / board" headerClassName="bg-white">

@@ -18,6 +18,15 @@
   --cream-band: #f7f0e8;
   --hairline: #e8dfd4;
   --white: #ffffff;
+  /* Paprly parent brand — light yellow + sky blue (paprly.in) */
+  --paprly-yellow: #fefce8;
+  --paprly-blue: #e9f0ff;
+  --paprly-yellow-accent: #fef9c3;
+  --paprly-blue-accent: #dbeafe;
+  --paprly-yellow-text: #facc15;
+  --paprly-blue-text: #67b5eb;
+  --paprly-yellow-text-light: #fde047;
+  --paprly-blue-text-light: #93c5fd;
 }
 
 @theme inline {
@@ -45,6 +54,63 @@ body {
   color: var(--ink);
   font-family: var(--font-sans-face), "Plus Jakarta Sans", system-ui,
     sans-serif;
+}
+
+/* Paprly parent brand — very light yellow + very light blue */
+.paprly-by {
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--muted);
+}
+
+.paprly-by-light {
+  color: var(--paprly-yellow-accent);
+}
+
+.paprly-wordmark {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  transition: opacity 0.15s ease;
+}
+
+.paprly-wordmark-papr {
+  color: var(--paprly-yellow-text);
+}
+
+.paprly-wordmark-ly {
+  color: var(--paprly-blue-text);
+}
+
+.paprly-wordmark:hover .paprly-wordmark-papr,
+.group:hover .paprly-wordmark-papr {
+  color: #eab308;
+}
+
+.paprly-wordmark:hover .paprly-wordmark-ly,
+.group:hover .paprly-wordmark-ly {
+  color: #4a9fd4;
+}
+
+.paprly-wordmark-light .paprly-wordmark-papr {
+  color: var(--paprly-yellow-text-light);
+}
+
+.paprly-wordmark-light .paprly-wordmark-ly {
+  color: var(--paprly-blue-text-light);
+}
+
+.paprly-wordmark-light:hover .paprly-wordmark-papr,
+.group:hover .paprly-wordmark-light .paprly-wordmark-papr {
+  color: var(--paprly-yellow-accent);
+}
+
+.paprly-wordmark-light:hover .paprly-wordmark-ly,
+.group:hover .paprly-wordmark-light .paprly-wordmark-ly {
+  color: var(--paprly-blue-accent);
 }
 
 @keyframes marquee {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { useRoleAction } from "@/hooks/use-role-action";
 import { ApiError, connectionsApi, type ConnectionStatus } from "@/lib/api";
 import { whatsappLink } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
@@ -52,6 +53,7 @@ export function ConnectButton({
   label?: string;
 }) {
   const { user, openRoleChooser } = useAuth();
+  const { requireParent } = useRoleAction();
   const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
   const [status, setStatus] = useState<"none" | ConnectionStatus>(
@@ -65,8 +67,21 @@ export function ConnectButton({
     setPhone(teacher.phone);
   }, [teacher.connectionStatus, teacher.phone]);
 
-  // Connections are one-directional — teachers never see a connect action
-  if (user && user.role !== "parent") return null;
+  if (user && user.role !== "parent") {
+    return (
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          requireParent();
+        }}
+        className={className}
+      >
+        <MessageCircle className="h-[1em] w-[1em]" />
+        {label}
+      </button>
+    );
+  }
 
   if (!user) {
     return (

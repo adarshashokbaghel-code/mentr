@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/auth/app-providers";
 import {
+  PARENT_COMPANY_NAME,
+  PARENT_COMPANY_URL,
+  SITE_BRAND,
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
   SITE_NAME,
@@ -19,28 +22,31 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — ${SITE_TAGLINE}`,
-    template: `%s | ${SITE_NAME}`,
+    default: `${SITE_BRAND} — ${SITE_TAGLINE}`,
+    template: `%s | ${SITE_BRAND}`,
   },
   description: SITE_DESCRIPTION,
-  applicationName: SITE_NAME,
+  applicationName: SITE_BRAND,
   keywords: SITE_KEYWORDS,
   category: "education",
-  authors: [{ name: SITE_NAME, url: SITE_URL }],
-  creator: SITE_NAME,
-  publisher: SITE_NAME,
+  authors: [
+    { name: PARENT_COMPANY_NAME, url: PARENT_COMPANY_URL },
+    { name: SITE_NAME, url: SITE_URL },
+  ],
+  creator: PARENT_COMPANY_NAME,
+  publisher: PARENT_COMPANY_NAME,
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: SITE_NAME,
+    siteName: SITE_BRAND,
     locale: "en_IN",
     url: SITE_URL,
-    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    title: `${SITE_BRAND} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    title: `${SITE_BRAND} — ${SITE_TAGLINE}`,
     description: SITE_DESCRIPTION,
   },
   robots: {

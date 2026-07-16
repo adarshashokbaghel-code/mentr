@@ -1,6 +1,10 @@
 "use client";
 
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
+import {
+  FacultyActionLink,
+  ParentActionLink,
+} from "@/components/auth/role-guard-link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, LayoutDashboard, Search } from "lucide-react";
 import Link from "next/link";
@@ -50,13 +54,13 @@ export function CTA() {
               </li>
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Link href="/search">
+              <ParentActionLink href="/search">
                 <Button size="lg" className="w-full sm:w-auto">
                   <Search className="h-4 w-4" />
                   Find a teacher
                   <ArrowRight className="h-4 w-4" />
                 </Button>
-              </Link>
+              </ParentActionLink>
               <PostRequirementButton size="lg" className="w-full sm:w-auto" />
             </div>
           </div>
@@ -89,7 +93,7 @@ export function CTA() {
               </li>
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/faculty/signup">
+              <FacultyActionLink href="/faculty/signup">
                 <Button
                   size="lg"
                   className="bg-butter text-ink hover:bg-butter-deep"
@@ -97,7 +101,7 @@ export function CTA() {
                   <LayoutDashboard className="h-4 w-4" />
                   Create free account
                 </Button>
-              </Link>
+              </FacultyActionLink>
               <Link href="/faculty">
                 <Button
                   size="lg"

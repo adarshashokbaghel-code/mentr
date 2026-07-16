@@ -8,6 +8,12 @@ export type FaqItem = {
 export const FAQS: FaqItem[] = [
   {
     category: "general",
+    question: "Who is behind Mentr?",
+    answer:
+      "Mentr is built by Paprly (paprly.in) — a technology company making essential business and education tools simple, fast, and free. Mentr by Paprly is our free tutor-parent connector: search locally or online, post requirements, and connect on WhatsApp with zero platform fees.",
+  },
+  {
+    category: "general",
     question: "Is Mentr really 100% free?",
     answer:
       "Yes — completely free for both sides, forever. Parents search, view profiles, and connect at no cost. Tutors and mentors list, receive requests, and pitch on requirements without coins, lead packs, subscriptions, or commission. There is no paid unlock anywhere on Mentr.",

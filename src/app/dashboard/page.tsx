@@ -19,6 +19,7 @@ import {
   type ConnectionRequest,
   type ProfileViewsResponse,
 } from "@/lib/api";
+import { absoluteUrl } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
   BadgeCheck,
@@ -117,17 +118,12 @@ export default function DashboardPage() {
   const [requestsLoading, setRequestsLoading] = useState(true);
 
   const [copied, setCopied] = useState(false);
-  const [origin, setOrigin] = useState("");
-
-  useEffect(() => {
-    setOrigin(window.location.origin);
-  }, []);
 
   async function copyListingLink() {
     if (!user) return;
     try {
       await navigator.clipboard.writeText(
-        `${window.location.origin}/teachers/${user.id}`,
+        absoluteUrl(`/teachers/${user.id}`),
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -602,7 +598,7 @@ export default function DashboardPage() {
                   </button>
                   <a
                     href={`https://wa.me/?text=${encodeURIComponent(
-                      `I'm on Mentr — you can see my subjects and free slots here: ${origin}/teachers/${user.id}`,
+                      `I'm on Mentr — you can see my subjects and free slots here: ${absoluteUrl(`/teachers/${user.id}`)}`,
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

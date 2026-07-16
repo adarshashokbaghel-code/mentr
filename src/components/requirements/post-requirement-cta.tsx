@@ -10,6 +10,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useToast } from "@/components/ui/toast";
+import { PARENT_ROLE_TOAST } from "@/hooks/use-role-action";
 import { homeFor } from "@/lib/auth-routes";
 import { cn } from "@/lib/utils";
 import { Loader2, Megaphone, Users } from "lucide-react";
@@ -35,19 +37,19 @@ export function PostRequirementButton({
   showIcon = true,
 }: PostRequirementButtonProps) {
   const { user, loading, logout } = useAuth();
+  const { toast } = useToast();
   const router = useRouter();
   const [gateOpen, setGateOpen] = useState(false);
   const [switching, setSwitching] = useState(false);
 
-  function goToPost() {
-    if (!user || user.role !== "parent") return;
-    router.push(homeFor(user, POST_DEST));
-  }
-
   function handleClick() {
     if (loading) return;
     if (user?.role === "parent") {
-      goToPost();
+      router.push(homeFor(user, POST_DEST));
+      return;
+    }
+    if (user) {
+      toast(PARENT_ROLE_TOAST);
       return;
     }
     setGateOpen(true);
@@ -57,16 +59,12 @@ export function PostRequirementButton({
     setSwitching(true);
     try {
       if (user) await logout();
-      router.push(
-        `/parent?next=${encodeURIComponent(POST_DEST)}`,
-      );
+      router.push(`/parent?next=${encodeURIComponent(POST_DEST)}`);
       setGateOpen(false);
     } finally {
       setSwitching(false);
     }
   }
-
-  const signedInAsTutor = user?.role === "faculty";
 
   return (
     <>
@@ -92,9 +90,8 @@ export function PostRequirementButton({
               Parents post requirements
             </DialogTitle>
             <DialogDescription className="text-sm leading-relaxed text-muted">
-              {signedInAsTutor
-                ? "You're signed in as a tutor. Only parent accounts can post a learning need — tutors respond on the board instead."
-                : "Only parents can post what their child needs. Verified tutors pitch on the board; you pick who to connect with on WhatsApp."}
+              Only parents can post what their child needs. Verified tutors pitch
+              on the board; you pick who to connect with on WhatsApp.
             </DialogDescription>
           </DialogHeader>
 
@@ -113,11 +110,6 @@ export function PostRequirementButton({
                 Accept one → WhatsApp unlocks. ₹0 fees
               </li>
             </ul>
-            {signedInAsTutor && (
-              <p className="rounded-lg border border-hairline bg-cream/60 px-3.5 py-2.5 text-xs text-muted">
-                Continuing will sign you out of your tutor account.
-              </p>
-            )}
           </div>
 
           <DialogFooter className="border-t border-hairline bg-cream/20 px-6 py-4 sm:justify-stretch">
@@ -129,7 +121,11 @@ export function PostRequirementButton({
             >
               Cancel
             </Button>
-            <Button className="flex-1" onClick={handleLoginAsParent} disabled={switching}>
+            <Button
+              className="flex-1"
+              onClick={handleLoginAsParent}
+              disabled={switching}
+            >
               {switching ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (

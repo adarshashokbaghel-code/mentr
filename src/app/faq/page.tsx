@@ -2,15 +2,16 @@ import { FaqLanding } from "@/components/landing/lp/faq-page";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { FAQS } from "@/lib/faqs";
-import { absoluteUrl, SITE_NAME } from "@/lib/seo";
+import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentr FAQ — Verification, Fees & How Connect Requests Work",
+  title: "Mentr by Paprly FAQ — Verification, Fees & How Connect Requests Work",
   description:
-    "Answers on tutor verification, WhatsApp contact, fees, connect requests, and how Mentr stays 100% free for parents and faculty worldwide.",
+    "Answers on tutor verification, WhatsApp contact, fees, connect requests, and how Mentr by Paprly stays 100% free for parents and faculty worldwide.",
   keywords: [
-    "Mentr FAQ",
+    "Mentr by Paprly FAQ",
+    "Paprly Mentr",
     "is Mentr free",
     "how to find tutor online",
     "tutor verification",
@@ -20,9 +21,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/faq" },
   openGraph: {
-    title: "Mentr FAQ — 100% free tutor & mentor finder",
+    title: "Mentr by Paprly FAQ — 100% free tutor & mentor finder",
     description:
-      "How Mentr stays completely free for parents, tutors, and mentors — verification, WhatsApp contact, and zero fees explained.",
+      "How Mentr by Paprly stays completely free for parents, tutors, and mentors — verification, WhatsApp contact, and zero fees explained.",
     url: absoluteUrl("/faq"),
     type: "website",
   },
@@ -41,11 +42,11 @@ const faqJsonLd = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Mentr FAQ",
+  name: "Mentr by Paprly FAQ",
   description:
-    "Frequently asked questions about finding tutors, faculty registration, fees, and verification on Mentr.",
+    "Frequently asked questions about finding tutors, faculty registration, fees, and verification on Mentr by Paprly.",
   url: absoluteUrl("/faq"),
-  isPartOf: { "@type": "WebSite", name: SITE_NAME, url: absoluteUrl("/") },
+  isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },
 };
 
 export default function FaqPage() {

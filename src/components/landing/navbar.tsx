@@ -2,7 +2,7 @@
 
 import { UserMenu } from "@/components/auth/user-menu";
 import { Button } from "@/components/ui/button";
-import { MentrLogo } from "@/components/ui/mentr-logo";
+import { MentrBrand } from "@/components/ui/mentr-brand";
 import { useAuth } from "@/components/auth/auth-provider";
 import { cn } from "@/lib/utils";
 import {
@@ -46,9 +46,7 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center">
-          <MentrLogo className="h-7" priority />
-        </Link>
+        <MentrBrand logoClassName="h-7" priority />
 
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (

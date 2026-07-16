@@ -6,13 +6,14 @@ import {
   IndianRupee,
   ShieldCheck,
 } from "lucide-react";
+import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Mentr — The Free Tutor-Parent Connector Worldwide",
+  title: "About Mentr by Paprly — The Free Tutor-Parent Connector Worldwide",
   description:
-    "Mentr connects parents and verified tutors globally — in-person nearby or online across time zones. No commission, no middlemen, ever.",
+    "Mentr by Paprly connects parents and verified tutors globally — in-person nearby or online across time zones. A free product from Paprly. No commission, no middlemen, ever.",
   alternates: { canonical: "/about" },
 };
 
@@ -47,7 +48,7 @@ export default function AboutPage() {
         <section className="border-b border-hairline bg-white">
           <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-20">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral">
-              About Mentr
+              About Mentr by Paprly
             </p>
             <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
               Parents find teachers. Faculty get found. Free.
@@ -55,14 +56,17 @@ export default function AboutPage() {
             <p className="mt-5 text-base leading-relaxed text-muted">
               Finding a good tutor usually means paying a platform — parents
               pay to unlock contacts, tutors pay for leads that never reply.
-              Mentr removes that toll booth. We verify tutors, let parents search
-              locally or online worldwide, and connect the two sides directly on
-              WhatsApp. Our platform fee is ₹0, forever.
+              Mentr by Paprly removes that toll booth. We verify tutors, let
+              parents search locally or online worldwide, and connect the two
+              sides directly on WhatsApp. Our platform fee is ₹0, forever.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Post a requirement and tutors pitch you, or search the directory
-              and send a connect request yourself. Either way, numbers stay
-              private until you accept — then you arrange everything directly.
+              Mentr is built by <PaprlyWordmark className="align-middle" />,
+              the team behind simple, free business tools for founders and
+              growing teams. Post a requirement and tutors pitch you, or search
+              the directory and send a connect request yourself. Either way,
+              numbers stay private until you accept — then you arrange
+              everything directly.
             </p>
           </div>
         </section>

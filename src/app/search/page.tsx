@@ -3,6 +3,7 @@
 import { useAuth } from "@/components/auth/auth-provider";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { SearchFacultyBlocked } from "@/components/auth/role-blocked-page";
 import {
   SearchHeader,
   type SearchFiltersState,
@@ -17,7 +18,6 @@ import {
 import {
   fetchLiveTeachers,
   searchTeachers,
-  TEACHERS,
   type Teacher,
 } from "@/lib/teachers";
 import { ArrowRight, GraduationCap, Lock, Users } from "lucide-react";
@@ -146,7 +146,7 @@ function SearchContent() {
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
 
-  // Live faculty from the database (auth-protected API), shown ahead of demo profiles
+  // Live faculty from the database (auth-protected API)
   const [liveTeachers, setLiveTeachers] = useState<Teacher[]>([]);
   useEffect(() => {
     if (!user) return;
@@ -159,15 +159,10 @@ function SearchContent() {
     };
   }, [user]);
 
-  const allTeachers = useMemo(
-    () => [...liveTeachers, ...TEACHERS],
-    [liveTeachers],
-  );
-
   const results = useMemo(
     () =>
       searchTeachers({
-        teachers: allTeachers,
+        teachers: liveTeachers,
         subject: filters.subject,
         locality: filters.locality,
         onlyOpen: filters.onlyOpen,
@@ -186,7 +181,7 @@ function SearchContent() {
         nearLng: userLocation?.lng,
         radiusKm: userLocation ? filters.radiusKm : undefined,
       }),
-    [filters, userLocation, allTeachers],
+    [filters, userLocation, liveTeachers],
   );
 
   const mapSelectedId =
@@ -240,7 +235,7 @@ function SearchContent() {
     }
   }, []);
 
-  // —— Auth gate: search is only for signed-in parents & tutors ——
+  // —— Auth gate: search is for signed-in parents only ——
   if (authLoading) {
     return (
       <>
@@ -253,6 +248,9 @@ function SearchContent() {
   }
   if (!user) {
     return <SearchAuthGate />;
+  }
+  if (user.role !== "parent") {
+    return <SearchFacultyBlocked />;
   }
 
   // —— Map view: Google Maps-style shell (no stacked modals) ——

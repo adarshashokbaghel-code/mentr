@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { BoardParentBlocked } from "@/components/auth/role-blocked-page";
 import { Navbar } from "@/components/landing/navbar";
 import { RequirementsFeed } from "@/components/requirements/tutor-board";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,14 +18,12 @@ export default function BoardPage() {
       router.replace("/faculty");
       return;
     }
-    if (user.role === "parent") {
-      router.replace("/parent/dashboard");
-      return;
+    if (user.role !== "parent" && !user.profileCompleted) {
+      router.replace("/profiling");
     }
-    if (!user.profileCompleted) router.replace("/profiling");
   }, [loading, user, router]);
 
-  if (loading || !user || user.role === "parent") {
+  if (loading) {
     return (
       <>
         <Navbar />
@@ -40,6 +39,12 @@ export default function BoardPage() {
         </main>
       </>
     );
+  }
+
+  if (!user) return null;
+
+  if (user.role === "parent") {
+    return <BoardParentBlocked />;
   }
 
   const name = user.profile?.name || "there";

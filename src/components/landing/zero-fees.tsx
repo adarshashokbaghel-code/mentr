@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
+import { ParentActionLink } from "@/components/auth/role-guard-link";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { Check, X } from "lucide-react";
-import Link from "next/link";
 
 const rows = [
   { label: "Platform fee from parents", champs: false, others: true },
@@ -35,11 +35,11 @@ export function ZeroFees() {
               contact is always free.
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/search">
+              <ParentActionLink href="/search">
                 <Button className="bg-butter text-ink hover:bg-butter-deep">
                   Browse as parent
                 </Button>
-              </Link>
+              </ParentActionLink>
               <a href="#for-faculty">
                 <Button
                   variant="secondary"

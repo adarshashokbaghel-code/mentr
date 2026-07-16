@@ -1,5 +1,6 @@
 "use client";
 
+import { FacultyActionLink } from "@/components/auth/role-guard-link";
 import { requirementsApi, type TutorPitch } from "@/lib/api";
 import { timeAgo } from "@/components/dashboard/widgets";
 import { cn } from "@/lib/utils";
@@ -94,13 +95,13 @@ export function PitchesSection() {
             until they accept.
           </p>
         </div>
-        <Link
+        <FacultyActionLink
           href="/board"
           className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-4 text-[13px] font-semibold text-ink transition hover:bg-cream"
         >
           <Megaphone className="h-3.5 w-3.5 text-coral" />
           Open board
-        </Link>
+        </FacultyActionLink>
       </div>
 
       {loading ? (
@@ -115,13 +116,13 @@ export function PitchesSection() {
             Parents post what they need on the requirements board — send a
             free pitch and connect with the ones that fit.
           </p>
-          <Link
+          <FacultyActionLink
             href="/board"
             className="mt-4 inline-flex h-9 items-center gap-1.5 rounded-md bg-coral px-4 text-[13px] font-semibold text-white transition hover:bg-coral-dark"
           >
             Browse requirements
             <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+          </FacultyActionLink>
         </div>
       ) : (
         <>
