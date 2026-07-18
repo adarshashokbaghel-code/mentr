@@ -8,6 +8,7 @@ import { LpStatsBand } from "@/components/landing/lp/shared";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
+import { ProductHuntSection } from "@/components/landing/product-hunt-section";
 import { StatsMarquee } from "@/components/landing/stats-marquee";
 import { SubjectGallery } from "@/components/landing/subject-gallery";
 import { SwitchToChamps } from "@/components/landing/switch-to-champs";
@@ -134,6 +135,7 @@ export default function Home() {
         <SubjectGallery />
         <ZeroFees />
         <Testimonials />
+        <ProductHuntSection />
         <FAQ />
         <CTA />
       </main>

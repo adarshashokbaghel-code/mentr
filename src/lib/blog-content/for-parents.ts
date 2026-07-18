@@ -1442,4 +1442,114 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
   },
+
+  "find-online-tutor-near-me": {
+    slug: "find-online-tutor-near-me",
+    publishedAt: "2026-07-18",
+    updatedAt: "2026-07-18",
+    readTimeMinutes: 9,
+    author: "Mentr Editorial Team",
+    intro:
+      "Parents in Dubai, London, Singapore, and Bengaluru all type the same phrase into Google: 'online tutor near me.' The words sound local, but the best results are often global — a verified maths tutor in India who teaches your child's CBSE syllabus over video at 5 PM Gulf time, or a Python mentor in the UK who fits your evening slot. This guide explains how to search smartly, what 'near me' should mean for online tutoring, and how to connect with verified tutors on Mentr without paying agency markups.",
+    sections: [
+      {
+        heading: "What 'online tutor near me' actually means",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "For home tutors, 'near me' is literal — same neighbourhood, short commute, familiar landmarks. For online tutoring, proximity matters differently: time zone overlap, curriculum familiarity (CBSE, IGCSE, IB, GCSE), language comfort, and fee expectations in your currency. A tutor 8,000 km away can be 'near' you if they teach your board, speak your language, and are awake when your child is free after school.",
+          },
+          {
+            type: "list",
+            items: [
+              "Time zone: confirm the tutor's availability matches your local evenings and weekends",
+              "Curriculum: CBSE in Dubai is not the same as CBSE in Delhi — ask which editions and years they have taught",
+              "Language: English-medium, Hindi support, Arabic for younger learners — state this upfront",
+              "Mode: pure online vs hybrid (some tutors visit when you travel to India)",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "How to search for online tutors near you",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Generic Google results mix aggregators, paid ads, and unverified WhatsApp numbers. A structured search saves hours of screening.",
+          },
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Start with your city or country plus subject — 'online maths tutor Dubai CBSE' beats 'tutor near me'",
+              "Filter for verified profiles with listed subjects, class levels, and teaching modes",
+              "Read bios for curriculum keywords — NCERT, Edexcel, AP, JEE, 11+ exams",
+              "Check availability slots in your time zone before sending a connect request",
+              "Send a short intro message explaining class, board, and preferred timings",
+            ],
+          },
+          {
+            type: "callout",
+            title: "Mentr tip",
+            text: "Search on Mentr by subject and mode (online). Each verified profile shows subjects, languages, availability, and a free connect flow — no coins or lead fees before you talk.",
+          },
+        ],
+      },
+      {
+        heading: "Online tutor fees by region (2026 benchmarks)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Fees vary more by subject and level than by country alone, but parents expect these rough ranges for one-on-one online sessions:",
+          },
+          {
+            type: "list",
+            items: [
+              "India: ₹500–₹1,500/hr school subjects; ₹1,000–₹2,500/hr JEE/NEET",
+              "UAE (AED): 80–200/hr school subjects; 150–350/hr competitive prep",
+              "UK (GBP): £25–£55/hr GCSE/A-Level; £40–£80/hr specialist exam prep",
+              "US (USD): $30–$80/hr K-12; $50–$120/hr AP and college-level",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Red flags when hiring an 'online tutor near me'",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "No verification or refusal to do a video intro before payment",
+              "Pressure to pay multiple months upfront via personal UPI or crypto",
+              "Vague subject list — claims 'all subjects Class 1–12'",
+              "No sample teaching — only marketing screenshots",
+              "Insists on child-only WhatsApp from day one",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can I find an online tutor in my exact neighbourhood?",
+        answer:
+          "For online sessions, exact neighbourhood matters less than time zone and curriculum fit. If you want occasional in-person classes when visiting India, mention both cities in your search and requirement post.",
+      },
+      {
+        question: "Is an online tutor from India good enough for UAE curriculum?",
+        answer:
+          "Many Indian tutors teach CBSE and ICSE to Gulf-based families daily. For IGCSE or IB, filter for tutors who explicitly list those boards and ask for past student examples in your first message.",
+      },
+      {
+        question: "How do I try a tutor before committing?",
+        answer:
+          "Book a paid trial session (30–60 minutes) covering one topic your child struggles with. Evaluate clarity, punctuality, and whether they adapt to your child's pace — not just credentials on paper.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Search tutors on Mentr", href: "/search" },
+      { label: "Find a verified tutor online", href: "/blog/how-to-find-verified-tutor-online" },
+      { label: "Online tutor UAE guide", href: "/blog/find-tutor-online-uae" },
+    ],
+  },
 };

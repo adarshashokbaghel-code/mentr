@@ -43,6 +43,8 @@ export const config = {
     retentionMinutes: 60,
   },
   jwtExpiresIn: "7d",
+  /** Set ADMIN_SECRET_KEY in .env — access panel at /admin/[key] */
+  adminSecretKey: process.env.ADMIN_SECRET_KEY || "",
 };
 
 export function getMongoUriWithDb(): string {

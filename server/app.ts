@@ -8,6 +8,7 @@ import connectionRoutes from "./routes/connections";
 import profileRoutes from "./routes/profile";
 import requirementRoutes from "./routes/requirements";
 import teacherRoutes from "./routes/teachers";
+import adminRoutes from "./routes/admin";
 import { getPublicTeacher } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 
@@ -96,6 +97,7 @@ app.use("/api/connections", connectionRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/requirements", requirementRoutes);
 app.use("/api/teachers", teacherRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.use(
   (

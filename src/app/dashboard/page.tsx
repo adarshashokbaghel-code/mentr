@@ -42,7 +42,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const DAY_SHORT: Record<AvailabilitySlot["day"], string> = {
   monday: "Mon",
@@ -135,6 +135,13 @@ export default function DashboardPage() {
   useEffect(() => {
     setSlots(user?.profile?.availability ?? []);
   }, [user]);
+
+  const reloadViews = useCallback(() => {
+    profileApi
+      .views()
+      .then(setViews)
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!user || user.role === "parent") return;
@@ -376,7 +383,11 @@ export default function DashboardPage() {
 
           {/* ------------------------------ stats ------------------------------- */}
           <div className="mt-7 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-            <WhoViewedCard data={views} loading={viewsLoading} />
+            <WhoViewedCard
+              data={views}
+              loading={viewsLoading}
+              onRefresh={reloadViews}
+            />
 
             <StatCard
               label="Parents reached"

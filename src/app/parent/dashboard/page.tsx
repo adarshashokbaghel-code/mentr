@@ -126,6 +126,28 @@ export default function ParentDashboardPage() {
   const [connectionsLoading, setConnectionsLoading] = useState(true);
   const [historyTab, setHistoryTab] = useState<HistoryTab>("all");
   const [viewMessage, setViewMessage] = useState<ParentConnection | null>(null);
+  const [respondingId, setRespondingId] = useState<string | null>(null);
+
+  async function respondToTeacher(
+    connection: ParentConnection,
+    action: "accept" | "decline",
+  ) {
+    setRespondingId(connection.id);
+    try {
+      await connectionsApi.respondAsParent(connection.id, action);
+      reloadConnections();
+    } catch {
+      // keep UI unchanged on failure
+    } finally {
+      setRespondingId(null);
+    }
+  }
+
+  function teacherRequestLabel(c: ParentConnection): string {
+    if (c.source === "board") return "Answered your post";
+    if (c.source === "profile") return "Reached out to you";
+    return "Sent you a request";
+  }
 
   useEffect(() => {
     if (loading) return;
@@ -321,7 +343,7 @@ export default function ParentDashboardPage() {
                               </span>
                               {c.requestedBy === "teacher" && (
                                 <span className="rounded-md bg-lavender px-2 py-0.5 text-[11px] font-semibold text-ink">
-                                  Answered your post
+                                  {teacherRequestLabel(c)}
                                 </span>
                               )}
                             </div>
@@ -360,10 +382,35 @@ export default function ParentDashboardPage() {
                               <MessageCircle className="h-3.5 w-3.5" />
                               Chat on WhatsApp
                             </a>
+                          ) : c.status === "pending" &&
+                            c.requestedBy === "teacher" ? (
+                            <>
+                              <button
+                                type="button"
+                                disabled={respondingId === c.id}
+                                onClick={() => respondToTeacher(c, "accept")}
+                                className="inline-flex h-9 items-center gap-1.5 rounded-md bg-sage px-4 text-[13px] font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
+                              >
+                                {respondingId === c.id ? (
+                                  <Clock3 className="h-3.5 w-3.5 animate-pulse" />
+                                ) : (
+                                  <BadgeCheck className="h-3.5 w-3.5" />
+                                )}
+                                Accept
+                              </button>
+                              <button
+                                type="button"
+                                disabled={respondingId === c.id}
+                                onClick={() => respondToTeacher(c, "decline")}
+                                className="inline-flex h-9 items-center rounded-md border border-hairline bg-white px-4 text-[13px] font-semibold text-ink transition hover:bg-cream disabled:opacity-50"
+                              >
+                                Decline
+                              </button>
+                            </>
                           ) : c.status === "pending" ? (
                             <span className="inline-flex h-9 items-center gap-1.5 rounded-md bg-cream px-4 text-[13px] font-semibold text-muted">
                               <Clock3 className="h-3.5 w-3.5" />
-                              Awaiting response
+                              Awaiting tutor
                             </span>
                           ) : (
                             <Link
@@ -451,7 +498,7 @@ export default function ParentDashboardPage() {
             ? [
                 viewMessage.teacherArea,
                 viewMessage.requestedBy === "teacher"
-                  ? "Answered your post"
+                  ? teacherRequestLabel(viewMessage)
                   : "Your request",
                 viewMessage.sentAt ? `sent ${timeAgo(viewMessage.sentAt)}` : null,
               ]

@@ -592,6 +592,73 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Search Whitefield tutors",
     ctaHref: "/search/bengaluru",
   },
+
+  // ── Global SEO: mentor search worldwide ────────────────────────────
+  {
+    slug: "find-online-tutor-near-me",
+    title: "How to Find an Online Tutor Near Me (Any City, Any Country)",
+    keyword: "online tutor near me",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    featured: true,
+    description:
+      "Search tactics for 'online tutor near me' — local time zones, verified profiles, and free platforms that work in India, UAE, UK, and beyond.",
+    cta: "Search tutors near you",
+    ctaHref: "/search",
+  },
+  {
+    slug: "how-to-find-verified-tutor-online",
+    title: "How to Find a Verified Tutor Online (What to Check Before You Book)",
+    keyword: "verified tutor online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "trust-safety",
+    featured: true,
+    description:
+      "What 'verified tutor' actually means — ID checks, qualification proof, trial sessions, and red flags when hiring online.",
+    cta: "Browse verified tutors",
+    ctaHref: "/search",
+  },
+  {
+    slug: "find-programming-mentor-worldwide",
+    title: "How to Find a Programming Mentor Worldwide (Free & Paid Options)",
+    keyword: "programming mentor worldwide",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "career-mentoring",
+    featured: true,
+    description:
+      "Find coding mentors across time zones — DSA, web dev, data science, and career guidance without cold LinkedIn spam.",
+    cta: "Find coding mentors",
+    ctaHref: "/search",
+  },
+  {
+    slug: "find-tutor-online-uae",
+    title: "Find a Tutor Online in the UAE: CBSE, IGCSE, Arabic & More",
+    keyword: "online tutor UAE",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "local-guides",
+    featured: true,
+    description:
+      "UAE parents' guide to online tutors — Dubai, Abu Dhabi, Sharjah, curriculum fit, fees in AED, and verified mentors on Mentr.",
+    cta: "Search UAE tutors",
+    ctaHref: "/search",
+  },
+  {
+    slug: "find-mentor-online-any-country",
+    title: "Find a Mentor Online in Any Country: Global Search That Actually Works",
+    keyword: "find mentor online worldwide",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "career-mentoring",
+    featured: true,
+    description:
+      "Cross-border mentor search for students and professionals — filters, verification, and how to hire tutors in India, UAE, UK, US, and more.",
+    cta: "Search mentors globally",
+    ctaHref: "/search",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

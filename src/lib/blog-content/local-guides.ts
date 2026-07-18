@@ -641,4 +641,107 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
   },
+
+  "find-tutor-online-uae": {
+    slug: "find-tutor-online-uae",
+    publishedAt: "2026-07-18",
+    updatedAt: "2026-07-18",
+    readTimeMinutes: 9,
+    author: "Mentr Editorial Team",
+    intro:
+      "UAE families — in Dubai, Abu Dhabi, Sharjah, Ajman, and Ras Al Khaimah — often need tutors who understand CBSE, ICSE, IGCSE, IB, or Arabic enrichment, and who can teach online after school lets out at 2–3 PM Gulf time. Finding a tutor online in the UAE should not mean paying undisclosed agency markups or trusting unverified WhatsApp lists. This 2026 guide covers curricula, typical AED fees, search tactics, and how to hire verified mentors on Mentr from anywhere in the Emirates.",
+    sections: [
+      {
+        heading: "Why UAE parents search for tutors online",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Traffic, dual-income schedules, and mixed curricula in one neighbourhood make home visits hard to coordinate. Online tutors based in India or the Gulf often deliver better value — same CBSE syllabus, lower hourly cost, flexible replays of recorded notes. Expat and NRI families also want continuity when travelling or relocating.",
+          },
+          {
+            type: "list",
+            items: [
+              "CBSE / ICSE — common in Indian curriculum schools across the UAE",
+              "IGCSE / GCSE — British curriculum schools in Dubai and Abu Dhabi",
+              "IB MYP & DP — growing pool, specialist tutors required",
+              "Arabic & Islamic studies — often combined with English-medium subject support",
+              "Competitive exams — JEE/NEET prep while enrolled in UAE schools",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Typical online tutor fees in the UAE (AED, 2026)",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Primary (Grades 1–5): AED 60–120/hr online",
+              "Middle school (Grades 6–8): AED 80–150/hr",
+              "IGCSE / CBSE Class 9–10: AED 100–180/hr",
+              "A-Level / Class 11–12 / IB DP: AED 150–280/hr",
+              "JEE/NEET / coding mentors: AED 150–350/hr",
+            ],
+          },
+          {
+            type: "callout",
+            title: "India-based tutors, UAE timings",
+            text: "Many families hire verified Indian tutors online at INR rates (often 40–60% lower than local UAE agencies) with sessions fixed to Gulf Standard Time evenings.",
+          },
+        ],
+      },
+      {
+        heading: "How to find a tutor online in the UAE on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Search by subject — Maths, Physics, English, Coding, etc.",
+              "Filter teaching mode: online",
+              "Open verified profiles; check languages and class levels",
+              "Send a connect request with your emirate, curriculum, and preferred times (GST)",
+              "Book a trial session before monthly packages",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Mention your school name and board in the first message — 'Dubai, CBSE Class 8 Maths, Sun–Wed 5–6 PM GST' gets faster, relevant replies than 'need tutor.'",
+          },
+        ],
+      },
+      {
+        heading: "Verification and safety for UAE families",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Online tutoring for children requires the same diligence as elsewhere: verified identity, video intro with a parent present, clear camera policy, and no child-only WhatsApp until trust is established. Mentr's Verified badge means ID and credentials were reviewed — still run a trial and supervise early sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can I hire a CBSE tutor in Dubai who is based in India?",
+        answer:
+          "Yes — this is one of the most common arrangements for UAE Indian curriculum families. Confirm GST evening availability and that the tutor uses current NCERT editions.",
+      },
+      {
+        question: "Are home visit tutors available in Dubai?",
+        answer:
+          "Some tutors in the UAE offer home visits at premium rates. Most cross-emirate online arrangements are easier to schedule and more affordable.",
+      },
+      {
+        question: "How do I pay tutors in the UAE?",
+        answer:
+          "Agree on AED or INR, payment frequency, and method before block booking. Use traceable transfers; avoid large cash advances to unverified contacts.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Search tutors on Mentr", href: "/search" },
+      { label: "Online tutor near me", href: "/blog/find-online-tutor-near-me" },
+      { label: "Verified tutor guide", href: "/blog/how-to-find-verified-tutor-online" },
+      { label: "Global mentor search", href: "/blog/find-mentor-online-any-country" },
+    ],
+  },
 };

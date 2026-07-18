@@ -1,4 +1,5 @@
 import { TeacherConnectPanel } from "@/components/connect/teacher-connect-panel";
+import { ProfileViewBeacon } from "@/components/teachers/profile-view-beacon";
 import { AvailabilitySchedule } from "@/components/teachers/availability-schedule";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
@@ -175,6 +176,7 @@ export default async function TeacherProfilePage({
 
   return (
     <>
+      <ProfileViewBeacon teacherId={teacher.id} />
       <JsonLd
         data={[
           breadcrumbJsonLd(
