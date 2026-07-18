@@ -206,6 +206,12 @@ export const profileApi = {
     }),
 
   views: () => request<ProfileViewsResponse>("/profile/views"),
+
+  /** Parent opened a tutor profile — records a view for the tutor dashboard. */
+  recordView: (teacherId: string) =>
+    request<Record<string, never>>(`/profile/views/${teacherId}`, {
+      method: "POST",
+    }),
 };
 
 /* ------------------------------ connections ------------------------------ */
@@ -220,8 +226,10 @@ export interface ParentConnection {
   teacherArea: string | null;
   message: string;
   status: ConnectionStatus;
-  /** "parent" = you asked the tutor; "teacher" = tutor answered your post */
+  /** "parent" = you asked; "teacher" + source distinguishes board vs profile outreach */
   requestedBy: "parent" | "teacher";
+  /** parent = you sent; board = tutor answered your post; profile = tutor reached out after you viewed them */
+  source: "parent" | "board" | "profile";
   /** wa.me-ready number — only present once accepted */
   phone: string | null;
   sentAt: string;
@@ -266,6 +274,23 @@ export const connectionsApi = {
       `/connections/${id}/respond`,
       { method: "POST", body: JSON.stringify({ action }) },
     ),
+
+  /** Tutor reaches out to a parent who viewed their profile */
+  outreach: (parentId: string, message: string) =>
+    request<{
+      outreach: {
+        parentId: string;
+        parentName: string;
+        parentArea: string | null;
+        message: string;
+        status: ConnectionStatus;
+        sentAt: string;
+      };
+      message: string;
+    }>("/connections/outreach", {
+      method: "POST",
+      body: JSON.stringify({ parentId, message }),
+    }),
 };
 
 /* ------------------------------ requirements ------------------------------ */
@@ -404,6 +429,11 @@ export interface ProfileViewer {
   area: string | null;
   count: number;
   lastViewedAt: string;
+  connectionStatus: ConnectionStatus | "none";
+  connectionId: string | null;
+  requestedBy: "parent" | "teacher" | null;
+  /** Tutor can send a connect request with a message */
+  canReachOut: boolean;
 }
 
 export interface ProfileViewsResponse {

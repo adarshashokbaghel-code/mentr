@@ -455,4 +455,198 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       { label: "Search mentors on Mentr", href: "/search" },
     ],
   },
+
+  "find-programming-mentor-worldwide": {
+    slug: "find-programming-mentor-worldwide",
+    publishedAt: "2026-07-18",
+    updatedAt: "2026-07-18",
+    readTimeMinutes: 11,
+    author: "Mentr Editorial Team",
+    intro:
+      "Whether you are preparing for FAANG interviews from Hyderabad, switching into web development from accounting in Dubai, or learning Python as a teenager in London, a programming mentor worldwide beats random YouTube playlists — if you find the right person. This guide covers how to search globally, evaluate coding mentors, and connect on Mentr without paying per-lead fees to aggregators.",
+    sections: [
+      {
+        heading: "What a programming mentor does (vs a coding tutor)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A coding tutor teaches syntax and syllabus — Class 12 Computer Science, AP CS, university assignments. A programming mentor helps you think like an engineer: architecture trade-offs, code review habits, career navigation, interview strategy, and project direction. Many professionals need both at different stages.",
+          },
+          {
+            type: "list",
+            items: [
+              "Tutor: syllabus coverage, homework, exam prep — session-based",
+              "Mentor: code review, system design, portfolio feedback — relationship-based",
+              "Coach: structured bootcamp-style skill sprint — time-bound programme",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "How to find a programming mentor worldwide",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Define your stack and goal — DSA interviews, React jobs, data science, embedded systems",
+              "Search globally with online mode — timezone overlap matters more than city",
+              "Prioritise mentors who show real work — GitHub, LinkedIn, past students",
+              "Request a 30-minute paid trial focused on one problem you are stuck on",
+              "Evaluate feedback quality — specific line-level notes beat generic encouragement",
+            ],
+          },
+          {
+            type: "callout",
+            title: "Avoid cold LinkedIn spam",
+            text: "Senior engineers ignore generic 'Will you be my mentor?' messages. Lead with a specific question, your current level, and what you tried already. Platforms like Mentr structure the intro so mentors know you are serious.",
+          },
+        ],
+      },
+      {
+        heading: "Typical fees for global programming mentors (2026)",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "India-based mentors: ₹1,500–₹6,000/hr for interview prep and code review",
+              "UAE / Gulf clients often hire Indian mentors at similar INR rates or AED 100–250/hr",
+              "US/UK mentors: $60–$200/hr for senior staff-level interview coaching",
+              "Monthly mentorship (4 sessions): often 10–20% cheaper than ad-hoc hourly",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Subjects and tracks mentors cover",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Data structures & algorithms for product company interviews",
+              "Full-stack web — JavaScript, React, Node, databases",
+              "Mobile — Swift, Kotlin, Flutter",
+              "Data science — Python, pandas, ML fundamentals",
+              "DevOps & cloud — AWS, Docker, CI/CD basics",
+              "Career switching — portfolio reviews, résumé, mock interviews",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can I find a free programming mentor online?",
+        answer:
+          "Occasionally through open-source communities, university alumni, or company volunteer programmes. For consistent weekly guidance, expect to pay — but compare platforms that do not charge mentors per lead, keeping hourly rates lower.",
+      },
+      {
+        question: "Is a programming mentor in India good for UAE or UK careers?",
+        answer:
+          "Many Indian engineers work globally and coach for international interviews daily. Confirm they have recent experience with your target market — FAANG, fintech, or regional employers — not just generic DSA drills.",
+      },
+      {
+        question: "How do I verify a coding mentor is legitimate?",
+        answer:
+          "Check employment history, public code contributions, and student outcomes. On Mentr, verified mentors pass ID and credential review. Always do a trial session before multi-month packages.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Find mentors globally", href: "/blog/find-mentor-online-any-country" },
+      { label: "How to find a career mentor free", href: "/blog/how-to-find-career-mentor-free" },
+      { label: "Search coding mentors", href: "/search" },
+    ],
+  },
+
+  "find-mentor-online-any-country": {
+    slug: "find-mentor-online-any-country",
+    publishedAt: "2026-07-18",
+    updatedAt: "2026-07-18",
+    readTimeMinutes: 10,
+    author: "Mentr Editorial Team",
+    intro:
+      "Students in Sharjah, professionals in Manchester, and parents in Mumbai all need the same thing: a trustworthy way to find a mentor online in any country without wading through unverified WhatsApp forwards. Global mentor search works when you filter by subject, verification, time zone, and teaching mode — not when you trust whoever paid for the top Google ad. Here is a practical playbook for worldwide mentor discovery on Mentr and beyond.",
+    sections: [
+      {
+        heading: "Why global mentor search beats local-only",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Local-only search made sense when every session was at your kitchen table. Online mentoring removes geography — a JEE maths mentor in Bengaluru can teach a student in Dubai at 6 PM Gulf time; a UX mentor in London can review portfolios for designers in Bangalore. The constraint is overlap and trust, not distance.",
+          },
+        ],
+      },
+      {
+        heading: "Search filters that actually matter",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Subject and level — be specific: 'Class 10 CBSE Maths' not 'tuition'",
+              "Teaching mode — online, home visit, or hybrid",
+              "Languages spoken — English, Hindi, Arabic, Malayalam, etc.",
+              "Verification badge — ID and credentials reviewed",
+              "Availability — slots that match your local evenings",
+              "Fee transparency — hourly or monthly expectations upfront",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Country-by-country quick notes",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Parents and professionals search differently by region. These patterns show up repeatedly on Mentr:",
+          },
+          {
+            type: "list",
+            items: [
+              "India: CBSE/ICSE home and online tutors; JEE/NEET mentors; coding interview prep",
+              "UAE: CBSE and IGCSE online tutors; Arabic and Islamic studies; competitive exam support for NRIs",
+              "UK: GCSE/A-Level maths and sciences; 11+ prep; university application mentoring",
+              "US: K-12 subject help; AP prep; college essay and STEM mentoring",
+              "Southeast Asia: IB tutors; English enrichment; maths olympiad coaching",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Connect safely across borders",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Use platforms that keep intro messages on-record until both sides agree to connect. On Mentr, tutors only share WhatsApp numbers after a parent accepts a connect request — reducing spam and protecting children. Never pay large advances to unverified personal accounts.",
+          },
+          {
+            type: "callout",
+            title: "Post a requirement",
+            text: "Not sure who to pick? Post what you need — subject, class, city, budget — and let verified tutors pitch you. You review messages before sharing contact details.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "How do I find a mentor online in the UAE?",
+        answer:
+          "Search Mentr with online mode and mention CBSE, IGCSE, or your subject in your connect message. See our UAE-specific guide for fees and curriculum tips.",
+      },
+      {
+        question: "Does Mentr work outside India?",
+        answer:
+          "Yes. Mentr supports global online search and connect requests. Tutors and mentors list their time zones and languages; parents search from any country.",
+      },
+      {
+        question: "What is the fastest way to hire a verified mentor?",
+        answer:
+          "Browse 3–5 verified profiles, send connect requests with a clear intro, and book trial sessions with the two best replies within 48 hours.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Online tutor UAE guide", href: "/blog/find-tutor-online-uae" },
+      { label: "Verified tutor online", href: "/blog/how-to-find-verified-tutor-online" },
+      { label: "Search mentors on Mentr", href: "/search" },
+    ],
+  },
 };

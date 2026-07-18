@@ -1,17 +1,30 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import type { ConnectionRequest, ProfileViewsResponse } from "@/lib/api";
+import {
+  ApiError,
+  connectionsApi,
+  type ConnectionRequest,
+  type ProfileViewer,
+  type ProfileViewsResponse,
+} from "@/lib/api";
 import {
   Bell,
+  Check,
   ChevronDown,
   Eye,
+  Loader2,
+  Send,
   Sparkles,
   UserPlus,
   UsersRound,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
+const MESSAGE_MIN = 10;
+const MESSAGE_MAX = 500;
 
 /* ------------------------------ helpers ------------------------------ */
 
@@ -143,18 +156,218 @@ export function StatCard({
 
 /* --------------------------- who viewed card --------------------------- */
 
+function viewerStatusLabel(v: ProfileViewer): string | null {
+  if (v.connectionStatus === "accepted") return "Connected";
+  if (v.connectionStatus === "pending" && v.requestedBy === "parent") {
+    return "In your inbox";
+  }
+  if (v.connectionStatus === "pending" && v.requestedBy === "teacher") {
+    return "Request sent";
+  }
+  return null;
+}
+
+function ViewerOutreachModal({
+  viewer,
+  onClose,
+  onSent,
+}: {
+  viewer: ProfileViewer;
+  onClose: () => void;
+  onSent: () => void;
+}) {
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  async function handleSend() {
+    const trimmed = message.trim();
+    if (trimmed.length < MESSAGE_MIN) {
+      setError(
+        `Write at least ${MESSAGE_MIN} characters so ${viewer.name.split(" ")[0]} knows why you're reaching out`,
+      );
+      return;
+    }
+    setError("");
+    setSending(true);
+    try {
+      await connectionsApi.outreach(viewer.id, trimmed);
+      setSent(true);
+      onSent();
+    } catch (err) {
+      if (err instanceof ApiError && err.data?.code === "ALREADY_PENDING") {
+        setSent(true);
+        onSent();
+      } else {
+        setError(
+          err instanceof ApiError ? err.message : "Failed to send. Try again.",
+        );
+      }
+    } finally {
+      setSending(false);
+    }
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[110] flex items-end justify-center p-0 sm:items-center sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="outreach-modal-title"
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-ink/40"
+        aria-label="Close"
+        onClick={onClose}
+      />
+
+      <div className="champs-pop relative z-10 w-full max-w-md rounded-t-xl border border-hairline bg-white p-5 shadow-xl sm:rounded-xl sm:p-6">
+        {sent ? (
+          <div className="py-4 text-center">
+            <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sage-wash">
+              <Check className="h-6 w-6 text-sage" />
+            </span>
+            <h2 className="mt-4 text-lg font-bold text-ink">Request sent</h2>
+            <p className="mx-auto mt-1.5 max-w-[300px] text-sm leading-relaxed text-muted">
+              {viewer.name.split(" ")[0]} will review your message. If they
+              accept, your WhatsApp number unlocks for them.
+            </p>
+            <button
+              type="button"
+              onClick={onClose}
+              className="mt-5 inline-flex h-10 items-center justify-center rounded-md bg-ink px-6 text-sm font-semibold text-white transition hover:bg-ink/85"
+            >
+              Done
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2
+                  id="outreach-modal-title"
+                  className="text-lg font-bold text-ink"
+                >
+                  Connect with {viewer.name.split(" ")[0]}
+                </h2>
+                <p className="mt-0.5 text-xs text-muted">
+                  {viewer.area ? `${viewer.area} · ` : ""}
+                  viewed your profile
+                  {viewer.count > 1 ? ` · ${viewer.count} visits` : ""}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-cream"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <p className="mt-4 rounded-lg bg-butter/40 px-3.5 py-3 text-xs leading-relaxed text-ink/80">
+              They looked at your listing but haven&apos;t connected yet. Send a
+              short intro — your WhatsApp number is shared only if they accept.
+            </p>
+
+            <label className="mt-4 block">
+              <span className="mb-1.5 flex items-baseline justify-between text-[13px] font-semibold text-ink">
+                Your message
+                <span
+                  className={cn(
+                    "text-[11px] font-medium tabular-nums",
+                    message.length > MESSAGE_MAX
+                      ? "text-coral-dark"
+                      : "text-muted",
+                  )}
+                >
+                  {message.length}/{MESSAGE_MAX}
+                </span>
+              </span>
+              <textarea
+                value={message}
+                onChange={(e) =>
+                  setMessage(e.target.value.slice(0, MESSAGE_MAX))
+                }
+                rows={4}
+                autoFocus
+                placeholder={`e.g. Hi — I saw you viewed my profile. I teach Class 9–12 Maths with online and home options in ${viewer.area || "your area"}. Happy to discuss timings if you're still looking.`}
+                className="w-full resize-none rounded-md border border-hairline bg-white px-3.5 py-3 text-sm leading-relaxed text-ink outline-none transition placeholder:text-muted/70 focus:border-ink/40"
+              />
+            </label>
+
+            {error && (
+              <p className="mt-3 rounded-md border border-coral/40 bg-coral-wash px-3 py-2 text-[13px] font-medium text-coral-dark">
+                {error}
+              </p>
+            )}
+
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                onClick={onClose}
+                disabled={sending}
+                className="flex h-11 flex-1 items-center justify-center rounded-md border border-hairline bg-white text-sm font-semibold text-ink transition hover:bg-cream disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleSend}
+                disabled={sending || message.trim().length < MESSAGE_MIN}
+                className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-md bg-coral text-sm font-semibold text-white transition hover:bg-coral-dark disabled:opacity-50"
+              >
+                {sending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
+                {sending ? "Sending…" : "Send request"}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function WhoViewedCard({
   data,
   loading,
+  onRefresh,
 }: {
   data: ProfileViewsResponse | null;
   loading: boolean;
+  onRefresh?: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const [outreachTarget, setOutreachTarget] = useState<ProfileViewer | null>(
+    null,
+  );
   const ref = useDismiss(open, () => setOpen(false));
 
   const viewers = data?.views ?? [];
   const preview = viewers.slice(0, 4);
+
+  function handleOutreachSent() {
+    onRefresh?.();
+  }
 
   return (
     <div ref={ref} className="relative">
@@ -246,33 +459,62 @@ export function WhoViewedCard({
             </div>
           ) : (
             <ul className="max-h-[320px] overflow-y-auto py-1">
-              {viewers.map((v, i) => (
-                <li
-                  key={v.id}
-                  className="flex items-center gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-cream"
-                >
-                  <LetterAvatar name={v.name} index={i} className="h-9 w-9 text-sm" />
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-ink">
-                      {v.name}
-                    </p>
-                    <p className="truncate text-xs text-muted">
-                      {v.area ? `${v.area} · ` : ""}
-                      {v.count > 1 ? `${v.count} visits` : "1 visit"}
-                    </p>
-                  </div>
-                  <span className="shrink-0 text-[11px] font-medium text-muted">
-                    {timeAgo(v.lastViewedAt)}
-                  </span>
-                </li>
-              ))}
+              {viewers.map((v, i) => {
+                const status = viewerStatusLabel(v);
+                return (
+                  <li
+                    key={v.id}
+                    className="flex items-center gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-cream"
+                  >
+                    <LetterAvatar
+                      name={v.name}
+                      index={i}
+                      className="h-9 w-9 text-sm"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-semibold text-ink">
+                        {v.name}
+                      </p>
+                      <p className="truncate text-xs text-muted">
+                        {v.area ? `${v.area} · ` : ""}
+                        {v.count > 1 ? `${v.count} visits` : "1 visit"}
+                        {status ? ` · ${status}` : ""}
+                      </p>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-end gap-1.5">
+                      <span className="text-[11px] font-medium text-muted">
+                        {timeAgo(v.lastViewedAt)}
+                      </span>
+                      {v.canReachOut && (
+                        <button
+                          type="button"
+                          onClick={() => setOutreachTarget(v)}
+                          className="inline-flex h-7 items-center gap-1 rounded-md bg-coral px-2.5 text-[11px] font-bold text-white transition hover:bg-coral-dark"
+                        >
+                          <UserPlus className="h-3 w-3" />
+                          Connect
+                        </button>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
 
           <p className="border-t border-hairline px-3 py-2 text-[11px] text-muted">
-            Parents who opened your listing while signed in.
+            Parents who opened your listing while signed in. Send a connect
+            request with a message — no lead fees.
           </p>
         </div>
+      )}
+
+      {outreachTarget && (
+        <ViewerOutreachModal
+          viewer={outreachTarget}
+          onClose={() => setOutreachTarget(null)}
+          onSent={handleOutreachSent}
+        />
       )}
     </div>
   );

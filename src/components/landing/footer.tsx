@@ -1,5 +1,6 @@
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
+import { ProductHuntBadges } from "@/components/ui/product-hunt-badge";
 import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
@@ -67,6 +68,9 @@ export function Footer() {
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
                 ₹0 forever
               </span>
+            </div>
+            <div className="mt-6">
+              <ProductHuntBadges compact />
             </div>
           </div>
 

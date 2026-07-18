@@ -1,5 +1,6 @@
 import { Router, Response } from "express";
 import { Connection, type IConnection } from "../models/Connection";
+import { ProfileView } from "../models/ProfileView";
 import { User, type IUser } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
@@ -19,6 +20,11 @@ function waPhone(raw: string): string {
   return digits.length === 10 ? `91${digits}` : digits;
 }
 
+function connectionSource(c: IConnection): "parent" | "profile" | "board" {
+  if (c.requestedBy === "parent") return "parent";
+  return c.requirement ? "board" : "profile";
+}
+
 function serializeForParent(c: IConnection, phone?: string | null) {
   return {
     id: c._id.toString(),
@@ -28,6 +34,7 @@ function serializeForParent(c: IConnection, phone?: string | null) {
     message: c.message,
     status: c.status,
     requestedBy: c.requestedBy ?? "parent",
+    source: connectionSource(c),
     /** Only present once the connection is accepted */
     phone: c.status === "accepted" ? (phone ?? null) : null,
     sentAt: c.createdAt,
@@ -151,6 +158,127 @@ router.post("/", async (req: AuthenticatedRequest, res: Response) => {
   } catch (error) {
     console.error("send connection error:", error);
     res.status(500).json({ error: "Failed to send request" });
+  }
+});
+
+/**
+ * Tutor → parent connect request after the parent viewed the tutor's profile.
+ * The parent reviews the compulsory message before WhatsApp is shared.
+ */
+router.post("/outreach", async (req: AuthenticatedRequest, res: Response) => {
+  try {
+    if (req.auth!.role === "parent") {
+      res
+        .status(403)
+        .json({ error: "Only tutor accounts can reach out to profile viewers" });
+      return;
+    }
+
+    const parentId = String(req.body?.parentId || "");
+    const message = String(req.body?.message || "").trim();
+
+    if (!/^[a-f\d]{24}$/i.test(parentId)) {
+      res.status(404).json({ error: "Parent not found" });
+      return;
+    }
+    if (message.length < MESSAGE_MIN) {
+      res.status(400).json({
+        error: `Add a short message (at least ${MESSAGE_MIN} characters) so the parent knows why you're reaching out`,
+      });
+      return;
+    }
+    if (message.length > MESSAGE_MAX) {
+      res
+        .status(400)
+        .json({ error: `Message must be under ${MESSAGE_MAX} characters` });
+      return;
+    }
+
+    const [teacher, parent, viewed] = await Promise.all([
+      User.findById(req.auth!.sub),
+      User.findById(parentId),
+      ProfileView.findOne({ teacher: req.auth!.sub, viewer: parentId }),
+    ]);
+
+    if (!teacher?.profile?.name) {
+      res.status(400).json({ error: "Complete your profile before reaching out" });
+      return;
+    }
+    if (!parent?.parentProfile?.name) {
+      res.status(404).json({ error: "Parent not found" });
+      return;
+    }
+    if (!viewed) {
+      res.status(403).json({
+        error: "You can only reach out to parents who viewed your profile",
+        code: "NOT_A_VIEWER",
+      });
+      return;
+    }
+
+    const existing = (await Connection.findOne({
+      parent: parent._id,
+      teacher: teacher._id,
+    })) as IConnection | null;
+
+    if (existing?.status === "pending") {
+      res.status(409).json({
+        error:
+          existing.requestedBy === "parent"
+            ? "This parent already sent you a request — check your inbox"
+            : "Request already sent — waiting for the parent to respond",
+        code: "ALREADY_PENDING",
+      });
+      return;
+    }
+    if (existing?.status === "accepted") {
+      res.status(409).json({
+        error: "You're already connected with this parent",
+        code: "ALREADY_CONNECTED",
+      });
+      return;
+    }
+
+    const tp = teacher.profile;
+    const fields = {
+      message,
+      status: "pending" as const,
+      requestedBy: "teacher" as const,
+      requirement: undefined,
+      parentName: parent.parentProfile.name,
+      parentArea:
+        parent.parentProfile.area || parent.parentProfile.city || undefined,
+      teacherName: tp.name,
+      teacherArea: [tp.area, tp.city].filter(Boolean).join(", ") || undefined,
+      respondedAt: undefined,
+    };
+
+    let connection: IConnection;
+    if (existing) {
+      existing.set(fields);
+      connection = await existing.save();
+    } else {
+      connection = await Connection.create({
+        parent: parent._id,
+        teacher: teacher._id,
+        ...fields,
+      });
+    }
+
+    res.status(201).json({
+      outreach: {
+        parentId,
+        parentName: connection.parentName,
+        parentArea: connection.parentArea ?? null,
+        message: connection.message,
+        status: connection.status,
+        sentAt: connection.createdAt,
+      },
+      message: "Sent — the parent will review your message on their dashboard",
+    });
+  } catch (error) {
+    console.error("profile outreach error:", error);
+    res.status(500).json({ error: "Failed to send connect request" });
   }
 });
 

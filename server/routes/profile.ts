@@ -8,7 +8,9 @@ import {
   type IParentProfile,
   type ISocialLinks,
 } from "../models/User";
+import { Connection, type IConnection } from "../models/Connection";
 import { ProfileView, type IProfileView } from "../models/ProfileView";
+import { recordProfileView } from "../lib/record-profile-view";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete, serializeUser } from "./auth";
@@ -292,6 +294,42 @@ router.get("/", requireAuth, async (req: AuthenticatedRequest, res: Response) =>
   }
 });
 
+/** Parent opened a tutor profile — record the view (login-gated). */
+router.post(
+  "/views/:teacherId",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (req.auth!.role !== "parent") {
+        res.status(403).json({ error: "Only parent accounts record profile views" });
+        return;
+      }
+
+      const teacherId = String(req.params.teacherId || "");
+      if (!/^[a-f\d]{24}$/i.test(teacherId)) {
+        res.status(404).json({ error: "Teacher not found" });
+        return;
+      }
+      if (teacherId === req.auth!.sub) {
+        res.status(400).json({ error: "Cannot record a view on your own profile" });
+        return;
+      }
+
+      const teacher = await User.findById(teacherId).select("role profileCompleted");
+      if (!teacher || teacher.role === "parent" || !teacher.profileCompleted) {
+        res.status(404).json({ error: "Teacher not found" });
+        return;
+      }
+
+      await recordProfileView(teacherId, req.auth!.sub);
+      res.status(204).end();
+    } catch (error) {
+      console.error("record profile view error:", error);
+      res.status(500).json({ error: "Failed to record profile view" });
+    }
+  },
+);
+
 /** Who saw my profile — tutors only. Distinct parents, most recent first. */
 router.get(
   "/views",
@@ -304,7 +342,7 @@ router.get(
       }
 
       const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-      const [views, totalViewers, weekCount] = await Promise.all([
+      const [views, totalViewers, weekCount, connections] = await Promise.all([
         ProfileView.find({ teacher: req.auth!.sub })
           .sort({ lastViewedAt: -1 })
           .limit(30) as Promise<IProfileView[]>,
@@ -313,18 +351,38 @@ router.get(
           teacher: req.auth!.sub,
           lastViewedAt: { $gte: weekAgo },
         }),
+        Connection.find({ teacher: req.auth!.sub }).limit(200) as Promise<
+          IConnection[]
+        >,
       ]);
+
+      const connectionByParent = new Map<string, IConnection>(
+        connections.map((c) => [c.parent.toString(), c]),
+      );
 
       res.json({
         totalViewers,
         weekCount,
-        views: views.map((v) => ({
-          id: v.viewer.toString(),
-          name: v.viewerName,
-          area: v.viewerArea ?? null,
-          count: v.count,
-          lastViewedAt: v.lastViewedAt,
-        })),
+        views: views.map((v) => {
+          const viewerId = v.viewer.toString();
+          const connection = connectionByParent.get(viewerId);
+          const status = connection?.status ?? "none";
+          const requestedBy = connection?.requestedBy;
+          const canReachOut =
+            !connection || connection.status === "declined";
+
+          return {
+            id: viewerId,
+            name: v.viewerName,
+            area: v.viewerArea ?? null,
+            count: v.count,
+            lastViewedAt: v.lastViewedAt,
+            connectionStatus: status,
+            connectionId: connection?._id.toString() ?? null,
+            requestedBy: requestedBy ?? null,
+            canReachOut,
+          };
+        }),
       });
     } catch (error) {
       console.error("get profile views error:", error);

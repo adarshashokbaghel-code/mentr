@@ -483,4 +483,96 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
       { label: "Home tutor vs online tutor", href: "/blog/home-tutor-vs-online-tutor" },
     ],
   },
+
+  "how-to-find-verified-tutor-online": {
+    slug: "how-to-find-verified-tutor-online",
+    publishedAt: "2026-07-18",
+    updatedAt: "2026-07-18",
+    readTimeMinutes: 10,
+    author: "Mentr Editorial Team",
+    intro:
+      "Every tutoring website claims 'verified tutors.' Few explain what was verified, by whom, or what you should still check yourself. For parents hiring online — especially across countries — verification is the difference between a qualified educator and a recycled profile with a stock photo. This guide breaks down what a verified tutor online should mean, how Mentr's checks work, and the trial steps you should never skip.",
+    sections: [
+      {
+        heading: "Layers of verification — what to demand",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Identity: government ID matched to profile name and photo",
+              "Contact: phone number verified (OTP or callback)",
+              "Qualifications: degree or exam rank documents aligned with listed subjects",
+              "Consistency: subjects taught match credentials — no B.Com tutor listing JEE Physics",
+              "Platform record: profile tied to an account, not a disposable WhatsApp number",
+            ],
+          },
+          {
+            type: "callout",
+            title: "Verification ≠ perfect teaching",
+            text: "A verified tutor passed fraud checks. Teaching style, patience, and fit for your child still require a trial session and your judgement.",
+          },
+        ],
+      },
+      {
+        heading: "How to find verified tutors online (step by step)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Use platforms that show verification status on the profile — not buried in FAQ pages. On Mentr, the Verified badge appears only after ID and credential review. Search by subject, filter online mode, and open profiles that list specific class levels rather than generic 'all classes.'",
+          },
+          {
+            type: "list",
+            items: [
+              "Compare 3–5 profiles before messaging — fees, experience, languages",
+              "Send a connect request with your child's class, board, and schedule",
+              "Schedule a video intro before paying for a full month",
+              "Ask one curriculum-specific question to test subject depth",
+              "Confirm cancellation and payment terms in writing",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Global hiring: extra checks for cross-border tutors",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Families in the UAE, UK, US, and Singapore often hire tutors based in India for CBSE, coding, or competitive exam prep. Extra diligence helps:",
+          },
+          {
+            type: "list",
+            items: [
+              "Confirm video platform and recording policy for child safety",
+              "Agree on currency and payment method before block bookings",
+              "Test audio/video quality in your child's study setup during trial",
+              "Keep initial communication on-platform until trust is established",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is OTP verification enough for a tutor?",
+        answer:
+          "Phone OTP confirms a number exists — not that the person is qualified. Look for ID plus qualification review, not phone verification alone.",
+      },
+      {
+        question: "Can verified tutors still be bad teachers?",
+        answer:
+          "Yes. Verification removes impersonation and fake degrees. Teaching quality requires a trial, reference checks, and watching how your child responds after 2–3 sessions.",
+      },
+      {
+        question: "Where can I find verified tutors for free search?",
+        answer:
+          "Mentr lets parents search and send connect requests without lead fees. Tutors pay nothing to list. Browse verified profiles at mentr.com/search.",
+      },
+    ],
+    relatedLinks: [
+      { label: "How Mentr verifies tutors", href: "/blog/how-mentr-verifies-tutors" },
+      { label: "Browse verified tutors", href: "/search" },
+      { label: "Online tutor near me guide", href: "/blog/find-online-tutor-near-me" },
+    ],
+  },
 };
