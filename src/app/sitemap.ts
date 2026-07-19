@@ -3,8 +3,11 @@ import {
   comboSitemapEntries,
   coreSitemapEntries,
   examPrepSitemapEntries,
+  mentorTopicSitemapEntries,
+  onlineSubjectSitemapEntries,
   subjectSitemapEntries,
   teacherSitemapEntries,
+  uaeCitySitemapEntries,
 } from "@/lib/sitemap-entries";
 import { resolveTeacherSitemapRefs } from "@/lib/sitemap-teachers";
 import type { MetadataRoute } from "next";
@@ -22,6 +25,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...areaSitemapEntries(),
     ...comboSitemapEntries(),
     ...examPrepSitemapEntries(),
+    ...onlineSubjectSitemapEntries(),
+    ...uaeCitySitemapEntries(),
+    ...mentorTopicSitemapEntries(),
     ...teacherSitemapEntries(teachers),
   ];
 }

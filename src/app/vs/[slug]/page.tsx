@@ -3,7 +3,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import { SeoBreadcrumbs } from "@/components/seo/hub-page";
 import { Button } from "@/components/ui/button";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, hubOpenGraph } from "@/lib/seo";
 import { VS_PAGES } from "@/lib/seo-hubs";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -25,6 +25,7 @@ export async function generateMetadata({
     title: page.title,
     description: page.description,
     alternates: { canonical: `/vs/${slug}` },
+    openGraph: hubOpenGraph(page.title, page.description, `/vs/${slug}`),
   };
 }
 

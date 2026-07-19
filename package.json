@@ -14,7 +14,8 @@
     "seed:requirements:reset": "tsx scripts/seed-demo-data.ts --reset",
     "seed:demo": "tsx scripts/seed-demo-data.ts",
     "seed:demo:reset": "tsx scripts/seed-demo-data.ts --reset",
-    "db:wipe": "tsx scripts/wipe-db.ts --confirm"
+    "db:wipe": "tsx scripts/wipe-db.ts --confirm",
+    "seo:gsc-check": "node scripts/seo-gsc-check.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

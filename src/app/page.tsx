@@ -9,6 +9,7 @@ import { HowItWorks } from "@/components/landing/how-it-works";
 import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
 import { ProductHuntSection } from "@/components/landing/product-hunt-section";
+import { SeoGuidesStrip } from "@/components/landing/seo-guides-strip";
 import { StatsMarquee } from "@/components/landing/stats-marquee";
 import { SubjectGallery } from "@/components/landing/subject-gallery";
 import { SwitchToChamps } from "@/components/landing/switch-to-champs";
@@ -104,7 +105,7 @@ const jsonLd = [
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}/find-online-tutors?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -136,6 +137,7 @@ export default function Home() {
         <ZeroFees />
         <Testimonials />
         <ProductHuntSection />
+        <SeoGuidesStrip />
         <FAQ />
         <CTA />
       </main>

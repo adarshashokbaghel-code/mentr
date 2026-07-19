@@ -552,9 +552,9 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
+      { label: "Find coding mentors", href: "/find-mentors/programming" },
+      { label: "Find mentors near me", href: "/find-mentors-near-me" },
       { label: "Find mentors globally", href: "/blog/find-mentor-online-any-country" },
-      { label: "How to find a career mentor free", href: "/blog/how-to-find-career-mentor-free" },
-      { label: "Search coding mentors", href: "/search" },
     ],
   },
 
@@ -644,9 +644,139 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
-      { label: "Online tutor UAE guide", href: "/blog/find-tutor-online-uae" },
-      { label: "Verified tutor online", href: "/blog/how-to-find-verified-tutor-online" },
-      { label: "Search mentors on Mentr", href: "/search" },
+      { label: "Find mentors near me", href: "/find-mentors-near-me" },
+      { label: "Find online tutors", href: "/find-online-tutors" },
+      { label: "Search mentors on Mentr", href: "/find-mentors/programming" },
+    ],
+  },
+
+  "find-mentors-near-me-online": {
+    slug: "find-mentors-near-me-online",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "When you search find mentors near me, you may want someone local — or an online expert in your time zone. Mentr lists career, coding, and skill mentors you can connect with for free worldwide.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "When you search find mentors near me, you may want someone local — or an online expert in your time zone. Mentr lists career, coding, and skill mentors you can connect with for free worldwide." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-mentors-near-me" },
+      { label: "Related guide", href: "/find-mentors/programming" },
+      { label: "Search tutors", href: "/find-online-tutors" },
+    ],
+  },
+
+  "find-coding-mentor-online": {
+    slug: "find-coding-mentor-online",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "A coding mentor online helps with DSA interviews, portfolio reviews, and project direction — beyond what YouTube tutorials provide. Find verified programming mentors on Mentr and send a connect request with your stack and goal.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "A coding mentor online helps with DSA interviews, portfolio reviews, and project direction — beyond what YouTube tutorials provide. Find verified programming mentors on Mentr and send a connect request with your stack and goal." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-mentors/programming" },
+      { label: "Related guide", href: "/find-mentors-near-me" },
+      { label: "Search tutors", href: "/blog/find-programming-mentor-worldwide" },
     ],
   },
 };

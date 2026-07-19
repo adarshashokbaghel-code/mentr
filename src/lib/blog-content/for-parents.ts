@@ -1547,9 +1547,204 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
-      { label: "Search tutors on Mentr", href: "/search" },
-      { label: "Find a verified tutor online", href: "/blog/how-to-find-verified-tutor-online" },
+      { label: "Find online tutors", href: "/find-online-tutors" },
+      { label: "Find verified online tutors", href: "/find-verified-online-tutors" },
       { label: "Online tutor UAE guide", href: "/blog/find-tutor-online-uae" },
+    ],
+  },
+
+  "find-tutors-online-free-india": {
+    slug: "find-tutors-online-free-india",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "Indian parents increasingly find tutors online for CBSE, ICSE, and competitive exams — skipping traffic and agency markups. Mentr lists verified tutors across Bengaluru and India with free connect requests and no commission.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "Indian parents increasingly find tutors online for CBSE, ICSE, and competitive exams — skipping traffic and agency markups. Mentr lists verified tutors across Bengaluru and India with free connect requests and no commission." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-online-tutors/india" },
+      { label: "Related guide", href: "/find-verified-online-tutors/india" },
+      { label: "Search tutors", href: "/search/bengaluru" },
+    ],
+  },
+
+  "find-maths-tutor-online-verified": {
+    slug: "find-maths-tutor-online-verified",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "Maths is the most searched subject for online tutoring — from Class 6 arithmetic to JEE calculus. Finding a verified maths tutor online means checking credentials, board alignment, and teaching style in a trial session.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "Maths is the most searched subject for online tutoring — from Class 6 arithmetic to JEE calculus. Finding a verified maths tutor online means checking credentials, board alignment, and teaching style in a trial session." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-verified-online-tutors" },
+      { label: "Related guide", href: "/find-verified-online-tutors" },
+      { label: "Search tutors", href: "/find-online-tutors" },
+    ],
+  },
+
+  "find-english-tutor-online-india": {
+    slug: "find-english-tutor-online-india",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "English tutoring online covers spoken fluency, CBSE/ICSE literature, and exam writing. Verified English tutors on Mentr list boards, levels, and languages — connect free before sharing WhatsApp.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "English tutoring online covers spoken fluency, CBSE/ICSE literature, and exam writing. Verified English tutors on Mentr list boards, levels, and languages — connect free before sharing WhatsApp." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-online-tutors/india" },
+      { label: "Related guide", href: "/find-online-tutors/india" },
+      { label: "Search tutors", href: "/find-verified-online-tutors" },
     ],
   },
 };

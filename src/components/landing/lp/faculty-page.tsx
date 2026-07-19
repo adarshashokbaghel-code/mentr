@@ -24,6 +24,7 @@ import {
   Zap,
 } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
 import {
   hardShadow,
@@ -194,6 +195,14 @@ function FacultyHero() {
                 </Button>
               </FacultyActionLink>
             </div>
+
+            <p className="text-center text-xs text-muted lg:text-left">
+              Looking for students? See{" "}
+              <Link href="/online-tutor-jobs" className="font-semibold text-coral hover:underline">
+                online tutor jobs
+              </Link>
+              {" — list free, keep 100% of your fees."}
+            </p>
 
             <div className="flex items-center justify-center gap-4 rounded-xl border-2 border-ink/10 bg-white/70 px-4 py-3 backdrop-blur-sm lg:justify-start lg:w-fit">
               <div className="text-center lg:text-left">
