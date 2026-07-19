@@ -964,4 +964,134 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       { label: "Mentr vs UrbanPro", href: "/blog/mentr-vs-urbanpro" },
     ],
   },
+
+  "online-tutor-jobs-from-home": {
+    slug: "online-tutor-jobs-from-home",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "Online tutor jobs from home suit educators who want flexible hours and zero commute. Mentr lets you list free, get verified, receive parent connect requests, and pitch on the requirements board — without paying per lead.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "Online tutor jobs from home suit educators who want flexible hours and zero commute. Mentr lets you list free, get verified, receive parent connect requests, and pitch on the requirements board — without paying per lead." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/online-tutor-jobs" },
+      { label: "Related guide", href: "/for-faculty" },
+      { label: "Search tutors", href: "/blog/get-tutoring-students-free" },
+    ],
+  },
+
+  "become-online-tutor-get-students": {
+    slug: "become-online-tutor-get-students",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "To become an online tutor and get students consistently, you need visibility without lead fees. Complete a verified Mentr profile, keep availability updated, respond fast to connect requests, and pitch daily on parent requirements.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "To become an online tutor and get students consistently, you need visibility without lead fees. Complete a verified Mentr profile, keep availability updated, respond fast to connect requests, and pitch daily on parent requirements." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/online-tutor-jobs" },
+      { label: "Related guide", href: "/blog/how-to-write-tutor-profile" },
+      { label: "Search tutors", href: "/faculty/signup" },
+    ],
+  },
 };

@@ -1,8 +1,12 @@
 import { BLOG_PILLARS, BLOG_POSTS } from "@/lib/blog-posts";
+import { MONEY_LANDING_PAGES, landingPagePath } from "@/lib/seo-landing-pages";
 import { absoluteUrl } from "@/lib/seo";
 import {
   EXAM_PREP_PAGES,
   VS_PAGES,
+  ONLINE_SUBJECT_PAGES,
+  UAE_CITY_PAGES,
+  MENTOR_TOPICS,
   areaHubSlug,
   comboSlug,
   publishedCombos,
@@ -34,11 +38,13 @@ function entry(
 export function coreSitemapEntries(): MetadataRoute.Sitemap {
   return [
     entry("/", 1, "daily"),
-    entry("/search", 0.9, "daily"),
     entry("/search/bengaluru", 0.85, "weekly"),
     entry("/parents", 0.9, "weekly"),
     entry("/for-faculty", 0.9, "weekly"),
-    entry("/become-a-mentor", 0.75, "monthly"),
+    entry("/online-tutor-jobs", 0.9, "weekly"),
+    ...MONEY_LANDING_PAGES.filter((p) => p.basePath !== "/online-tutor-jobs").map(
+      (p) => entry(landingPagePath(p), 0.9, "weekly"),
+    ),
     entry("/how-it-works", 0.8, "weekly"),
     entry("/pricing", 0.75, "monthly"),
     entry("/faq", 0.85, "weekly"),
@@ -86,5 +92,21 @@ export function teacherSitemapEntries(
 ): MetadataRoute.Sitemap {
   return teacherPaths.map(({ path, lastModified }) =>
     entry(path, 0.6, "weekly", lastModified ?? BUILD_DATE),
+  );
+}
+
+export function onlineSubjectSitemapEntries(): MetadataRoute.Sitemap {
+  return ONLINE_SUBJECT_PAGES.map((p) =>
+    entry(`/online/${p.slug}`, 0.8, "weekly"),
+  );
+}
+
+export function uaeCitySitemapEntries(): MetadataRoute.Sitemap {
+  return UAE_CITY_PAGES.map((p) => entry(`/uae/${p.slug}`, 0.8, "weekly"));
+}
+
+export function mentorTopicSitemapEntries(): MetadataRoute.Sitemap {
+  return MENTOR_TOPICS.map((p) =>
+    entry(`/find-mentors/${p.slug}`, 0.75, "weekly"),
   );
 }

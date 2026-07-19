@@ -127,6 +127,8 @@ export function SeoHubPage({
   relatedLinks,
   ctaHref = "/search",
   ctaLabel = "Search all tutors",
+  promoHref,
+  promoLabel = "Find verified online tutors",
 }: {
   eyebrow: string;
   title: string;
@@ -137,6 +139,8 @@ export function SeoHubPage({
   relatedLinks?: { label: string; href: string }[];
   ctaHref?: string;
   ctaLabel?: string;
+  promoHref?: string;
+  promoLabel?: string;
 }) {
   const schemaBreadcrumbs = breadcrumbs.map((b, i) => ({
     name: b.label,
@@ -169,10 +173,15 @@ export function SeoHubPage({
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted">
             {intro}
           </p>
-          <div className="mt-5">
+          <div className="mt-5 flex flex-wrap gap-3">
             <Link href={ctaHref}>
               <Button>{ctaLabel}</Button>
             </Link>
+            {promoHref && (
+              <Link href={promoHref}>
+                <Button variant="secondary">{promoLabel}</Button>
+              </Link>
+            )}
           </div>
 
           {teachers.length === 0 ? (

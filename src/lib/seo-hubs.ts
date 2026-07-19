@@ -225,3 +225,108 @@ export function areaIntro(area: string): string {
 export function comboIntro(area: string, subject: string): string {
   return `Looking for ${subject} tuition in ${area}, ${CITY}? These verified tutors teach ${subject} near ${area}. Compare experience, check open slots, and send a free connect request — no lead fees, no commission.`;
 }
+
+/** Global online subject hubs — /online/{slug} */
+export function onlineSubjectSlug(subject: string): string {
+  return `${slugify(subject)}-tutors`;
+}
+
+export function parseOnlineSubjectSlug(slug: string): string | null {
+  const suffix = "-tutors";
+  if (!slug.endsWith(suffix)) return null;
+  const raw = slug.slice(0, -suffix.length).replace(/-/g, " ");
+  return SUBJECTS.find((s) => slugify(s) === slugify(raw)) ?? null;
+}
+
+export function onlineSubjectIntro(subject: string): string {
+  return `Find verified ${subject} tutors online worldwide — video sessions in your time zone. Mentr lists ID-checked profiles with open availability. Send a free connect request; WhatsApp unlocks after acceptance. No lead fees.`;
+}
+
+export function teachersOnline(subject: string): Teacher[] {
+  return searchTeachers({ subject, teachers: TEACHERS }).filter((t) =>
+    (t.modes ?? []).includes("online"),
+  );
+}
+
+export const ONLINE_SUBJECT_PAGES = SUBJECTS.map((subject) => ({
+  slug: onlineSubjectSlug(subject),
+  subject,
+  title: `${subject} Tutors Online — Verified Worldwide`,
+  description: `Find verified ${subject} tutors online on Mentr. Search worldwide, connect free — no lead fees.`,
+}));
+
+/** UAE city hubs — /uae/{slug} */
+export const UAE_CITIES = ["Dubai", "Abu Dhabi", "Sharjah"] as const;
+
+export function uaeCitySlug(city: (typeof UAE_CITIES)[number]): string {
+  return `${slugify(city)}-tutors`;
+}
+
+export function parseUaeCitySlug(slug: string): (typeof UAE_CITIES)[number] | null {
+  const suffix = "-tutors";
+  if (!slug.endsWith(suffix)) return null;
+  const raw = slug.slice(0, -suffix.length).replace(/-/g, " ");
+  return UAE_CITIES.find((c) => slugify(c) === slugify(raw)) ?? null;
+}
+
+export function uaeCityIntro(city: string): string {
+  return `Parents in ${city} and across the UAE — find verified online tutors for CBSE, IGCSE, and IB on Mentr. Free to search and connect. Mention ${city} and Gulf Standard Time slots in your message.`;
+}
+
+export const UAE_CITY_PAGES = UAE_CITIES.map((city) => ({
+  slug: uaeCitySlug(city),
+  city,
+  title: `Online Tutors in ${city}, UAE — Verified Profiles`,
+  description: `Find verified online tutors in ${city} for CBSE, IGCSE, IB and more. Free connect on Mentr — no agency fees.`,
+}));
+
+/** Mentor topic hubs — /find-mentors/{slug} */
+export const MENTOR_TOPICS = [
+  {
+    slug: "career-coaching",
+    topic: "Career Coaching",
+    title: "Find Career Coaches & Mentors Online",
+    description: "Find verified career coaches and mentors online — free connect on Mentr.",
+    subjects: ["Career Mentoring"],
+  },
+  {
+    slug: "programming",
+    topic: "Programming Mentors",
+    title: "Find Programming Mentors Online",
+    description: "Find coding and programming mentors worldwide — DSA, web dev, Python, and more.",
+    subjects: ["Coding", "Computer Science", "Career Mentoring"],
+  },
+  {
+    slug: "business",
+    topic: "Business Mentors",
+    title: "Find Business Mentors Online",
+    description: "Find business and entrepreneurship mentors online — free verified search on Mentr.",
+    subjects: ["Career Mentoring", "Economics"],
+  },
+] as const;
+
+export function parseMentorTopicSlug(slug: string) {
+  return MENTOR_TOPICS.find((t) => t.slug === slug) ?? null;
+}
+
+export function teachersForMentorTopic(subjects: readonly string[]): Teacher[] {
+  return TEACHERS.filter((t) =>
+    t.subjects.some((s) =>
+      subjects.some((x) => x.toLowerCase() === s.toLowerCase()),
+    ),
+  );
+}
+
+export function allOnlineTeachers(): Teacher[] {
+  const seen = new Set<string>();
+  const out: Teacher[] = [];
+  for (const subject of SUBJECTS) {
+    for (const t of teachersOnline(subject)) {
+      if (!seen.has(t.id)) {
+        seen.add(t.id);
+        out.push(t);
+      }
+    }
+  }
+  return out;
+}

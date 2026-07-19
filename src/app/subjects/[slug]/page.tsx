@@ -2,7 +2,7 @@ import {
   SeoHubPage,
   subjectRelatedLinks,
 } from "@/components/seo/hub-page";
-import { SITE_NAME } from "@/lib/seo";
+import { SITE_NAME, absoluteUrl, hubOpenGraph } from "@/lib/seo";
 import {
   parseSubjectHubSlug,
   subjectHubSlug,
@@ -31,6 +31,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/subjects/${slug}` },
+    openGraph: hubOpenGraph(title, description, `/subjects/${slug}`),
   };
 }
 
@@ -61,6 +62,7 @@ export default async function SubjectHubPage({
       relatedLinks={subjectRelatedLinks(subject, teachers)}
       ctaHref={`/search?subject=${encodeURIComponent(subject)}`}
       ctaLabel={`Search ${subject} tutors`}
+      promoHref="/find-verified-online-tutors"
     />
   );
 }

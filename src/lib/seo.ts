@@ -4,6 +4,8 @@
  * Set NEXT_PUBLIC_SITE_URL in .env to the real production domain —
  * it feeds metadataBase, canonicals, the sitemap and robots.txt.
  */
+import type { Metadata } from "next";
+
 export const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.mentr.in"
 ).replace(/\/$/, "");
@@ -49,6 +51,11 @@ export const SITE_KEYWORDS = [
   "UrbanPro free alternative",
   "tuition teacher",
   "mentor for students free",
+  "find online tutors",
+  "find tutors online",
+  "find online tutors verified",
+  "find mentors near me",
+  "online tutor jobs",
   "Paprly",
 ];
 
@@ -61,6 +68,21 @@ export const PARENT_ORG_JSON_LD = {
 
 export function absoluteUrl(path = "/"): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
+}
+
+/** Shared Open Graph fields for programmatic hub pages. */
+export function hubOpenGraph(
+  title: string,
+  description: string,
+  path: string,
+): Metadata["openGraph"] {
+  return {
+    title,
+    description,
+    url: absoluteUrl(path),
+    type: "website",
+    siteName: SITE_BRAND,
+  };
 }
 
 /** Paste the content value from Google Search Console → HTML tag method. */

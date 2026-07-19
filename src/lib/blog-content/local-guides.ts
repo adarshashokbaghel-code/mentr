@@ -738,10 +738,74 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
-      { label: "Search tutors on Mentr", href: "/search" },
-      { label: "Online tutor near me", href: "/blog/find-online-tutor-near-me" },
-      { label: "Verified tutor guide", href: "/blog/how-to-find-verified-tutor-online" },
-      { label: "Global mentor search", href: "/blog/find-mentor-online-any-country" },
+      { label: "Find online tutors UAE", href: "/find-online-tutors/uae" },
+      { label: "Find verified online tutors", href: "/find-verified-online-tutors" },
+      { label: "Global mentor search", href: "/find-mentors-near-me" },
+    ],
+  },
+
+  "verified-online-tutors-uae-cbse": {
+    slug: "verified-online-tutors-uae-cbse",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "UAE families need verified online tutors for CBSE, IGCSE, and IB — often teaching from India in Gulf Standard Time slots. Mentr connects Dubai, Abu Dhabi, and Sharjah parents with ID-checked tutors for free.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "UAE families need verified online tutors for CBSE, IGCSE, and IB — often teaching from India in Gulf Standard Time slots. Mentr connects Dubai, Abu Dhabi, and Sharjah parents with ID-checked tutors for free." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-online-tutors/uae" },
+      { label: "Related guide", href: "/find-verified-online-tutors/uae" },
+      { label: "Search tutors", href: "/uae/dubai-tutors" },
     ],
   },
 };

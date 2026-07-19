@@ -659,6 +659,130 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Search mentors globally",
     ctaHref: "/search",
   },
+
+  // ── SEO cluster: exact-match keywords ─────────────────────────────
+  {
+    slug: "find-online-tutors-verified-free",
+    title: "Find Online Tutors Verified — Free Search on Mentr",
+    keyword: "find online tutors verified",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "trust-safety",
+    featured: true,
+    description:
+      "How to find online tutors verified with ID and credential checks — free connect, no lead fees on Mentr.",
+    cta: "Find verified tutors",
+    ctaHref: "/find-verified-online-tutors",
+  },
+  {
+    slug: "find-tutors-online-free-india",
+    title: "Find Tutors Online Free in India — Verified CBSE & JEE",
+    keyword: "find tutors online India",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Find tutors online in India without lead fees — CBSE, ICSE, JEE, NEET mentors on Mentr.",
+    cta: "Find online tutors India",
+    ctaHref: "/find-online-tutors/india",
+  },
+  {
+    slug: "find-mentors-near-me-online",
+    title: "Find Mentors Near Me Online — Career & Coding Free",
+    keyword: "find mentors near me",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "career-mentoring",
+    featured: true,
+    description:
+      "Find mentors near me — local or online mentors for career, coding, and skills on Mentr.",
+    cta: "Find mentors near me",
+    ctaHref: "/find-mentors-near-me",
+  },
+  {
+    slug: "online-tutor-jobs-from-home",
+    title: "Online Tutor Jobs From Home — List Free on Mentr",
+    keyword: "online tutor jobs from home",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-tutors",
+    description:
+      "Find online tutor jobs from home — free listing, no lead fees, keep 100% of fees on Mentr.",
+    cta: "Get tutor jobs",
+    ctaHref: "/online-tutor-jobs",
+  },
+  {
+    slug: "find-maths-tutor-online-verified",
+    title: "Find a Maths Tutor Online Verified — CBSE to JEE",
+    keyword: "find maths tutor online verified",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-parents",
+    description:
+      "Find a verified maths tutor online for CBSE, ICSE, and JEE — free connect on Mentr.",
+    cta: "Find maths tutors",
+    ctaHref: "/find-verified-online-tutors",
+  },
+  {
+    slug: "find-coding-mentor-online",
+    title: "Find a Coding Mentor Online — Python, Web & DSA",
+    keyword: "find coding mentor online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "career-mentoring",
+    description:
+      "Find a coding mentor online for DSA, web development, and career switching — verified on Mentr.",
+    cta: "Find coding mentors",
+    ctaHref: "/find-mentors/programming",
+  },
+  {
+    slug: "verified-online-tutors-uae-cbse",
+    title: "Verified Online Tutors UAE for CBSE & IGCSE",
+    keyword: "verified online tutors UAE",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "local-guides",
+    description:
+      "Find verified online tutors in UAE for CBSE, IGCSE, and IB — Dubai, Abu Dhabi, Sharjah.",
+    cta: "Find UAE tutors",
+    ctaHref: "/find-online-tutors/uae",
+  },
+  {
+    slug: "find-english-tutor-online-india",
+    title: "Find an English Tutor Online in India — Verified",
+    keyword: "find english tutor online India",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Find English tutors online in India — spoken English, board exams, IELTS foundation.",
+    cta: "Find English tutors",
+    ctaHref: "/find-online-tutors/india",
+  },
+  {
+    slug: "how-to-find-tutor-online-safely",
+    title: "How to Find a Tutor Online Safely — Parent Checklist",
+    keyword: "how to find tutor online safely",
+    intent: "informational",
+    funnel: "top",
+    pillar: "trust-safety",
+    description:
+      "Safety checklist for finding tutors online — verification, trials, and red flags before you book.",
+    cta: "Find verified tutors",
+    ctaHref: "/find-verified-online-tutors",
+  },
+  {
+    slug: "become-online-tutor-get-students",
+    title: "Become an Online Tutor & Get Students — Free on Mentr",
+    keyword: "become online tutor get students",
+    intent: "transactional",
+    funnel: "bottom",
+    pillar: "for-tutors",
+    description:
+      "Become an online tutor and get students without paying for leads — free profile on Mentr.",
+    cta: "List free",
+    ctaHref: "/online-tutor-jobs",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

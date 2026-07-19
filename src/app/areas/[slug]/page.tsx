@@ -1,5 +1,5 @@
 import { SeoHubPage, areaRelatedLinks } from "@/components/seo/hub-page";
-import { SITE_NAME } from "@/lib/seo";
+import { hubOpenGraph, SITE_NAME } from "@/lib/seo";
 import {
   areaHubSlug,
   areaIntro,
@@ -28,6 +28,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/areas/${slug}` },
+    openGraph: hubOpenGraph(title, description, `/areas/${slug}`),
   };
 }
 
@@ -58,6 +59,7 @@ export default async function AreaHubPage({
       relatedLinks={areaRelatedLinks(area, teachers)}
       ctaHref={`/search?locality=${encodeURIComponent(area)}`}
       ctaLabel={`Search tutors in ${area}`}
+      promoHref="/find-verified-online-tutors"
     />
   );
 }

@@ -329,6 +329,21 @@ function ParentsHero() {
               <PostRequirementButton size="lg" variant="secondary" className="h-13 w-full max-w-full px-5 sm:w-auto sm:px-8" />
             </div>
 
+            <p className="text-center text-xs text-muted lg:text-left">
+              Popular searches:{" "}
+              <Link href="/find-online-tutors" className="font-semibold text-coral hover:underline">
+                find online tutors
+              </Link>
+              {" · "}
+              <Link href="/find-verified-online-tutors" className="font-semibold text-coral hover:underline">
+                verified tutors online
+              </Link>
+              {" · "}
+              <Link href="/find-mentors-near-me" className="font-semibold text-coral hover:underline">
+                find mentors near me
+              </Link>
+            </p>
+
             <div className="flex items-center justify-center gap-3 pt-2 lg:justify-start">
               <div className="flex -space-x-2">
                 {["AR", "VS", "MK"].map((init) => (

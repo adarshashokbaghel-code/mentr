@@ -570,9 +570,139 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
-      { label: "How Mentr verifies tutors", href: "/blog/how-mentr-verifies-tutors" },
-      { label: "Browse verified tutors", href: "/search" },
+      { label: "Find verified online tutors", href: "/find-verified-online-tutors" },
+      { label: "Find online tutors", href: "/find-online-tutors" },
       { label: "Online tutor near me guide", href: "/blog/find-online-tutor-near-me" },
+    ],
+  },
+
+  "find-online-tutors-verified-free": {
+    slug: "find-online-tutors-verified-free",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "Searching find online tutors verified leads to dozens of aggregators charging hidden lead fees. Mentr verifies ID and credentials before profiles go live — and lets parents search and connect for free. This guide explains what verified means and how to hire safely online.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "Searching find online tutors verified leads to dozens of aggregators charging hidden lead fees. Mentr verifies ID and credentials before profiles go live — and lets parents search and connect for free. This guide explains what verified means and how to hire safely online." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-verified-online-tutors" },
+      { label: "Related guide", href: "/find-online-tutors" },
+      { label: "Search tutors", href: "/blog/how-mentr-verifies-tutors" },
+    ],
+  },
+
+  "how-to-find-tutor-online-safely": {
+    slug: "how-to-find-tutor-online-safely",
+    publishedAt: "2026-07-19",
+    updatedAt: "2026-07-19",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro: "Finding a tutor online is convenient but requires the same diligence as a home visit. Use verified platforms, run video trials, and never pay large advances to strangers. This parent checklist covers the steps before day one.",
+    sections: [
+      {
+        heading: "Why this search matters",
+        blocks: [
+          { type: "paragraph", text: "Finding a tutor online is convenient but requires the same diligence as a home visit. Use verified platforms, run video trials, and never pay large advances to strangers. This parent checklist covers the steps before day one." },
+          {
+            type: "callout",
+            title: "Start on Mentr",
+            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+          },
+        ],
+      },
+      {
+        heading: "Step-by-step on Mentr",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open the Mentr landing page for your search intent",
+              "Compare verified profiles — subjects, languages, availability",
+              "Send a connect request with class, board, and schedule",
+              "Run a trial session before monthly booking",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Fees and expectations",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is free to search and connect. Session fees are arranged directly between you and the tutor or mentor. Always confirm currency, cancellation policy, and mode (online vs home) before paying for a block of sessions.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is Mentr free for this search?",
+        answer: "Yes. Parents search, connect, and post requirements for free. Tutors list without lead fees.",
+      },
+      {
+        question: "Are tutors verified?",
+        answer: "Verified profiles passed ID and credential review. Still run a trial to assess teaching fit.",
+      },
+      {
+        question: "Where should I start?",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Primary Mentr page", href: "/find-verified-online-tutors" },
+      { label: "Related guide", href: "/blog/tutor-safety-checklist-parents" },
+      { label: "Search tutors", href: "/find-online-tutors" },
     ],
   },
 };

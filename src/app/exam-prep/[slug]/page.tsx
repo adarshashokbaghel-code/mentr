@@ -4,6 +4,7 @@ import {
   teachersForExamPrep,
 } from "@/lib/seo-hubs";
 import type { Metadata } from "next";
+import { hubOpenGraph } from "@/lib/seo";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
@@ -22,6 +23,7 @@ export async function generateMetadata({
     title: page.title,
     description: page.description,
     alternates: { canonical: `/exam-prep/${slug}` },
+    openGraph: hubOpenGraph(page.title, page.description, `/exam-prep/${slug}`),
   };
 }
 
