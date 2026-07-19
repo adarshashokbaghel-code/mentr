@@ -1,3 +1,4 @@
+import { excludeDemoUsersFilter } from "../lib/demo-users";
 import { Connection } from "../models/Connection";
 import { OtpSession } from "../models/OtpSession";
 import { ProfileView } from "../models/ProfileView";
@@ -82,18 +83,19 @@ export async function getAdminStats(): Promise<AdminStats> {
     facultyCities,
     facultySubjects,
   ] = await Promise.all([
-    User.countDocuments(),
-    User.countDocuments({ role: "parent" }),
-    User.countDocuments({ role: "faculty" }),
-    User.countDocuments({ emailVerified: true }),
+    User.countDocuments(excludeDemoUsersFilter),
+    User.countDocuments({ ...excludeDemoUsersFilter, role: "parent" }),
+    User.countDocuments({ ...excludeDemoUsersFilter, role: "faculty" }),
+    User.countDocuments({ ...excludeDemoUsersFilter, emailVerified: true }),
     User.countDocuments({
+      ...excludeDemoUsersFilter,
       role: "faculty",
       profileCompleted: true,
       "profile.name": { $exists: true, $ne: "" },
     }),
-    User.countDocuments({ role: "parent", profileCompleted: true }),
-    User.countDocuments({ createdAt: { $gte: d7 } }),
-    User.countDocuments({ lastLoginAt: { $gte: d30 } }),
+    User.countDocuments({ ...excludeDemoUsersFilter, role: "parent", profileCompleted: true }),
+    User.countDocuments({ ...excludeDemoUsersFilter, createdAt: { $gte: d7 } }),
+    User.countDocuments({ ...excludeDemoUsersFilter, lastLoginAt: { $gte: d30 } }),
     Connection.countDocuments(),
     Connection.countDocuments({ status: "pending" }),
     Connection.countDocuments({ status: "accepted" }),
@@ -123,6 +125,7 @@ export async function getAdminStats(): Promise<AdminStats> {
     User.aggregate<{ _id: string; count: number }>([
       {
         $match: {
+          ...excludeDemoUsersFilter,
           role: "faculty",
           profileCompleted: true,
           "profile.city": { $exists: true, $ne: "" },
@@ -133,7 +136,13 @@ export async function getAdminStats(): Promise<AdminStats> {
       { $limit: 6 },
     ]),
     User.aggregate<{ _id: string; count: number }>([
-      { $match: { role: "faculty", "profile.subjects.0": { $exists: true } } },
+      {
+        $match: {
+          ...excludeDemoUsersFilter,
+          role: "faculty",
+          "profile.subjects.0": { $exists: true },
+        },
+      },
       { $unwind: "$profile.subjects" },
       { $group: { _id: "$profile.subjects", count: { $sum: 1 } } },
       { $sort: { count: -1 } },

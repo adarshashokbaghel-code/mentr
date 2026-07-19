@@ -204,12 +204,19 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
     const otpHash = await hashOtp(code);
     const sessionId = randomUUID();
 
+    const registrationSource =
+      typeof req.body.registrationSource === "string" &&
+      req.body.registrationSource.trim().length > 0
+        ? req.body.registrationSource.trim().slice(0, 2048)
+        : undefined;
+
     await OtpSession.create({
       sessionId,
       email,
       otpHash,
       purpose,
       role,
+      registrationSource,
       expiresAt: getOtpExpiryDate(),
       purgeAt: getOtpPurgeDate(),
     });
@@ -315,6 +322,9 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
         role: session.role,
         emailVerified: true,
         lastLoginAt: new Date(),
+        ...(session.registrationSource && session.purpose === "signup"
+          ? { registrationSource: session.registrationSource }
+          : {}),
       });
     } else {
       // Unverified stubs may still switch portals; verified accounts cannot.

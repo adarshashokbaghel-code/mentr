@@ -32,6 +32,12 @@ export const config = {
     (process.env.VERCEL === "1"
       ? "https://www.mentr.in"
       : "http://localhost:3000"),
+  /** Public-facing site URL for emails and referral links — never localhost. */
+  publicSiteUrl: (
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    process.env.PUBLIC_SITE_URL ||
+    "https://www.mentr.in"
+  ).replace(/\/$/, ""),
   cookieName: "champs_token",
   otp: {
     length: 6,

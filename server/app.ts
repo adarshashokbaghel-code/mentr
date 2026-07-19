@@ -23,6 +23,8 @@ const allowedOrigins = new Set(
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
     "https://mentr.in",
     "https://www.mentr.in",
   ].filter(Boolean) as string[],
@@ -35,9 +37,7 @@ function isLocalDevOrigin(origin: string): boolean {
 
 function isAllowedOrigin(origin: string): boolean {
   if (allowedOrigins.has(origin)) return true;
-  if (process.env.NODE_ENV !== "production" && isLocalDevOrigin(origin)) {
-    return true;
-  }
+  if (isLocalDevOrigin(origin)) return true;
 
   try {
     const { hostname } = new URL(origin);
@@ -54,7 +54,7 @@ app.use(
   cors({
     origin(origin, callback) {
       if (!origin || isAllowedOrigin(origin)) {
-        callback(null, true);
+        callback(null, origin ?? true);
         return;
       }
       console.warn(`CORS blocked for origin: ${origin}`);

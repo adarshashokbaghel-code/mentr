@@ -5,8 +5,8 @@ import { ApiError, authApi, saveToken, type UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type Step = "email" | "otp";
 
@@ -31,6 +31,7 @@ export function FacultyAuthForm({
 }: FacultyAuthFormProps) {
   const { setUser } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
   const [sessionId, setSessionId] = useState("");
@@ -44,6 +45,15 @@ export function FacultyAuthForm({
   const base = role === "parent" ? "/parent" : "/faculty";
   const nextSuffix = next ? `?next=${encodeURIComponent(next)}` : "";
 
+  const registrationSource = useMemo(() => {
+    if (variant !== "signup" || typeof window === "undefined") return undefined;
+    const ref = searchParams?.get("ref");
+    if (!ref) return undefined;
+    const url = new URL(window.location.href);
+    url.searchParams.set("ref", ref);
+    return url.toString();
+  }, [variant, searchParams]);
+
   useEffect(() => {
     if (cooldown <= 0) return;
     const t = setInterval(() => setCooldown((c) => c - 1), 1000);
@@ -56,7 +66,12 @@ export function FacultyAuthForm({
     setMismatchRole(null);
     setLoading(true);
     try {
-      const data = await authApi.sendOtp(email.trim(), variant, role);
+      const data = await authApi.sendOtp(
+        email.trim(),
+        variant,
+        role,
+        registrationSource,
+      );
       setSessionId(data.sessionId);
       setStep("otp");
       setCooldown(60);
@@ -78,7 +93,7 @@ export function FacultyAuthForm({
     } finally {
       setLoading(false);
     }
-  }, [email, variant, role]);
+  }, [email, variant, role, registrationSource]);
 
   async function handleSendOtp(e: React.FormEvent) {
     e.preventDefault();
