@@ -5,6 +5,8 @@ import {
   AdminSection,
   AdminStatCard,
 } from "@/components/admin/admin-ui";
+import { AdminMessenger } from "@/components/admin/admin-messenger";
+import { AdminUsersTable } from "@/components/admin/admin-users-table";
 import { fetchAdminStats, type AdminStats } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
 import {
@@ -12,6 +14,7 @@ import {
   BarChart3,
   LayoutDashboard,
   Link2,
+  Mail,
   Megaphone,
   RefreshCw,
   Users,
@@ -20,6 +23,7 @@ import { useCallback, useEffect, useState } from "react";
 
 const NAV = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
+  { id: "messenger", label: "Messenger", icon: Mail },
   { id: "users", label: "Users", icon: Users },
   { id: "connections", label: "Connections", icon: Link2 },
   { id: "requirements", label: "Requirements", icon: Megaphone },
@@ -148,8 +152,13 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-4 sm:p-5 lg:p-6">
-          {error && (
+        <main
+          className={cn(
+            "flex-1 overflow-y-auto",
+            section === "messenger" ? "overflow-hidden p-0" : "p-4 sm:p-5 lg:p-6",
+          )}
+        >
+          {error && section !== "messenger" && (
             <div className="mb-4 rounded-xl border-2 border-ink bg-butter/50 px-4 py-3 text-sm text-ink">
               {error}
             </div>
@@ -208,9 +217,11 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
             </div>
           )}
 
+          {section === "messenger" && <AdminMessenger adminKey={adminKey} />}
+
           {stats && section === "users" && (
             <AdminSection id="users" title="Users" description="Signups and profile completion">
-              <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                 <AdminStatCard label="Total" value={stats.users.total} />
                 <AdminStatCard label="Parents" value={stats.users.parents} accent="coral" />
                 <AdminStatCard label="Faculty" value={stats.users.faculty} accent="sage" />
@@ -220,6 +231,7 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                 <AdminStatCard label="New (7 days)" value={stats.users.newLast7Days} accent="coral" />
                 <AdminStatCard label="Active (30 days)" value={stats.users.activeLast30Days} />
               </div>
+              <AdminUsersTable adminKey={adminKey} />
             </AdminSection>
           )}
 

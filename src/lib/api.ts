@@ -159,10 +159,15 @@ export function clearToken() {
 }
 
 export const authApi = {
-  sendOtp: (email: string, intent?: "login" | "signup", role?: UserRole) =>
+  sendOtp: (
+    email: string,
+    intent?: "login" | "signup",
+    role?: UserRole,
+    registrationSource?: string,
+  ) =>
     request<SendOtpResponse>("/auth/send-otp", {
       method: "POST",
-      body: JSON.stringify({ email, intent, role }),
+      body: JSON.stringify({ email, intent, role, registrationSource }),
     }),
 
   // Role is bound to the OTP session server-side at send time,

@@ -16,6 +16,8 @@ export interface IOtpSession extends Document {
   purpose: "login" | "signup";
   /** Role requested at send time — verify trusts this, not the client. */
   role: UserRole;
+  /** Signup URL captured at OTP send — stored on new user at verify. */
+  registrationSource?: string;
   attempts: number;
   expiresAt: Date;
   consumed: boolean;
@@ -31,6 +33,7 @@ const otpSessionSchema = new Schema<IOtpSession>(
     otpHash: { type: String, required: true },
     purpose: { type: String, enum: ["login", "signup"], required: true },
     role: { type: String, enum: USER_ROLES, required: true },
+    registrationSource: { type: String, trim: true },
     attempts: { type: Number, default: 0 },
     expiresAt: { type: Date, required: true },
     consumed: { type: Boolean, default: false },

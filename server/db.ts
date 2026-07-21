@@ -38,7 +38,7 @@ export async function connectDb(): Promise<void> {
 
         // Index reconciliation is slow on serverless cold starts — dev only.
         if (process.env.VERCEL !== "1") {
-          await syncIndexesOnce();
+          void syncIndexesOnce();
         }
       })
       .finally(() => {

@@ -88,6 +88,10 @@ export interface IUser extends Document {
   profileCompleted: boolean;
   profile?: IFacultyProfile;
   parentProfile?: IParentProfile;
+  /** Unique invite link generated when admin sends welcome email — used for referrals. */
+  referralUrl?: string;
+  /** Full signup URL the user arrived from (e.g. a referrer's link). */
+  registrationSource?: string;
   lastLoginAt?: Date;
   createdAt: Date;
   updatedAt: Date;
@@ -173,6 +177,8 @@ const userSchema = new Schema<IUser>(
     profileCompleted: { type: Boolean, default: false },
     profile: { type: facultyProfileSchema, required: false },
     parentProfile: { type: parentProfileSchema, required: false },
+    referralUrl: { type: String, trim: true },
+    registrationSource: { type: String, trim: true },
     lastLoginAt: { type: Date },
   },
   { timestamps: true },
@@ -180,6 +186,8 @@ const userSchema = new Schema<IUser>(
 
 userSchema.index({ "profile.subjects": 1 });
 userSchema.index({ "profile.city": 1 });
+userSchema.index({ referralUrl: 1 }, { sparse: true });
+userSchema.index({ registrationSource: 1 }, { sparse: true });
 
 export const User =
   mongoose.models.User || mongoose.model<IUser>("User", userSchema);

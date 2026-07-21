@@ -7,7 +7,25 @@ const transporter = nodemailer.createTransport({
     user: config.emailUser,
     pass: config.emailPass,
   },
+  connectionTimeout: 15_000,
+  greetingTimeout: 10_000,
+  socketTimeout: 30_000,
 });
+
+export async function sendAdminEmail(
+  to: string,
+  subject: string,
+  text: string,
+  html: string,
+): Promise<void> {
+  await transporter.sendMail({
+    from: `"Mentr by Paprly" <${config.emailUser}>`,
+    to,
+    subject,
+    text,
+    html,
+  });
+}
 
 export async function sendOtpEmail(
   to: string,
