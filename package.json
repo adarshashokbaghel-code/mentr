@@ -2,6 +2,7 @@
   "name": "champs",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "concurrently -n next,api -c blue,magenta \"npm run dev:next\" \"npm run dev:server\"",
     "dev:3001": "concurrently -n next,api -c blue,magenta \"next dev -p 3001\" \"npm run dev:server\"",
