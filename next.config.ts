@@ -36,13 +36,9 @@ const nextConfig: NextConfig = {
     ];
   },
   async redirects() {
+    // Do NOT redirect www ↔ apex here. Vercel Domains already owns that
+    // (primary host). App-level redirects fighting Vercel cause ERR_TOO_MANY_REDIRECTS.
     return [
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.mentr.in" }],
-        destination: "https://mentr.in/:path*",
-        permanent: true,
-      },
       {
         source: "/become-a-mentor-bengaluru",
         destination: "/for-faculty",
