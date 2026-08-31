@@ -47,6 +47,14 @@ const sections = [
     ],
   },
   {
+    title: "Advertising on public pages",
+    body: [
+      "Mentr is free for parents and faculty. To support the platform, we may show third-party advertisements on public marketing and guide pages (for example the homepage, blog, FAQ, and SEO landing pages).",
+      "Ads are served by Google AdSense and may use cookies as described in our Privacy policy. We do not show third-party ads inside logged-in dashboards or during account signup flows.",
+      "Clicking an ad takes you to a third-party site governed by that site's terms and privacy policy — not Mentr's.",
+    ],
+  },
+  {
     title: "Liability",
     body: [
       "Mentr provides the platform \"as is\". We're not liable for disputes, payments, or outcomes between parents and tutors.",
@@ -68,7 +76,7 @@ export default function TermsPage() {
             Terms of service
           </h1>
           <p className="mt-3 text-sm font-semibold text-muted">
-            Last updated: July 2026
+            Last updated: August 2026
           </p>
           <p className="mt-5 text-base leading-relaxed text-muted">
             Short version: Mentr connects you, everything else is between you
