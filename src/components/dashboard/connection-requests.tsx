@@ -2,6 +2,7 @@
 
 import { timeAgo } from "@/components/dashboard/widgets";
 import { connectionsApi, type ConnectionRequest } from "@/lib/api";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Check, Inbox, Loader2, Lock, X } from "lucide-react";
 import { useState } from "react";
@@ -70,9 +71,22 @@ export function ConnectionRequestsSection({
       )}
 
       {loading ? (
-        <div className="mt-4 rounded-lg border border-hairline bg-white px-5 py-8 text-center text-sm text-muted">
-          Loading…
-        </div>
+        <ul className="mt-4 space-y-3">
+          {[0, 1, 2].map((i) => (
+            <li
+              key={i}
+              className="rounded-lg border border-hairline bg-white p-4 shadow-[0_1px_3px_rgba(28,26,23,0.05)]"
+            >
+              <div className="flex items-start gap-3">
+                <Skeleton className="h-10 w-10 shrink-0 rounded-full" />
+                <div className="min-w-0 flex-1 space-y-2">
+                  <Skeleton className="h-3.5 w-1/3" />
+                  <Skeleton className="h-10 w-full rounded-md" />
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : requests.length === 0 ? (
         <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
           <Inbox className="mx-auto h-5 w-5 text-muted" />
