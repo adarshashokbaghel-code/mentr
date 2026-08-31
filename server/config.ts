@@ -28,16 +28,11 @@ export const config = {
   emailUser: requireEnv("EMAIL_USER"),
   emailPass: requireEnv("EMAIL_PASS").replace(/\s/g, ""),
   frontendUrl:
-    process.env.FRONTEND_URL ||
-    (process.env.VERCEL === "1"
-      ? "https://www.mentr.in"
-      : "http://localhost:3000"),
+    process.env.VERCEL === "1"
+      ? "https://mentr.in"
+      : process.env.FRONTEND_URL || "http://localhost:3000",
   /** Public-facing site URL for emails and referral links — never localhost. */
-  publicSiteUrl: (
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    process.env.PUBLIC_SITE_URL ||
-    "https://www.mentr.in"
-  ).replace(/\/$/, ""),
+  publicSiteUrl: "https://mentr.in",
   cookieName: "champs_token",
   otp: {
     length: 6,
@@ -48,7 +43,9 @@ export const config = {
     /** Session rows are kept this long for rate-limit accounting, then TTL-purged. */
     retentionMinutes: 60,
   },
-  jwtExpiresIn: "7d",
+  jwtExpiresIn: process.env.JWT_EXPIRES_IN || "60d",
+  /** Cookie max-age aligned with JWT — users stay logged in ~60 days. */
+  jwtMaxAgeMs: 60 * 24 * 60 * 60 * 1000,
   /** Set ADMIN_SECRET_KEY in .env — access panel at /admin/[key] */
   adminSecretKey: process.env.ADMIN_SECRET_KEY || "",
 };

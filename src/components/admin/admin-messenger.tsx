@@ -43,12 +43,22 @@ export function AdminMessenger({ adminKey }: Props) {
       );
   }, [adminKey]);
 
+  const activeTemplate = templates.find((t) => t.id === templateId);
+  const templateAudience = activeTemplate?.audience;
+
+  useEffect(() => {
+    if (!activeTemplate) return;
+    setPreviewName(activeTemplate.audience === "parent" ? "Parent" : "Educator");
+    setSelected(new Set());
+  }, [activeTemplate?.id, activeTemplate?.audience]);
+
   const loadPreview = useCallback(async () => {
     setPreviewLoading(true);
     try {
       const data = await previewMessengerEmail(adminKey, {
         templateId,
         name: previewName,
+        role: templateAudience,
       });
       setPreviewHtml(data.html);
       setPreviewSubject(data.subject);
@@ -57,7 +67,7 @@ export function AdminMessenger({ adminKey }: Props) {
     } finally {
       setPreviewLoading(false);
     }
-  }, [adminKey, templateId, previewName]);
+  }, [adminKey, templateId, previewName, templateAudience]);
 
   useEffect(() => {
     const t = setTimeout(() => void loadPreview(), 250);
@@ -67,14 +77,14 @@ export function AdminMessenger({ adminKey }: Props) {
   const loadUsers = useCallback(async () => {
     setUsersLoading(true);
     try {
-      const data = await searchAdminUsers(adminKey, query);
+      const data = await searchAdminUsers(adminKey, query, templateAudience);
       setUsers(data.users);
     } catch (e) {
       setStatus({ type: "err", msg: e instanceof Error ? e.message : "Search failed" });
     } finally {
       setUsersLoading(false);
     }
-  }, [adminKey, query]);
+  }, [adminKey, query, templateAudience]);
 
   useEffect(() => {
     const t = setTimeout(() => void loadUsers(), 300);
@@ -119,14 +129,33 @@ export function AdminMessenger({ adminKey }: Props) {
         <select
           value={templateId}
           onChange={(e) => setTemplateId(e.target.value)}
-          className="h-8 min-w-[180px] rounded border border-hairline bg-white px-2 text-xs font-medium text-ink outline-none focus:border-ink"
+          className="h-8 min-w-[200px] rounded border border-hairline bg-white px-2 text-xs font-medium text-ink outline-none focus:border-ink"
         >
-          {templates.map((t) => (
-            <option key={t.id} value={t.id}>
-              {t.label}
-            </option>
-          ))}
+          <optgroup label="Mentor templates">
+            {templates
+              .filter((t) => t.audience === "faculty")
+              .map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.label}
+                </option>
+              ))}
+          </optgroup>
+          <optgroup label="Parent templates">
+            {templates
+              .filter((t) => t.audience === "parent")
+              .map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.label}
+                </option>
+              ))}
+          </optgroup>
         </select>
+
+        {activeTemplate && (
+          <span className="hidden text-[10px] font-medium uppercase tracking-wide text-muted sm:inline">
+            For {activeTemplate.audience === "faculty" ? "tutors" : "parents"}
+          </span>
+        )}
 
         <div className="relative min-w-[140px] flex-1 sm:max-w-[160px]">
           <input
@@ -185,7 +214,16 @@ export function AdminMessenger({ adminKey }: Props) {
         <div className="flex w-full shrink-0 flex-col border-b border-hairline lg:w-[300px] lg:border-b-0 lg:border-r">
           <div className="flex items-center justify-between border-b border-hairline px-3 py-2">
             <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-              Recipients
+              {templateAudience === "parent"
+                ? "Parent recipients"
+                : templateAudience === "faculty"
+                  ? "Tutor recipients"
+                  : "Recipients"}
+              {users.length > 0 && (
+                <span className="ml-1 font-normal normal-case text-muted/80">
+                  ({users.length})
+                </span>
+              )}
             </p>
             <button
               type="button"
@@ -210,7 +248,13 @@ export function AdminMessenger({ adminKey }: Props) {
                 Loading
               </p>
             ) : users.length === 0 ? (
-              <p className="px-3 py-4 text-[11px] text-muted">No users</p>
+              <p className="px-3 py-4 text-[11px] text-muted">
+                {templateAudience === "parent"
+                  ? "No parents found"
+                  : templateAudience === "faculty"
+                    ? "No tutors found"
+                    : "No users"}
+              </p>
             ) : (
               <ul>
                 {users.map((user) => {
@@ -240,14 +284,14 @@ export function AdminMessenger({ adminKey }: Props) {
                             {user.name}
                           </span>
                           <span className="block truncate text-[10px] text-muted">
-                            {user.email}
+                            {user.email} · {user.role}
                           </span>
                         </span>
-                        {user.referralUrl && (
+                        {user.referralUrl ? (
                           <span className="shrink-0 text-[9px] font-medium uppercase tracking-wide text-sage">
                             Ref
                           </span>
-                        )}
+                        ) : null}
                       </button>
                     </li>
                   );

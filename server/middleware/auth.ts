@@ -34,7 +34,7 @@ export function setAuthCookie(res: Response, token: string): void {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    maxAge: config.jwtMaxAgeMs,
     path: "/",
   });
 }

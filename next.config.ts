@@ -39,8 +39,8 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/:path*",
-        has: [{ type: "host", value: "mentr.in" }],
-        destination: "https://www.mentr.in/:path*",
+        has: [{ type: "host", value: "www.mentr.in" }],
+        destination: "https://mentr.in/:path*",
         permanent: true,
       },
       {

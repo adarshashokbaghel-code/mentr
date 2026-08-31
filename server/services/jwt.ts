@@ -8,7 +8,9 @@ export interface AuthTokenPayload {
   role: UserRole;
 }
 
-const authSignOptions: SignOptions = { expiresIn: "7d" };
+const authSignOptions: SignOptions = {
+  expiresIn: config.jwtExpiresIn as SignOptions["expiresIn"],
+};
 
 export function signAuthToken(
   userId: string,
