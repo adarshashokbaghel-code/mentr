@@ -90,6 +90,6 @@ export const GOOGLE_SITE_VERIFICATION =
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ME7KM87RG4";
 
-/** Google AdSense publisher ID, e.g. ca-pub-XXXXXXXXXX */
+/** Google AdSense publisher ID — also used for the site verification meta tag. */
 export const ADSENSE_CLIENT_ID =
   process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4918938808225819";

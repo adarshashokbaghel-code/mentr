@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/auth/app-providers";
-import { GoogleAdSense } from "@/components/seo/google-adsense";
+import { CookieConsent } from "@/components/seo/cookie-consent";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import {
+  ADSENSE_CLIENT_ID,
   GOOGLE_SITE_VERIFICATION,
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
@@ -75,6 +76,9 @@ export const metadata: Metadata = {
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
+  ...(ADSENSE_CLIENT_ID
+    ? { other: { "google-adsense-account": ADSENSE_CLIENT_ID } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -85,11 +89,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <head>
-        <GoogleAdSense />
+        {process.env.NODE_ENV === "production" && ADSENSE_CLIENT_ID ? (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
         <GoogleAnalytics />
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <AppProviders>{children}</AppProviders>
+        <CookieConsent />
       </body>
     </html>
   );
