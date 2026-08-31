@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/auth/app-providers";
+import { GoogleAdSense } from "@/components/seo/google-adsense";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import {
   GOOGLE_SITE_VERIFICATION,
@@ -84,6 +85,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <head>
+        <GoogleAdSense />
         <GoogleAnalytics />
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">

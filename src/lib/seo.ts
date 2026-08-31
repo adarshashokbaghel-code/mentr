@@ -92,3 +92,7 @@ export const GOOGLE_SITE_VERIFICATION =
 /** Google Analytics measurement ID (gtag.js), e.g. G-ME7KM87RG4 */
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ME7KM87RG4";
+
+/** Google AdSense publisher ID, e.g. ca-pub-XXXXXXXXXX */
+export const ADSENSE_CLIENT_ID =
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4918938808225819";
