@@ -5,7 +5,10 @@ import {
   AdminSection,
   AdminStatCard,
 } from "@/components/admin/admin-ui";
+import { AdminConnectionsTable } from "@/components/admin/admin-connections-table";
+import { AdminEngagementTables } from "@/components/admin/admin-engagement-tables";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
+import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
 import { AdminUsersTable } from "@/components/admin/admin-users-table";
 import { fetchAdminStats, type AdminStats } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
@@ -23,10 +26,10 @@ import { useCallback, useEffect, useState } from "react";
 
 const NAV = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
-  { id: "messenger", label: "Messenger", icon: Mail },
-  { id: "users", label: "Users", icon: Users },
+  { id: "users", label: "User management", icon: Users },
+  { id: "requirements", label: "Board posts", icon: Megaphone },
   { id: "connections", label: "Connections", icon: Link2 },
-  { id: "requirements", label: "Requirements", icon: Megaphone },
+  { id: "messenger", label: "Messenger", icon: Mail },
   { id: "engagement", label: "Engagement", icon: Activity },
   { id: "supply", label: "Supply", icon: BarChart3 },
 ] as const;
@@ -179,10 +182,11 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                   accent="sage"
                 />
                 <AdminStatCard label="Parents" value={stats.users.parents} />
+                <AdminStatCard label="Board posts" value={stats.requirements.total} accent="coral" />
                 <AdminStatCard
                   label="Connections"
-                  value={stats.connections.accepted}
-                  sub={`${stats.connections.pending} pending`}
+                  value={stats.connections.total}
+                  sub={`${stats.connections.accepted} accepted`}
                   accent="butter"
                 />
               </div>
@@ -220,7 +224,11 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           {section === "messenger" && <AdminMessenger adminKey={adminKey} />}
 
           {stats && section === "users" && (
-            <AdminSection id="users" title="Users" description="Signups and profile completion">
+            <AdminSection
+              id="users"
+              title="User management"
+              description="Registered users — parents and tutors (demo accounts excluded)"
+            >
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                 <AdminStatCard label="Total" value={stats.users.total} />
                 <AdminStatCard label="Parents" value={stats.users.parents} accent="coral" />
@@ -236,7 +244,11 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           )}
 
           {stats && section === "connections" && (
-            <AdminSection id="connections" title="Connections" description="Connect requests and outcomes">
+            <AdminSection
+              id="connections"
+              title="Connections"
+              description="Every parent ↔ tutor connect request — who reached out to whom"
+            >
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                 <AdminStatCard label="Total" value={stats.connections.total} />
                 <AdminStatCard label="Pending" value={stats.connections.pending} accent="butter" />
@@ -246,13 +258,18 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                 <AdminStatCard label="Tutor pitched" value={stats.connections.teacherInitiated} accent="coral" />
                 <AdminStatCard label="Acceptance rate" value={`${stats.connections.acceptanceRate}%`} accent="sage" />
               </div>
+              <AdminConnectionsTable adminKey={adminKey} />
             </AdminSection>
           )}
 
           {stats && section === "requirements" && (
-            <AdminSection id="requirements" title="Requirements board" description="Parent posts and tutor interest">
+            <AdminSection
+              id="requirements"
+              title="Board posts"
+              description="Requirement threads posted by parents on the tutor board"
+            >
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-                <AdminStatCard label="All posts" value={stats.requirements.total} />
+                <AdminStatCard label="Total posted" value={stats.requirements.total} />
                 <AdminStatCard label="Open" value={stats.requirements.open} accent="sage" />
                 <AdminStatCard label="Closed" value={stats.requirements.closed} />
                 <AdminStatCard label="Expired" value={stats.requirements.expired} />
@@ -270,16 +287,22 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                   />
                 </div>
               </div>
+              <AdminRequirementsTable adminKey={adminKey} />
             </AdminSection>
           )}
 
           {stats && section === "engagement" && (
-            <AdminSection id="engagement" title="Engagement" description="Views and auth activity">
+            <AdminSection
+              id="engagement"
+              title="Engagement"
+              description="Profile views, tutor discovery, and auth activity — full detail"
+            >
               <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                 <AdminStatCard label="Profile views (total)" value={stats.engagement.profileViews} accent="coral" />
                 <AdminStatCard label="Teachers viewed" value={stats.engagement.teachersViewed} />
                 <AdminStatCard label="OTP sessions (24h)" value={stats.engagement.otpSessions24h} accent="butter" />
               </div>
+              <AdminEngagementTables adminKey={adminKey} />
             </AdminSection>
           )}
 

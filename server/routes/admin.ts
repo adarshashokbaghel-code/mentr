@@ -2,6 +2,12 @@ import { Router } from "express";
 import { ensureDb } from "../middleware/ensure-db";
 import { requireAdminKey } from "../middleware/admin-auth";
 import {
+  listAdminConnections,
+  listAdminOtpActivity,
+  listAdminProfileViews,
+  listAdminRequirements,
+} from "../services/admin-details";
+import {
   getMessengerTemplates,
   listAdminUsers,
   previewMessengerEmail,
@@ -30,7 +36,12 @@ router.get("/users/search", async (req, res) => {
   try {
     const q = String(req.query.q || "");
     const limit = Math.min(parseInt(String(req.query.limit || "40"), 10) || 40, 100);
-    const users = await searchAdminUsers(q, limit);
+    const roleParam = String(req.query.role || "");
+    const role =
+      roleParam === "faculty" || roleParam === "parent"
+        ? (roleParam as "faculty" | "parent")
+        : undefined;
+    const users = await searchAdminUsers(q, limit, role);
     res.json({ users });
   } catch (err) {
     console.error("Admin user search error:", err);
@@ -50,6 +61,50 @@ router.get("/users", async (req, res) => {
   }
 });
 
+router.get("/requirements", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
+    const posts = await listAdminRequirements(limit);
+    res.json({ posts, total: posts.length });
+  } catch (err) {
+    console.error("Admin requirements list error:", err);
+    res.status(500).json({ error: "Failed to load board posts" });
+  }
+});
+
+router.get("/connections", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
+    const connections = await listAdminConnections(limit);
+    res.json({ connections, total: connections.length });
+  } catch (err) {
+    console.error("Admin connections list error:", err);
+    res.status(500).json({ error: "Failed to load connections" });
+  }
+});
+
+router.get("/engagement/profile-views", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
+    const views = await listAdminProfileViews(limit);
+    res.json({ views, total: views.length });
+  } catch (err) {
+    console.error("Admin profile views error:", err);
+    res.status(500).json({ error: "Failed to load profile views" });
+  }
+});
+
+router.get("/engagement/otp", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "100"), 10) || 100, 300);
+    const sessions = await listAdminOtpActivity(limit);
+    res.json({ sessions, total: sessions.length });
+  } catch (err) {
+    console.error("Admin OTP activity error:", err);
+    res.status(500).json({ error: "Failed to load OTP activity" });
+  }
+});
+
 router.get("/messenger/templates", (_req, res) => {
   res.json({ templates: getMessengerTemplates() });
 });
@@ -59,7 +114,11 @@ router.post("/messenger/preview", (req, res) => {
     const templateId = String(req.body.templateId || "") as MessengerTemplateId;
     const name = req.body.name ? String(req.body.name) : undefined;
     const referralUrl = req.body.referralUrl ? String(req.body.referralUrl) : undefined;
-    const preview = previewMessengerEmail(templateId, { name, referralUrl });
+    const role =
+      req.body.role === "parent" || req.body.role === "faculty"
+        ? req.body.role
+        : undefined;
+    const preview = previewMessengerEmail(templateId, { name, referralUrl, role });
     res.json(preview);
   } catch (err) {
     console.error("Admin messenger preview error:", err);

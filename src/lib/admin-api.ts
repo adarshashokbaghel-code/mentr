@@ -94,16 +94,44 @@ export type AdminUserRow = {
   profileComplete: boolean;
   emailVerified: boolean;
   city: string;
+  area: string;
+  country: string;
+  phone?: string;
   createdAt: string;
+  updatedAt: string;
   lastLoginAt?: string;
   referralUrl?: string;
   registrationSource?: string;
+  faculty?: {
+    designation: string;
+    bio: string;
+    subjects: string[];
+    levels: string[];
+    languages: string[];
+    qualification: string;
+    experienceYears: number;
+    teachingModes: string[];
+    hourlyRate?: number;
+    workplace?: string;
+    gender?: string;
+    certifications: string[];
+    achievements: string[];
+    timezone: string;
+    availabilitySlots: number;
+  };
+  parent?: {
+    phoneNumber: string;
+    area?: string;
+    country: string;
+    city: string;
+  };
 };
 
 export type MessengerTemplateMeta = {
   id: string;
   label: string;
   description: string;
+  audience: "faculty" | "parent";
 };
 
 export type MessengerPreview = {
@@ -124,10 +152,17 @@ export type MessengerSendResult = {
   }[];
 };
 
-export function searchAdminUsers(key: string, q: string) {
+export function searchAdminUsers(
+  key: string,
+  q: string,
+  role?: "faculty" | "parent",
+) {
+  const params = new URLSearchParams({ q });
+  if (role) params.set("role", role);
+  if (role === "parent") params.set("limit", "200");
   return adminFetch<{ users: AdminUserRow[] }>(
     key,
-    `/api/admin/users/search?q=${encodeURIComponent(q)}`,
+    `/api/admin/users/search?${params.toString()}`,
   );
 }
 
@@ -135,6 +170,82 @@ export function fetchAdminUsers(key: string, q = "") {
   return adminFetch<{ users: AdminUserRow[]; total: number }>(
     key,
     `/api/admin/users?q=${encodeURIComponent(q)}&limit=1000`,
+  );
+}
+
+export type AdminConnectionRow = {
+  id: string;
+  parentName: string;
+  parentEmail: string;
+  teacherName: string;
+  teacherEmail: string;
+  status: string;
+  requestedBy: string;
+  message: string;
+  createdAt: string;
+  respondedAt?: string;
+};
+
+export type AdminRequirementRow = {
+  id: string;
+  subject: string;
+  classLevel: string;
+  city: string;
+  area: string;
+  status: string;
+  interestCount: number;
+  parentEmail: string;
+  details: string;
+  expiresAt: string;
+  createdAt: string;
+};
+
+export function fetchAdminConnections(key: string) {
+  return adminFetch<{ connections: AdminConnectionRow[]; total: number }>(
+    key,
+    "/api/admin/connections?limit=500",
+  );
+}
+
+export function fetchAdminRequirements(key: string) {
+  return adminFetch<{ posts: AdminRequirementRow[]; total: number }>(
+    key,
+    "/api/admin/requirements?limit=500",
+  );
+}
+
+export type AdminProfileViewRow = {
+  id: string;
+  teacherName: string;
+  teacherEmail: string;
+  viewerName: string;
+  viewerEmail: string;
+  viewerArea?: string;
+  count: number;
+  lastViewedAt: string;
+};
+
+export type AdminOtpRow = {
+  id: string;
+  email: string;
+  purpose: string;
+  role: string;
+  consumed: boolean;
+  attempts: number;
+  createdAt: string;
+};
+
+export function fetchAdminProfileViews(key: string) {
+  return adminFetch<{ views: AdminProfileViewRow[]; total: number }>(
+    key,
+    "/api/admin/engagement/profile-views?limit=500",
+  );
+}
+
+export function fetchAdminOtpActivity(key: string) {
+  return adminFetch<{ sessions: AdminOtpRow[]; total: number }>(
+    key,
+    "/api/admin/engagement/otp?limit=150",
   );
 }
 
@@ -147,7 +258,12 @@ export function fetchMessengerTemplates(key: string) {
 
 export function previewMessengerEmail(
   key: string,
-  payload: { templateId: string; name?: string; referralUrl?: string },
+  payload: {
+    templateId: string;
+    name?: string;
+    referralUrl?: string;
+    role?: "faculty" | "parent";
+  },
 ) {
   return adminFetch<MessengerPreview>(key, "/api/admin/messenger/preview", {
     method: "POST",

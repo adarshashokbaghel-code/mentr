@@ -1,11 +1,12 @@
 import type { Teacher } from "@/lib/teachers";
+import { SITE_URL } from "@/lib/seo";
 
 function siteBase(): string {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL || process.env.FRONTEND_URL;
-  if (fromEnv) return fromEnv.replace(/\/$/, "");
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  const port = process.env.PORT || "3000";
-  return `http://127.0.0.1:${port}`;
+  if (process.env.NODE_ENV === "development" && !process.env.VERCEL) {
+    const port = process.env.PORT || "3000";
+    return process.env.FRONTEND_URL?.replace(/\/$/, "") || `http://127.0.0.1:${port}`;
+  }
+  return SITE_URL;
 }
 
 async function loadFromDb(id: string): Promise<Teacher | null> {

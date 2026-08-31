@@ -1,14 +1,11 @@
 /**
- * Central SEO configuration.
- *
- * Set NEXT_PUBLIC_SITE_URL in .env to the real production domain —
- * it feeds metadataBase, canonicals, the sitemap and robots.txt.
+ * Central SEO configuration — canonical production URL is always mentr.in (no www).
+ * Feeds metadataBase, canonicals, the sitemap and robots.txt.
  */
 import type { Metadata } from "next";
 
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.mentr.in"
-).replace(/\/$/, "");
+/** Hardcoded apex domain — AdSense and SEO require mentr.in, not www. */
+export const SITE_URL = "https://mentr.in";
 
 export const SITE_NAME = "Mentr";
 

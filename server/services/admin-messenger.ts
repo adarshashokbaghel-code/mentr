@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 import { config } from "../config";
 import { excludeDemoUsersFilter } from "../lib/demo-users";
 import { isProfileComplete } from "../lib/profile-complete";
-import { IUser, User } from "../models/User";
+import { IUser, User, type UserRole } from "../models/User";
 import {
-  defaultTemplateVars,
   listMessengerTemplates,
   renderMessengerTemplate,
+  templateAudience,
+  templateVarsForRole,
   type MessengerTemplateId,
 } from "./email-templates";
 import { sendAdminEmail } from "./mail";
@@ -20,14 +21,43 @@ export type AdminUserRow = {
   profileComplete: boolean;
   emailVerified: boolean;
   city: string;
+  area: string;
+  country: string;
+  phone?: string;
   createdAt: string;
+  updatedAt: string;
   lastLoginAt?: string;
   referralUrl?: string;
   registrationSource?: string;
+  /** Faculty-only profile fields */
+  faculty?: {
+    designation: string;
+    bio: string;
+    subjects: string[];
+    levels: string[];
+    languages: string[];
+    qualification: string;
+    experienceYears: number;
+    teachingModes: string[];
+    hourlyRate?: number;
+    workplace?: string;
+    gender?: string;
+    certifications: string[];
+    achievements: string[];
+    timezone: string;
+    availabilitySlots: number;
+  };
+  /** Parent-only profile fields */
+  parent?: {
+    phoneNumber: string;
+    area?: string;
+    country: string;
+    city: string;
+  };
 };
 
-function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date }): AdminUserRow {
-  return {
+function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date; updatedAt: Date }): AdminUserRow {
+  const base: AdminUserRow = {
     id: String(u._id),
     email: u.email,
     name: displayName(u),
@@ -35,15 +65,51 @@ function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date }): AdminUser
     profileComplete: isProfileComplete(u),
     emailVerified: u.emailVerified,
     city: u.profile?.city || u.parentProfile?.city || "—",
+    area: u.profile?.area || u.parentProfile?.area || "—",
+    country: u.profile?.country || u.parentProfile?.country || "—",
+    phone: u.profile?.phoneNumber || u.parentProfile?.phoneNumber,
     createdAt: u.createdAt.toISOString(),
+    updatedAt: u.updatedAt.toISOString(),
     lastLoginAt: u.lastLoginAt?.toISOString(),
     referralUrl: u.referralUrl,
     registrationSource: u.registrationSource,
   };
+
+  if (u.role === "faculty" && u.profile) {
+    base.faculty = {
+      designation: u.profile.designation || "—",
+      bio: u.profile.bio || "",
+      subjects: u.profile.subjects || [],
+      levels: u.profile.levels || [],
+      languages: u.profile.languages || [],
+      qualification: u.profile.qualification || "",
+      experienceYears: u.profile.experienceYears ?? 0,
+      teachingModes: u.profile.teachingModes || [],
+      hourlyRate: u.profile.hourlyRate,
+      workplace: u.profile.workplace,
+      gender: u.profile.gender,
+      certifications: u.profile.certifications || [],
+      achievements: u.profile.achievements || [],
+      timezone: u.profile.timezone || "",
+      availabilitySlots: u.profile.availability?.length ?? 0,
+    };
+  }
+
+  if (u.role === "parent" && u.parentProfile) {
+    base.parent = {
+      phoneNumber: u.parentProfile.phoneNumber,
+      area: u.parentProfile.area,
+      country: u.parentProfile.country,
+      city: u.parentProfile.city,
+    };
+  }
+
+  return base;
 }
 
-function userSearchFilter(q: string) {
+function userSearchFilter(q: string, role?: UserRole) {
   const filter: Record<string, unknown> = { ...excludeDemoUsersFilter };
+  if (role) filter.role = role;
   if (!q.trim()) return filter;
   const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   filter.$or = [
@@ -96,18 +162,25 @@ export async function ensureReferralUrl(user: IUser): Promise<string> {
 export async function listAdminUsers(
   query = "",
   limit = 500,
+  role?: UserRole,
 ): Promise<AdminUserRow[]> {
   const cap = Math.min(Math.max(limit, 1), 1000);
-  const users = await User.find(userSearchFilter(query))
+  const users = await User.find(userSearchFilter(query, role))
     .sort({ createdAt: -1 })
     .limit(cap)
     .lean();
 
-  return users.map((u) => toAdminUserRow(u as IUser & { _id: unknown; createdAt: Date }));
+  return users.map((u) =>
+    toAdminUserRow(u as IUser & { _id: unknown; createdAt: Date; updatedAt: Date }),
+  );
 }
 
-export async function searchAdminUsers(query: string, limit = 40): Promise<AdminUserRow[]> {
-  return listAdminUsers(query, limit);
+export async function searchAdminUsers(
+  query: string,
+  limit = 40,
+  role?: UserRole,
+): Promise<AdminUserRow[]> {
+  return listAdminUsers(query, limit, role);
 }
 
 export function getMessengerTemplates() {
@@ -116,9 +189,11 @@ export function getMessengerTemplates() {
 
 export function previewMessengerEmail(
   templateId: MessengerTemplateId,
-  opts?: { name?: string; referralUrl?: string },
+  opts?: { name?: string; referralUrl?: string; role?: "faculty" | "parent" },
 ) {
-  const defaults = defaultTemplateVars(opts?.referralUrl);
+  const audience = templateAudience(templateId);
+  const role = opts?.role || audience;
+  const defaults = templateVarsForRole(role, opts?.name, opts?.referralUrl);
   return renderMessengerTemplate(templateId, {
     ...defaults,
     name: opts?.name?.trim() || defaults.name,
@@ -166,16 +241,34 @@ export async function sendMessengerEmails(
       continue;
     }
 
+    const audience = templateAudience(templateId);
+    if (user.role !== audience) {
+      results.push({
+        userId,
+        email: user.email,
+        ok: false,
+        error: `Template is for ${audience}, user is ${user.role}`,
+      });
+      failed += 1;
+      continue;
+    }
+
     try {
-      const referralUrl = await ensureReferralUrl(user);
+      const referralUrl =
+        user.role === "faculty" ? await ensureReferralUrl(user) : undefined;
       const vars = {
-        ...defaultTemplateVars(referralUrl),
+        ...templateVarsForRole(user.role, displayName(user), referralUrl),
         name: displayName(user),
-        referralUrl,
+        ...(referralUrl ? { referralUrl } : {}),
       };
       const rendered = renderMessengerTemplate(templateId, vars);
       await sendAdminEmail(user.email, rendered.subject, rendered.text, rendered.html);
-      results.push({ userId, email: user.email, ok: true, referralUrl });
+      results.push({
+        userId,
+        email: user.email,
+        ok: true,
+        ...(referralUrl ? { referralUrl } : {}),
+      });
       sent += 1;
     } catch (err) {
       results.push({

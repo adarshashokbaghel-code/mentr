@@ -19,7 +19,7 @@ app.set("trust proxy", 1);
 const allowedOrigins = new Set(
   [
     config.frontendUrl,
-    process.env.NEXT_PUBLIC_SITE_URL,
+    config.publicSiteUrl,
     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
     "http://localhost:3000",
     "http://127.0.0.1:3000",

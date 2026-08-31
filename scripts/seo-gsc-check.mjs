@@ -7,10 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.mentr.in").replace(
-  /\/$/,
-  "",
-);
+const siteUrl = "https://mentr.in";
 
 const robots = fs.readFileSync(path.join(root, "src/app/robots.ts"), "utf8");
 const sitemap = fs.readFileSync(path.join(root, "src/app/sitemap.ts"), "utf8");
