@@ -54,6 +54,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     ),
     ...BLOG_POSTS.map((p) => entry(`/blog/${p.slug}`, 0.7, "monthly")),
     entry("/about", 0.7, "monthly"),
+    entry("/open-source", 0.75, "monthly"),
     entry("/contact", 0.5, "yearly"),
     entry("/faculty/signup", 0.7, "monthly"),
     entry("/parent/signup", 0.7, "monthly"),

@@ -25,6 +25,7 @@ const navLinks = [
   { label: "For faculty", href: "/for-faculty" },
   { label: "FAQ", href: "/faq" },
   { label: "Blog", href: "/blog" },
+  { label: "Open source", href: "/open-source" },
 ];
 
 export function Navbar() {

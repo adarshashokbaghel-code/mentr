@@ -15,6 +15,12 @@ export const SITE_BRAND = "Mentr by Paprly";
 export const PARENT_COMPANY_NAME = "Paprly";
 export const PARENT_COMPANY_URL = "https://www.paprly.in";
 
+export const GITHUB_REPO_URL =
+  "https://github.com/adarshashokbaghel-code/mentr";
+
+export const LINKEDIN_URL =
+  "https://www.linkedin.com/company/mentrbypaprly/";
+
 /** Primary launch hub — local SEO pages still target this city. */
 export const LAUNCH_HUB_CITY = "Bengaluru";
 
@@ -54,6 +60,11 @@ export const SITE_KEYWORDS = [
   "find mentors near me",
   "online tutor jobs",
   "Paprly",
+  "Mentr open source",
+  "open source tutoring platform",
+  "free open source mentor finder",
+  "MIT licensed tutor platform",
+  "contribute to Mentr",
 ];
 
 /** JSON-LD snippet for schema.org parentOrganization. */
