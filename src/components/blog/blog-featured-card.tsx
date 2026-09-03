@@ -1,5 +1,6 @@
 import { getPillar, type BlogPost } from "@/lib/blog-posts";
 import { getArticleContent } from "@/lib/blog-content";
+import { formatBlogDate } from "@/lib/blog-utils";
 import { hardShadow, hardShadowSm } from "@/components/landing/lp/shared";
 import { cn } from "@/lib/utils";
 import { ArrowRight, BookOpen, Clock, Sparkles } from "lucide-react";
@@ -13,16 +14,13 @@ const pillarPanel: Record<string, string> = {
   "trust-safety": "from-sage/30 to-sage-wash",
   "career-mentoring": "from-lavender-deep to-lavender",
   "local-guides": "from-butter-deep to-butter",
+  "for-students": "from-sky to-lavender",
 };
 
 export function BlogFeaturedCard({ post }: { post: BlogPost }) {
   const pillar = getPillar(post.pillar);
   const content = getArticleContent(post.slug);
-  const date = new Date(content.publishedAt).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = formatBlogDate(content.publishedAt, "long");
   const panel = pillarPanel[post.pillar] ?? "from-cream-band to-cream";
 
   return (

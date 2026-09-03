@@ -1,5 +1,6 @@
-import { getPillar, type BlogPost } from "@/lib/blog-posts";
 import { getArticleContent } from "@/lib/blog-content";
+import { getPillar, type BlogPost } from "@/lib/blog-posts";
+import { formatBlogDate } from "@/lib/blog-utils";
 import { hardShadowSm } from "@/components/landing/lp/shared";
 import { cn } from "@/lib/utils";
 import { Clock } from "lucide-react";
@@ -17,16 +18,13 @@ const pillarAccent: Record<string, string> = {
   "trust-safety": "bg-sage-wash",
   "career-mentoring": "bg-lavender",
   "local-guides": "bg-butter",
+  "for-students": "bg-sky",
 };
 
 export function BlogPostCard({ post }: Props) {
   const pillar = getPillar(post.pillar);
   const content = getArticleContent(post.slug);
-  const date = new Date(content.publishedAt).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const date = formatBlogDate(content.publishedAt);
   const accent = pillarAccent[post.pillar] ?? "bg-cream-band";
 
   return (

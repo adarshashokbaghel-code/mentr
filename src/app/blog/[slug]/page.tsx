@@ -11,6 +11,7 @@ import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { cn } from "@/lib/utils";
 import { getArticleContent } from "@/lib/blog-content";
+import { formatBlogDate } from "@/lib/blog-utils";
 import {
   BLOG_POSTS,
   getBlogPost,
@@ -65,11 +66,7 @@ export default async function BlogPostPage({ params }: Props) {
     .filter((p) => p.slug !== post.slug)
     .slice(0, 3);
 
-  const date = new Date(content.publishedAt).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const date = formatBlogDate(content.publishedAt, "long");
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -152,7 +149,9 @@ export default async function BlogPostPage({ params }: Props) {
               text={
                 post.pillar === "for-tutors"
                   ? "Ready to grow your tutoring practice? List your profile on Mentr for free — no lead fees, no commission."
-                  : "Looking for a verified tutor? Search on Mentr and connect directly on WhatsApp once they accept — completely free."
+                  : post.pillar === "for-students"
+                    ? "Need a tutor or mentor? Search on Mentr for free — connect on WhatsApp once they accept. No platform fees, ever."
+                    : "Looking for a verified tutor? Search on Mentr and connect directly on WhatsApp once they accept — completely free."
               }
             />
 

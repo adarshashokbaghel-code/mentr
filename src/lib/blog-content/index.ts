@@ -1,4 +1,5 @@
 import type { ArticleContent } from "./types";
+import { FOR_STUDENTS_ARTICLES } from "./for-students";
 import { FOR_PARENTS_ARTICLES } from "./for-parents";
 import { COMPARISON_ARTICLES } from "./comparison";
 import { EXAM_PREP_ARTICLES } from "./exam-prep";
@@ -9,6 +10,7 @@ import { LOCAL_GUIDES_ARTICLES } from "./local-guides";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
+  ...FOR_STUDENTS_ARTICLES,
   ...COMPARISON_ARTICLES,
   ...EXAM_PREP_ARTICLES,
   ...FOR_TUTORS_ARTICLES,

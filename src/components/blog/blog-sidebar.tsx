@@ -4,6 +4,7 @@ import {
   featuredPosts,
   postsByPillar,
 } from "@/lib/blog-posts";
+import { sortPostsByDate } from "@/lib/blog-utils";
 import { hardShadowSm } from "@/components/landing/lp/shared";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -14,7 +15,7 @@ type Props = {
 };
 
 export function BlogSidebar({ activePillar, className }: Props) {
-  const featured = featuredPosts();
+  const featured = sortPostsByDate(featuredPosts(), "newest").slice(0, 8);
 
   return (
     <aside className={cn("space-y-6", className)}>

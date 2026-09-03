@@ -1,17 +1,14 @@
 import { hardShadowSm } from "@/components/landing/lp/shared";
-import type { BlogPost } from "@/lib/blog-posts";
 import { getArticleContent } from "@/lib/blog-content";
+import type { BlogPost } from "@/lib/blog-posts";
+import { formatBlogDate } from "@/lib/blog-utils";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Clock } from "lucide-react";
 import Link from "next/link";
 
 export function BlogComparisonCard({ post }: { post: BlogPost }) {
   const content = getArticleContent(post.slug);
-  const date = new Date(content.publishedAt).toLocaleDateString("en-IN", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  const date = formatBlogDate(content.publishedAt);
 
   return (
     <article className="group">
