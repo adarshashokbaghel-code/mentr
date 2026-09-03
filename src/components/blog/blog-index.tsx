@@ -1,12 +1,12 @@
-import { BlogComparisonCard } from "@/components/blog/blog-comparison-card";
 import { BlogComparisonGlance } from "@/components/blog/blog-comparison-glance";
 import { BlogFeaturedCard } from "@/components/blog/blog-featured-card";
+import { BlogFeed } from "@/components/blog/blog-feed";
 import { BlogFilterBar } from "@/components/blog/blog-filter-bar";
 import { BlogHeader } from "@/components/blog/blog-header";
-import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { BlogShell } from "@/components/blog/blog-shell";
 import { BLOG_PILLARS } from "@/lib/blog-posts";
 import { postsByPillar, type BlogPillarId } from "@/lib/blog-posts";
+import { getNewestFeaturedPost, sortPostsByDate } from "@/lib/blog-utils";
 import Link from "next/link";
 
 type Props = {
@@ -14,12 +14,13 @@ type Props = {
 };
 
 export function BlogIndex({ pillar = "all" }: Props) {
-  const posts = postsByPillar(pillar);
-  const featured = pillar === "all" ? posts.find((p) => p.featured) : undefined;
+  const sorted = sortPostsByDate(postsByPillar(pillar), "newest");
+  const featured =
+    pillar === "all" ? getNewestFeaturedPost() : undefined;
   const listPosts =
     pillar === "all" && featured
-      ? posts.filter((p) => p.slug !== featured.slug)
-      : posts;
+      ? sorted.filter((p) => p.slug !== featured.slug)
+      : sorted;
 
   return (
     <div className="w-full">
@@ -36,36 +37,20 @@ export function BlogIndex({ pillar = "all" }: Props) {
         {featured && (
           <div className="mb-8 sm:mb-10">
             <BlogFeaturedCard post={featured} />
+            <p className="mb-4 mt-8 text-xs font-bold uppercase tracking-wider text-muted sm:mb-5">
+              More guides
+            </p>
           </div>
         )}
 
-        {listPosts.length > 0 && (
-          <>
-            {(featured || pillar === "comparison") && (
-              <p className="mb-4 text-xs font-bold uppercase tracking-wider text-muted sm:mb-5">
-                {pillar === "comparison" ? "All comparisons" : featured ? "More guides" : "Articles"}
-              </p>
-            )}
-            {pillar === "comparison" ? (
-              <div className="flex flex-col gap-4">
-                {listPosts.map((post) => (
-                  <BlogComparisonCard key={post.slug} post={post} />
-                ))}
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-                {listPosts.map((post) => (
-                  <BlogPostCard key={post.slug} post={post} />
-                ))}
-              </div>
-            )}
-          </>
-        )}
-
-        {listPosts.length === 0 && !featured && (
-          <p className="py-12 text-center text-muted sm:py-16">
-            No guides here yet.
-          </p>
+        {listPosts.length > 0 ? (
+          <BlogFeed posts={listPosts} pillar={pillar} />
+        ) : (
+          !featured && (
+            <p className="py-12 text-center text-muted sm:py-16">
+              No guides here yet.
+            </p>
+          )
         )}
 
         {/* Mobile category links — sidebar is desktop-only */}

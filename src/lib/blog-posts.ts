@@ -1,5 +1,6 @@
 export type BlogPillarId =
   | "for-parents"
+  | "for-students"
   | "comparison"
   | "exam-prep"
   | "for-tutors"
@@ -42,6 +43,14 @@ export const BLOG_PILLARS: BlogPillar[] = [
     shortLabel: "For parents",
     description:
       "Parent-facing guides on finding, vetting, and hiring the right home tutor.",
+    tint: "lavender",
+  },
+  {
+    id: "for-students",
+    label: "Student Guides",
+    shortLabel: "For students",
+    description:
+      "Study plans, AI tools, finding mentors, and getting the most from tutoring — written for Class 6–12 and entrance-prep students in India and abroad.",
     tint: "lavender",
   },
   {
@@ -782,6 +791,80 @@ export const BLOG_POSTS: BlogPost[] = [
       "Become an online tutor and get students without paying for leads — free profile on Mentr.",
     cta: "List free",
     ctaHref: "/online-tutor-jobs",
+  },
+
+  // ── Pillar: Student Guides ─────────────────────────────────────
+  {
+    slug: "how-students-find-free-tutor-online-india",
+    title:
+      "How Students Can Find a Free Tutor or Mentor Online in India (2026 Guide)",
+    keyword: "how to find free tutor online India students",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "Step-by-step guide for students in India to find verified tutors and mentors online for free — CBSE, ICSE, JEE, NEET, coding, and spoken English without platform fees.",
+    publishWeek: 13,
+    featured: true,
+    cta: "Find tutors free",
+    ctaHref: "/find-online-tutors/india",
+  },
+  {
+    slug: "ai-study-tools-students-2026",
+    title:
+      "AI Study Tools for Students in 2026: What Helps Exam Prep (and What Is Cheating)",
+    keyword: "AI study tools for students 2026",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "A practical guide to using ChatGPT, note apps, and AI tutors for homework and board exams — plus when AI crosses the line and why a human mentor still matters.",
+    publishWeek: 14,
+    featured: true,
+    cta: "Find a study mentor",
+    ctaHref: "/find-mentors-near-me",
+  },
+  {
+    slug: "cbse-class-12-board-exam-study-plan-2027",
+    title:
+      "CBSE Class 12 Board Exam Study Plan 2027: Month-by-Month for Students",
+    keyword: "CBSE Class 12 board exam study plan 2027",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-students",
+    description:
+      "A realistic Class 12 CBSE revision calendar from September 2026 to March 2027 — subject priorities, mock tests, and when to bring in a tutor for Physics, Maths, and Chemistry.",
+    publishWeek: 15,
+    cta: "Find board exam tutors",
+    ctaHref: "/find-verified-online-tutors/india",
+  },
+  {
+    slug: "how-students-prepare-for-tutor-sessions",
+    title:
+      "How Students Should Prepare for Tutor Sessions (So Every Hour Counts)",
+    keyword: "how to prepare for tutoring session student",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-students",
+    description:
+      "Before, during, and after checklist for students — questions to bring, how to use trial sessions, and habits that make tutoring worth the time (and your parents' trust).",
+    publishWeek: 16,
+    cta: "Search tutors",
+    ctaHref: "/search",
+  },
+  {
+    slug: "mentr-free-open-source-guide-students-parents",
+    title:
+      "Why Mentr Is Free and Open Source — What Students and Parents Should Know",
+    keyword: "Mentr free open source tutoring platform",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-students",
+    description:
+      "Mentr charges ₹0 to search, connect, and list. The code is MIT licensed on GitHub. Here is what that means for students, parents, and tutors in India, UAE, and worldwide.",
+    publishWeek: 17,
+    cta: "View open source",
+    ctaHref: "/open-source",
   },
 ];
 

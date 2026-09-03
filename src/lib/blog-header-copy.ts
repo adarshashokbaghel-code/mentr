@@ -11,7 +11,7 @@ export const BLOG_HOME_HEADER: BlogHeaderCopy = {
   title: "Find tutors. Compare platforms. Prep for exams.",
   subtitle:
     "Fee guides for Bengaluru, honest UrbanPro comparisons, and JEE study plans — written for parents hiring tutors and faculty growing their practice.",
-  hint: "Covers hiring, pricing, exam prep, and neighbourhood listings",
+  hint: "Covers hiring, pricing, exam prep, student guides, and neighbourhood listings",
 };
 
 export const BLOG_PILLAR_HEADERS: Record<BlogPillarId, BlogHeaderCopy> = {
@@ -56,6 +56,12 @@ export const BLOG_PILLAR_HEADERS: Record<BlogPillarId, BlogHeaderCopy> = {
     subtitle:
       "Koramangala, Indiranagar, HSR Layout, Jayanagar, Whitefield — local fees, subjects covered, and how to book nearby.",
     hint: "Area guides · local fees · Koramangala · HSR · Jayanagar",
+  },
+  "for-students": {
+    title: "Study smarter. Find help free.",
+    subtitle:
+      "Board exam plans, AI study tools, how to find tutors online, and getting the most from every session — written for Class 6–12 and JEE/NEET students.",
+    hint: "AI study tools · CBSE Class 12 · free tutors · session prep",
   },
 };
 
