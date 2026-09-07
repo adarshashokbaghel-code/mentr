@@ -11,6 +11,8 @@ type FooterLink = { label: string; href: string; external?: boolean };
 
 const columns: Record<string, FooterLink[]> = {
   Product: [
+    { label: "Browse tutors", href: "/search" },
+    { label: "Browse mentors", href: "/search?kind=mentor" },
     { label: "Find online tutors", href: "/find-online-tutors" },
     { label: "Verified tutors", href: "/find-verified-online-tutors" },
     { label: "Find mentors near me", href: "/find-mentors-near-me" },
@@ -20,10 +22,10 @@ const columns: Record<string, FooterLink[]> = {
     { label: "FAQ", href: "/faq" },
   ],
   Parents: [
+    { label: "Browse all tutors", href: "/search" },
     { label: "Find online tutors", href: "/find-online-tutors" },
     { label: "India online tutors", href: "/find-online-tutors/india" },
     { label: "UAE online tutors", href: "/find-online-tutors/uae" },
-    { label: "Browse Bengaluru", href: "/search/bengaluru" },
     { label: "Maths tutors", href: "/subjects/mathematics-tutors-bengaluru" },
   ],
   Faculty: [
@@ -44,6 +46,7 @@ const columns: Record<string, FooterLink[]> = {
   ],
   Resources: [
     { label: "All guides", href: "/blog" },
+    { label: "Browse tutors", href: "/search" },
     { label: "Find online tutors", href: "/find-online-tutors" },
     { label: "Verified tutors online", href: "/find-verified-online-tutors" },
     { label: "Find mentors near me", href: "/find-mentors-near-me" },

@@ -24,7 +24,7 @@ import {
   Star,
   X,
 } from "lucide-react";
-import Image from "next/image";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import { useState } from "react";
 
 const QUICK_SUBJECTS = [
@@ -315,21 +315,13 @@ export function SearchMapShell({
                         !available && "opacity-70",
                       )}
                     >
-                      <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-md bg-cream-band">
-                        {t.imageUrl ? (
-                          <Image
-                            src={t.imageUrl}
-                            alt={t.name}
-                            fill
-                            className="object-cover"
-                            sizes="72px"
-                          />
-                        ) : (
-                          <span className="flex h-full w-full items-center justify-center text-lg font-bold text-ink/30">
-                            {t.initials}
-                          </span>
-                        )}
-                      </div>
+                      <ProfilePlaceholder
+                        name={t.name}
+                        initials={t.initials}
+                        kind={t.kind}
+                        size="lg"
+                        rounded="md"
+                      />
                       <div className="min-w-0 flex-1">
                         <div className="flex items-start gap-1">
                           <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-ink">

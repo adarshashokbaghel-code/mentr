@@ -130,8 +130,7 @@ export const TEACHERS: Teacher[] = [
     id: "aris-smith",
     name: "Dr. Aris Smith",
     initials: "AS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Mathematics", "Physics", "Exam Prep"],
     subjectLine: "Mathematics & Physics",
     experienceYears: 12,
@@ -161,8 +160,7 @@ export const TEACHERS: Teacher[] = [
     id: "meera-kapoor",
     name: "Prof. Meera Kapoor",
     initials: "MK",
-    imageUrl:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["English", "Career Mentoring"],
     subjectLine: "English & Creative Writing",
     experienceYears: 8,
@@ -190,8 +188,7 @@ export const TEACHERS: Teacher[] = [
     id: "rajesh-verma",
     name: "Rajesh Verma",
     initials: "RV",
-    imageUrl:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Computer Science", "Coding"],
     subjectLine: "Computer Science & Coding",
     experienceYears: 6,
@@ -219,8 +216,7 @@ export const TEACHERS: Teacher[] = [
     id: "anita-desai",
     name: "Anita Desai",
     initials: "AD",
-    imageUrl:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Chemistry", "Exam Prep"],
     subjectLine: "Chemistry · Board & JEE",
     experienceYears: 10,
@@ -248,8 +244,7 @@ export const TEACHERS: Teacher[] = [
     id: "vikram-singh",
     name: "Vikram Singh",
     initials: "VS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Mathematics", "Exam Prep"],
     subjectLine: "Mathematics · Class 10",
     experienceYears: 15,
@@ -277,8 +272,7 @@ export const TEACHERS: Teacher[] = [
     id: "priya-nair",
     name: "Priya Nair",
     initials: "PN",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Biology", "Exam Prep"],
     subjectLine: "Biology · NEET foundation",
     experienceYears: 7,
@@ -306,8 +300,7 @@ export const TEACHERS: Teacher[] = [
     id: "kabir-menon",
     name: "Kabir Menon",
     initials: "KM",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Physics", "Exam Prep"],
     subjectLine: "Physics · JEE mains",
     experienceYears: 9,
@@ -335,8 +328,7 @@ export const TEACHERS: Teacher[] = [
     id: "sara-joseph",
     name: "Sara Joseph",
     initials: "SJ",
-    imageUrl:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["English", "Music"],
     subjectLine: "English & Music basics",
     experienceYears: 5,
@@ -365,8 +357,7 @@ export const TEACHERS: Teacher[] = [
     id: "arjun-rao",
     name: "Arjun Rao",
     initials: "AR",
-    imageUrl:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Coding", "Computer Science"],
     subjectLine: "Coding for beginners",
     experienceYears: 4,
@@ -395,8 +386,7 @@ export const TEACHERS: Teacher[] = [
     id: "neha-iyer",
     name: "Neha Iyer",
     initials: "NI",
-    imageUrl:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=640&q=80",
+    imageUrl: "",
     subjects: ["Economics", "Exam Prep"],
     subjectLine: "Economics · Class 12",
     experienceYears: 11,

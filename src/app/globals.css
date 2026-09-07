@@ -378,6 +378,24 @@ main {
   object-fit: cover;
   display: block;
 }
+.champs-pop-hero-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.champs-pop-placeholder-initials {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 2px 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(26, 35, 28, 0.72);
+  box-shadow: 0 1px 2px rgba(26, 35, 28, 0.08);
+}
 .champs-pop-hero-fade {
   position: absolute;
   inset: auto 0 0 0;

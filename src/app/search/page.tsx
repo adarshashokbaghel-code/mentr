@@ -84,6 +84,9 @@ function SearchContent() {
   const searchParams = useSearchParams();
   const initialSubject = searchParams?.get("subject") || undefined;
   const initialArea = searchParams?.get("area") || undefined;
+  const kindParam = searchParams?.get("kind");
+  const initialKind =
+    kindParam === "tutor" || kindParam === "mentor" ? kindParam : "all";
   const initialView =
     searchParams?.get("view") === "map" ? "map" : "list";
 
@@ -91,6 +94,7 @@ function SearchContent() {
     ...DEFAULT_FILTERS,
     subject: initialSubject,
     locality: initialArea || undefined,
+    kind: initialKind,
     view: initialView,
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);

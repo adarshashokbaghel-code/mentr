@@ -45,7 +45,7 @@ export const metadata: Metadata = {
 
 const heroStats = [
   {
-    value: "500+",
+    value: "100+",
     label: "Verified tutors",
     tint: "bg-lavender",
     icon: Users,

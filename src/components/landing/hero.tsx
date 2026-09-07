@@ -26,7 +26,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import Image from "next/image";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
@@ -66,15 +66,13 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
       )}
     >
       <div className="flex min-w-0 items-center gap-3">
-        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg border-2 border-ink/10 bg-cream-band">
-          <Image
-            src={teacher.imageUrl}
-            alt={teacher.name}
-            fill
-            className="object-cover"
-            sizes="44px"
-          />
-        </div>
+        <ProfilePlaceholder
+          name={teacher.name}
+          initials={teacher.initials}
+          kind={teacher.kind}
+          size="sm"
+          rounded="lg"
+        />
         <div className="min-w-0">
           <p className="flex items-center gap-1 truncate text-sm font-bold text-ink">
             <span className="truncate">{teacher.name}</span>

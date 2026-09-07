@@ -18,8 +18,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const navLinks = [
-  { label: "Find tutors", href: "/find-online-tutors" },
-  { label: "Find mentors", href: "/find-mentors-near-me" },
+  { label: "Find tutors", href: "/search" },
+  { label: "Find mentors", href: "/search?kind=mentor" },
   { label: "How it works", href: "/#how-it-works" },
   { label: "For parents", href: "/parents" },
   { label: "For faculty", href: "/for-faculty" },
