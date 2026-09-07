@@ -61,6 +61,23 @@ const DEFAULT_FILTERS: SearchFiltersState = {
   radiusKm: DEFAULT_RADIUS_KM,
 };
 
+function CatalogErrorPanel({ onRetry }: { onRetry: () => void }) {
+  return (
+    <div className="rounded-lg border border-coral/30 bg-coral-wash/40 px-6 py-12 text-center">
+      <p className="text-base font-semibold text-ink">
+        Couldn&apos;t load tutors
+      </p>
+      <p className="mt-1.5 text-sm text-muted">
+        The server couldn&apos;t reach the database. Check your connection and
+        try again — don&apos;t worry, your saved tutors are safe.
+      </p>
+      <Button className="mt-4 rounded-md" size="sm" onClick={onRetry}>
+        Retry
+      </Button>
+    </div>
+  );
+}
+
 function GuestSearchBanner() {
   const { openRoleChooser } = useAuth();
   return (
@@ -111,21 +128,25 @@ function SearchContent() {
 
   const [catalogTeachers, setCatalogTeachers] = useState<Teacher[]>([]);
   const [catalogLoading, setCatalogLoading] = useState(true);
+  const [catalogFailed, setCatalogFailed] = useState(false);
+  const [catalogReloadKey, setCatalogReloadKey] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
     setCatalogLoading(true);
+    setCatalogFailed(false);
     const load = user?.role === "parent" ? fetchLiveTeachers : fetchPublicTeachers;
-    load().then((teachers) => {
+    load().then(({ teachers, failed }) => {
       if (!cancelled) {
         setCatalogTeachers(teachers);
+        setCatalogFailed(failed);
         setCatalogLoading(false);
       }
     });
     return () => {
       cancelled = true;
     };
-  }, [user]);
+  }, [user, catalogReloadKey]);
 
   const results = useMemo(
     () =>
@@ -133,7 +154,7 @@ function SearchContent() {
         teachers: catalogTeachers,
         subject: filters.subject,
         locality: filters.locality,
-        onlyOpen: filters.onlyOpen,
+        onlyOpen: filters.view === "map" ? false : filters.onlyOpen,
         onlyVerified: filters.onlyVerified,
         kind: filters.kind,
         mode: filters.mode,
@@ -147,7 +168,10 @@ function SearchContent() {
           : filters.sort,
         nearLat: userLocation?.lat,
         nearLng: userLocation?.lng,
-        radiusKm: userLocation ? filters.radiusKm : undefined,
+        radiusKm:
+          userLocation && filters.view !== "map"
+            ? filters.radiusKm
+            : undefined,
       }),
     [filters, userLocation, catalogTeachers],
   );
@@ -220,6 +244,22 @@ function SearchContent() {
 
   // —— Map view: Google Maps-style shell (no stacked modals) ——
   if (filters.view === "map") {
+    if (catalogLoading) {
+      return (
+        <div className="flex h-screen items-center justify-center bg-cream text-sm text-muted">
+          Loading tutors…
+        </div>
+      );
+    }
+    if (catalogFailed) {
+      return (
+        <div className="flex h-screen items-center justify-center bg-cream px-4">
+          <div className="w-full max-w-md">
+            <CatalogErrorPanel onRetry={() => setCatalogReloadKey((k) => k + 1)} />
+          </div>
+        </div>
+      );
+    }
     return (
       <ShortlistProvider catalog={catalogTeachers}>
         <SearchMapShellDynamic
@@ -235,6 +275,7 @@ function SearchContent() {
           onShareLocation={shareLocation}
           onBackToGrid={() => patchFilters({ view: "list" })}
           guestBrowse={!user}
+          mapBrowseAll
         />
         <ShortlistCompareBar />
       </ShortlistProvider>
@@ -262,6 +303,8 @@ function SearchContent() {
             <div className="py-16 text-center text-sm text-muted">
               Loading tutors…
             </div>
+          ) : catalogFailed ? (
+            <CatalogErrorPanel onRetry={() => setCatalogReloadKey((k) => k + 1)} />
           ) : results.length === 0 ? (
             <div className="rounded-lg border border-hairline bg-white px-6 py-12 text-center">
               <p className="text-base font-semibold text-ink">

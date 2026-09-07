@@ -116,10 +116,12 @@ export function toPublicTeacher(
     reviewCount: 0,
     openSlots,
     designation,
-    area: [p.area, p.city].filter(Boolean).join(", ") || "Bengaluru",
-    locality: p.area || p.city || "Bengaluru",
-    lat: null,
-    lng: null,
+    area: [p.area, p.city].filter(Boolean).join(", ") || p.city || "",
+    locality: p.area || p.city || "",
+    lat:
+      p.mapLat != null && Number.isFinite(p.mapLat) ? p.mapLat : null,
+    lng:
+      p.mapLng != null && Number.isFinite(p.mapLng) ? p.mapLng : null,
     bio: p.bio || "",
     levels: levels.join(" · "),
     modes: p.teachingModes || [],

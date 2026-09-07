@@ -1,7 +1,8 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
-import { SearchMap, type MapFocusTarget, type MapTeacher } from "@/components/search/search-map";
+import { resolveTeacherCoords } from "@/lib/teachers";
+import { SearchMap, type MapTeacher, type SearchMapHandle } from "@/components/search/search-map";
 import { type SearchFiltersState } from "@/components/search/search-header";
 import {
   DEFAULT_RADIUS_KM,
@@ -28,7 +29,7 @@ import {
 import { SaveTeacherButton } from "@/components/search/save-teacher-button";
 import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const QUICK_SUBJECTS = [
   "All",
@@ -54,6 +55,8 @@ interface SearchMapShellProps {
   onShareLocation: () => void;
   onBackToGrid: () => void;
   guestBrowse?: boolean;
+  /** Map view shows all tutors globally — radius chips are list-only */
+  mapBrowseAll?: boolean;
 }
 
 function useIsMobile(breakpoint = 640) {
@@ -191,14 +194,14 @@ export function SearchMapShell({
   onShareLocation,
   onBackToGrid,
   guestBrowse = false,
+  mapBrowseAll = false,
 }: SearchMapShellProps) {
   const isMobile = useIsMobile();
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window === "undefined") return true;
     return !window.matchMedia("(max-width: 639px)").matches;
   });
-  const [focusTarget, setFocusTarget] = useState<MapFocusTarget | null>(null);
-  const [focusSeq, setFocusSeq] = useState(0);
+  const mapRef = useRef<SearchMapHandle>(null);
   const { user, openRoleChooser } = useAuth();
   const showListWithoutLocation = guestBrowse || Boolean(userLocation);
 
@@ -206,33 +209,24 @@ export function SearchMapShell({
     ? teachers.find((t) => t.id === selectedId)
     : undefined;
 
-  function requestMapFocus(teacher: MapTeacher) {
-    if (!Number.isFinite(teacher.lat) || !Number.isFinite(teacher.lng)) return;
-    const seq = focusSeq + 1;
-    setFocusSeq(seq);
-    setFocusTarget({
-      id: teacher.id,
-      lat: teacher.lat,
-      lng: teacher.lng,
-      seq,
-    });
-  }
-
   function handleSelectFromList(id: string) {
-    if (!user && guestBrowse) {
-      openRoleChooser(`/teachers/${id}`);
-      return;
-    }
     const teacher = teachers.find((t) => t.id === id);
     if (!teacher) return;
 
     onSelect(id);
 
+    const coords = resolveTeacherCoords(teacher);
+    if (!coords) return;
+
     if (isMobile) {
       setSidebarOpen(false);
+      mapRef.current?.focusTeacher(coords.lat, coords.lng, teacher.id, {
+        delay: 280,
+      });
+      return;
     }
 
-    requestMapFocus(teacher);
+    mapRef.current?.focusTeacher(coords.lat, coords.lng, teacher.id);
   }
 
   function toggleSidebar() {
@@ -362,7 +356,7 @@ export function SearchMapShell({
             </button>
           </div>
 
-          {userLocation && (
+          {userLocation && !mapBrowseAll && (
             <div className="flex gap-1 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               {RADIUS_OPTIONS_KM.map((km) => (
                 <button
@@ -429,7 +423,9 @@ export function SearchMapShell({
           <div className="flex shrink-0 items-center justify-between gap-2 border-b border-hairline bg-white px-3 py-2">
             <p className="text-[12px] font-medium text-muted">
               <span className="font-semibold text-ink">{teachers.length}</span>{" "}
-              nearby · {filters.radiusKm || DEFAULT_RADIUS_KM} km
+              {mapBrowseAll
+                ? "tutors on map"
+                : `nearby · ${filters.radiusKm || DEFAULT_RADIUS_KM} km`}
             </p>
             <button
               type="button"
@@ -469,82 +465,84 @@ export function SearchMapShell({
                 const active = t.id === selectedId;
                 const available = t.openSlots > 0;
                 const next = t.slots.find((s) => s.available)?.label;
-                const hasCoords =
-                  Number.isFinite(t.lat) && Number.isFinite(t.lng);
+                const hasCoords = Boolean(resolveTeacherCoords(t));
                 return (
                   <li key={t.id}>
                     <div
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => handleSelectFromList(t.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleSelectFromList(t.id);
+                        }
+                      }}
                       className={cn(
-                        "flex w-full gap-3 rounded-md border bg-white p-2.5 text-left transition",
+                        "flex w-full cursor-pointer gap-3 rounded-md border bg-white p-2.5 text-left transition touch-manipulation",
                         active
                           ? "border-coral/40 bg-coral-wash/30 shadow-sm ring-1 ring-coral/20"
                           : "border-hairline hover:border-ink/20",
                         !available && "opacity-70",
                       )}
                     >
-                      <button
-                        type="button"
-                        onClick={() => handleSelectFromList(t.id)}
-                        className="flex min-w-0 flex-1 gap-3 text-left touch-manipulation"
-                      >
-                        <ProfilePlaceholder
-                          name={t.name}
-                          initials={t.initials}
-                          kind={t.kind}
-                          size="lg"
-                          rounded="md"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-start gap-1">
-                            <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-ink">
-                              {t.name}
+                      <ProfilePlaceholder
+                        name={t.name}
+                        initials={t.initials}
+                        kind={t.kind}
+                        size="lg"
+                        rounded="md"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-start gap-1">
+                          <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-ink">
+                            {t.name}
+                          </span>
+                          {t.verified && (
+                            <BadgeCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sage" />
+                          )}
+                          {t.reviewCount > 0 ? (
+                            <span className="inline-flex shrink-0 items-center gap-0.5 rounded bg-butter/70 px-1.5 py-0.5 text-[10px] font-bold text-ink">
+                              <Star className="h-2.5 w-2.5 fill-coral text-coral" />
+                              {t.rating.toFixed(1)}
                             </span>
-                            {t.verified && (
-                              <BadgeCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sage" />
-                            )}
-                            {t.reviewCount > 0 ? (
-                              <span className="inline-flex shrink-0 items-center gap-0.5 rounded bg-butter/70 px-1.5 py-0.5 text-[10px] font-bold text-ink">
-                                <Star className="h-2.5 w-2.5 fill-coral text-coral" />
-                                {t.rating.toFixed(1)}
-                              </span>
-                            ) : (
-                              <span className="inline-flex shrink-0 items-center rounded bg-coral px-1.5 py-0.5 text-[10px] font-bold text-white">
-                                New
-                              </span>
-                            )}
-                          </div>
-                          <p className="mt-0.5 truncate text-[12px] font-medium text-coral">
-                            {t.subjectLine}
-                          </p>
-                          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] font-medium text-muted">
-                            {t.distanceKm != null && (
-                              <span className="inline-flex items-center gap-0.5 text-ink">
-                                <MapPin className="h-3 w-3 text-coral/80" />
-                                {formatDistanceKm(t.distanceKm)}
-                              </span>
-                            )}
-                            <span className="inline-flex items-center gap-0.5">
-                              <Briefcase className="h-3 w-3" />
-                              {t.experienceYears} yrs
+                          ) : (
+                            <span className="inline-flex shrink-0 items-center rounded bg-coral px-1.5 py-0.5 text-[10px] font-bold text-white">
+                              New
                             </span>
-                            <span className={available ? "text-sage" : ""}>
-                              {available ? `${t.openSlots} open` : "Booked"}
-                            </span>
-                            {active && hasCoords && (
-                              <span className="text-coral">On map</span>
-                            )}
-                          </div>
-                          <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-muted">
-                            {t.bio}
-                          </p>
-                          {next && available && (
-                            <p className="mt-1 inline-flex items-center gap-1 text-[10px] font-medium text-sage">
-                              <CalendarDays className="h-3 w-3" />
-                              {next}
-                            </p>
                           )}
                         </div>
-                      </button>
+                        <p className="mt-0.5 truncate text-[12px] font-medium text-coral">
+                          {t.subjectLine}
+                        </p>
+                        <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[10px] font-medium text-muted">
+                          {t.distanceKm != null && (
+                            <span className="inline-flex items-center gap-0.5 text-ink">
+                              <MapPin className="h-3 w-3 text-coral/80" />
+                              {formatDistanceKm(t.distanceKm)}
+                            </span>
+                          )}
+                          <span className="inline-flex items-center gap-0.5">
+                            <Briefcase className="h-3 w-3" />
+                            {t.experienceYears} yrs
+                          </span>
+                          <span className={available ? "text-sage" : ""}>
+                            {available ? `${t.openSlots} open` : "Booked"}
+                          </span>
+                          {active && hasCoords && (
+                            <span className="text-coral">On map</span>
+                          )}
+                        </div>
+                        <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-muted">
+                          {t.bio}
+                        </p>
+                        {next && available && (
+                          <p className="mt-1 inline-flex items-center gap-1 text-[10px] font-medium text-sage">
+                            <CalendarDays className="h-3 w-3" />
+                            {next}
+                          </p>
+                        )}
+                      </div>
                       <SaveTeacherButton teacherId={t.id} size="sm" />
                     </div>
                   </li>
@@ -571,20 +569,13 @@ export function SearchMapShell({
         </button>
 
         <SearchMap
+          ref={mapRef}
           teachers={showListWithoutLocation ? teachers : []}
           selectedId={selectedId}
           userLocation={userLocation}
-          focusTarget={focusTarget}
+          sidebarOpen={sidebarOpen}
           mobileSheet={isMobile}
-          onSelect={(id) => {
-            if (!user && guestBrowse) {
-              openRoleChooser(`/teachers/${id}`);
-              return;
-            }
-            onSelect(id);
-            const teacher = teachers.find((t) => t.id === id);
-            if (teacher) requestMapFocus(teacher);
-          }}
+          onSelect={onSelect}
           onLocateClick={onShareLocation}
         />
 

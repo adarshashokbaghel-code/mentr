@@ -18,6 +18,7 @@ import {
   countOpenSlots,
   notifyParentTutorSlotsOpen,
 } from "../services/parent-notifications";
+import { resolveFacultyMapLocation } from "../lib/map-location";
 
 const router = Router();
 
@@ -581,6 +582,9 @@ router.put("/", requireAuth, async (req: AuthenticatedRequest, res: Response) =>
     }
 
     user.profile = result.profile;
+
+    await resolveFacultyMapLocation(user.profile);
+
     user.profileCompleted = true;
     await user.save();
 

@@ -22,6 +22,8 @@ import {
 } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "../lib/profile-complete";
+import { clientIpFromRequest, geocodeIp } from "../services/geocode";
+import { ensureFacultyMapLocation } from "../lib/map-location";
 
 const router = Router();
 
@@ -331,8 +333,19 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
       if (!user.emailVerified) user.role = session.role;
       user.emailVerified = true;
       user.lastLoginAt = new Date();
-      await user.save();
     }
+
+    const clientIp = clientIpFromRequest(req);
+    const ipCoords = clientIp ? await geocodeIp(clientIp) : null;
+    if (ipCoords) {
+      user.loginMapLat = ipCoords.lat;
+      user.loginMapLng = ipCoords.lng;
+      user.loginMapCapturedAt = new Date();
+    }
+    if (user.role === "faculty" && user.profile?.city) {
+      await ensureFacultyMapLocation(user, clientIp);
+    }
+    await user.save();
 
     // Consume every outstanding session for this email
     await OtpSession.updateMany(

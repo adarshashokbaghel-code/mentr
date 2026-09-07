@@ -1,10 +1,17 @@
 "use client";
 
 import { formatDistanceKm, type UserLocation } from "@/lib/geo";
-import { type Teacher, whatsappLink } from "@/lib/teachers";
+import { resolveTeacherCoords, type Teacher, whatsappLink } from "@/lib/teachers";
 import { profilePlaceholderMapHtml } from "@/components/ui/profile-placeholder";
 import { Navigation } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import type { CircleMarker, DivIcon, LeafletMouseEvent, Map as LeafletMap, Marker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -25,10 +32,21 @@ interface SearchMapProps {
   onLocateClick?: () => void;
   /** Explicit fly-to request from list panel (carries coords + seq) */
   focusTarget?: MapFocusTarget | null;
+  /** Sidebar open state — triggers map resize when layout changes */
+  sidebarOpen?: boolean;
   /** Skip Leaflet popup — parent renders a mobile bottom sheet instead */
   mobileSheet?: boolean;
   className?: string;
 }
+
+export type SearchMapHandle = {
+  focusTeacher: (
+    lat: number,
+    lng: number,
+    id?: string,
+    opts?: { delay?: number },
+  ) => boolean;
+};
 
 function escapeHtml(s: string) {
   return s
@@ -128,16 +146,21 @@ function buildPinIcon(
 }
 
 /** Full-bleed map with Google-style marker popups */
-export function SearchMap({
-  teachers,
-  selectedId,
-  userLocation,
-  onSelect,
-  onLocateClick,
-  focusTarget,
-  mobileSheet = false,
-  className,
-}: SearchMapProps) {
+export const SearchMap = forwardRef<SearchMapHandle, SearchMapProps>(
+  function SearchMap(
+    {
+      teachers,
+      selectedId,
+      userLocation,
+      onSelect,
+      onLocateClick,
+      focusTarget,
+      sidebarOpen = true,
+      mobileSheet = false,
+      className,
+    },
+    ref,
+  ) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const leafletRef = useRef<typeof import("leaflet") | null>(null);
@@ -150,7 +173,10 @@ export function SearchMap({
   const mobileSheetRef = useRef(mobileSheet);
   const initialFitDoneRef = useRef(false);
   const userPickedRef = useRef(false);
-  const focusSeqRef = useRef(0);
+  const handledFocusSeqRef = useRef(0);
+  const lastImperativeFocusIdRef = useRef<string | null>(null);
+  const mountedRef = useRef(false);
+  const mapTimersRef = useRef<number[]>([]);
   const [mapReady, setMapReady] = useState(false);
 
   onSelectRef.current = onSelect;
@@ -159,12 +185,52 @@ export function SearchMap({
   selectedIdRef.current = selectedId;
   mobileSheetRef.current = mobileSheet;
 
+  const clearMapTimers = useCallback(() => {
+    mapTimersRef.current.forEach((id) => window.clearTimeout(id));
+    mapTimersRef.current = [];
+  }, []);
+
+  const scheduleMapTimer = useCallback((fn: () => void, delay: number) => {
+    const id = window.setTimeout(() => {
+      mapTimersRef.current = mapTimersRef.current.filter((timerId) => timerId !== id);
+      fn();
+    }, delay);
+    mapTimersRef.current.push(id);
+    return id;
+  }, []);
+
+  const cancelMapTimer = useCallback((id: number) => {
+    window.clearTimeout(id);
+    mapTimersRef.current = mapTimersRef.current.filter((timerId) => timerId !== id);
+  }, []);
+
+  const isMapLive = useCallback(() => {
+    const map = mapRef.current;
+    const container = containerRef.current;
+    if (!mountedRef.current || !map || !container || !container.isConnected) {
+      return false;
+    }
+    try {
+      const pane = map.getPane("mapPane");
+      if (!pane) return false;
+      const rect = container.getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0;
+    } catch {
+      return false;
+    }
+  }, []);
+
   const safeInvalidate = useCallback(() => {
+    if (!isMapLive()) return;
     const map = mapRef.current;
     if (!map) return;
-    map.stop();
-    map.invalidateSize({ animate: false, pan: false });
-  }, []);
+    try {
+      map.stop();
+      map.invalidateSize({ animate: false, pan: false });
+    } catch {
+      // Map container may be mid-layout or unmounted.
+    }
+  }, [isMapLive]);
 
   const flyToCoords = useCallback(
     (
@@ -172,33 +238,85 @@ export function SearchMap({
       lng: number,
       opts?: { openPopupForId?: string; animate?: boolean },
     ) => {
+      if (!isMapLive()) return false;
+
       const map = mapRef.current;
       if (!map || !Number.isFinite(lat) || !Number.isFinite(lng)) return false;
 
-      safeInvalidate();
+      try {
+        map.stop();
+        map.invalidateSize({ animate: false, pan: false });
 
-      const zoom = Math.max(map.getZoom(), 15);
-      map.setView([lat, lng], zoom, {
-        animate: opts?.animate !== false,
-        duration: 0.45,
-      });
+        const zoom = Math.max(map.getZoom(), 15);
+        map.flyTo([lat, lng], zoom, {
+          animate: opts?.animate !== false,
+          duration: 0.5,
+        });
 
-      if (mobileSheetRef.current) {
-        window.setTimeout(() => {
-          map.panBy([0, 100], { animate: true, duration: 0.3 });
-        }, 300);
+        if (mobileSheetRef.current) {
+          scheduleMapTimer(() => {
+            if (!isMapLive()) return;
+            try {
+              mapRef.current?.panBy([0, 110], { animate: true, duration: 0.25 });
+            } catch {
+              // Ignore pan while map is resizing.
+            }
+          }, 450);
+        }
+
+        const popupId = opts?.openPopupForId;
+        if (popupId && !mobileSheetRef.current) {
+          scheduleMapTimer(() => {
+            if (!isMapLive()) return;
+            const marker = markersByIdRef.current.get(popupId);
+            if (!marker || !mapRef.current?.hasLayer(marker)) return;
+            try {
+              marker.openPopup();
+            } catch {
+              // Marker icon may not be mounted yet.
+            }
+          }, 520);
+        }
+
+        return true;
+      } catch {
+        return false;
       }
-
-      const popupId = opts?.openPopupForId;
-      if (popupId && !mobileSheetRef.current) {
-        window.setTimeout(() => {
-          markersByIdRef.current.get(popupId)?.openPopup();
-        }, 350);
-      }
-
-      return true;
     },
-    [safeInvalidate],
+    [isMapLive, scheduleMapTimer],
+  );
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      focusTeacher(lat, lng, id, opts) {
+        let attempts = 0;
+        const run = () => {
+          if (!isMapLive()) {
+            if (attempts < 8) {
+              attempts += 1;
+              scheduleMapTimer(run, 80);
+            }
+            return;
+          }
+          userPickedRef.current = true;
+          flyToCoords(lat, lng, {
+            openPopupForId: mobileSheetRef.current ? undefined : id,
+          });
+        };
+
+        if (id) lastImperativeFocusIdRef.current = id;
+
+        if (opts?.delay) {
+          scheduleMapTimer(run, opts.delay);
+          return true;
+        }
+
+        run();
+        return true;
+      },
+    }),
+    [flyToCoords, scheduleMapTimer, isMapLive],
   );
 
   useEffect(() => {
@@ -209,8 +327,8 @@ export function SearchMap({
       leafletRef.current = L;
       if (cancelled || !containerRef.current || mapRef.current) return;
 
-      const start = userLocationRef.current || { lat: 12.9716, lng: 77.5946 };
-      const zoom = userLocationRef.current ? 13 : 11;
+      const start = userLocationRef.current || { lat: 20.5937, lng: 78.9629 };
+      const zoom = userLocationRef.current ? 13 : 5;
 
       const map = L.map(containerRef.current, {
         scrollWheelZoom: true,
@@ -233,7 +351,9 @@ export function SearchMap({
         if (cancelled) return;
         safeInvalidate();
         requestAnimationFrame(() => {
-          if (!cancelled) setMapReady(true);
+          if (cancelled) return;
+          mountedRef.current = true;
+          setMapReady(true);
         });
       });
     }
@@ -242,6 +362,8 @@ export function SearchMap({
 
     return () => {
       cancelled = true;
+      mountedRef.current = false;
+      clearMapTimers();
       markersByIdRef.current.forEach((m) => m.remove());
       markersByIdRef.current.clear();
       userMarkerRef.current?.remove();
@@ -253,7 +375,7 @@ export function SearchMap({
       initialFitDoneRef.current = false;
       userPickedRef.current = false;
     };
-  }, [safeInvalidate]);
+  }, [safeInvalidate, clearMapTimers]);
 
   useEffect(() => {
     if (!mapReady || !mapRef.current || !userLocation) return;
@@ -292,6 +414,21 @@ export function SearchMap({
 
   useEffect(() => {
     if (!mapReady || !mapRef.current) return;
+    const delay = mobileSheetRef.current ? 320 : 60;
+    const id = scheduleMapTimer(() => {
+      if (!isMapLive()) return;
+      try {
+        mapRef.current?.stop();
+        mapRef.current?.invalidateSize({ animate: false, pan: false });
+      } catch {
+        // Ignore resize while sidebar animates.
+      }
+    }, delay);
+    return () => cancelMapTimer(id);
+  }, [mapReady, sidebarOpen, scheduleMapTimer, isMapLive, cancelMapTimer]);
+
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
 
     let cancelled = false;
 
@@ -305,7 +442,8 @@ export function SearchMap({
       const nextIds = new Set<string>();
 
       teachers.forEach((t) => {
-        if (!Number.isFinite(t.lat) || !Number.isFinite(t.lng)) return;
+        const coords = resolveTeacherCoords(t);
+        if (!coords) return;
         nextIds.add(t.id);
 
         const active = t.id === currentSelected;
@@ -313,11 +451,12 @@ export function SearchMap({
         const prev = existing.get(t.id);
 
         if (prev) {
+          prev.setLatLng([coords.lat, coords.lng]);
           prev.setIcon(icon);
           prev.setZIndexOffset(active ? 1000 : 0);
         } else {
           const size = active ? 38 : 32;
-          const marker = L.marker([t.lat, t.lng], {
+          const marker = L.marker([coords.lat, coords.lng], {
             icon,
             zIndexOffset: active ? 1000 : 0,
           }).addTo(map);
@@ -348,7 +487,7 @@ export function SearchMap({
             L.DomEvent.stopPropagation(e);
             userPickedRef.current = true;
             onSelectRef.current(t.id);
-            flyToCoords(t.lat, t.lng, {
+            flyToCoords(coords.lat, coords.lng, {
               openPopupForId: mobileSheetRef.current ? undefined : t.id,
             });
           });
@@ -366,9 +505,8 @@ export function SearchMap({
 
       const bounds: [number, number][] = [];
       teachers.forEach((t) => {
-        if (Number.isFinite(t.lat) && Number.isFinite(t.lng)) {
-          bounds.push([t.lat, t.lng]);
-        }
+        const coords = resolveTeacherCoords(t);
+        if (coords) bounds.push([coords.lat, coords.lng]);
       });
       if (userLocation) {
         bounds.push([userLocation.lat, userLocation.lng]);
@@ -382,12 +520,17 @@ export function SearchMap({
 
       if (shouldFitAll) {
         safeInvalidate();
-        if (bounds.length >= 2) {
-          map.fitBounds(bounds, { padding: [56, 56], maxZoom: 14, animate: false });
-        } else {
-          map.setView(bounds[0], 14, { animate: false });
+        if (!isMapLive()) return;
+        try {
+          if (bounds.length >= 2) {
+            map.fitBounds(bounds, { padding: [56, 56], maxZoom: 14, animate: false });
+          } else {
+            map.setView(bounds[0], 14, { animate: false });
+          }
+          initialFitDoneRef.current = true;
+        } catch {
+          // Bounds fit can fail if the map pane is not ready yet.
         }
-        initialFitDoneRef.current = true;
       }
     }
 
@@ -395,7 +538,7 @@ export function SearchMap({
     return () => {
       cancelled = true;
     };
-  }, [teachers, mapReady, userLocation, flyToCoords, safeInvalidate]);
+  }, [teachers, mapReady, userLocation, flyToCoords, safeInvalidate, isMapLive]);
 
   useEffect(() => {
     if (!mapReady) return;
@@ -405,37 +548,48 @@ export function SearchMap({
     const currentSelected = selectedId;
     markersByIdRef.current.forEach((marker, id) => {
       const t = teachersRef.current.find((teacher) => teacher.id === id);
-      if (!t) return;
+      if (!t || !mapRef.current?.hasLayer(marker)) return;
       const active = id === currentSelected;
-      marker.setIcon(buildPinIcon(L, t, active));
-      marker.setZIndexOffset(active ? 1000 : 0);
+      try {
+        marker.setIcon(buildPinIcon(L, t, active));
+        marker.setZIndexOffset(active ? 1000 : 0);
+      } catch {
+        // Marker icon may be mid-update.
+      }
     });
   }, [selectedId, mapReady]);
 
   useEffect(() => {
     if (!mapReady || !focusTarget) return;
-    if (focusTarget.seq === focusSeqRef.current) return;
-    focusSeqRef.current = focusTarget.seq;
+    if (focusTarget.seq <= handledFocusSeqRef.current) return;
 
-    userPickedRef.current = true;
+    const { lat, lng, id, seq } = focusTarget;
+    const delay = mobileSheetRef.current ? 280 : 0;
 
-    const run = () => {
-      flyToCoords(focusTarget.lat, focusTarget.lng, {
-        openPopupForId: mobileSheetRef.current ? undefined : focusTarget.id,
+    const timer = scheduleMapTimer(() => {
+      handledFocusSeqRef.current = seq;
+      userPickedRef.current = true;
+      flyToCoords(lat, lng, {
+        openPopupForId: mobileSheetRef.current ? undefined : id,
       });
-    };
+    }, delay);
 
-    const id = window.setTimeout(run, 280);
-    return () => window.clearTimeout(id);
-  }, [focusTarget, mapReady, flyToCoords]);
+    return () => cancelMapTimer(timer);
+  }, [focusTarget, mapReady, flyToCoords, scheduleMapTimer, cancelMapTimer]);
 
   useEffect(() => {
-    if (!mapReady || !selectedId || focusTarget) return;
+    if (!mapReady || !selectedId) return;
+    if (focusTarget && focusTarget.id === selectedId) return;
+    if (lastImperativeFocusIdRef.current === selectedId) {
+      lastImperativeFocusIdRef.current = null;
+      return;
+    }
     const t = teachersRef.current.find((teacher) => teacher.id === selectedId);
-    if (!t || !Number.isFinite(t.lat) || !Number.isFinite(t.lng)) return;
+    const coords = t ? resolveTeacherCoords(t) : null;
+    if (!coords) return;
 
     userPickedRef.current = true;
-    flyToCoords(t.lat, t.lng, {
+    flyToCoords(coords.lat, coords.lng, {
       openPopupForId: mobileSheetRef.current ? undefined : selectedId,
     });
   }, [selectedId, mapReady, focusTarget, flyToCoords]);
@@ -461,4 +615,5 @@ export function SearchMap({
       )}
     </div>
   );
-}
+},
+);

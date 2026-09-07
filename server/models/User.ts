@@ -67,6 +67,14 @@ export interface IFacultyProfile {
   socials?: ISocialLinks;
   // Legacy field kept optional for older records
   department?: string;
+  /** Map pin latitude — from profile geocode or login IP */
+  mapLat?: number;
+  /** Map pin longitude — from profile geocode or login IP */
+  mapLng?: number;
+  /** How mapLat/mapLng were determined */
+  mapLocationSource?: "profile" | "ip";
+  /** area|city|country hash — re-geocode when profile location changes */
+  mapLocationKey?: string;
 }
 
 export const USER_ROLES = ["faculty", "parent"] as const;
@@ -100,6 +108,10 @@ export interface IUser extends Document {
   /** Full signup URL the user arrived from (e.g. a referrer's link). */
   registrationSource?: string;
   lastLoginAt?: Date;
+  /** IP geolocation captured at login — used until profile address is geocoded */
+  loginMapLat?: number;
+  loginMapLng?: number;
+  loginMapCapturedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -155,6 +167,10 @@ const facultyProfileSchema = new Schema<IFacultyProfile>(
     introVideo: { type: String, trim: true },
     socials: { type: socialLinksSchema },
     department: { type: String, trim: true },
+    mapLat: { type: Number },
+    mapLng: { type: Number },
+    mapLocationSource: { type: String, enum: ["profile", "ip"] },
+    mapLocationKey: { type: String, trim: true },
   },
   { _id: false },
 );
@@ -198,6 +214,9 @@ const userSchema = new Schema<IUser>(
     referralUrl: { type: String, trim: true },
     registrationSource: { type: String, trim: true },
     lastLoginAt: { type: Date },
+    loginMapLat: { type: Number },
+    loginMapLng: { type: Number },
+    loginMapCapturedAt: { type: Date },
   },
   { timestamps: true },
 );

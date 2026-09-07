@@ -52,7 +52,7 @@ export interface IRequirement extends Document {
   /** Denormalized counter so board rows don't need an aggregate */
   interestCount: number;
   /** Private share link token — family groups, tutor referrals */
-  shareToken: string;
+  shareToken?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -85,7 +85,7 @@ const requirementSchema = new Schema<IRequirement>(
     },
     expiresAt: { type: Date, required: true },
     interestCount: { type: Number, default: 0, min: 0 },
-    shareToken: { type: String, required: true, unique: true, index: true },
+    shareToken: { type: String, trim: true },
   },
   { timestamps: true },
 );
@@ -93,6 +93,7 @@ const requirementSchema = new Schema<IRequirement>(
 // Board: open, unexpired, newest first
 requirementSchema.index({ status: 1, expiresAt: 1, createdAt: -1 });
 requirementSchema.index({ parent: 1, createdAt: -1 });
+requirementSchema.index({ shareToken: 1 }, { unique: true, sparse: true });
 
 export const Requirement =
   mongoose.models.Requirement ||
