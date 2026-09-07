@@ -6,6 +6,9 @@ import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import {
   ADSENSE_CLIENT_ID,
   GOOGLE_SITE_VERIFICATION,
+  GoogleVerificationTags,
+} from "@/components/seo/google-verification";
+import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
   SITE_BRAND,
@@ -76,9 +79,6 @@ export const metadata: Metadata = {
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
-  ...(ADSENSE_CLIENT_ID
-    ? { other: { "google-adsense-account": ADSENSE_CLIENT_ID } }
-    : {}),
 };
 
 export default function RootLayout({
@@ -89,7 +89,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <head>
-        {process.env.NODE_ENV === "production" && ADSENSE_CLIENT_ID ? (
+        <GoogleVerificationTags />
+        {process.env.NODE_ENV === "production" ? (
           <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
