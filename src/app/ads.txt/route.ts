@@ -1,7 +1,9 @@
 /** Authorised digital sellers for Google AdSense — required at /ads.txt */
+import { ADSENSE_PUBLISHER_ID } from "@/components/seo/google-verification";
+
 export function GET() {
   return new Response(
-    "google.com, pub-4918938808225819, DIRECT, f08c47fec0942fa0\n",
+    `google.com, ${ADSENSE_PUBLISHER_ID}, DIRECT, f08c47fec0942fa0\n`,
     {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",

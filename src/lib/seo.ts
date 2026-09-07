@@ -93,14 +93,13 @@ export function hubOpenGraph(
   };
 }
 
-/** Paste the content value from Google Search Console → HTML tag method. */
-export const GOOGLE_SITE_VERIFICATION =
-  process.env.GOOGLE_SITE_VERIFICATION || process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+/** @deprecated Import from @/components/seo/google-verification */
+export {
+  ADSENSE_CLIENT_ID,
+  ADSENSE_PUBLISHER_ID,
+  GOOGLE_SITE_VERIFICATION,
+} from "@/components/seo/google-verification";
 
 /** Google Analytics measurement ID (gtag.js), e.g. G-ME7KM87RG4 */
 export const GA_MEASUREMENT_ID =
   process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ME7KM87RG4";
-
-/** Google AdSense publisher ID — also used for the site verification meta tag. */
-export const ADSENSE_CLIENT_ID =
-  process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-4918938808225819";
