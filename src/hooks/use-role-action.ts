@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { useToast } from "@/components/ui/toast";
+import { isPublicBrowsePath } from "@/lib/public-browse";
 import { useCallback } from "react";
 
 export const PARENT_ROLE_TOAST =
@@ -18,6 +19,7 @@ export function useRoleAction() {
     (opts?: { href?: string; onAllowed?: () => void }): boolean => {
       if (loading) return false;
       if (!user) {
+        if (opts?.href && isPublicBrowsePath(opts.href)) return true;
         openRoleChooser(opts?.href);
         return false;
       }

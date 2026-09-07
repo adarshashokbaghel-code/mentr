@@ -179,8 +179,8 @@ function onlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
       },
     ],
     primaryCta: {
-      label: geo === "india" ? "Search Bengaluru tutors" : "Find tutors free",
-      href: geo === "india" ? "/search/bengaluru" : "/parent/signup",
+      label: geo === "india" ? "Search Bengaluru tutors" : "Browse tutors free",
+      href: "/search",
     },
     secondaryCta: {
       label: "Find verified online tutors",
@@ -281,7 +281,7 @@ function verifiedOnlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
           "Yes. Mentr supports worldwide online search. Many verified tutors teach UAE, UK, and US families over video.",
       },
     ],
-    primaryCta: { label: "Browse verified tutors", href: "/search/bengaluru" },
+    primaryCta: { label: "Browse verified tutors", href: "/search" },
     secondaryCta: { label: "How Mentr verifies tutors", href: "/blog/how-mentr-verifies-tutors" },
     relatedLinks: [
       { label: "Find online tutors", href: geoPath("/find-online-tutors", geo) },
@@ -367,7 +367,7 @@ function mentorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
           "State your goal in one paragraph — e.g. 'Class 12 student targeting JEE, need maths mentor for problem speed' or 'Switching to product design, need portfolio review'.",
       },
     ],
-    primaryCta: { label: "Find mentors free", href: "/parent/signup" },
+    primaryCta: { label: "Browse mentors free", href: "/search?kind=mentor" },
     secondaryCta: { label: "Programming mentors worldwide", href: "/blog/find-programming-mentor-worldwide" },
     relatedLinks: [
       { label: "Find online tutors", href: geoPath("/find-online-tutors", geo) },

@@ -15,7 +15,7 @@ import {
 } from "@/lib/seo-hubs";
 import { LOCALITIES, SUBJECTS, type Teacher } from "@/lib/teachers";
 import { MapPin, Star } from "lucide-react";
-import Image from "next/image";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import Link from "next/link";
 
 export function SeoBreadcrumbs({
@@ -48,26 +48,16 @@ export function SeoBreadcrumbs({
 
 function SeoTeacherRow({ teacher }: { teacher: Teacher }) {
   const available = teacher.openSlots > 0;
-  const alt = `${teacher.name}, ${teacher.subjectLine} tutor in ${teacher.area}, Bengaluru`;
 
   return (
     <li className="flex gap-4 rounded-xl border border-hairline bg-white p-4 shadow-[0_1px_3px_rgba(28,26,23,0.05)] transition hover:border-ink/20">
-      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg bg-cream-band">
-        {teacher.imageUrl ? (
-          <Image
-            src={teacher.imageUrl}
-            alt={alt}
-            fill
-            loading="lazy"
-            className="object-cover"
-            sizes="64px"
-          />
-        ) : (
-          <span className="flex h-full w-full items-center justify-center text-lg font-bold text-ink/30">
-            {teacher.initials}
-          </span>
-        )}
-      </div>
+      <ProfilePlaceholder
+        name={teacher.name}
+        initials={teacher.initials}
+        kind={teacher.kind}
+        size="md"
+        rounded="lg"
+      />
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <Link

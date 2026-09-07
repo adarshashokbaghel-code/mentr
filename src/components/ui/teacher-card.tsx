@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import { type Teacher, whatsappLink } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
@@ -9,7 +10,6 @@ import {
   MessageCircle,
   Star,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 interface TeacherCardProps {
@@ -37,13 +37,13 @@ export function TeacherCard({
       )}
     >
       <div className="relative aspect-[16/11] bg-cream-band">
-        <Image
-          src={teacher.imageUrl}
-          alt={teacher.name}
-          fill
-          loading="lazy"
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 33vw"
+        <ProfilePlaceholder
+          name={teacher.name}
+          initials={teacher.initials}
+          kind={teacher.kind}
+          size="fill"
+          rounded="lg"
+          className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
         />
       </div>
 

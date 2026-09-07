@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 
 const GUIDES = [
   {
+    label: "Browse tutors now",
+    href: "/search",
+    desc: "See verified tutors — no sign-in required",
+  },
+  {
     label: "Find online tutors",
     href: "/find-online-tutors",
     desc: "Verified tutors worldwide — free connect",

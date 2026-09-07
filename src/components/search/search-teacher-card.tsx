@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { ConnectButton } from "@/components/connect/connect-button";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import { formatDistanceKm } from "@/lib/geo";
 import { type Teacher } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
@@ -12,13 +13,71 @@ import {
   MapPin,
   Star,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 interface SearchTeacherCardProps {
   teacher: Teacher;
   className?: string;
   distanceKm?: number;
+}
+
+function CardPhoto({
+  teacher,
+  available,
+  asLink,
+  profileHref,
+}: {
+  teacher: Teacher;
+  available: boolean;
+  asLink: boolean;
+  profileHref: string;
+}) {
+  const inner = (
+    <>
+      <ProfilePlaceholder
+        name={teacher.name}
+        initials={teacher.initials}
+        kind={teacher.kind}
+        size="fill"
+        rounded="lg"
+        className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
+      />
+      <div className="absolute left-2 top-2 flex gap-1.5">
+        {available ? (
+          <span className="rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-semibold text-sage">
+            {teacher.openSlots} open
+          </span>
+        ) : (
+          <span className="rounded-md bg-ink/70 px-1.5 py-0.5 text-[10px] font-semibold text-white">
+            Booked
+          </span>
+        )}
+      </div>
+      {teacher.reviewCount > 0 ? (
+        <span className="absolute right-2 top-2 inline-flex items-center gap-0.5 rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-bold text-ink">
+          <Star className="h-2.5 w-2.5 fill-coral text-coral" />
+          {teacher.rating.toFixed(1)}
+        </span>
+      ) : (
+        <span className="absolute right-2 top-2 rounded-md bg-coral px-1.5 py-0.5 text-[10px] font-bold text-white">
+          New
+        </span>
+      )}
+    </>
+  );
+
+  const shellClass =
+    "relative block aspect-[4/3] overflow-hidden bg-cream-band";
+
+  if (asLink) {
+    return (
+      <Link href={profileHref} className={shellClass}>
+        {inner}
+      </Link>
+    );
+  }
+
+  return <div className={shellClass}>{inner}</div>;
 }
 
 /** Compact vertical card — landing theme, light radius, no heavy CTAs */
@@ -64,90 +123,12 @@ export function SearchTeacherCard({
           }
         : {})}
     >
-      {user ? (
-        <Link
-          href={profileHref}
-          className="relative block aspect-[4/3] overflow-hidden bg-cream-band"
-        >
-          {teacher.imageUrl ? (
-            <Image
-              src={teacher.imageUrl}
-              alt={teacher.name}
-              fill
-              loading="lazy"
-              className="object-cover transition duration-300 group-hover:scale-[1.02]"
-              sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, (max-width:1280px) 25vw, 20vw"
-            />
-          ) : (
-            <span className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream to-cream-band text-3xl font-bold text-ink/30">
-              {teacher.initials}
-            </span>
-          )}
-
-          <div className="absolute left-2 top-2 flex gap-1.5">
-            {available ? (
-              <span className="rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-semibold text-sage">
-                {teacher.openSlots} open
-              </span>
-            ) : (
-              <span className="rounded-md bg-ink/70 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                Booked
-              </span>
-            )}
-          </div>
-
-          {teacher.reviewCount > 0 ? (
-            <span className="absolute right-2 top-2 inline-flex items-center gap-0.5 rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-bold text-ink">
-              <Star className="h-2.5 w-2.5 fill-coral text-coral" />
-              {teacher.rating.toFixed(1)}
-            </span>
-          ) : (
-            <span className="absolute right-2 top-2 rounded-md bg-coral px-1.5 py-0.5 text-[10px] font-bold text-white">
-              New
-            </span>
-          )}
-        </Link>
-      ) : (
-        <div className="relative block aspect-[4/3] overflow-hidden bg-cream-band">
-          {teacher.imageUrl ? (
-            <Image
-              src={teacher.imageUrl}
-              alt={teacher.name}
-              fill
-              loading="lazy"
-              className="object-cover transition duration-300 group-hover:scale-[1.02]"
-              sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, (max-width:1280px) 25vw, 20vw"
-            />
-          ) : (
-            <span className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream to-cream-band text-3xl font-bold text-ink/30">
-              {teacher.initials}
-            </span>
-          )}
-
-          <div className="absolute left-2 top-2 flex gap-1.5">
-            {available ? (
-              <span className="rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-semibold text-sage">
-                {teacher.openSlots} open
-              </span>
-            ) : (
-              <span className="rounded-md bg-ink/70 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                Booked
-              </span>
-            )}
-          </div>
-
-          {teacher.reviewCount > 0 ? (
-            <span className="absolute right-2 top-2 inline-flex items-center gap-0.5 rounded-md bg-white/95 px-1.5 py-0.5 text-[10px] font-bold text-ink">
-              <Star className="h-2.5 w-2.5 fill-coral text-coral" />
-              {teacher.rating.toFixed(1)}
-            </span>
-          ) : (
-            <span className="absolute right-2 top-2 rounded-md bg-coral px-1.5 py-0.5 text-[10px] font-bold text-white">
-              New
-            </span>
-          )}
-        </div>
-      )}
+      <CardPhoto
+        teacher={teacher}
+        available={available}
+        asLink={Boolean(user)}
+        profileHref={profileHref}
+      />
 
       <div className="flex flex-1 flex-col p-3">
         <div className="flex items-start gap-1">

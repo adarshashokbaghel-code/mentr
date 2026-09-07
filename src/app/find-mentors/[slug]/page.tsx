@@ -59,8 +59,8 @@ export default async function MentorTopicHubPage({
         { label: "Programming mentor guide", href: "/blog/find-programming-mentor-worldwide" },
         { label: "Career mentor guide", href: "/blog/how-to-find-career-mentor-free" },
       ]}
-      ctaHref="/find-mentors-near-me"
-      ctaLabel="Find mentors free"
+      ctaHref="/search?kind=mentor"
+      ctaLabel="Browse mentors free"
       promoHref="/find-verified-online-tutors"
       promoLabel="Find verified tutors online"
     />

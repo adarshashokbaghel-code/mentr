@@ -26,7 +26,7 @@ import {
 import { absoluteUrl } from "@/lib/seo";
 import { areaHubSlug, subjectHubSlug } from "@/lib/seo-hubs";
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
@@ -165,8 +165,6 @@ export default async function TeacherProfilePage({
     },
   };
 
-  const imageAlt = `${teacher.name}, ${teacher.subjectLine} tutor in ${teacher.area}, Bengaluru`;
-
   const breadcrumbs = [
     { label: "Home", href: "/" },
     { label: `${primarySubject} tutors`, href: subjectHubPath },
@@ -204,22 +202,13 @@ export default async function TeacherProfilePage({
           </Link>
 
           <header className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-start">
-            <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-2xl bg-cream-band sm:h-36 sm:w-36">
-              {teacher.imageUrl ? (
-                <Image
-                  src={teacher.imageUrl}
-                  alt={imageAlt}
-                  fill
-                  className="object-cover"
-                  sizes="144px"
-                  priority
-                />
-              ) : (
-                <span className="flex h-full w-full items-center justify-center bg-gradient-to-br from-cream to-cream-band text-4xl font-bold text-ink/30">
-                  {teacher.initials}
-                </span>
-              )}
-            </div>
+            <ProfilePlaceholder
+              name={teacher.name}
+              initials={teacher.initials}
+              kind={teacher.kind}
+              size="xl"
+              rounded="2xl"
+            />
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl">

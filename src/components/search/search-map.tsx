@@ -2,6 +2,7 @@
 
 import { formatDistanceKm, type UserLocation } from "@/lib/geo";
 import { type Teacher, whatsappLink } from "@/lib/teachers";
+import { profilePlaceholderMapHtml } from "@/components/ui/profile-placeholder";
 import { Navigation } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { CircleMarker, Map as LeafletMap, Marker } from "leaflet";
@@ -45,9 +46,7 @@ function popupHtml(t: MapTeacher) {
           ? `<span class="champs-pop-btn champs-pop-btn-muted">Request sent</span>`
           : `<a href="/teachers/${escapeHtml(t.id)}" class="champs-pop-btn champs-pop-btn-primary">View &amp; connect</a>`;
 
-  const hero = t.imageUrl
-    ? `<img class="champs-pop-hero-img" src="${escapeHtml(t.imageUrl)}" alt="" />`
-    : `<div class="champs-pop-hero-img" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#fffaf5,#f3ead9);font:700 36px 'Plus Jakarta Sans',system-ui,sans-serif;color:rgba(26,35,28,0.3)">${escapeHtml(t.initials)}</div>`;
+  const hero = profilePlaceholderMapHtml(t);
   const ratingPill =
     t.reviewCount > 0
       ? `<span class="champs-pop-pill champs-pop-pill-rate">★ ${t.rating.toFixed(1)} · ${t.reviewCount}</span>`

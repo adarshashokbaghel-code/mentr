@@ -27,7 +27,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
+import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
@@ -55,7 +55,7 @@ import { SubjectGallery } from "../subject-gallery";
 const FILTERS = ["All", "Physics", "Mathematics", "English", "Coding"] as const;
 
 const parentStats = [
-  { value: "500+", label: "Verified tutors", tint: "bg-lavender", icon: Users, sub: "Local & online" },
+  { value: "100+", label: "Verified tutors", tint: "bg-lavender", icon: Users, sub: "Local & online" },
   { value: "₹0", label: "Agent fees", tint: "bg-butter", icon: Sparkles, sub: "Free forever" },
   { value: "30 sec", label: "To connect", tint: "bg-sage-wash", icon: Zap, sub: "Not days of calls" },
   { value: "Direct", label: "WhatsApp", tint: "bg-coral-wash", icon: MessageCircle, sub: "On tutor accept" },
@@ -175,9 +175,14 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
       )}
     >
       <div className="flex min-w-0 items-center gap-3">
-        <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg border-2 border-ink/10 bg-cream-band">
-          <Image src={teacher.imageUrl} alt={teacher.name} fill className="object-cover" sizes="44px" />
-        </div>
+        <ProfilePlaceholder
+          name={teacher.name}
+          initials={teacher.initials}
+          kind={teacher.kind}
+          size="sm"
+          rounded="lg"
+          className="border-2 border-ink/10"
+        />
         <div className="min-w-0">
           <p className="flex items-center gap-1 truncate text-sm font-bold text-ink">
             <span className="truncate">{teacher.name}</span>

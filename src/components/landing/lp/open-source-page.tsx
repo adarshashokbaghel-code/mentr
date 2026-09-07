@@ -78,7 +78,7 @@ const stats = [
     sub: "Free to fork & use",
   },
   {
-    value: "500+",
+    value: "100+",
     label: "Verified tutors",
     tint: "bg-coral-wash",
     icon: ShieldCheck,
