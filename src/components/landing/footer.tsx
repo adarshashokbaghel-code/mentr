@@ -36,6 +36,7 @@ const columns: Record<string, FooterLink[]> = {
   Company: [
     { label: "About", href: "/about" },
     { label: "Open source", href: "/open-source" },
+    { label: "Editorial policy", href: "/editorial-policy" },
     { label: PARENT_COMPANY_NAME, href: PARENT_COMPANY_URL, external: true },
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },

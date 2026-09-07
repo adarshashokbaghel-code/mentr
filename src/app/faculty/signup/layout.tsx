@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description:
     "Mentr is the best free platform for tutors and mentors to get found worldwide. Create a profile in minutes, get discovered by parents locally or online, and keep 100% of your fees — no coins, no lead charges, no commission, ever.",
   alternates: { canonical: "/faculty/signup" },
+  robots: { index: false, follow: true },
 };
 
 export default function FacultySignupLayout({

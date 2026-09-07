@@ -9,7 +9,7 @@ import profileRoutes from "./routes/profile";
 import requirementRoutes from "./routes/requirements";
 import teacherRoutes from "./routes/teachers";
 import adminRoutes from "./routes/admin";
-import { getPublicTeacher } from "./public-teacher";
+import { getPublicTeacher, getPublicTeachers } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 
 const app = express();
@@ -84,6 +84,10 @@ app.post("/api/auth/logout", (_req, res) => {
 });
 
 // Public SEO profiles — mounted before the auth-gated teachers router.
+app.get("/api/teachers/public", (_req, res) => {
+  void getPublicTeachers(res);
+});
+
 app.get("/api/teachers/public/:id", (req, res) => {
   void getPublicTeacher(String(req.params.id || ""), res);
 });

@@ -74,7 +74,7 @@ export default function PrivacyPage() {
             Privacy policy
           </h1>
           <p className="mt-3 text-sm font-semibold text-muted">
-            Last updated: August 2026
+            Last updated: September 2026
           </p>
           <p className="mt-5 text-base leading-relaxed text-muted">
             Mentr exists to connect parents with tutors — not to harvest data.

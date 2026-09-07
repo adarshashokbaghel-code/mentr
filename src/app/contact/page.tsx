@@ -1,12 +1,20 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
+import {
+  PARENT_COMPANY_NAME,
+  PARENT_COMPANY_URL,
+  SITE_BRAND,
+  SITE_URL,
+} from "@/lib/seo";
 import { Mail, MessageSquare, ShieldAlert } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Contact us",
+  title: "Contact us — Mentr by Paprly",
   description:
-    "Questions about finding a tutor, listing as faculty, or verification on Mentr? Reach the team — we reply within one working day.",
+    "Questions about finding a tutor, listing as faculty, verification, or editorial corrections on Mentr? Email hello@mentr.in — we reply within one working day.",
   alternates: { canonical: "/contact" },
 };
 
@@ -14,7 +22,7 @@ const channels = [
   {
     icon: Mail,
     title: "General questions",
-    body: "Anything about how Mentr works, accounts, or your profile.",
+    body: "Anything about how Mentr works, accounts, profiles, or using the platform.",
     action: "hello@mentr.in",
     href: "mailto:hello@mentr.in",
   },
@@ -28,7 +36,7 @@ const channels = [
   {
     icon: MessageSquare,
     title: "Partnerships & press",
-    body: "Schools, communities, or media — we'd love to talk.",
+    body: "Schools, communities, media, or open-source contributors — we'd love to talk.",
     action: "team@mentr.in",
     href: "mailto:team@mentr.in",
   },
@@ -47,8 +55,17 @@ export default function ContactPage() {
             Talk to the Mentr team
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted">
-            We&apos;re a small distributed team and we read everything. Expect
-            a reply within one working day.
+            We&apos;re a small distributed team at{" "}
+            <a
+              href={PARENT_COMPANY_URL}
+              className="font-semibold text-coral hover:underline"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <PaprlyWordmark className="align-middle" />
+            </a>{" "}
+            and we read every message. Expect a reply within one working day
+            (Monday–Friday, IST business hours).
           </p>
 
           <div className="mt-10 space-y-4">
@@ -75,6 +92,77 @@ export default function ContactPage() {
               </a>
             ))}
           </div>
+
+          <div className="mt-10 rounded-xl border border-hairline bg-cream p-6">
+            <h2 className="text-lg font-bold text-ink">Publisher information</h2>
+            <dl className="mt-4 space-y-3 text-sm text-muted">
+              <div>
+                <dt className="font-semibold text-ink">Product</dt>
+                <dd>{SITE_BRAND}</dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">Operated by</dt>
+                <dd>
+                  {PARENT_COMPANY_NAME} —{" "}
+                  <a
+                    href={PARENT_COMPANY_URL}
+                    className="font-semibold text-coral hover:underline"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {PARENT_COMPANY_URL.replace(/^https:\/\//, "")}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">Website</dt>
+                <dd>
+                  <a
+                    href={SITE_URL}
+                    className="font-semibold text-coral hover:underline"
+                  >
+                    {SITE_URL.replace(/^https:\/\//, "")}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="font-semibold text-ink">Content corrections</dt>
+                <dd>
+                  See something wrong in a guide? Email{" "}
+                  <a
+                    href="mailto:hello@mentr.in"
+                    className="font-semibold text-coral hover:underline"
+                  >
+                    hello@mentr.in
+                  </a>{" "}
+                  with the page URL. See our{" "}
+                  <Link
+                    href="/editorial-policy"
+                    className="font-semibold text-coral hover:underline"
+                  >
+                    editorial policy
+                  </Link>
+                  .
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <p className="mt-8 text-sm text-muted">
+            Before writing in, you may find answers in our{" "}
+            <Link href="/faq" className="font-semibold text-coral hover:underline">
+              FAQ
+            </Link>
+            ,{" "}
+            <Link href="/how-it-works" className="font-semibold text-coral hover:underline">
+              how it works
+            </Link>
+            , or{" "}
+            <Link href="/blog" className="font-semibold text-coral hover:underline">
+              blog guides
+            </Link>
+            .
+          </p>
         </section>
       </main>
       <Footer />

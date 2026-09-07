@@ -17,10 +17,11 @@ import {
 } from "@/lib/geo";
 import {
   fetchLiveTeachers,
+  fetchPublicTeachers,
   searchTeachers,
   type Teacher,
 } from "@/lib/teachers";
-import { ArrowRight, GraduationCap, Lock, Users } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
@@ -56,71 +57,25 @@ const DEFAULT_FILTERS: SearchFiltersState = {
   radiusKm: DEFAULT_RADIUS_KM,
 };
 
-/** Full-page "who are you?" gate — search is for signed-in users only. */
-function SearchAuthGate() {
+function GuestSearchBanner() {
+  const { openRoleChooser } = useAuth();
   return (
-    <>
-      <Navbar />
-      <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-cream px-4 py-12">
-        <div className="w-full max-w-md">
-          <div className="rounded-2xl border-2 border-ink bg-white p-6 shadow-[4px_4px_0_0_#1c1a17] sm:p-7">
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-butter">
-              <Lock className="h-5 w-5 text-ink" />
-            </span>
-            <h1 className="mt-4 text-[22px] font-bold tracking-tight text-ink">
-              Sign in to find teachers
-            </h1>
-            <p className="mt-1.5 text-sm text-muted">
-              Browsing tutors and contacting them is free — we just need to
-              know who you are first.
-            </p>
-
-            <div className="mt-5 space-y-3">
-              <Link
-                href={`/parent?next=${encodeURIComponent("/search")}`}
-                className="group flex items-center gap-4 rounded-xl border-2 border-ink bg-butter/60 p-4 transition hover:bg-butter"
-              >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-coral text-white">
-                  <Users className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[15px] font-bold text-ink">
-                    I&apos;m a parent or student
-                  </span>
-                  <span className="block text-xs text-muted">
-                    Find tutors near you & contact on WhatsApp
-                  </span>
-                </span>
-                <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
-              </Link>
-
-              <Link
-                href="/faculty"
-                className="group flex items-center gap-4 rounded-xl border-2 border-ink bg-white p-4 transition hover:bg-cream"
-              >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-ink text-white">
-                  <GraduationCap className="h-5 w-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[15px] font-bold text-ink">
-                    I&apos;m a tutor
-                  </span>
-                  <span className="block text-xs text-muted">
-                    List free, keep 100% of what you earn
-                  </span>
-                </span>
-                <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
-              </Link>
-            </div>
-          </div>
-
-          <p className="mt-4 text-center text-xs text-muted">
-            ₹0 platform fee · no middlemen · contact always free
-          </p>
-        </div>
-      </main>
-      <Footer />
-    </>
+    <div className="border-b border-hairline bg-butter/50 px-4 py-3 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-sm text-ink">
+          <span className="font-semibold">Browsing is free.</span>{" "}
+          Sign in as a parent to view full profiles and connect on WhatsApp.
+        </p>
+        <Button
+          size="sm"
+          className="shrink-0 gap-1.5"
+          onClick={() => openRoleChooser("/search")}
+        >
+          Sign in to connect
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Button>
+      </div>
+    </div>
   );
 }
 
@@ -146,13 +101,18 @@ function SearchContent() {
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState<string | null>(null);
 
-  // Live faculty from the database (auth-protected API)
-  const [liveTeachers, setLiveTeachers] = useState<Teacher[]>([]);
+  const [catalogTeachers, setCatalogTeachers] = useState<Teacher[]>([]);
+  const [catalogLoading, setCatalogLoading] = useState(true);
+
   useEffect(() => {
-    if (!user) return;
     let cancelled = false;
-    fetchLiveTeachers().then((teachers) => {
-      if (!cancelled) setLiveTeachers(teachers);
+    setCatalogLoading(true);
+    const load = user?.role === "parent" ? fetchLiveTeachers : fetchPublicTeachers;
+    load().then((teachers) => {
+      if (!cancelled) {
+        setCatalogTeachers(teachers);
+        setCatalogLoading(false);
+      }
     });
     return () => {
       cancelled = true;
@@ -162,7 +122,7 @@ function SearchContent() {
   const results = useMemo(
     () =>
       searchTeachers({
-        teachers: liveTeachers,
+        teachers: catalogTeachers,
         subject: filters.subject,
         locality: filters.locality,
         onlyOpen: filters.onlyOpen,
@@ -181,7 +141,7 @@ function SearchContent() {
         nearLng: userLocation?.lng,
         radiusKm: userLocation ? filters.radiusKm : undefined,
       }),
-    [filters, userLocation, liveTeachers],
+    [filters, userLocation, catalogTeachers],
   );
 
   const mapSelectedId =
@@ -235,7 +195,7 @@ function SearchContent() {
     }
   }, []);
 
-  // —— Auth gate: search is for signed-in parents only ——
+  // —— Auth: faculty accounts cannot use parent search ——
   if (authLoading) {
     return (
       <>
@@ -246,10 +206,7 @@ function SearchContent() {
       </>
     );
   }
-  if (!user) {
-    return <SearchAuthGate />;
-  }
-  if (user.role !== "parent") {
+  if (user && user.role !== "parent") {
     return <SearchFacultyBlocked />;
   }
 
@@ -268,6 +225,7 @@ function SearchContent() {
         onChangeFilters={patchFilters}
         onShareLocation={shareLocation}
         onBackToGrid={() => patchFilters({ view: "list" })}
+        guestBrowse={!user}
       />
     );
   }
@@ -275,6 +233,7 @@ function SearchContent() {
   return (
     <>
       <Navbar />
+      {!user && <GuestSearchBanner />}
       <main className="min-h-screen pb-20">
         <SearchHeader
           filters={filters}
@@ -288,7 +247,11 @@ function SearchContent() {
         />
 
         <div className="mx-auto max-w-[1400px] px-4 py-4 sm:px-6 lg:px-8">
-          {results.length === 0 ? (
+          {catalogLoading ? (
+            <div className="py-16 text-center text-sm text-muted">
+              Loading tutors…
+            </div>
+          ) : results.length === 0 ? (
             <div className="rounded-lg border border-hairline bg-white px-6 py-12 text-center">
               <p className="text-base font-semibold text-ink">
                 No teachers match yet

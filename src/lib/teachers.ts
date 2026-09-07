@@ -446,6 +446,22 @@ function fromApiTeacher(t: ApiTeacher): Teacher {
   };
 }
 
+/** Real faculty with completed profiles — public browse (no login). */
+export async function fetchPublicTeachers(): Promise<Teacher[]> {
+  try {
+    const res = await fetch("/api/teachers/public", { cache: "no-store" });
+    if (!res.ok) return [...TEACHERS];
+    const data = (await res.json()) as { teachers: ApiTeacher[] };
+    const live = (data.teachers || []).map(fromApiTeacher);
+    if (live.length === 0) return [...TEACHERS];
+    const liveIds = new Set(live.map((t) => t.id));
+    const demo = TEACHERS.filter((t) => !liveIds.has(t.id));
+    return [...live, ...demo];
+  } catch {
+    return [...TEACHERS];
+  }
+}
+
 /** Real faculty with completed profiles, straight from the database. */
 export async function fetchLiveTeachers(): Promise<Teacher[]> {
   try {
