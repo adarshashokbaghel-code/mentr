@@ -7,6 +7,7 @@ import {
   type AuthUser,
   type FacultyProfile,
 } from "@/lib/api";
+import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import {
   createContext,
   useCallback,
@@ -46,6 +47,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const { user: sessionUser } = await authApi.me();
       setUser(sessionUser);
+      if (sessionUser.role === "parent" && sessionUser.profileCompleted) {
+        await syncShortlistAfterAuth(sessionUser, setUser);
+      }
     } catch {
       clearToken();
       setUser(null);

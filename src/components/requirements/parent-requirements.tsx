@@ -26,6 +26,7 @@ import {
   Phone,
   Plus,
   Send,
+  Share2,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -185,6 +186,12 @@ function daysLeft(expiresAt: string): number {
   );
 }
 
+function requirementShareUrl(shareToken: string): string {
+  const origin =
+    typeof window !== "undefined" ? window.location.origin : "https://mentr.in";
+  return `${origin}/looking/${shareToken}`;
+}
+
 function RequirementCard({
   requirement: r,
   onChanged,
@@ -197,7 +204,20 @@ function RequirementCard({
   );
   const [closing, setClosing] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
   const pendingInterests = r.interests.filter((i) => i.status === "pending");
+
+  async function copyShareLink() {
+    if (!r.shareToken) return;
+    const url = requirementShareUrl(r.shareToken);
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareCopied(true);
+      window.setTimeout(() => setShareCopied(false), 2000);
+    } catch {
+      window.prompt("Copy this link:", url);
+    }
+  }
 
   async function handleClose() {
     setClosing(true);
@@ -258,13 +278,23 @@ function RequirementCard({
           </div>
         </div>
         {r.status === "open" && (
-          <button
-            type="button"
-            onClick={() => setConfirmOpen(true)}
-            className="rounded-md border border-hairline bg-white px-2.5 py-1.5 text-xs font-semibold text-muted transition hover:border-coral/40 hover:text-coral-dark"
-          >
-            Close post
-          </button>
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => void copyShareLink()}
+              className="inline-flex items-center gap-1 rounded-md border border-hairline bg-white px-2.5 py-1.5 text-xs font-semibold text-ink transition hover:bg-cream"
+            >
+              <Share2 className="h-3 w-3" />
+              {shareCopied ? "Link copied!" : "Share with family"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setConfirmOpen(true)}
+              className="rounded-md border border-hairline bg-white px-2.5 py-1.5 text-xs font-semibold text-muted transition hover:border-coral/40 hover:text-coral-dark"
+            >
+              Close post
+            </button>
+          </div>
         )}
       </div>
 

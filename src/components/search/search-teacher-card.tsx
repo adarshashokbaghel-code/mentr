@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { ConnectButton } from "@/components/connect/connect-button";
+import { SaveTeacherButton } from "@/components/search/save-teacher-button";
 import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
 import { formatDistanceKm } from "@/lib/geo";
 import { type Teacher } from "@/lib/teachers";
@@ -63,6 +64,9 @@ function CardPhoto({
           New
         </span>
       )}
+      <div className="absolute bottom-2 right-2" data-shortlist>
+        <SaveTeacherButton teacherId={teacher.id} size="sm" />
+      </div>
     </>
   );
 
@@ -112,6 +116,7 @@ export function SearchTeacherCard({
             tabIndex: 0,
             onClick: (e: React.MouseEvent) => {
               if ((e.target as HTMLElement).closest("[data-connect]")) return;
+              if ((e.target as HTMLElement).closest("[data-shortlist]")) return;
               guardGuest(e);
             },
             onKeyDown: (e: React.KeyboardEvent) => {

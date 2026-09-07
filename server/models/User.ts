@@ -79,6 +79,13 @@ export interface IParentProfile {
   country: string;
   city: string;
   area?: string;
+  /** Up to 3 tutor IDs the parent saved from search — for compare & return visits */
+  shortlistedTeacherIds?: string[];
+  /** Hiring checklist — parent self-reported milestones */
+  trialLoggedAt?: Date;
+  firstSessionLoggedAt?: Date;
+  /** Last daily pitch digest email — throttles to once per 24h */
+  lastPitchDigestAt?: Date;
 }
 
 export interface IUser extends Document {
@@ -159,6 +166,17 @@ const parentProfileSchema = new Schema<IParentProfile>(
     country: { type: String, default: "India", trim: true },
     city: { type: String, required: true, trim: true },
     area: { type: String, trim: true },
+    shortlistedTeacherIds: {
+      type: [String],
+      default: undefined,
+      validate: {
+        validator: (v: string[]) => !v || v.length <= 3,
+        message: "Shortlist cannot exceed 3 tutors",
+      },
+    },
+    trialLoggedAt: { type: Date },
+    firstSessionLoggedAt: { type: Date },
+    lastPitchDigestAt: { type: Date },
   },
   { _id: false },
 );

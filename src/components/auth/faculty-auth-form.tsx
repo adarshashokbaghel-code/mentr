@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { ApiError, authApi, saveToken, type UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
@@ -113,6 +114,9 @@ export function FacultyAuthForm({
 
       saveToken(data.token);
       setUser(data.user);
+      if (data.user.role === "parent" && data.profileCompleted) {
+        await syncShortlistAfterAuth(data.user, setUser);
+      }
       onComplete?.();
 
       if (data.user.role === "parent") {

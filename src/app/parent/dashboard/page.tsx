@@ -4,10 +4,14 @@ import { useAuth } from "@/components/auth/auth-provider";
 import { timeAgo } from "@/components/dashboard/widgets";
 import { ParentRequirementsSection } from "@/components/requirements/parent-requirements";
 import { PitchMessageDialog } from "@/components/requirements/pitch-message-dialog";
+import {
+  HiringChecklist,
+  PitchDigestBanner,
+} from "@/components/parent/hiring-checklist";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { Button } from "@/components/ui/button";
-import { connectionsApi, type ParentConnection } from "@/lib/api";
+import { connectionsApi, type HiringProgress, type ParentConnection } from "@/lib/api";
 import { whatsappLink } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
@@ -127,6 +131,9 @@ export default function ParentDashboardPage() {
   const [historyTab, setHistoryTab] = useState<HistoryTab>("all");
   const [viewMessage, setViewMessage] = useState<ParentConnection | null>(null);
   const [respondingId, setRespondingId] = useState<string | null>(null);
+  const [hiringProgress, setHiringProgress] = useState<HiringProgress | null>(
+    null,
+  );
 
   async function respondToTeacher(
     connection: ParentConnection,
@@ -223,8 +230,13 @@ export default function ParentDashboardPage() {
             sent={connections.length}
           />
 
+          <div className="mt-4 space-y-4">
+            <PitchDigestBanner progress={hiringProgress} />
+            <HiringChecklist onProgressChange={setHiringProgress} />
+          </div>
+
           <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,1fr)] lg:items-start">
-            <div className="space-y-8">
+            <div className="space-y-8" id="requirements">
               {/* ------------------------- requirements ------------------------- */}
               <ParentRequirementsSection
                 onConnectionsChanged={reloadConnections}

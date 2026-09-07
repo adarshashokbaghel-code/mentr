@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { profileApi } from "@/lib/api";
+import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { homeFor } from "@/lib/auth-routes";
 import { cn } from "@/lib/utils";
 import { MentrBrand } from "@/components/ui/mentr-brand";
@@ -61,6 +62,7 @@ function ParentProfilingContent() {
         area: area.trim() || undefined,
       });
       setUser(updated);
+      await syncShortlistAfterAuth(updated, setUser);
       router.replace(next || "/search");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");

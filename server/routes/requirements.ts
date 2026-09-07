@@ -1,4 +1,5 @@
 import { Router, Response } from "express";
+import { randomBytes } from "crypto";
 import { Connection, type IConnection } from "../models/Connection";
 import {
   MAX_OPEN_REQUIREMENTS,
@@ -12,6 +13,7 @@ import { TEACHING_MODES, User, type TeachingMode } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
+import { notifyParentRequirementPitch } from "../services/parent-notifications";
 
 const router = Router();
 
@@ -78,7 +80,19 @@ function serializeForOwner(r: IRequirement) {
     interestCount: r.interestCount,
     postedAt: r.createdAt,
     expiresAt: r.expiresAt,
+    shareToken: r.shareToken,
   };
+}
+
+function newShareToken(): string {
+  return randomBytes(9).toString("base64url");
+}
+
+async function ensureShareToken(r: IRequirement): Promise<string> {
+  if (r.shareToken) return r.shareToken;
+  r.shareToken = newShareToken();
+  await r.save();
+  return r.shareToken;
 }
 
 /**
@@ -192,6 +206,7 @@ router.post("/", async (req: AuthenticatedRequest, res: Response) => {
       details,
       startTimeline,
       status: "open",
+      shareToken: newShareToken(),
       // Urgent needs expire fast; flexible ones stay up longer
       expiresAt: new Date(
         Date.now() + TIMELINE_TTL_DAYS[startTimeline] * 24 * 60 * 60 * 1000,
@@ -256,9 +271,12 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
     }
 
     res.json({
-      requirements: requirements.map((r) => ({
-        ...serializeForOwner(r),
-        interests: (byRequirement.get(r._id.toString()) ?? []).map((c) => ({
+      requirements: await Promise.all(
+        requirements.map(async (r) => {
+          await ensureShareToken(r);
+          return {
+            ...serializeForOwner(r),
+            interests: (byRequirement.get(r._id.toString()) ?? []).map((c) => ({
           id: c._id.toString(),
           teacherId: c.teacher.toString(),
           teacherName: c.teacherName,
@@ -272,7 +290,9 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
           sentAt: c.createdAt,
           respondedAt: c.respondedAt ?? null,
         })),
-      })),
+          };
+        }),
+      ),
     });
   } catch (error) {
     console.error("list my requirements error:", error);
@@ -572,15 +592,28 @@ router.post(
         ...(pitchAt ? { lastPitchAt: pitchAt } : {}),
       };
 
+      let connection: IConnection;
       if (existing) {
         existing.set(fields);
-        await existing.save();
+        connection = await existing.save();
       } else {
-        await Connection.create({
+        connection = (await Connection.create({
           parent: parent._id,
           teacher: teacher._id,
           ...fields,
-        });
+        })) as IConnection;
+      }
+
+      if (!alreadyConnected && !pitchedOnThisPost) {
+        void notifyParentRequirementPitch(
+          parent._id.toString(),
+          connection.teacherName,
+          teacher._id.toString(),
+          requirement._id.toString(),
+          requirement.subject,
+          requirement.classLevel,
+          connection._id.toString(),
+        );
       }
 
       if (!pitchedOnThisPost) {

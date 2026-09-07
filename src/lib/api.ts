@@ -120,6 +120,9 @@ export interface ParentProfile {
   country: string;
   city: string;
   area?: string;
+  shortlistedTeacherIds?: string[];
+  trialLoggedAt?: string;
+  firstSessionLoggedAt?: string;
 }
 
 export interface AuthUser {
@@ -209,6 +212,15 @@ export const profileApi = {
       method: "PUT",
       body: JSON.stringify(profile),
     }),
+
+  saveShortlist: (teacherIds: string[]) =>
+    request<{ user: AuthUser; teacherIds: string[]; message: string }>(
+      "/profile/shortlist",
+      {
+        method: "PUT",
+        body: JSON.stringify({ teacherIds }),
+      },
+    ),
 
   views: () => request<ProfileViewsResponse>("/profile/views"),
 
@@ -336,6 +348,7 @@ export interface MyRequirement {
   interestCount: number;
   postedAt: string;
   expiresAt: string;
+  shareToken: string;
   interests: RequirementInterest[];
 }
 
@@ -426,6 +439,112 @@ export const requirementsApi = {
     }),
 
   pitches: () => request<{ pitches: TutorPitch[] }>("/requirements/pitches"),
+};
+
+export type HiringStepId =
+  | "browse"
+  | "shortlist"
+  | "trial"
+  | "connect"
+  | "firstSession";
+
+export type HiringSteps = Record<HiringStepId, boolean>;
+
+export interface RequirementPitchSummary {
+  requirementId: string;
+  subject: string;
+  classLevel: string;
+  area: string;
+  pendingCount: number;
+}
+
+export interface HiringProgress {
+  steps: HiringSteps;
+  completedCount: number;
+  totalSteps: number;
+  pendingPitchCount: number;
+  pitchSummaries: RequirementPitchSummary[];
+}
+
+export interface SharedRequirement {
+  headline: string;
+  subject: string;
+  classLevel: string;
+  city: string;
+  area: string;
+  modes: TeachingMode[];
+  budgetMin: number | null;
+  budgetMax: number | null;
+  details: string;
+  startTimeline: StartTimeline;
+  interestCount: number;
+  postedAt: string;
+  expiresAt: string;
+}
+
+export const parentHiringApi = {
+  progress: () => request<HiringProgress>("/parent/hiring-progress"),
+
+  completeStep: (step: "trial" | "firstSession") =>
+    request<{ user: AuthUser; progress: HiringProgress; message: string }>(
+      `/parent/hiring-progress/${step}`,
+      { method: "POST" },
+    ),
+};
+
+export async function fetchSharedRequirement(
+  token: string,
+): Promise<SharedRequirement> {
+  const res = await fetch(`/api/requirements/share/${encodeURIComponent(token)}`, {
+    cache: "no-store",
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    throw new ApiError(
+      (data as { error?: string }).error || "Post not found",
+      res.status,
+    );
+  }
+  return data as SharedRequirement;
+}
+
+export type ParentNotificationType =
+  | "connection_accepted"
+  | "connection_declined"
+  | "requirement_pitch"
+  | "teacher_outreach"
+  | "tutor_slots_open";
+
+export interface ParentNotification {
+  id: string;
+  type: ParentNotificationType;
+  title: string;
+  body: string;
+  href: string;
+  meta: Record<string, unknown>;
+  read: boolean;
+  createdAt: string;
+}
+
+export interface NotificationsResponse {
+  notifications: ParentNotification[];
+  unreadCount: number;
+}
+
+export const notificationsApi = {
+  list: () => request<NotificationsResponse>("/notifications"),
+
+  markRead: (id: string) =>
+    request<{ notification: ParentNotification; unreadCount: number }>(
+      `/notifications/${id}/read`,
+      { method: "POST" },
+    ),
+
+  markAllRead: () =>
+    request<{ message: string; unreadCount: number }>(
+      "/notifications/read-all",
+      { method: "POST" },
+    ),
 };
 
 export interface ProfileViewer {

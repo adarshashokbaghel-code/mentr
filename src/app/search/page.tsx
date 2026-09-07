@@ -5,6 +5,10 @@ import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { SearchFacultyBlocked } from "@/components/auth/role-blocked-page";
 import {
+  ShortlistProvider,
+} from "@/components/search/shortlist-context";
+import { ShortlistCompareBar } from "@/components/search/shortlist-compare";
+import {
   SearchHeader,
   type SearchFiltersState,
 } from "@/components/search/search-header";
@@ -151,7 +155,7 @@ function SearchContent() {
   const mapSelectedId =
     selectedId && results.some((t) => t.id === selectedId)
       ? selectedId
-      : results[0]?.id;
+      : undefined;
 
   function patchFilters(patch: Partial<SearchFiltersState>) {
     setFilters((prev) => ({ ...prev, ...patch }));
@@ -217,28 +221,31 @@ function SearchContent() {
   // —— Map view: Google Maps-style shell (no stacked modals) ——
   if (filters.view === "map") {
     return (
-      <SearchMapShellDynamic
-        teachers={results}
-        selectedId={mapSelectedId}
-        userLocation={userLocation}
-        locationDenied={locationDenied}
-        locationLoading={locationLoading}
-        locationError={locationError}
-        filters={filters}
-        onSelect={setSelectedId}
-        onChangeFilters={patchFilters}
-        onShareLocation={shareLocation}
-        onBackToGrid={() => patchFilters({ view: "list" })}
-        guestBrowse={!user}
-      />
+      <ShortlistProvider catalog={catalogTeachers}>
+        <SearchMapShellDynamic
+          teachers={results}
+          selectedId={mapSelectedId}
+          userLocation={userLocation}
+          locationDenied={locationDenied}
+          locationLoading={locationLoading}
+          locationError={locationError}
+          filters={filters}
+          onSelect={setSelectedId}
+          onChangeFilters={patchFilters}
+          onShareLocation={shareLocation}
+          onBackToGrid={() => patchFilters({ view: "list" })}
+          guestBrowse={!user}
+        />
+        <ShortlistCompareBar />
+      </ShortlistProvider>
     );
   }
 
   return (
-    <>
+    <ShortlistProvider catalog={catalogTeachers}>
       <Navbar />
       {!user && <GuestSearchBanner />}
-      <main className="min-h-screen pb-20">
+      <main className="min-h-screen pb-24">
         <SearchHeader
           filters={filters}
           resultCount={results.length}
@@ -285,8 +292,9 @@ function SearchContent() {
           )}
         </div>
       </main>
+      <ShortlistCompareBar />
       <Footer />
-    </>
+    </ShortlistProvider>
   );
 }
 

@@ -146,6 +146,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 8–12 · Exam prep",
     modes: ["online", "student_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 1200,
     slots: [
       { label: "Mon 4–6 PM", available: true },
       { label: "Wed 5–7 PM", available: false },
@@ -176,6 +177,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 6–12 · Spoken English",
     modes: ["online"],
     languages: ["English"],
+    hourlyRate: 850,
     slots: [
       { label: "Tue 6–8 PM", available: true },
       { label: "Thu 6–8 PM", available: false },
@@ -204,6 +206,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 9–12 · Beginners",
     modes: ["online", "tutor_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 750,
     slots: [
       { label: "Mon 7–9 PM", available: false },
       { label: "Sat 11–1", available: false },
@@ -232,6 +235,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12 · JEE / Boards",
     modes: ["student_home", "tutor_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 900,
     slots: [
       { label: "Fri 5–7 PM", available: true },
       { label: "Sun 10–12", available: true },
@@ -260,6 +264,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 9–10",
     modes: ["student_home"],
     languages: ["English", "Kannada"],
+    hourlyRate: 650,
     slots: [
       { label: "Mon–Fri 4–5 PM", available: true },
       { label: "Sat 9–11", available: true },
@@ -288,6 +293,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12 · NEET",
     modes: ["online"],
     languages: ["English", "Tamil"],
+    hourlyRate: 800,
     slots: [
       { label: "Wed 6–8 PM", available: true },
       { label: "Sat 4–6 PM", available: true },
@@ -316,6 +322,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12 · JEE",
     modes: ["online", "student_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 950,
     slots: [
       { label: "Sat 2–4 PM", available: true },
       { label: "Sun 5–7 PM", available: true },
@@ -344,6 +351,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 3–8",
     modes: ["student_home"],
     languages: ["English", "Kannada", "Hindi"],
+    hourlyRate: 600,
     slots: [
       { label: "Mon 5–6 PM", available: true },
       { label: "Thu 5–6 PM", available: true },
@@ -373,6 +381,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 6–10",
     modes: ["tutor_home"],
     languages: ["English", "Telugu"],
+    hourlyRate: 550,
     slots: [
       { label: "Tue 6–7 PM", available: true },
       { label: "Fri 6–7 PM", available: true },
@@ -402,6 +411,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12",
     modes: ["online"],
     languages: ["English", "Hindi"],
+    hourlyRate: 850,
     slots: [
       { label: "Wed 4–6 PM", available: true },
       { label: "Sat 3–5 PM", available: false },

@@ -51,6 +51,8 @@ export interface IRequirement extends Document {
   expiresAt: Date;
   /** Denormalized counter so board rows don't need an aggregate */
   interestCount: number;
+  /** Private share link token — family groups, tutor referrals */
+  shareToken: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -83,6 +85,7 @@ const requirementSchema = new Schema<IRequirement>(
     },
     expiresAt: { type: Date, required: true },
     interestCount: { type: Number, default: 0, min: 0 },
+    shareToken: { type: String, required: true, unique: true, index: true },
   },
   { timestamps: true },
 );
