@@ -1,5 +1,6 @@
 import type { Response } from "express";
 import { connectDb } from "./db";
+import { backfillMapCoords, ensureFacultyMapLocation } from "./lib/map-location";
 import { isProfileComplete } from "./lib/profile-complete";
 import { User, type IUser } from "./models/User";
 import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
@@ -8,22 +9,25 @@ import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
 export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
   await connectDb();
 
-  const users = await User.find({
+  const users = (await User.find({
     role: { $ne: "parent" },
     "profile.name": { $exists: true, $ne: "" },
   })
     .sort({ createdAt: -1 })
-    .limit(200)
-    .lean<IUser[]>();
+    .limit(200)) as IUser[];
 
-  return users
-    .filter((u) => isProfileComplete(u))
-    .map((u) =>
-      JSON.parse(JSON.stringify(toPublicTeacher(u, NO_CONNECTION))) as Record<
-        string,
-        unknown
-      >,
-    );
+  const complete = users.filter((u) => isProfileComplete(u));
+
+  void backfillMapCoords(complete).catch((err) =>
+    console.error("map coords backfill:", err),
+  );
+
+  return complete.map((u) =>
+    JSON.parse(JSON.stringify(toPublicTeacher(u, NO_CONNECTION))) as Record<
+      string,
+      unknown
+    >,
+  );
 }
 
 /** Public directory — no auth, no phone numbers (Express). */
@@ -45,10 +49,12 @@ export async function loadPublicTeacherById(
 
   await connectDb();
 
-  const user = await User.findById(id).lean();
+  const user = (await User.findById(id)) as IUser | null;
   if (!user || user.role === "parent" || !isProfileComplete(user)) {
     return null;
   }
+
+  await ensureFacultyMapLocation(user);
 
   const teacher = toPublicTeacher(user, NO_CONNECTION);
   return JSON.parse(JSON.stringify(teacher)) as Record<string, unknown>;

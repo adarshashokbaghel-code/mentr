@@ -14,6 +14,11 @@ import { recordProfileView } from "../lib/record-profile-view";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete, serializeUser } from "./auth";
+import {
+  countOpenSlots,
+  notifyParentTutorSlotsOpen,
+} from "../services/parent-notifications";
+import { resolveFacultyMapLocation } from "../lib/map-location";
 
 const router = Router();
 
@@ -275,6 +280,21 @@ function buildParentProfile(body: Record<string, unknown>):
   };
 }
 
+const OBJECT_ID_RE = /^[a-f\d]{24}$/i;
+const MAX_SHORTLIST = 3;
+
+function normalizeShortlistIds(raw: unknown): string[] | null {
+  if (!Array.isArray(raw)) return [];
+  const ids: string[] = [];
+  for (const item of raw) {
+    const id = String(item || "").trim();
+    if (!OBJECT_ID_RE.test(id)) continue;
+    if (!ids.includes(id)) ids.push(id);
+    if (ids.length >= MAX_SHORTLIST) break;
+  }
+  return ids;
+}
+
 router.get("/", requireAuth, async (req: AuthenticatedRequest, res: Response) => {
   try {
     const user = await User.findById(req.auth!.sub);
@@ -413,7 +433,10 @@ router.put(
         return;
       }
 
-      user.parentProfile = result.profile;
+      user.parentProfile = {
+        ...result.profile,
+        shortlistedTeacherIds: user.parentProfile?.shortlistedTeacherIds ?? [],
+      };
       user.profileCompleted = true;
       await user.save();
 
@@ -446,9 +469,42 @@ router.patch(
         return;
       }
 
+      if (user.role === "parent") {
+        res.status(403).json({ error: "Parent accounts cannot update tutor availability" });
+        return;
+      }
+
+      const teacherId = user._id.toString();
+      const teacherName = user.profile?.name || "A tutor";
+      const previousOpen = countOpenSlots(user.profile?.availability);
+
       user.profile.availability = availability;
       user.markModified("profile.availability");
       await user.save();
+
+      const newOpen = countOpenSlots(availability);
+      if (newOpen > previousOpen && newOpen > 0) {
+        const since = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000);
+        const views = await ProfileView.find({
+          teacher: user._id,
+          lastViewedAt: { $gte: since },
+        }).select("viewer");
+        const viewerIds = views.map((v) => v.viewer);
+        if (viewerIds.length) {
+          const parents = await User.find({
+            _id: { $in: viewerIds },
+            role: "parent",
+          }).select("_id");
+          for (const parent of parents) {
+            void notifyParentTutorSlotsOpen(
+              parent._id.toString(),
+              teacherName,
+              teacherId,
+              newOpen,
+            );
+          }
+        }
+      }
 
       res.json({
         user: serializeUser(user),
@@ -457,6 +513,52 @@ router.patch(
     } catch (error) {
       console.error("update availability error:", error);
       res.status(500).json({ error: "Failed to update availability" });
+    }
+  },
+);
+
+/** Parent: save tutor shortlist (max 3 IDs from search). */
+router.put(
+  "/shortlist",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (req.auth!.role !== "parent") {
+        res.status(403).json({ error: "Only parent accounts have a shortlist" });
+        return;
+      }
+
+      const user = await User.findById(req.auth!.sub);
+      if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+      if (!user.parentProfile?.name) {
+        res.status(400).json({
+          error: "Complete your parent profile before saving tutors",
+          code: "PROFILE_INCOMPLETE",
+        });
+        return;
+      }
+
+      const teacherIds = normalizeShortlistIds(req.body?.teacherIds);
+      if (teacherIds === null) {
+        res.status(400).json({ error: "teacherIds must be an array" });
+        return;
+      }
+
+      user.parentProfile.shortlistedTeacherIds = teacherIds;
+      user.markModified("parentProfile");
+      await user.save();
+
+      res.json({
+        user: serializeUser(user),
+        teacherIds,
+        message: "Shortlist updated",
+      });
+    } catch (error) {
+      console.error("update shortlist error:", error);
+      res.status(500).json({ error: "Failed to update shortlist" });
     }
   },
 );
@@ -480,6 +582,9 @@ router.put("/", requireAuth, async (req: AuthenticatedRequest, res: Response) =>
     }
 
     user.profile = result.profile;
+
+    await resolveFacultyMapLocation(user.profile);
+
     user.profileCompleted = true;
     await user.save();
 

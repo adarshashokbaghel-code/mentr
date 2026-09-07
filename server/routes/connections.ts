@@ -5,6 +5,11 @@ import { User, type IUser } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
+import {
+  notifyParentConnectionAccepted,
+  notifyParentConnectionDeclined,
+  notifyParentTeacherOutreach,
+} from "../services/parent-notifications";
 
 const router = Router();
 
@@ -276,6 +281,13 @@ router.post("/outreach", async (req: AuthenticatedRequest, res: Response) => {
       },
       message: "Sent — the parent will review your message on their dashboard",
     });
+
+    void notifyParentTeacherOutreach(
+      parent._id.toString(),
+      connection.teacherName,
+      teacher._id.toString(),
+      connection._id.toString(),
+    );
   } catch (error) {
     console.error("profile outreach error:", error);
     res.status(500).json({ error: "Failed to send connect request" });
@@ -395,6 +407,27 @@ router.post(
       connection.status = action === "accept" ? "accepted" : "declined";
       connection.respondedAt = new Date();
       await connection.save();
+
+      if (!isParent) {
+        const parentId = connection.parent.toString();
+        const teacherId = connection.teacher.toString();
+        const connectionId = connection._id.toString();
+        if (action === "accept") {
+          void notifyParentConnectionAccepted(
+            parentId,
+            connection.teacherName,
+            teacherId,
+            connectionId,
+          );
+        } else {
+          void notifyParentConnectionDeclined(
+            parentId,
+            connection.teacherName,
+            teacherId,
+            connectionId,
+          );
+        }
+      }
 
       if (isParent) {
         // Parent accepted a tutor's pitch — hand back the unlocked number

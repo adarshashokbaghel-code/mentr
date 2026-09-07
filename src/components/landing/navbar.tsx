@@ -1,6 +1,7 @@
 "use client";
 
 import { UserMenu } from "@/components/auth/user-menu";
+import { ParentNotificationsBell } from "@/components/parent/parent-notifications-bell";
 import { Button } from "@/components/ui/button";
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { useAuth } from "@/components/auth/auth-provider";
@@ -79,17 +80,21 @@ export function Navbar() {
               Requirements
             </Link>
           )}
+          {!loading && user?.role === "parent" && <ParentNotificationsBell />}
           {!loading && user && <UserMenu />}
         </div>
 
-        <button
-          type="button"
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-white md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          {!loading && user?.role === "parent" && <ParentNotificationsBell />}
+          <button
+            type="button"
+            aria-label={open ? "Close menu" : "Open menu"}
+            className="flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-white"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (

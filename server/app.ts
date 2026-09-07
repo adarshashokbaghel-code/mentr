@@ -9,6 +9,11 @@ import profileRoutes from "./routes/profile";
 import requirementRoutes from "./routes/requirements";
 import teacherRoutes from "./routes/teachers";
 import adminRoutes from "./routes/admin";
+import notificationRoutes from "./routes/notifications";
+import parentHiringRoutes from "./routes/parent-hiring";
+import { getPublicRequirementShare } from "./public-requirement-share";
+import { connectDb } from "./db";
+import { sendAllPitchDigests } from "./services/pitch-digest";
 import { getPublicTeacher, getPublicTeachers } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 
@@ -96,10 +101,33 @@ app.get("/api/testimonials/names", (_req, res) => {
   void getPublicTestimonialNames(res);
 });
 
+app.get("/api/requirements/share/:token", (req, res) => {
+  void getPublicRequirementShare(String(req.params.token || ""), res);
+});
+
+app.post("/api/cron/pitch-digest", async (req, res) => {
+  const secret = process.env.CRON_SECRET;
+  const auth = req.headers.authorization;
+  if (!secret || auth !== `Bearer ${secret}`) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+  try {
+    await connectDb();
+    const count = await sendAllPitchDigests();
+    res.json({ message: "Pitch digests processed", parents: count });
+  } catch (error) {
+    console.error("cron pitch digest error:", error);
+    res.status(500).json({ error: "Digest job failed" });
+  }
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/connections", connectionRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/requirements", requirementRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/parent", parentHiringRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/admin", adminRoutes);
 

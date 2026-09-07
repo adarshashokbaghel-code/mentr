@@ -303,9 +303,39 @@ main {
 }
 
 /* Leaflet map pins — avoid default icon CSS fighting our DivIcons */
+.leaflet-container {
+  background: #f7f0e8 !important;
+  font-family: var(--font-sans-face), "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
 .champs-map-pin {
   background: transparent;
   border: none;
+}
+
+.champs-map-pin-dot {
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 600 10px var(--font-sans-face), "Plus Jakarta Sans", system-ui, sans-serif;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 10px rgba(28, 26, 23, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.champs-map-pin-dot-active {
+  transform: scale(1.08);
+  box-shadow: 0 4px 16px rgba(255, 154, 77, 0.45);
+  border-color: #ff9a4d;
+}
+
+@media (max-width: 639px) {
+  .leaflet-control-zoom {
+    margin-bottom: calc(9rem + env(safe-area-inset-bottom, 0px)) !important;
+    margin-right: 12px !important;
+  }
 }
 
 /* Google-style marker hover tip */

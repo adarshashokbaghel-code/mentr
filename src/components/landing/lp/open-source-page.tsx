@@ -146,6 +146,37 @@ const techStack = [
   { name: "TypeScript", role: "End-to-end typing" },
 ];
 
+/** Shipped platform capabilities — mirrored in README.md */
+const platformFeatures = [
+  {
+    icon: Globe,
+    title: "Guest tutor browse",
+    body: "Parents explore /search and map view without login. Sign-in only to connect on WhatsApp.",
+  },
+  {
+    icon: Sparkles,
+    title: "Notifications + shortlist",
+    body: "Parent bell + email alerts; save up to 3 tutors; compare fees and slots side-by-side.",
+  },
+  {
+    icon: Workflow,
+    title: "Hiring checklist",
+    body: "Dashboard progress: Browse → Shortlist → Trial → Connect → Log first session.",
+  },
+  {
+    icon: HeartHandshake,
+    title: "Pitch digest & share links",
+    body: "Instant + daily pitch emails; share private /looking/{token} posts in family WhatsApp groups.",
+  },
+];
+
+const roadmapItems = [
+  { label: "Child profile + exam countdown", status: "Planned" as const },
+  { label: "Session check-in / attendance", status: "Planned" as const },
+  { label: "SEO compare landing pages", status: "Phase 2" as const },
+  { label: "Lighter notification polling", status: "Enhancement" as const },
+];
+
 const testimonials = [
   {
     quote:
@@ -425,6 +456,55 @@ export function OpenSourceLanding() {
 
       <LpSectionDivider bandClass="bg-white" className="bg-sage-wash" />
 
+      {/* Platform features */}
+      <section className="border-b border-hairline bg-white py-12 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="What's built"
+            title="Parent engagement,"
+            accent="open source."
+            description="Recent additions focus on bringing parents back until they hire — real events, not gamification. All of this ships in the public repo."
+          />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {platformFeatures.map((item) => (
+              <article
+                key={item.title}
+                className={cn(
+                  "rounded-2xl border-2 border-ink bg-cream-band p-6 transition-all duration-200 hover:-translate-y-1",
+                  hardShadowSm,
+                )}
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl border-2 border-ink bg-sage text-white">
+                  <item.icon className="h-5 w-5" />
+                </span>
+                <h3 className="mt-4 font-bold text-ink">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {item.body}
+                </p>
+              </article>
+            ))}
+          </div>
+          <div className="mt-10 rounded-2xl border-2 border-dashed border-hairline bg-cream/50 p-6 sm:p-8">
+            <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
+              On the roadmap
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {roadmapItems.map((item) => (
+                <li
+                  key={item.label}
+                  className="inline-flex items-center gap-2 rounded-lg border border-hairline bg-white px-3 py-2 text-sm text-ink"
+                >
+                  <span className="font-medium">{item.label}</span>
+                  <span className="rounded-md bg-butter/80 px-1.5 py-0.5 text-[10px] font-bold uppercase text-ink/70">
+                    {item.status}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* Why open source */}
       <section className="bg-sage-wash py-12 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
@@ -468,9 +548,9 @@ export function OpenSourceLanding() {
               </h2>
               <p className="mt-4 text-lg leading-relaxed text-white/75">
                 Next.js frontend, Express API, MongoDB models, SEO landing
-                pages, auth, connections, and the requirements board — all in
-                one repo. Clone it, run it locally, and ship improvements back
-                via pull request.
+                pages, auth, connections, notifications, shortlist, hiring
+                checklist, and the requirements board — all in one repo. Clone
+                it, run it locally, and ship improvements back via pull request.
               </p>
               <div className="mt-6 flex flex-wrap gap-2">
                 {techStack.map((t) => (

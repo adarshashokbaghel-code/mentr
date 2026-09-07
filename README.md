@@ -17,10 +17,19 @@ Live site: [mentr.in](https://www.mentr.in)
 - Per-slot availability toggling without resaving the full profile.
 
 **Teacher discovery**
-- Login-gated teacher directory and detail pages, enriched with the viewer's connection status.
+- **Guest browse** on `/search` — parents can explore tutors and map view without signing in; login only when connecting or viewing full profiles.
+- Login-gated teacher directory and detail pages for parents, enriched with the viewer's connection status.
+- **Map search** — Leaflet map with sidebar list, location radius, guest-friendly browsing, and save-to-shortlist on map cards.
 - Programmatic SEO landing pages for search by subject, locality, exam prep, online tutoring, and city (including a dedicated UAE section).
-- Interactive map-based search powered by Leaflet.
 - Automatic profile-view tracking, surfaced to tutors as analytics.
+- Themed profile placeholders (no stock photos) for privacy and consistent branding.
+
+**Parent engagement (2026)**
+- **Notification center** — in-app bell + email on connect accept/decline, requirement pitches, tutor outreach, and open-slot alerts (`/api/notifications`).
+- **Shortlist & compare** — save up to 3 tutors (localStorage for guests → account merge on login); side-by-side compare with fee hint and weekly slots.
+- **Hiring checklist** — dashboard progress bar: Browse → Shortlist → Trial → Connect → Log first session.
+- **Pitch digest** — instant in-app + email alerts; daily digest when pitches are waiting; dashboard “X pitches waiting” banner.
+- **Shareable requirement links** — private `/looking/{token}` pages for WhatsApp family groups (viral parent acquisition).
 
 **Student–teacher connections**
 - Parent-initiated connection requests with a required intro message.
@@ -31,6 +40,11 @@ Live site: [mentr.in](https://www.mentr.in)
 - Parents post anonymous learning requirements (subject, level, location, budget, teaching mode, timeline) that auto-expire.
 - Tutors browse an anonymized feed and pitch interest under a daily quota, keeping the board spam-resistant without a paid-credit system.
 - Requirement owners see incoming tutor interest; tutors track their own sent pitches.
+- **Share with family** — each open post gets a private link (`/looking/{token}`) for referrals without exposing parent identity.
+
+**Content & SEO**
+- 70+ parent, student, and tutor guide articles with FAQ schema, GEO targeting (India, UAE, Bengaluru), and internal links to platform pages.
+- Google AdSense verification (ads.txt + meta) and Search Console-ready sitemap/robots.
 
 **Admin panel**
 - Secret-key-gated dashboard (`ADMIN_SECRET_KEY`) with platform stats, user search/browse, and a templated bulk-email "messenger" for lifecycle/marketing emails.
@@ -39,6 +53,20 @@ Live site: [mentr.in](https://www.mentr.in)
 - Auto-generated sitemap index and `robots.txt`, covering core, subject, area, exam-prep, online, city, and per-teacher pages.
 - Production-only Google Analytics integration.
 - Persona- and city-specific landing pages (for parents, for teachers, comparison pages, pricing, how-it-works, FAQ, blog) for organic acquisition.
+
+## Roadmap (contributions welcome)
+
+| Priority | Feature | Status |
+|----------|---------|--------|
+| P1 | Parent notification center (bell + email) | ✅ Shipped |
+| P2 | Save & compare tutors (shortlist) | ✅ Shipped |
+| P3 | Child profile + exam countdown on dashboard | 🔜 Planned |
+| P4 | Session check-in / attendance log | 🔜 Planned |
+| P5 | Hiring checklist + pitch digest + share links | ✅ Shipped |
+| — | SEO compare pages (“Compare maths tutors in Koramangala”) | 🔜 Phase 2 |
+| — | Notification polling only when tab visible | 🔜 Enhancement |
+
+See [open-source page](https://www.mentr.in/open-source) for the full public feature list.
 
 ## Tech stack
 
@@ -86,6 +114,8 @@ npm run seed:demo           # seed demo data into MongoDB
 npm run seed:demo:reset    # wipe + reseed demo data
 npm run db:wipe               # wipe the database (requires --confirm)
 ```
+
+Optional: set `CRON_SECRET` and schedule `POST /api/cron/pitch-digest` (daily) for parent pitch digest emails when parents are inactive.
 
 ## Project structure
 

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { randomBytes } from "crypto";
 import { getMongoUriWithDb } from "./config";
 import { Connection } from "./models/Connection";
 import { OtpSession } from "./models/OtpSession";
@@ -8,8 +9,49 @@ import { User } from "./models/User";
 let isConnected = false;
 let connectPromise: Promise<void> | null = null;
 
+function newShareToken(): string {
+  return randomBytes(9).toString("base64url");
+}
+
+function isRetryableConnectError(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  const code = (err as { code?: string }).code;
+  return (
+    code === "ESERVFAIL" ||
+    code === "ENOTFOUND" ||
+    code === "ETIMEDOUT" ||
+    code === "ECONNREFUSED"
+  );
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/** Old requirements may lack shareToken — backfill before unique index sync. */
+async function backfillRequirementShareTokens(): Promise<void> {
+  const missing = await Requirement.find({
+    $or: [
+      { shareToken: null },
+      { shareToken: { $exists: false } },
+      { shareToken: "" },
+    ],
+  }).select("_id shareToken");
+
+  for (const doc of missing) {
+    doc.shareToken = newShareToken();
+    await doc.save();
+  }
+}
+
 async function syncIndexesOnce(): Promise<void> {
   try {
+    await backfillRequirementShareTokens();
+    try {
+      await Requirement.collection.dropIndex("shareToken_1");
+    } catch {
+      /* index may not exist yet */
+    }
     await Promise.all([
       OtpSession.syncIndexes(),
       User.syncIndexes(),
@@ -21,29 +63,54 @@ async function syncIndexesOnce(): Promise<void> {
   }
 }
 
+async function connectOnce(): Promise<void> {
+  const uri = getMongoUriWithDb();
+  await mongoose.connect(uri, {
+    serverSelectionTimeoutMS: 10_000,
+    connectTimeoutMS: 10_000,
+    maxPoolSize: 10,
+  });
+  isConnected = true;
+  console.log("MongoDB connected → champs database");
+
+  if (process.env.VERCEL !== "1") {
+    void syncIndexesOnce();
+  }
+}
+
 export async function connectDb(): Promise<void> {
   if (isConnected) return;
 
   if (!connectPromise) {
-    const uri = getMongoUriWithDb();
-    connectPromise = mongoose
-      .connect(uri, {
-        serverSelectionTimeoutMS: 8_000,
-        connectTimeoutMS: 8_000,
-        maxPoolSize: 10,
-      })
-      .then(async () => {
-        isConnected = true;
-        console.log("MongoDB connected → champs database");
+    connectPromise = (async () => {
+      const maxAttempts = 3;
+      let lastError: unknown;
 
-        // Index reconciliation is slow on serverless cold starts — dev only.
-        if (process.env.VERCEL !== "1") {
-          void syncIndexesOnce();
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+        try {
+          await connectOnce();
+          return;
+        } catch (err) {
+          lastError = err;
+          isConnected = false;
+          if (mongoose.connection.readyState !== 0) {
+            await mongoose.disconnect().catch(() => undefined);
+          }
+          if (attempt < maxAttempts && isRetryableConnectError(err)) {
+            console.warn(
+              `MongoDB connect attempt ${attempt} failed (${(err as Error).message}) — retrying…`,
+            );
+            await sleep(800 * attempt);
+            continue;
+          }
+          throw err;
         }
-      })
-      .finally(() => {
-        connectPromise = null;
-      });
+      }
+
+      throw lastError;
+    })().finally(() => {
+      connectPromise = null;
+    });
   }
 
   await connectPromise;

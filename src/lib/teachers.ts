@@ -100,7 +100,46 @@ export const LOCALITIES = [
 
 export type Locality = (typeof LOCALITIES)[number];
 
-/** Languages offered in the search Language filter */
+function hashSeed(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h);
+}
+
+/** Slight offset so tutors in the same locality don't stack on one pin. */
+export function jitterCoordsForId(
+  lat: number,
+  lng: number,
+  id: string,
+): { lat: number; lng: number } {
+  const h = hashSeed(id);
+  const angle = (h % 360) * (Math.PI / 180);
+  const r = 0.002 + (h % 80) / 40000;
+  return {
+    lat: lat + r * Math.cos(angle),
+    lng: lng + r * Math.sin(angle),
+  };
+}
+
+/** Resolve map coordinates — uses API lat/lng only (geocoded server-side). */
+export function resolveTeacherCoords(
+  teacher: {
+    id: string;
+    lat: number | null;
+    lng: number | null;
+  },
+): { lat: number; lng: number } | null {
+  if (
+    teacher.lat != null &&
+    teacher.lng != null &&
+    Number.isFinite(teacher.lat) &&
+    Number.isFinite(teacher.lng)
+  ) {
+    return jitterCoordsForId(teacher.lat, teacher.lng, teacher.id);
+  }
+  return null;
+}
+
 export const FILTER_LANGUAGES = [
   "English",
   "Hindi",
@@ -146,6 +185,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 8–12 · Exam prep",
     modes: ["online", "student_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 1200,
     slots: [
       { label: "Mon 4–6 PM", available: true },
       { label: "Wed 5–7 PM", available: false },
@@ -176,6 +216,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 6–12 · Spoken English",
     modes: ["online"],
     languages: ["English"],
+    hourlyRate: 850,
     slots: [
       { label: "Tue 6–8 PM", available: true },
       { label: "Thu 6–8 PM", available: false },
@@ -204,6 +245,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 9–12 · Beginners",
     modes: ["online", "tutor_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 750,
     slots: [
       { label: "Mon 7–9 PM", available: false },
       { label: "Sat 11–1", available: false },
@@ -232,6 +274,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12 · JEE / Boards",
     modes: ["student_home", "tutor_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 900,
     slots: [
       { label: "Fri 5–7 PM", available: true },
       { label: "Sun 10–12", available: true },
@@ -260,6 +303,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 9–10",
     modes: ["student_home"],
     languages: ["English", "Kannada"],
+    hourlyRate: 650,
     slots: [
       { label: "Mon–Fri 4–5 PM", available: true },
       { label: "Sat 9–11", available: true },
@@ -288,6 +332,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12 · NEET",
     modes: ["online"],
     languages: ["English", "Tamil"],
+    hourlyRate: 800,
     slots: [
       { label: "Wed 6–8 PM", available: true },
       { label: "Sat 4–6 PM", available: true },
@@ -316,6 +361,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12 · JEE",
     modes: ["online", "student_home"],
     languages: ["English", "Hindi"],
+    hourlyRate: 950,
     slots: [
       { label: "Sat 2–4 PM", available: true },
       { label: "Sun 5–7 PM", available: true },
@@ -344,6 +390,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 3–8",
     modes: ["student_home"],
     languages: ["English", "Kannada", "Hindi"],
+    hourlyRate: 600,
     slots: [
       { label: "Mon 5–6 PM", available: true },
       { label: "Thu 5–6 PM", available: true },
@@ -373,6 +420,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 6–10",
     modes: ["tutor_home"],
     languages: ["English", "Telugu"],
+    hourlyRate: 550,
     slots: [
       { label: "Tue 6–7 PM", available: true },
       { label: "Fri 6–7 PM", available: true },
@@ -402,6 +450,7 @@ export const TEACHERS: Teacher[] = [
     levels: "Class 11–12",
     modes: ["online"],
     languages: ["English", "Hindi"],
+    hourlyRate: 850,
     slots: [
       { label: "Wed 4–6 PM", available: true },
       { label: "Sat 3–5 PM", available: false },
@@ -436,31 +485,41 @@ function fromApiTeacher(t: ApiTeacher): Teacher {
   };
 }
 
+function mergeWithDemoTeachers(live: Teacher[]): Teacher[] {
+  const liveIds = new Set(live.map((t) => t.id));
+  const demo = TEACHERS.filter((t) => !liveIds.has(t.id));
+  return [...live, ...demo];
+}
+
+export type FetchTeachersResult = {
+  teachers: Teacher[];
+  /** API unreachable or errored — do not show demo placeholder data */
+  failed: boolean;
+};
+
 /** Real faculty with completed profiles — public browse (no login). */
-export async function fetchPublicTeachers(): Promise<Teacher[]> {
+export async function fetchPublicTeachers(): Promise<FetchTeachersResult> {
   try {
     const res = await fetch("/api/teachers/public", { cache: "no-store" });
-    if (!res.ok) return [...TEACHERS];
+    if (!res.ok) return { teachers: [], failed: true };
     const data = (await res.json()) as { teachers: ApiTeacher[] };
     const live = (data.teachers || []).map(fromApiTeacher);
-    if (live.length === 0) return [...TEACHERS];
-    const liveIds = new Set(live.map((t) => t.id));
-    const demo = TEACHERS.filter((t) => !liveIds.has(t.id));
-    return [...live, ...demo];
+    return { teachers: mergeWithDemoTeachers(live), failed: false };
   } catch {
-    return [...TEACHERS];
+    return { teachers: [], failed: true };
   }
 }
 
 /** Real faculty with completed profiles, straight from the database. */
-export async function fetchLiveTeachers(): Promise<Teacher[]> {
+export async function fetchLiveTeachers(): Promise<FetchTeachersResult> {
   try {
     const res = await fetch("/api/teachers", { cache: "no-store" });
-    if (!res.ok) return [];
+    if (!res.ok) return { teachers: [], failed: true };
     const data = (await res.json()) as { teachers: ApiTeacher[] };
-    return (data.teachers || []).map(fromApiTeacher);
+    const live = (data.teachers || []).map(fromApiTeacher);
+    return { teachers: mergeWithDemoTeachers(live), failed: false };
   } catch {
-    return [];
+    return { teachers: [], failed: true };
   }
 }
 
@@ -551,10 +610,17 @@ export function searchTeachers(opts: {
     );
 
     if (typeof opts.radiusKm === "number" && opts.radiusKm > 0) {
-      // Teachers without coordinates (new live profiles) stay in the list
-      list = list.filter(
-        (t) => t.distanceKm == null || t.distanceKm <= opts.radiusKm!,
-      );
+      const withinRadius = list.filter((t) => {
+        if (t.distanceKm == null) return true;
+        const modes = t.modes || [];
+        const onlineOnly =
+          modes.length > 0 &&
+          modes.every((m) => m === "online");
+        if (onlineOnly) return true;
+        return t.distanceKm <= opts.radiusKm!;
+      });
+      // Soft radius: if nothing nearby, still show all (sorted by distance)
+      list = withinRadius.length > 0 ? withinRadius : list;
     }
   }
 
