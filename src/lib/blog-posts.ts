@@ -866,6 +866,122 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "View open source",
     ctaHref: "/open-source",
   },
+
+  // ── Guide batch Sep 2026 ───────────────────────────────────────
+  {
+    slug: "browse-tutors-without-login-parent-guide",
+    title:
+      "Browse Tutors Without Login: A Parent's Guide to Mentr Search (2026)",
+    keyword: "browse tutors online without signup India",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-parents",
+    description:
+      "Parents can browse verified tutors on Mentr without creating an account — see subjects, areas, and open slots first, then sign in free to connect on WhatsApp.",
+    publishWeek: 18,
+    featured: true,
+    cta: "Browse tutors free",
+    ctaHref: "/search",
+  },
+  {
+    slug: "how-to-choose-cbse-class-6-8-tutor",
+    title:
+      "How to Choose a CBSE Tutor for Class 6–8: Fees, Trials & Red Flags",
+    keyword: "CBSE Class 6 7 8 home tutor guide",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Middle school is where maths and science foundations are built — how Bengaluru parents pick the right CBSE tutor, what to pay in 2026, and trial session questions.",
+    publishWeek: 19,
+    cta: "Find CBSE tutors",
+    ctaHref: "/search?subject=Mathematics",
+  },
+  {
+    slug: "icse-vs-cbse-tutor-guide-parents",
+    title: "ICSE vs CBSE Tutor: What Parents Must Match Before Hiring",
+    keyword: "ICSE vs CBSE tutor difference",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-parents",
+    description:
+      "Board-specific syllabi, English depth, and exam patterns differ — hire tutors who match your child's exact ICSE or CBSE class, not just the subject name.",
+    publishWeek: 20,
+    cta: "Search by subject",
+    ctaHref: "/search",
+  },
+  {
+    slug: "how-parents-evaluate-tutor-trial-session",
+    title:
+      "How Parents Should Evaluate a Tutor Trial Session (Checklist)",
+    keyword: "how to evaluate tutor trial session",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Paid trial sessions save thousands — what to watch during class, four questions to ask your child after, and when to walk away.",
+    publishWeek: 21,
+    featured: true,
+    cta: "Browse tutors",
+    ctaHref: "/search",
+  },
+  {
+    slug: "neet-2027-study-plan-students",
+    title:
+      "NEET 2027 Study Plan for Class 12: Month-by-Month from September 2026",
+    keyword: "NEET 2027 study plan Class 12",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "NCERT-first NEET timeline from Sep 2026 to May 2027 — Biology priority, mock test season, and when a mentor beats self-study.",
+    publishWeek: 22,
+    featured: true,
+    cta: "Find NEET tutors",
+    ctaHref: "/search?subject=Biology",
+  },
+  {
+    slug: "jee-dropper-guide-2027",
+    title:
+      "JEE Dropper Year Guide 2027: When It Works and a Realistic Calendar",
+    keyword: "JEE dropper preparation guide 2027",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "Should you take a drop year for JEE? Error audit, mock analysis, mentor vs batch — a structured plan for repeaters starting September 2026.",
+    publishWeek: 23,
+    cta: "Find JEE mentors",
+    ctaHref: "/exam-prep/jee-coaching-bengaluru",
+  },
+  {
+    slug: "when-to-hire-physics-tutor-class-11-12",
+    title:
+      "When to Hire a Physics Tutor for Class 11–12 (CBSE & JEE)",
+    keyword: "Physics tutor Class 11 12 when to hire",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "Mechanics walls, board derivations, JEE numericals — signs your child needs Physics help now, what good tutors do, and Bengaluru fee ranges.",
+    publishWeek: 24,
+    cta: "Browse Physics tutors",
+    ctaHref: "/search?subject=Physics",
+  },
+  {
+    slug: "online-tutoring-setup-guide-students-india",
+    title:
+      "Online Tutoring Setup for Students in India: Wi-Fi, Apps & Focus Rules",
+    keyword: "online tutoring setup students India",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "Device, internet, camera, and session habits — practical setup so Google Meet tutoring works as well as a tuition centre desk.",
+    publishWeek: 25,
+    cta: "Find online tutors",
+    ctaHref: "/find-online-tutors/india",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

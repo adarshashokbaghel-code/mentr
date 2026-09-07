@@ -1,5 +1,6 @@
 "use client";
 
+import { useAuth } from "@/components/auth/auth-provider";
 import { SearchMap, type MapTeacher } from "@/components/search/search-map";
 import { type SearchFiltersState } from "@/components/search/search-header";
 import {
@@ -49,6 +50,8 @@ interface SearchMapShellProps {
   onChangeFilters: (patch: Partial<SearchFiltersState>) => void;
   onShareLocation: () => void;
   onBackToGrid: () => void;
+  /** Guests can browse the list without sharing location; card actions prompt sign-in */
+  guestBrowse?: boolean;
 }
 
 export function SearchMapShell({
@@ -63,8 +66,11 @@ export function SearchMapShell({
   onChangeFilters,
   onShareLocation,
   onBackToGrid,
+  guestBrowse = false,
 }: SearchMapShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { user, openRoleChooser } = useAuth();
+  const showListWithoutLocation = guestBrowse || Boolean(userLocation);
 
   return (
     <div className="relative flex h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-cream">
@@ -209,10 +215,16 @@ export function SearchMapShell({
           <div className="shrink-0 border-b border-hairline bg-white px-3 py-3">
             <div className="rounded-md border border-hairline bg-cream p-3">
               <p className="text-sm font-semibold text-ink">
-                {locationDenied ? "Location blocked" : "Use your location"}
+                {guestBrowse
+                  ? "Browsing all tutors"
+                  : locationDenied
+                    ? "Location blocked"
+                    : "Use your location"}
               </p>
               <p className="mt-1 text-[12px] leading-relaxed text-muted">
-                Match faculty by latitude &amp; longitude — nearest first.
+                {guestBrowse
+                  ? "Share location to sort by distance, or sign in to connect with a tutor."
+                  : "Match faculty by latitude & longitude — nearest first."}
               </p>
               {locationError && (
                 <p className="mt-2 text-[11px] font-medium text-coral-dark">
@@ -257,7 +269,7 @@ export function SearchMapShell({
         )}
 
         <div className="min-h-0 flex-1 overflow-y-auto bg-cream/40 p-2.5">
-          {!userLocation ? (
+          {!showListWithoutLocation ? (
             <p className="px-2 py-8 text-center text-sm text-muted">
               Share location to list teachers near you.
             </p>
@@ -288,6 +300,10 @@ export function SearchMapShell({
                     <button
                       type="button"
                       onClick={() => {
+                        if (!user && guestBrowse) {
+                          openRoleChooser(`/teachers/${t.id}`);
+                          return;
+                        }
                         onSelect(t.id);
                         if (window.innerWidth < 640) setSidebarOpen(false);
                       }}
@@ -385,10 +401,16 @@ export function SearchMapShell({
         </button>
 
         <SearchMap
-          teachers={userLocation ? teachers : []}
+          teachers={showListWithoutLocation ? teachers : []}
           selectedId={selectedId}
           userLocation={userLocation}
-          onSelect={onSelect}
+          onSelect={(id) => {
+            if (!user && guestBrowse) {
+              openRoleChooser(`/teachers/${id}`);
+              return;
+            }
+            onSelect(id);
+          }}
           onLocateClick={onShareLocation}
         />
       </div>

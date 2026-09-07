@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   description:
     "Sign up on Mentr, the best free platform to find verified home and online tutors worldwide. Search by subject and area, connect, and chat directly on WhatsApp — completely free, no contact fees, no middlemen.",
   alternates: { canonical: "/parent/signup" },
+  robots: { index: false, follow: true },
 };
 
 export default function ParentSignupLayout({

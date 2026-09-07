@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Tutor Search Bengaluru — Filter by Subject & Area",
+  title: "Find Tutors & Mentors in Bengaluru — Browse Free",
   description:
-    "Browse verified Maths, Physics, English and Coding tutors across Bengaluru. Filter by subject, area and open slots. Free to search.",
-  alternates: { canonical: "/search/bengaluru" },
-  robots: { index: false, follow: true },
+    "Browse verified Maths, Physics, English and Coding tutors across Bengaluru without signing in. Filter by subject and area — sign in free to connect on WhatsApp.",
+  alternates: { canonical: "/search" },
+  robots: { index: true, follow: true },
 };
 
 export default function SearchLayout({
