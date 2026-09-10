@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import {
   breadcrumbJsonLd,
   collectionJsonLd,
+  faqJsonLd,
   JsonLd,
 } from "@/components/seo/json-ld";
+import type { HubFaq } from "@/lib/seo-programmatic";
 import { absoluteUrl } from "@/lib/seo";
 import {
   areaHubSlug,
@@ -119,6 +121,11 @@ export function SeoHubPage({
   ctaLabel = "Search all tutors",
   promoHref,
   promoLabel = "Find verified online tutors",
+  faqs,
+  requirementHref,
+  requirementLabel = "Post your requirement",
+  requirementBlurb,
+  emptyMessage,
 }: {
   eyebrow: string;
   title: string;
@@ -131,6 +138,11 @@ export function SeoHubPage({
   ctaLabel?: string;
   promoHref?: string;
   promoLabel?: string;
+  faqs?: HubFaq[];
+  requirementHref?: string;
+  requirementLabel?: string;
+  requirementBlurb?: string;
+  emptyMessage?: string;
 }) {
   const schemaBreadcrumbs = breadcrumbs.map((b, i) => ({
     name: b.label,
@@ -150,6 +162,7 @@ export function SeoHubPage({
             path: schemaPath,
             teachers,
           }),
+          ...(faqs && faqs.length > 0 ? [faqJsonLd(faqs)] : []),
         ]}
       />
       <Navbar />
@@ -174,13 +187,34 @@ export function SeoHubPage({
             )}
           </div>
 
+          {requirementHref && (
+            <aside className="mt-6 rounded-xl border border-coral/25 bg-coral/5 p-5 sm:p-6">
+              <p className="text-sm font-bold text-ink">
+                {requirementLabel}
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                {requirementBlurb ??
+                  "Can't find exactly what you need? Post your requirement and let verified tutors come to you — free on Mentr."}
+              </p>
+              <Link href={requirementHref} className="mt-3 inline-block">
+                <Button variant="secondary" size="sm">
+                  {requirementLabel}
+                </Button>
+              </Link>
+            </aside>
+          )}
+
           {teachers.length === 0 ? (
             <p className="mt-10 rounded-xl border border-dashed border-hairline bg-white px-5 py-10 text-center text-sm text-muted">
-              No tutors listed here yet —{" "}
-              <Link href="/search" className="font-semibold text-coral">
-                browse all of Bengaluru
-              </Link>
-              .
+              {emptyMessage ?? (
+                <>
+                  No tutors listed here yet —{" "}
+                  <Link href="/search" className="font-semibold text-coral">
+                    browse all tutors
+                  </Link>
+                  .
+                </>
+              )}
             </p>
           ) : (
             <ul className="mt-8 space-y-3">
@@ -207,6 +241,24 @@ export function SeoHubPage({
                   </li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {faqs && faqs.length > 0 && (
+            <section className="mt-10 border-t border-hairline pt-8">
+              <h2 className="text-lg font-bold text-ink">Common questions</h2>
+              <dl className="mt-5 space-y-5">
+                {faqs.map((faq) => (
+                  <div key={faq.question}>
+                    <dt className="text-[15px] font-semibold text-ink">
+                      {faq.question}
+                    </dt>
+                    <dd className="mt-2 text-sm leading-relaxed text-muted">
+                      {faq.answer}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
             </section>
           )}
         </div>

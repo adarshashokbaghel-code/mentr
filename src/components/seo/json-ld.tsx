@@ -51,6 +51,18 @@ export function collectionJsonLd(opts: {
   };
 }
 
+export function faqJsonLd(faqs: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+}
+
 export function personJsonLd(teacher: Teacher) {
   return {
     "@context": "https://schema.org",

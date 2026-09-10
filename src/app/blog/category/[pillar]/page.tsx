@@ -1,6 +1,7 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { BlogIndex } from "@/components/blog/blog-index";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { BLOG_PILLARS, postsByPillar, type BlogPillarId } from "@/lib/blog-posts";
 import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -64,6 +65,7 @@ export default async function BlogCategoryPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
+      <PageMarketing slug={`blog-category-${pillar.id}`} path={`/blog/category/${pillar.id}`} />
       <Navbar />
       <main className="min-h-screen bg-cream">
         <BlogIndex pillar={pillar.id} />

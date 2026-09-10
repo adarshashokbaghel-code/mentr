@@ -102,6 +102,8 @@ export type AdminUserRow = {
   lastLoginAt?: string;
   referralUrl?: string;
   registrationSource?: string;
+  acquisitionSlug?: string;
+  acquisitionKind?: string;
   faculty?: {
     designation: string;
     bio: string;
@@ -247,6 +249,48 @@ export function fetchAdminOtpActivity(key: string) {
     key,
     "/api/admin/engagement/otp?limit=150",
   );
+}
+
+export type MarketingSignup = {
+  id: string;
+  email: string;
+  name: string;
+  role: string;
+  createdAt: string;
+};
+
+export type MarketingPageRow = {
+  slug: string;
+  kind: "blog" | "page";
+  views: number;
+  uniqueViews: number;
+  redirects: number;
+  uniqueRedirects: number;
+  lastViewedAt?: string;
+  lastRedirectAt?: string;
+  signups: number;
+  parentSignups: number;
+  facultySignups: number;
+  recentSignups: MarketingSignup[];
+};
+
+export type MarketingOverview = {
+  generatedAt: string;
+  totals: {
+    views: number;
+    uniqueViews: number;
+    redirects: number;
+    uniqueRedirects: number;
+    signups: number;
+    parentSignups: number;
+    facultySignups: number;
+    pagesTracked: number;
+  };
+  rows: MarketingPageRow[];
+};
+
+export function fetchAdminMarketing(key: string) {
+  return adminFetch<MarketingOverview>(key, "/api/admin/marketing");
 }
 
 export function fetchMessengerTemplates(key: string) {

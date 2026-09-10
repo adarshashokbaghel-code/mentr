@@ -505,7 +505,7 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
       { label: "Search tutors in Bengaluru", href: "/search/bengaluru" },
       {
         label: "NEET coaching in Bengaluru",
-        href: "/exam-prep/neet-coaching-bengaluru",
+        href: "/exam-prep/neet-foundation-bengaluru",
       },
       {
         label: "How to choose a JEE/NEET mentor",

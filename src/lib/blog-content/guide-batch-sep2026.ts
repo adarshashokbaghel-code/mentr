@@ -485,7 +485,7 @@ export const GUIDE_BATCH_SEP2026: Record<string, ArticleContent> = {
       { label: "NEET Biology weightage", href: "/blog/neet-biology-weightage" },
       { label: "Choose a JEE/NEET mentor", href: "/blog/how-to-choose-jee-neet-mentor" },
       { label: "Find NEET tutors", href: "/search?subject=Biology" },
-      { label: "NEET coaching Bengaluru", href: "/exam-prep/neet-coaching-bengaluru" },
+      { label: "NEET coaching Bengaluru", href: "/exam-prep/neet-foundation-bengaluru" },
     ],
   },
 

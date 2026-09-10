@@ -167,10 +167,18 @@ export const authApi = {
     intent?: "login" | "signup",
     role?: UserRole,
     registrationSource?: string,
+    acquisition?: { slug?: string; kind?: "blog" | "page" },
   ) =>
     request<SendOtpResponse>("/auth/send-otp", {
       method: "POST",
-      body: JSON.stringify({ email, intent, role, registrationSource }),
+      body: JSON.stringify({
+        email,
+        intent,
+        role,
+        registrationSource,
+        acquisitionSlug: acquisition?.slug,
+        acquisitionKind: acquisition?.kind,
+      }),
     }),
 
   // Role is bound to the OTP session server-side at send time,

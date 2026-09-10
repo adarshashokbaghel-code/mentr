@@ -1,6 +1,7 @@
 import { ParentsLanding } from "@/components/landing/lp/parents-page";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import {
   absoluteUrl,
@@ -66,6 +67,7 @@ export default function ParentsPage() {
           webPageJsonLd,
         ]}
       />
+      <PageMarketing slug="parents" path="/parents" />
       <Navbar />
       <ParentsLanding />
       <Footer />

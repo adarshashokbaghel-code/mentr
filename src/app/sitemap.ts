@@ -1,5 +1,8 @@
 import {
   areaSitemapEntries,
+  boardSitemapEntries,
+  cityTutorSitemapEntries,
+  classSubjectSitemapEntries,
   comboSitemapEntries,
   coreSitemapEntries,
   examPrepSitemapEntries,
@@ -28,6 +31,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...onlineSubjectSitemapEntries(),
     ...uaeCitySitemapEntries(),
     ...mentorTopicSitemapEntries(),
+    ...classSubjectSitemapEntries(),
+    ...boardSitemapEntries(),
+    ...cityTutorSitemapEntries(),
     ...teacherSitemapEntries(teachers),
   ];
 }

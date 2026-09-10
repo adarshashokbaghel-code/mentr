@@ -22,6 +22,11 @@ import {
 } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "../lib/profile-complete";
+import {
+  parseAcquisitionFromUrl,
+  sanitizeMarketingKind,
+  sanitizeMarketingSlug,
+} from "../lib/marketing-attribution";
 import { clientIpFromRequest, geocodeIp } from "../services/geocode";
 import { ensureFacultyMapLocation } from "../lib/map-location";
 
@@ -212,6 +217,16 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
         ? req.body.registrationSource.trim().slice(0, 2048)
         : undefined;
 
+    const parsed = parseAcquisitionFromUrl(registrationSource);
+    const acquisitionSlug =
+      sanitizeMarketingSlug(req.body.acquisitionSlug) || parsed.slug;
+    const bodyKind = sanitizeMarketingKind(req.body.acquisitionKind);
+    const acquisitionKind =
+      bodyKind ||
+      (parsed.kind === "blog" || parsed.kind === "page" || parsed.kind === "referral"
+        ? parsed.kind
+        : undefined);
+
     await OtpSession.create({
       sessionId,
       email,
@@ -219,6 +234,8 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       purpose,
       role,
       registrationSource,
+      acquisitionSlug,
+      acquisitionKind,
       expiresAt: getOtpExpiryDate(),
       purgeAt: getOtpPurgeDate(),
     });
@@ -318,21 +335,45 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
       return;
     }
 
+    const acquisitionFields =
+      session.purpose === "signup"
+        ? {
+            ...(session.registrationSource
+              ? { registrationSource: session.registrationSource }
+              : {}),
+            ...(session.acquisitionSlug
+              ? { acquisitionSlug: session.acquisitionSlug }
+              : {}),
+            ...(session.acquisitionKind
+              ? { acquisitionKind: session.acquisitionKind }
+              : {}),
+          }
+        : {};
+
     if (!user) {
       user = await User.create({
         email,
         role: session.role,
         emailVerified: true,
         lastLoginAt: new Date(),
-        ...(session.registrationSource && session.purpose === "signup"
-          ? { registrationSource: session.registrationSource }
-          : {}),
+        ...acquisitionFields,
       });
     } else {
       // Unverified stubs may still switch portals; verified accounts cannot.
       if (!user.emailVerified) user.role = session.role;
       user.emailVerified = true;
       user.lastLoginAt = new Date();
+      if (session.purpose === "signup" && !user.registrationSource) {
+        if (acquisitionFields.registrationSource) {
+          user.registrationSource = acquisitionFields.registrationSource;
+        }
+        if (acquisitionFields.acquisitionSlug) {
+          user.acquisitionSlug = acquisitionFields.acquisitionSlug;
+        }
+        if (acquisitionFields.acquisitionKind) {
+          user.acquisitionKind = acquisitionFields.acquisitionKind;
+        }
+      }
     }
 
     const clientIp = clientIpFromRequest(req);

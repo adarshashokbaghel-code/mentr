@@ -1,6 +1,7 @@
 import { FacultyLanding } from "@/components/landing/lp/faculty-page";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import {
   absoluteUrl,
@@ -65,6 +66,7 @@ export default function ForFacultyPage() {
           webPageJsonLd,
         ]}
       />
+      <PageMarketing slug="for-faculty" path="/for-faculty" />
       <Navbar />
       <FacultyLanding />
       <Footer />

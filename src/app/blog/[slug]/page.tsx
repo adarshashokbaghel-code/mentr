@@ -4,6 +4,7 @@ import {
   ArticleFaqSection,
   ArticleProse,
 } from "@/components/blog/article-prose";
+import { MarketplaceArticleCta } from "@/components/blog/marketplace-article-cta";
 import { BlogPostCard } from "@/components/blog/blog-post-card";
 import { BlogShell } from "@/components/blog/blog-shell";
 import { hardShadowSm } from "@/components/landing/lp/shared";
@@ -146,6 +147,7 @@ export default async function BlogPostPage({ params }: Props) {
             <ArticleCta
               label={post.cta}
               href={post.ctaHref}
+              slug={post.slug}
               text={
                 post.pillar === "for-tutors"
                   ? "Ready to grow your tutoring practice? List your profile on Mentr for free — no lead fees, no commission."
@@ -180,9 +182,12 @@ export default async function BlogPostPage({ params }: Props) {
               </aside>
             )}
 
+            <MarketplaceArticleCta post={post} />
+
             <ArticleCta
               label={post.cta}
               href={post.ctaHref}
+              slug={post.slug}
               text="Take the next step — everything on Mentr is free for parents and faculty."
             />
 

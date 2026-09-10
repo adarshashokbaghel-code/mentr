@@ -13,6 +13,18 @@ import {
   slugify,
   subjectHubSlug,
 } from "@/lib/seo-hubs";
+import {
+  BOARD_COMBO_PAGES,
+  BOARDS,
+  CITY_SUBJECT_PAGES,
+  SEO_CITIES,
+  SUBJECT_CLASS_PAGES,
+  boardComboPath,
+  boardPath,
+  cityPath,
+  citySubjectPath,
+  classSubjectPath,
+} from "@/lib/seo-programmatic";
 import { LOCALITIES, SUBJECTS } from "@/lib/teachers";
 import type { MetadataRoute } from "next";
 
@@ -109,4 +121,28 @@ export function mentorTopicSitemapEntries(): MetadataRoute.Sitemap {
   return MENTOR_TOPICS.map((p) =>
     entry(`/find-mentors/${p.slug}`, 0.75, "weekly"),
   );
+}
+
+export function classSubjectSitemapEntries(): MetadataRoute.Sitemap {
+  return SUBJECT_CLASS_PAGES.map((p) =>
+    entry(classSubjectPath(p.level, p.subject), 0.82, "weekly"),
+  );
+}
+
+export function boardSitemapEntries(): MetadataRoute.Sitemap {
+  return [
+    ...BOARDS.map((b) => entry(boardPath(b.id), 0.8, "weekly")),
+    ...BOARD_COMBO_PAGES.map((p) =>
+      entry(boardComboPath(p.board, p.level, p.subject), 0.78, "weekly"),
+    ),
+  ];
+}
+
+export function cityTutorSitemapEntries(): MetadataRoute.Sitemap {
+  return [
+    ...SEO_CITIES.map((c) => entry(cityPath(c.slug), 0.85, "weekly")),
+    ...CITY_SUBJECT_PAGES.map((p) =>
+      entry(citySubjectPath(p.city, p.subject), 0.8, "weekly"),
+    ),
+  ];
 }
