@@ -29,6 +29,8 @@ export type AdminUserRow = {
   lastLoginAt?: string;
   referralUrl?: string;
   registrationSource?: string;
+  acquisitionSlug?: string;
+  acquisitionKind?: string;
   /** Faculty-only profile fields */
   faculty?: {
     designation: string;
@@ -73,6 +75,8 @@ function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date; updatedAt: D
     lastLoginAt: u.lastLoginAt?.toISOString(),
     referralUrl: u.referralUrl,
     registrationSource: u.registrationSource,
+    acquisitionSlug: u.acquisitionSlug,
+    acquisitionKind: u.acquisitionKind,
   };
 
   if (u.role === "faculty" && u.profile) {

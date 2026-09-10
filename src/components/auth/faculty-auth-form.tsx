@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { resolveAcquisition } from "@/lib/marketing-client";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { ApiError, authApi, saveToken, type UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
@@ -46,13 +47,9 @@ export function FacultyAuthForm({
   const base = role === "parent" ? "/parent" : "/faculty";
   const nextSuffix = next ? `?next=${encodeURIComponent(next)}` : "";
 
-  const registrationSource = useMemo(() => {
-    if (variant !== "signup" || typeof window === "undefined") return undefined;
-    const ref = searchParams?.get("ref");
-    if (!ref) return undefined;
-    const url = new URL(window.location.href);
-    url.searchParams.set("ref", ref);
-    return url.toString();
+  const acquisition = useMemo(() => {
+    if (variant !== "signup") return {};
+    return resolveAcquisition();
   }, [variant, searchParams]);
 
   useEffect(() => {
@@ -71,7 +68,11 @@ export function FacultyAuthForm({
         email.trim(),
         variant,
         role,
-        registrationSource,
+        acquisition.registrationSource,
+        {
+          slug: acquisition.acquisitionSlug,
+          kind: acquisition.acquisitionKind,
+        },
       );
       setSessionId(data.sessionId);
       setStep("otp");
@@ -94,7 +95,7 @@ export function FacultyAuthForm({
     } finally {
       setLoading(false);
     }
-  }, [email, variant, role, registrationSource]);
+  }, [email, variant, role, acquisition]);
 
   async function handleSendOtp(e: React.FormEvent) {
     e.preventDefault();

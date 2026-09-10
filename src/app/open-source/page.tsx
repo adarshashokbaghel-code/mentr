@@ -1,6 +1,7 @@
 import { OpenSourceLanding } from "@/components/landing/lp/open-source-page";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import {
   absoluteUrl,
@@ -83,6 +84,7 @@ export default function OpenSourcePage() {
           softwareJsonLd,
         ]}
       />
+      <PageMarketing slug="open-source" path="/open-source" />
       <Navbar />
       <OpenSourceLanding />
       <Footer />

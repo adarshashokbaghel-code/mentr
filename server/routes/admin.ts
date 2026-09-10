@@ -14,6 +14,7 @@ import {
   searchAdminUsers,
   sendMessengerEmails,
 } from "../services/admin-messenger";
+import { getAdminMarketing } from "../services/admin-marketing";
 import { getAdminStats } from "../services/admin-stats";
 import type { MessengerTemplateId } from "../services/email-templates";
 
@@ -102,6 +103,16 @@ router.get("/engagement/otp", async (req, res) => {
   } catch (err) {
     console.error("Admin OTP activity error:", err);
     res.status(500).json({ error: "Failed to load OTP activity" });
+  }
+});
+
+router.get("/marketing", async (_req, res) => {
+  try {
+    const marketing = await getAdminMarketing();
+    res.json(marketing);
+  } catch (err) {
+    console.error("Admin marketing error:", err);
+    res.status(500).json({ error: "Failed to load marketing stats" });
   }
 });
 

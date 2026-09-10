@@ -18,6 +18,8 @@ export interface IOtpSession extends Document {
   role: UserRole;
   /** Signup URL captured at OTP send — stored on new user at verify. */
   registrationSource?: string;
+  acquisitionSlug?: string;
+  acquisitionKind?: "blog" | "page" | "referral";
   attempts: number;
   expiresAt: Date;
   consumed: boolean;
@@ -34,6 +36,8 @@ const otpSessionSchema = new Schema<IOtpSession>(
     purpose: { type: String, enum: ["login", "signup"], required: true },
     role: { type: String, enum: USER_ROLES, required: true },
     registrationSource: { type: String, trim: true },
+    acquisitionSlug: { type: String, trim: true, lowercase: true },
+    acquisitionKind: { type: String, enum: ["blog", "page", "referral"] },
     attempts: { type: Number, default: 0 },
     expiresAt: { type: Date, required: true },
     consumed: { type: Boolean, default: false },

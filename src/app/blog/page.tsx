@@ -1,6 +1,7 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { BlogIndex } from "@/components/blog/blog-index";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -46,6 +47,7 @@ export default function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
       />
+      <PageMarketing slug="blog-index" path="/blog" />
       <Navbar />
       <main className="min-h-screen bg-cream">
         <BlogIndex />

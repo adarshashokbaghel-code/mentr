@@ -333,7 +333,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Updated NEET Biology chapter weightage — which units carry the most marks and how to prioritise revision.",
     cta: "Find NEET tutors",
-    ctaHref: "/exam-prep/neet-coaching-bengaluru",
+    ctaHref: "/exam-prep/neet-foundation-bengaluru",
   },
   {
     slug: "how-to-choose-jee-neet-mentor",
@@ -587,7 +587,7 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "NEET Biology specialists in Jayanagar — chapter coverage, mock test support, and local fee ranges.",
     cta: "Find NEET tutors",
-    ctaHref: "/exam-prep/neet-coaching-bengaluru",
+    ctaHref: "/exam-prep/neet-foundation-bengaluru",
   },
   {
     slug: "home-tutor-whitefield",

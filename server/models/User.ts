@@ -107,6 +107,9 @@ export interface IUser extends Document {
   referralUrl?: string;
   /** Full signup URL the user arrived from (e.g. a referrer's link). */
   registrationSource?: string;
+  /** Blog/page slug that last-touched this signup (utm_campaign or /blog/{slug}). */
+  acquisitionSlug?: string;
+  acquisitionKind?: "blog" | "page" | "referral";
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -213,6 +216,8 @@ const userSchema = new Schema<IUser>(
     parentProfile: { type: parentProfileSchema, required: false },
     referralUrl: { type: String, trim: true },
     registrationSource: { type: String, trim: true },
+    acquisitionSlug: { type: String, trim: true, lowercase: true },
+    acquisitionKind: { type: String, enum: ["blog", "page", "referral"] },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },
@@ -225,6 +230,7 @@ userSchema.index({ "profile.subjects": 1 });
 userSchema.index({ "profile.city": 1 });
 userSchema.index({ referralUrl: 1 }, { sparse: true });
 userSchema.index({ registrationSource: 1 }, { sparse: true });
+userSchema.index({ acquisitionSlug: 1 }, { sparse: true });
 
 export const User =
   mongoose.models.User || mongoose.model<IUser>("User", userSchema);

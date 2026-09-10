@@ -59,6 +59,8 @@ function UserDetailPanel({ user }: { user: AdminUserRow }) {
         <DetailItem label="Last login" value={formatDate(user.lastLoginAt)} />
         <DetailItem label="Referral URL" value={user.referralUrl} />
         <DetailItem label="Registration source" value={user.registrationSource} />
+        <DetailItem label="Acquisition slug" value={user.acquisitionSlug} />
+        <DetailItem label="Acquisition kind" value={user.acquisitionKind} />
       </div>
 
       {user.faculty && (

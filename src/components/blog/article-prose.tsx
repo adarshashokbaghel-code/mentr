@@ -1,5 +1,6 @@
 import type { ArticleBlock, ArticleSection } from "@/lib/blog-content/types";
 import { hardShadowSm } from "@/components/landing/lp/shared";
+import { TrackedLink } from "@/components/marketing/tracked-link";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -75,11 +76,18 @@ export function ArticleCta({
   label,
   href,
   text,
+  slug,
 }: {
   label: string;
   href: string;
   text: string;
+  slug?: string;
 }) {
+  const linkClass = cn(
+    "mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-ink bg-coral px-5 text-sm font-bold text-white touch-manipulation active:scale-[0.98] hover:bg-coral-dark sm:w-auto",
+    hardShadowSm,
+  );
+
   return (
     <aside
       className={cn(
@@ -88,15 +96,15 @@ export function ArticleCta({
       )}
     >
       <p className="text-sm leading-relaxed text-ink sm:text-[15px]">{text}</p>
-      <Link
-        href={href}
-        className={cn(
-          "mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-xl border-2 border-ink bg-coral px-5 text-sm font-bold text-white touch-manipulation active:scale-[0.98] hover:bg-coral-dark sm:w-auto",
-          hardShadowSm,
-        )}
-      >
-        {label} →
-      </Link>
+      {slug ? (
+        <TrackedLink href={href} slug={slug} kind="blog" content="cta" className={linkClass}>
+          {label} →
+        </TrackedLink>
+      ) : (
+        <Link href={href} className={linkClass}>
+          {label} →
+        </Link>
+      )}
     </aside>
   );
 }

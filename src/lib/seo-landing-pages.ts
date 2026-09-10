@@ -450,6 +450,112 @@ export const ONLINE_TUTOR_JOBS_PAGE: LandingPageConfig = {
   ],
 };
 
+function tutorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
+  const t: Record<LandingGeo, { h1: string; title: string; desc: string }> = {
+    global: {
+      h1: "Find a Tutor Near You — Online, Local & City-Based",
+      title: "Find a Tutor Near Me — Free on Mentr",
+      desc: "Find tutors near you — home tutors, online tutors, and city-based matches for CBSE, ICSE & IGCSE. Post your requirement free on Mentr.",
+    },
+    india: {
+      h1: "Find a Tutor Near Me in India",
+      title: "Find Tutors Near Me India — Home & Online",
+      desc: "Maths, Physics, English tutors near me in India — Bengaluru home tutors plus verified online tutors nationwide. Free connect on Mentr.",
+    },
+    uae: {
+      h1: "Find a Tutor Near Me in the UAE",
+      title: "Find Tutors Near Me UAE — Online & Verified",
+      desc: "Find tutors near me in UAE — CBSE, IGCSE, and maths tutors online in Gulf time zones. Free verified search on Mentr.",
+    },
+  };
+  const copy = t[geo];
+  return {
+    id: `find-tutors-near-me-${geo}`,
+    basePath: "/find-tutors-near-me",
+    geo,
+    title: copy.title,
+    metaDescription: copy.desc,
+    keywords: [
+      "tutor near me",
+      "find tutor near me",
+      "maths tutor near me",
+      "home tutor near me",
+      "physics tutor near me",
+      geo === "india" ? "tutor near me India" : "",
+      geo === "uae" ? "tutor near me UAE" : "",
+    ].filter(Boolean),
+    h1: copy.h1,
+    eyebrow: "For parents",
+    intro:
+      "When parents search 'tutor near me', they usually mean one of four things: a home tutor in their neighbourhood, a tutor in their city, a verified online tutor in their time zone, or a subject specialist regardless of location. Mentr covers all four — browse profiles free, or post a requirement and let tutors come to you.",
+    sections: [
+      {
+        heading: "Online tutors vs local tutors vs city-based tutors",
+        paragraphs: [
+          "Online tutors work over video — ideal for specialist subjects, busy schedules, and families outside major tutor hubs. Local home tutors visit your home — common in Bengaluru for board exams and younger classes. City-based tutors may teach online or in-person within one metro. Subject-specific tutors (Physics Class 12, Coding Class 6) may be online even when you search 'near me'.",
+        ],
+      },
+      {
+        heading: "How to find a tutor near you on Mentr",
+        paragraphs: ["Three paths — pick what fits your search:"],
+        bullets: [
+          "Browse city pages — Bengaluru, Pune, Hyderabad, Delhi, Mumbai",
+          "Filter search by subject, class, and online vs home visit",
+          "Post a requirement — tutors pitch you; you choose who to connect with",
+        ],
+      },
+      {
+        heading: "Subject-specific 'near me' searches",
+        paragraphs: [
+          "Searches like 'maths tutor near me' or 'physics tutor near me' are really about finding the right subject expert quickly. Use subject + class pages (e.g. Class 10 Physics) or post a requirement naming the subject — verified tutors respond with how they teach and their fee range.",
+        ],
+      },
+      {
+        heading: "Can't find exactly what you need?",
+        paragraphs: [
+          "Posting a requirement is often faster than scrolling profiles. Describe your child's class, board, subject, area or online preference, and budget. Verified tutors on Mentr pitch for free — you review messages before sharing WhatsApp.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Is finding tutors near me free on Mentr?",
+        answer:
+          "Yes. Search, shortlist, connect, and post requirements are free for parents. Mentr takes no commission on tuition fees.",
+      },
+      {
+        question: "What's the difference between home tutor and online tutor?",
+        answer:
+          "Home tutors visit your residence — common for younger classes and exam years in cities like Bengaluru. Online tutors teach over video — often better for specialist subjects or families outside major tutor hubs.",
+      },
+      {
+        question: "How do I find a maths tutor near me?",
+        answer:
+          "Search maths on Mentr, filter by your city or online mode, or browse Class-specific maths pages. You can also post a requirement and let maths tutors pitch you.",
+      },
+      {
+        question: "What if no tutor near me matches?",
+        answer:
+          "Post your requirement on Mentr. Describe class, board, subject, and whether you need home or online. Tutors come to you — you choose who to connect with.",
+      },
+    ],
+    primaryCta: {
+      label: "Browse tutors free",
+      href: "/search",
+    },
+    secondaryCta: {
+      label: "Post your requirement",
+      href: "/parent/signup?next=/parent/dashboard",
+    },
+    relatedLinks: [
+      { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
+      { label: "CBSE tutors", href: "/boards/cbse-tutors" },
+      { label: "Find online tutors", href: geoPath("/find-online-tutors", geo) },
+      { label: "Class 10 Physics tutors", href: "/class/10/physics-tutors" },
+    ],
+  };
+}
+
 export const MONEY_LANDING_PAGES: LandingPageConfig[] = [
   onlineTutorsConfig("global"),
   onlineTutorsConfig("india"),
@@ -460,6 +566,9 @@ export const MONEY_LANDING_PAGES: LandingPageConfig[] = [
   mentorsNearMeConfig("global"),
   mentorsNearMeConfig("india"),
   mentorsNearMeConfig("uae"),
+  tutorsNearMeConfig("global"),
+  tutorsNearMeConfig("india"),
+  tutorsNearMeConfig("uae"),
   ONLINE_TUTOR_JOBS_PAGE,
 ];
 
