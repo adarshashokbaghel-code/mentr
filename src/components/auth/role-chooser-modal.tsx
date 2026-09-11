@@ -61,12 +61,12 @@ export function RoleChooserModal() {
           First, who are you?
         </h2>
         <p className="mt-1.5 text-sm text-muted">
-          Sign in to continue — it takes a minute and it&apos;s free.
+          Create a free parent account in a minute — or log in if you already have one.
         </p>
 
         <div className="mt-5 space-y-3">
           <Link
-            href={`/parent${nextSuffix}`}
+            href={`/parent/signup${nextSuffix}`}
             onClick={closeRoleChooser}
             className="group flex items-center gap-4 rounded-xl border-2 border-ink bg-butter/60 p-4 transition hover:bg-butter"
           >
@@ -105,7 +105,14 @@ export function RoleChooserModal() {
         </div>
 
         <p className="mt-5 text-center text-xs text-muted">
-          New here? You can create a free account on the next screen.
+          Already a parent?{" "}
+          <Link
+            href={`/parent${nextSuffix}`}
+            onClick={closeRoleChooser}
+            className="font-semibold text-coral hover:underline"
+          >
+            Log in
+          </Link>
         </p>
       </div>
     </div>

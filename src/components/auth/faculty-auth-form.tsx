@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { resolveAcquisition } from "@/lib/marketing-client";
+import { isPublicBrowsePath } from "@/lib/public-browse";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { ApiError, authApi, saveToken, type UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
@@ -121,8 +122,9 @@ export function FacultyAuthForm({
       onComplete?.();
 
       if (data.user.role === "parent") {
+        const skipProfiling = next && isPublicBrowsePath(next);
         router.push(
-          data.profileCompleted
+          data.profileCompleted || skipProfiling
             ? next || "/search"
             : `/parent/profiling${nextSuffix}`,
         );

@@ -251,6 +251,39 @@ export function fetchAdminOtpActivity(key: string) {
   );
 }
 
+export type AdminInteractionRow = {
+  id: string;
+  name: string;
+  email: string;
+  city: string;
+  country: string;
+  role: string;
+  feedbackType: string;
+  feedback: string;
+  featureTitle?: string;
+  featureDescription?: string;
+  rating: number;
+  review?: string;
+  page: string;
+  createdAt: string;
+};
+
+export type AdminInteractionsPayload = {
+  rows: AdminInteractionRow[];
+  total: number;
+  averageRating: number;
+  byType: Record<string, number>;
+  fiveStars: number;
+  featureRequests: number;
+};
+
+export function fetchAdminInteractions(key: string) {
+  return adminFetch<AdminInteractionsPayload>(
+    key,
+    "/api/admin/interactions?limit=400",
+  );
+}
+
 export type MarketingSignup = {
   id: string;
   email: string;

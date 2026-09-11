@@ -59,7 +59,7 @@ export function PostRequirementButton({
     setSwitching(true);
     try {
       if (user) await logout();
-      router.push(`/parent?next=${encodeURIComponent(POST_DEST)}`);
+      router.push(`/parent/signup?next=${encodeURIComponent(POST_DEST)}`);
       setGateOpen(false);
     } finally {
       setSwitching(false);
@@ -131,7 +131,7 @@ export function PostRequirementButton({
               ) : (
                 <Users className="h-4 w-4" />
               )}
-              {switching ? "Switching…" : "Login as parent"}
+              {switching ? "Switching…" : "Create free parent account"}
             </Button>
           </DialogFooter>
         </DialogContent>

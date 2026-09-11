@@ -497,17 +497,105 @@ export type FetchTeachersResult = {
   failed: boolean;
 };
 
-/** Real faculty with completed profiles — public browse (no login). */
-export async function fetchPublicTeachers(): Promise<FetchTeachersResult> {
+const PUBLIC_TEACHERS_CACHE_KEY = "mentr_public_teachers_v1";
+const PUBLIC_TEACHERS_TTL_MS = 5 * 60 * 1000;
+
+type PublicTeachersCache = {
+  teachers: Teacher[];
+  at: number;
+};
+
+let publicTeachersMemory: PublicTeachersCache | null = null;
+let publicTeachersInflight: Promise<{
+  teachers: Teacher[];
+  failed: boolean;
+}> | null = null;
+
+function readPublicTeachersSession(): Teacher[] | null {
+  if (typeof window === "undefined") return null;
   try {
-    const res = await fetch("/api/teachers/public", { cache: "no-store" });
-    if (!res.ok) return { teachers: [], failed: true };
-    const data = (await res.json()) as { teachers: ApiTeacher[] };
-    const live = (data.teachers || []).map(fromApiTeacher);
-    return { teachers: mergeWithDemoTeachers(live), failed: false };
+    const raw = sessionStorage.getItem(PUBLIC_TEACHERS_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { teachers?: ApiTeacher[]; at?: number };
+    if (
+      !parsed.at ||
+      Date.now() - parsed.at > PUBLIC_TEACHERS_TTL_MS ||
+      !Array.isArray(parsed.teachers)
+    ) {
+      return null;
+    }
+    return parsed.teachers.map(fromApiTeacher);
   } catch {
-    return { teachers: [], failed: true };
+    return null;
   }
+}
+
+function writePublicTeachersSession(teachers: ApiTeacher[]) {
+  if (typeof window === "undefined") return;
+  try {
+    sessionStorage.setItem(
+      PUBLIC_TEACHERS_CACHE_KEY,
+      JSON.stringify({ teachers, at: Date.now() }),
+    );
+  } catch {
+    /* quota / private mode */
+  }
+}
+
+function cachedLiveTeachers(): Teacher[] | null {
+  if (
+    publicTeachersMemory &&
+    Date.now() - publicTeachersMemory.at < PUBLIC_TEACHERS_TTL_MS
+  ) {
+    return publicTeachersMemory.teachers;
+  }
+  const fromSession = readPublicTeachersSession();
+  if (fromSession) {
+    publicTeachersMemory = { teachers: fromSession, at: Date.now() };
+    return fromSession;
+  }
+  return null;
+}
+
+async function loadLivePublicTeachers(): Promise<{
+  teachers: Teacher[];
+  failed: boolean;
+}> {
+  const cached = cachedLiveTeachers();
+  if (cached) return { teachers: cached, failed: false };
+
+  if (!publicTeachersInflight) {
+    publicTeachersInflight = (async () => {
+      try {
+        const res = await fetch("/api/teachers/public");
+        if (!res.ok) return { teachers: [], failed: true };
+        const data = (await res.json()) as { teachers: ApiTeacher[] };
+        const live = (data.teachers || []).map(fromApiTeacher);
+        publicTeachersMemory = { teachers: live, at: Date.now() };
+        writePublicTeachersSession(data.teachers || []);
+        return { teachers: live, failed: false };
+      } catch {
+        return { teachers: [], failed: true };
+      } finally {
+        publicTeachersInflight = null;
+      }
+    })();
+  }
+
+  return publicTeachersInflight;
+}
+
+/** Real faculty with completed profiles — public browse (no login). */
+export async function fetchPublicTeachers(opts?: {
+  /** Skip demo placeholder profiles — homepage / live previews only */
+  liveOnly?: boolean;
+}): Promise<FetchTeachersResult> {
+  const { teachers: live, failed } = await loadLivePublicTeachers();
+  if (failed) return { teachers: [], failed: true };
+  return {
+    teachers: opts?.liveOnly ? live : mergeWithDemoTeachers(live),
+    failed: false,
+  };
 }
 
 /** Real faculty with completed profiles, straight from the database. */

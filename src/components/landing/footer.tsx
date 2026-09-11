@@ -22,6 +22,8 @@ const columns: Record<string, FooterLink[]> = {
     { label: "FAQ", href: "/faq" },
   ],
   Parents: [
+    { label: "Create parent account", href: "/parent/signup" },
+    { label: "Parent login", href: "/parent" },
     { label: "Browse all tutors", href: "/search" },
     { label: "Find online tutors", href: "/find-online-tutors" },
     { label: "India online tutors", href: "/find-online-tutors/india" },
@@ -43,6 +45,7 @@ const columns: Record<string, FooterLink[]> = {
     { label: "Privacy", href: "/privacy" },
     { label: "Terms", href: "/terms" },
     { label: "Contact", href: "/contact" },
+    { label: "Request a feature", href: "/request-feature" },
   ],
   Resources: [
     { label: "All guides", href: "/blog" },
@@ -70,6 +73,9 @@ export function Footer() {
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
                 Worldwide
+              </span>
+              <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
+                For parents
               </span>
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
                 For faculty

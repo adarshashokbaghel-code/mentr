@@ -1,5 +1,6 @@
 "use client";
 
+import { ParentNeedFinder } from "@/components/parent/parent-need-finder";
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
 import { ParentActionLink } from "@/components/auth/role-guard-link";
 import { BrowserFrame } from "@/components/ui/browser-frame";
@@ -859,6 +860,7 @@ export function ParentsLanding() {
   return (
     <main>
       <ParentsHero />
+      <ParentNeedFinder />
       <LpStatsBand stats={parentStats} />
       <GlobalReachMap />
       <ParentsTrust />

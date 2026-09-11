@@ -22,11 +22,11 @@ const navLinks = [
   { label: "Find tutors", href: "/search" },
   { label: "Find mentors", href: "/search?kind=mentor" },
   { label: "How it works", href: "/#how-it-works" },
-  { label: "For parents", href: "/parents" },
-  { label: "For faculty", href: "/for-faculty" },
   { label: "FAQ", href: "/faq" },
   { label: "Blog", href: "/blog" },
   { label: "Open source", href: "/open-source" },
+  { label: "Request a feature", href: "/request-feature" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -67,9 +67,18 @@ export function Navbar() {
 
         <div className="hidden items-center gap-2.5 md:flex">
           {!loading && !user && (
-            <Button size="sm" onClick={() => openRoleChooser()}>
-              Log in
-            </Button>
+            <>
+              <Link
+                href="/search"
+                className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-hairline bg-white px-3.5 text-sm font-semibold text-ink transition hover:border-ink/30 hover:bg-cream"
+              >
+                <Search className="h-4 w-4 text-coral" />
+                Find tutors
+              </Link>
+              <Button size="sm" onClick={() => openRoleChooser()}>
+                Log in
+              </Button>
+            </>
           )}
           {!loading && user && user.role !== "parent" && (
             <Link
@@ -187,15 +196,25 @@ export function Navbar() {
                 </button>
               </>
             ) : (
-              <Button
-                className="w-full"
-                onClick={() => {
-                  setOpen(false);
-                  openRoleChooser();
-                }}
-              >
-                Log in
-              </Button>
+              <>
+                <Link
+                  href="/search"
+                  className="flex items-center justify-center gap-2 rounded-lg border-2 border-ink bg-white px-3 py-3 text-sm font-bold text-ink"
+                  onClick={() => setOpen(false)}
+                >
+                  <Search className="h-4 w-4 text-coral" />
+                  Find tutors
+                </Link>
+                <Button
+                  className="w-full"
+                  onClick={() => {
+                    setOpen(false);
+                    openRoleChooser();
+                  }}
+                >
+                  Log in
+                </Button>
+              </>
             )}
           </nav>
         </div>
