@@ -76,6 +76,9 @@ export const metadata: Metadata = {
     },
   },
   formatDetection: { telephone: false },
+  other: {
+    "google-adsense-account": ADSENSE_CLIENT_ID,
+  },
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),

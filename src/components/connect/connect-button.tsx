@@ -2,7 +2,8 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { useRoleAction } from "@/hooks/use-role-action";
-import { ApiError, connectionsApi, type ConnectionStatus } from "@/lib/api";
+import { ApiError, connectionsApi, profileApi, type ConnectionStatus } from "@/lib/api";
+import { getParentNeed, parentNeedConnectMessage } from "@/lib/parent-need";
 import { whatsappLink } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
@@ -14,7 +15,6 @@ import {
   Send,
   X,
 } from "lucide-react";
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const MESSAGE_MIN = 10;
@@ -52,9 +52,8 @@ export function ConnectButton({
   requestedClassName?: string;
   label?: string;
 }) {
-  const { user, openRoleChooser } = useAuth();
+  const { user, setUser, openRoleChooser } = useAuth();
   const { requireParent } = useRoleAction();
-  const pathname = usePathname();
   const [modalOpen, setModalOpen] = useState(false);
   const [status, setStatus] = useState<"none" | ConnectionStatus>(
     teacher.connectionStatus ?? "none",
@@ -89,7 +88,7 @@ export function ConnectButton({
         type="button"
         onClick={(e) => {
           e.stopPropagation();
-          openRoleChooser(pathname ?? undefined);
+          openRoleChooser(`/teachers/${teacher.id}`);
         }}
         className={className}
       >
@@ -164,7 +163,20 @@ export function ConnectRequestModal({
   onClose: () => void;
   onSent: () => void;
 }) {
-  const [message, setMessage] = useState("");
+  const { user, setUser } = useAuth();
+  const needsIdentity = !user?.parentProfile?.name || !user?.parentProfile?.phoneNumber;
+  const storedNeed = getParentNeed();
+  const [name, setName] = useState(user?.parentProfile?.name ?? "");
+  const [phoneNumber, setPhoneNumber] = useState(user?.parentProfile?.phoneNumber ?? "");
+  const [city, setCity] = useState(
+    user?.parentProfile?.city || storedNeed?.city || "Bengaluru",
+  );
+  const [message, setMessage] = useState(() => {
+    const need = getParentNeed();
+    return need
+      ? parentNeedConnectMessage(need, teacher.name.split(" ")[0])
+      : "";
+  });
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -191,9 +203,33 @@ export function ConnectRequestModal({
       );
       return;
     }
+    if (needsIdentity) {
+      if (!name.trim()) {
+        setError("Add your name so the tutor knows who is reaching out");
+        return;
+      }
+      if (!/^\+?[\d\s-]{10,15}$/.test(phoneNumber.trim())) {
+        setError("Enter a valid WhatsApp number");
+        return;
+      }
+      if (!city.trim()) {
+        setError("Add your city");
+        return;
+      }
+    }
     setError("");
     setSending(true);
     try {
+      if (needsIdentity) {
+        const { user: updated } = await profileApi.saveParent({
+          name: name.trim(),
+          phoneNumber: phoneNumber.trim(),
+          country: user?.parentProfile?.country || "India",
+          city: city.trim() === "Online / any city" ? "Bengaluru" : city.trim(),
+          area: user?.parentProfile?.area,
+        });
+        setUser(updated);
+      }
       await connectionsApi.send(teacher.id, trimmed);
       setSent(true);
       onSent();
@@ -284,6 +320,48 @@ export function ConnectRequestModal({
                 This is a demo profile for illustration — connect with a live
                 tutor to try the flow.
               </p>
+            )}
+
+            {needsIdentity && (
+              <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+                <label className="block sm:col-span-1">
+                  <span className="mb-1 block text-[12px] font-semibold text-ink">
+                    Your name
+                  </span>
+                  <input
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    autoComplete="name"
+                    placeholder="Parent name"
+                    className="h-10 w-full rounded-md border border-hairline px-3 text-sm text-ink outline-none focus:border-ink/40"
+                  />
+                </label>
+                <label className="block">
+                  <span className="mb-1 block text-[12px] font-semibold text-ink">
+                    WhatsApp
+                  </span>
+                  <input
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    autoComplete="tel"
+                    inputMode="tel"
+                    placeholder="+91 98xxxxxxxx"
+                    className="h-10 w-full rounded-md border border-hairline px-3 text-sm text-ink outline-none focus:border-ink/40"
+                  />
+                </label>
+                <label className="block sm:col-span-2">
+                  <span className="mb-1 block text-[12px] font-semibold text-ink">
+                    City
+                  </span>
+                  <input
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    autoComplete="address-level2"
+                    placeholder="Bengaluru"
+                    className="h-10 w-full rounded-md border border-hairline px-3 text-sm text-ink outline-none focus:border-ink/40"
+                  />
+                </label>
+              </div>
             )}
 
             <label className="mt-4 block">

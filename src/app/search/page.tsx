@@ -105,17 +105,25 @@ function SearchContent() {
   const searchParams = useSearchParams();
   const initialSubject = searchParams?.get("subject") || undefined;
   const initialArea = searchParams?.get("area") || undefined;
+  const initialQuery = searchParams?.get("q") || "";
   const kindParam = searchParams?.get("kind");
   const initialKind =
     kindParam === "tutor" || kindParam === "mentor" ? kindParam : "all";
+  const modeParam = searchParams?.get("mode");
+  const initialMode =
+    modeParam === "online" || modeParam === "inperson" || modeParam === "both"
+      ? modeParam
+      : "all";
   const initialView =
     searchParams?.get("view") === "map" ? "map" : "list";
 
   const [filters, setFilters] = useState<SearchFiltersState>({
     ...DEFAULT_FILTERS,
+    query: initialQuery,
     subject: initialSubject,
     locality: initialArea || undefined,
     kind: initialKind,
+    mode: initialMode,
     view: initialView,
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);

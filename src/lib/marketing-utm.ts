@@ -151,6 +151,8 @@ export const MARKETING_PAGES = [
   { slug: "parents", title: "Parents landing", path: "/parents" },
   { slug: "for-faculty", title: "Faculty landing", path: "/for-faculty" },
   { slug: "open-source", title: "Open source", path: "/open-source" },
+  { slug: "contact", title: "Contact / request a feature", path: "/contact" },
+  { slug: "request-feature", title: "Request a feature", path: "/request-feature" },
   { slug: "blog-category-for-parents", title: "Blog · For parents", path: "/blog/category/for-parents" },
   { slug: "blog-category-for-students", title: "Blog · For students", path: "/blog/category/for-students" },
   { slug: "blog-category-comparison", title: "Blog · Comparisons", path: "/blog/category/comparison" },

@@ -1,18 +1,17 @@
 import { absoluteUrl } from "@/lib/seo";
 import type { MetadataRoute } from "next";
 
-/** App routes that must not be indexed (auth, dashboards, gated flows, signup). */
+/**
+ * App routes that must not be indexed (auth, dashboards, gated flows).
+ * Use `/parent/` (trailing slash) — `/parent` also matches the public `/parents` page.
+ */
 const PRIVATE_PATHS = [
   "/api/",
   "/dashboard",
   "/profiling",
-  "/parent/dashboard",
-  "/parent/profiling",
-  "/parent/signup",
-  "/faculty/signup",
-  "/board",
+  "/parent/",
   "/faculty",
-  "/parent",
+  "/board",
   "/login",
   "/admin/",
 ];
@@ -21,8 +20,16 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "*",
+        userAgent: [
+          "Mediapartners-Google",
+          "AdsBot-Google",
+          "AdsBot-Google-Mobile",
+        ],
         allow: "/",
+      },
+      {
+        userAgent: "*",
+        allow: ["/", "/ads.txt"],
         disallow: PRIVATE_PATHS,
       },
     ],

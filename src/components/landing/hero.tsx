@@ -14,7 +14,7 @@ import {
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
-import { TEACHERS, type Teacher } from "@/lib/teachers";
+import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
 import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
@@ -27,10 +27,71 @@ import {
   Users,
 } from "lucide-react";
 import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const FILTERS = ["All", "Physics", "Mathematics", "English", "Coding"] as const;
+const HERO_ORDER_KEY = "mentr_hero_tutor_order_v1";
+
+function shuffleTeachers(list: Teacher[]): Teacher[] {
+  const copy = [...list];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+/** Stable random order for this tab session so remounts don't reshuffle. */
+function orderTeachers(teachers: Teacher[]): Teacher[] {
+  if (teachers.length === 0) return [];
+  try {
+    const raw = sessionStorage.getItem(HERO_ORDER_KEY);
+    const map = new Map(teachers.map((t) => [t.id, t]));
+    if (raw) {
+      const ids = JSON.parse(raw) as string[];
+      const ordered: Teacher[] = [];
+      for (const id of ids) {
+        const t = map.get(id);
+        if (t) {
+          ordered.push(t);
+          map.delete(id);
+        }
+      }
+      const rest = shuffleTeachers([...map.values()]);
+      const next = [...ordered, ...rest];
+      sessionStorage.setItem(HERO_ORDER_KEY, JSON.stringify(next.map((t) => t.id)));
+      return next;
+    }
+    const shuffled = shuffleTeachers(teachers);
+    sessionStorage.setItem(
+      HERO_ORDER_KEY,
+      JSON.stringify(shuffled.map((t) => t.id)),
+    );
+    return shuffled;
+  } catch {
+    return shuffleTeachers(teachers);
+  }
+}
+
+function useHeroTeachers() {
+  const [pool, setPool] = useState<Teacher[]>([]);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchPublicTeachers({ liveOnly: true }).then(({ teachers }) => {
+      if (cancelled) return;
+      setPool(orderTeachers(teachers.filter((t) => t.live)));
+      setReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  return { pool, ready };
+}
 
 const BOARD_PREVIEW = [
   {
@@ -52,6 +113,22 @@ const BOARD_PREVIEW = [
     fresh: true,
   },
 ] as const;
+
+function TeacherRowSkeleton() {
+  return (
+    <div className="flex items-center justify-between gap-3 rounded-xl border-2 border-ink/10 bg-white p-3">
+      <div className="flex min-w-0 items-center gap-3">
+        <Skeleton className="h-10 w-10 shrink-0 rounded-lg bg-cream-band" />
+        <div className="min-w-0 space-y-1.5">
+          <Skeleton className="h-3.5 w-28 bg-cream-band" />
+          <Skeleton className="h-3 w-36 bg-cream-band" />
+          <Skeleton className="h-2.5 w-24 bg-cream-band" />
+        </div>
+      </div>
+      <Skeleton className="h-7 w-16 shrink-0 rounded-lg bg-cream-band" />
+    </div>
+  );
+}
 
 function TeacherRow({ teacher }: { teacher: Teacher }) {
   const available = teacher.openSlots > 0;
@@ -109,26 +186,48 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
   );
 }
 
-function HeroSearchPanel() {
+function HeroSearchPanel({
+  pool = [],
+  ready = false,
+}: {
+  pool?: Teacher[];
+  ready?: boolean;
+}) {
   const [query, setQuery] = useState("");
-  const [subject, setSubject] = useState<(typeof FILTERS)[number]>("All");
+  const [subject, setSubject] = useState("All");
   const [onlyOpen, setOnlyOpen] = useState(true);
 
+  const filters = useMemo(() => {
+    const seen: string[] = [];
+    for (const t of pool) {
+      for (const s of t.subjects) {
+        if (s && !seen.includes(s)) seen.push(s);
+      }
+    }
+    return ["All", ...seen.slice(0, 4)];
+  }, [pool]);
+
+  useEffect(() => {
+    if (subject !== "All" && !filters.includes(subject)) setSubject("All");
+  }, [filters, subject]);
+
   const results = useMemo(() => {
-    return TEACHERS.filter((t) => {
-      if (onlyOpen && t.openSlots <= 0) return false;
-      if (subject !== "All" && !t.subjects.some((s) => s.includes(subject))) {
-        return false;
-      }
-      if (query.trim()) {
-        const q = query.toLowerCase();
-        const hay =
-          `${t.name} ${t.subjectLine} ${t.area} ${t.subjects.join(" ")}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
-    }).slice(0, 4);
-  }, [query, subject, onlyOpen]);
+    return pool
+      .filter((t) => {
+        if (onlyOpen && t.openSlots <= 0) return false;
+        if (subject !== "All" && !t.subjects.some((s) => s.includes(subject))) {
+          return false;
+        }
+        if (query.trim()) {
+          const q = query.toLowerCase();
+          const hay =
+            `${t.name} ${t.subjectLine} ${t.area} ${t.subjects.join(" ")}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      })
+      .slice(0, 4);
+  }, [pool, query, subject, onlyOpen]);
 
   return (
     <BrowserFrame
@@ -138,9 +237,15 @@ function HeroSearchPanel() {
     >
       <div className="bg-white">
         <div className="flex items-center justify-between border-b-2 border-ink/10 bg-cream px-4 py-2.5">
-          <LpLiveDot label="12 tutors online" />
+          <LpLiveDot
+            label={
+              ready
+                ? `${pool.length} tutor${pool.length === 1 ? "" : "s"} listed`
+                : "Loading tutors…"
+            }
+          />
           <span className="text-[10px] font-bold text-muted">
-            {results.length} results
+            {ready ? `${results.length} results` : "…"}
           </span>
         </div>
 
@@ -157,7 +262,7 @@ function HeroSearchPanel() {
           </div>
 
           <div className="flex flex-wrap gap-1.5 sm:flex-nowrap sm:overflow-x-auto sm:pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {FILTERS.map((f) => (
+            {filters.map((f) => (
               <button
                 key={f}
                 type="button"
@@ -201,9 +306,18 @@ function HeroSearchPanel() {
           className="max-h-[260px] space-y-2 overflow-y-auto overscroll-contain bg-cream/50 p-3 sm:max-h-[280px]"
           onWheel={(e) => e.stopPropagation()}
         >
-          {results.length === 0 ? (
+          {!ready ? (
+            <>
+              <TeacherRowSkeleton />
+              <TeacherRowSkeleton />
+              <TeacherRowSkeleton />
+              <TeacherRowSkeleton />
+            </>
+          ) : results.length === 0 ? (
             <p className="py-8 text-center text-sm text-muted">
-              No matches — try another subject or turn off open-only.
+              {pool.length === 0
+                ? "Registered tutors will show up here."
+                : "No matches — try another subject or turn off open-only."}
             </p>
           ) : (
             results.map((t) => <TeacherRow key={t.id} teacher={t} />)
@@ -282,7 +396,13 @@ function HeroBoardPanel() {
   );
 }
 
-function HeroInteractiveMock() {
+function HeroInteractiveMock({
+  pool,
+  ready,
+}: {
+  pool: Teacher[];
+  ready: boolean;
+}) {
   const [mode, setMode] = useState<"search" | "board">("search");
 
   return (
@@ -337,13 +457,20 @@ function HeroInteractiveMock() {
           },
         ]}
       >
-        {mode === "search" ? <HeroSearchPanel /> : <HeroBoardPanel />}
+        {mode === "search" ? (
+          <HeroSearchPanel pool={pool} ready={ready} />
+        ) : (
+          <HeroBoardPanel />
+        )}
       </LpMockStage>
     </div>
   );
 }
 
 export function Hero() {
+  const { pool, ready } = useHeroTeachers();
+  const previewFaces = pool.slice(0, 4);
+
   return (
     <section className="relative overflow-hidden border-b border-hairline bg-cream">
       <LpGridBg />
@@ -450,26 +577,49 @@ export function Hero() {
 
             <div className="flex items-center justify-center gap-3 pt-1 lg:justify-start">
               <div className="flex -space-x-2">
-                {["AR", "VS", "MK", "RJ"].map((init) => (
-                  <span
-                    key={init}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-cream bg-lavender text-[10px] font-bold text-ink"
-                  >
-                    {init}
-                  </span>
-                ))}
+                {!ready
+                  ? [0, 1, 2, 3].map((i) => (
+                      <Skeleton
+                        key={i}
+                        className="h-8 w-8 rounded-full border-2 border-cream bg-cream-band"
+                      />
+                    ))
+                  : previewFaces.map((t) => (
+                      <span
+                        key={t.id}
+                        title={t.name}
+                        className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-cream bg-lavender text-[10px] font-bold text-ink"
+                      >
+                        {t.initials}
+                      </span>
+                    ))}
               </div>
               <p className="text-left text-xs leading-snug text-muted">
-                <span className="font-bold text-ink">Parents &amp; tutors</span>{" "}
-                connecting
-                <br />
-                locally and online this month
+                {ready && pool.length > 0 ? (
+                  <>
+                    <span className="font-bold text-ink">
+                      {previewFaces.map((t) => t.name.split(" ")[0]).join(", ")}
+                    </span>
+                    {pool.length > previewFaces.length
+                      ? ` +${pool.length - previewFaces.length} more`
+                      : ""}
+                    <br />
+                    registered tutors, live now
+                  </>
+                ) : (
+                  <>
+                    <span className="font-bold text-ink">Parents &amp; tutors</span>{" "}
+                    connecting
+                    <br />
+                    locally and online this month
+                  </>
+                )}
               </p>
             </div>
           </div>
 
           <div className="min-w-0 w-full max-w-full overflow-hidden">
-            <HeroInteractiveMock />
+            <HeroInteractiveMock pool={pool} ready={ready} />
             <p className="mt-4 text-center text-xs leading-relaxed text-muted lg:text-left">
               Switch tabs to preview both paths — filter tutors, toggle open
               slots, or browse live requirements on the board.

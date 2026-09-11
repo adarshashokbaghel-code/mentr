@@ -7,6 +7,7 @@ import {
 } from "@/components/admin/admin-ui";
 import { AdminConnectionsTable } from "@/components/admin/admin-connections-table";
 import { AdminEngagementTables } from "@/components/admin/admin-engagement-tables";
+import { AdminInteractions } from "@/components/admin/admin-interactions";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
@@ -21,6 +22,7 @@ import {
   Mail,
   Megaphone,
   RefreshCw,
+  MessageSquareText,
   Target,
   Users,
 } from "lucide-react";
@@ -34,6 +36,7 @@ const NAV = [
   { id: "messenger", label: "Messenger", icon: Mail },
   { id: "engagement", label: "Engagement", icon: Activity },
   { id: "marketing", label: "Marketing", icon: Target },
+  { id: "interactions", label: "User interaction", icon: MessageSquareText },
   { id: "supply", label: "Supply", icon: BarChart3 },
 ] as const;
 
@@ -295,6 +298,10 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           )}
 
           {section === "marketing" && <AdminMarketing adminKey={adminKey} />}
+
+          {section === "interactions" && (
+            <AdminInteractions adminKey={adminKey} />
+          )}
 
           {stats && section === "engagement" && (
             <AdminSection

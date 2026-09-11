@@ -5,8 +5,22 @@ import { isProfileComplete } from "./lib/profile-complete";
 import { User, type IUser } from "./models/User";
 import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
 
+const PUBLIC_LIST_TTL_MS = 60_000;
+
+let publicListCache: {
+  teachers: Record<string, unknown>[];
+  at: number;
+} | null = null;
+
 /** Load all public faculty profiles for browse (no phone / connection info). */
 export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
+  if (
+    publicListCache &&
+    Date.now() - publicListCache.at < PUBLIC_LIST_TTL_MS
+  ) {
+    return publicListCache.teachers;
+  }
+
   await connectDb();
 
   const users = (await User.find({
@@ -22,18 +36,21 @@ export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
     console.error("map coords backfill:", err),
   );
 
-  return complete.map((u) =>
+  const teachers = complete.map((u) =>
     JSON.parse(JSON.stringify(toPublicTeacher(u, NO_CONNECTION))) as Record<
       string,
       unknown
     >,
   );
+  publicListCache = { teachers, at: Date.now() };
+  return teachers;
 }
 
 /** Public directory — no auth, no phone numbers (Express). */
 export async function getPublicTeachers(res: Response): Promise<void> {
   try {
     const teachers = await loadPublicTeachers();
+    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=180");
     res.json({ teachers });
   } catch (error) {
     console.error("public teachers list error:", error);

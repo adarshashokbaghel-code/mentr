@@ -10,6 +10,7 @@ import requirementRoutes from "./routes/requirements";
 import teacherRoutes from "./routes/teachers";
 import adminRoutes from "./routes/admin";
 import marketingRoutes from "./routes/marketing";
+import feedbackRoutes from "./routes/feedback";
 import notificationRoutes from "./routes/notifications";
 import parentHiringRoutes from "./routes/parent-hiring";
 import { getPublicRequirementShare } from "./public-requirement-share";
@@ -124,6 +125,7 @@ app.post("/api/cron/pitch-digest", async (req, res) => {
 });
 
 app.use("/api/marketing", marketingRoutes);
+app.use("/api/feedback", feedbackRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/connections", connectionRoutes);
 app.use("/api/profile", profileRoutes);

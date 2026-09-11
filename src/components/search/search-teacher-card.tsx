@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/components/auth/auth-provider";
 import { ConnectButton } from "@/components/connect/connect-button";
 import { SaveTeacherButton } from "@/components/search/save-teacher-button";
 import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
@@ -90,16 +89,9 @@ export function SearchTeacherCard({
   className,
   distanceKm,
 }: SearchTeacherCardProps) {
-  const { user, openRoleChooser } = useAuth();
   const available = teacher.openSlots > 0;
   const nextSlot = teacher.slots.find((s) => s.available)?.label;
   const profileHref = `/teachers/${teacher.id}`;
-
-  function guardGuest(e: React.MouseEvent) {
-    if (user) return;
-    e.preventDefault();
-    openRoleChooser(profileHref);
-  }
 
   return (
     <article
@@ -107,48 +99,24 @@ export function SearchTeacherCard({
         "group flex h-full flex-col overflow-hidden rounded-lg border border-hairline bg-white transition",
         "hover:border-ink/20 hover:shadow-sm",
         !available && "opacity-70",
-        !user && "cursor-pointer",
         className,
       )}
-      {...(!user
-        ? {
-            role: "button" as const,
-            tabIndex: 0,
-            onClick: (e: React.MouseEvent) => {
-              if ((e.target as HTMLElement).closest("[data-connect]")) return;
-              if ((e.target as HTMLElement).closest("[data-shortlist]")) return;
-              guardGuest(e);
-            },
-            onKeyDown: (e: React.KeyboardEvent) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                openRoleChooser(profileHref);
-              }
-            },
-          }
-        : {})}
     >
       <CardPhoto
         teacher={teacher}
         available={available}
-        asLink={Boolean(user)}
+        asLink
         profileHref={profileHref}
       />
 
       <div className="flex flex-1 flex-col p-3">
         <div className="flex items-start gap-1">
-          {user ? (
-            <Link
-              href={profileHref}
-              className="min-w-0 flex-1 truncate text-sm font-semibold text-ink hover:text-coral"
-            >
-              {teacher.name}
-            </Link>
-          ) : (
-            <span className="min-w-0 flex-1 truncate text-sm font-semibold text-ink group-hover:text-coral">
-              {teacher.name}
-            </span>
-          )}
+          <Link
+            href={profileHref}
+            className="min-w-0 flex-1 truncate text-sm font-semibold text-ink hover:text-coral"
+          >
+            {teacher.name}
+          </Link>
           {teacher.verified && (
             <BadgeCheck
               className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sage"
@@ -192,7 +160,7 @@ export function SearchTeacherCard({
           {available ? (
             <ConnectButton
               teacher={teacher}
-              label={user ? "Connect" : "Sign in to connect"}
+              label="Connect"
               className="inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-md bg-coral text-[11px] font-semibold text-white transition hover:bg-coral-dark"
               requestedClassName="inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-md bg-cream text-[11px] font-semibold text-muted"
             />
@@ -201,22 +169,12 @@ export function SearchTeacherCard({
               Notify
             </span>
           )}
-          {user ? (
-            <Link
-              href={profileHref}
-              className="inline-flex h-8 items-center justify-center rounded-md border border-hairline px-2.5 text-[11px] font-semibold text-ink transition hover:bg-cream"
-            >
-              View
-            </Link>
-          ) : (
-            <button
-              type="button"
-              onClick={guardGuest}
-              className="inline-flex h-8 items-center justify-center rounded-md border border-hairline px-2.5 text-[11px] font-semibold text-ink transition hover:bg-cream"
-            >
-              View
-            </button>
-          )}
+          <Link
+            href={profileHref}
+            className="inline-flex h-8 items-center justify-center rounded-md border border-hairline px-2.5 text-[11px] font-semibold text-ink transition hover:bg-cream"
+          >
+            View
+          </Link>
         </div>
       </div>
     </article>

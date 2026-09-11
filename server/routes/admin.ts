@@ -14,6 +14,7 @@ import {
   searchAdminUsers,
   sendMessengerEmails,
 } from "../services/admin-messenger";
+import { listAdminInteractions } from "../services/admin-interactions";
 import { getAdminMarketing } from "../services/admin-marketing";
 import { getAdminStats } from "../services/admin-stats";
 import type { MessengerTemplateId } from "../services/email-templates";
@@ -103,6 +104,17 @@ router.get("/engagement/otp", async (req, res) => {
   } catch (err) {
     console.error("Admin OTP activity error:", err);
     res.status(500).json({ error: "Failed to load OTP activity" });
+  }
+});
+
+router.get("/interactions", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "300"), 10) || 300, 500);
+    const data = await listAdminInteractions(limit);
+    res.json(data);
+  } catch (err) {
+    console.error("Admin interactions error:", err);
+    res.status(500).json({ error: "Failed to load user interactions" });
   }
 });
 

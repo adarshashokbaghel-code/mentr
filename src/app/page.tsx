@@ -1,3 +1,4 @@
+import { ParentNeedFinder } from "@/components/parent/parent-need-finder";
 import { CTA } from "@/components/landing/cta";
 import { FAQ } from "@/components/landing/faq";
 import { FacultyShowcase } from "@/components/landing/faculty-showcase";
@@ -123,6 +124,7 @@ export default function Home() {
       <Navbar />
       <main className="w-full max-w-full overflow-x-clip">
         <Hero />
+        <ParentNeedFinder />
         <LpStatsBand stats={heroStats} />
         <StatsMarquee />
         <TrustSafety />
