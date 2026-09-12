@@ -2,6 +2,7 @@ import { testimonialInitial, testimonialName } from "@/lib/demo-users";
 import { cn } from "@/lib/utils";
 import { ArrowRight, LucideIcon } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 export const hardShadow = "shadow-[4px_4px_0_0_#1c1a17]";
 export const hardShadowSm = "shadow-[3px_3px_0_0_#1c1a17]";
@@ -510,6 +511,8 @@ export function LpFinalCta({
   secondaryHref,
   dark = false,
   perks,
+  innerClassName,
+  primarySlot,
 }: {
   eyebrow: string;
   title: string;
@@ -520,6 +523,8 @@ export function LpFinalCta({
   secondaryHref?: string;
   dark?: boolean;
   perks?: string[];
+  innerClassName?: string;
+  primarySlot?: ReactNode;
 }) {
   return (
     <section
@@ -534,7 +539,7 @@ export function LpFinalCta({
           <LpBlob color="rgba(47,158,110,0.1)" size={260} className="-right-16 bottom-0" />
         </>
       )}
-      <div className="relative mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-8">
+      <div className={cn("relative mx-auto max-w-[1000px] px-4 sm:px-6 lg:px-8", innerClassName)}>
         <div
           className={cn(
             "rounded-2xl border-2 p-5 text-center sm:p-8 lg:p-14",
@@ -575,6 +580,7 @@ export function LpFinalCta({
           )}
 
           <div className="mt-10 flex flex-wrap justify-center gap-4">
+            {primarySlot ?? (
             <Link
               href={primaryHref}
               className={cn(
@@ -587,6 +593,7 @@ export function LpFinalCta({
               {primaryLabel}
               <ArrowRight className="h-4 w-4" />
             </Link>
+            )}
             {secondaryLabel && secondaryHref && (
               <Link
                 href={secondaryHref}

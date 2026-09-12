@@ -51,6 +51,10 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
   return [
     entry("/", 1, "daily"),
     entry("/parents", 0.9, "weekly"),
+    entry("/learn", 0.9, "weekly"),
+    entry("/learn/india", 0.88, "weekly"),
+    entry("/learn/uae", 0.88, "weekly"),
+    entry("/learn/syllabus", 0.8, "weekly"),
     entry("/for-faculty", 0.9, "weekly"),
     entry("/online-tutor-jobs", 0.9, "weekly"),
     ...MONEY_LANDING_PAGES.filter((p) => p.basePath !== "/online-tutor-jobs").map(

@@ -1,0 +1,46 @@
+import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import type { ReactNode } from "react";
+
+function ArrowIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M14.43 5.93 20.5 12l-6.07 6.07"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3.5 12h16.83"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function LearnStartButton({
+  href = LEARN_SIGNUP_HREF,
+  children = "Get started for free",
+  className,
+  onClick,
+}: {
+  href?: string;
+  children?: ReactNode;
+  className?: string;
+  onClick?: () => void;
+}) {
+  return (
+    <Link href={href} onClick={onClick} className={cn("learn-hk-cta", className)}>
+      <span className="learn-hk-cta-label">{children}</span>
+      <span className="learn-hk-cta-arrow">
+        <ArrowIcon />
+      </span>
+    </Link>
+  );
+}

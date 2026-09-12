@@ -15,18 +15,18 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+import { LearnDino } from "@/components/landing/lp/learn-dino";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const navLinks = [
   { label: "Find tutors", href: "/search" },
   { label: "Find mentors", href: "/search?kind=mentor" },
-  { label: "How it works", href: "/#how-it-works" },
+  { label: "Mentr Learn", href: "/learn" },
   { label: "FAQ", href: "/faq" },
   { label: "Blog", href: "/blog" },
   { label: "Open source", href: "/open-source" },
   { label: "Request a feature", href: "/request-feature" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
@@ -58,8 +58,11 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-cream-band hover:text-ink"
+              className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-cream-band hover:text-ink"
             >
+              {link.href === "/learn" && (
+                <LearnDino size={18} className="h-[18px] w-[18px]" />
+              )}
               {link.label}
             </a>
           ))}
@@ -113,9 +116,12 @@ export function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-muted hover:bg-cream-band hover:text-ink"
+                className="inline-flex items-center gap-1.5 rounded-lg px-3 py-3 text-sm font-medium text-muted hover:bg-cream-band hover:text-ink"
                 onClick={() => setOpen(false)}
               >
+                {link.href === "/learn" && (
+                  <LearnDino size={18} className="h-[18px] w-[18px]" />
+                )}
                 {link.label}
               </a>
             ))}
