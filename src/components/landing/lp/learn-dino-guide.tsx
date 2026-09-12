@@ -30,6 +30,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { LearnDino } from "./learn-dino";
+import { LearnStartButton } from "./learn-start-button";
 
 const HIDDEN_PREFIXES = ["/admin", "/admintestingistrueonlyman134hsydsudy4"];
 
@@ -268,24 +269,24 @@ export function LearnDinoGuide() {
                       ))}
                     </div>
 
-                    <div className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                    <div className="mt-5 grid grid-cols-1 gap-2.5">
+                      <LearnStartButton
+                        href={onLearn ? "#curriculum" : "/learn"}
+                        onClick={() => setOpen(false)}
+                        className="w-full justify-center"
+                      >
+                        Explore Learn
+                      </LearnStartButton>
                       <button
                         type="button"
                         onClick={() => {
                           setTalk(true);
                           setFaqId(DINO_FAQ_START);
                         }}
-                        className="inline-flex h-12 items-center justify-center rounded-full bg-[#ff6a1a] px-4 text-[14px] font-bold text-white shadow-[0_8px_18px_rgba(255,106,26,0.28)] transition hover:bg-[#e85f14]"
+                        className="inline-flex h-12 items-center justify-center rounded-full bg-white/75 px-4 text-[14px] font-bold text-[#1c2434] ring-1 ring-white/85 transition hover:bg-white"
                       >
                         Talk to Dino
                       </button>
-                      <Link
-                        href={onLearn ? "#curriculum" : "/learn"}
-                        onClick={() => setOpen(false)}
-                        className="inline-flex h-12 items-center justify-center rounded-full bg-white/75 px-4 text-[14px] font-bold text-[#1c2434] ring-1 ring-white/85 transition hover:bg-white"
-                      >
-                        Explore Learn
-                      </Link>
                     </div>
                   </>
                 ) : (
@@ -355,13 +356,13 @@ export function LearnDinoGuide() {
                       ))}
                     </div>
 
-                    <Link
+                    <LearnStartButton
                       href={onLearn ? "#curriculum" : "/learn"}
                       onClick={() => setOpen(false)}
-                      className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-full bg-white/75 px-4 text-[14px] font-bold text-[#1c2434] ring-1 ring-white/85 transition hover:bg-white"
+                      className="mt-3 w-full justify-center"
                     >
                       Explore Learn
-                    </Link>
+                    </LearnStartButton>
                   </div>
                 )}
               </div>
