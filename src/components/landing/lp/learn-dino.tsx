@@ -1,4 +1,8 @@
-import { LEARN_DINO_SRC } from "@/lib/learn-assets";
+import {
+  LEARN_DINO_ACTIONS,
+  LEARN_DINO_SRC,
+  type LearnDinoAction,
+} from "@/lib/learn-assets";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 
@@ -6,10 +10,12 @@ export function LearnDino({
   size = 40,
   className,
   priority = false,
+  action = "still",
 }: {
   size?: number;
   className?: string;
   priority?: boolean;
+  action?: LearnDinoAction;
 }) {
   return (
     <Image
@@ -17,7 +23,11 @@ export function LearnDino({
       alt=""
       width={size}
       height={size}
-      className={cn("bg-transparent object-contain", className)}
+      className={cn(
+        "bg-transparent object-contain",
+        LEARN_DINO_ACTIONS[action],
+        className,
+      )}
       priority={priority}
       unoptimized
     />

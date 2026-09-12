@@ -20,7 +20,7 @@ export function LearnLeadersSection() {
     <section className="bg-[#fffdf8] py-10 sm:py-16 lg:py-20">
       <div className={LEARN_SHELL}>
         <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:justify-center sm:gap-3.5 sm:text-left">
-          <LearnDino size={56} className="h-12 w-12 shrink-0 sm:h-14 sm:w-14" />
+          <LearnDino size={56} action="handshake" className="h-12 w-12 shrink-0 sm:h-14 sm:w-14" />
           <h2 className="min-w-0 text-balance text-[1.35rem] font-extrabold tracking-tight text-[#1c2434] sm:text-[2.1rem]">
             They told students to learn this.{" "}
             <span className="text-[#ff6a1a]">We start it in Class 3–5.</span>

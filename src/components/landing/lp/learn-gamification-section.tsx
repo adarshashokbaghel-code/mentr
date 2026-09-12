@@ -247,7 +247,7 @@ function DinoGuideCard() {
       </div>
 
       <div className="mt-4 flex items-center gap-4">
-        <LearnDino size={88} className="learn-float h-[72px] w-[72px] shrink-0 sm:h-[88px] sm:w-[88px]" />
+        <LearnDino size={88} action="blink" className="learn-float h-[72px] w-[72px] shrink-0 sm:h-[88px] sm:w-[88px]" />
         <div
           key={line}
           className="learn-bubble-in relative min-w-0 flex-1 rounded-2xl rounded-bl-md bg-[#fff4e8] px-3.5 py-3"

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/auth/app-providers";
+import { LearnDinoGuide } from "@/components/landing/lp/learn-dino-guide";
 import { CookieConsent } from "@/components/seo/cookie-consent";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import {
@@ -104,6 +105,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <AppProviders>{children}</AppProviders>
+        <LearnDinoGuide />
         <CookieConsent />
       </body>
     </html>

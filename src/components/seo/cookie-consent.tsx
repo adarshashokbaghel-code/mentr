@@ -26,6 +26,7 @@ export function CookieConsent() {
       // Ignore storage failures — banner can still dismiss for this session.
     }
     setVisible(false);
+    window.dispatchEvent(new Event("mentr-cookie-accepted"));
   }
 
   if (!visible) return null;

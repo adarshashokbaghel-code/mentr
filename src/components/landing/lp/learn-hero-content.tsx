@@ -54,6 +54,7 @@ export function LearnHeroContent({ copy }: { copy: LearnLandingCopy }) {
       <div className="learn-hero-reveal learn-hero-reveal-delay-1 flex items-start gap-3 sm:gap-4">
         <LearnDino
           size={64}
+          action="blink"
           className="mt-0.5 h-10 w-10 shrink-0 sm:mt-1 sm:h-14 sm:w-14 lg:h-16 lg:w-16"
         />
         <h1 className="min-w-0 text-balance text-[1.45rem] font-extrabold leading-[1.18] tracking-tight break-words text-[#1c2434] sm:text-[2.35rem] lg:text-[2.75rem]">

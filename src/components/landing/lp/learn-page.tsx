@@ -18,7 +18,6 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { LearnAnimatedHero } from "./learn-animated-hero";
-import { LearnGuidePopup } from "./learn-guide-popup";
 import { LearnHeroContent } from "./learn-hero-content";
 import { LearnStatsSlider } from "./learn-stats-slider";
 import { LEARN_SHELL } from "./learn-shell";
@@ -204,7 +203,6 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
 
   return (
     <div className="min-h-screen max-w-[100vw] overflow-x-hidden bg-gradient-to-b from-butter/25 via-cream to-cream">
-      <LearnGuidePopup />
       <LearnLoggedInBanner />
 
       {/* Hero — light HackerKid-style ed-tech */}
