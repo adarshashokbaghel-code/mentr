@@ -995,3 +995,534 @@ main {
     animation: none;
   }
 }
+
+/* ── Mentr Learn (kid-friendly landing) ── */
+
+.learn-landing {
+  --learn-font: var(--font-learn-face, var(--font-sans-face)), "Baloo 2", "Plus Jakarta Sans",
+    system-ui, sans-serif;
+  font-family: var(--learn-font);
+}
+
+.learn-landing h1,
+.learn-landing h2,
+.learn-landing h3,
+.learn-landing .learn-display {
+  font-family: var(--learn-font);
+  letter-spacing: -0.02em;
+}
+
+@keyframes learn-stats-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.learn-stats-track {
+  animation: learn-stats-marquee 28s linear infinite;
+}
+
+.learn-stats-track:hover {
+  animation-play-state: paused;
+}
+
+.learn-facts-track {
+  animation: learn-stats-marquee 32s linear infinite;
+}
+
+.learn-facts-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-stats-track,
+  .learn-facts-track {
+    animation: none;
+  }
+}
+
+/* HackerKid-style hero: light, clean ed-tech */
+.learn-hk-hero {
+  --hk-orange: #ff6a1a;
+  --hk-orange-dark: #e85a0c;
+  --hk-teal: #0d9488;
+  --hk-navy: #1c2434;
+  --hk-muted: #5a6472;
+  background:
+    radial-gradient(ellipse 70% 55% at 88% 12%, rgba(255, 214, 120, 0.45), transparent 55%),
+    radial-gradient(ellipse 55% 50% at 8% 88%, rgba(13, 148, 136, 0.12), transparent 50%),
+    radial-gradient(ellipse 40% 40% at 55% 0%, rgba(255, 106, 26, 0.08), transparent 50%),
+    #fffdf8;
+  border-bottom: 1px solid #efe6d8;
+}
+
+@keyframes learn-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes learn-module-drift-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate(8px, -12px) rotate(1deg);
+  }
+}
+
+@keyframes learn-module-drift-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(2deg);
+  }
+  50% {
+    transform: translate(-10px, -8px) rotate(-1deg);
+  }
+}
+
+@keyframes learn-module-drift-3 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-1deg);
+  }
+  50% {
+    transform: translate(6px, -14px) rotate(2deg);
+  }
+}
+
+@keyframes learn-hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes learn-guide-pop {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes learn-bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes learn-bubble-text {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes learn-play-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 106, 26, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(255, 106, 26, 0);
+  }
+}
+
+@keyframes learn-video-progress {
+  0% {
+    width: 8%;
+  }
+  100% {
+    width: 78%;
+  }
+}
+
+@keyframes learn-video-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes learn-xp-burst {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.85);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-4px) scale(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-36px) scale(0.95);
+  }
+}
+
+@keyframes learn-star-twinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.learn-float {
+  animation: learn-float 3.8s ease-in-out infinite;
+}
+
+.learn-float-delay-1 {
+  animation-delay: 0.35s;
+}
+
+.learn-float-delay-2 {
+  animation-delay: 0.9s;
+}
+
+.learn-float-delay-3 {
+  animation-delay: 1.4s;
+}
+
+.learn-module-drift-1 {
+  animation: learn-module-drift-1 5s ease-in-out infinite;
+}
+
+.learn-module-drift-2 {
+  animation: learn-module-drift-2 4.6s ease-in-out infinite;
+}
+
+.learn-module-drift-3 {
+  animation: learn-module-drift-3 5.2s ease-in-out infinite;
+}
+
+.learn-hero-reveal {
+  animation: learn-hero-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.learn-hero-reveal-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.learn-hero-reveal-delay-2 {
+  animation-delay: 0.22s;
+}
+
+.learn-hero-reveal-delay-3 {
+  animation-delay: 0.38s;
+}
+
+.learn-guide-pop {
+  animation: learn-guide-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.learn-bubble-in {
+  animation: learn-bubble-in 0.35s ease-out both;
+}
+
+.learn-bubble-text {
+  animation: learn-bubble-text 0.35s ease-out both;
+}
+
+.learn-play-pulse {
+  animation: learn-play-pulse 2s ease-in-out infinite;
+}
+
+.learn-video-progress {
+  animation: learn-video-progress 8s linear infinite;
+}
+
+.learn-video-scan {
+  animation: learn-video-scan 2.8s linear infinite;
+}
+
+.learn-xp-burst {
+  animation: learn-xp-burst 1.2s ease-out both;
+}
+
+.learn-star-twinkle {
+  animation: learn-star-twinkle 2.4s ease-in-out infinite;
+}
+
+@keyframes learn-step-enter {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes learn-step-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes learn-quiz-correct {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.learn-step-enter {
+  animation: learn-step-enter 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.learn-step-progress {
+  animation: learn-step-progress 4s linear both;
+}
+
+.learn-quiz-correct {
+  animation: learn-quiz-correct 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-float,
+  .learn-float-delay-1,
+  .learn-float-delay-2,
+  .learn-float-delay-3,
+  .learn-module-drift-1,
+  .learn-module-drift-2,
+  .learn-module-drift-3,
+  .learn-hero-reveal,
+  .learn-hero-reveal-delay-1,
+  .learn-hero-reveal-delay-2,
+  .learn-hero-reveal-delay-3,
+  .learn-guide-pop,
+  .learn-bubble-in,
+  .learn-bubble-text,
+  .learn-play-pulse,
+  .learn-video-progress,
+  .learn-video-scan,
+  .learn-xp-burst,
+  .learn-star-twinkle,
+  .learn-step-enter,
+  .learn-step-progress,
+  .learn-quiz-correct {
+    animation: none;
+  }
+
+  .learn-step-progress {
+    width: 100%;
+  }
+}
+
+/* Why choose — HackerKid-style sticky horizontal tabs */
+.learn-choose-track {
+  height: auto;
+}
+
+@media (min-width: 768px) {
+  .learn-choose-track {
+    height: calc((100svh - 4rem) + (var(--choose-slides, 7) - 1) * 56vh);
+  }
+
+  .learn-choose-sticky {
+    min-height: calc(100svh - 4rem);
+  }
+
+  .learn-choose-sticky-pin {
+    position: fixed;
+    top: 4rem;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    height: calc(100svh - 4rem);
+  }
+
+  .learn-choose-sticky-after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+@keyframes learn-choose-copy {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes learn-choose-art {
+  from {
+    opacity: 0;
+    transform: translateX(22px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.learn-choose-copy {
+  animation: learn-choose-copy 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.learn-choose-art {
+  animation: learn-choose-art 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.learn-choose-dino {
+  transform: translate3d(0, -50%, 0);
+}
+
+@keyframes learn-badge-shine {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 0 6px 16px -4px var(--learn-badge-glow, rgba(255, 106, 26, 0.35));
+  }
+}
+
+.learn-xp-badge {
+  animation: learn-badge-shine 2.8s ease-in-out infinite;
+}
+
+.learn-xp-badge-lock {
+  filter: grayscale(0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-choose-copy,
+  .learn-choose-art,
+  .learn-xp-badge {
+    animation: none;
+  }
+}
+
+/* HackerKid “Get Started For Free” — arrow chip slides left on hover */
+.learn-hk-cta {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  overflow: hidden;
+  border: none;
+  border-radius: 1.5rem;
+  background: linear-gradient(#ff6a1a 0%, #e47400 100%);
+  padding: 0.85rem 3.85rem 0.85rem 1.6rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.learn-hk-cta-label {
+  display: inline-block;
+  min-width: 0;
+  color: #fff;
+  transition: transform 0.5s ease;
+}
+
+.learn-hk-cta-arrow {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 0.85rem;
+  background: #fff;
+  padding: 0.38rem 0.55rem;
+  color: #ff6a1a;
+  transform: translateY(-50%);
+  transition:
+    right 0.5s ease,
+    background-color 0.5s ease,
+    color 0.5s ease,
+    border-color 0.5s ease,
+    transform 0.5s ease;
+}
+
+.learn-hk-cta:hover .learn-hk-cta-label {
+  transform: translateX(20%);
+}
+
+.learn-hk-cta:hover .learn-hk-cta-arrow {
+  right: calc(100% - 2.85rem);
+  border-color: #fff;
+  background: #ff6a1a;
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .learn-hk-cta {
+    width: 100%;
+    justify-content: center;
+    border-radius: 1rem;
+    padding: 0.75rem 3.1rem 0.75rem 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .learn-hk-cta-arrow {
+    border-radius: 0.5rem;
+    padding: 0.28rem 0.4rem;
+  }
+
+  .learn-hk-cta-arrow svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-hk-cta-label,
+  .learn-hk-cta-arrow {
+    transition: none;
+  }
+}

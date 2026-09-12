@@ -22,6 +22,8 @@ const columns: Record<string, FooterLink[]> = {
     { label: "FAQ", href: "/faq" },
   ],
   Parents: [
+    { label: "Mentr Learn (Class 3–5)", href: "/learn" },
+    { label: "Class 3–5 syllabus PDF", href: "/learn/syllabus/download" },
     { label: "Create parent account", href: "/parent/signup" },
     { label: "Parent login", href: "/parent" },
     { label: "Browse all tutors", href: "/search" },

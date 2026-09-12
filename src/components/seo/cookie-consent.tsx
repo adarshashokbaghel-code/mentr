@@ -35,10 +35,10 @@ export function CookieConsent() {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie notice"
-      className="fixed inset-x-0 bottom-0 z-[250] border-t border-hairline bg-white/95 p-4 shadow-[0_-8px_30px_rgba(28,26,23,0.08)] backdrop-blur-sm sm:p-5"
+      className="fixed inset-x-0 bottom-0 z-[250] box-border w-full max-w-[100vw] overflow-x-hidden border-t border-hairline bg-white/95 px-4 py-3 shadow-[0_-8px_30px_rgba(28,26,23,0.08)] backdrop-blur-sm sm:p-5"
     >
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-3xl text-sm leading-relaxed text-muted">
+      <div className="mx-auto flex w-full min-w-0 max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+        <p className="min-w-0 max-w-3xl text-sm leading-relaxed text-muted">
           We use cookies for sign-in, Google Analytics, and Google AdSense ads
           on public pages. See our{" "}
           <Link
