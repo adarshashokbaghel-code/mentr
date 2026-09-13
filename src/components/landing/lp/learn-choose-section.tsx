@@ -283,7 +283,7 @@ export function LearnChooseSection() {
                   aria-hidden
                   className="learn-choose-dino absolute top-6 left-0 z-10 will-change-transform"
                 >
-                  <LearnDino size={40} className="h-9 w-9 sm:h-10 sm:w-10" />
+                  <LearnDino size={40} action="peek" className="h-9 w-9 sm:h-10 sm:w-10" />
                 </div>
                 <div
                   role="tablist"

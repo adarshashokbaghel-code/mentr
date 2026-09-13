@@ -38,7 +38,7 @@ export function LearnTracksSection() {
     <section id="tracks" className="scroll-mt-20 bg-white py-10 sm:py-16 lg:py-20">
       <div className={LEARN_SHELL}>
         <div className="mx-auto max-w-2xl text-center">
-          <LearnDino size={56} className="mx-auto h-12 w-12 sm:h-14 sm:w-14" />
+          <LearnDino size={56} action="cheer" className="mx-auto h-12 w-12 sm:h-14 sm:w-14" />
           <p className="mt-2 text-[12px] font-bold uppercase tracking-wider text-[#ff6a1a]">Three subjects</p>
           <h2 className="mt-1 text-[1.5rem] font-extrabold tracking-tight text-[#1c2434] sm:text-[2.1rem]">
             CS, AI &amp; Math that reinforce each other

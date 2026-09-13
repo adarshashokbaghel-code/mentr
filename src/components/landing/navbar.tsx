@@ -5,6 +5,7 @@ import { ParentNotificationsBell } from "@/components/parent/parent-notification
 import { Button } from "@/components/ui/button";
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { useAuth } from "@/components/auth/auth-provider";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -22,7 +23,7 @@ import { useEffect, useState } from "react";
 const navLinks = [
   { label: "Find tutors", href: "/search" },
   { label: "Find mentors", href: "/search?kind=mentor" },
-  { label: "Mentr Learn", href: "/learn" },
+  ...(LEARN_PUBLIC ? [{ label: "Mentr Learn", href: "/learn" }] : []),
   { label: "FAQ", href: "/faq" },
   { label: "Blog", href: "/blog" },
   { label: "Open source", href: "/open-source" },

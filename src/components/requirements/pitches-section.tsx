@@ -91,10 +91,7 @@ export function PitchesSection() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h2 className="text-xl font-semibold">Your pitches</h2>
-          <p className="mt-0.5 text-sm text-muted">
-            Requirements you responded to on the board. Parents stay anonymous
-            until they accept.
-          </p>
+          
         </div>
         <FacultyActionLink
           href="/board"

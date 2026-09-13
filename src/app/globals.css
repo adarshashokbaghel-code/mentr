@@ -1450,7 +1450,7 @@ main {
   align-items: center;
   overflow: hidden;
   border: none;
-  border-radius: 1.5rem;
+  border-radius: 1.15rem;
   background: linear-gradient(#ff6a1a 0%, #e47400 100%);
   padding: 0.85rem 3.85rem 0.85rem 1.6rem;
   font-size: 0.9375rem;
@@ -1503,7 +1503,7 @@ main {
   .learn-hk-cta {
     width: 100%;
     justify-content: center;
-    border-radius: 1rem;
+    border-radius: 0.85rem;
     padding: 0.75rem 3.1rem 0.75rem 1rem;
     font-size: 0.875rem;
     white-space: nowrap;
@@ -1524,5 +1524,203 @@ main {
   .learn-hk-cta-label,
   .learn-hk-cta-arrow {
     transition: none;
+  }
+}
+
+/* Learn dino guide — Apple-style glass + launcher */
+.learn-dino-glass {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(255, 250, 242, 0.88) 100%);
+  box-shadow:
+    0 24px 52px rgba(28, 36, 52, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.85) inset;
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.learn-dino-guide-in {
+  animation: learn-dino-guide-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes learn-dino-guide-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.learn-dino-hi {
+  animation: learn-dino-guide-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Launcher is the bare dino — no plate, no disc behind it. */
+.learn-dino-launcher {
+  display: inline-flex;
+  border: none;
+  background: none;
+  padding: 0;
+  animation: learn-dino-shake 2.6s ease-in-out infinite;
+}
+
+.learn-dino-launcher:hover {
+  animation-duration: 1.1s;
+}
+
+/* Dino holding the guide card by its left edge. Both copies of the artwork carry
+   this class so they sway as one; the pivot sits on the paws (88.5% across, mid
+   arm band) so the grip stays pinned to the panel while the body breathes. */
+.learn-dino-grip {
+  animation: learn-dino-grip 3.4s ease-in-out infinite;
+  transform-origin: 86.5% 53%;
+}
+
+@keyframes learn-dino-grip {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(-1.1deg);
+  }
+}
+
+/* Front copy: only the upper arm past the card edge, so that paw holds the panel
+   from the front while the lower one stays behind the frosted glass. The bottom
+   edge cuts at 55.3% of the height — the empty gap between the two arms — so the
+   clip never slices through the drawing. */
+.learn-dino-grip-front {
+  clip-path: inset(37% 0 44.7% 86.5%);
+}
+
+/* Chat view: the dino stands fully behind the glass and bobs as it waves. */
+.learn-dino-peek-bob {
+  animation: learn-dino-peek-bob 3s ease-in-out infinite;
+  transform-origin: 82% 100%;
+}
+
+@keyframes learn-dino-peek-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(1.8deg);
+  }
+}
+
+/* Dino motion set — applied to the original brand PNG. */
+.learn-dino-breathe {
+  animation: learn-dino-breathe 3.4s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.learn-dino-wave {
+  animation: learn-dino-wave 1.5s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.learn-dino-shake {
+  animation: learn-dino-shake 2.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.learn-dino-hop {
+  animation: learn-dino-hop 1.6s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+
+.learn-dino-peek {
+  animation: learn-dino-peek 4.2s ease-in-out infinite;
+}
+
+@keyframes learn-dino-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.025, 0.985);
+  }
+}
+
+@keyframes learn-dino-wave {
+  0%,
+  100% {
+    transform: rotate(-5deg) translateY(0);
+  }
+  50% {
+    transform: rotate(6deg) translateY(-3px);
+  }
+}
+
+@keyframes learn-dino-shake {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  78% {
+    transform: translateY(-4px) rotate(-4deg);
+  }
+  86% {
+    transform: translateY(0) rotate(4deg);
+  }
+  93% {
+    transform: translateY(-2px) rotate(-2deg);
+  }
+}
+
+@keyframes learn-dino-hop {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-12px) scale(0.97, 1.05);
+  }
+  55% {
+    transform: translateY(0) scale(1.06, 0.94);
+  }
+  75% {
+    transform: translateY(-4px) scale(1);
+  }
+}
+
+@keyframes learn-dino-peek {
+  0%,
+  100% {
+    transform: translateY(38%);
+    opacity: 0.9;
+  }
+  25%,
+  70% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-dino-guide-in,
+  .learn-dino-hi,
+  .learn-dino-grip,
+  .learn-dino-peek-bob,
+  .learn-dino-launcher,
+  .learn-dino-breathe,
+  .learn-dino-wave,
+  .learn-dino-shake,
+  .learn-dino-hop,
+  .learn-dino-peek {
+    animation: none;
+  }
+}
+
+@media print {
+  .learn-dino-guide {
+    display: none !important;
   }
 }

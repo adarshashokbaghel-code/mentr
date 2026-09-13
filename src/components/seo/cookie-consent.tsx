@@ -19,13 +19,16 @@ export function CookieConsent() {
     }
   }, []);
 
-  function accept() {
+  function dismiss(value: "accepted" | "dismissed") {
     try {
-      localStorage.setItem(CONSENT_KEY, "accepted");
+      localStorage.setItem(CONSENT_KEY, value);
     } catch {
       // Ignore storage failures — banner can still dismiss for this session.
     }
     setVisible(false);
+    if (value === "accepted") {
+      window.dispatchEvent(new Event("mentr-cookie-accepted"));
+    }
   }
 
   if (!visible) return null;
@@ -39,18 +42,25 @@ export function CookieConsent() {
     >
       <div className="mx-auto flex w-full min-w-0 max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <p className="min-w-0 max-w-3xl text-sm leading-relaxed text-muted">
-          We use cookies for sign-in, Google Analytics, and Google AdSense ads
-          on public pages. See our{" "}
+          We use cookies for sign-in, Google Analytics, and Google AdSense ads on
+          public pages (home, blog, guides). Ads help keep Mentr free. See our{" "}
           <Link
             href="/privacy"
             className="font-semibold text-ink underline-offset-2 hover:underline"
           >
             Privacy policy
           </Link>{" "}
-          for details and opt-out links.
+          for details, opt-out links, and how Google uses data for advertising.
         </p>
-        <div className="flex shrink-0 items-center gap-2">
-          <Button size="sm" onClick={accept}>
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
+          <Button
+            size="sm"
+            variant="secondary"
+            onClick={() => dismiss("dismissed")}
+          >
+            Dismiss
+          </Button>
+          <Button size="sm" onClick={() => dismiss("accepted")}>
             Got it
           </Button>
         </div>

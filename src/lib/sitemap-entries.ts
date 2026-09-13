@@ -1,4 +1,5 @@
 import { BLOG_PILLARS, BLOG_POSTS } from "@/lib/blog-posts";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import { MONEY_LANDING_PAGES, landingPagePath } from "@/lib/seo-landing-pages";
 import { absoluteUrl } from "@/lib/seo";
 import {
@@ -51,10 +52,14 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
   return [
     entry("/", 1, "daily"),
     entry("/parents", 0.9, "weekly"),
-    entry("/learn", 0.9, "weekly"),
-    entry("/learn/india", 0.88, "weekly"),
-    entry("/learn/uae", 0.88, "weekly"),
-    entry("/learn/syllabus", 0.8, "weekly"),
+    ...(LEARN_PUBLIC
+      ? [
+          entry("/learn", 0.9, "weekly"),
+          entry("/learn/india", 0.88, "weekly"),
+          entry("/learn/uae", 0.88, "weekly"),
+          entry("/learn/syllabus", 0.8, "weekly"),
+        ]
+      : []),
     entry("/for-faculty", 0.9, "weekly"),
     entry("/online-tutor-jobs", 0.9, "weekly"),
     ...MONEY_LANDING_PAGES.filter((p) => p.basePath !== "/online-tutor-jobs").map(

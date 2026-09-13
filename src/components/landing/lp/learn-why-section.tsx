@@ -72,7 +72,7 @@ export function LearnWhySection() {
     <section className="bg-[#fffdf8] py-10 sm:py-16 lg:py-20">
       <div className={LEARN_SHELL}>
         <div className="mx-auto max-w-2xl text-center">
-          <LearnDino size={56} className="mx-auto h-12 w-12 sm:h-14 sm:w-14" />
+          <LearnDino size={56} action="cheer" className="mx-auto h-12 w-12 sm:h-14 sm:w-14" />
           <h2 className="mt-3 text-[1.5rem] font-extrabold tracking-tight text-[#1c2434] sm:text-[2.1rem]">
             What kids do each day
           </h2>

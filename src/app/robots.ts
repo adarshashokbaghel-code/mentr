@@ -1,3 +1,4 @@
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import { absoluteUrl } from "@/lib/seo";
 import type { MetadataRoute } from "next";
 
@@ -14,6 +15,7 @@ const PRIVATE_PATHS = [
   "/board",
   "/login",
   "/admin/",
+  "/tmp-wa-preview",
 ];
 
 export default function robots(): MetadataRoute.Robots {
@@ -30,7 +32,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: ["/", "/ads.txt"],
-        disallow: PRIVATE_PATHS,
+        disallow: LEARN_PUBLIC ? PRIVATE_PATHS : [...PRIVATE_PATHS, "/learn"],
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),

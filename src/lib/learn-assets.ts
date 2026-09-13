@@ -2,6 +2,41 @@
 
 export const LEARN_DINO_SRC = "/learn/learn-dino-icon.png";
 
+/**
+ * Same dino gripping a panel at its right side — used while the guide card is on
+ * its intro view. Measured geometry (fractions of the 783×952 file): the body
+ * silhouette ends at 0.845 of the width, the paw tips reach 0.996, the upper arm
+ * spans 0.387–0.552 of the height and the lower arm 0.555–0.683, with a clean
+ * gap between them at 0.552. The popup pins the card's left edge to 0.865 of the
+ * dino width and lifts only the upper arm in front of the panel.
+ */
+export const LEARN_DINO_HOLD_SRC = "/learn/learn-dino-hold.png";
+export const LEARN_DINO_HOLD_SIZE = { width: 783, height: 952 } as const;
+
+/**
+ * Same dino peeking out and waving — used once the card switches to the chat
+ * view, where the dino drops fully behind the glass. Its head and waving paw sit
+ * in the left 0.62 of the 707×935 artwork, so that fraction stays outside the
+ * card and the rest reads as a blurred silhouette through the panel.
+ */
+export const LEARN_DINO_PEEK_SRC = "/learn/learn-dino-peek.png";
+export const LEARN_DINO_PEEK_SIZE = { width: 707, height: 935 } as const;
+
+/**
+ * The dino is always the original brand PNG — motion comes from CSS so the
+ * artwork never changes between placements.
+ */
+export const LEARN_DINO_ACTIONS = {
+  still: "",
+  blink: "learn-dino-breathe",
+  wave: "learn-dino-wave",
+  peek: "learn-dino-peek",
+  handshake: "learn-dino-shake",
+  cheer: "learn-dino-hop",
+} as const;
+
+export type LearnDinoAction = keyof typeof LEARN_DINO_ACTIONS;
+
 export function learnGuideAvatar(_seed = "Zappy") {
   return LEARN_DINO_SRC;
 }

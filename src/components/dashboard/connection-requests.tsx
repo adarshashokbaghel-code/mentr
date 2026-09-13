@@ -90,7 +90,7 @@ export function ConnectionRequestsSection({
       ) : requests.length === 0 ? (
         <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
           <Inbox className="mx-auto h-5 w-5 text-muted" />
-          <p className="mt-2 text-sm font-medium text-ink">No requests yet</p>
+          <p className="mt-2 text-sm font-medium text-ink">No requests yet </p>
           <p className="mt-1 text-sm text-muted">
             When a parent wants to talk, their request and message land here
             for you to review.

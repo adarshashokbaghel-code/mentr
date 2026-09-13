@@ -9,6 +9,7 @@ import {
   timeAgo,
 } from "@/components/dashboard/widgets";
 import { ConnectionRequestsSection } from "@/components/dashboard/connection-requests";
+import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { PitchesSection } from "@/components/requirements/pitches-section";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
@@ -439,6 +440,8 @@ export default function DashboardPage() {
               }
             />
           </div>
+
+          <WhatsappGroupCard className="mt-5" />
 
           <div className="mt-9 grid gap-5 lg:grid-cols-[1.6fr_1fr] lg:items-start">
           <div className="space-y-8">

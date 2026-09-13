@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AppProviders } from "@/components/auth/app-providers";
+import { LearnDinoGuide } from "@/components/landing/lp/learn-dino-guide";
+import { AdSenseLoader } from "@/components/seo/adsense-loader";
 import { CookieConsent } from "@/components/seo/cookie-consent";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import {
   ADSENSE_CLIENT_ID,
   GOOGLE_SITE_VERIFICATION,
@@ -93,17 +96,12 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <head>
         <GoogleVerificationTags />
-        {process.env.NODE_ENV === "production" ? (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
-            crossOrigin="anonymous"
-          />
-        ) : null}
         <GoogleAnalytics />
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <AppProviders>{children}</AppProviders>
+        <AdSenseLoader />
+        {LEARN_PUBLIC ? <LearnDinoGuide /> : null}
         <CookieConsent />
       </body>
     </html>

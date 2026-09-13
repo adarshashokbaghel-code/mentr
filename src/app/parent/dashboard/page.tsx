@@ -8,6 +8,7 @@ import {
   HiringChecklist,
   PitchDigestBanner,
 } from "@/components/parent/hiring-checklist";
+import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { Button } from "@/components/ui/button";
@@ -231,6 +232,7 @@ export default function ParentDashboardPage() {
           />
 
           <div className="mt-4 space-y-4">
+            <WhatsappGroupCard description="Dear parents — daily updates, newly verified tutors and quick answers from the Mentr team." />
             <PitchDigestBanner progress={hiringProgress} />
             <HiringChecklist onProgressChange={setHiringProgress} />
           </div>

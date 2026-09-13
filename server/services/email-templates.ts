@@ -2,14 +2,18 @@ import { config } from "../config";
 import type { UserRole } from "../models/User";
 
 const LINKEDIN_URL = "https://www.linkedin.com/company/mentrbypaprly/";
+const WHATSAPP_GROUP_URL =
+  "https://chat.whatsapp.com/FUUpqvQeuxY3oaUV4E1WkT?mode=gi_t";
 const SITE = config.publicSiteUrl;
 
 export type MessengerTemplateId =
   | "initial-user"
   | "mentor-go-live"
   | "mentor-referral"
+  | "mentor-whatsapp-group"
   | "parent-welcome"
-  | "parent-find-tutor";
+  | "parent-find-tutor"
+  | "parent-whatsapp-group";
 
 export type MessengerAudience = "faculty" | "parent";
 
@@ -82,6 +86,32 @@ function primaryBtn(href: string, label: string) {
 
 function secondaryBtn(href: string, label: string) {
   return `<a href="${href}" style="display:inline-block;padding:8px 16px;background:#e6f6ee;color:#2f9e6e;font-size:12px;font-weight:700;text-decoration:none;border:1px solid #2f9e6e;">${label}</a>`;
+}
+
+function whatsappBtn(label: string) {
+  return `<a href="${WHATSAPP_GROUP_URL}" style="display:inline-block;padding:11px 20px;background:#2f9e6e;color:#ffffff;font-size:13px;font-weight:700;text-decoration:none;">${label}</a>`;
+}
+
+/** Some clients strip the button styling, so always spell the invite link out. */
+function whatsappLinkFallback() {
+  return `<p style="margin:10px 0 0;font-size:11px;line-height:1.5;color:#6b756e;word-break:break-all;">
+    Button not working? Open this link:
+    <a href="${WHATSAPP_GROUP_URL}" style="color:#2f9e6e;font-weight:600;text-decoration:underline;">${WHATSAPP_GROUP_URL}</a>
+  </p>`;
+}
+
+function checklist(items: string[]) {
+  return `<table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+    ${items
+      .map(
+        (item) => `<tr>
+      <td style="padding:3px 0;font-size:12px;line-height:1.55;color:#525252;">
+        <span style="color:#2f9e6e;font-weight:700;">&#10003;</span>&nbsp;${item}
+      </td>
+    </tr>`,
+      )
+      .join("")}
+  </table>`;
 }
 
 function textLink(href: string, label: string) {
@@ -200,6 +230,47 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
       `),
   },
 
+  "mentor-whatsapp-group": {
+    id: "mentor-whatsapp-group",
+    label: "Mentor · WhatsApp group invite",
+    description: "Invite tutors to the official WhatsApp group for daily updates.",
+    audience: "faculty",
+    subject: (v) => `${v.name}, join our official Mentr WhatsApp group`,
+    text: (v) =>
+      `Dear ${v.name},\n\nWe run one official WhatsApp group for mentors and tutors on Mentr — daily updates, new parent postings, and quick answers from our team.\n\nJoin here: ${WHATSAPP_GROUP_URL}\n\nDashboard: ${v.dashboardUrl}\n\nMentr by Paprly`,
+    html: (v) =>
+      emailShell(`
+        ${greeting(v.name)}
+        <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:#525252;">
+          We run <strong>one official WhatsApp group</strong> for mentors and tutors on Mentr.
+          It is where we post daily updates and new parent postings first — so you hear about
+          them before anyone else.
+        </p>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 16px;">
+          <tr>
+            <td style="padding:12px 14px;background:#e6f6ee;border-left:3px solid #2f9e6e;">
+              ${sectionLabel("What you get inside", "#2f9e6e")}
+              ${checklist([
+                "Daily updates from the Mentr team",
+                "New parent postings and requirements",
+                "New free tools the moment they go live",
+                "Direct help — ask us anything",
+              ])}
+            </td>
+          </tr>
+        </table>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+          <tr><td style="padding-bottom:6px;">${whatsappBtn("Join the WhatsApp group")}</td></tr>
+          <tr><td>${textLink(v.dashboardUrl, "Open your dashboard")}</td></tr>
+        </table>
+        ${whatsappLinkFallback()}
+        <p style="margin:14px 0 0;font-size:12px;line-height:1.5;color:#6b756e;">
+          Only our team posts announcements, so the group stays quiet and useful. Free to join,
+          leave any time.
+        </p>
+      `),
+  },
+
   "parent-welcome": {
     id: "parent-welcome",
     label: "Parent · Welcome",
@@ -259,6 +330,46 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
           Already have an account? ${textLink(v.loginUrl, "Log in")} to manage your posts and connections.
         </p>
         ${signOff()}
+      `),
+  },
+
+  "parent-whatsapp-group": {
+    id: "parent-whatsapp-group",
+    label: "Parent · WhatsApp group invite",
+    description: "Invite parents to the official WhatsApp group for daily updates.",
+    audience: "parent",
+    subject: (v) => `${v.name}, join our official Mentr WhatsApp group`,
+    text: (v) =>
+      `Dear ${v.name},\n\nJoin our official Mentr WhatsApp group for daily updates, newly verified tutors, and quick answers from our team.\n\nJoin here: ${WHATSAPP_GROUP_URL}\n\nSearch tutors: ${v.searchUrl}\n\nMentr by Paprly`,
+    html: (v) =>
+      emailShell(`
+        ${greeting(v.name)}
+        <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:#525252;">
+          We run <strong>one official WhatsApp group</strong> for the Mentr community. Join in to
+          hear about newly verified tutors and updates the day they happen.
+        </p>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 16px;">
+          <tr>
+            <td style="padding:12px 14px;background:#e6f6ee;border-left:3px solid #2f9e6e;">
+              ${sectionLabel("What you get inside", "#2f9e6e")}
+              ${checklist([
+                "Daily updates from the Mentr team",
+                "New verified tutors in your city",
+                "Free learning resources for your child",
+                "Direct help — ask us anything",
+              ])}
+            </td>
+          </tr>
+        </table>
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+          <tr><td style="padding-bottom:6px;">${whatsappBtn("Join the WhatsApp group")}</td></tr>
+          <tr><td>${textLink(v.searchUrl, "Search tutors on Mentr")}</td></tr>
+        </table>
+        ${whatsappLinkFallback()}
+        <p style="margin:14px 0 0;font-size:12px;line-height:1.5;color:#6b756e;">
+          Only our team posts announcements, so the group stays quiet and useful. Free to join,
+          leave any time.
+        </p>
       `),
   },
 };
