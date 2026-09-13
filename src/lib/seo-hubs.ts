@@ -219,11 +219,11 @@ export function subjectIntro(subject: string): string {
 }
 
 export function areaIntro(area: string): string {
-  return `Parents in ${area}, ${CITY} — browse verified tutors for Mathematics, Physics, English, Coding, exam prep, and more. Every listing is free to view; WhatsApp unlocks after the tutor accepts your connect request.`;
+  return `Parents in ${area}, ${CITY} use Mentr to find verified home and online tutors for Mathematics, Physics, Chemistry, English, Coding, Biology, and exam prep. Compare experience, open weekly slots, and neighbourhood fit — every listing is free to view. Send a connect request when you are ready; WhatsApp unlocks only after the tutor accepts, so neither side gets spam. Session fees stay between you and the teacher with ₹0 platform commission.`;
 }
 
 export function comboIntro(area: string, subject: string): string {
-  return `Looking for ${subject} tuition in ${area}, ${CITY}? These verified tutors teach ${subject} near ${area}. Compare experience, check open slots, and send a free connect request — no lead fees, no commission.`;
+  return `Looking for ${subject} tuition in ${area}, ${CITY}? These verified tutors teach ${subject} near ${area} — for school boards, homework support, or competitive foundations depending on the profile. Read bios for class range and teaching mode, check open slots, and send a free connect request. No lead fees for parents or tutors; arrange timing and fees directly after WhatsApp unlocks.`;
 }
 
 /** Global online subject hubs — /online/{slug} */
@@ -239,7 +239,7 @@ export function parseOnlineSubjectSlug(slug: string): string | null {
 }
 
 export function onlineSubjectIntro(subject: string): string {
-  return `Find verified ${subject} tutors online worldwide — video sessions in your time zone. Mentr lists ID-checked profiles with open availability. Send a free connect request; WhatsApp unlocks after acceptance. No lead fees.`;
+  return `Find verified ${subject} tutors online worldwide — video sessions scheduled in your time zone for school, boards, or skill goals. Mentr lists ID-checked profiles with open availability so you can compare experience before messaging. Send a free connect request; WhatsApp unlocks after the tutor accepts. No lead fees, no commission on sessions — you arrange fees directly.`;
 }
 
 export function teachersOnline(subject: string): Teacher[] {

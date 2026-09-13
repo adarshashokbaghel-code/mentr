@@ -1,6 +1,7 @@
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import { ProductHuntBadges } from "@/components/ui/product-hunt-badge";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
@@ -22,8 +23,12 @@ const columns: Record<string, FooterLink[]> = {
     { label: "FAQ", href: "/faq" },
   ],
   Parents: [
-    { label: "Mentr Learn (Class 3–5)", href: "/learn" },
-    { label: "Class 3–5 syllabus PDF", href: "/learn/syllabus/download" },
+    ...(LEARN_PUBLIC
+      ? [
+          { label: "Mentr Learn (Class 3–5)", href: "/learn" },
+          { label: "Class 3–5 syllabus PDF", href: "/learn/syllabus/download" },
+        ]
+      : []),
     { label: "Create parent account", href: "/parent/signup" },
     { label: "Parent login", href: "/parent" },
     { label: "Browse all tutors", href: "/search" },

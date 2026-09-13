@@ -57,6 +57,7 @@ const sections = [
     title: "Changes to this policy",
     body: [
       "If we make material changes, we'll note them here with an updated date. Continued use after a change means you accept the updated policy.",
+      "Last substantive update for advertising disclosure: September 2026 — clarified Google AdSense on public pages, ads.txt, and that logged-in dashboards are not monetised with third-party ads.",
     ],
   },
 ];

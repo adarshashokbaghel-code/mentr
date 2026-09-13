@@ -187,6 +187,36 @@ export function SeoHubPage({
             )}
           </div>
 
+          <section className="mt-8 max-w-2xl space-y-3 text-[15px] leading-relaxed text-muted">
+            <h2 className="text-base font-bold text-ink">
+              How hiring works on Mentr
+            </h2>
+            <p>
+              Browse verified profiles for free, compare subjects and availability,
+              then send a connect request. WhatsApp unlocks only after the tutor
+              accepts — so numbers stay private until both sides agree. Session
+              fees are arranged directly; Mentr never takes a commission.
+            </p>
+            <p>
+              Prefer tutors to come to you?{" "}
+              <Link
+                href="/parent/signup"
+                className="font-semibold text-coral underline-offset-2 hover:underline"
+              >
+                Post a requirement
+              </Link>{" "}
+              with subject, class, and budget. You stay anonymous on the board
+              until you accept a pitch. Read our{" "}
+              <Link
+                href="/blog"
+                className="font-semibold text-coral underline-offset-2 hover:underline"
+              >
+                parent & tutor guides
+              </Link>{" "}
+              for fees, safety checklists, and trial tips.
+            </p>
+          </section>
+
           {requirementHref && (
             <aside className="mt-6 rounded-xl border border-coral/25 bg-coral/5 p-5 sm:p-6">
               <p className="text-sm font-bold text-ink">
