@@ -4,6 +4,7 @@ import { UserMenu } from "@/components/auth/user-menu";
 import { ParentNotificationsBell } from "@/components/parent/parent-notifications-bell";
 import { Button } from "@/components/ui/button";
 import { MentrBrand } from "@/components/ui/mentr-brand";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { useAuth } from "@/components/auth/auth-provider";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import { cn } from "@/lib/utils";
@@ -129,11 +130,32 @@ export function Navbar() {
             {!loading && user ? (
               <>
                 <div className="mt-1 flex items-center gap-3 rounded-lg bg-cream-band px-3 py-2.5">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral text-sm font-bold text-white">
-                    {(user.parentProfile?.name || user.profile?.name || user.email)
-                      .charAt(0)
-                      .toUpperCase()}
-                  </span>
+                  <MentorPhoto
+                    name={
+                      user.parentProfile?.name ||
+                      user.profile?.name ||
+                      user.email
+                    }
+                    initials={(
+                      user.parentProfile?.name ||
+                      user.profile?.name ||
+                      user.email
+                    )
+                      .split(/\s+/)
+                      .filter(Boolean)
+                      .slice(0, 2)
+                      .map((p) => p[0]!.toUpperCase())
+                      .join("")}
+                    imageUrl={
+                      user.profileImageUrl ||
+                      user.profile?.profileImageUrl ||
+                      null
+                    }
+                    size="sm"
+                    rounded="full"
+                    showInitials={false}
+                    className="!h-9 !w-9"
+                  />
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-ink">
                       {user.parentProfile?.name || user.profile?.name || user.email}

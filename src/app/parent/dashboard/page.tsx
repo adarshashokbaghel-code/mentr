@@ -12,6 +12,7 @@ import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { Button } from "@/components/ui/button";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { connectionsApi, type HiringProgress, type ParentConnection } from "@/lib/api";
 import { whatsappLink } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
@@ -37,14 +38,6 @@ const STATUS_META: Record<
   accepted: { label: "Connected", cls: "bg-sage-wash text-sage" },
   declined: { label: "Declined", cls: "bg-cream-band text-muted" },
 };
-
-const AVATAR_TONES = [
-  "bg-sage text-white",
-  "bg-coral text-white",
-  "bg-lavender-deep text-ink",
-  "bg-butter-deep text-ink",
-  "bg-sky text-ink",
-];
 
 type HistoryTab = "all" | "accepted" | "pending" | "declined";
 
@@ -325,20 +318,24 @@ export default function ParentDashboardPage() {
                   </div>
                 ) : (
                   <ul className="mt-4 space-y-3">
-                    {historyList.map((c, idx) => (
+                    {historyList.map((c) => (
                       <li
                         key={c.id}
                         className="rounded-xl border border-hairline bg-white p-4 shadow-[0_1px_3px_rgba(28,26,23,0.05)] transition hover:border-ink/20 sm:p-5"
                       >
                         <div className="flex items-start gap-3">
-                          <span
-                            className={cn(
-                              "flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-sm font-bold",
-                              AVATAR_TONES[idx % AVATAR_TONES.length],
-                            )}
+                          <Link
+                            href={`/teachers/${c.teacherId}`}
+                            className="shrink-0"
+                            aria-label={`${c.teacherName}'s profile`}
                           >
-                            {c.teacherName.charAt(0).toUpperCase()}
-                          </span>
+                            <MentorPhoto
+                              name={c.teacherName}
+                              imageUrl={c.teacherImageUrl}
+                              size="sm"
+                              rounded="full"
+                            />
+                          </Link>
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                               <Link

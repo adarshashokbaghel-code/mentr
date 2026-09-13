@@ -28,7 +28,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
@@ -176,10 +176,11 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
       )}
     >
       <div className="flex min-w-0 items-center gap-3">
-        <ProfilePlaceholder
+        <MentorPhoto
           name={teacher.name}
           initials={teacher.initials}
           kind={teacher.kind}
+          imageUrl={teacher.imageUrl}
           size="sm"
           rounded="lg"
           className="border-2 border-ink/10"

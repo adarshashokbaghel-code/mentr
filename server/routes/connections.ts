@@ -30,18 +30,22 @@ function connectionSource(c: IConnection): "parent" | "profile" | "board" {
   return c.requirement ? "board" : "profile";
 }
 
-function serializeForParent(c: IConnection, phone?: string | null) {
+function serializeForParent(
+  c: IConnection,
+  extras?: { phone?: string | null; teacherImageUrl?: string | null },
+) {
   return {
     id: c._id.toString(),
     teacherId: c.teacher.toString(),
     teacherName: c.teacherName,
     teacherArea: c.teacherArea ?? null,
+    teacherImageUrl: extras?.teacherImageUrl?.trim() || null,
     message: c.message,
     status: c.status,
     requestedBy: c.requestedBy ?? "parent",
     source: connectionSource(c),
     /** Only present once the connection is accepted */
-    phone: c.status === "accepted" ? (phone ?? null) : null,
+    phone: c.status === "accepted" ? (extras?.phone ?? null) : null,
     sentAt: c.createdAt,
     respondedAt: c.respondedAt ?? null,
   };
@@ -157,7 +161,9 @@ router.post("/", async (req: AuthenticatedRequest, res: Response) => {
     }
 
     res.status(201).json({
-      connection: serializeForParent(connection),
+      connection: serializeForParent(connection, {
+        teacherImageUrl: (teacher.profileImageUrl || "").trim() || null,
+      }),
       message: "Request sent — we'll notify you when the tutor responds",
     });
   } catch (error) {
@@ -306,26 +312,31 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
       .sort({ updatedAt: -1 })
       .limit(100)) as IConnection[];
 
-    // Phone numbers only for accepted connections
-    const acceptedIds = connections
-      .filter((c) => c.status === "accepted")
-      .map((c) => c.teacher);
-    const teachers = acceptedIds.length
-      ? await User.find({ _id: { $in: acceptedIds } }).select(
-          "profile.phoneNumber",
+    // Phone + headshots for all teachers in this parent's history
+    const teacherIds = [...new Set(connections.map((c) => c.teacher.toString()))];
+    const teachers = teacherIds.length
+      ? await User.find({ _id: { $in: teacherIds } }).select(
+          "profile.phoneNumber profileImageUrl",
         )
       : [];
-    const phoneById = new Map<string, string>(
+    const byId = new Map(
       teachers.map((t: IUser) => [
         t._id.toString(),
-        waPhone(t.profile?.phoneNumber || ""),
+        {
+          phone: waPhone(t.profile?.phoneNumber || ""),
+          teacherImageUrl: (t.profileImageUrl || "").trim() || null,
+        },
       ]),
     );
 
     res.json({
-      connections: connections.map((c) =>
-        serializeForParent(c, phoneById.get(c.teacher.toString())),
-      ),
+      connections: connections.map((c) => {
+        const extra = byId.get(c.teacher.toString());
+        return serializeForParent(c, {
+          phone: extra?.phone,
+          teacherImageUrl: extra?.teacherImageUrl,
+        });
+      }),
     });
   } catch (error) {
     console.error("list my connections error:", error);
@@ -430,18 +441,21 @@ router.post(
       }
 
       if (isParent) {
-        // Parent accepted a tutor's pitch — hand back the unlocked number
-        let phone: string | null = null;
-        if (connection.status === "accepted") {
-          const teacher = await User.findById(connection.teacher).select(
-            "profile.phoneNumber",
-          );
-          phone = teacher?.profile?.phoneNumber
+        // Parent accepted a tutor's pitch — hand back photo + unlocked number
+        const teacher = await User.findById(connection.teacher).select(
+          "profile.phoneNumber profileImageUrl",
+        );
+        const teacherImageUrl =
+          (teacher?.profileImageUrl || "").trim() || null;
+        const phone =
+          connection.status === "accepted" && teacher?.profile?.phoneNumber
             ? waPhone(teacher.profile.phoneNumber)
             : null;
-        }
         res.json({
-          connection: serializeForParent(connection, phone),
+          connection: serializeForParent(connection, {
+            phone,
+            teacherImageUrl,
+          }),
           message:
             action === "accept"
               ? `You're connected — chat with ${connection.teacherName} on WhatsApp`

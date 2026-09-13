@@ -26,7 +26,7 @@ import {
 import { absoluteUrl } from "@/lib/seo";
 import { areaHubSlug, subjectHubSlug } from "@/lib/seo-hubs";
 import type { Metadata } from "next";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cache } from "react";
@@ -202,10 +202,11 @@ export default async function TeacherProfilePage({
           </Link>
 
           <header className="mt-5 flex flex-col gap-5 sm:flex-row sm:items-start">
-            <ProfilePlaceholder
+            <MentorPhoto
               name={teacher.name}
               initials={teacher.initials}
               kind={teacher.kind}
+              imageUrl={teacher.imageUrl}
               size="xl"
               rounded="2xl"
             />

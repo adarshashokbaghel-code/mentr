@@ -11,25 +11,26 @@ export class ApiError extends Error {
 
 async function request<T>(
   path: string,
-  options: RequestInit = {},
+  options: RequestInit & { timeoutMs?: number } = {},
 ): Promise<T> {
   const token =
     typeof window !== "undefined"
       ? localStorage.getItem("champs_token")
       : null;
 
+  const { timeoutMs = 12_000, ...fetchOptions } = options;
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 12_000);
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     const res = await fetch(`/api${path}`, {
-      ...options,
+      ...fetchOptions,
       signal: controller.signal,
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        ...options.headers,
+        ...fetchOptions.headers,
       },
     });
 
@@ -110,6 +111,9 @@ export interface FacultyProfile {
   introVideo?: string;
   socials?: SocialLinks;
   department?: string;
+  /** Public mentor headshot URL (Supabase) */
+  profileImageUrl?: string;
+  profileImagePath?: string;
 }
 
 export type UserRole = "faculty" | "parent";
@@ -133,6 +137,8 @@ export interface AuthUser {
   profileCompleted: boolean;
   profile?: Partial<FacultyProfile>;
   parentProfile?: Partial<ParentProfile>;
+  profileImageUrl?: string;
+  profileImagePath?: string;
   lastLoginAt?: string;
   createdAt: string;
 }
@@ -237,6 +243,22 @@ export const profileApi = {
     request<Record<string, never>>(`/profile/views/${teacherId}`, {
       method: "POST",
     }),
+
+  uploadImage: (imageBase64: string, mimeType?: string) =>
+    request<{
+      user: AuthUser;
+      profileImageUrl: string;
+      message: string;
+    }>("/profile/image", {
+      method: "PUT",
+      body: JSON.stringify({ imageBase64, mimeType }),
+      timeoutMs: 60_000,
+    }),
+
+  deleteImage: () =>
+    request<{ user: AuthUser; message: string }>("/profile/image", {
+      method: "DELETE",
+    }),
 };
 
 /* ------------------------------ connections ------------------------------ */
@@ -249,6 +271,8 @@ export interface ParentConnection {
   teacherId: string;
   teacherName: string;
   teacherArea: string | null;
+  /** Public profile photo URL when the tutor has one */
+  teacherImageUrl: string | null;
   message: string;
   status: ConnectionStatus;
   /** "parent" = you asked; "teacher" + source distinguishes board vs profile outreach */
@@ -326,6 +350,8 @@ export interface RequirementInterest {
   teacherId: string;
   teacherName: string;
   teacherArea: string | null;
+  /** Public profile photo URL when the tutor has one */
+  teacherImageUrl: string | null;
   message: string;
   status: ConnectionStatus;
   /** Tutor's wa.me-ready number — unlocked once the parent accepts */

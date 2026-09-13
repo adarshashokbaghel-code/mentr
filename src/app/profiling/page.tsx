@@ -1,6 +1,8 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { ProfileImageUploader } from "@/components/profile/profile-image-uploader";
+import { ProfileSavedDialog } from "@/components/profile/profile-saved-dialog";
 import {
   ApiError,
   profileApi,
@@ -24,6 +26,7 @@ import {
   BadgeCheck,
   Briefcase,
   CalendarDays,
+  Camera,
   Check,
   Clock,
   Globe,
@@ -34,12 +37,14 @@ import {
   MapPin,
   Phone,
   Plus,
+  Save,
   Trash2,
   Trophy,
   UserRound,
   Video,
   X,
 } from "lucide-react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useState } from "react";
 
@@ -316,6 +321,9 @@ function ProfilingContent() {
 
   // Bio
   const [bio, setBio] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
+  const [saveFlash, setSaveFlash] = useState("");
+  const [showSavedDialog, setShowSavedDialog] = useState(false);
 
   useEffect(() => {
     if (loading) return;
@@ -371,6 +379,8 @@ function ProfilingContent() {
           setSocials((prev) => ({ ...prev, ...profile.socials }));
         }
         if (profile.bio) setBio(profile.bio);
+        if (profile.profileImageUrl) setProfileImageUrl(profile.profileImageUrl);
+        else if (user.profileImageUrl) setProfileImageUrl(user.profileImageUrl);
       })
       .catch(() => {});
   }, [user, prefilled]);
@@ -495,53 +505,107 @@ function ProfilingContent() {
     setAchievementInput("");
   }
 
-  async function handleSubmit() {
+  function buildPayload(): FacultyProfile {
+    const existing = user?.profile;
+    const cleanSocials: SocialLinks = {};
+    for (const f of SOCIAL_FIELDS) {
+      const v = socials[f.key].trim();
+      if (v) cleanSocials[f.key] = v;
+    }
+
+    // Prefer form values; fall back to saved profile so mid-step Save works
+    const pick = <T,>(formVal: T, fallback: T | undefined, emptyCheck: (v: T) => boolean): T =>
+      emptyCheck(formVal) && fallback !== undefined ? fallback : formVal;
+
+    return {
+      name: pick(name.trim(), existing?.name, (v) => !v),
+      designation: pick(designation, existing?.designation, (v) => !v),
+      phoneNumber: pick(phoneNumber.trim(), existing?.phoneNumber, (v) => !v),
+      bio: pick(bio.trim(), existing?.bio, (v) => !v),
+      subjects: pick(subjects, existing?.subjects, (v) => v.length === 0),
+      country: pick(country, existing?.country, (v) => !v),
+      city: pick(city.trim(), existing?.city, (v) => !v),
+      area: pick(area.trim(), existing?.area, (v) => !v),
+      levels: pick(levels, existing?.levels, (v) => v.length === 0),
+      languages: pick(languages, existing?.languages, (v) => v.length === 0),
+      qualification: pick(qualification, existing?.qualification, (v) => !v),
+      experienceYears:
+        experienceYears !== ""
+          ? Number(experienceYears)
+          : (existing?.experienceYears ?? 0),
+      teachingModes: pick(
+        teachingModes,
+        existing?.teachingModes,
+        (v) => v.length === 0,
+      ),
+      hourlyRate: hourlyRate.trim()
+        ? Number(hourlyRate)
+        : existing?.hourlyRate,
+      timeFormat,
+      timezone,
+      availability: pick(
+        availability,
+        existing?.availability,
+        (v) => v.length === 0,
+      ),
+      gender: gender || existing?.gender || undefined,
+      workplace: workplace.trim() || existing?.workplace || undefined,
+      certifications:
+        certifications.length > 0
+          ? certifications
+          : existing?.certifications || [],
+      achievements:
+        achievements.length > 0 ? achievements : existing?.achievements || [],
+      introVideo: introVideo.trim() || existing?.introVideo || undefined,
+      socials:
+        Object.keys(cleanSocials).length > 0
+          ? cleanSocials
+          : existing?.socials,
+    };
+  }
+
+  async function handleSave(_opts: { goLive?: boolean } = {}) {
+    // Always validate the current step first so Save feels local
     if (stepError) {
       setError(stepError);
       return;
     }
     setError("");
+    setSaveFlash("");
     setSaving(true);
     try {
-      const cleanSocials: SocialLinks = {};
-      for (const f of SOCIAL_FIELDS) {
-        const v = socials[f.key].trim();
-        if (v) cleanSocials[f.key] = v;
-      }
-      const payload: FacultyProfile = {
-        name: name.trim(),
-        designation,
-        phoneNumber: phoneNumber.trim(),
-        bio: bio.trim(),
-        subjects,
-        country,
-        city: city.trim(),
-        area: area.trim(),
-        levels,
-        languages,
-        qualification,
-        experienceYears: Number(experienceYears),
-        teachingModes,
-        hourlyRate: hourlyRate.trim() ? Number(hourlyRate) : undefined,
-        timeFormat,
-        timezone,
-        availability,
-        gender: gender || undefined,
-        workplace: workplace.trim() || undefined,
-        certifications,
-        achievements,
-        introVideo: introVideo.trim() || undefined,
-        socials: Object.keys(cleanSocials).length > 0 ? cleanSocials : undefined,
-      };
+      const payload = buildPayload();
       const { user: saved } = await profileApi.save(payload);
       setUser(saved);
-      router.replace("/dashboard");
+      if (saved.profileImageUrl) {
+        setProfileImageUrl(saved.profileImageUrl);
+      }
+      setSaveFlash("Saved");
+      setShowSavedDialog(true);
+      window.setTimeout(() => setSaveFlash(""), 2000);
     } catch (err) {
       setError(
         err instanceof ApiError ? err.message : "Failed to save. Try again.",
       );
+    } finally {
       setSaving(false);
     }
+  }
+
+  async function handleSubmit() {
+    await handleSave({ goLive: true });
+  }
+
+  function applyPhotoUser(saved: NonNullable<typeof user>, url: string | null) {
+    setProfileImageUrl(url);
+    setUser({
+      ...saved,
+      profileImageUrl: url || undefined,
+      profile: {
+        ...saved.profile,
+        profileImageUrl: url || undefined,
+      },
+    });
   }
 
   if (loading || !user) {
@@ -557,12 +621,40 @@ function ProfilingContent() {
 
   return (
     <div className="flex min-h-screen flex-col bg-cream">
-      {/* slim progress bar only — no navbar on the profiling flow */}
-      <div className="sticky top-0 z-20 h-1 w-full bg-cream-band">
-        <div
-          className="h-full rounded-r-full bg-coral transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
+      {/* sticky top: progress + Save on every step */}
+      <div className="sticky top-0 z-20 border-b border-hairline/80 bg-cream/95 backdrop-blur-md">
+        <div className="h-1 w-full bg-cream-band">
+          <div
+            className="h-full rounded-r-full bg-coral transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+        <div className="mx-auto flex h-12 w-full max-w-[760px] items-center justify-between gap-3 px-4 sm:px-6">
+          <Link
+            href="/dashboard"
+            className="text-xs font-semibold text-muted transition hover:text-ink"
+          >
+            ← Dashboard
+          </Link>
+          <div className="flex items-center gap-2">
+            {saveFlash && (
+              <span className="text-xs font-semibold text-sage">{saveFlash}</span>
+            )}
+            <button
+              type="button"
+              onClick={() => handleSave()}
+              disabled={saving}
+              className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-[13px] font-semibold text-ink transition hover:bg-cream disabled:opacity-60"
+            >
+              {saving ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <Save className="h-3.5 w-3.5" />
+              )}
+              {saving ? "Saving…" : "Save"}
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* ------------------------------- content ------------------------------- */}
@@ -622,6 +714,24 @@ function ProfilingContent() {
         {/* ------------------------------ step 1 ------------------------------ */}
         {step === 0 && (
           <div className="mt-5 space-y-4">
+            <Section
+              icon={Camera}
+              title="Profile photo"
+              hint="Optional — crop to a clear face shot parents will trust"
+            >
+              <ProfileImageUploader
+                name={name}
+                initials={name
+                  .split(/\s+/)
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((p) => p[0]!.toUpperCase())
+                  .join("")}
+                imageUrl={profileImageUrl}
+                onUploaded={(url) => applyPhotoUser(user, url)}
+              />
+            </Section>
+
             <Section icon={UserRound} title="Identity">
               <div className="grid gap-4 sm:grid-cols-2">
                 <Field label="Full name">
@@ -1222,6 +1332,19 @@ function ProfilingContent() {
             </Section>
 
             <Section icon={BadgeCheck} title="Quick review" hint="Everything parents will see">
+              <div className="mb-4">
+                <ProfileImageUploader
+                  name={name}
+                  initials={name
+                    .split(/\s+/)
+                    .filter(Boolean)
+                    .slice(0, 2)
+                    .map((p) => p[0]!.toUpperCase())
+                    .join("")}
+                  imageUrl={profileImageUrl}
+                  onUploaded={(url) => applyPhotoUser(user, url)}
+                />
+              </div>
               <dl className="grid gap-x-8 gap-y-3.5 text-sm sm:grid-cols-2">
                 <div>
                   <dt className="text-xs text-muted">Name & role</dt>
@@ -1354,6 +1477,11 @@ function ProfilingContent() {
           )}
         </div>
       </footer>
+
+      <ProfileSavedDialog
+        open={showSavedDialog}
+        onClose={() => setShowSavedDialog(false)}
+      />
     </div>
   );
 }

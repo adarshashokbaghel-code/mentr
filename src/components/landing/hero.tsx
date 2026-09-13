@@ -26,7 +26,7 @@ import {
   Sparkles,
   Users,
 } from "lucide-react";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
@@ -143,10 +143,11 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
       )}
     >
       <div className="flex min-w-0 items-center gap-3">
-        <ProfilePlaceholder
+        <MentorPhoto
           name={teacher.name}
           initials={teacher.initials}
           kind={teacher.kind}
+          imageUrl={teacher.imageUrl}
           size="sm"
           rounded="lg"
         />

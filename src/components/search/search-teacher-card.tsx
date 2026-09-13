@@ -2,7 +2,7 @@
 
 import { ConnectButton } from "@/components/connect/connect-button";
 import { SaveTeacherButton } from "@/components/search/save-teacher-button";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { formatDistanceKm } from "@/lib/geo";
 import { type Teacher } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
@@ -34,10 +34,11 @@ function CardPhoto({
 }) {
   const inner = (
     <>
-      <ProfilePlaceholder
+      <MentorPhoto
         name={teacher.name}
         initials={teacher.initials}
         kind={teacher.kind}
+        imageUrl={teacher.imageUrl}
         size="fill"
         rounded="lg"
         className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"

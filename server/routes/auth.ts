@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { randomUUID } from "crypto";
 import { config } from "../config";
-import { User, USER_ROLES, type IUser, type UserRole } from "../models/User";
+import { User, USER_ROLES, type IFacultyProfile, type IUser, type UserRole } from "../models/User";
 import { OtpSession, type IOtpSession } from "../models/OtpSession";
 import {
   generateOtpCode,
@@ -41,14 +41,32 @@ const router = Router();
 export { isProfileComplete } from "../lib/profile-complete";
 
 export function serializeUser(user: IUser) {
+  const rawProfile = user.profile as
+    | (IFacultyProfile & { toObject?: () => Record<string, unknown> })
+    | undefined
+    | null;
+  const profileObj = rawProfile
+    ? typeof rawProfile.toObject === "function"
+      ? rawProfile.toObject()
+      : { ...rawProfile }
+    : null;
+
   return {
     id: user._id.toString(),
     email: user.email,
     role: user.role,
     emailVerified: user.emailVerified,
     profileCompleted: isProfileComplete(user),
-    profile: user.profile,
+    profile: profileObj
+      ? {
+          ...profileObj,
+          profileImageUrl: user.profileImageUrl,
+          profileImagePath: user.profileImagePath,
+        }
+      : profileObj,
     parentProfile: user.parentProfile,
+    profileImageUrl: user.profileImageUrl,
+    profileImagePath: user.profileImagePath,
     lastLoginAt: user.lastLoginAt,
     createdAt: user.createdAt,
   };
