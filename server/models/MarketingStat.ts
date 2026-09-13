@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export type MarketingEventType = "view" | "redirect";
-export type MarketingKind = "blog" | "page";
+export type MarketingKind = "blog" | "page" | "social";
 
 /**
  * One row per (slug, kind, event, visitor) — `count` bumps on repeats
@@ -23,7 +23,7 @@ export interface IMarketingStat extends Document {
 const marketingStatSchema = new Schema<IMarketingStat>(
   {
     slug: { type: String, required: true, trim: true, lowercase: true },
-    kind: { type: String, enum: ["blog", "page"], required: true },
+    kind: { type: String, enum: ["blog", "page", "social"], required: true },
     event: { type: String, enum: ["view", "redirect"], required: true },
     visitorId: { type: String, required: true, trim: true },
     path: { type: String, required: true, trim: true },

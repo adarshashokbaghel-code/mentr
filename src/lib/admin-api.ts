@@ -290,11 +290,14 @@ export type MarketingSignup = {
   name: string;
   role: string;
   createdAt: string;
+  profileCompleted: boolean;
+  connections: number;
+  lastLoginAt?: string;
 };
 
 export type MarketingPageRow = {
   slug: string;
-  kind: "blog" | "page";
+  kind: "blog" | "page" | "social";
   views: number;
   uniqueViews: number;
   redirects: number;
@@ -304,6 +307,47 @@ export type MarketingPageRow = {
   signups: number;
   parentSignups: number;
   facultySignups: number;
+  profilesCompleted: number;
+  usersWithConnections: number;
+  totalConnections: number;
+  recentSignups: MarketingSignup[];
+};
+
+export type MarketingDayPoint = {
+  date: string;
+  blog: number;
+  social: number;
+  page: number;
+  other: number;
+  total: number;
+};
+
+export type MarketingSourceSlice = {
+  key: string;
+  label: string;
+  kind: "blog" | "page" | "social" | "other";
+  signups: number;
+  parents: number;
+  faculty: number;
+  profilesCompleted: number;
+  withConnections: number;
+};
+
+export type MarketingTrackedLink = {
+  id: string;
+  channel: "instagram" | "linkedin";
+  slug: string;
+  label: string;
+  path: string;
+  note?: string;
+  createdAt: string;
+  url: string;
+  signups: number;
+  parentSignups: number;
+  facultySignups: number;
+  profilesCompleted: number;
+  usersWithConnections: number;
+  totalConnections: number;
   recentSignups: MarketingSignup[];
 };
 
@@ -318,12 +362,47 @@ export type MarketingOverview = {
     parentSignups: number;
     facultySignups: number;
     pagesTracked: number;
+    profilesCompleted: number;
+    usersWithConnections: number;
   };
   rows: MarketingPageRow[];
+  socials: MarketingPageRow[];
+  links: MarketingTrackedLink[];
+  timeseries: MarketingDayPoint[];
+  sources: MarketingSourceSlice[];
 };
 
 export function fetchAdminMarketing(key: string) {
   return adminFetch<MarketingOverview>(key, "/api/admin/marketing");
+}
+
+export function createAdminMarketingLink(
+  key: string,
+  payload: {
+    channel: "instagram" | "linkedin";
+    label: string;
+    path?: string;
+    slug?: string;
+    note?: string;
+  },
+) {
+  return adminFetch<{
+    link: Pick<
+      MarketingTrackedLink,
+      "id" | "channel" | "slug" | "label" | "path" | "note" | "createdAt" | "url"
+    >;
+  }>(key, "/api/admin/marketing/links", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  });
+}
+
+export function deleteAdminMarketingLink(key: string, id: string) {
+  return adminFetch<{ ok: boolean }>(
+    key,
+    `/api/admin/marketing/links/${encodeURIComponent(id)}`,
+    { method: "DELETE" },
+  );
 }
 
 export function fetchMessengerTemplates(key: string) {

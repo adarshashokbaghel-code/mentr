@@ -223,7 +223,10 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
     const bodyKind = sanitizeMarketingKind(req.body.acquisitionKind);
     const acquisitionKind =
       bodyKind ||
-      (parsed.kind === "blog" || parsed.kind === "page" || parsed.kind === "referral"
+      (parsed.kind === "blog" ||
+      parsed.kind === "page" ||
+      parsed.kind === "referral" ||
+      parsed.kind === "social"
         ? parsed.kind
         : undefined);
 

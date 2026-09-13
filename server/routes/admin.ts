@@ -16,6 +16,10 @@ import {
 } from "../services/admin-messenger";
 import { listAdminInteractions } from "../services/admin-interactions";
 import { getAdminMarketing } from "../services/admin-marketing";
+import {
+  createMarketingLink,
+  deleteMarketingLink,
+} from "../services/marketing-links";
 import { getAdminStats } from "../services/admin-stats";
 import type { MessengerTemplateId } from "../services/email-templates";
 
@@ -125,6 +129,38 @@ router.get("/marketing", async (_req, res) => {
   } catch (err) {
     console.error("Admin marketing error:", err);
     res.status(500).json({ error: "Failed to load marketing stats" });
+  }
+});
+
+router.post("/marketing/links", async (req, res) => {
+  try {
+    const link = await createMarketingLink({
+      channel: req.body?.channel,
+      label: req.body?.label,
+      path: req.body?.path,
+      slug: req.body?.slug,
+      note: req.body?.note,
+    });
+    res.status(201).json({ link });
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : "Failed to create marketing link";
+    console.error("Admin marketing link create error:", err);
+    res.status(400).json({ error: message });
+  }
+});
+
+router.delete("/marketing/links/:id", async (req, res) => {
+  try {
+    const ok = await deleteMarketingLink(String(req.params.id || ""));
+    if (!ok) {
+      res.status(404).json({ error: "Link not found" });
+      return;
+    }
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("Admin marketing link delete error:", err);
+    res.status(500).json({ error: "Failed to delete marketing link" });
   }
 });
 

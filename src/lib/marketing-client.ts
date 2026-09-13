@@ -97,7 +97,11 @@ export function captureUrlAttribution(): StoredAttribution | undefined {
   if (parsed.kind === "referral" || !parsed.slug || !parsed.kind) {
     return getStoredAttribution();
   }
-  if (parsed.kind !== "blog" && parsed.kind !== "page") {
+  if (
+    parsed.kind !== "blog" &&
+    parsed.kind !== "page" &&
+    parsed.kind !== "social"
+  ) {
     return getStoredAttribution();
   }
   return persistAttribution({
@@ -129,7 +133,9 @@ export function resolveAcquisition(): {
   const stored = getStoredAttribution();
   const slug = parsed.slug || stored?.slug;
   const kind =
-    parsed.kind === "blog" || parsed.kind === "page"
+    parsed.kind === "blog" ||
+    parsed.kind === "page" ||
+    parsed.kind === "social"
       ? parsed.kind
       : stored?.kind;
 
