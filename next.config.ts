@@ -29,6 +29,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async headers() {
+    // AdSense crawler expects a plain static ads.txt at the site root.
+    return [
+      {
+        source: "/ads.txt",
+        headers: [
+          { key: "Content-Type", value: "text/plain; charset=utf-8" },
+          { key: "Cache-Control", value: "public, max-age=86400" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     // Local dev: proxy /api to the standalone Express process (tsx watch).
     // Production (Vercel): /api is served by pages/api/[[...all]].ts.

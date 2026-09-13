@@ -1,53 +1,59 @@
 "use client";
 
 import {
+  AdminBarList,
   AdminSection,
   AdminStatCard,
 } from "@/components/admin/admin-ui";
 import {
+  createAdminMarketingLink,
+  deleteAdminMarketingLink,
   fetchAdminMarketing,
   type MarketingOverview,
   type MarketingPageRow,
+  type MarketingSignup,
+  type MarketingTrackedLink,
 } from "@/lib/admin-api";
-import {
-  BLOG_PILLARS,
-  BLOG_POSTS,
-  FUNNEL_LABELS,
-  getPillar,
-  type BlogPillarId,
-} from "@/lib/blog-posts";
+import { BLOG_POSTS, getPillar } from "@/lib/blog-posts";
 import {
   blogFacultySignupUrl,
   blogParentSignupUrl,
   blogShareUrl,
-  MARKETING_PAGES,
-  pageShareUrl,
+  SOCIAL_CHANNELS,
+  socialLinkBundle,
+  type SocialChannelId,
   withBlogUtm,
-  withPageUtm,
 } from "@/lib/marketing-utm";
 import { SITE_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
   Check,
-  ChevronDown,
   Copy,
-  Download,
   Loader2,
-  Search,
+  Plus,
+  Share2,
+  Trash2,
+  Users,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-type BlogRow = MarketingPageRow & {
-  title: string;
-  path: string;
-  pillar?: BlogPillarId;
-  pillarLabel?: string;
-  funnel?: string;
-  ctaHref?: string;
-  ctaLabel?: string;
-};
+type TabId = "blogs" | "socials" | "graphs";
 
-function emptyRow(slug: string, kind: "blog" | "page"): MarketingPageRow {
+const LINK_PATH_OPTIONS = [
+  { value: "/", label: "Home" },
+  { value: "/parents", label: "Parents landing" },
+  { value: "/for-faculty", label: "Faculty landing" },
+  { value: "/blog", label: "Blog index" },
+  { value: "/search", label: "Search tutors" },
+  { value: "/parent/signup", label: "Parent signup" },
+  { value: "/faculty/signup", label: "Tutor signup" },
+  { value: "/learn", label: "Mentr Learn" },
+] as const;
+
+function emptyRow(
+  slug: string,
+  kind: "blog" | "page" | "social",
+): MarketingPageRow {
   return {
     slug,
     kind,
@@ -58,6 +64,9 @@ function emptyRow(slug: string, kind: "blog" | "page"): MarketingPageRow {
     signups: 0,
     parentSignups: 0,
     facultySignups: 0,
+    profilesCompleted: 0,
+    usersWithConnections: 0,
+    totalConnections: 0,
     recentSignups: [],
   };
 }
@@ -100,40 +109,181 @@ function CopyField({ label, value }: { label: string; value: string }) {
           }}
           aria-label={`Copy ${label}`}
         >
-          {copied ? <Check className="h-3.5 w-3.5 text-sage" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? (
+            <Check className="h-3.5 w-3.5 text-sage" />
+          ) : (
+            <Copy className="h-3.5 w-3.5" />
+          )}
         </button>
       </div>
     </div>
   );
 }
 
-function utmBundle(row: BlogRow) {
-  if (row.kind === "blog") {
-    return {
-      share: blogShareUrl(row.slug),
-      parent: blogParentSignupUrl(row.slug),
-      faculty: blogFacultySignupUrl(row.slug),
-      cta: row.ctaHref
-        ? `${SITE_URL}${withBlogUtm(row.ctaHref, row.slug, "cta")}`
-        : blogParentSignupUrl(row.slug),
-    };
+function SignupList({ users }: { users: MarketingSignup[] }) {
+  if (users.length === 0) {
+    return (
+      <p className="mt-2 text-[11px] text-muted">
+        No attributed signups yet — share a UTM link and wait for registrations.
+      </p>
+    );
   }
-  return {
-    share: pageShareUrl(row.path, row.slug),
-    parent: withPageUtm(`${SITE_URL}/parent/signup`, row.slug, "signup"),
-    faculty: withPageUtm(`${SITE_URL}/faculty/signup`, row.slug, "signup"),
-    cta: withPageUtm(`${SITE_URL}${row.path}`, row.slug, "cta"),
-  };
+
+  return (
+    <ul className="mt-2 divide-y divide-hairline">
+      {users.map((user) => (
+        <li
+          key={user.id}
+          className="flex flex-wrap items-center justify-between gap-2 py-1.5"
+        >
+          <span>
+            <span className="font-medium text-ink">{user.name}</span>
+            <span className="ml-2 text-[11px] text-muted">{user.email}</span>
+          </span>
+          <span className="text-[11px] text-muted">
+            {user.role}
+            {user.profileCompleted ? " · profile done" : " · incomplete"}
+            {user.connections > 0 ? ` · ${user.connections} conn` : ""}
+            {" · "}
+            {formatDate(user.createdAt)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function BehaviorCards({ row }: { row: MarketingPageRow }) {
+  return (
+    <div className="mt-3 grid gap-2 sm:grid-cols-4">
+      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+          Signups
+        </p>
+        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+          {row.signups}
+        </p>
+        <p className="text-[11px] text-muted">
+          {row.parentSignups} parents · {row.facultySignups} tutors
+        </p>
+      </div>
+      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+          Profiles completed
+        </p>
+        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+          {row.profilesCompleted}
+        </p>
+        <p className="text-[11px] text-muted">
+          {pct(row.profilesCompleted, row.signups)} of signups
+        </p>
+      </div>
+      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+          Active connectors
+        </p>
+        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+          {row.usersWithConnections}
+        </p>
+        <p className="text-[11px] text-muted">
+          {row.totalConnections} total connection rows
+        </p>
+      </div>
+      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+          Signup → connect
+        </p>
+        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+          {pct(row.usersWithConnections, row.signups)}
+        </p>
+        <p className="text-[11px] text-muted">Behaviour conversion</p>
+      </div>
+    </div>
+  );
+}
+
+function SignupTrendChart({
+  points,
+}: {
+  points: MarketingOverview["timeseries"];
+}) {
+  const max = Math.max(...points.map((p) => p.total), 1);
+
+  return (
+    <div className="rounded-xl border border-hairline bg-white p-4">
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+        Signups · last 30 days
+      </p>
+      <div className="mt-4 flex h-40 items-end gap-0.5">
+        {points.map((p) => (
+          <div
+            key={p.date}
+            className="group relative flex min-w-0 flex-1 flex-col justify-end"
+            title={`${p.date}: ${p.total} (blog ${p.blog}, social ${p.social}, page ${p.page}, other ${p.other})`}
+          >
+            <div
+              className="flex w-full flex-col justify-end overflow-hidden rounded-sm"
+              style={{ height: `${Math.max((p.total / max) * 100, p.total ? 4 : 0)}%` }}
+            >
+              {p.blog > 0 && (
+                <div
+                  className="w-full bg-coral"
+                  style={{ height: `${(p.blog / (p.total || 1)) * 100}%` }}
+                />
+              )}
+              {p.social > 0 && (
+                <div
+                  className="w-full bg-sage"
+                  style={{ height: `${(p.social / (p.total || 1)) * 100}%` }}
+                />
+              )}
+              {p.page > 0 && (
+                <div
+                  className="w-full bg-butter"
+                  style={{ height: `${(p.page / (p.total || 1)) * 100}%` }}
+                />
+              )}
+              {p.other > 0 && (
+                <div
+                  className="w-full bg-ink/25"
+                  style={{ height: `${(p.other / (p.total || 1)) * 100}%` }}
+                />
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex flex-wrap gap-3 text-[10px] text-muted">
+        <span className="inline-flex items-center gap-1">
+          <span className="h-2 w-2 rounded-sm bg-coral" /> Blog
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <span className="h-2 w-2 rounded-sm bg-sage" /> Social
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <span className="h-2 w-2 rounded-sm bg-butter" /> Page
+        </span>
+        <span className="inline-flex items-center gap-1">
+          <span className="h-2 w-2 rounded-sm bg-ink/25" /> Other
+        </span>
+      </div>
+    </div>
+  );
 }
 
 export function AdminMarketing({ adminKey }: { adminKey: string }) {
   const [data, setData] = useState<MarketingOverview | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
-  const [pillar, setPillar] = useState<"all" | BlogPillarId>("all");
-  const [sort, setSort] = useState<"views" | "redirects" | "signups" | "title">("views");
-  const [openSlug, setOpenSlug] = useState<string | null>(null);
+  const [tab, setTab] = useState<TabId>("blogs");
+  const [blogSlug, setBlogSlug] = useState(BLOG_POSTS[0]?.slug ?? "");
+  const [socialId, setSocialId] = useState<SocialChannelId>("instagram");
+  const [linkLabel, setLinkLabel] = useState("");
+  const [linkPath, setLinkPath] = useState("/");
+  const [linkNote, setLinkNote] = useState("");
+  const [linkBusy, setLinkBusy] = useState(false);
+  const [linkError, setLinkError] = useState<string | null>(null);
+  const [openLinkId, setOpenLinkId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -156,199 +306,154 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
     for (const row of data?.rows ?? []) {
       map.set(`${row.kind}:${row.slug}`, row);
     }
+    for (const row of data?.socials ?? []) {
+      map.set(`${row.kind}:${row.slug}`, row);
+    }
     return map;
   }, [data]);
 
-  const blogRows = useMemo<BlogRow[]>(() => {
-    return BLOG_POSTS.map((post) => {
-      const stats = statsByKey.get(`blog:${post.slug}`) ?? emptyRow(post.slug, "blog");
-      const pillarMeta = getPillar(post.pillar);
-      return {
-        ...stats,
-        slug: post.slug,
-        kind: "blog",
-        title: post.title,
-        path: `/blog/${post.slug}`,
-        pillar: post.pillar,
-        pillarLabel: pillarMeta.shortLabel,
-        funnel: FUNNEL_LABELS[post.funnel],
-        ctaHref: post.ctaHref,
-        ctaLabel: post.cta,
-      };
-    });
-  }, [statsByKey]);
+  const channelLinks = useMemo(
+    () => (data?.links ?? []).filter((l) => l.channel === socialId),
+    [data, socialId],
+  );
 
-  const pageRows = useMemo<BlogRow[]>(() => {
-    const known = new Set<string>(MARKETING_PAGES.map((p) => p.slug));
-    const catalog: BlogRow[] = MARKETING_PAGES.map((page) => {
-      const stats = statsByKey.get(`page:${page.slug}`) ?? emptyRow(page.slug, "page");
-      return {
-        ...stats,
-        slug: page.slug,
-        kind: "page",
-        title: page.title,
-        path: page.path,
-      };
-    });
+  const selectedPost = useMemo(
+    () => BLOG_POSTS.find((p) => p.slug === blogSlug) ?? BLOG_POSTS[0],
+    [blogSlug],
+  );
 
-    for (const row of data?.rows ?? []) {
-      if (row.kind !== "page" || known.has(row.slug)) continue;
-      catalog.push({
-        ...row,
-        title: row.slug,
-        path: `/${row.slug}`,
-      });
-    }
-    return catalog;
-  }, [data, statsByKey]);
-
-  const filteredBlogs = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return blogRows
-      .filter((row) => {
-        if (pillar !== "all" && row.pillar !== pillar) return false;
-        if (!q) return true;
-        return (
-          row.title.toLowerCase().includes(q) ||
-          row.slug.includes(q) ||
-          (row.pillarLabel ?? "").toLowerCase().includes(q)
-        );
-      })
-      .sort((a, b) => {
-        if (sort === "title") return a.title.localeCompare(b.title);
-        return b[sort] - a[sort];
-      });
-  }, [blogRows, pillar, query, sort]);
-
-  const blogTotals = useMemo(() => {
-    return blogRows.reduce(
-      (acc, row) => {
-        acc.views += row.views;
-        acc.uniqueViews += row.uniqueViews;
-        acc.redirects += row.redirects;
-        acc.signups += row.signups;
-        acc.parents += row.parentSignups;
-        acc.faculty += row.facultySignups;
-        return acc;
-      },
-      { views: 0, uniqueViews: 0, redirects: 0, signups: 0, parents: 0, faculty: 0 },
+  const selectedBlogStats = useMemo(() => {
+    if (!selectedPost) return emptyRow("", "blog");
+    return (
+      statsByKey.get(`blog:${selectedPost.slug}`) ??
+      emptyRow(selectedPost.slug, "blog")
     );
-  }, [blogRows]);
+  }, [selectedPost, statsByKey]);
 
-  function downloadCsv() {
-    const header = [
-      "kind",
-      "slug",
-      "title",
-      "pillar",
-      "path",
-      "views",
-      "unique_views",
-      "redirects",
-      "unique_redirects",
-      "signups",
-      "parent_signups",
-      "faculty_signups",
-      "share_utm",
-      "parent_signup_utm",
-      "faculty_signup_utm",
-      "cta_utm",
-    ];
-    const lines = [header.join(",")];
-    for (const row of [...blogRows, ...pageRows]) {
-      const utm = utmBundle(row);
-      const cells = [
-        row.kind,
-        row.slug,
-        row.title,
-        row.pillarLabel ?? "",
-        row.path,
-        row.views,
-        row.uniqueViews,
-        row.redirects,
-        row.uniqueRedirects,
-        row.signups,
-        row.parentSignups,
-        row.facultySignups,
-        utm.share,
-        utm.parent,
-        utm.faculty,
-        utm.cta,
-      ].map((cell) => `"${String(cell).replaceAll('"', '""')}"`);
-      lines.push(cells.join(","));
+  const selectedSocialStats = useMemo(() => {
+    return (
+      statsByKey.get(`social:${socialId}`) ?? emptyRow(socialId, "social")
+    );
+  }, [socialId, statsByKey]);
+
+  const socialLinks = useMemo(() => socialLinkBundle(socialId), [socialId]);
+
+  const blogLinks = useMemo(() => {
+    if (!selectedPost) {
+      return { share: "", parent: "", faculty: "", cta: "" };
     }
-    const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "mentr-marketing-utm.csv";
-    a.click();
-    URL.revokeObjectURL(url);
+    return {
+      share: blogShareUrl(selectedPost.slug),
+      parent: blogParentSignupUrl(selectedPost.slug),
+      faculty: blogFacultySignupUrl(selectedPost.slug),
+      cta: selectedPost.ctaHref
+        ? `${SITE_URL}${withBlogUtm(selectedPost.ctaHref, selectedPost.slug, "cta")}`
+        : blogParentSignupUrl(selectedPost.slug),
+    };
+  }, [selectedPost]);
+
+  const topSources = useMemo(
+    () =>
+      (data?.sources ?? []).slice(0, 12).map((s) => ({
+        label: s.label,
+        value: s.signups,
+      })),
+    [data],
+  );
+
+  async function handleCreateLink() {
+    setLinkBusy(true);
+    setLinkError(null);
+    try {
+      await createAdminMarketingLink(adminKey, {
+        channel: socialId,
+        label: linkLabel,
+        path: linkPath,
+        note: linkNote || undefined,
+      });
+      setLinkLabel("");
+      setLinkNote("");
+      setLinkPath("/");
+      await load();
+    } catch (e) {
+      setLinkError(e instanceof Error ? e.message : "Failed to create link");
+    } finally {
+      setLinkBusy(false);
+    }
   }
+
+  async function handleDeleteLink(link: MarketingTrackedLink) {
+    if (!window.confirm(`Delete tracked link “${link.label}”?`)) return;
+    setLinkBusy(true);
+    setLinkError(null);
+    try {
+      await deleteAdminMarketingLink(adminKey, link.id);
+      if (openLinkId === link.id) setOpenLinkId(null);
+      await load();
+    } catch (e) {
+      setLinkError(e instanceof Error ? e.message : "Failed to delete link");
+    } finally {
+      setLinkBusy(false);
+    }
+  }
+
+  const tabs: { id: TabId; label: string }[] = [
+    { id: "blogs", label: "Blogs" },
+    { id: "socials", label: "Socials" },
+    { id: "graphs", label: "Graphs" },
+  ];
 
   return (
     <AdminSection
       id="marketing"
-      title="Marketing strategy"
-      description="Blog-wise views, CTA redirects, signups, and slug UTM links — new posts inherit this automatically"
+      title="Marketing · UTM tracking"
+      description="Copy UTM links for blogs and socials. Metrics focus on signups and post-signup behaviour — not vanity clicks."
     >
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <AdminStatCard label="Blog views" value={blogTotals.views} sub={`${blogTotals.uniqueViews} unique`} accent="coral" />
-        <AdminStatCard label="Redirects from blogs" value={blogTotals.redirects} sub="CTA / marketplace clicks" />
         <AdminStatCard
-          label="Signups from blogs"
-          value={blogTotals.signups}
-          sub={`${blogTotals.parents} parents · ${blogTotals.faculty} tutors`}
+          label="Attributed signups"
+          value={data?.totals.signups ?? 0}
+          sub={`${data?.totals.parentSignups ?? 0} parents · ${data?.totals.facultySignups ?? 0} tutors`}
           accent="sage"
         />
         <AdminStatCard
-          label="View → signup"
-          value={pct(blogTotals.signups, blogTotals.views)}
-          sub={`${pct(blogTotals.redirects, blogTotals.views)} clicked through`}
+          label="Profiles completed"
+          value={data?.totals.profilesCompleted ?? 0}
+          sub={pct(
+            data?.totals.profilesCompleted ?? 0,
+            data?.totals.signups ?? 0,
+          )}
+          accent="coral"
+        />
+        <AdminStatCard
+          label="Users with connections"
+          value={data?.totals.usersWithConnections ?? 0}
+          sub="Sent or received a connect/pitch"
           accent="butter"
+        />
+        <AdminStatCard
+          label="Sources tracked"
+          value={data?.sources.length ?? 0}
+          sub={`${data?.socials?.reduce((n, s) => n + s.signups, 0) ?? 0} from social`}
         />
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <label className="relative min-w-[200px] flex-1">
-          <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted" />
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search title or slug"
-            className="h-10 w-full rounded-lg border border-hairline bg-white pl-8 pr-3 text-xs text-ink outline-none focus:border-ink"
-          />
-        </label>
-        <select
-          value={pillar}
-          onChange={(e) => setPillar(e.target.value as "all" | BlogPillarId)}
-          className="h-10 rounded-lg border border-hairline bg-white px-2 text-xs text-ink"
-        >
-          <option value="all">All pillars</option>
-          {BLOG_PILLARS.map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.shortLabel}
-            </option>
-          ))}
-        </select>
-        <select
-          value={sort}
-          onChange={(e) => setSort(e.target.value as typeof sort)}
-          className="h-10 rounded-lg border border-hairline bg-white px-2 text-xs text-ink"
-        >
-          <option value="views">Sort: views</option>
-          <option value="redirects">Sort: redirects</option>
-          <option value="signups">Sort: signups</option>
-          <option value="title">Sort: title</option>
-        </select>
-        <button
-          type="button"
-          onClick={downloadCsv}
-          className="inline-flex h-10 items-center gap-1.5 rounded-lg border border-hairline bg-white px-3 text-xs font-semibold text-ink hover:bg-cream"
-        >
-          <Download className="h-3.5 w-3.5" />
-          Export UTM CSV
-        </button>
+      <div className="mt-4 flex flex-wrap gap-1 rounded-lg border border-hairline bg-white p-1">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            type="button"
+            onClick={() => setTab(t.id)}
+            className={cn(
+              "rounded-md px-3 py-2 text-xs font-semibold transition",
+              tab === t.id
+                ? "bg-ink text-white"
+                : "text-muted hover:bg-cream hover:text-ink",
+            )}
+          >
+            {t.label}
+          </button>
+        ))}
       </div>
 
       {loading && !data && (
@@ -360,208 +465,361 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
 
       {error && (
         <p className="mt-4 border border-hairline bg-butter/40 px-3 py-3 text-xs text-ink">
-          {error} — UTM links below still work. Stats will fill in once tracking is reachable.
+          {error} — UTM links below still work. Stats fill in once the API is
+          reachable.
         </p>
       )}
 
-      <div className="mt-4 border border-hairline bg-white">
-        <div className="border-b border-hairline px-3 py-2">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-            Blogs · {filteredBlogs.length} of {BLOG_POSTS.length}
-          </p>
-          <p className="mt-0.5 text-[11px] text-muted">
-            Expand a row for UTM links, funnel, and who signed up from that slug
-          </p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[980px] border-collapse text-left text-xs">
-            <thead>
-              <tr className="border-b border-hairline bg-cream-band/60 text-[10px] font-semibold uppercase tracking-wider text-muted">
-                <th className="px-3 py-2">Blog</th>
-                <th className="px-3 py-2">Pillar</th>
-                <th className="px-3 py-2">Views</th>
-                <th className="px-3 py-2">Redirects</th>
-                <th className="px-3 py-2">Signups</th>
-                <th className="px-3 py-2">Conv.</th>
-                <th className="px-3 py-2">UTM</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredBlogs.map((row) => {
-                const open = openSlug === row.slug;
-                const utm = utmBundle(row);
-                return (
-                  <MarketingDetailRows
-                    key={row.slug}
-                    row={row}
-                    open={open}
-                    utm={utm}
-                    onToggle={() => setOpenSlug(open ? null : row.slug)}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div className="mt-4 border border-hairline bg-white">
-        <div className="border-b border-hairline px-3 py-2">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-            Landing pages · {pageRows.length}
-          </p>
-          <p className="mt-0.5 text-[11px] text-muted">
-            Same tracking as blogs. New landing pages that mount page tracking appear here automatically.
-          </p>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[820px] border-collapse text-left text-xs">
-            <thead>
-              <tr className="border-b border-hairline bg-cream-band/60 text-[10px] font-semibold uppercase tracking-wider text-muted">
-                <th className="px-3 py-2">Page</th>
-                <th className="px-3 py-2">Views</th>
-                <th className="px-3 py-2">Redirects</th>
-                <th className="px-3 py-2">Signups</th>
-                <th className="px-3 py-2">UTM</th>
-              </tr>
-            </thead>
-            <tbody>
-              {pageRows.map((row) => {
-                const key = `page:${row.slug}`;
-                const open = openSlug === key;
-                const utm = utmBundle(row);
-                return (
-                  <MarketingDetailRows
-                    key={key}
-                    row={row}
-                    open={open}
-                    utm={utm}
-                    onToggle={() => setOpenSlug(open ? null : key)}
-                  />
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </AdminSection>
-  );
-}
-
-function MarketingDetailRows({
-  row,
-  open,
-  utm,
-  onToggle,
-}: {
-  row: BlogRow;
-  open: boolean;
-  utm: ReturnType<typeof utmBundle>;
-  onToggle: () => void;
-}) {
-  return (
-    <>
-      <tr className="border-b border-hairline/70 hover:bg-cream/50">
-        <td className="px-3 py-2">
-          <button type="button" onClick={onToggle} className="flex max-w-[420px] items-start gap-1.5 text-left">
-            <ChevronDown
-              className={cn("mt-0.5 h-3.5 w-3.5 shrink-0 text-muted transition", open && "rotate-180")}
-            />
-            <span>
-              <span className="block font-medium text-ink">{row.title}</span>
-              <span className="block text-[10px] text-muted">{row.path}</span>
+      {tab === "blogs" && selectedPost && (
+        <div className="mt-4 space-y-4">
+          <label className="block">
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+              Select blog
             </span>
-          </button>
-        </td>
-        {row.kind === "blog" && (
-          <td className="px-3 py-2 text-muted">
-            {row.pillarLabel}
-            {row.funnel ? <span className="block text-[10px]">{row.funnel}</span> : null}
-          </td>
-        )}
-        <td className="px-3 py-2 tabular-nums text-ink">
-          {row.views}
-          <span className="block text-[10px] text-muted">{row.uniqueViews} unique</span>
-        </td>
-        <td className="px-3 py-2 tabular-nums text-ink">
-          {row.redirects}
-          <span className="block text-[10px] text-muted">{row.uniqueRedirects} unique</span>
-        </td>
-        <td className="px-3 py-2 tabular-nums font-medium text-ink">
-          {row.signups}
-          <span className="block text-[10px] text-muted">
-            {row.parentSignups}P · {row.facultySignups}T
-          </span>
-        </td>
-        {row.kind === "blog" && (
-          <td className="px-3 py-2 tabular-nums text-muted">{pct(row.signups, row.views)}</td>
-        )}
-        <td className="px-3 py-2">
-          <button
-            type="button"
-            onClick={async () => {
-              await navigator.clipboard.writeText(utm.share);
-            }}
-            className="text-[11px] font-semibold text-coral hover:underline"
-          >
-            Copy share link
-          </button>
-        </td>
-      </tr>
-      {open && (
-        <tr className="border-b border-hairline bg-cream/70">
-          <td colSpan={row.kind === "blog" ? 7 : 5} className="px-4 py-4">
-            <div className="grid gap-3 sm:grid-cols-3">
-              <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Funnel</p>
-                <p className="mt-1 text-xs text-ink">
-                  {row.views} views → {row.redirects} redirects → {row.signups} signups
-                </p>
-                <p className="mt-1 text-[11px] text-muted">
-                  Click-through {pct(row.redirects, row.views)} · signup {pct(row.signups, row.redirects || row.views)}
-                </p>
-                <p className="mt-1 text-[11px] text-muted">
-                  Last view {formatDate(row.lastViewedAt)} · last redirect {formatDate(row.lastRedirectAt)}
-                </p>
-              </div>
-              <div className="rounded-lg border border-hairline bg-white px-3 py-2 sm:col-span-2">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-                  Slug UTM links
-                </p>
-                <div className="mt-2 grid gap-2 lg:grid-cols-2">
-                  <CopyField label="Share / campaign URL" value={utm.share} />
-                  <CopyField label="Parent signup" value={utm.parent} />
-                  <CopyField label="Tutor signup" value={utm.faculty} />
-                  <CopyField label={row.ctaLabel ? `CTA · ${row.ctaLabel}` : "Primary CTA"} value={utm.cta} />
-                </div>
+            <select
+              value={selectedPost.slug}
+              onChange={(e) => setBlogSlug(e.target.value)}
+              className="mt-1 h-11 w-full rounded-lg border border-hairline bg-white px-3 text-sm text-ink outline-none focus:border-ink"
+            >
+              {BLOG_POSTS.map((post) => (
+                <option key={post.slug} value={post.slug}>
+                  {post.title}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <div className="rounded-xl border border-hairline bg-white p-4">
+            <p className="text-sm font-bold text-ink">{selectedPost.title}</p>
+            <p className="mt-0.5 text-[11px] text-muted">
+              /blog/{selectedPost.slug} · {getPillar(selectedPost.pillar).shortLabel}
+            </p>
+
+            <BehaviorCards row={selectedBlogStats} />
+
+            <div className="mt-4">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                UTM links for this blog
+              </p>
+              <div className="mt-2 grid gap-2 lg:grid-cols-2">
+                <CopyField label="Share / campaign URL" value={blogLinks.share} />
+                <CopyField label="Parent signup" value={blogLinks.parent} />
+                <CopyField label="Tutor signup" value={blogLinks.faculty} />
+                <CopyField
+                  label={
+                    selectedPost.cta
+                      ? `CTA · ${selectedPost.cta}`
+                      : "Primary CTA"
+                  }
+                  value={blogLinks.cta}
+                />
               </div>
             </div>
 
-            <div className="mt-3 rounded-lg border border-hairline bg-white px-3 py-2">
+            <div className="mt-4 rounded-lg border border-hairline bg-cream/60 px-3 py-2">
               <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-                Signups from this {row.kind} · {row.signups}
+                Signups from this blog · {selectedBlogStats.signups}
               </p>
-              {row.recentSignups.length === 0 ? (
-                <p className="mt-2 text-[11px] text-muted">No attributed signups yet</p>
+              <SignupList users={selectedBlogStats.recentSignups} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {tab === "socials" && (
+        <div className="mt-4 space-y-4">
+          <div className="flex flex-wrap gap-2">
+            {SOCIAL_CHANNELS.map((channel) => {
+              const active = socialId === channel.id;
+              return (
+                <button
+                  key={channel.id}
+                  type="button"
+                  onClick={() => setSocialId(channel.id)}
+                  className={cn(
+                    "inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-semibold transition",
+                    active
+                      ? "border-ink bg-ink text-white"
+                      : "border-hairline bg-white text-ink hover:bg-cream",
+                  )}
+                >
+                  <Share2 className="h-3.5 w-3.5" />
+                  {channel.label}
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="rounded-xl border border-hairline bg-white p-4">
+            <div className="flex items-start gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-cream">
+                <Share2 className="h-5 w-5 text-ink" />
+              </div>
+              <div>
+                <p className="text-sm font-bold text-ink">
+                  {SOCIAL_CHANNELS.find((c) => c.id === socialId)?.label}
+                </p>
+                <p className="mt-0.5 text-[11px] text-muted">
+                  {
+                    SOCIAL_CHANNELS.find((c) => c.id === socialId)
+                      ?.description
+                  }
+                </p>
+              </div>
+            </div>
+
+            <BehaviorCards row={selectedSocialStats} />
+
+            <div className="mt-4">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                Channel defaults · {socialId === "instagram" ? "Instagram" : "LinkedIn"}
+              </p>
+              <p className="mt-1 text-[11px] text-muted">
+                Generic bio / page links. For a specific post or reel, create a
+                tracked link below.
+              </p>
+              <div className="mt-2 grid gap-2 lg:grid-cols-2">
+                <CopyField label="Home / bio link" value={socialLinks.home} />
+                <CopyField label="Parents landing" value={socialLinks.parents} />
+                <CopyField label="Faculty landing" value={socialLinks.faculty} />
+                <CopyField label="Blog index" value={socialLinks.blog} />
+                <CopyField
+                  label="Parent signup"
+                  value={socialLinks.parentSignup}
+                />
+                <CopyField
+                  label="Tutor signup"
+                  value={socialLinks.facultySignup}
+                />
+              </div>
+            </div>
+
+            <div className="mt-5 rounded-xl border border-hairline bg-cream/50 p-4">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                Create tracked post link
+              </p>
+              <p className="mt-1 text-[11px] text-muted">
+                One link per post / story / reel. Signups and behaviour attribute
+                to that exact link.
+              </p>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                <label className="block sm:col-span-2">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                    Post name
+                  </span>
+                  <input
+                    value={linkLabel}
+                    onChange={(e) => setLinkLabel(e.target.value)}
+                    placeholder="e.g. Hiring reel Mar 12"
+                    className="mt-1 h-10 w-full rounded-lg border border-hairline bg-white px-3 text-sm text-ink outline-none focus:border-ink"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                    Lands on
+                  </span>
+                  <select
+                    value={linkPath}
+                    onChange={(e) => setLinkPath(e.target.value)}
+                    className="mt-1 h-10 w-full rounded-lg border border-hairline bg-white px-2 text-sm text-ink"
+                  >
+                    {LINK_PATH_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label} ({opt.value})
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                    Note (optional)
+                  </span>
+                  <input
+                    value={linkNote}
+                    onChange={(e) => setLinkNote(e.target.value)}
+                    placeholder="Internal note"
+                    className="mt-1 h-10 w-full rounded-lg border border-hairline bg-white px-3 text-sm text-ink outline-none focus:border-ink"
+                  />
+                </label>
+              </div>
+              {linkError && (
+                <p className="mt-2 text-[11px] text-coral">{linkError}</p>
+              )}
+              <button
+                type="button"
+                disabled={linkBusy || linkLabel.trim().length < 2}
+                onClick={() => void handleCreateLink()}
+                className="mt-3 inline-flex h-10 items-center gap-1.5 rounded-lg bg-ink px-3 text-xs font-semibold text-white disabled:opacity-50"
+              >
+                {linkBusy ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Plus className="h-3.5 w-3.5" />
+                )}
+                Create & store link
+              </button>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                Stored {socialId} links · {channelLinks.length}
+              </p>
+              {channelLinks.length === 0 ? (
+                <p className="mt-2 text-[11px] text-muted">
+                  No post links yet. Create one for each Instagram/LinkedIn post
+                  you want to measure.
+                </p>
               ) : (
-                <ul className="mt-2 divide-y divide-hairline">
-                  {row.recentSignups.map((user) => (
-                    <li key={user.id} className="flex flex-wrap items-center justify-between gap-2 py-1.5">
-                      <span>
-                        <span className="font-medium text-ink">{user.name}</span>
-                        <span className="ml-2 text-[11px] text-muted">{user.email}</span>
-                      </span>
-                      <span className="text-[11px] text-muted">
-                        {user.role} · {formatDate(user.createdAt)}
-                      </span>
-                    </li>
-                  ))}
+                <ul className="mt-2 space-y-2">
+                  {channelLinks.map((link) => {
+                    const open = openLinkId === link.id;
+                    return (
+                      <li
+                        key={link.id}
+                        className="rounded-lg border border-hairline bg-white"
+                      >
+                        <div className="flex flex-wrap items-start justify-between gap-2 px-3 py-2.5">
+                          <button
+                            type="button"
+                            className="min-w-0 flex-1 text-left"
+                            onClick={() =>
+                              setOpenLinkId(open ? null : link.id)
+                            }
+                          >
+                            <span className="block text-xs font-semibold text-ink">
+                              {link.label}
+                            </span>
+                            <span className="mt-0.5 block text-[11px] text-muted">
+                              {link.path} · {link.signups} signups ·{" "}
+                              {link.profilesCompleted} profiles ·{" "}
+                              {link.usersWithConnections} connected
+                            </span>
+                          </button>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              type="button"
+                              className="inline-flex h-8 items-center gap-1 rounded-md border border-hairline px-2 text-[11px] font-semibold text-coral hover:bg-cream"
+                              onClick={async () => {
+                                await navigator.clipboard.writeText(link.url);
+                              }}
+                            >
+                              <Copy className="h-3 w-3" />
+                              Copy
+                            </button>
+                            <button
+                              type="button"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-hairline text-muted hover:text-coral"
+                              onClick={() => void handleDeleteLink(link)}
+                              aria-label={`Delete ${link.label}`}
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                        {open && (
+                          <div className="border-t border-hairline bg-cream/40 px-3 py-3">
+                            <CopyField label="Tracked URL" value={link.url} />
+                            {link.note ? (
+                              <p className="mt-2 text-[11px] text-muted">
+                                Note: {link.note}
+                              </p>
+                            ) : null}
+                            <p className="mt-2 text-[10px] text-muted">
+                              Campaign · {link.slug} · created{" "}
+                              {formatDate(link.createdAt)}
+                            </p>
+                            <BehaviorCards
+                              row={{
+                                ...emptyRow(link.slug, "social"),
+                                signups: link.signups,
+                                parentSignups: link.parentSignups,
+                                facultySignups: link.facultySignups,
+                                profilesCompleted: link.profilesCompleted,
+                                usersWithConnections: link.usersWithConnections,
+                                totalConnections: link.totalConnections,
+                                recentSignups: link.recentSignups,
+                              }}
+                            />
+                            <div className="mt-3 rounded-lg border border-hairline bg-white px-3 py-2">
+                              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                                Signups from this post · {link.signups}
+                              </p>
+                              <SignupList users={link.recentSignups} />
+                            </div>
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </div>
-          </td>
-        </tr>
+
+            <div className="mt-4 rounded-lg border border-hairline bg-cream/60 px-3 py-2">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                All {socialId} signups (channel + posts) ·{" "}
+                {selectedSocialStats.signups}
+              </p>
+              <SignupList users={selectedSocialStats.recentSignups} />
+            </div>
+          </div>
+        </div>
       )}
-    </>
+
+      {tab === "graphs" && (
+        <div className="mt-4 grid gap-4 lg:grid-cols-2">
+          <div className="lg:col-span-2">
+            <SignupTrendChart points={data?.timeseries ?? []} />
+          </div>
+
+          <div className="rounded-xl border border-hairline bg-white p-4">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+              Traffic by source · signups
+            </p>
+            <div className="mt-3">
+              <AdminBarList items={topSources} emptyLabel="No attributed signups yet" />
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-hairline bg-white p-4">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+              Behaviour by source
+            </p>
+            <ul className="mt-3 space-y-2">
+              {(data?.sources ?? []).slice(0, 10).map((s) => (
+                <li
+                  key={s.key}
+                  className="rounded-lg border border-hairline bg-cream/50 px-3 py-2"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="truncate text-xs font-medium text-ink">
+                      {s.label}
+                    </span>
+                    <span className="shrink-0 text-[11px] tabular-nums text-muted">
+                      {s.signups} signups
+                    </span>
+                  </div>
+                  <p className="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-muted">
+                    <span>
+                      {s.parents}P · {s.faculty}T
+                    </span>
+                    <span>·</span>
+                    <span>{s.profilesCompleted} profiles done</span>
+                    <span>·</span>
+                    <span className="inline-flex items-center gap-1">
+                      <Users className="h-3 w-3" />
+                      {s.withConnections} connected
+                    </span>
+                  </p>
+                </li>
+              ))}
+              {(data?.sources?.length ?? 0) === 0 && (
+                <p className="text-xs text-muted">No source behaviour yet</p>
+              )}
+            </ul>
+          </div>
+        </div>
+      )}
+    </AdminSection>
   );
 }

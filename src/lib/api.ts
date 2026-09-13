@@ -167,7 +167,7 @@ export const authApi = {
     intent?: "login" | "signup",
     role?: UserRole,
     registrationSource?: string,
-    acquisition?: { slug?: string; kind?: "blog" | "page" },
+    acquisition?: { slug?: string; kind?: "blog" | "page" | "social" },
   ) =>
     request<SendOtpResponse>("/auth/send-otp", {
       method: "POST",

@@ -109,7 +109,7 @@ export interface IUser extends Document {
   registrationSource?: string;
   /** Blog/page slug that last-touched this signup (utm_campaign or /blog/{slug}). */
   acquisitionSlug?: string;
-  acquisitionKind?: "blog" | "page" | "referral";
+  acquisitionKind?: "blog" | "page" | "referral" | "social";
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -217,7 +217,10 @@ const userSchema = new Schema<IUser>(
     referralUrl: { type: String, trim: true },
     registrationSource: { type: String, trim: true },
     acquisitionSlug: { type: String, trim: true, lowercase: true },
-    acquisitionKind: { type: String, enum: ["blog", "page", "referral"] },
+    acquisitionKind: {
+      type: String,
+      enum: ["blog", "page", "referral", "social"],
+    },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },

@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/lib/seo";
 
-export type MarketingKind = "blog" | "page";
+export type MarketingKind = "blog" | "page" | "social";
 
 export type UtmParams = {
   source: string;
@@ -9,7 +9,29 @@ export type UtmParams = {
   content?: string;
 };
 
+export type SocialChannelId = "instagram" | "linkedin";
+
+export type SocialChannel = {
+  id: SocialChannelId;
+  label: string;
+  description: string;
+};
+
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,118}$/;
+const SOCIAL_SOURCES = new Set(["instagram", "linkedin", "insta", "ig", "li"]);
+
+export const SOCIAL_CHANNELS: SocialChannel[] = [
+  {
+    id: "instagram",
+    label: "Instagram",
+    description: "Bio, story, and post links for the Mentr Instagram page",
+  },
+  {
+    id: "linkedin",
+    label: "LinkedIn",
+    description: "Company page and post links for LinkedIn",
+  },
+];
 
 export function isMarketingSlug(value: string): boolean {
   return SLUG_RE.test(value);
@@ -26,6 +48,14 @@ export function defaultUtmFor(
   slug: string,
   content?: string,
 ): UtmParams {
+  if (kind === "social") {
+    return {
+      source: slug,
+      medium: "social",
+      campaign: slug,
+      ...(content ? { content } : {}),
+    };
+  }
   return {
     source: kind === "blog" ? "blog" : "page",
     medium: kind === "blog" ? "article" : "landing",
@@ -61,6 +91,14 @@ export function withPageUtm(href: string, slug: string, content?: string): strin
   return withUtm(href, defaultUtmFor("page", slug, content));
 }
 
+export function withSocialUtm(
+  href: string,
+  channel: SocialChannelId,
+  content?: string,
+): string {
+  return withUtm(href, defaultUtmFor("social", channel, content));
+}
+
 export function absoluteUtmUrl(path: string, utm: UtmParams): string {
   const relative = withUtm(path.startsWith("/") ? path : `/${path}`, utm);
   return relative.startsWith("http") ? relative : `${SITE_URL}${relative}`;
@@ -92,6 +130,25 @@ export function pageShareUrl(path: string, slug: string): string {
   });
 }
 
+export function socialLandingUrl(
+  channel: SocialChannelId,
+  path: string,
+  content: string,
+): string {
+  return absoluteUtmUrl(path, defaultUtmFor("social", channel, content));
+}
+
+export function socialLinkBundle(channel: SocialChannelId) {
+  return {
+    home: socialLandingUrl(channel, "/", "bio"),
+    parents: socialLandingUrl(channel, "/parents", "parents"),
+    faculty: socialLandingUrl(channel, "/for-faculty", "faculty"),
+    blog: socialLandingUrl(channel, "/blog", "blog"),
+    parentSignup: socialLandingUrl(channel, "/parent/signup", "signup-parent"),
+    facultySignup: socialLandingUrl(channel, "/faculty/signup", "signup-tutor"),
+  };
+}
+
 export type ParsedAcquisition = {
   slug?: string;
   kind?: MarketingKind | "referral";
@@ -99,6 +156,16 @@ export type ParsedAcquisition = {
   utmMedium?: string;
   utmCampaign?: string;
 };
+
+function normalizeSocialSource(
+  source?: string | null,
+): SocialChannelId | undefined {
+  const s = source?.toLowerCase();
+  if (!s) return undefined;
+  if (s === "instagram" || s === "insta" || s === "ig") return "instagram";
+  if (s === "linkedin" || s === "li") return "linkedin";
+  return undefined;
+}
 
 /** Read UTM / blog path / ref from a stored signup URL. */
 export function parseAcquisitionFromUrl(raw?: string | null): ParsedAcquisition {
@@ -114,6 +181,26 @@ export function parseAcquisitionFromUrl(raw?: string | null): ParsedAcquisition 
       ? sanitizeMarketingSlug(blogMatch[1])
       : undefined;
 
+    const social = normalizeSocialSource(utmSource);
+    if (
+      social ||
+      utmMedium === "social" ||
+      (utmSource != null && SOCIAL_SOURCES.has(utmSource))
+    ) {
+      const channel =
+        social || normalizeSocialSource(utmCampaign) || "instagram";
+      const CHANNEL_SLUGS = new Set(["instagram", "linkedin"]);
+      const slug =
+        utmCampaign && !CHANNEL_SLUGS.has(utmCampaign) ? utmCampaign : channel;
+      return {
+        slug,
+        kind: "social",
+        utmSource,
+        utmMedium,
+        utmCampaign: utmCampaign || channel,
+      };
+    }
+
     if (blogSlug) {
       return {
         slug: blogSlug,
@@ -125,6 +212,15 @@ export function parseAcquisitionFromUrl(raw?: string | null): ParsedAcquisition 
     }
 
     if (utmCampaign) {
+      if (utmCampaign === "instagram" || utmCampaign === "linkedin") {
+        return {
+          slug: utmCampaign,
+          kind: "social",
+          utmSource,
+          utmMedium,
+          utmCampaign,
+        };
+      }
       const kind: MarketingKind | "referral" =
         utmSource === "blog" || utmSource === "article"
           ? "blog"
