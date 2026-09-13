@@ -97,7 +97,7 @@ export function PitchesSection() {
           className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-4 text-[13px] font-semibold text-ink transition hover:bg-cream"
         >
           <Megaphone className="h-3.5 w-3.5 text-coral" />
-          Open board
+          Open  Requirement Board
         </FacultyActionLink>
       </div>
 

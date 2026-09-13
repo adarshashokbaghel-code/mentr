@@ -32,6 +32,7 @@ import {
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { PitchMessageDialog } from "@/components/requirements/pitch-message-dialog";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 
 const SUBJECT_OPTIONS = [
   "Mathematics",
@@ -409,9 +410,18 @@ function InterestRow({
   return (
     <li className="rounded-md border border-hairline bg-cream/60 p-3">
       <div className="flex items-start gap-2.5">
-        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-sage text-xs font-bold text-white">
-          {i.teacherName.charAt(0).toUpperCase()}
-        </span>
+        <Link
+          href={`/teachers/${i.teacherId}`}
+          className="shrink-0"
+          aria-label={`${i.teacherName}'s profile`}
+        >
+          <MentorPhoto
+            name={i.teacherName}
+            imageUrl={i.teacherImageUrl}
+            size="xs"
+            rounded="full"
+          />
+        </Link>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
             <Link

@@ -108,7 +108,7 @@ export function toPublicTeacher(
     id: user._id.toString(),
     name: p.name,
     initials: initialsOf(p.name),
-    imageUrl: "",
+    imageUrl: (user.profileImageUrl || "").trim(),
     subjects,
     subjectLine: subjects.slice(0, 2).join(" & ") || "Faculty",
     experienceYears: p.experienceYears ?? 0,

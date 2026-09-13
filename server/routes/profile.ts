@@ -19,6 +19,10 @@ import {
   notifyParentTutorSlotsOpen,
 } from "../services/parent-notifications";
 import { resolveFacultyMapLocation } from "../lib/map-location";
+import {
+  removeMentorProfileImage,
+  replaceMentorProfileImage,
+} from "../services/mentor-profile-image";
 
 const router = Router();
 
@@ -304,9 +308,24 @@ router.get("/", requireAuth, async (req: AuthenticatedRequest, res: Response) =>
     }
     res.json({
       role: user.role,
-      profile: user.profile ?? null,
+      profile: user.profile
+        ? {
+            ...(typeof (user.profile as { toObject?: () => object }).toObject ===
+            "function"
+              ? (user.profile as { toObject: () => object }).toObject()
+              : user.profile),
+            profileImageUrl: user.profileImageUrl,
+            profileImagePath: user.profileImagePath,
+          }
+        : user.profileImageUrl
+          ? {
+              profileImageUrl: user.profileImageUrl,
+              profileImagePath: user.profileImagePath,
+            }
+          : null,
       parentProfile: user.parentProfile ?? null,
       profileCompleted: isProfileComplete(user),
+      profileImageUrl: user.profileImageUrl ?? null,
     });
   } catch (error) {
     console.error("get profile error:", error);
@@ -597,5 +616,97 @@ router.put("/", requireAuth, async (req: AuthenticatedRequest, res: Response) =>
     res.status(500).json({ error: "Failed to save profile" });
   }
 });
+
+/** Upload / replace mentor profile photo (Supabase `mentrs_profile`). */
+router.put(
+  "/image",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (req.auth!.role === "parent") {
+        res.status(403).json({ error: "Only tutor accounts can upload a profile photo" });
+        return;
+      }
+
+      const user = await User.findById(req.auth!.sub);
+      if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+
+      const imageBase64 = String(req.body?.imageBase64 || "");
+      const mimeType = req.body?.mimeType
+        ? String(req.body.mimeType)
+        : undefined;
+
+      const uploaded = await replaceMentorProfileImage(
+        user._id.toString(),
+        user.profileImagePath,
+        { imageBase64, mimeType },
+      );
+
+      if ("error" in uploaded) {
+        res.status(400).json({ error: uploaded.error });
+        return;
+      }
+
+      user.profileImageUrl = uploaded.profileImageUrl;
+      user.profileImagePath = uploaded.profileImagePath;
+      await user.save();
+
+      res.json({
+        user: serializeUser(user),
+        profileImageUrl: uploaded.profileImageUrl,
+        message: "Profile photo updated",
+      });
+    } catch (error) {
+      console.error("upload profile image error:", error);
+      res.status(500).json({ error: "Failed to upload profile photo" });
+    }
+  },
+);
+
+/** Remove mentor profile photo from storage + MongoDB. */
+router.delete(
+  "/image",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (req.auth!.role === "parent") {
+        res.status(403).json({ error: "Only tutor accounts can remove a profile photo" });
+        return;
+      }
+
+      const user = await User.findById(req.auth!.sub);
+      if (!user) {
+        res.status(404).json({ error: "User not found" });
+        return;
+      }
+
+      await removeMentorProfileImage(user.profileImagePath);
+
+      user.profileImageUrl = undefined;
+      user.profileImagePath = undefined;
+      user.set("profileImageUrl", undefined);
+      user.set("profileImagePath", undefined);
+      await user.save();
+
+      // Ensure fields are cleared in Mongo (undefined assign can be a no-op)
+      await User.updateOne(
+        { _id: user._id },
+        { $unset: { profileImageUrl: 1, profileImagePath: 1 } },
+      );
+
+      const fresh = await User.findById(user._id);
+      res.json({
+        user: serializeUser(fresh!),
+        message: "Profile photo removed",
+      });
+    } catch (error) {
+      console.error("delete profile image error:", error);
+      res.status(500).json({ error: "Failed to remove profile photo" });
+    }
+  },
+);
 
 export default router;

@@ -110,6 +110,10 @@ export interface IUser extends Document {
   /** Blog/page slug that last-touched this signup (utm_campaign or /blog/{slug}). */
   acquisitionSlug?: string;
   acquisitionKind?: "blog" | "page" | "referral" | "social";
+  /** Public Supabase URL for mentor headshot */
+  profileImageUrl?: string;
+  /** Storage object path inside `mentrs_profile` (for replace/delete) */
+  profileImagePath?: string;
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -221,6 +225,8 @@ const userSchema = new Schema<IUser>(
       type: String,
       enum: ["blog", "page", "referral", "social"],
     },
+    profileImageUrl: { type: String, trim: true },
+    profileImagePath: { type: String, trim: true },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },

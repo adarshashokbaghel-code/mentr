@@ -120,7 +120,14 @@ export function profilePlaceholderMapHtml(teacher: {
   name: string;
   initials: string;
   kind?: "tutor" | "mentor";
+  imageUrl?: string;
 }) {
+  if (teacher.imageUrl?.trim()) {
+    const src = escapeHtml(teacher.imageUrl.trim());
+    const alt = escapeHtml(teacher.name || "Tutor");
+    return `<div class="champs-pop-hero-img"><img src="${src}" alt="${alt}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'" /></div>`;
+  }
+
   const tint = profilePlaceholderTint(teacher.name || teacher.initials);
   const initials = escapeHtml(teacher.initials.slice(0, 2).toUpperCase());
   const iconPath =

@@ -9,6 +9,7 @@ import {
   timeAgo,
 } from "@/components/dashboard/widgets";
 import { ConnectionRequestsSection } from "@/components/dashboard/connection-requests";
+import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { PitchesSection } from "@/components/requirements/pitches-section";
 import { Button } from "@/components/ui/button";
@@ -43,7 +44,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 const DAY_SHORT: Record<AvailabilitySlot["day"], string> = {
   monday: "Mon",
@@ -119,6 +120,8 @@ export default function DashboardPage() {
   const [requestsLoading, setRequestsLoading] = useState(true);
 
   const [copied, setCopied] = useState(false);
+  const [photoNudgeOpen, setPhotoNudgeOpen] = useState(false);
+  const photoNudgeDismissed = useRef(false);
 
   async function copyListingLink() {
     if (!user) return;
@@ -248,7 +251,18 @@ export default function DashboardPage() {
       router.replace("/search");
       return;
     }
-    if (!user.profileCompleted) router.replace("/profiling");
+    if (!user.profileCompleted) {
+      router.replace("/profiling");
+      return;
+    }
+    const hasPhoto = Boolean(
+      user.profileImageUrl || user.profile?.profileImageUrl,
+    );
+    if (hasPhoto) {
+      setPhotoNudgeOpen(false);
+      return;
+    }
+    if (!photoNudgeDismissed.current) setPhotoNudgeOpen(true);
   }, [loading, user, router]);
 
   if (loading) {
@@ -293,6 +307,12 @@ export default function DashboardPage() {
   const p = user.profile;
   const hasSocials = Object.values(p?.socials ?? {}).some(Boolean);
   const strengthItems = [
+    {
+      label: "Profile photo",
+      done: Boolean(user.profileImageUrl || p?.profileImageUrl),
+      hint: "A clear headshot makes parents far more likely to reach out.",
+      href: "/profiling?step=about",
+    },
     {
       label: "Detailed bio (100+ characters)",
       done: (p?.bio?.length ?? 0) >= 100,
@@ -348,6 +368,14 @@ export default function DashboardPage() {
   return (
     <>
       <Navbar />
+      <PhotoNudgeDialog
+        open={photoNudgeOpen}
+        name={name}
+        onIgnore={() => {
+          photoNudgeDismissed.current = true;
+          setPhotoNudgeOpen(false);
+        }}
+      />
       <main className="min-h-screen pb-16">
         <div className="mx-auto max-w-[1400px] px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
           {/* ------------------------------ header ------------------------------ */}
@@ -373,12 +401,7 @@ export default function DashboardPage() {
                   Edit profile
                 </Button>
               </Link>
-              <Link href={`/teachers/${user.id}`} className="hidden sm:block">
-                <Button variant="secondary" size="sm">
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  View listing
-                </Button>
-              </Link>
+             
             </div>
           </div>
 

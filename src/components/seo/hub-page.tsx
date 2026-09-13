@@ -17,7 +17,7 @@ import {
 } from "@/lib/seo-hubs";
 import { LOCALITIES, SUBJECTS, type Teacher } from "@/lib/teachers";
 import { MapPin, Star } from "lucide-react";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import Link from "next/link";
 
 export function SeoBreadcrumbs({
@@ -53,10 +53,11 @@ function SeoTeacherRow({ teacher }: { teacher: Teacher }) {
 
   return (
     <li className="flex gap-4 rounded-xl border border-hairline bg-white p-4 shadow-[0_1px_3px_rgba(28,26,23,0.05)] transition hover:border-ink/20">
-      <ProfilePlaceholder
+      <MentorPhoto
         name={teacher.name}
         initials={teacher.initials}
         kind={teacher.kind}
+        imageUrl={teacher.imageUrl}
         size="md"
         rounded="lg"
       />

@@ -2,7 +2,7 @@
 
 import { ConnectButton } from "@/components/connect/connect-button";
 import { useShortlist } from "@/components/search/shortlist-context";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { compareFeeDisplay, compareSlotsForTeacher } from "@/lib/shortlist";
 import { cn } from "@/lib/utils";
 import {
@@ -178,10 +178,11 @@ export function ShortlistCompareBar() {
                   >
                     <div className="p-3">
                       <div className="flex items-start gap-2">
-                        <ProfilePlaceholder
+                        <MentorPhoto
                           name={teacher.name}
                           initials={teacher.initials}
                           kind={teacher.kind}
+                          imageUrl={teacher.imageUrl}
                           size="md"
                           rounded="md"
                         />

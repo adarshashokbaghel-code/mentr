@@ -73,7 +73,12 @@ function popupHtml(t: MapTeacher) {
           ? `<span class="champs-pop-btn champs-pop-btn-muted">Request sent</span>`
           : `<a href="/teachers/${escapeHtml(t.id)}" class="champs-pop-btn champs-pop-btn-primary">View &amp; connect</a>`;
 
-  const hero = profilePlaceholderMapHtml(t);
+  const hero = profilePlaceholderMapHtml({
+    name: t.name,
+    initials: t.initials,
+    kind: t.kind,
+    imageUrl: t.imageUrl,
+  });
   const ratingPill =
     t.reviewCount > 0
       ? `<span class="champs-pop-pill champs-pop-pill-rate">★ ${t.rating.toFixed(1)} · ${t.reviewCount}</span>`

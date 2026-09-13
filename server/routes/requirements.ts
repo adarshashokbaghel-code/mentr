@@ -245,19 +245,20 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
       .sort({ createdAt: -1 })
       .limit(200)) as IConnection[];
 
-    // Accepted pitches unlock the tutor's WhatsApp right in the thread
-    const acceptedTeacherIds = interests
-      .filter((c) => c.status === "accepted")
-      .map((c) => c.teacher);
-    const teachers = acceptedTeacherIds.length
-      ? await User.find({ _id: { $in: acceptedTeacherIds } }).select(
-          "profile.phoneNumber",
+    // Phone (accepted) + headshots for every tutor who pitched
+    const teacherIds = [...new Set(interests.map((c) => c.teacher.toString()))];
+    const teachers = teacherIds.length
+      ? await User.find({ _id: { $in: teacherIds } }).select(
+          "profile.phoneNumber profileImageUrl",
         )
       : [];
-    const phoneById = new Map<string, string>(
+    const teacherById = new Map(
       teachers.map((t) => [
         t._id.toString(),
-        waPhone(t.profile?.phoneNumber || ""),
+        {
+          phone: waPhone(t.profile?.phoneNumber || ""),
+          teacherImageUrl: (t.profileImageUrl || "").trim() || null,
+        },
       ]),
     );
 
@@ -276,20 +277,22 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
           await ensureShareToken(r);
           return {
             ...serializeForOwner(r),
-            interests: (byRequirement.get(r._id.toString()) ?? []).map((c) => ({
-          id: c._id.toString(),
-          teacherId: c.teacher.toString(),
-          teacherName: c.teacherName,
-          teacherArea: c.teacherArea ?? null,
-          message: c.message,
-          status: c.status,
-          phone:
-            c.status === "accepted"
-              ? (phoneById.get(c.teacher.toString()) ?? null)
-              : null,
-          sentAt: c.createdAt,
-          respondedAt: c.respondedAt ?? null,
-        })),
+            interests: (byRequirement.get(r._id.toString()) ?? []).map((c) => {
+              const extra = teacherById.get(c.teacher.toString());
+              return {
+                id: c._id.toString(),
+                teacherId: c.teacher.toString(),
+                teacherName: c.teacherName,
+                teacherArea: c.teacherArea ?? null,
+                teacherImageUrl: extra?.teacherImageUrl ?? null,
+                message: c.message,
+                status: c.status,
+                phone:
+                  c.status === "accepted" ? (extra?.phone ?? null) : null,
+                sentAt: c.createdAt,
+                respondedAt: c.respondedAt ?? null,
+              };
+            }),
           };
         }),
       ),

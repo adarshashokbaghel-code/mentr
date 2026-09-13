@@ -27,7 +27,7 @@ import {
   X,
 } from "lucide-react";
 import { SaveTeacherButton } from "@/components/search/save-teacher-button";
-import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -94,10 +94,11 @@ function MapTeacherPreview({
         <span className="h-1 w-10 rounded-full bg-hairline" aria-hidden />
       </div>
       <div className="flex gap-3 p-3 pt-2 sm:p-4">
-        <ProfilePlaceholder
+        <MentorPhoto
           name={teacher.name}
           initials={teacher.initials}
           kind={teacher.kind}
+          imageUrl={teacher.imageUrl}
           size="lg"
           rounded="md"
         />
@@ -486,10 +487,11 @@ export function SearchMapShell({
                         !available && "opacity-70",
                       )}
                     >
-                      <ProfilePlaceholder
+                      <MentorPhoto
                         name={t.name}
                         initials={t.initials}
                         kind={t.kind}
+                        imageUrl={t.imageUrl}
                         size="lg"
                         rounded="md"
                       />
