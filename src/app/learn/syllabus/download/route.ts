@@ -8,7 +8,8 @@ export async function GET() {
   if (!LEARN_PUBLIC) return new Response("Not found", { status: 404 });
 
   const pdf = buildSyllabusPdf();
-  return new Response(pdf, {
+  // Buffer satisfies BodyInit; raw Uint8Array<ArrayBufferLike> fails TS DOM libs
+  return new Response(Buffer.from(pdf), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `attachment; filename="${SYLLABUS_PDF_FILENAME}"`,
