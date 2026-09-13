@@ -32,7 +32,11 @@ import { useEffect, useId, useRef, useState } from "react";
 import { LearnDino } from "./learn-dino";
 import { LearnStartButton } from "./learn-start-button";
 
-const HIDDEN_PREFIXES = ["/admin", "/admintestingistrueonlyman134hsydsudy4"];
+const HIDDEN_PREFIXES = [
+  "/admin",
+  "/admintestingistrueonlyman134hsydsudy4",
+  "/learn/app",
+];
 
 /**
  * Both copies of the holding dino use this exact box, so the clipped front layer

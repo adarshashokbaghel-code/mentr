@@ -40,7 +40,12 @@ export type LearnTrack = {
   units: LearnUnit[];
 };
 
-export const LEARN_SIGNUP_HREF = "/parent/signup?next=/learn";
+/** Primary Learn CTA — course enroll page (auth ungated for v1). */
+export const LEARN_SIGNUP_HREF = "/learn/start";
+/** Alias for course page */
+export const LEARN_COURSE_HREF = "/learn/start";
+/** Child LMS home after enroll */
+export const LEARN_APP_HREF = "/learn/app";
 
 export const VIDEO_LENGTH_BY_UNIT_INDEX = [3, 4, 5, 6] as const;
 

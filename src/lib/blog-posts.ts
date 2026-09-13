@@ -6,7 +6,8 @@ export type BlogPillarId =
   | "for-tutors"
   | "trust-safety"
   | "career-mentoring"
-  | "local-guides";
+  | "local-guides"
+  | "kids-learn";
 
 export type SearchIntent = "informational" | "commercial" | "transactional";
 export type FunnelStage = "top" | "mid" | "bottom";
@@ -100,6 +101,14 @@ export const BLOG_PILLARS: BlogPillar[] = [
     description:
       "City and area-specific tutor guides for Bengaluru neighbourhoods.",
     tint: "butter",
+  },
+  {
+    id: "kids-learn",
+    label: "Mentr Learn · Kids Coding & AI",
+    shortLabel: "Kids Learn",
+    description:
+      "Free Class 3–5 computer science, AI literacy, and math-for-coding guides for parents in India, UAE, and worldwide.",
+    tint: "sage",
   },
 ];
 
@@ -981,6 +990,266 @@ export const BLOG_POSTS: BlogPost[] = [
     publishWeek: 25,
     cta: "Find online tutors",
     ctaHref: "/find-online-tutors/india",
+  },
+
+  // ── Pillar: Mentr Learn · Kids Coding & AI (Wave 1) ───────────
+  {
+    slug: "free-computer-science-class-3-5-kids-india",
+    title:
+      "Free Computer Science for Class 3–5 Kids in India: What to Learn First",
+    keyword: "computer science for Class 3–5 India",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "A parent guide to free CS basics for Class 3–5 in India — input/output, algorithms, block coding, and how Mentr Learn covers 20 modules without typing Python.",
+    publishWeek: 26,
+    featured: true,
+    cta: "Enroll free in Mentr Learn",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "ai-for-kids-class-3-5-what-to-learn",
+    title: "AI for Kids (Class 3–5): What They Should Actually Learn",
+    keyword: "AI for kids Class 3–5",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Age-appropriate AI literacy for Class 3–5 — patterns, not magic; privacy; spotting mistakes — and a free 20-module path on Mentr Learn.",
+    publishWeek: 26,
+    featured: true,
+    cta: "Start free AI basics",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "block-coding-for-kids-no-typing",
+    title: "Block Coding for Kids: Learn Logic Without Typing Code",
+    keyword: "block coding for kids",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Why block coding is the right first step for Class 3–5 — sequence, loops, if/then — before Python or Scratch typing, with a free Mentr Learn path.",
+    publishWeek: 27,
+    cta: "Try free block coding modules",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "mentr-learn-class-3-5-syllabus-explained",
+    title: "Mentr Learn Class 3–5 Syllabus Explained (CS, AI & Math)",
+    keyword: "coding syllabus Class 3–5",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Full breakdown of the free 60-module Class 3–5 syllabus — 20 CS, 20 AI, 20 Math for CS — Watch → Quiz → Play, unit goals, and what is not included.",
+    publishWeek: 27,
+    featured: true,
+    cta: "Read full syllabus",
+    ctaHref: "/learn/syllabus",
+  },
+  {
+    slug: "15-minute-daily-coding-habit-kids",
+    title: "15-Minute Daily Coding Habit for Class 3–5 Kids",
+    keyword: "daily coding habit for kids",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "How parents build a light daily coding habit for Class 3–5 — 15 minutes, no pressure streaks, Watch → Quiz → Play on free Mentr Learn.",
+    publishWeek: 28,
+    cta: "Start Module A1 free",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "should-kids-learn-coding-in-primary-school",
+    title: "Should Kids Learn Coding in Primary School? A Parent Guide",
+    keyword: "should kids learn coding in primary school",
+    intent: "informational",
+    funnel: "top",
+    pillar: "kids-learn",
+    description:
+      "When coding helps Class 3–5 kids — and when it does not. Practical advice for Indian and worldwide parents, plus a free foundation path.",
+    publishWeek: 28,
+    cta: "Explore free Mentr Learn",
+    ctaHref: "/learn",
+  },
+  {
+    slug: "safe-ai-for-kids-privacy-parents-guide",
+    title: "Safe AI for Kids: Privacy Rules Every Parent Should Teach",
+    keyword: "AI safety for kids privacy",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Teach Class 3–5 kids that AI can be wrong, keep secrets private, and pause before believing — without scary deepfake lectures. Free AI modules on Mentr Learn.",
+    publishWeek: 29,
+    cta: "Enroll free AI path",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "free-coding-course-for-kids-india",
+    title: "Free Coding Course for Kids in India (Class 3–5) — What’s Actually Free",
+    keyword: "free coding course for kids India",
+    intent: "transactional",
+    funnel: "bottom",
+    pillar: "kids-learn",
+    description:
+      "What’s free vs paid in kids coding apps in India. Mentr Learn offers 60 modules (CS, AI, Math) at ₹0 forever for Class 3–5 — enroll with parent email.",
+    publishWeek: 29,
+    featured: true,
+    cta: "Enroll free — ₹0",
+    ctaHref: "/learn/start",
+  },
+
+  // ── Pillar: Kids Learn Wave 2 — geo + comparisons ─────────────
+  {
+    slug: "coding-for-kids-bengaluru-online",
+    title: "Coding for Kids in Bengaluru (Online): Free Class 3–5 Path",
+    keyword: "coding for kids Bengaluru online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Bengaluru parents: start Class 3–5 CS, AI & Math online for free with Mentr Learn — no centre commute, ~15 minutes a day, parent enroll.",
+    publishWeek: 30,
+    cta: "Enroll free from Bengaluru",
+    ctaHref: "/learn/india",
+  },
+  {
+    slug: "coding-for-kids-hyderabad-online",
+    title: "Coding for Kids in Hyderabad (Online): Class 3–5 Free Course",
+    keyword: "coding for kids Hyderabad online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Hyderabad families can give Class 3–5 kids free CS, AI literacy, and math-for-coding online — Mentr Learn, ₹0, Watch → Quiz → Play.",
+    publishWeek: 30,
+    cta: "Start free Mentr Learn",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "coding-for-kids-delhi-online",
+    title: "Coding for Kids in Delhi NCR (Online): Free Class 3–5 Foundation",
+    keyword: "coding for kids Delhi online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Delhi–NCR parents: free online Class 3–5 computer science, AI, and math-for-coding with Mentr Learn — structured syllabus, no paid camp required.",
+    publishWeek: 30,
+    cta: "Enroll free",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "coding-for-kids-mumbai-online",
+    title: "Coding for Kids in Mumbai (Online): Free CS & AI for Class 3–5",
+    keyword: "coding for kids Mumbai online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Mumbai parents looking for online coding for Class 3–5 — free Mentr Learn path with narrated lessons, quizzes, and block coding (no Python yet).",
+    publishWeek: 31,
+    cta: "Open free course",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "coding-for-kids-dubai-uae-online",
+    title: "Coding for Kids in Dubai & UAE (Online): Free Class 3–5 English Path",
+    keyword: "coding for kids Dubai UAE online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "UAE parents in Dubai, Abu Dhabi & Sharjah: English Class 3–5 CS, AI & Math online for free — Mentr Learn, IGCSE-friendly foundations, parent enroll.",
+    publishWeek: 31,
+    featured: true,
+    cta: "Enroll — Learn UAE",
+    ctaHref: "/learn/uae",
+  },
+  {
+    slug: "cbse-class-3-5-computer-basics-mentr-learn",
+    title: "CBSE Class 3–5 Computer Basics Mapped to Mentr Learn",
+    keyword: "CBSE Class 3-5 computer basics",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "How Mentr Learn’s free CS, AI, and Math tracks complement CBSE-style computer awareness for Class 3–5 — without replacing the school textbook.",
+    publishWeek: 31,
+    cta: "See India Learn hub",
+    ctaHref: "/learn/india",
+  },
+  {
+    slug: "math-for-coding-class-3-5-kids",
+    title: "Math for Coding: Patterns, Logic & Grids for Class 3–5",
+    keyword: "math for coding Class 3-5",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Why primary math-for-CS (patterns, true/false, Venn, grids, turns) matters before algebra — and how Mentr Learn’s free Math track teaches it.",
+    publishWeek: 32,
+    cta: "Start Math for CS free",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "scratch-vs-mentr-learn",
+    title: "Scratch vs Mentr Learn: Which Should Class 3–5 Use?",
+    keyword: "Scratch vs Mentr Learn",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "kids-learn",
+    description:
+      "Fair comparison: Scratch for open creative making; Mentr Learn for a free guided Class 3–5 syllabus with quizzes and a finish line. Many families use both.",
+    publishWeek: 32,
+    featured: true,
+    cta: "Try free guided path",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "tynker-vs-free-mentr-learn",
+    title: "Tynker vs Free Mentr Learn: What Parents Should Compare",
+    keyword: "Tynker vs free coding for kids",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "kids-learn",
+    description:
+      "Tynker often mixes samples with subscriptions. Mentr Learn offers a full Class 3–5 CS+AI+Math path at ₹0 — what you get, what you don’t, and when paid tools still help.",
+    publishWeek: 32,
+    cta: "Enroll Mentr Learn free",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "paid-kids-coding-apps-vs-free-foundation",
+    title:
+      "Paid Kids Coding Apps vs a Free Foundation (After the WhiteHat Jr Era)",
+    keyword: "paid kids coding vs free course India",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "kids-learn",
+    description:
+      "Indian parents learned to distrust huge outcome promises. Here’s how to judge paid kids coding apps vs a free Class 3–5 foundation like Mentr Learn — honestly.",
+    publishWeek: 33,
+    featured: true,
+    cta: "Start free foundation",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "pune-coding-for-kids-class-3-5-online",
+    title: "Coding for Kids in Pune (Online): Free Class 3–5 Course",
+    keyword: "coding for kids Pune online",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "Pune parents: free online Class 3–5 CS, AI & Math with Mentr Learn — short daily lessons, parent enroll, no credit card.",
+    publishWeek: 33,
+    cta: "Enroll free",
+    ctaHref: "/learn/start",
   },
 ];
 

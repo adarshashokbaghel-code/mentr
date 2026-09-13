@@ -5,8 +5,56 @@ import {
   marketplaceLinksForPost,
   showMarketplaceCta,
 } from "@/lib/blog-marketplace-cta";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 
 export function MarketplaceArticleCta({ post }: { post: BlogPost }) {
+  if (LEARN_PUBLIC && post.pillar === "kids-learn") {
+    return (
+      <aside className="mt-10 rounded-xl border-2 border-sage/40 bg-sage-wash p-5 sm:p-6">
+        <p className="text-sm font-bold uppercase tracking-wide text-sage">
+          Mentr Learn
+        </p>
+        <h2 className="mt-2 text-lg font-bold text-ink sm:text-xl">
+          Free Class 3–5 CS, AI &amp; Math — enroll in minutes
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[15px]">
+          60 modules, Watch → Quiz → Play, ₹999 → ₹0. Parent email only — then
+          open the learning app for your child.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <TrackedLink
+            href={post.ctaHref || "/learn/start"}
+            slug={post.slug}
+            kind="blog"
+            content="learn-enroll"
+          >
+            <Button size="sm">{post.cta || "Enroll free"}</Button>
+          </TrackedLink>
+          <TrackedLink
+            href="/learn/syllabus"
+            slug={post.slug}
+            kind="blog"
+            content="learn-syllabus"
+          >
+            <Button size="sm" variant="secondary">
+              View syllabus
+            </Button>
+          </TrackedLink>
+          <TrackedLink
+            href="/learn"
+            slug={post.slug}
+            kind="blog"
+            content="learn-hub"
+          >
+            <Button size="sm" variant="secondary">
+              Mentr Learn hub
+            </Button>
+          </TrackedLink>
+        </div>
+      </aside>
+    );
+  }
+
   if (!showMarketplaceCta(post)) return null;
 
   const links = marketplaceLinksForPost(post);
@@ -22,7 +70,7 @@ export function MarketplaceArticleCta({ post }: { post: BlogPost }) {
         Turn this guide into action on Mentr
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[15px]">
-        Can't find exactly what you need? Post your requirement and let verified
+        Can&apos;t find exactly what you need? Post your requirement and let verified
         tutors come to you — free for parents. Or browse profiles and connect
         directly.
       </p>

@@ -96,6 +96,47 @@ export interface IParentProfile {
   lastPitchDigestAt?: Date;
 }
 
+export type LearnTrackId = "class-3-5" | "class-6-8" | "class-9-12";
+
+/** LMS progress scaffold — filled in by Learn product later. */
+export interface ILearnProgress {
+  modulesCompleted: string[];
+  currentModuleId: string | null;
+  xp: number;
+  streakDays: number;
+  lastActivityAt: string | null;
+}
+
+export interface ILearnPurchase {
+  listPriceInr: number;
+  subtotalInr: number;
+  taxInr: number;
+  discountInr: number;
+  totalInr: number;
+  currency: "INR";
+  paymentMethod: "free" | "card" | "upi" | "other";
+}
+
+/** One Learn course enrollment (e.g. Mentr Starter). */
+export interface ILearnEnrollment {
+  courseId: string;
+  courseName: string;
+  tagline: string;
+  track: LearnTrackId;
+  status: "active" | "cancelled";
+  enrolledAt: Date;
+  receiptNumber: string;
+  /** Lifetime access for free Class 3–5 launch cohort */
+  expiry: "lifetime";
+  purchase: ILearnPurchase;
+  progress: ILearnProgress;
+}
+
+/** Separate Learn product object on the parent user document. */
+export interface ILearnProfile {
+  starter?: ILearnEnrollment;
+}
+
 export interface IUser extends Document {
   email: string;
   role: UserRole;
@@ -103,6 +144,8 @@ export interface IUser extends Document {
   profileCompleted: boolean;
   profile?: IFacultyProfile;
   parentProfile?: IParentProfile;
+  /** Mentr Learn enrollments + progress (parents only). */
+  learn?: ILearnProfile;
   /** Unique invite link generated when admin sends welcome email — used for referrals. */
   referralUrl?: string;
   /** Full signup URL the user arrived from (e.g. a referrer's link). */
@@ -204,6 +247,61 @@ const parentProfileSchema = new Schema<IParentProfile>(
   { _id: false },
 );
 
+const learnProgressSchema = new Schema<ILearnProgress>(
+  {
+    modulesCompleted: { type: [String], default: [] },
+    currentModuleId: { type: String, default: "A1" },
+    xp: { type: Number, default: 0, min: 0 },
+    streakDays: { type: Number, default: 0, min: 0 },
+    lastActivityAt: { type: String, default: null },
+  },
+  { _id: false },
+);
+
+const learnPurchaseSchema = new Schema<ILearnPurchase>(
+  {
+    listPriceInr: { type: Number, default: 0, min: 0 },
+    subtotalInr: { type: Number, default: 0, min: 0 },
+    taxInr: { type: Number, default: 0, min: 0 },
+    discountInr: { type: Number, default: 0, min: 0 },
+    totalInr: { type: Number, default: 0, min: 0 },
+    currency: { type: String, enum: ["INR"], default: "INR" },
+    paymentMethod: {
+      type: String,
+      enum: ["free", "card", "upi", "other"],
+      default: "free",
+    },
+  },
+  { _id: false },
+);
+
+const learnEnrollmentSchema = new Schema<ILearnEnrollment>(
+  {
+    courseId: { type: String, required: true, trim: true },
+    courseName: { type: String, required: true, trim: true },
+    tagline: { type: String, default: "", trim: true },
+    track: {
+      type: String,
+      enum: ["class-3-5", "class-6-8", "class-9-12"],
+      required: true,
+    },
+    status: { type: String, enum: ["active", "cancelled"], default: "active" },
+    enrolledAt: { type: Date, required: true },
+    receiptNumber: { type: String, required: true, trim: true },
+    expiry: { type: String, enum: ["lifetime"], default: "lifetime" },
+    purchase: { type: learnPurchaseSchema, required: true },
+    progress: { type: learnProgressSchema, default: () => ({}) },
+  },
+  { _id: false },
+);
+
+const learnProfileSchema = new Schema<ILearnProfile>(
+  {
+    starter: { type: learnEnrollmentSchema, required: false },
+  },
+  { _id: false },
+);
+
 const userSchema = new Schema<IUser>(
   {
     email: {
@@ -218,6 +316,7 @@ const userSchema = new Schema<IUser>(
     profileCompleted: { type: Boolean, default: false },
     profile: { type: facultyProfileSchema, required: false },
     parentProfile: { type: parentProfileSchema, required: false },
+    learn: { type: learnProfileSchema, required: false },
     referralUrl: { type: String, trim: true },
     registrationSource: { type: String, trim: true },
     acquisitionSlug: { type: String, trim: true, lowercase: true },
@@ -240,6 +339,8 @@ userSchema.index({ "profile.city": 1 });
 userSchema.index({ referralUrl: 1 }, { sparse: true });
 userSchema.index({ registrationSource: 1 }, { sparse: true });
 userSchema.index({ acquisitionSlug: 1 }, { sparse: true });
+userSchema.index({ "learn.starter.enrolledAt": -1 }, { sparse: true });
+userSchema.index({ "learn.starter.track": 1 }, { sparse: true });
 
 export const User =
   mongoose.models.User || mongoose.model<IUser>("User", userSchema);

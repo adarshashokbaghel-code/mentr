@@ -31,7 +31,7 @@ const baseFaqs = [
   {
     question: "Is Mentr Learn really free?",
     answer:
-      "Yes. All 60 modules across CS, AI, and Math for CS are free for the Class 3–5 launch cohort. Each lesson is a video, 10 practice questions, and 1 progress check. Mentr makes money from optional tutor connections later — not from selling your child's learning data.",
+      "Yes. All 60 modules across CS, AI, and Math for CS are free for Class 3–5 (₹999 → ₹0). Each lesson is a video, 10 practice questions, and 1 progress check. Mentr makes money from optional tutor connections later — not from selling your child's learning data.",
   },
   {
     question: "What age or class is this for?",
@@ -66,15 +66,16 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
     path: "/learn",
     title: "Master CS, AI & Math for Class 3–5 Kids | Mentr Learn",
     metaDescription:
-      "India's first completely free platform for Class 3–5 kids to learn CS, AI, and coding — narrated videos, gamified syllabus, Watch → Quiz → Play → Boss. ₹0 forever.",
+      "Free Class 3–5 CS, AI & coding for kids — 60 modules, Watch → Quiz → Play → Boss. Mentr Learn (Mentr Starter) is ₹0 forever. Enroll with parent email.",
     keywords: [
       "coding for kids",
       "AI for kids",
       "free computer science class 3",
       "free coding platform for kids India",
-      "learn CS AI coding kids",
-      "gamified learning platform Class 3-5",
+      "block coding for kids",
+      "Class 3-5 coding course free",
       "Mentr Learn",
+      "Mentr Starter",
     ],
     heroEyebrow: "",
     heroTitle: "Master CS, AI & Math",
@@ -97,13 +98,14 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
     path: "/learn/india",
     title: "Master Coding for Class 3–5 India | Mentr Learn",
     metaDescription:
-      "India's first completely free platform for Class 3–5 kids to learn CS, AI, and coding — narrated videos, gamified CBSE-friendly syllabus. ₹0 forever.",
+      "Free coding for Class 3–5 kids in India — CS, AI & Math, 60 modules, CBSE-friendly foundations. Mentr Learn is ₹0 forever. Enroll free.",
     keywords: [
+      "free coding course for kids India",
+      "computer science Class 3-5 India",
+      "AI for kids India",
       "coding class 3 India free",
-      "computer science kids India",
-      "AI basics children India",
-      "free coding Bengaluru",
       "CBSE class 3 computer",
+      "block coding kids Bengaluru",
       "Mentr Learn India",
     ],
     heroEyebrow: "India · Class 3–5 · Free",
@@ -132,11 +134,12 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
     path: "/learn/uae",
     title: "Master Coding for Kids in UAE | Mentr Learn",
     metaDescription:
-      "Master CS, AI & Math — a free gamified learning platform for Class 3–5 kids in the UAE. IGCSE-friendly foundations, 60 modules, weekly email for parents.",
+      "Free CS, AI & Math for Class 3–5 kids in the UAE — 60 modules, IGCSE-friendly foundations, Watch → Quiz → Play. Mentr Learn is ₹0. Enroll online.",
     keywords: [
       "coding kids UAE",
+      "free coding course kids Dubai",
       "IGCSE coding kids",
-      "free AI learning children Dubai",
+      "AI for kids UAE",
       "online CS class 3 UAE",
       "Mentr Learn UAE",
     ],

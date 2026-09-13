@@ -137,6 +137,27 @@ export interface AuthUser {
   profileCompleted: boolean;
   profile?: Partial<FacultyProfile>;
   parentProfile?: Partial<ParentProfile>;
+  learn?: {
+    starter?: {
+      courseId: string;
+      courseName: string;
+      tagline: string;
+      track: string;
+      status: string;
+      enrolledAt: string;
+      receiptNumber: string;
+      expiry: string;
+      purchase: {
+        listPriceInr: number;
+        subtotalInr: number;
+        taxInr: number;
+        discountInr: number;
+        totalInr: number;
+        currency: string;
+        paymentMethod: string;
+      };
+    };
+  };
   profileImageUrl?: string;
   profileImagePath?: string;
   lastLoginAt?: string;

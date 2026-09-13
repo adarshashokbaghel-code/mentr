@@ -1,11 +1,12 @@
 /**
- * Mentr Learn is still being built, so it stays hidden from the public site.
+ * Public visibility for Mentr Learn.
  *
- * While this is `false`:
- * - the navbar and footer drop their Learn links,
- * - the floating dino guide is not mounted,
- * - `/learn/*` routes render a 404 and are left out of the sitemap.
+ * When `true` (current):
+ * - navbar + footer show Learn links,
+ * - the floating dino guide is mounted,
+ * - `/learn/*` routes and syllabus download are live,
+ * - Learn URLs are included in the sitemap / robots allowlist.
  *
- * Flip it to `true` to launch — nothing else needs editing.
+ * Flip to `false` to hide Learn from the public site again without deleting code.
  */
-export const LEARN_PUBLIC = false;
+export const LEARN_PUBLIC = true;

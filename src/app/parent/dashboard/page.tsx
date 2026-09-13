@@ -324,26 +324,43 @@ export default function ParentDashboardPage() {
                         className="rounded-xl border border-hairline bg-white p-4 shadow-[0_1px_3px_rgba(28,26,23,0.05)] transition hover:border-ink/20 sm:p-5"
                       >
                         <div className="flex items-start gap-3">
-                          <Link
-                            href={`/teachers/${c.teacherId}`}
-                            className="shrink-0"
-                            aria-label={`${c.teacherName}'s profile`}
-                          >
-                            <MentorPhoto
-                              name={c.teacherName}
-                              imageUrl={c.teacherImageUrl}
-                              size="sm"
-                              rounded="full"
-                            />
-                          </Link>
+                          {c.teacherName === "Deleted user" ? (
+                            <span className="shrink-0" aria-label="Deleted user">
+                              <MentorPhoto
+                                name="Deleted user"
+                                imageUrl={null}
+                                size="sm"
+                                rounded="full"
+                              />
+                            </span>
+                          ) : (
+                            <Link
+                              href={`/teachers/${c.teacherId}`}
+                              className="shrink-0"
+                              aria-label={`${c.teacherName}'s profile`}
+                            >
+                              <MentorPhoto
+                                name={c.teacherName}
+                                imageUrl={c.teacherImageUrl}
+                                size="sm"
+                                rounded="full"
+                              />
+                            </Link>
+                          )}
                           <div className="min-w-0 flex-1">
                             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                              <Link
-                                href={`/teachers/${c.teacherId}`}
-                                className="text-[15px] font-bold text-ink hover:text-coral"
-                              >
-                                {c.teacherName}
-                              </Link>
+                              {c.teacherName === "Deleted user" ? (
+                                <span className="text-[15px] font-bold text-muted">
+                                  Deleted user
+                                </span>
+                              ) : (
+                                <Link
+                                  href={`/teachers/${c.teacherId}`}
+                                  className="text-[15px] font-bold text-ink hover:text-coral"
+                                >
+                                  {c.teacherName}
+                                </Link>
+                              )}
                               <span
                                 className={cn(
                                   "rounded-md px-2 py-0.5 text-[11px] font-semibold",

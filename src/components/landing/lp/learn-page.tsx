@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/components/auth/auth-provider";
 import { learnCopyFor, type LearnGeo } from "@/lib/learn-landing-copy";
 import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
 import { cn } from "@/lib/utils";
@@ -15,7 +14,6 @@ import {
   Trophy,
   Video,
 } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
 import { LearnAnimatedHero } from "./learn-animated-hero";
 import { LearnHeroContent } from "./learn-hero-content";
@@ -27,8 +25,7 @@ import { LearnChooseSection } from "./learn-choose-section";
 import { LearnWhySection } from "./learn-why-section";
 import { LearnGamificationSection } from "./learn-gamification-section";
 import { LearnSyllabusSection } from "./learn-syllabus-section";
-import {
-  hardShadowSm,
+import {  hardShadowSm,
   LpFinalCta,
   LpStepTimeline,
   SectionHeader,
@@ -120,24 +117,6 @@ function LoopStepMock({ step }: { step: number }) {
   );
 }
 
-function LearnLoggedInBanner() {
-  const { user, loading } = useAuth();
-  if (loading || !user || user.role !== "parent") return null;
-  return (
-    <div className="border-b-2 border-sage/30 bg-sage-wash px-4 py-3 sm:px-6">
-      <div className={cn(LEARN_SHELL, "flex flex-wrap items-center justify-between gap-3")}>
-        <p className="text-sm font-medium text-ink">
-          <strong>You&apos;re on the list</strong> — Mentr Learn launches soon. We&apos;ll email you
-          when Module 1 is live.
-        </p>
-        <Link href="/parent/dashboard" className="text-sm font-bold text-coral hover:underline">
-          Parent dashboard →
-        </Link>
-      </div>
-    </div>
-  );
-}
-
 export function LearnLanding({ geo }: { geo: LearnGeo }) {
   const copy = learnCopyFor(geo);
   const [loopStep, setLoopStep] = useState(0);
@@ -162,7 +141,7 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       label: "Forever free",
       tint: "bg-butter/60",
       icon: Sparkles,
-      sub: "Launch cohort",
+      sub: "Was ₹999",
     },
     {
       value: "4.5h",
@@ -203,8 +182,6 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
 
   return (
     <div className="min-h-screen max-w-[100vw] overflow-x-hidden bg-gradient-to-b from-butter/25 via-cream to-cream">
-      <LearnLoggedInBanner />
-
       {/* Hero — light HackerKid-style ed-tech */}
       <section className="learn-hk-hero relative overflow-hidden">
         <div className="relative mx-auto grid w-full min-w-0 max-w-[1400px] items-center gap-6 px-4 py-10 sm:gap-8 sm:px-5 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,540px)] lg:gap-8 lg:px-6 lg:py-20 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,580px)]">

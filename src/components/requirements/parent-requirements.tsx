@@ -410,26 +410,43 @@ function InterestRow({
   return (
     <li className="rounded-md border border-hairline bg-cream/60 p-3">
       <div className="flex items-start gap-2.5">
-        <Link
-          href={`/teachers/${i.teacherId}`}
-          className="shrink-0"
-          aria-label={`${i.teacherName}'s profile`}
-        >
-          <MentorPhoto
-            name={i.teacherName}
-            imageUrl={i.teacherImageUrl}
-            size="xs"
-            rounded="full"
-          />
-        </Link>
+        {i.teacherName === "Deleted user" ? (
+          <span className="shrink-0" aria-label="Deleted user">
+            <MentorPhoto
+              name="Deleted user"
+              imageUrl={null}
+              size="xs"
+              rounded="full"
+            />
+          </span>
+        ) : (
+          <Link
+            href={`/teachers/${i.teacherId}`}
+            className="shrink-0"
+            aria-label={`${i.teacherName}'s profile`}
+          >
+            <MentorPhoto
+              name={i.teacherName}
+              imageUrl={i.teacherImageUrl}
+              size="xs"
+              rounded="full"
+            />
+          </Link>
+        )}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            <Link
-              href={`/teachers/${i.teacherId}`}
-              className="text-[13px] font-bold text-ink hover:text-coral"
-            >
-              {i.teacherName}
-            </Link>
+            {i.teacherName === "Deleted user" ? (
+              <span className="text-[13px] font-bold text-muted">
+                Deleted user
+              </span>
+            ) : (
+              <Link
+                href={`/teachers/${i.teacherId}`}
+                className="text-[13px] font-bold text-ink hover:text-coral"
+              >
+                {i.teacherName}
+              </Link>
+            )}
             {i.status === "accepted" && (
               <span className="rounded-md bg-sage-wash px-1.5 py-0.5 text-[10px] font-bold text-sage">
                 Connected

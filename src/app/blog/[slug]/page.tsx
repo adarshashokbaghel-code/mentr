@@ -39,10 +39,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title =
     post.title.length > 52 ? `${post.title.slice(0, 49)}…` : post.title;
 
+  const keywords =
+    post.pillar === "kids-learn"
+      ? [
+          post.keyword,
+          "Mentr Learn",
+          "coding for kids",
+          "AI for kids",
+          "Class 3-5",
+          "free coding course India",
+        ]
+      : [post.keyword, "Mentr", "home tutor", "tutor guide"];
+
   return {
     title: `${title} — Mentr Blog`,
     description: post.description.slice(0, 155),
-    keywords: [post.keyword, "Mentr", "home tutor", "tutor guide"],
+    keywords,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
       title: post.title,

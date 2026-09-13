@@ -90,3 +90,95 @@ export function AdminBarList({
     </ul>
   );
 }
+
+export type AdminTrendSegment = {
+  value: number;
+  className: string;
+};
+
+export type AdminTrendPoint = {
+  key: string;
+  total: number;
+  title?: string;
+  segments?: AdminTrendSegment[];
+};
+
+/** Pixel-height bars — % heights collapse inside flex `items-end` and look blank. */
+export function AdminTrendChart({
+  points,
+  height = 160,
+  emptyLabel = "No data in this range",
+  legend,
+}: {
+  points: AdminTrendPoint[];
+  height?: number;
+  emptyLabel?: string;
+  legend?: { label: string; className: string }[];
+}) {
+  const max = Math.max(...points.map((p) => p.total), 0);
+  const hasData = max > 0;
+
+  return (
+    <div>
+      <div
+        className="flex items-end gap-0.5"
+        style={{ height }}
+        role="img"
+        aria-label="Trend chart"
+      >
+        {points.map((p) => {
+          const px =
+            hasData && p.total > 0
+              ? Math.max(Math.round((p.total / max) * height), 6)
+              : 2;
+          return (
+            <div
+              key={p.key}
+              className="group relative flex min-w-0 flex-1 flex-col justify-end"
+              title={p.title ?? `${p.key}: ${p.total}`}
+            >
+              <div
+                className="flex w-full flex-col justify-end overflow-hidden rounded-sm"
+                style={{ height: px }}
+              >
+                {p.segments && p.segments.some((s) => s.value > 0) ? (
+                  p.segments.map((seg, i) =>
+                    seg.value > 0 ? (
+                      <div
+                        key={`${p.key}-${i}`}
+                        className={cn("w-full", seg.className)}
+                        style={{
+                          height: `${(seg.value / (p.total || 1)) * 100}%`,
+                        }}
+                      />
+                    ) : null,
+                  )
+                ) : (
+                  <div
+                    className={cn(
+                      "h-full w-full",
+                      p.total > 0 ? "bg-coral" : "bg-cream-band",
+                    )}
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {!hasData && (
+        <p className="mt-2 text-center text-[11px] text-muted">{emptyLabel}</p>
+      )}
+      {legend && legend.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-3 text-[10px] text-muted">
+          {legend.map((item) => (
+            <span key={item.label} className="inline-flex items-center gap-1">
+              <span className={cn("h-2 w-2 rounded-sm", item.className)} />
+              {item.label}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}

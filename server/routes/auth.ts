@@ -65,6 +65,27 @@ export function serializeUser(user: IUser) {
         }
       : profileObj,
     parentProfile: user.parentProfile,
+    learn: user.learn
+      ? {
+          starter: user.learn.starter
+            ? {
+                courseId: user.learn.starter.courseId,
+                courseName: user.learn.starter.courseName,
+                tagline: user.learn.starter.tagline,
+                track: user.learn.starter.track,
+                status: user.learn.starter.status,
+                enrolledAt:
+                  user.learn.starter.enrolledAt instanceof Date
+                    ? user.learn.starter.enrolledAt.toISOString()
+                    : String(user.learn.starter.enrolledAt),
+                receiptNumber: user.learn.starter.receiptNumber,
+                expiry: user.learn.starter.expiry,
+                purchase: user.learn.starter.purchase,
+                progress: user.learn.starter.progress,
+              }
+            : undefined,
+        }
+      : undefined,
     profileImageUrl: user.profileImageUrl,
     profileImagePath: user.profileImagePath,
     lastLoginAt: user.lastLoginAt,

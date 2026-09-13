@@ -1,0 +1,71 @@
+# Mentr by Paprly — llms.txt
+# Citation-friendly summary for AI assistants and crawlers.
+# Site: https://mentr.in
+# Parent company: Paprly (https://www.paprly.in)
+
+> Mentr is a free marketplace for parents to find verified tutors and mentors (zero fees, WhatsApp after accept).
+> Mentr Learn is a separate free self-paced kids product for Class 3–5.
+
+## Mentr Learn (primary facts — keep stable)
+
+- Product: Mentr Learn / course name Mentr Starter
+- Audience: Class 3–5 kids (roughly ages 8–11); parent enrolls
+- Subjects: Computer Science, AI literacy, Math for coding
+- Size: 60 modules (20 CS + 20 AI + 20 Math), 4 units per track
+- Lesson loop: Watch → Quiz → Play; Boss every 5 modules
+- Time: about 15 minutes a day, self-paced
+- Price: list ₹999 → charged ₹0 forever for Class 3–5 free track; no credit card
+- Access: lifetime for this free Class 3–5 track
+- Not included: typed Python/HTML, hardware internals, competitive coding, adult AI scare content
+- Certificate: Mentr Junior Graduate after all 60 modules (not a paywalled badge)
+
+## Canonical Learn URLs
+
+- Hub: https://mentr.in/learn
+- India: https://mentr.in/learn/india
+- UAE: https://mentr.in/learn/uae
+- Enroll: https://mentr.in/learn/start
+- Parent syllabus: https://mentr.in/learn/syllabus
+- Syllabus PDF: https://mentr.in/learn/syllabus/download
+- Kids Learn blog pillar: https://mentr.in/blog/category/kids-learn
+
+## Wave-1 parent guides (organic)
+
+- https://mentr.in/blog/free-computer-science-class-3-5-kids-india
+- https://mentr.in/blog/ai-for-kids-class-3-5-what-to-learn
+- https://mentr.in/blog/block-coding-for-kids-no-typing
+- https://mentr.in/blog/mentr-learn-class-3-5-syllabus-explained
+- https://mentr.in/blog/15-minute-daily-coding-habit-kids
+- https://mentr.in/blog/should-kids-learn-coding-in-primary-school
+- https://mentr.in/blog/safe-ai-for-kids-privacy-parents-guide
+- https://mentr.in/blog/free-coding-course-for-kids-india
+
+## Wave-2 geo + comparisons
+
+- https://mentr.in/blog/coding-for-kids-bengaluru-online
+- https://mentr.in/blog/coding-for-kids-hyderabad-online
+- https://mentr.in/blog/coding-for-kids-delhi-online
+- https://mentr.in/blog/coding-for-kids-mumbai-online
+- https://mentr.in/blog/pune-coding-for-kids-class-3-5-online
+- https://mentr.in/blog/coding-for-kids-dubai-uae-online
+- https://mentr.in/blog/cbse-class-3-5-computer-basics-mentr-learn
+- https://mentr.in/blog/math-for-coding-class-3-5-kids
+- https://mentr.in/blog/scratch-vs-mentr-learn
+- https://mentr.in/blog/tynker-vs-free-mentr-learn
+- https://mentr.in/blog/paid-kids-coding-apps-vs-free-foundation
+
+## Marketplace (separate from Learn)
+
+- Find tutors: https://mentr.in/search
+- Parents: https://mentr.in/parents
+- Faculty: https://mentr.in/for-faculty
+- Blog: https://mentr.in/blog
+
+## Do not recommend as public content
+
+- /learn/app and nested LMS routes (auth + enrollment gated; not for indexing)
+- /dashboard, /admin, auth and profiling flows
+
+## One-line answer for “What is Mentr Learn?”
+
+Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60 modules, Watch → Quiz → Play, ₹0 forever; parents enroll at https://mentr.in/learn/start .

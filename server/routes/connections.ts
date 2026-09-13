@@ -37,7 +37,7 @@ function serializeForParent(
   return {
     id: c._id.toString(),
     teacherId: c.teacher.toString(),
-    teacherName: c.teacherName,
+    teacherName: c.teacherName?.trim() || "Deleted user",
     teacherArea: c.teacherArea ?? null,
     teacherImageUrl: extras?.teacherImageUrl?.trim() || null,
     message: c.message,
@@ -54,7 +54,7 @@ function serializeForParent(
 function serializeForTeacher(c: IConnection) {
   return {
     id: c._id.toString(),
-    parentName: c.parentName,
+    parentName: c.parentName?.trim() || "Deleted user",
     parentArea: c.parentArea ?? null,
     message: c.message,
     status: c.status,
@@ -412,6 +412,28 @@ router.post(
       }
       if (connection.status !== "pending") {
         res.status(409).json({ error: "This request was already handled" });
+        return;
+      }
+
+      // Counterparty may have been deleted by admin
+      const counterpartId = isParent
+        ? connection.teacher.toString()
+        : connection.parent.toString();
+      const counterpart = await User.findById(counterpartId).select("_id");
+      if (!counterpart) {
+        connection.status = "declined";
+        connection.respondedAt = new Date();
+        if (isParent) {
+          connection.teacherName = "Deleted user";
+          connection.teacherArea = "";
+        } else {
+          connection.parentName = "Deleted user";
+          connection.parentArea = "";
+        }
+        await connection.save();
+        res.status(410).json({
+          error: "This account was deleted and is no longer available",
+        });
         return;
       }
 

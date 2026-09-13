@@ -22,12 +22,25 @@ const columns: Record<string, FooterLink[]> = {
     { label: "For parents", href: "/parents" },
     { label: "FAQ", href: "/faq" },
   ],
+  ...(LEARN_PUBLIC
+    ? {
+        Learn: [
+          { label: "Mentr Learn (Class 3–5)", href: "/learn" },
+          { label: "Enroll free", href: "/learn/start" },
+          { label: "Full syllabus", href: "/learn/syllabus" },
+          { label: "Syllabus PDF", href: "/learn/syllabus/download" },
+          { label: "Learn India", href: "/learn/india" },
+          { label: "Learn UAE", href: "/learn/uae" },
+          {
+            label: "Kids coding & AI guides",
+            href: "/blog/category/kids-learn",
+          },
+        ] as FooterLink[],
+      }
+    : {}),
   Parents: [
     ...(LEARN_PUBLIC
-      ? [
-          { label: "Mentr Learn (Class 3–5)", href: "/learn" },
-          { label: "Class 3–5 syllabus PDF", href: "/learn/syllabus/download" },
-        ]
+      ? ([] as FooterLink[])
       : []),
     { label: "Create parent account", href: "/parent/signup" },
     { label: "Parent login", href: "/parent" },
@@ -56,6 +69,18 @@ const columns: Record<string, FooterLink[]> = {
   ],
   Resources: [
     { label: "All guides", href: "/blog" },
+    ...(LEARN_PUBLIC
+      ? [
+          {
+            label: "Free CS for Class 3–5",
+            href: "/blog/free-computer-science-class-3-5-kids-india",
+          },
+          {
+            label: "Free coding course kids India",
+            href: "/blog/free-coding-course-for-kids-india",
+          },
+        ]
+      : []),
     { label: "Browse tutors", href: "/search" },
     { label: "Find online tutors", href: "/find-online-tutors" },
     { label: "Verified tutors online", href: "/find-verified-online-tutors" },
@@ -96,7 +121,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6">
             {Object.entries(columns).map(([title, links]) => (
               <div key={title}>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-white/40">

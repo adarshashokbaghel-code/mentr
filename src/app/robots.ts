@@ -16,6 +16,7 @@ const PRIVATE_PATHS = [
   "/login",
   "/admin/",
   "/tmp-wa-preview",
+  "/learn/app",
 ];
 
 export default function robots(): MetadataRoute.Robots {
