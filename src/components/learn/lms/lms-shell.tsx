@@ -108,22 +108,22 @@ function ShellChrome({ children }: { children: ReactNode }) {
 
       {/* Main column scrolls independently */}
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <header className="sticky top-0 z-30 flex shrink-0 items-center justify-between gap-3 border-b border-[#e8e2d8] bg-white/95 px-4 py-3 backdrop-blur-md lg:px-6 xl:px-8">
+        <header className="sticky top-0 z-30 flex shrink-0 items-center justify-between gap-2 border-b border-[#e8e2d8] bg-white/95 px-3 py-2.5 backdrop-blur-md sm:gap-3 sm:px-4 sm:py-3 lg:px-6 xl:px-8">
           <div className="flex min-w-0 items-center gap-2 lg:hidden">
-            <LearnDino size={36} className="h-9 w-9 shrink-0" />
-            <p className="truncate text-[16px] font-extrabold text-[#1c2434]">
+            <LearnDino size={36} className="h-8 w-8 shrink-0" />
+            <p className="truncate text-[15px] font-extrabold text-[#1c2434]">
               Learn
             </p>
           </div>
           <p className="hidden text-[14px] font-bold text-[#5a6472] lg:block">
             Dashboard
           </p>
-          <div className="ml-auto flex shrink-0 items-center gap-2">
+          <div className="ml-auto flex shrink-0 items-center gap-1.5 sm:gap-2">
             <button
               type="button"
               onClick={() => openPotd()}
               title="Open today's Problem of the Day"
-              className="inline-flex items-center gap-1 rounded-full bg-[#fff8d6] px-2.5 py-1 text-[12px] font-bold text-[#b45309] transition hover:brightness-95"
+              className="inline-flex items-center gap-1 rounded-full bg-[#fff8d6] px-2 py-1 text-[11px] font-bold text-[#b45309] transition hover:brightness-95 sm:px-2.5 sm:text-[12px]"
             >
               <Flame className="h-3.5 w-3.5" /> {streak}
             </button>
@@ -131,14 +131,15 @@ function ShellChrome({ children }: { children: ReactNode }) {
               type="button"
               onClick={() => openPotd()}
               title="Open today's Problem of the Day"
-              className="inline-flex items-center gap-1 rounded-full bg-[#fff4e8] px-2.5 py-1 text-[12px] font-bold text-[#ff6a1a] transition hover:brightness-95"
+              className="inline-flex items-center gap-1 rounded-full bg-[#fff4e8] px-2 py-1 text-[11px] font-bold text-[#ff6a1a] transition hover:brightness-95 sm:px-2.5 sm:text-[12px]"
             >
-              <Sparkles className="h-3.5 w-3.5" /> {xp} XP
+              <Sparkles className="h-3.5 w-3.5" /> {xp}
+              <span className="hidden sm:inline"> XP</span>
             </button>
           </div>
         </header>
 
-        <main className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-5 pb-24 sm:px-6 sm:py-6 lg:px-8 lg:pb-8 xl:px-10">
+        <main className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-4 pb-24 sm:px-6 sm:py-6 lg:px-8 lg:pb-8 xl:px-10">
           {children}
         </main>
       </div>
@@ -155,11 +156,11 @@ function ShellChrome({ children }: { children: ReactNode }) {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center gap-0.5 rounded-xl px-0.5 py-2 text-[10px] font-bold",
+                "flex flex-col items-center gap-0.5 rounded-xl px-0.5 py-1.5 text-[9px] font-bold sm:py-2 sm:text-[10px]",
                 active ? "text-[#ff6a1a]" : "text-[#8a929c]",
               )}
             >
-              <Icon className="h-5 w-5" strokeWidth={2.25} />
+              <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" strokeWidth={2.25} />
               {item.label}
             </Link>
           );

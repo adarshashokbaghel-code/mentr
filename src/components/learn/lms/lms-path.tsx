@@ -15,10 +15,7 @@ import {
   hasCompletedQuiz,
   hasWatchedVideo,
 } from "@/lib/learn-progress-client";
-import { hasLessonNotes } from "@/lib/learn-lesson-notes";
-import { downloadLessonNotes } from "@/lib/learn-lesson-notes-pdf";
 import {
-  SYLLABUS_DOWNLOAD_HREF,
   SYLLABUS_VIEW_HREF,
 } from "@/lib/learn-syllabus-doc";
 import { cn } from "@/lib/utils";
@@ -37,6 +34,9 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { SyllabusDownloadButton } from "@/components/learn/syllabus-download-button";
+import { hasLessonNotes } from "@/lib/learn-lesson-notes";
+import { downloadLessonNotes } from "@/lib/learn-lesson-notes-pdf";
 
 function PathSideRail({
   done,
@@ -91,10 +91,7 @@ function PathSideRail({
           </span>
         </Link>
 
-        <Link
-          href={SYLLABUS_DOWNLOAD_HREF}
-          className="group flex items-start gap-3 rounded-2xl border border-[#e8e2d8] bg-white p-3.5 transition hover:border-[#1c2434]"
-        >
+        <SyllabusDownloadButton className="group flex w-full items-start gap-3 rounded-2xl border border-[#e8e2d8] bg-white p-3.5 text-left transition hover:border-[#1c2434]">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eef2ff] text-[#4f46e5]">
             <Download className="h-5 w-5" strokeWidth={2.25} />
           </span>
@@ -107,7 +104,7 @@ function PathSideRail({
               One-page download to share at home
             </span>
           </span>
-        </Link>
+        </SyllabusDownloadButton>
 
         <button
           type="button"
@@ -383,12 +380,12 @@ export function LmsPath() {
                             </p>
                           </div>
 
-                          <div className="flex w-full shrink-0 gap-2 sm:w-auto">
+                          <div className="flex w-full shrink-0 gap-1.5 sm:w-auto sm:gap-2">
                             {canOpen ? (
                               <Link
                                 href={`/learn/app/lesson/${m.id}?stage=watch`}
                                 className={cn(
-                                  "inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-xl text-[12px] font-extrabold sm:w-[4.75rem] sm:flex-none",
+                                  "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg text-[11px] font-extrabold sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]",
                                   videoDone
                                     ? "bg-[#e6f7f4] text-[#0d9488]"
                                     : "bg-[#fff4e8] text-[#ff6a1a]",
@@ -402,7 +399,7 @@ export function LmsPath() {
                                 Video
                               </Link>
                             ) : (
-                              <span className="inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#f3efe7] text-[12px] font-extrabold text-[#a89f91] sm:w-[4.75rem] sm:flex-none">
+                              <span className="inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg bg-[#f3efe7] text-[11px] font-extrabold text-[#a89f91] sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]">
                                 <Lock className="h-3.5 w-3.5" />
                                 Video
                               </span>
@@ -412,7 +409,7 @@ export function LmsPath() {
                               <Link
                                 href={`/learn/app/lesson/${m.id}?stage=quiz`}
                                 className={cn(
-                                  "inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-xl text-[12px] font-extrabold sm:w-[4.75rem] sm:flex-none",
+                                  "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg text-[11px] font-extrabold sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]",
                                   quizDone
                                     ? "bg-[#e6f7f4] text-[#0d9488]"
                                     : "bg-[#eef2ff] text-[#4f46e5]",
@@ -426,7 +423,7 @@ export function LmsPath() {
                                 Quiz
                               </Link>
                             ) : (
-                              <span className="inline-flex h-9 flex-1 items-center justify-center gap-1.5 rounded-xl bg-[#f3efe7] text-[12px] font-extrabold text-[#a89f91] sm:w-[4.75rem] sm:flex-none">
+                              <span className="inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg bg-[#f3efe7] text-[11px] font-extrabold text-[#a89f91] sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]">
                                 <Lock className="h-3.5 w-3.5" />
                                 Quiz
                               </span>
@@ -447,14 +444,14 @@ export function LmsPath() {
                                   : "Notes coming soon"
                               }
                               className={cn(
-                                "inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-xl px-2.5 text-[12px] font-extrabold transition sm:px-3",
+                                "inline-flex h-8 shrink-0 items-center justify-center gap-1 rounded-lg px-2 text-[11px] font-extrabold transition sm:h-9 sm:gap-1.5 sm:rounded-xl sm:px-3 sm:text-[12px]",
                                 hasLessonNotes(m.id)
                                   ? "bg-[#faf8f4] text-[#1c2434] ring-1 ring-[#e8e2d8] hover:bg-[#fff4e8] hover:text-[#ff6a1a]"
                                   : "cursor-not-allowed bg-[#f3efe7] text-[#a89f91]",
                               )}
                             >
                               <Download className="h-3.5 w-3.5" />
-                              Notes
+                              <span className="hidden min-[380px]:inline">Notes</span>
                             </button>
                           </div>
                         </div>

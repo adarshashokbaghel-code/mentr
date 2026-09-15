@@ -346,8 +346,8 @@ export function LearnCoursePage() {
     <div className="min-h-screen bg-gradient-to-b from-[#fff8ef] via-[#faf8f4] to-[#f6f4ef]">
       <Navbar />
 
-      <main className={cn(LEARN_SHELL, "pb-28 pt-6 sm:pb-16 sm:pt-10")}>
-        <div className="mb-6 flex items-center gap-2 text-[13px] font-medium text-[#8a929c]">
+      <main className={cn(LEARN_SHELL, "pb-24 pt-4 sm:pb-16 sm:pt-10")}>
+        <div className="mb-4 flex items-center gap-2 text-[12px] font-medium text-[#8a929c] sm:mb-6 sm:text-[13px]">
           <Link href="/learn" className="hover:text-[#1c2434]">
             Mentr Learn
           </Link>
@@ -355,11 +355,11 @@ export function LearnCoursePage() {
           <span className="text-[#1c2434]">Class 3–5 course</span>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_340px] lg:gap-10 xl:grid-cols-[minmax(0,1fr)_360px]">
           <div className="min-w-0">
-            <div className="overflow-hidden rounded-2xl border border-[#e8e2d8] bg-white shadow-[0_16px_40px_rgba(28,36,52,0.08)]">
+            <div className="overflow-hidden rounded-2xl border border-[#e8e2d8] bg-white shadow-[0_12px_32px_rgba(28,36,52,0.06)]">
               <div className="grid sm:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
-                <div className="relative h-[200px] sm:h-[280px]">
+                <div className="relative h-[160px] sm:h-[280px]">
                   <Image
                     src="/learn/demo/learn-course-hero.png"
                     alt="Mentr Learn course preview"
@@ -369,86 +369,99 @@ export function LearnCoursePage() {
                     sizes="(max-width: 640px) 100vw, 420px"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/40 sm:to-white" />
-                  <div className="absolute bottom-3 left-3 flex items-center gap-2">
-                    <LearnDino size={32} className="h-8 w-8 shrink-0 drop-shadow" />
-                    <span className="rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold text-[#1c2434] shadow-sm">
-                      Preview · Watch → Quiz → Build
+                  <div className="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 sm:bottom-3 sm:left-3 sm:gap-2">
+                    <LearnDino size={32} className="h-7 w-7 shrink-0 drop-shadow sm:h-8 sm:w-8" />
+                    <span className="rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-bold text-[#1c2434] shadow-sm sm:px-2.5 sm:py-1 sm:text-[11px]">
+                      Watch → Quiz → Build
                     </span>
                   </div>
                 </div>
 
-                <div className="flex flex-col justify-center gap-2.5 bg-gradient-to-br from-[#fff8ef] to-[#fff4e8] px-4 py-4 sm:px-5 sm:py-5">
+                <div className="flex flex-col justify-center gap-2 bg-gradient-to-br from-[#fff8ef] to-[#fff4e8] px-3.5 py-3.5 sm:gap-2.5 sm:px-5 sm:py-5">
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="rounded-full bg-[#ff6a1a] px-2.5 py-0.5 text-[11px] font-bold text-white">
+                    <span className="rounded-full bg-[#ff6a1a] px-2 py-0.5 text-[10px] font-bold text-white sm:px-2.5 sm:text-[11px]">
                       Class 3–5
                     </span>
-                    <span className="rounded-full bg-[#e6f7f4] px-2.5 py-0.5 text-[11px] font-bold text-[#0d9488]">
+                    <span className="rounded-full bg-[#e6f7f4] px-2 py-0.5 text-[10px] font-bold text-[#0d9488] sm:px-2.5 sm:text-[11px]">
                       ₹0 forever
                     </span>
-                    <span className="rounded-full bg-white px-2.5 py-0.5 text-[11px] font-bold text-[#5a6472] ring-1 ring-[#e8e2d8]">
-                      Self-paced
-                    </span>
                   </div>
-                  <h1 className="text-balance text-[1.25rem] font-extrabold leading-tight tracking-tight text-[#1c2434] sm:text-[1.5rem]">
+                  <h1 className="text-balance text-[1.15rem] font-extrabold leading-tight tracking-tight text-[#1c2434] sm:text-[1.5rem]">
                     Free course for Class 3–5 kids
                   </h1>
-                  <p className="text-[13px] font-semibold leading-snug text-[#1c2434] sm:text-[14px]">
-                    Three subjects:{" "}
-                    <span className="text-[#ff6a1a]">Computer Science</span>,{" "}
-                    <span className="text-[#7c6ad6]">AI</span> &{" "}
+                  <p className="text-[12px] font-semibold leading-snug text-[#1c2434] sm:text-[14px]">
+                    <span className="text-[#ff6a1a]">CS</span> ·{" "}
+                    <span className="text-[#7c6ad6]">AI</span> ·{" "}
                     <span className="text-[#0d9488]">Math</span>
+                    <span className="font-medium text-[#5a6472]">
+                      {" "}
+                      · ~15 min/day
+                    </span>
                   </p>
-                  <p className="text-[12px] font-medium leading-snug text-[#5a6472] sm:text-[13px]">
-                    Short narrated videos, Build Arena missions, and daily practice —
-                    about 15 minutes a day. Same free path as on{" "}
-                    <Link href="/learn" className="font-bold text-[#ff6a1a] hover:underline">
-                      Mentr Learn
-                    </Link>
-                    . Enroll once; your child starts in the learning app today.
+                  <p className="hidden text-[13px] font-medium leading-snug text-[#5a6472] sm:block">
+                    Short narrated videos, Build Arena, and daily practice. Enroll
+                    once; your child starts in the learning app today.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 space-y-3 lg:hidden">
-              <EnrollCard onEnroll={openEnroll} enrolled={enrolled} />
-              <CourseNav />
+            {/* Mobile: compact price strip only — sticky bar handles CTA */}
+            <div className="mt-4 rounded-2xl border border-[#e8e2d8] bg-white p-3.5 lg:hidden">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[20px] font-extrabold text-[#1c2434]">
+                    ₹0{" "}
+                    <span className="text-[13px] font-semibold text-[#8a929c] line-through">
+                      ₹999
+                    </span>
+                  </p>
+                  <p className="text-[11px] font-medium text-[#0d9488]">
+                    {enrolled ? "You're enrolled" : "No card · parent email"}
+                  </p>
+                </div>
+                <Link
+                  href="/learn/syllabus"
+                  className="text-[12px] font-bold text-[#ff6a1a] hover:underline"
+                >
+                  Syllabus →
+                </Link>
+              </div>
             </div>
 
-            <section id="included" className="mt-10 scroll-mt-28">
-              <h2 className="text-[18px] font-bold text-[#1c2434] sm:text-[20px]">
+            <section id="included" className="mt-8 scroll-mt-24 sm:mt-10 sm:scroll-mt-28">
+              <h2 className="text-[16px] font-bold text-[#1c2434] sm:text-[20px]">
                 What&apos;s included
               </h2>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:mt-4 sm:gap-3">
                 {INCLUDES.map(({ icon: Icon, title, body }) => (
                   <div
                     key={title}
-                    className="flex gap-3 rounded-2xl border border-[#e8e2d8] bg-white p-4"
+                    className="flex flex-col gap-2 rounded-xl border border-[#e8e2d8] bg-white p-3 sm:flex-row sm:gap-3 sm:rounded-2xl sm:p-4"
                   >
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#fff4e8] text-[#ff6a1a]">
-                      <Icon className="h-5 w-5" strokeWidth={2.25} />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fff4e8] text-[#ff6a1a] sm:h-11 sm:w-11 sm:rounded-xl">
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5" strokeWidth={2.25} />
                     </span>
-                    <div>
-                      <p className="text-[14px] font-bold text-[#1c2434]">{title}</p>
-                      <p className="mt-0.5 text-[13px] text-[#8a929c]">{body}</p>
+                    <div className="min-w-0">
+                      <p className="text-[12px] font-bold leading-snug text-[#1c2434] sm:text-[14px]">
+                        {title}
+                      </p>
+                      <p className="mt-0.5 hidden text-[13px] text-[#8a929c] sm:block">
+                        {body}
+                      </p>
                     </div>
                   </div>
                 ))}
               </div>
             </section>
 
-            <section id="outcomes" className="mt-10 scroll-mt-28">
-              <h2 className="text-[18px] font-bold text-[#1c2434] sm:text-[20px]">
+            <section id="outcomes" className="mt-8 scroll-mt-24 sm:mt-10 sm:scroll-mt-28">
+              <h2 className="text-[16px] font-bold text-[#1c2434] sm:text-[20px]">
                 Skills your child leaves with
               </h2>
-              <p className="mt-1.5 max-w-xl text-[13px] font-medium leading-relaxed text-[#5a6472] sm:text-[14px]">
-                This is the Class 3–5 path from{" "}
-                <Link href="/learn" className="font-bold text-[#ff6a1a] hover:underline">
-                  Mentr Learn
-                </Link>
-                : concrete computer science, AI literacy, and math-for-coding —
-                the same depth as our full syllabus, written so you can enroll with
-                confidence.
+              <p className="mt-1 max-w-xl text-[12px] font-medium leading-relaxed text-[#5a6472] sm:mt-1.5 sm:text-[14px]">
+                Concrete CS, AI literacy, and math-for-coding — the same depth as
+                our full syllabus.
               </p>
 
               <div className="mt-5 space-y-4">
@@ -519,7 +532,7 @@ export function LearnCoursePage() {
                           </ul>
                         </div>
 
-                        <div>
+                        <div className="hidden sm:block">
                           <p className="text-[11px] font-bold uppercase tracking-wider text-[#8a929c]">
                             Unit milestones
                           </p>
@@ -635,17 +648,17 @@ export function LearnCoursePage() {
         </div>
       </main>
 
-      {/* Mobile sticky enroll */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e8e2d8] bg-white/95 p-3 backdrop-blur-md lg:hidden">
-        <div className="mx-auto flex max-w-lg items-center gap-3">
+      {/* Mobile sticky enroll — sits under dino (z-255), clear of cookie */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[#e8e2d8] bg-white/95 px-3 py-2.5 pb-[max(0.65rem,env(safe-area-inset-bottom))] backdrop-blur-md lg:hidden">
+        <div className="mx-auto flex max-w-lg items-center gap-2.5">
           <div className="min-w-0 flex-1">
-            <p className="text-[15px] font-extrabold text-[#1c2434]">
+            <p className="text-[14px] font-extrabold text-[#1c2434]">
               ₹0{" "}
-              <span className="text-[13px] font-semibold text-[#8a929c] line-through">
+              <span className="text-[12px] font-semibold text-[#8a929c] line-through">
                 ₹999
               </span>
             </p>
-            <p className="text-[11px] font-medium text-[#0d9488]">
+            <p className="text-[10px] font-medium text-[#0d9488]">
               {enrolled ? "You're enrolled" : "Free forever"}
             </p>
           </div>
@@ -653,13 +666,17 @@ export function LearnCoursePage() {
             <LearnStartButton
               href={LEARN_APP_HREF}
               variant="enrolled"
-              className="shrink-0"
+              className="h-10 shrink-0 px-3.5 text-[13px] sm:h-11"
             >
               Explore
             </LearnStartButton>
           ) : (
-            <LearnStartButton asButton onClick={openEnroll} className="shrink-0">
-              Enroll for free
+            <LearnStartButton
+              asButton
+              onClick={openEnroll}
+              className="h-10 shrink-0 px-3.5 text-[13px] sm:h-11"
+            >
+              Enroll free
             </LearnStartButton>
           )}
         </div>

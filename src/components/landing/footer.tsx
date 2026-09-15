@@ -28,7 +28,7 @@ const columns: Record<string, FooterLink[]> = {
           { label: "Mentr Learn (Class 3–5)", href: "/learn" },
           { label: "Enroll free", href: "/learn/start" },
           { label: "Full syllabus", href: "/learn/syllabus" },
-          { label: "Syllabus PDF", href: "/learn/syllabus/download" },
+          { label: "Syllabus PDF", href: "/learn/syllabus?download=1" },
           { label: "Learn India", href: "/learn/india" },
           { label: "Learn UAE", href: "/learn/uae" },
           { label: "Learn Australia", href: "/learn/australia" },

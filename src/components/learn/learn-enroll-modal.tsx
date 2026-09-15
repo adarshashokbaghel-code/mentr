@@ -224,7 +224,7 @@ export function LearnEnrollModal({
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-3 top-3 z-10 flex h-10 w-10 items-center justify-center rounded-full text-[#8a929c] hover:bg-[#f6f4ef]"
+          className="absolute right-2.5 top-2.5 z-10 flex h-9 w-9 items-center justify-center rounded-full text-[#8a929c] hover:bg-[#f6f4ef] sm:right-3 sm:top-3 sm:h-10 sm:w-10"
           aria-label="Close"
         >
           <X className="h-5 w-5" />
@@ -292,22 +292,22 @@ export function LearnEnrollModal({
         ) : null}
 
         {!authLoading && phase === "auth" ? (
-          <div className="px-5 pb-6 pt-6 sm:px-7 sm:pt-7">
+          <div className="px-4 pb-5 pt-5 sm:px-7 sm:pb-6 sm:pt-7">
             <div className="flex items-center gap-3 pr-8">
-              <LearnDino size={44} className="h-11 w-11 shrink-0" />
+              <LearnDino size={44} className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
               <div>
-                <p className="text-[12px] font-bold uppercase tracking-wider text-[#ff6a1a]">
+                <p className="text-[11px] font-bold uppercase tracking-wider text-[#ff6a1a] sm:text-[12px]">
                   Parent account
                 </p>
                 <h2
                   id="learn-enroll-title"
-                  className="text-[1.35rem] font-extrabold tracking-tight text-[#1c2434]"
+                  className="text-[1.2rem] font-extrabold tracking-tight text-[#1c2434] sm:text-[1.35rem]"
                 >
                   Enroll in {LEARN_COURSE_NAME}
                 </h2>
               </div>
             </div>
-            <p className="mt-2 text-[13px] font-medium text-[#5a6472]">
+            <p className="mt-2 text-[12px] font-medium text-[#5a6472] sm:text-[13px]">
               {LEARN_COURSE_TAGLINE}. Sign in as a parent — then your child can
               open the learning app.
             </p>

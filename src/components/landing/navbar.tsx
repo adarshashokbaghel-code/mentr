@@ -52,8 +52,12 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 w-full min-w-0 max-w-[1400px] items-center justify-between gap-2 px-4 sm:px-6 lg:px-8">
-        <MentrBrand logoClassName="h-7" priority className="min-w-0 shrink" />
+      <div className="mx-auto flex h-12 w-full min-w-0 max-w-[1400px] items-center justify-between gap-2 px-3 sm:h-14 sm:px-6 lg:h-16 lg:px-8">
+        <MentrBrand
+          logoClassName="h-5 sm:h-6 lg:h-7"
+          priority
+          className="min-w-0 shrink"
+        />
 
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
@@ -98,15 +102,15 @@ export function Navbar() {
           {!loading && user && <UserMenu />}
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-1.5 md:hidden">
           {!loading && user?.role === "parent" && <ParentNotificationsBell />}
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-white"
+            className="flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-white"
             onClick={() => setOpen(!open)}
           >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </div>

@@ -108,13 +108,13 @@ export function ParentNotificationsBell() {
         aria-label={`Notifications${unreadCount > 0 ? ` (${unreadCount} new)` : ""}`}
         onClick={() => (open ? close() : void openPanel())}
         className={cn(
-          "relative flex h-10 w-10 items-center justify-center rounded-lg border border-hairline bg-white transition hover:bg-cream",
+          "relative flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-white transition hover:bg-cream sm:h-10 sm:w-10",
           open && "bg-cream",
         )}
       >
-        <Bell className="h-[18px] w-[18px] text-ink" />
+        <Bell className="h-4 w-4 text-ink sm:h-[18px] sm:w-[18px]" />
         {unreadCount > 0 && (
-          <span className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-coral px-1 text-[10px] font-bold text-white ring-2 ring-cream">
+          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-coral px-0.5 text-[9px] font-bold text-white ring-2 ring-cream sm:h-[18px] sm:min-w-[18px] sm:px-1 sm:text-[10px]">
             {unreadCount > 9 ? "9+" : unreadCount}
           </span>
         )}
@@ -124,7 +124,12 @@ export function ParentNotificationsBell() {
         <div
           role="menu"
           aria-label="Notifications"
-          className="champs-pop absolute right-0 top-[calc(100%+8px)] z-50 w-[320px] rounded-xl border border-hairline bg-white p-1.5 shadow-[0_12px_32px_rgba(26,35,28,0.14)]"
+          className={cn(
+            "champs-pop z-50 rounded-xl border border-hairline bg-white p-1.5 shadow-[0_12px_32px_rgba(26,35,28,0.14)]",
+            /* Mobile: stay inside viewport; desktop: anchor to bell */
+            "fixed left-3 right-3 top-[3.25rem] w-auto max-w-none",
+            "sm:absolute sm:left-auto sm:right-0 sm:top-[calc(100%+8px)] sm:w-[320px] sm:max-w-[min(320px,calc(100vw-1.5rem))]",
+          )}
         >
           <div className="flex items-center justify-between rounded-lg bg-cream px-3 py-2.5">
             <p className="text-sm font-bold text-ink">Updates</p>

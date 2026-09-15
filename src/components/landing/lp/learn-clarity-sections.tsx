@@ -224,87 +224,90 @@ export function LearnClaritySections({ geo = "global" }: { geo?: LearnGeo }) {
             ))}
           </div>
 
-          {/* Comparison — 3 aligned columns */}
+          {/* Comparison — landing-style delta table */}
           <div
             className={cn(
               "mt-8 overflow-hidden rounded-2xl border-2 border-ink bg-white",
               hardShadowSm,
             )}
           >
-            <div className="border-b-2 border-ink bg-lavender/60 px-5 py-5 sm:px-7 sm:py-6">
-              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
-                Why not another kids coding app
-              </p>
-              <h3 className="mt-1.5 text-xl font-bold tracking-tight text-ink sm:text-2xl">
-                Teaching first.{" "}
-                <span className="text-coral">No hi-fi fluff.</span>
-              </h3>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink/70">
-                Many platforms lead with flashy skins and soft “coding” games,
-                then push a paid live class. Mentr Learn ships a free syllabus,
-                narrated lessons, quizzes, and Build — what is taught matters
-                more than chrome. Mentors stay optional on Mentr later.
-              </p>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {["₹0 forever", "Syllabus published", "Tutor optional"].map(
-                  (t) => (
-                    <li
-                      key={t}
-                      className="rounded-md border border-ink/15 bg-white px-2.5 py-1 text-[11px] font-bold text-ink"
-                    >
-                      {t}
-                    </li>
-                  ),
-                )}
-              </ul>
-            </div>
-
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[36rem] border-collapse text-left">
-                <thead>
-                  <tr className="border-b border-hairline bg-cream/80">
-                    <th className="w-[22%] px-4 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-muted sm:px-6">
-                      Parameter
-                    </th>
-                    <th className="w-[39%] px-4 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-muted sm:px-6">
-                      Typical kids apps
-                    </th>
-                    <th className="w-[39%] px-4 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-sage sm:px-6">
-                      Mentr Learn
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {COMPARE_ROWS.map((row, i) => (
-                    <tr
-                      key={row.label}
-                      className={cn(
-                        i < COMPARE_ROWS.length - 1 && "border-b border-hairline",
-                        row.highlight && "bg-coral-wash/35",
-                      )}
-                    >
-                      <th
-                        scope="row"
-                        className="align-top px-4 py-4 text-[11px] font-bold uppercase tracking-[0.1em] text-muted sm:px-6 sm:py-5"
+            <div className="grid border-b-2 border-ink lg:grid-cols-[minmax(0,1fr)_1.15fr]">
+              <div className="relative overflow-hidden bg-lavender/60 p-5 sm:p-7 lg:p-8">
+                <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
+                  Why not another kids coding app
+                </p>
+                <h3 className="mt-2 text-xl font-bold tracking-tight text-ink sm:text-2xl">
+                  Teaching first.
+                  <span className="mt-1 block text-coral">No hi-fi fluff.</span>
+                </h3>
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-ink/70">
+                  Many platforms lead with flashy skins and soft “coding” games,
+                  then push a paid live class. Mentr Learn ships a free syllabus,
+                  narrated lessons, quizzes, and Build — what is taught matters
+                  more than chrome. Mentors stay optional on Mentr later.
+                </p>
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {["₹0 forever", "Syllabus published", "Tutor optional"].map(
+                    (t) => (
+                      <li
+                        key={t}
+                        className="rounded-md border border-ink/15 bg-white px-2.5 py-1 text-[11px] font-bold text-ink"
                       >
-                        {row.label}
+                        {t}
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
+
+              <div className="overflow-x-auto border-t-2 border-ink lg:border-l-2 lg:border-t-0">
+                <table className="w-full min-w-[28rem] border-collapse text-left">
+                  <thead>
+                    <tr className="border-b border-hairline bg-cream/80">
+                      <th className="w-[24%] px-3 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-muted sm:px-5">
+                        Parameter
                       </th>
-                      <td className="align-top px-4 py-4 text-sm text-muted line-through decoration-muted/50 sm:px-6 sm:py-5">
-                        {row.other}
-                      </td>
-                      <td className="align-top px-4 py-4 text-sm font-bold text-ink sm:px-6 sm:py-5">
-                        <span className="inline-flex items-start gap-1.5">
-                          <Check
-                            className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sage"
-                            aria-hidden
-                          />
-                          {row.mentr}
-                        </span>
-                      </td>
+                      <th className="w-[38%] px-3 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-muted sm:px-5">
+                        Typical kids apps
+                      </th>
+                      <th className="w-[38%] px-3 py-3 text-[10px] font-bold uppercase tracking-[0.1em] text-sage sm:px-5">
+                        Mentr Learn
+                      </th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {COMPARE_ROWS.map((row, i) => (
+                      <tr
+                        key={row.label}
+                        className={cn(
+                          i < COMPARE_ROWS.length - 1 &&
+                            "border-b border-hairline",
+                          row.highlight && "bg-coral-wash/35",
+                        )}
+                      >
+                        <th
+                          scope="row"
+                          className="align-top px-3 py-4 text-[11px] font-bold uppercase tracking-[0.1em] text-muted sm:px-5"
+                        >
+                          {row.label}
+                        </th>
+                        <td className="align-top px-3 py-4 text-sm text-muted line-through decoration-muted/50 sm:px-5">
+                          {row.other}
+                        </td>
+                        <td className="align-top px-3 py-4 text-sm font-bold text-ink sm:px-5">
+                          <span className="inline-flex items-start gap-1.5">
+                            <Check
+                              className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sage"
+                              aria-hidden
+                            />
+                            {row.mentr}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
 
