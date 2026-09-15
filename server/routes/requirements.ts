@@ -261,6 +261,7 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
         },
       ]),
     );
+    const liveTeacherIds = new Set(teacherById.keys());
 
     const byRequirement = new Map<string, IConnection[]>();
     for (const c of interests) {
@@ -279,16 +280,23 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
             ...serializeForOwner(r),
             interests: (byRequirement.get(r._id.toString()) ?? []).map((c) => {
               const extra = teacherById.get(c.teacher.toString());
+              const teacherGone = !liveTeacherIds.has(c.teacher.toString());
               return {
                 id: c._id.toString(),
                 teacherId: c.teacher.toString(),
-                teacherName: c.teacherName,
-                teacherArea: c.teacherArea ?? null,
-                teacherImageUrl: extra?.teacherImageUrl ?? null,
+                teacherName: teacherGone
+                  ? "Deleted user"
+                  : c.teacherName?.trim() || "Deleted user",
+                teacherArea: teacherGone ? null : (c.teacherArea ?? null),
+                teacherImageUrl: teacherGone
+                  ? null
+                  : (extra?.teacherImageUrl ?? null),
                 message: c.message,
                 status: c.status,
                 phone:
-                  c.status === "accepted" ? (extra?.phone ?? null) : null,
+                  c.status === "accepted" && !teacherGone
+                    ? (extra?.phone ?? null)
+                    : null,
                 sentAt: c.createdAt,
                 respondedAt: c.respondedAt ?? null,
               };
@@ -440,7 +448,9 @@ router.get("/pitches", async (req: AuthenticatedRequest, res: Response) => {
           sentAt: c.createdAt,
           respondedAt: c.respondedAt ?? null,
           // Privacy: identity unlocks only on acceptance
-          parentName: c.status === "accepted" ? c.parentName : null,
+          parentName: c.status === "accepted"
+            ? c.parentName?.trim() || "Deleted user"
+            : null,
           parentPhone:
             c.status === "accepted"
               ? (parentPhoneById.get(c.parent.toString()) ?? null)

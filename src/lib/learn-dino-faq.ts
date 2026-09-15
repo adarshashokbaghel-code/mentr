@@ -29,7 +29,7 @@ export const DINO_FAQ: Record<string, DinoFaqNode> = {
       "Mentr Learn is a free online path for Class 3–5 kids. They learn coding (CS), AI, and maths in short daily lessons — about 15 minutes. No tuition fee for the 60 modules.",
     next: ["how-it-works", "who-is-it-for", "is-it-free", "how-to-start", "what-is-mentr", "parent-email"],
     action: "wave",
-    cta: { label: "Start free", href: "/parent/signup?next=/learn" },
+    cta: { label: "Start free", href: "/learn/start" },
   },
   "how-it-works": {
     id: "how-it-works",
@@ -54,16 +54,16 @@ export const DINO_FAQ: Record<string, DinoFaqNode> = {
       "Yes. All 60 Class 3–5 modules are free — no locked chapters and no trial timer. Mentr earns from optional tutor bookings later, not from selling Learn lessons.",
     next: ["how-to-start", "need-tutor", "what-is-mentr", "how-it-works", "syllabus", "parent-email"],
     action: "cheer",
-    cta: { label: "Create free account", href: "/parent/signup?next=/learn" },
+    cta: { label: "Create free account", href: "/learn/start" },
   },
   "how-to-start": {
     id: "how-to-start",
     question: "How do we start?",
     answer:
-      "A parent signs up (free). Add your child’s profile. Then open Mentr Learn and start Module 1. Kids use the student side under the parent account — no separate paid plan.",
+      "Open the course page, enroll for free, then start Module A1 in the Learn app. Parents can review the syllabus anytime — no paid plan for Class 3–5.",
     next: ["is-it-free", "parent-email", "how-it-works", "tracks", "need-tutor", "syllabus"],
     action: "handshake",
-    cta: { label: "Parent signup", href: "/parent/signup?next=/learn" },
+    cta: { label: "Enroll free", href: "/learn/start" },
   },
   "what-is-mentr": {
     id: "what-is-mentr",
@@ -141,7 +141,7 @@ export const DINO_FAQ: Record<string, DinoFaqNode> = {
       "Class 6–8 and older tracks are planned next. Join free Class 3–5 now and we’ll email you when older cohorts open.",
     next: ["who-is-it-for", "how-to-start", "what-is-learn", "is-it-free", "what-is-mentr", "parent-email"],
     action: "blink",
-    cta: { label: "Join free", href: "/parent/signup?next=/learn" },
+    cta: { label: "Join free", href: "/learn/start" },
   },
 };
 

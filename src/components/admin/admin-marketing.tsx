@@ -1,9 +1,11 @@
 "use client";
 
+import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
 import {
   AdminBarList,
   AdminSection,
   AdminStatCard,
+  AdminTrendChart,
 } from "@/components/admin/admin-ui";
 import {
   createAdminMarketingLink,
@@ -155,48 +157,74 @@ function SignupList({ users }: { users: MarketingSignup[] }) {
 
 function BehaviorCards({ row }: { row: MarketingPageRow }) {
   return (
-    <div className="mt-3 grid gap-2 sm:grid-cols-4">
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Signups
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {row.signups}
-        </p>
-        <p className="text-[11px] text-muted">
-          {row.parentSignups} parents · {row.facultySignups} tutors
-        </p>
+    <div className="mt-3 space-y-2">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-lg border border-hairline bg-sage-wash/40 px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Unique views (IP)
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.uniqueViews}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.views} total page views
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-coral-wash/50 px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Unique clicks (IP)
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.uniqueRedirects}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.redirects} total CTA / link clicks
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Signups
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.signups}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.parentSignups} parents · {row.facultySignups} tutors
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Profiles completed
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.profilesCompleted}
+          </p>
+          <p className="text-[11px] text-muted">
+            {pct(row.profilesCompleted, row.signups)} of signups
+          </p>
+        </div>
       </div>
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Profiles completed
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {row.profilesCompleted}
-        </p>
-        <p className="text-[11px] text-muted">
-          {pct(row.profilesCompleted, row.signups)} of signups
-        </p>
-      </div>
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Active connectors
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {row.usersWithConnections}
-        </p>
-        <p className="text-[11px] text-muted">
-          {row.totalConnections} total connection rows
-        </p>
-      </div>
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Signup → connect
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {pct(row.usersWithConnections, row.signups)}
-        </p>
-        <p className="text-[11px] text-muted">Behaviour conversion</p>
+      <div className="grid gap-2 sm:grid-cols-2">
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Active connectors
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.usersWithConnections}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.totalConnections} total connection rows
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Signup → connect
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {pct(row.usersWithConnections, row.signups)}
+          </p>
+          <p className="text-[11px] text-muted">Behaviour conversion</p>
+        </div>
       </div>
     </div>
   );
@@ -207,65 +235,33 @@ function SignupTrendChart({
 }: {
   points: MarketingOverview["timeseries"];
 }) {
-  const max = Math.max(...points.map((p) => p.total), 1);
-
   return (
     <div className="rounded-xl border border-hairline bg-white p-4">
       <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
         Signups · last 30 days
       </p>
-      <div className="mt-4 flex h-40 items-end gap-0.5">
-        {points.map((p) => (
-          <div
-            key={p.date}
-            className="group relative flex min-w-0 flex-1 flex-col justify-end"
-            title={`${p.date}: ${p.total} (blog ${p.blog}, social ${p.social}, page ${p.page}, other ${p.other})`}
-          >
-            <div
-              className="flex w-full flex-col justify-end overflow-hidden rounded-sm"
-              style={{ height: `${Math.max((p.total / max) * 100, p.total ? 4 : 0)}%` }}
-            >
-              {p.blog > 0 && (
-                <div
-                  className="w-full bg-coral"
-                  style={{ height: `${(p.blog / (p.total || 1)) * 100}%` }}
-                />
-              )}
-              {p.social > 0 && (
-                <div
-                  className="w-full bg-sage"
-                  style={{ height: `${(p.social / (p.total || 1)) * 100}%` }}
-                />
-              )}
-              {p.page > 0 && (
-                <div
-                  className="w-full bg-butter"
-                  style={{ height: `${(p.page / (p.total || 1)) * 100}%` }}
-                />
-              )}
-              {p.other > 0 && (
-                <div
-                  className="w-full bg-ink/25"
-                  style={{ height: `${(p.other / (p.total || 1)) * 100}%` }}
-                />
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 flex flex-wrap gap-3 text-[10px] text-muted">
-        <span className="inline-flex items-center gap-1">
-          <span className="h-2 w-2 rounded-sm bg-coral" /> Blog
-        </span>
-        <span className="inline-flex items-center gap-1">
-          <span className="h-2 w-2 rounded-sm bg-sage" /> Social
-        </span>
-        <span className="inline-flex items-center gap-1">
-          <span className="h-2 w-2 rounded-sm bg-butter" /> Page
-        </span>
-        <span className="inline-flex items-center gap-1">
-          <span className="h-2 w-2 rounded-sm bg-ink/25" /> Other
-        </span>
+      <div className="mt-4">
+        <AdminTrendChart
+          height={160}
+          emptyLabel="No attributed signups in the last 30 days"
+          points={points.map((p) => ({
+            key: p.date,
+            total: p.total,
+            title: `${p.date}: ${p.total} (blog ${p.blog}, social ${p.social}, page ${p.page}, other ${p.other})`,
+            segments: [
+              { value: p.blog, className: "bg-coral" },
+              { value: p.social, className: "bg-sage" },
+              { value: p.page, className: "bg-butter" },
+              { value: p.other, className: "bg-ink/25" },
+            ],
+          }))}
+          legend={[
+            { label: "Blog", className: "bg-coral" },
+            { label: "Social", className: "bg-sage" },
+            { label: "Page", className: "bg-butter" },
+            { label: "Other", className: "bg-ink/25" },
+          ]}
+        />
       </div>
     </div>
   );
@@ -284,6 +280,12 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
   const [linkBusy, setLinkBusy] = useState(false);
   const [linkError, setLinkError] = useState<string | null>(null);
   const [openLinkId, setOpenLinkId] = useState<string | null>(null);
+  const [passGate, setPassGate] = useState<
+    | null
+    | { kind: "create" }
+    | { kind: "delete"; link: MarketingTrackedLink }
+  >(null);
+  const [passError, setPassError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -361,8 +363,9 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
     [data],
   );
 
-  async function handleCreateLink() {
+  async function runCreateLink(adminPass: string) {
     setLinkBusy(true);
+    setPassError(null);
     setLinkError(null);
     try {
       await createAdminMarketingLink(adminKey, {
@@ -370,31 +373,51 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
         label: linkLabel,
         path: linkPath,
         note: linkNote || undefined,
+        adminPass,
       });
       setLinkLabel("");
       setLinkNote("");
       setLinkPath("/");
+      setPassGate(null);
       await load();
     } catch (e) {
-      setLinkError(e instanceof Error ? e.message : "Failed to create link");
+      setPassError(e instanceof Error ? e.message : "Failed to create link");
     } finally {
       setLinkBusy(false);
     }
   }
 
-  async function handleDeleteLink(link: MarketingTrackedLink) {
-    if (!window.confirm(`Delete tracked link “${link.label}”?`)) return;
+  async function runDeleteLink(
+    link: MarketingTrackedLink,
+    adminPass: string,
+  ) {
     setLinkBusy(true);
+    setPassError(null);
     setLinkError(null);
     try {
-      await deleteAdminMarketingLink(adminKey, link.id);
+      await deleteAdminMarketingLink(adminKey, link.id, adminPass);
       if (openLinkId === link.id) setOpenLinkId(null);
+      setPassGate(null);
       await load();
     } catch (e) {
-      setLinkError(e instanceof Error ? e.message : "Failed to delete link");
+      setPassError(e instanceof Error ? e.message : "Failed to delete link");
     } finally {
       setLinkBusy(false);
     }
+  }
+
+  function handleCreateLink() {
+    if (!linkLabel.trim()) {
+      setLinkError("Label is required");
+      return;
+    }
+    setPassError(null);
+    setPassGate({ kind: "create" });
+  }
+
+  function handleDeleteLink(link: MarketingTrackedLink) {
+    setPassError(null);
+    setPassGate({ kind: "delete", link });
   }
 
   const tabs: { id: TabId; label: string }[] = [
@@ -406,15 +429,27 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
   return (
     <AdminSection
       id="marketing"
-      title="Marketing · UTM tracking"
-      description="Copy UTM links for blogs and socials. Metrics focus on signups and post-signup behaviour — not vanity clicks."
+      title="Marketing · UTM + IP click tracking"
+      description="Blogs, socials, and page CTAs: unique views/clicks count each new IP once; repeats add to totals. Signups still attribute via UTM."
     >
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <AdminStatCard
+          label="Unique views (IP)"
+          value={data?.totals.uniqueViews ?? 0}
+          sub={`${data?.totals.views ?? 0} total views`}
+          accent="sage"
+        />
+        <AdminStatCard
+          label="Unique clicks (IP)"
+          value={data?.totals.uniqueRedirects ?? 0}
+          sub={`${data?.totals.redirects ?? 0} total clicks`}
+          accent="coral"
+        />
         <AdminStatCard
           label="Attributed signups"
           value={data?.totals.signups ?? 0}
           sub={`${data?.totals.parentSignups ?? 0} parents · ${data?.totals.facultySignups ?? 0} tutors`}
-          accent="sage"
+          accent="butter"
         />
         <AdminStatCard
           label="Profiles completed"
@@ -423,18 +458,6 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
             data?.totals.profilesCompleted ?? 0,
             data?.totals.signups ?? 0,
           )}
-          accent="coral"
-        />
-        <AdminStatCard
-          label="Users with connections"
-          value={data?.totals.usersWithConnections ?? 0}
-          sub="Sent or received a connect/pitch"
-          accent="butter"
-        />
-        <AdminStatCard
-          label="Sources tracked"
-          value={data?.sources.length ?? 0}
-          sub={`${data?.socials?.reduce((n, s) => n + s.signups, 0) ?? 0} from social`}
         />
       </div>
 
@@ -820,6 +843,36 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
           </div>
         </div>
       )}
+
+      <AdminPassDialog
+        open={!!passGate}
+        title={
+          passGate?.kind === "delete"
+            ? "Delete tracked link?"
+            : "Create tracked link?"
+        }
+        description={
+          passGate?.kind === "delete"
+            ? `Delete “${passGate.link.label}”. Enter ADMIN_PASS to confirm.`
+            : `Create a tracked ${socialId} link. Enter ADMIN_PASS to confirm.`
+        }
+        confirmLabel={passGate?.kind === "delete" ? "Delete link" : "Create link"}
+        busy={linkBusy}
+        error={passError}
+        onConfirm={(pass) => {
+          if (passGate?.kind === "delete") {
+            void runDeleteLink(passGate.link, pass);
+          } else {
+            void runCreateLink(pass);
+          }
+        }}
+        onClose={() => {
+          if (!linkBusy) {
+            setPassGate(null);
+            setPassError(null);
+          }
+        }}
+      />
     </AdminSection>
   );
 }

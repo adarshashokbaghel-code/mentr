@@ -1,6 +1,9 @@
+"use client";
+
+import { TrackedLink } from "@/components/marketing/tracked-link";
+import { trackMarketingEvent } from "@/lib/marketing-client";
 import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 function ArrowIcon() {
@@ -29,18 +32,67 @@ export function LearnStartButton({
   children = "Get started for free",
   className,
   onClick,
+  asButton = false,
+  variant = "default",
 }: {
   href?: string;
   children?: ReactNode;
   className?: string;
   onClick?: () => void;
+  /** Use a button instead of a link (e.g. open enroll modal) */
+  asButton?: boolean;
+  /** Green enrolled / explore CTA */
+  variant?: "default" | "enrolled";
 }) {
-  return (
-    <Link href={href} onClick={onClick} className={cn("learn-hk-cta", className)}>
+  const ctaClass =
+    variant === "enrolled" ? "learn-hk-cta learn-hk-cta--enrolled" : "learn-hk-cta";
+
+  const inner = (
+    <>
       <span className="learn-hk-cta-label">{children}</span>
       <span className="learn-hk-cta-arrow">
         <ArrowIcon />
       </span>
-    </Link>
+    </>
+  );
+
+  function trackClick(targetHref: string) {
+    const path =
+      typeof window !== "undefined" ? window.location.pathname : "/learn";
+    void trackMarketingEvent({
+      type: "redirect",
+      slug: "learn",
+      kind: "page",
+      path,
+      href: targetHref,
+    });
+  }
+
+  if (asButton) {
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          trackClick(href);
+          onClick?.();
+        }}
+        className={cn(ctaClass, className)}
+      >
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <TrackedLink
+      href={href}
+      slug="learn"
+      kind="page"
+      content="cta"
+      className={cn(ctaClass, className)}
+      onClick={onClick}
+    >
+      {inner}
+    </TrackedLink>
   );
 }

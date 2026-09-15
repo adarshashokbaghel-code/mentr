@@ -7,6 +7,8 @@ import { FOR_TUTORS_ARTICLES } from "./for-tutors";
 import { TRUST_SAFETY_ARTICLES } from "./trust-safety";
 import { CAREER_MENTORING_ARTICLES } from "./career-mentoring";
 import { LOCAL_GUIDES_ARTICLES } from "./local-guides";
+import { KIDS_LEARN_ARTICLES } from "./kids-learn";
+import { KIDS_LEARN_WAVE2_ARTICLES } from "./kids-learn-wave2";
 import { GUIDE_BATCH_SEP2026 } from "./guide-batch-sep2026";
 import { ADSENSE_QUALITY_BATCH } from "./adsense-quality-batch";
 
@@ -19,6 +21,8 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...TRUST_SAFETY_ARTICLES,
   ...CAREER_MENTORING_ARTICLES,
   ...LOCAL_GUIDES_ARTICLES,
+  ...KIDS_LEARN_ARTICLES,
+  ...KIDS_LEARN_WAVE2_ARTICLES,
   ...GUIDE_BATCH_SEP2026,
   // Last: replaces thin Jul-19 template posts for AdSense content quality
   ...ADSENSE_QUALITY_BATCH,

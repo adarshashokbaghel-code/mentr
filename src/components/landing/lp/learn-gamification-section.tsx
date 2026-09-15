@@ -157,11 +157,13 @@ function PotdCard() {
           6-day streak
         </span>
       </div>
+
       <p className="mt-3 text-[14px] font-bold leading-snug text-[#1c2434]">
         A speaker plays sound. Is it <span className="text-[#ff6a1a]">input</span> or{" "}
         <span className="text-[#0d9488]">output</span>?
       </p>
-      <div className="mt-4 grid grid-cols-2 gap-2">
+
+      <div className="mt-3 grid grid-cols-2 gap-2">
         <span className="rounded-lg border border-[#efe6d8] bg-[#faf8f4] px-3 py-2.5 text-center text-[13px] font-bold text-[#5a6472]">
           Input
         </span>
@@ -169,9 +171,35 @@ function PotdCard() {
           Output ✓ · +5 XP
         </span>
       </div>
-      <p className="mt-auto pt-4 text-[13px] leading-relaxed text-[#5a6472]">
-        One new puzzle every day. Finish it to keep the streak and earn +5 XP — even on days with no
-        full module.
+
+      <div className="mt-3 flex flex-1 flex-col rounded-xl bg-[#faf8f4] px-3.5 py-3">
+        <p className="text-[11px] font-bold uppercase tracking-wider text-[#0d9488]">
+          Why it&apos;s output
+        </p>
+        <p className="mt-1.5 text-[13px] leading-relaxed text-[#5a6472]">
+          Input devices send information <span className="font-bold text-[#1c2434]">into</span> the
+          computer — like a keyboard or mouse. A speaker does the opposite: the computer sends
+          sound <span className="font-bold text-[#1c2434]">out</span> to you. So a speaker is an
+          output device.
+        </p>
+        <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
+          <span className="rounded-md bg-white px-2 py-1 text-[11px] font-bold text-[#ff6a1a] ring-1 ring-[#efe6d8]">
+            Keyboard → in
+          </span>
+          <span className="rounded-md bg-white px-2 py-1 text-[11px] font-bold text-[#ff6a1a] ring-1 ring-[#efe6d8]">
+            Mouse → in
+          </span>
+          <span className="rounded-md bg-[#e6f7f4] px-2 py-1 text-[11px] font-bold text-[#0d9488]">
+            Speaker → out
+          </span>
+          <span className="rounded-md bg-[#e6f7f4] px-2 py-1 text-[11px] font-bold text-[#0d9488]">
+            Screen → out
+          </span>
+        </div>
+      </div>
+
+      <p className="mt-3 text-[12px] leading-relaxed text-[#8a929c]">
+        One new puzzle every day. Finish it to keep the streak and earn +5 XP.
       </p>
     </div>
   );

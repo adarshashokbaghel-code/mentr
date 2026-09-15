@@ -6,13 +6,20 @@ import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { homeFor } from "@/lib/auth-routes";
 import { cn } from "@/lib/utils";
 import { MentrBrand } from "@/components/ui/mentr-brand";
-import { Loader2, MapPin, Phone, User } from "lucide-react";
-import Link from "next/link";
+import { Loader2, MapPin, Phone } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 const field =
   "mt-1.5 h-11 w-full rounded-md border border-[#e5e2dc] bg-white px-3 text-[15px] text-ink outline-none placeholder:text-[#a39e96] focus:border-ink";
+
+function nameFromEmail(email: string): string {
+  const local = email.split("@")[0]?.trim() || "Parent";
+  return local
+    .replace(/[._+-]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase())
+    .slice(0, 80);
+}
 
 function ParentProfilingContent() {
   const { user, loading, setUser } = useAuth();
@@ -20,7 +27,6 @@ function ParentProfilingContent() {
   const searchParams = useSearchParams();
   const next = searchParams?.get("next") || undefined;
 
-  const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("India");
   const [city, setCity] = useState("Bengaluru");
@@ -40,7 +46,6 @@ function ParentProfilingContent() {
       return;
     }
     if (!prefilled && user.parentProfile) {
-      setName(user.parentProfile.name ?? "");
       setPhoneNumber(user.parentProfile.phoneNumber ?? "");
       setCountry(user.parentProfile.country || "India");
       setCity(user.parentProfile.city || "Bengaluru");
@@ -54,8 +59,9 @@ function ParentProfilingContent() {
     setError("");
     setSaving(true);
     try {
+      const existingName = user?.parentProfile?.name?.trim();
       const { user: updated } = await profileApi.saveParent({
-        name: name.trim(),
+        name: existingName || nameFromEmail(user?.email || ""),
         phoneNumber: phoneNumber.trim(),
         country: country.trim(),
         city: city.trim(),
@@ -106,29 +112,13 @@ function ParentProfilingContent() {
             <div className="space-y-4">
               <label className="block">
                 <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink">
-                  <User className="h-3.5 w-3.5 text-muted" />
-                  Full name
-                </span>
-                <input
-                  type="text"
-                  required
-                  autoFocus
-                  autoComplete="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Your name"
-                  className={field}
-                />
-              </label>
-
-              <label className="block">
-                <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink">
                   <Phone className="h-3.5 w-3.5 text-muted" />
                   WhatsApp number
                 </span>
                 <input
                   type="tel"
                   required
+                  autoFocus
                   autoComplete="tel"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}

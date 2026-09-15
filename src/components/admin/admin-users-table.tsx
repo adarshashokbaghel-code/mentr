@@ -1,8 +1,13 @@
 "use client";
 
-import { fetchAdminUsers, type AdminUserRow } from "@/lib/admin-api";
+import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
+import {
+  deleteAdminUser,
+  fetchAdminUsers,
+  type AdminUserRow,
+} from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Loader2, Search } from "lucide-react";
+import { ChevronDown, Loader2, Search, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 function formatDate(iso?: string) {
@@ -39,7 +44,13 @@ function DetailItem({ label, value }: { label: string; value?: string | number |
   );
 }
 
-function UserDetailPanel({ user }: { user: AdminUserRow }) {
+function UserDetailPanel({
+  user,
+  onDelete,
+}: {
+  user: AdminUserRow;
+  onDelete: () => void;
+}) {
   return (
     <div className="border-t border-hairline bg-cream/80 px-4 py-3">
       <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-muted">
@@ -124,6 +135,17 @@ function UserDetailPanel({ user }: { user: AdminUserRow }) {
           </div>
         </div>
       )}
+
+      <div className="mt-4 flex justify-end border-t border-hairline pt-3">
+        <button
+          type="button"
+          onClick={onDelete}
+          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-coral/40 bg-coral-wash px-3 text-[12px] font-semibold text-coral-dark transition hover:bg-coral hover:text-white"
+        >
+          <Trash2 className="h-3.5 w-3.5" />
+          Delete user
+        </button>
+      </div>
     </div>
   );
 }
@@ -138,6 +160,9 @@ export function AdminUsersTable({ adminKey }: Props) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<AdminUserRow | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -156,6 +181,22 @@ export function AdminUsersTable({ adminKey }: Props) {
     const t = setTimeout(() => void load(), 250);
     return () => clearTimeout(t);
   }, [load]);
+
+  async function confirmDelete(adminPass: string) {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    setDeleteError(null);
+    try {
+      await deleteAdminUser(adminKey, deleteTarget.id, adminPass);
+      setUsers((prev) => prev.filter((u) => u.id !== deleteTarget.id));
+      setExpandedId(null);
+      setDeleteTarget(null);
+    } catch (e) {
+      setDeleteError(e instanceof Error ? e.message : "Failed to delete user");
+    } finally {
+      setDeleting(false);
+    }
+  }
 
   return (
     <div className="mt-4 border border-hairline bg-white">
@@ -262,7 +303,15 @@ export function AdminUsersTable({ adminKey }: Props) {
                             : "—"}
                         </span>
                       </button>
-                      {open && <UserDetailPanel user={user} />}
+                      {open && (
+                        <UserDetailPanel
+                          user={user}
+                          onDelete={() => {
+                            setDeleteError(null);
+                            setDeleteTarget(user);
+                          }}
+                        />
+                      )}
                     </td>
                   </tr>
                 );
@@ -271,6 +320,24 @@ export function AdminUsersTable({ adminKey }: Props) {
           </tbody>
         </table>
       </div>
+
+      {deleteTarget && (
+        <AdminPassDialog
+          open
+          title="Delete this user?"
+          description={`Permanently remove ${deleteTarget.name} (${deleteTarget.email}). Enter ADMIN_PASS to confirm. Other users will see “Deleted user” on old connections.`}
+          confirmLabel="Delete permanently"
+          busy={deleting}
+          error={deleteError}
+          onConfirm={(pass) => void confirmDelete(pass)}
+          onClose={() => {
+            if (!deleting) {
+              setDeleteTarget(null);
+              setDeleteError(null);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

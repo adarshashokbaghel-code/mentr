@@ -4,18 +4,27 @@ import { Navbar } from "@/components/landing/navbar";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/seo/json-ld";
 import {
+  LEARN_GEO_SEGMENTS,
   learnCopyFor,
+  learnHreflangMap,
   learnPathFor,
   parseLearnGeo,
   type LearnGeo,
 } from "@/lib/learn-landing-copy";
-import { LEARN_MODULE_COUNT, LEARN_TRACKS } from "@/lib/learn-curriculum";
-import { absoluteUrl, hubOpenGraph, SITE_BRAND } from "@/lib/seo";
+import {
+  LEARN_FACT_SHEET,
+  learnCourseJsonLd,
+  learnWebPageJsonLd,
+} from "@/lib/learn-seo";
+import { absoluteUrl, hubOpenGraph } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
-  return [{ geo: [] }, { geo: ["india"] }, { geo: ["uae"] }];
+  return [
+    { geo: [] as string[] },
+    ...LEARN_GEO_SEGMENTS.map((segment) => ({ geo: [segment] })),
+  ];
 }
 
 function geoForParams(raw?: string | string[]): LearnGeo | null {
@@ -31,12 +40,29 @@ export async function generateMetadata({
   const geo = geoForParams(raw);
   if (geo === null) return { title: "Not found", robots: { index: false } };
   const copy = learnCopyFor(geo);
+  const languages: Record<string, string> = {};
+  for (const [code, path] of Object.entries(learnHreflangMap())) {
+    languages[code] = absoluteUrl(path);
+  }
   return {
     title: copy.title,
     description: copy.metaDescription,
-    keywords: copy.keywords,
-    alternates: { canonical: copy.path },
+    keywords: [
+      ...copy.keywords,
+      LEARN_FACT_SHEET.courseName,
+      "60 modules",
+      "Build Arena",
+    ],
+    alternates: {
+      canonical: copy.path,
+      languages,
+    },
     openGraph: hubOpenGraph(copy.title, copy.metaDescription, copy.path),
+    twitter: {
+      card: "summary_large_image",
+      title: copy.title,
+      description: copy.metaDescription,
+    },
   };
 }
 
@@ -52,52 +78,35 @@ export default async function LearnPage({
   const copy = learnCopyFor(geo);
   const path = learnPathFor(geo);
 
-  const courseJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Course",
-    name: "Mentr Learn — Class 3–5 CS, AI & Math",
-    description: copy.metaDescription,
-    provider: {
-      "@type": "Organization",
-      name: SITE_BRAND,
-      url: absoluteUrl("/"),
-    },
-    educationalLevel: "Class 3-5",
-    numberOfCredits: LEARN_MODULE_COUNT,
-    isAccessibleForFree: true,
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "INR",
-      category: "Free",
-    },
-    hasCourseInstance: LEARN_TRACKS.map((t) => ({
-      "@type": "CourseInstance",
-      name: t.label,
-      courseMode: "online",
-      courseWorkload: "PT4H30M",
-    })),
-  };
-
-  const webPageJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: copy.title,
-    description: copy.metaDescription,
-    url: absoluteUrl(path),
-    isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },
-    about: courseJsonLd,
-  };
+  const crumbs =
+    geo === "global"
+      ? [
+          { name: "Home", path: "/" },
+          { name: "Mentr Learn", path: "/learn" },
+        ]
+      : [
+          { name: "Home", path: "/" },
+          { name: "Mentr Learn", path: "/learn" },
+          {
+            name: copy.regionLabel,
+            path,
+          },
+        ];
 
   return (
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: "Mentr Learn", path },
-          ]),
-          webPageJsonLd,
+          breadcrumbJsonLd(crumbs),
+          learnWebPageJsonLd({
+            name: copy.title,
+            description: copy.metaDescription,
+            path,
+          }),
+          learnCourseJsonLd({
+            description: copy.metaDescription,
+            url: path,
+          }),
           faqJsonLd(copy.faqs),
         ]}
       />

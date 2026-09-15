@@ -62,7 +62,7 @@ export const LEARN_TWEMOJI = {
 
 export const GUIDE_LINES = [
   "CS, AI & Math — free for Class 3–5.",
-  "Watch → Quiz → Play → Boss.",
+  "Watch → Quiz → Build → Practice.",
   "About 15 minutes a day.",
   "Parents get a weekly email.",
 ] as const;

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { ensureDb } from "../middleware/ensure-db";
 import { requireAdminKey } from "../middleware/admin-auth";
+import { requireAdminPass } from "../middleware/admin-pass";
 import {
   listAdminConnections,
   listAdminOtpActivity,
@@ -21,6 +22,12 @@ import {
   deleteMarketingLink,
 } from "../services/marketing-links";
 import { getAdminStats } from "../services/admin-stats";
+import { deleteAdminUser } from "../services/admin-delete-user";
+import { getAdminLearnTrack } from "../services/admin-learn";
+import {
+  LEARN_TRACKS,
+  type LearnTrackId,
+} from "../lib/learn-course";
 import type { MessengerTemplateId } from "../services/email-templates";
 
 const router = Router();
@@ -64,6 +71,21 @@ router.get("/users", async (req, res) => {
   } catch (err) {
     console.error("Admin users list error:", err);
     res.status(500).json({ error: "Failed to load users" });
+  }
+});
+
+router.delete("/users/:id", requireAdminPass, async (req, res) => {
+  try {
+    const id = String(req.params.id || "");
+    const result = await deleteAdminUser(id);
+    if ("error" in result) {
+      res.status(result.status).json({ error: result.error });
+      return;
+    }
+    res.json(result);
+  } catch (err) {
+    console.error("Admin delete user error:", err);
+    res.status(500).json({ error: "Failed to delete user" });
   }
 });
 
@@ -132,7 +154,7 @@ router.get("/marketing", async (_req, res) => {
   }
 });
 
-router.post("/marketing/links", async (req, res) => {
+router.post("/marketing/links", requireAdminPass, async (req, res) => {
   try {
     const link = await createMarketingLink({
       channel: req.body?.channel,
@@ -150,7 +172,7 @@ router.post("/marketing/links", async (req, res) => {
   }
 });
 
-router.delete("/marketing/links/:id", async (req, res) => {
+router.delete("/marketing/links/:id", requireAdminPass, async (req, res) => {
   try {
     const ok = await deleteMarketingLink(String(req.params.id || ""));
     if (!ok) {
@@ -161,6 +183,23 @@ router.delete("/marketing/links/:id", async (req, res) => {
   } catch (err) {
     console.error("Admin marketing link delete error:", err);
     res.status(500).json({ error: "Failed to delete marketing link" });
+  }
+});
+
+router.get("/learn/:track", async (req, res) => {
+  try {
+    const track = String(req.params.track || "") as LearnTrackId;
+    if (!LEARN_TRACKS.includes(track)) {
+      res.status(400).json({
+        error: "Unknown track. Use class-3-5, class-6-8, or class-9-12.",
+      });
+      return;
+    }
+    const data = await getAdminLearnTrack(track);
+    res.json(data);
+  } catch (err) {
+    console.error("Admin learn track error:", err);
+    res.status(500).json({ error: "Failed to load Learn enrollments" });
   }
 });
 
@@ -187,7 +226,7 @@ router.post("/messenger/preview", (req, res) => {
   }
 });
 
-router.post("/messenger/send", async (req, res) => {
+router.post("/messenger/send", requireAdminPass, async (req, res) => {
   try {
     const templateId = String(req.body.templateId || "") as MessengerTemplateId;
     const userIds = Array.isArray(req.body.userIds)

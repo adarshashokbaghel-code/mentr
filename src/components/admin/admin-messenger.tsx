@@ -1,5 +1,6 @@
 "use client";
 
+import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
 import {
   fetchMessengerTemplates,
   previewMessengerEmail,
@@ -31,6 +32,8 @@ export function AdminMessenger({ adminKey }: Props) {
 
   const [sending, setSending] = useState(false);
   const [status, setStatus] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
+  const [passOpen, setPassOpen] = useState(false);
+  const [passError, setPassError] = useState<string | null>(null);
 
   useEffect(() => {
     void fetchMessengerTemplates(adminKey)
@@ -100,23 +103,26 @@ export function AdminMessenger({ adminKey }: Props) {
     });
   };
 
-  const handleSend = async () => {
+  const handleSend = async (adminPass: string) => {
     if (selected.size === 0) return;
     setSending(true);
     setStatus(null);
+    setPassError(null);
     try {
       const result = await sendMessengerEmails(adminKey, {
         templateId,
         userIds: Array.from(selected),
+        adminPass,
       });
       setStatus({
         type: "ok",
         msg: `${result.sent} sent${result.failed ? `, ${result.failed} failed` : ""}`,
       });
       setSelected(new Set());
+      setPassOpen(false);
       void loadUsers();
     } catch (e) {
-      setStatus({ type: "err", msg: e instanceof Error ? e.message : "Send failed" });
+      setPassError(e instanceof Error ? e.message : "Send failed");
     } finally {
       setSending(false);
     }
@@ -182,7 +188,10 @@ export function AdminMessenger({ adminKey }: Props) {
 
         <button
           type="button"
-          onClick={() => void handleSend()}
+          onClick={() => {
+            setPassError(null);
+            setPassOpen(true);
+          }}
           disabled={sending || selected.size === 0}
           className="ml-auto flex h-8 items-center gap-1.5 rounded bg-ink px-3 text-xs font-semibold text-white disabled:opacity-40"
         >
@@ -332,6 +341,22 @@ export function AdminMessenger({ adminKey }: Props) {
           </div>
         </div>
       </div>
+
+      <AdminPassDialog
+        open={passOpen}
+        title="Send emails?"
+        description={`Send “${activeTemplate?.label || "this template"}” to ${selected.size} recipient${selected.size === 1 ? "" : "s"}. Enter ADMIN_PASS to confirm.`}
+        confirmLabel="Send emails"
+        busy={sending}
+        error={passError}
+        onConfirm={(pass) => void handleSend(pass)}
+        onClose={() => {
+          if (!sending) {
+            setPassOpen(false);
+            setPassError(null);
+          }
+        }}
+      />
     </div>
   );
 }

@@ -15,12 +15,15 @@
     "seed:requirements:reset": "tsx scripts/seed-demo-data.ts --reset",
     "seed:demo": "tsx scripts/seed-demo-data.ts",
     "seed:demo:reset": "tsx scripts/seed-demo-data.ts --reset",
+    "seed:learn-quiz": "tsx scripts/seed-learn-quiz.ts",
     "db:wipe": "tsx scripts/wipe-db.ts --confirm",
     "seo:gsc-check": "node scripts/seo-gsc-check.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.116.0",
+    "@vercel/analytics": "^2.0.1",
     "bcryptjs": "^3.0.3",
+    "blockly": "^13.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cookie-parser": "^1.4.7",

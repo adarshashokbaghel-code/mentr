@@ -10,6 +10,23 @@ export type AdminStats = {
     newLast7Days: number;
     activeLast30Days: number;
   };
+  registrations: {
+    timeseries: {
+      date: string;
+      total: number;
+      parents: number;
+      faculty: number;
+    }[];
+    bySource: {
+      key: string;
+      label: string;
+      kind: string;
+      slug: string;
+      total: number;
+      parents: number;
+      faculty: number;
+    }[];
+  };
   connections: {
     total: number;
     pending: number;
@@ -173,6 +190,18 @@ export function fetchAdminUsers(key: string, q = "") {
     key,
     `/api/admin/users?q=${encodeURIComponent(q)}&limit=1000`,
   );
+}
+
+export function deleteAdminUser(key: string, userId: string, adminPass: string) {
+  return adminFetch<{
+    id: string;
+    email: string;
+    role: string;
+    deleted: Record<string, number | boolean>;
+  }>(key, `/api/admin/users/${encodeURIComponent(userId)}`, {
+    method: "DELETE",
+    body: JSON.stringify({ adminPass }),
+  });
 }
 
 export type AdminConnectionRow = {
@@ -384,6 +413,7 @@ export function createAdminMarketingLink(
     path?: string;
     slug?: string;
     note?: string;
+    adminPass: string;
   },
 ) {
   return adminFetch<{
@@ -397,11 +427,18 @@ export function createAdminMarketingLink(
   });
 }
 
-export function deleteAdminMarketingLink(key: string, id: string) {
+export function deleteAdminMarketingLink(
+  key: string,
+  id: string,
+  adminPass: string,
+) {
   return adminFetch<{ ok: boolean }>(
     key,
     `/api/admin/marketing/links/${encodeURIComponent(id)}`,
-    { method: "DELETE" },
+    {
+      method: "DELETE",
+      body: JSON.stringify({ adminPass }),
+    },
   );
 }
 
@@ -429,10 +466,72 @@ export function previewMessengerEmail(
 
 export function sendMessengerEmails(
   key: string,
-  payload: { templateId: string; userIds: string[] },
+  payload: { templateId: string; userIds: string[]; adminPass: string },
 ) {
   return adminFetch<MessengerSendResult>(key, "/api/admin/messenger/send", {
     method: "POST",
     body: JSON.stringify(payload),
   });
+}
+
+export type AdminLearnTrackId = "class-3-5" | "class-6-8" | "class-9-12";
+
+export type AdminLearnEnrollmentRow = {
+  userId: string;
+  email: string;
+  name: string;
+  courseId: string;
+  courseName: string;
+  tagline?: string;
+  track?: string;
+  receiptNumber: string;
+  enrolledAt: string;
+  expiry: string;
+  purchase?: {
+    listPriceInr: number;
+    subtotalInr: number;
+    taxInr: number;
+    discountInr: number;
+    totalInr: number;
+    currency: string;
+    paymentMethod: string;
+  };
+  totalInr: number;
+  paymentMethod: string;
+  registrationSource?: string;
+  acquisitionSlug?: string;
+  lastLoginAt?: string;
+  progress: {
+    modulesCompleted: number;
+    xp: number;
+    streakDays: number;
+    currentModuleId: string | null;
+  };
+};
+
+export type AdminLearnTrackResponse = {
+  track: AdminLearnTrackId;
+  label: string;
+  unlocked: boolean;
+  course: {
+    courseId: string;
+    courseName: string;
+    tagline: string;
+    modules: number;
+    listPriceInr: number;
+  } | null;
+  totals: {
+    enrolled: number;
+    newLast7Days: number;
+    newLast30Days: number;
+  };
+  trend: { date: string; count: number }[];
+  enrollments: AdminLearnEnrollmentRow[];
+};
+
+export function fetchAdminLearnTrack(key: string, track: AdminLearnTrackId) {
+  return adminFetch<AdminLearnTrackResponse>(
+    key,
+    `/api/admin/learn/${encodeURIComponent(track)}`,
+  );
 }

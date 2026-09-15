@@ -10,9 +10,9 @@ import {
   LEARN_DINO_HOLD_SRC,
   LEARN_DINO_PEEK_SIZE,
   LEARN_DINO_PEEK_SRC,
-  type LearnDinoAction,
 } from "@/lib/learn-assets";
 import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
+import { learnUi } from "@/lib/learn-ui";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -32,41 +32,32 @@ import { useEffect, useId, useRef, useState } from "react";
 import { LearnDino } from "./learn-dino";
 import { LearnStartButton } from "./learn-start-button";
 
-const HIDDEN_PREFIXES = ["/admin", "/admintestingistrueonlyman134hsydsudy4"];
+const HIDDEN_PREFIXES = [
+  "/admin",
+  "/admintestingistrueonlyman134hsydsudy4",
+  "/learn/app",
+];
 
-/**
- * Both copies of the holding dino use this exact box, so the clipped front layer
- * lines up with the layer behind the glass. Each box keeps its artwork's ratio
- * (783:952 for the grip, 707:935 for the peek) so the clip percentages in
- * `.learn-dino-grip-front` map onto the drawing.
- *
- * Solved so the card's left edge lands at 0.865 of the dino width: 0.865 × 5.4 =
- * 4.67rem on mobile, 0.865 × 11 − 4.96 = 4.56rem from sm up — which is the card's
- * left margin below. Both sit flush with the dialog top so the card starts lower
- * than the dino's head and it reads as standing behind the panel.
- */
-const DINO_HOLD_BOX =
-  "learn-dino-grip pointer-events-none absolute left-0 top-0 h-[6.57rem] w-[5.4rem] sm:-left-[4.96rem] sm:h-[13.37rem] sm:w-[11rem]";
+/** Desktop grip pose — left of the card (sm+) */
+const DINO_HOLD_DESKTOP =
+  "pointer-events-none absolute -left-20 top-0 z-0 hidden h-[13.37rem] w-[11rem] sm:block";
 
-/**
- * Same card margins, solved so the edge lands at 0.82 of the peek artwork: that
- * clears the whole face and the waving paw, and tucks the lowered right arm and
- * foot behind the glass.
- */
-const DINO_PEEK_BOX =
-  "learn-dino-peek-bob pointer-events-none absolute left-[0.24rem] top-0 h-[7.14rem] w-[5.4rem] sm:-left-[3.64rem] sm:h-[13.23rem] sm:w-[10rem]";
+/** Desktop peek pose — left of the card (sm+) */
+const DINO_PEEK_DESKTOP =
+  "pointer-events-none absolute -left-14 top-0 z-0 hidden h-[13.23rem] w-[10rem] sm:block";
 
 const DINO_ART = {
   hold: { src: LEARN_DINO_HOLD_SRC, ...LEARN_DINO_HOLD_SIZE },
   peek: { src: LEARN_DINO_PEEK_SRC, ...LEARN_DINO_PEEK_SIZE },
 } as const;
 
-/**
- * The clipped front copy skips the drop shadow: the filter runs over the whole
- * drawing before the clip is applied, so its shadow would land on the panel as a
- * grey rectangle.
- */
-function DinoArt({ pose, shadow = false }: { pose: keyof typeof DINO_ART; shadow?: boolean }) {
+function DinoArt({
+  pose,
+  shadow = false,
+}: {
+  pose: keyof typeof DINO_ART;
+  shadow?: boolean;
+}) {
   const art = DINO_ART[pose];
   return (
     <Image
@@ -76,7 +67,7 @@ function DinoArt({ pose, shadow = false }: { pose: keyof typeof DINO_ART; shadow
       height={art.height}
       className={cn(
         "h-full w-full bg-transparent object-contain",
-        shadow && "drop-shadow-[0_16px_26px_rgba(28,36,52,0.2)]",
+        shadow && "drop-shadow-[0_12px_22px_rgba(28,36,52,0.18)]",
       )}
       unoptimized
       priority
@@ -85,9 +76,9 @@ function DinoArt({ pose, shadow = false }: { pose: keyof typeof DINO_ART; shadow
 }
 
 const TRACKS = [
-  { icon: Cpu, label: "CS", hint: "20 modules", tint: "text-[#ff6a1a]" },
-  { icon: Sparkles, label: "AI", hint: "20 modules", tint: "text-[#7c3aed]" },
-  { icon: Calculator, label: "Math", hint: "20 modules", tint: "text-[#0d9488]" },
+  { icon: Cpu, label: "CS", hint: "20", tint: "text-[#ff6a1a]" },
+  { icon: Sparkles, label: "AI", hint: "20", tint: "text-[#7c3aed]" },
+  { icon: Calculator, label: "Math", hint: "20", tint: "text-[#0d9488]" },
 ] as const;
 
 const STEPS = [
@@ -125,11 +116,11 @@ export function LearnDinoGuide() {
   const [hi, setHi] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const hidden = HIDDEN_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
+  const hidden = HIDDEN_PREFIXES.some(
+    (p) => pathname === p || pathname.startsWith(`${p}/`),
+  );
   const faq = dinoFaqNode(faqId);
   const nextQs = dinoFaqNext(faqId);
-  const action = (faq.action ?? "handshake") as LearnDinoAction;
-  const onLearn = pathname === "/learn" || pathname.startsWith("/learn/");
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
@@ -147,7 +138,12 @@ export function LearnDinoGuide() {
       if (e.key === "Escape") setOpen(false);
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
   }, [open]);
 
   useEffect(() => {
@@ -157,109 +153,124 @@ export function LearnDinoGuide() {
     }
   }, [open]);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   if (hidden) return null;
 
   return (
     <div
       className={cn(
-        "learn-dino-guide pointer-events-none fixed z-[255] flex justify-end",
-        cookieUp
-          ? "bottom-[7.5rem] sm:bottom-[5.5rem]"
-          : "bottom-[max(1rem,env(safe-area-inset-bottom))]",
-        "right-[max(0.75rem,env(safe-area-inset-right))]",
+        "pointer-events-none fixed z-[255]",
+        open
+          ? "inset-0 flex items-end justify-center sm:items-end sm:justify-end"
+          : "right-[max(0.75rem,env(safe-area-inset-right))] flex justify-end",
+        !open &&
+          (cookieUp
+            ? "bottom-[7.5rem] sm:bottom-[5.5rem]"
+            : "bottom-[max(1rem,env(safe-area-inset-bottom))]"),
       )}
     >
       {open ? (
         <button
           type="button"
-          className="pointer-events-auto fixed inset-0 z-0 bg-[#1c2434]/25 backdrop-blur-[3px]"
+          className="pointer-events-auto absolute inset-0 bg-ink/30 backdrop-blur-[2px]"
           aria-label="Close dino guide"
           onClick={() => setOpen(false)}
         />
       ) : null}
 
-      <div className="pointer-events-auto relative">
+      <div
+        className={cn(
+          "pointer-events-auto relative",
+          open &&
+            "w-full max-w-none p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:w-auto sm:max-w-[30rem] sm:p-4 sm:pb-6 sm:pr-4",
+        )}
+      >
         {open ? (
           <div
-            className="learn-dino-guide-in relative w-[min(calc(100vw-1.5rem),29.5rem)] sm:w-[29.5rem]"
+            className="relative w-full animate-in fade-in slide-in-from-bottom-3 duration-300 sm:w-[min(100%,29.5rem)]"
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
           >
-            {/* On the intro view the dino grips the card by its left edge: this copy sits
-                behind the glass, and the clipped copy after the card lifts only its upper
-                arm in front, so one paw holds the panel from the front and the lower one
-                stays behind it. On the chat view the dino swaps pose and drops fully
-                behind the glass. */}
+            {/* Desktop only: grip / peek art beside the card (hidden on mobile) */}
             {talk ? (
-              <div className={cn(DINO_PEEK_BOX, "z-0")}>
+              <div className={cn(DINO_PEEK_DESKTOP, "animate-in fade-in")}>
                 <DinoArt pose="peek" shadow />
               </div>
             ) : (
-              <div className={cn(DINO_HOLD_BOX, "z-0")}>
+              <div className={DINO_HOLD_DESKTOP}>
                 <DinoArt pose="hold" shadow />
               </div>
             )}
 
-            <div className="learn-dino-glass relative z-10 ml-[4.67rem] mt-[1.7rem] overflow-hidden rounded-[1.75rem] sm:ml-[4.56rem] sm:mt-[3.2rem]">
+            <div
+              className={cn(
+                "relative z-10 overflow-hidden rounded-3xl border border-white/80 bg-[#fffdf8]/95 shadow-[0_20px_48px_rgba(28,36,52,0.18)] backdrop-blur-xl sm:ml-[4.5rem] sm:mt-12",
+              )}
+            >
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="absolute right-3 top-3 z-20 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/70 text-[#5a6472] ring-1 ring-white/80 transition hover:bg-white hover:text-[#1c2434]"
+                className="absolute right-2.5 top-2.5 z-20 inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/80 text-[#5a6472] ring-1 ring-white transition hover:bg-white hover:text-ink"
                 aria-label="Close"
               >
-                <X className="h-3.5 w-3.5" strokeWidth={2.4} />
+                <X className="h-4 w-4" strokeWidth={2.4} />
               </button>
 
               <div
                 ref={scrollRef}
-                className="max-h-[min(70dvh,36rem)] overflow-y-auto overscroll-contain px-5 pb-6 pt-6 sm:px-7 sm:pb-7 sm:pt-7"
+                className="max-h-[min(78dvh,34rem)] overflow-y-auto overscroll-contain px-4 pb-5 pt-5 sm:max-h-[min(70dvh,36rem)] sm:px-6 sm:pb-6 sm:pt-6"
               >
                 {!talk ? (
                   <>
-                    <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#1c2434]">
-                      Mentr Learn
-                    </p>
+                    <p className={learnUi.label}>Mentr Learn</p>
                     <h2
                       id={titleId}
-                      className="mt-1.5 max-w-[16.5rem] text-[1.35rem] font-extrabold leading-snug tracking-tight text-[#1c2434] sm:text-[1.5rem]"
+                      className="mt-1 max-w-none text-[1.2rem] font-extrabold leading-snug tracking-tight text-ink sm:max-w-[17rem] sm:text-[1.45rem]"
                     >
                       CS, AI &amp; Math —{" "}
                       <span className="text-[#ff6a1a]">free for Class 3–5</span>
                     </h2>
-                    <p className="mt-3 text-[14px] leading-relaxed text-[#5a6472]">
-                      60 short lessons in coding, AI and maths for Class 3–5. Your child watches
-                      a video, answers 10 questions, then plays a game — about 15 minutes a day.
-                      Every week we email you what they finished.
+                    <p className="mt-2 text-[13px] leading-relaxed text-[#5a6472] sm:mt-3 sm:text-[14px]">
+                      60 short lessons. Watch a video, answer a quiz, then play —
+                      about 15 minutes a day.
                     </p>
 
-                    <div className="mt-5 grid grid-cols-3 gap-2">
+                    <div className="mt-4 grid grid-cols-3 gap-1.5 sm:mt-5 sm:gap-2">
                       {TRACKS.map((track) => (
-                        <div key={track.label} className="text-center">
+                        <div
+                          key={track.label}
+                          className="rounded-xl bg-white/70 py-2.5 text-center ring-1 ring-white/80"
+                        >
                           <track.icon
-                            className={cn("mx-auto h-7 w-7 sm:h-8 sm:w-8", track.tint)}
+                            className={cn("mx-auto h-5 w-5 sm:h-7 sm:w-7", track.tint)}
                             strokeWidth={2.1}
                             aria-hidden
                           />
-                          <p className="mt-2 text-[13px] font-extrabold text-[#1c2434]">
+                          <p className="mt-1 text-[12px] font-extrabold text-ink sm:text-[13px]">
                             {track.label}
                           </p>
-                          <p className="text-[11px] font-semibold text-[#8a929c]">{track.hint}</p>
+                          <p className="text-[10px] font-semibold text-[#8a929c] sm:text-[11px]">
+                            {track.hint} mods
+                          </p>
                         </div>
                       ))}
                     </div>
 
-                    <div className="mt-4 flex items-center justify-between gap-1 rounded-2xl bg-white/55 px-3 py-2.5 ring-1 ring-white/80">
+                    <div className="mt-3 flex items-center justify-between gap-1 rounded-2xl bg-white/60 px-2.5 py-2 ring-1 ring-white/80 sm:mt-4 sm:px-3 sm:py-2.5">
                       {STEPS.map((step, i) => (
                         <div
                           key={step.label}
-                          className="flex min-w-0 flex-1 items-center justify-center gap-1.5"
+                          className="flex min-w-0 flex-1 items-center justify-center gap-1"
                         >
                           <step.icon
-                            className="h-4 w-4 shrink-0 text-[#ff6a1a]"
+                            className="h-3.5 w-3.5 shrink-0 text-[#ff6a1a] sm:h-4 sm:w-4"
                             strokeWidth={2.3}
                           />
-                          <span className="truncate text-[12px] font-bold text-[#1c2434]">
+                          <span className="truncate text-[11px] font-bold text-ink sm:text-[12px]">
                             {step.label}
                           </span>
                           {i < STEPS.length - 1 ? (
@@ -269,9 +280,9 @@ export function LearnDinoGuide() {
                       ))}
                     </div>
 
-                    <div className="mt-5 grid grid-cols-1 gap-2.5">
+                    <div className="mt-4 grid grid-cols-1 gap-2 sm:mt-5 sm:gap-2.5">
                       <LearnStartButton
-                        href={onLearn ? "#curriculum" : "/learn"}
+                        href="/learn"
                         onClick={() => setOpen(false)}
                         className="w-full justify-center"
                       >
@@ -283,37 +294,37 @@ export function LearnDinoGuide() {
                           setTalk(true);
                           setFaqId(DINO_FAQ_START);
                         }}
-                        className="inline-flex h-12 items-center justify-center rounded-full bg-white/75 px-4 text-[14px] font-bold text-[#1c2434] ring-1 ring-white/85 transition hover:bg-white"
+                        className={learnUi.ctaGhost}
                       >
                         Talk to Dino
                       </button>
                     </div>
                   </>
                 ) : (
-                  <div className="w-full min-w-0 pr-1">
+                  <div className="w-full min-w-0">
                     <button
                       type="button"
                       onClick={() => {
                         setTalk(false);
                         setFaqId(DINO_FAQ_START);
                       }}
-                      className="inline-flex items-center gap-1 text-[12px] font-bold text-[#5a6472] transition hover:text-[#1c2434]"
+                      className="inline-flex items-center gap-1 text-[12px] font-bold text-[#5a6472] transition hover:text-ink"
                     >
                       <ArrowLeft className="h-3.5 w-3.5" strokeWidth={2.4} />
                       Back
                     </button>
                     <h2
                       id={titleId}
-                      className="mt-2.5 w-full text-[1.35rem] font-extrabold tracking-tight text-[#1c2434] sm:text-[1.5rem]"
+                      className="mt-2 text-[1.2rem] font-extrabold tracking-tight text-ink sm:text-[1.45rem]"
                     >
                       Talk to <span className="text-[#ff6a1a]">Dino</span>
                     </h2>
 
-                    <p className="mt-3 w-full text-[13px] font-bold leading-snug text-[#8a929c]">
+                    <p className="mt-2.5 text-[12px] font-bold leading-snug text-[#8a929c] sm:text-[13px]">
                       {faq.question}
                     </p>
-                    <div className="mt-1.5 w-full rounded-2xl bg-white/70 px-4 py-3.5 ring-1 ring-white/80">
-                      <p className="flex w-full items-start gap-2 text-[14px] font-semibold leading-relaxed text-[#1c2434]">
+                    <div className="mt-1.5 rounded-2xl bg-white/70 px-3.5 py-3 ring-1 ring-white/80 sm:px-4 sm:py-3.5">
+                      <p className="flex items-start gap-2 text-[13px] font-semibold leading-relaxed text-ink sm:text-[14px]">
                         <Volume2
                           className="mt-0.5 h-4 w-4 shrink-0 text-[#ff6a1a]"
                           strokeWidth={2.2}
@@ -326,7 +337,7 @@ export function LearnDinoGuide() {
                       <Link
                         href={faq.cta.href}
                         onClick={() => setOpen(false)}
-                        className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#ff6a1a] px-4 text-[14px] font-bold text-white shadow-[0_8px_18px_rgba(255,106,26,0.28)] transition hover:bg-[#e85f14]"
+                        className={cn(learnUi.cta, "mt-3")}
                       >
                         {faq.cta.label}
                       </Link>
@@ -334,22 +345,22 @@ export function LearnDinoGuide() {
                       <Link
                         href={LEARN_SIGNUP_HREF}
                         onClick={() => setOpen(false)}
-                        className="mt-3 inline-flex h-12 w-full items-center justify-center rounded-full bg-[#ff6a1a] px-4 text-[14px] font-bold text-white shadow-[0_8px_18px_rgba(255,106,26,0.28)] transition hover:bg-[#e85f14]"
+                        className={cn(learnUi.cta, "mt-3")}
                       >
                         Start free
                       </Link>
                     )}
 
-                    <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.14em] text-[#8a929c]">
+                    <p className="mt-3.5 text-[10px] font-bold uppercase tracking-[0.14em] text-[#8a929c] sm:mt-4 sm:text-[11px]">
                       Ask next
                     </p>
-                    <div className="mt-2 flex w-full flex-col gap-1.5">
+                    <div className="mt-1.5 flex w-full flex-col gap-1.5 sm:mt-2">
                       {nextQs.map((q) => (
                         <button
                           key={q.id}
                           type="button"
                           onClick={() => setFaqId(q.id)}
-                          className="w-full rounded-xl bg-white/60 px-3.5 py-3 text-left text-[13px] font-bold leading-snug text-[#1c2434] ring-1 ring-white/80 transition hover:bg-white"
+                          className="w-full rounded-xl bg-white/60 px-3 py-2.5 text-left text-[12px] font-bold leading-snug text-ink ring-1 ring-white/80 transition hover:bg-white sm:px-3.5 sm:py-3 sm:text-[13px]"
                         >
                           {q.question}
                         </button>
@@ -357,7 +368,7 @@ export function LearnDinoGuide() {
                     </div>
 
                     <LearnStartButton
-                      href={onLearn ? "#curriculum" : "/learn"}
+                      href="/learn"
                       onClick={() => setOpen(false)}
                       className="mt-3 w-full justify-center"
                     >
@@ -369,7 +380,11 @@ export function LearnDinoGuide() {
             </div>
 
             {!talk ? (
-              <div className={cn(DINO_HOLD_BOX, "learn-dino-grip-front z-20")} aria-hidden>
+              <div
+                className="pointer-events-none absolute -left-20 top-0 z-20 hidden h-[13.37rem] w-[11rem] sm:block"
+                style={{ clipPath: "inset(37% 0 44.7% 86.5%)" }}
+                aria-hidden
+              >
                 <DinoArt pose="hold" />
               </div>
             ) : null}
@@ -377,21 +392,21 @@ export function LearnDinoGuide() {
         ) : (
           <div className="flex flex-col items-end gap-2">
             {hi ? (
-              <p className="learn-dino-hi max-w-[11.5rem] rounded-2xl rounded-br-md bg-white/90 px-3 py-2 text-[12px] font-bold leading-snug text-[#1c2434] shadow-[0_10px_24px_rgba(28,36,52,0.14)] ring-1 ring-white/80 backdrop-blur-md">
+              <p className="max-w-[10.5rem] animate-in fade-in zoom-in-95 rounded-2xl rounded-br-md bg-white/90 px-2.5 py-1.5 text-[11px] font-bold leading-snug text-ink shadow-[0_8px_20px_rgba(28,36,52,0.12)] ring-1 ring-white/80 backdrop-blur-md sm:max-w-[11.5rem] sm:px-3 sm:py-2 sm:text-[12px]">
                 Learn with <span className="text-[#ff6a1a]">mentr</span>
               </p>
             ) : null}
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="learn-dino-launcher"
+              className="inline-flex border-0 bg-transparent p-0"
               aria-expanded={open}
               aria-label="Open Mentr Learn dino guide"
             >
               <LearnDino
                 action="handshake"
                 size={104}
-                className="h-[4.6rem] w-[4.6rem] drop-shadow-[0_12px_20px_rgba(28,36,52,0.22)] sm:h-[5.35rem] sm:w-[5.35rem]"
+                className="h-[4.25rem] w-[4.25rem] drop-shadow-[0_10px_18px_rgba(28,36,52,0.2)] sm:h-[5.35rem] sm:w-[5.35rem]"
               />
             </button>
           </div>

@@ -11,6 +11,7 @@ const PILLAR_HEADER_BG: Partial<Record<BlogPillarId | "all", string>> = {
   comparison: "bg-butter/60",
   "exam-prep": "bg-sage-wash/50",
   "for-parents": "bg-lavender/50",
+  "kids-learn": "bg-sage-wash/50",
 };
 
 function HomeTitle() {

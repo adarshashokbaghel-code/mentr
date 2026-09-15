@@ -8,6 +8,7 @@ const backendPort = process.env.BACKEND_PORT || "5000";
 
 const nextConfig: NextConfig = {
   serverExternalPackages: ["mongoose"],
+  transpilePackages: ["blockly"],
   turbopack: {
     // Parent ~/package-lock.json was being picked as the workspace root,
     // breaking PostCSS/Tailwind resolution and hanging page loads.

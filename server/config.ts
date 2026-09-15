@@ -48,6 +48,8 @@ export const config = {
   jwtMaxAgeMs: 60 * 24 * 60 * 60 * 1000,
   /** Set ADMIN_SECRET_KEY in .env — access panel at /admin/[key] */
   adminSecretKey: process.env.ADMIN_SECRET_KEY || "",
+  /** Password required for admin write actions (delete, send mail, etc.) */
+  adminPass: process.env.ADMIN_PASS || "",
 };
 
 export function getMongoUriWithDb(): string {

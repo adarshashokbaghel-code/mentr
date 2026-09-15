@@ -21,6 +21,7 @@ import {
   SITE_TAGLINE,
   SITE_URL,
 } from "@/lib/seo";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -103,6 +104,7 @@ export default function RootLayout({
         <AdSenseLoader />
         {LEARN_PUBLIC ? <LearnDinoGuide /> : null}
         <CookieConsent />
+        <Analytics />
       </body>
     </html>
   );

@@ -4,7 +4,6 @@ import { LEARN_SIGNUP_HREF, type LearnTrackId } from "@/lib/learn-curriculum";
 import {
   PARENT_GUIDE,
   SYLLABUS_COUNTS,
-  SYLLABUS_DOWNLOAD_HREF,
   SYLLABUS_PREAMBLE,
   SYLLABUS_SUBTITLE,
   SYLLABUS_TITLE,
@@ -17,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { SyllabusDownloadButton } from "@/components/learn/syllabus-download-button";
 import { LearnDino } from "./learn-dino";
 import { LearnStartButton } from "./learn-start-button";
 import { LEARN_SHELL } from "./learn-shell";
@@ -208,14 +208,13 @@ export function LearnSyllabusGuide() {
           ← Back to Learn
         </Link>
         <div className="flex flex-wrap gap-2">
-          <a
-            href={SYLLABUS_DOWNLOAD_HREF}
-            download
-            className="inline-flex h-10 items-center gap-2 rounded-md border border-hairline bg-white px-4 text-sm font-semibold text-ink hover:bg-cream"
+          <SyllabusDownloadButton
+            honorDownloadQuery
+            className="inline-flex h-10 items-center gap-2 rounded-md border border-hairline bg-white px-4 text-sm font-semibold text-ink hover:bg-cream disabled:opacity-60"
           >
             <Download className="h-4 w-4" />
             Download PDF
-          </a>
+          </SyllabusDownloadButton>
           <Link
             href={LEARN_SIGNUP_HREF}
             className="inline-flex h-10 items-center rounded-md bg-coral px-4 text-sm font-semibold text-white hover:bg-coral-dark"

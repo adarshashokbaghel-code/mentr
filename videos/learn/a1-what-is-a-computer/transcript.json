@@ -1,0 +1,332 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 7.76,
+      "caption": "Hello, champ! Welcome to class",
+      "text": "Hello, champ! Welcome back to Mentr Learn. I am so happy you are here today.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 7.76,
+      "end": 13.57,
+      "caption": "Unit 1 \u00b7 How Computers Work",
+      "text": "Today we start Computer Science \u2014 Unit one \u2014 How Computers Work.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 13.57,
+      "end": 19.77,
+      "caption": "Chapter 1 \u00b7 What Is a Computer?",
+      "text": "This is Chapter one. The name of our lesson is: What Is a Computer?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 19.77,
+      "end": 29.13,
+      "caption": "Say with me: What Is a Computer?",
+      "text": "Say the title with me, nice and slow\u2026 What\u2026 Is\u2026 A\u2026 Computer?",
+      "scene": "open",
+      "focus": "say"
+    },
+    {
+      "start": 29.13,
+      "end": 36.77,
+      "caption": "Great! Let's begin",
+      "text": "Great! Keep that title in your mind. Ready? Let's go.",
+      "scene": "open",
+      "focus": "go"
+    },
+    {
+      "start": 36.77,
+      "end": 45.53,
+      "caption": "So many machines at home\u2026",
+      "text": "Look around your home. Phones, TVs, fans, toasters, lamps\u2026 so many machines!",
+      "scene": "hook",
+      "focus": "look"
+    },
+    {
+      "start": 45.53,
+      "end": 53.31,
+      "caption": "Are ALL of them computers?",
+      "text": "But wait. Are all of them computers? Hmm. What do you think?",
+      "scene": "hook",
+      "focus": "ask"
+    },
+    {
+      "start": 53.31,
+      "end": 61.4,
+      "caption": "\u23f8 Your turn \u2014 point to a computer!",
+      "text": "Pause and think for a moment. Point to one thing near you that you think is a computer.",
+      "scene": "hook",
+      "focus": "think"
+    },
+    {
+      "start": 61.4,
+      "end": 67.14,
+      "caption": "Good thinking! We'll check soon",
+      "text": "Good thinking! We will check your answer together at the end.",
+      "scene": "hook",
+      "focus": "ok"
+    },
+    {
+      "start": 67.14,
+      "end": 73.82,
+      "caption": "Secret: a computer has 3 jobs",
+      "text": "Here is the big secret. A computer is a special machine with three jobs.",
+      "scene": "ipo",
+      "focus": "intro"
+    },
+    {
+      "start": 73.82,
+      "end": 79.2,
+      "caption": "1 \u00b7 INPUT = something goes in",
+      "text": "Job one \u2014 INPUT. That means something goes in.",
+      "scene": "ipo",
+      "focus": "input"
+    },
+    {
+      "start": 79.2,
+      "end": 85.85,
+      "caption": "2 \u00b7 PROCESS = it thinks / works",
+      "text": "Job two \u2014 PROCESS. That means the machine thinks, or works on it.",
+      "scene": "ipo",
+      "focus": "process"
+    },
+    {
+      "start": 85.85,
+      "end": 94.21,
+      "caption": "3 \u00b7 OUTPUT = something comes out",
+      "text": "Job three \u2014 OUTPUT. That means something comes out \u2014 an answer, a picture, or a sound.",
+      "scene": "ipo",
+      "focus": "output"
+    },
+    {
+      "start": 94.21,
+      "end": 101.87,
+      "caption": "Say together: Input \u00b7 Process \u00b7 Output",
+      "text": "Let's say the three jobs together: Input\u2026 Process\u2026 Output!",
+      "scene": "ipo",
+      "focus": "all"
+    },
+    {
+      "start": 101.87,
+      "end": 108.47,
+      "caption": "All 3 jobs \u2192 it's a computer",
+      "text": "Wonderful. If a machine does all three jobs, we can call it a computer.",
+      "scene": "ipo",
+      "focus": "rule"
+    },
+    {
+      "start": 108.47,
+      "end": 115.07,
+      "caption": "Story: sending a message",
+      "text": "Let's try a real story. Imagine you send a message to your friend on a phone.",
+      "scene": "message",
+      "focus": "intro"
+    },
+    {
+      "start": 115.07,
+      "end": 122.06,
+      "caption": "You type \u2192 INPUT",
+      "text": "First, you type the words with your fingers. That is INPUT \u2014 words going in.",
+      "scene": "message",
+      "focus": "step1"
+    },
+    {
+      "start": 122.06,
+      "end": 129.46,
+      "caption": "Phone works \u2192 PROCESS",
+      "text": "Next, the phone works on your message \u2014 it gets it ready to send. That is PROCESS.",
+      "scene": "message",
+      "focus": "step2"
+    },
+    {
+      "start": 129.46,
+      "end": 135.32,
+      "caption": "Friend sees it \u2192 OUTPUT",
+      "text": "Then your friend sees the message on their screen. That is OUTPUT.",
+      "scene": "message",
+      "focus": "step3"
+    },
+    {
+      "start": 135.32,
+      "end": 144.49,
+      "caption": "Phone = computer \u2713",
+      "text": "So \u2014 input, process, output. Your phone did all three jobs. Your phone is a computer!",
+      "scene": "message",
+      "focus": "phone"
+    },
+    {
+      "start": 144.49,
+      "end": 152.17,
+      "caption": "Laptop \u00b7 Phone \u00b7 Tablet = computers",
+      "text": "A laptop can do the same. A tablet can do the same. They are computers too.",
+      "scene": "message",
+      "focus": "devices"
+    },
+    {
+      "start": 152.17,
+      "end": 158.65,
+      "caption": "Story: switching on a bulb",
+      "text": "Now, another story. You press a switch, and a bulb lights up.",
+      "scene": "bulb",
+      "focus": "intro"
+    },
+    {
+      "start": 158.65,
+      "end": 166.12,
+      "caption": "Useful \u2014 but is it a computer?",
+      "text": "The switch sends power. The bulb gets hot and shines. That is useful!",
+      "scene": "bulb",
+      "focus": "shine"
+    },
+    {
+      "start": 166.12,
+      "end": 172.53,
+      "caption": "No real \u201cthinking\u201d like a computer",
+      "text": "But the bulb is not taking many kinds of input and thinking about a message or a game.",
+      "scene": "bulb",
+      "focus": "not-think"
+    },
+    {
+      "start": 172.53,
+      "end": 182.18,
+      "caption": "Bulb \u00b7 Toaster \u2192 NOT computers",
+      "text": "It mainly turns light on or off. So a simple bulb \u2014 or a toaster that only heats bread \u2014 is not a computer.",
+      "scene": "bulb",
+      "focus": "not"
+    },
+    {
+      "start": 182.18,
+      "end": 188.88,
+      "caption": "Computers work in a smarter way",
+      "text": "Remember: computers take input, process it, and show output in a smarter way.",
+      "scene": "bulb",
+      "focus": "remember"
+    },
+    {
+      "start": 188.88,
+      "end": 198.0,
+      "caption": "Game: say YES or NO!",
+      "text": "Quick game time! I will name something. You say YES if it is a computer, or NO if it is not.",
+      "scene": "game",
+      "focus": "intro"
+    },
+    {
+      "start": 198.0,
+      "end": 205.42,
+      "caption": "Laptop \u2192 YES \u2713",
+      "text": "Ready? Laptop\u2026 Yes! A laptop is a computer.",
+      "scene": "game",
+      "focus": "laptop"
+    },
+    {
+      "start": 205.42,
+      "end": 210.99,
+      "caption": "Phone \u2192 YES \u2713",
+      "text": "Phone\u2026 Yes! A phone is a computer.",
+      "scene": "game",
+      "focus": "phone"
+    },
+    {
+      "start": 210.99,
+      "end": 216.8,
+      "caption": "Tablet \u2192 YES \u2713",
+      "text": "Tablet\u2026 Yes! A tablet is a computer.",
+      "scene": "game",
+      "focus": "tablet"
+    },
+    {
+      "start": 216.8,
+      "end": 224.34,
+      "caption": "Toaster \u2192 NO \u2717",
+      "text": "Toaster\u2026 No! A toaster is not a computer \u2014 it only heats bread.",
+      "scene": "game",
+      "focus": "toaster"
+    },
+    {
+      "start": 224.34,
+      "end": 230.13,
+      "caption": "Lamp \u2192 NO \u2717",
+      "text": "Lamp\u2026 No! A lamp is not a computer.",
+      "scene": "game",
+      "focus": "lamp"
+    },
+    {
+      "start": 230.13,
+      "end": 234.65,
+      "caption": "High five! You're amazing \ud83d\ude4c",
+      "text": "You are doing amazing. High five!",
+      "scene": "game",
+      "focus": "highfive"
+    },
+    {
+      "start": 234.65,
+      "end": 240.05,
+      "caption": "Practice check question",
+      "text": "One more thinking question \u2014 the same kind you will see later in your check.",
+      "scene": "check",
+      "focus": "intro"
+    },
+    {
+      "start": 240.05,
+      "end": 247.26,
+      "caption": "Laptop \u00b7 Lamp \u00b7 Bicycle bell \u2014 which?",
+      "text": "Which one is a computer: a laptop, a lamp, or a bicycle bell?",
+      "scene": "check",
+      "focus": "ask"
+    },
+    {
+      "start": 247.26,
+      "end": 255.45,
+      "caption": "Answer: Laptop \u2713",
+      "text": "If you said laptop \u2014 you are right! Because it takes input, processes, and shows output.",
+      "scene": "check",
+      "focus": "answer"
+    },
+    {
+      "start": 255.45,
+      "end": 260.83,
+      "caption": "Lamp & bell \u2192 helpful, not computers",
+      "text": "A lamp and a bicycle bell are helpful, but they are not computers.",
+      "scene": "check",
+      "focus": "others"
+    },
+    {
+      "start": 260.83,
+      "end": 268.32,
+      "caption": "Lock in: Input \u00b7 Process \u00b7 Output",
+      "text": "Let's lock it in. A computer has three jobs: input, process, and output.",
+      "scene": "close",
+      "focus": "ipo"
+    },
+    {
+      "start": 268.32,
+      "end": 276.12,
+      "caption": "Computers vs not-computers",
+      "text": "Phone, laptop, tablet \u2014 computers. Toaster, lamp \u2014 not computers.",
+      "scene": "close",
+      "focus": "list"
+    },
+    {
+      "start": 276.12,
+      "end": 282.32,
+      "caption": "Chapter 1 complete \u00b7 Brilliant!",
+      "text": "You learned Chapter one: What Is a Computer? Brilliant work today!",
+      "scene": "close",
+      "focus": "done"
+    },
+    {
+      "start": 282.32,
+      "end": 291.23,
+      "caption": "Next \u2192 Quiz. Tap Finish, champ!",
+      "text": "Next, you will play a short quiz to practise. Tap Finish when you are ready. See you there, champ!",
+      "scene": "close",
+      "focus": "next"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import { excludeDemoUsersFilter } from "../lib/demo-users";
+import { parseAcquisitionFromUrl } from "../lib/marketing-attribution";
 import { Connection } from "../models/Connection";
 import { OtpSession } from "../models/OtpSession";
 import { ProfileView } from "../models/ProfileView";
@@ -7,6 +8,35 @@ import { User } from "../models/User";
 
 function daysAgo(n: number): Date {
   return new Date(Date.now() - n * 24 * 60 * 60 * 1000);
+}
+
+function dayKey(d: Date): string {
+  return d.toISOString().slice(0, 10);
+}
+
+function sourceLabel(
+  kind: string,
+  slug: string,
+  registrationSource?: string,
+): string {
+  if (kind === "blog" && slug) return `Blog · ${slug}`;
+  if (kind === "social" && slug) {
+    if (slug === "instagram" || slug === "linkedin") {
+      return slug === "linkedin" ? "LinkedIn" : "Instagram";
+    }
+    return `Social · ${slug}`;
+  }
+  if (kind === "page" && slug) return `Page · ${slug}`;
+  if (kind === "referral") return "Referral";
+  if (registrationSource) {
+    try {
+      const host = new URL(registrationSource).hostname.replace(/^www\./, "");
+      return host ? `Link · ${host}` : "Direct / unknown";
+    } catch {
+      return "Direct / unknown";
+    }
+  }
+  return "Direct / unknown";
 }
 
 export type AdminStats = {
@@ -20,6 +50,23 @@ export type AdminStats = {
     parentsComplete: number;
     newLast7Days: number;
     activeLast30Days: number;
+  };
+  registrations: {
+    timeseries: {
+      date: string;
+      total: number;
+      parents: number;
+      faculty: number;
+    }[];
+    bySource: {
+      key: string;
+      label: string;
+      kind: string;
+      slug: string;
+      total: number;
+      parents: number;
+      faculty: number;
+    }[];
   };
   connections: {
     total: number;
@@ -56,6 +103,10 @@ export async function getAdminStats(): Promise<AdminStats> {
   const d30 = daysAgo(30);
   const d1 = daysAgo(1);
 
+  const since = new Date();
+  since.setUTCDate(since.getUTCDate() - 29);
+  since.setUTCHours(0, 0, 0, 0);
+
   const [
     total,
     parents,
@@ -82,6 +133,7 @@ export async function getAdminStats(): Promise<AdminStats> {
     reqSubjects,
     facultyCities,
     facultySubjects,
+    recentUsers,
   ] = await Promise.all([
     User.countDocuments(excludeDemoUsersFilter),
     User.countDocuments({ ...excludeDemoUsersFilter, role: "parent" }),
@@ -93,9 +145,16 @@ export async function getAdminStats(): Promise<AdminStats> {
       profileCompleted: true,
       "profile.name": { $exists: true, $ne: "" },
     }),
-    User.countDocuments({ ...excludeDemoUsersFilter, role: "parent", profileCompleted: true }),
+    User.countDocuments({
+      ...excludeDemoUsersFilter,
+      role: "parent",
+      profileCompleted: true,
+    }),
     User.countDocuments({ ...excludeDemoUsersFilter, createdAt: { $gte: d7 } }),
-    User.countDocuments({ ...excludeDemoUsersFilter, lastLoginAt: { $gte: d30 } }),
+    User.countDocuments({
+      ...excludeDemoUsersFilter,
+      lastLoginAt: { $gte: d30 },
+    }),
     Connection.countDocuments(),
     Connection.countDocuments({ status: "pending" }),
     Connection.countDocuments({ status: "accepted" }),
@@ -148,7 +207,78 @@ export async function getAdminStats(): Promise<AdminStats> {
       { $sort: { count: -1 } },
       { $limit: 6 },
     ]),
+    User.find({
+      ...excludeDemoUsersFilter,
+      createdAt: { $gte: since },
+    })
+      .select(
+        "role createdAt registrationSource acquisitionSlug acquisitionKind",
+      )
+      .lean(),
   ]);
+
+  const dayMap = new Map<
+    string,
+    { date: string; total: number; parents: number; faculty: number }
+  >();
+  for (let i = 0; i < 30; i++) {
+    const d = new Date(since);
+    d.setUTCDate(since.getUTCDate() + i);
+    const key = dayKey(d);
+    dayMap.set(key, { date: key, total: 0, parents: 0, faculty: 0 });
+  }
+
+  const sourceMap = new Map<
+    string,
+    {
+      key: string;
+      label: string;
+      kind: string;
+      slug: string;
+      total: number;
+      parents: number;
+      faculty: number;
+    }
+  >();
+
+  for (const user of recentUsers) {
+    const key = dayKey(new Date(user.createdAt));
+    const day = dayMap.get(key);
+    if (day) {
+      day.total += 1;
+      if (user.role === "parent") day.parents += 1;
+      else day.faculty += 1;
+    }
+
+    const parsed =
+      user.acquisitionSlug &&
+      (user.acquisitionKind === "blog" ||
+        user.acquisitionKind === "page" ||
+        user.acquisitionKind === "social" ||
+        user.acquisitionKind === "referral")
+        ? {
+            slug: user.acquisitionSlug as string,
+            kind: user.acquisitionKind as string,
+          }
+        : parseAcquisitionFromUrl(user.registrationSource);
+
+    const kind = parsed.kind || "direct";
+    const slug = parsed.slug || "";
+    const sourceKey = `${kind}:${slug || "none"}`;
+    const existing = sourceMap.get(sourceKey) ?? {
+      key: sourceKey,
+      label: sourceLabel(kind, slug, user.registrationSource),
+      kind,
+      slug,
+      total: 0,
+      parents: 0,
+      faculty: 0,
+    };
+    existing.total += 1;
+    if (user.role === "parent") existing.parents += 1;
+    else existing.faculty += 1;
+    sourceMap.set(sourceKey, existing);
+  }
 
   const totalInterests = interestAgg[0]?.total ?? 0;
   const decided = connAccepted + connDeclined;
@@ -164,6 +294,10 @@ export async function getAdminStats(): Promise<AdminStats> {
       parentsComplete,
       newLast7Days,
       activeLast30Days,
+    },
+    registrations: {
+      timeseries: [...dayMap.values()],
+      bySource: [...sourceMap.values()].sort((a, b) => b.total - a.total),
     },
     connections: {
       total: connTotal,

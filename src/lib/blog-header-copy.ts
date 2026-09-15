@@ -63,6 +63,12 @@ export const BLOG_PILLAR_HEADERS: Record<BlogPillarId, BlogHeaderCopy> = {
       "Board exam plans, AI study tools, how to find tutors online, and getting the most from every session — written for Class 6–12 and JEE/NEET students.",
     hint: "AI study tools · CBSE Class 12 · free tutors · session prep",
   },
+  "kids-learn": {
+    title: "Free CS, AI & coding for Class 3–5",
+    subtitle:
+      "Parent guides to Mentr Learn — block coding, AI literacy, daily habits, and what’s actually free for kids in India and worldwide.",
+    hint: "Class 3–5 · ₹0 · CS · AI · Math for coding · syllabus",
+  },
 };
 
 export function getBlogHeaderCopy(

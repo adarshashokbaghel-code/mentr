@@ -1,6 +1,5 @@
 "use client";
 
-import { useAuth } from "@/components/auth/auth-provider";
 import { learnCopyFor, type LearnGeo } from "@/lib/learn-landing-copy";
 import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
 import { cn } from "@/lib/utils";
@@ -27,8 +26,8 @@ import { LearnChooseSection } from "./learn-choose-section";
 import { LearnWhySection } from "./learn-why-section";
 import { LearnGamificationSection } from "./learn-gamification-section";
 import { LearnSyllabusSection } from "./learn-syllabus-section";
-import {
-  hardShadowSm,
+import { LearnClaritySections } from "./learn-clarity-sections";
+import {  hardShadowSm,
   LpFinalCta,
   LpStepTimeline,
   SectionHeader,
@@ -43,17 +42,17 @@ const LEARNING_STEPS = [
   },
   {
     title: "Practice",
-    desc: "10 Play Arena questions on today’s idea — instant feedback.",
+    desc: "Quiz questions on today’s idea — instant feedback.",
     icon: ListChecks,
   },
   {
     title: "Progress check",
-    desc: "1 assessment question that marks the module done.",
+    desc: "A short check that helps mark the module done.",
     icon: BookOpen,
   },
   {
-    title: "Boss Challenge",
-    desc: "Every 5 modules — a bigger game or mini-project for the unit.",
+    title: "Unit challenge",
+    desc: "Bigger Build-style missions and unit challenges rolling out across the 60-module path.",
     icon: Trophy,
   },
 ];
@@ -114,26 +113,8 @@ function LoopStepMock({ step }: { step: number }) {
   return (
     <div className="rounded-xl border-2 border-ink bg-lavender p-4 text-center">
       <Trophy className="mx-auto h-10 w-10 text-ink" />
-      <p className="mt-2 text-sm font-bold text-ink">Build-a-Computer</p>
-      <p className="text-xs text-muted">Boss Challenge · Unit 1</p>
-    </div>
-  );
-}
-
-function LearnLoggedInBanner() {
-  const { user, loading } = useAuth();
-  if (loading || !user || user.role !== "parent") return null;
-  return (
-    <div className="border-b-2 border-sage/30 bg-sage-wash px-4 py-3 sm:px-6">
-      <div className={cn(LEARN_SHELL, "flex flex-wrap items-center justify-between gap-3")}>
-        <p className="text-sm font-medium text-ink">
-          <strong>You&apos;re on the list</strong> — Mentr Learn launches soon. We&apos;ll email you
-          when Module 1 is live.
-        </p>
-        <Link href="/parent/dashboard" className="text-sm font-bold text-coral hover:underline">
-          Parent dashboard →
-        </Link>
-      </div>
+      <p className="mt-2 text-sm font-bold text-ink">Build Arena mission</p>
+      <p className="text-xs text-muted">Unit challenge · rolling out with syllabus</p>
     </div>
   );
 }
@@ -162,7 +143,7 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       label: "Forever free",
       tint: "bg-butter/60",
       icon: Sparkles,
-      sub: "Launch cohort",
+      sub: "Was ₹999",
     },
     {
       value: "4.5h",
@@ -172,11 +153,18 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       sub: "Narrated · Class 3–5",
     },
     {
-      value: "600+",
+      value: "200+",
       label: "Practice questions",
       tint: "bg-coral-wash",
       icon: ListChecks,
-      sub: "10 after every lesson",
+      sub: "Bank live in the app",
+    },
+    {
+      value: "15",
+      label: "Build missions",
+      tint: "bg-lavender",
+      icon: Trophy,
+      sub: "Core + Maze Pack · blocks",
     },
     {
       value: "Daily",
@@ -186,25 +174,16 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       sub: "Problem of the Day · +5 XP",
     },
     {
-      value: "12",
-      label: "Boss challenges",
-      tint: "bg-lavender",
-      icon: Trophy,
-      sub: "One after every 5 modules",
-    },
-    {
-      value: "Weekly",
-      label: "Parent reports",
+      value: "Soon",
+      label: "Parent emails",
       tint: "bg-butter/60",
       icon: Mail,
-      sub: "Weekly email progress summary",
+      sub: "Weekly summary rolling out",
     },
   ];
 
   return (
     <div className="min-h-screen max-w-[100vw] overflow-x-hidden bg-gradient-to-b from-butter/25 via-cream to-cream">
-      <LearnLoggedInBanner />
-
       {/* Hero — light HackerKid-style ed-tech */}
       <section className="learn-hk-hero relative overflow-hidden">
         <div className="relative mx-auto grid w-full min-w-0 max-w-[1400px] items-center gap-6 px-4 py-10 sm:gap-8 sm:px-5 sm:py-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,540px)] lg:gap-8 lg:px-6 lg:py-20 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,580px)]">
@@ -214,6 +193,8 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       </section>
 
       <LearnStatsSlider stats={stats} />
+
+      <LearnClaritySections geo={geo} />
 
       <LearnChooseSection />
 
@@ -231,7 +212,7 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
               align="left"
               eyebrow="Every module"
               title="Watch → Practice → Check"
-              accent="→ Boss."
+              accent="→ Build."
             />
             <div className="mt-6">
               <LpStepTimeline
@@ -265,19 +246,36 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
             </div>
           ))}
         </dl>
+        <p className="mt-6 text-center text-sm text-muted">
+          More detail:{" "}
+          <Link href="/learn/syllabus" className="font-semibold text-ink hover:underline">
+            syllabus
+          </Link>
+          {" · "}
+          <Link href="/learn/start" className="font-semibold text-ink hover:underline">
+            enroll
+          </Link>
+          {" · "}
+          <Link
+            href="/blog/free-coding-course-for-kids-india"
+            className="font-semibold text-ink hover:underline"
+          >
+            free course guide
+          </Link>
+        </p>
       </section>
 
       <LpFinalCta
         innerClassName={LEARN_SHELL + " max-w-[1400px]"}
         eyebrow="Mentr Learn"
         title="Start Mentr Learn free today"
-        description="Class 3–5 · 60 modules · CS, AI & Math. Preview free — parent account saves progress."
+        description="Class 3–5 · 60-module syllabus · CS, AI & Math. Parent account saves progress — ₹0 forever."
         primaryLabel="Get started for free"
         primaryHref={LEARN_SIGNUP_HREF}
         primarySlot={<LearnStartButton href={LEARN_SIGNUP_HREF}>Get started for free</LearnStartButton>}
-        secondaryLabel="Find a tutor"
+        secondaryLabel="Browse tutors"
         secondaryHref="/parents"
-        perks={["₹0 forever", "Weekly parent reports", "Mentr Junior Graduate certificate"]}
+        perks={["₹0 forever", "60-module syllabus", "Build · Practice · POTD"]}
       />
     </div>
   );

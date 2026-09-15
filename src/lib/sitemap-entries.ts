@@ -1,5 +1,6 @@
 import { BLOG_PILLARS, BLOG_POSTS } from "@/lib/blog-posts";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
+import { LEARN_GEO_SEGMENTS, learnPathFor } from "@/lib/learn-landing-copy";
 import { MONEY_LANDING_PAGES, landingPagePath } from "@/lib/seo-landing-pages";
 import { absoluteUrl } from "@/lib/seo";
 import {
@@ -55,9 +56,11 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     ...(LEARN_PUBLIC
       ? [
           entry("/learn", 0.9, "weekly"),
-          entry("/learn/india", 0.88, "weekly"),
-          entry("/learn/uae", 0.88, "weekly"),
+          ...LEARN_GEO_SEGMENTS.map((segment) =>
+            entry(learnPathFor(segment), 0.88, "weekly"),
+          ),
           entry("/learn/syllabus", 0.8, "weekly"),
+          entry("/learn/start", 0.85, "weekly"),
         ]
       : []),
     entry("/for-faculty", 0.9, "weekly"),
@@ -69,6 +72,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/pricing", 0.75, "monthly"),
     entry("/faq", 0.85, "weekly"),
     entry("/blog", 0.85, "weekly"),
+    entry("/llms.txt", 0.4, "monthly"),
     entry("/search", 0.9, "daily"),
     ...BLOG_PILLARS.map((p) =>
       entry(`/blog/category/${p.id}`, 0.75, "weekly"),
