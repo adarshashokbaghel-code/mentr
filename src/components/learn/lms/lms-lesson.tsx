@@ -430,7 +430,7 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
   }, []);
 
   useEffect(() => {
-    const q = search.get("stage");
+    const q = search?.get("stage");
     if (q === "quiz") {
       if (videoDone || localVideoDone) setStage("quiz");
       else setStage("watch");
