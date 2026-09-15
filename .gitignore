@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# learn video local tooling
+.venv-video/
+videos/**/_build/
+videos/**/voiceover.wav

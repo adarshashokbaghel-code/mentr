@@ -157,48 +157,74 @@ function SignupList({ users }: { users: MarketingSignup[] }) {
 
 function BehaviorCards({ row }: { row: MarketingPageRow }) {
   return (
-    <div className="mt-3 grid gap-2 sm:grid-cols-4">
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Signups
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {row.signups}
-        </p>
-        <p className="text-[11px] text-muted">
-          {row.parentSignups} parents · {row.facultySignups} tutors
-        </p>
+    <div className="mt-3 space-y-2">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-lg border border-hairline bg-sage-wash/40 px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Unique views (IP)
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.uniqueViews}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.views} total page views
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-coral-wash/50 px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Unique clicks (IP)
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.uniqueRedirects}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.redirects} total CTA / link clicks
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Signups
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.signups}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.parentSignups} parents · {row.facultySignups} tutors
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Profiles completed
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.profilesCompleted}
+          </p>
+          <p className="text-[11px] text-muted">
+            {pct(row.profilesCompleted, row.signups)} of signups
+          </p>
+        </div>
       </div>
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Profiles completed
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {row.profilesCompleted}
-        </p>
-        <p className="text-[11px] text-muted">
-          {pct(row.profilesCompleted, row.signups)} of signups
-        </p>
-      </div>
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Active connectors
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {row.usersWithConnections}
-        </p>
-        <p className="text-[11px] text-muted">
-          {row.totalConnections} total connection rows
-        </p>
-      </div>
-      <div className="rounded-lg border border-hairline bg-white px-3 py-2">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-          Signup → connect
-        </p>
-        <p className="mt-1 text-lg font-bold tabular-nums text-ink">
-          {pct(row.usersWithConnections, row.signups)}
-        </p>
-        <p className="text-[11px] text-muted">Behaviour conversion</p>
+      <div className="grid gap-2 sm:grid-cols-2">
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Active connectors
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {row.usersWithConnections}
+          </p>
+          <p className="text-[11px] text-muted">
+            {row.totalConnections} total connection rows
+          </p>
+        </div>
+        <div className="rounded-lg border border-hairline bg-white px-3 py-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+            Signup → connect
+          </p>
+          <p className="mt-1 text-lg font-bold tabular-nums text-ink">
+            {pct(row.usersWithConnections, row.signups)}
+          </p>
+          <p className="text-[11px] text-muted">Behaviour conversion</p>
+        </div>
       </div>
     </div>
   );
@@ -403,15 +429,27 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
   return (
     <AdminSection
       id="marketing"
-      title="Marketing · UTM tracking"
-      description="Copy UTM links for blogs and socials. Metrics focus on signups and post-signup behaviour — not vanity clicks."
+      title="Marketing · UTM + IP click tracking"
+      description="Blogs, socials, and page CTAs: unique views/clicks count each new IP once; repeats add to totals. Signups still attribute via UTM."
     >
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+        <AdminStatCard
+          label="Unique views (IP)"
+          value={data?.totals.uniqueViews ?? 0}
+          sub={`${data?.totals.views ?? 0} total views`}
+          accent="sage"
+        />
+        <AdminStatCard
+          label="Unique clicks (IP)"
+          value={data?.totals.uniqueRedirects ?? 0}
+          sub={`${data?.totals.redirects ?? 0} total clicks`}
+          accent="coral"
+        />
         <AdminStatCard
           label="Attributed signups"
           value={data?.totals.signups ?? 0}
           sub={`${data?.totals.parentSignups ?? 0} parents · ${data?.totals.facultySignups ?? 0} tutors`}
-          accent="sage"
+          accent="butter"
         />
         <AdminStatCard
           label="Profiles completed"
@@ -420,18 +458,6 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
             data?.totals.profilesCompleted ?? 0,
             data?.totals.signups ?? 0,
           )}
-          accent="coral"
-        />
-        <AdminStatCard
-          label="Users with connections"
-          value={data?.totals.usersWithConnections ?? 0}
-          sub="Sent or received a connect/pitch"
-          accent="butter"
-        />
-        <AdminStatCard
-          label="Sources tracked"
-          value={data?.sources.length ?? 0}
-          sub={`${data?.socials?.reduce((n, s) => n + s.signups, 0) ?? 0} from social`}
         />
       </div>
 

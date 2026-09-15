@@ -37,18 +37,18 @@ import { useCallback, useEffect, useState } from "react";
 const INCLUDES = [
   {
     icon: BookOpen,
-    title: `${LEARN_MODULE_COUNT} modules`,
+    title: `${LEARN_MODULE_COUNT}-module syllabus`,
     body: "CS, AI & Math for Class 3–5",
   },
   {
     icon: Play,
-    title: "Watch → Quiz → Play",
-    body: "Short narrated lessons every day",
+    title: "Watch → Quiz → Build",
+    body: "Narrated lessons, quizzes & Build Arena",
   },
   {
     icon: Trophy,
-    title: "Boss challenges",
-    body: "Every 5 modules unlock the next unit",
+    title: "Practice & POTD",
+    body: "Extra questions + daily puzzle habit",
   },
   {
     icon: Flame,
@@ -133,7 +133,7 @@ function SyllabusTrack({ track }: { track: LearnTrack }) {
                 </ul>
                 <p className="mt-2 flex items-center gap-1.5 text-[12px] font-semibold text-[#0d9488]">
                   <Trophy className="h-3.5 w-3.5" />
-                  Boss: {unit.bossChallenge}
+                  Unit challenge: {unit.bossChallenge}
                 </p>
               </li>
             ))}
@@ -372,7 +372,7 @@ export function LearnCoursePage() {
                   <div className="absolute bottom-3 left-3 flex items-center gap-2">
                     <LearnDino size={32} className="h-8 w-8 shrink-0 drop-shadow" />
                     <span className="rounded-full bg-white/95 px-2.5 py-1 text-[11px] font-bold text-[#1c2434] shadow-sm">
-                      Preview · Watch → Quiz → Play
+                      Preview · Watch → Quiz → Build
                     </span>
                   </div>
                 </div>
@@ -399,12 +399,12 @@ export function LearnCoursePage() {
                     <span className="text-[#0d9488]">Math</span>
                   </p>
                   <p className="text-[12px] font-medium leading-snug text-[#5a6472] sm:text-[13px]">
-                    Short narrated videos, practice games, and fun challenges —
+                    Short narrated videos, Build Arena missions, and daily practice —
                     about 15 minutes a day. Same free path as on{" "}
                     <Link href="/learn" className="font-bold text-[#ff6a1a] hover:underline">
                       Mentr Learn
                     </Link>
-                    . Enroll once; your child starts Module 1 today.
+                    . Enroll once; your child starts in the learning app today.
                   </p>
                 </div>
               </div>
@@ -590,8 +590,8 @@ export function LearnCoursePage() {
                 {[
                   { icon: Play, label: "Watch", tint: "bg-[#fff4e8] text-[#ff6a1a]" },
                   { icon: BookOpen, label: "Quiz", tint: "bg-[#e6f7f4] text-[#0d9488]" },
-                  { icon: Gamepad2, label: "Play", tint: "bg-[#eef2ff] text-[#4f46e5]" },
-                  { icon: Trophy, label: "Boss", tint: "bg-[#fff8d6] text-[#b45309]" },
+                  { icon: Gamepad2, label: "Build", tint: "bg-[#eef2ff] text-[#4f46e5]" },
+                  { icon: Trophy, label: "Practice", tint: "bg-[#fff8d6] text-[#b45309]" },
                 ].map(({ icon: Icon, label, tint }) => (
                   <div
                     key={label}

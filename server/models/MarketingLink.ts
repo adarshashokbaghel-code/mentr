@@ -12,6 +12,12 @@ export const SOCIAL_LINK_PATHS = [
   "/parent/signup",
   "/faculty/signup",
   "/learn",
+  "/learn/start",
+  "/learn/india",
+  "/learn/uae",
+  "/learn/australia",
+  "/learn/sri-lanka",
+  "/learn/pakistan",
 ] as const;
 
 export type SocialLinkPath = (typeof SOCIAL_LINK_PATHS)[number] | string;

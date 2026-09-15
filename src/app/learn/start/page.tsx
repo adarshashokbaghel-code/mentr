@@ -1,4 +1,5 @@
 import { LearnCoursePage } from "@/components/landing/lp/learn-course-page";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/seo/json-ld";
 import {
   LEARN_FACT_SHEET,
@@ -13,7 +14,7 @@ import { Suspense } from "react";
 
 const TITLE = "Enroll free — Mentr Learn Class 3–5 (CS, AI & Math)";
 const DESCRIPTION =
-  "Enroll in Mentr Starter free. Class 3–5 CS, AI & Math — 60 modules, Watch → Quiz → Play → Boss. ₹999 → ₹0 forever. Parent email only — no credit card.";
+  "Enroll in Mentr Starter free. Class 3–5 CS, AI & Math — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD. ₹999 → ₹0 forever. Parent email only — no credit card.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -50,6 +51,7 @@ export default function LearnStartPage() {
           faqJsonLd(LEARN_START_FAQS),
         ]}
       />
+      <PageMarketing slug="learn-start" path="/learn/start" />
       <Suspense
         fallback={
           <div className="flex min-h-screen items-center justify-center bg-[#faf8f4] text-sm font-semibold text-[#5a6472]">

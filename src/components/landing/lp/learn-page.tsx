@@ -14,6 +14,7 @@ import {
   Trophy,
   Video,
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import { LearnAnimatedHero } from "./learn-animated-hero";
 import { LearnHeroContent } from "./learn-hero-content";
@@ -25,6 +26,7 @@ import { LearnChooseSection } from "./learn-choose-section";
 import { LearnWhySection } from "./learn-why-section";
 import { LearnGamificationSection } from "./learn-gamification-section";
 import { LearnSyllabusSection } from "./learn-syllabus-section";
+import { LearnClaritySections } from "./learn-clarity-sections";
 import {  hardShadowSm,
   LpFinalCta,
   LpStepTimeline,
@@ -40,17 +42,17 @@ const LEARNING_STEPS = [
   },
   {
     title: "Practice",
-    desc: "10 Play Arena questions on today’s idea — instant feedback.",
+    desc: "Quiz questions on today’s idea — instant feedback.",
     icon: ListChecks,
   },
   {
     title: "Progress check",
-    desc: "1 assessment question that marks the module done.",
+    desc: "A short check that helps mark the module done.",
     icon: BookOpen,
   },
   {
-    title: "Boss Challenge",
-    desc: "Every 5 modules — a bigger game or mini-project for the unit.",
+    title: "Unit challenge",
+    desc: "Bigger Build-style missions and unit challenges rolling out across the 60-module path.",
     icon: Trophy,
   },
 ];
@@ -111,8 +113,8 @@ function LoopStepMock({ step }: { step: number }) {
   return (
     <div className="rounded-xl border-2 border-ink bg-lavender p-4 text-center">
       <Trophy className="mx-auto h-10 w-10 text-ink" />
-      <p className="mt-2 text-sm font-bold text-ink">Build-a-Computer</p>
-      <p className="text-xs text-muted">Boss Challenge · Unit 1</p>
+      <p className="mt-2 text-sm font-bold text-ink">Build Arena mission</p>
+      <p className="text-xs text-muted">Unit challenge · rolling out with syllabus</p>
     </div>
   );
 }
@@ -151,11 +153,18 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       sub: "Narrated · Class 3–5",
     },
     {
-      value: "600+",
+      value: "200+",
       label: "Practice questions",
       tint: "bg-coral-wash",
       icon: ListChecks,
-      sub: "10 after every lesson",
+      sub: "Bank live in the app",
+    },
+    {
+      value: "15",
+      label: "Build missions",
+      tint: "bg-lavender",
+      icon: Trophy,
+      sub: "Core + Maze Pack · blocks",
     },
     {
       value: "Daily",
@@ -165,18 +174,11 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       sub: "Problem of the Day · +5 XP",
     },
     {
-      value: "12",
-      label: "Boss challenges",
-      tint: "bg-lavender",
-      icon: Trophy,
-      sub: "One after every 5 modules",
-    },
-    {
-      value: "Weekly",
-      label: "Parent reports",
+      value: "Soon",
+      label: "Parent emails",
       tint: "bg-butter/60",
       icon: Mail,
-      sub: "Weekly email progress summary",
+      sub: "Weekly summary rolling out",
     },
   ];
 
@@ -191,6 +193,8 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
       </section>
 
       <LearnStatsSlider stats={stats} />
+
+      <LearnClaritySections geo={geo} />
 
       <LearnChooseSection />
 
@@ -208,7 +212,7 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
               align="left"
               eyebrow="Every module"
               title="Watch → Practice → Check"
-              accent="→ Boss."
+              accent="→ Build."
             />
             <div className="mt-6">
               <LpStepTimeline
@@ -242,19 +246,36 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
             </div>
           ))}
         </dl>
+        <p className="mt-6 text-center text-sm text-muted">
+          More detail:{" "}
+          <Link href="/learn/syllabus" className="font-semibold text-ink hover:underline">
+            syllabus
+          </Link>
+          {" · "}
+          <Link href="/learn/start" className="font-semibold text-ink hover:underline">
+            enroll
+          </Link>
+          {" · "}
+          <Link
+            href="/blog/free-coding-course-for-kids-india"
+            className="font-semibold text-ink hover:underline"
+          >
+            free course guide
+          </Link>
+        </p>
       </section>
 
       <LpFinalCta
         innerClassName={LEARN_SHELL + " max-w-[1400px]"}
         eyebrow="Mentr Learn"
         title="Start Mentr Learn free today"
-        description="Class 3–5 · 60 modules · CS, AI & Math. Preview free — parent account saves progress."
+        description="Class 3–5 · 60-module syllabus · CS, AI & Math. Parent account saves progress — ₹0 forever."
         primaryLabel="Get started for free"
         primaryHref={LEARN_SIGNUP_HREF}
         primarySlot={<LearnStartButton href={LEARN_SIGNUP_HREF}>Get started for free</LearnStartButton>}
-        secondaryLabel="Find a tutor"
+        secondaryLabel="Browse tutors"
         secondaryHref="/parents"
-        perks={["₹0 forever", "Weekly parent reports", "Mentr Junior Graduate certificate"]}
+        perks={["₹0 forever", "60-module syllabus", "Build · Practice · POTD"]}
       />
     </div>
   );

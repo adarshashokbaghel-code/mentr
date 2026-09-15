@@ -4,13 +4,15 @@ export type MarketingEventType = "view" | "redirect";
 export type MarketingKind = "blog" | "page" | "social";
 
 /**
- * One row per (slug, kind, event, visitor) — `count` bumps on repeats
- * so unique visitors stay compact while totals stay accurate.
+ * One row per (slug, kind, event, visitorId).
+ * visitorId is a salted hash of client IP — unique visitors = unique IPs.
+ * `count` bumps when the same IP repeats the event.
  */
 export interface IMarketingStat extends Document {
   slug: string;
   kind: MarketingKind;
   event: MarketingEventType;
+  /** Salted IP hash (unique per IP). Legacy rows may still hold browser UUIDs. */
   visitorId: string;
   path: string;
   href?: string;

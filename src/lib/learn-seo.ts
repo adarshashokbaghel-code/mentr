@@ -13,14 +13,14 @@ export const LEARN_FACT_SHEET = {
   priceInr: 0,
   listPriceInr: 999,
   currency: "INR",
-  lessonLoop: "Watch → Quiz → Play → Boss",
+  lessonLoop: "Watch → Quiz → Build → Practice",
   dailyMinutes: 15,
   access: "Lifetime for Class 3–5 free track",
   enrollPath: "/learn/start",
   hubPath: "/learn",
   syllabusPath: "/learn/syllabus",
   oneLiner:
-    "Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60 modules, Watch → Quiz → Play, ₹0 forever.",
+    "Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD, ₹0 forever.",
   notIncluded:
     "Typed Python/HTML, hardware insides, competitive coding, adult AI fear content, Class 6+ algebra-first units.",
 } as const;
@@ -31,6 +31,7 @@ export const LEARN_START_KEYWORDS = [
   "free computer science for kids India",
   "AI for kids free course",
   "block coding for kids",
+  "Build Arena kids coding",
   "Mentr Starter",
   "₹0 coding for kids",
 ];
@@ -41,6 +42,7 @@ export const LEARN_SYLLABUS_KEYWORDS = [
   "CS AI Math kids curriculum",
   "parent coding syllabus PDF",
   "computer science Class 3-5 India",
+  "free coding syllabus Class 3-5",
 ];
 
 export const LEARN_START_FAQS = [
@@ -52,12 +54,17 @@ export const LEARN_START_FAQS = [
   {
     question: "Who can enroll — parent or tutor?",
     answer:
-      "Only parent accounts. Tutors signed in as faculty are asked to log out and continue as a parent so the child can use the learning app.",
+      "Only parent accounts. Tutors signed in as faculty are asked to log out and continue as a parent so the child can use the learning app. Teachers and centres can share the enroll link with parents.",
   },
   {
     question: "What does my child get after enroll?",
     answer:
-      "Full access to 60 modules across CS, AI, and Math for Class 3–5, lifetime for this free track, Watch → Quiz → Play lessons, and a shareable certificate when all modules are complete.",
+      "Free access to the Class 3–5 learning app: narrated lessons as modules go live, quizzes, Build Arena, Practice, Problem of the Day, and the published 60-module syllabus. Parent account saves progress. Junior Graduate finish line maps to completing the full path.",
+  },
+  {
+    question: "What is available today vs still rolling out?",
+    answer:
+      "Today: free enroll, quizzes, Build Arena, Practice, POTD, streaks/XP, and narrated lessons as modules ship. Unit challenges and weekly parent email summaries are rolling out. The full 60-module map is already published on the syllabus page.",
   },
   {
     question: "Is there a receipt?",
@@ -75,7 +82,12 @@ export const LEARN_SYLLABUS_FAQS = [
   {
     question: "How does each lesson work?",
     answer:
-      "Watch a short narrated video, answer practice questions (Quiz), then a Play challenge. Every five modules unlocks a Boss challenge.",
+      "Watch a short narrated video, answer practice questions (Quiz), then use Build Arena and Practice / POTD to reinforce. Unit challenges continue to roll out across the 60-module syllabus.",
+  },
+  {
+    question: "Is every video live today?",
+    answer:
+      "The full 60-module syllabus is published for parents. Narrated videos unlock as modules ship; Build Arena, Practice, and POTD are available in the app after enroll so kids always have something to do.",
   },
   {
     question: "Can I download the syllabus?",

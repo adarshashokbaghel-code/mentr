@@ -4,7 +4,9 @@ import { Navbar } from "@/components/landing/navbar";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/seo/json-ld";
 import {
+  LEARN_GEO_SEGMENTS,
   learnCopyFor,
+  learnHreflangMap,
   learnPathFor,
   parseLearnGeo,
   type LearnGeo,
@@ -19,7 +21,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export function generateStaticParams() {
-  return [{ geo: [] }, { geo: ["india"] }, { geo: ["uae"] }];
+  return [
+    { geo: [] as string[] },
+    ...LEARN_GEO_SEGMENTS.map((segment) => ({ geo: [segment] })),
+  ];
 }
 
 function geoForParams(raw?: string | string[]): LearnGeo | null {
@@ -35,6 +40,10 @@ export async function generateMetadata({
   const geo = geoForParams(raw);
   if (geo === null) return { title: "Not found", robots: { index: false } };
   const copy = learnCopyFor(geo);
+  const languages: Record<string, string> = {};
+  for (const [code, path] of Object.entries(learnHreflangMap())) {
+    languages[code] = absoluteUrl(path);
+  }
   return {
     title: copy.title,
     description: copy.metaDescription,
@@ -42,16 +51,11 @@ export async function generateMetadata({
       ...copy.keywords,
       LEARN_FACT_SHEET.courseName,
       "60 modules",
-      "Watch Quiz Play",
+      "Build Arena",
     ],
     alternates: {
       canonical: copy.path,
-      languages: {
-        "x-default": absoluteUrl("/learn"),
-        en: absoluteUrl("/learn"),
-        "en-IN": absoluteUrl("/learn/india"),
-        "en-AE": absoluteUrl("/learn/uae"),
-      },
+      languages,
     },
     openGraph: hubOpenGraph(copy.title, copy.metaDescription, copy.path),
     twitter: {
@@ -84,7 +88,7 @@ export default async function LearnPage({
           { name: "Home", path: "/" },
           { name: "Mentr Learn", path: "/learn" },
           {
-            name: geo === "india" ? "India" : "UAE",
+            name: copy.regionLabel,
             path,
           },
         ];

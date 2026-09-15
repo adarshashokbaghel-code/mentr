@@ -20,7 +20,14 @@ type Props = {
   content?: string;
   className?: string;
   children: ReactNode;
+  /** Open in new tab (external social / Product Hunt) */
+  external?: boolean;
+  onClick?: () => void;
 };
+
+function isExternalHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
+}
 
 export function TrackedLink({
   href,
@@ -29,25 +36,51 @@ export function TrackedLink({
   content,
   className,
   children,
+  external,
+  onClick,
 }: Props) {
-  const trackedHref = withUtm(href, defaultUtmFor(kind, slug, content));
+  const trackedHref = isExternalHref(href)
+    ? href
+    : withUtm(href, defaultUtmFor(kind, slug, content));
+  const openExternal = external ?? isExternalHref(href);
+
+  function onNavigate() {
+    const path =
+      typeof window !== "undefined"
+        ? window.location.pathname
+        : `/${kind}/${slug}`;
+    if (!openExternal) {
+      persistAttribution({ slug, kind, path, href: trackedHref });
+    }
+    void trackMarketingEvent({
+      type: "redirect",
+      slug,
+      kind,
+      path,
+      href: trackedHref,
+    });
+    onClick?.();
+  }
+
+  if (openExternal) {
+    return (
+      <a
+        href={trackedHref}
+        className={cn(className)}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={onNavigate}
+      >
+        {children}
+      </a>
+    );
+  }
 
   return (
     <Link
       href={trackedHref}
       className={cn(className)}
-      onClick={() => {
-        const path =
-          typeof window !== "undefined" ? window.location.pathname : `/${kind}/${slug}`;
-        persistAttribution({ slug, kind, path, href: trackedHref });
-        void trackMarketingEvent({
-          type: "redirect",
-          slug,
-          kind,
-          path,
-          href: trackedHref,
-        });
-      }}
+      onClick={onNavigate}
     >
       {children}
     </Link>

@@ -1,6 +1,9 @@
+"use client";
+
+import { TrackedLink } from "@/components/marketing/tracked-link";
+import { trackMarketingEvent } from "@/lib/marketing-client";
 import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import type { ReactNode } from "react";
 
 function ArrowIcon() {
@@ -53,11 +56,26 @@ export function LearnStartButton({
     </>
   );
 
+  function trackClick(targetHref: string) {
+    const path =
+      typeof window !== "undefined" ? window.location.pathname : "/learn";
+    void trackMarketingEvent({
+      type: "redirect",
+      slug: "learn",
+      kind: "page",
+      path,
+      href: targetHref,
+    });
+  }
+
   if (asButton) {
     return (
       <button
         type="button"
-        onClick={onClick}
+        onClick={() => {
+          trackClick(href);
+          onClick?.();
+        }}
         className={cn(ctaClass, className)}
       >
         {inner}
@@ -66,8 +84,15 @@ export function LearnStartButton({
   }
 
   return (
-    <Link href={href} onClick={onClick} className={cn(ctaClass, className)}>
+    <TrackedLink
+      href={href}
+      slug="learn"
+      kind="page"
+      content="cta"
+      className={cn(ctaClass, className)}
+      onClick={onClick}
+    >
       {inner}
-    </Link>
+    </TrackedLink>
   );
 }

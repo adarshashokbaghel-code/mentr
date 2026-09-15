@@ -515,8 +515,8 @@ export function LearnEnrollModal({
               </p>
             ) : null}
             <p className="mx-auto mt-3 max-w-sm text-[13px] leading-relaxed text-[#8a929c]">
-              Your child can start Module A1 now — Watch → Quiz → Play in the
-              learning app.
+              Your child can start in the learning app now — Watch → Quiz →
+              Build, plus Practice and POTD.
             </p>
 
             <div className="mt-6 space-y-2.5">

@@ -14,7 +14,7 @@ const SLIDES = [
     id: "gamified",
     tab: "Gamified learning",
     title: "Gamified learning for Class 3–5 kids",
-    body: "Mentr Learn is a free gamified learning platform for kids — not another worksheet. Class 3–5 children clear a level after each short coding lesson, earn XP, keep a daily streak, and unlock badges as they master computer science, AI, and math. Play Arena games and a Problem of the Day turn practice into a game, so they want to come back tomorrow.",
+    body: "Mentr Learn is a free gamified learning platform for kids — not another worksheet. Class 3–5 children clear a level after each short coding lesson, earn XP, keep a daily streak, and unlock badges as they master computer science, AI, and math. Build Arena missions and a Problem of the Day turn practice into a game, so they want to come back tomorrow.",
     cta: "Start free",
     href: LEARN_SIGNUP_HREF,
     image: "/learn/learn-why-play.png",
@@ -53,8 +53,8 @@ const SLIDES = [
   {
     id: "progress",
     tab: "Track progress",
-    title: "Track progress with a weekly parent report",
-    body: "You always know where your child stands. Mentr Learn emails a weekly parent report: modules completed, streak, XP, and what’s next in the CS, AI, and math tracks. No extra app to check. Progress is saved to the parent account, so a Class 3–5 learner can pick up the next narrated lesson on any day.",
+    title: "Track progress in the app — parent email coming",
+    body: "You can see modules, streak, and XP in the learning app today. A weekly parent email summary (what’s done and what’s next) is rolling out. Progress saves to the parent account so a Class 3–5 learner can pick up the next narrated lesson any day.",
     cta: "Start free",
     href: LEARN_SIGNUP_HREF,
     image: "/learn/learn-offer-potd.png",
@@ -63,10 +63,10 @@ const SLIDES = [
   {
     id: "certificate",
     tab: "Junior certificate",
-    title: "Mentr Junior Graduate certificate — 60/60",
-    body: "Finish all 60 modules across computer science, AI, and math and your child earns the Mentr Junior Graduate certificate. It is a shareable record of a completed free coding syllabus for Class 3–5 — useful for school portfolios and parent groups — not a paid badge behind a paywall.",
+    title: "Mentr Junior Graduate — finish the 60-module path",
+    body: "The syllabus maps all 60 modules across computer science, AI, and math. When the full path is complete, families get a shareable Junior Graduate record — a finish line for the free Class 3–5 foundation, not a paid badge.",
     cta: "See the syllabus",
-    href: "#curriculum",
+    href: "/learn/syllabus",
     image: "/learn/learn-offer-boss.png",
     art: "bg-[#fff6d9]",
   },
@@ -258,8 +258,8 @@ export function LearnChooseSection() {
             </h2>
             <p className="mt-2 text-[14px] leading-relaxed text-[#5a6472] sm:text-[16px]">
               India&apos;s free gamified learning platform for Class 3–5 kids — narrated coding
-              videos, CS, AI &amp; Math, streaks, and a weekly parent report. Load of benefits. Zero
-              hassle.
+              videos, CS, AI &amp; Math, streaks, Build Arena, and a published 60-module syllabus.
+              Load of benefits. Zero hassle.
             </p>
           </div>
 

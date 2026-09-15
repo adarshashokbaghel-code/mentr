@@ -18,8 +18,8 @@ export function MarketplaceArticleCta({ post }: { post: BlogPost }) {
           Free Class 3–5 CS, AI &amp; Math — enroll in minutes
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[15px]">
-          60 modules, Watch → Quiz → Play, ₹999 → ₹0. Parent email only — then
-          open the learning app for your child.
+          60-module syllabus, Build Arena, Practice & POTD, ₹999 → ₹0. Parent
+          email only — then open the learning app for your child.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <TrackedLink

@@ -31,6 +31,10 @@ export type LearnEnrollmentDto = {
   };
   progress: {
     modulesCompleted: string[];
+    videosWatched: string[];
+    quizzesCompleted: string[];
+    buildsCompleted?: string[];
+    buildsFirstTry?: string[];
     currentModuleId: string | null;
     xp: number;
     streakDays: number;

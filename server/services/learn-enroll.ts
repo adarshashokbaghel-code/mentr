@@ -24,7 +24,17 @@ export function serializeLearnEnrollment(enroll: ILearnEnrollment) {
       currency: enroll.purchase.currency,
       paymentMethod: enroll.purchase.paymentMethod,
     },
-    progress: enroll.progress ?? emptyLearnProgress(),
+    progress: {
+      modulesCompleted: enroll.progress?.modulesCompleted ?? [],
+      videosWatched: enroll.progress?.videosWatched ?? [],
+      quizzesCompleted: enroll.progress?.quizzesCompleted ?? [],
+      buildsCompleted: enroll.progress?.buildsCompleted ?? [],
+      buildsFirstTry: enroll.progress?.buildsFirstTry ?? [],
+      currentModuleId: enroll.progress?.currentModuleId ?? "A1",
+      xp: enroll.progress?.xp ?? 0,
+      streakDays: enroll.progress?.streakDays ?? 0,
+      lastActivityAt: enroll.progress?.lastActivityAt ?? null,
+    },
   };
 }
 

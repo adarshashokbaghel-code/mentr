@@ -5,6 +5,13 @@ import {
   enrollParentInStarter,
   getParentStarterEnrollment,
 } from "../services/learn-enroll";
+import { getPotdCalendar, getPotdForDateKey, getPotdMonth, getTodayPotd, recordPotdAttempt } from "../services/learn-potd";
+import { recordBuildComplete } from "../services/learn-build";
+import { recordLearnProgressEvent } from "../services/learn-progress";
+import {
+  getLessonQuizForParent,
+  submitLessonQuiz,
+} from "../services/learn-quiz";
 import { serializeUser } from "./auth";
 
 const router = Router();
@@ -12,12 +19,20 @@ const router = Router();
 router.use(ensureDb);
 router.use(requireAuth);
 
+function requireParent(
+  req: AuthenticatedRequest,
+  res: { status: (n: number) => { json: (b: unknown) => void } },
+) {
+  if (req.auth!.role !== "parent") {
+    res.status(403).json({ error: "Parent account required" });
+    return false;
+  }
+  return true;
+}
+
 router.get("/enrollment", async (req: AuthenticatedRequest, res) => {
   try {
-    if (req.auth!.role !== "parent") {
-      res.status(403).json({ error: "Parent account required" });
-      return;
-    }
+    if (!requireParent(req, res)) return;
     const enrollment = await getParentStarterEnrollment(req.auth!.sub);
     res.json({ enrollment });
   } catch (err) {
@@ -31,12 +46,7 @@ router.get("/enrollment", async (req: AuthenticatedRequest, res) => {
 
 router.post("/enroll", async (req: AuthenticatedRequest, res) => {
   try {
-    if (req.auth!.role !== "parent") {
-      res.status(403).json({
-        error: "Only parent accounts can enroll in Mentr Learn",
-      });
-      return;
-    }
+    if (!requireParent(req, res)) return;
     const { enrollment, created, user } = await enrollParentInStarter(
       req.auth!.sub,
     );
@@ -53,6 +63,167 @@ router.post("/enroll", async (req: AuthenticatedRequest, res) => {
     console.error("Learn enroll error:", err);
     res.status(status).json({
       error: err instanceof Error ? err.message : "Enrollment failed",
+    });
+  }
+});
+
+router.post("/progress", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const moduleId = String(req.body?.moduleId || "");
+    const event = req.body?.event;
+    if (event !== "video_complete" && event !== "quiz_complete") {
+      res.status(400).json({ error: "Invalid progress event" });
+      return;
+    }
+    const enrollment = await recordLearnProgressEvent(req.auth!.sub, {
+      moduleId,
+      event,
+      quizScore: req.body?.quizScore,
+    });
+    res.json({ enrollment });
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Learn progress error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to save progress",
+    });
+  }
+});
+
+router.get("/lessons/:moduleId/quiz", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const moduleId = String(req.params.moduleId || "");
+    const quiz = await getLessonQuizForParent(req.auth!.sub, moduleId);
+    res.json(quiz);
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Learn quiz get error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load quiz",
+    });
+  }
+});
+
+router.post(
+  "/lessons/:moduleId/quiz/submit",
+  async (req: AuthenticatedRequest, res) => {
+    try {
+      if (!requireParent(req, res)) return;
+      const moduleId = String(req.params.moduleId || "");
+      const answers = Array.isArray(req.body?.answers) ? req.body.answers : [];
+      const result = await submitLessonQuiz(req.auth!.sub, moduleId, answers);
+      await recordLearnProgressEvent(req.auth!.sub, {
+        moduleId,
+        event: "quiz_complete",
+        quizScore: { correct: result.correct, total: result.total },
+      });
+      res.json(result);
+    } catch (err) {
+      const status = (err as { status?: number }).status || 500;
+      console.error("Learn quiz submit error:", err);
+      res.status(status).json({
+        error: err instanceof Error ? err.message : "Failed to submit quiz",
+      });
+    }
+  },
+);
+
+router.get("/potd/today", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    res.json(await getTodayPotd(req.auth!.sub));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("POTD today error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load POTD",
+    });
+  }
+});
+
+router.get("/potd/date", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const dateKey = String(req.query.date || "");
+    res.json(await getPotdForDateKey(dateKey, req.auth!.sub));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("POTD date error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load POTD",
+    });
+  }
+});
+
+router.get("/potd/month", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const now = new Date();
+    const year = Number(req.query.year || now.getUTCFullYear());
+    const month = Number(req.query.month || now.getUTCMonth() + 1);
+    res.json(await getPotdMonth(req.auth!.sub, year, month));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("POTD month error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load calendar",
+    });
+  }
+});
+
+router.get("/potd/calendar", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    res.json(await getPotdCalendar(req.auth!.sub));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("POTD calendar error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load calendar",
+    });
+  }
+});
+
+router.post("/potd/attempt", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const dateKey = String(req.body?.dateKey || "");
+    const selectedIndex = Number(req.body?.selectedIndex);
+    if (!dateKey || !Number.isFinite(selectedIndex)) {
+      res.status(400).json({ error: "dateKey and selectedIndex required" });
+      return;
+    }
+    res.json(
+      await recordPotdAttempt(req.auth!.sub, { dateKey, selectedIndex }),
+    );
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("POTD attempt error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to save attempt",
+    });
+  }
+});
+
+router.post("/build/complete", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const missionId = String(req.body?.missionId || "");
+    const firstTry = Boolean(req.body?.firstTry);
+    const attempts = Number(req.body?.attempts) || 1;
+    const result = await recordBuildComplete(req.auth!.sub, {
+      missionId,
+      firstTry,
+      attempts,
+    });
+    res.json(result);
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Learn build complete error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to save build",
     });
   }
 });

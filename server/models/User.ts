@@ -101,6 +101,14 @@ export type LearnTrackId = "class-3-5" | "class-6-8" | "class-9-12";
 /** LMS progress scaffold — filled in by Learn product later. */
 export interface ILearnProgress {
   modulesCompleted: string[];
+  /** Module ids where Watch stage was finished */
+  videosWatched: string[];
+  /** Module ids where quiz was completed */
+  quizzesCompleted: string[];
+  /** Build Arena mission ids cleared */
+  buildsCompleted: string[];
+  /** Build missions cleared on first Run */
+  buildsFirstTry: string[];
   currentModuleId: string | null;
   xp: number;
   streakDays: number;
@@ -250,6 +258,10 @@ const parentProfileSchema = new Schema<IParentProfile>(
 const learnProgressSchema = new Schema<ILearnProgress>(
   {
     modulesCompleted: { type: [String], default: [] },
+    videosWatched: { type: [String], default: [] },
+    quizzesCompleted: { type: [String], default: [] },
+    buildsCompleted: { type: [String], default: [] },
+    buildsFirstTry: { type: [String], default: [] },
     currentModuleId: { type: String, default: "A1" },
     xp: { type: Number, default: 0, min: 0 },
     streakDays: { type: Number, default: 0, min: 0 },

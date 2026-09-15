@@ -31,7 +31,7 @@ function cityOnlineArticle(opts: {
     updatedAt: "2026-09-13",
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
-    intro: `Parents in ${city} searching for coding for kids often mean after-school centres, weekend camps, or expensive app subscriptions. For Class 3–5, an online free foundation is usually the smarter first step: short narrated lessons at home, no traffic, and a syllabus you can finish. ${regionNote} Mentr Learn (Mentr Starter) gives 60 modules of CS, AI, and Math for coding at ₹0 — Watch → Quiz → Play — with parent enroll only.`,
+    intro: `Parents in ${city} searching for coding for kids often mean after-school centres, weekend camps, or expensive app subscriptions. For Class 3–5, an online free foundation is usually the smarter first step: short narrated lessons at home, no traffic, and a syllabus you can finish. ${regionNote} Mentr Learn (Mentr Starter) gives a free 60-module CS, AI, and Math syllabus at ₹0 — narrated lessons, quizzes, Build Arena, Practice & POTD — with parent enroll only.`,
     sections: [
       {
         heading: `Why ${city} families start online for Class 3–5`,
@@ -61,7 +61,7 @@ function cityOnlineArticle(opts: {
           {
             type: "callout",
             title: "Local + free",
-            text: `${city} parents can enroll today at /learn/start. Prefer India-framed copy? Use ${hubLabel}. Prefer UAE framing? Use /learn/uae — the modules are the same.`,
+            text: `${city} parents can enroll today at /learn/start. Prefer India-framed copy? Use ${hubLabel}. Prefer UAE framing? Use /learn/uae. Australia, Sri Lanka, and Pakistan hubs are also live — the modules are the same.`,
           },
         ],
       },
@@ -206,6 +206,36 @@ export const KIDS_LEARN_WAVE2_ARTICLES: Record<string, ArticleContent> = {
       },
     ]),
   },
+
+  "coding-for-kids-australia-online": cityOnlineArticle({
+    slug: "coding-for-kids-australia-online",
+    city: "Australia",
+    regionNote:
+      "Across Sydney, Melbourne, and Brisbane, after-school calendars fill fast — a free 15-minute home habit is often the realistic first coding step.",
+    publishedAt: "2026-09-15",
+    hubHref: "/learn/australia",
+    hubLabel: "Mentr Learn Australia",
+  }),
+
+  "coding-for-kids-sri-lanka-online": cityOnlineArticle({
+    slug: "coding-for-kids-sri-lanka-online",
+    city: "Sri Lanka",
+    regionNote:
+      "Colombo and island-wide families often choose English online foundations before committing to a paid academy kit.",
+    publishedAt: "2026-09-15",
+    hubHref: "/learn/sri-lanka",
+    hubLabel: "Mentr Learn Sri Lanka",
+  }),
+
+  "coding-for-kids-pakistan-online": cityOnlineArticle({
+    slug: "coding-for-kids-pakistan-online",
+    city: "Pakistan",
+    regionNote:
+      "Karachi, Lahore, and Islamabad parents searching for free primary coding usually want clarity first — syllabus, no card, and something kids can finish.",
+    publishedAt: "2026-09-15",
+    hubHref: "/learn/pakistan",
+    hubLabel: "Mentr Learn Pakistan",
+  }),
 
   "cbse-class-3-5-computer-basics-mentr-learn": {
     slug: "cbse-class-3-5-computer-basics-mentr-learn",

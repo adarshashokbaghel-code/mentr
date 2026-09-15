@@ -31,6 +31,9 @@ const columns: Record<string, FooterLink[]> = {
           { label: "Syllabus PDF", href: "/learn/syllabus/download" },
           { label: "Learn India", href: "/learn/india" },
           { label: "Learn UAE", href: "/learn/uae" },
+          { label: "Learn Australia", href: "/learn/australia" },
+          { label: "Learn Sri Lanka", href: "/learn/sri-lanka" },
+          { label: "Learn Pakistan", href: "/learn/pakistan" },
           {
             label: "Kids coding & AI guides",
             href: "/blog/category/kids-learn",

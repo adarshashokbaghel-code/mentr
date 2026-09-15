@@ -36,6 +36,10 @@ export const MENTR_STARTER = {
 
 export type LearnProgressScaffold = {
   modulesCompleted: string[];
+  videosWatched: string[];
+  quizzesCompleted: string[];
+  buildsCompleted: string[];
+  buildsFirstTry: string[];
   currentModuleId: string | null;
   xp: number;
   streakDays: number;
@@ -45,6 +49,10 @@ export type LearnProgressScaffold = {
 export function emptyLearnProgress(): LearnProgressScaffold {
   return {
     modulesCompleted: [],
+    videosWatched: [],
+    quizzesCompleted: [],
+    buildsCompleted: [],
+    buildsFirstTry: [],
     currentModuleId: "A1",
     xp: 0,
     streakDays: 0,

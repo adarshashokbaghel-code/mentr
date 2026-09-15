@@ -157,18 +157,25 @@ export async function trackMarketingEvent(payload: {
   if (!slug || typeof window === "undefined") return;
   if (window.location.pathname.startsWith("/admin")) return;
 
+  const body = JSON.stringify({
+    type: payload.type,
+    slug,
+    kind: payload.kind,
+    path: payload.path.slice(0, 200),
+    href: payload.href?.slice(0, 500),
+    // Server keys uniqueness by IP hash; client id is unused for uniqueness.
+  });
+
   try {
+    if (typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
+      const blob = new Blob([body], { type: "application/json" });
+      const ok = navigator.sendBeacon("/api/marketing/event", blob);
+      if (ok) return;
+    }
     await fetch("/api/marketing/event", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: payload.type,
-        slug,
-        kind: payload.kind,
-        path: payload.path.slice(0, 200),
-        href: payload.href?.slice(0, 500),
-        visitorId: getVisitorId(),
-      }),
+      body,
       keepalive: true,
       credentials: "omit",
     });

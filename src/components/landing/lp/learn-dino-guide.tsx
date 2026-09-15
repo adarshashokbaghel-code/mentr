@@ -161,6 +161,10 @@ export function LearnDinoGuide() {
     }
   }, [open]);
 
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   if (hidden) return null;
 
   return (

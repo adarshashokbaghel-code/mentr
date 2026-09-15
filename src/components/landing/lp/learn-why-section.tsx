@@ -22,19 +22,19 @@ const OFFERS = [
   {
     id: "quizzes",
     title: "Practice + check",
-    tag: "10 + 1",
-    body: "Ten practice questions on the idea, then one progress-check that marks the lesson done.",
+    tag: "Quiz",
+    body: "Practice questions on the idea, then a short progress check before the next module.",
     href: "#curriculum",
     cta: "Try a sample quiz",
     image: "/learn/learn-offer-quiz.png",
   },
   {
     id: "play",
-    title: "Play Arena",
-    tag: "Games",
-    body: "A small game to practise the same idea — drag, match, or build.",
+    title: "Build Arena",
+    tag: "Missions",
+    body: "Block-based builds — sequence, maze, and story missions kids can finish in one sitting.",
     href: LEARN_SIGNUP_HREF,
-    cta: "See how play works",
+    cta: "See Build Arena",
     image: "/learn/learn-offer-play.png",
   },
   {
@@ -48,10 +48,10 @@ const OFFERS = [
   },
   {
     id: "boss",
-    title: "Boss challenge",
-    tag: "Every 5 lessons",
-    body: "A bigger game after five modules — like Build-a-Computer — then a badge.",
-    href: "#curriculum",
+    title: "Unit challenges",
+    tag: "Rolling out",
+    body: "Bigger Build-style challenges across the 60-module path — see the published syllabus for the full map.",
+    href: "/learn/syllabus",
     cta: "See the syllabus",
     image: "/learn/learn-offer-boss.png",
   },
@@ -77,7 +77,8 @@ export function LearnWhySection() {
             What kids do each day
           </h2>
           <p className="mt-2 text-[14px] leading-relaxed text-[#5a6472] sm:text-[16px]">
-            Watch a video, try 10 practice questions, then one progress check. About 15 minutes. Parents get the streak by email.
+            Watch a video, practise with a quiz, then Build or POTD. About 15 minutes. Streaks and XP
+            live in the app — weekly parent email summaries are rolling out.
           </p>
         </div>
 

@@ -1,6 +1,7 @@
 import { Footer } from "@/components/landing/footer";
 import { LearnSyllabusGuide } from "@/components/landing/lp/learn-syllabus-guide";
 import { Navbar } from "@/components/landing/navbar";
+import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/seo/json-ld";
 import {
   LEARN_FACT_SHEET,
@@ -14,7 +15,7 @@ import type { Metadata } from "next";
 
 const TITLE = "Class 3–5 parent syllabus — CS, AI & Math | Mentr Learn";
 const DESCRIPTION =
-  "Parent guide to Mentr Learn Class 3–5: 60 modules of CS, AI, and Math for coding — videos, quizzes, Play challenges, unit goals. Download the PDF. ₹0 forever.";
+  "Parent guide to Mentr Learn Class 3–5: 60-module CS, AI & Math syllabus — narrated lessons, quizzes, Build Arena, Practice & POTD. Download the PDF. ₹0 forever.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -51,6 +52,7 @@ export default function LearnSyllabusPage() {
           faqJsonLd(LEARN_SYLLABUS_FAQS),
         ]}
       />
+      <PageMarketing slug="learn-syllabus" path="/learn/syllabus" />
       <div className="print:hidden">
         <Navbar />
       </div>

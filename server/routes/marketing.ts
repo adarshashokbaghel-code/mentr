@@ -5,6 +5,10 @@ import {
   sanitizeMarketingKind,
   sanitizeMarketingSlug,
 } from "../lib/marketing-attribution";
+import {
+  clientIp,
+  marketingVisitorKeyFromIp,
+} from "../lib/marketing-visitor";
 
 const router = Router();
 
@@ -49,27 +53,29 @@ function sanitizeHref(value: unknown): string | undefined {
   return href.length > 0 ? href : undefined;
 }
 
-function sanitizeVisitorId(value: unknown): string | undefined {
-  if (typeof value !== "string") return undefined;
-  const id = value.trim().slice(0, 64);
-  return /^[a-zA-Z0-9_-]+$/.test(id) ? id : undefined;
-}
-
 router.post("/event", ensureDb, async (req: Request, res: Response) => {
   try {
-    if (ipLimited(req.ip ?? "unknown")) {
+    const ip = clientIp(req);
+    if (ipLimited(ip)) {
       res.status(429).json({ error: "Too many requests" });
       return;
     }
 
-    const type = req.body?.type === "redirect" ? "redirect" : req.body?.type === "view" ? "view" : null;
+    const type =
+      req.body?.type === "redirect"
+        ? "redirect"
+        : req.body?.type === "view"
+          ? "view"
+          : null;
     const slug = sanitizeMarketingSlug(req.body?.slug);
     const kind = sanitizeMarketingKind(req.body?.kind);
     const path = sanitizePath(req.body?.path);
-    const visitorId = sanitizeVisitorId(req.body?.visitorId);
     const href = type === "redirect" ? sanitizeHref(req.body?.href) : undefined;
 
-    if (!type || !slug || !kind || !path || !visitorId) {
+    // Unique per IP — each new IP is one unique view/click; repeats bump count.
+    const visitorId = marketingVisitorKeyFromIp(ip);
+
+    if (!type || !slug || !kind || !path) {
       res.status(400).json({ error: "Invalid event" });
       return;
     }

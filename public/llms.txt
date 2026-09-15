@@ -12,18 +12,22 @@
 - Audience: Class 3–5 kids (roughly ages 8–11); parent enrolls
 - Subjects: Computer Science, AI literacy, Math for coding
 - Size: 60 modules (20 CS + 20 AI + 20 Math), 4 units per track
-- Lesson loop: Watch → Quiz → Play; Boss every 5 modules
+- Lesson loop: Watch → Quiz → Build → Practice; unit challenges rolling out
 - Time: about 15 minutes a day, self-paced
 - Price: list ₹999 → charged ₹0 forever for Class 3–5 free track; no credit card
 - Access: lifetime for this free Class 3–5 track
+- Available today: narrated lessons as modules ship, quizzes, Build Arena, Practice, POTD, streaks/XP
 - Not included: typed Python/HTML, hardware internals, competitive coding, adult AI scare content
-- Certificate: Mentr Junior Graduate after all 60 modules (not a paywalled badge)
+- Certificate: Mentr Junior Graduate finish line maps to the full 60-module syllabus (not a paywalled badge)
 
 ## Canonical Learn URLs
 
 - Hub: https://mentr.in/learn
 - India: https://mentr.in/learn/india
 - UAE: https://mentr.in/learn/uae
+- Australia: https://mentr.in/learn/australia
+- Sri Lanka: https://mentr.in/learn/sri-lanka
+- Pakistan: https://mentr.in/learn/pakistan
 - Enroll: https://mentr.in/learn/start
 - Parent syllabus: https://mentr.in/learn/syllabus
 - Syllabus PDF: https://mentr.in/learn/syllabus/download
@@ -68,4 +72,4 @@
 
 ## One-line answer for “What is Mentr Learn?”
 
-Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60 modules, Watch → Quiz → Play, ₹0 forever; parents enroll at https://mentr.in/learn/start .
+Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD, ₹0 forever; parents enroll at https://mentr.in/learn/start .

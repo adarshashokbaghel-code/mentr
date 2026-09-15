@@ -1,0 +1,283 @@
+{
+  "id": "A1",
+  "title": "What Is a Computer?",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "CS · How Computers Work",
+  "slug": "a1-what-is-a-computer",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+0%",
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "welcome",
+      "beats": [
+        {
+          "vo": "Hello, champ! Welcome back to Mentr Learn. I am so happy you are here today.",
+          "caption": "Hello, champ! Welcome to class",
+          "focus": "hello"
+        },
+        {
+          "vo": "Today we start Computer Science — Unit one — How Computers Work.",
+          "caption": "Unit 1 · How Computers Work",
+          "focus": "unit"
+        },
+        {
+          "vo": "This is Chapter one. The name of our lesson is: What Is a Computer?",
+          "caption": "Chapter 1 · What Is a Computer?",
+          "focus": "chapter"
+        },
+        {
+          "vo": "Say the title with me, nice and slow… What… Is… A… Computer?",
+          "caption": "Say with me: What Is a Computer?",
+          "focus": "say"
+        },
+        {
+          "vo": "Great! Keep that title in your mind. Ready? Let's go.",
+          "caption": "Great! Let's begin",
+          "focus": "go"
+        }
+      ]
+    },
+    {
+      "id": "hook",
+      "visual": "hook",
+      "beats": [
+        {
+          "vo": "Look around your home. Phones, TVs, fans, toasters, lamps… so many machines!",
+          "caption": "So many machines at home…",
+          "focus": "look"
+        },
+        {
+          "vo": "But wait. Are all of them computers? Hmm. What do you think?",
+          "caption": "Are ALL of them computers?",
+          "focus": "ask"
+        },
+        {
+          "vo": "Pause and think for a moment. Point to one thing near you that you think is a computer.",
+          "caption": "⏸ Your turn — point to a computer!",
+          "focus": "think",
+          "pause": 1.2
+        },
+        {
+          "vo": "Good thinking! We will check your answer together at the end.",
+          "caption": "Good thinking! We'll check soon",
+          "focus": "ok"
+        }
+      ]
+    },
+    {
+      "id": "ipo",
+      "visual": "ipo",
+      "beats": [
+        {
+          "vo": "Here is the big secret. A computer is a special machine with three jobs.",
+          "caption": "Secret: a computer has 3 jobs",
+          "focus": "intro"
+        },
+        {
+          "vo": "Job one — INPUT. That means something goes in.",
+          "caption": "1 · INPUT = something goes in",
+          "focus": "input"
+        },
+        {
+          "vo": "Job two — PROCESS. That means the machine thinks, or works on it.",
+          "caption": "2 · PROCESS = it thinks / works",
+          "focus": "process"
+        },
+        {
+          "vo": "Job three — OUTPUT. That means something comes out — an answer, a picture, or a sound.",
+          "caption": "3 · OUTPUT = something comes out",
+          "focus": "output"
+        },
+        {
+          "vo": "Let's say the three jobs together: Input… Process… Output!",
+          "caption": "Say together: Input · Process · Output",
+          "focus": "all",
+          "pause": 0.6
+        },
+        {
+          "vo": "Wonderful. If a machine does all three jobs, we can call it a computer.",
+          "caption": "All 3 jobs → it's a computer",
+          "focus": "rule"
+        }
+      ]
+    },
+    {
+      "id": "message",
+      "visual": "story-message",
+      "beats": [
+        {
+          "vo": "Let's try a real story. Imagine you send a message to your friend on a phone.",
+          "caption": "Story: sending a message",
+          "focus": "intro"
+        },
+        {
+          "vo": "First, you type the words with your fingers. That is INPUT — words going in.",
+          "caption": "You type → INPUT",
+          "focus": "step1"
+        },
+        {
+          "vo": "Next, the phone works on your message — it gets it ready to send. That is PROCESS.",
+          "caption": "Phone works → PROCESS",
+          "focus": "step2"
+        },
+        {
+          "vo": "Then your friend sees the message on their screen. That is OUTPUT.",
+          "caption": "Friend sees it → OUTPUT",
+          "focus": "step3"
+        },
+        {
+          "vo": "So — input, process, output. Your phone did all three jobs. Your phone is a computer!",
+          "caption": "Phone = computer ✓",
+          "focus": "phone"
+        },
+        {
+          "vo": "A laptop can do the same. A tablet can do the same. They are computers too.",
+          "caption": "Laptop · Phone · Tablet = computers",
+          "focus": "devices"
+        }
+      ]
+    },
+    {
+      "id": "bulb",
+      "visual": "story-bulb",
+      "beats": [
+        {
+          "vo": "Now, another story. You press a switch, and a bulb lights up.",
+          "caption": "Story: switching on a bulb",
+          "focus": "intro"
+        },
+        {
+          "vo": "The switch sends power. The bulb gets hot and shines. That is useful!",
+          "caption": "Useful — but is it a computer?",
+          "focus": "shine"
+        },
+        {
+          "vo": "But the bulb is not taking many kinds of input and thinking about a message or a game.",
+          "caption": "No real “thinking” like a computer",
+          "focus": "not-think"
+        },
+        {
+          "vo": "It mainly turns light on or off. So a simple bulb — or a toaster that only heats bread — is not a computer.",
+          "caption": "Bulb · Toaster → NOT computers",
+          "focus": "not"
+        },
+        {
+          "vo": "Remember: computers take input, process it, and show output in a smarter way.",
+          "caption": "Computers work in a smarter way",
+          "focus": "remember"
+        }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "yesno",
+      "beats": [
+        {
+          "vo": "Quick game time! I will name something. You say YES if it is a computer, or NO if it is not.",
+          "caption": "Game: say YES or NO!",
+          "focus": "intro"
+        },
+        {
+          "vo": "Ready? Laptop… Yes! A laptop is a computer.",
+          "caption": "Laptop → YES ✓",
+          "focus": "laptop"
+        },
+        {
+          "vo": "Phone… Yes! A phone is a computer.",
+          "caption": "Phone → YES ✓",
+          "focus": "phone"
+        },
+        {
+          "vo": "Tablet… Yes! A tablet is a computer.",
+          "caption": "Tablet → YES ✓",
+          "focus": "tablet"
+        },
+        {
+          "vo": "Toaster… No! A toaster is not a computer — it only heats bread.",
+          "caption": "Toaster → NO ✗",
+          "focus": "toaster"
+        },
+        {
+          "vo": "Lamp… No! A lamp is not a computer.",
+          "caption": "Lamp → NO ✗",
+          "focus": "lamp"
+        },
+        {
+          "vo": "You are doing amazing. High five!",
+          "caption": "High five! You're amazing 🙌",
+          "focus": "highfive"
+        }
+      ]
+    },
+    {
+      "id": "check",
+      "visual": "checkpoint",
+      "beats": [
+        {
+          "vo": "One more thinking question — the same kind you will see later in your check.",
+          "caption": "Practice check question",
+          "focus": "intro"
+        },
+        {
+          "vo": "Which one is a computer: a laptop, a lamp, or a bicycle bell?",
+          "caption": "Laptop · Lamp · Bicycle bell — which?",
+          "focus": "ask",
+          "pause": 1.4
+        },
+        {
+          "vo": "If you said laptop — you are right! Because it takes input, processes, and shows output.",
+          "caption": "Answer: Laptop ✓",
+          "focus": "answer"
+        },
+        {
+          "vo": "A lamp and a bicycle bell are helpful, but they are not computers.",
+          "caption": "Lamp & bell → helpful, not computers",
+          "focus": "others"
+        }
+      ]
+    },
+    {
+      "id": "close",
+      "visual": "recap",
+      "beats": [
+        {
+          "vo": "Let's lock it in. A computer has three jobs: input, process, and output.",
+          "caption": "Lock in: Input · Process · Output",
+          "focus": "ipo"
+        },
+        {
+          "vo": "Phone, laptop, tablet — computers. Toaster, lamp — not computers.",
+          "caption": "Computers vs not-computers",
+          "focus": "list"
+        },
+        {
+          "vo": "You learned Chapter one: What Is a Computer? Brilliant work today!",
+          "caption": "Chapter 1 complete · Brilliant!",
+          "focus": "done"
+        },
+        {
+          "vo": "Next, you will play a short quiz to practise. Tap Finish when you are ready. See you there, champ!",
+          "caption": "Next → Quiz. Tap Finish, champ!",
+          "focus": "next"
+        }
+      ]
+    }
+  ]
+}

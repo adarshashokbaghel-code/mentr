@@ -1,3 +1,7 @@
+"use client";
+
+import { TrackedLink } from "@/components/marketing/tracked-link";
+
 const FEATURED_URL =
   "https://www.producthunt.com/products/mentr?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-mentr";
 
@@ -26,12 +30,13 @@ function badgeImgClass(compact?: boolean) {
 
 export function ProductHuntFeaturedBadge({ className, compact }: BadgeProps) {
   return (
-    <a
+    <TrackedLink
       href={FEATURED_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      slug="product-hunt"
+      kind="social"
+      content="featured-badge"
       className={className}
-      aria-label="Mentr on Product Hunt"
+      external
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -41,18 +46,19 @@ export function ProductHuntFeaturedBadge({ className, compact }: BadgeProps) {
         src={FEATURED_SRC}
         className={badgeImgClass(compact)}
       />
-    </a>
+    </TrackedLink>
   );
 }
 
 export function ProductHuntReviewBadge({ className, compact }: BadgeProps) {
   return (
-    <a
+    <TrackedLink
       href={REVIEW_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+      slug="product-hunt"
+      kind="social"
+      content="review-badge"
       className={className}
-      aria-label="Review Mentr on Product Hunt"
+      external
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -62,7 +68,7 @@ export function ProductHuntReviewBadge({ className, compact }: BadgeProps) {
         src={REVIEW_SRC}
         className={badgeImgClass(compact)}
       />
-    </a>
+    </TrackedLink>
   );
 }
 
