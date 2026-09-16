@@ -144,18 +144,31 @@ router.post("/", async (req: AuthenticatedRequest, res: Response) => {
         parent.parentProfile.area || parent.parentProfile.city || undefined,
       teacherName: tp.name,
       teacherArea: [tp.area, tp.city].filter(Boolean).join(", ") || undefined,
-      respondedAt: undefined,
     };
 
     let connection: IConnection;
     if (existing) {
-      // Declined earlier — allow a fresh request with a new message
-      existing.set(fields);
-      connection = await existing.save();
+      // Declined earlier — allow a fresh parent-initiated request
+      await Connection.updateOne(
+        { _id: existing._id },
+        {
+          $set: {
+            ...fields,
+            requestedBy: "parent",
+          },
+          $unset: {
+            requirement: 1,
+            respondedAt: 1,
+          },
+        },
+      );
+
+      connection = (await Connection.findById(existing._id)) as IConnection;
     } else {
       connection = await Connection.create({
         parent: parent._id,
         teacher: teacher._id,
+        requestedBy: "parent",
         ...fields,
       });
     }
