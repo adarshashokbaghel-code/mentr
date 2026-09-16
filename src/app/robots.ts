@@ -13,7 +13,6 @@ const PRIVATE_PATHS = [
   "/parent/",
   "/faculty",
   "/board",
-  "/login",
   "/admin/",
   "/tmp-wa-preview",
   "/learn/app",

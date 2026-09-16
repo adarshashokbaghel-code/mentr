@@ -8,14 +8,19 @@ const GUIDES = [
     desc: "See verified tutors — no sign-in required",
   },
   {
-    label: "Find online tutors",
-    href: "/find-online-tutors",
-    desc: "Verified tutors worldwide — free connect",
+    label: "Find a mentor online (India)",
+    href: "/blog/find-mentor-online-india",
+    desc: "Verified mentors — coding, career, exams",
   },
   {
-    label: "Verified online tutors",
-    href: "/find-verified-online-tutors",
-    desc: "ID-checked profiles, no lead fees",
+    label: "UrbanPro alternatives",
+    href: "/blog/urbanpro-alternatives",
+    desc: "Free platforms without coin unlocks",
+  },
+  {
+    label: "Home tutor fees (metros)",
+    href: "/blog/home-tutor-cost-bengaluru",
+    desc: "Bengaluru, Delhi, Mumbai, Hyderabad, Pune",
   },
   {
     label: "Find mentors near me",
@@ -26,6 +31,16 @@ const GUIDES = [
     label: "Online tutor jobs",
     href: "/online-tutor-jobs",
     desc: "List free, keep 100% of your fees",
+  },
+  {
+    label: "Mentr login",
+    href: "/login",
+    desc: "Parent or tutor — OTP sign-in",
+  },
+  {
+    label: "Mentr Learn (Class 3–5)",
+    href: "/learn",
+    desc: "Free CS, AI & Math foundation",
   },
 ];
 

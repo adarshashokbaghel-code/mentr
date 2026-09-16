@@ -552,6 +552,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
+      { label: "Find a mentor online in India", href: "/blog/find-mentor-online-india" },
       { label: "Find coding mentors", href: "/find-mentors/programming" },
       { label: "Find mentors near me", href: "/find-mentors-near-me" },
       { label: "Find mentors globally", href: "/blog/find-mentor-online-any-country" },
@@ -644,6 +645,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
+      { label: "Find a mentor online in India", href: "/blog/find-mentor-online-india" },
       { label: "Find mentors near me", href: "/find-mentors-near-me" },
       { label: "Find online tutors", href: "/find-online-tutors" },
       { label: "Search mentors on Mentr", href: "/find-mentors/programming" },

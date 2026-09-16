@@ -292,11 +292,11 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
   "home-tutor-cost-bengaluru": {
     slug: "home-tutor-cost-bengaluru",
     publishedAt: "2026-02-12",
-    updatedAt: "2026-06-10",
+    updatedAt: "2026-09-16",
     readTimeMinutes: 9,
     author: "Mentr Editorial Team",
     intro:
-      "Home tutor fees in Bengaluru vary more than most parents expect — the same subject at the same class level can differ by ₹300 per hour depending on neighbourhood, tutor experience, and whether you hire through an agency or connect directly. This 2026 fee guide breaks down what parents actually pay across subjects, classes, and areas so you can budget realistically and avoid overpaying.",
+      "Quick answer (2026): most Bengaluru home tutors charge about ₹500–₹2,000 per hour — Classes 5–8 maths/science often ₹500–₹800/hr, Class 9–10 ₹700–₹1,000/hr, and JEE/NEET mentors ₹1,200–₹2,500/hr. Fees swing with neighbourhood, travel, and agency markups. This guide shows class-wise ranges so you can budget, then hire verified tutors free on Mentr (no commission).",
     sections: [
       {
         heading: "Typical hourly and monthly fee ranges in 2026",
@@ -420,7 +420,11 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
-      { label: "Post your tutoring requirement", href: "/parent/signup" },
+      { label: "Search Bengaluru tutors", href: "/search" },
+      { label: "Home tutor fees Delhi NCR", href: "/blog/home-tutor-cost-delhi" },
+      { label: "Home tutor fees Mumbai", href: "/blog/home-tutor-cost-mumbai" },
+      { label: "Home tutor fees Hyderabad", href: "/blog/home-tutor-cost-hyderabad" },
+      { label: "Home tutor fees Pune", href: "/blog/home-tutor-cost-pune" },
       {
         label: "Free vs paid tutor platforms",
         href: "/blog/free-vs-paid-tutor-platforms-india",

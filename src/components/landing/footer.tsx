@@ -17,6 +17,7 @@ const columns: Record<string, FooterLink[]> = {
     { label: "Find online tutors", href: "/find-online-tutors" },
     { label: "Verified tutors", href: "/find-verified-online-tutors" },
     { label: "Find mentors near me", href: "/find-mentors-near-me" },
+    { label: "Login", href: "/login" },
     { label: "How it works", href: "/how-it-works" },
     { label: "Pricing", href: "/pricing" },
     { label: "For parents", href: "/parents" },
@@ -59,6 +60,8 @@ const columns: Record<string, FooterLink[]> = {
     { label: "Create account", href: "/faculty/signup" },
     { label: "Faculty login", href: "/faculty" },
     { label: "Mentr vs UrbanPro", href: "/vs/urbanpro" },
+    { label: "UrbanPro alternatives", href: "/blog/urbanpro-alternatives" },
+    { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
   ],
   Company: [
     { label: "About", href: "/about" },
@@ -72,6 +75,12 @@ const columns: Record<string, FooterLink[]> = {
   ],
   Resources: [
     { label: "All guides", href: "/blog" },
+    { label: "Find a mentor online (India)", href: "/blog/find-mentor-online-india" },
+    { label: "UrbanPro alternatives", href: "/blog/urbanpro-alternatives" },
+    { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
+    { label: "Home tutor fees Bengaluru", href: "/blog/home-tutor-cost-bengaluru" },
+    { label: "Home tutor fees Delhi", href: "/blog/home-tutor-cost-delhi" },
+    { label: "Mentr login guide", href: "/blog/how-to-login-mentr" },
     ...(LEARN_PUBLIC
       ? [
           {
@@ -85,8 +94,6 @@ const columns: Record<string, FooterLink[]> = {
         ]
       : []),
     { label: "Browse tutors", href: "/search" },
-    { label: "Find online tutors", href: "/find-online-tutors" },
-    { label: "Verified tutors online", href: "/find-verified-online-tutors" },
     { label: "Find mentors near me", href: "/find-mentors-near-me" },
     { label: "Online tutor jobs", href: "/online-tutor-jobs" },
   ],

@@ -11,6 +11,7 @@ import { KIDS_LEARN_ARTICLES } from "./kids-learn";
 import { KIDS_LEARN_WAVE2_ARTICLES } from "./kids-learn-wave2";
 import { GUIDE_BATCH_SEP2026 } from "./guide-batch-sep2026";
 import { ADSENSE_QUALITY_BATCH } from "./adsense-quality-batch";
+import { SEO_GROWTH_SEP2026 } from "./seo-growth-sep2026";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
@@ -26,6 +27,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...GUIDE_BATCH_SEP2026,
   // Last: replaces thin Jul-19 template posts for AdSense content quality
   ...ADSENSE_QUALITY_BATCH,
+  ...SEO_GROWTH_SEP2026,
 };
 
 export function getArticleContent(slug: string): ArticleContent {
