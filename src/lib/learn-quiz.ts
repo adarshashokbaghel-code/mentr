@@ -72,7 +72,9 @@ export function submitLessonQuiz(
     total: number;
     answered: number;
     correct: number;
+    wrong?: number;
     scorePercent: number;
+    enrollment?: import("@/lib/learn-enroll").LearnEnrollmentDto;
   }>(`/learn/lessons/${encodeURIComponent(moduleId)}/quiz/submit`, {
     method: "POST",
     body: JSON.stringify({ answers }),

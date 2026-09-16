@@ -1,4 +1,4 @@
-/** Client helpers for Learn progress + POTD */
+/** Client helpers for Learn progress + POTD + practice + leaderboard */
 
 import {
   fetchLearnEnrollment,
@@ -42,6 +42,16 @@ export async function recordVideoComplete(moduleId: string) {
   return data.enrollment;
 }
 
+export async function recordDailyCheckIn() {
+  const data = await learnRequest<{
+    enrollment: LearnEnrollmentDto;
+    awarded: number;
+    alreadyToday: boolean;
+  }>("/learn/check-in", { method: "POST", body: "{}" });
+  saveLearnEnrollmentLocal(data.enrollment);
+  return data;
+}
+
 export function hasWatchedVideo(
   enrollment: LearnEnrollmentDto | null | undefined,
   moduleId: string,
@@ -83,6 +93,8 @@ export type PotdTodayDto = {
   isFuture: boolean;
   unlocked: boolean;
   attempted: boolean;
+  /** Local/session flag: past-day practice (no XP, no calendar credit) */
+  practiceOnly?: boolean;
   attempt: {
     selectedIndex: number;
     correct: boolean;
@@ -132,6 +144,9 @@ export function submitPotdAttempt(dateKey: string, selectedIndex: number) {
     selectedIndex: number;
     correctIndex: number;
     explanation: string;
+    xpAwarded?: number;
+    alreadyAttempted?: boolean;
+    practiceOnly?: boolean;
   }>("/learn/potd/attempt", {
     method: "POST",
     body: JSON.stringify({ dateKey, selectedIndex }),
@@ -147,3 +162,53 @@ export function fetchPotdCalendar() {
 }
 
 export type PotdCalendarDto = PotdMonthDto;
+
+export type LearnLeaderboardRow = {
+  userId: string;
+  name: string;
+  xp: number;
+  you: boolean;
+  rank: number;
+};
+
+export type LearnLeaderboardDto = {
+  updatedAt: string;
+  cacheTtlSec: number;
+  totalShown: number;
+  yourRank: number | null;
+  yourXp: number | null;
+  rows: LearnLeaderboardRow[];
+};
+
+export function fetchLearnLeaderboard(limit = 100) {
+  return learnRequest<LearnLeaderboardDto>(
+    `/learn/leaderboard?limit=${limit}`,
+  );
+}
+
+export type LearnStatsDto = {
+  overall: {
+    xp: number;
+    videos: number;
+    quizzes: number;
+    modules: number;
+    builds: number;
+    potdCorrect: number;
+    practiceCorrect: number;
+    practiceAttempted: number;
+    streakDays: number;
+    rank: number;
+  };
+  week: {
+    weekKey: string | null;
+    xp: number;
+    videos: number;
+    potd: number;
+    rank: number;
+  };
+  leaderboardUpdatedAt: string;
+};
+
+export function fetchLearnStats() {
+  return learnRequest<LearnStatsDto>("/learn/stats");
+}

@@ -4,7 +4,7 @@ import {
   practiceModuleMeta,
   type PracticeQuestion,
 } from "@/lib/learn-practice-bank";
-import { writePracticeAnswer } from "@/lib/learn-practice-client";
+import { submitPracticeAnswer } from "@/lib/learn-practice-client";
 import { cn } from "@/lib/utils";
 import {
   Check,
@@ -41,6 +41,7 @@ export function LmsPracticeSolvePopup({
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [revealed, setRevealed] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => setMounted(true), []);
 
@@ -80,13 +81,24 @@ export function LmsPracticeSolvePopup({
 
   if (!mounted || !open || !question) return null;
 
-  function submit(optionIndex: number) {
-    if (revealed || !question) return;
-    const correct = optionIndex === question.correctIndex;
+  async function submit(optionIndex: number) {
+    if (revealed || !question || saving) return;
     setPicked(optionIndex);
-    setRevealed(true);
-    writePracticeAnswer(question.id, optionIndex, correct);
-    onAnswered(question.id, optionIndex, correct);
+    setSaving(true);
+    try {
+      const result = await submitPracticeAnswer(question.id, optionIndex);
+      setRevealed(true);
+      setPicked(result.correct ? optionIndex : result.selectedIndex);
+      // Prefer server-validated result
+      onAnswered(question.id, result.selectedIndex, result.correct);
+    } catch {
+      // Fallback: local reveal if offline — still lock UI
+      const correct = optionIndex === question.correctIndex;
+      setRevealed(true);
+      onAnswered(question.id, optionIndex, correct);
+    } finally {
+      setSaving(false);
+    }
   }
 
   function go(delta: number) {
@@ -159,8 +171,8 @@ export function LmsPracticeSolvePopup({
                 <button
                   key={`${question.id}-${i}`}
                   type="button"
-                  disabled={revealed}
-                  onClick={() => submit(i)}
+                  disabled={revealed || saving}
+                  onClick={() => void submit(i)}
                   className={cn(
                     "flex w-full items-start gap-3 rounded-2xl border-2 px-3.5 py-3 text-left text-[14px] font-bold transition disabled:cursor-default",
                     tone,

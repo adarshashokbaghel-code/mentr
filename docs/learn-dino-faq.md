@@ -37,7 +37,7 @@
 - **Content:** 60 modules (20 CS + 20 AI + 20 Math). Free for launch cohort.
 - **Lesson loop:** Watch → 10 practice → play; Boss every few modules; ~15 min/day.
 - **Parents:** Weekly email (modules, streak, what’s next). Account = parent signup + child profile.
-- **Leaderboard:** Opt-in, cohort, first name + avatar; off by default.
+- **Leaderboard:** Always on for Class 3–5 enrollments; first name + XP only.
 - **Money:** Learn free; tutors optional/paid separately. No selling lesson data as the model.
 - **Mentr:** Tutors/mentors marketplace + Learn.
 

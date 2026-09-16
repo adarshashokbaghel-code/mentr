@@ -15,6 +15,8 @@ export interface ILearnPotd extends Document {
   explanation: string;
   difficulty: "easy" | "medium" | "hard";
   active: boolean;
+  /** Bumped when option order / answers are regenerated */
+  seedVersion?: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -36,6 +38,7 @@ const learnPotdSchema = new Schema<ILearnPotd>(
       required: true,
     },
     active: { type: Boolean, default: true },
+    seedVersion: { type: Number, default: 1 },
   },
   { timestamps: true },
 );

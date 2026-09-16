@@ -75,7 +75,7 @@ const baseFaqs = [
   {
     question: "Is the leaderboard safe for kids?",
     answer:
-      "Leaderboards are scoped to your child's cohort, show first name and avatar only, and are parent opt-in — off by default so younger kids aren't discouraged by older active learners.",
+      "The Class 3–5 cohort leaderboard shows first name and XP only — no emails or phone numbers. Every enrolled learner is ranked so kids can see how practice adds up.",
   },
   {
     question: "Can I download the full syllabus?",

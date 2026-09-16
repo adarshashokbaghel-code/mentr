@@ -130,7 +130,7 @@ export const DINO_FAQ: Record<string, DinoFaqNode> = {
     id: "leaderboard",
     question: "Is there a leaderboard?",
     answer:
-      "Yes, optional. Same class cohort, first name + avatar only. Parents opt in — it’s off by default so kids aren’t pushed into rankings.",
+      "Yes. The Class 3–5 cohort leaderboard is always on for enrolled learners. It shows first name and XP only — no emails or phone numbers.",
     next: ["parent-email", "how-it-works", "is-it-free", "how-to-start", "who-is-it-for", "what-is-learn"],
     action: "cheer",
   },

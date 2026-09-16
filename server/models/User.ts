@@ -98,12 +98,12 @@ export interface IParentProfile {
 
 export type LearnTrackId = "class-3-5" | "class-6-8" | "class-9-12";
 
-/** LMS progress scaffold — filled in by Learn product later. */
+/** LMS progress — XP, streak, completion lists. */
 export interface ILearnProgress {
   modulesCompleted: string[];
   /** Module ids where Watch stage was finished */
   videosWatched: string[];
-  /** Module ids where quiz was completed */
+  /** Module ids where quiz was completed (no retake) */
   quizzesCompleted: string[];
   /** Build Arena mission ids cleared */
   buildsCompleted: string[];
@@ -113,6 +113,16 @@ export interface ILearnProgress {
   xp: number;
   streakDays: number;
   lastActivityAt: string | null;
+  lastCheckInDay: string | null;
+  streakBonusesClaimed: number[];
+  weekKey: string | null;
+  weekStartXp: number;
+  weekStartVideos: number;
+  weekStartPotdCorrect: number;
+  potdCorrect: number;
+  potdAttempted: number;
+  practiceCorrect: number;
+  practiceAttempted: number;
 }
 
 export interface ILearnPurchase {
@@ -266,6 +276,16 @@ const learnProgressSchema = new Schema<ILearnProgress>(
     xp: { type: Number, default: 0, min: 0 },
     streakDays: { type: Number, default: 0, min: 0 },
     lastActivityAt: { type: String, default: null },
+    lastCheckInDay: { type: String, default: null },
+    streakBonusesClaimed: { type: [Number], default: [] },
+    weekKey: { type: String, default: null },
+    weekStartXp: { type: Number, default: 0, min: 0 },
+    weekStartVideos: { type: Number, default: 0, min: 0 },
+    weekStartPotdCorrect: { type: Number, default: 0, min: 0 },
+    potdCorrect: { type: Number, default: 0, min: 0 },
+    potdAttempted: { type: Number, default: 0, min: 0 },
+    practiceCorrect: { type: Number, default: 0, min: 0 },
+    practiceAttempted: { type: Number, default: 0, min: 0 },
   },
   { _id: false },
 );
@@ -353,6 +373,10 @@ userSchema.index({ registrationSource: 1 }, { sparse: true });
 userSchema.index({ acquisitionSlug: 1 }, { sparse: true });
 userSchema.index({ "learn.starter.enrolledAt": -1 }, { sparse: true });
 userSchema.index({ "learn.starter.track": 1 }, { sparse: true });
+userSchema.index(
+  { "learn.starter.status": 1, "learn.starter.progress.xp": -1 },
+  { sparse: true },
+);
 
 export const User =
   mongoose.models.User || mongoose.model<IUser>("User", userSchema);

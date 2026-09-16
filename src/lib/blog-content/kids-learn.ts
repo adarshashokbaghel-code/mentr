@@ -411,7 +411,7 @@ export const KIDS_LEARN_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Mentr Learn uses streaks and XP to keep a habit, with leaderboards parent opt-in and off by default for younger kids. If your child misses a day, restart gently — the goal is identity (“I practice thinking like a computer”), not a perfect calendar.",
+            text: "Mentr Learn uses streaks and XP to keep a habit, with a Class 3–5 cohort leaderboard that shows first name and XP only. If your child misses a day, restart gently — the goal is identity (“I practice thinking like a computer”), not a perfect calendar.",
           },
           {
             type: "callout",

@@ -39,6 +39,16 @@ export type LearnEnrollmentDto = {
     xp: number;
     streakDays: number;
     lastActivityAt: string | null;
+    lastCheckInDay?: string | null;
+    streakBonusesClaimed?: number[];
+    weekKey?: string | null;
+    weekStartXp?: number;
+    weekStartVideos?: number;
+    weekStartPotdCorrect?: number;
+    potdCorrect?: number;
+    potdAttempted?: number;
+    practiceCorrect?: number;
+    practiceAttempted?: number;
   };
 };
 

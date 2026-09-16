@@ -369,8 +369,8 @@ export function LmsPotdPage() {
               Problem of the Day
             </h1>
             <p className="mt-1 text-[14px] font-medium text-[#8a929c]">
-              Click any date to open that day&apos;s problem. Green = solved,
-              orange = missed.
+              Today earns XP (green/orange on the calendar). Past days are
+              practice only — no XP, cards stay unchanged.
             </p>
           </div>
 

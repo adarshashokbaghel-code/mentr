@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  refreshLearnEnrollment,
   submitPotdAttempt,
   type PotdTodayDto,
 } from "@/lib/learn-progress-client";
@@ -58,9 +59,13 @@ export function LmsPotdSolve({
         correctIndex: res.correctIndex,
         explanation: res.explanation,
       });
+      if (!res.practiceOnly) {
+        void refreshLearnEnrollment();
+      }
       const next: PotdTodayDto = {
         ...data,
-        attempted: true,
+        attempted: res.practiceOnly ? false : true,
+        practiceOnly: Boolean(res.practiceOnly),
         attempt: {
           selectedIndex: res.selectedIndex,
           correct: res.correct,
@@ -130,7 +135,11 @@ export function LmsPotdSolve({
           <span className="rounded-full bg-[#fff4e8] px-2.5 py-0.5 text-[11px] font-bold capitalize text-[#ff6a1a]">
             {q.difficulty}
           </span>
-          {data.attempted ? (
+          {data.practiceOnly || (!data.isToday && !data.attempted) ? (
+            <span className="rounded-full bg-[#f3f0ea] px-2.5 py-0.5 text-[11px] font-bold text-[#5a6472]">
+              Practice only · no XP
+            </span>
+          ) : data.attempted ? (
             <span
               className={cn(
                 "rounded-full px-2.5 py-0.5 text-[11px] font-bold",
@@ -143,7 +152,7 @@ export function LmsPotdSolve({
             </span>
           ) : (
             <span className="rounded-full bg-[#fff4e8] px-2.5 py-0.5 text-[11px] font-bold text-[#ff6a1a]">
-              Not attempted
+              Today · earns XP
             </span>
           )}
         </div>
@@ -227,6 +236,9 @@ export function LmsPotdSolve({
           )}
         >
           {(result?.correct ?? data.attempt?.correct) ? "Nice! " : "Almost — "}
+          {data.practiceOnly || (!data.isToday && result)
+            ? "Practice only — no XP. "
+            : ""}
           {explanation}
         </p>
       ) : null}

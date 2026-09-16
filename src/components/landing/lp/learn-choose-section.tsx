@@ -74,7 +74,7 @@ const SLIDES = [
     id: "awards",
     tab: "Awards & badges",
     title: "Awards, badges, and a safe kids leaderboard",
-    body: "Kids unlock unit badges, track badges, and the 60/60 certificate as they learn to code. A cohort leaderboard shows first name and avatar only, and it is parent opt-in — off by default — so younger learners are not ranked against older active kids. Rewards stay motivating without public pressure.",
+    body: "Kids unlock unit badges, track badges, and the 60/60 certificate as they learn to code. A live Class 3–5 cohort leaderboard shows first name and XP only, so practice feels rewarding without exposing private details.",
     cta: "Start free",
     href: LEARN_SIGNUP_HREF,
     image: "/learn/learn-offer-quiz.png",

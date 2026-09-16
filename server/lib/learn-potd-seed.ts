@@ -87,6 +87,38 @@ const MATH = [
   { id: "C20", title: "Math Puzzle Capstone" },
 ] as const;
 
+function hashSeed(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+/** Shuffle options so the correct answer is not always A. */
+function withShuffledOptions(
+  seedKey: string,
+  options: string[],
+  correctIndex: number,
+): { options: string[]; correctIndex: number } {
+  const correct = options[correctIndex]!;
+  const next = [...options];
+  let s = hashSeed(seedKey);
+  for (let i = next.length - 1; i > 0; i--) {
+    s = (Math.imul(s, 1664525) + 1013904223) >>> 0;
+    const j = s % (i + 1);
+    [next[i], next[j]] = [next[j]!, next[i]!];
+  }
+  let idx = next.indexOf(correct);
+  if (idx === 0 && next.length > 1) {
+    const j = 1 + (hashSeed(seedKey + ":rot") % (next.length - 1));
+    [next[0], next[j]] = [next[j]!, next[0]!];
+    idx = j;
+  }
+  return { options: next, correctIndex: idx };
+}
+
 function buildForModule(
   dayIndex: number,
   trackId: "cs" | "ai" | "math",
@@ -201,9 +233,17 @@ function buildForModule(
     },
   };
 
-  if (trackId === "cs") return variant % 2 === 0 ? banks.cs0! : banks.cs1!;
-  if (trackId === "ai") return variant % 2 === 0 ? banks.ai0! : banks.ai1!;
-  return variant % 2 === 0 ? banks.math0! : banks.math1!;
+  let row: PotdSeed;
+  if (trackId === "cs") row = variant % 2 === 0 ? banks.cs0! : banks.cs1!;
+  else if (trackId === "ai") row = variant % 2 === 0 ? banks.ai0! : banks.ai1!;
+  else row = variant % 2 === 0 ? banks.math0! : banks.math1!;
+
+  const shuffled = withShuffledOptions(
+    `${row.potdId}:${row.prompt}`,
+    row.options,
+    row.correctIndex,
+  );
+  return { ...row, options: shuffled.options, correctIndex: shuffled.correctIndex };
 }
 
 /** Build exactly 70 POTDs: 24 CS + 23 AI + 23 Math across modules. */

@@ -6,7 +6,9 @@ import {
   AdminTrendChart,
 } from "@/components/admin/admin-ui";
 import {
+  fetchAdminLearnEnrollmentDetail,
   fetchAdminLearnTrack,
+  type AdminLearnEnrollmentDetail,
   type AdminLearnEnrollmentRow,
   type AdminLearnTrackResponse,
 } from "@/lib/admin-api";
@@ -16,10 +18,10 @@ import {
   type EnrollmentReceiptData,
 } from "@/lib/learn-enrollment-receipt";
 import { LEARN_COURSE_MODULES, LEARN_TRACK_LABEL } from "@/lib/learn-enroll";
-import { Download, Lock, Loader2 } from "lucide-react";
+import { Download, Eye, Lock, Loader2, X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
-function formatDate(iso?: string) {
+function formatDate(iso?: string | null) {
   if (!iso) return "—";
   return new Date(iso).toLocaleString("en-IN", {
     day: "numeric",
@@ -60,6 +62,10 @@ function receiptFromRow(row: AdminLearnEnrollmentRow): EnrollmentReceiptData {
   };
 }
 
+function listJoin(ids: string[], empty = "None yet") {
+  return ids.length ? ids.join(", ") : empty;
+}
+
 export function AdminLearnTrack({
   adminKey,
   track,
@@ -73,6 +79,9 @@ export function AdminLearnTrack({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [bulkBusy, setBulkBusy] = useState(false);
+  const [detail, setDetail] = useState<AdminLearnEnrollmentDetail | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
+  const [detailError, setDetailError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -90,6 +99,21 @@ export function AdminLearnTrack({
   useEffect(() => {
     void load();
   }, [load]);
+
+  async function openDetail(userId: string) {
+    setDetailLoading(true);
+    setDetailError(null);
+    setDetail(null);
+    try {
+      setDetail(
+        await fetchAdminLearnEnrollmentDetail(adminKey, track, userId),
+      );
+    } catch (e) {
+      setDetailError(e instanceof Error ? e.message : "Failed to load detail");
+    } finally {
+      setDetailLoading(false);
+    }
+  }
 
   if (loading && !data) {
     return (
@@ -130,8 +154,6 @@ export function AdminLearnTrack({
       </AdminSection>
     );
   }
-
-  const maxTrend = Math.max(...data.trend.map((t) => t.count), 1);
 
   async function downloadAll() {
     if (!data?.enrollments.length) return;
@@ -208,7 +230,8 @@ export function AdminLearnTrack({
             <p className="text-xs font-bold text-ink">Enrolled parents</p>
             <p className="text-[11px] text-muted">
               {data.enrollments.length} registration
-              {data.enrollments.length === 1 ? "" : "s"}
+              {data.enrollments.length === 1 ? "" : "s"} · click View for full
+              progress
             </p>
           </div>
           <button
@@ -226,16 +249,16 @@ export function AdminLearnTrack({
           </button>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[780px] text-left text-xs">
+          <table className="w-full min-w-[980px] text-left text-xs">
             <thead className="bg-cream/80 text-[10px] uppercase tracking-wider text-muted">
               <tr>
                 <th className="px-3 py-2 font-semibold">Name</th>
                 <th className="px-3 py-2 font-semibold">Email</th>
-                <th className="px-3 py-2 font-semibold">Receipt</th>
+                <th className="px-3 py-2 font-semibold">City</th>
                 <th className="px-3 py-2 font-semibold">Enrolled</th>
-                <th className="px-3 py-2 font-semibold">Paid</th>
+                <th className="px-3 py-2 font-semibold">XP / Streak</th>
                 <th className="px-3 py-2 font-semibold">Progress</th>
-                <th className="px-3 py-2 font-semibold">PDF</th>
+                <th className="px-3 py-2 font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -258,37 +281,47 @@ export function AdminLearnTrack({
                       {row.name}
                     </td>
                     <td className="px-3 py-2.5 text-muted">{row.email}</td>
-                    <td className="px-3 py-2.5 font-mono text-[10px] text-ink">
-                      {row.receiptNumber}
+                    <td className="px-3 py-2.5 text-muted">
+                      {row.city || "—"}
                     </td>
                     <td className="px-3 py-2.5 text-muted">
                       {formatDate(row.enrolledAt)}
                     </td>
                     <td className="px-3 py-2.5 tabular-nums text-ink">
-                      ₹{row.totalInr}
-                      <span className="ml-1 text-[10px] text-muted line-through">
-                        ₹999
-                      </span>
+                      {row.progress.xp} XP · {row.progress.streakDays}d
                     </td>
                     <td className="px-3 py-2.5 text-muted">
-                      {row.progress.modulesCompleted} mods · {row.progress.xp}{" "}
-                      XP
+                      {row.progress.videosWatched ?? 0}v ·{" "}
+                      {row.progress.quizzesCompleted ?? 0}q ·{" "}
+                      {row.progress.buildsCompleted ?? 0}b ·{" "}
+                      {row.progress.potdCorrect ?? 0} potd
                       {row.progress.currentModuleId
                         ? ` · ${row.progress.currentModuleId}`
                         : ""}
                     </td>
                     <td className="px-3 py-2.5">
-                      <button
-                        type="button"
-                        onClick={() =>
-                          downloadEnrollmentReceipt(receiptFromRow(row))
-                        }
-                        className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-bold text-coral hover:bg-coral-wash"
-                        title="Download receipt"
-                      >
-                        <Download className="h-3.5 w-3.5" />
-                        PDF
-                      </button>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => void openDetail(row.userId)}
+                          className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-bold text-ink hover:bg-cream"
+                          title="View detail"
+                        >
+                          <Eye className="h-3.5 w-3.5" />
+                          View
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            downloadEnrollmentReceipt(receiptFromRow(row))
+                          }
+                          className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[11px] font-bold text-coral hover:bg-coral-wash"
+                          title="Download receipt"
+                        >
+                          <Download className="h-3.5 w-3.5" />
+                          PDF
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
@@ -297,6 +330,129 @@ export function AdminLearnTrack({
           </table>
         </div>
       </div>
+
+      {(detail || detailLoading || detailError) && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
+          role="presentation"
+          onClick={() => {
+            setDetail(null);
+            setDetailError(null);
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal
+            className="max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-2xl border-2 border-ink bg-white p-5 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-sm font-bold text-ink">Enrollment detail</p>
+                <p className="text-[11px] text-muted">
+                  Videos, quizzes, builds, POTD, practice
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setDetail(null);
+                  setDetailError(null);
+                }}
+                className="rounded-lg p-1.5 text-muted hover:bg-cream"
+                aria-label="Close"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {detailLoading ? (
+              <div className="flex items-center gap-2 py-10 text-sm text-muted">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                Loading…
+              </div>
+            ) : detailError ? (
+              <p className="mt-4 text-sm text-coral">{detailError}</p>
+            ) : detail ? (
+              <div className="mt-4 space-y-3 text-xs">
+                <div className="rounded-xl bg-cream/60 p-3">
+                  <p className="font-bold text-ink">{detail.name}</p>
+                  <p className="text-muted">{detail.email}</p>
+                  <p className="mt-1 text-muted">
+                    {detail.phone || "—"} · {detail.city || "—"} ·{" "}
+                    {detail.country || "—"}
+                  </p>
+                  <p className="mt-1 font-mono text-[10px] text-ink">
+                    {detail.receiptNumber}
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="rounded-lg border border-hairline p-2">
+                    <p className="text-[10px] uppercase text-muted">XP</p>
+                    <p className="text-sm font-bold">{detail.progress.xp}</p>
+                  </div>
+                  <div className="rounded-lg border border-hairline p-2">
+                    <p className="text-[10px] uppercase text-muted">Streak</p>
+                    <p className="text-sm font-bold">
+                      {detail.progress.streakDays}d
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-hairline p-2">
+                    <p className="text-[10px] uppercase text-muted">Last check-in</p>
+                    <p className="text-sm font-bold">
+                      {detail.progress.lastCheckInDay || "—"}
+                    </p>
+                  </div>
+                  <div className="rounded-lg border border-hairline p-2">
+                    <p className="text-[10px] uppercase text-muted">Last activity</p>
+                    <p className="text-sm font-bold">
+                      {formatDate(detail.progress.lastActivityAt)}
+                    </p>
+                  </div>
+                </div>
+                <p>
+                  <span className="font-bold text-ink">Videos: </span>
+                  {listJoin(detail.progress.videosWatched)}
+                </p>
+                <p>
+                  <span className="font-bold text-ink">Quizzes: </span>
+                  {listJoin(detail.progress.quizzesCompleted)}
+                </p>
+                <p>
+                  <span className="font-bold text-ink">Modules done: </span>
+                  {listJoin(detail.progress.modulesCompleted)}
+                </p>
+                <p>
+                  <span className="font-bold text-ink">Builds: </span>
+                  {listJoin(detail.progress.buildsCompleted)}
+                </p>
+                <p>
+                  <span className="font-bold text-ink">POTD: </span>
+                  {detail.progress.potdCorrect} correct /{" "}
+                  {detail.progress.potdAttempted} attempted
+                </p>
+                <p>
+                  <span className="font-bold text-ink">Practice: </span>
+                  {detail.progress.practiceCorrect} correct /{" "}
+                  {detail.progress.practiceAttempted} attempted
+                </p>
+                {detail.recentPotd.length > 0 ? (
+                  <div>
+                    <p className="font-bold text-ink">Recent POTD</p>
+                    <ul className="mt-1 max-h-32 space-y-1 overflow-y-auto">
+                      {detail.recentPotd.map((p) => (
+                        <li key={p.dateKey} className="text-muted">
+                          {p.dateKey}: {p.correct ? "✓" : "✗"}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )}
     </AdminSection>
   );
 }

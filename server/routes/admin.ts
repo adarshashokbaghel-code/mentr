@@ -23,7 +23,10 @@ import {
 } from "../services/marketing-links";
 import { getAdminStats } from "../services/admin-stats";
 import { deleteAdminUser } from "../services/admin-delete-user";
-import { getAdminLearnTrack } from "../services/admin-learn";
+import {
+  getAdminLearnEnrollmentDetail,
+  getAdminLearnTrack,
+} from "../services/admin-learn";
 import {
   LEARN_TRACKS,
   type LearnTrackId,
@@ -200,6 +203,25 @@ router.get("/learn/:track", async (req, res) => {
   } catch (err) {
     console.error("Admin learn track error:", err);
     res.status(500).json({ error: "Failed to load Learn enrollments" });
+  }
+});
+
+router.get("/learn/:track/user/:userId", async (req, res) => {
+  try {
+    const track = String(req.params.track || "") as LearnTrackId;
+    const userId = String(req.params.userId || "");
+    if (!LEARN_TRACKS.includes(track) || !userId) {
+      res.status(400).json({ error: "Invalid track or user" });
+      return;
+    }
+    const data = await getAdminLearnEnrollmentDetail(track, userId);
+    res.json(data);
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Admin learn detail error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load detail",
+    });
   }
 });
 

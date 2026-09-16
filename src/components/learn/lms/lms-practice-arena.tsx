@@ -12,6 +12,7 @@ import {
   type PracticeQuestionType,
 } from "@/lib/learn-practice-bank";
 import {
+  fetchPracticeAnswers,
   readPracticeAnswers,
   type PracticeAnswerMap,
 } from "@/lib/learn-practice-client";
@@ -55,6 +56,11 @@ export function LmsPracticeArena() {
 
   useEffect(() => {
     setAnswers(readPracticeAnswers());
+    void fetchPracticeAnswers()
+      .then(setAnswers)
+      .catch(() => {
+        /* keep local cache */
+      });
   }, []);
 
   const counts = useMemo(() => practiceTrackCounts(), []);
@@ -96,7 +102,7 @@ export function LmsPracticeArena() {
           </h1>
           <p className="mt-1 max-w-xl text-[14px] font-medium text-[#8a929c]">
             {PRACTICE_BANK_TOTAL} questions from the full CS · AI · Math syllabus.
-            Tap a card to solve — next and back slide through the set.
+            One try per question forever — correct answers earn XP.
           </p>
         </div>
 

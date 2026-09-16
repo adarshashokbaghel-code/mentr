@@ -6,6 +6,7 @@ import {
 import { User, type ILearnEnrollment, type IUser } from "../models/User";
 
 export function serializeLearnEnrollment(enroll: ILearnEnrollment) {
+  const p = enroll.progress || emptyLearnProgress();
   return {
     courseId: enroll.courseId,
     courseName: enroll.courseName,
@@ -25,15 +26,25 @@ export function serializeLearnEnrollment(enroll: ILearnEnrollment) {
       paymentMethod: enroll.purchase.paymentMethod,
     },
     progress: {
-      modulesCompleted: enroll.progress?.modulesCompleted ?? [],
-      videosWatched: enroll.progress?.videosWatched ?? [],
-      quizzesCompleted: enroll.progress?.quizzesCompleted ?? [],
-      buildsCompleted: enroll.progress?.buildsCompleted ?? [],
-      buildsFirstTry: enroll.progress?.buildsFirstTry ?? [],
-      currentModuleId: enroll.progress?.currentModuleId ?? "A1",
-      xp: enroll.progress?.xp ?? 0,
-      streakDays: enroll.progress?.streakDays ?? 0,
-      lastActivityAt: enroll.progress?.lastActivityAt ?? null,
+      modulesCompleted: p.modulesCompleted ?? [],
+      videosWatched: p.videosWatched ?? [],
+      quizzesCompleted: p.quizzesCompleted ?? [],
+      buildsCompleted: p.buildsCompleted ?? [],
+      buildsFirstTry: p.buildsFirstTry ?? [],
+      currentModuleId: p.currentModuleId ?? "A1",
+      xp: p.xp ?? 0,
+      streakDays: p.streakDays ?? 0,
+      lastActivityAt: p.lastActivityAt ?? null,
+      lastCheckInDay: p.lastCheckInDay ?? null,
+      streakBonusesClaimed: p.streakBonusesClaimed ?? [],
+      weekKey: p.weekKey ?? null,
+      weekStartXp: p.weekStartXp ?? 0,
+      weekStartVideos: p.weekStartVideos ?? 0,
+      weekStartPotdCorrect: p.weekStartPotdCorrect ?? 0,
+      potdCorrect: p.potdCorrect ?? 0,
+      potdAttempted: p.potdAttempted ?? 0,
+      practiceCorrect: p.practiceCorrect ?? 0,
+      practiceAttempted: p.practiceAttempted ?? 0,
     },
   };
 }
@@ -118,4 +129,31 @@ export async function getParentStarterEnrollment(userId: string) {
   }
   if (!user.learn?.starter) return null;
   return serializeLearnEnrollment(user.learn.starter);
+}
+
+/** Load parent user + mutate starter progress, then save once. */
+export async function withStarterProgress(
+  userId: string,
+  mutator: (progress: ReturnType<typeof import("../lib/learn-progress-helpers").ensureProgressShape>) => void | Promise<void>,
+) {
+  const { ensureProgressShape } = await import("../lib/learn-progress-helpers");
+  const user = await User.findById(userId);
+  if (!user) {
+    throw Object.assign(new Error("User not found"), { status: 404 });
+  }
+  if (!user.learn?.starter) {
+    throw Object.assign(new Error("Enroll in Mentr Learn first"), {
+      status: 403,
+    });
+  }
+  const progress = ensureProgressShape(user.learn.starter.progress);
+  await mutator(progress);
+  user.learn.starter.progress = progress;
+  user.markModified("learn");
+  await user.save();
+  return {
+    user,
+    enrollment: serializeLearnEnrollment(user.learn.starter),
+    progress,
+  };
 }
