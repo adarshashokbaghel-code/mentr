@@ -1,5 +1,6 @@
 "use client";
 
+import { LEARN_BADGES } from "@/components/learn/lms/lms-cohort-board";
 import { LmsPointsTeaser } from "@/components/learn/lms/lms-points-guide";
 import { LearnDino } from "@/components/landing/lp/learn-dino";
 import { useLmsPotd } from "@/components/learn/lms/lms-potd-context";
@@ -32,13 +33,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const UP_NEXT = ["A2", "A3", "A4"] as const;
-
-const BADGES = [
-  { src: "/learn/icons/learn-badge-spark.png", label: "Spark", earned: true },
-  { src: "/learn/icons/learn-badge-cub.png", label: "Cub", earned: false },
-  { src: "/learn/icons/learn-badge-nova.png", label: "Nova", earned: false },
-  { src: "/learn/icons/learn-badge-ace.png", label: "Ace", earned: false },
-] as const;
 
 export function LmsHome() {
   const { openPotd, today, setToday, refreshToday, noteAttempt } = useLmsPotd();
@@ -220,7 +214,7 @@ export function LmsHome() {
               compact
               onAttempted={(next) => {
                 setToday(next);
-                if (next.attempt) {
+                if (next.isToday && !next.practiceOnly && next.attempt) {
                   noteAttempt(next.dateKey, next.attempt.correct);
                 }
               }}
@@ -280,11 +274,13 @@ export function LmsHome() {
             </Link>
           </div>
           <div className="mt-4 grid grid-cols-4 gap-3">
-            {BADGES.map((b) => (
+            {LEARN_BADGES.slice(0, 4).map((b) => {
+              const earned = xp >= b.xp;
+              return (
               <div
                 key={b.label}
                 className={`flex flex-col items-center gap-1.5 rounded-2xl border px-2 py-3 ${
-                  b.earned
+                  earned
                     ? "border-[#ff6a1a]/40 bg-[#fff4e8]"
                     : "border-[#f0ebe3] bg-[#faf8f4] opacity-55"
                 }`}
@@ -300,13 +296,14 @@ export function LmsHome() {
                   {b.label}
                 </p>
                 <p className="text-[10px] font-bold text-[#8a929c]">
-                  {b.earned ? "Earned" : "Locked"}
+                  {earned ? "Earned" : "Locked"}
                 </p>
               </div>
-            ))}
+              );
+            })}
           </div>
           <p className="mt-3 text-[12px] font-medium text-[#8a929c]">
-            Finish lessons and POTDs to unlock Cub, Nova, and Ace.
+            Earn XP from quizzes, POTD, practice, and daily login to unlock badges.
           </p>
         </section>
       </div>

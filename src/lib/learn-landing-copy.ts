@@ -75,7 +75,7 @@ const baseFaqs = [
   {
     question: "Is the leaderboard safe for kids?",
     answer:
-      "Leaderboards are scoped to your child's cohort, show first name and avatar only, and are parent opt-in — off by default so younger kids aren't discouraged by older active learners.",
+      "The Class 3–5 cohort leaderboard shows first name and XP only — no emails or phone numbers. Every enrolled learner is ranked so kids can see how practice adds up.",
   },
   {
     question: "Can I download the full syllabus?",
@@ -93,11 +93,13 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   global: {
     geo: "global",
     path: "/learn",
-    title: "Free CS, AI & Math for Class 3–5 Kids | Mentr Learn",
+    title: "Free Coding for Kids Class 3–5 (CS, AI & Math) | Mentr Learn",
     metaDescription:
-      "Free Class 3–5 coding foundation — 60-module CS, AI & Math syllabus, narrated lessons, Build Arena, Practice & POTD. ₹0 forever. Parent email enroll.",
+      "Free coding for kids Class 3–5 — CS, AI & Math (60 modules), narrated lessons, Build Arena, Practice & POTD. ₹0 forever. Parent email enroll, no credit card.",
     keywords: [
       "coding for kids",
+      "coding for kids Class 5 free",
+      "free coding for Class 3-5",
       "AI for kids",
       "free computer science class 3",
       "free coding platform for kids India",
@@ -128,11 +130,13 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   india: {
     geo: "india",
     path: "/learn/india",
-    title: "Free Coding for Class 3–5 Kids in India | Mentr Learn",
+    title: "Free Coding for Kids Class 3–5 in India | Mentr Learn",
     metaDescription:
-      "Free coding for Class 3–5 in India — CBSE-friendly CS, AI & Math syllabus (60 modules), narrated lessons, Build Arena & POTD. ₹0 forever. Enroll with parent email.",
+      "Free coding for kids Class 3–5 in India — CBSE-friendly CS, AI & Math (60 modules), narrated lessons, Build Arena & POTD. ₹0 forever. Parent email enroll.",
     keywords: [
       "free coding course for kids India",
+      "coding for kids Class 5 free",
+      "free coding for Class 3-5 India",
       "computer science Class 3-5 India",
       "AI for kids India",
       "coding class 3 India free",

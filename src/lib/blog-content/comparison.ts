@@ -141,7 +141,8 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "UrbanPro alternatives worth trying", href: "/blog/urbanpro-alternatives" },
-      { label: "How tutoring platforms make money", href: "/blog/how-tutoring-platforms-make-money" },
+      { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
+      { label: "Justdial tutor alternatives", href: "/blog/justdial-tutor-alternatives" },
       { label: "Best free tutor platforms in India", href: "/blog/best-free-tutor-platforms-india" },
       { label: "Why tutors should not pay for leads", href: "/blog/tutoring-platform-lead-fees" },
     ],
@@ -435,6 +436,8 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
       { label: "Free vs paid tutor platforms", href: "/blog/free-vs-paid-tutor-platforms-india" },
       { label: "Mentr vs UrbanPro", href: "/blog/mentr-vs-urbanpro" },
       { label: "UrbanPro alternatives", href: "/blog/urbanpro-alternatives" },
+      { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
+      { label: "Find a mentor online in India", href: "/blog/find-mentor-online-india" },
       { label: "How to find a good home tutor", href: "/blog/how-to-find-a-good-home-tutor" },
     ],
   },
@@ -572,9 +575,10 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "Mentr vs UrbanPro", href: "/blog/mentr-vs-urbanpro" },
+      { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
+      { label: "Justdial tutor alternatives", href: "/blog/justdial-tutor-alternatives" },
       { label: "Best free tutor platforms", href: "/blog/best-free-tutor-platforms-india" },
       { label: "How to verify tutor credentials", href: "/blog/how-to-verify-tutor-credentials" },
-      { label: "Tutor safety checklist for parents", href: "/blog/tutor-safety-checklist-parents" },
     ],
   },
 
@@ -721,9 +725,10 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "Mentr vs UrbanPro full comparison", href: "/blog/mentr-vs-urbanpro" },
+      { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
+      { label: "Justdial tutor alternatives", href: "/blog/justdial-tutor-alternatives" },
       { label: "Best free tutor platforms in India", href: "/blog/best-free-tutor-platforms-india" },
-      { label: "Tuition agency commission explained", href: "/blog/tuition-agency-commission-india" },
-      { label: "Tutoring platform lead fees", href: "/blog/tutoring-platform-lead-fees" },
+      { label: "Become a tutor free", href: "/for-faculty" },
     ],
   },
 

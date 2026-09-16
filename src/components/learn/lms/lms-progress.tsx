@@ -3,7 +3,6 @@
 import {
   LmsBadgesPanel,
   LmsCohortLeaderboard,
-  previewYourRank,
 } from "@/components/learn/lms/lms-cohort-board";
 import { LmsPointsGuide } from "@/components/learn/lms/lms-points-guide";
 import { LearnDino } from "@/components/landing/lp/learn-dino";
@@ -12,15 +11,7 @@ import {
   readLearnEnrollmentLocal,
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
-import {
-  fetchPotdMonth,
-} from "@/lib/learn-progress-client";
-import {
-  countAllPotdCorrect,
-  countRecentPotdCorrect,
-  ensureWeekSnap,
-  weekDeltas,
-} from "@/lib/learn-week-stats";
+import { fetchLearnStats } from "@/lib/learn-progress-client";
 import { cn } from "@/lib/utils";
 import {
   ArrowDownRight,
@@ -158,77 +149,66 @@ function RankDeltaChip({ delta }: { delta: number }) {
 export function LmsProgress() {
   const [enrollment, setEnrollment] = useState<LearnEnrollmentDto | null>(null);
   const [period, setPeriod] = useState<Period>("week");
-  const [potdWeek, setPotdWeek] = useState(0);
-  const [potdAll, setPotdAll] = useState(0);
   const [statsKey, setStatsKey] = useState(0);
   const filterId = useId();
+  const [week, setWeek] = useState({ videos: 0, xp: 0, potd: 0, rank: 0 });
+  const [overall, setOverall] = useState({
+    videos: 0,
+    xp: 0,
+    potd: 0,
+    rank: 0,
+    modules: 0,
+    quizzes: 0,
+  });
 
   useEffect(() => {
     setEnrollment(readLearnEnrollmentLocal());
     void fetchLearnEnrollment().then(setEnrollment);
-
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = now.getMonth() + 1;
-    void Promise.all([
-      fetchPotdMonth(y, m),
-      now.getDate() <= 7
-        ? fetchPotdMonth(m === 1 ? y - 1 : y, m === 1 ? 12 : m - 1).catch(
-            () => null,
-          )
-        : Promise.resolve(null),
-    ])
-      .then(([cur, prev]) => {
-        if (!cur) {
-          setPotdWeek(0);
-          setPotdAll(0);
-          return;
-        }
-        const weekDays = prev ? [...prev.days, ...cur.days] : cur.days;
-        setPotdWeek(countRecentPotdCorrect(weekDays, 7));
-        setPotdAll(countAllPotdCorrect(cur.days));
+    void fetchLearnStats()
+      .then((s) => {
+        setWeek({
+          videos: s.week.videos,
+          xp: s.week.xp,
+          potd: s.week.potd,
+          rank: s.week.rank,
+        });
+        setOverall({
+          videos: s.overall.videos,
+          xp: s.overall.xp,
+          potd: s.overall.potdCorrect,
+          rank: s.overall.rank,
+          modules: s.overall.modules,
+          quizzes: s.overall.quizzes,
+        });
       })
       .catch(() => {
-        setPotdWeek(0);
-        setPotdAll(0);
+        /* enrollment fallback below */
       });
   }, []);
 
-  const xp = enrollment?.progress?.xp ?? 0;
-  const done = enrollment?.progress?.modulesCompleted?.length ?? 0;
-  const videos = enrollment?.progress?.videosWatched?.length ?? 0;
-  const quizzes = enrollment?.progress?.quizzesCompleted?.length ?? 0;
-  const rank = previewYourRank(xp);
-
-  const [weekly, setWeekly] = useState({
-    videos: 0,
-    xp: 0,
-    potd: 0,
-    rankDelta: 0,
-    rankNow: rank,
-  });
-
-  useEffect(() => {
-    if (!enrollment) return;
-    const snap = ensureWeekSnap({ videos, xp, rank, potd: potdAll });
-    setWeekly(weekDeltas({ videos, xp, rank, potd: potdAll }, snap));
-  }, [enrollment, videos, xp, rank, potdAll]);
+  const xp = enrollment?.progress?.xp ?? overall.xp;
+  const done =
+    enrollment?.progress?.modulesCompleted?.length ?? overall.modules;
+  const videos =
+    enrollment?.progress?.videosWatched?.length ?? overall.videos;
+  const quizzes =
+    enrollment?.progress?.quizzesCompleted?.length ?? overall.quizzes;
 
   const display =
     period === "week"
       ? {
-          videos: weekly.videos,
-          xp: weekly.xp,
-          potd: potdWeek,
-          rank,
-          rankDelta: weekly.rankDelta,
+          videos: week.videos,
+          xp: week.xp,
+          potd: week.potd,
+          rank: week.rank || overall.rank,
+          rankDelta: 0,
           rankLabel: "Rank this week",
         }
       : {
           videos,
           xp,
-          potd: potdAll,
-          rank,
+          potd: overall.potd,
+          rank: overall.rank,
           rankDelta: 0,
           rankLabel: "Overall rank",
         };
@@ -332,8 +312,7 @@ export function LmsProgress() {
 
       {period === "week" ? (
         <p className="text-[12px] font-medium text-[#8a929c]">
-          Weekly gains since Monday · rank chip shows climbs (+) or drops (−)
-          vs week start.
+          Weekly gains since Monday (IST) · login streak builds XP separately.
         </p>
       ) : null}
 

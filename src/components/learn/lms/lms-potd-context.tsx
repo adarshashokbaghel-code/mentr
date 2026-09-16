@@ -130,8 +130,11 @@ export function LmsPotdProvider({ children }: { children: ReactNode }) {
         onClose={closePotd}
         initialToday={today}
         onSolved={(next) => {
-          noteAttempt(next.dateKey, Boolean(next.attempt?.correct));
-          if (next.isToday) setToday(next);
+          // Only official today attempts paint the calendar / count as solved
+          if (next.isToday && !next.practiceOnly) {
+            noteAttempt(next.dateKey, Boolean(next.attempt?.correct));
+            setToday(next);
+          }
         }}
       />
     </PotdContext.Provider>

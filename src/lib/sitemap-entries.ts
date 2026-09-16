@@ -74,6 +74,9 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/blog", 0.85, "weekly"),
     entry("/llms.txt", 0.4, "monthly"),
     entry("/search", 0.9, "daily"),
+    entry("/login", 0.75, "monthly"),
+    entry("/parent", 0.7, "monthly"),
+    entry("/faculty", 0.7, "monthly"),
     ...BLOG_PILLARS.map((p) =>
       entry(`/blog/category/${p.id}`, 0.75, "weekly"),
     ),

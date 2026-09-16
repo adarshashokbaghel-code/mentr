@@ -23,12 +23,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In What Is a Computer?, what is an important idea?",
     "options": [
-      "A computer is a machine that takes input, processes it, and shows output",
       "Waiting forever without doing anything",
       "A toaster that only heats bread",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A computer is a machine that takes input, processes it, and shows output"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A1: A computer is a machine that takes input, processes it, and shows output"
   },
   {
@@ -51,12 +51,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning What Is a Computer?, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Name the three jobs of a computer: input, process, output",
       "Waiting forever without doing anything",
-      "A toaster that only heats bread",
-      "Turning the device off forever"
+      "A toaster that only heats bread"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of A1 is: Name the three jobs of a computer: input, process, output"
   },
   {
@@ -66,12 +66,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In How Computers Understand Us, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "Computers only understand on and off — like a light switch",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "A bicycle bell that rings once"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A2: Computers only understand on and off — like a light switch"
   },
   {
@@ -81,10 +81,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Computers only understand on and off — like a light switch.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches How Computers Understand Us."
   },
   {
@@ -94,12 +94,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning How Computers Understand Us, what should you be able to do?",
     "options": [
-      "Explain binary as on/off lights",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
+      "A bicycle bell that rings once",
+      "Explain binary as on/off lights",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A2 is: Explain binary as on/off lights"
   },
   {
@@ -109,12 +109,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Input & Output Devices, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "Input devices send information in: keyboard, mouse, mic, camera",
       "Waiting forever without doing anything",
-      "A toaster that only heats bread",
-      "Turning the device off forever"
+      "A toaster that only heats bread"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A3: Input devices send information in: keyboard, mouse, mic, camera"
   },
   {
@@ -137,12 +137,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Input & Output Devices, what should you be able to do?",
     "options": [
-      "Sort common devices into input or output",
       "A bicycle bell that rings once",
+      "Turning the device off forever",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Sort common devices into input or output"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of A3 is: Sort common devices into input or output"
   },
   {
@@ -152,12 +152,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In How Websites Talk to Each Other, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "The internet is many computers asking and answering",
       "Waiting forever without doing anything",
-      "A toaster that only heats bread",
-      "Turning the device off forever"
+      "A toaster that only heats bread"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A4: The internet is many computers asking and answering"
   },
   {
@@ -180,12 +180,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning How Websites Talk to Each Other, what should you be able to do?",
     "options": [
-      "Describe the internet as a network, not a single box",
       "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Describe the internet as a network, not a single box"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of A4 is: Describe the internet as a network, not a single box"
   },
   {
@@ -195,12 +195,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Being Safe Online, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "Never share full name + school + home together with strangers",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "A bicycle bell that rings once"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A5: Never share full name + school + home together with strangers"
   },
   {
@@ -210,10 +210,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Never share full name + school + home together with strangers.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Being Safe Online."
   },
   {
@@ -223,12 +223,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Being Safe Online, what should you be able to do?",
     "options": [
-      "List three things never to post publicly",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
+      "A bicycle bell that rings once",
+      "List three things never to post publicly",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A5 is: List three things never to post publicly"
   },
   {
@@ -238,12 +238,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In What Is an Algorithm?, what is an important idea?",
     "options": [
-      "An algorithm is a clear list of steps — like a recipe or getting ready for school",
       "Waiting forever without doing anything",
       "A toaster that only heats bread",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "An algorithm is a clear list of steps — like a recipe or getting ready for school"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A6: An algorithm is a clear list of steps — like a recipe or getting ready for school"
   },
   {
@@ -266,12 +266,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning What Is an Algorithm?, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Write a 4–6 step algorithm for a daily task",
       "A bicycle bell that rings once",
-      "Magic that needs no steps",
-      "Turning the device off forever"
+      "Magic that needs no steps"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of A6 is: Write a 4–6 step algorithm for a daily task"
   },
   {
@@ -281,12 +281,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Sequencing, what is an important idea?",
     "options": [
-      "Order matters: socks before shoes, unlock before open",
-      "Only drawing pictures forever",
       "Throwing the device away",
+      "Only drawing pictures forever",
+      "Order matters: socks before shoes, unlock before open",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From A7: Order matters: socks before shoes, unlock before open"
   },
   {
@@ -309,12 +309,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Sequencing, what should you be able to do?",
     "options": [
-      "Reorder a scrambled everyday algorithm",
       "Only drawing pictures forever",
-      "Throwing the device away",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Reorder a scrambled everyday algorithm",
+      "Throwing the device away"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A7 is: Reorder a scrambled everyday algorithm"
   },
   {
@@ -324,12 +324,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Loops — Doing It Again and Again, what is an important idea?",
     "options": [
-      "A loop means ‘do this again’ — clap 5 times, not clap clap clap clap clap written out",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "A loop means ‘do this again’ — clap 5 times, not clap clap clap clap clap written out",
+      "Turning the device off forever",
+      "A bicycle bell that rings once"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A8: A loop means ‘do this again’ — clap 5 times, not clap clap clap clap clap written out"
   },
   {
@@ -339,10 +339,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A loop means ‘do this again’ — clap 5 times, not clap clap clap clap clap written out.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Loops — Doing It Again and Again."
   },
   {
@@ -352,12 +352,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Loops — Doing It Again and Again, what should you be able to do?",
     "options": [
-      "Replace a repeated list with a ‘repeat N times’ loop",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
+      "A bicycle bell that rings once",
+      "Replace a repeated list with a ‘repeat N times’ loop",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A8 is: Replace a repeated list with a ‘repeat N times’ loop"
   },
   {
@@ -367,12 +367,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In If This, Then That, what is an important idea?",
     "options": [
-      "If this, then that: if it rains, take an umbrella",
       "A bicycle bell that rings once",
-      "Magic that needs no steps",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "If this, then that: if it rains, take an umbrella",
+      "Magic that needs no steps"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From A9: If this, then that: if it rains, take an umbrella"
   },
   {
@@ -395,12 +395,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning If This, Then That, what should you be able to do?",
     "options": [
-      "Write an if/then rule for a simple story",
       "A bicycle bell that rings once",
+      "Turning the device off forever",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Write an if/then rule for a simple story"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of A9 is: Write an if/then rule for a simple story"
   },
   {
@@ -410,12 +410,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Debugging — Finding the Mistake, what is an important idea?",
     "options": [
-      "A bug is a mistake in the steps, not a ‘naughty’ computer",
-      "Waiting forever without doing anything",
       "A toaster that only heats bread",
+      "Waiting forever without doing anything",
+      "A bug is a mistake in the steps, not a ‘naughty’ computer",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From A10: A bug is a mistake in the steps, not a ‘naughty’ computer"
   },
   {
@@ -425,10 +425,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A bug is a mistake in the steps, not a ‘naughty’ computer.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Debugging — Finding the Mistake."
   },
   {
@@ -438,12 +438,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Debugging — Finding the Mistake, what should you be able to do?",
     "options": [
-      "Find one wrong or missing step in a short algorithm",
       "Waiting forever without doing anything",
+      "Turning the device off forever",
       "A toaster that only heats bread",
-      "Turning the device off forever"
+      "Find one wrong or missing step in a short algorithm"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of A10 is: Find one wrong or missing step in a short algorithm"
   },
   {
@@ -453,12 +453,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Meet Block Coding, what is an important idea?",
     "options": [
-      "Block coding: snap puzzle pieces instead of typing",
       "Only drawing pictures forever",
       "Throwing the device away",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Block coding: snap puzzle pieces instead of typing"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A11: Block coding: snap puzzle pieces instead of typing"
   },
   {
@@ -468,10 +468,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Block coding: snap puzzle pieces instead of typing.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Meet Block Coding."
   },
   {
@@ -481,12 +481,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Meet Block Coding, what should you be able to do?",
     "options": [
-      "Name block coding as visual, not typing-first",
-      "Waiting forever without doing anything",
       "A toaster that only heats bread",
+      "Waiting forever without doing anything",
+      "Name block coding as visual, not typing-first",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A11 is: Name block coding as visual, not typing-first"
   },
   {
@@ -496,12 +496,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Making a Character Move, what is an important idea?",
     "options": [
-      "Event (when flag clicked) + motion (move, turn)",
       "Only drawing pictures forever",
+      "Turning the device off forever",
       "Throwing the device away",
-      "Turning the device off forever"
+      "Event (when flag clicked) + motion (move, turn)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A12: Event (when flag clicked) + motion (move, turn)"
   },
   {
@@ -524,12 +524,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Making a Character Move, what should you be able to do?",
     "options": [
-      "Sequence start + move + turn for a short path",
       "Waiting forever without doing anything",
-      "A toaster that only heats bread",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Sequence start + move + turn for a short path",
+      "A toaster that only heats bread"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A12 is: Sequence start + move + turn for a short path"
   },
   {
@@ -539,12 +539,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Variables — Boxes That Store Things, what is an important idea?",
     "options": [
-      "A variable is a named box that holds a number or word (score, lives, name)",
-      "Only drawing pictures forever",
       "Throwing the device away",
+      "Only drawing pictures forever",
+      "A variable is a named box that holds a number or word (score, lives, name)",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From A13: A variable is a named box that holds a number or word (score, lives, name)"
   },
   {
@@ -554,10 +554,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A variable is a named box that holds a number or word (score, lives, name).",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Variables — Boxes That Store Things."
   },
   {
@@ -567,12 +567,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Variables — Boxes That Store Things, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Give a real example of a variable in a game",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "A bicycle bell that rings once"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of A13 is: Give a real example of a variable in a game"
   },
   {
@@ -582,12 +582,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Making Choices in Code, what is an important idea?",
     "options": [
-      "If/else in blocks: if touching wall, bounce; else keep walking",
-      "Only drawing pictures forever",
       "Throwing the device away",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "If/else in blocks: if touching wall, bounce; else keep walking",
+      "Only drawing pictures forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From A14: If/else in blocks: if touching wall, bounce; else keep walking"
   },
   {
@@ -597,10 +597,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "If/else in blocks: if touching wall, bounce; else keep walking.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Making Choices in Code."
   },
   {
@@ -610,12 +610,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Making Choices in Code, what should you be able to do?",
     "options": [
-      "Read a simple if-block and say what the character does",
       "Waiting forever without doing anything",
       "A toaster that only heats bread",
+      "Read a simple if-block and say what the character does",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A14 is: Read a simple if-block and say what the character does"
   },
   {
@@ -625,12 +625,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In My First Mini Program, what is an important idea?",
     "options": [
-      "Guided mini-project: a 5–8 block animation or joke",
       "Only drawing pictures forever",
-      "Throwing the device away",
-      "Turning the device off forever"
+      "Guided mini-project: a 5–8 block animation or joke",
+      "Turning the device off forever",
+      "Throwing the device away"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A15: Guided mini-project: a 5–8 block animation or joke"
   },
   {
@@ -653,12 +653,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning My First Mini Program, what should you be able to do?",
     "options": [
-      "Finish a tiny block program with help",
       "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Finish a tiny block program with help"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of A15 is: Finish a tiny block program with help"
   },
   {
@@ -668,12 +668,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Jobs That Use Computers, what is an important idea?",
     "options": [
-      "People who make games, apps, animations, and robots all use computers",
-      "Waiting forever without doing anything",
+      "Turning the device off forever",
       "A toaster that only heats bread",
-      "Turning the device off forever"
+      "Waiting forever without doing anything",
+      "People who make games, apps, animations, and robots all use computers"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A16: People who make games, apps, animations, and robots all use computers"
   },
   {
@@ -683,10 +683,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "People who make games, apps, animations, and robots all use computers.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Jobs That Use Computers."
   },
   {
@@ -696,12 +696,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Jobs That Use Computers, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Name two computer-using jobs",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "A bicycle bell that rings once"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of A16 is: Name two computer-using jobs"
   },
   {
@@ -711,12 +711,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In How Apps We Use Actually Work, what is an important idea?",
     "options": [
-      "A maps app: you type a place (input), it finds a path (process), it draws the route (ou…",
       "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A maps app: you type a place (input), it finds a path (process), it draws the route (ou…"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A17: A maps app: you type a place (input), it finds a path (process), it draws the route (output)"
   },
   {
@@ -726,10 +726,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A maps app: you type a place (input), it finds a path (process), it draws the route (output).",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches How Apps We Use Actually Work."
   },
   {
@@ -739,12 +739,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning How Apps We Use Actually Work, what should you be able to do?",
     "options": [
-      "Map a favourite app to input–process–output",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
+      "A bicycle bell that rings once",
+      "Map a favourite app to input–process–output",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of A17 is: Map a favourite app to input–process–output"
   },
   {
@@ -754,12 +754,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Robots & Automation, what is an important idea?",
     "options": [
-      "A robot follows algorithms — it doesn’t ‘feel’",
       "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A robot follows algorithms — it doesn’t ‘feel’"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A18: A robot follows algorithms — it doesn’t ‘feel’"
   },
   {
@@ -782,12 +782,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Robots & Automation, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Give one thing a robot can do well and one it cannot (yet)",
       "A bicycle bell that rings once",
-      "Magic that needs no steps",
-      "Turning the device off forever"
+      "Magic that needs no steps"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of A18 is: Give one thing a robot can do well and one it cannot (yet)"
   },
   {
@@ -797,12 +797,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Data — What Computers Remember, what is an important idea?",
     "options": [
-      "Data is facts the computer stores: names, scores, photos",
-      "Only drawing pictures forever",
+      "Turning the device off forever",
       "Throwing the device away",
-      "Turning the device off forever"
+      "Only drawing pictures forever",
+      "Data is facts the computer stores: names, scores, photos"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From A19: Data is facts the computer stores: names, scores, photos"
   },
   {
@@ -812,10 +812,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Data is facts the computer stores: names, scores, photos.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Data — What Computers Remember."
   },
   {
@@ -825,12 +825,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Data — What Computers Remember, what should you be able to do?",
     "options": [
-      "Give two examples of data a school computer might store",
       "A bicycle bell that rings once",
+      "Turning the device off forever",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Give two examples of data a school computer might store"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of A19 is: Give two examples of data a school computer might store"
   },
   {
@@ -840,12 +840,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Capstone: Design Your Dream App, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "Capstone: invent an app that helps a Class 3–5 child",
       "A bicycle bell that rings once",
-      "Magic that needs no steps",
-      "Turning the device off forever"
+      "Magic that needs no steps"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From A20: Capstone: invent an app that helps a Class 3–5 child"
   },
   {
@@ -868,12 +868,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Capstone: Design Your Dream App, what should you be able to do?",
     "options": [
-      "Describe an app idea with user, input, and output",
       "A bicycle bell that rings once",
+      "Describe an app idea with user, input, and output",
       "Magic that needs no steps",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of A20 is: Describe an app idea with user, input, and output"
   },
   {
@@ -883,10 +883,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Computers never use ideas from “A1” at all.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "False — A1 ideas matter in this track."
   },
   {
@@ -896,12 +896,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits How Computers Understand Us best?",
     "options": [
-      "On = 1, off = 0; a group of switches can count and spell",
-      "Only drawing pictures forever",
       "Throwing the device away",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "On = 1, off = 0; a group of switches can count and spell",
+      "Only drawing pictures forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Practice focus: Match 0/1 to off/on; read a 3-switch pattern"
   },
   {
@@ -911,12 +911,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Input & Output Devices best?",
     "options": [
-      "Output devices send information out: screen, speaker, printer",
-      "A bicycle bell that rings once",
       "Magic that needs no steps",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A bicycle bell that rings once",
+      "Output devices send information out: screen, speaker, printer"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Practice focus: Match device → job; drag keyboard/mouse/screen/speaker into the right box"
   },
   {
@@ -939,12 +939,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Being Safe Online best?",
     "options": [
-      "Passwords are secrets — even from friends",
       "Only drawing pictures forever",
-      "Throwing the device away",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Passwords are secrets — even from friends",
+      "Throwing the device away"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Practice focus: Safe vs unsafe posts; pick a strong vs weak password pair (no real passwords)"
   },
   {
@@ -954,12 +954,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits What Is an Algorithm? best?",
     "options": [
-      "Steps must be in an order a machine (or a friend) can follow",
-      "Waiting forever without doing anything",
       "A toaster that only heats bread",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Steps must be in an order a machine (or a friend) can follow",
+      "Waiting forever without doing anything"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Practice focus: Put sandwich / brush-teeth steps in order; find the missing step"
   },
   {
@@ -969,10 +969,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Computers never use ideas from “A7” at all.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "False — A7 ideas matter in this track."
   },
   {
@@ -982,12 +982,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Meet AI — Magic or Math?, what is an important idea?",
     "options": [
-      "AI is not magic — it finds patterns in lots of examples",
-      "A rock that never learns",
       "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A rock that never learns",
+      "AI is not magic — it finds patterns in lots of examples"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B1: AI is not magic — it finds patterns in lots of examples"
   },
   {
@@ -1010,12 +1010,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Meet AI — Magic or Math?, what should you be able to do?",
     "options": [
-      "Say AI uses patterns, not spells",
       "Ignoring every example you give it",
-      "Magic with no patterns",
-      "Turning the device off forever"
+      "Say AI uses patterns, not spells",
+      "Turning the device off forever",
+      "Magic with no patterns"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of B1 is: Say AI uses patterns, not spells"
   },
   {
@@ -1025,12 +1025,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Smart vs. Simple, what is an important idea?",
     "options": [
-      "Simple programs follow fixed rules: if button pressed, play sound",
-      "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Simple programs follow fixed rules: if button pressed, play sound",
+      "Ignoring every example you give it"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B2: Simple programs follow fixed rules: if button pressed, play sound"
   },
   {
@@ -1040,10 +1040,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Simple programs follow fixed rules: if button pressed, play sound.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Smart vs. Simple."
   },
   {
@@ -1053,12 +1053,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Smart vs. Simple, what should you be able to do?",
     "options": [
-      "Sort ‘fixed rule’ vs ‘learns from examples’",
       "A rock that never learns",
       "A broken calculator stuck on zero",
+      "Sort ‘fixed rule’ vs ‘learns from examples’",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B2 is: Sort ‘fixed rule’ vs ‘learns from examples’"
   },
   {
@@ -1068,12 +1068,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Where AI Hides in Daily Life, what is an important idea?",
     "options": [
-      "AI at home: voice helpers, photo search, video suggestions, maps traffic",
       "Only paper and pencils",
-      "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "AI at home: voice helpers, photo search, video suggestions, maps traffic",
+      "Turning the device off forever",
+      "AI is always perfect and never wrong"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From B3: AI at home: voice helpers, photo search, video suggestions, maps traffic"
   },
   {
@@ -1096,12 +1096,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Where AI Hides in Daily Life, what should you be able to do?",
     "options": [
-      "Point to two everyday AI helpers",
-      "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Ignoring every example you give it",
+      "Point to two everyday AI helpers"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B3 is: Point to two everyday AI helpers"
   },
   {
@@ -1111,12 +1111,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In AI Can Be Wrong Too, what is an important idea?",
     "options": [
-      "AI can be wrong: a dog photo labelled as a muffin",
       "A rock that never learns",
-      "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "AI can be wrong: a dog photo labelled as a muffin",
+      "Turning the device off forever",
+      "A broken calculator stuck on zero"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From B4: AI can be wrong: a dog photo labelled as a muffin"
   },
   {
@@ -1139,12 +1139,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning AI Can Be Wrong Too, what should you be able to do?",
     "options": [
-      "Give one way AI can make a mistake",
-      "A rock that never learns",
       "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A rock that never learns",
+      "Give one way AI can make a mistake"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B4 is: Give one way AI can make a mistake"
   },
   {
@@ -1154,12 +1154,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In AI Helpers Around the World, what is an important idea?",
     "options": [
-      "Translation, maps, and captions help people across languages",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Translation, maps, and captions help people across languages",
+      "Only paper and pencils"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B5: Translation, maps, and captions help people across languages"
   },
   {
@@ -1169,10 +1169,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Translation, maps, and captions help people across languages.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches AI Helpers Around the World."
   },
   {
@@ -1182,12 +1182,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning AI Helpers Around the World, what should you be able to do?",
     "options": [
-      "Name one AI helper used for language or travel",
-      "A rock that never learns",
       "A broken calculator stuck on zero",
+      "A rock that never learns",
+      "Name one AI helper used for language or travel",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B5 is: Name one AI helper used for language or travel"
   },
   {
@@ -1197,12 +1197,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Teaching a Computer Like Teaching a Puppy, what is an important idea?",
     "options": [
-      "We teach AI like a puppy: many examples, praise for right, more practice",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Only paper and pencils",
+      "We teach AI like a puppy: many examples, praise for right, more practice"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B6: We teach AI like a puppy: many examples, praise for right, more practice"
   },
   {
@@ -1225,12 +1225,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Teaching a Computer Like Teaching a Puppy, what should you be able to do?",
     "options": [
-      "Explain training as ‘lots of examples’",
       "Ignoring every example you give it",
-      "Magic with no patterns",
-      "Turning the device off forever"
+      "Explain training as ‘lots of examples’",
+      "Turning the device off forever",
+      "Magic with no patterns"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of B6 is: Explain training as ‘lots of examples’"
   },
   {
@@ -1240,12 +1240,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Patterns Everywhere, what is an important idea?",
     "options": [
+      "Magic with no patterns",
       "Patterns: same colour, same shape, same beat",
       "Ignoring every example you give it",
-      "Magic with no patterns",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From B7: Patterns: same colour, same shape, same beat"
   },
   {
@@ -1268,12 +1268,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Patterns Everywhere, what should you be able to do?",
     "options": [
-      "Find a pattern in a short sequence",
       "A rock that never learns",
-      "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Find a pattern in a short sequence",
+      "A broken calculator stuck on zero"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B7 is: Find a pattern in a short sequence"
   },
   {
@@ -1283,12 +1283,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Show and Tell — Learning From Examples, what is an important idea?",
     "options": [
-      "A label is a name we stick on an example: this is ‘apple’",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A label is a name we stick on an example: this is ‘apple’",
+      "Only paper and pencils"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B8: A label is a name we stick on an example: this is ‘apple’"
   },
   {
@@ -1298,10 +1298,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A label is a name we stick on an example: this is ‘apple’.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Show and Tell — Learning From Examples."
   },
   {
@@ -1311,12 +1311,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Show and Tell — Learning From Examples, what should you be able to do?",
     "options": [
-      "Explain what a label is",
       "Ignoring every example you give it",
+      "Explain what a label is",
       "Magic with no patterns",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of B8 is: Explain what a label is"
   },
   {
@@ -1326,12 +1326,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Data — The Food AI Eats, what is an important idea?",
     "options": [
-      "Data is the food AI eats: pictures, words, sounds",
       "A rock that never learns",
-      "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Data is the food AI eats: pictures, words, sounds",
+      "A broken calculator stuck on zero"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B9: Data is the food AI eats: pictures, words, sounds"
   },
   {
@@ -1354,12 +1354,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Data — The Food AI Eats, what should you be able to do?",
     "options": [
-      "Give two kinds of data AI might use",
-      "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Ignoring every example you give it",
+      "Give two kinds of data AI might use"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B9 is: Give two kinds of data AI might use"
   },
   {
@@ -1369,12 +1369,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Practice Makes Perfect, what is an important idea?",
     "options": [
-      "Practice improves guesses — first tries are wobbly",
+      "Turning the device off forever",
       "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Practice improves guesses — first tries are wobbly"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B10: Practice improves guesses — first tries are wobbly"
   },
   {
@@ -1384,10 +1384,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Practice improves guesses — first tries are wobbly.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Practice Makes Perfect."
   },
   {
@@ -1397,12 +1397,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Practice Makes Perfect, what should you be able to do?",
     "options": [
-      "Say why we test with new examples",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Only paper and pencils",
+      "Say why we test with new examples"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B10 is: Say why we test with new examples"
   },
   {
@@ -1412,12 +1412,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Can Computers See?, what is an important idea?",
     "options": [
-      "Seeing for a computer = matching patterns in pixels, not ‘eyeballs’",
-      "A rock that never learns",
+      "Turning the device off forever",
       "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Seeing for a computer = matching patterns in pixels, not ‘eyeballs’",
+      "A rock that never learns"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B11: Seeing for a computer = matching patterns in pixels, not ‘eyeballs’"
   },
   {
@@ -1427,10 +1427,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Seeing for a computer = matching patterns in pixels, not ‘eyeballs’.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Can Computers See?."
   },
   {
@@ -1440,12 +1440,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Can Computers See?, what should you be able to do?",
     "options": [
-      "Describe computer vision as pattern-matching in pictures",
+      "Turning the device off forever",
       "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Describe computer vision as pattern-matching in pictures"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B11 is: Describe computer vision as pattern-matching in pictures"
   },
   {
@@ -1455,12 +1455,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Can Computers Listen?, what is an important idea?",
     "options": [
-      "Listening = turning sound into words, then matching patterns",
       "Only paper and pencils",
+      "Turning the device off forever",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Listening = turning sound into words, then matching patterns"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B12: Listening = turning sound into words, then matching patterns"
   },
   {
@@ -1483,12 +1483,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Can Computers Listen?, what should you be able to do?",
     "options": [
-      "Explain voice assistants at kid level",
       "A rock that never learns",
-      "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Explain voice assistants at kid level",
+      "A broken calculator stuck on zero"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B12 is: Explain voice assistants at kid level"
   },
   {
@@ -1498,12 +1498,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Chatting With Computers, what is an important idea?",
     "options": [
-      "A chatbot picks a reply from patterns in your words",
+      "Turning the device off forever",
       "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "A chatbot picks a reply from patterns in your words"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B13: A chatbot picks a reply from patterns in your words"
   },
   {
@@ -1513,10 +1513,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A chatbot picks a reply from patterns in your words.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Chatting With Computers."
   },
   {
@@ -1526,12 +1526,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Chatting With Computers, what should you be able to do?",
     "options": [
-      "Say a chatbot predicts replies; it doesn’t have feelings",
-      "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Say a chatbot predicts replies; it doesn’t have feelings",
+      "Turning the device off forever",
+      "Ignoring every example you give it"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of B13 is: Say a chatbot predicts replies; it doesn’t have feelings"
   },
   {
@@ -1541,12 +1541,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Faces, Filters, and Fun, what is an important idea?",
     "options": [
-      "Filters find a face, then stick ears or glasses on points",
       "Only paper and pencils",
+      "Turning the device off forever",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Filters find a face, then stick ears or glasses on points"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B14: Filters find a face, then stick ears or glasses on points"
   },
   {
@@ -1556,10 +1556,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Filters find a face, then stick ears or glasses on points.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Faces, Filters, and Fun."
   },
   {
@@ -1569,12 +1569,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Faces, Filters, and Fun, what should you be able to do?",
     "options": [
-      "Describe a filter as ‘find face + draw on top’",
-      "A rock that never learns",
       "A broken calculator stuck on zero",
+      "A rock that never learns",
+      "Describe a filter as ‘find face + draw on top’",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B14 is: Describe a filter as ‘find face + draw on top’"
   },
   {
@@ -1584,12 +1584,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In AI in Games, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "Game characters follow rules: if player is near, chase; else patrol",
       "A rock that never learns",
-      "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "A broken calculator stuck on zero"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From B15: Game characters follow rules: if player is near, chase; else patrol"
   },
   {
@@ -1612,12 +1612,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning AI in Games, what should you be able to do?",
     "options": [
-      "Write two if/then rules for a game character",
       "Ignoring every example you give it",
       "Magic with no patterns",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Write two if/then rules for a game character"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B15 is: Write two if/then rules for a game character"
   },
   {
@@ -1627,12 +1627,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Is AI Fair?, what is an important idea?",
     "options": [
-      "If AI only sees one kind of example, it treats others unfairly",
-      "Ignoring every example you give it",
       "Magic with no patterns",
+      "Ignoring every example you give it",
+      "If AI only sees one kind of example, it treats others unfairly",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B16: If AI only sees one kind of example, it treats others unfairly"
   },
   {
@@ -1642,10 +1642,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "If AI only sees one kind of example, it treats others unfairly.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Is AI Fair?."
   },
   {
@@ -1655,12 +1655,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Is AI Fair?, what should you be able to do?",
     "options": [
-      "Explain unfair AI as ‘not enough kinds of examples’",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Explain unfair AI as ‘not enough kinds of examples’",
+      "Only paper and pencils"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B16 is: Explain unfair AI as ‘not enough kinds of examples’"
   },
   {
@@ -1670,12 +1670,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In AI and Privacy, what is an important idea?",
     "options": [
-      "Privacy: AI doesn’t need your full life story to help with homework",
       "A rock that never learns",
       "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Privacy: AI doesn’t need your full life story to help with homework"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B17: Privacy: AI doesn’t need your full life story to help with homework"
   },
   {
@@ -1685,10 +1685,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Privacy: AI doesn’t need your full life story to help with homework.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches AI and Privacy."
   },
   {
@@ -1698,12 +1698,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning AI and Privacy, what should you be able to do?",
     "options": [
-      "Name two pieces of information to keep private",
-      "A rock that never learns",
+      "Turning the device off forever",
       "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "A rock that never learns",
+      "Name two pieces of information to keep private"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of B17 is: Name two pieces of information to keep private"
   },
   {
@@ -1713,12 +1713,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Real or AI-Made?, what is an important idea?",
     "options": [
-      "Some pictures and voices can be made by AI",
       "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Some pictures and voices can be made by AI"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From B18: Some pictures and voices can be made by AI"
   },
   {
@@ -1741,12 +1741,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Real or AI-Made?, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Pause before believing a surprising picture",
       "A rock that never learns",
-      "A broken calculator stuck on zero",
-      "Turning the device off forever"
+      "A broken calculator stuck on zero"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of B18 is: Pause before believing a surprising picture"
   },
   {
@@ -1756,12 +1756,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In AI Helping Doctors, Scientists, Artists, what is an important idea?",
     "options": [
-      "AI helping: spotting plants, reading for people who can’t see well, finding routes",
       "A rock that never learns",
       "A broken calculator stuck on zero",
+      "AI helping: spotting plants, reading for people who can’t see well, finding routes",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From B19: AI helping: spotting plants, reading for people who can’t see well, finding routes"
   },
   {
@@ -1771,10 +1771,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "AI helping: spotting plants, reading for people who can’t see well, finding routes.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches AI Helping Doctors, Scientists, Artists."
   },
   {
@@ -1784,12 +1784,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning AI Helping Doctors, Scientists, Artists, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Name two helpful uses of AI",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Only paper and pencils"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of B19 is: Name two helpful uses of AI"
   },
   {
@@ -1799,12 +1799,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Capstone: Imagine Your Own AI Helper, what is an important idea?",
     "options": [
-      "Capstone: invent an AI helper for school or home",
       "Only paper and pencils",
-      "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Capstone: invent an AI helper for school or home",
+      "Turning the device off forever",
+      "AI is always perfect and never wrong"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From B20: Capstone: invent an AI helper for school or home"
   },
   {
@@ -1827,12 +1827,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Capstone: Imagine Your Own AI Helper, what should you be able to do?",
     "options": [
-      "Design a helper with user + job + one privacy rule",
-      "Ignoring every example you give it",
       "Magic with no patterns",
+      "Ignoring every example you give it",
+      "Design a helper with user + job + one privacy rule",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of B20 is: Design a helper with user + job + one privacy rule"
   },
   {
@@ -1842,10 +1842,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Computers never use ideas from “B1” at all.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "False — B1 ideas matter in this track."
   },
   {
@@ -1855,12 +1855,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Smart vs. Simple best?",
     "options": [
-      "AI programs change what they do after more examples",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "AI programs change what they do after more examples",
+      "Turning the device off forever",
+      "Only paper and pencils"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Practice focus: Sort 10 tools: alarm clock, spellcheck, voice assistant, torch"
   },
   {
@@ -1870,12 +1870,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Where AI Hides in Daily Life best?",
     "options": [
-      "Not everything smart-looking is AI (a blinking toy)",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Only paper and pencils",
+      "Not everything smart-looking is AI (a blinking toy)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Practice focus: Spot AI in 10 scene cards (kitchen, car, class, phone)"
   },
   {
@@ -1898,12 +1898,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits AI Helpers Around the World best?",
     "options": [
-      "AI helpers exist in many countries — same idea, local languages",
       "Only paper and pencils",
-      "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "AI helpers exist in many countries — same idea, local languages",
+      "AI is always perfect and never wrong"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Practice focus: Match helper → job (translate, navigate, caption)"
   },
   {
@@ -1913,12 +1913,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Teaching a Computer Like Teaching a Puppy best?",
     "options": [
-      "Training = showing labelled examples",
-      "Only paper and pencils",
       "AI is always perfect and never wrong",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Training = showing labelled examples",
+      "Only paper and pencils"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Practice focus: Choose better training sets (many cats vs one cat); order train → test"
   },
   {
@@ -1928,10 +1928,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Computers never use ideas from “B7” at all.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "False — B7 ideas matter in this track."
   },
   {
@@ -1941,12 +1941,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Counting the Computer Way, what is an important idea?",
     "options": [
-      "Count the computer way: 0 and 1 only (link to CS A2)",
-      "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Mixing shapes into spaghetti",
+      "Count the computer way: 0 and 1 only (link to CS A2)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C1: Count the computer way: 0 and 1 only (link to CS A2)"
   },
   {
@@ -1969,12 +1969,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Counting the Computer Way, what should you be able to do?",
     "options": [
-      "Count 0–5 using on/off lights",
       "Closing your eyes and hopping",
-      "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Count 0–5 using on/off lights",
+      "Turning the device off forever",
+      "Guessing with no plan at all"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C1 is: Count 0–5 using on/off lights"
   },
   {
@@ -1984,12 +1984,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Odd, Even, and Patterns, what is an important idea?",
     "options": [
-      "Odd and even; clap patterns",
-      "Erasing all the numbers",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Odd and even; clap patterns",
+      "Erasing all the numbers"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From C2: Odd and even; clap patterns"
   },
   {
@@ -1999,10 +1999,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Odd and even; clap patterns.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Odd, Even, and Patterns."
   },
   {
@@ -2012,12 +2012,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Odd, Even, and Patterns, what should you be able to do?",
     "options": [
+      "Guessing with no plan at all",
       "Sort numbers to 20 into odd/even",
       "Closing your eyes and hopping",
-      "Guessing with no plan at all",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C2 is: Sort numbers to 20 into odd/even"
   },
   {
@@ -2027,12 +2027,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Place Value Power-Up, what is an important idea?",
     "options": [
-      "Ones, tens, hundreds — why 23 is different from 32",
       "Closing your eyes and hopping",
-      "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Ones, tens, hundreds — why 23 is different from 32",
+      "Turning the device off forever",
+      "Guessing with no plan at all"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From C3: Ones, tens, hundreds — why 23 is different from 32"
   },
   {
@@ -2055,12 +2055,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Place Value Power-Up, what should you be able to do?",
     "options": [
-      "Say the value of a digit in a 2- or 3-digit number",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Closing your eyes and hopping",
+      "Say the value of a digit in a 2- or 3-digit number"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C3 is: Say the value of a digit in a 2- or 3-digit number"
   },
   {
@@ -2070,12 +2070,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Skip Counting & Sequences, what is an important idea?",
     "options": [
-      "Skip counting by 2, 5, 10 — the beat of a loop",
       "Mixing shapes into spaghetti",
-      "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Skip counting by 2, 5, 10 — the beat of a loop",
+      "Pretending patterns do not exist"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From C4: Skip counting by 2, 5, 10 — the beat of a loop"
   },
   {
@@ -2098,12 +2098,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Skip Counting & Sequences, what should you be able to do?",
     "options": [
-      "Skip-count by 2, 5, or 10 up to 50",
-      "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Mixing shapes into spaghetti",
+      "Skip-count by 2, 5, or 10 up to 50"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C4 is: Skip-count by 2, 5, or 10 up to 50"
   },
   {
@@ -2113,12 +2113,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Number Patterns Playground, what is an important idea?",
     "options": [
-      "Growing patterns: add 1 more each time (1, 2, 4 squares — keep it visual)",
-      "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Growing patterns: add 1 more each time (1, 2, 4 squares — keep it visual)",
+      "Mixing shapes into spaghetti"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From C5: Growing patterns: add 1 more each time (1, 2, 4 squares — keep it visual)"
   },
   {
@@ -2128,10 +2128,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Growing patterns: add 1 more each time (1, 2, 4 squares — keep it visual).",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Number Patterns Playground."
   },
   {
@@ -2141,12 +2141,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Number Patterns Playground, what should you be able to do?",
     "options": [
-      "Draw or choose the next figure in a growing pattern",
-      "Erasing all the numbers",
       "Counting backwards forever by accident",
+      "Erasing all the numbers",
+      "Draw or choose the next figure in a growing pattern",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of C5 is: Draw or choose the next figure in a growing pattern"
   },
   {
@@ -2156,12 +2156,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In True or False?, what is an important idea?",
     "options": [
-      "A statement is true or false — not ‘maybe’ for this game",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Closing your eyes and hopping",
+      "A statement is true or false — not ‘maybe’ for this game"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C6: A statement is true or false — not ‘maybe’ for this game"
   },
   {
@@ -2184,12 +2184,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning True or False?, what should you be able to do?",
     "options": [
-      "Mark simple statements true or false",
       "Erasing all the numbers",
-      "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Mark simple statements true or false",
+      "Turning the device off forever",
+      "Counting backwards forever by accident"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C6 is: Mark simple statements true or false"
   },
   {
@@ -2199,12 +2199,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In AND, OR, NOT for Kids, what is an important idea?",
     "options": [
-      "AND = both must be true (cake AND juice for the party)",
-      "Erasing all the numbers",
+      "Turning the device off forever",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Erasing all the numbers",
+      "AND = both must be true (cake AND juice for the party)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C7: AND = both must be true (cake AND juice for the party)"
   },
   {
@@ -2227,12 +2227,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning AND, OR, NOT for Kids, what should you be able to do?",
     "options": [
-      "Solve a kid AND/OR/NOT story",
       "Mixing shapes into spaghetti",
-      "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Solve a kid AND/OR/NOT story",
+      "Pretending patterns do not exist"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of C7 is: Solve a kid AND/OR/NOT story"
   },
   {
@@ -2242,12 +2242,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Sorting and Comparing, what is an important idea?",
     "options": [
-      "Compare: greater than, less than, equal",
-      "Erasing all the numbers",
+      "Turning the device off forever",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Compare: greater than, less than, equal",
+      "Erasing all the numbers"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From C8: Compare: greater than, less than, equal"
   },
   {
@@ -2257,10 +2257,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Compare: greater than, less than, equal.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Sorting and Comparing."
   },
   {
@@ -2270,12 +2270,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Sorting and Comparing, what should you be able to do?",
     "options": [
-      "Compare two numbers up to 100 (Class 3) or 1000 (Class 4–5)",
+      "Turning the device off forever",
       "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Compare two numbers up to 100 (Class 3) or 1000 (Class 4–5)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C8 is: Compare two numbers up to 100 (Class 3) or 1000 (Class 4–5)"
   },
   {
@@ -2285,12 +2285,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Sets — Things That Belong Together, what is an important idea?",
     "options": [
-      "A set is a group that belongs together",
       "Closing your eyes and hopping",
-      "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A set is a group that belongs together",
+      "Guessing with no plan at all"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From C9: A set is a group that belongs together"
   },
   {
@@ -2313,12 +2313,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Sets — Things That Belong Together, what should you be able to do?",
     "options": [
-      "Place items in a two-circle Venn",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Closing your eyes and hopping",
+      "Place items in a two-circle Venn"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C9 is: Place items in a two-circle Venn"
   },
   {
@@ -2328,12 +2328,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Solving Puzzles Step by Step, what is an important idea?",
     "options": [
-      "Logic puzzles: one clue at a time (who sits where)",
+      "Turning the device off forever",
       "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Logic puzzles: one clue at a time (who sits where)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C10: Logic puzzles: one clue at a time (who sits where)"
   },
   {
@@ -2343,10 +2343,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Logic puzzles: one clue at a time (who sits where).",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Solving Puzzles Step by Step."
   },
   {
@@ -2356,12 +2356,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Solving Puzzles Step by Step, what should you be able to do?",
     "options": [
-      "Solve a 3-clue logic grid with help",
       "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Solve a 3-clue logic grid with help"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C10 is: Solve a 3-clue logic grid with help"
   },
   {
@@ -2371,12 +2371,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Shapes All Around, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "2D shapes: sides, corners, square vs rectangle vs triangle vs circle",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Closing your eyes and hopping"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From C11: 2D shapes: sides, corners, square vs rectangle vs triangle vs circle"
   },
   {
@@ -2386,10 +2386,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "2D shapes: sides, corners, square vs rectangle vs triangle vs circle.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Shapes All Around."
   },
   {
@@ -2399,12 +2399,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Shapes All Around, what should you be able to do?",
     "options": [
-      "Name and count sides of common 2D shapes",
       "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
+      "Name and count sides of common 2D shapes",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of C11 is: Name and count sides of common 2D shapes"
   },
   {
@@ -2414,12 +2414,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Grids and Coordinates, what is an important idea?",
     "options": [
-      "A grid is rows and columns; a point has an address (2, 3)",
       "Erasing all the numbers",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "A grid is rows and columns; a point has an address (2, 3)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C12: A grid is rows and columns; a point has an address (2, 3)"
   },
   {
@@ -2442,12 +2442,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Grids and Coordinates, what should you be able to do?",
     "options": [
-      "Plot a point on a 5×5 grid",
       "Closing your eyes and hopping",
-      "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Plot a point on a 5×5 grid",
+      "Turning the device off forever",
+      "Guessing with no plan at all"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C12 is: Plot a point on a 5×5 grid"
   },
   {
@@ -2457,12 +2457,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Symmetry and Patterns, what is an important idea?",
     "options": [
-      "Line symmetry: a fold that matches",
       "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
+      "Line symmetry: a fold that matches",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "From C13: Line symmetry: a fold that matches"
   },
   {
@@ -2472,10 +2472,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Line symmetry: a fold that matches.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Symmetry and Patterns."
   },
   {
@@ -2485,12 +2485,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Symmetry and Patterns, what should you be able to do?",
     "options": [
-      "Find a line of symmetry on a simple shape",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Find a line of symmetry on a simple shape",
+      "Closing your eyes and hopping"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of C13 is: Find a line of symmetry on a simple shape"
   },
   {
@@ -2500,12 +2500,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Angles and Turns, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "A turn of 90° is a quarter turn — right or left",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Closing your eyes and hopping"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From C14: A turn of 90° is a quarter turn — right or left"
   },
   {
@@ -2515,10 +2515,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "A turn of 90° is a quarter turn — right or left.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Angles and Turns."
   },
   {
@@ -2528,12 +2528,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Angles and Turns, what should you be able to do?",
     "options": [
-      "Face a new direction after 1–3 quarter turns",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
+      "Closing your eyes and hopping",
+      "Face a new direction after 1–3 quarter turns",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "A goal of C14 is: Face a new direction after 1–3 quarter turns"
   },
   {
@@ -2543,12 +2543,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Draw With Math, what is an important idea?",
     "options": [
+      "Turning the device off forever",
       "Draw with commands: forward, turn 90, repeat 4 → square",
       "Mixing shapes into spaghetti",
-      "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Pretending patterns do not exist"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From C15: Draw with commands: forward, turn 90, repeat 4 → square"
   },
   {
@@ -2571,12 +2571,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Draw With Math, what should you be able to do?",
     "options": [
-      "Write commands for a square",
       "Erasing all the numbers",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Write commands for a square"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C15 is: Write commands for a square"
   },
   {
@@ -2586,12 +2586,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Estimation and Guess-Check-Improve, what is an important idea?",
     "options": [
-      "Estimate first, then check — like debugging",
-      "Mixing shapes into spaghetti",
+      "Turning the device off forever",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Mixing shapes into spaghetti",
+      "Estimate first, then check — like debugging"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C16: Estimate first, then check — like debugging"
   },
   {
@@ -2601,10 +2601,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Estimate first, then check — like debugging.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Estimation and Guess-Check-Improve."
   },
   {
@@ -2614,12 +2614,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Estimation and Guess-Check-Improve, what should you be able to do?",
     "options": [
-      "Give a sensible estimate for a pile or a length",
       "Closing your eyes and hopping",
+      "Turning the device off forever",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Give a sensible estimate for a pile or a length"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C16 is: Give a sensible estimate for a pile or a length"
   },
   {
@@ -2629,12 +2629,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Probability — What Are the Chances?, what is an important idea?",
     "options": [
-      "Chance words: certain, likely, unlikely, impossible",
       "Erasing all the numbers",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Chance words: certain, likely, unlikely, impossible"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C17: Chance words: certain, likely, unlikely, impossible"
   },
   {
@@ -2644,10 +2644,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Chance words: certain, likely, unlikely, impossible.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Probability — What Are the Chances?."
   },
   {
@@ -2657,12 +2657,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Probability — What Are the Chances?, what should you be able to do?",
     "options": [
+      "Pretending patterns do not exist",
       "Use a chance word correctly for a simple event",
       "Mixing shapes into spaghetti",
-      "Pretending patterns do not exist",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C17 is: Use a chance word correctly for a simple event"
   },
   {
@@ -2672,12 +2672,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Working Backwards, what is an important idea?",
     "options": [
-      "Work backwards: you have 12 sweets after getting 4, how many at the start?",
       "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Work backwards: you have 12 sweets after getting 4, how many at the start?"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "From C18: Work backwards: you have 12 sweets after getting 4, how many at the start?"
   },
   {
@@ -2700,12 +2700,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Working Backwards, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Solve a one-step backwards word problem",
       "Erasing all the numbers",
-      "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Counting backwards forever by accident"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C18 is: Solve a one-step backwards word problem"
   },
   {
@@ -2715,12 +2715,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Breaking Big Problems Into Small Ones, what is an important idea?",
     "options": [
+      "Guessing with no plan at all",
       "Big problems break into small jobs (decomposition)",
       "Closing your eyes and hopping",
-      "Guessing with no plan at all",
       "Turning the device off forever"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From C19: Big problems break into small jobs (decomposition)"
   },
   {
@@ -2730,10 +2730,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Big problems break into small jobs (decomposition).",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Yes — that matches Breaking Big Problems Into Small Ones."
   },
   {
@@ -2743,12 +2743,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Breaking Big Problems Into Small Ones, what should you be able to do?",
     "options": [
+      "Turning the device off forever",
       "Split a messy task into 3–5 smaller tasks",
-      "Closing your eyes and hopping",
       "Guessing with no plan at all",
-      "Turning the device off forever"
+      "Closing your eyes and hopping"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "A goal of C19 is: Split a messy task into 3–5 smaller tasks"
   },
   {
@@ -2758,12 +2758,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "In Capstone: Math Puzzle Challenge, what is an important idea?",
     "options": [
-      "Capstone mix: one pattern, one Venn or sort, one grid point, one chance word",
       "Mixing shapes into spaghetti",
-      "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Capstone mix: one pattern, one Venn or sort, one grid point, one chance word",
+      "Turning the device off forever",
+      "Pretending patterns do not exist"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "From C20: Capstone mix: one pattern, one Venn or sort, one grid point, one chance word"
   },
   {
@@ -2786,12 +2786,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "After learning Capstone: Math Puzzle Challenge, what should you be able to do?",
     "options": [
-      "Solve a mixed puzzle using at least two strategies from the year",
+      "Turning the device off forever",
       "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Solve a mixed puzzle using at least two strategies from the year"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "A goal of C20 is: Solve a mixed puzzle using at least two strategies from the year"
   },
   {
@@ -2801,10 +2801,10 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "true_false",
     "prompt": "Computers never use ideas from “C1” at all.",
     "options": [
-      "True",
-      "False"
+      "False",
+      "True"
     ],
-    "correctIndex": 1,
+    "correctIndex": 0,
     "explanation": "False — C1 ideas matter in this track."
   },
   {
@@ -2814,12 +2814,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Odd, Even, and Patterns best?",
     "options": [
-      "Patterns are how both maths and code repeat",
-      "Mixing shapes into spaghetti",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Patterns are how both maths and code repeat",
+      "Turning the device off forever",
+      "Mixing shapes into spaghetti"
     ],
-    "correctIndex": 0,
+    "correctIndex": 1,
     "explanation": "Practice focus: Odd/even sort; next number in a pattern"
   },
   {
@@ -2829,12 +2829,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Place Value Power-Up best?",
     "options": [
-      "Contrast with binary: different ‘place’ ideas, same ‘position matters’",
       "Mixing shapes into spaghetti",
+      "Turning the device off forever",
       "Pretending patterns do not exist",
-      "Turning the device off forever"
+      "Contrast with binary: different ‘place’ ideas, same ‘position matters’"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Practice focus: Expand 10 numbers; swap digits and say the new number"
   },
   {
@@ -2857,12 +2857,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits Number Patterns Playground best?",
     "options": [
-      "Fibonacci-lite: 1, 1, 2, 3, 5 as a story of adding the last two — optional, light",
       "Erasing all the numbers",
-      "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "Fibonacci-lite: 1, 1, 2, 3, 5 as a story of adding the last two — optional, light",
+      "Counting backwards forever by accident"
     ],
-    "correctIndex": 0,
+    "correctIndex": 2,
     "explanation": "Practice focus: Next picture / next number in 10 growing patterns"
   },
   {
@@ -2872,12 +2872,12 @@ export const PRACTICE_QUESTIONS: PracticeQuestion[] = [
     "type": "mcq",
     "prompt": "Which sentence fits True or False? best?",
     "options": [
-      "‘All birds can fly’ is false (penguins)",
       "Erasing all the numbers",
       "Counting backwards forever by accident",
-      "Turning the device off forever"
+      "Turning the device off forever",
+      "‘All birds can fly’ is false (penguins)"
     ],
-    "correctIndex": 0,
+    "correctIndex": 3,
     "explanation": "Practice focus: 10 true/false world and maths statements"
   }
 ];

@@ -1,10 +1,11 @@
 /**
- * Learn points rules — UI source of truth.
- * Backend wiring will mirror these constants later.
+ * Learn points rules — UI source of truth (mirrored on server).
  * 1 point = 1 XP. Leaderboard ranks by total points.
  */
 
 export const LEARN_POINTS = {
+  /** Marking a video complete unlocks the quiz — no XP */
+  videoComplete: 0,
   potdCorrect: 1,
   quizCorrect: 1,
   quizWrong: -0.5,
@@ -31,9 +32,17 @@ export type LearnPointsRule = {
 
 export const LEARN_POINTS_RULES: LearnPointsRule[] = [
   {
+    id: "video",
+    title: "Video complete",
+    detail: "Mark a lesson video done to unlock the quiz. No XP — progress only.",
+    points: `${LEARN_POINTS.videoComplete}`,
+    tone: "soon",
+    group: "now",
+  },
+  {
     id: "potd",
     title: "Correct POTD",
-    detail: "Solve today’s Problem of the Day correctly.",
+    detail: "Solve today’s Problem of the Day correctly (one try per day).",
     points: `+${LEARN_POINTS.potdCorrect}`,
     tone: "earn",
     group: "now",
@@ -41,7 +50,7 @@ export const LEARN_POINTS_RULES: LearnPointsRule[] = [
   {
     id: "quiz-ok",
     title: "Correct quiz answer",
-    detail: "Each right answer in a lesson quiz.",
+    detail: "Each right answer in a lesson quiz (one attempt per module).",
     points: `+${LEARN_POINTS.quizCorrect}`,
     tone: "earn",
     group: "now",
@@ -56,8 +65,8 @@ export const LEARN_POINTS_RULES: LearnPointsRule[] = [
   },
   {
     id: "signin",
-    title: "Daily sign-in",
-    detail: "Open Learn and check in once per day.",
+    title: "Daily login",
+    detail: "Open Learn once per day — this builds your streak.",
     points: `+${LEARN_POINTS.dailySignIn}`,
     tone: "earn",
     group: "now",
@@ -65,7 +74,7 @@ export const LEARN_POINTS_RULES: LearnPointsRule[] = [
   {
     id: "streak-7",
     title: "7-day streak",
-    detail: "Keep learning 7 days in a row — bonus once.",
+    detail: "Log in 7 days in a row — bonus once.",
     points: `+${LEARN_POINTS.streak7}`,
     tone: "bonus",
     group: "streak",
@@ -89,7 +98,8 @@ export const LEARN_POINTS_RULES: LearnPointsRule[] = [
   {
     id: "bank",
     title: "Practice bank",
-    detail: "~200 practice questions across CS, AI & Math. Correct earns points; wrong is 0.",
+    detail:
+      "~200 questions. One try each forever. Correct earns points; wrong is 0.",
     points: `+${LEARN_POINTS.practiceCorrect} / 0`,
     tone: "earn",
     group: "now",

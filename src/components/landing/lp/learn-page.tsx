@@ -262,6 +262,20 @@ export function LearnLanding({ geo }: { geo: LearnGeo }) {
           >
             free course guide
           </Link>
+          {" · "}
+          <Link
+            href="/blog/free-computer-science-class-3-5-kids-india"
+            className="font-semibold text-ink hover:underline"
+          >
+            Class 3–5 CS guide
+          </Link>
+          {" · "}
+          <Link
+            href="/blog/category/kids-learn"
+            className="font-semibold text-ink hover:underline"
+          >
+            all kids Learn guides
+          </Link>
         </p>
       </section>
 

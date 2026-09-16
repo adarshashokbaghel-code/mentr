@@ -147,6 +147,20 @@ export async function submitLessonQuiz(
   moduleId: string,
   answers: { questionId: string; selectedIndex: number }[],
 ) {
+  const enrollment = await getParentStarterEnrollment(userId);
+  if (!enrollment) {
+    throw Object.assign(new Error("Enroll in Mentr Learn to take quizzes"), {
+      status: 403,
+    });
+  }
+
+  const id = moduleId.trim().toUpperCase();
+  if ((enrollment.progress.quizzesCompleted ?? []).includes(id)) {
+    throw Object.assign(new Error("Quiz already completed — no retakes"), {
+      status: 409,
+    });
+  }
+
   const quiz = await getLessonQuizForParent(userId, moduleId);
   const byId = new Map(quiz.questions.map((q) => [q.questionId, q]));
 
@@ -175,15 +189,17 @@ export async function submitLessonQuiz(
     };
   });
 
+  const total = quiz.questions.length;
+  const wrong = Math.max(0, total - correct);
+
   return {
     videoId: quiz.lesson.videoId,
     moduleId: quiz.lesson.moduleId,
-    total: quiz.questions.length,
+    total,
     answered: answers.length,
     correct,
-    scorePercent: quiz.questions.length
-      ? Math.round((correct / quiz.questions.length) * 100)
-      : 0,
+    wrong,
+    scorePercent: total ? Math.round((correct / total) * 100) : 0,
     details,
   };
 }

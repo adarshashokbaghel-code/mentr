@@ -480,6 +480,8 @@ export type AdminLearnEnrollmentRow = {
   userId: string;
   email: string;
   name: string;
+  phone?: string;
+  city?: string;
   courseId: string;
   courseName: string;
   tagline?: string;
@@ -503,10 +505,58 @@ export type AdminLearnEnrollmentRow = {
   lastLoginAt?: string;
   progress: {
     modulesCompleted: number;
+    videosWatched?: number;
+    quizzesCompleted?: number;
+    buildsCompleted?: number;
+    potdCorrect?: number;
+    potdAttempted?: number;
+    practiceCorrect?: number;
+    practiceAttempted?: number;
     xp: number;
     streakDays: number;
     currentModuleId: string | null;
+    lastActivityAt?: string | null;
+    lastCheckInDay?: string | null;
   };
+};
+
+export type AdminLearnEnrollmentDetail = {
+  userId: string;
+  email: string;
+  name: string;
+  phone: string;
+  city: string;
+  country: string;
+  lastLoginAt: string | null;
+  registrationSource?: string;
+  acquisitionSlug?: string;
+  enrolledAt: string;
+  receiptNumber: string;
+  courseName: string;
+  purchase: AdminLearnEnrollmentRow["purchase"];
+  progress: {
+    xp: number;
+    streakDays: number;
+    currentModuleId: string | null;
+    lastActivityAt: string | null;
+    lastCheckInDay: string | null;
+    modulesCompleted: string[];
+    videosWatched: string[];
+    quizzesCompleted: string[];
+    buildsCompleted: string[];
+    buildsFirstTry: string[];
+    potdCorrect: number;
+    potdAttempted: number;
+    practiceCorrect: number;
+    practiceAttempted: number;
+    streakBonusesClaimed: number[];
+  };
+  recentPotd: {
+    dateKey: string;
+    correct: boolean;
+    potdId: string;
+    attemptedAt: string;
+  }[];
 };
 
 export type AdminLearnTrackResponse = {
@@ -533,5 +583,16 @@ export function fetchAdminLearnTrack(key: string, track: AdminLearnTrackId) {
   return adminFetch<AdminLearnTrackResponse>(
     key,
     `/api/admin/learn/${encodeURIComponent(track)}`,
+  );
+}
+
+export function fetchAdminLearnEnrollmentDetail(
+  key: string,
+  track: AdminLearnTrackId,
+  userId: string,
+) {
+  return adminFetch<AdminLearnEnrollmentDetail>(
+    key,
+    `/api/admin/learn/${encodeURIComponent(track)}/user/${encodeURIComponent(userId)}`,
   );
 }

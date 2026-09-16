@@ -16,11 +16,15 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import {
+  hasCompletedQuiz,
   hasWatchedVideo,
   recordVideoComplete,
   refreshLearnEnrollment,
 } from "@/lib/learn-progress-client";
-import type { LearnEnrollmentDto } from "@/lib/learn-enroll";
+import {
+  saveLearnEnrollmentLocal,
+  type LearnEnrollmentDto,
+} from "@/lib/learn-enroll";
 
 const DIFF_STYLES: Record<LearnQuizDifficulty, string> = {
   easy: "bg-[#e6f7f4] text-[#0d9488]",
@@ -166,6 +170,7 @@ function QuizStage({
 }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [alreadyDone, setAlreadyDone] = useState(false);
   const [videoId, setVideoId] = useState<string>("");
   const [questions, setQuestions] = useState<LearnQuizQuestionDto[]>([]);
   const [index, setIndex] = useState(0);
@@ -185,6 +190,14 @@ function QuizStage({
       setLoading(true);
       setError(null);
       try {
+        const enrollment = await refreshLearnEnrollment();
+        if (cancelled) return;
+        if (hasCompletedQuiz(enrollment, moduleId)) {
+          setAlreadyDone(true);
+          setFinished(true);
+          setLoading(false);
+          return;
+        }
         const data = await fetchLessonQuiz(moduleId);
         if (cancelled) return;
         setQuestions(data.questions);
@@ -224,6 +237,11 @@ function QuizStage({
     try {
       const result = await submitLessonQuiz(moduleId, nextAnswers);
       setScore({ correct: result.correct, total: result.total });
+      if (result.enrollment) {
+        saveLearnEnrollmentLocal(result.enrollment);
+      } else {
+        await refreshLearnEnrollment();
+      }
     } catch {
       const localCorrect = nextAnswers.reduce((n, a) => {
         const item = questions.find((x) => x.questionId === a.questionId);
@@ -243,6 +261,27 @@ function QuizStage({
         <p className="text-[14px] font-bold text-[#5a6472]">
           Loading quiz from lesson video…
         </p>
+      </div>
+    );
+  }
+
+  if (alreadyDone) {
+    return (
+      <div className="rounded-3xl border-2 border-[#1c2434] bg-white p-5 shadow-[4px_4px_0_0_#0d9488] sm:p-6">
+        <LearnDino size={64} action="cheer" className="mx-auto h-16 w-16" />
+        <p className="mt-3 text-center text-[1.25rem] font-extrabold text-[#1c2434]">
+          Quiz already done
+        </p>
+        <p className="mt-1 text-center text-[13px] font-medium text-[#8a929c]">
+          One attempt per lesson — no retakes. XP stays as earned.
+        </p>
+        <button
+          type="button"
+          onClick={onDone}
+          className="mt-5 w-full rounded-2xl bg-[#ff6a1a] py-3 text-[15px] font-extrabold text-white"
+        >
+          Continue
+        </button>
       </div>
     );
   }

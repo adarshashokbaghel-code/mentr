@@ -15,20 +15,29 @@ function parseDateKey(dateKey: string): Date {
 }
 
 let potdBankReady = false;
+/** Bump when seed content changes so existing DB rows get re-upserted. */
+const POTD_SEED_VERSION = 2;
 
 export async function ensurePotdBankSeeded() {
   if (potdBankReady) return POTD_CYCLE;
   const count = await LearnPotd.countDocuments({ active: true });
-  if (count >= POTD_CYCLE) {
+  const needsRefresh =
+    count < POTD_CYCLE ||
+    !(await LearnPotd.exists({ dayIndex: 0, seedVersion: POTD_SEED_VERSION }));
+
+  if (!needsRefresh) {
     potdBankReady = true;
     return count;
   }
+
   const bank = buildPotdSeedBank();
   await LearnPotd.bulkWrite(
     bank.map((row) => ({
       updateOne: {
         filter: { dayIndex: row.dayIndex },
-        update: { $set: { ...row, active: true } },
+        update: {
+          $set: { ...row, active: true, seedVersion: POTD_SEED_VERSION },
+        },
         upsert: true,
       },
     })),
@@ -220,22 +229,80 @@ export async function recordPotdAttempt(
     throw Object.assign(new Error("POTD missing"), { status: 404 });
   }
 
+  const existing = await LearnPotdAttempt.findOne({
+    user: userId,
+    dateKey: input.dateKey,
+  }).lean();
+  if (existing) {
+    return {
+      dateKey: input.dateKey,
+      correct: existing.correct,
+      selectedIndex: existing.selectedIndex,
+      correctIndex: potd.correctIndex,
+      explanation: potd.explanation,
+      alreadyAttempted: true,
+      xpAwarded: 0,
+      practiceOnly: false,
+      attempt: {
+        selectedIndex: existing.selectedIndex,
+        correct: existing.correct,
+        attemptedAt: existing.attemptedAt.toISOString(),
+      },
+    };
+  }
+
   const correctIndex = potd.correctIndex;
   const correct = input.selectedIndex === correctIndex;
+  const isToday = input.dateKey === todayKey;
 
-  const row = await LearnPotdAttempt.findOneAndUpdate(
-    { user: userId, dateKey: input.dateKey },
-    {
-      $set: {
-        potdId: potd.potdId,
-        dayIndex,
+  // Past days: practice only — feedback, no XP, no calendar credit
+  if (!isToday) {
+    return {
+      dateKey: input.dateKey,
+      correct,
+      selectedIndex: input.selectedIndex,
+      correctIndex,
+      explanation: potd.explanation,
+      alreadyAttempted: false,
+      xpAwarded: 0,
+      practiceOnly: true,
+      attempt: {
         selectedIndex: input.selectedIndex,
         correct,
-        attemptedAt: new Date(),
+        attemptedAt: new Date().toISOString(),
       },
-    },
-    { upsert: true, returnDocument: "after" },
+    };
+  }
+
+  const row = await LearnPotdAttempt.create({
+    user: userId,
+    dateKey: input.dateKey,
+    potdId: potd.potdId,
+    dayIndex,
+    selectedIndex: input.selectedIndex,
+    correct,
+    attemptedAt: new Date(),
+  });
+
+  let xpAwarded = 0;
+  const { withStarterProgress } = await import("./learn-enroll");
+  const { addXp, LEARN_POINTS } = await import("../lib/learn-points");
+  const { touchActivity } = await import("../lib/learn-progress-helpers");
+  const { invalidateLearnLeaderboardCache } = await import(
+    "./learn-leaderboard"
   );
+
+  await withStarterProgress(userId, (progress) => {
+    touchActivity(progress);
+    progress.potdAttempted = (progress.potdAttempted || 0) + 1;
+    if (correct) {
+      progress.potdCorrect = (progress.potdCorrect || 0) + 1;
+      xpAwarded = LEARN_POINTS.potdCorrect;
+      progress.xp = addXp(progress.xp, xpAwarded);
+    }
+  });
+
+  if (xpAwarded > 0) invalidateLearnLeaderboardCache();
 
   return {
     dateKey: input.dateKey,
@@ -243,10 +310,13 @@ export async function recordPotdAttempt(
     selectedIndex: input.selectedIndex,
     correctIndex,
     explanation: potd.explanation,
+    alreadyAttempted: false,
+    xpAwarded,
+    practiceOnly: false,
     attempt: {
-      selectedIndex: row!.selectedIndex,
-      correct: row!.correct,
-      attemptedAt: row!.attemptedAt.toISOString(),
+      selectedIndex: row.selectedIndex,
+      correct: row.correct,
+      attemptedAt: row.attemptedAt.toISOString(),
     },
   };
 }

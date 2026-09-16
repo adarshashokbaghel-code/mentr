@@ -44,6 +44,18 @@ export type LearnProgressScaffold = {
   xp: number;
   streakDays: number;
   lastActivityAt: string | null;
+  /** IST YYYY-MM-DD of last daily login check-in */
+  lastCheckInDay: string | null;
+  /** Streak milestones already awarded (7 / 15 / 30) */
+  streakBonusesClaimed: number[];
+  weekKey: string | null;
+  weekStartXp: number;
+  weekStartVideos: number;
+  weekStartPotdCorrect: number;
+  potdCorrect: number;
+  potdAttempted: number;
+  practiceCorrect: number;
+  practiceAttempted: number;
 };
 
 export function emptyLearnProgress(): LearnProgressScaffold {
@@ -57,6 +69,16 @@ export function emptyLearnProgress(): LearnProgressScaffold {
     xp: 0,
     streakDays: 0,
     lastActivityAt: null,
+    lastCheckInDay: null,
+    streakBonusesClaimed: [],
+    weekKey: null,
+    weekStartXp: 0,
+    weekStartVideos: 0,
+    weekStartPotdCorrect: 0,
+    potdCorrect: 0,
+    potdAttempted: 0,
+    practiceCorrect: 0,
+    practiceAttempted: 0,
   };
 }
 

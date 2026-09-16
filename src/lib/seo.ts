@@ -28,7 +28,7 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Mentr by Paprly is the free platform to find verified tutors — search locally, post your requirement, or connect online from any country. WhatsApp unlocks after they accept. No fees, no commission, ever.";
+  "Find verified tutors & mentors free — local or online in India and worldwide. Search, post a requirement, or hire a coding/career mentor. WhatsApp after they accept. No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
@@ -38,6 +38,8 @@ export const SITE_KEYWORDS = [
   "Mentr by Paprly",
   "Paprly Mentr",
   "Paprly tutors",
+  "mentr login",
+  "find a mentor online in india",
   "best free platform to find mentors",
   "best free platform to find tutors",
   "100% free tutoring platform",
@@ -52,6 +54,7 @@ export const SITE_KEYWORDS = [
   "physics tutor online",
   "free mentor finder",
   "UrbanPro free alternative",
+  "TeacherOn alternative",
   "tuition teacher",
   "mentor for students free",
   "find online tutors",
@@ -59,6 +62,7 @@ export const SITE_KEYWORDS = [
   "find online tutors verified",
   "find mentors near me",
   "online tutor jobs",
+  "coding for kids Class 5 free",
   "Paprly",
   "Mentr open source",
   "open source tutoring platform",

@@ -28,6 +28,8 @@ export const LEARN_FACT_SHEET = {
 export const LEARN_START_KEYWORDS = [
   "enroll Mentr Learn free",
   "free coding course Class 3-5",
+  "coding for kids Class 5 free",
+  "free coding for Class 3-5",
   "free computer science for kids India",
   "AI for kids free course",
   "block coding for kids",

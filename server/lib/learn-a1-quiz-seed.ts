@@ -35,8 +35,13 @@ export const A1_QUIZ_SEED: QSeed[] = [
     difficulty: "easy",
     type: "mcq",
     prompt: "A computer has how many main jobs?",
-    options: ["One", "Two", "Three", "Ten"],
-    correctIndex: 2,
+    options: [
+      "One",
+      "Three",
+      "Ten",
+      "Two"
+    ],
+    correctIndex: 1,
     explanation: "Every computer has three jobs: input, process, and output.",
     sortOrder: 1,
   },
@@ -46,12 +51,12 @@ export const A1_QUIZ_SEED: QSeed[] = [
     type: "mcq",
     prompt: "What does INPUT mean?",
     options: [
-      "Something goes into the computer",
       "The computer sleeps",
-      "The screen turns off",
       "Bread gets hot",
+      "Something goes into the computer",
+      "The screen turns off"
     ],
-    correctIndex: 0,
+    correctIndex: 2,
     explanation: "Input means information going in — like typing on a phone.",
     sortOrder: 2,
   },
@@ -60,8 +65,13 @@ export const A1_QUIZ_SEED: QSeed[] = [
     difficulty: "easy",
     type: "mcq",
     prompt: "Which one is a computer?",
-    options: ["Laptop", "Toaster", "Lamp", "Bicycle bell"],
-    correctIndex: 0,
+    options: [
+      "Bicycle bell",
+      "Toaster",
+      "Lamp",
+      "Laptop"
+    ],
+    correctIndex: 3,
     explanation: "A laptop does input → process → output. The others do not.",
     sortOrder: 3,
   },
@@ -70,8 +80,11 @@ export const A1_QUIZ_SEED: QSeed[] = [
     difficulty: "easy",
     type: "true_false",
     prompt: "A phone can be a computer.",
-    options: ["True", "False"],
-    correctIndex: 0,
+    options: [
+      "False",
+      "True"
+    ],
+    correctIndex: 1,
     explanation: "Yes — a phone takes input, processes, and shows output.",
     sortOrder: 4,
   },
@@ -81,12 +94,12 @@ export const A1_QUIZ_SEED: QSeed[] = [
     type: "mcq",
     prompt: "What does PROCESS mean?",
     options: [
-      "The computer thinks or works on the information",
-      "You throw the computer away",
       "The room gets dark",
+      "The computer thinks or works on the information",
       "Only the speaker plays music forever",
+      "You throw the computer away"
     ],
-    correctIndex: 0,
+    correctIndex: 1,
     explanation: "Process is the “thinking / working” job in the middle.",
     sortOrder: 5,
   },
@@ -96,14 +109,13 @@ export const A1_QUIZ_SEED: QSeed[] = [
     type: "mcq",
     prompt: "Why is a toaster usually NOT a computer?",
     options: [
-      "It mainly heats bread — it does not take many kinds of input and think",
       "It is made of metal",
-      "It is found in a kitchen",
       "It uses electricity",
+      "It mainly heats bread — it does not take many kinds of input and think",
+      "It is found in a kitchen"
     ],
-    correctIndex: 0,
-    explanation:
-      "Computers take input, process it, and show smarter output. A toaster mostly just heats.",
+    correctIndex: 2,
+    explanation: "Computers take input, process it, and show smarter output. A toaster mostly just heats.",
     sortOrder: 6,
   },
   {
@@ -112,12 +124,12 @@ export const A1_QUIZ_SEED: QSeed[] = [
     type: "mcq",
     prompt: "Put the three jobs in the correct order.",
     options: [
-      "Input → Process → Output",
+      "Input → Output → Process",
       "Output → Input → Process",
       "Process → Output → Input",
-      "Input → Output → Process",
+      "Input → Process → Output"
     ],
-    correctIndex: 0,
+    correctIndex: 3,
     explanation: "First information goes in, then the computer works, then something comes out.",
     sortOrder: 7,
   },
@@ -127,14 +139,13 @@ export const A1_QUIZ_SEED: QSeed[] = [
     type: "mcq",
     prompt: "Which device is a computer: laptop, lamp, or bicycle bell — and why?",
     options: [
-      "Laptop — because it takes input, processes, and shows output",
       "Lamp — because it makes light",
-      "Bicycle bell — because it makes sound",
       "All three — because they use energy",
+      "Bicycle bell — because it makes sound",
+      "Laptop — because it takes input, processes, and shows output"
     ],
-    correctIndex: 0,
-    explanation:
-      "Only the laptop does the three computer jobs. Light and sound alone are not enough.",
+    correctIndex: 3,
+    explanation: "Only the laptop does the three computer jobs. Light and sound alone are not enough.",
     sortOrder: 8,
   },
   {
@@ -143,14 +154,13 @@ export const A1_QUIZ_SEED: QSeed[] = [
     type: "mcq",
     prompt: "A machine uses electricity. Does that alone make it a computer?",
     options: [
-      "No — it must also do input, process, and output",
-      "Yes — any electric thing is a computer",
-      "Yes — if it is in a school",
       "Yes — if it is expensive",
+      "Yes — if it is in a school",
+      "No — it must also do input, process, and output",
+      "Yes — any electric thing is a computer"
     ],
-    correctIndex: 0,
-    explanation:
-      "Fans and toasters use electricity too. Computers are special because of the three jobs.",
+    correctIndex: 2,
+    explanation: "Fans and toasters use electricity too. Computers are special because of the three jobs.",
     sortOrder: 9,
   },
   {
@@ -158,9 +168,12 @@ export const A1_QUIZ_SEED: QSeed[] = [
     difficulty: "hard",
     type: "true_false",
     prompt: "If a machine does all three jobs — input, process, and output — we can call it a computer.",
-    options: ["True", "False"],
+    options: [
+      "True",
+      "False"
+    ],
     correctIndex: 0,
     explanation: "True — that is the big rule from Chapter 1.",
     sortOrder: 10,
-  },
+  }
 ];

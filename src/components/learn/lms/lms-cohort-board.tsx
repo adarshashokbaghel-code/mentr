@@ -1,12 +1,15 @@
 "use client";
 
+import {
+  fetchLearnLeaderboard,
+  type LearnLeaderboardRow,
+} from "@/lib/learn-progress-client";
 import { cn } from "@/lib/utils";
 import { Crown, Lock, Medal, Trophy, X } from "lucide-react";
 import Image from "next/image";
 import {
   useEffect,
   useId,
-  useMemo,
   useState,
   type CSSProperties,
   type ReactNode,
@@ -29,58 +32,12 @@ type BadgeDef = {
   chip: string;
 };
 
-const SEED_LEADERS: BoardRow[] = [
-  { name: "Aarav", xp: 420, you: false },
-  { name: "Mia", xp: 310, you: false },
-  { name: "Kabir", xp: 280, you: false },
-  { name: "Sara", xp: 240, you: false },
-  { name: "Vihaan", xp: 220, you: false },
-  { name: "Anaya", xp: 205, you: false },
-  { name: "Reyansh", xp: 190, you: false },
-  { name: "Diya", xp: 175, you: false },
-  { name: "Arjun", xp: 160, you: false },
-  { name: "Zara", xp: 148, you: false },
-];
-
-const FILL_NAMES = [
-  "Ishaan",
-  "Myra",
-  "Vivaan",
-  "Kiara",
-  "Advik",
-  "Aanya",
-  "Shaurya",
-  "Pari",
-  "Atharv",
-  "Navya",
-  "Rudra",
-  "Inaaya",
-  "Yash",
-  "Meher",
-  "Kian",
-  "Saanvi",
-  "Dev",
-  "Aarohi",
-  "Neil",
-  "Riya",
-  "Om",
-  "Tara",
-  "Veer",
-  "Ira",
-  "Ronit",
-  "Amaira",
-  "Kabir R",
-  "Nisha",
-  "Harsh",
-  "Jia",
-];
-
 export const LEARN_BADGES: BadgeDef[] = [
   {
     src: "/learn/icons/learn-badge-spark.png",
     label: "Byte Spark",
     xp: 40,
-    blurb: "Earn your first 40 XP from a video, quiz, or POTD.",
+    blurb: "Earn your first 40 XP from a quiz, POTD, or practice.",
     ring: "from-[#fde047] to-[#eab308]",
     glow: "rgba(234, 179, 8, 0.45)",
     chip: "bg-[#fef9c3] text-[#a16207]",
@@ -107,7 +64,7 @@ export const LEARN_BADGES: BadgeDef[] = [
     src: "/learn/icons/learn-badge-cub.png",
     label: "Circuit Cub",
     xp: 160,
-    blurb: "You’re building circuits in your head. 160 XP.",
+    blurb: "You're building circuits in your head. 160 XP.",
     ring: "from-[#67e8f9] to-[#0891b2]",
     glow: "rgba(8, 145, 178, 0.4)",
     chip: "bg-[#ecfeff] text-[#0e7490]",
@@ -167,31 +124,6 @@ export const LEARN_BADGES: BadgeDef[] = [
     chip: "bg-[#fffbeb] text-[#b45309]",
   },
 ];
-
-export function buildPreviewBoard(yourXp: number): BoardRow[] {
-  const others: BoardRow[] = [...SEED_LEADERS];
-  let xp = 140;
-  let i = 0;
-  while (others.length < 99) {
-    const name = FILL_NAMES[i % FILL_NAMES.length];
-    const suffix = i >= FILL_NAMES.length ? ` ${Math.floor(i / FILL_NAMES.length) + 1}` : "";
-    others.push({
-      name: `${name}${suffix}`,
-      xp: Math.max(12, xp),
-      you: false,
-    });
-    xp -= 1 + (i % 3);
-    i += 1;
-  }
-
-  const you: BoardRow = {
-    name: "You",
-    xp: Math.max(yourXp, 40),
-    you: true,
-  };
-
-  return [...others, you].sort((a, b) => b.xp - a.xp || (a.you ? 1 : 0)).slice(0, 100);
-}
 
 function rankMedal(rank: number) {
   if (rank === 1) return { tone: "gold" as const, label: "Gold", Icon: Crown };
@@ -476,10 +408,8 @@ function BadgeTile({
   );
 }
 
-export function previewYourRank(xp: number): number {
-  const board = buildPreviewBoard(xp);
-  const idx = board.findIndex((r) => r.you);
-  return idx >= 0 ? idx + 1 : board.length;
+function toBoardRow(r: LearnLeaderboardRow): BoardRow {
+  return { name: r.you ? "You" : r.name, xp: r.xp, you: r.you };
 }
 
 export function LmsCohortLeaderboard({
@@ -490,10 +420,34 @@ export function LmsCohortLeaderboard({
   className?: string;
 }) {
   const [listOpen, setListOpen] = useState(false);
-  const board = useMemo(() => buildPreviewBoard(xp), [xp]);
+  const [board, setBoard] = useState<BoardRow[]>([]);
+  const [yourRank, setYourRank] = useState<number | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    void fetchLearnLeaderboard(100)
+      .then((data) => {
+        if (cancelled) return;
+        setBoard(data.rows.map(toBoardRow));
+        setYourRank(data.yourRank);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        setBoard([{ name: "You", xp, you: true }]);
+        setYourRank(1);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [xp]);
+
   const top3 = board.slice(0, 3);
   const next3 = board.slice(3, 6);
-  const yourRank = board.findIndex((r) => r.you) + 1;
 
   return (
     <>
@@ -512,36 +466,48 @@ export function LmsCohortLeaderboard({
               Cohort leaderboard
             </h2>
             <p className="mt-0.5 text-[12px] font-semibold text-[#8a929c]">
-              You’re #{yourRank || "—"} · first name only
+              You&apos;re #{yourRank ?? "—"} · Class 3–5 · first name only
             </p>
           </div>
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <div className="relative px-3 pb-3 pt-5 sm:px-5">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute left-1/2 top-3 h-20 w-52 -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(255,106,26,0.12),transparent_70%)]"
-            />
-            <div className="relative mx-auto flex w-full max-w-[320px] items-end justify-center gap-2.5 sm:gap-4">
-              {top3[1] ? <PodiumBlock row={top3[1]} rank={2} /> : null}
-              {top3[0] ? <PodiumBlock row={top3[0]} rank={1} /> : null}
-              {top3[2] ? <PodiumBlock row={top3[2]} rank={3} /> : null}
-            </div>
-            <div className="mx-auto mt-1 h-2 w-[260px] max-w-full rounded-b-xl bg-gradient-to-b from-[#1c2434]/10 to-[#1c2434]/04 sm:w-[300px]" />
-            <div className="mx-auto h-1 w-[220px] max-w-full rounded-b-md bg-[#1c2434]/08 sm:w-[260px]" />
-          </div>
+          {loading ? (
+            <p className="px-5 py-10 text-center text-[13px] font-semibold text-[#8a929c]">
+              Loading ranks…
+            </p>
+          ) : board.length === 0 ? (
+            <p className="px-5 py-10 text-center text-[13px] font-semibold text-[#8a929c]">
+              Be the first on the board — earn XP to climb.
+            </p>
+          ) : (
+            <>
+              <div className="relative px-3 pb-3 pt-5 sm:px-5">
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute left-1/2 top-3 h-20 w-52 -translate-x-1/2 rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(255,106,26,0.12),transparent_70%)]"
+                />
+                <div className="relative mx-auto flex w-full max-w-[320px] items-end justify-center gap-2.5 sm:gap-4">
+                  {top3[1] ? <PodiumBlock row={top3[1]} rank={2} /> : null}
+                  {top3[0] ? <PodiumBlock row={top3[0]} rank={1} /> : null}
+                  {top3[2] ? <PodiumBlock row={top3[2]} rank={3} /> : null}
+                </div>
+                <div className="mx-auto mt-1 h-2 w-[260px] max-w-full rounded-b-xl bg-gradient-to-b from-[#1c2434]/10 to-[#1c2434]/04 sm:w-[300px]" />
+                <div className="mx-auto h-1 w-[220px] max-w-full rounded-b-md bg-[#1c2434]/08 sm:w-[260px]" />
+              </div>
 
-          <ul className="space-y-2 px-4 pb-3 pt-3 sm:px-5">
-            {next3.map((row, i) => (
-              <RankRow key={`${row.name}-${i}`} row={row} rank={i + 4} />
-            ))}
-          </ul>
+              <ul className="space-y-2 px-4 pb-3 pt-3 sm:px-5">
+                {next3.map((row, i) => (
+                  <RankRow key={`${row.name}-${i}`} row={row} rank={i + 4} />
+                ))}
+              </ul>
+            </>
+          )}
         </div>
 
         <div className="mt-auto flex shrink-0 flex-col gap-2 border-t border-[#f0ebe3] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-5">
           <p className="text-[11px] font-semibold text-[#8a929c]">
-            Preview ranks — live cohort ranks ship with more learners.
+            Live ranks · updates every few minutes
           </p>
           <button
             type="button"
@@ -557,7 +523,7 @@ export function LmsCohortLeaderboard({
         open={listOpen}
         onClose={() => setListOpen(false)}
         title="Cohort top 100"
-        subtitle="Preview ranks · first name + XP only"
+        subtitle="Class 3–5 · first name + XP only"
       >
         <ul className="space-y-1.5 p-3 sm:p-4">
           {board.map((row, i) => (
@@ -612,7 +578,7 @@ export function LmsBadgesPanel({ xp }: { xp: number }) {
         open={open}
         onClose={() => setOpen(false)}
         title="All badges"
-        subtitle={`Earn XP from videos, quizzes & POTD · you have ${xp} XP`}
+        subtitle={`Earn XP from quizzes, POTD & practice · you have ${xp} XP`}
       >
         <div className="space-y-3 p-3 sm:p-4">
           {LEARN_BADGES.map((badge) => {

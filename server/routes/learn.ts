@@ -7,11 +7,20 @@ import {
 } from "../services/learn-enroll";
 import { getPotdCalendar, getPotdForDateKey, getPotdMonth, getTodayPotd, recordPotdAttempt } from "../services/learn-potd";
 import { recordBuildComplete } from "../services/learn-build";
-import { recordLearnProgressEvent } from "../services/learn-progress";
+import {
+  recordDailyCheckIn,
+  recordLearnProgressEvent,
+} from "../services/learn-progress";
 import {
   getLessonQuizForParent,
   submitLessonQuiz,
 } from "../services/learn-quiz";
+import {
+  getPracticeAnswersForUser,
+  submitPracticeAttempt,
+} from "../services/learn-practice";
+import { getLearnLeaderboard } from "../services/learn-leaderboard";
+import { getLearnStats } from "../services/learn-stats";
 import { serializeUser } from "./auth";
 
 const router = Router();
@@ -67,6 +76,48 @@ router.post("/enroll", async (req: AuthenticatedRequest, res) => {
   }
 });
 
+/** Daily login check-in — drives streak +0.5 XP once per IST day. */
+router.post("/check-in", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const result = await recordDailyCheckIn(req.auth!.sub);
+    res.json(result);
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Learn check-in error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Check-in failed",
+    });
+  }
+});
+
+router.get("/stats", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    res.json(await getLearnStats(req.auth!.sub));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Learn stats error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load stats",
+    });
+  }
+});
+
+router.get("/leaderboard", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const limit = Math.min(100, Math.max(10, Number(req.query.limit) || 100));
+    res.json(await getLearnLeaderboard(req.auth!.sub, limit));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Learn leaderboard error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load leaderboard",
+    });
+  }
+});
+
 router.post("/progress", async (req: AuthenticatedRequest, res) => {
   try {
     if (!requireParent(req, res)) return;
@@ -87,6 +138,43 @@ router.post("/progress", async (req: AuthenticatedRequest, res) => {
     console.error("Learn progress error:", err);
     res.status(status).json({
       error: err instanceof Error ? err.message : "Failed to save progress",
+    });
+  }
+});
+
+router.get("/practice/answers", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    res.json(await getPracticeAnswersForUser(req.auth!.sub));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Practice answers error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load practice",
+    });
+  }
+});
+
+router.post("/practice/attempt", async (req: AuthenticatedRequest, res) => {
+  try {
+    if (!requireParent(req, res)) return;
+    const questionId = String(req.body?.questionId || "");
+    const selectedIndex = Number(req.body?.selectedIndex);
+    if (!questionId || !Number.isFinite(selectedIndex)) {
+      res.status(400).json({ error: "questionId and selectedIndex required" });
+      return;
+    }
+    res.json(
+      await submitPracticeAttempt(req.auth!.sub, {
+        questionId,
+        selectedIndex,
+      }),
+    );
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Practice attempt error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to save practice",
     });
   }
 });
@@ -114,12 +202,16 @@ router.post(
       const moduleId = String(req.params.moduleId || "");
       const answers = Array.isArray(req.body?.answers) ? req.body.answers : [];
       const result = await submitLessonQuiz(req.auth!.sub, moduleId, answers);
-      await recordLearnProgressEvent(req.auth!.sub, {
+      const enrollment = await recordLearnProgressEvent(req.auth!.sub, {
         moduleId,
         event: "quiz_complete",
-        quizScore: { correct: result.correct, total: result.total },
+        quizScore: {
+          correct: result.correct,
+          total: result.total,
+          wrong: result.wrong,
+        },
       });
-      res.json(result);
+      res.json({ ...result, enrollment });
     } catch (err) {
       const status = (err as { status?: number }).status || 500;
       console.error("Learn quiz submit error:", err);

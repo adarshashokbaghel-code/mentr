@@ -1,15 +1,18 @@
 "use client";
 
 import { LearnDino } from "@/components/landing/lp/learn-dino";
+import { LmsSidebarPotd } from "@/components/learn/lms/lms-sidebar-potd";
 import { LmsPotdProvider, useLmsPotd } from "@/components/learn/lms/lms-potd-context";
 import {
   fetchLearnEnrollment,
   readLearnEnrollmentLocal,
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
+import { recordDailyCheckIn } from "@/lib/learn-progress-client";
 import { cn } from "@/lib/utils";
 import {
   Blocks,
+  CalendarDays,
   Flame,
   Home,
   Library,
@@ -31,6 +34,7 @@ const NAV: {
   { href: "/learn/app/path", label: "Learn", icon: Map },
   { href: "/learn/app/build", label: "Build", icon: Blocks },
   { href: "/learn/app/practice", label: "Practice", icon: Library },
+  { href: "/learn/app/potd", label: "POTD", icon: CalendarDays },
   { href: "/learn/app/progress", label: "Progress", icon: Sparkles },
   { href: "/learn/app/me", label: "Me", icon: UserRound },
 ];
@@ -42,7 +46,15 @@ function ShellChrome({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     setEnrollment(readLearnEnrollmentLocal());
-    void fetchLearnEnrollment().then(setEnrollment);
+    void (async () => {
+      try {
+        const check = await recordDailyCheckIn();
+        setEnrollment(check.enrollment);
+      } catch {
+        const e = await fetchLearnEnrollment();
+        setEnrollment(e);
+      }
+    })();
   }, []);
 
   const xp = enrollment?.progress?.xp ?? 0;
@@ -91,18 +103,10 @@ function ShellChrome({ children }: { children: ReactNode }) {
           })}
         </nav>
 
-        <div className="mt-auto shrink-0 border-t border-[#f0ebe3] bg-white p-3 ">
-          <button
-            type="button"
-            onClick={() => openPotd()}
-            className="mb-2 hidden w-full items-center gap-1.5 rounded-xl bg-[#fff8d6] px-2.5 py-2 text-left transition hover:brightness-95 xl:flex"
-          >
-            <Flame className="h-4 w-4 shrink-0 text-[#b45309]" />
-            <span className="text-[12px] font-bold leading-snug text-[#b45309]">
-              {streak}-day streak · Today&apos;s POTD
-            </span>
-          </button>
-       
+        <div className="mt-auto shrink-0 border-t border-[#f0ebe3] bg-white p-2 xl:p-3">
+          <div className="hidden xl:block">
+            <LmsSidebarPotd />
+          </div>
         </div>
       </aside>
 
@@ -145,7 +149,7 @@ function ShellChrome({ children }: { children: ReactNode }) {
       </div>
 
       {/* Mobile bottom nav */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-6 border-t border-[#e8e2d8] bg-white/95 px-0.5 pb-[env(safe-area-inset-bottom)] pt-1 backdrop-blur-md lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-7 border-t border-[#e8e2d8] bg-white/95 px-0.5 pb-[env(safe-area-inset-bottom)] pt-1 backdrop-blur-md lg:hidden">
         {NAV.map((item) => {
           const active = item.exact
             ? pathname === item.href
