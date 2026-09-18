@@ -28,7 +28,13 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type PointerEvent as ReactPointerEvent,
+} from "react";
 import { LearnDino } from "./learn-dino";
 import { LearnStartButton } from "./learn-start-button";
 
@@ -37,6 +43,47 @@ const HIDDEN_PREFIXES = [
   "/admintestingistrueonlyman134hsydsudy4",
   "/learn/app",
 ];
+
+const DINO_FAB_POS_KEY = "mentr_dino_fab_pos_v1";
+
+type FabPos = { left: number; top: number };
+
+function readFabPos(): FabPos | null {
+  try {
+    const raw = localStorage.getItem(DINO_FAB_POS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as FabPos;
+    if (
+      typeof parsed?.left === "number" &&
+      typeof parsed?.top === "number" &&
+      Number.isFinite(parsed.left) &&
+      Number.isFinite(parsed.top)
+    ) {
+      return parsed;
+    }
+  } catch {
+    /* ignore */
+  }
+  return null;
+}
+
+function writeFabPos(pos: FabPos) {
+  try {
+    localStorage.setItem(DINO_FAB_POS_KEY, JSON.stringify(pos));
+  } catch {
+    /* ignore */
+  }
+}
+
+function clampFabPos(left: number, top: number, size = 72): FabPos {
+  const pad = 8;
+  const maxL = Math.max(pad, window.innerWidth - size - pad);
+  const maxT = Math.max(pad, window.innerHeight - size - pad);
+  return {
+    left: Math.min(maxL, Math.max(pad, left)),
+    top: Math.min(maxT, Math.max(pad, top)),
+  };
+}
 
 /** Desktop grip pose — left of the card (sm+) */
 const DINO_HOLD_DESKTOP =
@@ -114,13 +161,26 @@ export function LearnDinoGuide() {
   const [talk, setTalk] = useState(false);
   const [faqId, setFaqId] = useState(DINO_FAQ_START);
   const [hi, setHi] = useState(false);
+  const [fabPos, setFabPos] = useState<FabPos | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    origLeft: number;
+    origTop: number;
+    moved: boolean;
+  } | null>(null);
 
   const hidden = HIDDEN_PREFIXES.some(
     (p) => pathname === p || pathname.startsWith(`${p}/`),
   );
   const faq = dinoFaqNode(faqId);
   const nextQs = dinoFaqNext(faqId);
+
+  useEffect(() => {
+    setFabPos(readFabPos());
+  }, []);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
@@ -157,7 +217,65 @@ export function LearnDinoGuide() {
     setOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    function onResize() {
+      setFabPos((prev) => (prev ? clampFabPos(prev.left, prev.top) : prev));
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  function onFabPointerDown(e: ReactPointerEvent<HTMLButtonElement>) {
+    if (e.button !== 0) return;
+    const el = e.currentTarget;
+    const rect = el.getBoundingClientRect();
+    const left = fabPos?.left ?? rect.left;
+    const top = fabPos?.top ?? rect.top;
+    dragRef.current = {
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      origLeft: left,
+      origTop: top,
+      moved: false,
+    };
+    el.setPointerCapture(e.pointerId);
+  }
+
+  function onFabPointerMove(e: ReactPointerEvent<HTMLButtonElement>) {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    const dx = e.clientX - drag.startX;
+    const dy = e.clientY - drag.startY;
+    if (!drag.moved && dx * dx + dy * dy < 36) return;
+    drag.moved = true;
+    const next = clampFabPos(drag.origLeft + dx, drag.origTop + dy);
+    setFabPos(next);
+  }
+
+  function onFabPointerUp(e: ReactPointerEvent<HTMLButtonElement>) {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== e.pointerId) return;
+    dragRef.current = null;
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {
+      /* ignore */
+    }
+    if (drag.moved) {
+      const dx = e.clientX - drag.startX;
+      const dy = e.clientY - drag.startY;
+      const next = clampFabPos(drag.origLeft + dx, drag.origTop + dy);
+      setFabPos(next);
+      writeFabPos(next);
+      return;
+    }
+    setOpen(true);
+  }
+
   if (hidden) return null;
+
+  const usingCustomPos = Boolean(fabPos) && !open;
 
   return (
     <div
@@ -165,12 +283,20 @@ export function LearnDinoGuide() {
         "pointer-events-none fixed z-[255]",
         open
           ? "inset-0 flex items-end justify-center sm:items-end sm:justify-end"
-          : "right-[max(0.75rem,env(safe-area-inset-right))] flex justify-end",
+          : usingCustomPos
+            ? "left-0 top-0"
+            : "right-[max(0.75rem,env(safe-area-inset-right))] flex justify-end",
         !open &&
+          !usingCustomPos &&
           (cookieUp
-            ? "bottom-[7.5rem] sm:bottom-[5.5rem]"
-            : "bottom-[max(1rem,env(safe-area-inset-bottom))]"),
+            ? "bottom-[8.25rem] sm:bottom-[5.5rem]"
+            : "bottom-[5.75rem] sm:bottom-[max(1rem,env(safe-area-inset-bottom))]"),
       )}
+      style={
+        usingCustomPos && fabPos
+          ? { left: fabPos.left, top: fabPos.top }
+          : undefined
+      }
     >
       {open ? (
         <button
@@ -390,18 +516,26 @@ export function LearnDinoGuide() {
             ) : null}
           </div>
         ) : (
-          <div className="flex flex-col items-end gap-2">
-            {hi ? (
+          <div
+            className={cn(
+              "flex flex-col items-end gap-2",
+              usingCustomPos && "items-center",
+            )}
+          >
+            {hi && !usingCustomPos ? (
               <p className="max-w-[10.5rem] animate-in fade-in zoom-in-95 rounded-2xl rounded-br-md bg-white/90 px-2.5 py-1.5 text-[11px] font-bold leading-snug text-ink shadow-[0_8px_20px_rgba(28,36,52,0.12)] ring-1 ring-white/80 backdrop-blur-md sm:max-w-[11.5rem] sm:px-3 sm:py-2 sm:text-[12px]">
                 Learn with <span className="text-[#ff6a1a]">mentr</span>
               </p>
             ) : null}
             <button
               type="button"
-              onClick={() => setOpen(true)}
-              className="inline-flex border-0 bg-transparent p-0"
+              onPointerDown={onFabPointerDown}
+              onPointerMove={onFabPointerMove}
+              onPointerUp={onFabPointerUp}
+              onPointerCancel={onFabPointerUp}
+              className="inline-flex touch-none border-0 bg-transparent p-0"
               aria-expanded={open}
-              aria-label="Open Mentr Learn dino guide"
+              aria-label="Open Mentr Learn dino guide — drag to move"
             >
               <LearnDino
                 action="handshake"

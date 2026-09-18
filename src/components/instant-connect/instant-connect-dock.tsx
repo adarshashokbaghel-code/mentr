@@ -154,7 +154,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]",
+        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.85rem,env(safe-area-inset-bottom))] sm:px-4",
         className,
       )}
     >
@@ -170,16 +170,16 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
         aria-hidden={!shown}
       />
 
-      {/* Fixed-width shell — same 410px rect open & closed (Zero Nav) */}
+      {/* Fixed-width shell — same rect open & closed (Zero Nav) */}
       <div
-        className="pointer-events-auto relative w-full max-w-[410px]"
+        className="pointer-events-auto relative w-full max-w-[min(100%,440px)]"
         role="dialog"
         aria-modal={mounted}
         aria-labelledby={mounted ? titleId : undefined}
       >
         <div
           className={cn(
-            "flex w-full flex-col overflow-hidden rounded-[32px] p-1.5 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter]",
+            "flex w-full flex-col overflow-hidden rounded-[28px] p-2 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter] sm:rounded-[32px] sm:p-2.5",
             mounted
               ? "bg-[rgba(28,28,28,0.78)] shadow-[0_16px_48px_rgba(0,0,0,0.35)] ring-white/12 backdrop-blur-[20px]"
               : "bg-[#c4b5a0]/95 ring-ink/10 backdrop-blur-md",
@@ -202,7 +202,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
             <div className="min-h-0 overflow-hidden">
               <div
                 id={titleId}
-                className="max-h-[min(56vh,480px)] overflow-y-auto overscroll-contain px-4 pb-2 pt-5"
+                className="max-h-[min(72vh,640px)] overflow-y-auto overscroll-contain px-4 pb-3 pt-5 sm:max-h-[min(68vh,620px)] sm:px-6 sm:pb-4 sm:pt-6"
                 style={{
                   opacity: shown ? 1 : 0,
                   transform: shown ? "translateY(0)" : "translateY(18px)",
@@ -227,7 +227,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
           </div>
 
           <div
-            className="relative z-10 flex items-center gap-1.5"
+            className="relative z-10 flex items-center gap-2 px-0.5 pt-0.5"
             role="navigation"
             aria-label="Instant Connect"
           >
@@ -239,13 +239,13 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               aria-pressed={panel === "guide"}
               onClick={openGuide}
               className={cn(
-                "flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98]",
+                "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]",
                 mounted
                   ? "bg-white/15 text-white ring-1 ring-white/20"
                   : "bg-white text-sage shadow-sm",
               )}
             >
-              <Play className="h-4 w-4 fill-current" />
+              <Play className="h-3.5 w-3.5 fill-current sm:h-4 sm:w-4" />
             </button>
 
             <button
@@ -253,7 +253,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               onClick={() => void onMainCta()}
               disabled={mainDisabled}
               className={cn(
-                "flex h-[50px] min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-4 text-[15px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50",
+                "flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-[13px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 sm:h-[50px] sm:px-4 sm:text-[15px]",
                 mounted
                   ? "bg-white text-ink hover:bg-white/90"
                   : "bg-ink text-white shadow-[inset_0_1px_0.5px_rgba(255,255,255,0.3),inset_0_-1.5px_0.5px_rgba(0,0,0,0.3),0_2px_5px_rgba(0,0,0,0.25)] hover:bg-[#2a231c]",
@@ -273,9 +273,9 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 type="button"
                 aria-label="Close"
                 onClick={close}
-                className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-white text-ink transition hover:scale-[1.03] active:scale-[0.98]"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]"
               >
-                <X className="h-4 w-4" strokeWidth={2.5} />
+                <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.5} />
               </button>
             ) : (
               <button
@@ -283,9 +283,9 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 aria-label="Instant Connect"
                 onClick={openStepper}
                 disabled={loading}
-                className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 sm:h-[50px] sm:w-[50px]"
               >
-                <Zap className="h-4 w-4" />
+                <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </button>
             )}
           </div>
@@ -297,24 +297,24 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
 
 function GuidePanel() {
   return (
-    <div className="pb-1 font-sans text-center text-white">
-      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/45">
+    <div className="pb-2 font-sans text-center text-white">
+      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">
         Quick guide
       </p>
-      <h2 className="mt-1 text-2xl font-bold tracking-tight">
+      <h2 className="mt-1 text-xl font-bold tracking-tight sm:text-2xl">
         How it works
       </h2>
-      <ol className="mt-6 space-y-5 text-left">
+      <ol className="mt-5 space-y-4 text-left sm:mt-6 sm:space-y-5">
         {GUIDE_STEPS.map((s, i) => (
-          <li key={s.title} className="flex gap-3">
-            <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-white ring-1 ring-white/15">
+          <li key={s.title} className="flex gap-2.5 sm:gap-3">
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white ring-1 ring-white/15 sm:h-8 sm:w-8 sm:text-sm">
               {i + 1}
             </span>
             <div>
-              <p className="text-lg font-bold tracking-tight text-white">
+              <p className="text-base font-bold tracking-tight text-white sm:text-lg">
                 {s.title}
               </p>
-              <p className="mt-0.5 text-sm font-medium leading-relaxed text-white/50">
+              <p className="mt-0.5 text-xs font-medium leading-relaxed text-white/50 sm:text-sm">
                 {s.body}
               </p>
             </div>

@@ -56,6 +56,7 @@ export type ValidatedImage = {
  */
 export async function validateAndNormalizeImage(
   file: File,
+  opts?: { maxProcessSide?: number },
 ): Promise<ValidatedImage> {
   if (file.size <= 0) {
     throw new ImageValidationError("Empty file.");
@@ -100,10 +101,8 @@ export async function validateAndNormalizeImage(
     throw new ImageValidationError("Image has too many pixels.");
   }
 
-  const scale = Math.min(
-    1,
-    BG_REMOVAL.MAX_PROCESS_SIDE / Math.max(width, height),
-  );
+  const maxSide = opts?.maxProcessSide ?? BG_REMOVAL.MAX_PROCESS_SIDE;
+  const scale = Math.min(1, maxSide / Math.max(width, height));
   const processWidth = Math.max(1, Math.round(width * scale));
   const processHeight = Math.max(1, Math.round(height * scale));
 

@@ -388,7 +388,7 @@ export const TOOLS: ToolDef[] = [
       "Upload a photo, remove the background on your device, preview the transparent result, and download a PNG. Free forever with no watermark and no mandatory signup. Processing is private: your image never leaves this browser. Built as a dedicated utility while remove.bg’s standalone site moves into Canva (shutdown announced for 1 December 2026).",
     howTo: [
       "Upload a JPG, PNG, or WEBP image.",
-      "Wait while the model prepares (first visit downloads ~94 MB, then cached).",
+      "Wait while the model prepares (first visit loads ~94 MB from Mentr, then cached).",
       "Compare original vs transparent result.",
       "Download the PNG, or start over with another image.",
     ],
@@ -399,7 +399,7 @@ export const TOOLS: ToolDef[] = [
       "Homework images without cluttered backgrounds",
     ],
     privacyNote:
-      "Private processing on your device. The model downloads from Hugging Face into your browser cache — Mentr does not upload your image.",
+      "Private processing on your device. The model loads from Mentr’s CDN into your browser cache — your image never uploads.",
     metaTitle:
       "Free Background Remover — Remove Image Backgrounds | Mentr",
     metaDescription:
@@ -424,7 +424,7 @@ export const TOOLS: ToolDef[] = [
       {
         question: "Why is the first run slow?",
         answer:
-          "The background-removal model (~94 MB) downloads once and is cached locally. Later runs skip that download.",
+          "The background-removal model (~94 MB) loads once from Mentr and is cached in your browser. Later runs skip that download. Phones use a lighter path (smaller canvas, no second pass).",
       },
       {
         question: "Is there a watermark?",

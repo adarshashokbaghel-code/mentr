@@ -16,7 +16,7 @@ import {
 import { trackToolEvent } from "@/lib/tools-analytics";
 import { relatedTools } from "@/lib/tools-catalog";
 import { cn } from "@/lib/utils";
-import { Download, RotateCcw, Shield, Sparkles } from "lucide-react";
+import { Download, RefreshCw, RotateCcw, Shield } from "lucide-react";
 import Link from "next/link";
 import {
   useCallback,
@@ -134,8 +134,17 @@ export function ToolBackgroundRemover() {
     const client = new BackgroundRemovalClient();
     clientRef.current = client;
     client.setProgressHandler((p) => {
+      if (p.phase === "ready") {
+        setStatus(null);
+        setProgress(null);
+        return;
+      }
       setStatus(p.message);
       setProgress(p.progress ?? null);
+    });
+    // Warm model as soon as the tool page opens (critical on mobile)
+    void client.init().catch(() => {
+      /* process() will retry; avoid noisy banner before upload */
     });
     return () => {
       client.dispose();
@@ -162,6 +171,42 @@ export function ToolBackgroundRemover() {
     trackToolEvent("tool_reset", { slug: SLUG });
   }
 
+  async function retryProcess() {
+    const v = validated;
+    const client = clientRef.current;
+    if (!v || !client) return;
+    setError(null);
+    setBusy(true);
+    setStatus("Trying again…");
+    try {
+      await client.hardReset();
+      client.setProgressHandler((p) => {
+        if (p.phase === "ready") {
+          setStatus(null);
+          setProgress(null);
+          return;
+        }
+        setStatus(p.message);
+        setProgress(p.progress ?? null);
+      });
+      const out = await client.process(v.processBlob);
+      resultRef.current = out.objectUrl;
+      setResultUrl(out.objectUrl);
+      setStatus(null);
+      trackToolEvent("tool_complete", {
+        slug: SLUG,
+        detail: `retry-${out.backend}`,
+      });
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Processing failed";
+      setError(msg);
+      trackToolEvent("tool_error", { slug: SLUG, detail: msg.slice(0, 80) });
+    } finally {
+      setBusy(false);
+      setProgress(null);
+    }
+  }
+
   async function onFiles(files: File[]) {
     const file = files[0];
     if (!file) return;
@@ -172,7 +217,12 @@ export function ToolBackgroundRemover() {
       detail: "upload",
     });
     try {
-      const v = await validateAndNormalizeImage(file);
+      const client = clientRef.current;
+      if (!client) throw new Error("Processor unavailable");
+      const profile = client.getDeviceProfile();
+      const v = await validateAndNormalizeImage(file, {
+        maxProcessSide: profile.maxProcessSide,
+      });
       previewRef.current = v.previewUrl;
       setValidated(v);
       setBusy(true);
@@ -181,9 +231,6 @@ export function ToolBackgroundRemover() {
         slug: SLUG,
         detail: resolutionBucket(v.processWidth, v.processHeight),
       });
-
-      const client = clientRef.current;
-      if (!client) throw new Error("Processor unavailable");
 
       const out = await client.process(v.processBlob);
       resultRef.current = out.objectUrl;
@@ -233,7 +280,7 @@ export function ToolBackgroundRemover() {
           disabled={busy}
         />
       ) : null}
-{/* test comment */}
+
       {validated ? (
         <div className="space-y-4">
           {busy ? (
@@ -247,13 +294,31 @@ export function ToolBackgroundRemover() {
               originalUrl={validated.previewUrl}
               resultUrl={resultUrl}
             />
-          ) : null}
+          ) : (
+            <div className="overflow-hidden rounded-xl border border-hairline bg-white">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={validated.previewUrl}
+                alt="Upload preview"
+                className="mx-auto max-h-[320px] w-full object-contain"
+              />
+            </div>
+          )}
 
           <ToolsActionBar busy={busy} error={error}>
             {resultUrl ? (
               <ToolsPrimaryButton onClick={download} disabled={busy}>
                 <Download className="mr-1.5 h-4 w-4" />
                 Download PNG
+              </ToolsPrimaryButton>
+            ) : null}
+            {error && !resultUrl ? (
+              <ToolsPrimaryButton
+                onClick={() => void retryProcess()}
+                disabled={busy}
+              >
+                <RefreshCw className="mr-1.5 h-4 w-4" />
+                Retry
               </ToolsPrimaryButton>
             ) : null}
             <button
@@ -303,77 +368,179 @@ function ProcessingStage({
   status: string | null;
   progress: number | null;
 }) {
-  const label = friendlyStatus(status);
-  const bar =
-    progress != null
-      ? progress
-      : label.includes("edge")
-        ? 78
-        : label.includes("subject")
-          ? 52
-          : label.includes("ready") || label.includes("Setting")
-            ? Math.max(12, progress ?? 18)
-            : 35;
+  const step = statusToStep(status);
+  const [tick, setTick] = useState(0);
+  const started = useRef(Date.now());
+
+  useEffect(() => {
+    started.current = Date.now();
+    const id = window.setInterval(() => setTick((t) => t + 1), 400);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const elapsed = Math.max(0, Math.floor((Date.now() - started.current) / 1000));
+  void tick; // drive re-render for elapsed
+
+  const pct = computeProgress(step, progress, elapsed);
+
+  const steps = [
+    { id: 0, label: "Prepare" },
+    { id: 1, label: "Scan" },
+    { id: 2, label: "Cut out" },
+    { id: 3, label: "Finish" },
+  ] as const;
 
   return (
-    <div className="overflow-hidden rounded-2xl border-2 border-ink/10 bg-ink">
-      <div className="relative aspect-[4/3] w-full overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={previewUrl}
-          alt=""
-          className="h-full w-full object-contain opacity-80"
-          draggable={false}
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink/50"
-          aria-hidden
-        />
-        {/* Scanning beam */}
-        <div
-          className="mentr-bg-scan pointer-events-none absolute inset-x-0 h-28 bg-gradient-to-b from-transparent via-coral/55 to-transparent"
-          aria-hidden
-        />
-        <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-          <div className="flex items-center gap-2 text-white">
-            <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-coral/90">
-              <Sparkles className="h-4 w-4 animate-pulse" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <p className="text-[14px] font-extrabold tracking-tight">
-                {label}
-              </p>
-              <p className="text-[11px] font-medium text-white/65">
-                Private on your device · almost there
-              </p>
+    <div className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-sm">
+      <div className="grid gap-0 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
+        <div className="relative aspect-[4/3] bg-[#f6f4ef] sm:aspect-auto sm:min-h-[280px]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={previewUrl}
+            alt=""
+            className="h-full w-full object-contain"
+            draggable={false}
+          />
+          {/* Thin professional highlight — not a toy scan beam */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent"
+            aria-hidden
+          />
+          <div className="absolute bottom-3 left-3 rounded-md bg-ink/80 px-2 py-1 text-[10px] font-bold tracking-wide text-white uppercase">
+            Processing
+          </div>
+        </div>
+
+        <div className="flex flex-col justify-center gap-4 border-t border-hairline p-4 sm:border-t-0 sm:border-l sm:p-5">
+          <div>
+            <p className="text-[15px] font-extrabold tracking-tight text-ink">
+              {friendlyStatus(status)}
+            </p>
+            <p className="mt-1 text-[12px] font-medium text-muted">
+              Safe to switch tabs — progress continues in the background.
+            </p>
+          </div>
+
+          <div>
+            <div className="mb-1.5 flex items-baseline justify-between gap-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-muted">
+                Progress
+              </span>
+              <span className="tabular-nums text-[13px] font-extrabold text-ink">
+                {pct}%
+                <span className="ml-2 text-[11px] font-semibold text-muted">
+                  {elapsed}s
+                </span>
+              </span>
+            </div>
+            <div
+              className="h-2 overflow-hidden rounded-full bg-cream"
+              role="progressbar"
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={pct}
+              aria-label="Background removal progress"
+            >
+              <div
+                className={cn(
+                  "h-full rounded-full bg-ink transition-[width] duration-500 ease-out",
+                  progress == null && step < 3
+                    ? "mentr-bg-progress-indeterminate"
+                    : "",
+                )}
+                style={{ width: `${pct}%` }}
+              />
             </div>
           </div>
-          <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/15">
-            <div
-              className="h-full rounded-full bg-coral transition-[width] duration-500 ease-out"
-              style={{ width: `${Math.min(96, bar)}%` }}
-            />
-          </div>
+
+          <ol className="grid grid-cols-4 gap-1.5">
+            {steps.map((s) => {
+              const done = step > s.id;
+              const active = step === s.id;
+              return (
+                <li
+                  key={s.id}
+                  className={cn(
+                    "rounded-lg border px-1.5 py-2 text-center",
+                    done && "border-sage/40 bg-[#e6f7f4]/70",
+                    active && "border-ink bg-ink text-white",
+                    !done && !active && "border-hairline bg-cream/40 text-muted",
+                  )}
+                >
+                  <p
+                    className={cn(
+                      "text-[10px] font-extrabold uppercase tracking-wide",
+                      active ? "text-white" : done ? "text-sage" : "text-muted",
+                    )}
+                  >
+                    {done ? "Done" : active ? "Now" : s.id + 1}
+                  </p>
+                  <p
+                    className={cn(
+                      "mt-0.5 text-[11px] font-bold",
+                      active ? "text-white" : "text-ink",
+                    )}
+                  >
+                    {s.label}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </div>
   );
 }
 
+function statusToStep(raw: string | null): number {
+  const s = (raw || "").toLowerCase();
+  if (s.includes("edge") || s.includes("clean") || s.includes("detail") || s.includes("finish")) {
+    return 3;
+  }
+  if (s.includes("subject") || s.includes("finding") || s.includes("remov") || s.includes("cut")) {
+    return 2;
+  }
+  if (s.includes("scan") || s.includes("working") || s.includes("photo")) {
+    return 1;
+  }
+  // prepare / download / getting ready / retry / optimize
+  return 0;
+}
+
+function computeProgress(
+  step: number,
+  downloadPct: number | null,
+  elapsed: number,
+): number {
+  if (downloadPct != null && step === 0) {
+    return Math.min(42, Math.max(4, Math.round(downloadPct * 0.42)));
+  }
+  const bases = [8, 28, 58, 82];
+  const base = bases[step] ?? 8;
+  // Gentle time creep within the step so the bar feels alive
+  const creep = Math.min(14, Math.floor(elapsed / 3) + (elapsed % 5));
+  const caps = [42, 55, 78, 96];
+  return Math.min(caps[step] ?? 96, base + creep);
+}
+
 function friendlyStatus(raw: string | null): string {
   const s = (raw || "").toLowerCase();
   if (s.includes("edge") || s.includes("clean") || s.includes("detail")) {
-    return "Cleaning fine edges…";
+    return "Refining edges";
   }
   if (s.includes("subject") || s.includes("finding") || s.includes("remov")) {
-    return "Finding your subject…";
+    return "Removing background";
   }
-  if (s.includes("optim") || s.includes("another") || s.includes("path")) {
-    return "Tuning for your device…";
+  if (s.includes("optim") || s.includes("another") || s.includes("path") || s.includes("phone") || s.includes("device")) {
+    return "Optimizing for your device";
   }
-  if (s.includes("ready") || s.includes("setting") || s.includes("getting")) {
-    return "Getting ready…";
+  if (s.includes("retry")) {
+    return "Retrying setup";
   }
-  if (s.includes("scan")) return "Scanning your photo…";
-  return raw?.trim() || "Working on your photo…";
+  if (s.includes("ready") || s.includes("setting") || s.includes("getting") || s.includes("prepar")) {
+    return "Preparing model";
+  }
+  if (s.includes("scan")) return "Scanning photo";
+  return raw?.replace(/…/g, "").trim() || "Working on your photo";
 }

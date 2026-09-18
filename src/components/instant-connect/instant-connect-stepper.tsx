@@ -40,6 +40,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { createPortal } from "react-dom";
 
 const OTHER = "Other";
 /** Sheet form micro-steps + post-match flow */
@@ -63,11 +64,11 @@ export type InstantConnectCtaState = {
 };
 
 const inputCls =
-  "h-10 w-full rounded-xl border border-white/15 bg-white/10 px-3 text-sm font-medium text-white outline-none transition placeholder:text-white/40 focus:border-white/40 [&_option]:bg-white [&_option]:text-ink";
+  "h-10 w-full rounded-xl border border-white/15 bg-white/10 px-3 text-[13px] font-medium text-white outline-none transition placeholder:text-white/40 focus:border-white/40 sm:h-11 sm:text-sm [&_option]:bg-white [&_option]:text-ink";
 const inputClsLight =
   "h-11 w-full rounded-xl border-2 border-ink/10 bg-white px-3 text-sm font-medium text-ink outline-none transition focus:border-ink/40";
 const labelCls =
-  "mb-1.5 block text-[10px] font-bold uppercase tracking-[0.12em] text-white/55";
+  "mb-2 block text-[10px] font-bold uppercase tracking-[0.12em] text-white/55";
 const labelClsLight =
   "mb-1.5 block text-[11px] font-bold uppercase tracking-[0.1em] text-muted";
 
@@ -476,14 +477,14 @@ export const InstantConnectStepper = forwardRef<
       )}
     >
       {sheet ? (
-        <div className="mb-5 text-center">
-          <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-white/45">
+        <div className="mb-5 px-0.5 text-center sm:mb-6">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">
             Instant Connect
           </p>
-          <h2 className="mt-1 text-2xl font-bold tracking-tight text-white">
+          <h2 className="mt-1 text-xl font-bold tracking-tight text-white sm:text-2xl">
             {titles[step].h}
           </h2>
-          <p className="mt-1 text-sm font-medium text-white/50">
+          <p className="mt-1 text-xs font-medium text-white/50 sm:text-sm">
             {titles[step].s}
           </p>
           {step !== "results" && step !== "phone" && step !== "done" ? (
@@ -524,7 +525,7 @@ export const InstantConnectStepper = forwardRef<
       ) : null}
 
       {step === "looking" && (
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className="flex flex-wrap justify-center gap-2.5 px-1 sm:gap-3">
           {IC_LOOKING_FOR.map((o) => (
             <Chip
               key={o.value}
@@ -539,7 +540,7 @@ export const InstantConnectStepper = forwardRef<
       )}
 
       {step === "basics" && (
-        <div className="space-y-3">
+        <div className="space-y-4 sm:space-y-5">
           <Field label="Class / Level" labelClass={lCls}>
             <select
               className={iCls}
@@ -593,7 +594,7 @@ export const InstantConnectStepper = forwardRef<
       )}
 
       {step === "setup" && (
-        <div className="space-y-3">
+        <div className="space-y-5 sm:space-y-6">
           <Field label="Board" labelClass={lCls}>
             <select
               className={iCls}
@@ -608,9 +609,9 @@ export const InstantConnectStepper = forwardRef<
               ))}
             </select>
           </Field>
-          <div>
+          <div className="pt-0.5">
             <span className={lCls}>Mode</span>
-            <div className="flex flex-wrap gap-2">
+            <div className="mt-0.5 flex flex-wrap gap-2.5">
               {IC_MODES.map((o) => (
                 <Chip
                   key={o.value}
@@ -637,7 +638,7 @@ export const InstantConnectStepper = forwardRef<
       )}
 
       {step === "budget" && (
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className="flex flex-wrap justify-center gap-2.5 px-1 sm:gap-3">
           {IC_BUDGET_PRESETS.map((b, i) => (
             <Chip
               key={b.label}
@@ -973,7 +974,7 @@ function Chip({
       type="button"
       onClick={onClick}
       className={cn(
-        "rounded-lg border px-3 py-2 text-xs font-bold transition",
+        "rounded-lg border px-2.5 py-1.5 text-[11px] font-bold transition sm:px-3 sm:py-2 sm:text-xs",
         sheet
           ? active
             ? "border-white bg-white text-ink"
@@ -1035,7 +1036,10 @@ function MatchProfileModal({
   tutor: IcMatchedTutor;
   onClose: () => void;
 }) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => {
@@ -1056,39 +1060,35 @@ function MatchProfileModal({
         ? "Online"
         : "In person";
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center sm:p-4"
+      className="fixed inset-0 z-[400] flex items-stretch justify-center sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="ic-profile-title"
     >
       <button
         type="button"
-        className="absolute inset-0 bg-ink/55 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-ink/60 backdrop-blur-[3px]"
         aria-label="Close profile"
         onClick={onClose}
       />
 
       <div
         className={cn(
-          "relative z-10 flex w-full flex-col bg-white shadow-[0_-8px_40px_rgba(0,0,0,0.2)]",
-          "max-h-[min(92dvh,920px)] rounded-t-[1.5rem]",
-          "sm:max-h-[min(88vh,720px)] sm:max-w-lg sm:rounded-2xl sm:border-2 sm:border-ink sm:shadow-[4px_4px_0_0_#1c1a17]",
+          "relative z-10 flex h-full w-full flex-col bg-white",
+          "sm:h-auto sm:max-h-[min(90vh,760px)] sm:max-w-lg sm:rounded-2xl sm:border-2 sm:border-ink sm:shadow-[4px_4px_0_0_#1c1a17]",
         )}
       >
-        {/* Drag hint + sticky close (mobile) */}
-        <div className="sticky top-0 z-10 shrink-0 border-b border-hairline bg-white/95 px-4 pb-3 pt-3 backdrop-blur-md sm:px-5 sm:pt-4">
-          <div
-            className="mx-auto mb-3 h-1 w-10 rounded-full bg-ink/15 sm:hidden"
-            aria-hidden
-          />
+        <div className="sticky top-0 z-10 shrink-0 border-b border-hairline bg-white px-4 pb-3 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-5 sm:pt-4">
           <div className="flex items-start gap-3">
             <ProfileAvatar name={tutor.name} src={tutor.profileImageUrl} />
-            <div className="min-w-0 flex-1 pr-2">
+            <div className="min-w-0 flex-1 pr-1">
               <h3
                 id="ic-profile-title"
-                className="flex flex-wrap items-center gap-2 text-lg font-extrabold leading-snug tracking-tight text-ink sm:text-xl"
+                className="flex flex-wrap items-center gap-2 text-base font-extrabold leading-snug tracking-tight text-ink sm:text-xl"
               >
                 {tutor.name}
                 <span className="inline-flex items-center gap-0.5 rounded-md bg-sage-wash px-1.5 py-0.5 text-[10px] font-bold uppercase text-sage">
@@ -1096,7 +1096,7 @@ function MatchProfileModal({
                   Verified
                 </span>
               </h3>
-              <p className="mt-0.5 text-sm font-semibold text-coral">
+              <p className="mt-0.5 text-xs font-semibold text-coral sm:text-sm">
                 {tutor.designation || tutor.subjects[0] || "Mentor"}
               </p>
             </div>
@@ -1112,7 +1112,7 @@ function MatchProfileModal({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4 sm:px-5">
-          <dl className="grid gap-3 sm:grid-cols-2">
+          <dl className="grid gap-2.5 sm:grid-cols-2 sm:gap-3">
             <Detail
               label="Subjects"
               value={
@@ -1148,7 +1148,7 @@ function MatchProfileModal({
             />
           </dl>
 
-          <p className="mt-4 rounded-xl border border-hairline bg-cream px-3 py-2.5 text-[13px] font-medium leading-relaxed text-muted">
+          <p className="mt-4 rounded-xl border border-hairline bg-cream px-3 py-2.5 text-xs font-medium leading-relaxed text-muted sm:text-[13px]">
             Full bio, reviews, and availability are on the mentor profile.
           </p>
         </div>
@@ -1174,7 +1174,8 @@ function MatchProfileModal({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 
