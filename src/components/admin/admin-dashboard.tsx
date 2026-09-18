@@ -13,6 +13,7 @@ import { AdminLearnTrack } from "@/components/admin/admin-learn";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
+import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
 import { AdminUsersTable } from "@/components/admin/admin-users-table";
 import { fetchAdminStats, type AdminStats } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
@@ -30,6 +31,7 @@ import {
   MessageSquareText,
   Target,
   Users,
+  Zap,
 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
@@ -37,6 +39,7 @@ const NAV = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "users", label: "User management", icon: Users },
   { id: "requirements", label: "Board posts", icon: Megaphone },
+  { id: "instant-connect", label: "Instant Connect", icon: Zap },
   { id: "connections", label: "Connections", icon: Link2 },
   { id: "messenger", label: "Messenger", icon: Mail },
   { id: "engagement", label: "Engagement", icon: Activity },
@@ -411,6 +414,10 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
               <AdminUsersTable adminKey={adminKey} />
             </AdminSection>
+          )}
+
+          {section === "instant-connect" && (
+            <AdminInstantConnect adminKey={adminKey} />
           )}
 
           {stats && section === "connections" && (

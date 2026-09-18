@@ -72,6 +72,8 @@ export interface Teacher {
   kind: "tutor" | "mentor";
   /** True for real faculty loaded from the database */
   live?: boolean;
+  /** ISO join date from the database (newest-first lists) */
+  createdAt?: string | null;
 }
 
 export const SUBJECTS = [
@@ -463,10 +465,29 @@ export const TEACHERS: Teacher[] = [
 
 export type SearchSort =
   | "relevance"
+  | "newest"
   | "open"
   | "experience"
   | "rating"
   | "distance";
+
+function joinedAtMs(t: Pick<Teacher, "createdAt">): number {
+  if (!t.createdAt) return 0;
+  const ms = Date.parse(t.createdAt);
+  return Number.isFinite(ms) ? ms : 0;
+}
+
+function hasProfilePhoto(t: Pick<Teacher, "imageUrl">): boolean {
+  return Boolean(t.imageUrl?.trim());
+}
+
+/** Photo profiles first, then newest join date. */
+function comparePhotoThenNewest(a: Teacher, b: Teacher): number {
+  const photoA = hasProfilePhoto(a) ? 1 : 0;
+  const photoB = hasProfilePhoto(b) ? 1 : 0;
+  if (photoA !== photoB) return photoB - photoA;
+  return joinedAtMs(b) - joinedAtMs(a);
+}
 
 export function getTeacher(id: string): Teacher | undefined {
   return TEACHERS.find((t) => t.id === id);
@@ -497,7 +518,7 @@ export type FetchTeachersResult = {
   failed: boolean;
 };
 
-const PUBLIC_TEACHERS_CACHE_KEY = "mentr_public_teachers_v1";
+const PUBLIC_TEACHERS_CACHE_KEY = "mentr_public_teachers_v2";
 const PUBLIC_TEACHERS_TTL_MS = 5 * 60 * 1000;
 
 type PublicTeachersCache = {
@@ -714,36 +735,50 @@ export function searchTeachers(opts: {
 
   const sort = opts.sort || "relevance";
   if (sort === "distance" && hasGeo) {
-    return list.sort(
-      (a, b) => (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity),
-    );
-  }
-  if (sort === "experience") {
-    return list.sort((a, b) => b.experienceYears - a.experienceYears);
-  }
-  if (sort === "open") {
-    return list.sort((a, b) => b.openSlots - a.openSlots);
-  }
-  if (sort === "rating") {
-    return list.sort(
-      (a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount,
-    );
-  }
-  // relevance: if geo available, prefer nearer; else open/rating
-  if (hasGeo) {
     return list.sort((a, b) => {
-      if (a.openSlots === 0 && b.openSlots > 0) return 1;
-      if (b.openSlots === 0 && a.openSlots > 0) return -1;
-      return (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity);
+      const byDist =
+        (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity);
+      if (byDist !== 0) return byDist;
+      return comparePhotoThenNewest(a, b);
     });
   }
-  return list.sort((a, b) => {
-    if (a.openSlots === 0 && b.openSlots > 0) return 1;
-    if (b.openSlots === 0 && a.openSlots > 0) return -1;
-    if (a.rating !== b.rating) return b.rating - a.rating;
-    if (a.verified !== b.verified) return a.verified ? -1 : 1;
-    return b.experienceYears - a.experienceYears;
-  });
+  if (sort === "experience") {
+    return list.sort((a, b) => {
+      const byExp = b.experienceYears - a.experienceYears;
+      if (byExp !== 0) return byExp;
+      return comparePhotoThenNewest(a, b);
+    });
+  }
+  if (sort === "open") {
+    return list.sort((a, b) => {
+      const byOpen = b.openSlots - a.openSlots;
+      if (byOpen !== 0) return byOpen;
+      return comparePhotoThenNewest(a, b);
+    });
+  }
+  if (sort === "rating") {
+    return list.sort((a, b) => {
+      const byRating =
+        b.rating - a.rating || b.reviewCount - a.reviewCount;
+      if (byRating !== 0) return byRating;
+      return comparePhotoThenNewest(a, b);
+    });
+  }
+  if (sort === "newest") {
+    return list.sort(comparePhotoThenNewest);
+  }
+  // relevance: photo first, then newest; with geo prefer nearer within that
+  if (hasGeo) {
+    return list.sort((a, b) => {
+      const photoCmp = comparePhotoThenNewest(a, b);
+      // Keep photo priority even with location
+      const photoA = hasProfilePhoto(a) ? 1 : 0;
+      const photoB = hasProfilePhoto(b) ? 1 : 0;
+      if (photoA !== photoB) return photoB - photoA;
+      return (a.distanceKm ?? Infinity) - (b.distanceKm ?? Infinity) || photoCmp;
+    });
+  }
+  return list.sort(comparePhotoThenNewest);
 }
 
 /** Only meaningful once `phone` is available (accepted connection / demo). */

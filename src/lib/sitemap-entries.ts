@@ -3,6 +3,7 @@ import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import { LEARN_GEO_SEGMENTS, learnPathFor } from "@/lib/learn-landing-copy";
 import { MONEY_LANDING_PAGES, landingPagePath } from "@/lib/seo-landing-pages";
 import { absoluteUrl } from "@/lib/seo";
+import { TOOLS, TOOLS_HUB } from "@/lib/tools-catalog";
 import {
   EXAM_PREP_PAGES,
   VS_PAGES,
@@ -72,11 +73,11 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/pricing", 0.75, "monthly"),
     entry("/faq", 0.85, "weekly"),
     entry("/blog", 0.85, "weekly"),
+    entry(TOOLS_HUB.path, 0.95, "weekly"),
+    ...TOOLS.map((t) => entry(`/tools/${t.slug}`, 0.9, "weekly")),
+    entry("/technical/bgremover", 0.75, "monthly"),
     entry("/llms.txt", 0.4, "monthly"),
     entry("/search", 0.9, "daily"),
-    entry("/login", 0.75, "monthly"),
-    entry("/parent", 0.7, "monthly"),
-    entry("/faculty", 0.7, "monthly"),
     ...BLOG_PILLARS.map((p) =>
       entry(`/blog/category/${p.id}`, 0.75, "weekly"),
     ),
@@ -89,6 +90,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     ...VS_PAGES.map((p) => entry(`/vs/${p.slug}`, 0.65, "monthly")),
     entry("/privacy", 0.2, "yearly"),
     entry("/terms", 0.2, "yearly"),
+    entry("/cookie-policy", 0.2, "yearly"),
   ];
 }
 

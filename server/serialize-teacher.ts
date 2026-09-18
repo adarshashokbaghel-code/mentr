@@ -147,6 +147,7 @@ export function toPublicTeacher(
     verified: user.emailVerified,
     kind: isMentor ? ("mentor" as const) : ("tutor" as const),
     live: true,
+    createdAt: user.createdAt?.toISOString?.() ?? null,
   };
 }
 

@@ -61,6 +61,7 @@ const MODE_OPTIONS: { value: ModeFilter; label: string; hint: string }[] = [
 
 const SORT_OPTIONS: { value: SearchSort; label: string }[] = [
   { value: "relevance", label: "Best match" },
+  { value: "newest", label: "Newest" },
   { value: "distance", label: "Nearest" },
   { value: "rating", label: "Top rated" },
   { value: "open", label: "Most open" },
@@ -543,7 +544,7 @@ export function SearchHeader({
       filters.mode !== "all" ||
       !!filters.language ||
       filters.minExp > 0 ||
-      !filters.onlyOpen ||
+      filters.onlyOpen ||
       (filters.sort !== "relevance" && filters.sort !== "distance") ||
       (nearbyActive && filters.radiusKm !== 25),
   );
@@ -556,7 +557,7 @@ export function SearchHeader({
     filters.mode !== "all",
     !!filters.language,
     filters.minExp > 0,
-    !filters.onlyOpen,
+    filters.onlyOpen,
     filters.sort !== "relevance" && filters.sort !== "distance",
     nearbyActive && filters.radiusKm !== 25,
   ].filter(Boolean).length;

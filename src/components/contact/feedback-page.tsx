@@ -37,6 +37,15 @@ const CHANNELS = [
     iconColor: "text-coral-dark",
   },
   {
+    icon: Mail,
+    title: "Privacy requests",
+    body: "Access or delete account data. Email from your registered address.",
+    action: "hello@mentr.in",
+    href: "mailto:hello@mentr.in?subject=Privacy%20request",
+    tint: "bg-butter",
+    iconColor: "text-ink",
+  },
+  {
     icon: MessageSquare,
     title: "Partnerships & press",
     body: "Schools, communities, media, or open-source contributors.",

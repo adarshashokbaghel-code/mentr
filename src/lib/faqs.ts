@@ -79,6 +79,24 @@ export const FAQS: FaqItem[] = [
       "Never. UrbanPro and similar platforms charge tutors for coins or lead packs. On Mentr, parents contact you for free and you respond for free. You keep 100% of your tuition fees — Mentr takes no commission.",
   },
   {
+    category: "general",
+    question: "What free tools does Mentr offer?",
+    answer:
+      "Mentr Tools includes free utilities for teachers (worksheet, question paper, answer key, and lesson plan generators), students (study timetable, CGPA calculator), and PDF helpers (merge, compress, organize, extract text). Most tools run in your browser without signup. Each tool page explains who it is for and how to use the output.",
+  },
+  {
+    category: "parents",
+    question: "How is personal information handled?",
+    answer:
+      "Account basics (name, email, role) and optional profile details are stored to run search and connect requests. Tutor WhatsApp numbers stay hidden until the tutor accepts a parent’s request. Public pages may use analytics and AdSense cookies; dashboards do not show third-party ads. See the Privacy Policy and Cookie Policy for full detail, or email hello@mentr.in for deletion requests.",
+  },
+  {
+    category: "faculty",
+    question: "How can tutors join Mentr?",
+    answer:
+      "Register as faculty, complete your profile (subjects, classes, availability, WhatsApp), and pass phone/identity verification. Once live, parents can find you in search and send connect requests. Listing and responding are free — no lead coins. Classroom tools on /tools are available without a paid plan.",
+  },
+  {
     question: "What is the requirements board?",
     answer:
       "Parents post what they need — subject, class, area, and timing. Tutors browse open posts worldwide and pitch with a short message and their full profile. Each pitch automatically sends a connection request to the parent's dashboard. The parent reviews profiles, accepts who fits, and WhatsApp unlocks — free for both sides.",

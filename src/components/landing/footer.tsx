@@ -1,105 +1,15 @@
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import { ProductHuntBadges } from "@/components/ui/product-hunt-badge";
-import { LEARN_PUBLIC } from "@/lib/learn-flags";
+import { getFooterColumns } from "@/lib/public-nav";
 import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
 } from "@/lib/seo";
-import Link from "next/link";
-
-type FooterLink = { label: string; href: string; external?: boolean };
-
-const columns: Record<string, FooterLink[]> = {
-  Product: [
-    { label: "Browse tutors", href: "/search" },
-    { label: "Browse mentors", href: "/search?kind=mentor" },
-    { label: "Find online tutors", href: "/find-online-tutors" },
-    { label: "Verified tutors", href: "/find-verified-online-tutors" },
-    { label: "Find mentors near me", href: "/find-mentors-near-me" },
-    { label: "Login", href: "/login" },
-    { label: "How it works", href: "/how-it-works" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "For parents", href: "/parents" },
-    { label: "FAQ", href: "/faq" },
-  ],
-  ...(LEARN_PUBLIC
-    ? {
-        Learn: [
-          { label: "Mentr Learn (Class 3–5)", href: "/learn" },
-          { label: "Enroll free", href: "/learn/start" },
-          { label: "Full syllabus", href: "/learn/syllabus" },
-          { label: "Syllabus PDF", href: "/learn/syllabus?download=1" },
-          { label: "Learn India", href: "/learn/india" },
-          { label: "Learn UAE", href: "/learn/uae" },
-          { label: "Learn Australia", href: "/learn/australia" },
-          { label: "Learn Sri Lanka", href: "/learn/sri-lanka" },
-          { label: "Learn Pakistan", href: "/learn/pakistan" },
-          {
-            label: "Kids coding & AI guides",
-            href: "/blog/category/kids-learn",
-          },
-        ] as FooterLink[],
-      }
-    : {}),
-  Parents: [
-    ...(LEARN_PUBLIC
-      ? ([] as FooterLink[])
-      : []),
-    { label: "Create parent account", href: "/parent/signup" },
-    { label: "Parent login", href: "/parent" },
-    { label: "Browse all tutors", href: "/search" },
-    { label: "Find online tutors", href: "/find-online-tutors" },
-    { label: "India online tutors", href: "/find-online-tutors/india" },
-    { label: "UAE online tutors", href: "/find-online-tutors/uae" },
-    { label: "Maths tutors", href: "/subjects/mathematics-tutors-bengaluru" },
-  ],
-  Faculty: [
-    { label: "Online tutor jobs", href: "/online-tutor-jobs" },
-    { label: "For faculty", href: "/for-faculty" },
-    { label: "Create account", href: "/faculty/signup" },
-    { label: "Faculty login", href: "/faculty" },
-    { label: "Mentr vs UrbanPro", href: "/vs/urbanpro" },
-    { label: "UrbanPro alternatives", href: "/blog/urbanpro-alternatives" },
-    { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
-  ],
-  Company: [
-    { label: "About", href: "/about" },
-    { label: "Open source", href: "/open-source" },
-    { label: "Editorial policy", href: "/editorial-policy" },
-    { label: PARENT_COMPANY_NAME, href: PARENT_COMPANY_URL, external: true },
-    { label: "Privacy", href: "/privacy" },
-    { label: "Terms", href: "/terms" },
-    { label: "Contact", href: "/contact" },
-    { label: "Request a feature", href: "/request-feature" },
-  ],
-  Resources: [
-    { label: "All guides", href: "/blog" },
-    { label: "Find a mentor online (India)", href: "/blog/find-mentor-online-india" },
-    { label: "UrbanPro alternatives", href: "/blog/urbanpro-alternatives" },
-    { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
-    { label: "Home tutor fees Bengaluru", href: "/blog/home-tutor-cost-bengaluru" },
-    { label: "Home tutor fees Delhi", href: "/blog/home-tutor-cost-delhi" },
-    { label: "Mentr login guide", href: "/blog/how-to-login-mentr" },
-    ...(LEARN_PUBLIC
-      ? [
-          {
-            label: "Free CS for Class 3–5",
-            href: "/blog/free-computer-science-class-3-5-kids-india",
-          },
-          {
-            label: "Free coding course kids India",
-            href: "/blog/free-coding-course-for-kids-india",
-          },
-        ]
-      : []),
-    { label: "Browse tutors", href: "/search" },
-    { label: "Find mentors near me", href: "/find-mentors-near-me" },
-    { label: "Online tutor jobs", href: "/online-tutor-jobs" },
-  ],
-};
 
 export function Footer() {
+  const columns = getFooterColumns();
+
   return (
     <footer className="border-t border-hairline bg-ink text-white">
       <div className="mx-auto max-w-[1400px] px-4 py-10 sm:py-14 sm:px-6 lg:px-8">
@@ -107,20 +17,21 @@ export function Footer() {
           <div>
             <MentrBrand variant="light" logoClassName="h-8" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
-              The free connector for parents and faculty worldwide — a{" "}
+              Free tutor &amp; mentor finder, classroom tools, and learning
+              resources — a{" "}
               <PaprlyWordmark variant="light" className="align-middle" />{" "}
-              product. Search locally or online, message on WhatsApp, arrange
-              everything directly — zero fees, zero cut.
+              product. Search locally or online, connect on WhatsApp after both
+              sides accept — zero fees, zero commission.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
                 Worldwide
               </span>
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
-                For parents
+                Verified tutors
               </span>
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
-                For faculty
+                Free tools
               </span>
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
                 ₹0 forever
@@ -161,7 +72,16 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()}{" "}
             <PaprlyWordmark variant="light" className="align-middle" />. Mentr
-            is a {PARENT_COMPANY_NAME} product.
+            is a {PARENT_COMPANY_NAME} product (
+            <a
+              href={PARENT_COMPANY_URL}
+              className="text-white/60 underline-offset-2 hover:text-white hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              paprly.in
+            </a>
+            ).
           </p>
           <p>Parents find teachers. Faculty get found. Free.</p>
         </div>

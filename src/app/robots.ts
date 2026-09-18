@@ -14,6 +14,7 @@ const PRIVATE_PATHS = [
   "/faculty",
   "/board",
   "/admin/",
+  "/login",
   "/tmp-wa-preview",
   "/learn/app",
 ];

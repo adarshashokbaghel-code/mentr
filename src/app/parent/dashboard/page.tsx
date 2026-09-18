@@ -3,6 +3,7 @@
 import { useAuth } from "@/components/auth/auth-provider";
 import { timeAgo } from "@/components/dashboard/widgets";
 import { ParentRequirementsSection } from "@/components/requirements/parent-requirements";
+import { InstantConnectParentSection } from "@/components/instant-connect/instant-connect-parent-section";
 import { PitchMessageDialog } from "@/components/requirements/pitch-message-dialog";
 import {
   HiringChecklist,
@@ -232,6 +233,7 @@ export default function ParentDashboardPage() {
 
           <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1.5fr)_minmax(360px,1fr)] lg:items-start">
             <div className="space-y-8" id="requirements">
+              <InstantConnectParentSection />
               {/* ------------------------- requirements ------------------------- */}
               <ParentRequirementsSection
                 onConnectionsChanged={reloadConnections}
