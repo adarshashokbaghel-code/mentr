@@ -9,6 +9,7 @@ import {
   timeAgo,
 } from "@/components/dashboard/widgets";
 import { ConnectionRequestsSection } from "@/components/dashboard/connection-requests";
+import { InstantConnectFacultySection } from "@/components/dashboard/instant-connect-faculty";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { PitchesSection } from "@/components/requirements/pitches-section";
@@ -476,6 +477,17 @@ export default function DashboardPage() {
                 prev.map((r) => (r.id === updated.id ? updated : r)),
               )
             }
+          />
+
+          <InstantConnectFacultySection
+            acceptingStudents={user?.profile?.acceptingStudents !== false}
+            onAcceptingChange={(next) => {
+              if (!user?.profile) return;
+              setUser({
+                ...user,
+                profile: { ...user.profile, acceptingStudents: next },
+              });
+            }}
           />
 
           <PitchesSection />

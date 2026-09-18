@@ -26,6 +26,7 @@ type ShortlistContextValue = {
   isSaved: (teacherId: string) => boolean;
   toggle: (teacherId: string) => Promise<void>;
   remove: (teacherId: string) => Promise<void>;
+  clear: () => Promise<void>;
   atCapacity: boolean;
 };
 
@@ -102,6 +103,10 @@ export function ShortlistProvider({
     [user, guestIds, persist],
   );
 
+  const clear = useCallback(async () => {
+    await persist([]);
+  }, [persist]);
+
   const value = useMemo<ShortlistContextValue>(
     () => ({
       ids,
@@ -109,9 +114,10 @@ export function ShortlistProvider({
       isSaved: (teacherId) => ids.includes(teacherId),
       toggle,
       remove,
+      clear,
       atCapacity: ids.length >= MAX_SHORTLIST,
     }),
-    [ids, savedTeachers, toggle, remove],
+    [ids, savedTeachers, toggle, remove, clear],
   );
 
   return (

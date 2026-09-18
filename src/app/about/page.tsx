@@ -14,6 +14,7 @@ import {
   PARENT_COMPANY_URL,
   SITE_BRAND,
 } from "@/lib/seo";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -93,25 +94,88 @@ export default function AboutPage() {
               Mentr is a tutor–parent connector, not a tuition agency. We do not
               employ tutors, set session fees, or take a cut from classes. Parents
               and students use Mentr to discover verified tutors by subject and
-              area, send connect requests, or post learning requirements on a
-              board where tutors pitch interest. Faculty use Mentr to list
-              profiles, manage availability, and respond to requests — all
-              without buying lead credits.
+              area, send connect requests, or post learning requirements where
+              tutors pitch interest. Faculty use Mentr to list profiles, manage
+              availability, and respond to requests — all without buying lead
+              credits.
             </p>
             <ul className="mt-6 space-y-3 text-sm leading-relaxed text-muted">
               <li className="flex gap-2">
                 <span className="font-bold text-coral">→</span>
-                Search tutors in Bengaluru or online from India, UAE, and worldwide
+                Search tutors nearby or online from India, UAE, and worldwide
               </li>
               <li className="flex gap-2">
                 <span className="font-bold text-coral">→</span>
-                Read long-form guides on hiring tutors, exam prep, and platform comparisons
+                Free classroom and study tools (worksheets, papers, PDFs, calculators)
+              </li>
+              <li className="flex gap-2">
+                <span className="font-bold text-coral">→</span>
+                Long-form guides on hiring tutors, exam prep, and platform comparisons
               </li>
               <li className="flex gap-2">
                 <span className="font-bold text-coral">→</span>
                 Connect on WhatsApp only after both sides accept — privacy by default
               </li>
             </ul>
+          </div>
+        </section>
+
+        <section className="border-b border-hairline bg-white py-10 sm:py-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <h2 className="text-2xl font-bold text-ink">
+              How tutor verification works
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              Before a faculty profile goes live, we verify phone and identity
+              (Phase 1 is manual review). Live listings show a Verified badge.
+              Verification reduces fake or anonymous spam accounts; it does not
+              certify teaching skill, board results, or background checks beyond
+              what we state on the profile. Parents should still review subjects,
+              experience, and fit before hiring.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              Phone numbers stay hidden until a tutor accepts a parent&apos;s
+              connect request (or a parent accepts a pitch on a requirement).
+              That consent step is how we keep contact spam low without charging
+              either side for unlocks.
+            </p>
+          </div>
+        </section>
+
+        <section className="border-b border-hairline bg-cream py-10 sm:py-16">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <h2 className="text-2xl font-bold text-ink">
+              How Mentr stays free
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              There is no platform commission on tuition fees and no lead coins
+              for tutors. Core marketplace features — search, profiles, connect
+              requests, and the requirements flow — are free for parents and
+              faculty. Public marketing and guide pages may show Google AdSense
+              ads; logged-in dashboards do not. Optional profile boosts may be
+              offered later for visibility, but contact itself stays free.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted">
+              Beyond the marketplace, Mentr publishes free{" "}
+              <Link href="/tools" className="font-semibold text-coral hover:underline">
+                education tools
+              </Link>{" "}
+              and{" "}
+              <Link href="/blog" className="font-semibold text-coral hover:underline">
+                educational guides
+              </Link>
+              {LEARN_PUBLIC ? (
+                <>
+                  , plus{" "}
+                  <Link href="/learn" className="font-semibold text-coral hover:underline">
+                    Mentr Learn
+                  </Link>{" "}
+                  for Class 3–5 coding and AI literacy
+                </>
+              ) : null}
+              . Those products exist to help families and teachers even if they
+              never hire through the directory.
+            </p>
           </div>
         </section>
 

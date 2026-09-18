@@ -7,12 +7,21 @@ dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 const backendPort = process.env.BACKEND_PORT || "5000";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["mongoose"],
+  serverExternalPackages: ["mongoose", "sharp", "onnxruntime-node"],
   transpilePackages: ["blockly"],
   turbopack: {
     // Parent ~/package-lock.json was being picked as the workspace root,
     // breaking PostCSS/Tailwind resolution and hanging page loads.
     root: path.resolve(process.cwd()),
+  },
+  // Transformers.js / ORT Web — ignore Node-only bindings in the browser bundle.
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      sharp$: false,
+      "onnxruntime-node$": false,
+    };
+    return config;
   },
   images: {
     remotePatterns: [

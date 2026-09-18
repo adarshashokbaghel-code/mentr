@@ -613,6 +613,10 @@ export const EXAM_PREP_ARTICLES: Record<string, ArticleContent> = {
         href: "/blog/board-exams-vs-competitive-exams",
       },
       {
+        label: "Free study timetable PDF",
+        href: "/tools/study-timetable",
+      },
+      {
         label: "Class 10 board exam tutors in Bengaluru",
         href: "/exam-prep/class-10-board-exam-tutors-bengaluru",
       },

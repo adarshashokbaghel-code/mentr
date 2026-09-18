@@ -4,12 +4,14 @@ import { FAQ } from "@/components/landing/faq";
 import { FacultyShowcase } from "@/components/landing/faculty-showcase";
 import { Footer } from "@/components/landing/footer";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
+import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { Hero } from "@/components/landing/hero";
 import { LpStatsBand } from "@/components/landing/lp/shared";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
 import { ProductHuntSection } from "@/components/landing/product-hunt-section";
+import { PublicPlatformSections } from "@/components/landing/public-platform-sections";
 import { SeoGuidesStrip } from "@/components/landing/seo-guides-strip";
 import { StatsMarquee } from "@/components/landing/stats-marquee";
 import { SubjectGallery } from "@/components/landing/subject-gallery";
@@ -140,9 +142,11 @@ export default function Home() {
         <Testimonials />
         <ProductHuntSection />
         <SeoGuidesStrip />
+        <PublicPlatformSections />
         <FAQ />
         <CTA />
       </main>
+      <InstantConnectDock />
       <Footer />
     </>
   );

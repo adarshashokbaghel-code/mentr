@@ -67,6 +67,8 @@ export interface IFacultyProfile {
   socials?: ISocialLinks;
   // Legacy field kept optional for older records
   department?: string;
+  /** When false, exclude from Instant Connect matching. Default true. */
+  acceptingStudents?: boolean;
   /** Map pin latitude — from profile geocode or login IP */
   mapLat?: number;
   /** Map pin longitude — from profile geocode or login IP */
@@ -235,6 +237,7 @@ const facultyProfileSchema = new Schema<IFacultyProfile>(
     introVideo: { type: String, trim: true },
     socials: { type: socialLinksSchema },
     department: { type: String, trim: true },
+    acceptingStudents: { type: Boolean, default: true },
     mapLat: { type: Number },
     mapLng: { type: Number },
     mapLocationSource: { type: String, enum: ["profile", "ip"] },

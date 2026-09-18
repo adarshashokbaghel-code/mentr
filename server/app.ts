@@ -14,6 +14,7 @@ import feedbackRoutes from "./routes/feedback";
 import notificationRoutes from "./routes/notifications";
 import parentHiringRoutes from "./routes/parent-hiring";
 import learnRoutes from "./routes/learn";
+import instantConnectRoutes from "./routes/instant-connect";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
@@ -135,6 +136,7 @@ app.use("/api/requirements", requirementRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/parent", parentHiringRoutes);
 app.use("/api/learn", learnRoutes);
+app.use("/api/instant-connect", instantConnectRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/admin", adminRoutes);
 

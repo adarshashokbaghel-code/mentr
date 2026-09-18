@@ -1,0 +1,21 @@
+{
+  "benchmarkVersion": "BR-0.1",
+  "description": "Stub — replace after first real scored run. Do not invent metrics.",
+  "pipeline": "bg-pipeline-0.1",
+  "model": "studioludens/birefnet-lite-512",
+  "date": null,
+  "nImages": 0,
+  "splits": { "dev": 0, "val": 0, "holdout": 0 },
+  "overall": {
+    "mae": null,
+    "mse": null,
+    "iou": null,
+    "dice": null
+  },
+  "humanOverallAvg": null,
+  "categories": {},
+  "limitations": [
+    "Browser BiRefNet_lite runs at 512² then upsamples alpha",
+    "No HD server path in v0.1"
+  ]
+}

@@ -183,7 +183,14 @@ export default function PrivacyPage() {
                   >
                     mentr.in/ads.txt
                   </Link>{" "}
-                  lists authorised ad sellers for this site.
+                  lists authorised ad sellers for this site. See also our{" "}
+                  <Link
+                    href="/cookie-policy"
+                    className="font-semibold text-coral underline-offset-2 hover:underline"
+                  >
+                    Cookie policy
+                  </Link>
+                  .
                 </li>
               </ul>
             </section>

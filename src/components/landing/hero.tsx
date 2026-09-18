@@ -517,7 +517,7 @@ export function Hero() {
               <LpPill tint="coral">Faculty keep 100%</LpPill>
             </div>
 
-            <div className="flex w-full max-w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
+            <div className="flex w-full max-w-full flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
               <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
                 <Button
                   size="lg"

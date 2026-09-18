@@ -100,7 +100,7 @@ function CompareRow({
 }
 
 export function ShortlistCompareBar() {
-  const { ids, savedTeachers, remove } = useShortlist();
+  const { ids, savedTeachers, remove, clear } = useShortlist();
   const [open, setOpen] = useState(false);
 
   if (ids.length === 0) return null;
@@ -133,6 +133,18 @@ export function ShortlistCompareBar() {
           >
             <Scale className="h-3.5 w-3.5" />
             Compare
+          </button>
+          <button
+            type="button"
+            aria-label="Clear saved tutors"
+            title="Clear saved tutors"
+            onClick={() => {
+              setOpen(false);
+              void clear();
+            }}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-hairline bg-cream text-muted transition hover:bg-cream-band hover:text-ink"
+          >
+            <X className="h-4 w-4" strokeWidth={2.25} />
           </button>
         </div>
       </div>
