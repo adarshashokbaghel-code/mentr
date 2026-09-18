@@ -30,6 +30,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import SearchLoading, { SearchGridSkeleton } from "./loading";
 
 const SearchMapShellDynamic = dynamic(
   () =>
@@ -237,14 +238,7 @@ function SearchContent() {
 
   // —— Auth: faculty accounts cannot use parent search ——
   if (authLoading) {
-    return (
-      <>
-        <Navbar />
-        <main className="flex min-h-[60vh] items-center justify-center text-sm text-muted">
-          Loading…
-        </main>
-      </>
-    );
+    return <SearchLoading />;
   }
   if (user && user.role !== "parent") {
     return <SearchFacultyBlocked />;
@@ -308,9 +302,7 @@ function SearchContent() {
 
         <div className="mx-auto max-w-[1400px] px-4 py-4 sm:px-6 lg:px-8">
           {catalogLoading ? (
-            <div className="py-16 text-center text-sm text-muted">
-              Loading tutors…
-            </div>
+            <SearchGridSkeleton />
           ) : catalogFailed ? (
             <CatalogErrorPanel onRetry={() => setCatalogReloadKey((k) => k + 1)} />
           ) : results.length === 0 ? (
@@ -351,16 +343,7 @@ function SearchContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense
-      fallback={
-        <>
-          <Navbar />
-          <main className="mx-auto max-w-[1400px] px-4 py-12 text-center text-sm text-muted sm:py-20">
-            Loading search…
-          </main>
-        </>
-      }
-    >
+    <Suspense fallback={<SearchLoading />}>
       <SearchContent />
     </Suspense>
   );
