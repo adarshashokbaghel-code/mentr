@@ -1,4 +1,5 @@
 import { ParentsLanding } from "@/components/landing/lp/parents-page";
+import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { PageMarketing } from "@/components/marketing/page-marketing";
@@ -70,6 +71,7 @@ export default function ParentsPage() {
       <PageMarketing slug="parents" path="/parents" />
       <Navbar />
       <ParentsLanding />
+      <InstantConnectDock />
       <Footer />
     </>
   );

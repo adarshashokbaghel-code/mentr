@@ -6,9 +6,10 @@ import { Button } from "@/components/ui/button";
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { useAuth } from "@/components/auth/auth-provider";
-import { LEARN_PUBLIC } from "@/lib/learn-flags";
+import { getPublicNavGroups, type PublicNavGroup } from "@/lib/public-nav";
 import { cn } from "@/lib/utils";
 import {
+  ChevronDown,
   LayoutDashboard,
   LogOut,
   Megaphone,
@@ -19,22 +20,104 @@ import {
 } from "lucide-react";
 import { LearnDino } from "@/components/landing/lp/learn-dino";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
-const navLinks = [
-  { label: "Find tutors", href: "/search" },
-  { label: "Find mentors", href: "/search?kind=mentor" },
-  ...(LEARN_PUBLIC ? [{ label: "Mentr Learn", href: "/learn" }] : []),
-  { label: "FAQ", href: "/faq" },
-  { label: "Blog", href: "/blog" },
-  { label: "Open source", href: "/open-source" },
-  { label: "Request a feature", href: "/request-feature" },
-];
+function NavDropdown({
+  group,
+  open,
+  onOpen,
+  onClose,
+}: {
+  group: PublicNavGroup;
+  open: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+}) {
+  const panelId = useId();
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) onClose();
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open, onClose]);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="relative"
+      onMouseEnter={onOpen}
+      onMouseLeave={onClose}
+    >
+      <button
+        type="button"
+        className={cn(
+          "inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+          open
+            ? "bg-cream-band text-ink"
+            : "text-muted hover:bg-cream-band hover:text-ink",
+        )}
+        aria-expanded={open}
+        aria-controls={panelId}
+        onClick={() => (open ? onClose() : onOpen())}
+      >
+        {group.id === "learn" && (
+          <LearnDino size={18} className="h-[18px] w-[18px]" />
+        )}
+        {group.label}
+        <ChevronDown
+          className={cn("h-3.5 w-3.5 transition", open && "rotate-180")}
+        />
+      </button>
+      {open && (
+        <div
+          id={panelId}
+          className="absolute left-0 top-full z-50 w-72 pt-2"
+          role="menu"
+        >
+          <div className="rounded-xl border border-hairline bg-white p-2 shadow-lg">
+            {group.links.map((link) => (
+              <a
+                key={link.href + link.label}
+                href={link.href}
+                role="menuitem"
+                className="block rounded-lg px-3 py-2.5 transition hover:bg-cream"
+                onClick={onClose}
+              >
+                <span className="block text-sm font-semibold text-ink">
+                  {link.label}
+                </span>
+                {link.description && (
+                  <span className="mt-0.5 block text-xs leading-snug text-muted">
+                    {link.description}
+                  </span>
+                )}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
+  const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const { user, loading, logout, openRoleChooser } = useAuth();
+  const navGroups = getPublicNavGroups();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -59,18 +142,17 @@ export function Navbar() {
           className="min-w-0 shrink"
         />
 
-        <nav className="hidden items-center gap-1 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-cream-band hover:text-ink"
-            >
-              {link.href === "/learn" && (
-                <LearnDino size={18} className="h-[18px] w-[18px]" />
-              )}
-              {link.label}
-            </a>
+        <nav className="hidden items-center gap-0.5 lg:flex">
+          {navGroups.map((group) => (
+            <NavDropdown
+              key={group.id}
+              group={group}
+              open={desktopOpen === group.id}
+              onOpen={() => setDesktopOpen(group.id)}
+              onClose={() =>
+                setDesktopOpen((cur) => (cur === group.id ? null : cur))
+              }
+            />
           ))}
         </nav>
 
@@ -102,7 +184,7 @@ export function Navbar() {
           {!loading && user && <UserMenu />}
         </div>
 
-        <div className="flex items-center gap-1.5 md:hidden">
+        <div className="flex items-center gap-1.5 lg:hidden">
           {!loading && user?.role === "parent" && <ParentNotificationsBell />}
           <button
             type="button"
@@ -116,21 +198,59 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-hairline bg-cream md:hidden">
-          <nav className="flex flex-col gap-1 p-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="inline-flex items-center gap-1.5 rounded-lg px-3 py-3 text-sm font-medium text-muted hover:bg-cream-band hover:text-ink"
-                onClick={() => setOpen(false)}
-              >
-                {link.href === "/learn" && (
-                  <LearnDino size={18} className="h-[18px] w-[18px]" />
-                )}
-                {link.label}
-              </a>
-            ))}
+        <div className="border-t border-hairline bg-cream lg:hidden">
+          <nav className="flex max-h-[min(80vh,640px)] flex-col gap-1 overflow-y-auto p-4">
+            {navGroups.map((group) => {
+              const expanded = mobileGroup === group.id;
+              return (
+                <div key={group.id} className="rounded-lg border border-hairline/80 bg-white/60">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between px-3 py-3 text-left text-sm font-semibold text-ink"
+                    aria-expanded={expanded}
+                    onClick={() =>
+                      setMobileGroup((cur) =>
+                        cur === group.id ? null : group.id,
+                      )
+                    }
+                  >
+                    <span className="inline-flex items-center gap-1.5">
+                      {group.id === "learn" && (
+                        <LearnDino size={18} className="h-[18px] w-[18px]" />
+                      )}
+                      {group.label}
+                    </span>
+                    <ChevronDown
+                      className={cn(
+                        "h-4 w-4 text-muted transition",
+                        expanded && "rotate-180",
+                      )}
+                    />
+                  </button>
+                  {expanded && (
+                    <div className="space-y-0.5 border-t border-hairline px-2 pb-2 pt-1">
+                      {group.links.map((link) => (
+                        <a
+                          key={link.href + link.label}
+                          href={link.href}
+                          className="block rounded-lg px-2 py-2.5 text-sm text-muted hover:bg-cream-band hover:text-ink"
+                          onClick={() => setOpen(false)}
+                        >
+                          <span className="font-medium text-ink">
+                            {link.label}
+                          </span>
+                          {link.description && (
+                            <span className="mt-0.5 block text-xs text-muted">
+                              {link.description}
+                            </span>
+                          )}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
             {!loading && user ? (
               <>
                 <div className="mt-1 flex items-center gap-3 rounded-lg bg-cream-band px-3 py-2.5">
@@ -162,7 +282,9 @@ export function Navbar() {
                   />
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold text-ink">
-                      {user.parentProfile?.name || user.profile?.name || user.email}
+                      {user.parentProfile?.name ||
+                        user.profile?.name ||
+                        user.email}
                     </p>
                     <p className="text-xs text-muted">
                       {user.role === "parent" ? "Parent" : "Tutor"}

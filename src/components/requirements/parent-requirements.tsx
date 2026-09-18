@@ -111,6 +111,14 @@ export function ParentRequirementsSection({
 
   useEffect(reload, [reload]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("icFallback") === "1" || sessionStorage.getItem("ic_board_prefill")) {
+      setModalOpen(true);
+    }
+  }, []);
+
   return (
     <section>
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -664,6 +672,36 @@ function PostRequirementModal({
   const [startTimeline, setStartTimeline] = useState<StartTimeline | "">("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
+
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem("ic_board_prefill");
+      if (!raw) return;
+      const data = JSON.parse(raw) as {
+        subject?: string;
+        classLevel?: string;
+        details?: string;
+        budgetMin?: number | null;
+        budgetMax?: number | null;
+        mode?: string;
+        location?: string;
+      };
+      if (data.subject) setSubject(data.subject);
+      if (data.classLevel) setClassLevel(data.classLevel);
+      if (data.details) setDetails(data.details);
+      if (data.budgetMin != null) setBudgetMin(String(data.budgetMin));
+      if (data.budgetMax != null && data.budgetMax < 100000)
+        setBudgetMax(String(data.budgetMax));
+      if (data.location) setArea(data.location);
+      if (data.mode === "online") setModes(["online"]);
+      else if (data.mode === "offline") setModes(["student_home"]);
+      else if (data.mode === "either") setModes(["online", "student_home"]);
+      setStartTimeline("immediately");
+      sessionStorage.removeItem("ic_board_prefill");
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

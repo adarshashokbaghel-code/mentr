@@ -6,6 +6,10 @@ export const PARENT_NOTIFICATION_TYPES = [
   "requirement_pitch",
   "teacher_outreach",
   "tutor_slots_open",
+  "instant_connect_request",
+  "instant_connect_submitted",
+  "instant_connect_closed",
+  "instant_connect_expired",
 ] as const;
 
 export type ParentNotificationType = (typeof PARENT_NOTIFICATION_TYPES)[number];
@@ -18,6 +22,7 @@ export interface INotificationMeta {
   classLevel?: string;
   connectionId?: string;
   openSlots?: number;
+  instantConnectId?: string;
 }
 
 export interface INotification extends Document {
@@ -48,6 +53,7 @@ const notificationSchema = new Schema<INotification>(
         classLevel: String,
         connectionId: String,
         openSlots: Number,
+        instantConnectId: String,
       },
       default: {},
     },

@@ -111,6 +111,8 @@ export interface FacultyProfile {
   introVideo?: string;
   socials?: SocialLinks;
   department?: string;
+  /** Instant Connect matching — default true when unset */
+  acceptingStudents?: boolean;
   /** Public mentor headshot URL (Supabase) */
   profileImageUrl?: string;
   profileImagePath?: string;

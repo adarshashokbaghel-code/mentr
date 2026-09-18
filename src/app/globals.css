@@ -27,6 +27,10 @@
   --paprly-blue-text: #67b5eb;
   --paprly-yellow-text-light: #fde047;
   --paprly-blue-text-light: #93c5fd;
+  /* Instant Connect — warm espresso chrome (fits cream/coral, not electric blue) */
+  --ic-blue: #3d3429;
+  --ic-blue-dark: #2a231c;
+  --ic-blue-wash: #f3ebe3;
 }
 
 @theme inline {
@@ -46,6 +50,9 @@
   --color-cream-band: var(--cream-band);
   --color-hairline: var(--hairline);
   --color-white: var(--white);
+  --color-ic-blue: var(--ic-blue);
+  --color-ic-blue-dark: var(--ic-blue-dark);
+  --color-ic-blue-wash: var(--ic-blue-wash);
   --font-sans: var(--font-sans-face);
 }
 
@@ -2274,3 +2281,33 @@ main {
     display: none !important;
   }
 }
+
+@keyframes mentr-bg-scan {
+  0% {
+    top: -15%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 92%;
+    opacity: 0;
+  }
+}
+
+.mentr-bg-scan {
+  animation: mentr-bg-scan 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mentr-bg-scan {
+    animation: none;
+    top: 40%;
+    opacity: 0.45;
+  }
+}
+
