@@ -15,9 +15,9 @@ const SPECS = [
   { label: "Pipeline", value: BG_REMOVAL.PIPELINE_VERSION },
   { label: "Model", value: `${BG_REMOVAL.MODEL_NAME} · ${BG_REMOVAL.MODEL_VERSION}` },
   { label: "Inference", value: "512×512 + detail crop" },
-  { label: "Working size", value: `≤ ${BG_REMOVAL.MAX_PROCESS_SIDE}px` },
-  { label: "Model size", value: "~94 MB (cached)" },
-  { label: "Runtime", value: "On-device Web Worker" },
+  { label: "Working size", value: `≤ ${BG_REMOVAL.MAX_PROCESS_SIDE}px (≤${BG_REMOVAL.MAX_PROCESS_SIDE_MOBILE} mobile)` },
+  { label: "Model size", value: "~94 MB (same-origin cache)" },
+  { label: "Runtime", value: "On-device · WASM-first on phones" },
   { label: "Watermark", value: "None" },
   { label: "Signup", value: "Not required" },
 ] as const;

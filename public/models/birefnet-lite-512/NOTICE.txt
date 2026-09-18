@@ -1,0 +1,4 @@
+BiRefNet_lite browser export (MIT)
+Source: https://huggingface.co/studioludens/birefnet-lite-512
+Upstream: https://github.com/ZhengPeng7/BiRefNet
+Served same-origin by Mentr for reliable mobile loading.

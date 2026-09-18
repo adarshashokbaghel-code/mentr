@@ -12,16 +12,30 @@ export const BG_REMOVAL = {
   MAX_HEIGHT: 8000,
   /** Max width × height (decompression bomb guard) */
   MAX_PIXELS: 40_000_000,
-  /** Longest side after orientation normalize (more pixels → better refine crop) */
+  /** Desktop longest side after orientation normalize */
   MAX_PROCESS_SIDE: 2560,
+  /** Mobile longest side — less RAM, faster WASM */
+  MAX_PROCESS_SIDE_MOBILE: 1280,
+  /** Low-end desktop / tablet */
+  MAX_PROCESS_SIDE_LOW: 1600,
   /** Accepted MIME types (also verified by decode) */
   ACCEPTED_MIME: ["image/jpeg", "image/png", "image/webp"] as const,
-  /** Model id — MIT BiRefNet_lite browser export @ 512² */
-  MODEL_ID: "studioludens/birefnet-lite-512",
+  /**
+   * Same-origin folder under /public/models/ (populated by scripts/fetch-bg-models.mjs).
+   * Not the Hugging Face repo id — that is HF_FALLBACK_ID only.
+   */
+  MODEL_ID: "birefnet-lite-512",
+  /** Remote fallback if local /models is missing (dev without fetch) */
+  HF_FALLBACK_ID: "studioludens/birefnet-lite-512",
   MODEL_NAME: "BiRefNet_lite",
   MODEL_VERSION: "512-fp16+refine",
-  PIPELINE_VERSION: "bg-pipeline-0.2",
+  PIPELINE_VERSION: "bg-pipeline-0.3",
   LICENSE_TAG: "MIT",
+  /** Always fp16 graph (~94 MB) — never pull 192 MB fp32 on mobile */
+  DTYPE: "fp16" as const,
+  LOCAL_MODEL_PATH: "/models/",
+  ORT_WASM_PATH: "/ort/",
+  LOAD_RETRIES: 3,
 } as const;
 
 export type AcceptedMime = (typeof BG_REMOVAL.ACCEPTED_MIME)[number];

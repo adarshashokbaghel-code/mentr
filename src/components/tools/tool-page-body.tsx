@@ -14,10 +14,15 @@ import {
   BookOpen,
   CheckCircle2,
   ChevronRight,
+  Gift,
+  ImageOff,
+  Infinity,
   Lightbulb,
   Lock,
   Search,
   Shield,
+  Sparkles,
+  UserRound,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -251,22 +256,53 @@ export function ToolPageBody({ tool }: { tool: ToolDef }) {
                   Why Mentr
                 </p>
                 <ul className="space-y-0 p-2 text-[13px] font-bold text-ink">
-                  {[
-                    { t: "100% free forever", d: "No credits, no paywall" },
-                    { t: "No watermark", d: "Clean transparent PNG" },
-                    { t: "No signup required", d: "Upload and download" },
-                    { t: "Unlimited on-device", d: "Within your device limits" },
-                    { t: "Private by design", d: "Image stays in your browser" },
-                    { t: "High quality", d: "Soft edges + detail pass" },
-                  ].map((f) => (
+                  {(
+                    [
+                      {
+                        t: "100% free forever",
+                        d: "No credits, no paywall",
+                        Icon: Gift,
+                      },
+                      {
+                        t: "No watermark",
+                        d: "Clean transparent PNG",
+                        Icon: ImageOff,
+                      },
+                      {
+                        t: "No signup required",
+                        d: "Upload and download",
+                        Icon: UserRound,
+                      },
+                      {
+                        t: "Unlimited on-device",
+                        d: "Within your device limits",
+                        Icon: Infinity,
+                      },
+                      {
+                        t: "Private by design",
+                        d: "Image stays in your browser",
+                        Icon: Shield,
+                      },
+                      {
+                        t: "High quality",
+                        d: "Soft edges + detail pass",
+                        Icon: Sparkles,
+                      },
+                    ] as const
+                  ).map((f) => (
                     <li
                       key={f.t}
-                      className="rounded-lg px-3 py-2.5 hover:bg-cream"
+                      className="flex gap-3 rounded-lg px-3 py-2.5 hover:bg-cream"
                     >
-                      <p className="text-ink">{f.t}</p>
-                      <p className="text-[11px] font-semibold text-muted">
-                        {f.d}
-                      </p>
+                      <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-hairline bg-cream/80 text-coral">
+                        <f.Icon className="h-4 w-4" aria-hidden />
+                      </span>
+                      <span className="min-w-0">
+                        <p className="text-ink">{f.t}</p>
+                        <p className="text-[11px] font-semibold text-muted">
+                          {f.d}
+                        </p>
+                      </span>
                     </li>
                   ))}
                 </ul>

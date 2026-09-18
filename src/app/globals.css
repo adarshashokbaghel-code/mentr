@@ -2282,32 +2282,25 @@ main {
   }
 }
 
-@keyframes mentr-bg-scan {
-  0% {
-    top: -15%;
-    opacity: 0;
-  }
-  12% {
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
+@keyframes mentr-bg-progress-pulse {
+  0%,
   100% {
-    top: 92%;
-    opacity: 0;
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
   }
 }
 
-.mentr-bg-scan {
-  animation: mentr-bg-scan 2.4s ease-in-out infinite;
+.mentr-bg-progress-indeterminate {
+  animation: mentr-bg-progress-pulse 1.4s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mentr-bg-scan {
+  .mentr-bg-progress-indeterminate {
     animation: none;
-    top: 40%;
-    opacity: 0.45;
+    opacity: 0.5;
   }
 }
+
 

@@ -2,7 +2,8 @@
 
 /**
  * Background-removal Web Worker.
- * BiRefNet_lite 512 + crop-and-refine second pass for sharper subject edges.
+ * Same-origin BiRefNet_lite 512 fp16 + optional crop-and-refine.
+ * Mobile: WASM-first, no refine, retries — avoids HF / WebGPU pipeline failures.
  */
 
 import {
@@ -14,24 +15,56 @@ import {
   type Processor,
 } from "@huggingface/transformers";
 import { BG_REMOVAL } from "./config";
+import {
+  detectBgDeviceProfile,
+  friendlyBgError,
+  type BgDeviceProfile,
+} from "./device";
 
-env.allowLocalModels = false;
-env.useBrowserCache = true;
+configureEnv();
 
 type Backend = "webgpu" | "wasm";
 
 let model: PreTrainedModel | null = null;
 let processor: Processor | null = null;
 let backend: Backend | null = null;
+let profile: BgDeviceProfile = detectBgDeviceProfile();
+let loadAttempts = 0;
 
 type InMsg =
-  | { type: "init" }
+  | { type: "init"; profile?: BgDeviceProfile }
   | {
       type: "process";
       buffer: ArrayBuffer;
       mime: string;
       requestId: number;
-    };
+      profile?: BgDeviceProfile;
+      skipRefine?: boolean;
+    }
+  | { type: "reset-cache" };
+
+function configureEnv() {
+  // Prefer same-origin /public/models (see scripts/fetch-bg-models.mjs)
+  env.allowLocalModels = true;
+  env.allowRemoteModels = true;
+  env.useBrowserCache = true;
+  env.localModelPath = BG_REMOVAL.LOCAL_MODEL_PATH;
+
+  // Same-origin ORT wasm (avoid jsDelivr flakiness on mobile networks)
+  try {
+    const ort = env.backends?.onnx;
+    if (ort?.wasm) {
+      // Directory prefix — ORT picks asyncify / jsep / plain as needed
+      ort.wasm.wasmPaths = BG_REMOVAL.ORT_WASM_PATH;
+      ort.wasm.numThreads = Math.min(
+        4,
+        Math.max(1, self.navigator?.hardwareConcurrency || 2),
+      );
+    }
+  } catch {
+    /* ignore */
+  }
+}
 
 function post(msg: Record<string, unknown>, transfer: Transferable[] = []) {
   self.postMessage(msg, { transfer });
@@ -42,6 +75,35 @@ function onProgress(info: { status?: string; loaded?: number; total?: number }) 
     const pct = Math.min(99, Math.round(((info.loaded ?? 0) / info.total) * 100));
     post({ type: "progress", progress: pct });
   }
+}
+
+async function clearModelCaches() {
+  try {
+    if (typeof caches !== "undefined") {
+      const keys = await caches.keys();
+      await Promise.all(
+        keys
+          .filter(
+            (k) =>
+              /transformers|huggingface|onnx|ort/i.test(k) ||
+              k.includes("birefnet"),
+          )
+          .map((k) => caches.delete(k)),
+      );
+    }
+  } catch {
+    /* ignore */
+  }
+  if (model) {
+    try {
+      await model.dispose();
+    } catch {
+      /* ignore */
+    }
+  }
+  model = null;
+  processor = null;
+  backend = null;
 }
 
 type OrtTensor = {
@@ -89,7 +151,6 @@ function logitsToAlpha(
 
   if (mw === outW && mh === outH) return srcAlpha;
 
-  // Bicubic-ish smoother upsample (Catmull-Rom-lite via wider bilinear + sharpen)
   const out = new Float32Array(outW * outH);
   const xScale = (mw - 1) / Math.max(1, outW - 1);
   const yScale = (mh - 1) / Math.max(1, outH - 1);
@@ -98,7 +159,6 @@ function logitsToAlpha(
     const y0 = Math.floor(fy);
     const y1 = Math.min(mh - 1, y0 + 1);
     const wy = fy - y0;
-    // Smoothstep for less blocky upscale
     const sy = wy * wy * (3 - 2 * wy);
     for (let x = 0; x < outW; x++) {
       const fx = x * xScale;
@@ -176,11 +236,8 @@ function shouldRefine(box: BBox, width: number, height: number): boolean {
   const area = bw * bh;
   const imgArea = width * height;
   const frac = area / imgArea;
-  // Subject already fills most of the frame — second pass won't help much
   if (frac > 0.82) return false;
-  // Tiny / empty — skip
   if (frac < 0.02) return false;
-  // Crop must be large enough to re-infer useful detail
   if (bw < 48 || bh < 48) return false;
   return true;
 }
@@ -195,11 +252,6 @@ async function runModel(image: RawImage): Promise<Float32Array> {
   return logitsToAlpha(output, image.width, image.height);
 }
 
-/**
- * Second pass: re-run the model on a tight subject crop so 512² pixels
- * focus on edges/hair instead of empty background. Biggest quality win
- * without changing the model license.
- */
 async function cropAndRefine(
   image: RawImage,
   coarse: Float32Array,
@@ -224,13 +276,11 @@ async function cropAndRefine(
   const cropped = await image.crop([box.x0, box.y0, box.x1, box.y1]);
   const refined = await runModel(cropped);
 
-  // Paste refined alpha into full canvas
   const out = new Float32Array(coarse);
   for (let y = 0; y < cropH; y++) {
     for (let x = 0; x < cropW; x++) {
       const fi = (box.y0 + y) * ow + (box.x0 + x);
       const ri = y * cropW + x;
-      // Feather 3px at crop border so seams don't show
       const edge = Math.min(x, y, cropW - 1 - x, cropH - 1 - y);
       if (edge >= 3) {
         out[fi] = refined[ri]!;
@@ -243,7 +293,11 @@ async function cropAndRefine(
   return out;
 }
 
-async function loadWasm() {
+async function loadModel(
+  device: Backend,
+  modelId: string,
+  localOnly: boolean,
+): Promise<void> {
   if (model) {
     try {
       await model.dispose();
@@ -252,12 +306,66 @@ async function loadWasm() {
     }
     model = null;
   }
-  model = await AutoModel.from_pretrained(BG_REMOVAL.MODEL_ID, {
-    device: "wasm",
-    dtype: "fp32",
+  model = await AutoModel.from_pretrained(modelId, {
+    device,
+    dtype: BG_REMOVAL.DTYPE,
     progress_callback: onProgress,
+    local_files_only: localOnly,
   });
-  backend = "wasm";
+  backend = device;
+}
+
+async function loadProcessor(modelId: string, localOnly: boolean) {
+  processor = await AutoProcessor.from_pretrained(modelId, {
+    progress_callback: onProgress,
+    local_files_only: localOnly,
+  });
+}
+
+function isPipelineError(err: unknown): boolean {
+  const msg = err instanceof Error ? err.message : String(err);
+  return /failed to create|pipeline|inference session|out of memory|oom|fetch|network|load/i.test(
+    msg,
+  );
+}
+
+async function tryLoadPair(
+  preferWasm: boolean,
+  modelId: string,
+  localOnly: boolean,
+): Promise<void> {
+  const hasGpu =
+    typeof navigator !== "undefined" && "gpu" in navigator && !preferWasm;
+
+  if (hasGpu) {
+    try {
+      post({
+        type: "status",
+        status: "loading",
+        message: "Getting ready…",
+      });
+      await loadModel("webgpu", modelId, localOnly);
+    } catch (err) {
+      console.warn("[bg-remover] WebGPU failed → WASM", err);
+      post({
+        type: "status",
+        status: "loading",
+        message: "Optimizing for your device…",
+      });
+      model = null;
+    }
+  }
+
+  if (!model) {
+    post({
+      type: "status",
+      status: "loading",
+      message: preferWasm ? "Preparing on this phone…" : "Getting ready…",
+    });
+    await loadModel("wasm", modelId, localOnly);
+  }
+
+  await loadProcessor(modelId, localOnly);
 }
 
 async function ensureModel() {
@@ -269,39 +377,56 @@ async function ensureModel() {
     message: "Getting ready…",
   });
 
-  const hasGpu = typeof navigator !== "undefined" && "gpu" in navigator;
-  if (hasGpu) {
+  const preferWasm = profile.preferWasm;
+  let lastErr: unknown;
+
+  for (let attempt = 0; attempt < BG_REMOVAL.LOAD_RETRIES; attempt++) {
+    loadAttempts = attempt + 1;
     try {
-      model = await AutoModel.from_pretrained(BG_REMOVAL.MODEL_ID, {
-        device: "webgpu",
-        dtype: "fp16",
-        progress_callback: onProgress,
-      });
-      backend = "webgpu";
+      // 1) same-origin local
+      try {
+        await tryLoadPair(preferWasm, BG_REMOVAL.MODEL_ID, true);
+        post({
+          type: "ready",
+          backend,
+          model: BG_REMOVAL.MODEL_NAME,
+          version: BG_REMOVAL.MODEL_VERSION,
+          attempt: loadAttempts,
+        });
+        return;
+      } catch (localErr) {
+        console.warn("[bg-remover] local model miss, trying remote", localErr);
+        await clearModelCaches();
+        // 2) HF fallback (dev / incomplete deploy)
+        await tryLoadPair(preferWasm, BG_REMOVAL.HF_FALLBACK_ID, false);
+        post({
+          type: "ready",
+          backend,
+          model: BG_REMOVAL.MODEL_NAME,
+          version: BG_REMOVAL.MODEL_VERSION,
+          attempt: loadAttempts,
+        });
+        return;
+      }
     } catch (err) {
-      console.warn("[bg-remover] WebGPU failed, falling back to WASM", err);
+      lastErr = err;
+      console.warn(`[bg-remover] load attempt ${attempt + 1} failed`, err);
+      await clearModelCaches();
+      if (!isPipelineError(err) && attempt === 0) break;
       post({
         type: "status",
         status: "loading",
-        message: "Optimizing for your device…",
+        message: "Retrying setup…",
       });
+      await new Promise((r) => setTimeout(r, 400 * (attempt + 1)));
     }
   }
 
-  if (!model) {
-    await loadWasm();
-  }
-
-  processor = await AutoProcessor.from_pretrained(BG_REMOVAL.MODEL_ID, {
-    progress_callback: onProgress,
-  });
-
-  post({
-    type: "ready",
-    backend,
-    model: BG_REMOVAL.MODEL_NAME,
-    version: BG_REMOVAL.MODEL_VERSION,
-  });
+  throw new Error(
+    friendlyBgError(
+      lastErr instanceof Error ? lastErr.message : String(lastErr ?? "load failed"),
+    ),
+  );
 }
 
 self.onmessage = async (event: MessageEvent<InMsg>) => {
@@ -309,6 +434,16 @@ self.onmessage = async (event: MessageEvent<InMsg>) => {
   if (!data?.type) return;
 
   try {
+    if (data.type === "reset-cache") {
+      await clearModelCaches();
+      post({ type: "status", status: "loading", message: "Cache cleared" });
+      return;
+    }
+
+    if (data.profile) {
+      profile = data.profile;
+    }
+
     if (data.type === "init") {
       await ensureModel();
       return;
@@ -338,15 +473,19 @@ self.onmessage = async (event: MessageEvent<InMsg>) => {
           message: "Trying another path…",
           requestId: data.requestId,
         });
-        await loadWasm();
+        await loadModel("wasm", BG_REMOVAL.MODEL_ID, true).catch(() =>
+          loadModel("wasm", BG_REMOVAL.HF_FALLBACK_ID, false),
+        );
         alpha = await runModel(image);
       }
 
-      // Detail pass — subject fills the 512 window
-      try {
-        alpha = await cropAndRefine(image, alpha, data.requestId);
-      } catch (err) {
-        console.warn("[bg-remover] refine pass skipped", err);
+      const skipRefine = data.skipRefine ?? profile.skipRefine;
+      if (!skipRefine) {
+        try {
+          alpha = await cropAndRefine(image, alpha, data.requestId);
+        } catch (err) {
+          console.warn("[bg-remover] refine pass skipped", err);
+        }
       }
 
       const rgbaImg = image.rgba();
@@ -370,9 +509,10 @@ self.onmessage = async (event: MessageEvent<InMsg>) => {
       );
     }
   } catch (err) {
+    const raw = err instanceof Error ? err.message : String(err);
     post({
       type: "error",
-      message: err instanceof Error ? err.message : String(err),
+      message: friendlyBgError(raw),
       requestId: data.type === "process" ? data.requestId : undefined,
     });
   }

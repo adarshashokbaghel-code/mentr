@@ -18,8 +18,8 @@
 | Commercial use allowed? | **Yes** under MIT |
 | Redistribution allowed? | Yes (MIT) |
 | Attribution required? | Retain MIT notices; cite BiRefNet paper |
-| Production status | **Shipped — Mode A local** (`bg-pipeline-0.1`) |
-| Notes | 512² inference then bilinear alpha upsample. WebGPU → WASM fallback. Not RMBG-2.0. HD / server Mode B not enabled. |
+| Production status | **Shipped — Mode A local** (`bg-pipeline-0.3`) |
+| Notes | Served from `/models/birefnet-lite-512` (same-origin). 512² inference then bilinear alpha upsample. Mobile: WASM-first, no refine, ≤1280px. WebGPU → WASM on desktop. Not RMBG-2.0. HD Mode B not enabled. |
 
 Licenses change. Re-verify before launch. Prefer primary sources (Hugging Face card, GitHub LICENSE, vendor commercial terms).
 

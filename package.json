@@ -17,7 +17,9 @@
     "seed:demo:reset": "tsx scripts/seed-demo-data.ts --reset",
     "seed:learn-quiz": "tsx scripts/seed-learn-quiz.ts",
     "db:wipe": "tsx scripts/wipe-db.ts --confirm",
-    "seo:gsc-check": "node scripts/seo-gsc-check.mjs"
+    "seo:gsc-check": "node scripts/seo-gsc-check.mjs",
+    "models:fetch": "node scripts/fetch-bg-models.mjs",
+    "prebuild": "node scripts/fetch-bg-models.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",

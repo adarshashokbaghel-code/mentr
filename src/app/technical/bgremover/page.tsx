@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     absolute: `remove.bg Moves to Canva in Dec 2026 — How Mentr Built a Free On-Device Background Remover | ${SITE_NAME}`,
   },
   description:
-    "remove.bg’s standalone site ends 1 December 2026 as background removal moves to Canva. Mentr’s free forever on-device remover: BiRefNet_lite, crop-and-refine, guided alpha, WebGPU/WASM, browser cache — pipeline bg-pipeline-0.2.",
+    "remove.bg’s standalone site ends 1 December 2026 as background removal moves to Canva. Mentr’s free forever on-device remover: BiRefNet_lite, crop-and-refine, guided alpha, same-origin model host, WebGPU/WASM — pipeline bg-pipeline-0.3.",
   keywords: [
     "remove.bg shutdown",
     "remove.bg Canva",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "remove.bg → Canva (Dec 2026) and Mentr’s free on-device alternative",
     description:
-      "Engineering deep dive for bg-pipeline-0.2: crop-and-refine, guided alpha, caching, and MIT BiRefNet_lite.",
+      "Engineering deep dive for bg-pipeline-0.3: same-origin weights, mobile WASM path, crop-and-refine, MIT BiRefNet_lite.",
     url: absoluteUrl("/technical/bgremover"),
     type: "article",
     images: [
@@ -60,7 +60,8 @@ const TOC = [
   { id: "flowchart", label: "System flowchart" },
   { id: "pipeline", label: "Pipeline steps" },
   { id: "refine", label: "Crop-and-refine" },
-  { id: "caching", label: "Caching & WebGPU" },
+  { id: "caching", label: "Caching & mobile" },
+  { id: "changelog", label: "Version log" },
   { id: "licensing", label: "Licensing choices" },
   { id: "limits", label: "Honest limits" },
   { id: "try", label: "Try the tool" },
@@ -71,10 +72,10 @@ const SPECS = [
   { k: "Model", v: `${BG_REMOVAL.MODEL_NAME} (${BG_REMOVAL.MODEL_VERSION})` },
   { k: "Weights", v: BG_REMOVAL.MODEL_ID },
   { k: "License", v: BG_REMOVAL.LICENSE_TAG },
-  { k: "Model size", v: "~94 MB fp16 (first download)" },
+  { k: "Model size", v: "~94 MB fp16 (same-origin /models)" },
   { k: "Inference grid", v: "512 × 512 (×2 passes when useful)" },
-  { k: "Working long side", v: `≤ ${BG_REMOVAL.MAX_PROCESS_SIDE}px` },
-  { k: "Runtime", v: "WebGPU → WASM fallback" },
+  { k: "Working long side", v: `≤ ${BG_REMOVAL.MAX_PROCESS_SIDE}px (≤${BG_REMOVAL.MAX_PROCESS_SIDE_MOBILE} mobile)` },
+  { k: "Runtime", v: "Phones: WASM-first · Desktop: WebGPU → WASM" },
   { k: "Thread", v: "Dedicated Web Worker" },
   { k: "Alpha", v: "Continuous [0,1] soft matte" },
   { k: "Post", v: "Guided refine · hole fill · decontaminate" },
@@ -102,7 +103,7 @@ export default function TechnicalBgRemoverPage() {
             author: { "@type": "Organization", name: SITE_NAME },
             publisher: { "@type": "Organization", name: SITE_NAME },
             description:
-              "Engineering article on Mentr bg-pipeline-0.2 after remove.bg’s Canva migration announcement.",
+              "Engineering article on Mentr bg-pipeline-0.3 after remove.bg’s Canva migration announcement.",
             image: absoluteUrl("/technical/removebg-moving-to-canva.png"),
             mainEntityOfPage: absoluteUrl("/technical/bgremover"),
           },
@@ -145,7 +146,7 @@ export default function TechnicalBgRemoverPage() {
                 100% free, no-watermark, unlimited on-device remover
               </strong>{" "}
               ({BG_REMOVAL.PIPELINE_VERSION}): BiRefNet_lite, crop-and-refine,
-              guided alpha, WebGPU/WASM, browser weight cache.
+              guided alpha, same-origin model host, mobile WASM path.
             </p>
           </div>
         </div>
@@ -278,7 +279,7 @@ export default function TechnicalBgRemoverPage() {
                   {
                     icon: HardDrive,
                     title: "Cached weights",
-                    body: "~94 MB fp16 downloads once; browser cache skips the hit on return visits.",
+                    body: "~94 MB fp16 from Mentr CDN once; browser cache on return visits.",
                   },
                 ].map((c) => (
                   <div
@@ -411,34 +412,106 @@ export default function TechnicalBgRemoverPage() {
 
             <section id="caching" className="scroll-mt-24">
               <h2 className="text-[1.4rem] font-extrabold text-ink">
-                8. Caching, WebGPU, and first-load behavior
+                8. Caching, mobile path, and first-load behavior
               </h2>
               <p className="mt-3 text-[15px] font-medium leading-relaxed text-muted">
-                Transformers.js uses{" "}
+                Weights are served same-origin from{" "}
                 <code className="rounded bg-cream px-1.5 py-0.5 text-[13px] font-bold text-ink">
-                  env.useBrowserCache = true
+                  /models/birefnet-lite-512
                 </code>{" "}
-                and{" "}
+                (not Hugging Face live). ORT wasm lives under{" "}
                 <code className="rounded bg-cream px-1.5 py-0.5 text-[13px] font-bold text-ink">
-                  env.allowLocalModels = false
+                  /ort/
                 </code>
-                . First visit downloads ~94 MB fp16 ONNX; later visits read from
-                browser cache.
+                . Browser cache + long Cache-Control keep return visits fast.
+                Phones use WASM-first, skip the detail pass, and cap at{" "}
+                {BG_REMOVAL.MAX_PROCESS_SIDE_MOBILE}px to avoid “Failed to create
+                pipeline” OOMs.
               </p>
               <p className="mt-3 text-[15px] font-medium leading-relaxed text-muted">
-                WebGPU shortens inference when the adapter can run the graph;
-                otherwise WASM. Degenerate GPU masks trigger an automatic WASM
-                retry. The model is{" "}
+                Desktop prefers WebGPU then WASM. Degenerate GPU masks trigger an
+                automatic WASM retry. The model is{" "}
                 <strong className="text-ink">
                   not loaded on the /tools hub
                 </strong>{" "}
-                — only on `/tools/background-remover`.
+                — only on `/tools/background-remover` (warmed on page open). Work
+                runs in a Web Worker, so switching tabs mid-run is safe — the
+                job keeps going until you close the page.
               </p>
+            </section>
+
+            <section id="changelog" className="scroll-mt-24">
+              <h2 className="text-[1.4rem] font-extrabold text-ink">
+                9. Version log (what changed and why)
+              </h2>
+              <div className="mt-4 space-y-4">
+                <div className="rounded-xl border border-hairline bg-cream/30 p-4">
+                  <p className="text-[13px] font-extrabold text-ink">
+                    {BG_REMOVAL.PIPELINE_VERSION}{" "}
+                    <span className="font-semibold text-muted">
+                      · September 2026 · mobile reliability
+                    </span>
+                  </p>
+                  <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[14px] font-medium text-muted">
+                    <li>
+                      <strong className="text-ink">Same-origin weights</strong>{" "}
+                      — production phones were timing out on Hugging Face (~94
+                      MB) and then failing with “Failed to create pipeline.”
+                      Model + ORT wasm now ship from Mentr CDN on build.
+                    </li>
+                    <li>
+                      <strong className="text-ink">Mobile runtime path</strong>{" "}
+                      — WASM-first (skip flaky phone WebGPU), working long side
+                      ≤{BG_REMOVAL.MAX_PROCESS_SIDE_MOBILE}px, skip crop-and-refine
+                      on phones, always fp16 (never the 192 MB fp32 graph).
+                    </li>
+                    <li>
+                      <strong className="text-ink">
+                        Same quality model on purpose
+                      </strong>{" "}
+                      — we evaluated a much smaller fallback (e.g. MODNet /
+                      U²-NetP). Edge quality dropped enough that it was not “the
+                      same cutout, just faster.” For free forever + reliable, we
+                      keep BiRefNet_lite and make the{" "}
+                      <em>runtime</em> lighter, not the weights weaker.
+                    </li>
+                    <li>
+                      Warm-up on tool open, load retries + cache purge, and a
+                      Retry control when setup fails mid-download.
+                    </li>
+                  </ul>
+                </div>
+                <div className="rounded-xl border border-hairline p-4">
+                  <p className="text-[13px] font-extrabold text-ink">
+                    bg-pipeline-0.2{" "}
+                    <span className="font-semibold text-muted">
+                      · crop-and-refine + guided alpha
+                    </span>
+                  </p>
+                  <p className="mt-1.5 text-[14px] font-medium text-muted">
+                    Second-pass subject crop, soft matte, guided refine, hole
+                    fill, color decontamination — quality ceiling without
+                    changing the MIT model.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-hairline p-4">
+                  <p className="text-[13px] font-extrabold text-ink">
+                    bg-pipeline-0.1{" "}
+                    <span className="font-semibold text-muted">
+                      · initial Mode A ship
+                    </span>
+                  </p>
+                  <p className="mt-1.5 text-[14px] font-medium text-muted">
+                    BiRefNet_lite 512 in a Web Worker, soft alpha export, no
+                    watermark / no signup product path.
+                  </p>
+                </div>
+              </div>
             </section>
 
             <section id="licensing" className="scroll-mt-24">
               <h2 className="text-[1.4rem] font-extrabold text-ink">
-                9. Licensing choices
+                10. Licensing choices
               </h2>
               <p className="mt-3 text-[15px] font-medium leading-relaxed text-muted">
                 Mentr&apos;s product is MIT. An AGPL background-removal SDK in a
@@ -462,7 +535,7 @@ export default function TechnicalBgRemoverPage() {
 
             <section id="limits" className="scroll-mt-24">
               <h2 className="text-[1.4rem] font-extrabold text-ink">
-                10. Honest limits
+                11. Honest limits
               </h2>
               <ul className="mt-3 list-disc space-y-2 pl-5 text-[15px] font-medium text-muted">
                 <li>
@@ -486,7 +559,7 @@ export default function TechnicalBgRemoverPage() {
 
             <section id="try" className="scroll-mt-24">
               <h2 className="text-[1.4rem] font-extrabold text-ink">
-                11. Try it — free forever
+                12. Try it — free forever
               </h2>
               <p className="mt-3 text-[15px] font-medium leading-relaxed text-muted">
                 Need a dedicated cutout utility that is not folded into a full

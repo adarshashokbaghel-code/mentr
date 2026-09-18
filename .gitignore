@@ -45,3 +45,8 @@ next-env.d.ts
 .venv-video/
 videos/**/_build/
 videos/**/voiceover.wav
+
+# Background remover ONNX + ORT wasm (fetched by scripts/fetch-bg-models.mjs)
+/public/models/**/*.onnx
+/public/ort/*.wasm
+/public/ort/*.mjs

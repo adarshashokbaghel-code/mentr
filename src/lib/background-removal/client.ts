@@ -2,6 +2,11 @@
 
 import { BG_REMOVAL } from "@/lib/background-removal/config";
 import {
+  detectBgDeviceProfile,
+  friendlyBgError,
+  type BgDeviceProfile,
+} from "@/lib/background-removal/device";
+import {
   composeRgba,
   decontaminateEdges,
   enhanceAlpha,
@@ -54,9 +59,16 @@ export class BackgroundRemovalClient {
     }
   >();
   private onProgress: ((p: BgRemovalProgress) => void) | null = null;
+  private profile: BgDeviceProfile = detectBgDeviceProfile();
+  private ready = false;
+  private initPromise: Promise<void> | null = null;
 
   setProgressHandler(fn: ((p: BgRemovalProgress) => void) | null) {
     this.onProgress = fn;
+  }
+
+  getDeviceProfile() {
+    return this.profile;
   }
 
   private emit(p: BgRemovalProgress) {
@@ -65,10 +77,9 @@ export class BackgroundRemovalClient {
 
   private ensureWorker() {
     if (this.worker) return;
-    this.worker = new Worker(
-      new URL("./worker.ts", import.meta.url),
-      { type: "module" },
-    );
+    this.worker = new Worker(new URL("./worker.ts", import.meta.url), {
+      type: "module",
+    });
     this.worker.onmessage = (ev: MessageEvent) => {
       const msg = ev.data as Record<string, unknown>;
       if (msg.type === "progress") {
@@ -87,6 +98,7 @@ export class BackgroundRemovalClient {
         return;
       }
       if (msg.type === "ready") {
+        this.ready = true;
         this.emit({
           phase: "ready",
           message: "Ready",
@@ -105,7 +117,9 @@ export class BackgroundRemovalClient {
       }
       if (msg.type === "error") {
         const id = msg.requestId != null ? Number(msg.requestId) : null;
-        const err = new Error(String(msg.message ?? "Processing failed"));
+        const err = new Error(
+          friendlyBgError(String(msg.message ?? "Processing failed")),
+        );
         if (id != null && this.pending.has(id)) {
           this.pending.get(id)!.reject(err);
           this.pending.delete(id);
@@ -117,23 +131,80 @@ export class BackgroundRemovalClient {
     this.worker.onerror = (e) => {
       this.emit({
         phase: "error",
-        message: e.message || "Worker crashed",
+        message: friendlyBgError(e.message || "Worker crashed"),
       });
     };
   }
 
-  /** Warm model download without an image (optional). */
+  /** Warm model download without an image (call on tool page mount). */
   async init() {
+    if (this.ready) return;
+    if (this.initPromise) return this.initPromise;
     this.ensureWorker();
     this.emit({
       phase: "loading",
-      message: "Getting ready…",
+      message: this.profile.mobile
+        ? "Preparing for this phone…"
+        : "Getting ready…",
     });
-    this.worker!.postMessage({ type: "init" });
+
+    this.initPromise = new Promise<void>((resolve, reject) => {
+      let settled = false;
+      const finish = (fn: () => void) => {
+        if (settled) return;
+        settled = true;
+        fn();
+      };
+
+      const onMsg = (ev: MessageEvent) => {
+        const msg = ev.data as Record<string, unknown>;
+        if (msg.type === "ready") {
+          this.worker?.removeEventListener("message", onMsg);
+          this.ready = true;
+          finish(() => resolve());
+        }
+        if (msg.type === "error" && msg.requestId == null) {
+          this.worker?.removeEventListener("message", onMsg);
+          this.initPromise = null;
+          finish(() =>
+            reject(
+              new Error(
+                friendlyBgError(String(msg.message ?? "Setup failed")),
+              ),
+            ),
+          );
+        }
+      };
+      this.worker!.addEventListener("message", onMsg);
+      this.worker!.postMessage({ type: "init", profile: this.profile });
+
+      window.setTimeout(() => {
+        if (settled || this.ready) return;
+        this.worker?.removeEventListener("message", onMsg);
+        this.initPromise = null;
+        finish(() =>
+          reject(
+            new Error(
+              "Download is taking too long on this network. Keep the tab open and tap retry.",
+            ),
+          ),
+        );
+      }, 180_000);
+    });
+
+    return this.initPromise;
   }
 
   async process(blob: Blob): Promise<BgRemovalResult> {
     this.ensureWorker();
+    // Ensure warm (or start load) before process
+    try {
+      await this.init();
+    } catch {
+      // process will retry ensureModel inside worker
+      this.initPromise = null;
+    }
+
     const id = ++this.requestId;
     const buffer = await blob.arrayBuffer();
 
@@ -145,6 +216,8 @@ export class BackgroundRemovalClient {
           buffer,
           mime: blob.type || "image/png",
           requestId: id,
+          profile: this.profile,
+          skipRefine: this.profile.skipRefine,
         },
         [buffer],
       );
@@ -172,6 +245,25 @@ export class BackgroundRemovalClient {
     };
   }
 
+  /** Clear caches and force a fresh load (UI retry). */
+  async hardReset() {
+    this.ready = false;
+    this.initPromise = null;
+    for (const [, p] of this.pending) {
+      p.reject(new Error("Cancelled"));
+    }
+    this.pending.clear();
+    if (this.worker) {
+      try {
+        this.worker.postMessage({ type: "reset-cache" });
+      } catch {
+        /* ignore */
+      }
+      this.worker.terminate();
+      this.worker = null;
+    }
+  }
+
   dispose() {
     for (const [, p] of this.pending) {
       p.reject(new Error("Cancelled"));
@@ -179,5 +271,7 @@ export class BackgroundRemovalClient {
     this.pending.clear();
     this.worker?.terminate();
     this.worker = null;
+    this.ready = false;
+    this.initPromise = null;
   }
 }
