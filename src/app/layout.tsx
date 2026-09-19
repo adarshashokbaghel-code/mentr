@@ -5,6 +5,7 @@ import { LearnDinoGuide } from "@/components/landing/lp/learn-dino-guide";
 import { AdSenseLoader } from "@/components/seo/adsense-loader";
 import { CookieConsent } from "@/components/seo/cookie-consent";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
+import { SkipLink } from "@/components/ui/skip-link";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import {
   ADSENSE_CLIENT_ID,
@@ -100,6 +101,7 @@ export default function RootLayout({
         <GoogleAnalytics />
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
+        <SkipLink />
         <AppProviders>{children}</AppProviders>
         <AdSenseLoader />
         {LEARN_PUBLIC ? <LearnDinoGuide /> : null}
