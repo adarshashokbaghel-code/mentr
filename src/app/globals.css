@@ -2303,4 +2303,113 @@ main {
   }
 }
 
+/* Instant Connect quick-guide “video” reel */
+@keyframes mentr-ic-guide-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mentr-ic-guide-chip-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mentr-ic-guide-bar {
+  from {
+    width: 6%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes mentr-ic-guide-card-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mentr-ic-guide-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+@keyframes mentr-ic-guide-caption {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mentr-ic-guide-scene {
+  animation: mentr-ic-guide-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mentr-ic-guide-chip {
+  opacity: 0;
+  animation: mentr-ic-guide-chip-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mentr-ic-guide-bar {
+  width: 6%;
+  animation: mentr-ic-guide-bar 2.2s ease-out 0.45s both;
+}
+
+.mentr-ic-guide-card {
+  opacity: 0;
+  animation: mentr-ic-guide-card-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.mentr-ic-guide-ring {
+  animation: mentr-ic-guide-ring 1.6s ease-out infinite;
+}
+
+.mentr-ic-guide-caption {
+  animation: mentr-ic-guide-caption 0.35s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mentr-ic-guide-scene,
+  .mentr-ic-guide-chip,
+  .mentr-ic-guide-bar,
+  .mentr-ic-guide-card,
+  .mentr-ic-guide-ring,
+  .mentr-ic-guide-caption {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .mentr-ic-guide-bar {
+    width: 70%;
+  }
+}
+
+
 

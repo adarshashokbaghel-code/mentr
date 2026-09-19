@@ -1,19 +1,13 @@
-import { TEACHERS } from "@/lib/teachers";
-
 export type SitemapTeacherRef = {
   path: string;
   lastModified?: Date;
 };
 
 /**
- * Static demo teachers + live MongoDB faculty profiles (when DB is reachable at build).
+ * Live MongoDB faculty profiles for the sitemap (when DB is reachable at build).
  */
 export async function resolveTeacherSitemapRefs(): Promise<SitemapTeacherRef[]> {
   const byId = new Map<string, SitemapTeacherRef>();
-
-  for (const teacher of TEACHERS) {
-    byId.set(teacher.id, { path: `/teachers/${teacher.id}` });
-  }
 
   try {
     const { connectDb } = await import("../../server/db");
@@ -35,7 +29,7 @@ export async function resolveTeacherSitemapRefs(): Promise<SitemapTeacherRef[]> 
       });
     }
   } catch {
-    // Sitemap still ships with static teacher URLs when Mongo is unavailable.
+    // Empty teacher sitemap segment when Mongo is unavailable.
   }
 
   return [...byId.values()];

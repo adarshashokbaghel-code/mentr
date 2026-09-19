@@ -88,36 +88,28 @@ export function PitchesSection() {
   return (
     <section>
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="text-xl font-semibold">Your pitches</h2>
-          
-        </div>
+        <h2 className="text-lg font-semibold">Your pitches</h2>
         <FacultyActionLink
           href="/board"
-          className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-4 text-[13px] font-semibold text-ink transition hover:bg-cream"
+          className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-[13px] font-semibold text-ink transition hover:bg-cream"
         >
           <Megaphone className="h-3.5 w-3.5 text-coral" />
-          Open  Requirement Board
+          Requirement board
         </FacultyActionLink>
       </div>
 
       {loading ? (
-        <div className="mt-4 rounded-lg border border-hairline bg-white px-5 py-8 text-center text-sm text-muted">
+        <div className="mt-3 rounded-xl border border-hairline bg-white px-4 py-6 text-center text-sm text-muted">
           Loading…
         </div>
       ) : pitches.length === 0 ? (
-        <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
-          <Send className="mx-auto h-5 w-5 text-muted" />
-          <p className="mt-2 text-sm font-medium text-ink">No pitches yet</p>
-          <p className="mx-auto mt-1 max-w-[360px] text-sm text-muted">
-            Parents post what they need on the requirements board — send a
-            free pitch and connect with the ones that fit.
-          </p>
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-hairline bg-white px-4 py-4">
+          <p className="text-sm text-muted">No pitches yet.</p>
           <FacultyActionLink
             href="/board"
-            className="mt-4 inline-flex h-9 items-center gap-1.5 rounded-md bg-coral px-4 text-[13px] font-semibold text-white transition hover:bg-coral-dark"
+            className="inline-flex h-8 items-center gap-1 rounded-md bg-coral px-3 text-[12px] font-semibold text-white hover:bg-coral-dark"
           >
-            Browse requirements
+            Browse board
             <ArrowUpRight className="h-3.5 w-3.5" />
           </FacultyActionLink>
         </div>

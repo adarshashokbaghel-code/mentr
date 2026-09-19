@@ -138,6 +138,7 @@ export type IcMatchedTutor = {
   profileImageUrl: string | null;
   score: number;
   responseHint: string;
+  matchReason?: string | null;
 };
 
 export type IcParentRequest = {
@@ -159,6 +160,9 @@ export type IcParentRequest = {
   expiresAt: string;
   closedAt: string | null;
   closedBy: string | null;
+  closeOutcome: "dismissed" | "mentor_found" | null;
+  hiredTutorIds: string[];
+  closeNotes: string | null;
 };
 
 export type IcTutorRequest = {
@@ -179,15 +183,30 @@ export type IcTutorRequest = {
   parentContact: { available: true; phone: string } | { available: false };
 };
 
+export type IcAdminMentor = {
+  id: string;
+  name: string;
+  email: string;
+  subjects?: string[];
+};
+
+export type IcClosePayload = {
+  outcome: "dismissed" | "mentor_found";
+  hiredTutorIds?: string[];
+  notes?: string;
+};
+
 export const instantConnectApi = {
   match: (form: IcFormPayload) =>
     request<{
       matches: IcMatchedTutor[];
+      matchedBy: "rules" | "ai";
       noMatch: boolean;
       form: IcFormPayload;
     }>("/instant-connect/match", {
       method: "POST",
       body: JSON.stringify(form),
+      timeoutMs: 35_000,
     }),
 
   create: (
@@ -217,9 +236,10 @@ export const instantConnectApi = {
       }[];
     }>(`/instant-connect/${id}`),
 
-  close: (id: string) =>
+  close: (id: string, payload: IcClosePayload = { outcome: "dismissed" }) =>
     request<{ request: IcParentRequest }>(`/instant-connect/${id}/close`, {
       method: "POST",
+      body: JSON.stringify(payload),
     }),
 
   tutorMine: () =>
@@ -238,6 +258,7 @@ export const instantConnectApi = {
         active: number;
         closed: number;
         expired: number;
+        mentorFound: number;
         noMatch: number;
         with1: number;
         with2: number;
@@ -250,9 +271,17 @@ export const instantConnectApi = {
         parentEmail: string;
         subject: string;
         classLevel: string;
-        mentorsNotified: number;
+        board: string;
+        mode: string;
+        lookingFor: string;
+        mentorsNotified: IcAdminMentor[];
+        mentorsHired: IcAdminMentor[];
         status: string;
+        closeOutcome: "dismissed" | "mentor_found" | null;
+        closeNotes: string | null;
+        closedBy: string | null;
         createdAt: string;
+        expiresAt: string;
         closedAt: string | null;
       }[];
     }>("/instant-connect/admin/summary", {

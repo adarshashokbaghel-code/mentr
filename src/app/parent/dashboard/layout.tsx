@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "My connections",
+  title: "Parent dashboard",
   description:
-    "Track your tutor connection requests. Once a tutor accepts, their WhatsApp number unlocks for you — free, no middlemen.",
+    "Track Instant Connect requests and tutor connections. Once a tutor accepts, their WhatsApp number unlocks — free, no middlemen.",
   robots: { index: false, follow: false },
 };
 

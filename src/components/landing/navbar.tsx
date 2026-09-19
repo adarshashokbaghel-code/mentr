@@ -299,7 +299,7 @@ export function Navbar() {
                       onClick={() => setOpen(false)}
                     >
                       <LayoutDashboard className="h-4 w-4 text-muted" />
-                      My connections
+                      Dashboard
                     </Link>
                     <Link
                       href="/search"

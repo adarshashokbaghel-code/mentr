@@ -18,13 +18,13 @@ import {
   type IcFormPayload,
   type IcMatchedTutor,
 } from "@/lib/instant-connect";
+import { notifyIcRequestSent } from "@/lib/instant-connect-active";
 import { cn } from "@/lib/utils";
 import {
   BadgeCheck,
   Check,
   ExternalLink,
   Loader2,
-  MapPin,
   Megaphone,
   Sparkles,
   X,
@@ -49,6 +49,7 @@ export type IcSheetStep =
   | "basics"
   | "setup"
   | "budget"
+  | "notes"
   | "results"
   | "phone"
   | "done";
@@ -101,7 +102,9 @@ export const InstantConnectStepper = forwardRef<
   const [mode, setMode] = useState("online");
   const [location, setLocation] = useState("");
   const [budgetIdx, setBudgetIdx] = useState(4);
+  const [notes, setNotes] = useState("");
   const [matches, setMatches] = useState<IcMatchedTutor[]>([]);
+  const [matchedBy, setMatchedBy] = useState<"rules" | "ai">("rules");
   const [selected, setSelected] = useState<string[]>([]);
   const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -131,6 +134,7 @@ export const InstantConnectStepper = forwardRef<
       budgetMin: preset?.min ?? null,
       budgetMax: preset?.max ?? null,
       preferredTime: "Flexible",
+      message: notes.trim() || undefined,
     };
   }, [
     lookingFor,
@@ -140,6 +144,7 @@ export const InstantConnectStepper = forwardRef<
     mode,
     location,
     budgetIdx,
+    notes,
   ]);
 
   const locationOk = mode === "online" || location.trim().length > 1;
@@ -179,7 +184,13 @@ export const InstantConnectStepper = forwardRef<
       case "setup":
         return { label: "Next", disabled: !setupOk, busy: false };
       case "budget":
-        return { label: "Instant Connect", disabled: false, busy: false };
+        return { label: "Next", disabled: false, busy: false };
+      case "notes":
+        return {
+          label: notes.trim() ? "AI match" : "Find mentors",
+          disabled: false,
+          busy: false,
+        };
       case "results":
         if (matches.length === 0) {
           return { label: "Post to board", disabled: false, busy: false };
@@ -196,7 +207,7 @@ export const InstantConnectStepper = forwardRef<
           busy: false,
         };
       case "done":
-        return { label: "Done", disabled: false, busy: false };
+        return { label: "Track request", disabled: false, busy: false };
       default:
         return { label: "Next", disabled: false, busy: false };
     }
@@ -210,6 +221,7 @@ export const InstantConnectStepper = forwardRef<
     selected.length,
     consent,
     phoneInput,
+    notes,
   ]);
 
   useEffect(() => {
@@ -223,12 +235,14 @@ export const InstantConnectStepper = forwardRef<
     try {
       const res = await instantConnectApi.match(formPayload);
       setMatches(res.matches);
+      setMatchedBy(res.matchedBy || "rules");
       setSelected(res.matches.map((m) => m.id));
       setStep("results");
       if (res.noMatch) trackIcEvent("instant_connect_no_match");
       else
         trackIcEvent("instant_connect_matches_shown", {
           count: res.matches.length,
+          matchedBy: res.matchedBy,
         });
     } catch (err) {
       setError(err instanceof ApiError ? err.message : "Matching failed");
@@ -262,6 +276,7 @@ export const InstantConnectStepper = forwardRef<
         selectedTutorIds: selected,
         consentSharedPhone: true,
       });
+      notifyIcRequestSent();
       trackIcEvent("instant_connect_request_sent", {
         mentors: selected.length,
       });
@@ -305,6 +320,7 @@ export const InstantConnectStepper = forwardRef<
         selectedTutorIds: selected,
         consentSharedPhone: true,
       });
+      notifyIcRequestSent();
       trackIcEvent("instant_connect_request_sent", {
         mentors: selected.length,
       });
@@ -379,7 +395,12 @@ export const InstantConnectStepper = forwardRef<
         setStep("budget");
         return;
       case "budget":
-        trackIcEvent("instant_connect_form_started");
+        setStep("notes");
+        return;
+      case "notes":
+        trackIcEvent("instant_connect_form_started", {
+          hasNotes: Boolean(notes.trim()),
+        });
         await runMatch();
         return;
       case "results":
@@ -397,7 +418,7 @@ export const InstantConnectStepper = forwardRef<
         await savePhoneAndContinue();
         return;
       case "done":
-        onDoneClose?.();
+        // Dock shows Track request; nothing to advance.
         return;
     }
   }
@@ -411,6 +432,7 @@ export const InstantConnectStepper = forwardRef<
     selected,
     consent,
     phoneInput,
+    notes,
     formPayload,
     user,
   ]);
@@ -433,12 +455,18 @@ export const InstantConnectStepper = forwardRef<
     },
     budget: {
       h: "Budget (optional)",
-      s: "Skip or pick a range — then we match.",
+      s: "Skip or pick a range — then add notes if you want.",
+    },
+    notes: {
+      h: "Anything else? (optional)",
+      s: "Goals, board quirks, timing — we use this to pick better mentors.",
     },
     results: {
-      h: matches.length ? "Your matches" : "No match yet",
+      h: matches.length ? "Pick mentors" : "No match yet",
       s: matches.length
-        ? "Pick who to notify."
+        ? matchedBy === "ai"
+          ? "AI-ranked for you — select who can call you"
+          : "Select who can see your number and call you"
         : "Post on the board instead.",
     },
     phone: {
@@ -447,7 +475,7 @@ export const InstantConnectStepper = forwardRef<
     },
     done: {
       h: "You're set",
-      s: "Mentors can reach you for 48 hours.",
+      s: "Track this request anytime from your dashboard.",
     },
   };
 
@@ -489,8 +517,10 @@ export const InstantConnectStepper = forwardRef<
           </p>
           {step !== "results" && step !== "phone" && step !== "done" ? (
             <StepDots
-              index={["looking", "basics", "setup", "budget"].indexOf(step)}
-              total={4}
+              index={
+                ["looking", "basics", "setup", "budget", "notes"].indexOf(step)
+              }
+              total={5}
             />
           ) : null}
         </div>
@@ -652,6 +682,34 @@ export const InstantConnectStepper = forwardRef<
         </div>
       )}
 
+      {step === "notes" && (
+        <div className="space-y-2">
+          <textarea
+            value={notes}
+            onChange={(e) => setNotes(e.target.value.slice(0, 400))}
+            rows={4}
+            placeholder="e.g. Class 10 ICSE Physics — weak in numericals, evenings only, calm tutor preferred"
+            className={cn(
+              "w-full resize-none rounded-xl px-3 py-2.5 text-[13px] font-medium outline-none transition sm:text-sm",
+              sheet
+                ? "border border-white/15 bg-white/10 text-white placeholder:text-white/40 focus:border-white/40"
+                : "border-2 border-ink/10 bg-white text-ink placeholder:text-muted focus:border-ink/40",
+            )}
+          />
+          <p
+            className={cn(
+              "text-right text-[10px]",
+              sheet ? "text-white/40" : "text-muted",
+            )}
+          >
+            Optional · {notes.length}/400
+            {notes.trim()
+              ? " · AI will refine matches"
+              : " · Skip for standard match"}
+          </p>
+        </div>
+      )}
+
       {step === "results" && matches.length === 0 && (
         <p
           className={cn(
@@ -665,146 +723,24 @@ export const InstantConnectStepper = forwardRef<
       )}
 
       {step === "results" && matches.length > 0 && (
-        <div className="space-y-3">
-          <ul className="space-y-2.5">
-            {matches.map((m) => {
-              const on = selected.includes(m.id);
-              return (
-                <li
-                  key={m.id}
-                  className={cn(
-                    "rounded-2xl border p-3 transition",
-                    sheet
-                      ? on
-                        ? "border-white/40 bg-white/15"
-                        : "border-white/10 bg-white/5"
-                      : on
-                        ? "border-2 border-ink bg-white shadow-[3px_3px_0_0_rgba(61,52,41,0.25)]"
-                        : "border-2 border-ink/10 bg-white",
-                  )}
-                >
-                  <div className="flex gap-3">
-                    <button
-                      type="button"
-                      aria-label={on ? "Deselect" : "Select"}
-                      onClick={() => {
-                        setSelected((prev) =>
-                          on
-                            ? prev.filter((id) => id !== m.id)
-                            : prev.length >= 3
-                              ? prev
-                              : [...prev, m.id],
-                        );
-                        trackIcEvent("instant_connect_mentor_selected");
-                      }}
-                      className={cn(
-                        "mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded border-2",
-                        on
-                          ? sheet
-                            ? "border-white bg-white text-ink"
-                            : "border-ink bg-ink text-white"
-                          : sheet
-                            ? "border-white/30 bg-transparent"
-                            : "border-ink/25 bg-white",
-                      )}
-                    >
-                      {on ? <Check className="h-3 w-3" /> : null}
-                    </button>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-start gap-3">
-                        <Avatar name={m.name} src={m.profileImageUrl} />
-                        <div className="min-w-0 flex-1">
-                          <p
-                            className={cn(
-                              "flex flex-wrap items-center gap-2 font-bold",
-                              sheet ? "text-white" : "text-ink",
-                            )}
-                          >
-                            {m.name}
-                            <span
-                              className={cn(
-                                "inline-flex items-center gap-0.5 rounded-md px-1.5 py-0.5 text-[10px] font-bold uppercase",
-                                sheet
-                                  ? "bg-sage/25 text-sage"
-                                  : "bg-sage-wash text-sage",
-                              )}
-                            >
-                              <BadgeCheck className="h-3 w-3" />
-                              Verified
-                            </span>
-                          </p>
-                          <p
-                            className={cn(
-                              "mt-0.5 text-sm",
-                              sheet ? "text-white/55" : "text-muted",
-                            )}
-                          >
-                            {(m.subjects[0] || m.designation) +
-                              (m.levels[0] ? ` · ${m.levels[0]}` : "")}
-                          </p>
-                          <p
-                            className={cn(
-                              "mt-1 flex flex-wrap gap-x-3 text-xs font-semibold",
-                              sheet ? "text-white/75" : "text-ink/80",
-                            )}
-                          >
-                            <span>
-                              {m.teachingModes.includes("online")
-                                ? "Online"
-                                : "In person"}
-                            </span>
-                            {m.hourlyRate != null ? (
-                              <span>₹{m.hourlyRate}/hour</span>
-                            ) : null}
-                            {m.city ? (
-                              <span className="inline-flex items-center gap-0.5">
-                                <MapPin className="h-3 w-3" />
-                                {m.city}
-                              </span>
-                            ) : null}
-                          </p>
-                          <button
-                            type="button"
-                            onClick={() => setProfileTutor(m)}
-                            className={cn(
-                              "mt-2 inline-flex items-center gap-1 text-[12px] font-bold underline underline-offset-2 transition hover:opacity-90",
-                              sheet
-                                ? "text-coral decoration-coral/70"
-                                : "text-coral decoration-coral/50 hover:decoration-coral",
-                            )}
-                          >
-                            <ExternalLink className="h-3 w-3 shrink-0" />
-                            View profile
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-
-          <label
-            className={cn(
-              "flex cursor-pointer items-start gap-3 rounded-xl p-3 text-sm leading-relaxed",
-              sheet
-                ? "border border-white/10 bg-white/5 text-white/85"
-                : "border-2 border-ink/10 bg-[#f3ebe3]/70 text-ink",
-            )}
-          >
-            <input
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-1 h-4 w-4 accent-[var(--ink)]"
-            />
-            <span>
-              Share my phone with the mentors I select until I close this
-              request.
-            </span>
-          </label>
-        </div>
+        <MatchesList
+          sheet={sheet}
+          matches={matches}
+          matchedBy={matchedBy}
+          selected={selected}
+          consent={consent}
+          onConsent={setConsent}
+          onToggle={(id) => {
+            setSelected((prev) => {
+              const on = prev.includes(id);
+              if (on) return prev.filter((x) => x !== id);
+              if (prev.length >= 3) return prev;
+              return [...prev, id];
+            });
+            trackIcEvent("instant_connect_mentor_selected");
+          }}
+          onViewProfile={setProfileTutor}
+        />
       )}
 
       {step === "phone" && (
@@ -828,20 +764,36 @@ export const InstantConnectStepper = forwardRef<
           </span>
           <p
             className={cn(
-              "mt-3 text-sm",
-              sheet ? "text-white/55" : "text-muted",
+              "mt-3 text-sm font-semibold",
+              sheet ? "text-white" : "text-ink",
             )}
           >
             {selected.length} mentor{selected.length === 1 ? "" : "s"} notified.
-            Budget:{" "}
+          </p>
+          <p
+            className={cn(
+              "mt-2 text-sm leading-relaxed",
+              sheet ? "text-white/60" : "text-muted",
+            )}
+          >
+            You can track your request from your dashboard — open Quick match
+            anytime to see status or close it when you&apos;ve found a mentor.
+          </p>
+          <p
+            className={cn(
+              "mt-2 text-xs",
+              sheet ? "text-white/40" : "text-muted",
+            )}
+          >
+            Mentors can reach you for 48 hours · Budget:{" "}
             {formatIcBudget(formPayload.budgetMin, formPayload.budgetMax)}.
           </p>
           {!sheet ? (
             <Link
-              href="/search"
-              className="mt-5 inline-flex h-11 items-center justify-center rounded-md border-2 border-ink/15 bg-white px-5 text-sm font-bold text-ink"
+              href="/parent/dashboard#instant-connect"
+              className="mt-5 inline-flex h-11 items-center justify-center rounded-md bg-ink px-5 text-sm font-bold text-white"
             >
-              Back to search
+              Track request
             </Link>
           ) : null}
         </div>
@@ -866,6 +818,8 @@ export const InstantConnectStepper = forwardRef<
         >
           {busy ? (
             <Loader2 className="h-4 w-4 animate-spin" />
+          ) : step === "notes" ? (
+            <Sparkles className="h-4 w-4" />
           ) : step === "budget" ? (
             <Sparkles className="h-4 w-4" />
           ) : null}
@@ -924,6 +878,252 @@ export const InstantConnectStepper = forwardRef<
     </div>
   );
 });
+
+function MatchesList({
+  sheet,
+  matches,
+  matchedBy,
+  selected,
+  consent,
+  onConsent,
+  onToggle,
+  onViewProfile,
+}: {
+  sheet: boolean;
+  matches: IcMatchedTutor[];
+  matchedBy: "rules" | "ai";
+  selected: string[];
+  consent: boolean;
+  onConsent: (v: boolean) => void;
+  onToggle: (id: string) => void;
+  onViewProfile: (m: IcMatchedTutor) => void;
+}) {
+  return (
+    <div className="space-y-3">
+      <div className="flex items-center justify-between gap-3 px-0.5">
+        <p
+          className={cn(
+            "text-[12px] font-semibold tabular-nums",
+            sheet ? "text-white/55" : "text-muted",
+          )}
+        >
+          {selected.length}/{matches.length} selected
+        </p>
+        {matchedBy === "ai" ? (
+          <span
+            className={cn(
+              "inline-flex items-center gap-1 text-[11px] font-semibold",
+              sheet ? "text-white/50" : "text-ic-blue",
+            )}
+          >
+            <Sparkles className="h-3 w-3" />
+            AI matched
+          </span>
+        ) : null}
+      </div>
+
+      <ul className="space-y-2">
+        {matches.map((m) => {
+          const on = selected.includes(m.id);
+          const mode = m.teachingModes.includes("online")
+            ? "Online"
+            : "In person";
+          const subject = m.subjects[0] || m.designation || "Mentor";
+          const level = m.levels[0];
+          const meta = [subject, level, mode, m.city].filter(Boolean).join(" · ");
+
+          return (
+            <li key={m.id}>
+              <div
+                role="button"
+                tabIndex={0}
+                aria-pressed={on}
+                onClick={() => onToggle(m.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onToggle(m.id);
+                  }
+                }}
+                className={cn(
+                  "w-full cursor-pointer rounded-xl text-left transition",
+                  sheet
+                    ? on
+                      ? "bg-white/[0.12] ring-1 ring-white/35"
+                      : "bg-white/[0.05] ring-1 ring-white/10 hover:bg-white/[0.08]"
+                    : on
+                      ? "border border-ink bg-white"
+                      : "border border-ink/10 bg-white hover:border-ink/25",
+                )}
+              >
+                <div className="flex items-center gap-3 px-3 py-2.5">
+                  <MatchAvatar
+                    name={m.name}
+                    src={m.profileImageUrl}
+                    sheet={sheet}
+                  />
+
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline gap-1.5">
+                      <p
+                        className={cn(
+                          "min-w-0 truncate text-[13px] font-bold leading-tight tracking-tight",
+                          sheet ? "text-white" : "text-ink",
+                        )}
+                      >
+                        {m.name}
+                      </p>
+                      <BadgeCheck
+                        className={cn(
+                          "h-3.5 w-3.5 shrink-0",
+                          sheet ? "text-sage" : "text-sage",
+                        )}
+                        aria-label="Verified"
+                      />
+                    </div>
+
+                    <p
+                      className={cn(
+                        "mt-0.5 truncate text-[11px] font-medium leading-snug",
+                        sheet ? "text-white/45" : "text-muted",
+                      )}
+                    >
+                      {meta}
+                    </p>
+
+                    <div className="mt-1.5 flex items-center gap-2">
+                      {m.hourlyRate != null ? (
+                        <span
+                          className={cn(
+                            "text-[12px] font-bold tabular-nums",
+                            sheet ? "text-white/85" : "text-ink",
+                          )}
+                        >
+                          ₹{m.hourlyRate}
+                          <span
+                            className={cn(
+                              "ml-0.5 font-semibold",
+                              sheet ? "text-white/40" : "text-muted",
+                            )}
+                          >
+                            /hr
+                          </span>
+                        </span>
+                      ) : null}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onViewProfile(m);
+                        }}
+                        className={cn(
+                          "text-[11px] font-semibold transition",
+                          sheet
+                            ? "text-white/40 hover:text-white/70"
+                            : "text-muted hover:text-ink",
+                        )}
+                      >
+                        Profile
+                      </button>
+                    </div>
+
+                    {m.matchReason ? (
+                      <p
+                        className={cn(
+                          "mt-1.5 line-clamp-1 text-[11px] font-medium",
+                          sheet ? "text-coral/85" : "text-coral-dark",
+                        )}
+                      >
+                        {m.matchReason}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  <span
+                    className={cn(
+                      "flex h-6 w-6 shrink-0 items-center justify-center rounded-full transition",
+                      sheet
+                        ? on
+                          ? "bg-white text-ink"
+                          : "bg-transparent ring-1 ring-white/25"
+                        : on
+                          ? "bg-ink text-white"
+                          : "bg-transparent ring-1 ring-ink/20",
+                    )}
+                    aria-hidden
+                  >
+                    {on ? (
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                    ) : null}
+                  </span>
+                </div>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+
+      <label
+        className={cn(
+          "flex cursor-pointer items-start gap-2.5 px-0.5 pt-0.5 text-[12px] font-medium leading-snug",
+          sheet ? "text-white/60" : "text-ink/70",
+        )}
+      >
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => onConsent(e.target.checked)}
+          className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[var(--ink)]"
+        />
+        <span>
+          Share my phone with selected mentors until I close this request.
+        </span>
+      </label>
+    </div>
+  );
+}
+
+function MatchAvatar({
+  name,
+  src,
+  sheet,
+}: {
+  name: string;
+  src: string | null;
+  sheet: boolean;
+}) {
+  const [failed, setFailed] = useState(false);
+  const initials = name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]!.toUpperCase())
+    .join("");
+
+  return (
+    <span
+      className={cn(
+        "flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full text-[12px] font-bold",
+        sheet
+          ? "bg-[#f7f0e8] text-ink"
+          : "bg-cream text-ink ring-1 ring-ink/10",
+      )}
+    >
+      {src && !failed ? (
+        <Image
+          src={src}
+          alt=""
+          width={40}
+          height={40}
+          className="h-full w-full object-cover"
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        initials
+      )}
+    </span>
+  );
+}
 
 function StepDots({ index, total }: { index: number; total: number }) {
   return (
@@ -989,46 +1189,6 @@ function Chip({
   );
 }
 
-function Avatar({
-  name,
-  src,
-  light,
-}: {
-  name: string;
-  src: string | null;
-  light?: boolean;
-}) {
-  const initials = name
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((p) => p[0]!.toUpperCase())
-    .join("");
-  if (src) {
-    return (
-      <Image
-        src={src}
-        alt=""
-        width={44}
-        height={44}
-        className="h-11 w-11 rounded-xl border border-white/10 object-cover"
-      />
-    );
-  }
-  return (
-    <span
-      className={cn(
-        "flex h-11 w-11 items-center justify-center rounded-xl text-sm font-bold",
-        light
-          ? "border border-ink/10 bg-cream text-ink"
-          : "border border-white/10 bg-white/10 text-white",
-      )}
-    >
-      {initials}
-    </span>
-  );
-}
-
 function MatchProfileModal({
   tutor,
   onClose,
@@ -1071,7 +1231,7 @@ function MatchProfileModal({
     >
       <button
         type="button"
-        className="absolute inset-0 bg-ink/60 backdrop-blur-[3px]"
+        className="absolute inset-0 bg-black/35 backdrop-blur-[2px]"
         aria-label="Close profile"
         onClick={onClose}
       />
@@ -1213,26 +1373,29 @@ function ProfileAvatar({
   name: string;
   src: string | null;
 }) {
+  const [imgFailed, setImgFailed] = useState(false);
   const initials = name
     .split(/\s+/)
     .filter(Boolean)
     .slice(0, 2)
     .map((p) => p[0]!.toUpperCase())
     .join("");
-  if (src) {
-    return (
-      <Image
-        src={src}
-        alt=""
-        width={56}
-        height={56}
-        className="h-14 w-14 shrink-0 rounded-2xl border-2 border-ink/10 object-cover"
-      />
-    );
-  }
+  const showImg = Boolean(src) && !imgFailed;
+
   return (
-    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-ink/10 bg-cream text-base font-bold text-ink">
-      {initials}
+    <span className="relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-2 border-ink/10 bg-[#f7f0e8] text-base font-bold text-ink">
+      {showImg ? (
+        <Image
+          src={src!}
+          alt=""
+          width={56}
+          height={56}
+          className="h-full w-full object-cover"
+          onError={() => setImgFailed(true)}
+        />
+      ) : (
+        initials
+      )}
     </span>
   );
 }

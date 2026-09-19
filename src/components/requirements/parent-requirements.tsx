@@ -123,10 +123,9 @@ export function ParentRequirementsSection({
     <section>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold">My requirements</h2>
+          <h2 className="text-lg font-semibold">My posts</h2>
           <p className="mt-0.5 text-sm text-muted">
-            Post what you need — verified tutors reach out, you pick who to
-            connect with. Your identity stays hidden until you accept.
+            Tutors pitch you — accept to unlock WhatsApp.
           </p>
         </div>
         <button

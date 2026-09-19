@@ -1,9 +1,10 @@
 "use client";
 
 import { timeAgo } from "@/components/dashboard/widgets";
+import { InfoTip } from "@/components/dashboard/info-tip";
 import { connectionsApi, type ConnectionRequest } from "@/lib/api";
 import { cn } from "@/lib/utils";
-import { Check, Inbox, Loader2, Lock, X } from "lucide-react";
+import { Check, Loader2, Lock, X } from "lucide-react";
 import { useState } from "react";
 
 const STATUS_BADGE: Record<string, { label: string; cls: string }> = {
@@ -47,8 +48,20 @@ export function ConnectionRequestsSection({
   return (
     <section>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 className="flex items-center gap-2 text-xl font-semibold">
+        <h2 className="flex items-center gap-1.5 text-lg font-semibold">
           Connection requests
+          <InfoTip title="What are connection requests?">
+            <p>
+              When a parent finds your listing and wants to talk, they send a
+              short message here first.
+            </p>
+            <p>
+              <strong className="text-ink">Accept</strong> → your WhatsApp is
+              shared with that parent only.{" "}
+              <strong className="text-ink">Decline</strong> → nothing is shared.
+            </p>
+            <p>Your number stays private until you accept.</p>
+          </InfoTip>
           {pending.length > 0 && (
             <span className="rounded-md bg-coral px-1.5 py-0.5 text-xs font-bold text-white">
               {pending.length}
@@ -57,11 +70,12 @@ export function ConnectionRequestsSection({
         </h2>
       </div>
 
-      <p className="mt-1.5 flex items-start gap-1.5 text-xs leading-relaxed text-muted">
-        <Lock className="mt-0.5 h-3 w-3 shrink-0" />
-        Once you accept a request, your WhatsApp number becomes visible to
-        that parent — and only to them.
-      </p>
+      {pending.length > 0 ? (
+        <p className="mt-1 flex items-start gap-1.5 text-xs text-muted">
+          <Lock className="mt-0.5 h-3 w-3 shrink-0" />
+          Accept to share your WhatsApp with that parent only.
+        </p>
+      ) : null}
 
       {error && (
         <p className="mt-3 rounded-md border border-coral/40 bg-coral-wash px-3 py-2 text-[13px] font-medium text-coral-dark">
@@ -70,19 +84,13 @@ export function ConnectionRequestsSection({
       )}
 
       {loading ? (
-        <div className="mt-4 rounded-lg border border-hairline bg-white px-5 py-8 text-center text-sm text-muted">
+        <div className="mt-3 rounded-xl border border-hairline bg-white px-4 py-6 text-center text-sm text-muted">
           Loading…
         </div>
       ) : requests.length === 0 ? (
-        <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
-          <Inbox className="mx-auto h-5 w-5 text-muted" />
-          <p className="mt-2 text-sm font-medium text-ink">No requests yet </p>
-          <p className="mt-1 text-sm text-muted">
-            When a parent wants to talk, their request and message land here
-            for you to review.
-          </p>
-          {/* comment */}
-        </div>
+        <p className="mt-3 rounded-xl border border-dashed border-hairline bg-white px-4 py-5 text-center text-sm text-muted">
+          No connection requests yet.
+        </p>
       ) : (
         <ul className="mt-4 space-y-3">
           {pending.map((r) => (

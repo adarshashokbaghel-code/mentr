@@ -4,7 +4,7 @@ export const MENTR_WHATSAPP_GROUP_URL =
   "https://chat.whatsapp.com/FUUpqvQeuxY3oaUV4E1WkT?mode=gi_t";
 
 const DEFAULT_DESCRIPTION =
-  "Dear mentors and tutors — daily updates, new postings and quick answers from the Mentr team.";
+  "Daily updates, new postings, and quick answers from the Mentr team.";
 
 function WhatsappGlyph({ className }: { className?: string }) {
   return (
@@ -17,37 +17,71 @@ function WhatsappGlyph({ className }: { className?: string }) {
 export function WhatsappGroupCard({
   description = DEFAULT_DESCRIPTION,
   className,
+  compact = false,
 }: {
   description?: string;
   className?: string;
+  /** One-line strip for denser dashboards */
+  compact?: boolean;
 }) {
   return (
     <section
-      className={cn("rounded-xl border border-hairline bg-white", className)}
+      className={cn(
+        "rounded-xl border border-hairline bg-white",
+        className,
+      )}
     >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-2.5 px-4 py-3 sm:px-5">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-sage-wash text-sage">
-          <WhatsappGlyph className="h-[18px] w-[18px]" />
+      <div
+        className={cn(
+          "flex flex-wrap items-center gap-x-3",
+          compact ? "gap-y-2 px-3 py-2.5 sm:px-4" : "gap-y-2.5 px-4 py-3 sm:px-5",
+        )}
+      >
+        <span
+          className={cn(
+            "flex shrink-0 items-center justify-center rounded-md bg-sage-wash text-sage",
+            compact ? "h-8 w-8" : "h-9 w-9",
+          )}
+        >
+          <WhatsappGlyph className={compact ? "h-4 w-4" : "h-[18px] w-[18px]"} />
         </span>
 
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <h2 className="text-sm font-bold text-ink">Official WhatsApp group</h2>
-            <span className="rounded-md bg-sage-wash px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-sage">
-              Free
-            </span>
+            <h2
+              className={cn(
+                "font-bold text-ink",
+                compact ? "text-[13px]" : "text-sm",
+              )}
+            >
+              {compact ? "Mentors WhatsApp group" : "Official WhatsApp group"}
+            </h2>
+            {!compact ? (
+              <span className="rounded-md bg-sage-wash px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-sage">
+                Free
+              </span>
+            ) : null}
           </div>
-          <p className="mt-0.5 text-xs leading-relaxed text-muted">{description}</p>
+          {!compact ? (
+            <p className="mt-0.5 text-xs leading-relaxed text-muted">
+              {description}
+            </p>
+          ) : null}
         </div>
 
         <a
           href={MENTR_WHATSAPP_GROUP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-md bg-sage px-3 text-[11px] font-semibold text-white transition hover:opacity-90 max-sm:w-full max-sm:justify-center"
+          className={cn(
+            "inline-flex shrink-0 items-center gap-1.5 rounded-md bg-sage font-semibold text-white transition hover:opacity-90 max-sm:w-full max-sm:justify-center",
+            compact
+              ? "h-8 px-3 text-[11px]"
+              : "h-8 px-3 text-[11px]",
+          )}
         >
           <WhatsappGlyph className="h-3 w-3" />
-          Join group
+          Join
         </a>
       </div>
     </section>

@@ -1,12 +1,13 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { LocationFields } from "@/components/forms/location-fields";
 import { profileApi } from "@/lib/api";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { homeFor } from "@/lib/auth-routes";
 import { cn } from "@/lib/utils";
 import { MentrBrand } from "@/components/ui/mentr-brand";
-import { Loader2, MapPin, Phone } from "lucide-react";
+import { Loader2, Phone } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
@@ -57,6 +58,10 @@ function ParentProfilingContent() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    if (!country.trim() || !city.trim()) {
+      setError("Please choose a country and city");
+      return;
+    }
     setSaving(true);
     try {
       const existingName = user?.parentProfile?.name?.trim();
@@ -130,47 +135,15 @@ function ParentProfilingContent() {
                 </span>
               </label>
 
-              <div className="grid grid-cols-2 gap-3">
-                <label className="block">
-                  <span className="text-[13px] font-semibold text-ink">
-                    Country
-                  </span>
-                  <input
-                    type="text"
-                    required
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    className={field}
-                  />
-                </label>
-                <label className="block">
-                  <span className="text-[13px] font-semibold text-ink">
-                    City
-                  </span>
-                  <input
-                    type="text"
-                    required
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    className={field}
-                  />
-                </label>
-              </div>
-
-              <label className="block">
-                <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink">
-                  <MapPin className="h-3.5 w-3.5 text-muted" />
-                  Area / locality{" "}
-                  <span className="font-normal text-muted">(optional)</span>
-                </span>
-                <input
-                  type="text"
-                  value={area}
-                  onChange={(e) => setArea(e.target.value)}
-                  placeholder="e.g. HSR Layout"
-                  className={field}
-                />
-              </label>
+              <LocationFields
+                value={{ country, city, area }}
+                onChange={(next) => {
+                  setCountry(next.country);
+                  setCity(next.city);
+                  setArea(next.area);
+                }}
+                controlClassName={field}
+              />
             </div>
 
             {error && (

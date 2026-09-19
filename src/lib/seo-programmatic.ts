@@ -184,8 +184,7 @@ export function teachersForClassSubject(
 }
 
 export function teachersForBoard(boardId: BoardId): Teacher[] {
-  const matched = TEACHERS.filter((t) => boardMatch(boardId, t));
-  return matched.length > 0 ? matched : TEACHERS;
+  return TEACHERS.filter((t) => boardMatch(boardId, t));
 }
 
 export function teachersForBoardCombo(
@@ -201,8 +200,8 @@ export function teachersForBoardCombo(
 export function teachersForCity(citySlug: SeoCitySlug): Teacher[] {
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   if (!city) return [];
-  if (city.local) return [...TEACHERS];
-  return searchTeachers({ teachers: TEACHERS, mode: "online" });
+  if (city.local) return [];
+  return searchTeachers({ teachers: [], mode: "online" });
 }
 
 export function teachersForCitySubject(
@@ -212,7 +211,7 @@ export function teachersForCitySubject(
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   if (!city) return [];
   if (city.local) return teachersForSubject(subject);
-  return searchTeachers({ subject, teachers: TEACHERS, mode: "online" });
+  return searchTeachers({ subject, teachers: [], mode: "online" });
 }
 
 export function parseClassSubjectSlug(

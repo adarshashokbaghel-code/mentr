@@ -12,7 +12,6 @@ import { ConnectionRequestsSection } from "@/components/dashboard/connection-req
 import { InstantConnectFacultySection } from "@/components/dashboard/instant-connect-faculty";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
-import { PitchesSection } from "@/components/requirements/pitches-section";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
 import {
@@ -26,20 +25,17 @@ import { absoluteUrl } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
   BadgeCheck,
-  CalendarCheck,
   CalendarDays,
   Check,
   Copy,
   ExternalLink,
-  Eye,
+  Inbox,
   Loader2,
-  MapPin,
   MessageCircle,
   Pencil,
-  Phone,
   Plus,
+  Send,
   ShieldCheck,
-  Sparkles,
   UsersRound,
   X,
 } from "lucide-react";
@@ -123,6 +119,9 @@ export default function DashboardPage() {
   const [copied, setCopied] = useState(false);
   const [photoNudgeOpen, setPhotoNudgeOpen] = useState(false);
   const photoNudgeDismissed = useRef(false);
+  const [dashTab, setDashTab] = useState<"inbox" | "schedule" | "grow">(
+    "inbox",
+  );
 
   async function copyListingLink() {
     if (!user) return;
@@ -407,7 +406,7 @@ export default function DashboardPage() {
           </div>
 
           {/* ------------------------------ stats ------------------------------- */}
-          <div className="mt-7 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-6 grid gap-3 sm:grid-cols-3">
             <WhoViewedCard
               data={views}
               loading={viewsLoading}
@@ -422,7 +421,7 @@ export default function DashboardPage() {
               footer={
                 (views?.totalViewers ?? 0) > 0
                   ? "unique parents, all time"
-                  : "grows as parents open your listing"
+                  : "when parents open your listing"
               }
             />
 
@@ -432,427 +431,390 @@ export default function DashboardPage() {
               icon={CalendarDays}
               tone="bg-sage-wash text-sage"
               footer={
-                slots.length > 0 ? (
-                  <span className="flex w-full items-center gap-2">
-                    <span className="h-1 flex-1 overflow-hidden rounded-full bg-cream-band">
-                      <span
-                        className="block h-full rounded-full bg-sage"
-                        style={{
-                          width: `${Math.round((openCount / slots.length) * 100)}%`,
-                        }}
-                      />
-                    </span>
-                    <span className="shrink-0 text-xs text-muted tabular-nums">
-                      of {slots.length} weekly
-                    </span>
-                  </span>
-                ) : (
-                  "add availability to get contacted"
-                )
-              }
-            />
-
-            <StatCard
-              label="Booked slots"
-              value={bookedCount}
-              icon={CalendarCheck}
-              tone="bg-butter/70 text-ink"
-              footer={
-                bookedCount > 0
-                  ? `${Math.round((bookedCount / slots.length) * 100)}% of your week is filled`
-                  : "mark a slot booked after a WhatsApp confirmation"
+                slots.length > 0
+                  ? `${bookedCount} booked · ${slots.length} weekly`
+                  : "add availability to get contacted"
               }
             />
           </div>
 
-          <WhatsappGroupCard className="mt-5" />
+          <WhatsappGroupCard className="mt-4" compact />
 
-          <div className="mt-9 grid gap-5 lg:grid-cols-[1.6fr_1fr] lg:items-start">
-          <div className="space-y-8">
-          <ConnectionRequestsSection
-            requests={requests}
-            loading={requestsLoading}
-            onUpdated={(updated) =>
-              setRequests((prev) =>
-                prev.map((r) => (r.id === updated.id ? updated : r)),
-              )
-            }
-          />
-
-          <InstantConnectFacultySection
-            acceptingStudents={user?.profile?.acceptingStudents !== false}
-            onAcceptingChange={(next) => {
-              if (!user?.profile) return;
-              setUser({
-                ...user,
-                profile: { ...user.profile, acceptingStudents: next },
-              });
-            }}
-          />
-
-          <PitchesSection />
-
-          <section>
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">Your slots</h2>
-              <Button variant="secondary" size="sm" onClick={openAddSlot}>
-                <Plus className="h-4 w-4" />
-                Add slot
-              </Button>
-            </div>
-            {slotsError && (
-              <p className="mt-3 text-sm font-medium text-coral-dark">
-                {slotsError}
-              </p>
-            )}
-            {slots.length === 0 ? (
-              <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
-                <p className="text-sm text-muted">
-                  No weekly slots yet — add your availability so parents know
-                  when to reach you.
-                </p>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  className="mt-3"
-                  onClick={openAddSlot}
-                >
-                  <Plus className="h-4 w-4" />
-                  Add availability
-                </Button>
-              </div>
-            ) : (
-              <ul className="mt-4 divide-y divide-hairline overflow-hidden rounded-lg border border-hairline bg-white">
-                {slots.map((slot, i) => {
-                  const available = !slot.booked;
-                  return (
-                    <li
-                      key={`${slot.day}-${slot.start}-${slot.end}`}
-                      className="flex items-center justify-between gap-4 px-5 py-4"
-                    >
-                      <span className="font-medium text-ink">
-                        {slotLabel(slot, timeFormat)}
-                        <span
-                          className={cn(
-                            "ml-2.5 rounded-md px-1.5 py-0.5 text-[11px] font-semibold",
-                            available
-                              ? "bg-sage-wash text-sage"
-                              : "bg-cream-band text-muted",
-                          )}
-                        >
-                          {available ? "Open" : "Booked"}
-                        </span>
-                      </span>
-                      <button
-                        type="button"
-                        role="switch"
-                        aria-checked={available}
-                        onClick={() => toggleSlot(i)}
+          {/* Primary workspace — one job at a time */}
+          <div className="mt-7 grid gap-5 lg:grid-cols-[minmax(0,1.7fr)_minmax(260px,0.9fr)] lg:items-start">
+            <div className="min-w-0">
+              <div
+                role="tablist"
+                aria-label="Dashboard sections"
+                className="flex gap-1 rounded-xl border border-hairline bg-white p-1"
+              >
+                {(
+                  [
+                    {
+                      id: "inbox" as const,
+                      label: "Inbox",
+                      Icon: Inbox,
+                      count:
+                        requests.filter((r) => r.status === "pending").length ||
+                        undefined,
+                    },
+                    {
+                      id: "schedule" as const,
+                      label: "Schedule",
+                      Icon: CalendarDays,
+                      count: undefined,
+                    },
+                    {
+                      id: "grow" as const,
+                      label: "Pitch parents",
+                      Icon: Send,
+                      count: undefined,
+                    },
+                  ] as const
+                ).map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={dashTab === tab.id}
+                    onClick={() => setDashTab(tab.id)}
+                    className={cn(
+                      "relative flex flex-1 items-center justify-center gap-1.5 rounded-lg px-3 py-2.5 text-[13px] font-bold transition",
+                      dashTab === tab.id
+                        ? "bg-ink text-white shadow-sm"
+                        : "text-muted hover:bg-cream hover:text-ink",
+                    )}
+                  >
+                    <tab.Icon className="h-3.5 w-3.5 shrink-0 opacity-90" />
+                    {tab.label}
+                    {tab.count ? (
+                      <span
                         className={cn(
-                          "relative h-8 w-14 rounded-full transition-colors duration-150",
-                          available ? "bg-sage" : "bg-cream-band",
+                          "rounded-full px-1.5 py-0.5 text-[10px] font-extrabold tabular-nums",
+                          dashTab === tab.id
+                            ? "bg-coral text-white"
+                            : "bg-coral-wash text-coral-dark",
                         )}
                       >
-                        <span
-                          className={cn(
-                            "absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform duration-150",
-                            available ? "left-7" : "left-1",
-                          )}
-                        />
-                        <span className="sr-only">
-                          {available ? "Available" : "Booked"}
-                        </span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-            <p className="mt-3 text-sm text-muted">
-              When a parent books through WhatsApp, mark the slot booked so it
-              won&apos;t show as open. Changes save automatically and update
-              your public listing.
-            </p>
-
-            {/* --------------------------- recent activity --------------------------- */}
-            <div className="mt-7">
-              <h2 className="text-xl font-semibold">Recent activity</h2>
-              {viewsLoading ? (
-                <div className="mt-4 rounded-lg border border-hairline bg-white px-5 py-8 text-center text-sm text-muted">
-                  Loading…
-                </div>
-              ) : (views?.views?.length ?? 0) === 0 ? (
-                <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
-                  <Eye className="mx-auto h-5 w-5 text-muted" />
-                  <p className="mt-2 text-sm font-medium text-ink">
-                    No visits yet
-                  </p>
-                  <p className="mt-1 text-sm text-muted">
-                    When a parent opens your listing, you&apos;ll see them
-                    here. Share your link to get the first ones in.
-                  </p>
-                </div>
-              ) : (
-                <ul className="mt-4 divide-y divide-hairline overflow-hidden rounded-lg border border-hairline bg-white">
-                  {views!.views.slice(0, 6).map((v) => (
-                    <li
-                      key={`${v.id}-${v.lastViewedAt}`}
-                      className="flex items-center gap-3.5 px-5 py-3.5"
-                    >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lavender text-sm font-bold text-ink">
-                        {v.name.charAt(0).toUpperCase()}
+                        {tab.count}
                       </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-ink">
-                          <span className="font-semibold">{v.name}</span>{" "}
-                          viewed your profile
-                          {v.count > 1 ? ` ${v.count} times` : ""}
-                        </p>
-                        <p className="text-xs text-muted">
-                          {v.area ? `${v.area} · ` : ""}
-                          {timeAgo(String(v.lastViewedAt))}
+                    ) : null}
+                  </button>
+                ))}
+              </div>
+
+              <div className="mt-4 space-y-5">
+                {dashTab === "inbox" ? (
+                  <>
+                    <ConnectionRequestsSection
+                      requests={requests}
+                      loading={requestsLoading}
+                      onUpdated={(updated) =>
+                        setRequests((prev) =>
+                          prev.map((r) => (r.id === updated.id ? updated : r)),
+                        )
+                      }
+                    />
+                    <InstantConnectFacultySection
+                      acceptingStudents={
+                        user?.profile?.acceptingStudents !== false
+                      }
+                      onAcceptingChange={(next) => {
+                        if (!user?.profile) return;
+                        setUser({
+                          ...user,
+                          profile: {
+                            ...user.profile,
+                            acceptingStudents: next,
+                          },
+                        });
+                      }}
+                    />
+                  </>
+                ) : null}
+
+                {dashTab === "schedule" ? (
+                  <section>
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <h2 className="text-lg font-semibold">Weekly slots</h2>
+                        <p className="mt-0.5 text-xs text-muted">
+                          Toggle booked after a WhatsApp confirmation.
                         </p>
                       </div>
-                      <Eye className="h-4 w-4 shrink-0 text-muted" />
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-
-            {/* --------------------------- share listing --------------------------- */}
-            <div className="mt-7 rounded-lg border border-hairline bg-lavender/40 p-5">
-              <div className="flex flex-wrap items-center justify-between gap-4">
-                <div className="min-w-0">
-                  <h2 className="text-base font-bold text-ink">
-                    Share your listing
-                  </h2>
-                  <p className="mt-1 text-sm text-muted">
-                    Parents you already know are your best first reviews — send
-                    them your Mentr page.
-                  </p>
-                </div>
-                <div className="flex shrink-0 gap-2">
-                  <button
-                    type="button"
-                    onClick={copyListingLink}
-                    className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-[13px] font-semibold text-ink transition hover:bg-cream"
-                  >
-                    {copied ? (
-                      <Check className="h-3.5 w-3.5 text-sage" />
+                      <Button variant="secondary" size="sm" onClick={openAddSlot}>
+                        <Plus className="h-4 w-4" />
+                        Add slot
+                      </Button>
+                    </div>
+                    {slotsError ? (
+                      <p className="mt-3 text-sm font-medium text-coral-dark">
+                        {slotsError}
+                      </p>
+                    ) : null}
+                    {slots.length === 0 ? (
+                      <div className="mt-4 rounded-xl border border-dashed border-hairline bg-white px-4 py-6 text-center">
+                        <p className="text-sm text-muted">
+                          No slots yet — add when you&apos;re free.
+                        </p>
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="mt-3"
+                          onClick={openAddSlot}
+                        >
+                          <Plus className="h-4 w-4" />
+                          Add availability
+                        </Button>
+                      </div>
                     ) : (
-                      <Copy className="h-3.5 w-3.5" />
+                      <ul className="mt-4 divide-y divide-hairline overflow-hidden rounded-xl border border-hairline bg-white">
+                        {slots.map((slot, i) => {
+                          const available = !slot.booked;
+                          return (
+                            <li
+                              key={`${slot.day}-${slot.start}-${slot.end}`}
+                              className="flex items-center justify-between gap-4 px-4 py-3.5 sm:px-5"
+                            >
+                              <span className="font-medium text-ink">
+                                {slotLabel(slot, timeFormat)}
+                                <span
+                                  className={cn(
+                                    "ml-2 rounded-md px-1.5 py-0.5 text-[11px] font-semibold",
+                                    available
+                                      ? "bg-sage-wash text-sage"
+                                      : "bg-cream-band text-muted",
+                                  )}
+                                >
+                                  {available ? "Open" : "Booked"}
+                                </span>
+                              </span>
+                              <button
+                                type="button"
+                                role="switch"
+                                aria-checked={available}
+                                onClick={() => toggleSlot(i)}
+                                className={cn(
+                                  "relative h-8 w-14 rounded-full transition-colors duration-150",
+                                  available ? "bg-sage" : "bg-cream-band",
+                                )}
+                              >
+                                <span
+                                  className={cn(
+                                    "absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-transform duration-150",
+                                    available ? "left-7" : "left-1",
+                                  )}
+                                />
+                                <span className="sr-only">
+                                  {available ? "Available" : "Booked"}
+                                </span>
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
                     )}
-                    {copied ? "Copied" : "Copy link"}
-                  </button>
-                  <a
-                    href={`https://wa.me/?text=${encodeURIComponent(
-                      `I'm on Mentr — you can see my subjects and free slots here: ${absoluteUrl(`/teachers/${user.id}`)}`,
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex h-9 items-center gap-1.5 rounded-md bg-sage px-3.5 text-[13px] font-semibold text-white transition hover:opacity-90"
-                  >
-                    <MessageCircle className="h-3.5 w-3.5" />
-                    WhatsApp
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
-          </div>
+                  </section>
+                ) : null}
 
-          {/* --------------------------- right column --------------------------- */}
-          <div className="space-y-5">
-            <section className="rounded-lg border border-hairline bg-white p-5">
-              <div className="flex items-center justify-between">
-                <h2 className="flex items-center gap-2 text-base font-bold text-ink">
-                  <ShieldCheck className="h-4 w-4 text-sage" />
-                  Profile strength
-                </h2>
-                <span
-                  className={cn(
-                    "rounded-md px-2 py-0.5 text-xs font-bold",
-                    strengthPct >= 75
-                      ? "bg-sage-wash text-sage"
-                      : strengthPct >= 40
-                        ? "bg-butter/70 text-ink"
-                        : "bg-coral-wash text-coral-dark",
-                  )}
-                >
-                  {strengthPct}%
-                </span>
-              </div>
-
-              <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-cream-band">
-                <div
-                  className={cn(
-                    "h-full rounded-full transition-all duration-500",
-                    strengthPct >= 75 ? "bg-sage" : "bg-coral",
-                  )}
-                  style={{ width: `${strengthPct}%` }}
-                />
-              </div>
-              <p className="mt-2 text-xs leading-relaxed text-muted">
-                {strengthPct === 100
-                  ? "Complete — your listing has everything parents look for."
-                  : "Stronger profiles show up better and get contacted more. All of these are optional but worth it."}
-              </p>
-
-              <ul className="mt-4 space-y-1">
-                {strengthItems.map((item) => {
-                  const inner = (
-                    <>
-                      <span
-                        className={cn(
-                          "mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full",
-                          item.done
-                            ? "bg-sage text-white"
-                            : "border border-hairline bg-white",
-                        )}
-                      >
-                        {item.done && <Check className="h-2.5 w-2.5" />}
-                      </span>
-                      <span className="min-w-0 flex-1">
-                        <span
-                          className={cn(
-                            "block text-[13px] font-medium leading-tight",
-                            item.done ? "text-muted line-through" : "text-ink",
-                          )}
-                        >
-                          {item.label}
-                        </span>
-                        {!item.done && (
-                          <span className="mt-0.5 block text-[11px] leading-snug text-muted">
-                            {item.hint}
-                          </span>
-                        )}
-                      </span>
-                      {!item.done && (
-                        <span className="mt-0.5 rounded bg-cream px-1.5 py-0.5 text-[10px] font-bold text-coral-dark">
-                          ADD
-                        </span>
-                      )}
-                    </>
-                  );
-                  const itemCls =
-                    "flex w-full items-start gap-2.5 rounded-md px-1.5 py-1.5 text-left transition";
-                  if (item.done) {
-                    return (
-                      <li key={item.label} className={itemCls}>
-                        {inner}
-                      </li>
-                    );
-                  }
-                  return (
-                    <li key={item.label}>
-                      {item.href ? (
-                        <Link
-                          href={item.href}
-                          className={cn(itemCls, "hover:bg-cream")}
-                        >
-                          {inner}
-                        </Link>
+                {dashTab === "grow" ? (
+                  <>
+                    <section>
+                      <h2 className="text-lg font-semibold">Recent activity</h2>
+                      {viewsLoading ? (
+                        <p className="mt-3 text-sm text-muted">Loading…</p>
+                      ) : (views?.views?.length ?? 0) === 0 ? (
+                        <p className="mt-3 rounded-xl border border-dashed border-hairline bg-white px-4 py-5 text-center text-sm text-muted">
+                          No profile visits yet — share your listing to get
+                          started.
+                        </p>
                       ) : (
+                        <ul className="mt-3 divide-y divide-hairline overflow-hidden rounded-xl border border-hairline bg-white">
+                          {views!.views.slice(0, 6).map((v) => (
+                            <li
+                              key={`${v.id}-${v.lastViewedAt}`}
+                              className="flex items-center gap-3 px-4 py-3"
+                            >
+                              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lavender text-sm font-bold text-ink">
+                                {v.name.charAt(0).toUpperCase()}
+                              </span>
+                              <div className="min-w-0 flex-1">
+                                <p className="truncate text-sm font-medium text-ink">
+                                  <span className="font-semibold">{v.name}</span>{" "}
+                                  viewed your profile
+                                  {v.count > 1 ? ` · ${v.count}×` : ""}
+                                </p>
+                                <p className="text-xs text-muted">
+                                  {v.area ? `${v.area} · ` : ""}
+                                  {timeAgo(String(v.lastViewedAt))}
+                                </p>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </section>
+
+                    <div className="rounded-xl border border-hairline bg-lavender/35 p-4">
+                      <p className="text-sm font-bold text-ink">
+                        Share your listing
+                      </p>
+                      <p className="mt-1 text-xs text-muted">
+                        Best first traffic: parents you already know.
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
                         <button
                           type="button"
-                          onClick={openAddSlot}
-                          className={cn(itemCls, "hover:bg-cream")}
+                          onClick={copyListingLink}
+                          className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-[13px] font-semibold text-ink transition hover:bg-cream"
                         >
-                          {inner}
+                          {copied ? (
+                            <Check className="h-3.5 w-3.5 text-sage" />
+                          ) : (
+                            <Copy className="h-3.5 w-3.5" />
+                          )}
+                          {copied ? "Copied" : "Copy link"}
                         </button>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-
-              {strengthPct < 100 && (
-                <Link
-                  href="/profiling?step=links"
-                  className="mt-4 flex h-9 items-center justify-center rounded-md bg-ink text-[13px] font-semibold text-white transition hover:bg-ink/85"
-                >
-                  Add missing details
-                </Link>
-              )}
-            </section>
-
-            <section className="rounded-lg border border-hairline bg-white p-5">
-              <div className="flex items-center justify-between">
-                <h2 className="text-base font-bold text-ink">Your profile</h2>
-                <Link
-                  href="/profiling"
-                  className="text-xs font-semibold text-coral hover:underline"
-                >
-                  Edit
-                </Link>
+                        <a
+                          href={`https://wa.me/?text=${encodeURIComponent(
+                            `I'm on Mentr — you can see my subjects and free slots here: ${absoluteUrl(`/teachers/${user.id}`)}`,
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex h-9 items-center gap-1.5 rounded-md bg-sage px-3.5 text-[13px] font-semibold text-white transition hover:opacity-90"
+                        >
+                          <MessageCircle className="h-3.5 w-3.5" />
+                          WhatsApp
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                ) : null}
               </div>
+            </div>
 
-              <div className="mt-4 flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-coral text-base font-bold text-white">
-                  {name.charAt(0).toUpperCase()}
-                </span>
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold text-ink">{name}</p>
-                  <p className="truncate text-xs text-muted">{user.email}</p>
+            {/* --------------------------- right column --------------------------- */}
+            <aside className="space-y-4">
+              <section className="rounded-xl border border-hairline bg-white p-4">
+                <div className="flex items-center gap-3">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-coral text-base font-bold text-white">
+                    {name.charAt(0).toUpperCase()}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-ink">
+                      {name}
+                    </p>
+                    <p className="truncate text-xs text-muted">
+                      {user.profile?.designation} · {user.profile?.area}
+                    </p>
+                  </div>
+                  <Link
+                    href="/profiling"
+                    className="text-xs font-semibold text-coral hover:underline"
+                  >
+                    Edit
+                  </Link>
                 </div>
-              </div>
+                {(user.profile?.subjects?.length ?? 0) > 0 ? (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {user.profile!.subjects!.slice(0, 4).map((s) => (
+                      <span
+                        key={s}
+                        className="rounded-md bg-cream px-2 py-0.5 text-[11px] font-medium text-ink"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+                <Link
+                  href={`/teachers/${user.id}`}
+                  className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-muted hover:text-coral"
+                >
+                  View public listing
+                  <ExternalLink className="h-3 w-3" />
+                </Link>
+              </section>
 
-              <dl className="mt-4 space-y-2.5 border-t border-hairline pt-4 text-sm">
-                <div className="flex items-center gap-2.5">
-                  <Phone className="h-3.5 w-3.5 shrink-0 text-muted" />
-                  <dd className="font-medium text-ink">
-                    {user.profile?.phoneNumber || "—"}
-                  </dd>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <MapPin className="h-3.5 w-3.5 shrink-0 text-muted" />
-                  <dd className="truncate font-medium text-ink">
-                    {[user.profile?.area, user.profile?.city]
-                      .filter(Boolean)
-                      .join(", ") || "—"}
-                  </dd>
-                </div>
-              </dl>
-
-              {(user.profile?.subjects?.length ?? 0) > 0 && (
-                <div className="mt-3.5 flex flex-wrap gap-1.5">
-                  {user.profile!.subjects!.slice(0, 6).map((s) => (
+              {strengthPct < 100 ? (
+                <section className="rounded-xl border border-hairline bg-white p-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <h2 className="flex items-center gap-1.5 text-sm font-bold text-ink">
+                      <ShieldCheck className="h-4 w-4 text-sage" />
+                      Profile tips
+                    </h2>
                     <span
-                      key={s}
-                      className="rounded-md bg-cream px-2 py-1 text-xs font-medium text-ink"
+                      className={cn(
+                        "rounded-md px-2 py-0.5 text-xs font-bold",
+                        strengthPct >= 75
+                          ? "bg-sage-wash text-sage"
+                          : strengthPct >= 40
+                            ? "bg-butter/70 text-ink"
+                            : "bg-coral-wash text-coral-dark",
+                      )}
                     >
-                      {s}
+                      {strengthPct}%
                     </span>
-                  ))}
-                </div>
-              )}
-
-              <p className="mt-3.5 text-xs leading-relaxed text-muted">
-                {user.profile?.experienceYears != null
-                  ? `${user.profile.experienceYears} yrs experience`
-                  : ""}
-                {user.profile?.qualification
-                  ? ` · ${user.profile.qualification}`
-                  : ""}
-              </p>
-            </section>
-
-            <section className="rounded-lg border border-dashed border-hairline bg-coral-wash/40 p-5">
-              <div className="flex gap-3">
-                <Sparkles className="h-5 w-5 shrink-0 text-coral" />
-                <div>
-                  <p className="text-sm font-semibold text-ink">
-                    Be found first — feature your profile
+                  </div>
+                  <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-cream-band">
+                    <div
+                      className={cn(
+                        "h-full rounded-full transition-all duration-500",
+                        strengthPct >= 75 ? "bg-sage" : "bg-coral",
+                      )}
+                      style={{ width: `${strengthPct}%` }}
+                    />
+                  </div>
+                  <p className="mt-2 text-[11px] text-muted">
+                    Next {Math.min(3, strengthItems.filter((i) => !i.done).length)}{" "}
+                    to boost replies
                   </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted">
-                    Coming soon. Phase 1 is free for everyone — this upgrade
-                    slot is designed in for later.
-                  </p>
-                </div>
-              </div>
-            </section>
-          </div>
+                  <ul className="mt-3 space-y-1">
+                    {strengthItems
+                      .filter((i) => !i.done)
+                      .slice(0, 3)
+                      .map((item) => {
+                        const inner = (
+                          <>
+                            <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-hairline bg-white" />
+                            <span className="min-w-0 flex-1 text-[13px] font-medium text-ink">
+                              {item.label}
+                            </span>
+                            <span className="rounded bg-cream px-1.5 py-0.5 text-[10px] font-bold text-coral-dark">
+                              ADD
+                            </span>
+                          </>
+                        );
+                        const itemCls =
+                          "flex w-full items-start gap-2 rounded-md px-1 py-1.5 text-left transition hover:bg-cream";
+                        return (
+                          <li key={item.label}>
+                            {item.href ? (
+                              <Link href={item.href} className={itemCls}>
+                                {inner}
+                              </Link>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={openAddSlot}
+                                className={itemCls}
+                              >
+                                {inner}
+                              </button>
+                            )}
+                          </li>
+                        );
+                      })}
+                  </ul>
+                  <Link
+                    href="/profiling?step=links"
+                    className="mt-3 flex h-9 items-center justify-center rounded-md bg-ink text-[13px] font-semibold text-white transition hover:bg-ink/85"
+                  >
+                    Improve profile
+                  </Link>
+                </section>
+              ) : null}
+            </aside>
           </div>
         </div>
       </main>
