@@ -152,7 +152,8 @@ export async function notifyParentInstantConnectEvent(
     type:
       | "instant_connect_submitted"
       | "instant_connect_closed"
-      | "instant_connect_expired";
+      | "instant_connect_expired"
+      | "instant_connect_mentor_found";
     title: string;
     body: string;
     requestId: string;
