@@ -214,7 +214,7 @@ export default function ParentDashboardPage() {
                     },
                     {
                       id: "instant" as const,
-                      label: "Quick match",
+                      label: "Instant connect",
                       Icon: Zap,
                       count: undefined,
                     },
