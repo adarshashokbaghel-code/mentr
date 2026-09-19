@@ -49,7 +49,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           "Class 3-5",
           "free coding course India",
         ]
-      : [post.keyword, "Mentr", "home tutor", "tutor guide"];
+      : post.slug.includes("instant-connect")
+        ? [
+            post.keyword,
+            "Instant Connect Mentr",
+            "find tutor fast online",
+            "same day online tutor India",
+            "verified tutor for parents",
+            "hire tutor without agency",
+            "quick tutor matching",
+            "get mentor to call you",
+            "free tutor platform India",
+            "online home tutor parents",
+          ]
+        : [post.keyword, "Mentr", "home tutor", "tutor guide"];
 
   return {
     title: `${title} — Mentr Blog`,

@@ -176,9 +176,8 @@ export function searchAdminUsers(
   q: string,
   role?: "faculty" | "parent",
 ) {
-  const params = new URLSearchParams({ q });
+  const params = new URLSearchParams({ q, limit: "5000" });
   if (role) params.set("role", role);
-  if (role === "parent") params.set("limit", "200");
   return adminFetch<{ users: AdminUserRow[] }>(
     key,
     `/api/admin/users/search?${params.toString()}`,
@@ -188,7 +187,7 @@ export function searchAdminUsers(
 export function fetchAdminUsers(key: string, q = "") {
   return adminFetch<{ users: AdminUserRow[]; total: number }>(
     key,
-    `/api/admin/users?q=${encodeURIComponent(q)}&limit=1000`,
+    `/api/admin/users?q=${encodeURIComponent(q)}&limit=5000`,
   );
 }
 
