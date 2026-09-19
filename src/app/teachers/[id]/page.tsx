@@ -6,7 +6,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { SeoBreadcrumbs } from "@/components/seo/hub-page";
 import { breadcrumbJsonLd, JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
-import { getTeacher, TEACHERS, type Teacher } from "@/lib/teachers";
+import { getTeacher, type Teacher } from "@/lib/teachers";
 import { fetchLiveTeacher } from "@/lib/live-teacher-server";
 import {
   BadgeCheck,
@@ -34,7 +34,7 @@ import { cache } from "react";
 export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
-  return TEACHERS.map((t) => ({ id: t.id }));
+  return [];
 }
 
 export const dynamicParams = true;

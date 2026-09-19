@@ -30,14 +30,16 @@ import { SITE_URL } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
   Check,
+  ChevronDown,
   Copy,
   Loader2,
   Plus,
+  Search,
   Share2,
   Trash2,
   Users,
 } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 
 type TabId = "blogs" | "socials" | "graphs";
 
@@ -88,6 +90,13 @@ function pct(part: number, whole: number) {
   if (!whole) return "—";
   return `${Math.round((part / whole) * 1000) / 10}%`;
 }
+
+type BlogSortKey =
+  | "uniqueViews"
+  | "uniqueRedirects"
+  | "signups"
+  | "profilesCompleted"
+  | "title";
 
 function CopyField({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -230,6 +239,289 @@ function BehaviorCards({ row }: { row: MarketingPageRow }) {
   );
 }
 
+function BlogPerfTable({
+  statsByKey,
+  expandedSlug,
+  onExpand,
+}: {
+  statsByKey: Map<string, MarketingPageRow>;
+  expandedSlug: string | null;
+  onExpand: (slug: string | null) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const [sortKey, setSortKey] = useState<BlogSortKey>("uniqueRedirects");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
+  const [activeOnly, setActiveOnly] = useState(false);
+
+  const rows = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    const list = BLOG_POSTS.map((post) => {
+      const stats =
+        statsByKey.get(`blog:${post.slug}`) ?? emptyRow(post.slug, "blog");
+      return { post, stats };
+    }).filter(({ post, stats }) => {
+      if (activeOnly) {
+        const has =
+          stats.uniqueViews > 0 ||
+          stats.uniqueRedirects > 0 ||
+          stats.signups > 0;
+        if (!has) return false;
+      }
+      if (!q) return true;
+      return (
+        post.title.toLowerCase().includes(q) ||
+        post.slug.toLowerCase().includes(q) ||
+        getPillar(post.pillar).shortLabel.toLowerCase().includes(q)
+      );
+    });
+
+    list.sort((a, b) => {
+      if (sortKey === "title") {
+        const cmp = a.post.title.localeCompare(b.post.title);
+        return sortDir === "asc" ? cmp : -cmp;
+      }
+      const av = a.stats[sortKey];
+      const bv = b.stats[sortKey];
+      if (av === bv) return a.post.title.localeCompare(b.post.title);
+      return sortDir === "asc" ? av - bv : bv - av;
+    });
+
+    return list;
+  }, [statsByKey, query, sortKey, sortDir, activeOnly]);
+
+  function toggleSort(key: BlogSortKey) {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "desc" ? "asc" : "desc"));
+      return;
+    }
+    setSortKey(key);
+    setSortDir(key === "title" ? "asc" : "desc");
+  }
+
+  function SortBtn({
+    label,
+    col,
+    className,
+  }: {
+    label: string;
+    col: BlogSortKey;
+    className?: string;
+  }) {
+    const active = sortKey === col;
+    return (
+      <button
+        type="button"
+        onClick={() => toggleSort(col)}
+        className={cn(
+          "inline-flex items-center gap-0.5 text-[10px] font-semibold uppercase tracking-wider transition",
+          active ? "text-ink" : "text-muted hover:text-ink",
+          className,
+        )}
+      >
+        {label}
+        {active ? (sortDir === "desc" ? " ↓" : " ↑") : ""}
+      </button>
+    );
+  }
+
+  return (
+    <div className="mt-4 space-y-3">
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="relative min-w-[200px] flex-1">
+          <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted" />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search blogs…"
+            className="h-9 w-full rounded-lg border border-hairline bg-white pl-8 pr-3 text-xs text-ink outline-none focus:border-ink"
+          />
+        </div>
+        <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-hairline bg-white px-2.5 py-2 text-[11px] font-medium text-ink">
+          <input
+            type="checkbox"
+            checked={activeOnly}
+            onChange={(e) => setActiveOnly(e.target.checked)}
+            className="h-3.5 w-3.5 accent-[var(--ink)]"
+          />
+          With activity only
+        </label>
+        <p className="text-[11px] text-muted">
+          {rows.length} of {BLOG_POSTS.length} blogs
+        </p>
+      </div>
+
+      <div className="overflow-hidden rounded-xl border border-hairline bg-white">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[720px] border-collapse text-left">
+            <thead>
+              <tr className="border-b border-hairline bg-cream/50">
+                <th className="px-3 py-2.5">
+                  <SortBtn label="Blog" col="title" />
+                </th>
+                <th className="px-2 py-2.5 text-right">
+                  <SortBtn label="Views" col="uniqueViews" className="ml-auto" />
+                </th>
+                <th className="px-2 py-2.5 text-right">
+                  <SortBtn
+                    label="Clicks"
+                    col="uniqueRedirects"
+                    className="ml-auto"
+                  />
+                </th>
+                <th className="px-2 py-2.5 text-right">
+                  <SortBtn label="Signups" col="signups" className="ml-auto" />
+                </th>
+                <th className="px-2 py-2.5 text-right">
+                  <SortBtn
+                    label="Profiles"
+                    col="profilesCompleted"
+                    className="ml-auto"
+                  />
+                </th>
+                <th className="px-3 py-2.5 text-right">
+                  <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                    CTR
+                  </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.length === 0 ? (
+                <tr>
+                  <td
+                    colSpan={6}
+                    className="px-3 py-8 text-center text-xs text-muted"
+                  >
+                    No blogs match this filter.
+                  </td>
+                </tr>
+              ) : (
+                rows.map(({ post, stats }) => {
+                  const open = expandedSlug === post.slug;
+                  const ctr = pct(stats.uniqueRedirects, stats.uniqueViews);
+                  const share = blogShareUrl(post.slug);
+                  const parent = blogParentSignupUrl(post.slug);
+                  const faculty = blogFacultySignupUrl(post.slug);
+                  const cta = post.ctaHref
+                    ? `${SITE_URL}${withBlogUtm(post.ctaHref, post.slug, "cta")}`
+                    : parent;
+
+                  return (
+                    <Fragment key={post.slug}>
+                      <tr
+                        className={cn(
+                          "border-b border-hairline/70 transition hover:bg-cream/40",
+                          open && "bg-cream/60",
+                        )}
+                      >
+                        <td className="px-3 py-2.5">
+                          <button
+                            type="button"
+                            onClick={() => onExpand(open ? null : post.slug)}
+                            className="flex max-w-[340px] items-start gap-2 text-left"
+                          >
+                            <ChevronDown
+                              className={cn(
+                                "mt-0.5 h-3.5 w-3.5 shrink-0 text-muted transition",
+                                open && "rotate-180",
+                              )}
+                            />
+                            <span>
+                              <span className="block text-[12px] font-semibold leading-snug text-ink">
+                                {post.title}
+                              </span>
+                              <span className="mt-0.5 block text-[10px] text-muted">
+                                {getPillar(post.pillar).shortLabel} · /blog/
+                                {post.slug}
+                              </span>
+                            </span>
+                          </button>
+                        </td>
+                        <td className="px-2 py-2.5 text-right">
+                          <span className="block text-[13px] font-bold tabular-nums text-ink">
+                            {stats.uniqueViews}
+                          </span>
+                          <span className="text-[10px] tabular-nums text-muted">
+                            {stats.views} tot
+                          </span>
+                        </td>
+                        <td className="px-2 py-2.5 text-right">
+                          <span className="block text-[13px] font-bold tabular-nums text-ink">
+                            {stats.uniqueRedirects}
+                          </span>
+                          <span className="text-[10px] tabular-nums text-muted">
+                            {stats.redirects} tot
+                          </span>
+                        </td>
+                        <td className="px-2 py-2.5 text-right">
+                          <span className="block text-[13px] font-bold tabular-nums text-ink">
+                            {stats.signups}
+                          </span>
+                          <span className="text-[10px] text-muted">
+                            {stats.parentSignups}P · {stats.facultySignups}T
+                          </span>
+                        </td>
+                        <td className="px-2 py-2.5 text-right text-[13px] font-bold tabular-nums text-ink">
+                          {stats.profilesCompleted}
+                        </td>
+                        <td className="px-3 py-2.5 text-right text-[12px] font-semibold tabular-nums text-muted">
+                          {ctr}
+                        </td>
+                      </tr>
+                      {open ? (
+                        <tr className="border-b border-hairline bg-cream/30">
+                          <td colSpan={6} className="px-3 py-3 sm:px-4">
+                            <div className="rounded-lg border border-hairline bg-white p-3">
+                              <BehaviorCards row={stats} />
+                              <div className="mt-4">
+                                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                                  UTM links
+                                </p>
+                                <div className="mt-2 grid gap-2 lg:grid-cols-2">
+                                  <CopyField
+                                    label="Share / campaign URL"
+                                    value={share}
+                                  />
+                                  <CopyField
+                                    label="Parent signup"
+                                    value={parent}
+                                  />
+                                  <CopyField
+                                    label="Tutor signup"
+                                    value={faculty}
+                                  />
+                                  <CopyField
+                                    label={
+                                      post.cta
+                                        ? `CTA · ${post.cta}`
+                                        : "Primary CTA"
+                                    }
+                                    value={cta}
+                                  />
+                                </div>
+                              </div>
+                              <div className="mt-4 rounded-lg border border-hairline bg-cream/60 px-3 py-2">
+                                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                                  Signups · {stats.signups}
+                                </p>
+                                <SignupList users={stats.recentSignups} />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      ) : null}
+                    </Fragment>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SignupTrendChart({
   points,
 }: {
@@ -272,7 +564,7 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [tab, setTab] = useState<TabId>("blogs");
-  const [blogSlug, setBlogSlug] = useState(BLOG_POSTS[0]?.slug ?? "");
+  const [blogSlug, setBlogSlug] = useState<string | null>(null);
   const [socialId, setSocialId] = useState<SocialChannelId>("instagram");
   const [linkLabel, setLinkLabel] = useState("");
   const [linkPath, setLinkPath] = useState("/");
@@ -319,19 +611,6 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
     [data, socialId],
   );
 
-  const selectedPost = useMemo(
-    () => BLOG_POSTS.find((p) => p.slug === blogSlug) ?? BLOG_POSTS[0],
-    [blogSlug],
-  );
-
-  const selectedBlogStats = useMemo(() => {
-    if (!selectedPost) return emptyRow("", "blog");
-    return (
-      statsByKey.get(`blog:${selectedPost.slug}`) ??
-      emptyRow(selectedPost.slug, "blog")
-    );
-  }, [selectedPost, statsByKey]);
-
   const selectedSocialStats = useMemo(() => {
     return (
       statsByKey.get(`social:${socialId}`) ?? emptyRow(socialId, "social")
@@ -339,20 +618,6 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
   }, [socialId, statsByKey]);
 
   const socialLinks = useMemo(() => socialLinkBundle(socialId), [socialId]);
-
-  const blogLinks = useMemo(() => {
-    if (!selectedPost) {
-      return { share: "", parent: "", faculty: "", cta: "" };
-    }
-    return {
-      share: blogShareUrl(selectedPost.slug),
-      parent: blogParentSignupUrl(selectedPost.slug),
-      faculty: blogFacultySignupUrl(selectedPost.slug),
-      cta: selectedPost.ctaHref
-        ? `${SITE_URL}${withBlogUtm(selectedPost.ctaHref, selectedPost.slug, "cta")}`
-        : blogParentSignupUrl(selectedPost.slug),
-    };
-  }, [selectedPost]);
 
   const topSources = useMemo(
     () =>
@@ -493,60 +758,12 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
         </p>
       )}
 
-      {tab === "blogs" && selectedPost && (
-        <div className="mt-4 space-y-4">
-          <label className="block">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-              Select blog
-            </span>
-            <select
-              value={selectedPost.slug}
-              onChange={(e) => setBlogSlug(e.target.value)}
-              className="mt-1 h-11 w-full rounded-lg border border-hairline bg-white px-3 text-sm text-ink outline-none focus:border-ink"
-            >
-              {BLOG_POSTS.map((post) => (
-                <option key={post.slug} value={post.slug}>
-                  {post.title}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <div className="rounded-xl border border-hairline bg-white p-4">
-            <p className="text-sm font-bold text-ink">{selectedPost.title}</p>
-            <p className="mt-0.5 text-[11px] text-muted">
-              /blog/{selectedPost.slug} · {getPillar(selectedPost.pillar).shortLabel}
-            </p>
-
-            <BehaviorCards row={selectedBlogStats} />
-
-            <div className="mt-4">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-                UTM links for this blog
-              </p>
-              <div className="mt-2 grid gap-2 lg:grid-cols-2">
-                <CopyField label="Share / campaign URL" value={blogLinks.share} />
-                <CopyField label="Parent signup" value={blogLinks.parent} />
-                <CopyField label="Tutor signup" value={blogLinks.faculty} />
-                <CopyField
-                  label={
-                    selectedPost.cta
-                      ? `CTA · ${selectedPost.cta}`
-                      : "Primary CTA"
-                  }
-                  value={blogLinks.cta}
-                />
-              </div>
-            </div>
-
-            <div className="mt-4 rounded-lg border border-hairline bg-cream/60 px-3 py-2">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
-                Signups from this blog · {selectedBlogStats.signups}
-              </p>
-              <SignupList users={selectedBlogStats.recentSignups} />
-            </div>
-          </div>
-        </div>
+      {tab === "blogs" && (
+        <BlogPerfTable
+          statsByKey={statsByKey}
+          expandedSlug={blogSlug}
+          onExpand={setBlogSlug}
+        />
       )}
 
       {tab === "socials" && (

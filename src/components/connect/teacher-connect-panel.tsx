@@ -112,7 +112,7 @@ export function TeacherConnectPanel({
             className="mt-4 inline-flex h-10 items-center gap-2 rounded-md border border-hairline bg-white px-4 text-[13px] font-semibold text-ink transition hover:bg-cream"
           >
             <LayoutDashboard className="h-3.5 w-3.5 text-muted" />
-            Track it in My connections
+            Track it in Dashboard
           </Link>
         </>
       ) : status === "declined" ? (

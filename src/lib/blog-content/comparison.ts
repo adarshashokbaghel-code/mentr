@@ -725,10 +725,266 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "Mentr vs UrbanPro full comparison", href: "/blog/mentr-vs-urbanpro" },
+      { label: "MyPrivateTutor alternatives", href: "/blog/myprivatetutor-alternatives-india" },
       { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
       { label: "Justdial tutor alternatives", href: "/blog/justdial-tutor-alternatives" },
       { label: "Best free tutor platforms in India", href: "/blog/best-free-tutor-platforms-india" },
       { label: "Become a tutor free", href: "/for-faculty" },
+    ],
+  },
+
+  "myprivatetutor-alternatives-india": {
+    slug: "myprivatetutor-alternatives-india",
+    publishedAt: "2026-09-19",
+    updatedAt: "2026-09-19",
+    readTimeMinutes: 9,
+    author: "Mentr Editorial Team",
+    intro:
+      "MyPrivateTutor has been part of India's home-tuition search for years — parents post needs, tutors chase enquiries, and both sides hope the match sticks. If you are googling MyPrivateTutor alternatives in 2026, you are usually dealing with one of three frustrations: tutors paying again for the next batch of leads, parents getting thin or delayed replies, or both sides wanting a cleaner way to talk on WhatsApp without another middle layer. This guide lists practical alternatives that actually work in Indian cities, what each one costs, and when to stick with MyPrivateTutor versus trying something else. Disclosure: Mentr is our product — we say so clearly below and still include competitors that beat us on reach today.",
+    sections: [
+      {
+        heading: "What MyPrivateTutor still does well",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Before switching apps, be fair about the baseline. MyPrivateTutor is familiar to many Indian parents. It has long covered school tuition, home visits, and online options across metros and smaller cities. For a parent who already has a shortlist of tutors from an old search, staying put can be fine. For a tutor who already converted two students from the platform last month, dumping it overnight is rarely smart.",
+          },
+          {
+            type: "paragraph",
+            text: "The product category it sits in — tutor directories with paid tutor-side enquiries — is the same family as UrbanPro and several regional portals. Parents often browse free. Tutors usually pay somehow: packages, credits, or membership that unlocks parent contact. That split explains most of the complaints you will hear on faculty WhatsApp groups.",
+          },
+          {
+            type: "callout",
+            title: "Who this article is for",
+            text: "Parents comparing response quality and safety. Tutors who are tired of buying leads that go quiet after one message. Anyone who wants a free, verified directory as a second channel — not a lecture on why every marketplace is evil.",
+          },
+        ],
+      },
+      {
+        heading: "Why people look for MyPrivateTutor alternatives",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Talk to tutors in Bengaluru, Hyderabad, or Delhi NCR and the story rhymes. A lead pack runs out mid-month. The next enquiry looks promising — Class 9 CBSE maths, evening slots, budget that matches — then the parent stops replying after the first call. The tutor already spent money to unlock the chat. Multiply that by ten enquiries and the monthly “marketing” bill starts to look like a second rent.",
+          },
+          {
+            type: "paragraph",
+            text: "Parents face the mirror image. You post a clear requirement: Class 6 English, thrice a week, Whitefield or online. You get three replies. Two are generic. One never shows for the demo. You are left wondering whether good tutors even saw the post, or whether only those still buying packages are responding.",
+          },
+          {
+            type: "list",
+            items: [
+              "Tutors: recurring lead or package spend with uneven conversion",
+              "Parents: fewer serious pitches than the listing count suggests",
+              "Both: little clarity on who is verified before the first call",
+              "Both: wanting direct WhatsApp once both sides are interested",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "None of this means MyPrivateTutor is useless. It means a second channel with a different fee model is worth testing for 30 days — especially if your city already has free options with verified profiles.",
+          },
+        ],
+      },
+      {
+        heading: "How to judge any MyPrivateTutor alternative",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Ignore glossy homepage claims. Score each option on five points that matter in India in 2026.",
+          },
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Fees: who pays — parents, tutors, or neither — and when (lead unlock, first lessons, ongoing commission)",
+              "Verification: is there a real profile review before a tutor goes live?",
+              "Boards and subjects: CBSE, ICSE, state boards, JEE/NEET, languages — not only “coding” or hobbies",
+              "Contact path: do you get WhatsApp or phone after mutual interest, or stay trapped in-app?",
+              "Local reality: does the platform have active tutors in your city, or only SEO pages?",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "If an alternative fails on fees and verification, keep searching. If it fails only on national scale, use it as a metro-focused channel alongside a bigger directory.",
+          },
+        ],
+      },
+      {
+        heading: "1. Mentr — free for parents and tutors (our pick when fees are the issue)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr is built for the exact pain that sends people looking for MyPrivateTutor alternatives: connect without charging tutors per lead. Parents search verified tutors by subject, class, and locality, or post on the requirements board. Tutors list free, pitch free, and speak on WhatsApp after a connect is accepted. There is no coin pack and no commission on what you charge per hour.",
+          },
+          {
+            type: "list",
+            items: [
+              "No lead fees for tutors; no browse fees for parents",
+              "Profiles reviewed before they go live",
+              "Requirements board that mirrors the “post a need” habit parents already have",
+              "Instant Connect for parents who want a shortlist of mentors fast",
+              "Stronger today in metros like Bengaluru; expanding elsewhere",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Be honest about the trade-off. MyPrivateTutor and UrbanPro still have more historical listings in many towns. If you live in a tier-2 city with thin Mentr coverage, keep MyPrivateTutor as Plan A and add Mentr as Plan B. If you are in a metro and tired of paying for enquiries, flip that order.",
+          },
+          {
+            type: "callout",
+            title: "Practical test (48 hours)",
+            text: "Post the same requirement on MyPrivateTutor and on Mentr. Compare how many replies you get, how specific they are, and whether anyone asks for a paid unlock to continue. Tutors: list on both, track cost per converted student for one month.",
+          },
+        ],
+      },
+      {
+        heading: "2. UrbanPro — bigger directory, coin-based for tutors",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "UrbanPro is the most common MyPrivateTutor alternative parents already know by name. Reach is its strength. The coin system is its tax on tutors. Parents can post free; tutors spend coins to unlock contacts. That can work if your conversion rate is high. It gets expensive in crowded categories — Class 10 maths in Bengaluru, spoken English in Mumbai — where unlock prices climb and replies stay soft.",
+          },
+          {
+            type: "paragraph",
+            text: "Use UrbanPro when you need volume. Use a free platform like Mentr when you need margin. Many tutors keep both: UrbanPro for spillover leads, Mentr for zero-cost pitches. Parents can post on both and keep whoever responds with a clear demo plan.",
+          },
+        ],
+      },
+      {
+        heading: "3. Superprof — useful for skills; less ideal as a pure school-tuition swap",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Superprof shows up in India for music, languages, fitness, and hobby coaching as much as for CBSE tuition. Tutors often list free and pay commission on early lessons with each new student instead of buying lead packs. That is a different cost shape — better for some, worse for others.",
+          },
+          {
+            type: "paragraph",
+            text: "If you teach guitar or French, Superprof can be a real MyPrivateTutor alternative. If you mainly want Class 8–12 board tuition or JEE mentoring with local home visits, check Mentr and UrbanPro first, then add Superprof only if you also offer online skill sessions.",
+          },
+        ],
+      },
+      {
+        heading: "4. TeacherOn, Justdial, and local tuition bureaus",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "TeacherOn is another portal tutors try when MyPrivateTutor leads dry up. Quality varies by city and by how you write your profile. Justdial still surfaces “home tutor near me” searches; treat it like a phone book — useful for discovery, weak on verification. Traditional tuition bureaus remain common in older neighbourhoods: they place fast, then take a month’s fee or an ongoing cut of 15–30%.",
+          },
+          {
+            type: "paragraph",
+            text: "Agencies make sense when you need a replacement tutor by Monday and will pay for hand-holding. They are a poor long-term substitute if you only wanted a verified directory. Always ask what the tutor actually receives before you lock a monthly package.",
+          },
+        ],
+      },
+      {
+        heading: "5. WhatsApp groups and school referrals — free, messy, still necessary",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Society groups, PTA chats, and “CBSE tutors in [locality]” Facebook groups are free MyPrivateTutor alternatives in the literal sense. Speed is high. Trust is uneven. Posts vanish. Nobody has verified the person who replied with “Madam I take all subjects.”",
+          },
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Ask your child’s class teacher or two parents whose kids improved recently",
+              "Cross-check any name on a verified platform profile if it exists",
+              "Do a paid trial (one or two sessions) before a monthly commitment",
+              "Keep platform search open so you are not stuck with one referral",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "The stack that works for most metro families in 2026: referrals for trust, a free verified platform for options, and a paid directory only if coverage is thin.",
+          },
+        ],
+      },
+      {
+        heading: "Quick comparison: fees and fit",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Mentr — free both sides; verified profiles; best when you hate lead fees; metro coverage still growing",
+              "MyPrivateTutor — familiar; tutor-side packages/credits common; keep if it already converts for you",
+              "UrbanPro — largest habit loop in India; coins for tutors; strong volume",
+              "Superprof — commission on early lessons; stronger for skills than pure board tuition",
+              "Agencies / Justdial / groups — speed or local discovery; weaker on transparent verification",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "There is no single winner for every pin code. There is a clear winner for “I refuse to keep buying leads”: a free connect model. That is the gap Mentr is built to fill.",
+          },
+        ],
+      },
+      {
+        heading: "How to switch without losing students (or options)",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Do not delete your MyPrivateTutor profile on day one. Parallel-run for a month.",
+          },
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Parents: copy your requirement text to Mentr and one other channel; track reply quality, not vanity count",
+              "Tutors: finish your free Mentr profile (subjects, boards, rate, photo) before you expect enquiries",
+              "Log every lead’s cost and outcome in a simple sheet for 30 days",
+              "Keep WhatsApp etiquette the same — clear slots, demo plan, no spam forwards",
+              "Drop the paid channel only after free channels produce steady demos",
+            ],
+          },
+          {
+            type: "callout",
+            title: "Safety still comes first",
+            text: "Whatever platform you use, confirm identity, meet in a sensible place for the first session, and agree fees in writing (even a WhatsApp message). Platform choice does not replace basic caution.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is the best free MyPrivateTutor alternative in India?",
+        answer:
+          "For zero lead fees on both sides, Mentr is the strongest free alternative in 2026: verified tutor profiles, a requirements board, and WhatsApp contact after connect. Coverage is strongest in metros and still expanding — pair it with referrals if your town has few listings yet.",
+      },
+      {
+        question: "Is MyPrivateTutor free for tutors?",
+        answer:
+          "Browsing and listing are often free or low-friction, but contacting parent enquiries typically involves paid packages, credits, or similar tutor-side spend. Always check the current pricing on their site for your city before you budget monthly marketing.",
+      },
+      {
+        question: "Should parents leave MyPrivateTutor completely?",
+        answer:
+          "Not necessarily. If you already get good tutors there, keep it. Add a free verified search (like Mentr) so you are not dependent on whoever is buying packages this week. Compare demo quality over two weekends, then decide.",
+      },
+      {
+        question: "How is Mentr different from MyPrivateTutor and UrbanPro?",
+        answer:
+          "Mentr does not sell lead unlocks to tutors and does not take a cut of session fees. Parents and tutors connect after mutual interest, with profiles reviewed before going live. Larger directories may still have more total names in some cities; Mentr aims for response quality without a coin gate.",
+      },
+      {
+        question: "Can I use MyPrivateTutor and Mentr together?",
+        answer:
+          "Yes — and most serious tutors should for a while. Post or list on both, track cost per enrolled student, and shift time toward the channel that converts without draining your fee. Parents can post the same need on both and shortlist from whoever replies with a clear plan.",
+      },
+      {
+        question: "Is this page an ad for Mentr?",
+        answer:
+          "Mentr publishes this guide and we recommend our product when the problem is lead fees. We also list UrbanPro, Superprof, agencies, and WhatsApp groups with their trade-offs. Fees and policies change — verify on each site before you pay.",
+      },
+    ],
+    relatedLinks: [
+      { label: "UrbanPro alternatives", href: "/blog/urbanpro-alternatives" },
+      { label: "Mentr vs UrbanPro", href: "/blog/mentr-vs-urbanpro" },
+      { label: "Best free tutor platforms in India", href: "/blog/best-free-tutor-platforms-india" },
+      { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
+      { label: "5 free ways tutors get students", href: "/blog/get-tutoring-students-free" },
+      { label: "Search verified tutors", href: "/search" },
+      { label: "List as a tutor free", href: "/faculty/signup" },
     ],
   },
 

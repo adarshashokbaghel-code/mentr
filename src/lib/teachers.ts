@@ -166,302 +166,9 @@ function matchesMode(teacher: Teacher, mode: ModeFilter): boolean {
   return online && inPerson;
 }
 
-export const TEACHERS: Teacher[] = [
-  {
-    id: "aris-smith",
-    name: "Dr. Aris Smith",
-    initials: "AS",
-    imageUrl: "",
-    subjects: ["Mathematics", "Physics", "Exam Prep"],
-    subjectLine: "Mathematics & Physics",
-    experienceYears: 12,
-    rating: 4.9,
-    reviewCount: 48,
-    openSlots: 3,
-    designation: "Senior Mentor",
-    area: "Koramangala, Bengaluru",
-    locality: "Koramangala",
-    lat: 12.9352,
-    lng: 77.6245,
-    bio: "I help Class 8–12 students build strong foundations in Maths and Physics — board exams and entrance prep. Sessions are flexible; we decide timing together.",
-    levels: "Class 8–12 · Exam prep",
-    modes: ["online", "student_home"],
-    languages: ["English", "Hindi"],
-    hourlyRate: 1200,
-    slots: [
-      { label: "Mon 4–6 PM", available: true },
-      { label: "Wed 5–7 PM", available: false },
-      { label: "Sat 10–12", available: true },
-      { label: "Sun 3–5 PM", available: true },
-    ],
-    phone: "919876543210",
-    verified: true,
-    kind: "mentor",
-  },
-  {
-    id: "meera-kapoor",
-    name: "Prof. Meera Kapoor",
-    initials: "MK",
-    imageUrl: "",
-    subjects: ["English", "Career Mentoring"],
-    subjectLine: "English & Creative Writing",
-    experienceYears: 8,
-    rating: 4.8,
-    reviewCount: 36,
-    openSlots: 1,
-    designation: "Associate Faculty",
-    area: "Indiranagar, Bengaluru",
-    locality: "Indiranagar",
-    lat: 12.9784,
-    lng: 77.6408,
-    bio: "Spoken English, writing, and career guidance for teens. Warm sessions focused on confidence and clarity.",
-    levels: "Class 6–12 · Spoken English",
-    modes: ["online"],
-    languages: ["English"],
-    hourlyRate: 850,
-    slots: [
-      { label: "Tue 6–8 PM", available: true },
-      { label: "Thu 6–8 PM", available: false },
-    ],
-    phone: "919812345678",
-    verified: true,
-    kind: "mentor",
-  },
-  {
-    id: "rajesh-verma",
-    name: "Rajesh Verma",
-    initials: "RV",
-    imageUrl: "",
-    subjects: ["Computer Science", "Coding"],
-    subjectLine: "Computer Science & Coding",
-    experienceYears: 6,
-    rating: 4.6,
-    reviewCount: 22,
-    openSlots: 0,
-    designation: "Industry Mentor",
-    area: "HSR Layout, Bengaluru",
-    locality: "HSR Layout",
-    lat: 12.9116,
-    lng: 77.6473,
-    bio: "Python, web basics, and school CS for beginners. Fully booked this week — openings soon.",
-    levels: "Class 9–12 · Beginners",
-    modes: ["online", "tutor_home"],
-    languages: ["English", "Hindi"],
-    hourlyRate: 750,
-    slots: [
-      { label: "Mon 7–9 PM", available: false },
-      { label: "Sat 11–1", available: false },
-    ],
-    phone: "919900112233",
-    verified: false,
-    kind: "tutor",
-  },
-  {
-    id: "anita-desai",
-    name: "Anita Desai",
-    initials: "AD",
-    imageUrl: "",
-    subjects: ["Chemistry", "Exam Prep"],
-    subjectLine: "Chemistry · Board & JEE",
-    experienceYears: 10,
-    rating: 4.9,
-    reviewCount: 41,
-    openSlots: 2,
-    designation: "Faculty",
-    area: "Jayanagar, Bengaluru",
-    locality: "Jayanagar",
-    lat: 12.9308,
-    lng: 77.5838,
-    bio: "Organic and physical chemistry for Class 11–12. Concept-first, then practice papers.",
-    levels: "Class 11–12 · JEE / Boards",
-    modes: ["student_home", "tutor_home"],
-    languages: ["English", "Hindi"],
-    hourlyRate: 900,
-    slots: [
-      { label: "Fri 5–7 PM", available: true },
-      { label: "Sun 10–12", available: true },
-    ],
-    phone: "919955667788",
-    verified: true,
-    kind: "tutor",
-  },
-  {
-    id: "vikram-singh",
-    name: "Vikram Singh",
-    initials: "VS",
-    imageUrl: "",
-    subjects: ["Mathematics", "Exam Prep"],
-    subjectLine: "Mathematics · Class 10",
-    experienceYears: 15,
-    rating: 4.7,
-    reviewCount: 63,
-    openSlots: 4,
-    designation: "Tutor",
-    area: "Whitefield, Bengaluru",
-    locality: "Whitefield",
-    lat: 12.9698,
-    lng: 77.75,
-    bio: "Patient Class 10 Maths tutor. Algebra, geometry, and board-style problems.",
-    levels: "Class 9–10",
-    modes: ["student_home"],
-    languages: ["English", "Kannada"],
-    hourlyRate: 650,
-    slots: [
-      { label: "Mon–Fri 4–5 PM", available: true },
-      { label: "Sat 9–11", available: true },
-    ],
-    phone: "919933221100",
-    verified: true,
-    kind: "tutor",
-  },
-  {
-    id: "priya-nair",
-    name: "Priya Nair",
-    initials: "PN",
-    imageUrl: "",
-    subjects: ["Biology", "Exam Prep"],
-    subjectLine: "Biology · NEET foundation",
-    experienceYears: 7,
-    rating: 4.8,
-    reviewCount: 29,
-    openSlots: 2,
-    designation: "Mentor",
-    area: "Malleshwaram, Bengaluru",
-    locality: "Malleshwaram",
-    lat: 13.0035,
-    lng: 77.5645,
-    bio: "NEET foundation and school Biology. Clear diagrams, weekly tests, and doubt clearing.",
-    levels: "Class 11–12 · NEET",
-    modes: ["online"],
-    languages: ["English", "Tamil"],
-    hourlyRate: 800,
-    slots: [
-      { label: "Wed 6–8 PM", available: true },
-      { label: "Sat 4–6 PM", available: true },
-    ],
-    phone: "919944556677",
-    verified: true,
-    kind: "mentor",
-  },
-  {
-    id: "kabir-menon",
-    name: "Kabir Menon",
-    initials: "KM",
-    imageUrl: "",
-    subjects: ["Physics", "Exam Prep"],
-    subjectLine: "Physics · JEE mains",
-    experienceYears: 9,
-    rating: 4.7,
-    reviewCount: 33,
-    openSlots: 2,
-    designation: "Tutor",
-    area: "HSR Layout, Bengaluru",
-    locality: "HSR Layout",
-    lat: 12.9141,
-    lng: 77.642,
-    bio: "JEE and board Physics with problem drills. Weekend intensives available.",
-    levels: "Class 11–12 · JEE",
-    modes: ["online", "student_home"],
-    languages: ["English", "Hindi"],
-    hourlyRate: 950,
-    slots: [
-      { label: "Sat 2–4 PM", available: true },
-      { label: "Sun 5–7 PM", available: true },
-    ],
-    phone: "919911223344",
-    verified: true,
-    kind: "tutor",
-  },
-  {
-    id: "sara-joseph",
-    name: "Sara Joseph",
-    initials: "SJ",
-    imageUrl: "",
-    subjects: ["English", "Music"],
-    subjectLine: "English & Music basics",
-    experienceYears: 5,
-    rating: 4.9,
-    reviewCount: 19,
-    openSlots: 3,
-    designation: "Mentor",
-    area: "Indiranagar, Bengaluru",
-    locality: "Indiranagar",
-    lat: 12.9718,
-    lng: 77.6412,
-    bio: "Reading fluency, school English, and beginner piano for younger kids.",
-    levels: "Class 3–8",
-    modes: ["student_home"],
-    languages: ["English", "Kannada", "Hindi"],
-    hourlyRate: 600,
-    slots: [
-      { label: "Mon 5–6 PM", available: true },
-      { label: "Thu 5–6 PM", available: true },
-      { label: "Sat 11–12", available: true },
-    ],
-    phone: "919922334455",
-    verified: true,
-    kind: "mentor",
-  },
-  {
-    id: "arjun-rao",
-    name: "Arjun Rao",
-    initials: "AR",
-    imageUrl: "",
-    subjects: ["Coding", "Computer Science"],
-    subjectLine: "Coding for beginners",
-    experienceYears: 4,
-    rating: 4.5,
-    reviewCount: 14,
-    openSlots: 5,
-    designation: "Tutor",
-    area: "Whitefield, Bengaluru",
-    locality: "Whitefield",
-    lat: 12.972,
-    lng: 77.748,
-    bio: "Scratch to Python for school kids. Project-based sessions, no lectures.",
-    levels: "Class 6–10",
-    modes: ["tutor_home"],
-    languages: ["English", "Telugu"],
-    hourlyRate: 550,
-    slots: [
-      { label: "Tue 6–7 PM", available: true },
-      { label: "Fri 6–7 PM", available: true },
-      { label: "Sun 10–12", available: true },
-    ],
-    phone: "919933445566",
-    verified: false,
-    kind: "tutor",
-  },
-  {
-    id: "neha-iyer",
-    name: "Neha Iyer",
-    initials: "NI",
-    imageUrl: "",
-    subjects: ["Economics", "Exam Prep"],
-    subjectLine: "Economics · Class 12",
-    experienceYears: 11,
-    rating: 4.8,
-    reviewCount: 27,
-    openSlots: 1,
-    designation: "Faculty",
-    area: "Jayanagar, Bengaluru",
-    locality: "Jayanagar",
-    lat: 12.928,
-    lng: 77.586,
-    bio: "Macro/micro for CBSE and ISC. Case studies and board answer writing.",
-    levels: "Class 11–12",
-    modes: ["online"],
-    languages: ["English", "Hindi"],
-    hourlyRate: 850,
-    slots: [
-      { label: "Wed 4–6 PM", available: true },
-      { label: "Sat 3–5 PM", available: false },
-    ],
-    phone: "919944556688",
-    verified: true,
-    kind: "tutor",
-  },
-];
+/** Live faculty only — no static demo tutors/mentors. */
+export const TEACHERS: Teacher[] = [];
+
 
 export type SearchSort =
   | "relevance"
@@ -504,12 +211,6 @@ function fromApiTeacher(t: ApiTeacher): Teacher {
     lat: t.lat ?? NaN,
     lng: t.lng ?? NaN,
   };
-}
-
-function mergeWithDemoTeachers(live: Teacher[]): Teacher[] {
-  const liveIds = new Set(live.map((t) => t.id));
-  const demo = TEACHERS.filter((t) => !liveIds.has(t.id));
-  return [...live, ...demo];
 }
 
 export type FetchTeachersResult = {
@@ -607,16 +308,13 @@ async function loadLivePublicTeachers(): Promise<{
 }
 
 /** Real faculty with completed profiles — public browse (no login). */
-export async function fetchPublicTeachers(opts?: {
-  /** Skip demo placeholder profiles — homepage / live previews only */
+export async function fetchPublicTeachers(_opts?: {
+  /** @deprecated No demo profiles remain; always live-only */
   liveOnly?: boolean;
 }): Promise<FetchTeachersResult> {
   const { teachers: live, failed } = await loadLivePublicTeachers();
   if (failed) return { teachers: [], failed: true };
-  return {
-    teachers: opts?.liveOnly ? live : mergeWithDemoTeachers(live),
-    failed: false,
-  };
+  return { teachers: live, failed: false };
 }
 
 /** Real faculty with completed profiles, straight from the database. */
@@ -626,7 +324,7 @@ export async function fetchLiveTeachers(): Promise<FetchTeachersResult> {
     if (!res.ok) return { teachers: [], failed: true };
     const data = (await res.json()) as { teachers: ApiTeacher[] };
     const live = (data.teachers || []).map(fromApiTeacher);
-    return { teachers: mergeWithDemoTeachers(live), failed: false };
+    return { teachers: live, failed: false };
   } catch {
     return { teachers: [], failed: true };
   }
@@ -652,11 +350,11 @@ export function searchTeachers(opts: {
   nearLng?: number;
   /** Max distance in km (requires nearLat/nearLng) */
   radiusKm?: number;
-  /** Base list to search; defaults to demo teachers */
+  /** Base list to search; defaults to empty (pass live results from fetch*) */
   teachers?: Teacher[];
 }): (Teacher & { distanceKm?: number })[] {
   let list: (Teacher & { distanceKm?: number })[] = [
-    ...(opts.teachers ?? TEACHERS),
+    ...(opts.teachers ?? []),
   ];
 
   if (opts.subject) {

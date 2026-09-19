@@ -1,5 +1,6 @@
 import { User, type IUser } from "../models/User";
-import type { IcMode } from "../models/InstantConnectRequest";
+import type { IcLookingFor, IcMode } from "../models/InstantConnectRequest";
+import { rerankInstantConnectWithAi } from "./instant-connect-ai";
 
 /** Tunable later — V1 eligibility gate for Instant Connect matching pool. */
 export function isEligibleForInstantConnect(user: IUser): boolean {
@@ -18,6 +19,10 @@ export type MatchInput = {
   location?: string;
   budgetMin?: number;
   budgetMax?: number;
+  lookingFor?: IcLookingFor;
+  board?: string;
+  /** Optional free-text notes — triggers AI re-rank when OpenAI key is set */
+  message?: string;
 };
 
 export type MatchedTutorCard = {
@@ -33,6 +38,13 @@ export type MatchedTutorCard = {
   profileImageUrl: string | null;
   score: number;
   responseHint: string;
+  /** Short AI reason when matchedBy === "ai" */
+  matchReason?: string | null;
+};
+
+export type FindMatchesResult = {
+  matches: MatchedTutorCard[];
+  matchedBy: "rules" | "ai";
 };
 
 function norm(s: string): string {
@@ -178,15 +190,17 @@ export function toMatchCard(user: IUser, score: number): MatchedTutorCard {
     profileImageUrl: user.profileImageUrl || null,
     score: Math.round(score * 1000) / 1000,
     responseHint: "Usually responds within 12 hours",
+    matchReason: null,
   };
 }
 
 const MIN_SCORE = 0.22;
+const CANDIDATE_POOL = 24;
 
 export async function findTopMatches(
   input: MatchInput,
   limit = 3,
-): Promise<MatchedTutorCard[]> {
+): Promise<FindMatchesResult> {
   const faculty = await User.find({
     role: "faculty",
     emailVerified: true,
@@ -204,5 +218,33 @@ export async function findTopMatches(
   }
 
   scored.sort((a, b) => b.score - a.score);
-  return scored.slice(0, limit).map(({ user, score }) => toMatchCard(user, score));
+  const pool = scored
+    .slice(0, Math.max(limit, CANDIDATE_POOL))
+    .map(({ user, score }) => toMatchCard(user, score));
+
+  const notes = (input.message || "").trim();
+  if (notes && pool.length > 0) {
+    const ai = await rerankInstantConnectWithAi(input, pool, limit);
+    if (ai && ai.orderedIds.length > 0) {
+      const byId = new Map(pool.map((c) => [c.id, c]));
+      const matches = ai.orderedIds
+        .map((id) => {
+          const card = byId.get(id);
+          if (!card) return null;
+          return {
+            ...card,
+            matchReason: ai.reasons[id] || null,
+          };
+        })
+        .filter(Boolean) as MatchedTutorCard[];
+      if (matches.length > 0) {
+        return { matches, matchedBy: "ai" };
+      }
+    }
+  }
+
+  return {
+    matches: pool.slice(0, limit),
+    matchedBy: "rules",
+  };
 }

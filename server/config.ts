@@ -50,6 +50,9 @@ export const config = {
   adminSecretKey: process.env.ADMIN_SECRET_KEY || "",
   /** Password required for admin write actions (delete, send mail, etc.) */
   adminPass: process.env.ADMIN_PASS || "",
+  /** Optional — Instant Connect AI re-rank when parent leaves notes */
+  openaiApiKey: process.env.OPENAI_API_KEY || "",
+  openaiIcModel: process.env.OPENAI_IC_MODEL || "gpt-4o-mini",
 };
 
 export function getMongoUriWithDb(): string {

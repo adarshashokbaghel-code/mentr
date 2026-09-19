@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { LocationFields } from "@/components/forms/location-fields";
 import { ProfileImageUploader } from "@/components/profile/profile-image-uploader";
 import { ProfileSavedDialog } from "@/components/profile/profile-saved-dialog";
 import {
@@ -51,17 +52,6 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 /* ---------------------------------- data --------------------------------- */
 
 const ROLES = ["Tutor", "Teacher", "Trainer", "Coach"] as const;
-
-const COUNTRIES = [
-  "India",
-  "United Arab Emirates",
-  "Singapore",
-  "United States",
-  "United Kingdom",
-  "Australia",
-  "Canada",
-  "Other",
-] as const;
 
 const SUBJECT_OPTIONS = [
   "Mathematics",
@@ -286,6 +276,7 @@ function ProfilingContent() {
   const [city, setCity] = useState("Bengaluru");
   const [area, setArea] = useState("");
   const [languages, setLanguages] = useState<string[]>([]);
+  const [customLanguage, setCustomLanguage] = useState("");
 
   // Teaching
   const [subjects, setSubjects] = useState<string[]>([]);
@@ -491,6 +482,16 @@ function ProfilingContent() {
     setCustomSubject("");
   }
 
+  function addCustomLanguage() {
+    const lang = customLanguage.trim();
+    if (!lang) return;
+    const match = languages.find(
+      (l) => l.toLowerCase() === lang.toLowerCase(),
+    );
+    if (!match) setLanguages((prev) => [...prev, lang]);
+    setCustomLanguage("");
+  }
+
   function addCertification() {
     const c = certInput.trim();
     if (!c) return;
@@ -621,7 +622,7 @@ function ProfilingContent() {
 
   return (
     <div className="flex min-h-screen flex-col bg-cream">
-      {/* sticky top: progress + Save on every step */}
+      {/* sticky top: progress only — actions live in the footer */}
       <div className="sticky top-0 z-20 border-b border-hairline/80 bg-cream/95 backdrop-blur-md">
         <div className="h-1 w-full bg-cream-band">
           <div
@@ -629,36 +630,21 @@ function ProfilingContent() {
             style={{ width: `${progress}%` }}
           />
         </div>
-        <div className="mx-auto flex h-12 w-full max-w-[760px] items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex h-11 w-full max-w-[760px] items-center justify-between gap-3 px-4 sm:px-6">
           <Link
             href="/dashboard"
             className="text-xs font-semibold text-muted transition hover:text-ink"
           >
             ← Dashboard
           </Link>
-          <div className="flex items-center gap-2">
-            {saveFlash && (
-              <span className="text-xs font-semibold text-sage">{saveFlash}</span>
-            )}
-            <button
-              type="button"
-              onClick={() => handleSave()}
-              disabled={saving}
-              className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-[13px] font-semibold text-ink transition hover:bg-cream disabled:opacity-60"
-            >
-              {saving ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <Save className="h-3.5 w-3.5" />
-              )}
-              {saving ? "Saving…" : "Save"}
-            </button>
-          </div>
+          {saveFlash && (
+            <span className="text-xs font-semibold text-sage">{saveFlash}</span>
+          )}
         </div>
       </div>
 
       {/* ------------------------------- content ------------------------------- */}
-      <main className="mx-auto w-full max-w-[760px] flex-1 px-4 py-6 sm:px-6 sm:py-8">
+      <main className="mx-auto w-full max-w-[760px] flex-1 px-4 py-6 pb-28 sm:px-6 sm:py-8 sm:pb-32">
         {/* stepper pills */}
         <div className="flex gap-1.5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {STEPS.map((s, i) => {
@@ -784,33 +770,18 @@ function ProfilingContent() {
                     className={inputCls}
                   />
                 </Field>
-                <Field label="Country">
-                  <select
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    className={selectCls}
-                  >
-                    {COUNTRIES.map((c) => (
-                      <option key={c}>{c}</option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="City">
-                  <input
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Bengaluru"
-                    className={inputCls}
+                <div className="sm:col-span-2">
+                  <LocationFields
+                    value={{ country, city, area }}
+                    onChange={(next) => {
+                      setCountry(next.country);
+                      setCity(next.city);
+                      setArea(next.area);
+                    }}
+                    controlClassName={selectCls}
+                    compact
                   />
-                </Field>
-                <Field label="Area / locality">
-                  <input
-                    value={area}
-                    onChange={(e) => setArea(e.target.value)}
-                    placeholder="HSR Layout"
-                    className={inputCls}
-                  />
-                </Field>
+                </div>
               </div>
             </Section>
 
@@ -825,6 +796,41 @@ function ProfilingContent() {
                     {l}
                   </Chip>
                 ))}
+                {languages
+                  .filter((l) => !LANGUAGE_OPTIONS.includes(l as (typeof LANGUAGE_OPTIONS)[number]))
+                  .map((l) => (
+                    <Chip
+                      key={l}
+                      active
+                      onClick={() =>
+                        setLanguages((prev) => prev.filter((x) => x !== l))
+                      }
+                    >
+                      {l}
+                    </Chip>
+                  ))}
+              </div>
+              <div className="mt-3 flex gap-2">
+                <input
+                  value={customLanguage}
+                  onChange={(e) => setCustomLanguage(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      addCustomLanguage();
+                    }
+                  }}
+                  placeholder="Add another language"
+                  className={cn(inputCls, "max-w-[240px]")}
+                />
+                <button
+                  type="button"
+                  onClick={addCustomLanguage}
+                  className="flex h-11 items-center gap-1 rounded-md border border-hairline bg-cream px-4 text-sm font-semibold text-ink transition hover:bg-cream-band"
+                >
+                  <Plus className="h-4 w-4" />
+                  Add
+                </button>
               </div>
             </Section>
           </div>
@@ -1436,45 +1442,66 @@ function ProfilingContent() {
 
       {/* ------------------------------ footer bar ------------------------------ */}
       <footer className="sticky bottom-0 z-20 border-t border-hairline bg-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex h-[68px] w-full max-w-[760px] items-center justify-between gap-3 px-4 sm:px-6">
+        <div className="mx-auto flex min-h-[68px] w-full max-w-[760px] flex-wrap items-center justify-between gap-2 px-4 py-2.5 sm:flex-nowrap sm:gap-3 sm:px-6">
           {step > 0 ? (
             <button
               type="button"
               onClick={back}
               disabled={saving}
-              className="flex h-11 items-center gap-1.5 rounded-md border border-hairline bg-white px-5 text-sm font-semibold text-ink transition hover:bg-cream-band disabled:opacity-50"
+              className="flex h-11 shrink-0 items-center gap-1.5 rounded-md border border-hairline bg-white px-4 text-sm font-semibold text-ink transition hover:bg-cream-band disabled:opacity-50 sm:px-5"
             >
               <ArrowLeft className="h-4 w-4" />
               Back
             </button>
           ) : (
-            <span className="text-xs text-muted">Takes about 2 minutes</span>
+            <span className="hidden text-xs text-muted sm:inline">
+              Takes about 2 minutes
+            </span>
           )}
 
-          {step < STEPS.length - 1 ? (
+          <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-2 sm:flex-initial">
             <button
               type="button"
-              onClick={next}
-              className="flex h-11 items-center gap-1.5 rounded-md bg-coral px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark active:scale-[0.98]"
-            >
-              Continue
-              <ArrowRight className="h-4 w-4" />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={handleSubmit}
+              onClick={() => handleSave()}
               disabled={saving}
-              className="flex h-11 items-center gap-2 rounded-md bg-coral px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark active:scale-[0.98] disabled:opacity-60"
+              className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-sm font-semibold text-ink transition hover:bg-cream disabled:opacity-60 sm:px-4"
             >
               {saving ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
               ) : (
-                <BadgeCheck className="h-4 w-4" />
+                <Save className="h-3.5 w-3.5" />
               )}
-              {saving ? "Saving…" : "Finish & go live"}
+              <span className="hidden sm:inline">
+                {saving ? "Saving…" : "Save"}
+              </span>
+              <span className="sm:hidden">{saving ? "…" : "Save"}</span>
             </button>
-          )}
+
+            {step < STEPS.length - 1 ? (
+              <button
+                type="button"
+                onClick={next}
+                className="flex h-11 shrink-0 items-center gap-1.5 rounded-md bg-coral px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark active:scale-[0.98] sm:px-6"
+              >
+                Continue
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={saving}
+                className="flex h-11 shrink-0 items-center gap-2 rounded-md bg-coral px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark active:scale-[0.98] disabled:opacity-60 sm:px-6"
+              >
+                {saving ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <BadgeCheck className="h-4 w-4" />
+                )}
+                {saving ? "Saving…" : "Finish & go live"}
+              </button>
+            )}
+          </div>
         </div>
       </footer>
 

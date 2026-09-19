@@ -342,22 +342,22 @@ function MockShell({
 
 function ParentMock() {
   return (
-    <MockShell url="mentr.in / teachers / priya-nair">
+    <MockShell url="mentr.in / teachers / profile">
       <div className="flex items-center gap-3">
         <span className="flex h-10 w-10 items-center justify-center rounded-md border-2 border-ink bg-lavender text-sm font-bold text-ink">
-          PN
+          VT
         </span>
         <div className="min-w-0 flex-1">
           <p className="flex items-center gap-1.5 text-sm font-bold text-ink">
-            Priya Nair
+            Verified tutor
             <BadgeCheck className="h-4 w-4 text-sage" />
           </p>
           <p className="text-xs font-medium text-muted">
-            Mathematics · Class 9–12 · Koramangala
+            Mathematics · Class 9–12 · your area
           </p>
         </div>
         <span className="rounded-md border border-ink/20 bg-sage-wash px-2 py-1 text-[10px] font-bold text-sage">
-          3 open slots
+          Open slots
         </span>
       </div>
 
@@ -366,8 +366,8 @@ function ParentMock() {
           Your message · required
         </p>
         <p className="mt-1.5 text-[13px] font-medium leading-snug text-ink">
-          Hi Priya, looking for Class 10 maths for my daughter — weekends,
-          near HSR. Board exam focus.
+          Looking for Class 10 maths for my daughter — weekends, board exam
+          focus. Can we connect on WhatsApp after you accept?
         </p>
         <div className="mt-2.5 flex items-center justify-between">
           <span className="text-[10px] font-bold text-muted">98/500</span>
@@ -391,7 +391,7 @@ function ParentMock() {
           <p className="text-xs font-bold text-ink">
             Request sent{" "}
             <span className="font-medium text-ink/60">
-              — Priya is reviewing your note
+              — tutor is reviewing your note
             </span>
           </p>
         </div>

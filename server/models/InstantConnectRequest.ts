@@ -9,6 +9,9 @@ export type IcMode = (typeof IC_MODES)[number];
 export const IC_STATUSES = ["active", "closed", "expired"] as const;
 export type IcStatus = (typeof IC_STATUSES)[number];
 
+export const IC_CLOSE_OUTCOMES = ["dismissed", "mentor_found"] as const;
+export type IcCloseOutcome = (typeof IC_CLOSE_OUTCOMES)[number];
+
 export const IC_PREFERRED_TIMES = [
   "Morning",
   "Afternoon",
@@ -41,6 +44,12 @@ export interface IInstantConnectRequest extends Document {
   closedAt?: Date;
   expiresAt: Date;
   closedBy?: "parent" | "system";
+  /** How the parent closed: plain close vs mentor found */
+  closeOutcome?: IcCloseOutcome;
+  /** Mentors the parent marked as hired (subset of selectedTutorIds) */
+  hiredTutorIds: Types.ObjectId[];
+  /** Optional notes when closing / marking mentor found */
+  closeNotes?: string;
 }
 
 const instantConnectRequestSchema = new Schema<IInstantConnectRequest>(
@@ -86,6 +95,12 @@ const instantConnectRequestSchema = new Schema<IInstantConnectRequest>(
     closedAt: { type: Date },
     expiresAt: { type: Date, required: true, index: true },
     closedBy: { type: String, enum: ["parent", "system"] },
+    closeOutcome: { type: String, enum: IC_CLOSE_OUTCOMES },
+    hiredTutorIds: {
+      type: [{ type: Schema.Types.ObjectId, ref: "User" }],
+      default: [],
+    },
+    closeNotes: { type: String, trim: true, maxlength: 500 },
   },
   { timestamps: true },
 );

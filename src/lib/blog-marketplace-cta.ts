@@ -29,6 +29,22 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
 
   const hay = `${post.slug} ${post.title} ${post.keyword}`.toLowerCase();
   const links: MarketplaceLink[] = [];
+
+  if (
+    hay.includes("instant connect") ||
+    hay.includes("find tutor instantly") ||
+    post.slug.includes("instant-connect")
+  ) {
+    links.push({
+      label: "Try Instant Connect",
+      href: "/parents",
+    });
+    links.push({
+      label: "Parent dashboard · Quick match",
+      href: "/parent/dashboard#instant-connect",
+    });
+  }
+
   const subject = detectSubject(hay);
   const cls = detectClass(hay);
 

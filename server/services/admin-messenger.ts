@@ -165,10 +165,10 @@ export async function ensureReferralUrl(user: IUser): Promise<string> {
 
 export async function listAdminUsers(
   query = "",
-  limit = 500,
+  limit = 1000,
   role?: UserRole,
 ): Promise<AdminUserRow[]> {
-  const cap = Math.min(Math.max(limit, 1), 1000);
+  const cap = Math.min(Math.max(limit, 1), 5000);
   const users = await User.find(userSearchFilter(query, role))
     .sort({ createdAt: -1 })
     .limit(cap)
@@ -181,7 +181,7 @@ export async function listAdminUsers(
 
 export async function searchAdminUsers(
   query: string,
-  limit = 40,
+  limit = 1000,
   role?: UserRole,
 ): Promise<AdminUserRow[]> {
   return listAdminUsers(query, limit, role);

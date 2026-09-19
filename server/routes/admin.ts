@@ -51,7 +51,10 @@ router.get("/stats", async (_req, res) => {
 router.get("/users/search", async (req, res) => {
   try {
     const q = String(req.query.q || "");
-    const limit = Math.min(parseInt(String(req.query.limit || "40"), 10) || 40, 100);
+    const limit = Math.min(
+      parseInt(String(req.query.limit || "1000"), 10) || 1000,
+      5000,
+    );
     const roleParam = String(req.query.role || "");
     const role =
       roleParam === "faculty" || roleParam === "parent"
@@ -68,7 +71,10 @@ router.get("/users/search", async (req, res) => {
 router.get("/users", async (req, res) => {
   try {
     const q = String(req.query.q || "");
-    const limit = Math.min(parseInt(String(req.query.limit || "500"), 10) || 500, 1000);
+    const limit = Math.min(
+      parseInt(String(req.query.limit || "1000"), 10) || 1000,
+      5000,
+    );
     const users = await listAdminUsers(q, limit);
     res.json({ users, total: users.length });
   } catch (err) {

@@ -82,11 +82,34 @@ export async function notifyFacultyInstantConnect(
   const href = `/dashboard#instant-connect`;
   const title = "New Instant Connect request";
   const body = reqSummary(request);
+  const notifBody = `${request.subject} · ${request.classLevel}. Open your Mentr dashboard to view the parent's phone number and call them.`;
   const htmlBody = `
-    <p style="color: #525252; line-height: 1.5;">You have a new Instant Connect request. Open your dashboard to view the parent contact while this requirement is active.</p>
+    <p style="color: #525252; line-height: 1.5; margin: 0 0 12px;">A parent selected you on Instant Connect. Here's what they need:</p>
     ${reqSummaryHtml(request)}
-    <p style="color: #6b756e; font-size: 12px; margin-top: 12px;">Parent contact is only shown in your Mentr dashboard — not in this email.</p>
+    <p style="color: #1a231c; font-size: 14px; font-weight: 600; line-height: 1.5; margin: 16px 0 8px;">What to do next</p>
+    <ol style="color: #525252; font-size: 14px; line-height: 1.6; margin: 0 0 12px; padding-left: 20px;">
+      <li>Open your Mentr dashboard (button below).</li>
+      <li>Go to Instant Connect to see the parent's phone number.</li>
+      <li>Call the parent while this request is still active.</li>
+    </ol>
+    <p style="color: #6b756e; font-size: 12px; margin: 0;">For privacy, the parent's number is only shown on the platform — never in this email.</p>
   `;
+  const textBody = [
+    title,
+    "",
+    "A parent selected you on Instant Connect.",
+    "",
+    body,
+    "",
+    "What to do next:",
+    "1. Open your Mentr dashboard.",
+    "2. Go to Instant Connect to see the parent's phone number.",
+    "3. Call the parent while this request is still active.",
+    "",
+    `View parent number: ${siteUrl(href)}`,
+    "",
+    "For privacy, the parent's number is only shown on the platform — never in this email.",
+  ].join("\n");
 
   for (const id of tutorIds) {
     try {
@@ -94,7 +117,7 @@ export async function notifyFacultyInstantConnect(
         user: id,
         type: "instant_connect_request",
         title,
-        body,
+        body: notifBody,
         href,
         meta: {
           instantConnectId: request._id.toString(),
@@ -108,9 +131,14 @@ export async function notifyFacultyInstantConnect(
 
       await sendAdminEmail(
         user.email,
-        "New Instant Connect request on Mentr",
-        `${title}\n\n${body}\n\nView request: ${siteUrl(href)}\n\nParent contact is available in your dashboard while the requirement is active.`,
-        emailShell(title, htmlBody, "View request", siteUrl(href)),
+        "New Instant Connect — view parent number on Mentr",
+        textBody,
+        emailShell(
+          title,
+          htmlBody,
+          "View parent number on Mentr",
+          siteUrl(href),
+        ),
       );
     } catch (err) {
       console.error("IC faculty notify failed:", id, err);

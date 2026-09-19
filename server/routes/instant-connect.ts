@@ -1,11 +1,13 @@
 import { Router, Response } from "express";
 import { Types } from "mongoose";
 import {
+  IC_CLOSE_OUTCOMES,
   IC_LOOKING_FOR,
   IC_MODES,
   IC_TTL_MS,
   InstantConnectRequest,
   type IInstantConnectRequest,
+  type IcCloseOutcome,
   type IcLookingFor,
   type IcMode,
 } from "../models/InstantConnectRequest";
@@ -119,6 +121,9 @@ function serializeParentRow(r: IInstantConnectRequest) {
     expiresAt: r.expiresAt,
     closedAt: r.closedAt || null,
     closedBy: r.closedBy || null,
+    closeOutcome: r.closeOutcome || null,
+    hiredTutorIds: (r.hiredTutorIds || []).map((id) => id.toString()),
+    closeNotes: r.closeNotes || null,
   };
 }
 
@@ -158,9 +163,10 @@ router.post("/match", async (req, res: Response) => {
       return;
     }
     await expireDueInstantConnectRequests();
-    const matches = await findTopMatches(parsed.data, 3);
+    const { matches, matchedBy } = await findTopMatches(parsed.data, 3);
     res.json({
       matches,
+      matchedBy,
       noMatch: matches.length === 0,
       form: parsed.data,
     });
@@ -350,17 +356,19 @@ router.patch(
   },
 );
 
-/** GET /admin/summary — metrics (no phones) */
+/** GET /admin/summary — metrics + full request visibility (no phones) */
 router.get("/admin/summary", requireAdminKey, async (_req, res: Response) => {
   try {
     await expireDueInstantConnectRequests();
-    const [total, active, closed, expired, noMatchProxy] = await Promise.all([
-      InstantConnectRequest.countDocuments(),
-      InstantConnectRequest.countDocuments({ status: "active" }),
-      InstantConnectRequest.countDocuments({ status: "closed" }),
-      InstantConnectRequest.countDocuments({ status: "expired" }),
-      InstantConnectRequest.countDocuments({ matchedTutorIds: { $size: 0 } }),
-    ]);
+    const [total, active, closed, expired, noMatchProxy, mentorFound] =
+      await Promise.all([
+        InstantConnectRequest.countDocuments(),
+        InstantConnectRequest.countDocuments({ status: "active" }),
+        InstantConnectRequest.countDocuments({ status: "closed" }),
+        InstantConnectRequest.countDocuments({ status: "expired" }),
+        InstantConnectRequest.countDocuments({ matchedTutorIds: { $size: 0 } }),
+        InstantConnectRequest.countDocuments({ closeOutcome: "mentor_found" }),
+      ]);
 
     const withCounts = await InstantConnectRequest.aggregate([
       {
@@ -402,8 +410,13 @@ router.get("/admin/summary", requireAdminKey, async (_req, res: Response) => {
 
     const recent = await InstantConnectRequest.find()
       .sort({ createdAt: -1 })
-      .limit(40)
-      .populate("parentId", "email parentProfile.name");
+      .limit(80)
+      .populate("parentId", "email parentProfile.name")
+      .populate(
+        "selectedTutorIds",
+        "email profile.name profile.subjects",
+      )
+      .populate("hiredTutorIds", "email profile.name");
 
     res.json({
       metrics: {
@@ -411,6 +424,7 @@ router.get("/admin/summary", requireAdminKey, async (_req, res: Response) => {
         active,
         closed,
         expired,
+        mentorFound,
         noMatch: noMatchProxy,
         with1: byMentorCount["1"],
         with2: byMentorCount["2"],
@@ -425,15 +439,46 @@ router.get("/admin/summary", requireAdminKey, async (_req, res: Response) => {
           email?: string;
           parentProfile?: { name?: string };
         } | null;
+        const notified = (
+          r.selectedTutorIds as unknown as {
+            _id: { toString(): string };
+            email?: string;
+            profile?: { name?: string; subjects?: string[] };
+          }[]
+        ).map((t) => ({
+          id: t._id.toString(),
+          name: t.profile?.name || "Mentor",
+          email: t.email || "",
+          subjects: t.profile?.subjects || [],
+        }));
+        const hired = (
+          (r.hiredTutorIds || []) as unknown as {
+            _id: { toString(): string };
+            email?: string;
+            profile?: { name?: string };
+          }[]
+        ).map((t) => ({
+          id: t._id.toString(),
+          name: t.profile?.name || "Mentor",
+          email: t.email || "",
+        }));
         return {
           id: r._id.toString(),
           parentName: parent?.parentProfile?.name || "Parent",
           parentEmail: parent?.email || "",
           subject: r.subject,
           classLevel: r.classLevel,
-          mentorsNotified: r.selectedTutorIds.length,
+          board: r.board,
+          mode: r.mode,
+          lookingFor: r.lookingFor,
+          mentorsNotified: notified,
+          mentorsHired: hired,
           status: r.status,
+          closeOutcome: r.closeOutcome || null,
+          closeNotes: r.closeNotes || null,
+          closedBy: r.closedBy || null,
           createdAt: r.createdAt,
+          expiresAt: r.expiresAt,
           closedAt: r.closedAt || null,
         };
       }),
@@ -478,7 +523,7 @@ router.get("/:id", requireAuth, async (req: AuthenticatedRequest, res: Response)
   }
 });
 
-/** POST /:id/close — parent closes */
+/** POST /:id/close — parent closes (dismiss or mentor found) */
 router.post(
   "/:id/close",
   requireAuth,
@@ -498,9 +543,45 @@ router.post(
         res.status(400).json({ error: "Request is not active" });
         return;
       }
+
+      const outcomeRaw = String(req.body?.outcome || "dismissed").toLowerCase();
+      const outcome = (
+        IC_CLOSE_OUTCOMES.includes(outcomeRaw as IcCloseOutcome)
+          ? outcomeRaw
+          : "dismissed"
+      ) as IcCloseOutcome;
+
+      const selectedSet = new Set(
+        r.selectedTutorIds.map((id: { toString(): string }) => id.toString()),
+      );
+      let hiredIds: string[] = [];
+      if (outcome === "mentor_found") {
+        hiredIds = Array.isArray(req.body?.hiredTutorIds)
+          ? req.body.hiredTutorIds.map(String)
+          : [];
+        if (hiredIds.length < 1) {
+          res.status(400).json({ error: "Select at least one mentor you hired" });
+          return;
+        }
+        if (!hiredIds.every((id) => selectedSet.has(id))) {
+          res.status(400).json({ error: "Hired mentors must be from this request" });
+          return;
+        }
+      }
+
+      const notes = String(req.body?.notes || "")
+        .trim()
+        .slice(0, 500);
+
       r.status = "closed";
       r.closedAt = new Date();
       r.closedBy = "parent";
+      r.closeOutcome = outcome;
+      r.hiredTutorIds =
+        outcome === "mentor_found"
+          ? hiredIds.map((id) => new Types.ObjectId(id))
+          : [];
+      r.closeNotes = notes || undefined;
       await r.save();
 
       const tutorIds = r.selectedTutorIds.map((id: { toString(): string }) =>
@@ -508,9 +589,18 @@ router.post(
       );
       void notifyFacultyRequestEnded(tutorIds, r, "closed");
       void notifyParentInstantConnectEvent(req.auth.sub, {
-        type: "instant_connect_closed",
-        title: "Instant Connect requirement closed",
-        body: "Mentors no longer have access to your phone through this request.",
+        type:
+          outcome === "mentor_found"
+            ? "instant_connect_mentor_found"
+            : "instant_connect_closed",
+        title:
+          outcome === "mentor_found"
+            ? "Mentor found — request closed"
+            : "Instant Connect requirement closed",
+        body:
+          outcome === "mentor_found"
+            ? "Great — we recorded who you hired. Mentors no longer have access to your phone through this request."
+            : "Mentors no longer have access to your phone through this request.",
         requestId: r._id.toString(),
       });
 

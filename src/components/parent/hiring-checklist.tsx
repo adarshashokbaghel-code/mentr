@@ -60,8 +60,13 @@ const STEPS: {
 
 export function HiringChecklist({
   onProgressChange,
+  compact = false,
+  className,
 }: {
   onProgressChange?: (progress: HiringProgress) => void;
+  /** One-line next step — for quieter dashboards */
+  compact?: boolean;
+  className?: string;
 }) {
   const [progress, setProgress] = useState<HiringProgress | null>(null);
   const [loading, setLoading] = useState(true);
@@ -96,8 +101,9 @@ export function HiringChecklist({
   }
 
   if (loading) {
+    if (compact) return null;
     return (
-      <section className="rounded-xl border border-hairline bg-white px-4 py-5 sm:px-5">
+      <section className={cn("rounded-xl border border-hairline bg-white px-4 py-5 sm:px-5", className)}>
         <div className="h-4 w-40 animate-pulse rounded bg-cream-band" />
         <div className="mt-4 h-2 animate-pulse rounded-full bg-cream-band" />
       </section>
@@ -111,8 +117,62 @@ export function HiringChecklist({
   );
   const allDone = progress.completedCount === progress.totalSteps;
 
+  if (compact) {
+    if (allDone) return null;
+    const next = STEPS.find((step, index) => {
+      const done = progress.steps[step.id];
+      const locked =
+        step.requires && !progress.steps[step.requires] && !done;
+      return (
+        !done &&
+        !locked &&
+        STEPS.slice(0, index).every((s) => progress.steps[s.id])
+      );
+    });
+    if (!next) return null;
+
+    return (
+      <section
+        className={cn(
+          "flex flex-wrap items-center justify-between gap-2 rounded-xl border border-hairline bg-white px-3 py-2.5 sm:px-4",
+          className,
+        )}
+      >
+        <div className="min-w-0">
+          <p className="text-[11px] font-bold uppercase tracking-wide text-muted">
+            Next step · {progress.completedCount}/{progress.totalSteps}
+          </p>
+          <p className="truncate text-[13px] font-semibold text-ink">
+            {next.label}
+          </p>
+        </div>
+        {next.href ? (
+          <Link
+            href={next.href}
+            className="inline-flex h-8 shrink-0 items-center rounded-md bg-coral px-3 text-[11px] font-bold text-white hover:bg-coral-dark"
+          >
+            Go
+          </Link>
+        ) : next.manual ? (
+          <button
+            type="button"
+            disabled={marking === next.manual}
+            onClick={() => void markStep(next.manual!)}
+            className="inline-flex h-8 shrink-0 items-center rounded-md border border-hairline px-3 text-[11px] font-bold text-ink hover:bg-cream disabled:opacity-50"
+          >
+            {marking === next.manual ? (
+              <Loader2 className="h-3 w-3 animate-spin" />
+            ) : (
+              "Mark done"
+            )}
+          </button>
+        ) : null}
+      </section>
+    );
+  }
+
   return (
-    <section className="overflow-hidden rounded-xl border border-hairline bg-white">
+    <section className={cn("overflow-hidden rounded-xl border border-hairline bg-white", className)}>
       <div className="border-b border-hairline bg-cream/60 px-4 py-3 sm:px-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>

@@ -7,9 +7,20 @@ import {
   type InstantConnectStepperHandle,
 } from "@/components/instant-connect/instant-connect-stepper";
 import { useToast } from "@/components/ui/toast";
+import { useActiveInstantConnect } from "@/hooks/use-active-instant-connect";
 import { PARENT_ROLE_TOAST } from "@/hooks/use-role-action";
 import { cn } from "@/lib/utils";
-import { Loader2, Play, X, Zap } from "lucide-react";
+import {
+  BadgeCheck,
+  LayoutDashboard,
+  Loader2,
+  Pause,
+  Phone,
+  Play,
+  X,
+  Zap,
+} from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 type Panel = "closed" | "guide" | "stepper";
@@ -17,19 +28,23 @@ type Panel = "closed" | "guide" | "stepper";
 /** Matches Zero Nav spring: bounce 0.2, duration ~0.4s */
 const OPEN_MS = 420;
 const EASE = "cubic-bezier(0.22, 1.2, 0.36, 1)";
+const GUIDE_BEAT_MS = 4200;
 
-const GUIDE_STEPS = [
+const GUIDE_BEATS = [
   {
-    title: "Tell us what you need",
-    body: "A few quick taps — class, subject, board, mode.",
+    step: "1",
+    title: "Answer a few simple questions",
+    caption: "Class, subject, board, and online or in person — like filling a short form.",
   },
   {
-    title: "We match verified mentors",
-    body: "Up to 3 tutors. You choose who gets your number.",
+    step: "2",
+    title: "We show you matching tutors",
+    caption: "Up to 3 verified mentors. You tap who you want to talk to.",
   },
   {
-    title: "They call you",
-    body: "Shared only until you close the request (or 48h).",
+    step: "3",
+    title: "They call you on your phone",
+    caption: "Your number is shared only with tutors you pick — then you can close anytime.",
   },
 ] as const;
 
@@ -45,6 +60,7 @@ type InstantConnectDockProps = {
 export function InstantConnectDock({ className }: InstantConnectDockProps) {
   const { user, loading } = useAuth();
   const { toast } = useToast();
+  const { showTrackFlash } = useActiveInstantConnect();
   const [panel, setPanel] = useState<Panel>("closed");
   const [mounted, setMounted] = useState(false);
   const [shown, setShown] = useState(false);
@@ -57,6 +73,14 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
   const stepperRef = useRef<InstantConnectStepperHandle>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const open = panel !== "closed";
+
+  /** Brief post-submit CTA, or while confirmation is open in the dock. */
+  const onDoneScreen =
+    mounted && panel === "stepper" && cta.label === "Track request";
+  const showTrack =
+    Boolean(user?.role === "parent") &&
+    (onDoneScreen ||
+      (showTrackFlash && (!mounted || panel === "closed")));
 
   const onCtaStateChange = useCallback((state: InstantConnectCtaState) => {
     setCta(state);
@@ -130,6 +154,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
 
   async function onMainCta() {
     if (loading) return;
+    if (showTrack) return;
     if (!mounted || panel === "closed") {
       openStepper();
       return;
@@ -141,8 +166,9 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
     await stepperRef.current?.advance();
   }
 
-  const mainLabel =
-    !mounted || panel === "closed"
+  const mainLabel = showTrack
+    ? "Track request"
+    : !mounted || panel === "closed"
       ? "Instant Connect"
       : panel === "guide"
         ? "Instant Connect"
@@ -182,7 +208,9 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
             "flex w-full flex-col overflow-hidden rounded-[28px] p-2 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter] sm:rounded-[32px] sm:p-2.5",
             mounted
               ? "bg-[rgba(28,28,28,0.78)] shadow-[0_16px_48px_rgba(0,0,0,0.35)] ring-white/12 backdrop-blur-[20px]"
-              : "bg-[#c4b5a0]/95 ring-ink/10 backdrop-blur-md",
+              : showTrack
+                ? "bg-ic-blue/95 ring-ic-blue/30 backdrop-blur-md"
+                : "bg-[#c4b5a0]/95 ring-ink/10 backdrop-blur-md",
           )}
           style={{
             transitionDuration: `${OPEN_MS}ms`,
@@ -202,7 +230,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
             <div className="min-h-0 overflow-hidden">
               <div
                 id={titleId}
-                className="max-h-[min(72vh,640px)] overflow-y-auto overscroll-contain px-4 pb-3 pt-5 sm:max-h-[min(68vh,620px)] sm:px-6 sm:pb-4 sm:pt-6"
+                className="max-h-[min(78vh,720px)] overflow-y-auto overscroll-contain px-4 pb-3 pt-5 sm:max-h-[min(72vh,680px)] sm:px-6 sm:pb-4 sm:pt-6"
                 style={{
                   opacity: shown ? 1 : 0,
                   transform: shown ? "translateY(0)" : "translateY(18px)",
@@ -238,35 +266,49 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               }
               aria-pressed={panel === "guide"}
               onClick={openGuide}
+              disabled={showTrack}
               className={cn(
                 "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]",
                 mounted
                   ? "bg-white/15 text-white ring-1 ring-white/20"
                   : "bg-white text-sage shadow-sm",
+                showTrack && "opacity-50",
               )}
             >
               <Play className="h-3.5 w-3.5 fill-current sm:h-4 sm:w-4" />
             </button>
 
-            <button
-              type="button"
-              onClick={() => void onMainCta()}
-              disabled={mainDisabled}
-              className={cn(
-                "flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-[13px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 sm:h-[50px] sm:px-4 sm:text-[15px]",
-                mounted
-                  ? "bg-white text-ink hover:bg-white/90"
-                  : "bg-ink text-white shadow-[inset_0_1px_0.5px_rgba(255,255,255,0.3),inset_0_-1.5px_0.5px_rgba(0,0,0,0.3),0_2px_5px_rgba(0,0,0,0.25)] hover:bg-[#2a231c]",
-              )}
-            >
-              {cta.busy && panel === "stepper" ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : mainLabel === "Instant Connect" ||
-                mainLabel.startsWith("Notify") ? (
-                <Zap className="h-3.5 w-3.5 shrink-0 opacity-90" />
-              ) : null}
-              {mainLabel}
-            </button>
+            {showTrack ? (
+              <Link
+                href="/parent/dashboard#instant-connect"
+                className="flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-white px-3 text-[13px] font-bold tracking-tight text-ink shadow-sm transition hover:bg-white/95 active:scale-[0.99] sm:h-[50px] sm:px-4 sm:text-[15px]"
+              >
+                <LayoutDashboard className="h-3.5 w-3.5 shrink-0 opacity-90" />
+                Track request
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => void onMainCta()}
+                disabled={mainDisabled}
+                className={cn(
+                  "flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-[13px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 sm:h-[50px] sm:px-4 sm:text-[15px]",
+                  mounted
+                    ? "bg-white text-ink hover:bg-white/90"
+                    : "bg-ink text-white shadow-[inset_0_1px_0.5px_rgba(255,255,255,0.3),inset_0_-1.5px_0.5px_rgba(0,0,0,0.3),0_2px_5px_rgba(0,0,0,0.25)] hover:bg-[#2a231c]",
+                )}
+              >
+                {cta.busy && panel === "stepper" ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : mainLabel === "Instant Connect" ||
+                  mainLabel === "Find mentors" ||
+                  mainLabel === "AI match" ||
+                  mainLabel.startsWith("Notify") ? (
+                  <Zap className="h-3.5 w-3.5 shrink-0 opacity-90" />
+                ) : null}
+                {mainLabel}
+              </button>
+            )}
 
             {mounted ? (
               <button
@@ -277,6 +319,14 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               >
                 <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.5} />
               </button>
+            ) : showTrack ? (
+              <Link
+                href="/parent/dashboard#instant-connect"
+                aria-label="Track Instant Connect request"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]"
+              >
+                <LayoutDashboard className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              </Link>
             ) : (
               <button
                 type="button"
@@ -296,31 +346,231 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
 }
 
 function GuidePanel() {
+  const [beat, setBeat] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const beatStarted = useRef(Date.now());
+
+  useEffect(() => {
+    beatStarted.current = Date.now();
+    setProgress(0);
+  }, [beat]);
+
+  useEffect(() => {
+    if (!playing) return;
+    const id = window.setInterval(() => {
+      const elapsed = Date.now() - beatStarted.current;
+      if (elapsed >= GUIDE_BEAT_MS) {
+        beatStarted.current = Date.now();
+        setProgress(0);
+        setBeat((b) => (b + 1) % GUIDE_BEATS.length);
+        return;
+      }
+      setProgress(elapsed / GUIDE_BEAT_MS);
+    }, 40);
+    return () => window.clearInterval(id);
+  }, [playing, beat]);
+
+  const current = GUIDE_BEATS[beat]!;
+
   return (
-    <div className="pb-2 font-sans text-center text-white">
-      <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]">
-        Quick guide
-      </p>
-      <h2 className="mt-1 text-xl font-bold tracking-tight sm:text-2xl">
-        How it works
-      </h2>
-      <ol className="mt-5 space-y-4 text-left sm:mt-6 sm:space-y-5">
-        {GUIDE_STEPS.map((s, i) => (
-          <li key={s.title} className="flex gap-2.5 sm:gap-3">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/10 text-xs font-bold text-white ring-1 ring-white/15 sm:h-8 sm:w-8 sm:text-sm">
-              {i + 1}
+    <div className="pb-1 font-sans text-white">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/45">
+            Quick guide
+          </p>
+          <h2 className="mt-0.5 text-xl font-extrabold leading-tight tracking-tight sm:text-[1.35rem]">
+            How Instant Connect works
+          </h2>
+        </div>
+        <button
+          type="button"
+          aria-label={playing ? "Pause guide" : "Play guide"}
+          onClick={() => setPlaying((p) => !p)}
+          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition hover:bg-white/15"
+        >
+          {playing ? (
+            <Pause className="h-3.5 w-3.5" fill="currentColor" />
+          ) : (
+            <Play className="h-3.5 w-3.5 translate-x-px" fill="currentColor" />
+          )}
+        </button>
+      </div>
+
+      <div className="mt-3 grid grid-cols-3 gap-1.5">
+        {GUIDE_BEATS.map((b, i) => (
+          <button
+            key={b.step}
+            type="button"
+            aria-label={`Step ${b.step}`}
+            aria-current={i === beat}
+            onClick={() => {
+              setBeat(i);
+              setPlaying(true);
+            }}
+            className={cn(
+              "rounded-lg px-1 py-1.5 text-center transition sm:py-2",
+              i === beat
+                ? "bg-white text-ink shadow-sm"
+                : "bg-white/10 text-white/70 ring-1 ring-white/10 hover:bg-white/15",
+            )}
+          >
+            <span className="block text-[9px] font-bold uppercase tracking-wide opacity-70">
+              Step {b.step}
             </span>
-            <div>
-              <p className="text-base font-bold tracking-tight text-white sm:text-lg">
-                {s.title}
+            <span className="mt-0.5 block text-[11px] font-extrabold leading-tight">
+              {i === 0 ? "Ask" : i === 1 ? "Match" : "Call"}
+            </span>
+          </button>
+        ))}
+      </div>
+
+      {/* Fixed-height stage — scenes must fit; never spill */}
+      <div className="relative mt-3 overflow-hidden rounded-2xl bg-[#12100e] ring-1 ring-white/12">
+        <div className="relative h-[168px] w-full overflow-hidden sm:h-[180px]">
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage:
+                "radial-gradient(ellipse at 25% 15%, rgba(255,154,77,0.22), transparent 50%), radial-gradient(ellipse at 85% 85%, rgba(47,158,110,0.16), transparent 48%)",
+            }}
+            aria-hidden
+          />
+          <div className="absolute inset-0 flex items-center justify-center overflow-hidden p-3">
+            {beat === 0 ? <GuideSceneNeed key={`need-${beat}`} /> : null}
+            {beat === 1 ? <GuideSceneMatch key={`match-${beat}`} /> : null}
+            {beat === 2 ? <GuideSceneCall key={`call-${beat}`} /> : null}
+          </div>
+        </div>
+
+        <div className="border-t border-white/10 px-3 py-2.5 sm:px-3.5 sm:py-3">
+          <p
+            key={current.title}
+            className="mentr-ic-guide-caption text-[13px] font-extrabold leading-snug tracking-tight text-white sm:text-[14px]"
+          >
+            <span className="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-coral text-[10px] font-extrabold text-white">
+              {current.step}
+            </span>
+            {current.title}
+          </p>
+          <p
+            key={current.caption}
+            className="mentr-ic-guide-caption mt-1 line-clamp-2 text-[11px] font-medium leading-snug text-white/60 sm:text-[12px]"
+            style={{ animationDelay: "70ms" }}
+          >
+            {current.caption}
+          </p>
+        </div>
+
+        <div className="h-0.5 w-full bg-white/10">
+          <div
+            className="h-full bg-coral transition-[width] duration-75 ease-linear"
+            style={{ width: `${Math.min(100, progress * 100)}%` }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function GuideSceneNeed() {
+  const rows = [
+    { label: "Class", value: "Class 10", delay: 80 },
+    { label: "Subject", value: "Maths", delay: 200 },
+    { label: "Board", value: "CBSE", delay: 320 },
+    { label: "Mode", value: "Online", delay: 440 },
+  ];
+  return (
+    <div className="mentr-ic-guide-scene w-full max-w-[280px] rounded-xl border border-white/15 bg-white/[0.09] p-2.5 shadow-lg backdrop-blur-sm sm:max-w-[300px] sm:p-3">
+      <div className="mb-2 flex items-center gap-2">
+        <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-coral text-white">
+          <Zap className="h-3 w-3" />
+        </span>
+        <p className="text-[11px] font-extrabold text-white">Your requirement</p>
+      </div>
+      <div className="grid grid-cols-2 gap-1.5">
+        {rows.map((r) => (
+          <div
+            key={r.label}
+            className="mentr-ic-guide-chip flex items-center justify-between gap-1 rounded-lg border border-white/12 bg-white/[0.07] px-2 py-1.5"
+            style={{ animationDelay: `${r.delay}ms` }}
+          >
+            <div className="min-w-0">
+              <p className="text-[8px] font-bold uppercase tracking-wide text-white/40">
+                {r.label}
               </p>
-              <p className="mt-0.5 text-xs font-medium leading-relaxed text-white/50 sm:text-sm">
-                {s.body}
+              <p className="truncate text-[12px] font-extrabold text-white">
+                {r.value}
               </p>
             </div>
-          </li>
+            <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-sage text-[9px] text-white">
+              ✓
+            </span>
+          </div>
         ))}
-      </ol>
+      </div>
+    </div>
+  );
+}
+
+function GuideSceneMatch() {
+  const tutors = [
+    { name: "Tutor A", sub: "Maths · CBSE", delay: 80 },
+    { name: "Tutor B", sub: "Class 10 · Online", delay: 200 },
+    { name: "Tutor C", sub: "Exam prep", delay: 320 },
+  ];
+  return (
+    <div className="mentr-ic-guide-scene flex w-full max-w-[280px] flex-col gap-1.5 sm:max-w-[300px]">
+      {tutors.map((t, i) => (
+        <div
+          key={t.name}
+          className="mentr-ic-guide-card flex items-center gap-2 rounded-xl border border-white/12 bg-white/[0.09] px-2.5 py-1.5 backdrop-blur-sm"
+          style={{ animationDelay: `${t.delay}ms` }}
+        >
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#f7f0e8] text-[10px] font-extrabold text-ink">
+            {t.name.slice(-1)}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="flex items-center gap-1 text-[12px] font-extrabold text-white">
+              {t.name}
+              <BadgeCheck className="h-3 w-3 text-sage" />
+            </p>
+            <p className="text-[10px] font-medium text-white/50">{t.sub}</p>
+          </div>
+          <span
+            className={cn(
+              "rounded-md px-2 py-1 text-[9px] font-extrabold",
+              i === 0 ? "bg-coral text-white" : "bg-white/15 text-white/80",
+            )}
+          >
+            Select
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function GuideSceneCall() {
+  return (
+    <div className="mentr-ic-guide-scene flex w-full max-w-[240px] flex-col items-center">
+      <div className="relative flex h-16 w-16 items-center justify-center">
+        <span className="mentr-ic-guide-ring absolute inset-0 rounded-full border-2 border-sage/45" />
+        <span
+          className="mentr-ic-guide-ring absolute inset-1 rounded-full border border-sage/30"
+          style={{ animationDelay: "0.4s" }}
+        />
+        <span className="relative flex h-11 w-11 items-center justify-center rounded-full bg-sage text-white shadow-lg">
+          <Phone className="h-5 w-5" />
+        </span>
+      </div>
+      <p className="mt-2.5 text-[13px] font-extrabold text-white">
+        Tutor is calling you
+      </p>
+      <p className="mt-0.5 text-center text-[11px] font-medium text-white/55">
+        Only selected mentors see your number
+      </p>
     </div>
   );
 }

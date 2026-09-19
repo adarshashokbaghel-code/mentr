@@ -58,6 +58,58 @@ export function MarketplaceArticleCta({ post }: { post: BlogPost }) {
   if (!showMarketplaceCta(post)) return null;
 
   const links = marketplaceLinksForPost(post);
+  const isInstantConnect = post.slug.includes("instant-connect");
+
+  if (isInstantConnect) {
+    const icPrimary =
+      links.find((l) => l.href === "/parents") ||
+      links.find((l) => l.href.includes("instant-connect"));
+    const icSecondary = links
+      .filter((l) => l !== icPrimary)
+      .slice(0, 3);
+
+    return (
+      <aside className="mt-10 rounded-xl border-2 border-ic-blue/35 bg-ic-blue-wash p-5 sm:p-6">
+        <p className="text-sm font-bold uppercase tracking-wide text-ic-blue">
+          Instant Connect
+        </p>
+        <h2 className="mt-2 text-lg font-bold text-ink sm:text-xl">
+          Match verified mentors in minutes — free for parents
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[15px]">
+          Answer a few questions, optionally add notes for smarter matching,
+          and let up to three verified tutors call you while your request is
+          active. Close anytime from your dashboard.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {icPrimary ? (
+            <TrackedLink
+              href={icPrimary.href}
+              slug={post.slug}
+              kind="blog"
+              content="instant-connect-cta"
+            >
+              <Button size="sm">{post.cta || icPrimary.label}</Button>
+            </TrackedLink>
+          ) : null}
+          {icSecondary.map((link) => (
+            <TrackedLink
+              key={link.href}
+              href={link.href}
+              slug={post.slug}
+              kind="blog"
+              content="instant-connect-secondary"
+            >
+              <Button size="sm" variant="secondary">
+                {link.label}
+              </Button>
+            </TrackedLink>
+          ))}
+        </div>
+      </aside>
+    );
+  }
+
   const primary = links.find((l) => l.href.includes("/parent/signup"));
   const secondary = links.filter((l) => l !== primary).slice(0, 3);
 

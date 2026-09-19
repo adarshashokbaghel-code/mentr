@@ -113,6 +113,22 @@ export const BLOG_PILLARS: BlogPillar[] = [
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+  // ── Instant Connect (flagship parent SEO) ──────────────────────
+  {
+    slug: "instant-connect-find-tutor-fast-parents",
+    title:
+      "Instant Connect: How Parents Find a Verified Tutor Fast Online (Free on Mentr)",
+    keyword: "find tutor instantly online",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-parents",
+    description:
+      "Need a tutor this week? Instant Connect matches parents with up to 3 verified mentors, optional AI notes, and temporary phone contact — free, no agency fees. Step-by-step + safety checklist.",
+    publishWeek: 39,
+    featured: true,
+    cta: "Try Instant Connect",
+    ctaHref: "/parents",
+  },
   // ── Pillar 1: Find-a-Tutor Guides ──────────────────────────────
   {
     slug: "how-to-find-a-good-home-tutor",
@@ -304,6 +320,20 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Five tutor platforms worth comparing to UrbanPro — including free options with no lead fees.",
     cta: "Try Mentr",
+    ctaHref: "/search",
+  },
+  {
+    slug: "myprivatetutor-alternatives-india",
+    title:
+      "MyPrivateTutor Alternatives in India (2026): Free Options Without Lead Fees",
+    keyword: "myprivatetutor alternative",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "comparison",
+    description:
+      "Honest MyPrivateTutor alternatives for parents and tutors in India — what each costs, who it suits, and where free verified search fits.",
+    featured: true,
+    cta: "Try Mentr free",
     ctaHref: "/search",
   },
   {

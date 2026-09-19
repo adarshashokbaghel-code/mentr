@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ConnectButton } from "@/components/connect/connect-button";
 import { PARENT_LP_TESTIMONIALS } from "@/lib/demo-users";
 import { useTestimonialNames } from "@/hooks/use-testimonial-names";
-import { TEACHERS, type Teacher } from "@/lib/teachers";
+import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
 import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
 import {
   hardShadow,
@@ -212,25 +212,41 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
 function HeroSearchMock() {
   const [query, setQuery] = useState("");
   const [subject, setSubject] = useState<(typeof FILTERS)[number]>("All");
+  const [live, setLive] = useState<Teacher[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchPublicTeachers({ liveOnly: true }).then(({ teachers }) => {
+      if (!cancelled) setLive(teachers);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const results = useMemo(() => {
-    return TEACHERS.filter((t) => {
-      if (t.openSlots <= 0) return false;
-      if (subject !== "All" && !t.subjects.some((s) => s.includes(subject))) return false;
-      if (query.trim()) {
-        const q = query.toLowerCase();
-        const hay = `${t.name} ${t.subjectLine} ${t.area} ${t.subjects.join(" ")}`.toLowerCase();
-        if (!hay.includes(q)) return false;
-      }
-      return true;
-    }).slice(0, 4);
-  }, [query, subject]);
+    return live
+      .filter((t) => {
+        if (t.openSlots <= 0) return false;
+        if (subject !== "All" && !t.subjects.some((s) => s.includes(subject))) {
+          return false;
+        }
+        if (query.trim()) {
+          const q = query.toLowerCase();
+          const hay =
+            `${t.name} ${t.subjectLine} ${t.area} ${t.subjects.join(" ")}`.toLowerCase();
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      })
+      .slice(0, 4);
+  }, [live, query, subject]);
 
   return (
     <BrowserFrame url="mentr.in / search" headerClassName="bg-white" className="border-2 border-ink">
       <div className="bg-white">
         <div className="flex items-center justify-between border-b-2 border-ink/10 bg-cream px-4 py-2.5">
-          <LpLiveDot label="12 tutors online" />
+          <LpLiveDot label={`${live.length} tutors online`} />
           <span className="text-[10px] font-bold text-muted">{results.length} results</span>
         </div>
         <div className="space-y-3 border-b border-hairline px-4 py-3">
@@ -264,7 +280,11 @@ function HeroSearchMock() {
         </div>
         <div className="max-h-[280px] space-y-2 overflow-y-auto bg-cream/50 p-3">
           {results.length === 0 ? (
-            <p className="py-8 text-center text-sm text-muted">No matches — try another filter.</p>
+            <p className="py-8 text-center text-sm text-muted">
+              {live.length === 0
+                ? "Live tutors load here when faculty are online."
+                : "No matches — try another filter."}
+            </p>
           ) : (
             results.map((t) => <TeacherRow key={t.id} teacher={t} />)
           )}
@@ -432,16 +452,16 @@ function FlowMock({ path, step }: { path: "search" | "post"; step: number }) {
     const screens = [
       <div key="s0" className="space-y-2 p-4">
         <p className="text-[10px] font-bold uppercase tracking-wide text-muted">Search results</p>
-        {["Priya Nair · Maths · 3 open", "Rahul M. · Physics · 2 open"].map((r) => (
+        {["Verified tutor · Maths · open slots", "Verified tutor · Physics · open slots"].map((r) => (
           <div key={r} className="rounded-lg border-2 border-ink/10 bg-white px-3 py-2.5 text-xs font-semibold">{r}</div>
         ))}
       </div>,
       <div key="s1" className="space-y-3 p-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-ink bg-lavender text-xs font-bold">PN</span>
+          <span className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-ink bg-lavender text-xs font-bold">VT</span>
           <div>
-            <p className="text-sm font-bold">Priya Nair <BadgeCheck className="inline h-3.5 w-3.5 text-sage" /></p>
-            <p className="text-xs text-muted">Class 9–12 Maths · HSR</p>
+            <p className="text-sm font-bold">Verified tutor <BadgeCheck className="inline h-3.5 w-3.5 text-sage" /></p>
+            <p className="text-xs text-muted">Class 9–12 Maths · your area</p>
           </div>
         </div>
         <div className="rounded-lg border-2 border-ink/15 bg-butter/50 p-3">
@@ -483,8 +503,8 @@ function FlowMock({ path, step }: { path: "search" | "post"; step: number }) {
     <div key="p1" className="space-y-2 p-4">
       <p className="text-[10px] font-bold text-coral">3 connection requests · auto-sent</p>
       {[
-        { name: "Priya Nair", sub: "Maths · HSR", verified: true },
-        { name: "Rahul Menon", sub: "IIT Physics · Koramangala", verified: true },
+        { name: "Verified maths tutor", sub: "Maths · your locality", verified: true },
+        { name: "Verified physics tutor", sub: "Physics · nearby", verified: true },
       ].map((t) => (
         <div key={t.name} className="rounded-lg border-2 border-ink/10 bg-white p-2.5">
           <p className="flex items-center gap-1 text-xs font-bold text-ink">
@@ -502,16 +522,16 @@ function FlowMock({ path, step }: { path: "search" | "post"; step: number }) {
       <p className="text-[10px] font-bold uppercase text-muted">Parent dashboard</p>
       <div className="rounded-lg border-2 border-ink bg-lavender p-3">
         <div className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-ink bg-white text-[10px] font-bold">PN</span>
+          <span className="flex h-8 w-8 items-center justify-center rounded-lg border-2 border-ink bg-white text-[10px] font-bold">VT</span>
           <div>
             <p className="flex items-center gap-1 text-xs font-bold text-ink">
-              Priya Nair <BadgeCheck className="h-3 w-3 text-sage" />
+              Verified tutor <BadgeCheck className="h-3 w-3 text-sage" />
             </p>
             <p className="text-[10px] text-muted">View profile · Read pitch</p>
           </div>
         </div>
         <p className="mt-2 rounded-md bg-white/80 px-2 py-1.5 text-[10px] leading-relaxed text-muted">
-          10+ yrs CBSE maths, HSR & Koramangala. Sat–Sun open for board exam prep.
+          Experienced CBSE maths tutor with weekend openings for board exam prep.
         </p>
         <div className="mt-2 flex gap-1.5">
           <span className="flex-1 rounded-md bg-sage py-1 text-center text-[9px] font-bold text-white">Accept</span>
@@ -673,24 +693,24 @@ function ParentSwitchSection() {
 function RequirementBoardSection() {
   const pitches = [
     {
-      name: "Priya Nair",
+      name: "Verified maths tutor",
       subject: "Mathematics · Class 9–12",
-      area: "HSR & Koramangala",
-      msg: "10+ yrs CBSE maths. Sat–Sun open. Board exam specialist.",
+      area: "Your locality",
+      msg: "Board exam specialist with weekend openings.",
       time: "2h ago",
     },
     {
-      name: "Rahul Menon",
-      subject: "Physics · IIT Prep",
-      area: "Koramangala",
-      msg: "IIT grad, board exam specialist. Can start this week.",
+      name: "Verified physics tutor",
+      subject: "Physics · Exam prep",
+      area: "Nearby",
+      msg: "Can start this week. Flexible timing.",
       time: "5h ago",
     },
     {
-      name: "Anita Desai",
-      subject: "Chemistry · Board & JEE",
-      area: "Jayanagar",
-      msg: "Flexible timing. Home visits in HSR & BTM.",
+      name: "Verified chemistry tutor",
+      subject: "Chemistry · Board & entrance",
+      area: "In-person or online",
+      msg: "Home visits and online sessions available.",
       time: "1d ago",
     },
   ];
