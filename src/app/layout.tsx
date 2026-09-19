@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import { AppProviders } from "@/components/auth/app-providers";
 import { LearnDinoGuide } from "@/components/landing/lp/learn-dino-guide";
-import { AdSenseLoader } from "@/components/seo/adsense-loader";
 import { CookieConsent } from "@/components/seo/cookie-consent";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import { SkipLink } from "@/components/ui/skip-link";
@@ -99,11 +99,21 @@ export default function RootLayout({
       <head>
         <GoogleVerificationTags />
         <GoogleAnalytics />
+        {/*
+          AdSense site verification (code-snippet method).
+          Must appear in document head for Google's crawler — not only via client inject.
+        */}
+        <Script
+          id="mentr-adsense-head"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT_ID}`}
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <SkipLink />
         <AppProviders>{children}</AppProviders>
-        <AdSenseLoader />
         {LEARN_PUBLIC ? <LearnDinoGuide /> : null}
         <CookieConsent />
         <Analytics />
