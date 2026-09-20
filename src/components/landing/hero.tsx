@@ -549,10 +549,10 @@ export function Hero() {
                   For parents
                 </p>
                 <p className="mt-2 text-sm font-bold text-ink">
-                  Search tutors or post a requirement
+                  Create a free parent account
                 </p>
                 <p className="mt-1 text-xs text-muted">
-                  Compare profiles, accept pitches, connect on WhatsApp.
+                  Then search tutors, post a need, connect on WhatsApp.
                 </p>
               </Link>
               <Link

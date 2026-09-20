@@ -13,10 +13,12 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Find a Tutor for Your Child — Free, Local or Online Worldwide",
+  title: "Hire a Tutor Free — Create a Parent Account on Mentr",
   description:
-    "Search verified tutors near you or online from any country. Post your requirement free, review pitches, connect on WhatsApp once accepted. ₹0 platform fee for parents.",
+    "Parents: create a free account to find verified tutors near you or online, post a requirement, and connect on WhatsApp after accept. ₹0 platform fee — no agent fees.",
   keywords: [
+    "hire a tutor free",
+    "create parent account tutor",
     "find tutor online",
     "find tutor near me",
     "free tutor search",
@@ -30,9 +32,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/parents" },
   openGraph: {
-    title: "Find a Tutor — Free on Mentr by Paprly",
+    title: "Hire a Tutor Free — Parent Account on Mentr by Paprly",
     description:
-      "Search locally or online worldwide. Post requirements, get pitches, connect on WhatsApp. Completely free for parents.",
+      "Register free as a parent. Search verified tutors, post requirements, connect on WhatsApp. Completely free — no agent fees.",
     url: absoluteUrl("/parents"),
     type: "website",
   },
@@ -41,13 +43,13 @@ export const metadata: Metadata = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Find a Tutor for Your Child — Mentr by Paprly",
+  name: "Hire a Tutor Free — Create a Parent Account | Mentr by Paprly",
   description: GLOBAL_REACH_LINE,
   url: absoluteUrl("/parents"),
   isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },
   about: {
     "@type": "Service",
-    name: "Free tutor search for parents",
+    name: "Free parent tutor hiring on Mentr",
     areaServed: [
       { "@type": "City", name: LAUNCH_HUB_CITY },
       { "@type": "Place", name: "Worldwide" },

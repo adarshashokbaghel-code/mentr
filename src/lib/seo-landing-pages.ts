@@ -179,12 +179,12 @@ function onlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
       },
     ],
     primaryCta: {
-      label: geo === "india" ? "Search Bengaluru tutors" : "Browse tutors free",
-      href: "/search",
+      label: "Create free parent account",
+      href: "/parent/signup",
     },
     secondaryCta: {
-      label: "Find verified online tutors",
-      href: geoPath("/find-verified-online-tutors", geo),
+      label: geo === "india" ? "Browse Bengaluru tutors" : "Browse tutors free",
+      href: "/search",
     },
     relatedLinks: [
       { label: "Verified online tutors", href: geoPath("/find-verified-online-tutors", geo) },
@@ -281,8 +281,14 @@ function verifiedOnlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
           "Yes. Mentr supports worldwide online search. Many verified tutors teach UAE, UK, and US families over video.",
       },
     ],
-    primaryCta: { label: "Browse verified tutors", href: "/search" },
-    secondaryCta: { label: "How Mentr verifies tutors", href: "/blog/how-mentr-verifies-tutors" },
+    primaryCta: {
+      label: "Create free parent account",
+      href: "/parent/signup",
+    },
+    secondaryCta: {
+      label: "Browse verified tutors",
+      href: "/search",
+    },
     relatedLinks: [
       { label: "Find online tutors", href: geoPath("/find-online-tutors", geo) },
       { label: "Tutor safety checklist", href: "/blog/tutor-safety-checklist-parents" },
@@ -367,8 +373,14 @@ function mentorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
           "State your goal in one paragraph — e.g. 'Class 12 student targeting JEE, need maths mentor for problem speed' or 'Switching to product design, need portfolio review'.",
       },
     ],
-    primaryCta: { label: "Browse mentors free", href: "/search?kind=mentor" },
-    secondaryCta: { label: "Programming mentors worldwide", href: "/blog/find-programming-mentor-worldwide" },
+    primaryCta: {
+      label: "Create free parent account",
+      href: "/parent/signup",
+    },
+    secondaryCta: {
+      label: "Browse mentors free",
+      href: "/search?kind=mentor",
+    },
     relatedLinks: [
       { label: "Find online tutors", href: geoPath("/find-online-tutors", geo) },
       { label: "Career mentor guide", href: "/blog/how-to-find-career-mentor-free" },
@@ -540,12 +552,12 @@ function tutorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
       },
     ],
     primaryCta: {
-      label: "Browse tutors free",
-      href: "/search",
+      label: "Create free parent account",
+      href: "/parent/signup",
     },
     secondaryCta: {
-      label: "Post your requirement",
-      href: "/parent/signup?next=/parent/dashboard",
+      label: "Browse tutors free",
+      href: "/search",
     },
     relatedLinks: [
       { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },

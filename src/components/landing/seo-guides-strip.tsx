@@ -3,9 +3,19 @@ import { Button } from "@/components/ui/button";
 
 const GUIDES = [
   {
+    label: "Create free parent account",
+    href: "/parent/signup",
+    desc: "Register free — then hire verified tutors",
+  },
+  {
     label: "Browse tutors now",
     href: "/search",
     desc: "See verified tutors — no sign-in required",
+  },
+  {
+    label: "For parents hub",
+    href: "/parents",
+    desc: "How hiring works — free, no agent fees",
   },
   {
     label: "Find a mentor online (India)",
@@ -31,11 +41,6 @@ const GUIDES = [
     label: "Online tutor jobs",
     href: "/online-tutor-jobs",
     desc: "List free, keep 100% of your fees",
-  },
-  {
-    label: "Mentr login",
-    href: "/login",
-    desc: "Parent or tutor — OTP sign-in",
   },
   {
     label: "What is Mentr Learn?",

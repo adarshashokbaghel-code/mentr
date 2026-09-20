@@ -1,6 +1,5 @@
 "use client";
 
-import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
 import {
   FacultyActionLink,
   ParentActionLink,
@@ -20,7 +19,7 @@ export function CTA() {
             <span className="text-coral">and</span> faculty.
           </h2>
             <p className="mt-3 text-base text-muted sm:text-lg">
-              Parents search tutors or post requirements — faculty list and
+              Parents create a free account to hire tutors — faculty list and
               pitch. Same platform. Zero fees either way.
             </p>
         </div>
@@ -31,15 +30,18 @@ export function CTA() {
               Parents
             </span>
             <h3 className="mt-3 text-2xl font-bold tracking-tight text-ink">
-              Search or post. Connect free.
+              Create a free parent account.
             </h3>
             <p className="mt-3 flex-1 text-base leading-relaxed text-muted">
-              Know who you want? Browse verified teachers worldwide and send
-              a connect request. Not sure yet? Post your requirement — tutors
-              pitch, you pick who to connect with. WhatsApp unlocks once they
-              accept. Mentr stays out of fees and scheduling.
+              Register with email OTP in under a minute. Then browse verified
+              teachers worldwide, send a connect request, or post your
+              requirement — tutors pitch, you pick who to connect with. WhatsApp
+              unlocks once they accept. Mentr stays out of fees and scheduling.
             </p>
             <ul className="mt-5 space-y-2 text-sm text-ink">
+              <li className="flex gap-2">
+                <span className="text-coral">→</span> Free parent account · no credit card
+              </li>
               <li className="flex gap-2">
                 <span className="text-coral">→</span> Search tutors by subject &amp; area
               </li>
@@ -49,19 +51,20 @@ export function CTA() {
               <li className="flex gap-2">
                 <span className="text-coral">→</span> Accept → WhatsApp unlocks · ₹0 fees
               </li>
-              <li className="flex gap-2">
-                <span className="text-coral">→</span> Your identity hidden until you accept pitches
-              </li>
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ParentActionLink href="/search">
+              <Link href="/parent/signup">
                 <Button size="lg" className="w-full sm:w-auto">
-                  <Search className="h-4 w-4" />
-                  Find a teacher
+                  Create free parent account
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+              </Link>
+              <ParentActionLink href="/search">
+                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
+                  <Search className="h-4 w-4" />
+                  Browse tutors first
+                </Button>
               </ParentActionLink>
-              <PostRequirementButton size="lg" className="w-full sm:w-auto" />
             </div>
           </div>
 
