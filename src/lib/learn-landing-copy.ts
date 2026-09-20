@@ -53,6 +53,16 @@ export const LEARN_GEO_CHIPS = [
 
 const baseFaqs = [
   {
+    question: "What is Mentr Learn on mentr.in?",
+    answer:
+      "Mentr Learn is the free kids coding product on mentr.in/learn — also called Mentr Starter. It is a Class 3–5 (ages ~8–11) track covering computer science, AI literacy, and math-for-coding across 60 modules, with narrated lessons, quizzes, Build Arena, Practice, and Problem of the Day. Price is ₹0 forever.",
+  },
+  {
+    question: "Where do I find Learn by Mentr / mentr.in learn?",
+    answer:
+      "Go to https://mentr.in/learn for the hub, https://mentr.in/learn/start to enroll free with a parent email, and https://mentr.in/learn/syllabus for the full parent syllabus PDF. Region pages include /learn/india, /learn/uae, /learn/australia, and more — same free modules, local framing.",
+  },
+  {
     question: "Is Mentr Learn really free?",
     answer:
       "Yes. The Class 3–5 track is ₹0 forever (list price ₹999 → ₹0). You get the published 60-module syllabus across CS, AI, and Math for CS, plus narrated lessons as they ship, quizzes, Build Arena, Practice, and Problem of the Day. Mentr makes money from optional tutor connections later — not from selling your child's learning data.",
@@ -93,11 +103,16 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   global: {
     geo: "global",
     path: "/learn",
-    title: "Free Coding for Kids Class 3–5 (CS, AI & Math) | Mentr Learn",
+    title: "Mentr Learn — Free Coding for Kids Class 3–5 | mentr.in/learn",
     metaDescription:
-      "Free coding for kids Class 3–5 — CS, AI & Math (60 modules), narrated lessons, Build Arena, Practice & POTD. ₹0 forever. Parent email enroll, no credit card.",
+      "Mentr Learn by mentr.in is free coding for kids Class 3–5 — CS, AI & Math (60 modules), narrated lessons, Build Arena, Practice & POTD. ₹0 forever. Start at mentr.in/learn — parent email, no card.",
     keywords: [
-      "coding for kids",
+      "Mentr Learn",
+      "Learn by Mentr",
+      "mentr.in learn",
+      "mentr.in/learn",
+      "learn.mentr",
+      "free coding for kids",
       "coding for kids Class 5 free",
       "free coding for Class 3-5",
       "AI for kids",
@@ -105,15 +120,15 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
       "free coding platform for kids India",
       "block coding for kids",
       "Class 3-5 coding course free",
-      "Mentr Learn",
       "Mentr Starter",
+      "Mentr Learn free",
     ],
     regionLabel: "Worldwide",
-    heroEyebrow: "",
-    heroTitle: "Master CS, AI & Math",
-    heroAccent: "— a free gamified learning platform for Class 3–5 kids.",
+    heroEyebrow: "Mentr Learn · mentr.in/learn · Free",
+    heroTitle: "Mentr Learn",
+    heroAccent: "— free CS, AI & Math for Class 3–5 kids.",
     heroSub:
-      "India's first completely free platform for kids to learn CS, AI, and coding — narrated videos, a published 60-module syllabus, Build Arena, and daily practice. ₹0 forever.",
+      "Mentr Learn on mentr.in is India's first completely free platform for kids to learn CS, AI, and coding — narrated videos, a published 60-module syllabus, Build Arena, and daily practice. ₹0 forever.",
     statsSub: "Worldwide · online-friendly",
     geoEmphasis: "Worldwide · online",
     clarityNote:
@@ -130,10 +145,13 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   india: {
     geo: "india",
     path: "/learn/india",
-    title: "Free Coding for Kids Class 3–5 in India | Mentr Learn",
+    title: "Mentr Learn India — Free Coding for Kids Class 3–5 | mentr.in",
     metaDescription:
-      "Free coding for kids Class 3–5 in India — CBSE-friendly CS, AI & Math (60 modules), narrated lessons, Build Arena & POTD. ₹0 forever. Parent email enroll.",
+      "Mentr Learn (mentr.in/learn/india) — free coding for kids Class 3–5 in India. CBSE-friendly CS, AI & Math, 60 modules, Build Arena. ₹0 forever. Parent email enroll.",
     keywords: [
+      "Mentr Learn India",
+      "Mentr Learn",
+      "mentr.in learn India",
       "free coding course for kids India",
       "coding for kids Class 5 free",
       "free coding for Class 3-5 India",
@@ -143,15 +161,14 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
       "CBSE class 3 computer",
       "block coding kids Bengaluru",
       "free coding Class 4 Class 5 India",
-      "Mentr Learn India",
     ],
     regionLabel: "India",
     hreflang: "en-IN",
-    heroEyebrow: "India · Class 3–5 · Free",
-    heroTitle: "Master CS, AI & Math",
-    heroAccent: "— India's free gamified learning platform for Class 3–5 kids.",
+    heroEyebrow: "Mentr Learn · India · Free",
+    heroTitle: "Mentr Learn",
+    heroAccent: "— India's free CS, AI & Math path for Class 3–5 kids.",
     heroSub:
-      "India's first completely free platform for kids to learn CS, AI, and coding — narrated videos, a gamified CBSE-friendly 60-module syllabus, Build Arena, and daily practice. Built for families, teachers, and centres in Bengaluru, Hyderabad, Delhi, Mumbai & Pune. ₹0 forever.",
+      "Mentr Learn on mentr.in is India's first completely free platform for kids to learn CS, AI, and coding — narrated videos, a gamified CBSE-friendly 60-module syllabus, Build Arena, and daily practice. Built for families in Bengaluru, Hyderabad, Delhi, Mumbai & Pune. ₹0 forever.",
     statsSub: "CBSE-friendly pacing · India",
     geoEmphasis: "India · CBSE-friendly",
     clarityNote:
@@ -178,25 +195,27 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   uae: {
     geo: "uae",
     path: "/learn/uae",
-    title: "Free Coding for Kids in UAE | Mentr Learn",
+    title: "Mentr Learn UAE — Free Coding for Kids | mentr.in/learn",
     metaDescription:
-      "Free CS, AI & Math for Class 3–5 kids in the UAE — 60-module IGCSE-friendly syllabus, narrated lessons, Build Arena & Practice. ₹0. Enroll online.",
+      "Mentr Learn (mentr.in/learn/uae) — free CS, AI & Math for Class 3–5 kids in the UAE. 60-module syllabus, Build Arena. ₹0. Enroll online.",
     keywords: [
+      "Mentr Learn UAE",
+      "Mentr Learn",
+      "mentr.in learn UAE",
       "coding kids UAE",
       "free coding course kids Dubai",
       "IGCSE coding kids",
       "AI for kids UAE",
       "online CS class 3 UAE",
-      "Mentr Learn UAE",
       "coding for kids Abu Dhabi free",
     ],
     regionLabel: "UAE",
     hreflang: "en-AE",
-    heroEyebrow: "UAE · Class 3–5 · Online",
-    heroTitle: "Master CS, AI & Math",
-    heroAccent: "— a free gamified learning platform for kids in the UAE.",
+    heroEyebrow: "Mentr Learn · UAE · Online",
+    heroTitle: "Mentr Learn",
+    heroAccent: "— free CS, AI & Math for Class 3–5 kids in the UAE.",
     heroSub:
-      "The completely free platform for kids to learn CS, AI, and coding — narrated videos, a gamified IGCSE-friendly 60-module syllabus, Build Arena, and daily practice. For families, teachers, and learning centres in Dubai, Abu Dhabi & Sharjah.",
+      "Mentr Learn on mentr.in is the completely free platform for kids to learn CS, AI, and coding — narrated videos, a gamified IGCSE-friendly 60-module syllabus, Build Arena, and daily practice. For families in Dubai, Abu Dhabi & Sharjah.",
     statsSub: "Online · Gulf time zones",
     geoEmphasis: "UAE · IGCSE-friendly",
     clarityNote:
@@ -223,24 +242,26 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   australia: {
     geo: "australia",
     path: "/learn/australia",
-    title: "Free Coding for Kids in Australia | Mentr Learn",
+    title: "Mentr Learn Australia — Free Coding for Kids | mentr.in",
     metaDescription:
-      "Free Class 3–5 CS, AI & Math for kids in Australia — 60-module syllabus, narrated lessons, Build Arena & POTD. ₹0 forever. Parent email enroll online.",
+      "Mentr Learn (mentr.in/learn/australia) — free Class 3–5 CS, AI & Math for kids in Australia. 60 modules, Build Arena. ₹0 forever. Parent enroll.",
     keywords: [
+      "Mentr Learn Australia",
+      "Mentr Learn",
+      "mentr.in learn Australia",
       "coding for kids Australia free",
       "free coding course kids Sydney",
       "primary coding Australia",
       "AI for kids Australia",
       "online CS class kids Melbourne",
-      "Mentr Learn Australia",
     ],
     regionLabel: "Australia",
     hreflang: "en-AU",
-    heroEyebrow: "Australia · Class 3–5 · Online",
-    heroTitle: "Master CS, AI & Math",
-    heroAccent: "— a free gamified learning platform for kids in Australia.",
+    heroEyebrow: "Mentr Learn · Australia · Online",
+    heroTitle: "Mentr Learn",
+    heroAccent: "— free CS, AI & Math for Class 3–5 kids in Australia.",
     heroSub:
-      "Completely free CS, AI, and coding for primary-age kids — narrated videos, a published 60-module syllabus, Build Arena, and daily practice. Built for families in Sydney, Melbourne, Brisbane & beyond. Same modules worldwide.",
+      "Mentr Learn on mentr.in — completely free CS, AI, and coding for primary-age kids. Narrated videos, 60-module syllabus, Build Arena, and daily practice. For families in Sydney, Melbourne, Brisbane & beyond.",
     statsSub: "Online · AEST-friendly",
     geoEmphasis: "Australia · online",
     clarityNote:
@@ -262,23 +283,25 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   "sri-lanka": {
     geo: "sri-lanka",
     path: "/learn/sri-lanka",
-    title: "Free Coding for Kids in Sri Lanka | Mentr Learn",
+    title: "Mentr Learn Sri Lanka — Free Coding for Kids | mentr.in",
     metaDescription:
-      "Free Class 3–5 CS, AI & Math for kids in Sri Lanka — 60-module syllabus, narrated lessons, Build Arena & Practice. ₹0 forever. Enroll with parent email.",
+      "Mentr Learn (mentr.in/learn/sri-lanka) — free Class 3–5 CS, AI & Math for kids in Sri Lanka. 60 modules, Build Arena. ₹0. Parent email enroll.",
     keywords: [
+      "Mentr Learn Sri Lanka",
+      "Mentr Learn",
+      "mentr.in learn Sri Lanka",
       "coding for kids Sri Lanka free",
       "free coding course kids Colombo",
       "computer science Class 3-5 Sri Lanka",
       "AI for kids Sri Lanka",
-      "Mentr Learn Sri Lanka",
     ],
     regionLabel: "Sri Lanka",
     hreflang: "en-LK",
-    heroEyebrow: "Sri Lanka · Class 3–5 · Free",
-    heroTitle: "Master CS, AI & Math",
-    heroAccent: "— a free gamified learning platform for kids in Sri Lanka.",
+    heroEyebrow: "Mentr Learn · Sri Lanka · Free",
+    heroTitle: "Mentr Learn",
+    heroAccent: "— free CS, AI & Math for Class 3–5 kids in Sri Lanka.",
     heroSub:
-      "Completely free CS, AI, and coding for Class 3–5 — narrated videos, a published 60-module syllabus, Build Arena, and daily practice. For families and centres in Colombo, Kandy & online island-wide.",
+      "Mentr Learn on mentr.in — completely free CS, AI, and coding for Class 3–5. Narrated videos, 60-module syllabus, Build Arena, and daily practice. For families in Colombo, Kandy & online island-wide.",
     statsSub: "Online · Sri Lanka",
     geoEmphasis: "Sri Lanka · online",
     clarityNote:
@@ -300,24 +323,26 @@ const COPY: Record<LearnGeo, LearnLandingCopy> = {
   pakistan: {
     geo: "pakistan",
     path: "/learn/pakistan",
-    title: "Free Coding for Kids in Pakistan | Mentr Learn",
+    title: "Mentr Learn Pakistan — Free Coding for Kids | mentr.in",
     metaDescription:
-      "Free Class 3–5 CS, AI & Math for kids in Pakistan — 60-module syllabus, narrated lessons, Build Arena & POTD. ₹0 forever. Parent email enroll.",
+      "Mentr Learn (mentr.in/learn/pakistan) — free Class 3–5 CS, AI & Math for kids in Pakistan. 60 modules, Build Arena. ₹0 forever. Parent enroll.",
     keywords: [
+      "Mentr Learn Pakistan",
+      "Mentr Learn",
+      "mentr.in learn Pakistan",
       "coding for kids Pakistan free",
       "free coding course kids Karachi",
       "computer science Class 3-5 Pakistan",
       "AI for kids Pakistan",
       "coding kids Lahore online",
-      "Mentr Learn Pakistan",
     ],
     regionLabel: "Pakistan",
     hreflang: "en-PK",
-    heroEyebrow: "Pakistan · Class 3–5 · Free",
-    heroTitle: "Master CS, AI & Math",
-    heroAccent: "— a free gamified learning platform for kids in Pakistan.",
+    heroEyebrow: "Mentr Learn · Pakistan · Free",
+    heroTitle: "Mentr Learn",
+    heroAccent: "— free CS, AI & Math for Class 3–5 kids in Pakistan.",
     heroSub:
-      "Completely free CS, AI, and coding for Class 3–5 — narrated videos, a published 60-module syllabus, Build Arena, and daily practice. For families and centres in Karachi, Lahore, Islamabad & online.",
+      "Mentr Learn on mentr.in — completely free CS, AI, and coding for Class 3–5. Narrated videos, 60-module syllabus, Build Arena, and daily practice. For families in Karachi, Lahore, Islamabad & online.",
     statsSub: "Online · Pakistan",
     geoEmphasis: "Pakistan · online",
     clarityNote:

@@ -28,6 +28,11 @@ import {
   getAdminLearnTrack,
 } from "../services/admin-learn";
 import {
+  getAdminFeaturedState,
+  searchFacultyForFeatured,
+  setFeaturedTeacherIds,
+} from "../services/featured-tutors";
+import {
   LEARN_TRACKS,
   type LearnTrackId,
 } from "../lib/learn-course";
@@ -37,6 +42,40 @@ const router = Router();
 
 router.use(ensureDb);
 router.use(requireAdminKey);
+
+router.get("/featured-tutors", async (_req, res) => {
+  try {
+    const data = await getAdminFeaturedState();
+    res.json(data);
+  } catch (err) {
+    console.error("Admin featured tutors get error:", err);
+    res.status(500).json({ error: "Failed to load featured tutors" });
+  }
+});
+
+router.get("/featured-tutors/search", async (req, res) => {
+  try {
+    const q = String(req.query.q || "");
+    const teachers = await searchFacultyForFeatured(q, 30);
+    res.json({ teachers });
+  } catch (err) {
+    console.error("Admin featured tutors search error:", err);
+    res.status(500).json({ error: "Failed to search faculty" });
+  }
+});
+
+router.put("/featured-tutors", requireAdminPass, async (req, res) => {
+  try {
+    const ids = await setFeaturedTeacherIds(req.body?.ids);
+    const data = await getAdminFeaturedState();
+    res.json({ ...data, ids });
+  } catch (err) {
+    const message =
+      err instanceof Error ? err.message : "Failed to save featured tutors";
+    console.error("Admin featured tutors save error:", err);
+    res.status(400).json({ error: message });
+  }
+});
 
 router.get("/stats", async (_req, res) => {
   try {

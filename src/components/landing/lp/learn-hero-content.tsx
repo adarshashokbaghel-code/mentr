@@ -25,13 +25,14 @@ const PERKS = [
 ] as const;
 
 function renderAccent(accent: string) {
-  const parts = accent.split(/(Class 3–5 kids\.?|3–5 kids\.?)/);
+  const parts = accent.split(/(Class 3–5 kids[^.]*\.?|3–5 kids[^.]*\.?)/);
   return parts.map((part, i) => {
     if (!part || part === ".") return null;
-    if (/^(Class )?3–5 kids\.?$/.test(part)) {
+    if (/Class 3–5 kids|3–5 kids/.test(part)) {
       return (
         <span key={i} className="text-[#1c2434]">
-          {part.replace(/\.$/, "")}.
+          {part.replace(/\.$/, "")}
+          {part.endsWith(".") ? "." : ""}
         </span>
       );
     }

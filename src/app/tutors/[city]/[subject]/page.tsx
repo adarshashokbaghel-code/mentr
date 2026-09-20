@@ -4,14 +4,17 @@ import { slugify, subjectHubSlug } from "@/lib/seo-hubs";
 import { SUBJECTS } from "@/lib/teachers";
 import {
   CITY_SUBJECT_PAGES,
+  INSTANT_CONNECT_CTA,
   REQUIREMENT_CTA,
   SEO_CITIES,
-  cityFaqs,
+  citySubjectFaqs,
   citySubjectPath,
-  teachersForCitySubject,
 } from "@/lib/seo-programmatic";
+import { liveTeachersForCitySubject } from "@/lib/seo-live-teachers";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+export const revalidate = 300;
 
 function parseCitySubject(
   citySlug: string,
@@ -47,7 +50,7 @@ export async function generateMetadata({
   const parsed = parseCitySubject(resolved.city, resolved.subject);
   if (!parsed) return { title: "Not found", robots: { index: false } };
   const title = `${parsed.subject} Tutors in ${parsed.city.name}`;
-  const description = `Find ${parsed.subject} tutors in ${parsed.city.name} on ${SITE_NAME}. Verified profiles — home and online. Connect free or post your requirement.`;
+  const description = `Find verified ${parsed.subject} tutors in ${parsed.city.name} on ${SITE_NAME}. Compare rates, home & online modes, and bios — connect free or try Instant Connect.`;
   const path = citySubjectPath(parsed.city.slug, parsed.subject);
   return {
     title,
@@ -66,14 +69,19 @@ export default async function CitySubjectHubPage({
   const parsed = parseCitySubject(resolved.city, resolved.subject);
   if (!parsed) notFound();
 
-  const teachers = teachersForCitySubject(parsed.city.slug, parsed.subject);
+  const teachers = await liveTeachersForCitySubject(
+    parsed.city.slug,
+    parsed.subject,
+  );
   const path = citySubjectPath(parsed.city.slug, parsed.subject);
+  const searchHref = `/search?subject=${encodeURIComponent(parsed.subject)}&q=${encodeURIComponent(parsed.city.name)}`;
+  const mapHref = `${searchHref}&view=map`;
 
   return (
     <SeoHubPage
       eyebrow={`${parsed.subject} · ${parsed.city.name}`}
       title={`${parsed.subject} tutors in ${parsed.city.name}`}
-      intro={`Searching "${parsed.subject} tutors in ${parsed.city.name}"? Browse verified ${parsed.subject} tutors below — filter by open slots, read bios, and send a free connect request. Or post your requirement and let ${parsed.subject} tutors pitch you.`}
+      intro={`Looking for ${parsed.subject} tutors in ${parsed.city.name}? Browse verified profiles below — see rates, home vs online, experience, and areas. Connect free, post a requirement, or try Instant Connect for a fast match.`}
       teachers={teachers}
       schemaPath={path}
       breadcrumbs={[
@@ -81,12 +89,20 @@ export default async function CitySubjectHubPage({
         { label: parsed.city.name, href: `/tutors/${parsed.city.slug}` },
         { label: parsed.subject },
       ]}
-      ctaHref={`/search?subject=${encodeURIComponent(parsed.subject)}&q=${encodeURIComponent(parsed.city.name)}`}
-      ctaLabel={`Search ${parsed.subject} in ${parsed.city.name}`}
-      faqs={cityFaqs(parsed.city.name, parsed.city.local)}
+      ctaHref={searchHref}
+      ctaLabel={`Browse all ${parsed.subject}`}
+      mapHref={mapHref}
+      faqs={citySubjectFaqs(
+        parsed.subject,
+        parsed.city.name,
+        parsed.city.local,
+      )}
       requirementHref={REQUIREMENT_CTA.href}
       requirementLabel={REQUIREMENT_CTA.label}
       requirementBlurb={REQUIREMENT_CTA.blurb}
+      instantHref={INSTANT_CONNECT_CTA.href}
+      instantLabel={INSTANT_CONNECT_CTA.label}
+      instantBlurb={INSTANT_CONNECT_CTA.blurb}
       relatedLinks={[
         {
           label: `All tutors in ${parsed.city.name}`,
@@ -98,6 +114,7 @@ export default async function CitySubjectHubPage({
         },
         { label: "Find tutors near you", href: "/find-tutors-near-me" },
         { label: "CBSE tutors", href: "/boards/cbse-tutors" },
+        { label: "Try Instant Connect", href: INSTANT_CONNECT_CTA.href },
       ]}
     />
   );

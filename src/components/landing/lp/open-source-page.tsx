@@ -9,10 +9,15 @@ import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ProductHuntBadges, ProductHuntFeaturedBadge } from "@/components/ui/product-hunt-badge";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import {
+  CREATOR_LINKEDIN_URL,
   GITHUB_REPO_URL,
   GLOBAL_REACH_LINE,
   LINKEDIN_URL,
 } from "@/lib/seo";
+import {
+  formatGithubRelativeTime,
+  type GithubRepoStats,
+} from "@/lib/github-repo";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -21,6 +26,7 @@ import {
   Code2,
   ExternalLink,
   GitBranch,
+  GitFork,
   GitPullRequest,
   Globe,
   HeartHandshake,
@@ -34,6 +40,7 @@ import {
   Users,
   Workflow,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -252,6 +259,193 @@ function SocialLink({
   );
 }
 
+function RepoLiveCard({ stats }: { stats: GithubRepoStats | null }) {
+  if (!stats) {
+    return <RepoMock />;
+  }
+
+  return (
+    <BrowserFrame
+      url="github.com / mentr"
+      headerClassName="bg-ink text-white"
+      className="border-2 border-ink"
+    >
+      <div className="bg-[#0d1117] p-4 text-left text-[11px] leading-relaxed text-[#c9d1d9] sm:p-5 sm:text-xs">
+        <div className="flex items-center gap-2 border-b border-white/10 pb-3">
+          <GitHubIcon className="h-4 w-4 shrink-0 text-white" />
+          <a
+            href={stats.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="truncate font-mono font-bold text-white hover:text-butter"
+          >
+            {stats.fullName}
+          </a>
+          <span className="ml-auto shrink-0 rounded-md border border-sage/40 bg-sage/20 px-2 py-0.5 text-[10px] font-bold text-sage">
+            Public
+          </span>
+        </div>
+
+        <div className="mt-3 flex items-center gap-3">
+          <a
+            href={stats.creator.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-2 py-1.5 transition hover:border-white/25"
+          >
+            <Image
+              src={stats.creator.avatarUrl}
+              alt=""
+              width={28}
+              height={28}
+              className="rounded-full"
+              unoptimized
+            />
+            <div className="min-w-0">
+              <p className="text-[10px] font-medium uppercase tracking-wide text-white/45">
+                Creator
+              </p>
+              <p className="truncate font-bold text-butter">
+                @{stats.creator.login}
+              </p>
+            </div>
+          </a>
+          <div className="min-w-0 flex-1">
+            <p className="text-[10px] text-white/45">
+              {stats.license ?? "MIT"} · Updated{" "}
+              {formatGithubRelativeTime(stats.pushedAt)}
+            </p>
+            <p className="mt-0.5 line-clamp-2 text-white/70">
+              {stats.description ||
+                "Free tutor-parent connector — 100% open source, zero commission."}
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {[
+            { label: "Stars", value: String(stats.stars), icon: Star },
+            { label: "Forks", value: String(stats.forks), icon: GitFork },
+            {
+              label: "PRs merged",
+              value: String(stats.mergedPrCount),
+              icon: GitPullRequest,
+            },
+            {
+              label: "Contributors",
+              value: String(Math.max(stats.contributorCount, stats.contributors.length)),
+              icon: Users,
+            },
+          ].map((item) => (
+            <div
+              key={item.label}
+              className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2"
+            >
+              <p className="inline-flex items-center gap-1 text-[10px] text-white/50">
+                <item.icon className="h-3 w-3" />
+                {item.label}
+              </p>
+              <p className="mt-0.5 text-lg font-bold tabular-nums text-butter">
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {stats.lastMergedPr && (
+          <a
+            href={stats.lastMergedPr.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 block rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 transition hover:border-coral/40 hover:bg-white/[0.07]"
+          >
+            <p className="text-[10px] font-bold uppercase tracking-wide text-sage">
+              Last merged PR
+            </p>
+            <p className="mt-1 line-clamp-2 font-semibold text-white">
+              #{stats.lastMergedPr.number} · {stats.lastMergedPr.title}
+            </p>
+            <p className="mt-1 text-[10px] text-white/55">
+              by @{stats.lastMergedPr.authorDisplayName} ·{" "}
+              {formatGithubRelativeTime(stats.lastMergedPr.mergedAt)}
+            </p>
+          </a>
+        )}
+
+        {stats.contributors.length > 0 && (
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wide text-white/45">
+              Live contributors
+            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              {stats.contributors.slice(0, 8).map((c) => {
+                const avatar = (
+                  <Image
+                    src={c.avatarUrl}
+                    alt={c.displayName}
+                    width={32}
+                    height={32}
+                    className={cn(
+                      "rounded-full ring-2 ring-[#0d1117]",
+                      c.linkable && "transition group-hover:ring-butter",
+                    )}
+                    unoptimized
+                  />
+                );
+                return c.linkable ? (
+                  <a
+                    key={c.login}
+                    href={c.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`@${c.displayName} · ${c.contributions} commits`}
+                    className="group relative"
+                  >
+                    {avatar}
+                  </a>
+                ) : (
+                  <span
+                    key={c.login}
+                    title={c.displayName}
+                    className="relative cursor-default"
+                  >
+                    {avatar}
+                  </span>
+                );
+              })}
+              <a
+                href={`${stats.url}/graphs/contributors`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md border border-white/15 px-2 py-1 text-[10px] font-semibold text-white/70 hover:text-butter"
+              >
+                View all
+              </a>
+            </div>
+          </div>
+        )}
+
+        <div className="mt-4 flex flex-wrap gap-2">
+          <a
+            href={stats.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-md bg-white/10 px-2 py-1 text-[10px] font-semibold hover:bg-white/15"
+          >
+            ⭐ Star on GitHub
+          </a>
+          <span className="rounded-md bg-coral/20 px-2 py-1 text-[10px] text-coral">
+            {stats.openIssues} open issues
+          </span>
+          <span className="rounded-md bg-sage/20 px-2 py-1 text-[10px] text-sage">
+            help wanted
+          </span>
+        </div>
+      </div>
+    </BrowserFrame>
+  );
+}
+
 function RepoMock() {
   return (
     <BrowserFrame
@@ -306,7 +500,314 @@ function RepoMock() {
   );
 }
 
-export function OpenSourceLanding() {
+function GithubCommunitySection({ stats }: { stats: GithubRepoStats }) {
+  const maxCommits = Math.max(
+    1,
+    ...stats.contributors.map((c) => c.contributions),
+  );
+
+  return (
+    <section className="relative border-b border-hairline bg-white py-12 sm:py-20 lg:py-24">
+      <LpGridBg className="opacity-20" />
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeader
+            align="left"
+            eyebrow="Live from GitHub"
+            title="Contributors &"
+            accent="merged PRs"
+            description={`Public activity on ${stats.fullName} — ranked by commits, with merged pull requests and recent merges. Refreshes hourly.`}
+          />
+          <div className="flex flex-wrap gap-2 lg:justify-end">
+            <a href={stats.url} target="_blank" rel="noopener noreferrer">
+              <Button variant="secondary" className="gap-2">
+                <GitHubIcon className="h-4 w-4" />
+                Open repository
+                <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+              </Button>
+            </a>
+            <a
+              href={`${stats.url}/graphs/contributors`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button variant="secondary" className="gap-2">
+                <Users className="h-4 w-4" />
+                Full graph
+              </Button>
+            </a>
+          </div>
+        </div>
+
+        {/* Big metrics */}
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          {[
+            { label: "Stars", value: stats.stars, icon: Star, tint: "bg-butter" },
+            { label: "Forks", value: stats.forks, icon: GitFork, tint: "bg-lavender" },
+            {
+              label: "PRs merged",
+              value: stats.mergedPrCount,
+              icon: GitPullRequest,
+              tint: "bg-sage-wash",
+            },
+            {
+              label: "Contributors",
+              value: stats.contributorCount,
+              icon: Users,
+              tint: "bg-coral-wash",
+            },
+            {
+              label: "Commits",
+              value: stats.totalCommits,
+              icon: GitBranch,
+              tint: "bg-cream-band",
+            },
+            {
+              label: "Open issues",
+              value: stats.openIssues,
+              icon: Bug,
+              tint: "bg-white",
+            },
+          ].map((m) => (
+            <div
+              key={m.label}
+              className={cn(
+                "rounded-2xl border-2 border-ink p-4",
+                m.tint,
+                hardShadowSm,
+              )}
+            >
+              <p className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-muted">
+                <m.icon className="h-3.5 w-3.5" />
+                {m.label}
+              </p>
+              <p className="mt-2 text-3xl font-bold tabular-nums tracking-tight text-ink">
+                {m.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Creator strip */}
+        <a
+          href={stats.creator.profileUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={cn(
+            "mt-6 flex flex-wrap items-center gap-4 rounded-2xl border-2 border-ink bg-ink p-4 text-white transition hover:-translate-y-0.5 sm:p-5",
+            hardShadowSm,
+          )}
+        >
+          <Image
+            src={stats.creator.avatarUrl}
+            alt={stats.creator.login}
+            width={56}
+            height={56}
+            className="rounded-full ring-2 ring-butter"
+            unoptimized
+          />
+          <div className="min-w-0 flex-1">
+            <p className="text-[11px] font-bold uppercase tracking-wide text-butter">
+              Repository creator
+            </p>
+            <p className="mt-0.5 truncate text-xl font-bold">
+              @{stats.creator.login}
+            </p>
+            <p className="mt-1 text-sm text-white/60">
+              {stats.license ?? "MIT"} · Updated{" "}
+              {formatGithubRelativeTime(stats.pushedAt)}
+              {stats.lastMergedPr
+                ? ` · Last merge #${stats.lastMergedPr.number}`
+                : ""}
+            </p>
+          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-sage/40 bg-sage/20 px-3 py-1 text-xs font-bold text-sage">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sage" />
+            Live
+          </span>
+        </a>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-2 lg:gap-8">
+          {/* Ranked contributors */}
+          <div
+            className={cn(
+              "rounded-2xl border-2 border-ink bg-cream/40 p-4 sm:p-6",
+              hardShadowSm,
+            )}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-lg font-bold text-ink">Contributor ranking</h3>
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+                by commits
+              </span>
+            </div>
+            <ul className="mt-5 space-y-3">
+              {stats.contributors.map((c) => {
+                const body = (
+                  <>
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={cn(
+                          "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border-2 border-ink text-xs font-bold",
+                          c.rank === 1
+                            ? "bg-butter"
+                            : c.rank === 2
+                              ? "bg-lavender"
+                              : c.rank === 3
+                                ? "bg-sage-wash"
+                                : "bg-cream-band text-muted",
+                        )}
+                      >
+                        #{c.rank}
+                      </span>
+                      <Image
+                        src={c.avatarUrl}
+                        alt=""
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                        unoptimized
+                      />
+                      <div className="min-w-0 flex-1">
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <p
+                            className={cn(
+                              "truncate font-bold text-ink",
+                              c.linkable && "group-hover:text-coral",
+                            )}
+                          >
+                            {c.displayName}
+                          </p>
+                          {c.isCreator && (
+                            <span className="rounded bg-ink px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-butter">
+                              Creator
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-0.5 text-xs text-muted">
+                          {c.contributions} commit
+                          {c.contributions === 1 ? "" : "s"}
+                          {" · "}
+                          {c.mergedPrs} merged PR
+                          {c.mergedPrs === 1 ? "" : "s"}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-cream-band">
+                      <div
+                        className="h-full rounded-full bg-coral"
+                        style={{
+                          width: `${Math.max(
+                            6,
+                            Math.round((c.contributions / maxCommits) * 100),
+                          )}%`,
+                        }}
+                      />
+                    </div>
+                  </>
+                );
+
+                return (
+                  <li key={c.login}>
+                    {c.linkable ? (
+                      <a
+                        href={c.profileUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group block rounded-xl border border-hairline bg-white p-3 transition hover:border-ink/30 hover:shadow-xs sm:p-3.5"
+                      >
+                        {body}
+                      </a>
+                    ) : (
+                      <div className="rounded-xl border border-hairline bg-white p-3 sm:p-3.5">
+                        {body}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          {/* Recent merged PRs */}
+          <div
+            className={cn(
+              "rounded-2xl border-2 border-ink bg-white p-4 sm:p-6",
+              hardShadowSm,
+            )}
+          >
+            <div className="flex items-center justify-between gap-3">
+              <h3 className="text-lg font-bold text-ink">Recent merged PRs</h3>
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-muted">
+                {stats.mergedPrCount} total
+              </span>
+            </div>
+            <ul className="mt-5 space-y-2.5">
+              {stats.recentMergedPrs.length === 0 ? (
+                <li className="rounded-xl border border-dashed border-hairline px-4 py-8 text-center text-sm text-muted">
+                  No merged pull requests yet.
+                </li>
+              ) : (
+                stats.recentMergedPrs.map((pr) => (
+                  <li key={pr.number}>
+                    <a
+                      href={pr.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex gap-3 rounded-xl border border-hairline bg-cream/50 p-3 transition hover:border-ink/25 hover:bg-cream sm:p-3.5"
+                    >
+                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-sage-wash text-xs font-bold text-sage">
+                        #{pr.number}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="line-clamp-2 text-sm font-semibold text-ink">
+                          {pr.title}
+                        </p>
+                        <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-muted">
+                          <span className="inline-flex items-center gap-1 font-semibold text-ink/80">
+                            {pr.authorAvatarUrl ? (
+                              <Image
+                                src={pr.authorAvatarUrl}
+                                alt=""
+                                width={14}
+                                height={14}
+                                className="rounded-full"
+                                unoptimized
+                              />
+                            ) : null}
+                            @{pr.authorDisplayName}
+                          </span>
+                          <span>·</span>
+                          <span>{formatGithubRelativeTime(pr.mergedAt)}</span>
+                        </p>
+                      </div>
+                      <ExternalLink className="mt-1 h-3.5 w-3.5 shrink-0 text-muted" />
+                    </a>
+                  </li>
+                ))
+              )}
+            </ul>
+            <a
+              href={`${stats.url}/pulls?q=is%3Apr+is%3Amerged`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-coral hover:underline"
+            >
+              View all merged PRs
+              <ArrowRight className="h-3.5 w-3.5" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function OpenSourceLanding({
+  githubStats = null,
+}: {
+  githubStats?: GithubRepoStats | null;
+}) {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
@@ -390,6 +891,8 @@ export function OpenSourceLanding() {
       </section>
 
       <LpStatsBand stats={stats} />
+
+      {githubStats ? <GithubCommunitySection stats={githubStats} /> : null}
 
       {/* Mission */}
       <section className="relative border-b border-hairline bg-white py-12 sm:py-20 lg:py-24">
@@ -585,7 +1088,7 @@ export function OpenSourceLanding() {
                 </a>
               </div>
             </div>
-            <RepoMock />
+            <RepoLiveCard stats={githubStats} />
           </div>
         </div>
       </section>
@@ -676,6 +1179,140 @@ export function OpenSourceLanding() {
             </a>{" "}
             or open a GitHub issue.
           </p>
+        </div>
+      </section>
+
+      {/* Creator */}
+      <section className="relative overflow-hidden border-t border-hairline bg-white py-12 sm:py-20 lg:py-24">
+        <LpGridBg className="opacity-20" />
+        <LpBlob
+          color="rgba(255,154,77,0.12)"
+          size={280}
+          className="-right-16 top-10"
+        />
+        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
+          <div className="relative max-w-3xl">
+            <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
+              <span className="h-px w-5 bg-muted/50" aria-hidden />
+              The creator
+              <span className="h-px w-5 bg-muted/50" aria-hidden />
+            </p>
+            <h2 className="mt-4 whitespace-nowrap text-[1.35rem] font-bold tracking-tight text-ink sm:text-3xl lg:text-[42px] lg:leading-[1.12]">
+              Built by someone who{" "}
+              <span className="text-coral">hates paywalls</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+              Short version from the LinkedIn bio — minus the corporate fluff.
+            </p>
+          </div>
+
+          <div
+            className={cn(
+              "mt-10 flex flex-col gap-6 rounded-3xl border-2 border-ink bg-cream/50 p-5 sm:flex-row sm:items-start sm:gap-8 sm:p-7 lg:p-8",
+              hardShadow,
+            )}
+          >
+            <div className="mx-auto w-[140px] shrink-0 sm:mx-0 sm:w-[160px]">
+              <div className="overflow-hidden rounded-2xl border-2 border-ink bg-ink shadow-[3px_3px_0_0_#1c1a17]">
+                <Image
+                  src="/team/adarsh-singh.png"
+                  alt="Adarsh Singh — creator of Mentr by Paprly"
+                  width={320}
+                  height={400}
+                  quality={95}
+                  unoptimized
+                  className="h-auto w-full object-cover object-top"
+                />
+              </div>
+              <p className="mt-2 text-center text-[10px] font-bold uppercase tracking-wide text-muted">
+                Creator · Paprly / Mentr
+              </p>
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <p className="text-[11px] font-bold uppercase tracking-wide text-coral">
+                Meet the human
+              </p>
+              <h3 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+                Adarsh Singh
+              </h3>
+              <p className="mt-2 text-sm font-semibold text-ink/80">
+                Software Engineer @ upGrad School of Technology · Ex-Founding
+                Engineer @ Paprly · SIH 2024 Winner · Creator of Mentr
+              </p>
+              <p className="mt-1 text-sm text-muted">Bengaluru, India</p>
+
+              <blockquote className="mt-5 border-l-4 border-coral pl-4 text-sm leading-relaxed text-ink sm:text-base">
+                Edtech loves charging you to say hello. Coins. Lead packs.
+                &ldquo;Unlock contact for ₹999.&rdquo;{" "}
+                <span className="font-semibold text-coral">
+                  Mentr is the opposite joke:
+                </span>{" "}
+                parents find tutors for ₹0, tutors keep 100%, and the code is
+                MIT so nobody can quietly reverse that.
+              </blockquote>
+
+              <p className="mt-4 text-sm leading-relaxed text-muted">
+                Aim is simple —{" "}
+                <span className="font-semibold text-ink">
+                  keep things that should be free, free.
+                </span>{" "}
+                Search. Connect. WhatsApp after mutual accept. No commission
+                engine hiding in the repo. If education infrastructure can be
+                open, it should be.
+              </p>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                {[
+                  "₹0 platform fee",
+                  "MIT open source",
+                  "No lead packs",
+                  "Build in public",
+                ].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-hairline bg-white px-3 py-1 text-[11px] font-semibold text-ink"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                  href={CREATOR_LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="gap-2">
+                    <LinkedInIcon className="h-4 w-4" />
+                    LinkedIn
+                    <ExternalLink className="h-3.5 w-3.5 opacity-70" />
+                  </Button>
+                </a>
+                <a
+                  href={GITHUB_REPO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary" className="gap-2">
+                    <GitHubIcon className="h-4 w-4" />
+                    GitHub repo
+                  </Button>
+                </a>
+                <Link href="/blog/who-created-mentr-adarsh-singh">
+                  <Button variant="secondary" className="gap-2">
+                    Creator story
+                  </Button>
+                </Link>
+                <Link href="/blog/contribute-to-mentr-open-source">
+                  <Button variant="secondary" className="gap-2">
+                    Contribute guide
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

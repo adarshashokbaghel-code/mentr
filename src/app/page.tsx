@@ -2,6 +2,7 @@ import { ParentNeedFinder } from "@/components/parent/parent-need-finder";
 import { CTA } from "@/components/landing/cta";
 import { FAQ } from "@/components/landing/faq";
 import { FacultyShowcase } from "@/components/landing/faculty-showcase";
+import { FeaturedMentors } from "@/components/landing/featured-mentors";
 import { Footer } from "@/components/landing/footer";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
 import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
@@ -10,6 +11,7 @@ import { LpStatsBand } from "@/components/landing/lp/shared";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
+import { PopularSearches } from "@/components/landing/popular-searches";
 import { ProductHuntSection } from "@/components/landing/product-hunt-section";
 import { PublicPlatformSections } from "@/components/landing/public-platform-sections";
 import { SeoGuidesStrip } from "@/components/landing/seo-guides-strip";
@@ -20,8 +22,9 @@ import { Testimonials } from "@/components/landing/testimonials";
 import { TrustSafety } from "@/components/landing/trust-safety";
 import { WaveSeparator } from "@/components/landing/wave-separator";
 import { ZeroFees } from "@/components/landing/zero-fees";
+import { LEARN_PUBLIC } from "@/lib/learn-flags";
+import { learnCourseJsonLd } from "@/lib/learn-seo";
 import {
-  GLOBAL_REACH_LINE,
   PARENT_ORG_JSON_LD,
   SITE_BRAND,
   SITE_DESCRIPTION,
@@ -30,17 +33,19 @@ import {
   SITE_URL,
   absoluteUrl,
 } from "@/lib/seo";
-import { Globe, MessageCircle, Sparkles, Users } from "lucide-react";
+import { SUBJECTS } from "@/lib/teachers";
+import { BookOpen, MessageCircle, Sparkles, Users } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Find Verified Tutors & Mentors — Free, Local or Online Worldwide",
+  title:
+    "Find Verified Tutors & Mentors — Free Search, Instant Connect · Mentr Learn",
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE_BRAND} — Free Tutor & Mentor Finder`,
-    description: GLOBAL_REACH_LINE,
+    title: `${SITE_BRAND} — Free Tutors + Mentr Learn kids coding`,
+    description: SITE_DESCRIPTION,
     url: absoluteUrl("/"),
     type: "website",
   },
@@ -48,32 +53,32 @@ export const metadata: Metadata = {
 
 const heroStats = [
   {
-    value: "100+",
-    label: "Verified tutors",
+    value: "200+",
+    label: "Tutors & mentors",
     tint: "bg-lavender",
     icon: Users,
-    sub: "Local & online",
+    sub: "Verified profiles",
+  },
+  {
+    value: `${SUBJECTS.length}+`,
+    label: "Subjects offered",
+    tint: "bg-butter",
+    icon: BookOpen,
+    sub: "School · exams · skills",
   },
   {
     value: "₹0",
     label: "Platform fee",
-    tint: "bg-butter",
+    tint: "bg-sage-wash",
     icon: Sparkles,
     sub: "Parents & faculty",
   },
   {
     value: "2 ways",
     label: "To connect",
-    tint: "bg-sage-wash",
-    icon: MessageCircle,
-    sub: "Search or post req",
-  },
-  {
-    value: "Global",
-    label: "Any country",
     tint: "bg-coral-wash",
-    icon: Globe,
-    sub: "Your time zone",
+    icon: MessageCircle,
+    sub: "Search or Instant Connect",
   },
 ];
 
@@ -83,7 +88,7 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: SITE_BRAND,
-    alternateName: SITE_NAME,
+    alternateName: [SITE_NAME, "Mentr Learn", "Learn by Mentr"],
     url: SITE_URL,
     logo: absoluteUrl("/mentr-logo.png"),
     description: SITE_DESCRIPTION,
@@ -97,6 +102,18 @@ const jsonLd = [
       email: "hello@mentr.in",
       contactType: "customer support",
     },
+    ...(LEARN_PUBLIC
+      ? {
+          makesOffer: {
+            "@type": "Offer",
+            name: "Mentr Learn — Free Class 3–5 coding",
+            url: absoluteUrl("/learn"),
+            price: "0",
+            priceCurrency: "INR",
+            category: "Free",
+          },
+        }
+      : {}),
   },
   {
     "@context": "https://schema.org",
@@ -113,6 +130,7 @@ const jsonLd = [
       "query-input": "required name=search_term_string",
     },
   },
+  ...(LEARN_PUBLIC ? [learnCourseJsonLd()] : []),
   // FAQPage schema lives on /faq — duplicating it here would hurt eligibility
 ];
 
@@ -131,6 +149,8 @@ export default function Home() {
         <StatsMarquee />
         <TrustSafety />
         <GlobalReachMap />
+        <FeaturedMentors />
+        <PopularSearches />
         <MentrFlow />
         <HowItWorks />
         <SwitchToChamps />

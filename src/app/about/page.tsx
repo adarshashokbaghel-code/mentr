@@ -19,9 +19,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Mentr by Paprly — The Free Tutor-Parent Connector Worldwide",
+  title: "About Mentr by Paprly — Free Open Source Tutor Platform by Adarsh Singh",
   description:
-    "Mentr by Paprly connects parents and verified tutors globally — in-person nearby or online across time zones. A free, open-source product from Paprly. No commission, no middlemen, ever.",
+    "Mentr by Paprly connects parents and verified tutors worldwide — free, MIT open source, zero commission. Created by Adarsh Singh. Contribute on GitHub or find tutors at ₹0.",
+  keywords: [
+    "about Mentr",
+    "Adarsh Singh Mentr",
+    "Paprly open source",
+    "free tutor platform",
+  ],
   alternates: { canonical: "/about" },
 };
 
@@ -192,9 +198,24 @@ export default function AboutPage() {
               >
                 paprly.in
               </a>
-              ). We are a small distributed team building free tools for
-              education and business. Mentr&apos;s codebase is open source under
-              the MIT license — anyone can audit how the platform works on our{" "}
+              ). Mentr was created by{" "}
+              <Link
+                href="/blog/who-created-mentr-adarsh-singh"
+                className="font-semibold text-coral hover:underline"
+              >
+                Adarsh Singh
+              </Link>
+              {" "}(
+              <a
+                href="https://www.linkedin.com/in/adarshsingh05"
+                className="font-semibold text-coral hover:underline"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                LinkedIn
+              </a>
+              ). We build free tools for education and business. Mentr&apos;s
+              codebase is MIT open source — developers can contribute on our{" "}
               <Link href="/open-source" className="font-semibold text-coral hover:underline">
                 open source page
               </Link>

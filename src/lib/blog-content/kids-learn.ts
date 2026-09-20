@@ -15,6 +15,85 @@ function relatedLearn(extra: { label: string; href: string }[] = []) {
 }
 
 export const KIDS_LEARN_ARTICLES: Record<string, ArticleContent> = {
+  "what-is-mentr-learn": {
+    slug: "what-is-mentr-learn",
+    publishedAt: "2026-09-20",
+    updatedAt: "2026-09-20",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro:
+      "Searching for Learn by Mentr, mentr.in/learn, or Mentr Learn? This page explains what Mentr Learn is, where it lives on mentr.in, who it is for (Class 3–5 kids), what is free, and how parents enroll — so Google and families can find the product without guessing.",
+    sections: [
+      {
+        heading: "What is Mentr Learn?",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr Learn (also called Mentr Starter) is the free kids coding product on Mentr by Paprly. It is a self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60 modules, narrated lessons, quizzes, Build Arena, Practice, and Problem of the Day. The list price is ₹999; parents pay ₹0 forever for this track.",
+          },
+          {
+            type: "list",
+            items: [
+              "Hub: https://mentr.in/learn",
+              "Enroll free: https://mentr.in/learn/start",
+              "Parent syllabus: https://mentr.in/learn/syllabus",
+              "India: https://mentr.in/learn/india · UAE: /learn/uae · Australia · Sri Lanka · Pakistan",
+              "Blog guides: https://mentr.in/blog/category/kids-learn",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "How is Learn different from finding a tutor on Mentr?",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Mentr’s main marketplace helps parents find verified tutors and connect on WhatsApp after mutual accept — still ₹0 platform fee. Mentr Learn is a separate free learning app for younger kids: Watch → Quiz → Build → Practice without hiring a tutor first. Many families use Learn for daily habits, then browse tutors on /search when they want live help.",
+          },
+        ],
+      },
+      {
+        heading: "How do parents start?",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Open mentr.in/learn/start, enroll with a parent email OTP, then open the learning app. No credit card. Read the syllabus first at mentr.in/learn/syllabus if you want the full 60-module map before signing up.",
+          },
+          {
+            type: "callout",
+            title: "Brand names people search",
+            text: "Mentr Learn, Learn by Mentr, mentr.in learn, mentr.in/learn, and Mentr Starter all refer to the same free Class 3–5 product on mentr.in.",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "What is Learn by Mentr / Mentr Learn?",
+        answer:
+          "Mentr Learn is free coding for Class 3–5 kids on mentr.in/learn — CS, AI & Math, 60 modules, ₹0 forever.",
+      },
+      {
+        question: "Where is the Learn page on mentr.in?",
+        answer:
+          "https://mentr.in/learn — enroll at /learn/start, syllabus at /learn/syllabus.",
+      },
+      {
+        question: "Is Mentr Learn free?",
+        answer:
+          "Yes. Parent email enroll, no credit card. Class 3–5 track is ₹0 forever.",
+      },
+    ],
+    relatedLinks: relatedLearn([
+      { label: "Kids Learn blog guides", href: "/blog/category/kids-learn" },
+      { label: "Scratch vs Mentr Learn", href: "/blog/scratch-vs-mentr-learn" },
+      {
+        label: "Mentr Learn syllabus explained",
+        href: "/blog/mentr-learn-class-3-5-syllabus-explained",
+      },
+    ]),
+  },
+
   "free-computer-science-class-3-5-kids-india": {
     slug: "free-computer-science-class-3-5-kids-india",
     publishedAt: "2026-09-13",

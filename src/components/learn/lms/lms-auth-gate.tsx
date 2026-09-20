@@ -5,6 +5,7 @@ import { LmsShell } from "@/components/learn/lms/lms-shell";
 import {
   fetchLearnEnrollment,
   LEARN_START_ENROLL_HREF,
+  readLearnEnrollmentLocal,
 } from "@/lib/learn-enroll";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,9 @@ import { useEffect, useState, type ReactNode } from "react";
 /**
  * Gates /learn/app — parent must be logged in and enrolled in Mentr Starter.
  * Otherwise redirects to /learn/start?enroll=1 (popup opens).
+ *
+ * Trusts local enrollment cache when the API is slow/unavailable so
+ * "Open learning app" after enroll does not bounce into a modal flicker loop.
  */
 export function LmsAuthGate({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useAuth();
@@ -32,13 +36,21 @@ export function LmsAuthGate({ children }: { children: ReactNode }) {
         router.replace(LEARN_START_ENROLL_HREF);
         return;
       }
+
+      const local = readLearnEnrollmentLocal();
+      if (local) {
+        if (!cancelled) setReady(true);
+      }
+
       const enrollment = await fetchLearnEnrollment();
       if (cancelled) return;
-      if (!enrollment) {
-        router.replace(LEARN_START_ENROLL_HREF);
+
+      if (enrollment || local) {
+        setReady(true);
         return;
       }
-      setReady(true);
+
+      router.replace(LEARN_START_ENROLL_HREF);
     }
 
     void gate();

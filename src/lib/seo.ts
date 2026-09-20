@@ -21,6 +21,16 @@ export const GITHUB_REPO_URL =
 export const LINKEDIN_URL =
   "https://www.linkedin.com/company/mentrbypaprly/";
 
+/** Personal LinkedIn of Mentr / Paprly creator */
+export const CREATOR_LINKEDIN_URL =
+  "https://www.linkedin.com/in/adarshsingh05";
+
+export const CREATOR_NAME = "Adarsh Singh";
+export const CREATOR_ROLE =
+  "Creator of Mentr by Paprly · Software Engineer · Ex-Founding Engineer @ Paprly";
+export const CREATOR_GITHUB_URL =
+  "https://github.com/adarshashokbaghel-code";
+
 /** Primary launch hub — local SEO pages still target this city. */
 export const LAUNCH_HUB_CITY = "Bengaluru";
 
@@ -28,11 +38,11 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Find verified tutors & mentors free — local or online in India and worldwide. Search, post a requirement, or hire a coding/career mentor. WhatsApp after they accept. No fees, no commission.";
+  "Find verified tutors & mentors free on Mentr — 200+ profiles, Instant Connect, WhatsApp after they accept. Also Mentr Learn: free Class 3–5 coding (CS, AI & Math) at mentr.in/learn. No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
-  "Mentr by Paprly is built for the world — parents and tutors connect in-person nearby or online across time zones, from any country.";
+  "Mentr by Paprly helps parents find verified tutors and mentors — search by subject, try Instant Connect, or post a requirement. Free for both sides.";
 
 export const SITE_KEYWORDS = [
   "Mentr by Paprly",
@@ -44,8 +54,8 @@ export const SITE_KEYWORDS = [
   "best free platform to find tutors",
   "100% free tutoring platform",
   "free tutor finder",
-  "online tutors worldwide",
-  "global mentor platform",
+  "history tutors bangalore",
+  "maths tutors bengaluru",
   `tutors in ${LAUNCH_HUB_CITY}`,
   "home tutors Bangalore",
   "online tutors India",
@@ -62,7 +72,13 @@ export const SITE_KEYWORDS = [
   "find online tutors verified",
   "find mentors near me",
   "online tutor jobs",
+  "Instant Connect tutor",
   "coding for kids Class 5 free",
+  "Mentr Learn",
+  "Learn by Mentr",
+  "mentr.in learn",
+  "mentr.in/learn",
+  "free coding kids Mentr Learn",
   "Paprly",
   "Mentr open source",
   "open source tutoring platform",

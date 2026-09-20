@@ -3,6 +3,7 @@ import { connectDb } from "./db";
 import { backfillMapCoords, ensureFacultyMapLocation } from "./lib/map-location";
 import { isProfileComplete } from "./lib/profile-complete";
 import { User, type IUser } from "./models/User";
+import { loadFeaturedPublicTeachers } from "./services/featured-tutors";
 import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
 
 const PUBLIC_LIST_TTL_MS = 60_000;
@@ -44,6 +45,19 @@ export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
   );
   publicListCache = { teachers, at: Date.now() };
   return teachers;
+}
+
+/** Admin-curated featured tutors for the homepage (ordered). */
+export async function getPublicFeaturedTeachers(res: Response): Promise<void> {
+  try {
+    await connectDb();
+    const teachers = await loadFeaturedPublicTeachers();
+    res.set("Cache-Control", "public, max-age=30, stale-while-revalidate=120");
+    res.json({ teachers });
+  } catch (error) {
+    console.error("public featured teachers error:", error);
+    res.status(500).json({ error: "Failed to load featured teachers" });
+  }
 }
 
 /** Public directory — no auth, no phone numbers (Express). */

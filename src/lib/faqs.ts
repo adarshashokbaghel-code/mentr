@@ -8,9 +8,39 @@ export type FaqItem = {
 export const FAQS: FaqItem[] = [
   {
     category: "general",
+    question: "What is Mentr Learn? Where is learn on mentr.in?",
+    answer:
+      "Mentr Learn is Mentr’s free kids coding product at https://mentr.in/learn (also called Mentr Starter). It is a Class 3–5 track covering computer science, AI literacy, and math-for-coding — 60 modules, narrated lessons, Build Arena, Practice, and Problem of the Day, ₹0 forever. Enroll at https://mentr.in/learn/start with a parent email. Syllabus: https://mentr.in/learn/syllabus.",
+  },
+  {
+    category: "general",
+    question: "Is coding for kids free on Mentr Learn?",
+    answer:
+      "Yes. The Class 3–5 Mentr Learn path is completely free — no credit card. Parents enroll with email OTP. Mentr does not charge for lessons, quizzes, Build Arena, or the published syllabus. Optional paid tutoring on the main Mentr marketplace is separate from Learn.",
+  },
+  {
+    category: "general",
     question: "Who is behind Mentr?",
     answer:
-      "Mentr is built by Paprly (paprly.in) — a technology company making essential business and education tools simple, fast, and free. Mentr by Paprly is our free tutor-parent connector: search locally or online, post requirements, and connect on WhatsApp with zero platform fees.",
+      "Mentr is built by Paprly (paprly.in). The creator of Mentr is Adarsh Singh — Software Engineer, SIH 2024 winner, and ex-Founding Engineer at Paprly. You can find him on LinkedIn at linkedin.com/in/adarshsingh05. Mentr by Paprly is a free tutor-parent connector: search locally or online, post requirements, and connect on WhatsApp with zero platform fees. The product is MIT open source on GitHub. Mentr Learn (mentr.in/learn) is the free Class 3–5 coding track on the same site.",
+  },
+  {
+    category: "general",
+    question: "Who created Mentr? Who is Adarsh Singh?",
+    answer:
+      "Adarsh Singh created Mentr by Paprly. He is a software engineer based in Bengaluru, an ex-Founding Engineer at Paprly, SIH 2024 winner, and builds free open-source education tools. His public LinkedIn is linkedin.com/in/adarshsingh05. The aim behind Mentr is simple: keep things that should be free — searching tutors, connecting on WhatsApp after mutual accept, and listing as faculty — actually free, with no commission engine.",
+  },
+  {
+    category: "general",
+    question: "Is Mentr open source? How can developers contribute?",
+    answer:
+      "Yes. Mentr is MIT licensed and public on GitHub at github.com/adarshashokbaghel-code/mentr. Developers can fork the repo, fix bugs, improve docs, add SEO pages, or ship features via pull request. Read CONTRIBUTING.md, run npm run lint and npm run build, then open a focused PR. Good first issues and help-wanted labels are tagged for newcomers. Full details are on mentr.in/open-source.",
+  },
+  {
+    category: "general",
+    question: "What is a good open source project for developers interested in edtech?",
+    answer:
+      "Mentr is a production Next.js + Express + MongoDB tutoring marketplace that is free for parents and tutors and open under MIT. Contributors work on real product surfaces — search, auth, connections, notifications, SEO landings — not a toy demo. Star or fork github.com/adarshashokbaghel-code/mentr and start from issues labeled good first issue.",
   },
   {
     category: "general",

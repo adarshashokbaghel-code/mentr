@@ -16,12 +16,12 @@ import {
   BadgeCheck,
   Check,
   Clock,
-  Globe,
   Handshake,
   LayoutDashboard,
   Lock,
   Megaphone,
   MessageCircle,
+  BookOpen,
   Search,
   ShieldCheck,
   Sparkles,
@@ -56,9 +56,9 @@ import { SubjectGallery } from "../subject-gallery";
 const FILTERS = ["All", "Physics", "Mathematics", "English", "Coding"] as const;
 
 const parentStats = [
-  { value: "100+", label: "Verified tutors", tint: "bg-lavender", icon: Users, sub: "Local & online" },
-  { value: "₹0", label: "Agent fees", tint: "bg-butter", icon: Sparkles, sub: "Free forever" },
-  { value: "30 sec", label: "To connect", tint: "bg-sage-wash", icon: Zap, sub: "Not days of calls" },
+  { value: "200+", label: "Tutors & mentors", tint: "bg-lavender", icon: Users, sub: "Verified profiles" },
+  { value: "₹0", label: "Platform fee", tint: "bg-butter", icon: Sparkles, sub: "Free forever" },
+  { value: "15+", label: "Subjects", tint: "bg-sage-wash", icon: BookOpen, sub: "School · exams · skills" },
   { value: "Direct", label: "WhatsApp", tint: "bg-coral-wash", icon: MessageCircle, sub: "On tutor accept" },
 ];
 
@@ -160,7 +160,7 @@ const parentTestimonials = PARENT_LP_TESTIMONIALS;
 const trustPoints = [
   { icon: ShieldCheck, title: "Phone & identity verified", body: "Every tutor passes manual verification before going live." },
   { icon: BadgeCheck, title: "Verified badge on profiles", body: "Clear signal that this faculty cleared our checks." },
-  { icon: Globe, title: "Worldwide — local or online", body: "Find tutors near you or connect online from any country — slots show in your time zone." },
+  { icon: BookOpen, title: "200+ tutors · 15+ subjects", body: "Maths, History, Coding, boards and more — search free or try Instant Connect." },
   { icon: Handshake, title: "You arrange everything", body: "Timing, fees, location — between you and the tutor only." },
 ];
 
@@ -312,12 +312,12 @@ function ParentsHero() {
           <div className="min-w-0 w-full max-w-full space-y-5 sm:space-y-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
               <LpBadge>
-                <Globe className="h-3.5 w-3.5 text-sage" />
-                Worldwide
+                <Users className="h-3.5 w-3.5 text-sage" />
+                200+ tutors
               </LpBadge>
               <LpBadge>
                 <ShieldCheck className="h-3.5 w-3.5 text-sage" />
-                Verified tutors
+                Verified profiles
               </LpBadge>
             </div>
 

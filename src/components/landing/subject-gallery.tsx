@@ -31,7 +31,7 @@ export function SubjectGallery() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold text-coral">
-              30+ subjects · zero upcharges
+              {SUBJECTS.length}+ subjects · zero upcharges
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[40px]">
               Subjects parents search.{" "}

@@ -324,7 +324,7 @@ function SearchContent() {
               </Button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            <div className="flex w-full flex-col gap-2.5 sm:gap-3">
               {results.map((t) => (
                 <SearchTeacherCard
                   key={t.id}

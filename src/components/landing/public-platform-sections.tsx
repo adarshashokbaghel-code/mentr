@@ -109,17 +109,28 @@ export function PublicPlatformSections() {
                 <h3 className="text-lg font-bold text-ink">Mentr Learn</h3>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
-                Mentr Learn is a free path for Class 3–5 covering computer
-                science ideas and age-appropriate AI literacy. Public pages
-                describe the syllabus and goals before you enroll, so parents
-                can decide if it fits without creating an account first.
+                <strong className="font-semibold text-ink">Mentr Learn</strong>{" "}
+                (on{" "}
+                <Link href="/learn" className="font-semibold text-coral hover:underline">
+                  mentr.in/learn
+                </Link>
+                ) is free coding for Class 3–5 kids — computer science, AI
+                literacy, and math-for-coding across 60 modules. Narrated
+                lessons, Build Arena, Practice, and Problem of the Day. ₹0
+                forever. Parents can read the syllabus before enrolling; no
+                credit card.
               </p>
-              <Link
-                href="/learn"
-                className="mt-4 inline-block text-sm font-semibold text-coral hover:underline"
-              >
-                Explore Mentr Learn →
-              </Link>
+              <div className="mt-4 flex flex-wrap gap-4 text-sm font-semibold">
+                <Link href="/learn" className="text-coral hover:underline">
+                  Open Mentr Learn →
+                </Link>
+                <Link href="/learn/start" className="text-coral hover:underline">
+                  Enroll free →
+                </Link>
+                <Link href="/learn/syllabus" className="text-coral hover:underline">
+                  Syllabus →
+                </Link>
+              </div>
             </article>
           ) : (
             <article>

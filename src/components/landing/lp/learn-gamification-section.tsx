@@ -2,9 +2,10 @@
 
 import { GUIDE_LINES } from "@/lib/learn-assets";
 import { cn } from "@/lib/utils";
-import { Flame, Lock, Play, Video } from "lucide-react";
+import { Flame, Lock, Video } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState, type CSSProperties } from "react";
+import { LearnDemoVideo } from "./learn-demo-video";
 import { LearnDino } from "./learn-dino";
 import { LEARN_SHELL } from "./learn-shell";
 
@@ -112,33 +113,21 @@ function VideoModuleCard() {
           </span>
           <div>
             <p className="text-[11px] font-bold uppercase tracking-wider text-[#ffb27a]">
-              Gamified video module
+              Sample lesson
             </p>
-            <p className="text-[14px] font-bold text-white">What Is a Computer?</p>
+            <p className="text-[14px] font-bold text-white">Module A1 · CS Basics</p>
           </div>
         </div>
-        <span className="learn-play-pulse rounded-full bg-[#ff6a1a] px-2.5 py-1 text-[11px] font-bold text-white">
+        <span className="rounded-full bg-[#ff6a1a] px-2.5 py-1 text-[11px] font-bold text-white">
           +10 XP
         </span>
       </div>
-      <div className="relative mx-4 mb-3 aspect-[16/9] overflow-hidden rounded-xl bg-gradient-to-br from-[#2a3548] via-[#1c2434] to-[#0f3d38]">
-        <div className="learn-video-scan pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div className="learn-play-pulse flex h-12 w-12 items-center justify-center rounded-full bg-[#ff6a1a] text-white">
-            <Play className="h-5 w-5 fill-current" />
-          </div>
-          <p className="mt-3 text-[12px] font-semibold text-white/80">Narrated · 3 min</p>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 px-3 pb-2.5 pt-8">
-          <div className="h-1 overflow-hidden rounded-full bg-white/15">
-            <div className="learn-video-progress h-full rounded-full bg-[#ff6a1a]" />
-          </div>
-          <p className="mt-1.5 text-[11px] font-bold text-white/55">Finish video · +10 XP</p>
-        </div>
+      <div className="mx-4 mb-3 overflow-hidden rounded-xl">
+        <LearnDemoVideo className="aspect-[16/9]" autoPlay={false} compact />
       </div>
       <p className="px-4 pb-4 text-[13px] leading-relaxed text-white/65">
-        Every CS, AI, and Math lesson is a short narrated video. Finish it and XP lands — then 10
-        practice questions keep the streak.
+        Tap play to watch the real Module A1 narrated lesson. Finish it in the app and XP lands —
+        then practice questions keep the streak.
       </p>
     </div>
   );

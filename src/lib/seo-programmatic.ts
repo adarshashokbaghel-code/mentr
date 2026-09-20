@@ -115,19 +115,48 @@ export const BOARD_COMBO_PAGES: {
   { board: "state-board", level: "10", subject: "Mathematics" },
 ];
 
-/** City × subject (top subjects per launch city) */
+/** High-intent subjects for Bengaluru (parent demand queries) */
+export const BENGALURU_SEO_SUBJECTS = [
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "Biology",
+  "English",
+  "Coding",
+  "Computer Science",
+  "History",
+  "Geography",
+  "Economics",
+  "Accountancy",
+] as const;
+
+/** Core subjects for other launch cities */
+const OTHER_CITY_SEO_SUBJECTS = [
+  "Mathematics",
+  "Physics",
+  "Chemistry",
+  "English",
+  "Coding",
+  "Biology",
+  "History",
+] as const;
+
+/** City × subject (curated — no full cross-product spam) */
 export const CITY_SUBJECT_PAGES: { city: SeoCitySlug; subject: string }[] =
-  SEO_CITIES.flatMap((city) =>
-    (
-      [
-        "Mathematics",
-        "Physics",
-        "Chemistry",
-        "English",
-        "Coding",
-      ] as const
-    ).map((subject) => ({ city: city.slug, subject })),
-  );
+  SEO_CITIES.flatMap((city) => {
+    const subjects =
+      city.slug === "bengaluru"
+        ? BENGALURU_SEO_SUBJECTS
+        : OTHER_CITY_SEO_SUBJECTS;
+    return subjects.map((subject) => ({ city: city.slug, subject }));
+  });
+
+export const INSTANT_CONNECT_CTA = {
+  label: "Try Instant Connect",
+  href: "/parent/signup?next=/parent/dashboard%23instant-connect",
+  blurb:
+    "Need a tutor today? Instant Connect matches you with verified mentors in minutes — free to try.",
+};
 
 export function classSubjectPath(level: ClassLevel, subject: string): string {
   return `/class/${level}/${slugify(subject)}-tutors`;
@@ -291,16 +320,43 @@ export function cityFaqs(cityName: string, local: boolean): HubFaq[] {
     {
       question: `How do I find tutors in ${cityName}?`,
       answer: local
-        ? `Browse verified tutors across ${cityName} by subject and area on Mentr. Filter by open slots and send a free connect request.`
+        ? `Browse verified tutors across ${cityName} by subject and area on Mentr. Filter by open slots and send a free connect request — or use Instant Connect for a fast match.`
         : `Mentr lists online tutors who work with ${cityName} families — video sessions in your time zone. Post a requirement to get pitches from tutors who serve ${cityName}.`,
     },
     {
       question: `Is Mentr free for parents in ${cityName}?`,
-      answer: `Yes. Search, shortlist, connect, and post requirements are free. Mentr takes no commission on tuition fees.`,
+      answer: `Yes. Search, shortlist, connect, Instant Connect, and post requirements are free. Mentr takes no commission on tuition fees.`,
     },
     {
       question: `Home tutor vs online tutor in ${cityName}?`,
       answer: `Many families mix both — home visits for tests and online doubt-clearing on weekdays. Mentr profiles show teaching mode so you can filter before connecting.`,
+    },
+  ];
+}
+
+export function citySubjectFaqs(
+  subject: string,
+  cityName: string,
+  local: boolean,
+): HubFaq[] {
+  return [
+    {
+      question: `How many ${subject} tutors are available in ${cityName}?`,
+      answer: local
+        ? `Mentr lists verified ${subject} tutors across ${cityName} — home and online. Browse profiles below for rates, experience, and areas, then connect free or try Instant Connect.`
+        : `Mentr lists online ${subject} tutors who work with ${cityName} families. Compare profiles, then connect free or post a requirement.`,
+    },
+    {
+      question: `What do ${subject} tutors in ${cityName} typically charge?`,
+      answer: `Fees vary by experience, board, and home vs online. Where tutors share a rate you’ll see ₹/hr on the card. Session fees are arranged directly — Mentr takes no commission.`,
+    },
+    {
+      question: `Can I get a ${subject} tutor online in ${cityName}?`,
+      answer: `Yes. Many ${subject} tutors offer online sessions. Look for the Online badge on profiles, or use Instant Connect to match faster.`,
+    },
+    {
+      question: `How do I hire a ${subject} tutor on Mentr?`,
+      answer: `Open a profile → send a free connect request → WhatsApp unlocks after they accept. Or post your requirement / use Instant Connect and let tutors come to you.`,
     },
   ];
 }

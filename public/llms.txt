@@ -35,6 +35,7 @@
 
 ## Wave-1 parent guides (organic)
 
+- https://mentr.in/blog/what-is-mentr-learn
 - https://mentr.in/blog/free-computer-science-class-3-5-kids-india
 - https://mentr.in/blog/ai-for-kids-class-3-5-what-to-learn
 - https://mentr.in/blog/block-coding-for-kids-no-typing

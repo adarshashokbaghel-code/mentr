@@ -6,13 +6,21 @@ import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentr by Paprly FAQ — Verification, Fees & How Connect Requests Work",
+  title: "Mentr by Paprly FAQ — Fees, Learn & How Connect Requests Work",
   description:
-    "Answers on tutor verification, WhatsApp contact, fees, connect requests, and how Mentr by Paprly stays 100% free for parents and faculty worldwide.",
+    "FAQ for Mentr by Paprly: tutor verification, WhatsApp connect, zero fees, and Mentr Learn (mentr.in/learn) — free Class 3–5 coding for kids.",
   keywords: [
     "Mentr by Paprly FAQ",
     "Paprly Mentr",
+    "What is Mentr Learn",
+    "Learn by Mentr",
+    "mentr.in/learn",
+    "is Mentr Learn free",
     "is Mentr free",
+    "is Mentr open source",
+    "who created Mentr",
+    "Adarsh Singh Mentr",
+    "contribute to Mentr",
     "how to find tutor online",
     "tutor verification",
     "UrbanPro alternative",
@@ -21,9 +29,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/faq" },
   openGraph: {
-    title: "Mentr by Paprly FAQ — 100% free tutor & mentor finder",
+    title: "Mentr by Paprly FAQ — free tutors + Mentr Learn",
     description:
-      "How Mentr by Paprly stays completely free for parents, tutors, and mentors — verification, WhatsApp contact, and zero fees explained.",
+      "How Mentr stays free for parents and faculty — plus what Mentr Learn is at mentr.in/learn (Class 3–5 coding, ₹0).",
     url: absoluteUrl("/faq"),
     type: "website",
   },

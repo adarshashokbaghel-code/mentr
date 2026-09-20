@@ -72,6 +72,7 @@ function WatchStage({
             controls
             playsInline
             preload="metadata"
+            autoPlay
             onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
             onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
             onEnded={() => setEnded(true)}

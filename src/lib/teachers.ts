@@ -84,6 +84,9 @@ export const SUBJECTS = [
   "Computer Science",
   "Coding",
   "Biology",
+  "History",
+  "Geography",
+  "Accountancy",
   "Exam Prep",
   "Career Mentoring",
   "Economics",
@@ -169,6 +172,22 @@ function matchesMode(teacher: Teacher, mode: ModeFilter): boolean {
 /** Live faculty only — no static demo tutors/mentors. */
 export const TEACHERS: Teacher[] = [];
 
+
+export function modeLabels(teacher: Pick<Teacher, "modes">): string[] {
+  const modes = teacher.modes || [];
+  const labels: string[] = [];
+  if (modes.includes("online")) labels.push("Online");
+  if (modes.includes("student_home") || modes.includes("tutor_home")) {
+    labels.push("Home");
+  }
+  if (labels.length === 0) labels.push("Flexible");
+  return labels;
+}
+
+export function formatHourlyRate(rate?: number | null): string | null {
+  if (rate == null || !Number.isFinite(rate) || rate <= 0) return null;
+  return `₹${Math.round(rate)}/hr`;
+}
 
 export type SearchSort =
   | "relevance"
