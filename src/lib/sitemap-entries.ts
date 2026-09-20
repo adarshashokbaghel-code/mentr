@@ -56,12 +56,12 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/parents", 0.9, "weekly"),
     ...(LEARN_PUBLIC
       ? [
-          entry("/learn", 0.9, "weekly"),
+          entry("/learn", 1, "daily"),
           ...LEARN_GEO_SEGMENTS.map((segment) =>
-            entry(learnPathFor(segment), 0.88, "weekly"),
+            entry(learnPathFor(segment), 0.95, "weekly"),
           ),
-          entry("/learn/syllabus", 0.8, "weekly"),
-          entry("/learn/start", 0.85, "weekly"),
+          entry("/learn/syllabus", 0.9, "weekly"),
+          entry("/learn/start", 0.95, "daily"),
         ]
       : []),
     entry("/for-faculty", 0.9, "weekly"),
@@ -83,7 +83,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     ),
     ...BLOG_POSTS.map((p) => entry(`/blog/${p.slug}`, 0.7, "monthly")),
     entry("/about", 0.7, "monthly"),
-    entry("/open-source", 0.75, "monthly"),
+    entry("/open-source", 0.9, "weekly"),
     entry("/editorial-policy", 0.6, "monthly"),
     entry("/contact", 0.7, "monthly"),
     entry("/request-feature", 0.7, "monthly"),

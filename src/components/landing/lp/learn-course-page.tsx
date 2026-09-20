@@ -30,6 +30,7 @@ import { useAuth } from "@/components/auth/auth-provider";
 import {
   fetchLearnEnrollment,
   LEARN_APP_HREF,
+  readLearnEnrollmentLocal,
 } from "@/lib/learn-enroll";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -311,8 +312,9 @@ export function LearnCoursePage() {
     }
     setCheckingEnroll(true);
     try {
+      if (readLearnEnrollmentLocal()) setEnrolled(true);
       const enrollment = await fetchLearnEnrollment();
-      setEnrolled(!!enrollment);
+      setEnrolled(!!enrollment || !!readLearnEnrollmentLocal());
     } finally {
       setCheckingEnroll(false);
     }
@@ -326,8 +328,8 @@ export function LearnCoursePage() {
   useEffect(() => {
     if (authLoading || checkingEnroll) return;
     if (searchParams?.get("enroll") === "1") {
-      if (enrolled) {
-        router.replace(LEARN_APP_HREF);
+      if (enrolled || readLearnEnrollmentLocal()) {
+        window.location.assign(LEARN_APP_HREF);
         return;
       }
       setEnrollOpen(true);

@@ -9,7 +9,6 @@ import {
   CalendarDays,
   ListChecks,
   Mail,
-  Play,
   Sparkles,
   Trophy,
   Video,
@@ -17,6 +16,7 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { LearnAnimatedHero } from "./learn-animated-hero";
+import { LearnDemoVideo } from "./learn-demo-video";
 import { LearnHeroContent } from "./learn-hero-content";
 import { LearnStatsSlider } from "./learn-stats-slider";
 import { LEARN_SHELL } from "./learn-shell";
@@ -61,21 +61,7 @@ function LoopStepMock({ step }: { step: number }) {
   if (step === 0) {
     return (
       <div className="overflow-hidden rounded-2xl border-[3px] border-ink bg-ink shadow-[5px_5px_0_0_#1c1a17]">
-        <div className="relative aspect-video bg-gradient-to-br from-coral-wash via-lavender/30 to-sage-wash">
-          <div className="learn-video-scan pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <div className="learn-play-pulse flex h-14 w-14 items-center justify-center rounded-full border-[3px] border-ink bg-coral text-white">
-              <Play className="h-7 w-7 fill-current" />
-            </div>
-            <p className="mt-3 text-sm font-bold text-ink">What Is a Computer?</p>
-          </div>
-          <div className="absolute bottom-0 left-0 right-0 px-3 pb-2 pt-5">
-            <div className="h-1.5 overflow-hidden rounded-full bg-ink/15">
-              <div className="learn-video-progress h-full rounded-full bg-coral" />
-            </div>
-            <p className="mt-1 text-[10px] font-bold text-muted">3 min · narrated · +10 XP</p>
-          </div>
-        </div>
+        <LearnDemoVideo className="aspect-video" compact />
       </div>
     );
   }

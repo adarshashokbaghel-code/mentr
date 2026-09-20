@@ -4,32 +4,33 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function SearchGridSkeleton() {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {Array.from({ length: 10 }).map((_, index) => (
+    <div className="flex w-full flex-col gap-2.5 sm:gap-3">
+      {Array.from({ length: 6 }).map((_, index) => (
         <div
           key={index}
-          className="overflow-hidden rounded-xl border border-hairline bg-white shadow-xs"
+          className="w-full overflow-hidden rounded-xl border border-hairline bg-white p-3 sm:p-3.5 lg:p-4"
         >
-          {/* Image placeholder */}
-          <Skeleton className="aspect-[4/3] w-full" />
-
-          {/* Card body */}
-          <div className="p-3">
-            <div className="flex items-center justify-between gap-2">
-              <Skeleton className="h-4 w-28" />
-              <Skeleton className="h-3 w-8" />
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+            <Skeleton className="h-[72px] w-[72px] shrink-0 rounded-xl sm:h-[88px] sm:w-[88px]" />
+            <div className="min-w-0 flex-1 space-y-2">
+              <Skeleton className="h-5 w-44" />
+              <div className="flex gap-1.5">
+                <Skeleton className="h-5 w-16 rounded-full" />
+                <Skeleton className="h-5 w-16 rounded-full" />
+                <Skeleton className="h-5 w-14 rounded-full" />
+              </div>
+              <Skeleton className="h-3.5 w-4/5 max-w-lg" />
+              <Skeleton className="h-3 w-3/5 max-w-md" />
+              <div className="flex gap-1.5">
+                <Skeleton className="h-5 w-24 rounded-md" />
+                <Skeleton className="h-5 w-28 rounded-md" />
+                <Skeleton className="h-5 w-20 rounded-md" />
+              </div>
             </div>
-            <Skeleton className="mt-2 h-3 w-36" />
-
-            {/* Badges / tags placeholder */}
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              <Skeleton className="h-5 w-14" />
-              <Skeleton className="h-5 w-16" />
-            </div>
-
-            {/* Card bottom action */}
-            <div className="mt-4 border-t border-hairline pt-3">
-              <Skeleton className="h-8 w-full" />
+            <div className="hidden w-[148px] shrink-0 flex-col items-end gap-2 border-l border-hairline pl-4 sm:flex">
+              <Skeleton className="h-6 w-20" />
+              <Skeleton className="h-9 w-full rounded-lg" />
+              <Skeleton className="h-8 w-full rounded-lg" />
             </div>
           </div>
         </div>

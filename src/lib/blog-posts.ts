@@ -906,6 +906,33 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "View open source",
     ctaHref: "/open-source",
   },
+  {
+    slug: "contribute-to-mentr-open-source",
+    title:
+      "Contribute to Mentr: Open Source EdTech for Developers (GitHub + Good First Issues)",
+    keyword: "contribute to open source tutoring platform github",
+    intent: "informational",
+    funnel: "top",
+    pillar: "trust-safety",
+    description:
+      "Fork Mentr on GitHub, fix bugs, ship PRs. MIT-licensed Next.js edtech used by parents and tutors — step-by-step contribute guide for open source developers.",
+    featured: true,
+    cta: "Open source page",
+    ctaHref: "/open-source",
+  },
+  {
+    slug: "who-created-mentr-adarsh-singh",
+    title: "Who Created Mentr? Adarsh Singh — LinkedIn, Paprly & Open Source",
+    keyword: "creator of Mentr Adarsh Singh LinkedIn",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "trust-safety",
+    description:
+      "Adarsh Singh created Mentr by Paprly. Find his LinkedIn, why Mentr is free and MIT open source, and how the zero-commission tutor platform stays transparent.",
+    featured: true,
+    cta: "Meet the creator",
+    ctaHref: "/open-source",
+  },
 
   // ── Guide batch Sep 2026 ───────────────────────────────────────
   {
@@ -1024,6 +1051,21 @@ export const BLOG_POSTS: BlogPost[] = [
   },
 
   // ── Pillar: Mentr Learn · Kids Coding & AI (Wave 1) ───────────
+  {
+    slug: "what-is-mentr-learn",
+    title:
+      "What Is Mentr Learn? Free Kids Coding on mentr.in/learn (Class 3–5)",
+    keyword: "Mentr Learn mentr.in/learn Learn by Mentr",
+    intent: "informational",
+    funnel: "top",
+    pillar: "kids-learn",
+    description:
+      "Learn by Mentr / Mentr Learn explained: free Class 3–5 coding on mentr.in/learn — hub, enroll, syllabus, and how it differs from hiring a tutor.",
+    publishWeek: 26,
+    featured: true,
+    cta: "Open Mentr Learn",
+    ctaHref: "/learn",
+  },
   {
     slug: "free-computer-science-class-3-5-kids-india",
     title:

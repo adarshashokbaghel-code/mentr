@@ -14,6 +14,7 @@ import { ADSENSE_QUALITY_BATCH } from "./adsense-quality-batch";
 import { SEO_GROWTH_SEP2026 } from "./seo-growth-sep2026";
 import { TOOLS_SEO_BATCH } from "./tools-seo-batch";
 import { INSTANT_CONNECT_ARTICLES } from "./instant-connect";
+import { OPEN_SOURCE_SEO_ARTICLES } from "./open-source-seo";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
@@ -32,6 +33,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...SEO_GROWTH_SEP2026,
   ...TOOLS_SEO_BATCH,
   ...INSTANT_CONNECT_ARTICLES,
+  ...OPEN_SOURCE_SEO_ARTICLES,
 };
 
 export function getArticleContent(slug: string): ArticleContent {

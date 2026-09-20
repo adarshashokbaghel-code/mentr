@@ -2,7 +2,7 @@
 
 import { TrackedLink } from "@/components/marketing/tracked-link";
 import { trackMarketingEvent } from "@/lib/marketing-client";
-import { LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
+import { LEARN_APP_HREF, LEARN_SIGNUP_HREF } from "@/lib/learn-curriculum";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 
@@ -80,6 +80,24 @@ export function LearnStartButton({
       >
         {inner}
       </button>
+    );
+  }
+
+  // Learning app is auth-gated — hard navigate avoids soft-router bounce loops.
+  if (href === LEARN_APP_HREF || href.startsWith(`${LEARN_APP_HREF}?`)) {
+    return (
+      <a
+        href={href}
+        className={cn(ctaClass, className)}
+        onClick={(e) => {
+          e.preventDefault();
+          trackClick(href);
+          onClick?.();
+          window.location.assign(href);
+        }}
+      >
+        {inner}
+      </a>
     );
   }
 

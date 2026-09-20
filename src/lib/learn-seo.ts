@@ -20,12 +20,16 @@ export const LEARN_FACT_SHEET = {
   hubPath: "/learn",
   syllabusPath: "/learn/syllabus",
   oneLiner:
-    "Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD, ₹0 forever.",
+    "Mentr Learn (mentr.in/learn) — also called Mentr Starter — is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding: 60-module syllabus, narrated lessons, Build Arena, Practice & POTD, ₹0 forever.",
   notIncluded:
     "Typed Python/HTML, hardware insides, competitive coding, adult AI fear content, Class 6+ algebra-first units.",
 } as const;
 
 export const LEARN_START_KEYWORDS = [
+  "Mentr Learn enroll",
+  "Mentr Learn",
+  "mentr.in/learn/start",
+  "Learn by Mentr enroll",
   "enroll Mentr Learn free",
   "free coding course Class 3-5",
   "coding for kids Class 5 free",
@@ -39,8 +43,9 @@ export const LEARN_START_KEYWORDS = [
 ];
 
 export const LEARN_SYLLABUS_KEYWORDS = [
-  "Class 3-5 coding syllabus",
   "Mentr Learn syllabus",
+  "mentr.in/learn/syllabus",
+  "Class 3-5 coding syllabus",
   "CS AI Math kids curriculum",
   "parent coding syllabus PDF",
   "computer science Class 3-5 India",

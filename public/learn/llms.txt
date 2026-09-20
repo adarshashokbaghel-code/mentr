@@ -14,6 +14,7 @@ Australia: https://mentr.in/learn/australia
 Sri Lanka: https://mentr.in/learn/sri-lanka
 Pakistan: https://mentr.in/learn/pakistan
 Guides: https://mentr.in/blog/category/kids-learn
+What is Mentr Learn: https://mentr.in/blog/what-is-mentr-learn
 
 Wave-2 highlights:
 - https://mentr.in/blog/coding-for-kids-dubai-uae-online

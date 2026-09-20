@@ -441,6 +441,47 @@ export function deleteAdminMarketingLink(
   );
 }
 
+export type FeaturedAdminTeacher = {
+  id: string;
+  name: string;
+  email: string;
+  subjects: string[];
+  area: string;
+  city: string;
+  imageUrl: string;
+  verified: boolean;
+  hourlyRate: number | null;
+  profileComplete: boolean;
+};
+
+export type FeaturedTutorsState = {
+  ids: string[];
+  selected: FeaturedAdminTeacher[];
+  max: number;
+};
+
+export function fetchAdminFeaturedTutors(key: string) {
+  return adminFetch<FeaturedTutorsState>(key, "/api/admin/featured-tutors");
+}
+
+export function searchAdminFeaturedTutors(key: string, q: string) {
+  return adminFetch<{ teachers: FeaturedAdminTeacher[] }>(
+    key,
+    `/api/admin/featured-tutors/search?q=${encodeURIComponent(q)}`,
+  );
+}
+
+export function saveAdminFeaturedTutors(
+  key: string,
+  ids: string[],
+  adminPass: string,
+) {
+  return adminFetch<FeaturedTutorsState>(key, "/api/admin/featured-tutors", {
+    method: "PUT",
+    body: JSON.stringify({ ids, adminPass }),
+  });
+}
+
 export function fetchMessengerTemplates(key: string) {
   return adminFetch<{ templates: MessengerTemplateMeta[] }>(
     key,

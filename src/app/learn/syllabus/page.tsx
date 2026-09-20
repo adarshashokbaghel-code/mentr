@@ -13,9 +13,9 @@ import {
 import { hubOpenGraph } from "@/lib/seo";
 import type { Metadata } from "next";
 
-const TITLE = "Class 3–5 parent syllabus — CS, AI & Math | Mentr Learn";
+const TITLE = "Mentr Learn Syllabus — Class 3–5 CS, AI & Math | mentr.in";
 const DESCRIPTION =
-  "Parent guide to Mentr Learn Class 3–5: 60-module CS, AI & Math syllabus — narrated lessons, quizzes, Build Arena, Practice & POTD. Download the PDF. ₹0 forever.";
+  "Mentr Learn parent syllabus (mentr.in/learn/syllabus): 60-module CS, AI & Math for Class 3–5 — narrated lessons, quizzes, Build Arena. Download the PDF. ₹0 forever.";
 
 export const metadata: Metadata = {
   title: TITLE,

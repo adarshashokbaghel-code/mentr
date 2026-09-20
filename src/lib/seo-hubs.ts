@@ -207,6 +207,12 @@ export function subjectIntro(subject: string): string {
       "Career guidance and spoken-skills mentors for teens and young adults in Bengaluru — free to search and connect.",
     Economics:
       "Class 11–12 Economics and board-exam tutors across Bengaluru — verified profiles, no agent fees.",
+    History:
+      "School History and Social Science tutors across Bengaluru — CBSE, ICSE, and state board. Compare rates, areas, and teaching mode, then connect free.",
+    Geography:
+      "Geography and Social Science tutors across Bengaluru for Classes 6–12. Browse verified profiles and connect free on Mentr.",
+    Accountancy:
+      "Class 11–12 Accountancy and commerce tutors across Bengaluru — verified profiles with rates where shared.",
     Music:
       "Music basics and school-level tutoring in Bengaluru — browse verified mentors by area.",
     "Sports Coaching":

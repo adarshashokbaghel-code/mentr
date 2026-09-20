@@ -22,7 +22,6 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 
@@ -42,7 +41,6 @@ export function LearnEnrollModal({
   onEnrolled,
 }: LearnEnrollModalProps) {
   const { user, loading: authLoading, setUser, logout } = useAuth();
-  const router = useRouter();
   const [phase, setPhase] = useState<Phase>("auth");
   const [tab, setTab] = useState<AuthTab>("signup");
   const [step, setStep] = useState<AuthStep>("email");
@@ -191,8 +189,10 @@ export function LearnEnrollModal({
   }
 
   function goToLms() {
+    // Hard navigate so LmsAuthGate mounts cleanly with local enrollment
+    // already saved — soft push + modal close was bouncing back to ?enroll=1.
     onClose();
-    router.push(LEARN_APP_HREF);
+    window.location.assign(LEARN_APP_HREF);
   }
 
   function handleDownloadReceipt() {

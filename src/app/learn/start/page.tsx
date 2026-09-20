@@ -12,9 +12,9 @@ import { hubOpenGraph } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-const TITLE = "Enroll free — Mentr Learn Class 3–5 (CS, AI & Math)";
+const TITLE = "Mentr Learn — Enroll Free Class 3–5 (CS, AI & Math) | mentr.in";
 const DESCRIPTION =
-  "Enroll in Mentr Starter free. Class 3–5 CS, AI & Math — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD. ₹999 → ₹0 forever. Parent email only — no credit card.";
+  "Enroll in Mentr Learn (mentr.in/learn/start) free. Class 3–5 CS, AI & Math — 60 modules, Build Arena, Practice & POTD. ₹999 → ₹0 forever. Parent email only — no credit card.";
 
 export const metadata: Metadata = {
   title: TITLE,

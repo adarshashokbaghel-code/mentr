@@ -2,15 +2,18 @@ import { SeoHubPage } from "@/components/seo/hub-page";
 import { SITE_NAME, hubOpenGraph } from "@/lib/seo";
 import {
   CITY_SUBJECT_PAGES,
+  INSTANT_CONNECT_CTA,
   REQUIREMENT_CTA,
   SEO_CITIES,
   cityFaqs,
   cityPath,
   citySubjectPath,
-  teachersForCity,
 } from "@/lib/seo-programmatic";
+import { liveTeachersForCity } from "@/lib/seo-live-teachers";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+export const revalidate = 300;
 
 export function generateStaticParams() {
   return SEO_CITIES.map((c) => ({ city: c.slug }));
@@ -25,7 +28,7 @@ export async function generateMetadata({
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   if (!city) return { title: "Not found", robots: { index: false } };
   const title = `Tutors in ${city.name} — Verified Home & Online`;
-  const description = `Find tutors in ${city.name} on ${SITE_NAME}. Browse verified profiles by subject, connect free, or post your requirement and let tutors come to you.`;
+  const description = `Find tutors in ${city.name} on ${SITE_NAME}. Browse verified profiles by subject, connect free, try Instant Connect, or post your requirement.`;
   const path = cityPath(city.slug);
   return {
     title,
@@ -44,7 +47,7 @@ export default async function CityTutorsHubPage({
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   if (!city) notFound();
 
-  const teachers = teachersForCity(city.slug);
+  const teachers = await liveTeachersForCity(city.slug);
   const path = cityPath(city.slug);
   const subjects = [
     ...new Set(
@@ -53,6 +56,7 @@ export default async function CityTutorsHubPage({
       ),
     ),
   ];
+  const searchHref = `/search?q=${encodeURIComponent(city.name)}`;
 
   return (
     <SeoHubPage
@@ -60,8 +64,8 @@ export default async function CityTutorsHubPage({
       title={`Tutors in ${city.name}`}
       intro={
         city.local
-          ? `Browse verified tutors across ${city.name} — home visits and online sessions for CBSE, ICSE, and IGCSE. Every profile shows subjects, experience, and open slots. Can't find the right fit? Post your requirement and let tutors pitch you.`
-          : `${city.name} families use Mentr for verified online tutors in their time zone — plus home tutors where available. Browse subject specialists below or post a requirement naming ${city.name}, class, and board.`
+          ? `Browse verified tutors across ${city.name} — home visits and online sessions for CBSE, ICSE, and IGCSE. Every profile shows subjects, rates where shared, experience, and open slots.`
+          : `${city.name} families use Mentr for verified online tutors in their time zone — plus home tutors where available. Browse below or post a requirement naming ${city.name}, class, and board.`
       }
       teachers={teachers}
       schemaPath={path}
@@ -70,14 +74,18 @@ export default async function CityTutorsHubPage({
         { label: "Cities", href: "/find-tutors-near-me" },
         { label: city.name },
       ]}
-      ctaHref={`/search?q=${encodeURIComponent(city.name)}`}
+      ctaHref={searchHref}
       ctaLabel={`Search tutors in ${city.name}`}
+      mapHref={`${searchHref}&view=map`}
       promoHref="/find-tutors-near-me"
       promoLabel="Find tutors near you"
       faqs={cityFaqs(city.name, city.local)}
       requirementHref={REQUIREMENT_CTA.href}
       requirementLabel={REQUIREMENT_CTA.label}
       requirementBlurb={REQUIREMENT_CTA.blurb}
+      instantHref={INSTANT_CONNECT_CTA.href}
+      instantLabel={INSTANT_CONNECT_CTA.label}
+      instantBlurb={INSTANT_CONNECT_CTA.blurb}
       emptyMessage={
         city.local
           ? undefined

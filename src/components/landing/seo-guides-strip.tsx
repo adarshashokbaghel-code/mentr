@@ -38,6 +38,11 @@ const GUIDES = [
     desc: "Parent or tutor — OTP sign-in",
   },
   {
+    label: "What is Mentr Learn?",
+    href: "/blog/what-is-mentr-learn",
+    desc: "Learn by Mentr on mentr.in/learn explained",
+  },
+  {
     label: "Mentr Learn (Class 3–5)",
     href: "/learn",
     desc: "Free CS, AI & Math foundation",
