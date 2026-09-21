@@ -3,6 +3,16 @@ import { Button } from "@/components/ui/button";
 
 const GUIDES = [
   {
+    label: "What is Snap & Grade?",
+    href: "/blog/what-is-snap-and-grade",
+    desc: "CBSE photo marking for Class 9–12 — 100 free credits",
+  },
+  {
+    label: "Snap & Grade hub",
+    href: "/snapandgrade",
+    desc: "Photograph your notebook. See CBSE step marks.",
+  },
+  {
     label: "Create free parent account",
     href: "/parent/signup",
     desc: "Register free — then hire verified tutors",

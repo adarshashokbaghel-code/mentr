@@ -8,6 +8,60 @@ import {
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 
 export function MarketplaceArticleCta({ post }: { post: BlogPost }) {
+  const isSnapGrade =
+    post.ctaHref.startsWith("/snapandgrade") ||
+    post.slug.includes("snap-and-grade") ||
+    post.slug.includes("cbse-marking") ||
+    post.slug.includes("ncert-answers-from-a-photo") ||
+    post.slug.includes("lose-marks-on-steps");
+
+  if (isSnapGrade) {
+    return (
+      <aside className="mt-10 rounded-xl border-2 border-coral/30 bg-coral/5 p-5 sm:p-6">
+        <p className="text-sm font-bold uppercase tracking-wide text-coral">
+          Snap &amp; Grade
+        </p>
+        <h2 className="mt-2 text-lg font-bold text-ink sm:text-xl">
+          Photograph your notebook. See CBSE step marks.
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[15px]">
+          Class 9–12 Maths, Science, and Physics. 100 free credits once. Then
+          from ₹1. Not ChatGPT — the marking key is already on the question.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <TrackedLink
+            href={post.ctaHref || "/snapandgrade/grade"}
+            slug={post.slug}
+            kind="blog"
+            content="snap-grade-cta"
+          >
+            <Button size="sm">{post.cta || "Try Snap & Grade"}</Button>
+          </TrackedLink>
+          <TrackedLink
+            href="/snapandgrade"
+            slug={post.slug}
+            kind="blog"
+            content="snap-grade-hub"
+          >
+            <Button size="sm" variant="secondary">
+              What it is
+            </Button>
+          </TrackedLink>
+          <TrackedLink
+            href="/blog/what-is-snap-and-grade"
+            slug={post.slug}
+            kind="blog"
+            content="snap-grade-guide"
+          >
+            <Button size="sm" variant="secondary">
+              Full guide
+            </Button>
+          </TrackedLink>
+        </div>
+      </aside>
+    );
+  }
+
   if (LEARN_PUBLIC && post.pillar === "kids-learn") {
     return (
       <aside className="mt-10 rounded-xl border-2 border-sage/40 bg-sage-wash p-5 sm:p-6">

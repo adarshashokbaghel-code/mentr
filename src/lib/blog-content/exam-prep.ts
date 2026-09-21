@@ -613,6 +613,10 @@ export const EXAM_PREP_ARTICLES: Record<string, ArticleContent> = {
         href: "/blog/board-exams-vs-competitive-exams",
       },
       {
+        label: "Grade NCERT answers from a photo",
+        href: "/blog/grade-ncert-answers-from-a-photo",
+      },
+      {
         label: "Free study timetable PDF",
         href: "/tools/study-timetable",
       },

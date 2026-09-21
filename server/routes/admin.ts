@@ -315,4 +315,185 @@ router.post("/messenger/send", requireAdminPass, async (req, res) => {
   }
 });
 
+/* ── Snap & Grade ─────────────────────────────────────────────── */
+
+router.get("/snap-grade/questions", async (_req, res) => {
+  try {
+    const { ensureSnapGradeSeed } = await import("../services/snap-grade-seed");
+    const { SnapGradeQuestion, SnapGradeEvaluation } = await import(
+      "../models/SnapGrade"
+    );
+    try {
+      await ensureSnapGradeSeed();
+    } catch (seedErr) {
+      console.warn("[admin snap-grade] seed skipped/failed:", seedErr);
+    }
+    const [questions, evalCount] = await Promise.all([
+      SnapGradeQuestion.find().sort({ sortOrder: 1 }),
+      SnapGradeEvaluation.countDocuments(),
+    ]);
+    res.json({
+      evalCount,
+      questions: questions.map((q) => ({
+        id: q._id.toString(),
+        board: q.board,
+        classLevel: q.classLevel,
+        subject: q.subject,
+        chapterNumber: q.chapterNumber,
+        chapterName: q.chapterName,
+        exercise: q.exercise,
+        questionNumber: q.questionNumber,
+        questionText: q.questionText,
+        referenceNotes: q.referenceNotes || "",
+        maxMarks: q.maxMarks,
+        rubric: q.rubric,
+        markingSchemeNotes: q.markingSchemeNotes,
+        weightSource: q.weightSource || "practice_cbse",
+        adminLocked: Boolean(q.adminLocked),
+        creditsCost: q.creditsCost,
+        active: q.active,
+        sortOrder: q.sortOrder,
+        updatedAt: q.updatedAt,
+      })),
+    });
+  } catch (err) {
+    console.error("Admin snap-grade list error:", err);
+    res.status(500).json({ error: "Failed to load Snap & Grade bank" });
+  }
+});
+
+router.put(
+  "/snap-grade/questions/:id",
+  requireAdminPass,
+  async (req, res) => {
+    try {
+      const { SnapGradeQuestion } = await import("../models/SnapGrade");
+      const q = await SnapGradeQuestion.findById(req.params.id);
+      if (!q) {
+        res.status(404).json({ error: "Question not found" });
+        return;
+      }
+
+      if (Array.isArray(req.body?.rubric)) {
+        q.rubric = req.body.rubric.map(
+          (s: {
+            id?: string;
+            label?: string;
+            marks?: number;
+            criteria?: string;
+          }) => ({
+            id: String(s.id || "").trim() || "s1",
+            label: String(s.label || "").trim(),
+            marks: Number(s.marks) || 0,
+            criteria: String(s.criteria || "").trim(),
+          }),
+        );
+        q.maxMarks = q.rubric.reduce(
+          (a: number, s: { marks: number }) => a + s.marks,
+          0,
+        );
+        q.weightSource = "admin_curated";
+        q.adminLocked = true;
+      }
+      if (typeof req.body?.markingSchemeNotes === "string") {
+        q.markingSchemeNotes = req.body.markingSchemeNotes.trim();
+        q.adminLocked = true;
+        if (q.weightSource === "practice_cbse") q.weightSource = "admin_curated";
+      }
+      if (typeof req.body?.referenceNotes === "string") {
+        q.referenceNotes = req.body.referenceNotes.trim();
+      }
+      if (typeof req.body?.questionText === "string") {
+        q.questionText = req.body.questionText.trim();
+      }
+      if (typeof req.body?.creditsCost === "number") {
+        q.creditsCost = Math.max(1, Math.floor(req.body.creditsCost));
+      }
+      if (typeof req.body?.active === "boolean") {
+        q.active = req.body.active;
+      }
+      if (typeof req.body?.adminLocked === "boolean") {
+        q.adminLocked = req.body.adminLocked;
+        if (!req.body.adminLocked && q.weightSource === "admin_curated") {
+          q.weightSource = "practice_cbse";
+        }
+      }
+
+      await q.save();
+      res.json({
+        message: "Rubric updated",
+        question: {
+          id: q._id.toString(),
+          maxMarks: q.maxMarks,
+          rubric: q.rubric,
+          markingSchemeNotes: q.markingSchemeNotes,
+          referenceNotes: q.referenceNotes,
+          questionText: q.questionText,
+          creditsCost: q.creditsCost,
+          active: q.active,
+          weightSource: q.weightSource,
+          adminLocked: q.adminLocked,
+        },
+      });
+    } catch (err) {
+      console.error("Admin snap-grade update error:", err);
+      res.status(500).json({ error: "Failed to update question" });
+    }
+  },
+);
+
+router.get("/snap-grade/evaluations", async (req, res) => {
+  try {
+    const { SnapGradeEvaluation } = await import("../models/SnapGrade");
+    const limit = Math.min(Number(req.query.limit) || 50, 200);
+    const rows = await SnapGradeEvaluation.find()
+      .sort({ createdAt: -1 })
+      .limit(limit)
+      .populate("user", "email role")
+      .populate(
+        "question",
+        "classLevel chapterNumber chapterName exercise questionNumber subject maxMarks",
+      );
+    res.json({
+      evaluations: rows.map((e) => {
+        const user = e.user as unknown as {
+          email?: string;
+          role?: string;
+        } | null;
+        const question = e.question as unknown as {
+          classLevel?: number;
+          chapterNumber?: number;
+          exercise?: string;
+          questionNumber?: string;
+          subject?: string;
+          chapterName?: string;
+          maxMarks?: number;
+        } | null;
+        return {
+          id: e._id.toString(),
+          marksAwarded: e.marksAwarded,
+          maxMarks: e.maxMarks,
+          creditsDeducted: e.creditsDeducted,
+          overallFeedback: e.overallFeedback,
+          steps: e.steps,
+          imageUrl: e.imageUrl,
+          model: e.aiModel,
+          createdAt: e.createdAt,
+          userEmail: user?.email || "—",
+          userRole: user?.role || "—",
+          classLevel: question?.classLevel ?? null,
+          chapterNumber: question?.chapterNumber ?? null,
+          exercise: question?.exercise ?? null,
+          questionLabel: question
+            ? `Class ${question.classLevel} · Ch${question.chapterNumber} · Ex ${question.exercise} Q${question.questionNumber}`
+            : "—",
+        };
+      }),
+    });
+  } catch (err) {
+    console.error("Admin snap-grade evaluations error:", err);
+    res.status(500).json({ error: "Failed to load evaluations" });
+  }
+});
+
 export default router;

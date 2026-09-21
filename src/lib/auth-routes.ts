@@ -5,7 +5,7 @@ import { isPublicBrowsePath } from "@/lib/public-browse";
 export function homeFor(user: AuthUser, next?: string | null): string {
   if (user.role === "parent") {
     if (!user.profileCompleted) {
-      // Search / tutor profiles can continue — identity is collected at connect.
+      // Search / tutor profiles / Snap & Grade can continue — identity at connect.
       if (next && isPublicBrowsePath(next)) return next;
       return next
         ? `/parent/profiling?next=${encodeURIComponent(next)}`
@@ -13,5 +13,6 @@ export function homeFor(user: AuthUser, next?: string | null): string {
     }
     return next || "/search";
   }
+  if (next && isPublicBrowsePath(next)) return next;
   return user.profileCompleted ? "/dashboard" : "/profiling";
 }

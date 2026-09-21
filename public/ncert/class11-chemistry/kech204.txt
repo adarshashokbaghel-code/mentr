@@ -1,0 +1,2412 @@
+315 THE p -BLOCK ELEMENTS
+UNIT 11
+After studying this unit, you will be
+able to
+• • • • • appreciate the general trends in the
+chemistry of p -block elements;
+• • • • • describe the trends in physical and
+chemical properties of group 13 and
+14 elements;
+• • • • • explain anomalous behaviour of
+boron and carbon;
+• • • • • describe allotropic forms of carbon;
+• • • • • know the chemistry of some
+important compounds of boron,
+carbon and silicon;
+• • • • • list the important uses of group 13
+and 14 elements and their
+compounds.
+THE p -BLOCK ELEMENTS
+In p -block elements the last electron enters the outermost
+p orbital. As we know that the number of p orbitals is three
+and, therefore, the maximum number of electrons that can
+be accommodated in a set of p orbitals is six. Consequently
+there are six groups of p –block elements in the periodic
+table numbering from 13 to 18. Boron, carbon, nitrogen,
+oxygen, fluorine and helium head the groups. Their valence
+shell electronic configuration is ns
+2
+np
+1-6
+(except for He).
+The inner core of the electronic configuration may,
+however, differ. The difference in inner core of elements
+greatly influences their physical properties (such as atomic
+and ionic radii, ionisation enthalpy, etc.) as well as chemical
+properties. Consequently, a lot of variation in properties of
+elements in a group of p -block is observed. The maximum
+oxidation state shown by a p -block element is equal to the
+total number of valence electrons ( i.e., the sum of the s-
+and p- electrons). Clearly, the number of possible oxidation
+states increases towards the right of the periodic table. In
+addition to this so called group oxidation state , p- block
+elements may show other oxidation states which normally,
+but not necessarily, differ from the total number of valence
+electrons by unit of two. The important oxidation states
+exhibited by p -block elements are shown in Table 11.1. In
+boron, carbon and nitrogen families the group oxidation
+state is the most stable state for the lighter elements in the
+group. However, the oxidation state two unit less than the
+group oxidation state becomes progressively more stable
+for the heavier elements in each group. The occurrence of
+oxidation states two unit less than the group oxidation
+states are sometime attributed to the ‘ inert pair effect ’.
+The variation in properties of the p-block elements due to the
+influence of d and f electrons in the inner core of the heavier
+elements makes their chemistry interesting
+2019-20
+
+316 CHEMISTRY
+The relative stabilities of these two oxidation
+states – group oxidation state and two unit less
+than the group oxidation state – may vary from
+group to group and will be discussed at
+appropriate places.
+It is interesting to note that the non-metals
+and metalloids exist only in the p -block of the
+periodic table. The non-metallic character of
+elements decreases down the group. In fact the
+heaviest element in each p -block group is the
+most metallic in nature. This change from non-
+metallic to metallic character brings diversity
+in the chemistry of these elements depending
+on the group to which they belong.
+In general, non-metals have higher ionisation
+enthalpies and higher electronegativities than
+the metals. Hence, in contrast to metals which
+readily form cations, non-metals readily form
+anions. The compounds formed by highly
+reactive non-metals with highly reactive metals
+are generally ionic because of large differences
+in their electronegativities. On the other hand,
+compounds formed between non-metals
+themselves are largely covalent in character
+because of small differences in their
+electronegativities. The change of non-metallic
+to metallic character can be best illustrated by
+the nature of oxides they form. The non-metal
+oxides are acidic or neutral whereas metal
+oxides are basic in nature.
+The first member of p-block differs from the
+remaining members of their corresponding
+group in two major respects . First is the size
+and all other properties which depend on size.
+Thus, the lightest p -block elements show the
+same kind of differences as the lightest s -block
+elements, lithium and beryllium. The second
+important difference, which applies only to the
+p -block elements, arises from the effect of d -
+orbitals in the valence shell of heavier elements
+(starting from the third period onwards) and
+their lack in second period elements. The
+second period elements of p- groups starting
+from boron are restricted to a maximum
+covalence of four (using 2 s and three 2 p
+orbitals). In contrast, the third period elements
+of p -groups with the electronic configuration
+3 s
+2
+3 p
+n 
+have the vacant 3 d orbitals lying
+between the 3 p and the 4 s levels of energy.
+Using these d -orbitals the third period
+elements can expand their covalence above
+four. For example, while boron forms only
+[BF
+4
+]
+–
+, aluminium gives [AlF
+6
+]
+3– 
+ion. The
+presence of these d -orbitals influences the
+chemistry of the heavier elements in a number
+of other ways. The combined effect of size and
+availability of d orbitals considerably
+influences the ability of these elements to form
+π bonds. The first member of a group differs
+from the heavier members in its ability to form
+p π - p π multiple bonds to itself ( e.g., C=C, C ≡ C,
+Table 11.1 General Electronic Configuration and Oxidation States of p -Block Elements
+Group 13 14 15 16 17 18
+General
+electronic ns
+2
+np
+1 
+ns
+2
+np
+2 
+ns
+2
+np
+3 
+ns
+2
+np
+4 
+ns
+2
+np
+5 
+ns
+2
+np
+6
+configuration (1 s
+2 
+for He)
+First member
+of the B C N O F He
+group
+Group
+oxidation +3 +4 +5 +6 +7 +8
+state
+Other
+oxidation +1 +2, – 4 +3, – 3 +4, +2, –2 +5, + 3, +1, –1 +6, +4, +2
+states
+2019-20
+
+317 THE p -BLOCK ELEMENTS
+N ≡ N) and to other second row elements (e.g.,
+C=O, C=N, C ≡ N, N=O). This type of π - bonding
+is not particularly strong for the heavier
+p -block elements. The heavier elements do form
+π bonds but this involves d orbitals ( d π – p π
+or d π –d π ). As the d orbitals are of higher
+energy than the p orbitals, they contribute less
+to the overall stability of molecules than does
+p π - p π bonding of the second row elements.
+However, the coordination number in species
+of heavier elements may be higher than for
+the first element in the same oxidation state.
+For example, in +5 oxidation state both N and
+P form oxoanions : NO
+3
+– 
+(three-coordination
+with π – bond involving one nitrogen p -orbital)
+and 
+3
+4
+PO 
+− 
+(four-coordination involving s , p and
+d orbitals contributing to the π – bond). In
+this unit we will study the chemistry of group
+13 and 14 elements of the periodic table.
+11.1 GROUP 13 ELEMENTS: THE BORON
+FAMILY
+This group elements show a wide variation in
+properties. Boron is a typical non-metal,
+aluminium is a metal but shows many
+chemical similarities to boron, and gallium,
+indium, thallium and nihonium are almost
+exclusively metallic in character.
+Boron is a fairly rare element, mainly
+occurs as orthoboric acid, (H
+3
+BO
+3
+), borax,
+Na
+2
+B
+4
+O
+7
+·10H
+2
+O, and kernite, Na
+2
+B
+4
+O
+7
+·4H
+2
+O.
+In India borax occurs in Puga Valley (Ladakh)
+and Sambhar Lake (Rajasthan). The
+abundance of boron in earth crust is less than
+0.0001% by mass. There are two isotopic
+forms of boron 
+10
+B (19%) and 
+11
+B (81%).
+Aluminium is the most abundant metal and
+the third most abundant element in the earth’s
+crust (8.3% by mass) after oxygen (45.5%) and
+Si (27.7%). Bauxite, Al
+2
+O
+3
+. 2H
+2
+O and cryolite,
+Na
+3
+AlF
+6 
+are the important minerals of
+aluminium. In India it is found as mica in
+Madhya Pradesh, Karnataka, Orissa and
+Jammu. Gallium, indium and thallium are less
+abundant elements in nature. Nihonium has
+symbol Nh, atomic number 113, atomic mass
+286 g mol
+-1 
+and electronic configuration [Rn]
+5 f 
+14 
+6 d
+10 
+7 s
+2 
+7 p
+2
+. So far it has been prepared
+in small amount and half life of its most stable
+isotope is 20 seconds. Due to these reasons its
+chemistry has not been established.
+Nihonium is a synthetically prepared
+radioactive element. Here atomic, physical and
+chemical properties of elements of this group
+leaving nihonium are discussed below.
+11.1.1 Electronic Configuration
+The outer electronic configuration of these
+elements is ns
+2
+np 
+1
+. A close look at the
+electronic configuration suggests that while
+boron and aluminium have noble gas
+core, gallium and indium have noble gas plus
+10 d- electrons, and thallium has noble gas
+plus 14 f- electrons plus 10 d- electron cores.
+Thus, the electronic structures of these
+elements are more complex than for the first
+two groups of elements discussed in unit 10.
+This difference in electronic structures affects
+the other properties and consequently the
+chemistry of all the elements of this group.
+11.1.2 Atomic Radii
+On moving down the group, for each successive
+member one extra shell of electrons is added
+and, therefore, atomic radius is expected to
+increase. However, a deviation can be seen.
+Atomic radius of Ga is less than that of Al. This
+can be understood from the variation in the
+inner core of the electronic configuration. The
+presence of additional 10 d -electrons offer
+only poor screening effect (Unit 2) for the outer
+electrons from the increased nuclear charge in
+gallium. Consequently, the atomic radius of
+gallium (135 pm) is less than that of
+aluminium (143 pm).
+11.1.3 Ionization Enthalpy
+The ionisation enthalpy values as expected
+from the general trends do not decrease
+smoothly down the group. The decrease from
+B to Al is associated with increase in size. The
+observed discontinuity in the ionisation
+enthalpy values between Al and Ga, and
+between In and Tl are due to inability of d- and
+f- electrons ,which have low screening effect, to
+compensate the increase in nuclear charge.
+The order of ionisation enthalpies, as
+expected, is ∆
+i
+H
+1
+< ∆
+i
+H
+2
+< ∆
+i
+H
+3
+. The sum of the
+first three ionisation enthalpies for each of the
+2019-20
+
+318 CHEMISTRY
+elements is very high. Effect of this will be
+apparent when you study their chemical
+properties.
+11.1.4 Electronegativity
+Down the group, electronegativity first
+decreases from B to Al and then increases
+marginally (Table 11.2). This is because of the
+discrepancies in atomic size of the elements.
+11.1.5 Physical Properties
+Boron is non-metallic in nature. It is extremely
+hard and black coloured solid. It exists in many
+allotropic forms. Due to very strong crystalline
+lattice, boron has unusually high melting point.
+Rest of the members are soft metals with low
+melting point and high electrical conductivity.
+It is worthwhile to note that gallium with
+unusually low melting point (303 K), could
+exist in liquid state during summer. Its high
+boiling point (2676 K) makes it a useful
+material for measuring high temperatures.
+Density of the elements increases down the
+group from boron to thallium.
+11.1.6 Chemical Properties
+Oxidation state and trends in chemical
+reactivity
+Due to small size of boron, the sum of its first
+three ionization enthalpies is very high. This
+prevents it to form +3 ions and forces it to form
+only covalent compounds. But as we move from
+B to Al, the sum of the first three ionisation
+enthalpies of Al considerably decreases, and
+is therefore able to form Al
+3+ 
+ions. In fact,
+aluminium is a highly electropositive metal.
+However, down the group, due to poor
+shielding effect of intervening d and f orbitals,
+the increased effective nuclear charge holds ns
+electrons tightly (responsible for inert pair
+effect ) and thereby, restricting their
+participation in bonding. As a result of this,
+only p -orbital electron may be involved in
+bonding. In fact in Ga, In and Tl, both +1 and
++3 oxidation states are observed. The relative
+stability of +1 oxidation state progressively
+increases for heavier elements: Al<Ga<In<Tl. In
+thallium +1 oxidation state is predominant
+Table 11.2 Atomic and Physical Properties of Group 13 Elements
+a
+Metallic radius, 
+b 
+6-coordination, 
+c 
+Pauling scale,
+Atomic number 5 13 31 49 81
+Atomic mass(g mol
+–1
+) 10.81 26.98 69.72 114.82 204.38
+Electronic [He]2 s
+2
+2 p
+1 
+[Ne]3 s
+2
+3 p
+1 
+[Ar]3 d
+10
+4 s
+2
+4 p
+1 
+[Kr]4 d
+10
+5 s
+2
+5 p
+1 
+[Xe]4 f
+14
+5 d
+10
+6 s
+2
+6 p
+1
+Configuration
+Atomic radius/pm
+a 
+(88) 143 135 167 170
+Ionic radius (27) 53.5 62.0 80.0 88.5
+M
+3+
+/pm
+b
+Ionic radius - - 120 140 150
+M
++
+/pm
+Ionization ∆
+i
+H
+1 
+801 577 579 558 589
+enthalpy ∆
+i
+H
+2 
+2427 1816 1979 1820 1971
+(kJ mol
+–1
+) ∆
+i
+H
+3 
+3659 2744 2962 2704 2877
+Electronegativity
+c 
+2.0 1.5 1.6 1.7 1.8
+Density /g cm
+–3 
+2.35 2.70 5.90 7.31 11.85
+at 298 K
+Melting point / K 2453 933 303 430 576
+Boiling point / K 3923 2740 2676 2353 1730
+E
+
+/ V for (M
+3+
+/M) - –1.66 –0.56 –0.34 +1.26
+E
+ 
+/ V for (M
++
+/M) - +0.55 -0.79(acid) –0.18 –0.34
+–1.39(alkali)
+Property 
+Element
+Boron Aluminium Gallium Indium Thallium
+B Al Ga In Tl
+2019-20
+
+319 THE p -BLOCK ELEMENTS
+whereas the +3 oxidation state is highly
+oxidising in character. The compounds in
++1 oxidation state, as expected from energy
+considerations, are more ionic than those in
++3 oxidation state.
+In trivalent state, the number of electrons
+around the central atom in a molecule
+of the compounds of these elements
+(e.g., boron in BF
+3
+) will be only six. Such
+electron deficient molecules have tendency
+to accept a pair of electrons to achieve stable
+electronic configuration and thus, behave as
+Lewis acids. The tendency to behave as Lewis
+acid decreases with the increase in the size
+down the group. BCl
+3 
+easily accepts a lone pair
+of electrons from ammonia to form BCl
+3
+⋅ NH
+3
+.
+Solution
+Standard electrode potential values for two
+half cell reactions suggest that aluminium
+has high tendency to make Al
+3+
+(aq) ions,
+whereas Tl
+3+ 
+is not only unstable in
+solution but is a powerful oxidising agent
+also. Thus Tl
++ 
+is more stable in solution
+than Tl
+3+
+. Aluminium being able to form
++3 ions easily, is more electropositive than
+thallium.
+(i) Reactivity towards air
+Boron is unreactive in crystalline form.
+Aluminium forms a very thin oxide layer on
+the surface which protects the metal from
+further attack. Amorphous boron and
+aluminium metal on heating in air form B
+2
+O
+3
+and Al
+2
+O
+3 
+respectively. With dinitrogen at high
+temperature they form nitrides.
+( ) ( ) ( )
+( ) ( ) ( )
+2 2 3
+2
+2E s 3O g 2E O s
+2E s N g 2EN s
+∆
+∆
++ →
++ →
+(E = element)
+The nature of these oxides varies down the
+group. Boron trioxide is acidic and reacts with
+basic (metallic) oxides forming metal borates.
+Aluminium and gallium oxides are amphoteric
+and those of indium and thallium are basic in
+their properties.
+(ii) Reactivity towards acids and alkalies
+Boron does not react with acids and alkalies
+even at moderate temperature; but aluminium
+dissolves in mineral acids and aqueous alkalies
+and thus shows amphoteric character.
+Aluminium dissolves in dilute HCl and
+liberates dihydrogen.
+2Al(s) + 6HCl (aq) → 2Al
+3+ 
+(aq) + 6Cl
+– 
+(aq)
++ 3H
+2 
+(g)
+However, concentrated nitric acid renders
+aluminium passive by forming a protective
+oxide layer on the surface.
+Aluminium also reacts with aqueous alkali
+and liberates dihydrogen.
+2Al (s) + 2NaOH(aq) + 6H
+2
+O(l)
+↓
+2 Na
++ 
+[Al(OH)
+4
+] 
+–
+(aq) + 3H
+2
+(g)
+Sodium
+tetrahydroxoaluminate(III)
+In trivalent state most of the compounds
+being covalent are hydrolysed in water. For
+example, the trichlorides on hyrolysis in water
+form tetrahedral ( )
+4
+M OH 
+−
+ 
+  
+species; the
+hybridisation state of element M is sp
+3
+.
+Aluminium chloride in acidified aqueous
+solution forms octahedral ( ) 
+3
+2 6
+Al H O 
++
+ 
+  
+ion.
+In this complex ion, the 3 d orbitals of Al are
+involved and the hybridisation state of Al is
+sp
+3
+d
+2
+.
+Problem 11.1
+Standard electrode potential values, E
+
+for Al
+3+
+/Al is –1.66 V and that of Tl
+3+
+/Tl
+is +1.26 V. Predict about the formation of
+M
+3+ 
+ion in solution and compare the
+electropositive character of the two
+metals.
+AlCl
+3 
+achieves stability by forming a dimer
+2019-20
+
+320 CHEMISTRY
+(iii) Reactivity towards halogens
+These elements react with halogens to form
+trihalides (except Tl I
+3
+).
+2E(s) + 3 X
+2 
+(g) → 2EX
+3 
+(s) (X = F, Cl, Br, I)
+Problem 11.2
+White fumes appear around the bottle of
+anhydrous aluminium chloride. Give
+reason.
+Solution
+Anhydrous aluminium chloride is
+partially hydrolysed with atmospheric
+moisture to liberate HCl gas. Moist HCl
+appears white in colour.
+11.2 IMPORTANT TRENDS AND
+ANOMALOUS PROPERTIES OF
+BORON
+Certain important trends can be observed
+in the chemical behaviour of group
+13 elements. The tri-chlorides, bromides
+and iodides of all these elements being
+covalent in nature are hydrolysed in water.
+Species like tetrahedral [M(OH)
+4
+]
+– 
+and
+octahedral [M(H
+2
+O)
+6
+]
+3+
+, except in boron, exist
+in aqueous medium.
+The monomeric trihalides, being electron
+deficient, are strong Lewis acids. Boron
+trifluoride easily reacts with Lewis bases such
+as NH
+3 
+to complete octet around boron.
+3 3 3 3
+F B :NH F B NH + → ←
+It is due to the absence of d orbitals that
+the maximum covalence of B is 4. Since the
+d orbitals are available with Al and other
+elements, the maximum covalence can be
+expected beyond 4. Most of the other metal
+halides ( e.g., AlCl
+3
+) are dimerised through
+halogen bridging ( e.g., Al
+2
+Cl
+6
+). The metal
+species completes its octet by accepting
+electrons from halogen in these halogen
+bridged molecules.
+Problem 11.3
+Boron is unable to form BF
+6
+3– 
+ion. Explain.
+Solution
+Due to non-availability of d orbitals, boron
+is unable to expand its octet. Therefore,
+the maximum covalence of boron cannot
+exceed 4.
+11.3 SOME IMPORTANT COMPOUNDS OF
+BORON
+Some useful compounds of boron are borax,
+orthoboric acid and diborane. We will briefly
+study their chemistry.
+11.3.1 Borax
+It is the most important compound of boron.
+It is a white crystalline solid of formula
+Na 
+2
+B
+4
+O 
+7
+⋅ ⋅ ⋅ ⋅ ⋅ 10H 
+2
+O. In fact it contains the
+tetranuclear units ( ) 
+2
+4 5 4
+B O OH 
+−
+ 
+  
+and correct
+formula; therefore, is Na
+2
+[B
+4
+O
+5 
+(OH)
+4
+].8H
+2
+O.
+Borax dissolves in water to give an alkaline
+solution.
+Na
+2
+B
+4
+O
+7 
++ 7H
+2
+O → 2NaOH + 4H
+3
+BO
+3
+Orthoboric acid
+On heating, borax first loses water
+molecules and swells up. On further heating it
+turns into a transparent liquid, which solidifies
+into glass like material known as borax
+bead.
+Na
+2
+B
+4
+O
+7
+.10H
+2
+O ∆
+→ Na
+2
+B
+4
+O
+7 
+∆
+→ 2NaBO
+2
+Sodium + B
+2
+O
+3
+metaborate Boric
+anhydride
+The metaborates of many transition metals
+have characteristic colours and, therefore,
+borax bead test can be used to identify them
+in the laboratory. For example, when borax is
+heated in a Bunsen burner flame with CoO on
+a loop of platinum wire, a blue coloured
+Co(BO
+2
+)
+2 
+bead is formed.
+11.3.2 Orthoboric acid
+Orthoboric acid, H
+3
+BO
+3 
+is a white crystalline
+solid, with soapy touch. It is sparingly soluble
+in water but highly soluble in hot water. It can
+be prepared by acidifying an aqueous solution
+of borax.
+Na
+2
+B
+4
+O
+7 
++ 2HCl + 5H
+2
+O → 2NaCl + 4B(OH)
+3
+It is also formed by the hydrolysis (reaction
+with water or dilute acid) of most boron
+compounds (halides, hydrides, etc.). It has a
+2019-20
+
+321 THE p -BLOCK ELEMENTS
+Problem 11.4
+Why is boric acid considered as a weak
+acid?
+Solution
+Because it is not able to release H
++ 
+ions
+on its own. It receives OH
+– 
+ions from water
+molecule to complete its octet and in turn
+releases H
++ 
+ions.
+11.3.3 Diborane, B
+2
+H
+6
+The simplest boron hydride known, is
+diborane. It is prepared by treating boron
+trifluoride with LiAlH
+4 
+in diethyl ether.
+4BF
+3 
++ 3 LiAlH
+4 
+→ 2B
+2
+H
+6 
++ 3LiF + 3AlF
+3
+A convenient laboratory method for the
+preparation of diborane involves the oxidation
+of sodium borohydride with iodine.
+2NaBH
+4 
++ I
+2 
+→ B
+2
+H
+6 
++ 2NaI + H
+2
+Diborane is produced on an industrial scale
+by the reaction of BF
+3 
+with sodium hydride.
+3 2 6
+450K
+2BF 6NaH B H 6NaF +  → +
+Diborane is a colourless, highly toxic gas
+with a b.p. of 180 K. Diborane catches fire
+spontaneously upon exposure to air. It burns
+in oxygen releasing an enormous amount of
+energy.
+2 6 2 2 3 2
+1
+B H +3O B O + 3H O;
+1976 kJ mol
+−
+→
+∆ = −
+
+c 
+H
+Most of the higher boranes are also
+spontaneously flammable in air. Boranes are
+readily hydrolysed by water to give boric acid.
+B
+2
+H
+6
+(g) + 6H
+2
+O(l) → 2B(OH)
+3
+(aq) + 6H
+2
+(g)
+Diborane undergoes cleavage reactions
+with Lewis bases(L) to give borane adducts,
+BH
+3
+⋅ ⋅ ⋅ ⋅ ⋅ L
+B
+2
+H
+6 
++ 2 NMe
+3 
+→ 2BH
+3
+⋅ ⋅ ⋅ ⋅ ⋅ NMe
+3
+B
+2
+H
+6 
++ 2 CO → 2BH
+3
+⋅ ⋅ ⋅ ⋅ ⋅ CO
+Reaction of ammonia with diborane gives
+initially B
+2
+H
+6
+.2NH
+3 
+which is formulated as
+[BH
+2
+(NH
+3
+)
+2
+]
++ 
+[BH
+4
+]
+– 
+; further heating gives
+borazine, B 
+3
+N 
+3
+H 
+6 
+known as “inorganic
+benzene” in view of its ring structure with
+alternate BH and NH groups.
+–
+2 6 3 2 3 2 4
+3 3 6 2
++
+Heat
+3B H +6NH 3[BH (NH ) ] [BH ]
+2B N H +12H
+→
+ →
+The structure of diborane is shown in
+Fig.11.2(a). The four terminal hydrogen atoms
+and the two boron atoms lie in one plane.
+Above and below this plane, there are two
+bridging hydrogen atoms. The four terminal
+B-H bonds are regular two centre-two electron
+bonds while the two bridge (B-H-B) bonds are
+different and can be described in terms of three
+Fig.11.2(a) The structure of diborane, B
+2
+H
+6
+Fig. 11. 1 Structure of boric acid; the dotted lines
+represent hydrogen bonds
+layer structure in which planar BO
+3 
+units are
+joined by hydrogen bonds as shown in
+Fig. 11.1.
+Boric acid is a weak monobasic acid. It is
+not a protonic acid but acts as a Lewis acid
+by accepting electrons from a hydroxyl ion:
+B(OH)
+3 
++ 2HOH → [B(OH)
+4
+]
+– 
++ H
+3
+O
++
+On heating, orthoboric acid above 370K
+forms metaboric acid, HBO
+2 
+which on further
+heating yields boric oxide, B
+2
+O
+3
+.
+H
+3
+BO
+3 
+∆
+ → HBO
+2 
+∆
+ → B
+2
+O
+3
+2019-20
+
+322 CHEMISTRY
+centre–two electron bonds shown in
+Fig.11.2 (b).
+Boron also forms a series of hydridoborates;
+the most important one is the tetrahedral [BH
+4
+]
+–
+ion. Tetrahydridoborates of several metals are
+known. Lithium and sodium tetra-
+hydridoborates, also known as borohydrides ,
+are prepared by the reaction of metal hydrides
+with B
+2
+H
+6 
+in diethyl ether.
+2MH + B
+2
+H
+6 
+→ 2 M
++ 
+[BH
+4
+]
+– 
+(M = Li or Na)
+orthoboric acid is generally used as a mild
+antiseptic.
+Aluminium is a bright silvery-white metal,
+with high tensile strength. It has a high
+electrical and thermal conductivity. On a
+weight-to-weight basis, the electrical
+conductivity of aluminium is twice that of
+copper. Aluminium is used extensively in
+industry and everyday life. It forms alloys with
+Cu, Mn, Mg, Si and Zn. Aluminium and its
+alloys can be given shapes of pipe, tubes,
+rods, wires, plates or foils and, therefore, find
+uses in packing, utensil making,
+construction, aeroplane and transportation
+industry. The use of aluminium and its
+compounds for domestic purposes is now
+reduced considerably because of their toxic
+nature.
+11.5 GROUP 14 ELEMENTS: THE CARBON
+FAMILY
+Carbon, silicon, germanium, tin lead and
+flerovium are the members of group 14. Carbon
+is the seventeenth most abundant element by
+mass in the earth’s crust. It is widely
+distributed in nature in free as well as in the
+combined state. In elemental state it is available
+as coal, graphite and diamond; however, in
+combined state it is present as metal
+carbonates, hydrocarbons and carbon dioxide
+gas (0.03%) in air. One can emphatically say
+that carbon is the most versatile element in the
+world. Its combination with other elements
+such as dihydrogen, dioxygen, chlorine and
+sulphur provides an astonishing array of
+materials ranging from living tissues to drugs
+and plastics. Organic chemistry is devoted to
+carbon containing compounds. It is an
+essential constituent of all living organisms.
+Naturally occurring carbon contains two stable
+isotopes:
+12
+C and 
+13
+C. In addition to these, third
+isotope, 
+14
+C is also present. It is a radioactive
+isotope with half-life 5770 years and used for
+radiocarbon dating. Silicon is the second
+(27.7 % by mass) most abundant element on
+the earth’s crust and is present in nature in
+the form of silica and silicates. Silicon is a very
+important component of ceramics, glass and
+cement. Germanium exists only in traces. Tin
+Both LiBH
+4 
+and NaBH
+4 
+are used as
+reducing agents in organic synthesis. They are
+useful starting materials for preparing other
+metal borohydrides.
+11.4 USES OF BORON AND ALUMINIUM
+AND THEIR COMPOUNDS
+Boron being extremely hard refractory solid of
+high melting point, low density and very low
+electrical conductivity, finds many
+applications. Boron fibres are used in making
+bullet-proof vest and light composite material
+for aircraft. The boron-10 (
+10
+B) isotope has high
+ability to absorb neutrons and, therefore,
+metal borides are used in nuclear industry as
+protective shields and control rods. The main
+industrial application of borax and boric acid
+is in the manufacture of heat resistant glasses
+(e.g., Pyrex), glass-wool and fibreglass. Borax
+is also used as a flux for soldering metals, for
+heat, scratch and stain resistant glazed coating
+to earthenwares and as constituent of
+medicinal soaps. An aqueous solution of
+Fig.11.2(b) Bonding in diborane. Each B atom
+uses sp
+3 
+hybrids for bonding. Out
+of the four sp
+3 
+hybrids on each B
+atom, one is without an electron
+shown in broken lines. The terminal
+B-H bonds are normal 2-centre-2-
+electron bonds but the two bridge
+bonds are 3-centre-2-electron bonds.
+The 3-centre-2-electron bridge bonds
+are also referred to as banana bonds.
+2019-20
+
+323 THE p -BLOCK ELEMENTS
+occurs mainly as cassiterite, SnO
+2 
+and lead as
+galena, PbS. Flerovium is synthetically
+prepared radioactive element
+Ultrapure form of germanium and silicon
+are used to make transistors and
+semiconductor devices.
+Symbol of Flerovium is Fl. It has atomic
+number 114, atomic mass 289 gmol
+-1 
+and
+electronic configuration [Rn] 5 f 
+14
+6 d
+10
+7 s
+2 
+7 p
+2
+.
+It has been prepared only in small amount.
+Its half life is short and its chemistry has not
+been established yet. The important atomic
+and physical properties along with their
+electronic configuration of the elements of
+group 14 leaving flerovium are given in
+Table 11.3. Some of the atomic, physical and
+chemical properties are discussed below:
+11.5.1 Electronic Configuration
+The valence shell electronic configuration of
+these elements is ns
+2
+np
+2
+. The inner core of the
+electronic configuration of elements in this
+group also differs.
+11.5.2 Covalent Radius
+There is a considerable increase in covalent
+radius from C to Si, thereafter from Si to Pb a
+small increase in radius is observed. This is
+due to the presence of completely filled d and f
+orbitals in heavier members.
+11.5.3 Ionization Enthalpy
+The first ionization enthalpy of group 14
+members is higher than the corresponding
+members of group 13. The influence of inner
+core electrons is visible here also. In general the
+ionisation enthalpy decreases down the group.
+Small decrease in ∆
+i
+H from Si to Ge to Sn and
+slight increase in ∆
+i
+H from Sn to Pb is the
+consequence of poor shielding effect of
+intervening d and f orbitals and increase in size
+of the atom.
+11.5.4 Electronegativity
+Due to small size, the elements of this group
+are slightly more electronegative than group
+13 elements. The electronegativity values for
+elements from Si to Pb are almost the same.
+Table 11.3 Atomic and Physical Properties of Group 14 Elements
+a
+for M 
+IV 
+oxidation state; 
+b 
+6–coordination; 
+c 
+Pauling scale; 
+d 
+293 K; 
+e 
+for diamond; for graphite, density is
+2.22; 
+f
+β -form (stable at room temperature)
+Atomic Number 6 14 32 50 82
+Atomic mass (g mol
+–1
+) 12.01 28.09 72.60 118.71 207.2
+Electronic [He]2 s
+2
+2 p
+2 
+[Ne]3 s
+2
+3 p
+2 
+[Ar]3 d
+10
+4 s
+2
+4 p
+2 
+[Kr]4 d
+10
+5 s
+2 
+5 p
+2 
+[Xe]4 f 
+14
+5 d
+10
+6 s
+2
+6 p
+2
+configuration
+Covalent radius/pm
+a 
+77 118 122 140 146
+Ionic radius M
+4+
+/pm
+b 
+– 40 53 69 78
+Ionic radius M
+2+
+/pm
+b 
+– – 73 118 119
+Ionization ∆
+i
+H
+1 
+1086 786 761 708 715
+enthalpy/ ∆
+i
+H
+2 
+2352 1577 1537 1411 1450
+kJ mol
+–1 
+∆
+i
+H
+3 
+4620 3228 3300 2942 3081
+∆
+i
+H
+4 
+6220 4354 4409 3929 4082
+Electronegativity
+c 
+2.5 1.8 1.8 1.8 1.9
+Density
+d
+/g cm
+–3 
+3.51
+e 
+2.34 5.32 7.26
+f 
+11.34
+Melting point/K 4373 1693 1218 505 600
+Boiling point/K – 3550 3123 2896 2024
+Electrical resistivity/ 10
+14
+–10
+16 
+50 50 10
+–5 
+2 × 10
+–5
+ohm cm (293 K)
+Carbon Silicon Germanium Tin Lead
+C Si Ge Sn Pb
+Element
+Property
+2019-20
+
+324 CHEMISTRY
+11.5.5 Physical Properties
+All members of group14 are solids. Carbon and
+silicon are non-metals, germanium is a metalloid,
+whereas tin and lead are soft metals with low
+melting points. Melting points and boiling points
+of group 14 elements are much higher than those
+of corresponding elements of group 13.
+11.5.6 Chemical Properties
+Oxidation states and trends in chemical
+reactivity
+The group 14 elements have four electrons in
+outermost shell. The common oxidation states
+exhibited by these elements are +4 and +2.
+Carbon also exhibits negative oxidation states.
+Since the sum of the first four ionization
+enthalpies is very high, compounds in +4
+oxidation state are generally covalent in nature.
+In heavier members the tendency to show +2
+oxidation state increases in the sequence
+Ge<Sn<Pb. It is due to the inability of ns
+2
+electrons of valence shell to participate in
+bonding. The relative stabilities of these two
+oxidation states vary down the group. Carbon
+and silicon mostly show +4 oxidation state.
+Germanium forms stable compounds in +4
+state and only few compounds in +2 state. Tin
+forms compounds in both oxidation states (Sn
+in +2 state is a reducing agent). Lead
+compounds in +2 state are stable and in +4
+state are strong oxidising agents. In tetravalent
+state the number of electrons around the
+central atom in a molecule ( e.g. , carbon in CCl
+4
+)
+is eight. Being electron precise molecules, they
+are normally not expected to act as electron
+acceptor or electron donor species. Although
+carbon cannot exceed its covalence more than
+4, other elements of the group can do so. It is
+because of the presence of d orbital in them.
+Due to this, their halides undergo hydrolysis
+and have tendency to form complexes by
+accepting electron pairs from donor species. For
+example, the species like, SiF
+6
+2–
+, [GeCl
+6
+]
+2–
+,
+[Sn(OH)
+6
+]
+2– 
+exist where the hybridisation of the
+central atom is sp
+3
+d
+2
+.
+(i) Reactivity towards oxygen
+All members when heated in oxygen form
+oxides. There are mainly two types of oxides,
+i.e., monoxide and dioxide of formula MO and
+MO
+2 
+respectively. SiO only exists at high
+temperature. Oxides in higher oxidation states
+of elements are generally more acidic than
+those in lower oxidation states. The dioxides
+— CO
+2
+, SiO
+2 
+and GeO
+2 
+are acidic, whereas
+SnO
+2 
+and PbO
+2 
+are amphoteric in nature.
+Among monoxides, CO is neutral, GeO is
+distinctly acidic whereas SnO and PbO are
+amphoteric.
+Problem 11.5
+Select the member(s) of group 14 that
+(i) forms the most acidic dioxide, (ii) is
+commonly found in +2 oxidation state,
+(iii) used as semiconductor.
+Solution
+(i) carbon (ii) lead
+(iii) silicon and germanium
+(ii) Reactivity towards water
+Carbon, silicon and germanium are not
+affected by water. Tin decomposes steam to
+form dioxide and dihydrogen gas.
+2 2 2
+Sn + 2H O SnO + 2H
+∆
+ →
+Lead is unaffected by water, probably
+because of a protective oxide film formation.
+(iii) Reactivity towards halogen
+These elements can form halides of formula
+MX
+2 
+and MX
+4 
+(where X = F, Cl, Br, I). Except
+carbon, all other members react directly with
+halogen under suitable condition to make
+halides. Most of the MX
+4 
+are covalent in nature.
+The central metal atom in these halides
+undergoes sp
+3 
+hybridisation and the molecule
+is tetrahedral in shape. Exceptions are SnF
+4
+and PbF
+4
+, which are ionic in nature. PbI
+4 
+does
+not exist because Pb—I bond initially formed
+during the reaction does not release enough
+energy to unpair 6 s
+2 
+electrons and excite one
+of them to higher orbital to have four unpaired
+electrons around lead atom. Heavier members
+Ge to Pb are able to make halides of formula
+MX
+2
+. Stability of dihalides increases down the
+group. Considering the thermal and chemical
+stability, GeX
+4 
+is more stable than GeX
+2
+,
+whereas PbX
+2 
+is more than PbX
+4
+. Except CCl
+4
+,
+other tetrachlorides are easily hydrolysed
+2019-20
+
+325 THE p -BLOCK ELEMENTS
+by water because the central atom can
+accommodate the lone pair of electrons from
+oxygen atom of water molecule in d orbital.
+Hydrolysis can be understood by taking
+the example of SiCl
+4. 
+It undergoes hydrolysis
+by initially accepting lone pair of electrons
+from water molecule in d orbitals of Si, finally
+leading to the formation of Si(OH)
+4 
+as shown
+below :
+Carbon also has unique ability to form
+p π – p π multiple bonds with itself and with other
+atoms of small size and high electronegativity.
+Few examples of multiple bonding are: C=C,
+C ≡ C, C = O, C = S, and C ≡ N. Heavier elements
+do not form p π – p π bonds because their atomic
+orbitals are too large and diffuse to have
+effective overlapping.
+Carbon atoms have the tendency to link
+with one another through covalent bonds to
+form chains and rings. This property is called
+catenation . This is because C—C bonds are
+very strong. Down the group the size increases
+and electronegativity decreases, and, thereby,
+tendency to show catenation decreases. This
+can be clearly seen from bond enthalpies
+values. The order of catenation is C > > Si >
+Ge ≈ Sn. Lead does not show catenation.
+Bond Bond enthalpy / kJ mol 
+–1
+C—C 348
+Si —Si 297
+Ge—Ge 260
+Sn—Sn 240
+Due to property of catenation and p π – p π
+bond formation, carbon is able to show
+allotropic forms.
+11.7 ALLOTROPES OF CARBON
+Carbon exhibits many allotropic forms; both
+crystalline as well as amorphous. Diamond
+and graphite are two well-known crystalline
+forms of carbon. In 1985, third form of carbon
+known as fullerenes was discovered by
+H.W.Kroto, E.Smalley and R.F.Curl. For this
+discovery they were awarded the Nobel Prize
+in 1996.
+11.7.1 Diamond
+It has a crystalline lattice. In diamond each
+carbon atom undergoes sp
+3 
+hybridisation and
+linked to four other carbon atoms by using
+hybridised orbitals in tetrahedral fashion. The
+C–C bond length is 154 pm. The structure
+extends in space and produces a rigid three-
+dimensional network of carbon atoms. In this
+Problem 11. 6
+[SiF
+6
+]
+2– 
+is known whereas [SiCl
+6
+]
+2– 
+not.
+Give possible reasons.
+Solution
+The main reasons are :
+(i) six large chloride ions cannot be
+accommodated around Si
+4+ 
+due to
+limitation of its size.
+(ii) interaction between lone pair of
+chloride ion and Si
+4+ 
+is not very strong.
+11.6 IMPORTANT TRENDS AND
+ANOMALOUS BEHAVIOUR OF
+CARBON
+Like first member of other groups, carbon
+also differs from rest of the members of its
+group. It is due to its smaller size, higher
+electronegativity, higher ionisation enthalpy
+and unavailability of d orbitals.
+In carbon, only s and p orbitals are
+available for bonding and, therefore, it can
+accommodate only four pairs of electrons
+around it. This would limit the maximum
+covalence to four whereas other members can
+expand their covalence due to the presence of
+d orbitals.
+2019-20
+
+326 CHEMISTRY
+structure (Fig. 11.3) directional covalent bonds
+are present throughout the lattice.
+It is very difficult to break extended covalent
+bonding and, therefore, diamond is a hardest
+substance on the earth. It is used as an
+abrasive for sharpening hard tools, in making
+dyes and in the manufacture of tungsten
+filaments for electric light bulbs.
+Problem 11.7
+Diamond is covalent, yet it has high
+melting point. Why ?
+Solution
+Diamond has a three-dimensional
+network involving strong C—C bonds,
+which are very difficult to break and, in
+turn has high melting point.
+11.7.2 Graphite
+Graphite has layered structure (Fig.11.4).
+Layers are held by van der Waals forces and
+distance between two layers is 340 pm. Each
+layer is composed of planar hexagonal rings
+of carbon atoms. C—C bond length within the
+layer is 141.5 pm. Each carbon atom in
+hexagonal ring undergoes sp
+2 
+hybridisation
+and makes three sigma bonds with three
+neighbouring carbon atoms. Fourth electron
+forms a π bond. The electrons are delocalised
+over the whole sheet. Electrons are mobile and,
+therefore, graphite conducts electricity along
+the sheet. Graphite cleaves easily between the
+layers and, therefore, it is very soft and slippery.
+For this reason graphite is used as a dry
+lubricant in machines running at high
+temperature, where oil cannot be used as a
+lubricant.
+11.7.3 Fullerenes
+Fullerenes are made by the heating of graphite
+in an electric arc in the presence of inert gases
+such as helium or argon. The sooty material
+formed by condensation of vapourised C
+n 
+small
+molecules consists of mainly C
+60 
+with smaller
+quantity of C
+70 
+and traces of fullerenes
+consisting of even number of carbon atoms up
+to 350 or above. Fullerenes are the only pure
+form of carbon because they have smooth
+structure without having ‘dangling’ bonds.
+Fullerenes are cage like molecules. C
+60
+molecule has a shape like soccer ball and
+called Buckminsterfullerene (Fig. 11.5).
+It contains twenty six- membered rings and
+twelve five-membered rings. A six membered
+ring is fused with six or five membered rings
+but a five membered ring can only fuse with
+six membered rings. All the carbon atoms are
+equal and they undergo sp
+2 
+hybridisation.
+Each carbon atom forms three sigma bonds
+with other three carbon atoms. The remaining
+electron at each carbon is delocalised in
+Fig. 11.3 The structure of diamond Fig 11.4 The structure of graphite
+2019-20
+
+327 THE p -BLOCK ELEMENTS
+molecular orbitals, which in turn give aromatic
+character to molecule. This ball shaped
+molecule has 60 vertices and each one is
+occupied by one carbon atom and it also
+contains both single and double bonds with
+C–C distances of 143.5 pm and 138.3 pm
+respectively. Spherical fullerenes are also called
+bucky balls in short.
+filters to remove organic contaminators and in
+airconditioning system to control odour.
+Carbon black is used as black pigment in
+black ink and as filler in automobile tyres. Coke
+is used as a fuel and largely as a reducing
+agent in metallurgy. Diamond is a precious
+stone and used in jewellery. It is measured in
+carats (1 carat = 200 mg).
+11.8 SOME IMPORTANT COMPOUNDS OF
+CARBON AND SILICON
+Oxides of Carbon
+Two important oxides of carbon are carbon
+monoxide, CO and carbon dioxide, CO
+2
+.
+11.8.1 Carbon Monoxide
+Direct oxidation of C in limited supply of
+oxygen or air yields carbon monoxide.
+2
+2C(s) O (g) 2CO(g)
+∆
++   →
+On small scale pure CO is prepared by
+dehydration of formic acid with concentrated
+H
+2
+SO
+4 
+at 373 K
+2
+4 2
+373K
+conc.H SO
+HCOOH H O + CO  →
+On commercial scale it is prepared by the
+passage of steam over hot coke. The mixture
+of CO and H
+2 
+thus produced is known as water
+gas or synthesis gas .
+( ) ( ) ( ) ( ) 2 2
+473 1273K
+C s H O g CO g H g
+Water gas
+−
++  → +
+When air is used instead of steam, a mixture
+of CO and N
+2 
+is produced, which is called
+producer gas .
+2 2
+2
+1273K
+2C(s) O (g) 4N (g) 2CO(g)
+4N (g)
++ +  →
++
+Producer gas
+Water gas and producer gas are very
+important industrial fuels. Carbon monoxide
+in water gas or producer gas can undergo
+further combustion forming carbon dioxide
+with the liberation of heat.
+Carbon monoxide is a colourless,
+odourless and almost water insoluble gas. It
+is a powerful reducing agent and reduces
+almost all metal oxides other than those of the
+alkali and alkaline earth metals, aluminium
+and a few transition metals. This property of
+Fig.11.5 The structure of C
+60
+, Buckminster-
+fullerene : Note that molecule has the
+shape of a soccer ball (football).
+It is very important to know that graphite
+is thermodynamically most stable allotrope of
+carbon and, therefore, ∆ f H
+ 
+of graphite is taken
+as zero. ∆ f H
+ 
+values of diamond and fullerene,
+C
+60 
+are 1.90 and 38.1 kJ mol
+–1
+, respectively.
+Other forms of elemental carbon like carbon
+black, coke, and charcoal are all impure forms
+of graphite or fullerenes. Carbon black is
+obtained by burning hydrocarbons in a limited
+supply of air. Charcoal and coke are obtained
+by heating wood or coal respectively at high
+temperatures in the absence of air.
+11.7.4 Uses of Carbon
+Graphite fibres embedded in plastic material
+form high strength, lightweight composites.
+The composites are used in products such as
+tennis rackets, fishing rods, aircrafts and
+canoes. Being good conductor, graphite is used
+for electrodes in batteries and industrial
+electrolysis. Crucibles made from graphite are
+inert to dilute acids and alkalies. Being highly
+porous, activated charcoal is used in
+adsorbing poisonous gases; also used in water
+2019-20
+
+328 CHEMISTRY
+CO is used in the extraction of many metals
+from their oxides ores.
+( ) ( ) ( ) ( )
+( ) ( ) ( ) ( )
+2 3 2
+2
+Fe O s 3CO g 2Fe s 3CO g
+ZnO s CO g Zn s CO g
+∆
+∆
++   → +
++   → +
+In CO molecule, there are one sigma and
+two π bonds between carbon and oxygen,
+: C ≡ O : . Because of the presence of a lone pair
+on carbon, CO molecule acts as a donor and
+reacts with certain metals when heated to form
+metal carbonyls . The highly poisonous
+nature of CO arises because of its ability to
+form a complex with haemoglobin , which
+is about 300 times more stable than the
+oxygen-haemoglobin complex. This prevents
+haemoglobin in the red blood corpuscles from
+carrying oxygen round the body and ultimately
+resulting in death.
+11.8.2 Carbon Dioxide
+It is prepared by complete combustion of
+carbon and carbon containing fuels in excess
+of air.
+2 2
+C(s) O (g) CO (g)
+∆
++  →
+4 2 2 2
+CH (g) 2O (g) CO (g) 2H O(g)
+∆
++  → +
+In the laboratory it is conveniently
+prepared by the action of dilute HCl on calcium
+carbonate.
+CaCO
+3
+(s) + 2HCl (aq) → CaCl
+2 
+(aq) + CO
+2 
+(g) +
+H
+2
+O(l)
+On commercial scale it is obtained by
+heating limestone.
+It is a colourless and odourless gas. Its low
+solubility in water makes it of immense bio-
+chemical and geo-chemical importance. With
+water, it forms carbonic acid, H
+2
+CO
+3 
+which is
+a weak dibasic acid and dissociates in two
+steps:
+H
+2
+CO
+3
+(aq) + H
+2
+O(l)  HCO
+3
+–
+(aq) + H
+3
+O
++
+(aq)
+HCO
+3
+– 
+(aq) + H
+2
+O(l)  CO
+3
+2– 
+(aq) + H
+3
+O
++
+(aq)
+H
+2
+CO 
+3
+/HCO
+3
+– 
+buffer system helps to
+maintain pH of blood between 7.26 to 7.42.
+Being acidic in nature, it combines with alkalies
+to form metal carbonates.
+Carbon dioxide, which is normally present
+to the extent of ~ 0.03 % by volume in the
+atmosphere, is removed from it by the process
+known as photosynthesis . It is the process
+by which green plants convert atmospheric
+CO
+2 
+into carbohydrates such as glucose. The
+overall chemical change can be expressed as:
+→
+2 2 6 12 6 2
+2
+h
+Chlorophyll
+6CO +12H O C H O + 6O
++ 6H O
+ν
+By this process plants make food for
+themselves as well as for animals and human
+beings. Unlike CO, it is not poisonous. But the
+increase in combustion of fossil fuels and
+decomposition of limestone for cement
+manufacture in recent years seem to increase
+the CO
+2 
+content of the atmosphere. This may
+lead to increase in green house effect and
+thus, raise the temperature of the atmosphere
+which might have serious consequences.
+Carbon dioxide can be obtained as a solid
+in the form of dry ice by allowing the liquified
+CO
+2 
+to expand rapidly. Dry ice is used as a
+refrigerant for ice-cream and frozen food.
+Gaseous CO
+2 
+is extensively used to carbonate
+soft drinks. Being heavy and non-supporter
+of combustion it is used as fire extinguisher. A
+substantial amount of CO 
+2 
+is used to
+manufacture urea.
+In CO
+2 
+molecule carbon atom undergoes
+sp hybridisation. Two sp hybridised orbitals
+of carbon atom overlap with two p orbitals of
+oxygen atoms to make two sigma bonds while
+other two electrons of carbon atom are involved
+in p π – p π bonding with oxygen atom. This
+results in its linear shape [with both C–O bonds
+of equal length (115 pm)] with no dipole
+moment. The resonance structures are shown
+below:
+Resonance structures of carbon dioxide
+11.8.3 Silicon Dioxide, SiO
+2
+95% of the earth’s crust is made up of silica
+and silicates. Silicon dioxide, commonly known
+as silica, occurs in several crystallographic
+forms. Quartz, cristobalite and tridymite are
+some of the crystalline forms of silica, and they
+are interconvertable at suitable temperature.
+Silicon dioxide is a covalent, three-dimensional
+2019-20
+
+329 THE p -BLOCK ELEMENTS
+network solid in which each silicon atom is
+covalently bonded in a tetrahedral manner to
+four oxygen atoms. Each oxygen atom in turn
+covalently bonded to another silicon atoms as
+shown in diagram (Fig 11.6 ). Each corner is
+shared with another tetrahedron. The entire
+crystal may be considered as giant molecule
+in which eight membered rings are formed with
+alternate silicon and oxygen atoms.
+substituted chlorosilane of formula MeSiCl
+3
+,
+Me
+2
+SiCl
+2
+, Me
+3
+SiCl with small amount of Me
+4
+Si
+are formed. Hydrolysis of dimethyl-
+dichlorosilane, (CH 
+3
+)
+2
+SiCl 
+2 
+followed by
+condensation polymerisation yields straight
+chain polymers.
+The chain length of the polymer can be
+controlled by adding (CH
+3
+)
+3
+SiCl which blocks
+the ends as shown below :
+Fig. 11.6 Three dimensional structure of SiO
+2
+Silica in its normal form is almost non-
+reactive because of very high Si — O bond
+enthalpy. It resists the attack by halogens,
+dihydrogen and most of the acids and metals
+even at elevated temperatures. However, it is
+attacked by HF and NaOH.
+SiO
+2 
++ 2NaOH → Na
+2
+SiO
+3 
++ H
+2
+O
+SiO
+2 
++ 4HF → SiF
+4 
++ 2H
+2
+O
+Quartz is extensively used as a piezoelectric
+material; it has made possible to develop extremely
+accurate clocks, modern radio and television
+broadcasting and mobile radio communications.
+Silica gel is used as a drying agent and as a support
+for chromatographic materials and catalysts.
+Kieselghur, an amorphous form of silica is used
+in filtration plants.
+11.8.4 Silicones
+They are a group of organosilicon polymers,
+which have (R
+2
+SiO) as a repeating unit. The
+starting materials for the manufacture of
+silicones are alkyl or aryl substituted silicon
+chlorides, R
+n
+SiCl
+(4–n)
+, where R is alkyl or aryl
+group. When methyl chloride reacts with
+silicon in the presence of copper as a catalyst
+at a temperature 573K various types of methyl
+2019-20
+
+330 CHEMISTRY
+Silicones being surrounded by non-polar
+alkyl groups are water repelling in nature.
+They have in general high thermal stability,
+high dielectric strength and resistance to
+oxidation and chemicals. They have wide
+applications. They are used as sealant, greases,
+electrical insulators and for water proofing of
+fabrics. Being biocompatible they are also used
+in surgical and cosmetic plants.
+Problem: 11.8
+What are silicones ?
+Solution
+Simple silicones consist of
+chains in which alkyl or phenyl groups
+occupy the remaining bonding positions
+on each silicon. They are hydrophobic
+(water repellant) in nature.
+11.8.5 Silicates
+A large number of silicates minerals exist in
+nature. Some of the examples are feldspar,
+zeolites, mica and asbestos. The basic
+structural unit of silicates is SiO
+4
+4– 
+(Fig.11.7)
+in which silicon atom is bonded to four
+oxygen atoms in tetrahedron fashion. In
+silicates either the discrete unit is present or
+a number of such units are joined together
+via corners by sharing 1,2,3 or 4 oxygen
+atoms per silicate units. When silicate units
+are linked together, they form chain, ring,
+sheet or three-dimensional structures.
+Negative charge on silicate structure is
+neutralised by positively charged metal ions.
+If all the four corners are shared with other
+tetrahedral units, three-dimensional network
+is formed.
+Two important man-made silicates are
+glass and cement.
+11.8.6 Zeolites
+If aluminium atoms replace few silicon atoms
+in three-dimensional network of silicon dioxide,
+overall structure known as aluminosilicate,
+acquires a negative charge. Cations such as
+Na
++
+, K
++ 
+or Ca
+2+ 
+balance the negative charge.
+Examples are feldspar and zeolites. Zeolites are
+widely used as a catalyst in petrochemical
+industries for cracking of hydrocarbons and
+isomerisation, e.g., ZSM-5 (A type of zeolite)
+used to convert alcohols directly into gasoline.
+Hydrated zeolites are used as ion exchangers
+in softening of “hard” water.
+SUMMARY
+p -Block of the periodic table is unique in terms of having all types of elements – metals,
+non-metals and metalloids . There are six groups of p -block elements in the periodic
+table numbering from 13 to 18. Their valence shell electronic configuration is ns
+2
+np
+1–6
+(except for He). Differences in the inner core of their electronic configuration greatly
+influence their physical and chemical properties. As a consequence of this, a lot of
+variation in properties among these elements is observed. In addition to the group oxidation
+state , these elements show other oxidation states differing from the total number of valence
+electrons by unit of two. While the group oxidation state is the most stable for the lighter
+elements of the group, lower oxidation states become progressively more stable for the
+heavier elements. The combined effect of size and availability of d orbitals considerably
+(a) (b)
+Fig. 11.7 (a) Tetrahedral structure of SiO
+4
+4–
+anion; (b) Representation of SiO
+4
+4–
+unit
+2019-20
+
+331 THE p -BLOCK ELEMENTS
+influences the ability of these elements to form π -bonds. While the lighter elements form
+p π π π π π –p π π π π π bonds, the heavier ones form d π π π π π –p π π π π π or d π π π π π –d π π π π π bonds. Absence of d orbital in
+second period elements limits their maximum covalence to 4 while heavier ones can
+exceed this limit.
+Boron is a typical non-metal and the other members are metals. The availability of 3
+valence electrons (2 s
+2
+2 p
+1
+) for covalent bond formation using four orbitals (2 s , 2 p
+x, 
+2 p
+y 
+and
+2 p
+z
+) leads to the so called electron deficiency in boron compounds. This deficiency
+makes them good electron acceptor and thus boron compounds behave as Lewis acids .
+Boron forms covalent molecular compounds with dihydrogen as boranes, the simplest of
+which is diborane , B
+2
+H
+6
+. Diborane contains two bridging hydrogen atoms between two
+boron atoms; these bridge bonds are considered to be three-centre two-electron bonds .
+The important compounds of boron with dioxygen are boric acid and borax . Boric acid,
+B(OH)
+3 
+is a weak monobasic acid; it acts as a Lewis acid by accepting electrons from
+hydroxyl ion. Borax is a white crystalline solid of formula Na
+2
+[B
+4
+O
+5
+(OH)
+4
+]·8H
+2
+O. The borax
+bead test gives characteristic colours of transition metals.
+Aluminium exhibits +3 oxidation state. With heavier elements +1 oxidation state gets
+progressively stabilised on going down the group. This is a consequence of the so called
+inert pair effect .
+Carbon is a typical non-metal forming covalent bonds employing all its four valence
+electrons (2 s
+2
+2 p
+2
+). It shows the property of catenation , the ability to form chains or
+rings, not only with C–C single bonds but also with multiple bonds (C=C or C ≡ C). The
+tendency to catenation decreases as C>>Si>Ge ~ Sn > Pb. Carbon provides one of the
+best examples of allotropy . Three important allotropes of carbon are diamond , graphite
+and fullerenes . The members of the carbon family mainly exhibit +4 and +2 oxidation
+states; compouds in +4 oxidation states are generally covalent in nature. The tendency
+to show +2 oxidation state increases among heavier elements. Lead in +2 state is stable
+whereas in +4 oxidation state it is a strong oxidising agent. Carbon also exhibits negative
+oxidation states. It forms two important oxides: CO and CO
+2
+. Carbon monoxide is neutral
+whereas CO
+2 
+is acidic in nature. Carbon monoxide having lone pair of electrons on C
+forms metal carbonyls . It is deadly poisonous due to higher stability of its haemoglobin
+complex as compared to that of oxyhaemoglobin complex. Carbon dioxide as such is not
+toxic. However, increased content of CO
+2 
+in atmosphere due to combustion of fossil fuels
+and decomposition of limestone is feared to cause increase in ‘ green house effect ’. This,
+in turn, raises the temperature of the atmosphere and causes serious complications.
+Silica , silicates and silicones are important class of compounds and find applications
+in industry and technology.
+EXERCISES
+11.1 Discuss the pattern of variation in the oxidation states of
+(i) B to Tl and (ii) C to Pb.
+11.2 How can you explain higher stability of BCl
+3 
+as compared to TlCl
+3 
+?
+11.3 Why does boron triflouride behave as a Lewis acid ?
+11.4 Consider the compounds, BCl
+3 
+and CCl 
+4
+. How will they behave with
+water ? Justify.
+11.5 Is boric acid a protic acid ? Explain.
+11.6 Explain what happens when boric acid is heated .
+11.7 Describe the shapes of BF
+3 
+and BH
+4
+–
+. Assign the hybridisation of boron in
+these species.
+11.8 Write reactions to justify amphoteric nature of aluminium.
+2019-20
+
+332 CHEMISTRY
+11.9 What are electron deficient compounds ? Are BCl
+3 
+and SiCl
+4 
+electron
+deficient species ? Explain.
+11.10 Write the resonance structures of CO
+3
+2–
+and HCO
+3
+– 
+.
+11.11 What is the state of hybridisation of carbon in (a) CO
+3
+2– 
+(b) diamond
+(c) graphite?
+11.12 Explain the difference in properties of diamond and graphite on the basis
+of their structures.
+11.13 Rationalise the given statements and give chemical reactions :
+• Lead(II) chloride reacts with Cl
+2 
+to give PbCl
+4
+.
+• Lead(IV) chloride is highly unstable towards heat.
+• Lead is known not to form an iodide, PbI
+4
+.
+11.14 Suggest reasons why the B–F bond lengths in BF
+3 
+(130 pm) and BF
+4
+–
+(143 pm) differ.
+11.15 If B–Cl bond has a dipole moment, explain why BCl
+3 
+molecule has zero
+dipole moment.
+11.16 Aluminium trifluoride is insoluble in anhydrous HF but dissolves on
+addition of NaF. Aluminium trifluoride precipitates out of the resulting
+solution when gaseous BF
+3 
+is bubbled through. Give reasons.
+11.17 Suggest a reason as to why CO is poisonous.
+11.18 How is excessive content of CO
+2 
+responsible for global warming ?
+11.19 Explain structures of diborane and boric acid.
+11.20 What happens when
+(a) Borax is heated strongly,
+(b) Boric acid is added to water,
+(c) Aluminium is treated with dilute NaOH,
+(d) BF
+3 
+is reacted with ammonia ?
+11.21 Explain the following reactions
+(a) Silicon is heated with methyl chloride at high temperature in the
+presence of copper;
+(b) Silicon dioxide is treated with hydrogen fluoride;
+(c) CO is heated with ZnO;
+(d) Hydrated alumina is treated with aqueous NaOH solution.
+11.22 Give reasons :
+(i) Conc. HNO
+3 
+can be transported in aluminium container.
+(ii) A mixture of dilute NaOH and aluminium pieces is used to open
+drain.
+(iii) Graphite is used as lubricant.
+(iv) Diamond is used as an abrasive.
+(v) Aluminium alloys are used to make aircraft body.
+(vi) Aluminium utensils should not be kept in water overnight.
+(vii) Aluminium wire is used to make transmission cables.
+11.23 Explain why is there a phenomenal decrease in ionization enthalpy from
+carbon to silicon ?
+11.24 How would you explain the lower atomic radius of Ga as compared to Al ?
+11.25 What are allotropes? Sketch the structure of two allotropes of carbon namely
+diamond and graphite. What is the impact of structure on physical
+properties of two allotropes?
+2019-20
+
+333 THE p -BLOCK ELEMENTS
+11.26 (a) Classify following oxides as neutral, acidic, basic or amphoteric:
+CO, B
+2
+O
+3
+, SiO
+2
+, CO
+2
+, Al
+2
+O
+3
+, PbO
+2
+, Tl
+2
+O
+3
+(b) Write suitable chemical equations to show their nature.
+11.27 In some of the reactions thallium resembles aluminium, whereas in others
+it resembles with group I metals. Support this statement by giving some
+evidences.
+11.28 When metal X is treated with sodium hydroxide, a white precipitate (A) is
+obtained, which is soluble in excess of NaOH to give soluble complex (B).
+Compound (A) is soluble in dilute HCl to form compound (C). The compound
+(A) when heated strongly gives (D), which is used to extract metal. Identify
+(X), (A), (B), (C) and (D). Write suitable equations to support their identities.
+11.29 What do you understand by (a) inert pair effect (b) allotropy and
+(c) catenation?
+11.30 A certain salt X, gives the following results.
+(i) Its aqueous solution is alkaline to litmus.
+(ii) It swells up to a glassy material Y on strong heating.
+(iii) When conc. H
+2
+SO
+4 
+is added to a hot solution of X,white crystal of an
+acid Z separates out.
+Write equations for all the above reactions and identify X, Y and Z.
+11.31 Write balanced equations for:
+(i) BF
+3 
++ LiH →
+(ii) B
+2
+H
+6 
++ H
+2
+O →
+(iii) NaH + B
+2
+H
+6 
+→
+(iv) H
+3
+BO
+3
+∆
+ →
+(v) Al + NaOH →
+(vi) B
+2
+H
+6 
++ NH
+3 
+→
+11.32. Give one method for industrial preparation and one for laboratory
+preparation of CO and CO
+2 
+each.
+11.33 An aqueous solution of borax is
+(a) neutral (b) amphoteric
+(c) basic (d) acidic
+11.34 Boric acid is polymeric due to
+(a) its acidic nature (b) the presence of hydrogen bonds
+(c) its monobasic nature (d) its geometry
+11.35 The type of hybridisation of boron in diborane is
+(a) sp (b) sp
+2 
+(c) sp
+3 
+(d) dsp
+2
+11.36 Thermodynamically the most stable form of carbon is
+(a) diamond (b) graphite
+(c) fullerenes (d) coal
+11.37 Elements of group 14
+(a) exhibit oxidation state of +4 only
+(b) exhibit oxidation state of +2 and +4
+(c) form M
+2– 
+and M
+4+ 
+ions
+(d) form M
+2+ 
+and M
+4+ 
+ions
+11.38 If the starting material for the manufacture of silicones is RSiCl
+3
+, write the
+structure of the product formed.
+2019-20

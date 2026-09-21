@@ -129,7 +129,13 @@ export function FacultyAuthForm({
             : `/parent/profiling${nextSuffix}`,
         );
       } else {
-        router.push(data.profileCompleted ? "/dashboard" : "/profiling");
+        router.push(
+          next && isPublicBrowsePath(next)
+            ? next
+            : data.profileCompleted
+              ? "/dashboard"
+              : "/profiling",
+        );
       }
     } catch (err) {
       if (err instanceof ApiError && err.data?.code) {

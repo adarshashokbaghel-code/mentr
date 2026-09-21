@@ -81,6 +81,21 @@ export function getPublicNavGroups(): PublicNavGroup[] {
       href: "/tools",
       links: [
         {
+          label: "Snap & Grade",
+          href: "/snapandgrade",
+          description: "CBSE Class 9–12 NCERT photo marking",
+        },
+        {
+          label: "Class 10 Maths marking",
+          href: "/snapandgrade/class-10-maths",
+          description: "Photo your working — CBSE step marks",
+        },
+        {
+          label: "What is Snap & Grade?",
+          href: "/blog/what-is-snap-and-grade",
+          description: "How the paid CBSE grader works",
+        },
+        {
           label: "All tools",
           href: "/tools",
           description: "Teacher, student, and PDF utilities",
@@ -187,6 +202,9 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
         }
       : {}),
     Tools: [
+      { label: "Snap & Grade", href: "/snapandgrade" },
+      { label: "Class 10 Maths marking", href: "/snapandgrade/class-10-maths" },
+      { label: "CBSE marking scheme", href: "/snapandgrade/cbse-marking-scheme" },
       { label: "All free tools", href: "/tools" },
       { label: "Worksheet generator", href: "/tools/worksheet-generator" },
       {
@@ -200,6 +218,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
     ],
     Resources: [
       { label: "Blog & guides", href: "/blog" },
+      { label: "What is Snap & Grade?", href: "/blog/what-is-snap-and-grade" },
       { label: "FAQ", href: "/faq" },
       { label: "Online tutor jobs", href: "/online-tutor-jobs" },
       { label: "For faculty", href: "/for-faculty" },

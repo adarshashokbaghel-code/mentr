@@ -636,3 +636,87 @@ export function fetchAdminLearnEnrollmentDetail(
     `/api/admin/learn/${encodeURIComponent(track)}/user/${encodeURIComponent(userId)}`,
   );
 }
+
+/* ── Snap & Grade ─────────────────────────────────────────────── */
+
+export type SnapGradeAdminQuestion = {
+  id: string;
+  board: string;
+  classLevel: number;
+  subject: string;
+  chapterNumber: number;
+  chapterName: string;
+  exercise: string;
+  questionNumber: string;
+  questionText: string;
+  referenceNotes: string;
+  maxMarks: number;
+  rubric: {
+    id: string;
+    label: string;
+    marks: number;
+    criteria: string;
+  }[];
+  markingSchemeNotes: string;
+  weightSource: "practice_cbse" | "admin_curated" | "official_sqp";
+  adminLocked: boolean;
+  creditsCost: number;
+  active: boolean;
+  sortOrder: number;
+  updatedAt: string;
+};
+
+export function fetchSnapGradeAdmin(key: string) {
+  return adminFetch<{
+    questions: SnapGradeAdminQuestion[];
+    evalCount: number;
+  }>(key, "/api/admin/snap-grade/questions");
+}
+
+export type SnapGradeAdminEvaluation = {
+  id: string;
+  marksAwarded: number;
+  maxMarks: number;
+  creditsDeducted: number;
+  overallFeedback: string;
+  imageUrl: string;
+  model: string;
+  createdAt: string;
+  userEmail: string;
+  userRole: string;
+  classLevel: number | null;
+  chapterNumber: number | null;
+  exercise: string | null;
+  questionLabel: string;
+};
+
+export function fetchSnapGradeEvaluations(key: string, limit = 50) {
+  return adminFetch<{ evaluations: SnapGradeAdminEvaluation[] }>(
+    key,
+    `/api/admin/snap-grade/evaluations?limit=${limit}`,
+  );
+}
+
+export function updateSnapGradeQuestion(
+  key: string,
+  id: string,
+  adminPass: string,
+  body: {
+    rubric?: SnapGradeAdminQuestion["rubric"];
+    markingSchemeNotes?: string;
+    referenceNotes?: string;
+    questionText?: string;
+    creditsCost?: number;
+    active?: boolean;
+    adminLocked?: boolean;
+  },
+) {
+  return adminFetch<{ message: string }>(
+    key,
+    `/api/admin/snap-grade/questions/${encodeURIComponent(id)}`,
+    {
+      method: "PUT",
+      body: JSON.stringify({ ...body, adminPass }),
+    },
+  );
+}

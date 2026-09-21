@@ -423,6 +423,72 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Search JEE mentors",
     ctaHref: "/exam-prep/jee-coaching-bengaluru",
   },
+  {
+    slug: "what-is-snap-and-grade",
+    title: "What Is Snap & Grade? CBSE Photo Marking for Class 9–12 (Mentr)",
+    keyword: "what is Snap and Grade CBSE",
+    intent: "commercial",
+    funnel: "top",
+    pillar: "exam-prep",
+    description:
+      "Snap & Grade by Mentr grades Class 9–12 NCERT answers from a photo — CBSE step marks and writing tips. 100 free credits. Not ChatGPT, not a tutor.",
+    publishWeek: 40,
+    featured: true,
+    cta: "Try Snap & Grade",
+    ctaHref: "/snapandgrade",
+  },
+  {
+    slug: "how-to-write-cbse-answers-to-keep-step-marks",
+    title: "How to Write CBSE Answers So You Keep Step Marks (Class 9–12)",
+    keyword: "how to write CBSE answers step marking",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "Formula, working, units, last line — why CBSE cuts marks even when the method is right, and how to practise that writing on paper.",
+    publishWeek: 40,
+    cta: "Grade a practice answer",
+    ctaHref: "/snapandgrade/grade",
+  },
+  {
+    slug: "chatgpt-vs-cbse-marking-scheme",
+    title: "ChatGPT vs CBSE Marking Scheme: Why Uploading a PDF Is Not Enough",
+    keyword: "ChatGPT vs CBSE marking scheme",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "ChatGPT guesses steps from a PDF you upload. A board key splits marks. How Snap & Grade keeps that split on the question you practised.",
+    publishWeek: 40,
+    cta: "See Snap & Grade vs ChatGPT",
+    ctaHref: "/snapandgrade#vs-ai",
+  },
+  {
+    slug: "why-students-lose-marks-on-steps-cbse",
+    title: "Why Class 9–12 Students Lose Marks on Steps (Even After Practice)",
+    keyword: "lose marks on steps CBSE",
+    intent: "informational",
+    funnel: "top",
+    pillar: "exam-prep",
+    description:
+      "The quiet mark leak: missing units, reasons, and last lines. What to ask after practice — and how to see the cut the same night.",
+    publishWeek: 40,
+    cta: "See why marks slip",
+    ctaHref: "/snapandgrade#why-marks",
+  },
+  {
+    slug: "grade-ncert-answers-from-a-photo",
+    title: "Grade NCERT Answers from a Photo — CBSE Step Marks on Mentr",
+    keyword: "grade NCERT answers from photo",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "exam-prep",
+    description:
+      "Photograph your Class 9–12 NCERT notebook page. Get CBSE-style step marks and a writing tip. 100 free credits. No app.",
+    publishWeek: 40,
+    cta: "Grade from a photo",
+    ctaHref: "/snapandgrade/grade",
+  },
 
   // ── Pillar 4: Tutor-Side Guides ──────────────────────────────────
   {

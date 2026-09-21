@@ -21,6 +21,9 @@ type ProfileImageUploaderProps = {
   imageUrl?: string | null;
   onUploaded: (url: string | null) => void;
   className?: string;
+  /** Override default tutor-oriented copy */
+  title?: string;
+  description?: string;
 };
 
 async function cropToJpeg(
@@ -62,6 +65,8 @@ export function ProfileImageUploader({
   imageUrl,
   onUploaded,
   className,
+  title = "Profile photo",
+  description = "Square crop works best. Parents trust listings with a real face — optional, but worth it.",
 }: ProfileImageUploaderProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [previewUrl, setPreviewUrl] = useState(imageUrl || null);
@@ -152,11 +157,8 @@ export function ProfileImageUploader({
           rounded="2xl"
         />
         <div className="min-w-0 flex-1 space-y-2">
-          <p className="text-sm font-semibold text-ink">Profile photo</p>
-          <p className="text-xs leading-relaxed text-muted">
-            Square crop works best. Parents trust listings with a real face —
-            optional, but worth it.
-          </p>
+          <p className="text-sm font-semibold text-ink">{title}</p>
+          <p className="text-xs leading-relaxed text-muted">{description}</p>
           <div className="flex flex-wrap gap-2">
             <button
               type="button"

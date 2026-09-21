@@ -1,0 +1,3142 @@
+170 Chemistry
+In Class XI, you have learnt that the p -block elements
+are placed in groups 13 to 18 of the periodic table.
+Their valence shell electronic configuration is ns
+2
+np
+1–6
+(except He which has 1 s
+2 
+configuration). The properties
+of p -block elements like that of others are greatly
+influenced by atomic sizes, ionisation enthalpy, electron
+gain enthalpy and electronegativity. The absence of d -
+orbitals in second period and presence of d or d and f
+orbitals in heavier elements (starting from third period
+onwards) have significant effects on the properties of
+elements. In addition, the presence of all the three types
+of elements; metals, metalloids and non-metals bring
+diversification in chemistry of these elements.
+Having learnt the chemistry of elements of Groups
+13 and 14 of the p -block of periodic table in Class XI,
+you will learn the chemistry of the elements of
+subsequent groups in this Unit.
+The p -Block
+Elements
+7
+The p -Block
+Elements
+After studying this Unit, you will be
+able to
+• appreciate general trends in the
+chemistry of elements of groups
+15,16,17 and 18;
+• learn the preparation, properties
+and uses of dinitrogen and
+phosphorus and some of their
+important compounds;
+• describe the preparation,
+properties and uses of dioxygen
+and ozone and chemistry of some
+simple oxides;
+• know allotropic forms of sulphur,
+chemistry of its important
+compounds and the structures of
+its oxoacids;
+• describe the preparation,
+properties and uses of chlorine
+and hydrochloric acid;
+• know the chemistry of
+interhalogens and structures of
+oxoacids of halogens;
+• enumerate the uses of noble
+gases;
+• appreciate the importance of
+these elements and their
+compounds in our day to day life.
+Objectives
+Diversity in chemistry is the hallmark of p–block elements manifested
+in their ability to react with the elements of s–, d– and f–blocks as
+well as with their own.
+Group 15 includes nitrogen, phosphorus, arsenic, antimony, bismuth
+and moscovium. As we go down the group, there is a shift from non-
+metallic to metallic through metalloidic character. Nitrogen and
+phosphorus are non-metals, arsenic and antimony metalloids, bismuth
+and moscovium are typical metals.
+Molecular nitrogen comprises 78% by volume of the atmosphere.
+In the earth’s crust, it occurs as sodium nitrate, NaNO 3 (called Chile
+saltpetre) and potassium nitrate (Indian saltpetre). It is found in the
+form of proteins in plants and animals. Phosphorus occurs in minerals
+7.1 7.1 7.1 7.1 7.1 Group 15 Group 15 Group 15 Group 15 Group 15
+Elements Elements Elements Elements Elements
+7.1.1 Occurrence
+Unit Unit Unit Unit Unit
+7
+2020-21
+
+171 The p -Block Elements
+of the apatite family, Ca 9 (PO 4 ) 6 . CaX 2 (X = F, Cl or OH) (e.g., fluorapatite
+Ca 9 (PO 4 ) 6 . CaF 2 ) which are the main components of phosphate rocks.
+Phosphorus is an essential constituent of animal and plant matter. It
+is present in bones as well as in living cells. Phosphoproteins are present
+in milk and eggs. Arsenic, antimony and bismuth are found mainly as
+sulphide minerals. Moscovium is a synthetic radioactive element. Its
+symbol is Mc, atomic number 115, atomic mass 289 and electronic
+configuration [Rn] 5 f 
+14
+6 d
+10
+7 s
+2
+7 p
+3
+. Due to very short half life and
+availability in very little amount, its chemistry is yet to be established.
+Here, except for moscovium, important atomic and physical
+properties of other elements of this group along with their electronic
+configurations are given in Table 7.1.
+Table 7.1: Atomic and Physical Properties of Group 15 Elements
+a 
+E
+III 
+single bond (E = element); 
+b 
+E 
+3–
+; 
+c 
+E 
+3+
+; 
+d 
+White phosphorus; 
+e 
+Grey α -form at 38.6 atm; 
+f 
+Sublimation temperature;
+g 
+At 63 K; 
+h
+Grey α -form; * Molecular N 2 .
+Trends of some of the atomic, physical and chemical properties of the
+group are discussed below.
+The valence shell electronic configuration of these elements is ns
+2
+np
+3
+.
+The s orbital in these elements is completely filled and p orbitals are
+half-filled, making their electronic configuration extra stable.
+Covalent and ionic (in a particular state) radii increase in size
+down the group. There is a considerable increase in covalent radius
+from N to P. However, from As to Bi only a small increase in
+covalent radius is observed. This is due to the presence of
+completely filled d and/or f orbitals in heavier members.
+Ionisation enthalpy decreases down the group due to gradual increase
+in atomic size. Because of the extra stable half-filled p orbitals electronic
+configuration and smaller size, the ionisation enthalpy of the group 15
+elements is much greater than that of group 14 elements in the
+corresponding periods. The order of successive ionisation enthalpies,
+as expected is ∆ i H 1 < ∆ i H 2 < ∆ i H 3 (Table 7.1).
+7.1.2 Electronic
+Configuration
+7.1.3 Atomic and
+Ionic Radii
+7.1.4 Ionisation
+Enthalpy
+Property N P As Sb Bi
+Atomic number 7 15 33 51 83
+Atomic mass/g mol
+–1 
+14.01 30.97 74.92 121.75 208.98
+Electronic configuration [He]2 s
+2
+2 p
+3 
+[Ne]3 s
+2
+3 p
+3 
+[Ar]3 d
+10
+4 s
+2
+4 p
+3 
+[Kr]4 d
+10
+5 s
+2
+5 p
+3 
+[Xe]4 f
+14
+5 d
+10
+6 s
+2
+6 p
+3
+Ionisation enthalpy I 1402 1012 947 834 703
+( ∆ i H /(kJ mol
+–1
+) II 2856 1903 1798 1595 1610
+III 4577 2910 2736 2443 2466
+Electronegativity 3.0 2.1 2.0 1.9 1.9
+Covalent radius/pm
+a 
+70 110 121 141 148
+Ionic radius/pm 171
+b 
+212
+b 
+222
+b 
+76
+c 
+103
+c
+Melting point/K 63* 317
+d 
+1089
+e 
+904 544
+Boiling point/K 77.2* 554
+d 
+888
+f 
+1860 1837
+Density/[g cm
+–3
+(298 K)] 0.879
+g 
+1.823 5.778
+h 
+6.697 9.808
+2020-21
+
+172 Chemistry
+The electronegativity value, in general, decreases down the group with
+increasing atomic size. However, amongst the heavier elements, the
+difference is not that much pronounced.
+All the elements of this group are polyatomic. Dinitrogen is a diatomic gas
+while all others are solids. Metallic character increases down the group.
+Nitrogen and phosphorus are non-metals, arsenic and antimony metalloids
+and bismuth is a metal. This is due to decrease in ionisation enthalpy and
+increase in atomic size. The boiling points, in general, increase from top to
+bottom in the group but the melting point increases upto arsenic and then
+decreases upto bismuth. Except nitrogen, all the elements show allotropy.
+Oxidation states and trends in chemical reactivity
+The common oxidation states of these elements are –3, +3 and +5.
+The tendency to exhibit –3 oxidation state decreases down the group due
+to increase in size and metallic character. In fact last member of the group,
+bismuth hardly forms any compound in –3 oxidation state. The stability
+of +5 oxidation state decreases down the group. The only well characterised
+Bi (V) compound is BiF 5 . The stability of +5 oxidation state decreases and
+that of +3 state increases (due to inert pair effect) down the group. Besides
++5 oxidation state, nitrogen exhibits + 1, + 2, + 4 oxidation states also
+when it reacts with oxygen. However, it does not form compounds in
++5 oxidation state with halogens as nitrogen does not have d -orbitals
+to accommodate electrons from other elements to form bonds.
+Phosphorus also shows +1 and +4 oxidation states in some oxoacids.
+In the case of nitrogen, all oxidation states from +1 to +4 tend to
+disproportionate in acid solution. For example,
+3HNO 2 → HNO 3 + H 2 O + 2NO
+Similarly, in case of phosphorus nearly all intermediate oxidation
+states disproportionate into +5 and –3 both in alkali and acid. However
++3 oxidation state in case of arsenic, antimony and bismuth becomes
+increasingly stable with respect to disproportionation.
+Nitrogen is restricted to a maximum covalency of 4 since only four
+(one s and three p ) orbitals are available for bonding. The heavier elements
+have vacant d orbitals in the outermost shell which can be used for
+bonding (covalency) and hence, expand their covalence as in PF
+–
+6 .
+Anomalous properties of nitrogen
+Nitrogen differs from the rest of the members of this group due to
+its small size, high electronegativity, high ionisation enthalpy and
+non-availability of d orbitals. Nitrogen has unique ability to form
+p π π π π π - p π π π π π multiple bonds with itself and with other elements having
+small size and high electronegativity (e.g., C, O). Heavier elements of
+this group do not form p π - p π bonds as their atomic orbitals are so
+large and diffuse that they cannot have effective overlapping.
+Thus, nitrogen exists as a diatomic molecule with a triple bond (one
+s and two p ) between the two atoms. Consequently, its bond enthalpy
+(941.4 kJ mol
+–1
+) is very high. On the contrary, phosphorus, arsenic
+and antimony form single bonds as P–P, As–As and Sb–Sb while
+bismuth forms metallic bonds in elemental state. However, the single
+7.1.5
+Electronegativity
+7.1.6 Physical
+Properties
+7.1.7 Chemical
+Properties
+2020-21
+
+173 The p -Block Elements
+N–N bond is weaker than the single P–P bond because of high
+interelectronic repulsion of the non-bonding electrons, owing to the
+small bond length. As a result the catenation tendency is weaker in
+nitrogen. Another factor which affects the chemistry of nitrogen is
+the absence of d orbitals in its valence shell. Besides restricting its
+covalency to four, nitrogen cannot form d π π π π π – p π π π π π bond as the heavier
+elements can e.g., R 3 P = O or R 3 P = CH 2 (R = alkyl group). Phosphorus
+and arsenic can form d π π π π π – d π π π π π bond also with transition metals when
+their compounds like P(C 2 H 5 ) 3 and As(C 6 H 5 ) 3 act as ligands.
+(i) Reactivity towards hydrogen : All the elements of Group 15
+form hydrides of the type EH 3 where E = N, P, As, Sb or Bi.
+Some of the properties of these hydrides are shown in Table
+7.2. The hydrides show regular gradation in their properties.
+The stability of hydrides decreases from NH 3 to BiH 3 which can
+be observed from their bond dissociation enthalpy.
+Consequently, the reducing character of the hydrides increases.
+Ammonia is only a mild reducing agent while BiH 3 is the
+strongest reducing agent amongst all the hydrides. Basicity also
+decreases in the order NH 3 > PH 3 > AsH 3 > SbH 3 > BiH 3 . Due to
+high electronegativity and small size of nitrogen, NH 3 exhibits
+hydrogen bonding in solid as well as liquid state. Because of this,
+it has higher melting and boiling points than that of PH 3 .
+(ii) Reactivity towards oxygen : All these elements form two types
+of oxides: E 2 O 3 and E 2 O 5 . The oxide in the higher oxidation state
+of the element is more acidic than that of lower oxidation state.
+Their acidic character decreases down the group. The oxides of
+the type E 2 O 3 of nitrogen and phosphorus are purely acidic,
+that of arsenic and antimony amphoteric and those of bismuth
+predominantly basic.
+(iii) Reactivity towards halogens : These elements react to form two
+series of halides: EX 3 and EX 5 . Nitrogen does not form pentahalide
+due to non-availability of the d orbitals in its valence shell.
+Pentahalides are more covalent than trihalides. This is due to the
+fact that in pentahalides +5 oxidation state exists while in the case
+of trihalides +3 oxidation state exists. Since elements in +5 oxidation
+Property NH 3 PH 3 AsH 3 SbH 3 BiH 3
+Melting point/K 195.2 139.5 156.7 185 –
+Boiling point/K 238.5 185.5 210.6 254.6 290
+(E–H) Distance/pm 101.7 141.9 151.9 170.7 –
+HEH angle (°) 107.8 93.6 91.8 91.3 –
+∆ f H
+V
+/kJ mol
+–1 
+–46.1 13.4 66.4 145.1 278
+∆ diss H
+V
+(E–H)/kJ mol
+–1 
+389 322 297 255 –
+Table 7.2: Properties of Hydrides of Group 15 Elements
+2020-21
+
+174 Chemistry
+Though nitrogen exhibits +5 oxidation state, it does not form
+pentahalide. Give reason.
+Nitrogen with n = 2, has s and p orbitals only. It does not have d
+orbitals to expand its covalence beyond four. That is why it does not
+form pentahalide.
+PH 3 has lower boiling point than NH 3 . Why?
+Unlike NH 3 , PH 3 molecules are not associated through hydrogen bonding
+in liquid state. That is why the boiling point of PH 3 is lower than NH 3 .
+Preparation
+Dinitrogen is produced commercially by the liquefaction and fractional
+distillation of air. Liquid dinitrogen (b.p. 77.2 K) distils out first leaving
+behind liquid oxygen (b.p. 90 K).
+In the laboratory, dinitrogen is prepared by treating an aqueous
+solution of ammonium chloride with sodium nitrite.
+NH 4 CI(aq) + NaNO 2 (aq) → N 2 (g) + 2H 2 O(l) + NaCl (aq)
+Small amounts of NO and HNO 3 are also formed in this reaction;
+these impurities can be removed by passing the gas through aqueous
+sulphuric acid containing potassium dichromate. It can also be obtained
+by the thermal decomposition of ammonium dichromate.
+(NH 4 ) 2 Cr 2 O 7 
+Heat
+ → N 2 + 4H 2 O + Cr 2 O 3
+Very pure nitrogen can be obtained by the thermal decomposition
+of sodium or barium azide.
+Ba(N 3 ) 2 
+→ Ba + 3N 2
+7.2 7.2 7.2 7.2 7.2 Dinitrogen Dinitrogen Dinitrogen Dinitrogen Dinitrogen
+Example 7.1 Example 7.1 Example 7.1 Example 7.1 Example 7.1
+Solution Solution Solution Solution Solution
+Example 7.2 Example 7.2 Example 7.2 Example 7.2 Example 7.2
+Solution Solution Solution Solution Solution
+state will have more polarising power than in +3 oxidation state,
+the covalent character of bonds is more in pentahalides. All the
+trihalides of these elements except those of nitrogen are stable.
+In case of nitrogen, only NF 3 is known to be stable. Trihalides
+except BiF 3 are predominantly covalent in nature.
+(iv) Reactivity towards metals : All these elements react with metals
+to form their binary compounds exhibiting –3 oxidation state,
+such as, Ca 3 N 2 (calcium nitride) Ca 3 P 2 (calcium phosphide),
+Na 3 As (sodium arsenide), Zn 3 Sb 2 (zinc antimonide) and Mg 3 Bi 2
+(magnesium bismuthide).
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.1 Why are pentahalides of P, As, Sb and Bi more covalent than their
+trihalides?
+7.2 Why is BiH 3 the strongest reducing agent amongst all the hydrides of
+Group 15 elements ?
+2020-21
+
+175 The p -Block Elements
+Preparation
+Ammonia is present in small quantities in air and soil where it is
+formed by the decay of nitrogenous organic matter e.g., urea.
+NH CONH H O NH CO NH H O CO
+2 2 2 4 2 3 3 2 2
+2 2 + → ( ) + + 
+On a small scale ammonia is obtained from ammonium salts which
+decompose when treated with caustic soda or calcium hydroxide.
+2NH 4 Cl + Ca(OH) 2 → 2NH 3 + 2H 2 O + CaCl 2
+(NH 4 ) 2 SO 4 + 2NaOH → 2NH 3 + 2H 2 O + Na 2 SO 4
+Properties
+Dinitrogen is a colourless, odourless, tasteless and non-toxic gas.
+Nitrogen atom has two stable isotopes: 
+14
+N and 
+15
+N. It has a very low
+solubility in water (23.2 cm
+3 
+per litre of water at 273 K and 1 bar
+pressure) and low freezing and boiling points (Table 7.1).
+Dinitrogen is rather inert at room temperature because of the high
+bond enthalpy of N ≡ N bond. Reactivity, however, increases rapidly with
+rise in temperature. At higher temperatures, it directly combines with
+some metals to form predominantly ionic nitrides and with non-metals,
+covalent nitrides. A few typical reactions are:
+6Li + N 2 
+Heat
+ → 2Li 3 N
+3Mg + N 2 
+Heat
+ → Mg 3 N 2
+It combines with hydrogen at about 773 K in the presence of a
+catalyst (Haber’s Process) to form ammonia:
+N 2 (g) + 3H 2 (g) 
+773 k
+ ⇀ 
+↽   
+2NH 3 (g); ∆ f H
+y 
+= –46.1 kJmol
+–1
+Dinitrogen combines with dioxygen only at very high temperature
+(at about 2000 K) to form nitric oxide, NO.
+N 2 + O 2 (g) 
+Heat
+ ⇀ 
+↽   
+2NO(g)
+Uses Uses Uses Uses Uses: The main use of dinitrogen is in the manufacture of ammonia and other
+industrial chemicals containing nitrogen, (e.g., calcium cyanamide). It also
+finds use where an inert atmosphere is required (e.g., in iron and steel industry,
+inert diluent for reactive chemicals). Liquid dinitrogen is used as a refrigerant
+to preserve biological materials, food items and in cryosurgery.
+Write the reaction of thermal decomposition of sodium azide.
+Thermal decomposition of sodium azide gives dinitrogen gas.
+3 2
+2NaN 2Na 3N → +
+Example 7.3 Example 7.3 Example 7.3 Example 7.3 Example 7.3
+Solution Solution Solution Solution Solution
+Intext Question Intext Question Intext Question Intext Question Intext Question
+7.3 Why is N 2 less reactive at room temperature?
+7.3 Ammonia 7.3 Ammonia 7.3 Ammonia 7.3 Ammonia 7.3 Ammonia
+2020-21
+
+176 Chemistry
+Properties
+Ammonia is a colourless gas with a pungent odour. Its freezing and
+boiling points are 198.4 and 239.7 K respectively. In the solid and
+liquid states, it is associated through hydrogen bonds as in the case
+of water and that accounts for its higher melting and boiling points
+than expected on the basis of its molecular mass. The ammonia molecule
+is trigonal pyramidal with the nitrogen atom at the apex. It has three
+bond pairs and one lone pair of electrons as shown in the structure.
+Ammonia gas is highly soluble in water. Its aqueous solution is
+weakly basic due to the formation of OH
+– 
+ions.
+NH 3 (g) + H 2 O(l) l NH 4
++ 
+(aq) + OH
+– 
+(aq)
+It forms ammonium salts with acids, e.g., NH 4 Cl, (NH 4 ) 2 SO 4 , etc. As
+a weak base, it precipitates the hydroxides (hydrated oxides in case of
+some metals) of many metals from their salt solutions. For example,
+( ) ( ) ( ) ( ) ( ) ( )
+( )
+4 4 4 4 2 2
+ZnSO 2NH OH Zn NH SO aq aq aq OH s
+white ppt
++ → +
+( ) ( ) ( ) ( )
+( )
+3 4 2 3 2 4
+aq aq aq FeCl NH OH Fe O . H O NH Cl s
+brown ppt
++ → + x
+H 
+H 
+H
+N
+Fig. 7.1
+Flow chart for the
+manufacture of
+ammonia
+On a large scale, ammonia is manufactured by Haber’s process.
+N 2 (g) + 3H 2 (g) Ö 2NH 3 (g); ∆ f H
+0 
+= – 46.1 kJ mol
+–1
+In accordance with Le Chatelier’s principle, high pressure would
+favour the formation of ammonia. The optimum conditions for the
+production of ammonia are a pressure of 200 × 10
+5 
+Pa (about 200
+atm), a temperature of ~ 700 K and the use of a catalyst such as iron
+oxide with small amounts of K 2 O and Al 2 O 3 to increase the rate of
+attainment of equilibrium. The flow chart for the production of ammonia
+is shown in Fig. 7.1. Earlier, iron was used as a catalyst with
+molybdenum as a promoter.
+2020-21
+
+177 The p -Block Elements
+Example 7.4 Example 7.4 Example 7.4 Example 7.4 Example 7.4 Why does NH 3 act as a Lewis base ?
+Nitrogen atom in NH 3 has one lone pair of electrons which
+is available for donation. Therefore, it acts as a Lewis base.
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.4 Mention the conditions required to maximise the yield of ammonia.
+7.5 How does ammonia react with a solution of Cu
+2+
+?
+7.4 7.4 7.4 7.4 7.4 Oxides of Oxides of Oxides of Oxides of Oxides of
+Nitrogen Nitrogen Nitrogen Nitrogen Nitrogen
+Solution Solution Solution Solution Solution
+Uses Uses Uses Uses Uses: Ammonia is used to produce various nitrogenous fertilisers
+(ammonium nitrate, urea, ammonium phosphate and ammonium sulphate)
+and in the manufacture of some inorganic nitrogen compounds, the most
+important one being nitric acid. Liquid ammonia is also used as a refrigerant.
+Nitrogen forms a number of oxides in different oxidation states. The
+names, formulas, preparation and physical appearance of these oxides
+are given in Table 7.3.
+Dinitrogen oxide N 2 O + 1
+Heat
+4 3
+2 2
+NH NO
+N O 2H O
+→
++ 
+colourless gas,
+[Nitrogen(I) oxide] neutral
+Nitrogen monoxide NO + 2 2 4 2 4 2NaNO 2FeSO 3H SO + + colourless gas,
+[Nitrogen(II) oxide] 
+( ) 2 4 4 3
+Fe SO 2NaHSO → + 
+neutral
+2 2H O 2NO + +
+Table 7.3: Oxides of Nitrogen
+Oxidation
+state of
+nitrogen
+Name Formula Common
+methods of
+preparation
+Physical
+appearance and
+chemical nature
+The presence of a lone pair of electrons on the nitrogen atom of
+the ammonia molecule makes it a Lewis base. It donates the electron
+pair and forms linkage with metal ions and the formation of such
+complex compounds finds applications in detection of metal ions
+such as Cu
+2+
+, Ag
++
+:
+Cu
+2+ 
+(aq) + 4 NH 3 (aq) Ö [Cu(NH 3 ) 4 ]
+2+
+(aq)
+(blue) (deep blue)
+( ) ( ) ( ) Ag Cl AgCl aq aq s
++ −
++ →
+(colourless) (white ppt)
+( ) ( ) ( ) ( ) 3 3 2
+NH Ag AgCl 2NH Cl aq aq s   + → 
+ 
+(white ppt) (colourless)
+2020-21
+
+178 Chemistry
+Table 7.4: Structures of Oxides of Nitrogen
+Lewis dot main resonance structures and bond parameters of oxides
+are given in Table 7.4.
+Dinitrogen trioxide N 2 O 3 + 3 
+250 K
+2 4 2 3 2NO N O 2N O +  → blue solid,
+[Nitrogen(III) oxide] acidic
+Nitrogen dioxide NO 2 + 4 
+( )  →
++ +
+673K
+3 2
+2 2
+2Pb NO
+4NO 2PbO O 
+brown gas,
+[Nitrogen(IV) oxide] acidic
+Dinitrogen tetroxide N 2 O 4 + 4 
+Cool
+2 2 4 Heat
+2NO N O  ⇀ ↽  colourless solid/
+liquid, acidic [Nitrogen(IV) oxide]
+Dinitrogen pentoxide N 2 O 5 +5 3 4 10
+3 2 5
+4HNO P O
+4HPO 2N O
++
+→ +
+colourless solid,
+[Nitrogen(V) oxide] acidic
+2020-21
+
+179 The p -Block Elements
+Preparation
+In the laboratory, nitric acid is prepared by heating KNO 3 or NaNO 3
+and concentrated H 2 SO 4 in a glass retort.
+3 2 4 4 3
+NaNO H SO NaHSO HNO + → +
+On a large scale it is prepared mainly by Ostwald’s process.
+This method is based upon catalytic oxidation of NH 3 by atmospheric
+oxygen.
+( ) ( ) ( ) ( )
+Pt / Rh gauge catalyst
+3 2 2 500 K 9 bar ,
+(from air)
+4NH g 5O g 4NO g 6H O g +  → +
+Nitric oxide thus formed combines with oxygen giving NO 2 .
+( ) ( ) ( ) 2 2
+2NO g O g 2NO g + 
+Nitrogen dioxide so formed, dissolves in water to give HNO 3 .
+( ) ( ) ( ) ( ) 2 2 3
+3NO g H O l 2HNO aq NO g + → +
+NO thus formed is recycled and the aqueous HNO 3 can be
+concentrated by distillation upto ~ 68% by mass. Further
+concentration to 98% can be achieved by dehydration with
+concentrated H 2 SO 4 .
+Properties
+It is a colourless liquid (f.p. 231.4 K and b.p. 355.6 K). Laboratory
+grade nitric acid contains ~ 68% of the HNO 3 by mass and has a
+specific gravity of 1.504.
+In the gaseous state, HNO 3 exists as a planar molecule with
+the structure as shown.
+In aqueous solution, nitric acid behaves as a strong acid giving
+hydronium and nitrate ions.
+HNO 3 (aq) + H 2 O(l) → H 3 O
++
+(aq) + NO 3
+– 
+(aq)
+Concentrated nitric acid is a strong oxidising agent and attacks
+most metals except noble metals such as gold and platinum. The
+Why does NO 2 dimerise ?
+NO 2 contains odd number of valence electrons. It behaves as a typical
+odd molecule. On dimerisation, it is converted to stable N 2 O 4 molecule
+with even number of electrons.
+Intext Question Intext Question Intext Question Intext Question Intext Question
+7.6 What is the covalence of nitrogen in N 2 O 5 ?
+7.5 7.5 7.5 7.5 7.5 Nitric Acid Nitric Acid Nitric Acid Nitric Acid Nitric Acid Nitrogen forms oxoacids such as H 2 N 2 O 2 (hyponitrous acid), HNO 2
+(nitrous acid) and HNO 3 (nitric acid). Amongst them HNO 3 is the
+most important.
+Solution Solution Solution Solution Solution
+Example 7.5 Example 7.5 Example 7.5 Example 7.5 Example 7.5
+2020-21
+
+180 Chemistry
+7.6 7.6 7.6 7.6 7.6 Phosphorus — Phosphorus — Phosphorus — Phosphorus — Phosphorus —
+Allotropic Allotropic Allotropic Allotropic Allotropic
+Forms Forms Forms Forms Forms
+products of oxidation depend upon the concentration of the acid,
+temperature and the nature of the material undergoing oxidation.
+3Cu + 8 HNO 3 (dilute) → 3Cu(NO 3 ) 2 + 2NO + 4H 2 O
+Cu + 4HNO 3 (conc.) → Cu(NO 3 ) 2 + 2NO 2 + 2H 2 O
+Zinc reacts with dilute nitric acid to give N 2 O and with concentrated
+acid to give NO 2 .
+4Zn + 10HNO 3 (dilute) → 4 Zn (NO 3 ) 2 + 5H 2 O + N 2 O
+Zn + 4HNO 3 (conc.) → Zn (NO 3 ) 2 + 2H 2 O + 2NO 2
+Some metals (e.g., Cr, Al) do not dissolve in concentrated nitric
+acid because of the formation of a passive film of oxide on the surface.
+Concentrated nitric acid also oxidises non–metals and their
+compounds. Iodine is oxidised to iodic acid, carbon to carbon dioxide,
+sulphur to H 2 SO 4 , and phosphorus to phosphoric acid.
+I 2 + 10HNO 3 → 2HIO 3 + 10NO 2 + 4H 2 O
+C + 4HNO 3 → CO 2 + 2H 2 O + 4NO 2
+S 8 + 48HNO 3 → 8H 2 SO 4 + 48NO 2 + 16H 2 O
+P 4 + 20HNO 3 → 4H 3 PO 4 + 20NO 2 + 4H 2 O
+Brown Ring Test : The familiar brown ring test for nitrates depends
+on the ability of Fe
+2+ 
+to reduce nitrates to nitric oxide, which reacts
+with Fe
+2+ 
+to form a brown coloured complex. The test is usually carried
+out by adding dilute ferrous sulphate solution to an aqueous solution
+containing nitrate ion, and then carefully adding concentrated sulphuric
+acid along the sides of the test tube. A brown ring at the interface
+between the solution and sulphuric acid layers indicates the presence
+of nitrate ion in solution.
+NO 3
+- 
++ 3Fe
+2+ 
++ 4H
++ 
+→ NO + 3Fe
+3+ 
++ 2H 2 O
++ 2
+6 2 ] ) O H ( Fe [ + NO → [Fe (H 2 O) 5 (NO)]
+2+ 
++ H 2 O
+(brown)
+Uses Uses Uses Uses Uses: The major use of nitric acid is in the manufacture of ammonium nitrate
+for fertilisers and other nitrates for use in explosives and pyrotechnics. It is
+also used for the preparation of nitroglycerin, trinitrotoluene and other organic
+nitro compounds. Other major uses are in the pickling of stainless steel,
+etching of metals and as an oxidiser in rocket fuels.
+Phosphorus is found in many allotropic forms, the important ones
+being white, red and black.
+White phosphorus is a translucent white waxy solid. It is poisonous,
+insoluble in water but soluble in carbon disulphide and glows in dark
+(chemiluminescence). It dissolves in boiling NaOH solution in an inert
+atmosphere giving PH 3 .
+( )
+4 2 3 2 2
+sodium hypophosphite
+P 3NaOH 3H O PH 3NaH PO + + → +
+2020-21
+
+181 The p -Block Elements
+White phosphorus is less stable and therefore, more reactive than
+the other solid phases under normal conditions because of angular
+strain in the P 4 molecule where the angles are only 60°. It readily
+catches fire in air to give dense white fumes of P 4 O 10 .
+4 2 4 10
+P 5O P O + →
+It consists of discrete tetrahedral P 4 molecule as shown in Fig. 7.2.
+Red phosphorus is obtained by heating white phosphorus at 573K
+in an inert atmosphere for several days. When red phosphorus is heated
+under high pressure, a series of phases of black phosphorus is formed.
+Red phosphorus possesses iron grey lustre. It is odourless, non-
+poisonous and insoluble in water as well as in carbon disulphide.
+Chemically, red phosphorus is much less reactive than white
+phosphorus. It does not glow in the dark.
+It is polymeric, consisting of chains of P 4
+tetrahedra linked together in the manner as shown
+in Fig. 7.3.
+Black phosphorus has two forms α -black
+phosphorus and β -black phosphorus. α -Black
+phosphorus is formed when red phosphorus is
+heated in a sealed tube at 803K. It can be sublimed
+in air and has opaque monoclinic or rhombohedral
+crystals. It does not oxidise in air. β -Black phosphorus is prepared by
+heating white phosphorus at 473 K under high pressure. It does not
+burn in air upto 673 K.
+Preparation
+Phosphine is prepared by the reaction of calcium phosphide with water
+or dilute HCl.
+Ca 3 P 2 + 6H 2 O → 3Ca(OH) 2 + 2PH 3
+Ca 3 P 2 + 6HCl → 3CaCl 2 + 2PH 3
+In the laboratory, it is prepared by heating white phosphorus with
+concentrated NaOH solution in an inert atmosphere of CO 2 .
+( )
+4 2 3 2 2
+P 3NaOH 3H O PH 3NaH PO
+sodium hypophosphite
++ + → +
+When pure, it is non inflammable but becomes inflammable owing
+to the presence of P 2 H 4 or P 4 vapours. To purify it from the impurities,
+it is absorbed in HI to form phosphonium iodide (PH 4 I) which on treating
+with KOH gives off phosphine.
+4 2 3
+PH I KOH KI H O PH + → + +
+Properties
+It is a colourless gas with rotten fish smell and is highly poisonous.
+It explodes in contact with traces of oxidising agents like HNO 3 , Cl 2 and
+Br 2 vapours.
+It is slightly soluble in water. The solution of PH 3 in water decomposes
+in presence of light giving red phosphorus and H 2 . When absorbed in
+P P P
+P P P
+P P P P P P
+Fig.7.3: Red phosphorus
+P
+P P
+P
+60°
+Fig. 7.2
+White phosphorus
+7.7 7.7 7.7 7.7 7.7 Phosphine Phosphine Phosphine Phosphine Phosphine
+2020-21
+
+182 Chemistry
+7.8.1 Phosphorus
+Trichloride
+Phosphorus forms two types of halides, PX 3 (X = F, Cl, Br, I) and
+PX 5 (X = F, Cl, Br).
+Preparation
+It is obtained by passing dry chlorine over heated white phosphorus.
+4 2 3
+P 6Cl 4PCl + →
+It is also obtained by the action of thionyl chloride with white
+phosphorus.
+4 2 3 2 2 2
+P 8SOCl 4PCl 4SO 2S Cl + → + +
+Properties
+It is a colourless oily liquid and hydrolyses in the presence of moisture.
+3 2 3 3
+PCl 3H O H PO + 3HCl + →
+It reacts with organic compounds containing –OH group such as
+CH 3 COOH, C 2 H 5 OH.
+3 3 3 3 3
+3CH COOH PCl 3CH COCl H PO + → +
+2 5 3 2 5 3 3
+3C H OH PCl 3C H Cl H PO + → +
+It has a pyramidal shape as shown, in which phosphorus is sp
+3
+hybridised.
+7.8 7.8 7.8 7.8 7.8 Phosphorus Halides Phosphorus Halides Phosphorus Halides Phosphorus Halides Phosphorus Halides
+Uses Uses Uses Uses Uses: The spontaneous combustion of phosphine is technically used in Holme’s
+signals . Containers containing calcium carbide and calcium phosphide are pierced
+and thrown in the sea when the gases evolved burn and serve as a signal. It is also
+used in smoke screens .
+P
+Cl
+Cl 
+Cl
+7.8.2 Phosphorus
+Pentachloride
+copper sulphate or mercuric chloride solution, the corresponding
+phosphides are obtained.
+4 3 3 2 2 4
+3CuSO 2PH Cu P 3H SO + → +
+2 3 3 2
+3HgCl 2PH Hg P 6HCl + → +
+Phosphine is weakly basic and like ammonia, gives phosphonium
+compounds with acids e.g.,
+3 4
+PH HBr PH Br + →
+Example 7.6 Example 7.6 Example 7.6 Example 7.6 Example 7.6 In what way can it be proved that PH 3 is basic in nature?
+PH 3 reacts with acids like HI to form PH 4 I which shows that it is
+basic in nature.
+3 4
+PH HI PH I + →
+Due to lone pair on phosphorus atom, PH 3 is acting as a Lewis base in the above reaction.
+Solution Solution Solution Solution Solution
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.7 (a) Bond angle in PH 4
++ 
+is higher than that in PH 3 . Why?
+(b) What is formed when PH 3 reacts with an acid?
+7.8 What happens when white phosphorus is heated with concentrated NaOH
+solution in an inert atmosphere of CO 2 ?
+2020-21
+
+183 The p -Block Elements
+Preparation
+Phosphorus pentachloride is prepared by the reaction of white
+phosphorus with excess of dry chlorine.
+4 2 5
+P 10Cl 4PCl + →
+It can also be prepared by the action of SO 2 Cl 2 on phosphorus.
+4 2 2 5 2
+P 10SO Cl 4PCl 10SO + → +
+Properties
+PCl 5 is a yellowish white powder and in moist air, it hydrolyses to
+POCl 3 and finally gets converted to phosphoric acid.
+5 2 3
+PCl H O POCl 2HCl + → +
+3 2 3 4
+POCl 3H O H PO 3HCl + → +
+When heated, it sublimes but decomposes on stronger heating.
+Heat
+5 3 2
+PCl PCl Cl  → +
+It reacts with organic compounds containing –OH group converting
+them to chloro derivatives.
+2 5 5 2 5 3
+C H OH PCl C H Cl POCl HCl + → + +
+3 5 3 3
+CH COOH PCl CH COCl POCl +HCl + → +
+Finely divided metals on heating with PCl 5 give corresponding
+chlorides.
+5 3
+5 4 3
+2Ag PCl 2AgCl PCl
+Sn 2PCl SnCl 2PCl
++ → +
++ → +
+It is used in the synthesis of some organic
+compounds, e.g., C 2 H 5 Cl, CH 3 COCl.
+In gaseous and liquid phases, it has a trigonal
+bipyramidal structure as shown. The three equatorial
+P–Cl bonds are equivalent, while the two axial bonds are
+longer than equatorial bonds. This is due to the fact that
+the axial bond pairs suffer more repulsion as compared
+to equatorial bond pairs.
+P
+Cl
+Cl
+Cl Cl
+Cl 240 pm
+202 pm
+Why does PCl 3 fume in moisture ?
+PCl 3 hydrolyses in the presence of moisture giving fumes of HCl.
+3 2 3 3
+PCl 3H O H PO + 3HCl + →
+Are all the five bonds in PCl 5 molecule equivalent? Justify your answer.
+PCl 5 has a trigonal bipyramidal structure and the three equatorial
+P-Cl bonds are equivalent, while the two axial bonds are different and
+longer than equatorial bonds.
+Example 7.7 Example 7.7 Example 7.7 Example 7.7 Example 7.7
+Solution Solution Solution Solution Solution
+Example 7.8 Example 7.8 Example 7.8 Example 7.8 Example 7.8
+Solution Solution Solution Solution Solution
+2020-21
+
+184 Chemistry
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.9 What happens when PCl 5 is heated?
+7.10 Write a balanced equation for the reaction of PCl 5 with water.
+Phosphorus forms a number of oxoacids. The important oxoacids of
+phosphorus with their formulas, methods of preparation and the
+presence of some characteristic bonds in their structures are given
+in Table 7.5.
+* Exists in polymeric forms only. Characteristic bonds of (HPO 3 ) 3 have been given in the Table.
+The compositions of the oxoacids are interrelated in terms of loss
+or gain of H 2 O molecule or O-atom. The structures of some important
+oxoacids are given next.
+In oxoacids phosphorus is tetrahedrally surrounded by other atoms.
+All these acids contain at least one P=O bond and one P–OH bond. The
+oxoacids in which phosphorus has lower oxidation state (less than +5)
+contain, in addition to P=O and P–OH bonds, either P–P (e.g., in H 4 P 2 O 6 )
+or P–H (e.g., in H 3 PO 2 ) bonds but not both. These acids in +3 oxidation
+state of phosphorus tend to disproportionate to higher and lower
+oxidation states. For example, orthophophorous acid (or phosphorous
+acid) on heating disproportionates to give orthophosphoric acid (or
+phosphoric acid) and phosphine.
+3 3 3 4 3
+4H PO 3H PO PH → +
+Table 7.5: Oxoacids of Phosphorus
+7.9 7.9 7.9 7.9 7.9 Oxoacids of Oxoacids of Oxoacids of Oxoacids of Oxoacids of
+Phosphorus Phosphorus Phosphorus Phosphorus Phosphorus
+Hypophosphorous H
+3
+PO
+2 
++1 One P – OH white P
+4 
++ alkali
+(Phosphinic) Two P – H
+One P = O
+Orthophosphorous H
+3
+PO
+3 
++3 Two P – OH P
+2
+O
+3 
++ H
+2
+O
+(Phosphonic) One P – H
+One P = O
+Pyrophosphorous H
+4
+P
+2
+O
+5 
++3 Two P – OH PCl
+3 
++ H
+3
+PO
+3
+Two P – H
+Two P = O
+Hypophosphoric H
+4
+P
+2
+O
+6 
++4 Four P – OH red P
+4 
++ alkali
+Two P = O
+One P – P
+Orthophosphoric H
+3
+PO
+4 
++5 Three P – OH P
+4
+O
+10
++H
+2
+O
+One P = O
+Pyrophosphoric H
+4
+P
+2
+O
+7 
++5 Four P – OH heat phosphoric
+Two P = O acid
+One P – O – P
+Metaphosphoric * (HPO
+3
+)
+n 
++5 Three P – OH phosphorus acid
+Three P = O + Br
+2
+, heat in a
+Three P – O – P sealed tube
+Oxidation
+state of
+phosphorus
+Characteristic
+bonds and their
+number
+Preparation Name Formula
+2020-21
+
+185 The p -Block Elements
+The acids which contain P–H bond have strong reducing properties.
+Thus, hypophosphorous acid is a good reducing agent as it contains
+two P–H bonds and reduces, for example, AgNO 3 to metallic silver.
+4 AgNO 3 + 2H 2 O + H 3 PO 2 → 4Ag + 4HNO 3 + H 3 PO 4
+These P–H bonds are not ionisable to give H
++ 
+and do not play any
+role in basicity. Only those H atoms which are attached with oxygen in
+P–OH form are ionisable and cause the basicity. Thus, H 3 PO 3 and
+H 3 PO 4 are dibasic and tribasic, respectively as the structure of H 3 PO 3
+has two P–OH bonds and H 3 PO 4 three.
+Oxygen, sulphur, selenium, tellurium, polonium and livermorium
+constitute Group 16 of the periodic table. This is sometimes known as
+group of chalcogens . The name is derived from the Greek word for
+brass and points to the association of sulphur and its congeners with
+copper. Most copper minerals contain either oxygen or sulphur and
+frequently the other members of the group.
+7.10 7.10 7.10 7.10 7.10 Group 16 Group 16 Group 16 Group 16 Group 16
+Elements Elements Elements Elements Elements
+Fig. 7.4
+Structures of some
+important oxoacids of
+phosphorus
+O
+P
+HO
+H PO
+Orthophosphoric acid
+3 4
+OH
+OH
+OH
+OH
+O
+P
+Orthophosphorous acid
+H PO 3 3
+H HO
+O O
+P 
+P
+O
+H P O
+Pyrophosphoric acid
+4 2 7
+OH 
+OH
+OH
+O
+P
+H
+H
+OH
+Hypophosphorous acid
+H PO 3 2
+O
+O O
+O
+O
+O
+HO
+OH
+OH
+P P
+P
+O
+O O
+O
+O O
+OH OH
+P P P
+OH O
+Cyclotrimetaphosphoric acid, (HPO ) 3 3 Polymetaphosphoric acid, (HPO ) 3 n
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.11 What is the basicity of H 3 PO 4 ?
+7.12 What happens when H 3 PO 3 is heated?
+How do you account for the reducing behaviour
+of H 3 PO 2 on the basis of its structure ?
+In H 3 PO 2 , two H atoms are bonded directly to P
+atom which imparts reducing character to the acid.
+Example 7.9 Example 7.9 Example 7.9 Example 7.9 Example 7.9
+Solution Solution Solution Solution Solution
+2020-21
+
+186 Chemistry
+Oxygen is the most abundant of all the elements on earth. Oxygen
+forms about 46.6% by mass of earth’s crust. Dry air contains 20.946%
+oxygen by volume.
+However, the abundance of sulphur in the earth’s crust is only
+0.03-0.1%. Combined sulphur exists primarily as sulphates such as
+gypsum CaSO 4 .2H 2 O, epsom salt MgSO 4 .7H 2 O, baryte BaSO 4 and
+sulphides such as galena PbS, zinc blende ZnS, copper pyrites CuFeS 2 .
+Traces of sulphur occur as hydrogen sulphide in volcanoes. Organic
+materials such as eggs, proteins, garlic, onion, mustard, hair and wool
+contain sulphur.
+Selenium and tellurium are also found as metal selenides and
+tellurides in sulphide ores. Polonium occurs in nature as a decay
+product of thorium and uranium minerals. Livermorium is a synthetic
+radioactive element. Its symbol is Lv, atomic number 116, atomic mass
+292 and electronic configuration [Rn] 5 f 
+14
+6 d
+10
+7 s
+2
+7 p
+4
+. It has been
+produced only in a very small amount and has very short half-life (only
+a small fraction of one second). This limits the study of properlies of Lv.
+Here, except for livermorium, important atomic and physical
+properties of other elements of Group16 along with their electronic
+configurations are given in Table 7.6. Some of the atomic, physical and
+chemical properties and their trends are discussed below.
+7.10.2 Electronic
+Configuration
+7.10.3 Atomic
+and Ionic
+Radii
+The elements of Group16 have six electrons in the outermost shell and
+have ns
+2
+np
+4 
+general electronic configuration.
+Due to increase in the number of shells, atomic and ionic radii increase
+from top to bottom in the group. The size of oxygen atom is, however,
+exceptionally small.
+a
+Single bond; 
+b
+Approximate value; 
+c
+At the melting point; 
+d 
+Rhombic sulphur; 
+e
+Hexagonal grey; 
+f
+Monoclinic form, 673 K.
+* Oxygen shows oxidation states of +2 and +1 in oxygen fluorides OF 2 and O 2 F 2 respectively.
+Atomic number 8 16 34 52 84
+Atomic mass/g mol
+–1 
+16.00 32.06 78.96 127.60 210.00
+Electronic configuration [He]2 s
+2
+2 p
+4 
+[Ne]3 s
+2
+3 p
+4 
+[Ar]3 d
+10
+4 s
+2
+4 p
+4 
+[Kr]4 d
+10
+5 s
+2
+5 p
+4 
+[Xe]4 f
+14
+5 d
+10
+6 s
+2
+6 p
+4
+Covalent radius/(pm)
+a 
+66 104 117 137 146
+Ionic radius, E
+2–
+/pm 140 184 198 221 230
+b
+Electron gain enthalpy, –141 –200 –195 –190 –174
+/ ∆ eg H kJ mol
+–1
+Ionisation enthalpy ( ∆ i H 1 ) 1314 1000 941 869 813
+/kJ mol
+–1
+Electronegativity 3.50 2.58 2.55 2.01 1.76
+Density /g cm
+–3 
+(298 K) 1.32
+c 
+2.06
+d 
+4.19
+e 
+6.25 –
+Melting point/K 55 393
+f 
+490 725 520
+Boiling point/K 90 718 958 1260 1235
+Oxidation states * –2,–1,1,2 –2,2,4,6 –2,2,4,6 –2,2,4,6 2,4
+Property O S Se Te Po
+Table 7.6: Some Physical Properties of Group 16 Elements
+7.10.1 Occurrence
+2020-21
+
+187 The p -Block Elements
+7.10.4 Ionisation
+Enthalpy
+7.10.5 Electron
+Gain
+Enthalpy
+7.10.6
+Electronegativity
+Ionisation enthalpy decreases down the group. It is due to increase in
+size. However, the elements of this group have lower ionisation enthalpy
+values compared to those of Group15 in the corresponding periods.
+This is due to the fact that Group 15 elements have extra stable half-
+filled p orbitals electronic configurations.
+Because of the compact nature of oxygen atom, it has less negative
+electron gain enthalpy than sulphur. However, from sulphur onwards
+the value again becomes less negative upto polonium.
+Next to fluorine, oxygen has the highest electronegativity value amongst
+the elements. Within the group, electronegativity decreases with an
+increase in atomic number. This implies that the metallic character
+increases from oxygen to polonium.
+Some of the physical properties of Group 16 elements are given in
+Table 7.6. Oxygen and sulphur are non-metals, selenium and tellurium
+metalloids, whereas polonium is a metal. Polonium is radioactive and
+is short lived (Half-life 13.8 days). All these elements exhibit allotropy.
+The melting and boiling points increase with an increase in atomic
+number down the group. The large difference between the melting and
+boiling points of oxygen and sulphur may be explained on the basis
+of their atomicity; oxygen exists as diatomic molecule (O 2 ) whereas
+sulphur exists as polyatomic molecule (S 8 ).
+Oxidation states and trends in chemical reactivity
+The elements of Group 16 exhibit a number of oxidation states (Table
+7.6). The stability of -2 oxidation state decreases down the group.
+Polonium hardly shows –2 oxidation state. Since electronegativity of
+oxygen is very high, it shows only negative oxidation state as –2 except
+in the case of OF 2 where its oxidation state is + 2. Other elements of the
+group exhibit + 2, + 4, + 6 oxidation states but + 4 and + 6 are more
+common. Sulphur, selenium and tellurium usually show + 4 oxidation
+state in their compounds with oxygen and + 6 with fluorine. The stability
+of + 6 oxidation state decreases down the group and stability of + 4
+oxidation state increases (inert pair effect). Bonding in +4 and +6
+oxidation states is primarily covalent.
+Anomalous behaviour of oxygen
+The anomalous behaviour of oxygen, like other members of p -block
+present in second period is due to its small size and high
+electronegativity. One typical example of effects of small size and high
+electronegativity is the presence of strong hydrogen bonding in H 2 O
+which is not found in H 2 S.
+7.10.7 Physical
+Properties
+7.10.8 Chemical
+Properties
+Elements of Group 16 generally show lower value of first ionisation
+enthalpy compared to the corresponding periods of group 15. Why?
+Due to extra stable half-filled p orbitals electronic configurations of
+Group 15 elements, larger amount of energy is required to remove
+electrons compared to Group 16 elements.
+Example 7.10 Example 7.10 Example 7.10 Example 7.10 Example 7.10
+Solution Solution Solution Solution Solution
+2020-21
+
+188 Chemistry
+(ii) Reactivity with oxygen : All these elements form oxides of the EO 2
+and EO 3 types where E = S, Se, Te or Po. Ozone (O 3 ) and sulphur
+dioxide (SO 2 ) are gases while selenium dioxide (SeO 2 ) is solid.
+Reducing property of dioxide decreases from SO 2 to TeO 2 ; SO 2 is
+reducing while TeO 2 is an oxidising agent. Besides EO 2 type,
+sulphur, selenium and tellurium also form EO 3 type oxides (SO 3 ,
+SeO 3 , TeO 3 ). Both types of oxides are acidic in nature.
+(iii) Reactivity towards the halogens : Elements of Group 16 form a
+large number of halides of the type, EX 6 , EX 4 and EX 2 where E is
+an element of the group and X is a halogen. The stability of the
+halides decreases in the order F
+– 
+> Cl
+– 
+> Br
+– 
+> I
+–
+. Amongst hexahalides,
+hexafluorides are the only stable halides. All hexafluorides are
+gaseous in nature. They have octahedral structure. Sulphur
+hexafluoride, SF 6 is exceptionally stable for steric reasons.
+Amongst tetrafluorides, SF 4 is a gas, SeF 4 a liquid and TeF 4 a solid.
+These fluorides have sp
+3
+d hybridisation and thus, have trigonal
+bipyramidal structures in which one of the equatorial positions is
+occupied by a lone pair of electrons. This geometry is also regarded as
+see-saw geometry.
+All elements except oxygen form dichlorides and dibromides. These
+dihalides are formed by sp
+3 
+hybridisation and thus, have tetrahedral
+structure. The well known monohalides are dimeric in nature. Examples
+The absence of d orbitals in oxygen limits its covalency to four and
+in practice, rarely exceeds two. On the other hand, in case of other
+elements of the group, the valence shells can be expanded and covalence
+exceeds four.
+(i) Reactivity with hydrogen : All the elements of Group 16 form
+hydrides of the type H 2 E (E = O, S, Se, Te, Po). Some properties of
+hydrides are given in Table 7.7. Their acidic character increases
+from H 2 O to H 2 Te. The increase in acidic character can be explained
+in terms of decrease in bond enthalpy for the dissociation of H–E
+bond down the group. Owing to the decrease in enthalpy for the
+dissociation of H–E bond down the group, the thermal stability of
+hydrides also decreases from H 2 O to H 2 Po. All the hydrides except
+water possess reducing property and this character increases from
+H 2 S to H 2 Te.
+Property H 2 O H 2 S H 2 Se H 2 Te
+m.p/K 273 188 208 222
+b.p/K 373 213 232 269
+H–E distance/pm 96 134 146 169
+HEH angle (°) 104 92 91 90
+∆ f H /kJ mol
+–1 
+–286 –20 73 100
+∆ diss H (H–E) /kJ mol
+–1 
+463 347 276 238
+Dissociation constant
+a 
+1.8×10
+–16 
+1.3×10
+–7 
+1.3×10
+–4 
+2.3×10
+–3
+a 
+Aqueous solution, 298 K
+Table 7.7: Properties of Hydrides of Group 16 Elements
+2020-21
+
+189 The p -Block Elements
+are S 2 F 2 , S 2 Cl 2 , S 2 Br 2 , Se 2 Cl 2 and Se 2 Br 2 . These dimeric halides undergo
+disproportionation as given below:
+2Se 2 Cl 2 → SeCl 4 + 3Se
+7.11 7.11 7.11 7.11 7.11 Dioxygen Dioxygen Dioxygen Dioxygen Dioxygen 
+Preparation
+Dioxygen can be obtained in the laboratory by the following ways:
+(i) By heating oxygen containing salts such as chlorates, nitrates and
+permanganates.
+2
+Heat
+3 2 MnO
+2KClO 2KCl 3O  → +
+(ii) By the thermal decomposition of the oxides of metals low in the
+electrochemical series and higher oxides of some metals.
+2Ag 2 O(s) → 4Ag(s) + O 2 (g); 2Pb 3 O 4 (s) → 6PbO(s) + O 2 (g)
+2HgO(s) → 2Hg(l) + O 2 (g) ; 2PbO 2 (s) → 2PbO(s) + O 2 (g)
+(iii) Hydrogen peroxide is readily decomposed into water and dioxygen
+by catalysts such as finely divided metals and manganese dioxide.
+2H 2 O 2 (aq) → 2H 2 O(1) + O 2 (g)
+On large scale it can be prepared from water or air. Electrolysis of
+water leads to the release of hydrogen at the cathode and oxygen
+at the anode.
+Industrially, dioxygen is obtained from air by first removing carbon
+dioxide and water vapour and then, the remaining gases are liquefied
+and fractionally distilled to give dinitrogen and dioxygen.
+Properties
+Dioxygen is a colourless and odourless gas. Its solubility in water is to
+the extent of 3.08 cm
+3 
+in 100 cm
+3 
+water at 293 K which is just sufficient
+for the vital support of marine and aquatic life. It liquefies at 90 K and
+freezes at 55 K. Oxygen atom has three stable isotopes: 
+16
+O, 
+17
+O and
+18
+O. Molecular oxygen, O 2 is unique in being paramagnetic inspite of
+having even number of electrons (see Class XI Chemistry Book, Unit 4).
+Dioxygen directly reacts with nearly all metals and non-metals
+except some metals ( e.g., Au, Pt) and some noble gases. Its combination
+with other elements is often strongly exothermic which helps in
+sustaining the reaction. However, to initiate the reaction, some external
+H 2 S is less acidic than H 2 Te. Why?
+Due to the decrease in bond (E–H) dissociation
+enthalpy down the group, acidic character increases.
+Example 7.11 Example 7.11 Example 7.11 Example 7.11 Example 7.11
+Solution Solution Solution Solution Solution
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.13 List the important sources of sulphur.
+7.14 Write the order of thermal stability of the hydrides of Group 16 elements.
+7.15 Why is H 2 O a liquid and H 2 S a gas ?
+2020-21
+
+190 Chemistry
+A binary compound of oxygen with another element is called oxide. As
+already stated, oxygen reacts with most of the elements of the periodic
+table to form oxides. In many cases one element forms two or more
+oxides. The oxides vary widely in their nature and properties.
+Oxides can be simple (e.g., MgO, Al 2 O 3 ) or mixed (Pb 3 O 4 , Fe 3 O 4 ).
+Simple oxides can be classified on the basis of their acidic, basic or
+amphoteric character. An oxide that combines with water to give an
+acid is termed acidic oxide (e.g., SO 2 , Cl 2 O 7 , CO 2 , N 2 O 5 ). For example,
+SO 2 combines with water to give H 2 SO 3 , an acid.
+2 2 2 3
+SO H O H SO + →
+As a general rule, only non-metal oxides are acidic but oxides of
+some metals in high oxidation state also have acidic character (e.g.,
+Mn 2 O 7 , CrO 3 , V 2 O 5 ). The oxides which give a base with water are known
+as basic oxides (e.g., Na 2 O, CaO, BaO). For example, CaO combines
+with water to give Ca(OH) 2 , a base.
+( )
+2 2
+CaO H O Ca OH + →
+7.16 Which of the following does not react with oxygen directly?
+Zn, Ti, Pt, Fe
+7.17 Complete the following reactions:
+(i) C 2 H 4 + O 2 →
+(ii) 4Al + 3 O 2 →
+7.12 7.12 7.12 7.12 7.12 Simple Simple Simple Simple Simple
+Oxides Oxides Oxides Oxides Oxides
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+heating is required as bond dissociation enthalpy of oxgyen-oxygen
+double bond is high (493.4 kJ mol
+–1
+).
+Some of the reactions of dioxygen with metals, non-metals and
+other compounds are given below:
+2
+2Ca O 2CaO + →
+2 2 3
+4Al 3O 2Al O + →
+4 2 4 10
+P 5O P O + →
+2 2
+C O CO + →
+2ZnS + 3O 2 → 2ZnO + 2SO 2
+4 2 2 2
+CH 2O CO 2H O + → +
+Some compounds are catalytically oxidised. For example,
+2 5 V O
+2 2 3
+2SO O 2SO +   →
+2 CuCl
+2 2 2
+4HCl O 2Cl 2H O +  → +
+Uses Uses Uses Uses Uses: In addition to its importance in normal respiration and combustion
+processes, oxygen is used in oxyacetylene welding, in the manufacture of
+many metals, particularly steel. Oxygen cylinders are widely used in hospitals,
+high altitude flying and in mountaineering. The combustion of fuels, e.g.,
+hydrazines in liquid oxygen, provides tremendous thrust in rockets.
+2020-21
+
+191 The p -Block Elements
+In general, metallic oxides are basic.
+Some metallic oxides exhibit a dual behaviour. They show
+characteristics of both acidic as well as basic oxides. Such oxides are
+known as amphoteric oxides. They react with acids as well as alkalies.
+For example, Al 2 O 3 reacts with acids as well as alkalies.
+( ) ( ) ( ) [ ] ( ) ( )
+( ) ( ) ( ) ( ) [ ] ( )
+3
+2 6 2 3 2
+2 3 2 3 6
+Al(H O) Al O 6HCl 9H O 2 6Cl aq aq aq s l
+Al Al O 6NaOH 3H O 2Na aq aq OH s l
++ −
++ + → +
++ + →
+There are some oxides which are neither acidic nor basic. Such oxides
+are known as neutral oxides. Examples of neutral oxides are CO, NO
+and N 2 O.
+Ozone is an allotropic form of oxygen . It is too reactive to remain for
+long in the atmosphere at sea level. At a height of about 20 kilometres,
+it is formed from atmospheric oxygen in the presence of sunlight. This
+ozone layer protects the earth’s surface from an excessive concentration
+of ultraviolet (UV) radiations.
+Preparation
+When a slow dry stream of oxygen is passed through a silent electrical
+discharge, conversion of oxygen to ozone (10%) occurs. The product is
+known as ozonised oxygen.
+3O 2 → 2O 3 ∆ H
+V 
+(298 K) = +142 kJ mol
+–1
+Since the formation of ozone from oxygen is an endothermic process,
+it is necessary to use a silent electrical discharge in its preparation to
+prevent its decomposition.
+If concentrations of ozone greater than 10 per cent are required, a
+battery of ozonisers can be used, and pure ozone (b.p. 101.1K) can be
+condensed in a vessel surrounded by liquid oxygen.
+Properties
+Pure ozone is a pale blue gas, dark blue liquid and violet-black solid.
+Ozone has a characteristic smell and in small concentrations it is harmless.
+However, if the concentration rises above about 100 parts per million,
+breathing becomes uncomfortable resulting in headache and nausea.
+Ozone is thermodynamically unstable with respect to oxygen since
+its decomposition into oxygen results in the liberation of heat ( ∆ H is
+negative) and an increase in entropy ( ∆ S is positive). These two effects
+reinforce each other, resulting in large negative Gibbs energy change
+( ∆ G) for its conversion into oxygen. It is not really surprising, therefore,
+high concentrations of ozone can be dangerously explosive.
+Due to the ease with which it liberates atoms of nascent oxygen
+(O 3 → O 2 + O), it acts as a powerful oxidising agent. For example, it
+oxidises lead sulphide to lead sulphate and iodide ions to iodine.
+PbS(s) + 4O 3 (g) → PbSO 4 (s) + 4O 2 (g)
+2I
+–
+(aq) + H 2 O(l) + O 3 (g) → 2OH
+–
+(aq) + I 2 (s) + O 2 (g)
+When ozone reacts with an excess of potassium iodide solution
+buffered with a borate buffer (pH 9.2), iodine is liberated which can be
+titrated against a standard solution of sodium thiosulphate. This is a
+quantitative method for estimating O 3 gas.
+7.13 7.13 7.13 7.13 7.13 Ozone Ozone Ozone Ozone Ozone
+2020-21
+
+192 Chemistry
+Sulphur forms numerous allotropes of which the yellow rhombic
+( α -sulphur) and monoclinic ( β -sulphur) forms are the most important.
+The stable form at room temperature is rhombic sulphur, which
+transforms to monoclinic sulphur when heated above 369 K.
+Rhombic sulphur ( α α α α α -sulphur)
+This allotrope is yellow in colour, m.p. 385.8 K and specific gravity
+2.06. Rhombic sulphur crystals are formed on evaporating the solution
+of roll sulphur in CS 2 . It is insoluble in water but dissolves to some
+extent in benzene, alcohol and ether. It is readily soluble in CS 2 .
+Monoclinic sulphur ( β β β β β -sulphur)
+Its m.p. is 393 K and specific gravity 1.98. It is soluble in CS 2 . This
+form of sulphur is prepared by melting rhombic sulphur in a dish
+and cooling, till crust is formed. Two holes are made in the crust and
+the remaining liquid poured out. On removing the crust, colourless
+needle shaped crystals of β -sulphur are formed. It is stable above 369 K
+and transforms into α -sulphur below it. Conversely, α -sulphur is stable
+below 369 K and transforms into β -sulphur above this. At 369 K both
+the forms are stable. This temperature is called transition temperature.
+Both rhombic and monoclinic sulphur have S 8 molecules. These S 8
+molecules are packed to give different crystal structures. The S 8 ring
+in both the forms is puckered and has a crown shape. The molecular
+dimensions are given in Fig. 7.5(a).
+7.14 Sulphur — 7.14 Sulphur — 7.14 Sulphur — 7.14 Sulphur — 7.14 Sulphur —
+Allotropic Allotropic Allotropic Allotropic Allotropic
+Forms Forms Forms Forms Forms
+Experiments have shown that nitrogen oxides (particularly nitrogen
+monoxide) combine very rapidly with ozone and there is, thus, the
+possibility that nitrogen oxides emitted from the exhaust systems of
+supersonic jet aeroplanes might be slowly depleting the concentration
+of the ozone layer in the upper atmosphere.
+( ) ( ) ( ) ( ) 3 2 2
+NO g O g NO g O g + → +
+Another threat to this ozone layer is probably posed by the use of
+freons which are used in aerosol sprays and as refrigerants.
+The two oxygen-oxygen bond lengths in the ozone
+molecule are identical (128 pm) and the molecule is angular
+as expected with a bond angle of about 117
+o
+. It is a resonance
+hybrid of two main forms:
+7.18 Why does O 3 act as a powerful oxidising agent?
+7.19 How is O 3 estimated quantitatively?
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+Uses Uses Uses Uses Uses: It is used as a germicide, disinfectant and for sterilising water. It is also
+used for bleaching oils, ivory, flour, starch, etc. It acts as an oxidising agent
+in the manufacture of potassium permanganate.
+2020-21
+
+193 The p -Block Elements
+Which form of sulphur shows paramagnetic behaviour ?
+In vapour state sulphur partly exists as S 2 molecule which has two
+unpaired electrons in the antibonding π * orbitals like O 2 and, hence,
+exhibits paramagnetism.
+Example 7.12 Example 7.12 Example 7.12 Example 7.12 Example 7.12
+Solution Solution Solution Solution Solution
+Several other modifications
+of sulphur containing 6-20
+sulphur atoms per ring have
+been synthesised in the last
+two decades. In cyclo-S 6 , the
+ring adopts the chair form and
+the molecular dimensions are
+as shown in Fig. 7.5 (b).
+At elevated temperatures
+(~1000 K), S 2 is the dominant
+species and is paramagnetic
+like O 2 .
+Preparation
+Sulphur dioxide is formed together with a little (6-8%) sulphur trioxide
+when sulphur is burnt in air or oxygen:
+S( s ) + O 2 ( g ) → SO 2 ( g )
+In the laboratory it is readily generated by treating a sulphite with
+dilute sulphuric acid.
+SO 3
+2-
+( aq ) + 2H
++ 
+( aq ) → H 2 O(l) + SO 2 ( g )
+Industrially, it is produced as a by-product of the roasting of
+sulphide ores.
+( ) ( ) ( ) ( ) 2 2 2 3 2
+4FeS 11O 2Fe O 8SO g g s s + → +
+The gas after drying is liquefied under pressure and stored in steel cylinders.
+Properties
+Sulphur dioxide is a colourless gas with pungent smell and is highly
+soluble in water. It liquefies at room temperature under a pressure of
+two atmospheres and boils at 263 K.
+Sulphur dioxide, when passed through water, forms a solution of
+sulphurous acid.
+SO g H O l H SO
+2 2 2 3 ( ) + ( ) ( )  aq
+It reacts readily with sodium hydroxide solution, forming sodium
+sulphite, which then reacts with more sulphur dioxide to form sodium
+hydrogen sulphite.
+2NaOH + SO 2 → Na 2 SO 3 + H 2 O
+Na 2 SO 3 + H 2 O + SO 2 → 2NaHSO 3
+In its reaction with water and alkalies, the behaviour of sulphur
+dioxide is very similar to that of carbon dioxide.
+7.15 7.15 7.15 7.15 7.15 Sulphur Sulphur Sulphur Sulphur Sulphur
+Dioxide Dioxide Dioxide Dioxide Dioxide
+(a) (b)
+Fig. 7.5: The structures of (a) S
+8 
+ring in
+rhombic sulphur and (b) S
+6 
+form
+2020-21
+
+194 Chemistry
+Sulphur forms a number of oxoacids such as H 2 SO 3 , H 2 S 2 O 3 , H 2 S 2 O 4 ,
+H 2 S 2 O 5 , H 2 S x O 6 (x = 2 to 5), H 2 SO 4 , H 2 S 2 O 7 , H 2 SO 5 , H 2 S 2 O 8 . Some of
+these acids are unstable and cannot be isolated. They are known in
+aqueous solution or in the form of their salts. Structures of some
+important oxoacids are shown in Fig. 7.6.
+7.16 7.16 7.16 7.16 7.16 Oxoacids of Oxoacids of Oxoacids of Oxoacids of Oxoacids of
+Sulphur Sulphur Sulphur Sulphur Sulphur
+Fig. 7.6: Structures of some important oxoacids of sulphur
+Sulphur dioxide reacts with chlorine in the presence of charcoal (which
+acts as a catalyst) to give sulphuryl chloride, SO 2 Cl 2 . It is oxidised to
+sulphur trioxide by oxygen in the presence of vanadium(V) oxide catalyst.
+SO 2 (g) + Cl 2 (g) → SO 2 Cl 2 ( l )
+( ) ( ) ( )
+2 5 V O
+2 2 3
+2SO g O g 2SO g +   →
+When moist, sulphur dioxide behaves as a reducing agent. For
+example, it converts iron(III) ions to iron(II) ions and decolourises
+acidified potassium permanganate(VII) solution; the latter reaction is a
+convenient test for the gas.
+3 2 2
+2 2 4
+2 2
+2 4 2 4
+2Fe SO 2H O 2Fe SO 4H
+5SO 2MnO 2H O 5SO 4H 2Mn
++ + − +
+− − + +
++ + → + +
++ + → + +
+The molecule of SO 2 is angular. It is a resonance hybrid
+of the two canonical forms:
+Uses Uses Uses Uses Uses: Sulphur dioxide is used (i) in refining petroleum and sugar (ii) in bleaching
+wool and silk and (iii) as an anti-chlor, disinfectant and preservative. Sulphuric
+acid, sodium hydrogen sulphite and calcium hydrogen sulphite (industrial
+chemicals) are manufactured from sulphur dioxide. Liquid SO 2 is used as a
+solvent to dissolve a number of organic and inorganic chemicals.
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.20 What happens when sulphur dioxide is passed through an aqueous
+solution of Fe(III) salt?
+7.21 Comment on the nature of two S–O bonds formed in SO 2 molecule. Are
+the two S–O bonds in this molecule equal ?
+7.22 How is the presence of SO 2 detected ?
+2020-21
+
+195 The p -Block Elements
+Manufacture
+Sulphuric acid is one of the most important industrial chemicals
+worldwide.
+Sulphuric acid is manufactured by the Contact Process which involves
+three steps:
+(i) burning of sulphur or sulphide ores in air to generate SO 2 .
+(ii) conversion of SO 2 to SO 3 by the reaction with oxygen in the presence
+of a catalyst (V 2 O 5 ), and
+(iii) absorption of SO 3 in H 2 SO 4 to give Oleum (H 2 S 2 O 7 ).
+A flow diagram for the manufacture of sulphuric acid is shown in
+(Fig. 7.7). The SO 2 produced is purified by removing dust and other
+impurities such as arsenic compounds.
+The key step in the manufacture of H 2 SO 4 is the catalytic oxidation
+of SO 2 with O 2 to give SO 3 in the presence of V 2 O 5 (catalyst).
+( ) ( ) ( )
+2 5 V O
+2 2 3
+2SO g O g 2SO g +   → 
+1
+r 
+196.6 kJmol
+−
+∆ = −
+0
+H
+The reaction is exothermic, reversible and the forward reaction leads
+to a decrease in volume. Therefore, low temperature and high pressure
+are the favourable conditions for maximum yield. But the temperature
+should not be very low otherwise rate of reaction will become slow.
+In practice, the plant is operated at a pressure of 2 bar and a
+temperature of 720 K. The SO 3 gas from the catalytic converter is
+absorbed in concentrated H 2 SO 4 to produce oleum . Dilution of oleum
+with water gives H 2 SO 4 of the desired concentration. In the industry
+two steps are carried out simultaneously to make the process a
+continuous one and also to reduce the cost.
+SO 3 + H 2 SO 4 → H 2 S 2 O 7
+(Oleum)
+The sulphuric acid obtained by Contact process is 96-98% pure.
+7.17 7.17 7.17 7.17 7.17 Sulphuric Sulphuric Sulphuric Sulphuric Sulphuric
+Acid Acid Acid Acid Acid
+Dust
+precipitator
+Sulphur
+burner
+Waste
+water
+Waste
+acid
+Drying
+tower
+Washing and
+cooling tower
+Arsenic purifier
+containing
+gelatinous hydrated
+ferric oxide
+Catalytic
+converter 
+Oleum
+(H S O ) 2 2 7
+SO 3
+Conc. H SO 2 4
+Dry SO +O 2 2
+Water
+spray
+Conc. H SO
+spray
+2 4
+Impure
+SO +O 2 2
+Sulphur
+Air
+Preheater
+Quartz
+V O 2 5
+Fig. 7.7: Flow diagram for the manufacture of sulphuric acid
+2020-21
+
+196 Chemistry
+Properties
+Sulphuric acid is a colourless, dense, oily liquid with a specific gravity
+of 1.84 at 298 K. The acid freezes at 283 K and boils at 611 K. It
+dissolves in water with the evolution of a large quantity of heat. Hence,
+care must be taken while preparing sulphuric acid solution from
+concentrated sulphuric acid. The concentrated acid must be added
+slowly into water with constant stirring.
+The chemical reactions of sulphuric acid are as a result of the
+following characteristics: (a) low volatility (b) strong acidic character
+(c) strong affinity for water and (d) ability to act as an oxidising agent.
+In aqueous solution, sulphuric acid ionises in two steps.
+H 2 SO 4 (aq) + H 2 O(l) → H 3 O
++
+(aq) + HSO 4
+–
+(aq); 
+1 a
+K = very large ( 
+1 a
+K >10)
+HSO 4
+–
+(aq) + H 2 O(l) → H 3 O
++
+(aq) + SO 4
+2-
+(aq) ; 
+2 a
+K = 1.2 × 10
+–2
+The larger value of 
+1 a
+K ( 
+1 a
+K >10) means that H 2 SO 4 is largely
+dissociated into H
++ 
+and HSO 4
+–
+. Greater the value of dissociation constant
+( K a ), the stronger is the acid.
+The acid forms two series of salts: normal sulphates (such as sodium
+sulphate and copper sulphate) and acid sulphates (e.g., sodium
+hydrogen sulphate).
+Sulphuric acid, because of its low volatility can be used to
+manufacture more volatile acids from their corresponding salts.
+2 MX + H 2 SO 4 → 2 HX + M 2 SO 4 (X = F, Cl, NO 3 )
+(M = Metal)
+Concentrated sulphuric acid is a strong dehydrating agent. Many
+wet gases can be dried by passing them through sulphuric acid,
+provided the gases do not react with the acid. Sulphuric acid removes
+water from organic compounds; it is evident by its charring action on
+carbohydrates.
+C 12 H 22 O 11 
+2 4 H SO
+ → 12C + 11H 2 O
+Hot concentrated sulphuric acid is a moderately strong oxidising
+agent. In this respect, it is intermediate between phosphoric and nitric
+acids. Both metals and non-metals are oxidised by concentrated
+sulphuric acid, which is reduced to SO 2 .
+Cu + 2 H 2 SO 4 (conc.) → CuSO 4 + SO 2 + 2H 2 O
+S + 2H 2 SO 4 (conc.) → 3SO 2 + 2H 2 O
+C + 2H 2 SO 4 (conc.) → CO 2 + 2 SO 2 + 2 H 2 O
+Uses Uses Uses Uses Uses: Sulphuric acid is a very important industrial chemical. A nation’s
+industrial strength can be judged by the quantity of sulphuric acid it
+produces and consumes. It is needed for the manufacture of hundreds
+of other compounds and also in many industrial processes. The bulk
+of sulphuric acid produced is used in the manufacture of fertilisers
+(e.g., ammonium sulphate, superphosphate). Other uses are in:
+(a) petroleum refining (b) manufacture of pigments, paints and dyestuff
+intermediates (c) detergent industry (d) metallurgical applications (e.g.,
+cleansing metals before enameling, electroplating and galvanising
+(e) storage batteries (f) in the manufacture of nitrocellulose products
+and (g) as a laboratory reagent.
+2020-21
+
+197 The p -Block Elements
+Fluorine, chlorine, bromine, iodine, astatine and tennessine are
+members of Group 17. These are collectively known as the halogens
+(Greek halo means salt and genes means born i.e., salt producers).
+The halogens are highly reactive non-metallic elements. Like Groups
+1 and 2, the elements of Group 17 show great similarity amongst
+themselves. That much similarity is not found in the elements of
+other groups of the periodic table. Also, there is a regular gradation
+in their physical and chemical properties. Astatine and tennessine are
+radioactive elements.
+Fluorine and chlorine are fairly abundant while bromine and iodine
+less so. Fluorine is present mainly as insoluble fluorides (fluorspar
+CaF 2 , cryolite Na 3 AlF 6 and fluoroapatite 3Ca 3 (PO 4 ) 2 .CaF 2 ) and small
+quantities are present in soil, river water plants and bones and teeth
+of animals. Sea water contains chlorides, bromides and iodides of
+sodium, potassium, magnesium and calcium, but is mainly sodium
+chloride solution (2.5% by mass). The deposits of dried up seas
+contain these compounds, e.g., sodium chloride and carnallite,
+KCl.MgCl 2 .6H 2 O. Certain forms of marine life contain iodine in their
+systems; various seaweeds, for example, contain upto 0.5% of iodine
+and Chile saltpetre contains upto 0.2% of sodium iodate.
+Here important atomic and physical properties of Group 17 elements
+other than tennessine are given along with their electronic configurations
+[Table 7.8, page 198]. Tennessine is a synthetic radioactive element. Its
+symbol is Ts, atomic number 117, atomic mass 294 and electronic
+configuration [Rn] 5 f 
+14
+6 d
+10
+7 s
+2
+7 p
+5
+. Only very small amount of the element
+could be prepared. Also its half life is in milliseconds only. That is why
+its chemistry could not be established.
+7.18.1 Occurrence
+7.18 7.18 7.18 7.18 7.18 Group 17 Group 17 Group 17 Group 17 Group 17
+Elements Elements Elements Elements Elements
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.23 Mention three areas in which H 2 SO 4 plays an important role.
+7.24 Write the conditions to maximise the yield of H 2 SO 4 by Contact process.
+7.25 Why is K K
+a a 2 1
+= for H 2 SO 4 in water ?
+What happens when
+(i) Concentrated H 2 SO 4 is added to calcium fluoride
+(ii) SO 3 is passed through water?
+(i) It forms hydrogen fluoride
+2 2 4 4
+CaF H SO CaSO 2HF + → +
+(ii) It dissolves SO 3 to give H 2 SO 4 .
+3 2 2 4
+SO H O H SO + →
+Solution Solution Solution Solution Solution
+Example 7.13 Example 7.13 Example 7.13 Example 7.13 Example 7.13
+2020-21
+
+198 Chemistry
+The trends of some of the atomic, physical and chemical properties
+are discussed below.
+All these elements have seven electrons in their outermost shell ( ns
+2
+np
+5
+)
+which is one electron short of the next noble gas.
+The halogens have the smallest atomic radii in their respective periods
+due to maximum effective nuclear charge. The atomic radius of fluorine
+like the other elements of second period is extremely small. Atomic and
+ionic radii increase from fluorine to iodine due to increasing number
+of quantum shells.
+They have little tendency to lose electron. Thus they have very high
+ionisation enthalpy. Due to increase in atomic size, ionisation enthalpy
+decreases down the group.
+Halogens have maximum negative electron gain enthalpy in the
+corresponding periods. This is due to the fact that the atoms of these
+elements have only one electron less than stable noble gas configurations.
+Electron gain enthalpy of the elements of the group becomes less negative
+down the group. However, the negative electron gain enthalpy of fluorine
+is less than that of chlorine. It is due to small size of fluorine atom. As
+a result, there are strong interelectronic repulsions in the relatively
+small 2 p orbitals of fluorine and thus, the incoming electron does not
+experience much attraction.
+7.18.3 Atomic
+and Ionic
+Radii
+7.18.4 Ionisation
+Enthalpy
+7.18.5 Electron
+Gain
+Enthalpy
+7.18.2 Electronic
+Configuration
+Property F Cl Br I At
+a
+Atomic number 9 17 35 53 85
+Atomic mass/g mol
+–1 
+19.00 35.45 79.90 126.90 210
+Electronic configuration [He]2 s
+2
+2 p
+5 
+[Ne]3 s
+2
+3 p
+5 
+[Ar]3 d
+10
+4 s
+2
+4 p
+5 
+[Kr]4 d
+10
+5 s
+2
+5 p
+5 
+[Xe]4 f
+14
+5 d
+10
+6 s
+2
+6 p
+5
+Covalent radius/pm 64 99 114 133 –
+Ionic radius X
+–
+/pm 133 184 196 220 –
+Ionisation enthalpy/kJ mol
+–1 
+1680 1256 1142 1008 –
+Electron gain enthalpy/kJ mol
+–1 
+–333 –349 –325 –296 –
+Electronegativity
+b 
+4 3.2 3.0 2.7 2.2
+∆ Hyd H (X
+–
+)/kJ mol
+–1 
+515 381 347 305 –
+F 2 Cl 2 Br 2 I 2 –
+Melting point/K 54.4 172.0 265.8 386.6 –
+Boiling point/K 84.9 239.0 332.5 458.2 –
+Density/g cm
+–3 
+1.5 (85)
+c 
+1.66 (203)
+c 
+3.19(273)
+c 
+4.94(293)
+d 
+–
+Distance X – X/pm 143 199 228 266 –
+Bond dissociation enthalpy 158.8 242.6 192.8 151.1 –
+/(kJ mol
+–1
+)
+E
+V
+/V
+e 
+2.87 1.36 1.09 0.54 –
+Table 7.8: Atomic and Physical Properties of Halogens
+a 
+Radioactive; 
+b 
+Pauling scale; 
+c 
+For the liquid at temperatures (K) given in the parentheses; 
+d 
+solid; 
+e 
+The
+half-cell reaction is X 2 (g) + 2e
+–
+→ 2X
+–
+(aq).
+2020-21
+
+199 The p -Block Elements
+Oxidation states and trends in chemical reactivity
+All the halogens exhibit –1 oxidation state. However, chlorine, bromine
+and iodine exhibit + 1, + 3, + 5 and + 7 oxidation states also as
+explained below:
+7.18.8 Chemical
+Properties
+Halogen atom
+in ground state
+(other than fluorine) 
+1 unpaired electron accounts
+for –1 or +1 oxidation states
+First excited state 
+3 unpaired electrons account
+for +3 oxidation states
+Second excited state
+Third excited state
+5 unpaired electrons account
+for +5 oxidation state
+7 unpaired electrons
+account for +7 oxidation state
+n s n p n d
+7.18.6
+Electronegativity
+7.18.7 Physical
+Properties
+They have very high electronegativity. The electronegativity decreases
+down the group. Fluorine is the most electronegative element in the
+periodic table.
+Halogens have maximum negative electron gain enthalpy in the
+respective periods of the periodic table. Why?
+Halogens have the smallest size in their respective periods and therefore
+high effective nuclear charge. As a consequence, they readily accept
+one electron to acquire noble gas electronic configuration.
+Example 7.14 Example 7.14 Example 7.14 Example 7.14 Example 7.14
+Solution Solution Solution Solution Solution
+Although electron gain enthalpy of fluorine is less negative as compared
+to chlorine, fluorine is a stronger oxidising agent than chlorine. Why?
+It is due to
+(i) low enthalpy of dissociation of F-F bond (Table 7.8).
+(ii) high hydration enthalpy of F
+– 
+(Table 7.8).
+Example 7.15 Example 7.15 Example 7.15 Example 7.15 Example 7.15
+Solution Solution Solution Solution Solution
+Halogens display smooth variations in their physical properties. Fluorine
+and chlorine are gases, bromine is a liquid and iodine is a solid. Their
+melting and boiling points steadily increase with atomic number. All
+halogens are coloured. This is due to absorption of radiations in visible
+region which results in the excitation of outer electrons to higher energy
+level. By absorbing different quanta of radiation, they display different
+colours. For example, F 2 , has yellow, Cl 2 , greenish yellow, Br 2 , red and
+I 2 , violet colour. Fluorine and chlorine react with water. Bromine and
+iodine are only sparingly soluble in water but are soluble in various
+organic solvents such as chloroform, carbon tetrachloride, carbon
+disulphide and hydrocarbons to give coloured solutions.
+One curious anomaly we notice from Table 7.8 is the smaller
+enthalpy of dissociation of F 2 compared to that of Cl 2 whereas X-X
+bond dissociation enthalpies from chlorine onwards show the expected
+trend: Cl – Cl > Br – Br > I – I. A reason for this anomaly is the relatively
+large electron-electron repulsion among the lone pairs in F 2 molecule
+where they are much closer to each other than in case of Cl 2 .
+2020-21
+
+200 Chemistry
+The higher oxidation states of chlorine, bromine and iodine are realised
+mainly when the halogens are in combination with the small and highly
+electronegative fluorine and oxygen atoms. e.g., in interhalogens, oxides
+and oxoacids. The oxidation states of +4 and +6 occur in the oxides and
+oxoacids of chlorine and bromine. The fluorine atom has no d orbitals
+in its valence shell and therefore cannot expand its octet. Being the most
+electronegative, it exhibits only –1 oxidation state.
+All the halogens are highly reactive. They react with metals and
+non-metals to form halides. The reactivity of the halogens decreases
+down the group.
+The ready acceptance of an electron is the reason for the strong
+oxidising nature of halogens. F 2 is the strongest oxidising halogen and
+it oxidises other halide ions in solution or even in the solid phase. In
+general, a halogen oxidises halide ions of higher atomic number.
+F 2 + 2X
+– 
+→ 2F
+– 
++ X 2 (X = Cl, Br or I)
+Cl 2 + 2X
+– 
+→ 2Cl
+– 
++ X 2 (X = Br or I)
+Br 2 + 2I
+– 
+→ 2Br
+– 
++ I 2
+The decreasing oxidising ability of the halogens in aqueous solution
+down the group is evident from their standard electrode potentials
+(Table 7.8) which are dependent on the parameters indicated below:
+( ) ( ) ( ) ( )
+eg hyd diss 1/ 2
+2
+1 
+X g X g X g X aq
+2
+H H H – – ∆ ∆ ∆
+ →  →   →
+V V V
+The relative oxidising power of halogens can further be illustrated
+by their reactions with water. Fluorine oxidises water to oxygen whereas
+chlorine and bromine react with water to form corresponding hydrohalic
+and hypohalous acids. The reaction of iodine with water is non-
+spontaneous. In fact, I
+– 
+can be oxidised by oxygen in acidic medium;
+just the reverse of the reaction observed with fluorine.
+( ) ( ) ( ) ( ) ( )
+( ) ( ) ( ) ( )
+( )
+( ) ( ) ( ) ( ) ( )
+2 2 2
+2 2
+2 2 2
+2F g 2H O 4H 4F O g aq aq l
+X g H O HX HOX aq aq l
+where X = Cl or Br
+4I 4H O g 2I 2H O aq aq s l
++ −
+− +
++ → + +
++ → +
++ + → +
+Anomalous behaviour of fluorine
+Like other elements of p -block present in second period of the periodic
+table, fluorine is anomalous in many properties. For example, ionisation
+enthalpy, electronegativity, and electrode potentials are all higher for
+fluorine than expected from the trends set by other halogens. Also, ionic
+and covalent radii, m.p. and b.p., enthalpy of bond dissociation and electron
+gain enthalpy are quite lower than expected. The anomalous behaviour of
+fluorine is due to its small size, highest electronegativity, low F-F bond
+dissociation enthalpy, and non availability of d orbitals in valence shell.
+Most of the reactions of fluorine are exothermic (due to the small
+and strong bond formed by it with other elements). It forms only one
+oxoacid while other halogens form a number of oxoacids. Hydrogen
+fluoride is a liquid (b.p. 293 K) due to strong hydrogen bonding.
+Hydrogen bond is formed in HF due to small size and high
+2020-21
+
+201 The p -Block Elements
+electronegativity of fluorine. Other hydrogen halides which have bigger
+size and less electronegativity are gases.
+(i) Reactivity towards hydrogen : They all react with hydrogen to give
+hydrogen halides but affinity for hydrogen decreases from fluorine
+to iodine. Hydrogen halides dissolve in water to form hydrohalic
+acids. Some of the properties of hydrogen halides are given in
+Table 7.9. The acidic strength of these acids varies in the order:
+HF < HCl < HBr < HI. The stability of these halides decreases down
+the group due to decrease in bond (H–X) dissociation enthalpy in
+the order: H–F > H–Cl > H–Br > H–I.
+Property HF HCl HBr HI
+Melting point/K 190 159 185 222
+Boiling point/K 293 189 206 238
+Bond length (H – X)/pm 91.7 127.4 141.4 160.9
+∆
+diss
+H
+V
+/kJ mol
+–1 
+574 432 363 295
+pK
+a 
+3.2 –7.0 –9.5 –10.0
+Table 7.9: Properties of Hydrogen Halides
+(ii) Reactivity towards oxygen : Halogens form many oxides with oxygen
+but most of them are unstable. Fluorine forms two oxides OF 2 and
+O 2 F 2 . However, only OF 2 is thermally stable at 298 K. These oxides
+are essentially oxygen fluorides because of the higher
+electronegativity of fluorine than oxygen. Both are strong fluorinating
+agents. O 2 F 2 oxidises plutonium to PuF 6 and the reaction is used
+in removing plutonium as PuF 6 from spent nuclear fuel.
+Chlorine, bromine and iodine form oxides in which the oxidation
+states of these halogens range from +1 to +7. A combination of kinetic
+and thermodynamic factors lead to the generally decreasing order of
+stability of oxides formed by halogens, I > Cl > Br. Higher stability of
+oxides of iodine is due to greater polarisability of bond between
+iodine and oxygen. In the case of chlorine, multiple bond formation
+between chlorine and oxygen takes place due to availability of
+d –orbitals. This leads to increase in stability. Bromine lacks both the
+characteristics hence stability of oxides of bromine is least. The higher
+oxides of halogens tend to be more stable than the lower ones.
+Chlorine oxides, Cl 2 O, ClO 2 , Cl 2 O 6 and Cl 2 O 7 are highly reactive
+oxidising agents and tend to explode. ClO 2 is used as a bleaching
+agent for paper pulp and textiles and in water treatment.
+The bromine oxides, Br 2 O, BrO 2 , BrO 3 are the least stable
+halogen oxides (middle row anomally) and exist only at low
+temperatures. They are very powerful oxidising agents.
+The iodine oxides, I 2 O 4 , I 2 O 5 , I 2 O 7 are insoluble solids and
+decompose on heating. I 2 O 5 is a very good oxidising agent and is
+used in the estimation of carbon monoxide.
+(iii) Reactivity towards metals : Halogens react with metals to form
+metal halides. For example, bromine reacts with magnesium to give
+magnesium bromide.
+2020-21
+
+202 Chemistry
+( ) ( ) ( ) 2 2
+Mg s Br l MgBr s + →
+The ionic character of the halides decreases in the order MF >
+MCl > MBr > MI where M is a monovalent metal. If a metal exhibits
+more than one oxidation state, the halides in higher oxidation
+state will be more covalent than the one in lower oxidation state.
+For example, SnCl 4 , PbCl 4 , SbCl 5 and UF 6 are more covalent than
+SnCl 2 , PbCl 2 , SbCl 3 and UF 4 respectively.
+(iv) Reactivity of halogens towards other halogens : Halogens combine
+amongst themselves to form a number of compounds known as
+interhalogens of the types XX 
+′
+, XX 3
+′
+, XX 5
+′ 
+and XX 7
+′ 
+where X is a
+larger size halogen and X
+′ 
+is smaller size halogen.
+Fluorine exhibits only –1 oxidation state whereas other halogens
+exhibit + 1, + 3, + 5 and + 7 oxidation states also. Explain.
+Fluorine is the most electronegative element and cannot exhibit any positive
+oxidation state. Other halogens have d orbitals and therefore, can expand
+their octets and show + 1, + 3, + 5 and + 7 oxidation states also.
+Example 7.16 Example 7.16 Example 7.16 Example 7.16 Example 7.16
+Solution Solution Solution Solution Solution
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.26 Considering the parameters such as bond dissociation enthalpy, electron
+gain enthalpy and hydration enthalpy, compare the oxidising power of
+F 2 and Cl 2 .
+7.27 Give two examples to show the anomalous behaviour of fluorine.
+7.28 Sea is the greatest source of some halogens. Comment.
+Chlorine was discovered in 1774 by Scheele by the action of HCl on
+MnO 2 . In 1810 Davy established its elementary nature and suggested the
+name chlorine on account of its colour (Greek, chloros = greenish yellow).
+Preparation
+It can be prepared by any one of the following methods:
+(i) By heating manganese dioxide with concentrated hydrochloric acid.
+MnO 2 + 4HCl → MnCl 2 + Cl 2 + 2H 2 O
+However, a mixture of common salt and concentrated H 2 SO 4 is
+used in place of HCl.
+4NaCl + MnO 2 + 4H 2 SO 4 → MnCl 2 + 4NaHSO 4 + 2H 2 O + Cl 2
+(ii) By the action of HCl on potassium permanganate.
+2KMnO 4 + 16HCl → 2KCl + 2MnCl 2 + 8H 2 O + 5Cl 2
+Manufacture of chlorine
+(i) Deacon’s process : By oxidation of hydrogen chloride gas by
+atmospheric oxygen in the presence of CuCl 2 (catalyst) at 723 K.
+2 CuCl
+2 2 2
+4HCl O 2Cl 2H O +  → +
+(ii) Electrolytic process : Chlorine is obtained by the electrolysis of
+brine (concentrated NaCl solution). Chlorine is liberated at anode.
+It is also obtained as a by–product in many chemical industries.
+7.19 7.19 7.19 7.19 7.19 Chlorine Chlorine Chlorine Chlorine Chlorine
+2020-21
+
+203 The p -Block Elements
+Properties
+It is a greenish yellow gas with pungent and suffocating odour. It is
+about 2-5 times heavier than air. It can be liquefied easily into greenish
+yellow liquid which boils at 239 K. It is soluble in water.
+Chlorine reacts with a number of metals and non-metals to form chlorides.
+2Al + 3Cl 2 → 2AlCl 3 ; P 4 + 6Cl 2 → 4PCl 3
+2Na + Cl 2 → 2NaCl; S 8 + 4Cl 2 → 4S 2 Cl 2
+2Fe + 3Cl 2 → 2FeCl 3 ;
+It has great affinity for hydrogen. It reacts with compounds
+containing hydrogen to form HCl.
+2 2
+2 2
+10 16 2
+H Cl 2HCl
+H S Cl 2HCl S
+C H 8Cl 16HCl 10C
++ →
++ → +
++ → +
+With cold and dilute alkalies chlorine produces a mixture of chloride
+and hypochlorite but with hot and concentrated alkalies it gives chloride
+and chlorate.
+2NaOH + Cl 2 → NaCl + NaOCl + H 2 O
+(cold and dilute)
+6 NaOH + 3Cl 2 → 5NaCl + NaClO 3 + 3H 2 O
+(hot and conc.)
+With dry slaked lime it gives bleaching powder.
+2Ca(OH) 2 + 2Cl 2 → Ca(OCl) 2 + CaCl 2 + 2H 2 O
+The composition of bleaching powder is Ca(OCl) 2 .CaCl 2 .Ca(OH) 2 .2H 2 O.
+Chlorine reacts with hydrocarbons and gives substitution products
+with saturated hydrocarbons and addition products with unsaturated
+hydrocarbons. For example,
+CH 4 + Cl 2 
+UV
+ → CH 3 Cl + HCl
+Methane Methyl chloride
+C 2 H 4 + Cl 2
+Room temp.
+  → C 2 H 4 Cl 2
+Ethene 1,2-Dichloroethane
+Chlorine water on standing loses its yellow colour due to the
+formation of HCl and HOCl. Hypochlorous acid (HOCl) so formed, gives
+nascent oxygen which is responsible for oxidising and bleaching
+properties of chlorine.
+Chlorine oxidises ferrous to ferric and sulphite to sulphate. Chlorine
+oxidises sulphur dioxide to sulphur trioxide and iodine to iodate. In the
+presence of water they form sulphuric acid and iodic acid respectively.
+2FeSO 4 + H 2 SO 4 + Cl 2 → Fe 2 (SO 4 ) 3 + 2HCl
+Na 2 SO 3 + Cl 2 + H 2 O → Na 2 SO 4 + 2HCl
+SO 2 + 2H 2 O + Cl 2 → H 2 SO 4 + 2HCl
+I 2 + 6H 2 O + 5Cl 2 → 2HIO 3 + 10HCl
+Chlorine is a powerful bleaching agent; bleaching action is due
+to oxidation.
+It bleaches vegetable or organic matter in the presence of moisture.
+Bleaching effect of chlorine is permanent.
+Cl 2 + H 2 O → 2HCl + O
+Coloured substance + O → Colourless substance
+2020-21
+
+204 Chemistry
+Write the balanced chemical equation for the reaction of Cl 2 with hot
+and concentrated NaOH. Is this reaction a disproportionation
+reaction? Justify.
+3Cl 2 + 6NaOH → 5NaCl + NaClO 3 + 3H 2 O
+Yes, chlorine from zero oxidation state is changed to –1 and +5
+oxidation states.
+Example 7.17 Example 7.17 Example 7.17 Example 7.17 Example 7.17
+Solution Solution Solution Solution Solution
+Glauber prepared this acid in 1648 by heating common salt with
+concentrated sulphuric acid. Davy in 1810 showed that it is a compound
+of hydrogen and chlorine.
+Preparation
+In laboratory, it is prepared by heating sodium chloride with
+concentrated sulphuric acid.
+NaCl + H 2 SO 4
+420 K
+ → NaHSO 4 + HCl
+NaHSO 4 + NaCl 
+823 K
+ → Na 2 SO 4 + HCl
+HCl gas can be dried by passing through concentrated sulphuric acid.
+Properties
+It is a colourless and pungent smelling gas. It is easily liquefied to a
+colourless liquid (b.p.189 K) and freezes to a white crystalline solid
+(f.p. 159 K). It is extremely soluble in water and ionises as follows:
+( ) ( ) ( ) ( ) 
+7
+2 3 a
+HCl g H O H O Cl 10 aq aq l 
++ −
++ → + = K
+Its aqueous solution is called hydrochloric acid. High value of
+dissociation constant ( K a ) indicates that it is a strong acid in water.
+It reacts with NH 3 and gives white fumes of NH 4 Cl.
+NH 3 + HCl → NH 4 Cl
+When three parts of concentrated HCl and one part of concentrated
+HNO 3 are mixed, aqua regia is formed which is used for dissolving
+noble metals, e.g., gold, platinum.
+3 4 2
+2
+3 6 2
+Au 4H NO 4Cl AuCl NO 2H O
+3Pt 16H 4NO 18Cl 3PtCl 4NO 8H O
++ − − −
++ − − −
++ + + → + +
++ + + → + +
+7.20 7.20 7.20 7.20 7.20 Hydrogen Hydrogen Hydrogen Hydrogen Hydrogen
+Chloride Chloride Chloride Chloride Chloride
+Uses Uses Uses Uses Uses: It is used (i) for bleaching woodpulp (required for the manufacture of
+paper and rayon), bleaching cotton and textiles, (ii) in the extraction of gold
+and platinum (iii) in the manufacture of dyes, drugs and organic compounds
+such as CCl 4 , CHCl 3 , DDT, refrigerants, etc. (iv) in sterilising drinking water
+and (v) preparation of poisonous gases such as phosgene (COCl 2 ), tear gas
+(CCl 3 NO 2 ), mustard gas (ClCH 2 CH 2 SCH 2 CH 2 Cl).
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.29 Give the reason for bleaching action of Cl 2 .
+7.30 Name two poisonous gases which can be prepared from chlorine gas.
+2020-21
+
+205 The p -Block Elements
+Fig. 7.8
+The structures of
+oxoacids of chlorine
+Hydrochloric acid decomposes salts of weaker acids, e.g.,
+carbonates, hydrogencarbonates, sulphites, etc.
+Na 2 CO 3 + 2HCl → 2NaCl + H 2 O + CO 2
+NaHCO 3 + HCl → NaCl + H 2 O + CO 2
+Na 2 SO 3 + 2HCl → 2NaCl + H 2 O + SO 2
+Table 7.10: Oxoacids of Halogens
+Halic (I) acid HOF HOCl HOBr HOI
+(Hypohalous acid) (Hypofluorous acid) (Hypochlorous acid) (Hypobromous acid) (Hypoiodous acid)
+Halic (III) acid – HOCIO – –
+(Halous acid) – (chlorous acid) – –
+Halic (V) acid – HOCIO 2 HOBrO 2 HOIO 2
+(Halic acid) – (chloric acid) (bromic acid) (iodic acid)
+Halic (VII) acid – HOCIO 3 HOBrO 3 HOIO 3
+(Perhalic acid) – (perchloric acid) (perbromic acid) (periodic acid)
+When HCl reacts with finely powdered iron, it forms ferrous chloride
+and not ferric chloride. Why?
+Its reaction with iron produces H 2 .
+2 2
+Fe 2HCl FeCl H + → +
+Liberation of hydrogen prevents the formation of ferric chloride.
+Example 7.18 Example 7.18 Example 7.18 Example 7.18 Example 7.18
+Solution Solution Solution Solution Solution
+Uses Uses Uses Uses Uses: It is used (i) in the manufacture of chlorine, NH 4 Cl and glucose (from
+corn starch), (ii) for extracting glue from bones and purifying bone black, (iii)
+in medicine and as a laboratory reagent.
+Due to high electronegativity and small size, fluorine forms only one
+oxoacid, HOF known as fluoric (I) acid or hypofluorous acid. The other
+halogens form several oxoacids. Most of them cannot be isolated in
+pure state. They are stable only in aqueous solutions or in the form of
+their salts. The oxoacids of halogens are given in Table 7.10 and their
+structures are given in Fig. 7.8.
+7.21 Oxoacids of 7.21 Oxoacids of 7.21 Oxoacids of 7.21 Oxoacids of 7.21 Oxoacids of
+Halogens Halogens Halogens Halogens Halogens
+2020-21
+
+206 Chemistry
+When two different halogens react with each other, interhalogen
+compounds are formed. They can be assigned general compositions as
+XX
+′ 
+, XX 3
+′
+, XX 5
+′ 
+and XX 7
+′ 
+where X is halogen of larger size and X
+′ 
+of
+smaller size and X is more electropositive than X
+′
+. As the ratio between
+radii of X and X
+′ 
+increases, the number of atoms per molecule also
+increases. Thus, iodine (VII) fluoride should have maximum number of
+atoms as the ratio of radii between I and F should be maximum. That
+is why its formula is IF 7 (having maximum number of atoms).
+Preparation
+The interhalogen compounds can be prepared by the direct
+combination or by the action of halogen on lower interhalogen
+compounds. The product formed depends upon some specific
+conditions, For example,
+7.22 7.22 7.22 7.22 7.22 Interhalogen Interhalogen Interhalogen Interhalogen Interhalogen
+Compounds Compounds Compounds Compounds Compounds
+2 2
+(equimolar )
+I Cl 2ICl; + →
+573 K
+2 2 3
+(excess)
+Cl 3F 2ClF ; +  →
+437 K
+2 2
+(equal volume)
+Cl F 2ClF ; +  → 2 2 3
+(excess)
+I 3Cl 2ICl + →
+2 2 3
+(diluted with water)
+Br 3F 2BrF + →
+2 2 5
+(excess)
+Br 5F 2BrF + →
+Properties
+Some properties of interhalogen compounds are given in Table 7.11.
+Type Formula Physical state and colour Structure
+XX ′ 1 ClF colourless gas –
+BrF pale brown gas –
+IF
+a 
+detected spectroscopically –
+BrCl
+b 
+gas
+ICl ruby red solid ( α -form) –
+brown red solid ( β -form) –
+IBr black solid –
+XX ′ 3 ClF 3 colourless gas Bent T-shaped
+BrF 3 yellow green liquid Bent T-shaped
+IF 3 yellow powder Bent T-shaped (?)
+ICl 3
+c 
+orange solid Bent T-shaped (?)
+XX ′ 5 IF 5 colourless gas but Square
+solid below 77 K pyramidal
+BrF 5 colourless liquid Square
+pyramidal
+ClF 5 colourless liquid Square
+pyramidal
+XX ′ 7 IF 7 colourless gas Pentagonal
+bipyramidal
+Table 7.11: Some Properties of Interhalogen Compounds
+a
+Very unstable; 
+b
+The pure solid is known at room temperature; 
+c
+Dimerises as Cl–bridged
+dimer (I 2 Cl 6 )
+2020-21
+
+207 The p -Block Elements
+These are all covalent molecules and are diamagnetic in nature.
+They are volatile solids or liquids at 298 K except ClF which is a
+gas. Their physical properties are intermediate between those of
+constituent halogens except that their m.p. and b.p. are a little higher
+than expected.
+Their chemical reactions can be compared with the individual
+halogens. In general, interhalogen compounds are more reactive
+than halogens (except fluorine). This is because X–X ′ bond in
+interhalogens is weaker than X–X bond in halogens except F–F
+bond. All these undergo hydrolysis giving halide ion derived from
+the smaller halogen and a hypohalite ( when XX ′ ), halite ( when
+XX ′ 3 ), halate (when XX ′ 5 ) and perhalate (when XX ′ 7 ) anion derived
+from the larger halogen.
+2 XX H O HX HOX
+' '
++ → +
+Their molecular structures are very interesting which can be
+explained on the basis of VSEPR theory (Example 7.19). The XX 3
+compounds have the bent ‘T’ shape, XX 5 compounds square pyramidal
+and IF 7 has pentagonal bipyramidal structures (Table 7.11).
+Discuss the molecular shape of BrF 3 on the basis of VSEPR theory.
+The central atom Br has seven electrons
+in the valence shell. Three of these will form electron-
+pair bonds with three fluorine atoms leaving behind
+four electrons. Thus, there are three bond pairs and
+two lone pairs. According to VSEPR theory, these
+will occupy the corners of a trigonal bipyramid. The
+two lone pairs will occupy the equatorial positions
+to minimise lone pair-lone pair and the bond pair-
+lone pair repulsions which are greater than the bond
+pair-bond pair repulsions. In addition, the axial
+fluorine atoms will be bent towards the equatorial
+fluorine in order to minimise the lone-pair-lone pair
+repulsions. The shape would be that of a slightly
+bent ‘T’.
+Example 7.19 Example 7.19 Example 7.19 Example 7.19 Example 7.19
+Solution Solution Solution Solution Solution
+Uses Uses Uses Uses Uses: These compounds can be used as non aqueous solvents. Interhalogen
+compounds are very useful fluorinating agents. ClF 3 and BrF 3 are used for the
+production of UF 6 in the enrichment of 
+235
+U.
+U(s) + 3ClF 3 (l) → UF 6 (g) + 3ClF(g)
+Intext Question Intext Question Intext Question Intext Question Intext Question
+7.31 Why is ICl more reactive than I 2 ?
+2020-21
+
+208 Chemistry
+Group 18 consists of elements: helium, neon, argon, krypton, xenon,
+radon and oganesson. All these are gases and chemically unreactive.
+They form very few compounds, because of this they are termed
+as noble gases .
+All these gases except radon and oganesson occur in the atmosphere.
+Their atmospheric abundance in dry air is ~ 1% by volume of which
+argon is the major constituent. Helium and sometimes neon are found
+in minerals of radioactive origin e.g., pitchblende, monazite, cleveite.
+The main commercial source of helium is natural gas. Xenon and
+radon are the rarest elements of the group. Radon is obtained as a
+decay product of 
+226
+Ra.
+226 222 4
+88 86 2
+Ra Rn He → +
+Oganesson has been synthetically produced by collision of 
+249
+98 
+Cf
+atoms and 
+48
+20 
+Ca ions
+249 48 294
+98 20 118
+Cf Ca Og + 3 + n
+7.23 7.23 7.23 7.23 7.23 Group 18 Group 18 Group 18 Group 18 Group 18
+Elements Elements Elements Elements Elements
+7.23.1 Occurrence
+Why are the elements of Group 18 known as noble gases ?
+The elements present in Group 18 have their valence shell orbitals
+completely filled and, therefore, react with a few elements only under
+certain conditions. Therefore, they are now known as noble gases.
+Example 7.20 Example 7.20 Example 7.20 Example 7.20 Example 7.20
+Solution Solution Solution Solution Solution
+Oganesson has its symbol Og, atomic number 118, atomic mass
+294 and electronic configuration [Rn] 5 f 
+14
+6 d
+10
+7 s
+2
+7 p
+6
+. Only very small
+amount of Og has been produced. Its half life is 0.7 milliseconds.
+Therefore, mainly predictions about its chemistry have been made.
+Here, except for oganesson, important atomic and physical
+properties of other elements of Group 18 along with their electronic
+configurations are given in Table 7.12. The trends in some of the atomic,
+physical and chemical properties of the group are discussed here.
+Propery He Ne Ar Kr Xe Rn *
+Atomic number 2 10 18 36 54 86
+Atomic mass/ g mol
+–1 
+4.00 20.18 39.95 83.80 131.30 222.00
+Electronic configuration 1 s
+2 
+[He]2 s
+2
+2 p
+6 
+[Ne] 3 s
+2
+3 p
+6 
+[Ar]3 d
+10
+4 s
+2
+4 p
+6 
+[Kr]4 d
+10
+5 s
+2
+5 p
+6 
+[Xe]4 f 
+14
+5 d
+10
+6 s
+2
+6 p
+6
+Atomic radius/pm 120 160 190 200 220 –
+Ionisation enthalpy 2372 2080 1520 1351 1170 1037
+/kJmol
+-1
+Electron gain enthalpy 48 116 96 96 77 68
+/kJmol
+-1
+Density (at STP)/gcm
+–3 
+1.8×10
+–4 
+9.0×10
+–4 
+1.8×10
+–3 
+3.7×10
+–3 
+5.9×10
+–3 
+9.7×10
+–3
+Melting point/K – 24.6 83.8 115.9 161.3 202
+Boiling point/K 4.2 27.1 87.2 119.7 165.0 211
+Atmospheric content 5.24×10
+–4 
+– 1.82×10
+–3 
+0.934 1.14×10
+–4 
+8.7×10
+–6
+(% by volume)
+Table 7.12: Atomic and Physical Properties of Group 18 Elements
+* radioactive
+2020-21
+
+209 The p -Block Elements
+All noble gases have general electronic configuration ns
+2
+np
+6 
+except
+helium which has 1s
+2 
+(Table 7.12). Many of the properties of noble
+gases including their inactive nature are ascribed to their closed
+shell structures.
+Due to stable electronic configuration these gases exhibit very high
+ionisation enthalpy. However, it decreases down the group with increase
+in atomic size.
+Atomic radii increase down the group with increase in atomic
+number.
+Since noble gases have stable electronic configurations, they have no
+tendency to accept the electron and therefore, have large positive values
+of electron gain enthalpy.
+Physical Properties
+All the noble gases are monoatomic. They are colourless, odourless
+and tasteless. They are sparingly soluble in water. They have very low
+melting and boiling points because the only type of interatomic
+interaction in these elements is weak dispersion forces. Helium has the
+lowest boiling point (4.2 K) of any known substance. It has an unusual
+property of diffusing through most commonly used laboratory materials
+such as rubber, glass or plastics.
+7.23.2 Electronic
+Configuration
+7.23.3 Ionisation
+Enthalpy
+7.23.4 Atomic
+Radii
+7.23.5 Electron
+Gain
+Enthalpy
+Chemical Properties
+In general, noble gases are least reactive. Their inertness to chemical
+reactivity is attributed to the following reasons:
+(i) The noble gases except helium (1s
+2
+) have completely filled ns
+2
+np
+6
+electronic configuration in their valence shell.
+(ii) They have high ionisation enthalpy and more positive electron
+gain enthalpy.
+The reactivity of noble gases has been investigated occasionally,
+ever since their discovery, but all attempts to force them to react to
+form the compounds, were unsuccessful for quite a few years. In March
+1962, Neil Bartlett, then at the University of British Columbia, observed
+the reaction of a noble gas. First, he prepared a red compound which
+is formulated as O 2
++
+PtF 6
+–
+. He, then realised that the first ionisation
+enthalpy of molecular oxygen (1175 kJmol
+–1
+) was almost identical with
+that of xenon (1170 kJ mol
+–1
+). He made efforts to prepare same type of
+compound with Xe and was successful in preparing another red colour
+compound Xe
++
+PtF 6
+– 
+by mixing PtF 6 and xenon. After this discovery, a
+number of xenon compounds mainly with most electronegative elements
+like fluorine and oxygen, have been synthesised.
+The compounds of krypton are fewer. Only the difluoride (KrF 2 ) has
+been studied in detail. Compounds of radon have not been isolated
+Noble gases have very low boiling points. Why?
+Noble gases being monoatomic have no interatomic forces except weak
+dispersion forces and therefore, they are liquefied at very low
+temperatures. Hence, they have low boiling points.
+Example 7.21 Example 7.21 Example 7.21 Example 7.21 Example 7.21
+Solution Solution Solution Solution Solution
+2020-21
+
+210 Chemistry
+Fig. 7.9
+The structures of
+(a) XeF
+2 
+(b) XeF
+4
+(c) XeF
+6 
+(d) XeOF
+4
+and (e) XeO
+3
+F
+F
+Xe
+(a) Linear (b) Square planar
+F F
+F F
+Xe
+Xe
+F
+O
+F
+F F
+O
+O
+O
+Xe Xe
+F
+F
+F
+F
+F
+F
+(c) Distorted octahedral (d) Square pyramidal (e) Pyramidal
+but only identified (e.g., RnF 2 ) by radiotracer technique. No true
+compounds of Ar, Ne or He are yet known.
+(a) Xenon-fluorine compounds
+Xenon forms three binary fluorides, XeF 2 , XeF 4 and XeF 6 by the
+direct reaction of elements under appropriate experimental conditions.
+Xe (g) + F 2 (g) 
+673 K, 1 bar
+→ XeF 2 (s)
+(xenon in excess)
+Xe (g) + 2F 2 (g) 
+873 K, 7 bar
+ → XeF 4 (s)
+(1:5 ratio)
+Xe (g) + 3F 2 (g) 
+573 K, 60 70bar −
+ → XeF 6 (s)
+(1:20 ratio)
+XeF 6 can also be prepared by the interaction of XeF 4 and O 2 F 2 at 143K.
+4 2 2 6 2
+XeF O F XeF O + → +
+XeF 2 , XeF 4 and XeF 6 are colourless crystalline solids and sublime
+readily at 298 K. They are powerful fluorinating agents. They are readily
+hydrolysed even by traces of water. For example, XeF 2 is hydrolysed to
+give Xe, HF and O 2 .
+2XeF 2 (s) + 2H 2 O(l) → 2Xe (g) + 4 HF(aq) + O 2 (g)
+The structures of the three xenon fluorides can be deduced from
+VSEPR and these are shown in Fig. 7.9. XeF 2 and XeF 4 have linear and
+square planar structures respectively. XeF 6 has seven electron pairs (6
+bonding pairs and one lone pair) and would, thus, have a distorted
+octahedral structure as found experimentally in the gas phase.
+Xenon fluorides react with fluoride ion acceptors to form cationic
+species and fluoride ion donors to form fluoroanions.
+XeF 2 + PF 5 → [XeF]
++ 
+[PF 6 ]
+– 
+; XeF 4 + SbF 5 → [XeF 3 ]
++ 
+[SbF 6 ]
+–
+XeF 6 + MF → M
++ 
+[XeF 7 ]
+– 
+(M = Na, K, Rb or Cs)
+(b) Xenon-oxygen compounds
+Hydrolysis of XeF 4 and XeF 6 with water gives Xe0 3 .
+6XeF 4 + 12 H 2 O → 4Xe + 2Xe0 3 + 24 HF + 3 O 2
+XeF 6 + 3 H 2 O → XeO 3 + 6 HF
+Partial hydrolysis of XeF 6 gives oxyfluorides, XeOF 4
+and XeO 2 F 2 .
+XeF 6 + H 2 O → XeOF 4 + 2 HF
+XeF 6 + 2 H 2 O → XeO 2 F 2 + 4HF
+2020-21
+
+211 The p -Block Elements
+XeO 3 is a colourless explosive solid and has a pyramidal molecular
+structure (Fig. 7.9). XeOF 4 is a colourless volatile liquid and has a
+square pyramidal molecular structure (Fig.7.9).
+Does the hydrolysis of XeF 6 lead to a redox reaction?
+No, the products of hydrolysis are XeOF 4 and XeO 2 F 2 where the oxidation
+states of all the elements remain the same as it was in the reacting state.
+Example 7.22 Example 7.22 Example 7.22 Example 7.22 Example 7.22
+Solution Solution Solution Solution Solution
+Uses Uses Uses Uses Uses: Helium is a non-inflammable and light gas. Hence, it is used in filling
+balloons for meteorological observations. It is also used in gas-cooled nuclear
+reactors. Liquid helium (b.p. 4.2 K) finds use as cryogenic agent for carrying out
+various experiments at low temperatures. It is used to produce and sustain
+powerful superconducting magnets which form an essential part of modern NMR
+spectrometers and Magnetic Resonance Imaging (MRI) systems for clinical
+diagnosis. It is used as a diluent for oxygen in modern diving apparatus because
+of its very low solubility in blood.
+Neon is used in discharge tubes and fluorescent bulbs for advertisement display
+purposes. Neon bulbs are used in botanical gardens and in green houses.
+Argon is used mainly to provide an inert atmosphere in high temperature
+metallurgical processes (arc welding of metals or alloys) and for filling electric bulbs.
+It is also used in the laboratory for handling substances that are air-sensitive.
+There are no significant uses of Xenon and Krypton. They are used in light
+bulbs designed for special purposes.
+Intext Questions Intext Questions Intext Questions Intext Questions Intext Questions
+7.32 Why is helium used in diving apparatus?
+7.33 Balance the following equation: XeF 6 + H 2 O → XeO 2 F 2 + HF
+7.34 Why has it been difficult to study the chemistry of radon?
+2020-21
+
+212 Chemistry
+Summary Summary Summary Summary Summary
+Groups 13 to 18 of the periodic table consist of p -block elements with their valence
+shell electronic configuration ns
+2
+np
+1–6
+. Groups 13 and 14 were dealt with in Class
+XI. In this Unit remaining groups of the p -block have been discussed.
+Group 15 consists of five elements namely, N, P, As, Sb and Bi which have
+general electronic configuration ns
+2
+np
+3
+. Nitrogen differs from other elements of this
+group due to small size, formation of p π π π π π – p π π π π π multiple bonds with itself and with
+highly electronegative atom like O or C and non-availability of d orbitals to expand
+its valence shell. Elements of group 15 show gradation in properties. They react with
+oxygen, hydrogen and halogens. They exhibit two important oxidation states, + 3
+and + 5 but +3 oxidation is favoured by heavier elements due to ‘inert pair effect’.
+Dinitrogen can be prepared in laboratory as well as on industrial scale. It forms
+oxides in various oxidation states as N 2 O, NO, N 2 O 3 , NO 2 , N 2 O 4 and N 2 O 5 . These
+oxides have resonating structures and have multiple bonds. Ammonia can be
+prepared on large scale by Haber’s process . HNO 3 is an important industrial
+chemical. It is a strong monobasic acid and is a powerful oxidising agent. Metals
+and non-metals react with HNO 3 under different conditions to give NO or NO 2 .
+Phosphorus exists as P 4 in elemental form. It exists in several allotropic forms .
+It forms hydride, PH 3 which is a highly poisonous gas. It forms two types of halides as
+PX 3 and PX 5 . PCl 3 is prepared by the reaction of white phosphorus with dry chlorine
+while PCl 5 is prepared by the reaction of phosphorus with SO 2 Cl 2 . Phosphorus forms
+a number of oxoacids. Depending upon the number of P–OH groups, their basicity
+varies. The oxoacids which have P–H bonds are good reducing agents.
+The Group 16 elements have general electronic configuration ns
+2
+np
+4
+. They show
+maximum oxidation state, +6. Gradation in physical and chemical properties is
+observed in the group 16 elements. In laboratory, dioxygen is prepared by heating
+KClO 3 in presence of MnO 2 . It forms a number of oxides with metals. Allotropic form
+of oxygen is O 3 which is a highly oxidising agent. Sulphur forms a number of allotropes.
+Of these, α – and β – forms of sulphur are the most important. Sulphur combines with
+oxygen to give oxides such as SO 2 and SO 3 . SO 2 is prepared by the direct union of
+sulphur with oxygen. SO 2 is used in the manufacture of H 2 SO 4 . Sulphur forms a
+number of oxoacids. Amongst them, the most important is H 2 SO 4 . It is prepared by
+contact process . It is a dehydrating and oxidising agent. It is used in the manufacture
+of several compounds.
+Group 17 of the periodic table consists of the following elements F, Cl, Br, I and
+At.These elements are extremely reactive and as such they are found in the
+combined state only. The common oxidation state of these elements is –1. However,
+highest oxidation state can be +7. They show regular gradation in physical and
+chemical properties. They form oxides, hydrogen halides, interhalogen compounds
+and oxoacids. Chlorine is conveniently obtained by the reaction of HCl with KMnO 4 .
+HCl is prepared by heating NaCl with concentrated H 2 SO 4 . Halogens combine with
+one another to form interhalogen compounds of the type XX
+1
+n (n = 1, 3, 5, 7)
+where X
+1 
+is lighter than X. A number of oxoacids of halogens are known. In the
+structures of these oxoacids, halogen is the central atom which is bonded in each
+case with one OH bond as X–OH. In some cases X = 0 bonds are also found.
+Group 18 of the periodic table consists of noble gases . They have ns
+2 
+np
+6 
+valence
+shell electronic configuration except He which has 1 s
+2
+. All the gases except Rn
+occur in atmosphere. Rn is obtained as the decay product of 
+226
+Ra.
+Due to complete octet of outermost shell, they have less tendency to form
+compounds. The best characterised compounds are those of xenon with fluorine
+and oxygen only under certain conditions. These gases have several uses. Argon is
+used to provide inert atmosphere, helium is used in filling balloons for meteorological
+observations, neon is used in discharge tubes and fluorescent bulbs.
+2020-21
+
+213 The p -Block Elements
+7.1 Discuss the general characteristics of Group 15 elements with reference to
+their electronic configuration, oxidation state, atomic size, ionisation enthalpy
+and electronegativity.
+7.2 Why does the reactivity of nitrogen differ from phosphorus?
+7.3 Discuss the trends in chemical reactivity of group 15 elements.
+7.4 Why does NH 3 form hydrogen bond but PH 3 does not?
+7.5 How is nitrogen prepared in the laboratory? Write the chemical equations
+of the reactions involved.
+7.6 How is ammonia manufactured industrially?
+7.7 Illustrate how copper metal can give different products on reaction with HNO 3 .
+7.8 Give the resonating structures of NO 2 and N 2 O 5 .
+7.9 The HNH angle value is higher than HPH, HAsH and HSbH angles. Why?
+[ Hint: Can be explained on the basis of sp
+3 
+hybridisation in NH 3 and only
+s–p bonding between hydrogen and other elements of the group].
+7.10 Why does R 3 P = O exist but R 3 N = O does not (R = alkyl group)?
+7.11 Explain why NH 3 is basic while BiH 3 is only feebly basic.
+7.12 Nitrogen exists as diatomic molecule and phosphorus as P 4 . Why?
+7.13 Write main differences between the properties of white phosphorus and red
+phosphorus.
+7.14 Why does nitrogen show catenation properties less than phosphorus?
+7.15 Give the disproportionation reaction of H 3 PO 3 .
+7.16 Can PCl 5 act as an oxidising as well as a reducing agent? Justify.
+7.17 Justify the placement of O, S, Se, Te and Po in the same group of the
+periodic table in terms of electronic configuration, oxidation state and hydride
+formation.
+7.18 Why is dioxygen a gas but sulphur a solid?
+7.19 Knowing the electron gain enthalpy values for O → O
+– 
+and O → O
+2– 
+as –141
+and 702 kJ mol
+–1 
+respectively, how can you account for the formation of a
+large number of oxides having O
+2– 
+species and not O
+–
+?
+( Hint: Consider lattice energy factor in the formation of compounds).
+7.20 Which aerosols deplete ozone?
+7.21 Describe the manufacture of H 2 SO 4 by contact process?
+7.22 How is SO 2 an air pollutant?
+7.23 Why are halogens strong oxidising agents?
+7.24 Explain why fluorine forms only one oxoacid, HOF.
+7.25 Explain why inspite of nearly the same electronegativity, nitrogen forms
+hydrogen bonding while chlorine does not.
+7.26 Write two uses of ClO 2 .
+7.27 Why are halogens coloured?
+7.28 Write the reactions of F 2 and Cl 2 with water.
+7.29 How can you prepare Cl 2 from HCl and HCl from Cl 2 ? Write reactions only.
+7.30 What inspired N. Bartlett for carrying out reaction between Xe and PtF 6 ?
+7.31 What are the oxidation states of phosphorus in the following:
+(i) H 3 PO 3 (ii) PCl 3 (iii) Ca 3 P 2 (iv) Na 3 PO 4 (v) POF 3 ?
+Exercises
+2020-21
+
+214 Chemistry
+7.32 Write balanced equations for the following:
+(i) NaCl is heated with sulphuric acid in the presence of MnO 2 .
+(ii) Chlorine gas is passed into a solution of NaI in water.
+7.33 How are xenon fluorides XeF 2 , XeF 4 and XeF 6 obtained?
+7.34 With what neutral molecule is ClO
+– 
+isoelectronic? Is that molecule a Lewis
+base?
+7.35 How are XeO 3 and XeOF 4 prepared?
+7.36 Arrange the following in the order of property indicated for each set:
+(i) F 2 , Cl 2 , Br 2 , I 2 - increasing bond dissociation enthalpy.
+(ii) HF, HCl, HBr, HI - increasing acid strength.
+(iii) NH 3 , PH 3 , AsH 3 , SbH 3 , BiH 3 – increasing base strength.
+7.37 Which one of the following does not exist?
+(i) XeOF 4 (ii) NeF 2 (iii) XeF 2 (iv) XeF 6
+7.38 Give the formula and describe the structure of a noble gas species which
+is isostructural with:
+(i) ICl 4
+– 
+(ii) IBr 2
+– 
+(iii) BrO 3
+–
+7.39 Why do noble gases have comparatively large atomic sizes?
+7.40 List the uses of neon and argon gases.
+Answers to Some Intext Questions
+7.1 Higher the positive oxidation state of central atom, more will be its polarising
+power which, in turn, increases the covalent character of bond formed
+between the central atom and the other atom.
+7.2 Because BiH 3 is the least stable among the hydrides of Group 15.
+7.3 Because of strong p π –p π overlap resulting into the triple bond, N ≡ N.
+7.6 From the structure of N 2 O 5 it is evident that covalence of nitrogen is four.
+7.7 (a) Both are sp
+3 
+hybridised. In PH 4
++ 
+all the four orbitals are bonded whereas
+in PH 3 there is a lone pair of electrons on P, which is responsible for lone
+pair-bond pair repulsion in PH 3 reducing the bond angle to less than
+109° 28 ′ .
+7.10 PCl 5 + H 2 O → POCl 3 + 2HCl
+7.11 Three P–OH groups are present in the molecule of H 3 PO 4 . Therefore, its
+basicity is three.
+7.15 Because of small size and high electronegativity of oxygen, molecules of
+water are highly associated through hydrogen bonding resulting in its
+liquid state.
+7.21 Both the S–O bonds are covalent and have equal strength due to resonating
+structures.
+7.25 H 2 SO 4 is a very strong acid in water largely because of its first ionisation
+to H 3 O
++ 
+and HSO 4
+–
+. The ionisation of HSO 4
+– 
+to H 3 O
++ 
+and SO 4
+2– 
+is very very
+small. That is why K a 2 
+<< K a 1
+.
+7.31 In general, interhalogen compounds are more reactive than halogens due
+to weaker X–X
+1 
+bonding than X–X bond. Thus, ICl is more reactive than I 2 .
+7.34 Radon is radioactive with very short half-life which makes the study of
+chemistry of radon difficult.
+2020-21

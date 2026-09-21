@@ -617,17 +617,12 @@ router.put("/", requireAuth, async (req: AuthenticatedRequest, res: Response) =>
   }
 });
 
-/** Upload / replace mentor profile photo (Supabase `mentrs_profile`). */
+/** Upload / replace profile photo (Supabase `mentrs_profile`) — tutors + parents. */
 router.put(
   "/image",
   requireAuth,
   async (req: AuthenticatedRequest, res: Response) => {
     try {
-      if (req.auth!.role === "parent") {
-        res.status(403).json({ error: "Only tutor accounts can upload a profile photo" });
-        return;
-      }
-
       const user = await User.findById(req.auth!.sub);
       if (!user) {
         res.status(404).json({ error: "User not found" });
@@ -666,17 +661,12 @@ router.put(
   },
 );
 
-/** Remove mentor profile photo from storage + MongoDB. */
+/** Remove profile photo from storage + MongoDB. */
 router.delete(
   "/image",
   requireAuth,
   async (req: AuthenticatedRequest, res: Response) => {
     try {
-      if (req.auth!.role === "parent") {
-        res.status(403).json({ error: "Only tutor accounts can remove a profile photo" });
-        return;
-      }
-
       const user = await User.findById(req.auth!.sub);
       if (!user) {
         res.status(404).json({ error: "User not found" });

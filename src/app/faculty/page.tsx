@@ -5,25 +5,30 @@ import { FacultyAuthShell } from "@/components/auth/faculty-auth-shell";
 import { useAuth } from "@/components/auth/auth-provider";
 import { homeFor } from "@/lib/auth-routes";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 
-export default function FacultyLoginPage() {
+function FacultyLoginInner() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const next = searchParams?.get("next") || undefined;
 
   useEffect(() => {
     if (!loading && user) {
-      router.replace(homeFor(user));
+      router.replace(homeFor(user, next));
     }
-  }, [loading, user, router]);
+  }, [loading, user, router, next]);
 
   return (
     <FacultyAuthShell
       footerNote={
         <>
           Need a teacher?{" "}
-          <Link href="/search" className="font-semibold text-ink underline underline-offset-2">
+          <Link
+            href="/search"
+            className="font-semibold text-ink underline underline-offset-2"
+          >
             Search Bengaluru
           </Link>
         </>
@@ -32,8 +37,20 @@ export default function FacultyLoginPage() {
       {loading ? (
         <p className="py-16 text-center text-sm text-muted">Loading…</p>
       ) : (
-        <FacultyAuthForm variant="login" />
+        <FacultyAuthForm variant="login" next={next} />
       )}
     </FacultyAuthShell>
+  );
+}
+
+export default function FacultyLoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <p className="py-16 text-center text-sm text-muted">Loading…</p>
+      }
+    >
+      <FacultyLoginInner />
+    </Suspense>
   );
 }

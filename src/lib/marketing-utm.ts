@@ -243,6 +243,9 @@ export function parseAcquisitionFromUrl(raw?: string | null): ParsedAcquisition 
 }
 
 export const MARKETING_PAGES = [
+  { slug: "snapandgrade", title: "Snap & Grade", path: "/snapandgrade" },
+  { slug: "snapandgrade-class-10-maths", title: "Snap & Grade · Class 10 Maths", path: "/snapandgrade/class-10-maths" },
+  { slug: "snapandgrade-cbse-marking-scheme", title: "Snap & Grade · CBSE marking", path: "/snapandgrade/cbse-marking-scheme" },
   { slug: "blog-index", title: "Blog index", path: "/blog" },
   { slug: "parents", title: "Parents landing", path: "/parents" },
   { slug: "for-faculty", title: "Faculty landing", path: "/for-faculty" },

@@ -15,6 +15,7 @@ import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
 import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
 import { AdminFeaturedTutors } from "@/components/admin/admin-featured-tutors";
+import { AdminSnapGrade } from "@/components/admin/admin-snap-grade";
 import { AdminUsersTable } from "@/components/admin/admin-users-table";
 import { fetchAdminStats, type AdminStats } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ import {
   Activity,
   BarChart3,
   BookOpen,
+  Camera,
   ChevronDown,
   LayoutDashboard,
   Link2,
@@ -43,6 +45,7 @@ const NAV = [
   { id: "featured", label: "Featured tutors", icon: Star },
   { id: "requirements", label: "Board posts", icon: Megaphone },
   { id: "instant-connect", label: "Instant Connect", icon: Zap },
+  { id: "snap-grade", label: "Snap & Grade", icon: Camera },
   { id: "connections", label: "Connections", icon: Link2 },
   { id: "messenger", label: "Messenger", icon: Mail },
   { id: "engagement", label: "Engagement", icon: Activity },
@@ -425,6 +428,10 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
           {section === "instant-connect" && (
             <AdminInstantConnect adminKey={adminKey} />
+          )}
+
+          {section === "snap-grade" && (
+            <AdminSnapGrade adminKey={adminKey} />
           )}
 
           {stats && section === "connections" && (

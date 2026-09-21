@@ -3,5 +3,6 @@ export function isPublicBrowsePath(href: string): boolean {
   const path = href.split("?")[0].split("#")[0];
   if (path === "/search" || path.startsWith("/search/")) return true;
   if (path.startsWith("/teachers/")) return true;
+  if (path === "/snapandgrade" || path.startsWith("/snapandgrade/")) return true;
   return false;
 }

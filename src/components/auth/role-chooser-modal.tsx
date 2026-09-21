@@ -61,7 +61,7 @@ export function RoleChooserModal() {
           First, who are you?
         </h2>
         <p className="mt-1.5 text-sm text-muted">
-          Create a free parent account in a minute — or log in if you already have one.
+          Log in as a parent or tutor to grade — you&apos;ll come right back here.
         </p>
 
         <div className="mt-5 space-y-3">
@@ -85,7 +85,7 @@ export function RoleChooserModal() {
           </Link>
 
           <Link
-            href="/faculty"
+            href={`/faculty${nextSuffix}`}
             onClick={closeRoleChooser}
             className="group flex items-center gap-4 rounded-xl border-2 border-ink bg-white p-4 transition hover:bg-cream"
           >
