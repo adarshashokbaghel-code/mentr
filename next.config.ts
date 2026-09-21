@@ -2,17 +2,52 @@ import type { NextConfig } from "next";
 import path from "path";
 import dotenv from "dotenv";
 
-dotenv.config({ path: path.resolve(process.cwd(), ".env") });
+dotenv.config({
+  path: path.resolve(/* turbopackIgnore: true */ process.cwd(), ".env"),
+});
 
 const backendPort = process.env.BACKEND_PORT || "5000";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["mongoose", "sharp", "onnxruntime-node"],
+  serverExternalPackages: ["mongoose", "sharp", "onnxruntime-node", "tesseract.js"],
+  // Keep Snap & Grade / NCERT filesystem reads out of the /api serverless NFT.
+  // Without this, path.join(process.cwd(), ...) can trace ~1GB into pages/api.
+  outputFileTracingExcludes: {
+    "/api/**": [
+      "./public/ncert/**",
+      "./public/models/**",
+      "./public/ort/**",
+      "./public/learn/**",
+      "./videos/**",
+      "./.cache/**",
+      "./docs/**",
+      "./scripts/**",
+      "./eng.traineddata",
+    ],
+    "/api/[[...all]]": [
+      "./public/ncert/**",
+      "./public/models/**",
+      "./public/ort/**",
+      "./public/learn/**",
+      "./videos/**",
+      "./.cache/**",
+      "./docs/**",
+      "./scripts/**",
+      "./eng.traineddata",
+    ],
+    "/api/teachers/public/**": [
+      "./public/ncert/**",
+      "./public/models/**",
+      "./public/ort/**",
+      "./videos/**",
+      "./.cache/**",
+    ],
+  },
   transpilePackages: ["blockly"],
   turbopack: {
     // Parent ~/package-lock.json was being picked as the workspace root,
     // breaking PostCSS/Tailwind resolution and hanging page loads.
-    root: path.resolve(process.cwd()),
+    root: path.resolve(/* turbopackIgnore: true */ process.cwd()),
   },
   // Transformers.js / ORT Web — ignore Node-only bindings in the browser bundle.
   webpack: (config) => {

@@ -1,7 +1,9 @@
 import dotenv from "dotenv";
 import path from "path";
 
-dotenv.config({ path: path.resolve(process.cwd(), ".env") });
+dotenv.config({
+  path: path.resolve(/* turbopackIgnore: true */ process.cwd(), ".env"),
+});
 
 function requireEnv(key: string): string {
   const value = process.env[key];
