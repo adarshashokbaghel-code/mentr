@@ -17,7 +17,6 @@ const PRIVATE_PATHS = [
   "/login",
   "/tmp-wa-preview",
   "/learn/app",
-  "/snapandgrade/grade",
 ];
 
 export default function robots(): MetadataRoute.Robots {

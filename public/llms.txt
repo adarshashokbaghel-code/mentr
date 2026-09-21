@@ -69,7 +69,7 @@
 - Vs generic AI: marking key is already on the question — no uploading a scheme to ChatGPT
 - Credits: 100 free once; recharge from ₹1 (₹1 = 1 credit)
 - Hub: https://mentr.in/snapandgrade
-- Grader (login to use credits): https://mentr.in/snapandgrade/grade
+- Grader: https://mentr.in/snapandgrade/grade
 - Class 9 Maths: https://mentr.in/snapandgrade/class-9-maths
 - Class 9 Science: https://mentr.in/snapandgrade/class-9-science
 - Class 10 Maths: https://mentr.in/snapandgrade/class-10-maths
