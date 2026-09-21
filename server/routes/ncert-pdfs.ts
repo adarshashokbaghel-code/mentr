@@ -404,6 +404,9 @@ const ALL_BOOKS = [
 ];
 const NCERT_LIVE_BASE = "https://ncert.nic.in/textbook/pdf";
 
+/** Vercel serverless FS is read-only except /tmp — never write under public/ there. */
+const IS_SERVERLESS = process.env.VERCEL === "1" || process.env.AWS_LAMBDA_FUNCTION_NAME;
+
 function publicDir(book: ClassBook) {
   // turbopackIgnore: do not NFT-trace process.cwd() (would pull ~1GB of public/ into the API lambda).
   return path.join(
@@ -415,6 +418,9 @@ function publicDir(book: ClassBook) {
 }
 
 function cacheDir(book: ClassBook) {
+  if (IS_SERVERLESS) {
+    return path.join("/tmp", "ncert-cache", book.publicDir);
+  }
   return path.join(
     /* turbopackIgnore: true */ process.cwd(),
     ".cache",
@@ -458,8 +464,9 @@ function findExistingFile(book: ClassBook, pdfFile: string): string | null {
 }
 
 async function fetchPdf(url: string): Promise<Buffer | null> {
+  // Stay under Vercel function maxDuration (30s).
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 120_000);
+  const timeout = setTimeout(() => controller.abort(), 20_000);
   try {
     const res = await fetch(url, {
       signal: controller.signal,
@@ -470,9 +477,13 @@ async function fetchPdf(url: string): Promise<Buffer | null> {
       },
       redirect: "follow",
     });
-    if (!res.ok) return null;
+    if (!res.ok) {
+      console.warn("[ncert-pdf] fetch status", res.status, url);
+      return null;
+    }
     const buf = Buffer.from(await res.arrayBuffer());
     if (buf.length < 10_000 || buf.subarray(0, 4).toString() !== "%PDF") {
+      console.warn("[ncert-pdf] not a PDF", url, buf.length);
       return null;
     }
     return buf;
@@ -484,18 +495,17 @@ async function fetchPdf(url: string): Promise<Buffer | null> {
   }
 }
 
+type PdfPayload =
+  | { kind: "path"; path: string }
+  | { kind: "buffer"; buffer: Buffer }
+  | { error: string; status: number };
+
 async function ensureCached(
   book: ClassBook,
   chMeta: ChapterMeta,
-): Promise<string | { error: string; status: number }> {
+): Promise<PdfPayload> {
   const existing = findExistingFile(book, chMeta.pdfFile);
-  if (existing) return existing;
-
-  const pub = publicDir(book);
-  const cache = cacheDir(book);
-  fs.mkdirSync(cache, { recursive: true });
-  fs.mkdirSync(pub, { recursive: true });
-  const dest = path.join(pub, chMeta.pdfFile);
+  if (existing) return { kind: "path", path: existing };
 
   const archiveBase = `https://archive.org/download/${chMeta.archiveItem}`;
   const sources = [
@@ -503,25 +513,44 @@ async function ensureCached(
     `${NCERT_LIVE_BASE}/${chMeta.pdfFile}`,
   ];
 
+  let buf: Buffer | null = null;
   for (const url of sources) {
-    const buf = await fetchPdf(url);
-    if (!buf) continue;
-    fs.writeFileSync(dest, buf);
-    fs.writeFileSync(path.join(cache, chMeta.pdfFile), buf);
-    return dest;
+    buf = await fetchPdf(url);
+    if (buf) break;
   }
 
-  return {
-    error: `Chapter ${chMeta.number} PDF is not available yet. Try again shortly.`,
-    status: 503,
-  };
+  if (!buf) {
+    return {
+      error: `Chapter ${chMeta.number} PDF is not available yet. Try again shortly.`,
+      status: 503,
+    };
+  }
+
+  // Persist when the FS allows it (local dev / /tmp on Vercel). Never write public/ on serverless.
+  try {
+    const cache = cacheDir(book);
+    fs.mkdirSync(cache, { recursive: true });
+    const cachePath = path.join(cache, chMeta.pdfFile);
+    fs.writeFileSync(cachePath, buf);
+
+    if (!IS_SERVERLESS) {
+      const pub = publicDir(book);
+      fs.mkdirSync(pub, { recursive: true });
+      fs.writeFileSync(path.join(pub, chMeta.pdfFile), buf);
+    }
+
+    return { kind: "path", path: cachePath };
+  } catch (err) {
+    console.warn("[ncert-pdf] cache write skipped, streaming buffer:", err);
+    return { kind: "buffer", buffer: buf };
+  }
 }
 
-function sendPdf(
+function sendPdfHeaders(
   res: Response,
-  filePath: string,
   filename: string,
-  disposition: "attachment" | "inline" = "attachment",
+  disposition: "attachment" | "inline",
+  contentLength?: number,
 ) {
   res.setHeader("Content-Type", "application/pdf");
   res.setHeader(
@@ -530,7 +559,34 @@ function sendPdf(
   );
   res.setHeader("Cache-Control", "public, max-age=86400");
   res.setHeader("X-Content-Type-Options", "nosniff");
-  fs.createReadStream(filePath).pipe(res);
+  if (typeof contentLength === "number") {
+    res.setHeader("Content-Length", String(contentLength));
+  }
+}
+
+function sendPdf(
+  res: Response,
+  payload: Extract<PdfPayload, { kind: "path" } | { kind: "buffer" }>,
+  filename: string,
+  disposition: "attachment" | "inline" = "attachment",
+) {
+  if (payload.kind === "buffer") {
+    sendPdfHeaders(res, filename, disposition, payload.buffer.length);
+    res.status(200).end(payload.buffer);
+    return;
+  }
+
+  sendPdfHeaders(res, filename, disposition);
+  fs.createReadStream(payload.path)
+    .on("error", (err) => {
+      console.error("[ncert-pdf] stream error:", err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: "Failed to read PDF" });
+      } else {
+        res.destroy(err);
+      }
+    })
+    .pipe(res);
 }
 
 for (const book of ALL_BOOKS) {
@@ -552,29 +608,33 @@ for (const book of ALL_BOOKS) {
     });
   });
 
-  router.get(`/${book.routeSlug}/:chapter`, async (req, res) => {
-    const raw = String(req.params.chapter || "").replace(/\.pdf$/i, "");
-    const chMeta = findChapter(book, raw);
-    if (!chMeta) {
-      res.status(404).json({
-        error: `Chapter not found (use 1–${book.chapters.length})`,
-      });
-      return;
-    }
+  router.get(`/${book.routeSlug}/:chapter`, async (req, res, next) => {
+    try {
+      const raw = String(req.params.chapter || "").replace(/\.pdf$/i, "");
+      const chMeta = findChapter(book, raw);
+      if (!chMeta) {
+        res.status(404).json({
+          error: `Chapter not found (use 1–${book.chapters.length})`,
+        });
+        return;
+      }
 
-    const cached = await ensureCached(book, chMeta);
-    if (typeof cached !== "string") {
-      res.status(cached.status).json({ error: cached.error });
-      return;
-    }
+      const cached = await ensureCached(book, chMeta);
+      if ("error" in cached) {
+        res.status(cached.status).json({ error: cached.error });
+        return;
+      }
 
-    const inline = String(req.query.view || "") === "1";
-    sendPdf(
-      res,
-      cached,
-      downloadFilename(book, chMeta),
-      inline ? "inline" : "attachment",
-    );
+      const inline = String(req.query.view || "") === "1";
+      sendPdf(
+        res,
+        cached,
+        downloadFilename(book, chMeta),
+        inline ? "inline" : "attachment",
+      );
+    } catch (err) {
+      next(err);
+    }
   });
 }
 
