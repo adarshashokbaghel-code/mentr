@@ -49,6 +49,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           "Class 3-5",
           "free coding course India",
         ]
+      : post.ctaHref.startsWith("/snapandgrade") ||
+          post.slug.includes("snap-and-grade")
+        ? [
+            post.keyword,
+            "Snap & Grade",
+            "Snap and Grade Mentr",
+            "CBSE step marking",
+            "grade NCERT answers photo",
+            "Class 9 10 11 12 CBSE",
+          ]
       : post.slug.includes("instant-connect")
         ? [
             post.keyword,

@@ -44,9 +44,15 @@ export const FAQS: FaqItem[] = [
   },
   {
     category: "general",
+    question: "What is Snap & Grade?",
+    answer:
+      "Snap & Grade is Mentr’s CBSE Class 9–12 practice tool. You pick an NCERT or board-style question, photograph the answer you already wrote, and get step marks plus a short tip on how to write it. Start at mentr.in/snapandgrade — 100 free credits once, then from ₹1. It is not a tutor and not ChatGPT with a PDF. The marking key is already on the question.",
+  },
+  {
+    category: "general",
     question: "Is Mentr really 100% free?",
     answer:
-      "Yes — completely free for both sides, forever. Parents search, view profiles, and connect at no cost. Tutors and mentors list, receive requests, and pitch on requirements without coins, lead packs, subscriptions, or commission. There is no paid unlock anywhere on Mentr.",
+      "The tutor marketplace is free for both sides, forever — search, profiles, connect, and WhatsApp after accept, with no coins or commission. Mentr Learn (Class 3–5) is also free. Snap & Grade is a separate CBSE practice tool: 100 free credits once, then optional recharge from ₹1. Listing and contacting tutors is never paywalled.",
   },
   {
     category: "general",
@@ -76,7 +82,7 @@ export const FAQS: FaqItem[] = [
     category: "fees",
     question: "Does Mentr charge parents or faculty?",
     answer:
-      "Listing and contact are free — ₹0 platform fee, no cut from sessions. Later, teachers who want to appear first can optionally boost their profile, but contact stays free.",
+      "Listing and contact are free — ₹0 platform fee, no cut from sessions. Later, teachers who want to appear first can optionally boost their profile, but contact stays free. Snap & Grade (exam practice marking) is a separate paid product with 100 free credits, then recharge from ₹1.",
   },
   {
     category: "parents",
@@ -112,7 +118,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "What free tools does Mentr offer?",
     answer:
-      "Mentr Tools includes free utilities for teachers (worksheet, question paper, answer key, and lesson plan generators), students (study timetable, CGPA calculator), and PDF helpers (merge, compress, organize, extract text). Most tools run in your browser without signup. Each tool page explains who it is for and how to use the output.",
+      "Mentr Tools includes free utilities for teachers (worksheet, question paper, answer key, and lesson plan generators), students (study timetable, CGPA calculator), and PDF helpers (merge, compress, organize, extract text). Most tools run in the browser without signup. Snap & Grade is a separate CBSE Class 9–12 photo grader at mentr.in/snapandgrade — 100 free credits, then from ₹1.",
   },
   {
     category: "parents",

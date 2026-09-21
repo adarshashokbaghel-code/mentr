@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { LocationFields } from "@/components/forms/location-fields";
+import { ProfileImageUploader } from "@/components/profile/profile-image-uploader";
 import { profileApi } from "@/lib/api";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { homeFor } from "@/lib/auth-routes";
@@ -32,6 +33,7 @@ function ParentProfilingContent() {
   const [country, setCountry] = useState("India");
   const [city, setCity] = useState("Bengaluru");
   const [area, setArea] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [prefilled, setPrefilled] = useState(false);
@@ -51,6 +53,10 @@ function ParentProfilingContent() {
       setCountry(user.parentProfile.country || "India");
       setCity(user.parentProfile.city || "Bengaluru");
       setArea(user.parentProfile.area ?? "");
+      setProfileImageUrl(user.profileImageUrl || null);
+      setPrefilled(true);
+    } else if (!prefilled && user) {
+      setProfileImageUrl(user.profileImageUrl || null);
       setPrefilled(true);
     }
   }, [loading, user, router, next, prefilled]);
@@ -89,6 +95,9 @@ function ParentProfilingContent() {
     );
   }
 
+  const displayName =
+    user.parentProfile?.name?.trim() || nameFromEmail(user.email);
+
   return (
     <div className="flex min-h-screen flex-col bg-cream">
       <header className="flex items-center justify-between px-5 py-4 sm:px-8">
@@ -114,7 +123,26 @@ function ParentProfilingContent() {
             onSubmit={handleSubmit}
             className="rounded-lg border border-hairline bg-white p-5 sm:p-6"
           >
-            <div className="space-y-4">
+            <div className="space-y-5">
+              <div className="rounded-lg border border-dashed border-ink/15 bg-cream/40 p-4">
+                <ProfileImageUploader
+                  name={displayName}
+                  initials={displayName.slice(0, 1).toUpperCase()}
+                  imageUrl={profileImageUrl}
+                  onUploaded={(url) => {
+                    setProfileImageUrl(url);
+                    if (user) {
+                      setUser({
+                        ...user,
+                        profileImageUrl: url || undefined,
+                      });
+                    }
+                  }}
+                  title="Photo (optional)"
+                  description="Helps tutors recognize you on the public parents list. First name only is shown — skip anytime."
+                />
+              </div>
+
               <label className="block">
                 <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink">
                   <Phone className="h-3.5 w-3.5 text-muted" />

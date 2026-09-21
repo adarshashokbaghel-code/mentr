@@ -126,8 +126,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "Need a tutor this week? Instant Connect matches parents with up to 3 verified mentors, optional AI notes, and temporary phone contact — free, no agency fees. Step-by-step + safety checklist.",
     publishWeek: 39,
     featured: true,
-    cta: "Try Instant Connect",
-    ctaHref: "/parents",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   // ── Pillar 1: Find-a-Tutor Guides ──────────────────────────────
   {
@@ -141,8 +141,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "A parent's checklist — 10 questions to ask before hiring a home tutor, plus red flags and what verified means on Mentr.",
     publishWeek: 1,
     featured: true,
-    cta: "Search verified tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "home-tutor-vs-online-tutor",
@@ -153,8 +153,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Compare in-person and online tutoring — flexibility, focus, cost, and when each format works best for your child.",
-    cta: "Browse tutors near you",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "home-tutor-cost-bengaluru",
@@ -168,7 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Bengaluru home tutor cost 2026 — maths, science, JEE/NEET & boards. See ₹/hour ranges by class, then hire verified tutors free on Mentr (no agency cut).",
     publishWeek: 2,
     featured: true,
-    cta: "Post your requirement",
+    cta: "Create free parent account",
     ctaHref: "/parent/signup",
   },
   {
@@ -181,8 +181,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Warning signs that a tutor may not be right for your child — and how Mentr's verification catches common issues.",
     publishWeek: 7,
-    cta: "Find verified tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "one-on-one-vs-group-tuition",
@@ -194,8 +194,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "When private tuition beats group classes — and how to decide based on your child's learning style and goals.",
     publishWeek: 10,
-    cta: "Search tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "signs-child-needs-tutor",
@@ -206,7 +206,7 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Academic warning signs parents often miss — and a step-by-step plan to find the right help early.",
-    cta: "Post a requirement",
+    cta: "Create free parent account",
     ctaHref: "/parent/signup",
   },
   {
@@ -218,8 +218,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Set expectations, pack the right materials, and make the first session productive for parent, child, and tutor.",
-    cta: "Find a tutor",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "free-vs-paid-tutor-platforms-india",
@@ -230,8 +230,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "What free platforms like Mentr actually offer vs paid marketplaces — and where hidden costs show up.",
-    cta: "Try Mentr free",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "how-to-post-tutor-requirement",
@@ -242,7 +242,7 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Write a requirement that gets quality pitches — subject, schedule, budget, and location tips that tutors respond to.",
-    cta: "Post your requirement",
+    cta: "Create free parent account",
     ctaHref: "/parent/signup",
   },
   {
@@ -254,8 +254,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "ID checks, qualification proof, references, and trial sessions — a practical verification checklist for parents.",
-    cta: "Browse verified tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
 
   // ── Pillar 2: Comparison / Alternative Pages ─────────────────────
@@ -422,6 +422,72 @@ export const BLOG_POSTS: BlogPost[] = [
       "Online coaching vs a local JEE/NEET mentor — cost, accountability, doubt-solving, and hybrid approaches.",
     cta: "Search JEE mentors",
     ctaHref: "/exam-prep/jee-coaching-bengaluru",
+  },
+  {
+    slug: "what-is-snap-and-grade",
+    title: "What Is Snap & Grade? CBSE Photo Marking for Class 9–12 (Mentr)",
+    keyword: "what is Snap and Grade CBSE",
+    intent: "commercial",
+    funnel: "top",
+    pillar: "exam-prep",
+    description:
+      "Snap & Grade by Mentr grades Class 9–12 NCERT answers from a photo — CBSE step marks and writing tips. 100 free credits. Not ChatGPT, not a tutor.",
+    publishWeek: 40,
+    featured: true,
+    cta: "Try Snap & Grade",
+    ctaHref: "/snapandgrade",
+  },
+  {
+    slug: "how-to-write-cbse-answers-to-keep-step-marks",
+    title: "How to Write CBSE Answers So You Keep Step Marks (Class 9–12)",
+    keyword: "how to write CBSE answers step marking",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "Formula, working, units, last line — why CBSE cuts marks even when the method is right, and how to practise that writing on paper.",
+    publishWeek: 40,
+    cta: "Grade a practice answer",
+    ctaHref: "/snapandgrade/grade",
+  },
+  {
+    slug: "chatgpt-vs-cbse-marking-scheme",
+    title: "ChatGPT vs CBSE Marking Scheme: Why Uploading a PDF Is Not Enough",
+    keyword: "ChatGPT vs CBSE marking scheme",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "exam-prep",
+    description:
+      "ChatGPT guesses steps from a PDF you upload. A board key splits marks. How Snap & Grade keeps that split on the question you practised.",
+    publishWeek: 40,
+    cta: "See Snap & Grade vs ChatGPT",
+    ctaHref: "/snapandgrade#vs-ai",
+  },
+  {
+    slug: "why-students-lose-marks-on-steps-cbse",
+    title: "Why Class 9–12 Students Lose Marks on Steps (Even After Practice)",
+    keyword: "lose marks on steps CBSE",
+    intent: "informational",
+    funnel: "top",
+    pillar: "exam-prep",
+    description:
+      "The quiet mark leak: missing units, reasons, and last lines. What to ask after practice — and how to see the cut the same night.",
+    publishWeek: 40,
+    cta: "See why marks slip",
+    ctaHref: "/snapandgrade#why-marks",
+  },
+  {
+    slug: "grade-ncert-answers-from-a-photo",
+    title: "Grade NCERT Answers from a Photo — CBSE Step Marks on Mentr",
+    keyword: "grade NCERT answers from photo",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "exam-prep",
+    description:
+      "Photograph your Class 9–12 NCERT notebook page. Get CBSE-style step marks and a writing tip. 100 free credits. No app.",
+    publishWeek: 40,
+    cta: "Grade from a photo",
+    ctaHref: "/snapandgrade/grade",
   },
 
   // ── Pillar 4: Tutor-Side Guides ──────────────────────────────────
@@ -653,8 +719,8 @@ export const BLOG_POSTS: BlogPost[] = [
     featured: true,
     description:
       "Search tactics for 'online tutor near me' — local time zones, verified profiles, and free platforms that work in India, UAE, UK, and beyond.",
-    cta: "Search tutors near you",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "how-to-find-verified-tutor-online",
@@ -732,8 +798,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Find tutors online in India without lead fees — CBSE, ICSE, JEE, NEET mentors on Mentr.",
-    cta: "Find online tutors India",
-    ctaHref: "/find-online-tutors/india",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "find-mentors-near-me-online",
@@ -769,8 +835,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Find a verified maths tutor online for CBSE, ICSE, and JEE — free connect on Mentr.",
-    cta: "Find maths tutors",
-    ctaHref: "/find-verified-online-tutors",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "find-coding-mentor-online",
@@ -805,8 +871,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Find English tutors online in India — spoken English, board exams, IELTS foundation.",
-    cta: "Find English tutors",
-    ctaHref: "/find-online-tutors/india",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "how-to-find-tutor-online-safely",
@@ -947,8 +1013,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "Parents can browse verified tutors on Mentr without creating an account — see subjects, areas, and open slots first, then sign in free to connect on WhatsApp.",
     publishWeek: 18,
     featured: true,
-    cta: "Browse tutors free",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "how-to-choose-cbse-class-6-8-tutor",
@@ -961,8 +1027,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Middle school is where maths and science foundations are built — how Bengaluru parents pick the right CBSE tutor, what to pay in 2026, and trial session questions.",
     publishWeek: 19,
-    cta: "Find CBSE tutors",
-    ctaHref: "/search?subject=Mathematics",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "icse-vs-cbse-tutor-guide-parents",
@@ -974,8 +1040,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Board-specific syllabi, English depth, and exam patterns differ — hire tutors who match your child's exact ICSE or CBSE class, not just the subject name.",
     publishWeek: 20,
-    cta: "Search by subject",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "how-parents-evaluate-tutor-trial-session",
@@ -989,8 +1055,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "Paid trial sessions save thousands — what to watch during class, four questions to ask your child after, and when to walk away.",
     publishWeek: 21,
     featured: true,
-    cta: "Browse tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "neet-2027-study-plan-students",
@@ -1417,8 +1483,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Delhi NCR home tutor cost 2026 — class-wise ₹/hour for boards & JEE/NEET. Hire verified tutors free on Mentr.",
     publishWeek: 34,
-    cta: "Search Delhi tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "home-tutor-cost-mumbai",
@@ -1430,8 +1496,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Mumbai home tutor cost by class & subject (2026). Compare ranges, then connect verified tutors with ₹0 platform fee.",
     publishWeek: 34,
-    cta: "Search Mumbai tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "home-tutor-cost-hyderabad",
@@ -1443,8 +1509,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Hyderabad home tutor fees 2026 — primary to JEE/NEET. Budget smart, then hire verified tutors free on Mentr.",
     publishWeek: 34,
-    cta: "Search Hyderabad tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "home-tutor-cost-pune",
@@ -1456,8 +1522,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Pune & PCMC home tutor cost 2026 by class. See ₹/hour bands and find verified tutors without agency commission.",
     publishWeek: 34,
-    cta: "Search Pune tutors",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
   },
   {
     slug: "how-to-login-mentr",

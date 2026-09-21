@@ -3,6 +3,7 @@ import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import { LEARN_GEO_SEGMENTS, learnPathFor } from "@/lib/learn-landing-copy";
 import { MONEY_LANDING_PAGES, landingPagePath } from "@/lib/seo-landing-pages";
 import { absoluteUrl } from "@/lib/seo";
+import { SNAP_GRADE_CLUSTERS, snapGradeClusterPath } from "@/lib/snap-grade-seo";
 import { TOOLS, TOOLS_HUB } from "@/lib/tools-catalog";
 import {
   EXAM_PREP_PAGES,
@@ -54,6 +55,10 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
   return [
     entry("/", 1, "daily"),
     entry("/parents", 0.9, "weekly"),
+    entry("/snapandgrade", 0.95, "weekly"),
+    ...SNAP_GRADE_CLUSTERS.map((p) =>
+      entry(snapGradeClusterPath(p.slug), 0.86, "weekly"),
+    ),
     ...(LEARN_PUBLIC
       ? [
           entry("/learn", 1, "daily"),

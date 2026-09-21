@@ -104,8 +104,8 @@ const switchTabs = [
     description:
       "UrbanPro routes parents through agents and charges tutors for coins. Mentr is direct — search verified tutors, send a connect request, and chat on WhatsApp once they accept. No middleman.",
     letterBg: "bg-coral",
-    cta: "Search tutors free",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
     migrate: "~30 sec",
     deltas: [
       { label: "Cost to parents", other: "Agent fees", champs: "₹0", highlight: true },
@@ -124,8 +124,8 @@ const switchTabs = [
     description:
       "Agencies take a cut and control the relationship. On Mentr you find the tutor yourself, send a request, and deal directly on WhatsApp — no commission on sessions.",
     letterBg: "bg-ink",
-    cta: "Find a teacher",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
     migrate: "Instant",
     deltas: [
       { label: "Session commission", other: "15–30%", champs: "₹0", highlight: true },
@@ -144,8 +144,8 @@ const switchTabs = [
     description:
       "Tuition groups bury posts in minutes. Mentr is a searchable directory — subjects, verified profiles, live availability, and one-tap connect requests.",
     letterBg: "bg-sage",
-    cta: "Browse directory",
-    ctaHref: "/search",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
     migrate: "One search",
     deltas: [
       { label: "Search by subject", other: "Scroll & hope", champs: "Built-in", highlight: true },
@@ -322,18 +322,19 @@ function ParentsHero() {
             </div>
 
             <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
-              Find a tutor
+              Hire a tutor
               <br />
               for your child.
               <span className="mt-3 block text-[1.65rem] font-semibold leading-snug text-coral sm:text-[2rem] lg:text-[2.25rem]">
-                Free. No agent fees. Ever.
+                Free parent account. No agent fees.
               </span>
             </h1>
 
             <p className="mx-auto max-w-md text-base leading-relaxed text-muted lg:mx-0 sm:text-lg">
-              Search verified tutors locally or online from any country — or post
-              your requirement and let tutors pitch you. WhatsApp unlocks when
-              you accept. ₹0 platform fee.
+              Create a free parent account in under a minute — then search
+              verified tutors locally or online, or post your requirement and
+              let tutors pitch you. WhatsApp unlocks when you accept. ₹0
+              platform fee.
             </p>
             <p className="mx-auto max-w-md text-sm leading-relaxed text-muted/90 lg:mx-0">
               {GLOBAL_REACH_LINE}
@@ -342,18 +343,22 @@ function ParentsHero() {
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
               <LpPill tint="sage">Free forever</LpPill>
               <LpPill tint="butter">No credit card</LpPill>
-              <LpPill tint="coral">Unlimited searches</LpPill>
+              <LpPill tint="coral">Parent email OTP</LpPill>
             </div>
 
             <div className="flex w-full max-w-full flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:justify-start">
-              <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
+              <Link href="/parent/signup" className="block w-full max-w-full sm:w-auto">
                 <Button size="lg" className="h-13 w-full max-w-full gap-2 px-5 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8">
-                  <Search className="h-4 w-4" />
-                  Find a teacher
+                  Create free parent account
                   <ArrowRight className="h-4 w-4" />
                 </Button>
+              </Link>
+              <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
+                <Button size="lg" variant="secondary" className="h-13 w-full max-w-full gap-2 px-5 text-base sm:w-auto sm:px-8">
+                  <Search className="h-4 w-4" />
+                  Browse tutors first
+                </Button>
               </ParentActionLink>
-              <PostRequirementButton size="lg" variant="secondary" className="h-13 w-full max-w-full px-5 sm:w-auto sm:px-8" />
             </div>
 
             <p className="text-center text-xs text-muted lg:text-left">
@@ -593,14 +598,14 @@ function ParentFlowSection() {
             <LpStepTimeline steps={steps} activeIndex={step} onSelect={setStep} />
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href={path === "search" ? "/search" : "/parent/signup"}
+                href="/parent/signup"
                 className={cn(
                   "inline-flex h-11 items-center gap-2 rounded-lg border-2 border-ink bg-coral px-5 text-sm font-bold text-white hover:bg-coral-dark",
                   hardShadowSm,
                 )}
               >
                 {path === "search" ? <Search className="h-4 w-4" /> : <Megaphone className="h-4 w-4" />}
-                {path === "search" ? "Start searching" : "Post requirement"}
+                {path === "search" ? "Create free parent account" : "Post requirement"}
               </Link>
             </div>
           </div>
@@ -894,13 +899,13 @@ export function ParentsLanding() {
       <ParentTestimonials />
       <ParentFaqPreview />
       <LpFinalCta
-        eyebrow="Ready to find a tutor?"
-        title="Your child's teacher is one search away."
-        description="Search verified tutors or post your requirement — tutors pitch with their profile, you accept on your dashboard, then WhatsApp. No agent fees, no commission."
-        primaryLabel="Search tutors — free"
-        primaryHref="/search"
-        secondaryLabel="Post your requirement"
-        secondaryHref="/parent/signup"
+        eyebrow="Ready to hire a tutor?"
+        title="Create a free parent account."
+        description="Register with parent email OTP — then search verified tutors or post your requirement. Tutors pitch, you accept on your dashboard, WhatsApp unlocks. No agent fees, no commission."
+        primaryLabel="Create free parent account"
+        primaryHref="/parent/signup"
+        secondaryLabel="Browse tutors first"
+        secondaryHref="/search"
         perks={["Free forever", "No credit card", "Verified tutors", "Direct WhatsApp"]}
       />
     </main>

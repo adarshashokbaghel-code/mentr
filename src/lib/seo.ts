@@ -38,7 +38,7 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Find verified tutors & mentors free on Mentr — 200+ profiles, Instant Connect, WhatsApp after they accept. Also Mentr Learn: free Class 3–5 coding (CS, AI & Math) at mentr.in/learn. No fees, no commission.";
+  "Find verified tutors & mentors free on Mentr — 200+ profiles, Instant Connect, WhatsApp after they accept. Also Mentr Learn (Class 3–5 coding) and Snap & Grade (CBSE Class 9–12 NCERT photo marking). No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
@@ -78,6 +78,10 @@ export const SITE_KEYWORDS = [
   "Learn by Mentr",
   "mentr.in learn",
   "mentr.in/learn",
+  "Snap & Grade",
+  "Snap and Grade",
+  "mentr.in/snapandgrade",
+  "CBSE Class 9–12 NCERT marking",
   "free coding kids Mentr Learn",
   "Paprly",
   "Mentr open source",

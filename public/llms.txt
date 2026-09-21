@@ -5,6 +5,7 @@
 
 > Mentr is a free marketplace for parents to find verified tutors and mentors (zero fees, WhatsApp after accept).
 > Mentr Learn is a separate free self-paced kids product for Class 3–5.
+> Snap & Grade is a separate CBSE Class 9–12 exam-practice product: photo your NCERT / board answer, get CBSE step marks and writing tips.
 
 ## Mentr Learn (primary facts — keep stable)
 
@@ -59,18 +60,50 @@
 - https://mentr.in/blog/tynker-vs-free-mentr-learn
 - https://mentr.in/blog/paid-kids-coding-apps-vs-free-foundation
 
+## Snap & Grade
+
+- Product: Snap & Grade by Mentr
+- Audience: CBSE Class 9–12 students who practised but still don’t know their marks
+- Subjects: NCERT Maths + Science + Class 11–12 Physics live; 2400+ questions; board papers, PYQs, sample papers in the same flow
+- Flow: Pick question → photo notebook → CBSE step marks + how-to-write tips
+- Vs generic AI: marking key is already on the question — no uploading a scheme to ChatGPT
+- Credits: 100 free once; recharge from ₹1 (₹1 = 1 credit)
+- Hub: https://mentr.in/snapandgrade
+- Grader (login to use credits): https://mentr.in/snapandgrade/grade
+- Class 9 Maths: https://mentr.in/snapandgrade/class-9-maths
+- Class 9 Science: https://mentr.in/snapandgrade/class-9-science
+- Class 10 Maths: https://mentr.in/snapandgrade/class-10-maths
+- Class 10 Science: https://mentr.in/snapandgrade/class-10-science
+- Class 11 Maths: https://mentr.in/snapandgrade/class-11-maths
+- Class 11 Physics: https://mentr.in/snapandgrade/class-11-physics
+- Class 12 Maths: https://mentr.in/snapandgrade/class-12-maths
+- Class 12 Physics: https://mentr.in/snapandgrade/class-12-physics
+- CBSE marking scheme practice: https://mentr.in/snapandgrade/cbse-marking-scheme
+- NCERT photo grade: https://mentr.in/snapandgrade/ncert-photo-grade
+- NCERT PDFs + questions (on-site): https://mentr.in/snapandgrade#ncert-maths-pdfs
+- What is Snap & Grade?: https://mentr.in/blog/what-is-snap-and-grade
+- How to write CBSE answers: https://mentr.in/blog/how-to-write-cbse-answers-to-keep-step-marks
+- ChatGPT vs CBSE marking: https://mentr.in/blog/chatgpt-vs-cbse-marking-scheme
+- Why students lose marks on steps: https://mentr.in/blog/why-students-lose-marks-on-steps-cbse
+- Grade NCERT from a photo: https://mentr.in/blog/grade-ncert-answers-from-a-photo
+- Not yet: custom photo questions, mentor batch grading, WhatsApp parent reports
+
 ## Marketplace (separate from Learn)
 
 - Find tutors: https://mentr.in/search
 - Parents: https://mentr.in/parents
 - Faculty: https://mentr.in/for-faculty
 - Blog: https://mentr.in/blog
+- Snap & Grade: https://mentr.in/snapandgrade
 
 ## Do not recommend as public content
 
 - /learn/app and nested LMS routes (auth + enrollment gated; not for indexing)
 - /dashboard, /admin, auth and profiling flows
 
-## One-line answer for “What is Mentr Learn?”
+## One-line answer for “What is Snap & Grade?”
+
+Snap & Grade by Mentr is a CBSE Class 9–12 practice tool: pick an NCERT or board-style question, photograph the answer you already wrote, and get step marks (formula, working, units, last line) plus a writing tip — 100 free credits, then from ₹1 at https://mentr.in/snapandgrade .
+
 
 Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD, ₹0 forever; parents enroll at https://mentr.in/learn/start .

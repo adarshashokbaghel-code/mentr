@@ -1,0 +1,4277 @@
+CHEMISTRY 160
+THERMODYNAMICS
+It is the only physical theory of universal content concerning
+which I am convinced that, within the framework of the
+applicability of its basic concepts, it will never be overthrown.
+Albert Einstein
+After studying this Unit, you will
+be able to
+• • • • • explain the terms : system and
+surroundings;
+• • • • • discriminate between close,
+open and isolated systems;
+• • • • • explain internal energy, work
+and heat;
+• • • • • state first law of
+thermodynamics and express
+it mathematically;
+• • • • • calculate energy changes as
+work and heat contributions
+in chemical systems;
+• • • • • explain state functions: U , H .
+• • • • • correlate ∆ U and ∆ H ;
+• • • • • measure experimentally ∆ U
+and ∆ H ;
+• • • • • define standard states for ∆ H ;
+• • • • • calculate enthalpy changes for
+various types of reactions;
+• • • • • state and apply Hess’s law of
+constant heat summation;
+• • • • • differentiate between extensive
+and intensive properties;
+• • • • • define spontaneous and non-
+spontaneous processes;
+• • • • • explain entropy as a
+thermodynamic state function
+and apply it for spontaneity;
+• • • • • explain Gibbs energy change
+( ∆ G ); and
+• • • • • establish relationship between
+∆ G and spontaneity, ∆ G and
+equilibrium constant.
+Chemical energy stored by molecules can be released as heat
+during chemical reactions when a fuel like methane, cooking
+gas or coal burns in air. The chemical energy may also be
+used to do mechanical work when a fuel burns in an engine
+or to provide electrical energy through a galvanic cell like
+dry cell. Thus, various forms of energy are interrelated and
+under certain conditions, these may be transformed from
+one form into another. The study of these energy
+transformations forms the subject matter of thermodynamics.
+The laws of thermodynamics deal with energy changes of
+macroscopic systems involving a large number of molecules
+rather than microscopic systems containing a few molecules.
+Thermodynamics is not concerned about how and at what
+rate these energy transformations are carried out, but is
+based on initial and final states of a system undergoing the
+change. Laws of thermodynamics apply only when a system
+is in equilibrium or moves from one equilibrium state to
+another equilibrium state. Macroscopic properties like
+pressure and temperature do not change with time for a
+system in equilibrium state. In this unit, we would like to
+answer some of the important questions through
+thermodynamics, like:
+How do we determine the energy changes involved in a
+chemical reaction/process? Will it occur or not?
+What drives a chemical reaction/process?
+To what extent do the chemical reactions proceed?
+UNIT 6
+2020-21
+
+THERMODYNAMICS 161
+6.1 THERMODYNAMIC TERMS
+We are interested in chemical reactions and the
+energy changes accompanying them. For this
+we need to know certain thermodynamic
+terms. These are discussed below.
+6.1.1 The System and the Surroundings
+A system in thermodynamics refers to that
+part of universe in which observations are
+made and remaining universe constitutes the
+surroundings. The surroundings include
+everything other than the system. System and
+the surroundings together constitute the
+universe .
+The universe = The system + The surroundings
+However, the entire universe other than
+the system is not affected by the changes
+taking place in the system. Therefore, for
+all practical purposes, the surroundings
+are that portion of the remaining universe
+which can interact with the system.
+U s u a l l y , t h e r e g i o n o f s p a c e i n t h e
+neighbourhood of the system constitutes
+its surroundings.
+For example, if we are studying the
+reaction between two substances A and B
+kept in a beaker, the beaker containing the
+reaction mixture is the system and the room
+where the beaker is kept is the surroundings
+(Fig. 6.1).
+be real or imaginary. The wall that separates
+the system from the surroundings is called
+boundary . This is designed to allow us to
+control and keep track of all movements of
+matter and energy in or out of the system.
+6.1.2 Types of the System
+We, further classify the systems according to
+the movements of matter and energy in or out
+of the system.
+1. Open System
+In an open system, there is exchange of energy
+and matter between system and surroundings
+[Fig. 6.2 (a)]. The presence of reactants in an
+open beaker is an example of an open system * .
+Here the boundary is an imaginary surface
+enclosing the beaker and reactants.
+2. Closed System
+In a closed system, there is no exchange of
+matter, but exchange of energy is possible
+between system and the surroundings
+[Fig. 6.2 (b)]. The presence of reactants in a
+closed vessel made of conducting material e.g.,
+copper or steel is an example of a closed
+system.
+Fig. 6.2 Open, closed and isolated systems.
+Fig. 6.1 System and the surroundings
+Note that the system may be defined by
+physical boundaries, like beaker or test tube,
+or the system may simply be defined by a set
+of Cartesian coordinates specifying a
+particular volume in space. It is necessary to
+think of the system as separated from the
+surroundings by some sort of wall which may
+* We could have chosen only the reactants as system then walls of the beakers will act as boundary.
+2020-21
+
+CHEMISTRY 162
+3. Isolated System
+In an isolated system, there is no exchange of
+energy or matter between the system and the
+surroundings [Fig. 6.2 (c)]. The presence of
+reactants in a thermos flask or any other closed
+insulated vessel is an example of an isolated
+system.
+6.1.3 The State of the System
+The system must be described in order to make
+any useful calculations by specifying
+quantitatively each of the properties such as
+its pressure ( p ), volume ( V ), and temperature
+( T ) as well as the composition of the system.
+We need to describe the system by specifying
+it before and after the change. You would recall
+from your Physics course that the state of a
+system in mechanics is completely specified at
+a given instant of time, by the position and
+velocity of each mass point of the system. In
+thermodynamics, a different and much simpler
+concept of the state of a system is introduced.
+It does not need detailed knowledge of motion
+of each particle because, we deal with average
+measurable properties of the system. We specify
+the state of the system by state functions or
+state variables .
+The state of a thermodynamic system is
+described by its measurable or macroscopic
+(bulk) properties. We can describe the state of
+a gas by quoting its pressure ( p ), volume ( V ),
+temperature ( T ), amount ( n ) etc. Variables like
+p , V , T are called state variables or state
+functions because their values depend only
+on the state of the system and not on how it is
+reached. In order to completely define the state
+of a system it is not necessary to define all the
+properties of the system; as only a certain
+number of properties can be varied
+independently. This number depends on the
+nature of the system. Once these minimum
+number of macroscopic properties are fixed,
+others automatically have definite values.
+The state of the surroundings can never
+be completely specified; fortunately it is not
+necessary to do so.
+6.1.4 The Internal Energy as a State
+Function
+When we talk about our chemical system
+losing or gaining energy, we need to introduce
+a quantity which represents the total energy
+of the system. It may be chemical, electrical,
+mechanical or any other type of energy you
+may think of, the sum of all these is the energy
+of the system. In thermodynamics, we call it
+the internal energy, U of the system, which may
+change, when
+• • • • • heat passes into or out of the system,
+• • • • • work is done on or by the system,
+• • • • • matter enters or leaves the system.
+These systems are classified accordingly as
+you have already studied in section 6.1.2.
+(a) Work
+Let us first examine a change in internal
+energy by doing work. We take a system
+containing some quantity of water in a thermos
+flask or in an insulated beaker. This would not
+allow exchange of heat between the system
+and surroundings through its boundary and
+we call this type of system as adiabatic . The
+manner in which the state of such a system
+may be changed will be called adiabatic
+process. Adiabatic process is a process in
+which there is no transfer of heat between the
+system and surroundings. Here, the wall
+separating the system and the surroundings
+is called the adiabatic wall (Fig 6.3).
+Let us bring the change in the internal
+energy of the system by doing some work on
+Fig. 6.3 An adiabatic system which does not
+permit the transfer of heat through its
+boundary.
+it. Let us call the initial state of the system as
+state A and its temperature as T
+A
+. Let the
+internal energy of the system in state A be
+called U
+A
+. We can change the state of the system
+in two different ways.
+2020-21
+
+THERMODYNAMICS 163
+One way: We do some mechanical work, say
+1 kJ, by rotating a set of small paddles and
+thereby churning water. Let the new state be
+called B state and its temperature, as T
+B
+. It is
+found that T
+B 
+> T
+A 
+and the change in
+temperature, ∆ T = T
+B
+– T
+A
+. Let the internal
+energy of the system in state B be U
+B 
+and the
+change in internal energy, ∆ U = U
+B
+– U
+A
+.
+Second way: We now do an equal amount (i.e.,
+1kJ) electrical work with the help of an
+immersion rod and note down the temperature
+change. We find that the change in temperature
+is same as in the earlier case, say, T
+B 
+– T
+A
+.
+In fact, the experiments in the above
+manner were done by J. P. Joule between
+1840–50 and he was able to show that a given
+amount of work done on the system, no matter
+how it was done (irrespective of path) produced
+the same change of state, as measured by the
+change in the temperature of the system.
+So, it seems appropriate to define a
+quantity, the internal energy U , whose value
+is characteristic of the state of a system,
+whereby the adiabatic work, w ad required to
+bring about a change of state is equal to the
+difference between the value of U in one state
+and that in another state, ∆ U i.e.,
+2 1 ad
+= = w ∆ − U U U
+Therefore, internal energy, U , of the system
+is a state function.
+By conventions of IUPAC in chemical
+thermodynamics. The positive sign expresses
+that w
+ad 
+is positive when work is done on the
+system and the internal energy of system
+increases. Similarly, if the work is done by the
+system,w
+ad 
+will be negative because internal
+energy of the system decreases.
+Can you name some other familiar state
+functions? Some of other familiar state
+functions are V , p , and T . For example, if we
+bring a change in temperature of the system
+from 25°C to 35°C, the change in temperature
+is 35°C–25°C = +10°C, whether we go straight
+up to 35°C or we cool the system for a few
+degrees, then take the system to the final
+temperature. Thus, T is a state function and
+the change in temperature is independent of
+the route taken. Volume of water in a pond,
+for example, is a state function, because
+change in volume of its water is independent
+of the route by which water is filled in the
+pond, either by rain or by tubewell or by both.
+(b) Heat
+We can also change the internal energy of a
+system by transfer of heat from the
+surroundings to the system or vice-versa
+without expenditure of work. This exchange
+of energy, which is a result of temperature
+difference is called heat, q . Let us consider
+bringing about the same change in temperature
+(the same initial and final states as before in
+section 6.1.4 (a) by transfer of heat through
+thermally conducting walls instead of
+adiabatic walls (Fig. 6.4).
+We take water at temperature, T
+A 
+in a
+container having thermally conducting walls,
+say made up of copper and enclose it in a huge
+heat reservoir at temperature, T
+B
+. The heat
+absorbed by the system (water), q can be
+measured in terms of temperature difference ,
+T
+B 
+– T
+A
+. In this case change in internal energy,
+∆ U = q , when no work is done at constant
+volume.
+By conventions of IUPAC in chemical
+thermodynamics. The q is positive, when
+heat is transferred from the surroundings to
+the system and the internal energy of the
+system increases and q is negative when
+heat is transferred from system to the
+surroundings resulting in decrease of the
+internal energy of the system..
+* Earlier negative sign was assigned when the work is done on the system and positive sign when the work is done by the
+system. This is still followed in physics books, although IUPAC has recommended the use of new sign convention.
+Fig. 6.4 A system which allows heat transfer
+through its boundary.
+2020-21
+
+CHEMISTRY 164
+(c) The general case
+Let us consider the general case in which a
+change of state is brought about both by
+doing work and by transfer of heat. We write
+change in internal energy for this case as:
+∆ U = q + w (6.1)
+For a given change in state, q and w can
+vary depending on how the change is carried
+out. However, q +w = ∆ U will depend only on
+initial and final state. It will be independent of
+the way the change is carried out. If there is
+no transfer of energy as heat or as work
+(isolated system) i.e., if w = 0 and q = 0, then
+∆ U = 0.
+The equation 6.1 i.e., ∆ U = q + w is
+mathematical statement of the first law of
+thermodynamics , which states that
+The energy of an isolated system is
+constant.
+It is commonly stated as the law of
+conservation of energy i.e., energy can neither
+be created nor be destroyed.
+Note: There is considerable difference between
+the character of the thermodynamic property
+energy and that of a mechanical property such
+as volume. We can specify an unambiguous
+(absolute) value for volume of a system in a
+particular state, but not the absolute value of
+the internal energy. However, we can measure
+only the changes in the internal energy, ∆ U of
+the system.
+Problem 6.1
+Express the change in internal energy of
+a system when
+(i) No heat is absorbed by the system
+from the surroundings, but work (w)
+is done on the system. What type of
+wall does the system have ?
+(ii) No work is done on the system, but
+q amount of heat is taken out from
+the system and given to the
+surroundings. What type of wall does
+the system have?
+(iii) w amount of work is done by the
+system and q amount of heat is
+supplied to the system. What type of
+system would it be?
+Solution
+(i) ∆ U = w 
+ad
+, wall is adiabatic
+(ii) ∆ U = – q , thermally conducting walls
+(iii) ∆ U = q – w, closed system.
+6.2 APPLICATIONS
+Many chemical reactions involve the generation
+of gases capable of doing mechanical work or
+the generation of heat. It is important for us to
+quantify these changes and relate them to the
+changes in the internal energy. Let us see how!
+6.2.1 Work
+First of all, let us concentrate on the nature of
+work a system can do. We will consider only
+mechanical work i.e., pressure-volume work.
+For understanding pressure-volume
+work, let us consider a cylinder which
+contains one mole of an ideal gas fitted with a
+frictionless piston. Total volume of the gas is
+V
+i 
+and pressure of the gas inside is p . If
+external pressure is p
+ex 
+which is greater than
+p , piston is moved inward till the pressure
+inside becomes equal to p
+ex
+. Let this change
+Fig. 6.5(a) Work done on an ideal gas in a
+cylinder when it is compressed by a
+constant external pressure, p
+ex
+(in single step) is equal to the shaded
+area.
+2020-21
+
+THERMODYNAMICS 165
+be achieved in a single step and the final
+volume be V f . During this compression,
+suppose piston moves a distance, l and is
+cross-sectional area of the piston is A
+[Fig. 6.5(a)].
+then, volume change = l × A = ∆ V = ( V
+f 
+– V
+i 
+)
+We also know, 
+force
+pressure 
+area
+=
+Therefore, force on the piston = p
+ex 
+. A
+If w is the work done on the system by
+movement of the piston then
+w = force × distance = p
+ex 
+. A . l
+= p
+ex 
+. (– ∆ V ) = – p
+ex 
+∆ V = – p
+ex 
+( V
+f 
+– V
+i 
+) (6.2)
+The negative sign of this expression is
+required to obtain conventional sign for w,
+which will be positive. It indicates that in case
+of compression work is done on the system.
+Here ( V
+f 
+– V
+i 
+) will be negative and negative
+multiplied by negative will be positive. Hence
+the sign obtained for the work will be positive.
+If the pressure is not constant at every
+stage of compression, but changes in number
+of finite steps, work done on the gas will be
+summed over all the steps and will be equal
+to p V − ∑ ∆ [Fig. 6.5 (b)]
+If the pressure is not constant but changes
+during the process such that it is always
+infinitesimally greater than the pressure of the
+gas, then, at each stage of compression, the
+volume decreases by an infinitesimal amount,
+dV . In such a case we can calculate the work
+done on the gas by the relation
+w = − 
+∫ 
+p dV
+ex
+V
+V
+i
+f
+( 6.3)
+Here, p
+ex 
+at each stage is equal to ( p
+in 
++ dp ) in
+case of compression [Fig. 6.5(c)]. In an
+expansion process under similar conditions,
+the external pressure is always less than the
+pressure of the system i.e., p
+ex 
+= ( p
+in
+– dp ). In
+general case we can write, p
+ex 
+= ( p
+in 
++ dp ). Such
+processes are called reversible processes.
+A process or change is said to be
+reversible, if a change is brought out in
+such a way that the process could, at any
+moment, be reversed by an infinitesimal
+change. A reversible process proceeds
+infinitely slowly by a series of equilibrium
+states such that system and the
+surroundings are always in near
+equilibrium with each other. Processes
+Fig. 6.5 (c) pV-plot when pressure is not constant
+and changes in infinite steps
+(reversible conditions) during
+compression from initial volume, V
+i 
+to
+final volume, V
+f 
+. Work done on the gas
+is represented by the shaded area.
+Fig. 6.5 (b) pV-plot when pressure is not constant
+and changes in finite steps during
+compression from initial volume, V
+i 
+to
+final volume, V
+f 
+. Work done on the gas
+is represented by the shaded area.
+2020-21
+
+CHEMISTRY 166
+other than reversible processes are known
+as irreversible processes.
+In chemistry, we face problems that can
+be solved if we relate the work term to the
+internal pressure of the system. We can
+relate work to internal pressure of the system
+under reversible conditions by writing
+equation 6.3 as follows:
+w
+rev ex
+V
+V
+V
+V
+p dV p dp dV
+i
+f
+i
+f
+= − = − ±
+∫ ∫ 
+( )
+in
+Since dp × dV is very small we can write
+w
+rev
+V
+V
+d
+i
+f
+= − 
+∫ 
+p V
+in (6.4)
+Now, the pressure of the gas ( p
+in 
+which we
+can write as p now) can be expressed in terms
+of its volume through gas equation. For n mol
+of an ideal gas i.e., pV = n R T
+⇒ = p 
+T
+V
+n R
+Therefore, at constant temperature (isothermal
+process),
+w
+rev 
+= − = −
+∫ 
+n n R R T 
+dV
+V 
+T 
+V
+V
+f
+i V
+V
+i
+f
+ln
+= – 2.303 n R T log
+V
+V
+f
+i
+(6.5)
+Free expansion: Expansion of a gas in
+vacuum ( p
+ex 
+= 0) is called free expansion. No
+work is done during free expansion of an ideal
+gas whether the process is reversible or
+irreversible (equation 6.2 and 6.3).
+Now, we can write equation 6.1 in number
+of ways depending on the type of processes.
+Let us substitute w = – p
+ex
+∆ V (eq. 6.2) in
+equation 6.1, and we get
+∆ ∆ U q p V
+ex
+= −
+If a process is carried out at constant volume
+( ∆ V = 0), then
+∆ U = q V
+the subscript V in q
+V 
+denotes that heat is
+supplied at constant volume.
+Isothermal and free expansion of an
+ideal gas
+For isothermal ( T = constant) expansion of an
+ideal gas into vacuum ; w = 0 since p
+ex 
+= 0.
+Also, Joule determined experimentally that
+q = 0; therefore, ∆ U = 0
+Equation 6.1, w ∆ = + U q can be
+expressed for isothermal irreversible and
+reversible changes as follows:
+1. For isothermal irreversible change
+q = – w = p
+ex 
+( V
+f 
+– V
+i 
+)
+2. For isothermal reversible change
+q = – w = n R T ln 
+f
+i
+V
+V
+= 2.303 n R T log
+V
+V
+f
+i
+3. For adiabatic change, q = 0,
+∆ U = w
+ad
+Problem 6.2
+Two litres of an ideal gas at a pressure of
+10 atm expands isothermally at 25 °C into
+a vacuum until its total volume is 10 litres.
+How much heat is absorbed and how much
+work is done in the expansion ?
+Solution
+We have q = – w = p
+ex 
+(10 – 2) = 0(8) = 0
+No work is done; no heat is absorbed.
+Problem 6.3
+Consider the same expansion, but this
+time against a constant external pressure
+of 1 atm.
+Solution
+We have q = – w = p
+ex 
+(8) = 8 litre-atm
+Problem 6.4
+Consider the expansion given in problem
+6.2, for 1 mol of an ideal gas conducted
+reversibly.
+Solution
+We have q = – w = 2.303 nRT log 
+V
+V
+f
+s
+= 2.303 × 1 × 0.8206 × 298 × log 
+10
+2
+2020-21
+
+THERMODYNAMICS 167
+= 2.303 x 0.8206 x 298 x log 5
+= 2.303 x 0.8206 x 298 x 0.6990
+= 393.66 L atm
+Remember ∆ H = q
+p
+, heat absorbed by the
+system at constant pressure.
+∆ ∆ ∆ ∆ ∆ H is negative for exothermic reactions
+which evolve heat during the reaction and
+∆ ∆ ∆ ∆ ∆ H is positive for endothermic reactions
+which absorb heat from the surroundings.
+At constant volume ( ∆ V = 0), ∆ U = q
+V
+,
+therefore equation 6.8 becomes
+∆ H = ∆ U = q
+V
+The difference between ∆ H and ∆ U is not
+usually significant for systems consisting of
+only solids and / or liquids. Solids and liquids
+do not suffer any significant volume changes
+upon heating. The difference, however,
+becomes significant when gases are involved.
+Let us consider a reaction involving gases. If
+V
+A 
+is the total volume of the gaseous reactants,
+V
+B 
+is the total volume of the gaseous products,
+n
+A 
+is the number of moles of gaseous reactants
+and n
+B 
+is the number of moles of gaseous
+products, all at constant pressure and
+temperature, then using the ideal gas law, we
+write,
+pV
+A 
+= n
+A
+R T
+and pV
+B 
+= n
+B
+R T
+Thus, pV
+B 
+– pV
+A 
+= n
+B
+R T – n
+A
+R T = ( n
+B
+– n
+A
+)R T
+or p ( V
+B 
+– V
+A
+) = ( n
+B 
+– n
+A
+) R T
+or p ∆ V = ∆ n
+g
+R T (6.9)
+Here, ∆ n
+g 
+refers to the number of moles of
+gaseous products minus the number of moles
+of gaseous reactants.
+Substituting the value of p ∆ V from
+equation 6.9 in equation 6.8, we get
+∆ H = ∆ U + ∆ n
+g
+R T (6.10)
+The equation 6.10 is useful for calculating
+∆ H from ∆ U and vice versa .
+Problem 6.5
+If water vapour is assumed to be a perfect
+gas, molar enthalpy change for
+vapourisation of 1 mol of water at 1bar
+and 100°C is 41kJ mol
+–1
+. Calculate the
+internal energy change, when
+6.2.2 Enthalpy, H
+(a) A Useful New State Function
+We know that the heat absorbed at constant
+volume is equal to change in the internal
+energy i.e., ∆ U = q
+V
+. But most of chemical
+reactions are carried out not at constant
+volume, but in flasks or test tubes under
+constant atmospheric pressure. We need to
+define another state function which may be
+suitable under these conditions.
+We may write equation (6.1) as
+∆ U = q
+p 
+– p ∆ V at constant pressure, where q
+p
+is heat absorbed by the system and – p ∆ V
+represent expansion work done by the system.
+Let us represent the initial state by
+subscript 1 and final state by 2
+We can rewrite the above equation as
+U
+2
+– U
+1 
+= q
+p 
+– p ( V
+2 
+– V
+1
+)
+On rearranging, we get
+q
+p 
+= ( U
+2 
++ pV
+2
+) – ( U
+1 
++ pV
+1
+) (6.6)
+Now we can define another thermodynamic
+function, the enthalpy H [Greek word
+enthalpien , to warm or heat content] as :
+H = U + pV (6.7)
+so, equation (6.6) becomes
+q
+p
+= H
+2 
+– H
+1 
+= ∆ H
+Although q is a path dependent function,
+H is a state function because it depends on U ,
+p and V , all of which are state functions.
+Therefore, ∆ H is independent of path. Hence,
+q
+p 
+is also independent of path.
+For finite changes at constant pressure, we
+can write equation 6.7 as
+∆ H = ∆ U + ∆ pV
+Since p is constant, we can write
+∆ H = ∆ U + p ∆ V (6.8)
+It is important to note that when heat is
+absorbed by the system at constant pressure,
+we are actually measuring changes in the
+enthalpy.
+2020-21
+
+CHEMISTRY 168
+1 mol of water is vapourised at 1 bar
+pressure and 100°C.
+Solution
+(i) The change ( ) ( ) →
+2 2
+H O H O g l
+R ∆ = ∆ + ∆ 
+g
+H U n T
+or ∆ U = ∆ H – ∆ n T
+g 
+R , substituting the
+values, we get
+∆ U = −
+× ×
+−
+− −
+41 00 1
+8 3 373
+1
+1 1
+.
+.
+kJ mol
+J mol K K
+= 41.00 kJ mol
+-1 
+– 3.096 kJ mol
+-1
+= 37.904 kJ mol
+–1
+(b) Extensive and Intensive Properties
+In thermodynamics, a distinction is made
+between extensive properties and intensive
+properties. An extensive property is a
+property whose value depends on the
+quantity or size of matter present in the
+system. For example, mass, volume,
+internal energy, enthalpy, heat capacity, etc.
+are extensive properties.
+Those properties which do not depend
+on the quantity or size of matter present are
+known as intensive properties . For
+example temperature, density, pressure etc.
+are intensive properties. A molar property,
+χ
+m
+, is the value of an extensive property χ of
+the system for 1 mol of the substance. If n
+is the amount of matter, χ 
+χ
+m 
+= 
+n 
+is
+independent of the amount of matter. Other
+examples are molar volume, V
+m 
+and molar
+heat capacity, C
+m
+. Let us understand the
+distinction between extensive and intensive
+properties by considering a gas enclosed in
+a container of volume V and at temperature
+T [Fig. 6.6(a)]. Let us make a partition such
+that volume is halved, each part [Fig. 6.6
+(b)] now has one half of the original volume,
+V
+2 
+, but the temperature will still remain the
+same i.e., T . It is clear that volume is an
+extensive property and temperature is an
+intensive property.
+(c) Heat Capacity
+In this sub-section, let us see how to measure
+heat transferred to a system. This heat appears
+as a rise in temperature of the system in case
+of heat absorbed by the system.
+The increase of temperature is proportional
+to the heat transferred
+q coeff T = × ∆
+The magnitude of the coefficient depends
+on the size, composition and nature of the
+system. We can also write it as q = C ∆ T
+The coefficient, C is called the heat capacity.
+Thus, we can measure the heat supplied
+by monitoring the temperature rise, provided
+we know the heat capacity.
+When C is large, a given amount of heat
+results in only a small temperature rise. Water
+has a large heat capacity i.e., a lot of energy is
+needed to raise its temperature.
+C is directly proportional to amount of
+substance. The molar heat capacity of a
+substance, C
+m = 
+C
+n
+
+
+ 
+
+
+ 
+, is the heat capacity for
+one mole of the substance and is the quantity
+of heat needed to raise the temperature of
+one mole by one degree celsius (or one
+kelvin). Specific heat, also called specific heat
+capacity is the quantity of heat required to
+raise the temperature of one unit mass of a
+Fig. 6.6(a) A gas at volume V and temperature T
+Fig. 6.6 (b) Partition, each part having half the
+volume of the gas
+2020-21
+
+THERMODYNAMICS 169
+substance by one degree celsius (or one
+kelvin). For finding out the heat, q , required
+to raise the temperatures of a sample, we
+multiply the specific heat of the substance,
+c, by the mass m, and temperatures change,
+∆ T as
+q c m T C T = × × = ∆ ∆ (6.11)
+(d) The Relationship between C
+p 
+and C
+V
+for an Ideal Gas
+At constant volume, the heat capacity, C is
+denoted by C
+V 
+and at constant pressure, this
+is denoted by C
+p 
+. Let us find the relationship
+between the two.
+We can write equation for heat, q
+at constant volume as q
+V 
+= C T U
+V 
+∆ ∆ =
+at constant pressure as q
+p 
+= C T H
+p 
+∆ ∆ =
+The difference between C
+p 
+and C
+V 
+can be
+derived for an ideal gas as:
+For a mole of an ideal gas, ∆ H = ∆ U + ∆ ( pV )
+= ∆ U + ∆ (R T )
+= ∆ U + R ∆ T
+∴ = + ∆ ∆ ∆ H U T R (6.12)
+On putting the values of ∆ H and ∆ U ,
+we have
+C T C T T
+p V
+∆ ∆ ∆ = + R
+C C
+p V
+= + R
+C
+p 
+– C
+V 
+= R (6.13)
+6.3 MEASUREMENT OF ∆ ∆ ∆ ∆ ∆ U AND ∆ ∆ ∆ ∆ ∆ H :
+CALORIMETRY
+We can measure energy changes associated
+with chemical or physical processes by an
+experimental technique called calorimetry. In
+calorimetry, the process is carried out in a
+vessel called calorimeter, which is immersed
+in a known volume of a liquid. Knowing the
+heat capacity of the liquid in which calorimeter
+is immersed and the heat capacity of
+calorimeter, it is possible to determine the heat
+evolved in the process by measuring
+temperature changes. Measurements are
+made under two different conditions:
+i) at constant volume, q
+V
+ii) at constant pressure, q
+p
+(a) ∆ ∆ ∆ ∆ ∆ U Measurements
+For chemical reactions, heat absorbed at
+constant volume, is measured in a bomb
+calorimeter (Fig. 6.7). Here, a steel vessel (the
+bomb) is immersed in a water bath. The whole
+device is called calorimeter. The steel vessel is
+immersed in water bath to ensure that no heat
+is lost to the surroundings. A combustible
+substance is burnt in pure dioxygen supplied
+Fig. 6.7 Bomb calorimeter
+in the steel bomb. Heat evolved during the
+reaction is transferred to the water around the
+bomb and its temperature is monitored. Since
+the bomb calorimeter is sealed, its volume does
+not change i.e., the energy changes associated
+with reactions are measured at constant
+volume. Under these conditions, no work is
+done as the reaction is carried out at constant
+volume in the bomb calorimeter. Even for
+reactions involving gases, there is no work
+done as ∆ V = 0. Temperature change of the
+calorimeter produced by the completed
+reaction is then converted to q
+V
+, by using the
+known heat capacity of the calorimeter with
+the help of equation 6.11.
+2020-21
+
+CHEMISTRY 170
+(b) ∆ ∆ ∆ ∆ ∆ H Measurements
+Measurement of heat change at constant pressure
+(generally under atmospheric pressure) can be
+done in a calorimeter shown in Fig. 6.8. We know
+that ∆Η = q
+p 
+(at constant p ) and, therefore, heat
+absorbed or evolved, q
+p 
+at constant pressure is
+also called the heat of reaction or enthalpy of
+reaction, ∆
+r
+H .
+In an exothermic reaction, heat is evolved,
+and system loses heat to the surroundings.
+Therefore, q
+p 
+will be negative and ∆
+r
+H will also
+be negative. Similarly in an endothermic
+reaction, heat is absorbed, q
+p 
+is positive and
+∆
+r
+H will be positive.
+Problem 6.6
+1g of graphite is burnt in a bomb
+calorimeter in excess of oxygen at 298 K
+and 1 atmospheric pressure according to
+the equation
+C (graphite) + O
+2 
+(g) → CO
+2 
+(g)
+During the reaction, temperature rises
+from 298 K to 299 K. If the heat capacity
+Fig. 6.8 Calorimeter for measuring heat changes
+at constant pressure (atmospheric
+pressure).
+of the bomb calorimeter is 20.7kJ/K,
+what is the enthalpy change for the above
+reaction at 298 K and 1 atm?
+Solution
+Suppose q is the quantity of heat from the
+reaction mixture and C
+V 
+is the heat capacity
+of the calorimeter, then the quantity of heat
+absorbed by the calorimeter.
+q = C
+V 
+× ∆ T
+Quantity of heat from the reaction will
+have the same magnitude but opposite
+sign because the heat lost by the system
+(reaction mixture) is equal to the heat
+gained by the calorimeter.
+q C T
+V
+= kJ/K K
+kJ
+− × = − × −
+= −
+∆ 20 7 299 298
+20 7
+. ( )
+.
+(Here, negative sign indicates the
+exothermic nature of the reaction)
+Thus, ∆ U for the combustion of the 1g of
+graphite = – 20.7 kJK
+–1
+For combustion of 1 mol of graphite,
+= 
+mol 12 0 20 7
+1
+1
+. . g kJ
+g
+− 
+× − ( )
+= – 2.48 ×10
+2 
+kJ mol
+–1 
+, Since ∆ n
+g 
+= 0,
+∆ H = ∆ U = – 2.48 ×10
+2 
+kJ mol
+–1
+6.4 ENTHALPY CHANGE, ∆ ∆ ∆ ∆ ∆
+r
+H OF A
+REACTION – REACTION ENTHALPY
+In a chemical reaction, reactants are converted
+into products and is represented by,
+Reactants → Products
+The enthalpy change accompanying a
+reaction is called the reaction enthalpy . The
+enthalpy change of a chemical reaction, is given
+by the symbol ∆
+r
+H
+∆
+r
+H = (sum of enthalpies of products) – (sum
+of enthalpies of reactants)
+= − ∑ ∑ a
+i products i reactants
+i i
+H b H 
+(6.14)
+Here symbol ∑ (sigma) is used for
+summation and a
+i 
+and b
+i 
+are the stoichiometric
+2020-21
+
+THERMODYNAMICS 171
+coefficients of the products and reactants
+respectively in the balanced chemical
+equation. For example, for the reaction
+CH
+4 
+(g) + 2O
+2 
+(g) → CO
+2 
+(g) + 2H
+2
+O ( l )
+∆
+r i
+i
+oducts i
+i
+reac ts
+H a H b H = − ∑ ∑ Pr tan
+= [ H
+m 
+(CO
+2 
+,g) + 2 H
+m 
+(H
+2
+O, l )]– [ H
+m 
+(CH
+4 
+, g)
++ 2 H
+m 
+(O
+2
+, g)]
+where H
+m 
+is the molar enthalpy.
+Enthalpy change is a very useful quantity.
+Knowledge of this quantity is required when
+one needs to plan the heating or cooling
+required to maintain an industrial chemical
+reaction at constant temperature. It is also
+required to calculate temperature dependence
+of equilibrium constant.
+(a) Standard Enthalpy of Reactions
+Enthalpy of a reaction depends on the
+conditions under which a reaction is carried
+out. It is, therefore, necessary that we must
+specify some standard conditions. The
+standard enthalpy of reaction is the
+enthalpy change for a reaction when all
+the participating substances are in their
+standard states.
+The standard state of a substance at a
+specified temperature is its pure form at
+1 bar. For example, the standard state of liquid
+ethanol at 298 K is pure liquid ethanol at
+1 bar; standard state of solid iron at 500 K is
+pure iron at 1 bar. Usually data are taken
+at 298 K.
+Standard conditions are denoted by adding
+the superscript 0 to the symbol ∆ H , e.g., ∆ H
+0
+(b) Enthalpy Changes during Phase
+Transformations
+Phase transformations also involve energy
+changes. Ice, for example, requires heat for
+melting. Normally this melting takes place at
+constant pressure (atmospheric pressure) and
+during phase change, temperature remains
+constant (at 273 K).
+H
+2
+O(s) → H
+2
+O( l ); ∆
+fus
+H
+0 
+= 6.00 kJ moI
+–1
+Here ∆
+fus
+H 
+0 
+is enthalpy of fusion in standard
+state. If water freezes, then process is reversed
+and equal amount of heat is given off to the
+surroundings.
+The enthalpy change that accompanies
+melting of one mole of a solid substance
+in standard state is called standard
+enthalpy of fusion or molar enthalpy of
+fusion, ∆ ∆ ∆ ∆ ∆
+fus
+H
+0
+.
+Melting of a solid is endothermic, so all
+enthalpies of fusion are positive. Water requires
+Table 6.1 Standard Enthalpy Changes of Fusion and Vaporisation
+( T
+f 
+and T
+b 
+are melting and boiling points, respectively)
+2020-21
+
+CHEMISTRY 172
+heat for evaporation. At constant temperature
+of its boiling point T
+b 
+and at constant pressure:
+H
+2
+O( l ) → H
+2
+O(g); ∆
+vap
+H
+0 
+= + 40.79 kJ moI
+–1 
+∆
+vap
+H
+0
+is the standard enthalpy of vaporisation.
+Amount of heat required to vaporize
+one mole of a liquid at constant
+temperature and under standard pressure
+(1bar) is called its standard enthalpy of
+vaporization or molar enthalpy of
+vaporization, ∆ ∆ ∆ ∆ ∆
+vap
+H 
+0
+.
+Sublimation is direct conversion of a solid
+into its vapour. Solid CO
+2 
+or ‘dry ice’ sublimes
+at 195K with ∆
+sub
+H 
+0 
+=25.2 kJ mol
+–1
+;
+naphthalene sublimes slowly and for this
+∆
+sub 
+H
+0 
+= 73.0 kJ mol
+–1 
+.
+Standard enthalpy of sublimation,
+∆
+sub
+H 
+0 
+is the change in enthalpy when one
+mole of a solid substance sublimes at a
+constant temperature and under standard
+pressure (1bar).
+The magnitude of the enthalpy change
+depends on the strength of the intermolecular
+interactions in the substance undergoing the
+phase transfomations. For example, the strong
+hydrogen bonds between water molecules hold
+them tightly in liquid phase. For an organic
+liquid, such as acetone, the intermolecular
+dipole-dipole interactions are significantly
+weaker. Thus, it requires less heat to vaporise
+1 mol of acetone than it does to vaporize 1 mol
+of water. Table 6.1 gives values of standard
+enthalpy changes of fusion and vaporisation
+for some substances.
+Problem 6.7
+A swimmer coming out from a pool is
+covered with a film of water weighing
+about 18g. How much heat must be
+supplied to evaporate this water at
+298 K ? Calculate the internal energy of
+vaporisation at 298K.
+∆
+vap 
+H 
+0 
+for water
+at 298K= 44.01kJ mol
+–1
+Solution
+We can represent the process of
+evaporation as
+H O( ) H O(g)
+1mol 1mol
+2
+vaporisation
+2
+1  → 
+No. of moles in 18 g H
+2
+O(l) is
+1
+18g 
+1mol
+18 g mol
+−
+= =
+Heat supplied to evaporate18g water at
+298 K = n × ∆
+vap 
+H 
+0
+= (1 mol) × (44.01 kJ mol
+–1
+)
+= 44.01 kJ
+(assuming steam behaving as an ideal
+gas).
+∆ = ∆ − ∆ = ∆ − ∆ vap vap vap g U H p V H n RT
+V V
+∆ ∆
+∆
+vap 
+H T
+V 
+− =
+− 
+− − − −
+n R
+JK mol K
+g 
+44 01
+1 8 314 298 10
+1 1 3 1
+.
+( )( . )( )( )
+kJ
+kJ J
+v vap
+U 
+V 
+= −
+=
+44 01 2 48
+41 53
+. .
+.
+kJ kJ
+kJ
+Problem 6.8
+Assuming the water vapour to be a perfect
+gas, calculate the internal energy change
+when 1 mol of water at 100°C and 1 bar
+pressure is converted to ice at 0°C. Given
+the enthalpy of fusion of ice is 6.00 kJ mol
+-
+1 
+heat capacity of water is 4.2 J/g°C
+The change take place as follows:
+Step - 1 1 mol H
+2
+O (l, 100°C) à 1
+mol (l, 0°C) Enthalpy
+change ∆ H
+1
+Step - 2 1 mol H
+2
+O (l, 0°C) à 1 mol
+H
+2
+O( S, 0°C) Enthalpy
+change ∆ H
+2
+Total enthalpy change will be -
+∆ H = ∆ H
+1 
++ ∆ H
+2
+∆ H
+1 
+= - (18 x 4.2 x 100) J mol
+-1
+= - 7560 J mol
+-1 
+= - 7.56 k J mol
+-1
+∆ H
+2 
+= - 6.00 kJ mol
+-1
+2020-21
+
+THERMODYNAMICS 173
+aggregation (also known as reference
+states) is called Standard Molar Enthalpy
+of Formation. Its symbol is ∆ ∆ ∆ ∆ ∆
+f 
+H 
+0 0 0 0 0
+, where
+the subscript ‘ f ’ indicates that one mole of
+the compound in question has been formed
+in its standard state from its elements in their
+most stable states of aggregation. The reference
+state of an element is its most stable state of
+aggregation at 25°C and 1 bar pressure.
+For example, the reference state of dihydrogen
+is H
+2 
+gas and those of dioxygen, carbon and
+sulphur are O
+2 
+gas, C
+graphite 
+and S
+rhombic
+respectively. Some reactions with standard
+molar enthalpies of formation are as follows.
+Table 6.2 Standard Molar Enthalpies of Formation ( ∆ ∆ ∆ ∆ ∆
+f 
+H
+y y y y y
+) at 298K of a
+Few Selected Substances
+Therefore,
+∆ H = - 7.56 kJ mol
+-1 
++ (-6.00 kJ mol
+-1
+)
+= -13.56 kJ mol
+-1
+There is negligible change in the volume
+during the change form liquid to solid
+state.
+Therefore, p ∆ v = ∆ ng RT = 0
+∆ H = ∆ U = - 13.56kJ mol
+-1
+(c) Standard Enthalpy of Formation
+The standard enthalpy change for the
+formation of one mole of a compound from
+its elements in their most stable states of
+2020-21
+
+CHEMISTRY 174
+H
+2
+(g) + ½O
+2 
+(g) → H
+2
+O(1);
+∆
+f 
+H
+0 
+= –285.8 kJ mol
+–1
+C (graphite, s) + 2H
+2
+(g) → Ch
+4 
+(g) ;
+∆
+f 
+H
+0 
+= –74.81 kJ mol
+–1
+2C (graphite, s)+3H
+2 
+(g)+ ½O
+2
+(g) → C
+2
+H
+5
+OH(1);
+∆
+f 
+H
+0 
+= – 277.7kJ mol
+–1
+It is important to understand that a
+standard molar enthalpy of formation, ∆
+f
+H 
+0
+,
+is just a special case of ∆
+r
+H 
+0
+, where one mole
+of a compound is formed from its constituent
+elements, as in the above three equations,
+where 1 mol of each, water, methane and
+ethanol is formed. In contrast, the enthalpy
+change for an exothermic reaction:
+CaO(s) + CO
+2
+(g) → CaCo
+3
+(s);
+∆
+r
+H
+0 
+= – 178.3kJ mol
+–1
+is not an enthalpy of formation of calcium
+carbonate, since calcium carbonate has been
+formed from other compounds, and not from
+its constituent elements. Also, for the reaction
+given below, enthalpy change is not standard
+enthalpy of formation, ∆
+f
+H
+0
+for HBr(g).
+H
+2
+(g) + Br
+2
+( l ) → 2HBr(g);
+∆
+r 
+H
+0 
+= – 178.3kJ mol
+–1
+Here two moles, instead of one mole of the
+product is formed from the elements, i.e., .
+∆
+r 
+H
+0 
+= 2 ∆
+f 
+H
+0
+Therefore, by dividing all coefficients in the
+balanced equation by 2, expression for
+enthalpy of formation of HBr (g) is written as
+½H
+2
+(g) + ½Br
+2
+(1) → HBr(g);
+∆
+f 
+H
+0 
+= – 36.4 kJ mol
+–1
+Standard enthalpies of formation of some
+common substances are given in Table 6.2.
+By convention, standard enthalpy for
+formation, ∆
+f 
+H 
+0
+, of an element in reference
+state, i.e., its most stable state of aggregation
+is taken as zero.
+Suppose, you are a chemical engineer and
+want to know how much heat is required to
+decompose calcium carbonate to lime and
+carbon dioxide, with all the substances in their
+standard state.
+CaCO
+3
+(s) → CaO(s) + CO
+2
+(g); ∆
+r 
+H
+0 
+= ?
+Here, we can make use of standard enthalpy
+of formation and calculate the enthalpy
+change for the reaction. The following general
+equation can be used for the enthalpy change
+calculation.
+∆
+r
+H
+0 
+= 
+i
+∑ a
+i 
+∆
+f 
+H
+0 
+(products) – 
+i
+∑ b
+i 
+∆
+f 
+H
+0 
+(reactants)
+(6.15)
+where a and b represent the coefficients of the
+products and reactants in the balanced
+equation. Let us apply the above equation for
+decomposition of calcium carbonate. Here,
+coefficients ‘a’ and ‘b’ are 1 each. Therefore,
+∆
+r
+H
+0 
+= ∆
+f 
+H
+0 
+= [CaO(s)]+ ∆
+f 
+H
+0 
+[CO
+2
+(g)]
+– ∆
+f 
+H
+0 
+= [CaCO
+3
+(s)]
+=1 (–635.1 kJ mol
+–1
+) + 1(–393.5 kJ mol
+–1
+)
+–1(–1206.9 kJ mol
+–1
+)
+= 178.3 kJ mol
+–1
+Thus, the decomposition of CaCO
+3 
+(s) is an
+endothermic process and you have to heat it
+for getting the desired products.
+(d) Thermochemical Equations
+A balanced chemical equation together with
+the value of its ∆
+r
+H is called a thermochemical
+equation. We specify the physical state
+(alongwith allotropic state) of the substance in
+an equation. For example:
+C
+2
+H
+5
+OH( l ) + 3O
+2
+(g) → 2CO
+2
+(g) + 3H
+2
+O( l );
+∆
+r
+H
+0 
+= – 1367 kJ mol
+–1
+The above equation describes the
+combustion of liquid ethanol at constant
+temperature and pressure. The negative sign
+of enthalpy change indicates that this is an
+exothermic reaction.
+It would be necessary to remember the
+following conventions regarding thermo-
+chemical equations.
+1. The coefficients in a balanced thermo-
+chemical equation refer to the number of
+moles (never molecules) of reactants and
+products involved in the reaction.
+2. The numerical value of ∆
+r
+H 
+0 
+refers to the
+number of moles of substances specified
+by an equation. Standard enthalpy change
+∆
+r
+H
+0 
+will have units as kJ mol
+–1
+.
+2020-21
+
+THERMODYNAMICS 175
+To illustrate the concept, let us consider
+the calculation of heat of reaction for the
+following reaction :
+Fe O s H g Fe s H O l
+2 3 2 2
+3 2 3 ( ) + ( ) → ( ) + ( ) ,
+From the Table (6.2) of standard enthalpy of
+formation ( ∆
+f 
+H 
+0
+), we find :
+∆
+f 
+H 
+0 
+(H
+2
+O, l ) = –285.83 kJ mol
+–1
+;
+∆
+f 
+H 
+0 
+(Fe
+2
+O
+3
+,s) = – 824.2 kJ mol
+–1
+;
+Also ∆
+f 
+H 
+0 
+(Fe, s) = 0 and
+∆
+f 
+H 
+0 
+(H
+2
+, g) = 0 as per convention
+Then,
+∆
+f 
+H
+1
+0 
+= 3(–285.83 kJ mol
+–1
+)
+– 1(– 824.2 kJ mol
+–1
+)
+= (–857.5 + 824.2) kJ mol
+–1
+= –33.3 kJ mol
+–1
+Note that the coefficients used in these
+calculations are pure numbers, which are
+equal to the respective stoichiometric
+coefficients. The unit for ∆
+r 
+H 
+0 
+is
+kJ mol
+–1
+, which means per mole of reaction .
+Once we balance the chemical equation in a
+particular way, as above, this defines the mole
+of reaction . If we had balanced the equation
+differently, for example,
+1
+2
+3
+2
+3
+2
+2 3 2 2
+Fe O s H g Fe s H O l ( ) + ( ) → ( ) + ( )
+then this amount of reaction would be one
+mole of reaction and ∆
+r
+H 
+0 
+would be
+∆
+f 
+H 
+2
+0 
+= 
+3
+2 
+(–285.83 kJ mol
+–1
+)
+– 
+1
+2 
+(–824.2 kJ mol
+–1
+)
+= (– 428.7 + 412.1) kJ mol
+–1
+= –16.6 kJ mol
+–1 
+= ½ ∆
+r 
+H 
+1
+0
+It shows that enthalpy is an extensive quantity.
+3. When a chemical equation is reversed, the
+value of ∆
+r
+H 
+0 
+is reversed in sign. For
+example
+N
+2
+(g) + 3H
+2 
+(g) → 2NH
+3 
+(g);
+∆
+r 
+H 
+0 
+= – 91.8 kJ. mol
+–1
+2NH
+3
+(g) → N
+2
+(g) + 3H
+2 
+(g);
+∆
+r 
+H 
+0 
+= + 91.8 kJ mol
+–1
+(e) Hess’s Law of Constant Heat
+Summation
+We know that enthalpy is a state function,
+therefore the change in enthalpy is
+independent of the path between initial state
+(reactants) and final state (products). In other
+words, enthalpy change for a reaction is the
+same whether it occurs in one step or in a
+series of steps. This may be stated as follows
+in the form of Hess’s Law.
+If a reaction takes place in several steps
+then its standard reaction enthalpy is the
+sum of the standard enthalpies of the
+intermediate reactions into which the
+overall reaction may be divided at the same
+temperature.
+Let us understand the importance of this
+law with the help of an example.
+Consider the enthalpy change for the
+reaction
+C (graphite,s) + 
+1
+2 
+O
+2 
+(g) → CO (g); ∆
+r 
+H 
+0 
+= ?
+Although CO(g) is the major product, some
+CO
+2 
+gas is always produced in this reaction.
+Therefore, we cannot measure enthalpy change
+for the above reaction directly. However, if we
+can find some other reactions involving related
+species, it is possible to calculate the enthalpy
+change for the above reaction.
+Let us consider the following reactions:
+C (graphite,s) + O
+2 
+(g) → CO
+2 
+(g);
+∆
+r 
+H 
+0 
+= – 393.5 kJ mol
+–1 
+(i)
+CO (g) + 
+1
+2 
+O
+2 
+(g) → CO
+2 
+(g)
+∆
+r 
+H 
+0 
+= – 283.0 kJ mol
+–1 
+(ii)
+We can combine the above two reactions
+in such a way so as to obtain the desired
+reaction. To get one mole of CO(g) on the right,
+we reverse equation (ii). In this, heat is
+absorbed instead of being released, so we
+change sign of ∆
+r
+H 
+0 
+value
+CO
+2 
+(g) → CO (g) + 
+1
+2 
+O
+2 
+(g);
+∆
+r 
+H 
+0 
+= + 283.0 kJ mol
+–1 
+(iii)
+2020-21
+
+CHEMISTRY 176
+Adding equation (i) and (iii), we get the
+desired equation,
+C graphite s O g CO g , ; ( ) + ( ) → ( )
+1
+2 
+2
+for which ∆
+r 
+H 
+0 
+= (– 393.5 + 283.0)
+= – 110.5 kJ mol
+–1
+In general, if enthalpy of an overall reaction
+A → B along one route is ∆
+r
+H and ∆
+r
+H
+1
+, ∆
+r
+H
+2
+,
+∆
+r
+H
+3
+..... representing enthalpies of reactions
+leading to same product, B along another
+route,then we have
+∆
+r
+H = ∆
+r
+H
+1 
++ ∆
+r
+H
+2 
++ ∆
+r
+H
+3 
+... (6.16)
+It can be represented as:
+6.5 ENTHALPIES FOR DIFFERENT TYPES
+OF REACTIONS
+It is convenient to give name to enthalpies
+specifying the types of reactions.
+(a) Standard Enthalpy of Combustion
+(symbol : ∆ ∆ ∆ ∆ ∆
+c
+H 
+0 0 0 0 0
+)
+Combustion reactions are exothermic in
+nature. These are important in industry,
+rocketry, and other walks of life. Standard
+enthalpy of combustion is defined as the
+enthalpy change per mole (or per unit amount)
+of a substance, when it undergoes combustion
+and all the reactants and products being in
+their standard states at the specified
+temperature.
+Cooking gas in cylinders contains mostly
+butane (C
+4
+H
+10
+). During complete combustion
+of one mole of butane, 2658 kJ of heat is
+released. We can write the thermochemical
+reactions for this as:
+C H g O g CO g H O
+4 10 2 2 2
+13
+2 
+4 5 1 ( ) ( ) ( ) ( ); + → +
+∆
+C 
+H 
+0 
+= – 2658.0 kJ mol
+–1
+Similarly, combustion of glucose gives out
+2802.0 kJ/mol of heat, for which the overall
+equation is :
+C H O g O g CO g H O
+6 12 6 2 2 2
+6 6 6 1 ( ) ( ) ( ) ( ); + → +
+∆
+C 
+H 
+0 
+= – 2802.0 kJ mol
+–1
+Our body also generates energy from food
+by the same overall process as combustion,
+although the final products are produced after
+a series of complex bio-chemical reactions
+involving enzymes.
+A B
+C D
+∆ H
+1
+∆
+r
+H
+2
+∆
+r
+H
+3
+∆
+r
+H
+Problem 6.9
+The combustion of one mole of benzene
+takes place at 298 K and 1 atm. After
+combustion, CO
+2
+(g) and H
+2
+O (1) are
+produced and 3267.0 kJ of heat is
+liberated. Calculate the standard
+enthalpy of formation, ∆
+f 
+H 
+0 
+of benzene.
+Standard enthalpies of formation of
+CO
+2
+(g) and 
+2
+H O(l) are –393.5 kJ mol
+–1
+and – 285.83 kJ mol
+–1 
+respectively.
+Solution
+The formation reaction of benezene is
+given by :
+6 3 
+2 6 6
+C graphite H g C H l ( ) + ( ) → ( ) ;
+∆
+f 
+H 
+0 
+= ? ... (i)
+The enthalpy of combustion of 1 mol of
+benzene is :
+C H l O CO g H O l
+6 6 2 2 2
+15
+2 
+6 3 ( ) + → ( ) + ( ) ;
+∆
+C 
+H 
+0 
+= – 3267 kJ mol
+–1
+... (ii)
+The enthalpy of formation of 1 mol of
+CO
+2
+(g) :
+C graphite O g CO g ( ) + ( ) → ( ) 2 2 
+;
+∆
+f 
+H 
+0 
+= – 393.5 kJ mol
+–1
+... (iii)
+The enthalpy of formation of 1 mol of
+H
+2
+O(l) is :
+H g O g H O l
+2 2 2
+1
+2
+( ) + ( ) → ( ) ;
+∆
+C 
+H 
+0 
+= – 285.83 kJ mol
+–1
+... (iv)
+multiplying eqn. (iii) by 6 and eqn. (iv)
+by 3 we get:
+2020-21
+
+THERMODYNAMICS 177
+6 6 6
+2 2
+C graphite O g CO g ( ) + ( ) → ( ) ;
+∆
+f 
+H 
+0 
+= – 2361 kJ mol
+–1
+3 
+3
+2 
+3 1
+2 2 2
+H g O g H O ( ) + ( ) → ( ) ;
+∆
+f 
+H 
+0 
+= – 857.49 kJ mol
+–1
+Summing up the above two equations :
+6 3 
+15
+2 
+6
+3
+2 2 2
+2
+C graphite H g O g CO g
+H O l
+( ) + ( ) + ( ) → ( )
++ ( ) ;
+∆
+f 
+H 
+0 
+= – 3218.49 kJ mol
+–1
+... (v)
+Reversing equation (ii);
+6 3 
+15
+2
+2 2 6 6 2
+CO g H O l C H l O ( ) + ( ) → ( ) + ;
+∆
+f 
+H 
+0 
+= – 3267.0 kJ mol
+–1
+... (vi)
+Adding equations (v) and (vi), we get
+6 3 
+2 6 6
+C graphite H g C H l ( ) + ( ) → ( ) ;
+∆
+f 
+H 
+0 
+= – 48.51 kJ mol
+–1
+... (iv)
+In this case, the enthalpy of atomization is
+same as the enthalpy of sublimation.
+(c) Bond Enthalpy (symbol: ∆ ∆ ∆ ∆ ∆
+bond
+H 
+0 0 0 0 0
+)
+Chemical reactions involve the breaking and
+making of chemical bonds. Energy is required
+to break a bond and energy is released when
+a bond is formed. It is possible to relate heat
+of reaction to changes in energy associated
+with breaking and making of chemical bonds.
+With reference to the enthalpy changes
+associated with chemical bonds, two different
+terms are used in thermodynamics.
+(i) Bond dissociation enthalpy
+(ii) Mean bond enthalpy
+Let us discuss these terms with reference
+to diatomic and polyatomic molecules.
+Diatomic Molecules: Consider the following
+process in which the bonds in one mole of
+dihydrogen gas (H
+2
+) are broken:
+H 2 (g) → 2H(g) ; ∆
+H–H
+H 
+0 
+= 435.0 kJ mol
+–1
+The enthalpy change involved in this process
+is the bond dissociation enthalpy of H–H bond.
+The bond dissociation enthalpy is the change
+in enthalpy when one mole of covalent bonds
+of a gaseous covalent compound is broken to
+form products in the gas phase.
+Note that it is the same as the enthalpy of
+atomization of dihydrogen. This is true for all
+diatomic molecules. For example:
+Cl 2 (g) → 2Cl(g) ; ∆
+Cl–Cl
+H 
+0 
+= 242 kJ mol
+–1
+O 2 (g) → 2O(g) ; ∆
+O=O
+H
+0 
+= 428 kJ mol
+–1
+In the case of polyatomic molecules, bond
+dissociation enthalpy is different for different
+bonds within the same molecule.
+Polyatomic Molecules: Let us now consider
+a polyatomic molecule like methane, CH
+4
+. The
+overall thermochemical equation for its
+atomization reaction is given below:
+CH g C g H g
+4 
+4 ( ) ( ) ( ); → +
+∆
+a 
+H 
+0 
+= 1665 kJ mol
+–1
+In methane, all the four C – H bonds are
+identical in bond length and energy. However,
+the energies required to break the individual
+C – H bonds in each successive step differ :
+(b) Enthalpy of Atomization
+(symbol: ∆ ∆ ∆ ∆ ∆
+a
+H 
+0 0 0 0 0
+)
+Consider the following example of atomization
+of dihydrogen
+H
+2
+(g) → 2H(g); ∆
+a
+H
+0 
+= 435.0 kJ mol
+–1
+You can see that H atoms are formed by
+breaking H–H bonds in dihydrogen. The
+enthalpy change in this process is known as
+enthalpy of atomization, ∆
+a
+H 
+0
+. It is the
+enthalpy change on breaking one mole of
+bonds completely to obtain atoms in the gas
+phase.
+In case of diatomic molecules, like
+dihydrogen (given above), the enthalpy of
+atomization is also the bond dissociation
+enthalpy. The other examples of enthalpy of
+atomization can be
+CH 4 (g) → C(g) + 4H(g); ∆
+a
+H
+0 
+= 1665 kJ mol
+–1
+Note that the products are only atoms of C
+and H in gaseous phase. Now see the following
+reaction:
+Na(s) → Na(g) ; ∆
+a
+H
+0 
+= 108.4 kJ mol
+–1
+2020-21
+
+CHEMISTRY 178
+CH
+4
+(g) → CH
+3
+(g)+H(g); ∆
+bond 
+H
+0 
+= +427 kJ mol
+–1
+CH
+3
+(g) → CH
+2
+(g)+H(g); ∆
+bond 
+H
+0 
+= +439 kJ mol
+–1
+CH
+2
+(g) → CH(g)+H(g); ∆
+bond 
+H
+0 
+= +452 kJ mol
+–1
+CH(g) → C(g)+H(g); ∆
+bond 
+H
+0 
+= +347 kJ mol
+–1
+Therefore,
+CH
+4
+(g) → C(g)+4H(g); ∆
+a 
+H
+0 
+= 1665 kJ mol
+–1
+In such cases we use mean bond enthalpy
+of C – H bond .
+For example in CH
+4
+, ∆
+C–H
+H 
+0 
+is calculated as:
+∆
+C–H
+H 
+0 
+= ¼ ( ∆
+a 
+H
+0
+) = ¼ (1665 kJ mol
+–1
+)
+= 416 kJ mol
+–1
+We find that mean C–H bond enthalpy in
+methane is 416 kJ/mol. It has been found that
+mean C–H bond enthalpies differ slightly from
+compound to compound, as in
+CH
+3
+CH
+2
+Cl,CH
+3
+NO
+2
+, etc, but it does not differ
+in a great deal*. Using Hess’s law, bond
+enthalpies can be calculated. Bond enthalpy
+values of some single and multiple bonds are
+given in Table 6.3. The reaction enthalpies are
+very important quantities as these arise from
+the changes that accompany the breaking of
+old bonds and formation of the new bonds.
+We can predict enthalpy of a reaction in gas
+phase, if we know different bond enthalpies.
+The standard enthalpy of reaction, ∆
+r
+H
+0 
+is
+related to bond enthalpies of the reactants and
+products in gas phase reactions as:
+∆
+r 
+H
+0 
+=
+−
+∑
+∑
+bond enthalpies
+bond enthalpies
+reactants
+products
+(6.17)**
+This relationship is particularly more
+useful when the required values of ∆
+f 
+H
+0 
+are
+not available. The net enthalpy change of a
+reaction is the amount of energy required to
+break all the bonds in the reactant molecules
+minus the amount of energy required to break
+all the bonds in the product molecules.
+Remember that this relationship is
+H C N O F Si P S Cl Br I
+435.8 414 389 464 569 293 318 339 431 368 297 H
+347 293 351 439 289 264 259 330 276 238 C
+159 201 272 - 209 - 201 243 - N
+138 184 368 351 - 205 - 201 O
+155 540 490 327 255 197 - F
+176 213 226 360 289 213 Si
+213 230 331 272 213 P
+213 251 213 - S
+243 218 209 Cl
+192 180 Br
+151 I
+Table 6.3(a) Some Mean Single Bond Enthalpies in kJ mol
+–1 
+at 298 K
+N = N 418 C = C 611 O = O 498
+N ≡ N 946 C ≡ C 837
+C = N 615 C = O 741
+C ≡ N 891 C ≡ O 1070
+Table 6.3(b) Some Mean Multiple Bond Enthalpies in kJ mol
+–1 
+at 298 K
+** If we use enthalpy of bond formation, ( ∆
+f 
+H 
+bond
+), which is the enthalpy change when one mole of a particular type of
+bond is formed from gaseous atom, then ∆
+f 
+H 
+0 
+= ∑ ∆
+f 
+H 
+0
+bonds of products 
+– ∑ ∆
+f 
+H 
+0
+bonds of reactants
+0
+* Note that symbol used for bond dissociation enthalpy and mean bond enthalpy is the same.
+2020-21
+
+THERMODYNAMICS 179
+approximate and is valid when all substances
+(reactants and products) in the reaction are in
+gaseous state.
+(d) Lattice Enthalpy
+The lattice enthalpy of an ionic compound is
+the enthalpy change which occurs when one
+mole of an ionic compound dissociates into its
+ions in gaseous state.
+Na Cl s Na g Cl g
++ − + −
+( ) → + ( ) ( ) ;
+∆
+lattice
+H
+0 
+= +788 kJ mol
+–1
+Since it is impossible to determine lattice
+enthalpies directly by experiment, we use an
+indirect method where we construct an
+enthalpy diagram called a Born-Haber Cycle
+(Fig. 6.9).
+Let us now calculate the lattice enthalpy
+of Na
++
+Cl
+–
+(s) by following steps given below :
+1. Na s Na g ( ) ( ) → , sublimation of sodium
+metal, ∆
+sub
+H
+0 
+= 108.4 kJ mol
+–1
+2. Na g Na g e g ( ) ( ) ( ) → +
++ − 1 
+, the ionization of
+sodium atoms , ionization enthalpy
+∆
+i
+H
+0 
+= 496 kJ mol
+–1
+3. 
+1
+2 
+2
+Cl g Cl g ( ) ( ) → , the dissociation of
+chlorine , the reaction enthalpy is half the
+bond dissociation enthalpy.
+1
+2 
+∆
+bond
+H
+0 
+= 121 kJ mol
+–1
+4. Cl g e g Cl g ( ) ( ) ( ) + →
+− 1 
+electron gained by
+chlorine atoms. The electron gain enthalpy,
+∆
+eg
+H 
+0 
+= – 348.6 kJ mol
+–1
+.
+You have learnt about ionization enthalpy
+and electron gain enthalpy in Unit 3. In
+fact, these terms have been taken from
+thermodynamics. Earlier terms, ionization
+energy and electron affinity were in
+practice in place of the above terms (see
+the box for justification).
+Fig. 6.9 Enthalpy diagram for lattice enthalpy
+of NaCl
+5. 
+Na g Cl g Na Cl s
++ − + −
++ → ( ) ( ) ( )
+The sequence of steps is shown in Fig. 6.9,
+and is known as a Born-Haber cycle. The
+Ionization Energy and Electron Affinity
+Ionization energy and electron affinity are
+defined at absolute zero. At any other
+temperature, heat capacities for the
+reactants and the products have to be
+taken into account. Enthalpies of reactions
+for
+M(g) → M
++
+(g) + e
+– 
+(for ionization)
+M(g) + e
+– 
+→ M
+–
+(g) (for electron gain)
+at temperature, T is
+∆
+r
+H
+0
+( T ) = ∆
+r
+H
+0
+(0) + 
+0
+T
+∫ ∆
+r
+C
+P
+0
+dT
+The value of C p for each species in the
+above reaction is 5/2 R ( C V = 3/2R)
+So, ∆
+r
+C
+p
+0 
+= + 5/2 R (for ionization)
+∆
+r
+C
+p
+0 
+= – 5/2 R (for electron gain)
+Therefore,
+∆
+r
+H
+0 
+(ionization enthalpy )
+= E 0 (ionization energy) + 5/2 R T
+∆
+r
+H
+0 
+(electron gain enthalpy)
+= – A( electron affinity) – 5/2 R T
+2020-21
+
+CHEMISTRY 180
+The enthalpy of solution of AB(s), ∆
+sol
+H
+0
+, in
+water is, therefore, determined by the selective
+values of the lattice enthalpy, ∆
+lattice
+H
+0 
+and
+enthalpy of hydration of ions, ∆
+hyd
+H
+0 
+as
+∆
+sol 
+H 
+0 
+= ∆
+lattice
+H 
+0 
++ ∆
+hyd
+H 
+0
+For most of the ionic compounds, ∆
+sol 
+H
+0 
+is
+positive and the dissociation process is
+endothermic. Therefore the solubility of most
+salts in water increases with rise of
+temperature. If the lattice enthalpy is very
+high, the dissolution of the compound may not
+take place at all. Why do many fluorides tend
+to be less soluble than the corresponding
+chlorides? Estimates of the magnitudes of
+enthalpy changes may be made by using tables
+of bond energies (enthalpies) and lattice
+energies (enthalpies).
+(f) Enthalpy of Dilution
+It is known that enthalpy of solution is the
+enthalpy change associated with the addition
+of a specified amount of solute to the specified
+amount of solvent at a constant temperature
+and pressure. This argument can be applied
+to any solvent with slight modification.
+Enthalpy change for dissolving one mole of
+gaseous hydrogen chloride in 10 mol of water
+can be represented by the following equation.
+For convenience we will use the symbol aq. for
+water
+HCl(g) + 10 aq. → HCl.10 aq.
+∆ H = –69.01 kJ / mol
+Let us consider the following set of enthalpy
+changes:
+(S-1) HCl(g) + 25 aq. → HCl.25 aq.
+∆ H = –72.03 kJ / mol
+(S-2) HCl(g) + 40 aq. → HCl.40 aq.
+∆ H = –72.79 kJ / mol
+(S-3) HCl(g) + ∞ aq. → HCl. ∞ aq.
+∆ H = –74.85 kJ / mol
+The values of ∆ H show general dependence
+of the enthalpy of solution on amount of solvent.
+As more and more solvent is used, the enthalpy
+of solution approaches a limiting value, i.e, the
+value in infinitely dilute solution. For
+hydrochloric acid this value of ∆ H is given
+above in equation (S-3).
+importance of the cycle is that, the sum of
+the enthalpy changes round a cycle is
+zero. A p p l y i n g H e s s ’ s l a w , w e g e t ,
+∆
+lattice
+H
+0 
+= 411.2 + 108.4 + 121 + 496 – 348.6
+∆
+lattice
+H
+0 
+= + 788kJ
+for NaCl(s) d Na
++
+(g) + Cl
+–
+(g)
+Internal energy is smaller by 2RT ( because
+∆ n
+g 
+= 2) and is equal to + 783 kJ mol
+–1
+.
+Now we use the value of lattice enthalpy to
+calculate enthalpy of solution from the
+expression:
+∆
+sol
+H
+0 
+= ∆
+lattice
+H
+0 
++ ∆
+hyd
+H
+0
+For one mole of NaCl(s),
+lattice enthalpy = + 788 kJ mol
+–1
+and ∆
+hyd
+H 
+0 
+= – 784 kJ mol
+–1
+( from the
+literature)
+∆
+sol 
+H 
+0 
+= + 788 kJ mol
+–1 
+– 784 kJ mol
+–1
+= + 4 kJ mol
+–1
+The dissolution of NaCl(s) is accompanied
+by very little heat change.
+(e) Enthalpy of Solution (symbol : ∆ ∆ ∆ ∆ ∆
+sol
+H
+0 0 0 0 0 
+)
+Enthalpy of solution of a substance is the
+enthalpy change when one mole of it dissolves
+in a specified amount of solvent. The enthalpy
+of solution at infinite dilution is the enthalpy
+change observed on dissolving the substance
+in an infinite amount of solvent when the
+interactions between the ions (or solute
+molecules) are negligible.
+When an ionic compound dissolves in a
+solvent, the ions leave their ordered positions on
+the crystal lattice. These are now more free in
+solution. But solvation of these ions (hydration
+in case solvent is water) also occurs at the same
+time. This is shown diagrammatically, for an
+ionic compound, AB (s)
+2020-21
+
+THERMODYNAMICS 181
+If we subtract the first equation (equation
+S-1) from the second equation (equation S-2)
+in the above set of equations, we obtain–
+HCl.25 aq. + 15 aq. → HCl.40 aq.
+∆ H = [ –72.79 – (–72.03)] kJ / mol
+= – 0.76 kJ / mol
+This value (–0.76kJ/mol) of ∆ H is enthalpy
+of dilution. It is the heat withdrawn from the
+surroundings when additional solvent is
+added to the solution. The enthalpy of dilution
+of a solution is dependent on the original
+concentration of the solution and the amount
+of solvent added.
+6.6 SPONTANEITY
+The first law of thermodynamics tells us about
+the relationship between the heat absorbed
+and the work performed on or by a system. It
+puts no restrictions on the direction of heat
+flow. However, the flow of heat is unidirectional
+from higher temperature to lower
+temperature. In fact, all naturally occurring
+processes whether chemical or physical will
+tend to proceed spontaneously in one
+direction only. For example, a gas expanding
+to fill the available volume, burning carbon
+in dioxygen giving carbon dioxide.
+But heat will not flow from colder body to
+warmer body on its own, the gas in a container
+will not spontaneously contract into one
+corner or carbon dioxide will not form carbon
+and dioxygen spontaneously. These and many
+other spontaneously occurring changes show
+unidirectional change. We may ask ‘what is the
+driving force of spontaneously occurring
+changes ? What determines the direction of a
+spontaneous change ? In this section, we shall
+establish some criterion for these processes
+whether these will take place or not.
+Let us first understand what do we mean
+by spontaneous reaction or change ? You may
+think by your common observation that
+spontaneous reaction is one which occurs
+immediately when contact is made between
+the reactants. Take the case of combination of
+hydrogen and oxygen. These gases may be
+mixed at room temperature and left for many
+years without observing any perceptible
+change. Although the reaction is taking place
+between them, it is at an extremely slow rate.
+It is still called spontaneous reaction. So
+spontaneity means ‘having the potential to
+proceed without the assistance of external
+agency’ . However, it does not tell about the
+rate of the reaction or process. Another aspect
+of spontaneous reaction or process, as we see
+is that these cannot reverse their direction on
+their own. We may summarise it as follows:
+A spontaneous process is an
+irreversible process and may only be
+reversed by some external agency.
+(a) Is Decrease in Enthalpy a Criterion
+for Spontaneity ?
+If we examine the phenomenon like flow of
+water down hill or fall of a stone on to the
+ground, we find that there is a net decrease in
+potential energy in the direction of change. By
+analogy, we may be tempted to state that a
+chemical reaction is spontaneous in a given
+direction, because decrease in energy has
+taken place, as in the case of exothermic
+reactions. For example:
+1
+2 
+N
+2
+(g) + 
+3
+2 
+H
+2
+(g) = NH
+3
+(g) ;
+∆
+r 
+H
+0 
+= – 46.1 kJ mol
+–1
+1
+2 
+H
+2
+(g) + 
+1
+2 
+Cl
+2
+(g) = HCl (g) ;
+∆
+r 
+H
+0 
+= – 92.32 kJ mol
+–1
+H
+2
+(g) + 
+1
+2 
+O
+2
+(g) → H
+2
+O(l) ;
+∆
+r 
+H
+0 
+= –285.8 kJ mol
+–1
+The decrease in enthalpy in passing from
+reactants to products may be shown for any
+exothermic reaction on an enthalpy diagram
+as shown in Fig. 6.10(a).
+Thus, the postulate that driving force for a
+chemical reaction may be due to decrease in
+energy sounds ‘reasonable’ as the basis of
+evidence so far !
+Now let us examine the following reactions:
+1
+2 
+N
+2
+(g) + O
+2
+(g) → NO
+2
+(g);
+∆
+r 
+H
+0 
+= +33.2 kJ mol
+–1
+C(graphite, s) + 2 S(l) → CS
+2
+(l);
+∆
+r 
+H
+0 
+= +128.5 kJ mol
+–1
+2020-21
+
+CHEMISTRY 182
+These reactions though endothermic, are
+spontaneous. The increase in enthalpy may
+be represented on an enthalpy diagram as
+shown in Fig. 6.10(b).
+Fig. 6.10 (a) Enthalpy diagram for exothermic
+reactions
+Fig. 6.10 (b) Enthalpy diagram for endothermic
+reactions
+Fig. 6.11 Diffusion of two gases
+respectively and separated by a movable
+partition [Fig. 6.11 (a)]. When the partition is
+withdrawn [Fig.6.11( b)], the gases begin to
+diffuse into each other and after a period of
+time, diffusion will be complete.
+Let us examine the process. Before
+partition, if we were to pick up the gas
+molecules from left container, we would be
+sure that these will be molecules of gas A and
+similarly if we were to pick up the gas
+molecules from right container, we would be
+sure that these will be molecules of gas B. But,
+if we were to pick up molecules from container
+when partition is removed, we are not sure
+whether the molecules picked are of gas A or
+gas B. We say that the system has become less
+predictable or more chaotic.
+We may now formulate another postulate:
+in an isolated system, there is always a
+tendency for the systems’ energy to become
+more disordered or chaotic and this could be
+a criterion for spontaneous change !
+At this point, we introduce another
+thermodynamic function, entropy denoted as
+S . The above mentioned disorder is the
+manifestation of entropy. To form a mental
+Therefore, it becomes obvious that while
+decrease in enthalpy may be a contributory
+factor for spontaneity, but it is not true for all
+cases.
+(b) Entropy and Spontaneity
+Then, what drives the spontaneous process in
+a given direction ? Let us examine such a case
+in which ∆ H = 0 i.e., there is no change in
+enthalpy, but still the process is spontaneous.
+Let us consider diffusion of two gases into
+each other in a closed container which is
+isolated from the surroundings as shown in
+Fig. 6.11.
+The two gases, say, gas A and gas B are
+represented by black dots and white dots
+2020-21
+
+THERMODYNAMICS 183
+picture, one can think of entropy as a measure
+of the degree of randomness or disorder in the
+system. The greater the disorder in an isolated
+system, the higher is the entropy. As far as a
+chemical reaction is concerned, this entropy
+change can be attributed to rearrangement of
+atoms or ions from one pattern in the reactants
+to another (in the products). If the structure
+of the products is very much disordered than
+that of the reactants, there will be a resultant
+increase in entropy. The change in entropy
+accompanying a chemical reaction may be
+estimated qualitatively by a consideration of
+the structures of the species taking part in the
+reaction. Decrease of regularity in structure
+would mean increase in entropy. For a given
+substance, the crystalline solid state is the
+state of lowest entropy (most ordered), The
+gaseous state is state of highest entropy.
+Now let us try to quantify entropy. One way
+to calculate the degree of disorder or chaotic
+distribution of energy among molecules would
+be through statistical method which is beyond
+the scope of this treatment. Other way would
+be to relate this process to the heat involved in
+a process which would make entropy a
+thermodynamic concept. Entropy, like any
+other thermodynamic property such as
+internal energy U and enthalpy H is a state
+function and ∆ S is independent of path.
+Whenever heat is added to the system, it
+increases molecular motions causing
+increased randomness in the system. Thus
+heat ( q ) has randomising influence on the
+system. Can we then equate ∆ S with q ? Wait !
+Experience suggests us that the distribution
+of heat also depends on the temperature at
+which heat is added to the system. A system
+at higher temperature has greater randomness
+in it than one at lower temperature. Thus,
+temperature is the measure of average
+chaotic motion of particles in the system .
+Heat added to a system at lower temperature
+causes greater randomness than when the
+same quantity of heat is added to it at higher
+temperature. This suggests that the entropy
+change is inversely proportional to the
+temperature. ∆ S is related with q and T for a
+reversible reaction as :
+∆ S = 
+q
+T
+rev 
+(6.18)
+The total entropy change ( ∆ S
+total
+) for the
+system and surroundings of a spontaneous
+process is given by
+∆ ∆ ∆ S S S
+total system surr
+= + > 0 (6.19)
+When a system is in equilibrium, the
+entropy is maximum, and the change in
+entropy, ∆ S = 0.
+We can say that entropy for a spontaneous
+process increases till it reaches maximum and
+at equilibrium the change in entropy is zero.
+Since entropy is a state property, we can
+calculate the change in entropy of a reversible
+process by
+∆ S
+sys 
+= 
+q
+sys rev ,
+T
+We find that both for reversible and
+irreversible expansion for an ideal gas, under
+isothermal conditions, ∆ U = 0, but ∆ S
+total 
+i.e.,
+∆ ∆ S S
+sys surr
++ is not zero for irreversible
+process. Thus, ∆ U does not discriminate
+between reversible and irreversible process,
+whereas ∆ S does.
+Problem 6.10
+Predict in which of the following, entropy
+increases/decreases :
+(i) A liquid crystallizes into a solid.
+(ii) Temperature of a crystalline solid is
+raised from 0 K to 115 K.
+iii NaHCO s Na CO s
+CO g H O g
+( ) ( ) → ( ) +
+( ) + ( )
+2 
+3 2 3
+2 2
+(iv) H g H g
+2 
+2 ( ) → ( )
+Solution
+(i) After freezing, the molecules attain an
+ordered state and therefore, entropy
+decreases.
+(ii) At 0 K, the contituent particles are
+static and entropy is minimum. If
+temperature is raised to 115 K, these
+2020-21
+
+CHEMISTRY 184
+begin to move and oscillate about their
+equilibrium positions in the lattice and
+system becomes more disordered,
+therefore entropy increases.
+(iii) Reactant, NaHCO
+3 
+is a solid and it
+has low entropy. Among products
+there are one solid and two gases.
+Therefore, the products represent a
+condition of higher entropy.
+(iv) Here one molecule gives two atoms
+i.e., number of particles increases
+leading to more disordered state.
+Two moles of H atoms have higher
+entropy than one mole of dihydrogen
+molecule.
+Problem 6.11
+For oxidation of iron,
+4 3 2
+2 2 3
+Fe s O g Fe O s ( ) + ( ) → ( )
+entropy change is – 549.4 JK
+–1
+mol
+–1
+at
+298 K. Inspite of negative entropy change
+of this reaction, why is the reaction
+spontaneous?
+( ∆
+r
+H 
+0
+for this reaction is
+–1648 × 10
+3 
+J mol
+–1
+)
+Solution
+One decides the spontaneity of a reaction
+by considering
+∆ ∆ ∆ S S S
+total sys surr
++ ( ) . For calculating
+∆ S
+surr
+, we have to consider the heat
+absorbed by the surroundings which is
+equal to – ∆
+r
+H
+0
+. . . . . At temperature T, entropy
+change of the surroundings is
+= − 
+− × ( )
+−
+1648 10
+298
+3 1
+J mol
+K
+= 5530 JK
+–1
+mol
+–1
+Thus, total entropy change for this
+reaction
+∆ r total S = +
+− ( )
+5530
+549 4
+1 1
+1 1
+JK mol
+JK mol
+– –
+– –
+.
+= 4980.6 JK
+–1 
+mol
+–1
+This shows that the above reaction is
+spontaneous.
+(c) Gibbs Energy and Spontaneity
+We have seen that for a system, it is the total
+entropy change, ∆ S
+total 
+which decides the
+spontaneity of the process. But most of the
+chemical reactions fall into the category of
+either closed systems or open systems.
+Therefore, for most of the chemical reactions
+there are changes in both enthalpy and
+entropy. It is clear from the discussion in
+previous sections that neither decrease in
+enthalpy nor increase in entropy alone can
+determine the direction of spontaneous change
+for these systems.
+For this purpose, we define a new
+thermodynamic function the Gibbs energy or
+Gibbs function, G , as
+G = H – TS (6.20)
+Gibbs function, G is an extensive property
+and a state function.
+The change in Gibbs energy for the system,
+∆ G
+sys 
+can be written as
+∆ ∆ ∆ ∆ G H T S S T sys sys sys sys = − −
+At constant temperature, 0 T ∆ =
+∴ − ∆ ∆ ∆ G H T S sys sys sys =
+Usually the subscript ‘system’ is dropped
+and we simply write this equation as
+∆ ∆ ∆ G H T S = − (6.21)
+Thus, Gibbs energy change = enthalpy
+change – temperature × entropy change, and
+is referred to as the Gibbs equation, one of the
+most important equations in chemistry. Here,
+we have considered both terms together for
+spontaneity: energy (in terms of ∆ H ) and
+entropy ( ∆ S , a measure of disorder) as
+indicated earlier. Dimensionally if we analyse,
+we find that ∆ G has units of energy because,
+both ∆ H and the T ∆ S are energy terms, since
+T ∆ S = (K) (J/K) = J.
+Now let us consider how ∆ G is related to
+reaction spontaneity.
+2020-21
+
+THERMODYNAMICS 185
+We know,
+∆ S
+total 
+= ∆ S
+sys 
++ ∆ S
+surr
+If the system is in thermal equilibrium with
+the surrounding, then the temperature of the
+surrounding is same as that of the system.
+Also, increase in enthalpy of the surrounding
+is equal to decrease in the enthalpy of the
+system.
+Therefore, entropy change of
+surroundings,
+∆ 
+∆ ∆
+S
+surr 
+= 
+H
+T
+H
+T
+surr sys
+= −
+∆ ∆ 
+∆
+S S
+total sys
+= + −
+
+
+
+
+
+
+H
+T
+sys
+Rearranging the above equation:
+T ∆ S
+total 
+= T ∆ S
+sys 
+– ∆ H
+sys
+For spontaneous process, ∆ S
+total 
+> 0 , so
+T ∆ S
+sys 
+– ∆ H
+sys 
+> Ο
+⇒ − − ( ) > ∆ ∆ H T S
+sys sys 
+0
+Using equation 6.21, the above equation can
+be written as
+– ∆ G > O
+∆ ∆ ∆ G H T S = − < 0 (6.22)
+∆ H
+sys 
+is the enthalpy change of a reaction,
+T ∆ S
+sys 
+is the energy which is not available to
+do useful work. So ∆ G is the net energy
+available to do useful work and is thus a
+measure of the ‘free energy’. For this reason, it
+is also known as the free energy of the reaction.
+∆ G gives a criteria for spontaneity at
+constant pressure and temperature.
+(i) If ∆ G is negative (< 0), the process is
+spontaneous.
+(ii) If ∆ G is positive (> 0), the process is non
+spontaneous.
+Note : If a reaction has a positive enthalpy
+change and positive entropy change, it can be
+spontaneous when T ∆ S is large enough to
+outweigh ∆ H . This can happen in two ways;
+(a) The positive entropy change of the system
+can be ‘small’ in which case T must be large.
+(b) The positive entropy change of the system
+can be ’large’, in which case T may be small.
+The former is one of the reasons why reactions
+are often carried out at high temperature.
+Table 6.4 summarises the effect of temperature
+on spontaneity of reactions.
+(d) Entropy and Second Law of
+Thermodynamics
+We know that for an isolated system the
+change in energy remains constant. Therefore,
+increase in entropy in such systems is the
+natural direction of a spontaneous change.
+This, in fact is the second law of
+thermodynamics. Like first law of
+thermodynamics, second law can also be
+stated in several ways. The second law of
+thermodynamics explains why spontaneous
+exothermic reactions are so common. In
+exothermic reactions heat released by the
+reaction increases the disorder of the
+surroundings and overall entropy change is
+positive which makes the reaction
+spontaneous.
+(e) Absolute Entropy and Third Law of
+Thermodynamics
+Molecules of a substance may move in a
+straight line in any direction, they may spin
+like a top and the bonds in the molecules may
+stretch and compress. These motions of the
+molecule are called translational, rotational
+and vibrational motion respectively. When
+temperature of the system rises, these motions
+become more vigorous and entropy increases.
+On the other hand when temperature is
+lowered, the entropy decreases. The entropy
+of any pure crystalline substance
+approaches zero as the temperature
+approaches absolute zero. This is called
+third law of thermodynamics. This is so
+because there is perfect order in a crystal at
+absolute zero. The statement is confined to
+pure crystalline solids because theoretical
+arguments and practical evidences have
+shown that entropy of solutions and super
+cooled liquids is not zero at 0 K. The
+importance of the third law lies in the fact that
+2020-21
+
+CHEMISTRY 186
+Table 6.4 Effect of Temperature on Spontaneity of Reactions
+∆
+r
+H
+0 
+∆
+r
+S
+0 
+∆
+r
+G
+0 
+Description*
+– + – Reaction spontaneous at all temperatures
+– – – (at low T ) Reaction spontaneous at low temperature
+– – + (at high T ) Reaction nonspontaneous at high temperature
++ + + (at low T ) Reaction nonspontaneous at low temperature
++ + – (at high T ) Reaction spontaneous at high temperature
++ – + (at all T ) Reaction nonspontaneous at all temperatures
+* 
+The term low temperature and high temperature are relative. For a particular reaction, high temperature could even
+mean room temperature.
+it permits the calculation of absolute values
+of entropy of pure substance from thermal
+data alone. For a pure substance, this can be
+done by summing 
+q
+T
+rev 
+increments from 0 K
+to 298 K. Standard entropies can be used to
+calculate standard entropy changes by a
+Hess’s law type of calculation.
+6.7 GIBBS ENERGY CHANGE AND
+EQUILIBRIUM
+We have seen how a knowledge of the sign and
+magnitude of the free energy change of a
+chemical reaction allows:
+(i) Prediction of the spontaneity of the
+chemical reaction.
+(ii) Prediction of the useful work that could
+be extracted from it.
+So far we have considered free energy
+changes in irreversible reactions. Let us now
+examine the free energy changes in reversible
+reactions.
+‘Reversible’ under strict thermodynamic
+sense is a special way of carrying out a
+process such that system is at all times in
+perfect equilibrium with its surroundings.
+When applied to a chemical reaction, the
+term ‘reversible’ indicates that a given
+reaction can proceed in either direction
+s i m u l t a n e o u s l y , s o t h a t a d y n a m i c
+equilibrium is set up. This means that the
+reactions in both the directions should
+proceed with a decrease in free energy, which
+seems impossible. It is possible only if at
+equilibrium the free energy of the system is
+minimum. If it is not, the system would
+spontaneously change to configuration of
+lower free energy.
+So, the criterion for equilibrium
+A + B l C + D ; is
+∆
+r
+G = 0
+Gibbs energy for a reaction in which all
+reactants and products are in standard state,
+∆
+r
+G
+0
+is related to the equilibrium constant of
+the reaction as follows:
+0 = ∆
+r
+G
+0 
++ R T ln K
+or ∆
+r
+G
+0 
+= – R T ln K
+or ∆
+r
+G
+0 
+= – 2.303 R T log K (6.23)
+We also know that
+(6.24)
+For strongly endothermic reactions, the
+value of ∆
+r
+H
+0 
+may be large and positive. In
+such a case, value of K will be much smaller
+than 1 and the reaction is unlikely to form
+much product. In case of exothermic
+reactions, ∆
+r
+H
+0 
+is large and negative, and ∆
+r
+G
+0
+is likely to be large and negative too. In such
+cases, K will be much larger than 1. We may
+expect strongly exothermic reactions to have
+a large K , and hence can go to near
+completion. ∆
+r
+G
+0 
+also depends upon ∆
+r
+S
+0
+, if
+the changes in the entropy of reaction is also
+taken into account, the value of K or extent
+of chemical reaction will also be affected,
+2020-21
+
+THERMODYNAMICS 187
+depending upon whether ∆
+r
+S
+0 
+is positive or
+negative.
+Using equation (6.24),
+(i) It is possible to obtain an estimate of ∆ G
+0
+from the measurement of ∆ H
+V 
+and ∆ S
+0
+,
+and then calculate K at any temperature
+for economic yields of the products.
+(ii) If K is measured directly in the
+laboratory, value of ∆ G
+0 
+at any other
+temperature can be calculated.
+Using equation (6.24),
+=
+– .
+. .
+13 6 10
+2 303 8 314 298
+3
+× ( )
+( ) ( )
+J mol
+JK mol K
+–1
+–1 –1
+= 2.38
+Hence K = antilog 2.38 = 2.4 × 10
+2
+.
+Problem 6.14
+At 60°C, dinitrogen tetroxide is 50
+per cent dissociated. Calculate the
+standard free energy change at this
+temperature and at one atmosphere.
+Solution
+N
+2
+O
+4
+(g) 2NO
+2
+(g)
+If N
+2
+O
+4 
+is 50% dissociated, the mole
+fraction of both the substances is given
+by
+x x
+N O NO
+2 4 2
+1 0 5
+1 0 5
+2 0 5
+1 0 5
+= 
+−
++ 
+= 
+×
++
+.
+. 
+: 
+.
+.
+p p
+N O NO 2 4 2
+0 5
+1 5 
+1
+1
+1 5 
+1
+= × =
+×
+.
+.
+.
+atm,
+atm.
+The equilibrium constant K
+p 
+is given by
+K
+p 
+=
+p
+p
+NO
+N O
+2
+2 4
+( ) 
+=
+2
+2
+1 5
+1 5 0 5
+.
+( . ) ( . )
+= 1.33 atm.
+Since
+∆
+r
+G
+0 
+= –R T ln K
+p
+∆
+r
+G
+0 
+= (– 8.314 JK
+–1 
+mol
+–1
+) × (333 K)
+× (2.303) × (0.1239)
+= – 763.8 kJ mol
+–1
+Problem 6.12
+Calculate ∆
+r
+G
+0 
+for conversion of oxygen
+to ozone, 3/2 O
+2
+(g) → O
+3
+(g) at 298 K. if K
+p
+for this conversion is 2.47 × 10
+–29
+.
+Solution
+We know ∆
+r
+G
+0 
+= – 2.303 R T log K
+p 
+and
+R = 8.314 JK
+–1 
+mol
+–1
+Therefore, ∆
+r
+G
+0 
+=
+– 2.303 (8.314 J K
+–1 
+mol
+–1
+)
+× (298 K) (log 2.47 × 10
+–29
+)
+= 163000 J mol
+–1
+= 163 kJ mol
+–1
+.
+Problem 6.13
+Find out the value of equilibrium constant
+for the following reaction at 298 K.
+Standard Gibbs energy change, ∆
+r
+G
+0 
+at
+the given temperature is –13.6 kJ mol
+–1
+.
+Solution
+We know, log K =
+2020-21
+
+CHEMISTRY 188
+SUMMARY
+Thermodynamics deals with energy changes in chemical or physical processes and enables us
+to study these changes quantitatively and to make useful predictions. For these purposes, we
+divide the universe into the system and the surroundings. Chemical or physical processes
+lead to evolution or absorption of heat ( q ), part of which may be converted into work (w). These
+quantities are related through the first law of thermodynamics via ∆ U = q + w. ∆ U , change in
+internal energy, depends on initial and final states only and is a state function, whereas q and
+w depend on the path and are not the state functions. We follow sign conventions of q and w by
+giving the positive sign to these quantities when these are added to the system. We can measure
+the transfer of heat from one system to another which causes the change in temperature. The
+magnitude of rise in temperature depends on the heat capacity ( C ) of a substance. Therefore,
+heat absorbed or evolved is q = C ∆ T . Work can be measured by w = – p
+ex
+∆ V , in case of expansion
+of gases. Under reversible process, we can put p
+ex 
+= p for infinitesimal changes in the volume
+making w
+rev 
+= – p d V . In this condition, we can use gas equation, pV = n R T .
+At constant volume, w = 0, then ∆ U = q
+V 
+, heat transfer at constant volume. But in study of
+chemical reactions, we usually have constant pressure. We define another state function
+enthalpy . Enthalpy change, ∆ H = ∆ U + ∆ n
+g
+R T , can be found directly from the heat changes at
+constant pressure, ∆ H = q
+p
+.
+There are varieties of enthalpy changes. Changes of phase such as melting, vaporization
+and sublimation usually occur at constant temperature and can be characterized by enthalpy
+changes which are always positive. Enthalpy of formation, combustion and other enthalpy
+changes can be calculated using Hess’s law . Enthalpy change for chemical reactions can be
+determined by
+∆ ∆ ∆ r i f i f
+i f
+H a H b H = ( ) − ( ) ∑ ∑ products reactions
+and in gaseous state by
+∆
+r
+H
+0 
+= Σ bond enthalpies of the reactants – Σ bond enthalpies of the products
+First law of thermodynamics does not guide us about the direction of chemical reactions
+i.e., what is the driving force of a chemical reaction. For isolated systems,
+∆ U = 0. We define another state function, S , entropy for this purpose. Entropy is a measure of
+disorder or randomness. For a spontaneous change, total entropy change is positive. Therefore,
+for an isolated system, ∆ U = 0, ∆ S > 0, so entropy change distinguishes a spontaneous change,
+while energy change does not. Entropy changes can be measured by the equation
+∆ S = 
+q rev
+T 
+for a reversible process. 
+q rev
+T 
+is independent of path.
+Chemical reactions are generally carried at constant pressure, so we define another state
+function Gibbs energy , G , which is related to entropy and enthalpy changes of the system by
+the equation:
+∆
+r
+G = ∆
+r
+H – T ∆
+r
+S
+For a spontaneous change, ∆ G
+sys 
+< 0 and at equilibrium, ∆ G
+sys 
+= 0.
+Standard Gibbs energy change is related to equilibrium constant by
+∆
+r
+G
+0 
+= – R T ln K .
+K can be calculated from this equation, if we know ∆
+r
+G
+0 
+which can be found from
+. Temperature is an important factor in the equation. Many reactions which
+are non-spontaneous at low temperature, are made spontaneous at high temperature for systems
+having positive entropy of reaction.
+2020-21
+
+THERMODYNAMICS 189
+EXERCISES
+6.1 Choose the correct answer. A thermodynamic state function is a quantity
+(i) used to determine heat changes
+(ii) whose value is independent of path
+(iii) used to determine pressure volume work
+(iv) whose value depends on temperature only.
+6.2 For the process to occur under adiabatic conditions, the correct condition is:
+(i) ∆ T = 0
+(ii) ∆ p = 0
+(iii) q = 0
+(iv) w = 0
+6.3 The enthalpies of all elements in their standard states are:
+(i) unity
+(ii) zero
+(iii) < 0
+(iv) different for each element
+6.4 ∆ U 
+0
+of combustion of methane is – X kJ mol
+–1
+. The value of ∆ H
+0 
+is
+(i) = ∆ U 
+0
+(ii) > ∆ U 
+0
+(iii) < ∆ U 
+0
+(iv) = 0
+6.5 The enthalpy of combustion of methane, graphite and dihydrogen at 298 K
+are, –890.3 kJ mol
+–1 
+–393.5 kJ mol
+–1
+, and –285.8 kJ mol
+–1 
+respectively. Enthalpy
+of formation of CH
+4
+(g) will be
+(i) –74.8 kJ mol
+–1 
+(ii) –52.27 kJ mol
+–1
+(iii) +74.8 kJ mol
+–1 
+(iv) +52.26 kJ mol
+–1
+.
+6.6 A reaction, A + B → C + D + q is found to have a positive entropy change. The
+reaction will be
+(i) possible at high temperature
+(ii) possible only at low temperature
+(iii) not possible at any temperature
+(v) possible at any temperature
+6.7 In a process, 701 J of heat is absorbed by a system and 394 J of work is done
+by the system. What is the change in internal energy for the process?
+6.8 The reaction of cyanamide, NH
+2
+CN (s), with dioxygen was carried out in a bomb
+calorimeter, and ∆ U was found to be –742.7 kJ mol
+–1 
+at 298 K. Calculate enthalpy
+change for the reaction at 298 K.
+NH
+2
+CN(g) + 
+3
+2 
+O
+2
+(g) → N
+2
+(g) + CO
+2
+(g) + H
+2
+O(l)
+2020-21
+
+CHEMISTRY 190
+6.9 Calculate the number of kJ of heat necessary to raise the temperature of
+60.0 g of aluminium from 35°C to 55°C. Molar heat capacity of Al is 24 J mol
+–1 
+K
+–1
+.
+6.10 Calculate the enthalpy change on freezing of 1.0 mol of water at10.0°C to ice at
+–10.0°C. ∆
+fus
+H = 6.03 kJ mol
+–1 
+at 0°C.
+C
+p 
+[H
+2
+O(l)] = 75.3 J mol
+–1 
+K
+–1
+C
+p 
+[H
+2
+O(s)] = 36.8 J mol
+–1 
+K
+–1
+6.11 Enthalpy of combustion of carbon to CO
+2 
+is –393.5 kJ mol
+–1
+. Calculate the heat
+released upon formation of 35.2 g of CO
+2 
+from carbon and dioxygen gas.
+6.12 Enthalpies of formation of CO(g), CO
+2
+(g), N
+2
+O(g) and N
+2
+O
+4
+(g) are –110, – 393, 81
+and 9.7 kJ mol
+–1 
+respectively. Find the value of ∆
+r
+H for the reaction:
+N
+2
+O
+4
+(g) + 3CO(g) → N
+2
+O(g) + 3CO
+2
+(g)
+6.13 Given
+N
+2
+(g) + 3H
+2
+(g) → 2NH
+3
+(g) ; ∆
+r
+H
+0 
+= –92.4 kJ mol
+–1
+What is the standard enthalpy of formation of NH
+3 
+gas?
+6.14 Calculate the standard enthalpy of formation of CH
+3
+OH(l) from the following
+data:
+CH
+3
+OH (l) + 
+3
+2 
+O
+2
+(g) → CO
+2
+(g) + 2H
+2
+O(l) ; ∆
+r
+H
+0 
+= –726 kJ mol
+–1
+C(graphite) + O
+2
+(g) → CO
+2
+(g) ; ∆
+c
+H
+0 
+= –393 kJ mol
+–1
+H
+2
+(g) + 
+1
+2 
+O
+2
+(g) → H
+2
+O(l) ; ∆
+f 
+H
+0 
+= –286 kJ mol
+–1
+.
+6.15 Calculate the enthalpy change for the process
+CCl
+4
+(g) → C(g) + 4 Cl(g)
+and calculate bond enthalpy of C – Cl in CCl
+4
+(g).
+∆
+vap
+H
+0
+(CCl
+4
+) = 30.5 kJ mol
+–1
+.
+∆
+f
+H
+0 
+(CCl
+4
+) = –135.5 kJ mol
+–1
+.
+∆
+a
+H
+0 
+(C) = 715.0 kJ mol
+–1 
+, where ∆
+a
+H
+0 
+is enthalpy of atomisation
+∆
+a
+H
+0 
+(Cl
+2
+) = 242 kJ mol
+–1
+6.16 For an isolated system, ∆ U = 0, what will be ∆ S ?
+6.17 For the reaction at 298 K,
+2A + B → C
+∆ H = 400 kJ mol
+–1 
+and ∆ S = 0.2 kJ K
+–1 
+mol
+–1
+At what temperature will the reaction become spontaneous considering ∆ H
+and ∆ S to be constant over the temperature range.
+6.18 For the reaction,
+2 Cl(g) → Cl
+2
+(g), what are the signs of ∆ H and ∆ S ?
+6.19 For the reaction
+2 A(g) + B(g) → 2D(g)
+∆ U 
+0 
+= –10.5 kJ and ∆ S
+0 
+= –44.1 JK
+–1
+.
+Calculate ∆ G
+0 
+for the reaction, and predict whether the reaction may occur
+spontaneously.
+2020-21
+
+THERMODYNAMICS 191
+6.20 The equilibrium constant for a reaction is 10. What will be the value of ∆ G
+0 
+?
+R = 8.314 JK
+–1 
+mol
+–1
+, T = 300 K.
+6.21 Comment on the thermodynamic stability of NO(g), given
+1
+2 
+N
+2
+(g) + 
+1
+2 
+O
+2
+(g) → NO(g) ; ∆
+r
+H
+0 
+= 90 kJ mol
+–1
+NO(g) + 
+1
+2 
+O
+2
+(g) → NO
+2
+(g) : ∆
+r
+H
+0
+= –74 kJ mol
+–1
+6.22 Calculate the entropy change in surroundings when 1.00 mol of H
+2
+O(l) is formed
+under standard conditions. ∆
+f 
+H
+0 
+= –286 kJ mol
+–1
+.
+2020-21

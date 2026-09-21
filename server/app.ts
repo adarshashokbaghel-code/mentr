@@ -15,11 +15,16 @@ import notificationRoutes from "./routes/notifications";
 import parentHiringRoutes from "./routes/parent-hiring";
 import learnRoutes from "./routes/learn";
 import instantConnectRoutes from "./routes/instant-connect";
+import snapGradeRoutes, {
+  snapGradeRazorpayWebhook,
+} from "./routes/snap-grade";
+import ncertPdfRoutes from "./routes/ncert-pdfs";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
 import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
+import { ensureDb } from "./middleware/ensure-db";
 
 const app = express();
 
@@ -73,6 +78,23 @@ app.use(
   }),
 );
 
+/** Razorpay webhook needs raw body for HMAC — before express.json. */
+app.post(
+  "/api/snap-grade/webhook/razorpay",
+  express.raw({ type: "application/json" }),
+  (req, _res, next) => {
+    (req as express.Request & { rawBody?: Buffer }).rawBody = Buffer.isBuffer(
+      req.body,
+    )
+      ? req.body
+      : Buffer.from("");
+    next();
+  },
+  ensureDb,
+  (req, res) => {
+    void snapGradeRazorpayWebhook(req, res);
+  },
+);
 
 // comment
 // 3mb so cropped profile images can POST as base64 JSON
@@ -141,6 +163,8 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/parent", parentHiringRoutes);
 app.use("/api/learn", learnRoutes);
 app.use("/api/instant-connect", instantConnectRoutes);
+app.use("/api/snap-grade", snapGradeRoutes);
+app.use("/api/ncert", ncertPdfRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/admin", adminRoutes);
 

@@ -1201,9 +1201,7 @@ export function OpenSourceLanding({
               Built by someone who{" "}
               <span className="text-coral">hates paywalls</span>
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-              Short version from the LinkedIn bio — minus the corporate fluff.
-            </p>
+          
           </div>
 
           <div

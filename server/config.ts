@@ -50,9 +50,38 @@ export const config = {
   adminSecretKey: process.env.ADMIN_SECRET_KEY || "",
   /** Password required for admin write actions (delete, send mail, etc.) */
   adminPass: process.env.ADMIN_PASS || "",
-  /** Optional — Instant Connect AI re-rank when parent leaves notes */
+  /** Prefer gpt-4o for Snap & Grade vision marking; IC can stay on mini */
   openaiApiKey: process.env.OPENAI_API_KEY || "",
   openaiIcModel: process.env.OPENAI_IC_MODEL || "gpt-4o-mini",
+  /**
+   * Snap & Grade low-cost defaults: local Tesseract OCR + mini for
+   * vision fallback / marking. Override with env if you need gpt-4o.
+   */
+  openaiSnapGradeModel: process.env.OPENAI_SNAP_GRADE_MODEL || "gpt-4o-mini",
+  openaiSnapGradeOcrModel:
+    process.env.OPENAI_SNAP_GRADE_OCR_MODEL ||
+    process.env.OPENAI_SNAP_GRADE_MODEL ||
+    "gpt-4o-mini",
+  /**
+   * Snap & Grade Razorpay (live). Prefer RAZORPAY_LIVE_* ;
+   * webhook secret from Razorpay Dashboard → Webhooks.
+   */
+  razorpay: {
+    keyId:
+      process.env.RAZORPAY_LIVE_KEY_ID ||
+      process.env.RAZORPAY_KEY_ID ||
+      "",
+    keySecret:
+      process.env.RAZORPAY_LIVE_KEY_SECRET ||
+      process.env.RAZORPAY_KEY_SECRET ||
+      "",
+    webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET || "",
+    /** Paise per credit (default ₹1 = 100). */
+    creditPaise: Math.max(
+      1,
+      parseInt(process.env.SNAP_GRADE_CREDIT_PAISE || "100", 10) || 100,
+    ),
+  },
 };
 
 export function getMongoUriWithDb(): string {

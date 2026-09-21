@@ -50,3 +50,12 @@ videos/**/voiceover.wav
 /public/models/**/*.onnx
 /public/ort/*.wasm
 /public/ort/*.mjs
+
+# Cached NCERT chapter PDFs (proxied downloads)
+.cache/
+
+# Local Tesseract language pack (downloaded at runtime)
+eng.traineddata
+
+# NCERT chapter PDFs are fetched/cached — do not commit binaries
+public/ncert/**/*.pdf

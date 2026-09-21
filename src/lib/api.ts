@@ -363,6 +363,7 @@ export const connectionsApi = {
       method: "POST",
       body: JSON.stringify({ parentId, message }),
     }),
+
 };
 
 /* ------------------------------ requirements ------------------------------ */
@@ -622,3 +623,213 @@ export interface ProfileViewsResponse {
   weekCount: number;
   views: ProfileViewer[];
 }
+
+/* ------------------------------ Snap & Grade ------------------------------ */
+
+export type SnapGradeRubricStep = {
+  id: string;
+  label: string;
+  marks: number;
+  criteria: string;
+};
+
+export type SnapGradeQuestion = {
+  id: string;
+  board: string;
+  classLevel: number;
+  subject: string;
+  chapterNumber: number;
+  chapterName: string;
+  exercise: string;
+  questionNumber: string;
+  questionText: string;
+  maxMarks: number;
+  rubric: SnapGradeRubricStep[];
+  markingSchemeNotes: string;
+  creditsCost: number;
+};
+
+export type SnapGradeStepAward = {
+  stepId: string;
+  label: string;
+  marksPossible: number;
+  marksAwarded: number;
+  comment: string;
+};
+
+export type SnapGradeEvaluation = {
+  id: string;
+  marksAwarded: number;
+  maxMarks: number;
+  creditsDeducted: number;
+  steps: SnapGradeStepAward[];
+  overallFeedback: string;
+  transcript?: string;
+  originalTranscript?: string;
+  transcriptEdited?: boolean;
+  relevance?: string;
+  imageUrl: string;
+  createdAt: string;
+};
+
+export type SnapGradeTranscript = {
+  transcript: string;
+  relevance: string;
+  notes: string;
+  imageReadable: boolean;
+  creditsCharged: number;
+  question: SnapGradeQuestion;
+};
+
+export type SnapGradeHistoryItem = {
+  id: string;
+  gradedAt: string;
+  board: string;
+  classLevel: number;
+  subject: string;
+  chapterNumber: number;
+  chapterName: string;
+  exercise: string;
+  questionNumber: string;
+  questionText: string;
+  marksAwarded: number;
+  maxMarks: number;
+  creditsDeducted: number;
+  overallFeedback: string;
+  transcript: string;
+  relevance: string;
+  steps: {
+    stepId: string;
+    label: string;
+    marksPossible: number;
+    marksAwarded: number;
+    comment: string;
+  }[];
+};
+
+export type SnapGradePricing = {
+  freeCredits: number;
+  minRecharge: number;
+  maxRecharge?: number;
+  creditPaise: number;
+  paymentsEnabled: boolean;
+};
+
+export const snapGradeApi = {
+  catalog: () =>
+    request<{
+      boards: string[];
+      classes: number[];
+      subjects: string[];
+      chapters: {
+        subject: string;
+        chapterNumber: number;
+        chapterName: string;
+      }[];
+      exercises: {
+        subject: string;
+        chapterNumber: number;
+        exercise: string;
+      }[];
+      questions: SnapGradeQuestion[];
+      pricing?: SnapGradePricing;
+    }>("/snap-grade/catalog"),
+
+  wallet: () =>
+    request<{
+      creditBalance: number;
+      freeCreditsClaimed: boolean;
+      freeCreditsGranted?: number;
+      totalRecharged?: number;
+      totalSpent?: number;
+      pricing?: SnapGradePricing;
+    }>("/snap-grade/wallet"),
+
+  account: () =>
+    request<{
+      creditBalance: number;
+      freeCreditsClaimed: boolean;
+      freeCreditsGranted: number;
+      totalRecharged: number;
+      totalSpent: number;
+      history: SnapGradeHistoryItem[];
+      recharges: {
+        orderId: string;
+        paymentId: string | null;
+        credits: number;
+        amountPaise: number;
+        status: string;
+        createdAt: string;
+        paidAt: string | null;
+      }[];
+      pricing: SnapGradePricing;
+    }>("/snap-grade/account"),
+
+  history: (opts?: { limit?: number; offset?: number }) => {
+    const q = new URLSearchParams();
+    if (opts?.limit) q.set("limit", String(opts.limit));
+    if (opts?.offset) q.set("offset", String(opts.offset));
+    const qs = q.toString();
+    return request<{ total: number; items: SnapGradeHistoryItem[] }>(
+      `/snap-grade/history${qs ? `?${qs}` : ""}`,
+    );
+  },
+
+  createRechargeOrder: (credits: number) =>
+    request<{
+      orderId: string;
+      amountPaise: number;
+      currency: string;
+      credits: number;
+      keyId: string;
+      creditBalance: number;
+    }>("/snap-grade/recharge/order", {
+      method: "POST",
+      body: JSON.stringify({ credits }),
+    }),
+
+  verifyRecharge: (payload: {
+    razorpay_order_id: string;
+    razorpay_payment_id: string;
+    razorpay_signature: string;
+  }) =>
+    request<{
+      alreadyApplied: boolean;
+      creditBalance: number;
+      credits: number;
+    }>("/snap-grade/recharge/verify", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  /** Free OCR — no credits. User reviews before grading. */
+  transcribe: (payload: {
+    questionId: string;
+    imageBase64: string;
+    mimeType?: string;
+  }) =>
+    request<SnapGradeTranscript>("/snap-grade/transcribe", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      timeoutMs: 70_000,
+    }),
+
+  evaluate: (payload: {
+    questionId: string;
+    imageBase64: string;
+    mimeType?: string;
+    confirmedTranscript: string;
+    originalTranscript?: string;
+    relevance?: string;
+  }) =>
+    request<{
+      evaluation: SnapGradeEvaluation;
+      question: SnapGradeQuestion;
+      creditBalance: number;
+    }>("/snap-grade/evaluate", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      timeoutMs: 70_000,
+    }),
+};
+

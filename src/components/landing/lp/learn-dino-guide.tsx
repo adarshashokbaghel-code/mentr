@@ -38,10 +38,23 @@ import {
 import { LearnDino } from "./learn-dino";
 import { LearnStartButton } from "./learn-start-button";
 
+/**
+ * Hide floating dino on work / app surfaces (search, dashboards, auth).
+ * Keep it on marketing landings: /, /parents, /for-faculty, /learn, /blog, SEO hubs.
+ */
 const HIDDEN_PREFIXES = [
   "/admin",
   "/admintestingistrueonlyman134hsydsudy4",
   "/learn/app",
+  "/search",
+  "/parent",
+  "/faculty",
+  "/teachers",
+  "/requirements",
+  "/messenger",
+  "/notifications",
+  "/settings",
+  "/account",
 ];
 
 const DINO_FAB_POS_KEY = "mentr_dino_fab_pos_v1";
