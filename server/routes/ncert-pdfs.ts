@@ -405,11 +405,21 @@ const ALL_BOOKS = [
 const NCERT_LIVE_BASE = "https://ncert.nic.in/textbook/pdf";
 
 function publicDir(book: ClassBook) {
-  return path.join(process.cwd(), "public", "ncert", book.publicDir);
+  // turbopackIgnore: do not NFT-trace process.cwd() (would pull ~1GB of public/ into the API lambda).
+  return path.join(
+    /* turbopackIgnore: true */ process.cwd(),
+    "public",
+    "ncert",
+    book.publicDir,
+  );
 }
 
 function cacheDir(book: ClassBook) {
-  return path.join(process.cwd(), ".cache", `ncert-${book.publicDir}`);
+  return path.join(
+    /* turbopackIgnore: true */ process.cwd(),
+    ".cache",
+    `ncert-${book.publicDir}`,
+  );
 }
 
 function downloadFilename(book: ClassBook, chMeta: { number: number; slug: string }) {
