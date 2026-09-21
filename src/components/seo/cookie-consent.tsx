@@ -61,7 +61,8 @@ export function CookieConsent() {
       aria-live="polite"
       aria-label="Cookie notice"
       aria-describedby="cookie-notice-description"
-      className="fixed inset-x-0 bottom-0 z-[250] box-border w-full max-w-[100vw] overflow-x-hidden border-t border-hairline bg-white/95 px-4 py-3 shadow-[0_-8px_30px_rgba(28,26,23,0.08)] backdrop-blur-sm sm:p-5"
+      className="fixed inset-x-0 bottom-0 z-[250] box-border w-full max-w-[100vw] overflow-x-hidden border-t border-hairline bg-white/95 px-4 py-3 shadow-[0_-8px_30px_rgba(28,26,23,0.08)] backdrop-blur-sm short:py-2.5 sm:p-5"
+      data-cookie-consent=""
     >
       <div className="mx-auto flex w-full min-w-0 max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
         <p

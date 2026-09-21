@@ -8,7 +8,7 @@ export function StatsMarquee() {
       <div className="relative overflow-hidden border-y border-hairline bg-cream-band">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-cream-band to-transparent sm:w-24" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-cream-band to-transparent sm:w-24" />
-        <div className="flex w-max animate-marquee items-center py-3.5">
+        <div className="flex w-max animate-marquee items-center py-3.5 short:py-2.5">
           {row.map((subject, i) => (
             <span
               key={`${subject}-${i}`}

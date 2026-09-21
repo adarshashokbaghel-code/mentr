@@ -86,7 +86,7 @@ export function ParentNeedFinder({ className }: { className?: string }) {
         className,
       )}
     >
-      <div className="mx-auto w-full max-w-[1400px] px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <div className="mx-auto w-full max-w-[1400px] px-4 py-8 short:py-5 shorter:py-4 sm:px-6 sm:py-10 short:sm:py-6 lg:px-8">
         <div
           className={cn(
             "rounded-2xl border-2 border-ink bg-white p-4 sm:p-6 lg:p-7",

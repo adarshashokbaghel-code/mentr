@@ -307,7 +307,7 @@ function ParentsHero() {
       <LpBlob color="rgba(235,228,255,0.7)" size={360} className="-left-32 -top-20" />
       <LpBlob color="rgba(255,241,228,0.8)" size={300} className="-right-24 bottom-0" />
 
-      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 short:py-6 shorter:py-4 sm:px-6 sm:py-16 short:sm:py-8 lg:px-8 lg:py-24 short:lg:py-10 shorter:lg:py-8">
         <div className="grid w-full min-w-0 items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div className="min-w-0 w-full max-w-full space-y-5 sm:space-y-7 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
@@ -414,7 +414,7 @@ function ParentsHero() {
 
 function ParentsTrust() {
   return (
-    <section className="relative overflow-hidden border-b border-hairline bg-white py-12 sm:py-20 lg:py-28">
+    <section className="relative overflow-hidden border-b border-hairline bg-white py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10 lg:py-28 short:lg:py-12">
       <LpBlob color="rgba(230,246,238,0.6)" size={240} className="right-0 top-0" />
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:gap-12 lg:grid-cols-[1fr_1.4fr] lg:items-end">
@@ -565,7 +565,7 @@ function ParentFlowSection() {
   const steps = path === "search" ? searchSteps : postSteps;
 
   return (
-    <section className="bg-white py-12 sm:py-20 lg:py-28">
+    <section className="bg-white py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10 lg:py-28 short:lg:py-12">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
           number="02"
@@ -630,7 +630,7 @@ function ParentSwitchSection() {
   const current = switchTabs.find((t) => t.id === active)!;
 
   return (
-    <section className="relative overflow-hidden bg-cream py-12 sm:py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-cream py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10 lg:py-28 short:lg:py-12">
       <LpGridBg className="opacity-20" />
       <div className="relative mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         <SectionHeader
@@ -721,7 +721,7 @@ function RequirementBoardSection() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-lavender py-12 sm:py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-lavender py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10 lg:py-28 short:lg:py-12">
       <LpBlob color="rgba(217,208,255,0.5)" size={300} className="-left-20 bottom-0" />
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
@@ -842,7 +842,7 @@ function ParentTestimonials() {
   const items = useTestimonialNames(parentTestimonials);
 
   return (
-    <section className="bg-cream-band py-12 sm:py-20 lg:py-28">
+    <section className="bg-cream-band py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10 lg:py-28 short:lg:py-12">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <SectionHeader number="05" eyebrow="From the community" title="Parents & tutors." accent="Same free platform." />
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
@@ -864,7 +864,7 @@ function ParentFaqPreview() {
   ];
 
   return (
-    <section className="bg-lavender py-12 sm:py-20">
+    <section className="bg-lavender py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10">
       <div className="mx-auto max-w-[800px] px-4 sm:px-6 lg:px-8">
         <SectionHeader eyebrow="Common questions" title="Everything parents ask" accent="before signing up." />
         <div className="mt-10 space-y-3">

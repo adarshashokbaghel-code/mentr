@@ -115,7 +115,7 @@ export function PlatformProof({
     <section
       id={id}
       className={cn(
-        "border-y border-hairline bg-cream py-10 sm:py-16",
+        "border-y border-hairline bg-cream py-10 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8",
         className,
       )}
     >

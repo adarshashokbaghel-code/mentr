@@ -31,7 +31,7 @@ const steps = [
 
 export function FacultyShowcase() {
   return (
-    <section id="for-faculty" className="bg-butter py-10 sm:py-16 lg:py-24">
+    <section id="for-faculty" className="bg-butter py-10 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8 lg:py-24 short:lg:py-10">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-8 sm:gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           <div className="text-center lg:text-left">

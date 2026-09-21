@@ -66,7 +66,7 @@ const GUIDES = [
 
 export function SeoGuidesStrip() {
   return (
-    <section className="border-y border-hairline bg-cream/40 py-12 sm:py-14">
+    <section className="border-y border-hairline bg-cream/40 py-12 short:py-6 shorter:py-4 sm:py-14 short:sm:py-8">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div>

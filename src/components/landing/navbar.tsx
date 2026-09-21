@@ -135,7 +135,7 @@ export function Navbar() {
           : "bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-12 w-full min-w-0 max-w-[1400px] items-center justify-between gap-2 px-3 sm:h-14 sm:px-6 lg:h-16 lg:px-8">
+      <div className="mx-auto flex h-12 w-full min-w-0 max-w-[1400px] items-center justify-between gap-2 px-3 short:h-11 sm:h-14 sm:px-6 short:sm:h-12 lg:h-16 lg:px-8 short:lg:h-12">
         <MentrBrand
           logoClassName="h-5 sm:h-6 lg:h-7"
           priority
@@ -199,7 +199,7 @@ export function Navbar() {
 
       {open && (
         <div className="border-t border-hairline bg-cream lg:hidden">
-          <nav className="flex max-h-[min(80vh,640px)] flex-col gap-1 overflow-y-auto p-4">
+          <nav className="flex max-h-[min(80vh,640px)] flex-col gap-1 overflow-y-auto p-4 short:max-h-[min(70dvh,480px)] short:p-3 shorter:max-h-[min(60dvh,360px)]">
             {navGroups.map((group) => {
               const expanded = mobileGroup === group.id;
               return (

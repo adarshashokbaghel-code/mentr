@@ -59,3 +59,7 @@ eng.traineddata
 
 # NCERT chapter PDFs are fetched/cached — do not commit binaries
 public/ncert/**/*.pdf
+
+# Google MCP service-account keys (never commit)
+.google-mcp/*.json
+**/*service-account*.json

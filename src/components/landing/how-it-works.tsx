@@ -23,7 +23,7 @@ const postSteps = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-10 sm:py-16 lg:py-24">
+    <section id="how-it-works" className="py-10 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8 lg:py-24 short:lg:py-10">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
           <div className="mx-auto max-w-2xl lg:mx-0">

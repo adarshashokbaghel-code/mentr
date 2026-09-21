@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export function CTA() {
   return (
-    <section className="border-t border-hairline bg-cream-band py-10 sm:py-16">
+    <section className="border-t border-hairline bg-cream-band py-10 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl text-center sm:mb-10 lg:text-left">
           <p className="text-sm font-semibold text-coral">Get started</p>
