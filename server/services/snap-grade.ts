@@ -17,10 +17,6 @@ import {
   SnapGradeWallet,
 } from "../models/SnapGrade";
 import type { Types } from "mongoose";
-import {
-  prepareSnapGradeImage,
-  runLocalOcr,
-} from "./snap-grade-image";
 
 export const FREE_CREDITS = 100;
 
@@ -151,6 +147,7 @@ export async function uploadSnapGradeImage(
   if ("error" in decoded) return decoded;
 
   // Always store a resized JPEG — smaller + matches OCR input
+  const { prepareSnapGradeImage } = await import("./snap-grade-image");
   const prepared = await prepareSnapGradeImage(decoded.buffer);
   if ("error" in prepared) return prepared;
 
@@ -572,6 +569,9 @@ export async function transcribeSolutionPhoto(
   const decoded = decodeMentorImagePayload({ imageBase64: imageDataUrl });
   if ("error" in decoded) return decoded;
 
+  const { prepareSnapGradeImage, runLocalOcr } = await import(
+    "./snap-grade-image"
+  );
   const prepared = await prepareSnapGradeImage(decoded.buffer);
   if ("error" in prepared) return prepared;
 

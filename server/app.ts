@@ -15,9 +15,6 @@ import notificationRoutes from "./routes/notifications";
 import parentHiringRoutes from "./routes/parent-hiring";
 import learnRoutes from "./routes/learn";
 import instantConnectRoutes from "./routes/instant-connect";
-import snapGradeRoutes, {
-  snapGradeRazorpayWebhook,
-} from "./routes/snap-grade";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
@@ -90,8 +87,10 @@ app.post(
     next();
   },
   ensureDb,
-  (req, res) => {
-    void snapGradeRazorpayWebhook(req, res);
+  (req, res, next) => {
+    void import("./routes/snap-grade")
+      .then((mod) => mod.snapGradeRazorpayWebhook(req, res))
+      .catch(next);
   },
 );
 
@@ -162,7 +161,12 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/parent", parentHiringRoutes);
 app.use("/api/learn", learnRoutes);
 app.use("/api/instant-connect", instantConnectRoutes);
-app.use("/api/snap-grade", snapGradeRoutes);
+// Lazy-load Snap & Grade (pulls sharp/tesseract) so other /api routes stay healthy on Vercel.
+app.use("/api/snap-grade", (req, res, next) => {
+  void import("./routes/snap-grade")
+    .then((mod) => mod.default(req, res, next))
+    .catch(next);
+});
 // Lazy-load NCERT PDF proxy — avoids Turbopack NFT-tracing process.cwd()/public into every /api lambda.
 app.use("/api/ncert", (req, res, next) => {
   void import("./routes/ncert-pdfs")
