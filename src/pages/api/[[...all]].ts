@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import app from "../../../server/app";
+import type { Express } from "express";
 
 export const config = {
   api: {
@@ -11,11 +11,28 @@ export const config = {
 const PUBLIC_TEACHER_PATH =
   /^(?:\/api)?\/teachers\/public\/([a-f\d]{24})$/i;
 
+let appPromise: Promise<Express> | null = null;
+
+function loadApp(): Promise<Express> {
+  if (!appPromise) {
+    appPromise = import("../../../server/app")
+      .then((mod) => mod.default as Express)
+      .catch((err) => {
+        appPromise = null;
+        throw err;
+      });
+  }
+  return appPromise;
+}
+
 /**
  * Forward Next.js req/res to Express. Must resolve only after `res.finish`
  * so Next/Vercel does not stall until FUNCTION_INVOCATION_TIMEOUT.
+ *
+ * App is loaded lazily so a Snap & Grade / sharp crash does not take down
+ * every /api route at module-eval time.
  */
-export default function apiHandler(
+export default async function apiHandler(
   req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<void> {
@@ -26,7 +43,21 @@ export default function apiHandler(
     return handlePublicTeacher(publicMatch[1]!, res);
   }
 
-  return new Promise((resolve, reject) => {
+  let app: Express;
+  try {
+    app = await loadApp();
+  } catch (error) {
+    console.error("API app import failed:", error);
+    if (!res.headersSent) {
+      res.status(500).json({
+        error: "API failed to start",
+        detail: error instanceof Error ? error.message : String(error),
+      });
+    }
+    return;
+  }
+
+  await new Promise<void>((resolve, reject) => {
     res.once("finish", resolve);
     res.once("close", resolve);
     res.once("error", reject);

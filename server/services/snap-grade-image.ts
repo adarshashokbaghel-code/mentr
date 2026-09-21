@@ -1,6 +1,3 @@
-import sharp from "sharp";
-import Tesseract from "tesseract.js";
-
 /** Longest edge after resize — enough for handwriting, fewer vision tiles if we escalate. */
 const MAX_EDGE = 1280;
 const JPEG_QUALITY = 72;
@@ -23,11 +20,37 @@ export type LocalOcrResult = {
   durationMs: number;
 };
 
-let workerPromise: Promise<Tesseract.Worker> | null = null;
+type TesseractMod = typeof import("tesseract.js");
+type SharpMod = typeof import("sharp");
 
-async function getOcrWorker(): Promise<Tesseract.Worker> {
+let workerPromise: Promise<import("tesseract.js").Worker> | null = null;
+let sharpPromise: Promise<SharpMod> | null = null;
+let tesseractPromise: Promise<TesseractMod> | null = null;
+
+async function loadSharp(): Promise<SharpMod> {
+  if (!sharpPromise) {
+    sharpPromise = import("sharp").catch((err) => {
+      sharpPromise = null;
+      throw err;
+    });
+  }
+  return sharpPromise;
+}
+
+async function loadTesseract(): Promise<TesseractMod> {
+  if (!tesseractPromise) {
+    tesseractPromise = import("tesseract.js").catch((err) => {
+      tesseractPromise = null;
+      throw err;
+    });
+  }
+  return tesseractPromise;
+}
+
+async function getOcrWorker(): Promise<import("tesseract.js").Worker> {
   if (!workerPromise) {
     workerPromise = (async () => {
+      const Tesseract = await loadTesseract();
       const worker = await Tesseract.createWorker("eng", 1, {
         // Keep logs quiet in production
         logger: () => undefined,
@@ -48,11 +71,15 @@ async function getOcrWorker(): Promise<Tesseract.Worker> {
 /**
  * Resize + JPEG compress for OCR / optional cloud vision.
  * Fast (sharp) and cuts tokens if we escalate to OpenAI.
+ *
+ * sharp/tesseract are loaded lazily so /api cold starts on Vercel do not
+ * crash when the wrong platform native binary is traced into the lambda.
  */
 export async function prepareSnapGradeImage(
   input: Buffer,
 ): Promise<PreparedSnapImage | { error: string }> {
   try {
+    const sharp = (await loadSharp()).default;
     const bytesIn = input.length;
     const image = sharp(input, { failOn: "none" }).rotate(); // honor EXIF
     const meta = await image.metadata();
