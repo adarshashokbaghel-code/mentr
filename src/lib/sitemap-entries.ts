@@ -56,6 +56,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/", 1, "daily"),
     entry("/parents", 0.9, "weekly"),
     entry("/snapandgrade", 0.95, "weekly"),
+    entry("/snapandgrade/grade", 0.9, "weekly"),
     ...SNAP_GRADE_CLUSTERS.map((p) =>
       entry(snapGradeClusterPath(p.slug), 0.86, "weekly"),
     ),
