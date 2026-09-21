@@ -64,7 +64,7 @@
 
 - Product: Snap & Grade by Mentr
 - Audience: CBSE Class 9–12 students who practised but still don’t know their marks
-- Subjects: NCERT Maths + Science + Class 11–12 Physics live; 2400+ questions; board papers, PYQs, sample papers in the same flow
+- Subjects: NCERT Maths + Science + Class 11–12 Physics, Chemistry and Biology live; 3500+ questions; board papers, PYQs, sample papers in the same flow
 - Flow: Pick question → photo notebook → CBSE step marks + how-to-write tips
 - Vs generic AI: marking key is already on the question — no uploading a scheme to ChatGPT
 - Credits: 100 free once; recharge from ₹1 (₹1 = 1 credit)

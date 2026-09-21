@@ -10,8 +10,10 @@ function siteBase(): string {
 }
 
 async function fetchViaApi(): Promise<TestimonialNameMaps | null> {
+  // ISR — never cache: "no-store" / revalidate: 0 here. That opts the
+  // calling route (including static `/`) into DYNAMIC_SERVER_USAGE.
   const res = await fetch(`${siteBase()}/api/testimonials/names`, {
-    cache: "no-store",
+    next: { revalidate: 3600 },
   });
   if (!res.ok) return null;
   return (await res.json()) as TestimonialNameMaps;

@@ -1,11 +1,11 @@
-import { TestimonialAvatar } from "@/components/ui/testimonial-avatar";
-import { HOME_TESTIMONIALS, testimonialName } from "@/lib/demo-users";
-import { enrichTestimonials } from "@/lib/testimonial-names";
-import { fetchTestimonialNameMaps } from "@/lib/testimonial-names-server";
+"use client";
 
-export async function Testimonials() {
-  const maps = await fetchTestimonialNameMaps();
-  const items = enrichTestimonials(HOME_TESTIMONIALS, maps);
+import { TestimonialAvatar } from "@/components/ui/testimonial-avatar";
+import { useTestimonialNames } from "@/hooks/use-testimonial-names";
+import { HOME_TESTIMONIALS, testimonialName } from "@/lib/demo-users";
+
+export function Testimonials() {
+  const items = useTestimonialNames(HOME_TESTIMONIALS);
 
   return (
     <section id="testimonials" className="bg-cream-band py-10 sm:py-16 lg:py-24">

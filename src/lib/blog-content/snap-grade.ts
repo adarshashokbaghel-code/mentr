@@ -23,7 +23,7 @@ export const SNAP_GRADE_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "list",
             items: [
-              "Live banks: Class 9–12 Maths, Class 9–10 Science, Class 11–12 Physics — 2000+ questions, with board papers, PYQs and sample papers in the same flow.",
+              "Live banks: Class 9–12 Maths, Class 9–10 Science, Class 11–12 Physics, Chemistry and Biology — 3500+ questions, with board papers, PYQs and sample papers in the same flow.",
               "Output: marks by step, the line that was cut, and a writing tip for the next attempt.",
               "Credits: 100 free once on a new account. Then recharge from ₹1 (₹1 = 1 credit). A full grade uses about 5 credits.",
             ],
@@ -99,7 +99,7 @@ export const SNAP_GRADE_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Which classes are covered?",
         answer:
-          "CBSE Class 9–12. Maths, Science, and Class 11–12 Physics question banks are live.",
+          "CBSE Class 9–12. Maths, Science, and Class 11–12 Physics, Chemistry and Biology question banks are live.",
       },
     ],
     relatedLinks: [
@@ -408,7 +408,7 @@ export const SNAP_GRADE_ARTICLES: Record<string, ArticleContent> = {
     readTimeMinutes: 7,
     author: AUTHOR,
     intro:
-      "You already solved the NCERT exercise in the notebook. The next step is not to retype the sum into a chat box. Photograph that page, confirm the text, and see marks the CBSE way. Snap & Grade on mentr.in is built for that loop: study the chapter PDF, practise the question, grade the handwriting. Class 9–12 Maths, Science, and Class 11–12 Physics — 2000+ questions on the same site.",
+      "You already solved the NCERT exercise in the notebook. The next step is not to retype the sum into a chat box. Photograph that page, confirm the text, and see marks the CBSE way. Snap & Grade on mentr.in is built for that loop: study the chapter PDF, practise the question, grade the handwriting. Class 9–12 Maths, Science, and Class 11–12 Physics, Chemistry and Biology — 3500+ questions on the same site.",
     sections: [
       {
         heading: "Why a photo of your notebook beats typing",
@@ -432,7 +432,7 @@ export const SNAP_GRADE_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "On the Snap & Grade hub you can open Class 9–12 Maths, Class 9–10 Science, and Class 11–12 Physics chapter PDFs in the on-site reader. Study, practise, then grade. You do not need a second website for the PDF and a third for “check my answer”.",
+            text: "On the Snap & Grade hub you can open Class 9–12 Maths, Class 9–10 Science, and Class 11–12 Physics, Chemistry and Biology chapter PDFs in the on-site reader. Study, practise, then grade. You do not need a second website for the PDF and a third for “check my answer”.",
           },
           {
             type: "callout",
