@@ -230,7 +230,7 @@ export function LpStatsBand({
           <div
             key={stat.label}
             className={cn(
-              "group relative overflow-hidden border-b border-r border-hairline px-4 py-6 text-center transition-colors last:border-r-0 sm:px-6 sm:py-10 md:border-b-0 lg:px-8",
+              "group relative overflow-hidden border-b border-r border-hairline px-4 py-6 text-center transition-colors last:border-r-0 short:py-4 shorter:py-3 sm:px-6 sm:py-10 short:sm:py-6 md:border-b-0 lg:px-8",
               stat.tint,
             )}
           >
@@ -243,7 +243,7 @@ export function LpStatsBand({
             {stat.icon && (
               <stat.icon className="mx-auto mb-3 h-5 w-5 text-ink/40" />
             )}
-            <p className="relative text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[40px]">
+            <p className="relative text-2xl font-bold tracking-tight text-ink short:text-xl sm:text-3xl short:sm:text-2xl lg:text-[40px] short:lg:text-[28px]">
               {stat.value}
             </p>
             <p className="relative mt-2 text-sm font-semibold text-ink/80">
@@ -484,7 +484,7 @@ export function LpMockStage({
         <div
           key={chip.label}
           className={cn(
-            "absolute z-10 hidden rounded-lg border-2 border-ink bg-white px-3 py-2 text-xs font-bold shadow-[3px_3px_0_0_#1c1a17] sm:block",
+            "absolute z-10 hidden rounded-lg border-2 border-ink bg-white px-3 py-2 text-xs font-bold shadow-[3px_3px_0_0_#1c1a17] sm:block short:sm:hidden",
             chip.className,
           )}
           style={chip.style}
@@ -529,7 +529,7 @@ export function LpFinalCta({
   return (
     <section
       className={cn(
-        "relative overflow-hidden py-12 sm:py-20 lg:py-28",
+        "relative overflow-hidden py-12 short:py-6 shorter:py-4 sm:py-20 short:sm:py-10 lg:py-28 short:lg:py-12",
         dark ? "bg-ink text-white" : "border-t border-hairline bg-cream-band",
       )}
     >

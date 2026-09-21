@@ -8,7 +8,7 @@ export function Testimonials() {
   const items = useTestimonialNames(HOME_TESTIMONIALS);
 
   return (
-    <section id="testimonials" className="bg-cream-band py-10 sm:py-16 lg:py-24">
+    <section id="testimonials" className="bg-cream-band py-10 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8 lg:py-24 short:lg:py-10">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">

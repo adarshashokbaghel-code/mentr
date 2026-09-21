@@ -2,7 +2,7 @@ import { ProductHuntBadges } from "@/components/ui/product-hunt-badge";
 
 export function ProductHuntSection() {
   return (
-    <section className="border-y border-hairline bg-white py-10 sm:py-12">
+    <section className="border-y border-hairline bg-white py-10 short:py-5 shorter:py-4 sm:py-12 short:sm:py-7">
       <div className="mx-auto flex max-w-[1400px] flex-col items-center gap-5 px-4 text-center sm:px-6 lg:px-8">
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-coral">

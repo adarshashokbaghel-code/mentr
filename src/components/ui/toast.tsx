@@ -35,6 +35,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
       <div
         aria-live="polite"
+        data-toast-viewport=""
         className="pointer-events-none fixed bottom-4 right-4 z-[300] flex max-w-sm flex-col gap-2"
       >
         {toasts.map((t) => (

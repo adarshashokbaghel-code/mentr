@@ -112,7 +112,7 @@ export function PopularSearches({
     <section
       id="popular-searches"
       className={cn(
-        "border-b border-hairline bg-cream py-8 sm:py-12",
+        "border-b border-hairline bg-cream py-8 short:py-5 shorter:py-4 sm:py-12 short:sm:py-7",
         className,
       )}
     >

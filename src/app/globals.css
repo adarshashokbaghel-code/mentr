@@ -56,6 +56,11 @@
   --font-sans: var(--font-sans-face);
 }
 
+/* Short laptop / landscape viewports — height is the bottleneck, not width */
+@custom-variant short (@media (max-height: 820px));
+@custom-variant shorter (@media (max-height: 700px));
+@custom-variant short-landscape (@media (max-height: 520px) and (orientation: landscape));
+
 html {
   overflow-x: clip;
   width: 100%;
@@ -75,6 +80,43 @@ main {
   width: 100%;
   max-width: 100%;
   overflow-x: clip;
+}
+
+/* Instant Connect bottom dock — keep page content clear of the fixed bar */
+body:has([data-ic-dock]) footer {
+  padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+body:has([data-ic-dock]) main > :last-child {
+  scroll-margin-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Lift overlays above the Instant Connect dock */
+body:has([data-ic-dock]) [data-cookie-consent] {
+  bottom: calc(4.85rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+body:has([data-ic-dock]) [data-toast-viewport] {
+  bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Short-laptop section rhythm — compress tall py without layout changes */
+@media (max-height: 820px) {
+  .short-section {
+    padding-block: 2.25rem !important;
+  }
+}
+
+@media (max-height: 700px) {
+  .short-section {
+    padding-block: 1.5rem !important;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  .short-section {
+    padding-block: 1rem !important;
+  }
 }
 
 /* Site-wide layout — consistent mobile padding */

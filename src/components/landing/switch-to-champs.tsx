@@ -79,7 +79,7 @@ export function SwitchToChamps() {
   const current = tabs.find((t) => t.id === active)!;
 
   return (
-    <section id="switch" className="bg-cream py-10 sm:py-16 lg:py-24">
+    <section id="switch" className="bg-cream py-10 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8 lg:py-24 short:lg:py-10">
       <div className="mx-auto max-w-[1120px] px-4 sm:px-6 lg:px-8">
         {/* Header — Youform layout */}
         <div className="mx-auto max-w-2xl text-center">

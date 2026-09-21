@@ -18,7 +18,7 @@ export function PublicPlatformSections() {
   return (
     <section
       id="what-is-mentr"
-      className="border-y border-hairline bg-white py-12 sm:py-16 lg:py-20"
+      className="border-y border-hairline bg-white py-12 short:py-6 shorter:py-4 sm:py-16 short:sm:py-8 lg:py-20 short:lg:py-10"
     >
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">

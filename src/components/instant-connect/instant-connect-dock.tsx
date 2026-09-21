@@ -179,8 +179,9 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
 
   return (
     <div
+      data-ic-dock=""
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.85rem,env(safe-area-inset-bottom))] sm:px-4",
+        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))] short:pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-4",
         className,
       )}
     >
@@ -205,7 +206,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
       >
         <div
           className={cn(
-            "flex w-full flex-col overflow-hidden rounded-[28px] p-2 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter] sm:rounded-[32px] sm:p-2.5",
+            "flex w-full max-h-[min(100dvh-0.75rem,100vh-0.75rem)] flex-col overflow-hidden rounded-[28px] p-2 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter] short:rounded-[24px] short:p-1.5 sm:rounded-[32px] sm:p-2.5 short:sm:rounded-[28px] short:sm:p-2",
             mounted
               ? "bg-[rgba(28,28,28,0.78)] shadow-[0_16px_48px_rgba(0,0,0,0.35)] ring-white/12 backdrop-blur-[20px]"
               : showTrack
@@ -230,7 +231,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
             <div className="min-h-0 overflow-hidden">
               <div
                 id={titleId}
-                className="max-h-[min(78vh,720px)] overflow-y-auto overscroll-contain px-4 pb-3 pt-5 sm:max-h-[min(72vh,680px)] sm:px-6 sm:pb-4 sm:pt-6"
+                className="max-h-[min(calc(100dvh-7.25rem),720px)] overflow-y-auto overscroll-contain px-4 pb-3 pt-5 short:max-h-[min(calc(100dvh-6.25rem),560px)] short:px-3 short:pb-2 short:pt-3 shorter:max-h-[min(calc(100dvh-5.75rem),420px)] short-landscape:max-h-[min(calc(100dvh-5.25rem),320px)] sm:max-h-[min(calc(100dvh-7.5rem),680px)] sm:px-6 sm:pb-4 sm:pt-6 short:sm:px-4 short:sm:pb-3 short:sm:pt-4"
                 style={{
                   opacity: shown ? 1 : 0,
                   transform: shown ? "translateY(0)" : "translateY(18px)",
@@ -255,7 +256,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
           </div>
 
           <div
-            className="relative z-10 flex items-center gap-2 px-0.5 pt-0.5"
+            className="relative z-10 flex shrink-0 items-center gap-1.5 px-0.5 pt-0.5 short:gap-1 sm:gap-2"
             role="navigation"
             aria-label="Instant Connect"
           >
@@ -268,7 +269,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               onClick={openGuide}
               disabled={showTrack}
               className={cn(
-                "flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]",
+                "flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98] short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11",
                 mounted
                   ? "bg-white/15 text-white ring-1 ring-white/20"
                   : "bg-white text-sage shadow-sm",
@@ -281,7 +282,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
             {showTrack ? (
               <Link
                 href="/parent/dashboard#instant-connect"
-                className="flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-white px-3 text-[13px] font-bold tracking-tight text-ink shadow-sm transition hover:bg-white/95 active:scale-[0.99] sm:h-[50px] sm:px-4 sm:text-[15px]"
+                className="flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-white px-3 text-[13px] font-bold tracking-tight text-ink shadow-sm transition hover:bg-white/95 active:scale-[0.99] short:h-9 short:text-[12px] sm:h-[50px] sm:px-4 sm:text-[15px] short:sm:h-11 short:sm:text-[13px]"
               >
                 <LayoutDashboard className="h-3.5 w-3.5 shrink-0 opacity-90" />
                 Track request
@@ -292,7 +293,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 onClick={() => void onMainCta()}
                 disabled={mainDisabled}
                 className={cn(
-                  "flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-[13px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 sm:h-[50px] sm:px-4 sm:text-[15px]",
+                  "flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-[13px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 short:h-9 short:text-[12px] sm:h-[50px] sm:px-4 sm:text-[15px] short:sm:h-11 short:sm:text-[13px]",
                   mounted
                     ? "bg-white text-ink hover:bg-white/90"
                     : "bg-ink text-white shadow-[inset_0_1px_0.5px_rgba(255,255,255,0.3),inset_0_-1.5px_0.5px_rgba(0,0,0,0.3),0_2px_5px_rgba(0,0,0,0.25)] hover:bg-[#2a231c]",
@@ -315,7 +316,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 type="button"
                 aria-label="Close"
                 onClick={close}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink transition hover:scale-[1.03] active:scale-[0.98] short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
               >
                 <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.5} />
               </button>
@@ -323,7 +324,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               <Link
                 href="/parent/dashboard#instant-connect"
                 aria-label="Track Instant Connect request"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] sm:h-[50px] sm:w-[50px]"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
               >
                 <LayoutDashboard className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </Link>
@@ -333,7 +334,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 aria-label="Instant Connect"
                 onClick={openStepper}
                 disabled={loading}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 sm:h-[50px] sm:w-[50px]"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
               >
                 <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </button>
@@ -374,13 +375,13 @@ function GuidePanel() {
   const current = GUIDE_BEATS[beat]!;
 
   return (
-    <div className="pb-1 font-sans text-white">
+    <div className="pb-1 font-sans text-white short:pb-0">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/45">
+          <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/45 short:text-[9px]">
             Quick guide
           </p>
-          <h2 className="mt-0.5 text-xl font-extrabold leading-tight tracking-tight sm:text-[1.35rem]">
+          <h2 className="mt-0.5 text-xl font-extrabold leading-tight tracking-tight short:text-lg sm:text-[1.35rem] short:sm:text-xl">
             How Instant Connect works
           </h2>
         </div>
@@ -388,7 +389,7 @@ function GuidePanel() {
           type="button"
           aria-label={playing ? "Pause guide" : "Play guide"}
           onClick={() => setPlaying((p) => !p)}
-          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition hover:bg-white/15"
+          className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white ring-1 ring-white/15 transition hover:bg-white/15 short:h-8 short:w-8"
         >
           {playing ? (
             <Pause className="h-3.5 w-3.5" fill="currentColor" />
@@ -398,7 +399,7 @@ function GuidePanel() {
         </button>
       </div>
 
-      <div className="mt-3 grid grid-cols-3 gap-1.5">
+      <div className="mt-3 grid grid-cols-3 gap-1.5 short:mt-2 short:gap-1">
         {GUIDE_BEATS.map((b, i) => (
           <button
             key={b.step}
@@ -410,7 +411,7 @@ function GuidePanel() {
               setPlaying(true);
             }}
             className={cn(
-              "rounded-lg px-1 py-1.5 text-center transition sm:py-2",
+              "rounded-lg px-1 py-1.5 text-center transition short:py-1 sm:py-2 short:sm:py-1.5",
               i === beat
                 ? "bg-white text-ink shadow-sm"
                 : "bg-white/10 text-white/70 ring-1 ring-white/10 hover:bg-white/15",
@@ -419,7 +420,7 @@ function GuidePanel() {
             <span className="block text-[9px] font-bold uppercase tracking-wide opacity-70">
               Step {b.step}
             </span>
-            <span className="mt-0.5 block text-[11px] font-extrabold leading-tight">
+            <span className="mt-0.5 block text-[11px] font-extrabold leading-tight short:text-[10px]">
               {i === 0 ? "Ask" : i === 1 ? "Match" : "Call"}
             </span>
           </button>
@@ -427,8 +428,8 @@ function GuidePanel() {
       </div>
 
       {/* Fixed-height stage — scenes must fit; never spill */}
-      <div className="relative mt-3 overflow-hidden rounded-2xl bg-[#12100e] ring-1 ring-white/12">
-        <div className="relative h-[168px] w-full overflow-hidden sm:h-[180px]">
+      <div className="relative mt-3 overflow-hidden rounded-2xl bg-[#12100e] ring-1 ring-white/12 short:mt-2 short:rounded-xl">
+        <div className="relative h-[168px] w-full overflow-hidden short:h-[120px] shorter:h-[96px] short-landscape:h-[88px] sm:h-[180px] short:sm:h-[132px]">
           <div
             className="pointer-events-none absolute inset-0"
             style={{
@@ -437,26 +438,26 @@ function GuidePanel() {
             }}
             aria-hidden
           />
-          <div className="absolute inset-0 flex items-center justify-center overflow-hidden p-3">
+          <div className="absolute inset-0 flex items-center justify-center overflow-hidden p-3 short:p-2">
             {beat === 0 ? <GuideSceneNeed key={`need-${beat}`} /> : null}
             {beat === 1 ? <GuideSceneMatch key={`match-${beat}`} /> : null}
             {beat === 2 ? <GuideSceneCall key={`call-${beat}`} /> : null}
           </div>
         </div>
 
-        <div className="border-t border-white/10 px-3 py-2.5 sm:px-3.5 sm:py-3">
+        <div className="border-t border-white/10 px-3 py-2.5 short:px-2.5 short:py-2 sm:px-3.5 sm:py-3 short:sm:py-2">
           <p
             key={current.title}
-            className="mentr-ic-guide-caption text-[13px] font-extrabold leading-snug tracking-tight text-white sm:text-[14px]"
+            className="mentr-ic-guide-caption text-[13px] font-extrabold leading-snug tracking-tight text-white short:text-[12px] sm:text-[14px]"
           >
-            <span className="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-coral text-[10px] font-extrabold text-white">
+            <span className="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-coral text-[10px] font-extrabold text-white short:h-4 short:w-4 short:text-[9px]">
               {current.step}
             </span>
             {current.title}
           </p>
           <p
             key={current.caption}
-            className="mentr-ic-guide-caption mt-1 line-clamp-2 text-[11px] font-medium leading-snug text-white/60 sm:text-[12px]"
+            className="mentr-ic-guide-caption mt-1 line-clamp-2 text-[11px] font-medium leading-snug text-white/60 short:mt-0.5 short:line-clamp-1 short:text-[10px] sm:text-[12px]"
             style={{ animationDelay: "70ms" }}
           >
             {current.caption}

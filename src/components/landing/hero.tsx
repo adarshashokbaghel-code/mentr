@@ -304,7 +304,7 @@ function HeroSearchPanel({
         </div>
 
         <div
-          className="max-h-[260px] space-y-2 overflow-y-auto overscroll-contain bg-cream/50 p-3 sm:max-h-[280px]"
+          className="max-h-[260px] space-y-2 overflow-y-auto overscroll-contain bg-cream/50 p-3 short:max-h-[160px] shorter:max-h-[120px] sm:max-h-[280px] short:sm:max-h-[180px]"
           onWheel={(e) => e.stopPropagation()}
         >
           {!ready ? (
@@ -479,10 +479,10 @@ export function Hero() {
       <LpBlob color="rgba(255,241,228,0.8)" size={300} className="-right-24 bottom-0" />
       <LpBlob color="rgba(230,246,238,0.55)" size={220} className="right-1/3 top-1/2 hidden lg:block" />
 
-      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
-        <div className="grid w-full min-w-0 items-center gap-8 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-14">
-          <div className="min-w-0 w-full max-w-full space-y-5 sm:space-y-7 text-center lg:text-left">
-            <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+      <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 short:py-6 shorter:py-4 sm:px-6 sm:py-16 short:sm:py-8 lg:px-8 lg:py-24 short:lg:py-10 shorter:lg:py-8">
+        <div className="grid w-full min-w-0 items-center gap-8 short:gap-5 shorter:gap-4 sm:gap-12 short:sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-14 short:lg:gap-8">
+          <div className="min-w-0 w-full max-w-full space-y-5 short:space-y-3 shorter:space-y-2.5 sm:space-y-7 short:sm:space-y-4 text-center lg:text-left">
+            <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start short:gap-1.5">
               <LpBadge>
                 <ShieldCheck className="h-3.5 w-3.5 text-sage" />
                 Verified faculty
@@ -493,35 +493,35 @@ export function Hero() {
               </LpBadge>
             </div>
 
-            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink sm:text-4xl lg:text-[56px] lg:leading-[1.05]">
+            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink short:text-[1.5rem] shorter:text-[1.35rem] sm:text-4xl short:sm:text-[1.85rem] lg:text-[56px] lg:leading-[1.05] short:lg:text-[2.35rem] shorter:lg:text-[2.1rem]">
               Find verified tutors
               <br />
               &amp; mentors worldwide.
-              <span className="mt-3 block text-lg font-semibold leading-snug text-coral sm:text-xl lg:text-[2.1rem]">
+              <span className="mt-3 block text-lg font-semibold leading-snug text-coral short:mt-1.5 short:text-base shorter:text-[15px] sm:text-xl short:sm:text-lg lg:text-[2.1rem] short:lg:text-xl">
                 Free for parents. Free for faculty.
               </span>
             </h1>
 
-            <p className="mx-auto max-w-lg text-base leading-relaxed text-pretty text-muted lg:mx-0 sm:text-lg">
+            <p className="mx-auto max-w-lg text-base leading-relaxed text-pretty text-muted lg:mx-0 short:text-sm short:leading-snug shorter:line-clamp-3 sm:text-lg short:sm:text-[15px]">
               Search open slots near you or online, send a connect request, or
               post your requirement and review tutor pitches — WhatsApp unlocks
               once either side accepts. ₹0 platform fee, no commission, ever.
             </p>
-            <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted/90 lg:mx-0">
+            <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted/90 lg:mx-0 short:hidden short:sm:block short:sm:text-xs shorter:hidden">
               {GLOBAL_REACH_LINE}
             </p>
 
-            <div className="flex w-full max-w-full flex-wrap items-center justify-center gap-2 lg:justify-start">
+            <div className="flex w-full max-w-full flex-wrap items-center justify-center gap-2 lg:justify-start short:gap-1.5 shorter:hidden sm:flex">
               <LpPill tint="sage">Search &amp; connect</LpPill>
               <LpPill tint="butter">Post &amp; get pitches</LpPill>
               <LpPill tint="coral">Faculty keep 100%</LpPill>
             </div>
 
-            <div className="flex w-full max-w-full flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
+            <div className="flex w-full max-w-full flex-col items-stretch gap-3 short:gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
               <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="h-13 w-full max-w-full gap-2 px-5 text-base shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8"
+                  className="h-13 w-full max-w-full gap-2 px-5 text-base shadow-[3px_3px_0_0_#1c1a17] short:h-11 short:text-sm sm:w-auto sm:px-8 short:sm:h-12"
                 >
                   <Search className="h-4 w-4 shrink-0" />
                   Find a teacher
@@ -531,15 +531,15 @@ export function Hero() {
               <PostRequirementButton
                 size="lg"
                 variant="secondary"
-                className="h-13 w-full max-w-full border-2 border-ink px-5 shadow-[3px_3px_0_0_#1c1a17] sm:w-auto sm:px-8"
+                className="h-13 w-full max-w-full border-2 border-ink px-5 shadow-[3px_3px_0_0_#1c1a17] short:h-11 short:text-sm sm:w-auto sm:px-8 short:sm:h-12"
               />
             </div>
 
-            <div className="grid w-full min-w-0 gap-3 sm:grid-cols-2">
+            <div className="grid w-full min-w-0 gap-3 short:gap-2 shorter:hidden sm:grid-cols-2 short:sm:gap-2">
               <Link
                 href="/parents"
                 className={cn(
-                  "rounded-xl border-2 border-ink/10 bg-white p-4 text-left transition hover:border-ink hover:bg-cream-band",
+                  "rounded-xl border-2 border-ink/10 bg-white p-4 text-left transition hover:border-ink hover:bg-cream-band short:p-3",
                   hardShadowSm,
                   "hover:-translate-y-0.5",
                 )}
@@ -548,17 +548,17 @@ export function Hero() {
                   <Users className="h-3.5 w-3.5" />
                   For parents
                 </p>
-                <p className="mt-2 text-sm font-bold text-ink">
+                <p className="mt-2 text-sm font-bold text-ink short:mt-1 short:text-[13px]">
                   Create a free parent account
                 </p>
-                <p className="mt-1 text-xs text-muted">
+                <p className="mt-1 text-xs text-muted short:line-clamp-1">
                   Then search tutors, post a need, connect on WhatsApp.
                 </p>
               </Link>
               <Link
                 href="/for-faculty"
                 className={cn(
-                  "rounded-xl border-2 border-ink/10 bg-white p-4 text-left transition hover:border-ink hover:bg-cream-band",
+                  "rounded-xl border-2 border-ink/10 bg-white p-4 text-left transition hover:border-ink hover:bg-cream-band short:p-3",
                   hardShadowSm,
                   "hover:-translate-y-0.5",
                 )}
@@ -567,35 +567,35 @@ export function Hero() {
                   <BadgeCheck className="h-3.5 w-3.5" />
                   For faculty
                 </p>
-                <p className="mt-2 text-sm font-bold text-ink">
+                <p className="mt-2 text-sm font-bold text-ink short:mt-1 short:text-[13px]">
                   List free &amp; get found worldwide
                 </p>
-                <p className="mt-1 text-xs text-muted">
+                <p className="mt-1 text-xs text-muted short:line-clamp-1">
                   Receive requests, pitch on the board, keep every rupee.
                 </p>
               </Link>
             </div>
 
-            <div className="flex items-center justify-center gap-3 pt-1 lg:justify-start">
+            <div className="flex items-center justify-center gap-3 pt-1 lg:justify-start short:pt-0 shorter:hidden">
               <div className="flex -space-x-2">
                 {!ready
                   ? [0, 1, 2, 3].map((i) => (
                       <Skeleton
                         key={i}
-                        className="h-8 w-8 rounded-full border-2 border-cream bg-cream-band"
+                        className="h-8 w-8 rounded-full border-2 border-cream bg-cream-band short:h-7 short:w-7"
                       />
                     ))
                   : previewFaces.map((t) => (
                       <span
                         key={t.id}
                         title={t.name}
-                        className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-cream bg-lavender text-[10px] font-bold text-ink"
+                        className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-cream bg-lavender text-[10px] font-bold text-ink short:h-7 short:w-7"
                       >
                         {t.initials}
                       </span>
                     ))}
               </div>
-              <p className="text-left text-xs leading-snug text-muted">
+              <p className="text-left text-xs leading-snug text-muted short:text-[11px]">
                 {ready && pool.length > 0 ? (
                   <>
                     <span className="font-bold text-ink">
@@ -619,9 +619,9 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="min-w-0 w-full max-w-full overflow-hidden">
+          <div className="min-w-0 w-full max-w-full overflow-hidden short-landscape:hidden">
             <HeroInteractiveMock pool={pool} ready={ready} />
-            <p className="mt-4 text-center text-xs leading-relaxed text-muted lg:text-left">
+            <p className="mt-4 text-center text-xs leading-relaxed text-muted lg:text-left short:mt-2 short:text-[11px] shorter:hidden">
               Switch tabs to preview both paths — filter tutors, toggle open
               slots, or browse live requirements on the board.
             </p>
