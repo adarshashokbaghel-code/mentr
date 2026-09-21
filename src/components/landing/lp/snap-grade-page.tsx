@@ -867,7 +867,8 @@ export function SnapGradeLanding() {
                 <span className="text-coral">Your paper.</span>
               </h2>
               <p className="mt-3 text-base text-muted">
-                Short pages for Class 9–12 Maths, Science, Physics, CBSE
+                Short pages for Class 9–12 Maths, Science, Physics, Chemistry,
+                Biology, CBSE
                 marking, and NCERT photo grading — then open the grader.
               </p>
             </div>

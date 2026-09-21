@@ -189,32 +189,55 @@ function guessMarks(text) {
 }
 
 function findExerciseBlocks(body) {
-  // NCERT chem/bio PDFs often OCR as "Exercises Exercises Exercises…" on one line
+  // Chem: "Exercises" / "Exercises Exercises…"
+  // Bio: OCR often spaces letters — "E XERCISES"
   const re =
-    /\n[ \t]*((?:ADDITIONAL|OPTIONAL)[ \t]+)?(?:EXERCISES?[ \t]*)+(?:\([^)]*\))?[ \t]*\n/gi;
+    /\n[ \t]*((?:ADDITIONAL|OPTIONAL)[ \t]+)?(?:(?:E\s*X\s*E\s*R\s*C\s*I\s*S\s*E\s*S)|(?:EXERCISES?))(?:[ \t]+(?:(?:E\s*X\s*E\s*R\s*C\s*I\s*S\s*E\s*S)|(?:EXERCISES?)))*[ \t]*(?:\([^)]*\))?[ \t]*\n/gi;
   const found = [];
   let m;
   while ((m = re.exec(body))) {
-    const after = body.slice(m.index + m[0].length, m.index + m[0].length + 80);
+    const after = body.slice(m.index + m[0].length, m.index + m[0].length + 200);
+    const afterClean = after
+      .replace(/^\s*2020-21\s*/i, "")
+      .replace(/^\s*\d{1,3}\s+[A-Za-z].{0,40}\n/m, "")
+      .trim();
     if (
       !m[1] &&
-      /^(Additional exercises|Appendix|Reprint|Answers|ANSWERS)\b/i.test(after.trim())
+      /^(Additional exercises|Appendix|Reprint|Answers|ANSWERS|S\s*U\s*M\s*M\s*A\s*R\s*Y)/i.test(
+        afterClean,
+      )
     ) {
+      // Header may sit AFTER the questions (chem OCR) — still record for fallback anchor
+      found.push({
+        index: m.index,
+        optional: Boolean(m[1]),
+        label: m[0],
+        emptyAfter: true,
+      });
       continue;
     }
     found.push({
       index: m.index,
       optional: Boolean(m[1]),
       label: m[0],
+      emptyAfter: false,
     });
   }
   if (!found.length) return [];
 
-  const threshold = Math.floor(body.length * 0.35);
+  const threshold = Math.floor(body.length * 0.3);
   let sections = found.filter((s) => s.index >= threshold);
   if (!sections.length) sections = [found[found.length - 1]];
 
   return sections.map((sec, i) => {
+    if (sec.emptyAfter) {
+      const lookBack = Math.max(0, sec.index - 18_000);
+      return {
+        ...sec,
+        chunk: body.slice(lookBack, sec.index),
+        fromLookback: true,
+      };
+    }
     const start = sec.index + sec.label.length;
     const end = i + 1 < sections.length ? sections[i + 1].index : body.length;
     return { ...sec, chunk: body.slice(start, end) };
@@ -233,9 +256,33 @@ function normalizeSpacedNumbers(chunk) {
     );
 }
 
-function splitQuestions(chunk) {
+function cleanQuestionText(text) {
+  return cleanText(text)
+    .replace(/\n?Reprint\s+\d{4}-\d{2}\s*$/gi, "")
+    .replace(/\n?\d{1,3}\s*$/g, "")
+    .replace(/\n{2,}/g, "\n")
+    .replace(/\n?2020-21\s*$/gi, "")
+    .trim();
+}
+
+function isJunkQuestion(text) {
+  if (text.length < 12) return true;
+  if (/^Note for the (student|teacher)/i.test(text)) return true;
+  if (/^Note\s*:/i.test(text) && text.length < 80) return true;
+  if (/^The exercises given here/i.test(text) && text.length < 200) return true;
+  if (/^(Answers|Appendix|SUMMARY|Summary|S\s*U\s*M\s*M\s*A\s*R\s*Y)\b/i.test(text))
+    return true;
+  // Section headings OCR'd as "8.1 W HAT IS A C ELL"
+  if (/^[A-Z](?:\s+[A-Z]){3,}\b/.test(text) && text.length < 60) return true;
+  return false;
+}
+
+/** Chemistry-style 3.1 / Biology-style 1. 2. 3. */
+function splitQuestions(chunk, { simple = false } = {}) {
   chunk = normalizeSpacedNumbers(chunk);
-  const re = /(?:^|\n)\s*(\d{1,2}\.\d{1,2})\s+/g;
+  const re = simple
+    ? /(?:^|\n)\s*(\d{1,2})\.\s+(?=[A-Za-z(“"'])/g
+    : /(?:^|\n)\s*(\d{1,2}\.\d{1,2})\s+/g;
   const matches = [...chunk.matchAll(re)];
   if (matches.length < 1) return [];
 
@@ -244,48 +291,88 @@ function splitQuestions(chunk) {
     const full = matches[i][1];
     const start = matches[i].index + matches[i][0].length;
     const end = i + 1 < matches.length ? matches[i + 1].index : chunk.length;
-    let text = cleanText(chunk.slice(start, end));
-    text = text
-      .replace(/\n?Reprint\s+\d{4}-\d{2}\s*$/gi, "")
-      .replace(/\n?\d{1,3}\s*$/g, "")
-      .replace(/\n{2,}/g, "\n")
-      .trim();
-    if (text.length < 15) continue;
-    if (/^Note for the (student|teacher)/i.test(text)) continue;
-    if (/^Note\s*:/i.test(text) && text.length < 80) continue;
-    if (/^The exercises given here/i.test(text) && text.length < 200) continue;
-    if (/^(Answers|Appendix|SUMMARY|Summary)\b/i.test(text)) continue;
+    const text = cleanQuestionText(chunk.slice(start, end));
+    if (isJunkQuestion(text)) continue;
     out.push({ full, n: full, text });
   }
   return out;
 }
 
-function parseExercises(raw, chapterNumber) {
-  const text = cleanText(raw);
-  const lastEx = Math.max(
-    text.lastIndexOf("\nEXERCISES"),
-    text.lastIndexOf("\nExercises"),
-    text.lastIndexOf("\nADDITIONAL EXERCISES"),
-    text.lastIndexOf("\nAdditional Exercises"),
+function fallbackBeforeAnswers(body, chapterNumber) {
+  const ans = body.search(
+    /\n\s*(Answers to Some Intext Questions|ANSWERS|Answers)\b/,
   );
-  let body = text;
+  const region = ans > 0 ? body.slice(0, ans) : body;
+  const start = Math.floor(region.length * 0.65);
+  let qs = splitQuestions(region.slice(start));
+  qs = qs.filter((q) => q.full.startsWith(`${chapterNumber}.`));
+  // Keep the last contiguous run (exercise sets restart numbering)
+  if (qs.length < 3) return [];
+  const byNum = new Map();
+  for (const q of qs) byNum.set(q.full, q);
+  return [...byNum.values()].sort((a, b) => {
+    const [a1, a2] = a.full.split(".").map(Number);
+    const [b1, b2] = b.full.split(".").map(Number);
+    return a1 - b1 || a2 - b2;
+  });
+}
+
+function parseExercises(raw, chapterNumber, { subject } = {}) {
+  const text = cleanText(raw);
+  // Normalise spaced bio header early so lastIndexOf works
+  const normalised = text.replace(
+    /\n[ \t]*E\s+X\s+E\s+R\s+C\s+I\s+S\s+E\s+S[ \t]*\n/gi,
+    "\nEXERCISES\n",
+  );
+
+  const lastEx = Math.max(
+    normalised.lastIndexOf("\nEXERCISES"),
+    normalised.lastIndexOf("\nExercises"),
+    normalised.lastIndexOf("\nADDITIONAL EXERCISES"),
+    normalised.lastIndexOf("\nAdditional Exercises"),
+  );
+  let body = normalised;
   if (lastEx > 0) {
-    const tail = text.slice(lastEx);
+    const tail = normalised.slice(lastEx);
     const cutRel = tail.search(
-      /\n\s*(ANSWERS|Answers|Appendix|SUMMARY|Summary|Answers to Some)\b/,
+      /\n\s*(ANSWERS|Answers|Appendix|SUMMARY|Summary|Answers to Some|S\s*U\s*M\s*M\s*A\s*R\s*Y)\b/,
     );
-    if (cutRel > 0) body = text.slice(0, lastEx + cutRel);
+    // Don't cut the body before Exercises when Answers is the next line —
+    // lookback path needs the questions above the header.
+    if (cutRel > 80) body = normalised.slice(0, lastEx + cutRel);
   }
 
+  const isBio = subject === "Biology";
   const blocks = findExerciseBlocks(body);
-  if (!blocks.length) return [];
-
   const exercises = [];
+
   for (const block of blocks) {
-    let qs = splitQuestions(block.chunk);
-    const matched = qs.filter((q) => q.full.startsWith(`${chapterNumber}.`));
-    if (matched.length >= 2) qs = matched;
-    else if (matched.length === 1 && qs.length === 1) qs = matched;
+    let chunk = block.chunk;
+    if (block.fromLookback && !isBio) {
+      // Start at the last "N.1 " before the misplaced Exercises header
+      const marker = `\n${chapterNumber}.1 `;
+      const idx = chunk.lastIndexOf(marker);
+      if (idx >= 0) chunk = chunk.slice(idx);
+    }
+
+    let qs = isBio
+      ? splitQuestions(chunk, { simple: true })
+      : splitQuestions(chunk);
+
+    if (!isBio) {
+      const matched = qs.filter((q) => q.full.startsWith(`${chapterNumber}.`));
+      if (matched.length >= 2) qs = matched;
+      else if (matched.length === 1 && qs.length === 1) qs = matched;
+    } else {
+      // Biology: keep ascending 1..N, drop TOC noise (single-digit runs in mid-book)
+      qs = qs.filter((q) => {
+        const n = Number(q.n);
+        return n >= 1 && n <= 40;
+      });
+      // Prefer run starting at 1
+      const startAt1 = qs.findIndex((q) => q.n === "1" || q.n === "1.1");
+      if (startAt1 > 0) qs = qs.slice(startAt1);
+    }
 
     if (!qs.length) continue;
 
@@ -303,6 +390,41 @@ function parseExercises(raw, chapterNumber) {
     });
   }
 
+  if (!exercises.length && !isBio) {
+    const qs = fallbackBeforeAnswers(body, chapterNumber);
+    if (qs.length) {
+      exercises.push({
+        exercise: `${chapterNumber}.E`,
+        questions: qs.map((q, idx) => ({
+          n: String(idx + 1),
+          marks: guessMarks(q.text),
+          text: q.text,
+        })),
+      });
+    }
+  }
+
+  // Biology: if header missed, take last simple-numbered block in final 20%
+  if (!exercises.length && isBio) {
+    const start = Math.floor(body.length * 0.75);
+    let qs = splitQuestions(body.slice(start), { simple: true }).filter((q) => {
+      const n = Number(q.n);
+      return n >= 1 && n <= 40;
+    });
+    const startAt1 = qs.findIndex((q) => q.n === "1");
+    if (startAt1 >= 0) qs = qs.slice(startAt1);
+    if (qs.length >= 3) {
+      exercises.push({
+        exercise: `${chapterNumber}.E`,
+        questions: qs.map((q, idx) => ({
+          n: String(idx + 1),
+          marks: guessMarks(q.text),
+          text: q.text,
+        })),
+      });
+    }
+  }
+
   const merged = new Map();
   for (const ex of exercises) {
     const prev = merged.get(ex.exercise);
@@ -311,6 +433,7 @@ function parseExercises(raw, chapterNumber) {
   }
   return [...merged.values()].filter((e) => e.questions.length > 0);
 }
+
 
 function toTsLiteral(value, indent = 0) {
   const pad = "  ".repeat(indent);
@@ -378,7 +501,7 @@ async function processClass(classLevel, subject, list, { refreshText = false } =
       text = await pdfToText(pdf);
       fs.writeFileSync(textPath, text);
     }
-    const exercises = parseExercises(text, ch.n);
+    const exercises = parseExercises(text, ch.n, { subject });
     const qn = exercises.reduce((a, e) => a + e.questions.length, 0);
     console.log(`  → ${exercises.length} set(s), ${qn} questions`);
     extracted.push({ ...ch, exercises });

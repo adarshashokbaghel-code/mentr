@@ -602,7 +602,155 @@ in 2 litre of water at 25° C, assuming that it is completely dissociated.`
     subject: "Chemistry",
     chapterNumber: 3,
     chapterName: "Electrochemistry",
-    exercises: []
+    exercises: [
+      {
+        exercise: "3.E",
+        questions: [
+          {
+            n: "1",
+            marks: 2,
+            text: `Arrange the following metals in the order in which they displace each other
+from the solution of their salts.
+Al, Cu, Fe, Mg and Zn.`
+          },
+          {
+            n: "2",
+            marks: 2,
+            text: `Given the standard electrode potentials,
+K
++
+/K = –2.93V, Ag
++
+/Ag = 0.80V,
+Hg
+2+
+/Hg = 0.79V
+Mg
+2+
+/Mg = –2.37 V, Cr
+3+
+/Cr = – 0.74V
+Arrange these metals in their increasing order of reducing power.`
+          },
+          {
+            n: "3",
+            marks: 3,
+            text: `Depict the galvanic cell in which the reaction
+Zn(s)+2Ag
++
+(aq) → Zn
+2+
+(aq)+2Ag(s) takes place. Further show:
+(i) Which of the electrode is negatively charged?
+(ii) The carriers of the current in the cell.
+(iii) Individual reaction at each electrode.`
+          },
+          {
+            n: "4",
+            marks: 2,
+            text: `Calculate the standard cell potentials of galvanic cell in which the following
+reactions take place:
+(i) 2Cr(s) + 3Cd
+2+
+(aq) → 2Cr
+3+
+(aq) + 3Cd
+(ii) Fe
+2+
+(aq) + Ag
++
+(aq) → Fe
+3+
+(aq) + Ag(s)
+Calculate the ∆
+r
+G
+J 
+and equilibrium constant of the reactions.`
+          },
+          {
+            n: "5",
+            marks: 4,
+            text: `Write the Nernst equation and emf of the following cells at 298 K:
+(i) Mg(s)|Mg
+2+
+(0.001M)| |Cu
+2+
+(0.0001 M)|Cu(s)
+(ii) Fe(s)|Fe
+2+
+(0.001M)| |H
++
+(1M)|H
+2
+(g)(1bar)| Pt(s)
+(iii) Sn(s)|Sn
+2+
+(0.050 M)| |H
++
+(0.020 M)|H
+2
+(g) (1 bar)|Pt(s)
+(iv) Pt(s)|Br
+–
+(0.010 M)|Br
+2
+(l )| |H
++
+(0.030 M)| H
+2
+(g) (1 bar)|Pt(s).`
+          },
+          {
+            n: "6",
+            marks: 2,
+            text: `In the button cells widely used in watches and other devices the following
+reaction takes place:
+Zn(s) + Ag
+2
+O(s) + H
+2
+O( l ) → Zn
+2+
+(aq) + 2Ag(s) + 2OH
+–
+(aq)
+Determine ∆
+r 
+G
+J 
+and E
+J 
+for the reaction.`
+          },
+          {
+            n: "7",
+            marks: 3,
+            text: `Define conductivity and molar conductivity for the solution of an electrolyte.
+Discuss their variation with concentration.`
+          },
+          {
+            n: "8",
+            marks: 2,
+            text: `The conductivity of 0.20 M solution of KCl at 298 K is 0.0248 S cm
+–1
+. Calculate
+its molar conductivity.`
+          },
+          {
+            n: "9",
+            marks: 2,
+            text: `The resistance of a conductivity cell containing 0.001M KCl solution at 298
+K is 1500 Ω . What is the cell constant if conductivity of 0.001M KCl solution
+at 298 K is 0.146 × 10
+–3 
+S cm
+–1
+.`
+          }
+        ]
+      }
+    ]
   },
   {
     classLevel: 12,
@@ -922,14 +1070,350 @@ that it does not change with temperature.`
     subject: "Chemistry",
     chapterNumber: 5,
     chapterName: "Surface Chemistry",
-    exercises: []
+    exercises: [
+      {
+        exercise: "5.E",
+        questions: [
+          {
+            n: "1",
+            marks: 3,
+            text: `Distinguish between the meaning of the terms adsorption and absorption.
+Give one example of each.`
+          },
+          {
+            n: "2",
+            marks: 2,
+            text: "What is the difference between physisorption and chemisorption?"
+          },
+          {
+            n: "3",
+            marks: 2,
+            text: "Give reason why a finely divided substance is more effective as an adsorbent."
+          },
+          {
+            n: "4",
+            marks: 2,
+            text: "What are the factors which influence the adsorption of a gas on a solid?"
+          },
+          {
+            n: "5",
+            marks: 3,
+            text: "What is an adsorption isotherm? Describe Freundlich adsorption isotherm."
+          },
+          {
+            n: "6",
+            marks: 2,
+            text: "What do you understand by activation of adsorbent? How is it achieved?"
+          },
+          {
+            n: "7",
+            marks: 2,
+            text: "What role does adsorption play in heterogeneous catalysis?"
+          },
+          {
+            n: "8",
+            marks: 2,
+            text: "Why is adsorption always exothermic ?"
+          },
+          {
+            n: "9",
+            marks: 2,
+            text: `How are the colloidal solutions classified on the basis of physical states of
+the dispersed phase and dispersion medium?`
+          },
+          {
+            n: "10",
+            marks: 3,
+            text: `Discuss the effect of pressure and temperature on the adsorption of gases
+on solids.`
+          },
+          {
+            n: "11",
+            marks: 2,
+            text: `What are lyophilic and lyophobic sols? Give one example of each type. Why
+are hydrophobic sols easily coagulated ?`
+          },
+          {
+            n: "12",
+            marks: 2,
+            text: `What is the difference between multimolecular and macromolecular colloids?
+Give one example of each. How are associated colloids different from these
+two types of colloids?`
+          },
+          {
+            n: "13",
+            marks: 2,
+            text: "What are enzymes ? Write in brief the mechanism of enzyme catalysis."
+          },
+          {
+            n: "14",
+            marks: 3,
+            text: `How are colloids classified on the basis of
+(i) physical states of components
+(ii) nature of dispersed phase and
+(iii) interaction between dispersed phase and dispersion medium?`
+          },
+          {
+            n: "15",
+            marks: 3,
+            text: `Explain what is observed
+(i) when a beam of light is passed through a colloidal sol.
+(ii) an electrolyte, NaCl is added to hydrated ferric oxide sol.
+(iii) electric current is passed through a colloidal sol?`
+          },
+          {
+            n: "16",
+            marks: 2,
+            text: "What are emulsions? What are their different types? Give example of each type."
+          },
+          {
+            n: "17",
+            marks: 2,
+            text: "How do emulsifires stabilise emulsion? Name two emulsifiers."
+          },
+          {
+            n: "18",
+            marks: 2,
+            text: "Action of soap is due to emulsification and micelle formation. Comment."
+          },
+          {
+            n: "19",
+            marks: 2,
+            text: "Give four examples of heterogeneous catalysis."
+          },
+          {
+            n: "20",
+            marks: 2,
+            text: "What do you mean by activity and selectivity of catalysts?"
+          },
+          {
+            n: "21",
+            marks: 3,
+            text: "Describe some features of catalysis by zeolites."
+          },
+          {
+            n: "22",
+            marks: 2,
+            text: "What is shape selective catalysis?"
+          },
+          {
+            n: "23",
+            marks: 4,
+            text: `Explain the following terms:
+(i) Electrophoresis (ii) Coagulation (iii) Dialysis (iv) Tyndall effect.`
+          },
+          {
+            n: "24",
+            marks: 2,
+            text: "Give four uses of emulsions."
+          },
+          {
+            n: "25",
+            marks: 2,
+            text: "What are micelles? Give an example of a micellers system."
+          },
+          {
+            n: "26",
+            marks: 3,
+            text: `Explain the terms with suitable examples:
+(i) Alcosol (ii) Aerosol (iii) Hydrosol.`
+          },
+          {
+            n: "27",
+            marks: 2,
+            text: `Comment on the statement that “colloid is not a substance but a state of
+substance”.
+Exercises Exercises Exercises Exercises Exercises
+2020-`
+          }
+        ]
+      }
+    ]
   },
   {
     classLevel: 12,
     subject: "Chemistry",
     chapterNumber: 6,
     chapterName: "General Principles and Processes of Isolation of Elements",
-    exercises: []
+    exercises: [
+      {
+        exercise: "6.E",
+        questions: [
+          {
+            n: "1",
+            marks: 3,
+            text: "Copper can be extracted by hydrometallurgy but not zinc. Explain."
+          },
+          {
+            n: "2",
+            marks: 2,
+            text: "What is the role of depressant in froth floatation process?"
+          },
+          {
+            n: "3",
+            marks: 2,
+            text: `Why is the extraction of copper from pyrites more difficult than that from its
+oxide ore through reduction?`
+          },
+          {
+            n: "4",
+            marks: 2,
+            text: "Explain: (i) Zone refining (ii) Column chromatography."
+          },
+          {
+            n: "5",
+            marks: 2,
+            text: "Out of C and CO, which is a better reducing agent at 673 K ?"
+          },
+          {
+            n: "6",
+            marks: 2,
+            text: `Name the common elements present in the anode mud in electrolytic refining
+of copper. Why are they so present ?`
+          },
+          {
+            n: "7",
+            marks: 2,
+            text: `Write down the reactions taking place in different zones in the blast furnace
+during the extraction of iron.`
+          },
+          {
+            n: "8",
+            marks: 2,
+            text: `Write chemical reactions taking place in the extraction of zinc from zinc blende.`
+          },
+          {
+            n: "9",
+            marks: 2,
+            text: "State the role of silica in the metallurgy of copper."
+          },
+          {
+            n: "10",
+            marks: 3,
+            text: `Which method of refining may be more suitable if element is obtained in minute
+quantity?`
+          },
+          {
+            n: "11",
+            marks: 2,
+            text: `Which method of refining will you suggest for an element in which impurities
+present have chemical properties close to the properties of that elements?`
+          },
+          {
+            n: "12",
+            marks: 3,
+            text: "Describe a method for refining nickel."
+          },
+          {
+            n: "13",
+            marks: 2,
+            text: `How can you separate alumina from silica in a bauxite ore associated with
+silica? Give equations, if any.`
+          },
+          {
+            n: "14",
+            marks: 3,
+            text: "Giving examples, differentiate between ‘roasting’ and ‘calcination’."
+          },
+          {
+            n: "15",
+            marks: 2,
+            text: "How is ‘cast iron’ different from ‘pig iron”?"
+          },
+          {
+            n: "16",
+            marks: 3,
+            text: "Differentiate between “minerals” and “ores”."
+          },
+          {
+            n: "17",
+            marks: 2,
+            text: "Why copper matte is put in silica lined converter?"
+          },
+          {
+            n: "18",
+            marks: 2,
+            text: "What is the role of cryolite in the metallurgy of aluminium?"
+          },
+          {
+            n: "19",
+            marks: 2,
+            text: "How is leaching carried out in case of low grade copper ores?"
+          },
+          {
+            n: "20",
+            marks: 2,
+            text: "Why is zinc not extracted from zinc oxide through reduction using CO?"
+          },
+          {
+            n: "21",
+            marks: 2,
+            text: `The value of ∆
+f
+G
+0 
+for formation of Cr
+2 
+O
+3 
+is – 540 kJmol
+−1
+and that of Al
+2 
+O
+3 
+is
+– 827 kJmol
+−1
+. Is the reduction of Cr
+2 
+O
+3 
+possible with Al ?`
+          },
+          {
+            n: "22",
+            marks: 2,
+            text: "Out of C and CO, which is a better reducing agent for ZnO ?"
+          },
+          {
+            n: "23",
+            marks: 2,
+            text: `The choice of a reducing agent in a particular case depends on thermodynamic
+factor. How far do you agree with this statement? Support your opinion with
+two examples.`
+          },
+          {
+            n: "24",
+            marks: 3,
+            text: `Name the processes from which chlorine is obtained as a by-product. What
+will happen if an aqueous solution of NaCl is subjected to electrolysis?`
+          },
+          {
+            n: "25",
+            marks: 2,
+            text: "What is the role of graphite rod in the electrometallurgy of aluminium?"
+          },
+          {
+            n: "26",
+            marks: 3,
+            text: `Outline the principles of refining of metals by the following methods:
+(i) Zone refining
+(ii) Electrolytic refining
+(iii) Vapour phase refining`
+          },
+          {
+            n: "27",
+            marks: 2,
+            text: `Predict conditions under which Al might be expected to reduce MgO.
+(Hint: See Intext question 6.4)
+Exercises Exercises Exercises Exercises Exercises
+2020-21
+General Principles and Processes of Isolation of Elements`
+          }
+        ]
+      }
+    ]
   },
   {
     classLevel: 12,
@@ -2267,7 +2751,148 @@ acid.`
     subject: "Chemistry",
     chapterNumber: 14,
     chapterName: "Biomolecules",
-    exercises: []
+    exercises: [
+      {
+        exercise: "14.E",
+        questions: [
+          {
+            n: "1",
+            marks: 2,
+            text: "What are monosaccharides?"
+          },
+          {
+            n: "2",
+            marks: 2,
+            text: "What are reducing sugars?"
+          },
+          {
+            n: "3",
+            marks: 2,
+            text: "Write two main functions of carbohydrates in plants."
+          },
+          {
+            n: "4",
+            marks: 2,
+            text: `Classify the following into monosaccharides and disaccharides.
+Ribose, 2-deoxyribose, maltose, galactose, fructose and lactose.`
+          },
+          {
+            n: "5",
+            marks: 2,
+            text: "What do you understand by the term glycosidic linkage?"
+          },
+          {
+            n: "6",
+            marks: 2,
+            text: "What is glycogen? How is it different from starch?"
+          },
+          {
+            n: "7",
+            marks: 2,
+            text: `What are the hydrolysis products of
+(i) sucrose and (ii) lactose?`
+          },
+          {
+            n: "8",
+            marks: 2,
+            text: "What is the basic structural difference between starch and cellulose?"
+          },
+          {
+            n: "9",
+            marks: 3,
+            text: `What happens when D-glucose is treated with the following reagents?
+(i) HI (ii) Bromine water (iii) HNO`
+          },
+          {
+            n: "10",
+            marks: 3,
+            text: `Enumerate the reactions of D-glucose which cannot be explained by its
+open chain structure.`
+          },
+          {
+            n: "11",
+            marks: 2,
+            text: `What are essential and non-essential amino acids? Give two examples of
+each type.`
+          },
+          {
+            n: "12",
+            marks: 3,
+            text: `Define the following as related to proteins
+(i) Peptide linkage (ii) Primary structure (iii) Denaturation.`
+          },
+          {
+            n: "13",
+            marks: 2,
+            text: "What are the common types of secondary structure of proteins?"
+          },
+          {
+            n: "14",
+            marks: 2,
+            text: "What type of bonding helps in stabilising the α -helix structure of proteins?"
+          },
+          {
+            n: "15",
+            marks: 3,
+            text: "Differentiate between globular and fibrous proteins."
+          },
+          {
+            n: "16",
+            marks: 3,
+            text: "How do you explain the amphoteric behaviour of amino acids?"
+          },
+          {
+            n: "17",
+            marks: 2,
+            text: "What are enzymes?"
+          },
+          {
+            n: "18",
+            marks: 2,
+            text: "What is the effect of denaturation on the structure of proteins?"
+          },
+          {
+            n: "19",
+            marks: 2,
+            text: `How are vitamins classified? Name the vitamin responsible for the
+coagulation of blood.`
+          },
+          {
+            n: "20",
+            marks: 2,
+            text: "Why are vitamin A and vitamin C essential to us? Give their important sources."
+          },
+          {
+            n: "21",
+            marks: 2,
+            text: "What are nucleic acids? Mention their two important functions."
+          },
+          {
+            n: "22",
+            marks: 2,
+            text: "What is the difference between a nucleoside and a nucleotide?"
+          },
+          {
+            n: "23",
+            marks: 3,
+            text: "The two strands in DNA are not identical but are complementary. Explain."
+          },
+          {
+            n: "24",
+            marks: 2,
+            text: `Write the important structural and functional differences between DNA
+and RNA.`
+          },
+          {
+            n: "25",
+            marks: 2,
+            text: `What are the different types of RNA found in the cell?
+Exercises Exercises Exercises Exercises Exercises
+2020-`
+          }
+        ]
+      }
+    ]
   },
   {
     classLevel: 12,

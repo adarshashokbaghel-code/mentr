@@ -402,12 +402,12 @@ export const SNAP_GRADE_CLUSTERS: SnapGradeCluster[] = [
     slug: "ncert-photo-grade",
     title: "Grade NCERT answers from a photo — CBSE steps | Snap & Grade",
     metaDescription:
-      "Photo your NCERT Maths, Science, or Physics answer. Get CBSE-style step marks and writing tips. Class 9–12. Free credits on Mentr.",
+      "Photo your NCERT Maths, Science, Physics, Chemistry or Biology answer. Get CBSE-style step marks and writing tips. Class 9–12. Free credits on Mentr.",
     h1: "Photo your NCERT answer.",
     h1Accent: "Get step marks.",
     eyebrow: "Snap & Grade · NCERT",
     intro:
-      "You already solved the NCERT exercise in the notebook. Snap & Grade is the next step: photograph that page, confirm the text, and see marks the CBSE way. Class 9–12 Maths, Science, and Class 11–12 Physics — 2000+ questions, chapter PDFs on the same site.",
+      "You already solved the NCERT exercise in the notebook. Snap & Grade is the next step: photograph that page, confirm the text, and see marks the CBSE way. Class 9–12 Maths, Science, and Class 11–12 Physics, Chemistry and Biology — 3500+ questions, chapter PDFs on the same site.",
     what: "Pick the NCERT question we loaded. Snap. Confirm. Grade.",
     benefit:
       "Study, practise, and grade in one place — without retyping the sum.",
