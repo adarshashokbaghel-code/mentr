@@ -332,6 +332,9 @@ function applyPlanToUser(
   if (!user.mentrPremium.firstRechargedAt) {
     user.mentrPremium.firstRechargedAt = paidAt;
   }
+  if (!user.mentrPremium.planChosenAt) {
+    user.mentrPremium.planChosenAt = paidAt;
+  }
   user.mentrPremium.type = "premium";
   user.mentrPremium.lastPurchasedAt = paidAt;
   user.mentrPremium.expiresAt = periodEnd;
@@ -461,6 +464,9 @@ export async function verifyPremiumMentorPayment(opts: {
         ...(user.mentrPremium?.firstRechargedAt
           ? {}
           : { "mentrPremium.firstRechargedAt": paidAt }),
+        ...(user.mentrPremium?.planChosenAt
+          ? {}
+          : { "mentrPremium.planChosenAt": paidAt }),
       },
     },
     { new: true },
@@ -517,4 +523,40 @@ export async function markPremiumOrderFailed(
     },
     { $set: { "premiumPayments.$.status": "failed" } },
   );
+}
+
+/**
+ * Onboarding / soft-commit: mentor stays Classic (free). Does not downgrade
+ * an active Premium subscription.
+ */
+export async function chooseFreeMentorPlan(userId: string) {
+  const user = await User.findById(userId);
+  if (!user || user.role !== "faculty") {
+    return { error: "Mentor not found", code: "FORBIDDEN" as const };
+  }
+
+  const now = new Date();
+  if (isMentrPremiumActive(user, now)) {
+    return {
+      alreadyPremium: true as const,
+      user,
+      premium: serializeMentrPremiumState(user),
+    };
+  }
+
+  if (!user.mentrPremium) {
+    user.mentrPremium = { type: "free" };
+  }
+  user.mentrPremium.type = "free";
+  if (!user.mentrPremium.planChosenAt) {
+    user.mentrPremium.planChosenAt = now;
+  }
+  user.markModified("mentrPremium");
+  await user.save();
+
+  return {
+    alreadyPremium: false as const,
+    user,
+    premium: serializeMentrPremiumState(user),
+  };
 }

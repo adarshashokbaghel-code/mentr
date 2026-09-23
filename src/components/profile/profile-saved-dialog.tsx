@@ -1,14 +1,17 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { Check, X } from "lucide-react";
+import { Check, Crown, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
+export type ProfileSavedVariant = "saved" | "live-free" | "live-premium";
+
 type ProfileSavedDialogProps = {
   open: boolean;
   onClose: () => void;
+  variant?: ProfileSavedVariant;
 };
 
 function ArrowIcon() {
@@ -32,7 +35,35 @@ function ArrowIcon() {
   );
 }
 
-export function ProfileSavedDialog({ open, onClose }: ProfileSavedDialogProps) {
+const COPY: Record<
+  ProfileSavedVariant,
+  { title: string; body: string; primary: string; secondary: string }
+> = {
+  saved: {
+    title: "Your profile is updated",
+    body: "Changes are live. Head to your dashboard, or pitch on open parent requirements.",
+    primary: "Go to dashboard",
+    secondary: "Open requirement board",
+  },
+  "live-free": {
+    title: "You're live on Free",
+    body: "Parents can find you now. Pitch up to 3 times a day — upgrade to Premium anytime for unlimited reach.",
+    primary: "Go to dashboard",
+    secondary: "Browse requirements",
+  },
+  "live-premium": {
+    title: "Premium is active",
+    body: "You're live with unlimited pitches, parent unlocks, and featured placement. Time to win students.",
+    primary: "Open dashboard",
+    secondary: "Browse requirements",
+  },
+};
+
+export function ProfileSavedDialog({
+  open,
+  onClose,
+  variant = "saved",
+}: ProfileSavedDialogProps) {
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -48,6 +79,9 @@ export function ProfileSavedDialog({ open, onClose }: ProfileSavedDialogProps) {
   }, [open, onClose]);
 
   if (!open || typeof document === "undefined") return null;
+
+  const copy = COPY[variant];
+  const isPremium = variant === "live-premium";
 
   return createPortal(
     <div className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center sm:p-4">
@@ -79,19 +113,29 @@ export function ProfileSavedDialog({ open, onClose }: ProfileSavedDialogProps) {
         </button>
 
         <div className="flex items-start gap-3 px-5 pb-4 pt-5 sm:px-5">
-          <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sage-wash text-sage">
-            <Check className="h-4 w-4" strokeWidth={2.75} />
+          <span
+            className={cn(
+              "mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full",
+              isPremium
+                ? "bg-ink text-butter"
+                : "bg-sage-wash text-sage",
+            )}
+          >
+            {isPremium ? (
+              <Crown className="h-4 w-4" strokeWidth={2.25} />
+            ) : (
+              <Check className="h-4 w-4" strokeWidth={2.75} />
+            )}
           </span>
           <div className="min-w-0 pr-5">
             <h2
               id="profile-saved-title"
               className="text-[16px] font-bold tracking-tight text-ink"
             >
-              Your profile is updated
+              {copy.title}
             </h2>
             <p className="mt-1 text-[13px] leading-snug text-muted">
-              Changes are live. Head to your dashboard, or pitch on open parent
-              requirements.
+              {copy.body}
             </p>
           </div>
         </div>
@@ -102,7 +146,7 @@ export function ProfileSavedDialog({ open, onClose }: ProfileSavedDialogProps) {
             onClick={onClose}
             className="learn-hk-cta w-full"
           >
-            <span className="learn-hk-cta-label">Go to dashboard</span>
+            <span className="learn-hk-cta-label">{copy.primary}</span>
             <span className="learn-hk-cta-arrow">
               <ArrowIcon />
             </span>
@@ -113,16 +157,18 @@ export function ProfileSavedDialog({ open, onClose }: ProfileSavedDialogProps) {
             onClick={onClose}
             className="inline-flex h-10 w-full items-center justify-center rounded-[0.85rem] border border-hairline bg-white text-[13px] font-bold text-ink transition hover:bg-cream sm:rounded-[1.15rem]"
           >
-            Open requirement board
+            {copy.secondary}
           </Link>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex h-8 items-center justify-center text-[13px] font-medium text-coral transition hover:text-coral-dark"
-          >
-            Keep editing
-          </button>
+          {variant === "saved" && (
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex h-8 items-center justify-center text-[13px] font-medium text-coral transition hover:text-coral-dark"
+            >
+              Keep editing
+            </button>
+          )}
         </div>
       </div>
     </div>,

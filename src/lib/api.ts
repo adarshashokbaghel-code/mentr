@@ -168,6 +168,7 @@ export interface AuthUser {
   premiumMentorVerifiedAt?: string;
   mentrPremium?: {
     type: "free" | "premium";
+    planChosenAt?: string;
     firstRechargedAt?: string;
     lastPurchasedAt?: string;
     expiresAt?: string;
@@ -407,6 +408,16 @@ export const premiumMentorApi = {
     request<{ ok: boolean }>("/premium-mentor/cancel", {
       method: "POST",
       body: JSON.stringify({ orderId }),
+    }),
+
+  chooseFree: () =>
+    request<{
+      alreadyPremium: boolean;
+      user: AuthUser;
+      premium: PremiumMentorState;
+    }>("/premium-mentor/choose-free", {
+      method: "POST",
+      body: JSON.stringify({}),
     }),
 
   parents: (opts?: { q?: string; posted?: boolean; limit?: number }) => {
