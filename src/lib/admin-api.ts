@@ -720,3 +720,39 @@ export function updateSnapGradeQuestion(
     },
   );
 }
+
+/* ------------------------------ premium mentors ------------------------------ */
+
+export type AdminPremiumMentorRow = {
+  id: string;
+  email: string;
+  name: string;
+  phone: string | null;
+  city: string | null;
+  area: string | null;
+  status: "pending" | "verified" | "none";
+  screenshotUrl: string | null;
+  submittedAt: string | null;
+  verifiedAt: string | null;
+};
+
+export function fetchAdminPremiumMentors(key: string) {
+  return adminFetch<{ mentors: AdminPremiumMentorRow[] }>(
+    key,
+    "/api/admin/premium-mentors",
+  );
+}
+
+export function verifyAdminPremiumMentor(
+  key: string,
+  userId: string,
+  adminPass: string,
+) {
+  return adminFetch<{
+    ok: boolean;
+    mentor: { id: string; status: string; verifiedAt: string };
+  }>(key, `/api/admin/premium-mentors/${encodeURIComponent(userId)}/verify`, {
+    method: "POST",
+    body: JSON.stringify({ adminPass }),
+  });
+}

@@ -39,19 +39,24 @@ export function AdminSection({
   title,
   description,
   children,
+  actions,
 }: {
   id: string;
   title: string;
   description?: string;
   children: React.ReactNode;
+  actions?: React.ReactNode;
 }) {
   return (
     <section id={id} className="scroll-mt-6">
-      <div className="mb-4">
-        <h2 className="text-sm font-bold text-ink">{title}</h2>
-        {description && (
-          <p className="mt-0.5 text-xs text-muted">{description}</p>
-        )}
+      <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h2 className="text-sm font-bold text-ink">{title}</h2>
+          {description && (
+            <p className="mt-0.5 text-xs text-muted">{description}</p>
+          )}
+        </div>
+        {actions ? <div className="shrink-0">{actions}</div> : null}
       </div>
       {children}
     </section>

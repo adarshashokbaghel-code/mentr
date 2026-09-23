@@ -88,6 +88,14 @@ export function serializeUser(user: IUser) {
       : undefined,
     profileImageUrl: user.profileImageUrl,
     profileImagePath: user.profileImagePath,
+    premiumMentorStatus: user.premiumMentorStatus || "none",
+    premiumMentorPaymentSsUrl: user.premiumMentorPaymentSsUrl,
+    premiumMentorSubmittedAt: user.premiumMentorSubmittedAt
+      ? user.premiumMentorSubmittedAt.toISOString()
+      : undefined,
+    premiumMentorVerifiedAt: user.premiumMentorVerifiedAt
+      ? user.premiumMentorVerifiedAt.toISOString()
+      : undefined,
     lastLoginAt: user.lastLoginAt,
     createdAt: user.createdAt,
   };

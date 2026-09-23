@@ -157,6 +157,8 @@ export interface ILearnProfile {
   starter?: ILearnEnrollment;
 }
 
+export type PremiumMentorStatus = "none" | "pending" | "verified";
+
 export interface IUser extends Document {
   email: string;
   role: UserRole;
@@ -177,6 +179,12 @@ export interface IUser extends Document {
   profileImageUrl?: string;
   /** Storage object path inside `mentrs_profile` (for replace/delete) */
   profileImagePath?: string;
+  /** Premium mentor upgrade — pay via QR, upload SS, admin verifies */
+  premiumMentorStatus?: PremiumMentorStatus;
+  premiumMentorPaymentSsUrl?: string;
+  premiumMentorPaymentSsPath?: string;
+  premiumMentorSubmittedAt?: Date;
+  premiumMentorVerifiedAt?: Date;
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -361,6 +369,15 @@ const userSchema = new Schema<IUser>(
     },
     profileImageUrl: { type: String, trim: true },
     profileImagePath: { type: String, trim: true },
+    premiumMentorStatus: {
+      type: String,
+      enum: ["none", "pending", "verified"],
+      default: "none",
+    },
+    premiumMentorPaymentSsUrl: { type: String, trim: true },
+    premiumMentorPaymentSsPath: { type: String, trim: true },
+    premiumMentorSubmittedAt: { type: Date },
+    premiumMentorVerifiedAt: { type: Date },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },
@@ -369,6 +386,7 @@ const userSchema = new Schema<IUser>(
   { timestamps: true },
 );
 
+userSchema.index({ premiumMentorStatus: 1, premiumMentorSubmittedAt: -1 });
 userSchema.index({ "profile.subjects": 1 });
 userSchema.index({ "profile.city": 1 });
 userSchema.index({ referralUrl: 1 }, { sparse: true });

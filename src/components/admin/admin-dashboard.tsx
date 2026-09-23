@@ -15,6 +15,7 @@ import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
 import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
 import { AdminFeaturedTutors } from "@/components/admin/admin-featured-tutors";
+import { AdminPremiumMentors } from "@/components/admin/admin-premium-mentors";
 import { AdminSnapGrade } from "@/components/admin/admin-snap-grade";
 import { AdminUsersTable } from "@/components/admin/admin-users-table";
 import { fetchAdminStats, type AdminStats } from "@/lib/admin-api";
@@ -25,6 +26,7 @@ import {
   BookOpen,
   Camera,
   ChevronDown,
+  Crown,
   LayoutDashboard,
   Link2,
   Lock,
@@ -43,6 +45,7 @@ const NAV = [
   { id: "overview", label: "Overview", icon: LayoutDashboard },
   { id: "users", label: "User management", icon: Users },
   { id: "featured", label: "Featured tutors", icon: Star },
+  { id: "premium", label: "Premium mentors", icon: Crown },
   { id: "requirements", label: "Board posts", icon: Megaphone },
   { id: "instant-connect", label: "Instant Connect", icon: Zap },
   { id: "snap-grade", label: "Snap & Grade", icon: Camera },
@@ -424,6 +427,10 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
           {section === "featured" && (
             <AdminFeaturedTutors adminKey={adminKey} />
+          )}
+
+          {section === "premium" && (
+            <AdminPremiumMentors adminKey={adminKey} />
           )}
 
           {section === "instant-connect" && (

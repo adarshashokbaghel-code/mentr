@@ -11,6 +11,7 @@ import {
 import { ConnectionRequestsSection } from "@/components/dashboard/connection-requests";
 import { InstantConnectFacultySection } from "@/components/dashboard/instant-connect-faculty";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
+import { PremiumMentorCard } from "@/components/dashboard/premium-mentor-card";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
@@ -385,11 +386,17 @@ export default function DashboardPage() {
               <h1 className="mt-0.5 text-[26px] font-bold tracking-tight sm:text-3xl">
                 {greeting}, {firstName}
               </h1>
-              <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
+              <p className="mt-1 flex flex-wrap items-center gap-1.5 text-sm text-muted">
                 <span className="inline-flex items-center gap-1 rounded-md bg-sage-wash px-1.5 py-0.5 text-xs font-semibold text-sage">
                   <BadgeCheck className="h-3 w-3" />
                   Live
                 </span>
+                {user.premiumMentorStatus === "verified" ? (
+                  <span className="inline-flex items-center gap-1 rounded-md bg-butter/50 px-1.5 py-0.5 text-xs font-semibold text-ink">
+                    <ShieldCheck className="h-3 w-3" />
+                    Premium
+                  </span>
+                ) : null}
                 {user.profile?.designation} · {user.profile?.area}
               </p>
             </div>
@@ -439,6 +446,8 @@ export default function DashboardPage() {
           </div>
 
           <WhatsappGroupCard className="mt-4" compact />
+
+          <PremiumMentorCard className="mt-4" />
 
           {/* Primary workspace — one job at a time */}
           <div className="mt-7 grid gap-5 lg:grid-cols-[minmax(0,1.7fr)_minmax(260px,0.9fr)] lg:items-start">

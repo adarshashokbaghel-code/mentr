@@ -496,4 +496,87 @@ router.get("/snap-grade/evaluations", async (req, res) => {
   }
 });
 
+/** Premium mentor payment screenshots awaiting verification. */
+router.get("/premium-mentors", async (_req, res) => {
+  try {
+    const { User } = await import("../models/User");
+    const mentors = await User.find({
+      role: "faculty",
+      premiumMentorStatus: { $in: ["pending", "verified"] },
+    })
+      .select(
+        "email profile.name profile.phoneNumber profile.city profile.area premiumMentorStatus premiumMentorPaymentSsUrl premiumMentorSubmittedAt premiumMentorVerifiedAt createdAt",
+      )
+      .sort({ premiumMentorSubmittedAt: -1 })
+      .lean();
+
+    res.json({
+      mentors: mentors.map((m) => ({
+        id: String(m._id),
+        email: m.email,
+        name: m.profile?.name || "—",
+        phone: m.profile?.phoneNumber || null,
+        city: m.profile?.city || null,
+        area: m.profile?.area || null,
+        status: m.premiumMentorStatus || "none",
+        screenshotUrl: m.premiumMentorPaymentSsUrl || null,
+        submittedAt: m.premiumMentorSubmittedAt
+          ? new Date(m.premiumMentorSubmittedAt).toISOString()
+          : null,
+        verifiedAt: m.premiumMentorVerifiedAt
+          ? new Date(m.premiumMentorVerifiedAt).toISOString()
+          : null,
+      })),
+    });
+  } catch (err) {
+    console.error("Admin premium mentors list error:", err);
+    res.status(500).json({ error: "Failed to load premium mentors" });
+  }
+});
+
+router.post(
+  "/premium-mentors/:id/verify",
+  requireAdminPass,
+  async (req, res) => {
+    try {
+      const { User } = await import("../models/User");
+      const id = String(req.params.id || "");
+      const user = await User.findById(id);
+      if (!user || user.role !== "faculty") {
+        res.status(404).json({ error: "Mentor not found" });
+        return;
+      }
+      if (user.premiumMentorStatus !== "pending") {
+        res.status(400).json({
+          error:
+            user.premiumMentorStatus === "verified"
+              ? "Already verified"
+              : "No pending payment screenshot",
+        });
+        return;
+      }
+      if (!user.premiumMentorPaymentSsUrl) {
+        res.status(400).json({ error: "No payment screenshot on file" });
+        return;
+      }
+
+      user.premiumMentorStatus = "verified";
+      user.premiumMentorVerifiedAt = new Date();
+      await user.save();
+
+      res.json({
+        ok: true,
+        mentor: {
+          id: user._id.toString(),
+          status: user.premiumMentorStatus,
+          verifiedAt: user.premiumMentorVerifiedAt.toISOString(),
+        },
+      });
+    } catch (err) {
+      console.error("Admin premium mentor verify error:", err);
+      res.status(500).json({ error: "Failed to verify premium mentor" });
+    }
+  },
+);
+
 export default router;
