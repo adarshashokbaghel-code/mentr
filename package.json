@@ -15,6 +15,8 @@
     "seed:requirements:reset": "tsx scripts/seed-demo-data.ts --reset",
     "seed:demo": "tsx scripts/seed-demo-data.ts",
     "seed:demo:reset": "tsx scripts/seed-demo-data.ts --reset",
+    "seed:parents": "tsx scripts/seed-parent-profiles.ts",
+    "seed:parents:reset": "tsx scripts/seed-parent-profiles.ts --reset",
     "seed:learn-quiz": "tsx scripts/seed-learn-quiz.ts",
     "db:wipe": "tsx scripts/wipe-db.ts --confirm",
     "seo:gsc-check": "node scripts/seo-gsc-check.mjs",

@@ -1,5 +1,6 @@
 import { Connection, type IConnection } from "./models/Connection";
 import { type IUser, type IAvailabilitySlot } from "./models/User";
+import { isMentrPremiumActive } from "./services/premium-mentor-billing";
 
 const DAY_SHORT: Record<IAvailabilitySlot["day"], string> = {
   monday: "Mon",
@@ -145,6 +146,7 @@ export function toPublicTeacher(
     phone: conn.status === "accepted" ? conn.phone : null,
     connectionStatus: conn.status,
     verified: user.emailVerified,
+    premium: isMentrPremiumActive(user),
     kind: isMentor ? ("mentor" as const) : ("tutor" as const),
     live: true,
     createdAt: user.createdAt?.toISOString?.() ?? null,

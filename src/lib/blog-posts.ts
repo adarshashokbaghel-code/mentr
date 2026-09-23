@@ -492,6 +492,19 @@ export const BLOG_POSTS: BlogPost[] = [
 
   // ── Pillar 4: Tutor-Side Guides ──────────────────────────────────
   {
+    slug: "mentr-premium-mentor-guide",
+    title: "Mentr Premium for Mentors: Features, Pricing & How It Works",
+    keyword: "Mentr Premium mentor guide",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-tutors",
+    description:
+      "Full walkthrough of Mentr Premium — Free vs Premium, upgrade steps, parent directory, unlimited pitches, Snap & Grade, and where to find every feature.",
+    featured: true,
+    cta: "Read full Premium guide",
+    ctaHref: "/mentrpremium",
+  },
+  {
     slug: "how-to-become-a-home-tutor-india",
     title: "How to Become a Home Tutor in India: A Step-by-Step Guide",
     keyword: "how to become a home tutor india",

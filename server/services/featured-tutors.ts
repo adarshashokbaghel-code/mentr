@@ -3,8 +3,29 @@ import { isProfileComplete } from "../lib/profile-complete";
 import { SiteSettings } from "../models/SiteSettings";
 import { User, type IUser } from "../models/User";
 import { NO_CONNECTION, toPublicTeacher } from "../serialize-teacher";
+import { isMentrPremiumActive } from "./premium-mentor-billing";
 
 export const FEATURED_TUTORS_MAX = 8;
+
+/** Active Premium mentors (Razorpay dated or legacy verified). */
+export function activePremiumMongoFilter(now = new Date()) {
+  return {
+    role: { $ne: "parent" },
+    $or: [
+      {
+        "mentrPremium.type": "premium",
+        "mentrPremium.expiresAt": { $gt: now },
+      },
+      {
+        premiumMentorStatus: "verified",
+        $or: [
+          { mentrPremium: { $exists: false } },
+          { "mentrPremium.type": { $ne: "premium" } },
+        ],
+      },
+    ],
+  };
+}
 
 export async function getFeaturedTeacherIds(): Promise<string[]> {
   const doc = await SiteSettings.findOne({ key: "main" }).lean();
@@ -50,32 +71,59 @@ export async function setFeaturedTeacherIds(
   return [];
 }
 
+function serializePublic(u: IUser): Record<string, unknown> | null {
+  if (!isProfileComplete(u)) return null;
+  try {
+    return JSON.parse(
+      JSON.stringify(toPublicTeacher(u, NO_CONNECTION)),
+    ) as Record<string, unknown>;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Landing featured strip: active Premium mentors first, then admin-curated IDs.
+ * Deduped, capped at FEATURED_TUTORS_MAX.
+ */
 export async function loadFeaturedPublicTeachers(): Promise<
   Record<string, unknown>[]
 > {
-  const ids = await getFeaturedTeacherIds();
-  if (ids.length === 0) return [];
+  const now = new Date();
+  const [premiumUsers, curatedIds] = await Promise.all([
+    User.find(activePremiumMongoFilter(now))
+      .sort({ "mentrPremium.lastPurchasedAt": -1, premiumMentorVerifiedAt: -1 })
+      .limit(FEATURED_TUTORS_MAX) as Promise<IUser[]>,
+    getFeaturedTeacherIds(),
+  ]);
 
-  const users = (await User.find({
-    _id: { $in: ids },
-    role: { $ne: "parent" },
-  })) as IUser[];
-
-  const byId = new Map(users.map((u) => [u._id.toString(), u]));
   const ordered: Record<string, unknown>[] = [];
+  const seen = new Set<string>();
 
-  for (const id of ids) {
-    const u = byId.get(id);
-    if (!u || !isProfileComplete(u)) continue;
-    try {
-      ordered.push(
-        JSON.parse(JSON.stringify(toPublicTeacher(u, NO_CONNECTION))) as Record<
-          string,
-          unknown
-        >,
-      );
-    } catch {
-      /* skip broken profile */
+  for (const u of premiumUsers) {
+    if (ordered.length >= FEATURED_TUTORS_MAX) break;
+    const row = serializePublic(u);
+    if (!row) continue;
+    seen.add(u._id.toString());
+    ordered.push(row);
+  }
+
+  if (ordered.length < FEATURED_TUTORS_MAX && curatedIds.length > 0) {
+    const remainingIds = curatedIds.filter((id) => !seen.has(id));
+    if (remainingIds.length > 0) {
+      const curated = (await User.find({
+        _id: { $in: remainingIds },
+        role: { $ne: "parent" },
+      })) as IUser[];
+      const byId = new Map(curated.map((u) => [u._id.toString(), u]));
+      for (const id of remainingIds) {
+        if (ordered.length >= FEATURED_TUTORS_MAX) break;
+        const u = byId.get(id);
+        if (!u) continue;
+        const row = serializePublic(u);
+        if (!row) continue;
+        ordered.push(row);
+      }
     }
   }
 
@@ -91,18 +139,37 @@ export type FeaturedAdminRow = {
   city: string;
   imageUrl: string;
   verified: boolean;
+  premium: boolean;
   hourlyRate: number | null;
   profileComplete: boolean;
 };
 
+export async function listActivePremiumAdminRows(
+  limit = FEATURED_TUTORS_MAX,
+): Promise<FeaturedAdminRow[]> {
+  const now = new Date();
+  const users = (await User.find(activePremiumMongoFilter(now))
+    .sort({
+      "mentrPremium.lastPurchasedAt": -1,
+      premiumMentorVerifiedAt: -1,
+    })
+    .limit(Math.min(Math.max(limit, 1), FEATURED_TUTORS_MAX))) as IUser[];
+  return users.map(toAdminRow).filter((r) => r.profileComplete);
+}
+
 export async function getAdminFeaturedState(): Promise<{
   ids: string[];
   selected: FeaturedAdminRow[];
+  /** Active Premium mentors — always first on the homepage featured strip. */
+  premiumAuto: FeaturedAdminRow[];
   max: number;
 }> {
-  const ids = await getFeaturedTeacherIds();
+  const [ids, premiumAuto] = await Promise.all([
+    getFeaturedTeacherIds(),
+    listActivePremiumAdminRows(FEATURED_TUTORS_MAX),
+  ]);
   const selected = await resolveAdminRows(ids);
-  return { ids, selected, max: FEATURED_TUTORS_MAX };
+  return { ids, selected, premiumAuto, max: FEATURED_TUTORS_MAX };
 }
 
 export async function searchFacultyForFeatured(
@@ -153,6 +220,7 @@ function toAdminRow(u: IUser): FeaturedAdminRow {
     city: p?.city || "",
     imageUrl: (u.profileImageUrl || "").trim(),
     verified: Boolean(u.emailVerified),
+    premium: isMentrPremiumActive(u),
     hourlyRate: p?.hourlyRate ?? null,
     profileComplete: isProfileComplete(u),
   };

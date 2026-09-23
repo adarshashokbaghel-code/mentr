@@ -68,6 +68,8 @@ export interface Teacher {
   /** This viewer's connection state with the teacher (live profiles) */
   connectionStatus?: "none" | "pending" | "accepted" | "declined";
   verified: boolean;
+  /** Active Mentr Premium mentor */
+  premium?: boolean;
   /** tutor | mentor */
   kind: "tutor" | "mentor";
   /** True for real faculty loaded from the database */
@@ -238,7 +240,7 @@ export type FetchTeachersResult = {
   failed: boolean;
 };
 
-const PUBLIC_TEACHERS_CACHE_KEY = "mentr_public_teachers_v2";
+const PUBLIC_TEACHERS_CACHE_KEY = "mentr_public_teachers_v3";
 const PUBLIC_TEACHERS_TTL_MS = 5 * 60 * 1000;
 
 type PublicTeachersCache = {
@@ -354,6 +356,8 @@ export function searchTeachers(opts: {
   locality?: string;
   onlyOpen?: boolean;
   onlyVerified?: boolean;
+  /** regular = non-premium (default), premium = premium only, all = no filter */
+  mentorTier?: "regular" | "premium" | "all";
   kind?: "tutor" | "mentor" | "all";
   /** Delivery mode: online / in person / offers both */
   mode?: ModeFilter;
@@ -404,6 +408,14 @@ export function searchTeachers(opts: {
   }
   if (opts.onlyVerified) {
     list = list.filter((t) => t.verified);
+  }
+  if (opts.mentorTier === "premium") {
+    list = list.filter((t) => Boolean(t.premium));
+  } else if (opts.mentorTier === "regular" || !opts.mentorTier) {
+    // Default: regular catalog (non-premium). Pass "all" to disable.
+    if (opts.mentorTier === "regular") {
+      list = list.filter((t) => !t.premium);
+    }
   }
   if (opts.kind && opts.kind !== "all") {
     list = list.filter((t) => t.kind === opts.kind);

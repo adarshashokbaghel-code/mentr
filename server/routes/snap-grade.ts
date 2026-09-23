@@ -208,12 +208,23 @@ router.get("/catalog", async (_req, res: Response) => {
 router.get("/account", requireAuth, async (req: AuthenticatedRequest, res) => {
   try {
     const wallet = await getOrCreateWallet(req.auth!.sub);
+    const { User } = await import("../models/User");
+    const { isMentrPremiumActive } = await import(
+      "../services/premium-mentor-billing"
+    );
+    const u = await User.findById(req.auth!.sub).select(
+      "role mentrPremium premiumMentorStatus",
+    );
+    const premiumUnlimited = Boolean(
+      u && u.role === "faculty" && isMentrPremiumActive(u),
+    );
     res.json({
       creditBalance: wallet.creditBalance,
       freeCreditsClaimed: wallet.freeCreditsClaimed,
       freeCreditsGranted: wallet.freeCreditsGranted || 0,
       totalRecharged: wallet.totalRecharged || 0,
       totalSpent: wallet.totalSpent || 0,
+      premiumUnlimited,
       history: (wallet.history || []).slice(0, 40).map(serializeHistoryEntry),
       recharges: (wallet.recharges || [])
         .slice(-20)
@@ -579,6 +590,7 @@ router.post(
         },
         question: serializeQuestion(question),
         creditBalance: result.creditBalance,
+        premiumUnlimited: Boolean(result.premiumUnlimited),
       });
     } catch (err) {
       console.error("snap-grade evaluate error:", err);

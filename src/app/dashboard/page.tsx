@@ -12,6 +12,7 @@ import { ConnectionRequestsSection } from "@/components/dashboard/connection-req
 import { InstantConnectFacultySection } from "@/components/dashboard/instant-connect-faculty";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { PremiumMentorCard } from "@/components/dashboard/premium-mentor-card";
+import { ParentRevealHistorySidebar } from "@/components/dashboard/parent-reveal-history-sidebar";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
@@ -29,6 +30,8 @@ import {
   CalendarDays,
   Check,
   Copy,
+  Crown,
+  Eye,
   ExternalLink,
   Inbox,
   Loader2,
@@ -123,6 +126,7 @@ export default function DashboardPage() {
   const [dashTab, setDashTab] = useState<"inbox" | "schedule" | "grow">(
     "inbox",
   );
+  const [revealHistoryOpen, setRevealHistoryOpen] = useState(false);
 
   async function copyListingLink() {
     if (!user) return;
@@ -391,12 +395,38 @@ export default function DashboardPage() {
                   <BadgeCheck className="h-3 w-3" />
                   Live
                 </span>
-                {user.premiumMentorStatus === "verified" ? (
-                  <span className="inline-flex items-center gap-1 rounded-md bg-butter/50 px-1.5 py-0.5 text-xs font-semibold text-ink">
-                    <ShieldCheck className="h-3 w-3" />
-                    Premium
-                  </span>
-                ) : null}
+                {(() => {
+                  const exp = user.mentrPremium?.expiresAt;
+                  const premiumActive = exp
+                    ? user.mentrPremium?.type === "premium" &&
+                      new Date(exp).getTime() > Date.now()
+                    : user.premiumMentorStatus === "verified" &&
+                      user.mentrPremium?.type !== "premium";
+                  const wasPremium =
+                    Boolean(exp) ||
+                    user.mentrPremium?.type === "premium" ||
+                    user.premiumMentorStatus === "verified";
+
+                  if (premiumActive) {
+                    return (
+                      <span className="inline-flex items-center gap-1 rounded-md bg-butter/50 px-1.5 py-0.5 text-xs font-semibold text-ink">
+                        <ShieldCheck className="h-3 w-3" />
+                        Premium
+                      </span>
+                    );
+                  }
+                  if (wasPremium) {
+                    return (
+                      <Link
+                        href="/mentrpricing"
+                        className="inline-flex items-center gap-1 rounded-md bg-coral-wash px-1.5 py-0.5 text-xs font-semibold text-coral transition hover:bg-coral/15"
+                      >
+                        Renew Premium
+                      </Link>
+                    );
+                  }
+                  return null;
+                })()}
                 {user.profile?.designation} · {user.profile?.area}
               </p>
             </div>
@@ -413,7 +443,7 @@ export default function DashboardPage() {
           </div>
 
           {/* ------------------------------ stats ------------------------------- */}
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <WhoViewedCard
               data={views}
               loading={viewsLoading}
@@ -443,12 +473,11 @@ export default function DashboardPage() {
                   : "add availability to get contacted"
               }
             />
+
+            <PremiumMentorCard variant="stat" />
           </div>
 
           <WhatsappGroupCard className="mt-4" compact />
-
-          <PremiumMentorCard className="mt-4" />
-
           {/* Primary workspace — one job at a time */}
           <div className="mt-7 grid gap-5 lg:grid-cols-[minmax(0,1.7fr)_minmax(260px,0.9fr)] lg:items-start">
             <div className="min-w-0">
@@ -628,6 +657,45 @@ export default function DashboardPage() {
 
                 {dashTab === "grow" ? (
                   <>
+                    <section className="overflow-hidden rounded-xl border-2 border-ink bg-white shadow-[3px_3px_0_0_#1a231c]">
+                      <div className="border-b border-hairline bg-butter/40 px-4 py-3">
+                        <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-ink">
+                          <Crown className="h-3.5 w-3.5" />
+                          Premium parent directory
+                        </p>
+                        <h2 className="mt-1 text-base font-bold text-ink">
+                          Browse parents · reveal 3 contacts / day
+                        </h2>
+                      </div>
+                      <div className="flex flex-wrap gap-2 px-4 py-3">
+                        <Link href="/parentslist">
+                          <Button size="sm" className="h-9 gap-1.5">
+                            Open parent list
+                          </Button>
+                        </Link>
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="secondary"
+                          className="h-9 gap-1.5 border border-ink/15"
+                          onClick={() => setRevealHistoryOpen(true)}
+                        >
+                          <Eye className="h-3.5 w-3.5" />
+                          Reveal history
+                        </Button>
+                        <Link href="/board">
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="secondary"
+                            className="h-9 gap-1.5"
+                          >
+                            Need board
+                          </Button>
+                        </Link>
+                      </div>
+                    </section>
+
                     <section>
                       <h2 className="text-lg font-semibold">Recent activity</h2>
                       {viewsLoading ? (
@@ -950,6 +1018,10 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+      <ParentRevealHistorySidebar
+        open={revealHistoryOpen}
+        onClose={() => setRevealHistoryOpen(false)}
+      />
     </>
   );
 }

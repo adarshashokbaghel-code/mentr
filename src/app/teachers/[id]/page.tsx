@@ -10,6 +10,7 @@ import { getTeacher, type Teacher } from "@/lib/teachers";
 import { fetchLiveTeacher } from "@/lib/live-teacher-server";
 import {
   BadgeCheck,
+  Crown,
   MapPin,
   Briefcase,
   Star,
@@ -220,6 +221,12 @@ export default async function TeacherProfilePage({
                     <BadgeCheck className="h-3.5 w-3.5" />
                     Verified
                   </Badge>
+                )}
+                {teacher.premium && (
+                  <span className="inline-flex items-center gap-1 rounded-md border border-ink/15 bg-gradient-to-r from-butter to-[#ffe08a] px-2 py-1 text-sm font-bold text-ink shadow-[1px_1px_0_0_rgba(26,35,28,0.12)]">
+                    <Crown className="h-3.5 w-3.5" />
+                    Premium
+                  </span>
                 )}
                 {teacher.reviewCount > 0 ? (
                   <span className="inline-flex items-center gap-1 rounded-md bg-butter/70 px-2 py-1 text-sm font-bold text-ink">

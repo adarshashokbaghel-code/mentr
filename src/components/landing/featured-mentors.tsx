@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
+import { MentorStatusBadges } from "@/components/ui/mentor-status-badges";
 import {
   fetchPublicTeachers,
   formatHourlyRate,
@@ -11,7 +12,6 @@ import {
 } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
-  BadgeCheck,
   Globe2,
   Home,
   MapPin,
@@ -24,6 +24,7 @@ const FEATURED_LIMIT = 8;
 
 function scoreTeacher(t: Teacher): number {
   let score = 0;
+  if (t.premium) score += 50;
   if (t.imageUrl?.trim()) score += 40;
   if (t.verified) score += 25;
   if (t.hourlyRate != null && t.hourlyRate > 0) score += 15;
@@ -88,12 +89,14 @@ function FeaturedCard({ teacher }: { teacher: Teacher }) {
           className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
           alt=""
         />
-        {teacher.verified && (
-          <span className="absolute left-2 top-2 inline-flex items-center gap-0.5 rounded bg-white/95 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-sage">
-            <BadgeCheck className="h-2.5 w-2.5" />
-            Verified
+        {teacher.verified || teacher.premium ? (
+          <span className="absolute left-2 top-2">
+            <MentorStatusBadges
+              verified={teacher.verified}
+              premium={teacher.premium}
+            />
           </span>
-        )}
+        ) : null}
         {rate && (
           <span className="absolute right-2 top-2 rounded bg-ink/85 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-white">
             {rate}

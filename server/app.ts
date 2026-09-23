@@ -174,6 +174,11 @@ app.use("/api/ncert", (req, res, next) => {
     .catch(next);
 });
 app.use("/api/teachers", teacherRoutes);
+app.use("/api/premium-mentor", (req, res, next) => {
+  void import("./routes/premium-mentor")
+    .then((mod) => mod.default(req, res, next))
+    .catch(next);
+});
 app.use("/api/admin", adminRoutes);
 
 app.use(

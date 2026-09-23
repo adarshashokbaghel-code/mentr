@@ -4,10 +4,11 @@ import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
 import {
   deleteAdminUser,
   fetchAdminUsers,
+  updateAdminUser,
   type AdminUserRow,
 } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Loader2, Search, Trash2 } from "lucide-react";
+import { ChevronDown, Loader2, Pencil, Search, Trash2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 function formatDate(iso?: string) {
@@ -44,37 +45,134 @@ function DetailItem({ label, value }: { label: string; value?: string | number |
   );
 }
 
+function Field({
+  label,
+  value,
+  onChange,
+  type = "text",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: string;
+}) {
+  return (
+    <label className="block min-w-0">
+      <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+        {label}
+      </span>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="mt-0.5 h-8 w-full rounded-md border border-hairline bg-white px-2 text-xs text-ink outline-none focus:border-ink"
+      />
+    </label>
+  );
+}
+
 function UserDetailPanel({
   user,
   onDelete,
+  onRequestSave,
 }: {
   user: AdminUserRow;
   onDelete: () => void;
+  onRequestSave: (draft: {
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+    area: string;
+    country: string;
+  }) => void;
 }) {
+  const [editing, setEditing] = useState(false);
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [phone, setPhone] = useState(user.phone || "");
+  const [city, setCity] = useState(user.city === "—" ? "" : user.city);
+  const [area, setArea] = useState(user.area === "—" ? "" : user.area);
+  const [country, setCountry] = useState(
+    user.country === "—" ? "" : user.country,
+  );
+
+  useEffect(() => {
+    setName(user.name);
+    setEmail(user.email);
+    setPhone(user.phone || "");
+    setCity(user.city === "—" ? "" : user.city);
+    setArea(user.area === "—" ? "" : user.area);
+    setCountry(user.country === "—" ? "" : user.country);
+    setEditing(false);
+  }, [user]);
+
   return (
     <div className="border-t border-hairline bg-cream/80 px-4 py-3">
-      <p className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-muted">
-        Full platform details
-      </p>
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <DetailItem label="User ID" value={user.id} />
-        <DetailItem label="Email" value={user.email} />
-        <DetailItem label="Phone" value={user.phone} />
-        <DetailItem label="Email verified" value={user.emailVerified ? "Yes" : "No"} />
-        <DetailItem label="Profile complete" value={user.profileComplete ? "Yes" : "No"} />
-        <DetailItem label="Country" value={user.country} />
-        <DetailItem label="City" value={user.city} />
-        <DetailItem label="Area" value={user.area} />
-        <DetailItem label="Joined" value={formatDate(user.createdAt)} />
-        <DetailItem label="Last updated" value={formatDate(user.updatedAt)} />
-        <DetailItem label="Last login" value={formatDate(user.lastLoginAt)} />
-        <DetailItem label="Referral URL" value={user.referralUrl} />
-        <DetailItem label="Registration source" value={user.registrationSource} />
-        <DetailItem label="Acquisition slug" value={user.acquisitionSlug} />
-        <DetailItem label="Acquisition kind" value={user.acquisitionKind} />
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+          Full platform details
+        </p>
+        <button
+          type="button"
+          onClick={() => setEditing((v) => !v)}
+          className="inline-flex h-8 items-center gap-1.5 rounded-md border border-hairline bg-white px-3 text-[12px] font-semibold text-ink transition hover:bg-cream"
+        >
+          <Pencil className="h-3.5 w-3.5" />
+          {editing ? "Close editor" : "Edit details"}
+        </button>
       </div>
 
-      {user.faculty && (
+      {editing ? (
+        <div className="space-y-3 rounded-lg border border-hairline bg-white p-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <Field label="Name" value={name} onChange={setName} />
+            <Field label="Email" value={email} onChange={setEmail} type="email" />
+            <Field label="Phone" value={phone} onChange={setPhone} />
+            <Field label="Country" value={country} onChange={setCountry} />
+            <Field label="City" value={city} onChange={setCity} />
+            <Field label="Area" value={area} onChange={setArea} />
+          </div>
+          <div className="flex flex-wrap justify-end gap-2">
+            <button
+              type="button"
+              onClick={() => setEditing(false)}
+              className="h-8 rounded-md border border-hairline bg-cream px-3 text-[12px] font-semibold text-ink"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() =>
+                onRequestSave({ name, email, phone, city, area, country })
+              }
+              className="h-8 rounded-md bg-ink px-3 text-[12px] font-semibold text-white"
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <DetailItem label="User ID" value={user.id} />
+          <DetailItem label="Email" value={user.email} />
+          <DetailItem label="Phone" value={user.phone} />
+          <DetailItem label="Email verified" value={user.emailVerified ? "Yes" : "No"} />
+          <DetailItem label="Profile complete" value={user.profileComplete ? "Yes" : "No"} />
+          <DetailItem label="Country" value={user.country} />
+          <DetailItem label="City" value={user.city} />
+          <DetailItem label="Area" value={user.area} />
+          <DetailItem label="Joined" value={formatDate(user.createdAt)} />
+          <DetailItem label="Last updated" value={formatDate(user.updatedAt)} />
+          <DetailItem label="Last login" value={formatDate(user.lastLoginAt)} />
+          <DetailItem label="Referral URL" value={user.referralUrl} />
+          <DetailItem label="Registration source" value={user.registrationSource} />
+          <DetailItem label="Acquisition slug" value={user.acquisitionSlug} />
+          <DetailItem label="Acquisition kind" value={user.acquisitionKind} />
+        </div>
+      )}
+
+      {user.faculty && !editing && (
         <div className="mt-4 border-t border-hairline pt-3">
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-sage">
             Tutor profile
@@ -94,10 +192,7 @@ function UserDetailPanel({
             <DetailItem label="Workplace" value={user.faculty.workplace} />
             <DetailItem label="Gender" value={user.faculty.gender} />
             <DetailItem label="Timezone" value={user.faculty.timezone} />
-            <DetailItem
-              label="Availability slots"
-              value={user.faculty.availabilitySlots}
-            />
+            <DetailItem label="Availability slots" value={user.faculty.availabilitySlots} />
             <DetailItem label="Subjects" value={user.faculty.subjects.join(", ") || undefined} />
             <DetailItem label="Levels" value={user.faculty.levels.join(", ") || undefined} />
             <DetailItem label="Languages" value={user.faculty.languages.join(", ") || undefined} />
@@ -122,7 +217,7 @@ function UserDetailPanel({
         </div>
       )}
 
-      {user.parent && (
+      {user.parent && !editing && (
         <div className="mt-4 border-t border-hairline pt-3">
           <p className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-coral-dark">
             Parent profile
@@ -163,6 +258,17 @@ export function AdminUsersTable({ adminKey }: Props) {
   const [deleteTarget, setDeleteTarget] = useState<AdminUserRow | null>(null);
   const [deleting, setDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [editTarget, setEditTarget] = useState<AdminUserRow | null>(null);
+  const [editDraft, setEditDraft] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+    area: string;
+    country: string;
+  } | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -198,13 +304,31 @@ export function AdminUsersTable({ adminKey }: Props) {
     }
   }
 
+  async function confirmSave(adminPass: string) {
+    if (!editTarget || !editDraft) return;
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const res = await updateAdminUser(adminKey, editTarget.id, adminPass, editDraft);
+      setUsers((prev) =>
+        prev.map((u) => (u.id === editTarget.id ? res.user : u)),
+      );
+      setEditTarget(null);
+      setEditDraft(null);
+    } catch (e) {
+      setSaveError(e instanceof Error ? e.message : "Failed to save");
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <div className="mt-4 border border-hairline bg-white">
       <div className="flex flex-wrap items-center gap-2 border-b border-hairline px-3 py-2">
         <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
           All users · {users.length}
         </p>
-        <p className="text-[11px] text-muted">Click a row for full details</p>
+        <p className="text-[11px] text-muted">Click a row for full details · edit in panel</p>
         <div className="relative ml-auto min-w-[180px] flex-1 sm:max-w-xs">
           <Search className="pointer-events-none absolute left-2 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted" />
           <input
@@ -310,6 +434,11 @@ export function AdminUsersTable({ adminKey }: Props) {
                             setDeleteError(null);
                             setDeleteTarget(user);
                           }}
+                          onRequestSave={(draft) => {
+                            setSaveError(null);
+                            setEditTarget(user);
+                            setEditDraft(draft);
+                          }}
                         />
                       )}
                     </td>
@@ -334,6 +463,25 @@ export function AdminUsersTable({ adminKey }: Props) {
             if (!deleting) {
               setDeleteTarget(null);
               setDeleteError(null);
+            }
+          }}
+        />
+      )}
+
+      {editTarget && editDraft && (
+        <AdminPassDialog
+          open
+          title="Save user details?"
+          description={`Update ${editTarget.name} (${editTarget.email}). Enter ADMIN_PASS to confirm.`}
+          confirmLabel="Save changes"
+          busy={saving}
+          error={saveError}
+          onConfirm={(pass) => void confirmSave(pass)}
+          onClose={() => {
+            if (!saving) {
+              setEditTarget(null);
+              setEditDraft(null);
+              setSaveError(null);
             }
           }}
         />
