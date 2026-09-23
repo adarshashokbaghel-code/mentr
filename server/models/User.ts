@@ -191,6 +191,8 @@ export interface IPremiumMentorPayment {
 
 export interface IMentrPremium {
   type: MentrAccountType;
+  /** When mentor picked Free or completed Premium during / after onboarding */
+  planChosenAt?: Date;
   firstRechargedAt?: Date;
   lastPurchasedAt?: Date;
   expiresAt?: Date;
@@ -426,6 +428,7 @@ const premiumMentorPaymentSchema = new Schema<IPremiumMentorPayment>(
 const mentrPremiumSchema = new Schema<IMentrPremium>(
   {
     type: { type: String, enum: ["free", "premium"], default: "free" },
+    planChosenAt: { type: Date },
     firstRechargedAt: { type: Date },
     lastPurchasedAt: { type: Date },
     expiresAt: { type: Date },

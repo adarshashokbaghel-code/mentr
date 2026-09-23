@@ -4,6 +4,7 @@ import { ensureDb } from "../middleware/ensure-db";
 import { User } from "../models/User";
 import { serializeUser } from "./auth";
 import {
+  chooseFreeMentorPlan,
   createPremiumMentorOrder,
   isPremiumRazorpayConfigured,
   markPremiumOrderFailed,
@@ -159,6 +160,33 @@ router.post(
     } catch (err) {
       console.error("premium-mentor cancel error:", err);
       res.status(500).json({ error: "Could not update order" });
+    }
+  },
+);
+
+/** Onboarding: stay on Classic / Free mentor (no payment). */
+router.post(
+  "/choose-free",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (!rateLimit(`prem-free:${req.auth!.sub}`, 20, 60_000)) {
+        res.status(429).json({ error: "Too many attempts" });
+        return;
+      }
+      const result = await chooseFreeMentorPlan(req.auth!.sub);
+      if ("error" in result) {
+        res.status(403).json(result);
+        return;
+      }
+      res.json({
+        alreadyPremium: result.alreadyPremium,
+        user: serializeUser(result.user),
+        premium: result.premium,
+      });
+    } catch (err) {
+      console.error("premium-mentor choose-free error:", err);
+      res.status(500).json({ error: "Could not save plan" });
     }
   },
 );

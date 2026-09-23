@@ -99,6 +99,9 @@ export function serializeUser(user: IUser) {
     mentrPremium: user.mentrPremium
       ? {
           type: user.mentrPremium.type || "free",
+          planChosenAt: user.mentrPremium.planChosenAt
+            ? user.mentrPremium.planChosenAt.toISOString()
+            : undefined,
           firstRechargedAt: user.mentrPremium.firstRechargedAt
             ? user.mentrPremium.firstRechargedAt.toISOString()
             : undefined,

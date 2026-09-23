@@ -1,11 +1,20 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { PremiumCheckoutDialog } from "@/components/dashboard/premium-checkout-dialog";
 import { LocationFields } from "@/components/forms/location-fields";
+import {
+  OnboardingPlanStep,
+  type OnboardingPlanId,
+} from "@/components/profile/onboarding-plan-step";
 import { ProfileImageUploader } from "@/components/profile/profile-image-uploader";
-import { ProfileSavedDialog } from "@/components/profile/profile-saved-dialog";
+import {
+  ProfileSavedDialog,
+  type ProfileSavedVariant,
+} from "@/components/profile/profile-saved-dialog";
 import {
   ApiError,
+  premiumMentorApi,
   profileApi,
   type AvailabilitySlot,
   type FacultyProfile,
@@ -30,6 +39,7 @@ import {
   Camera,
   Check,
   Clock,
+  Crown,
   Globe,
   GraduationCap,
   IndianRupee,
@@ -39,6 +49,7 @@ import {
   Phone,
   Plus,
   Save,
+  Sparkles,
   Trash2,
   Trophy,
   UserRound,
@@ -47,7 +58,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 /* ---------------------------------- data --------------------------------- */
 
@@ -246,7 +257,7 @@ function toggleItem(list: string[], item: string): string[] {
 
 /* ---------------------------------- page --------------------------------- */
 
-const STEPS = [
+const BASE_STEPS = [
   { label: "About you", icon: UserRound },
   { label: "Teaching", icon: GraduationCap },
   { label: "Availability", icon: CalendarDays },
@@ -254,8 +265,16 @@ const STEPS = [
   { label: "Review", icon: BadgeCheck },
 ] as const;
 
+const PLAN_STEP = { label: "Plan", icon: Sparkles } as const;
+
 /** ?step= slugs so the dashboard can deep-link into the edit flow */
-const STEP_SLUGS = ["about", "teaching", "availability", "links", "review"] as const;
+const BASE_STEP_SLUGS = [
+  "about",
+  "teaching",
+  "availability",
+  "links",
+  "review",
+] as const;
 
 function ProfilingContent() {
   const { user, loading, setUser } = useAuth();
@@ -315,6 +334,16 @@ function ProfilingContent() {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [saveFlash, setSaveFlash] = useState("");
   const [showSavedDialog, setShowSavedDialog] = useState(false);
+  const [savedVariant, setSavedVariant] =
+    useState<ProfileSavedVariant>("saved");
+  /** Freeze plan step for this session so mid-wizard Saves don't drop it. */
+  const [includePlanStep, setIncludePlanStep] = useState<boolean | null>(null);
+  const [selectedPlan, setSelectedPlan] = useState<OnboardingPlanId | null>(
+    null,
+  );
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [finishing, setFinishing] = useState(false);
+  const premiumPaidRef = useRef(false);
 
   useEffect(() => {
     if (loading) return;
@@ -326,15 +355,42 @@ function ProfilingContent() {
     if (user.role === "parent") router.replace("/parent/profiling");
   }, [loading, user, router]);
 
+  useEffect(() => {
+    if (!user || includePlanStep !== null) return;
+    // First-time mentors see Free vs Premium after Review.
+    setIncludePlanStep(!user.profileCompleted);
+  }, [user, includePlanStep]);
+
+  const STEPS = useMemo(
+    () =>
+      includePlanStep
+        ? [...BASE_STEPS, PLAN_STEP]
+        : [...BASE_STEPS],
+    [includePlanStep],
+  );
+
+  const STEP_SLUGS = useMemo(
+    () =>
+      includePlanStep
+        ? ([...BASE_STEP_SLUGS, "plan"] as const)
+        : BASE_STEP_SLUGS,
+    [includePlanStep],
+  );
+
+  const planStepIndex = includePlanStep ? BASE_STEPS.length : -1;
+  const isPlanStep = includePlanStep === true && step === planStepIndex;
+
   // Deep link: /profiling?step=links jumps straight to a section when the
   // profile is already complete (all earlier steps are valid then).
-  const canJumpSteps = Boolean(user?.profileCompleted);
+  const canJumpSteps = Boolean(user?.profileCompleted) && !includePlanStep;
   useEffect(() => {
-    if (!canJumpSteps) return;
+    if (!canJumpSteps || includePlanStep === null) return;
     const slug = searchParams?.get("step");
-    const idx = STEP_SLUGS.indexOf(slug as (typeof STEP_SLUGS)[number]);
+    const idx = STEP_SLUGS.indexOf(
+      slug as (typeof BASE_STEP_SLUGS)[number],
+    );
     if (idx > 0) setStep(idx);
-  }, [canJumpSteps, searchParams]);
+  }, [canJumpSteps, searchParams, STEP_SLUGS, includePlanStep]);
 
   useEffect(() => {
     if (!user || prefilled) return;
@@ -420,6 +476,9 @@ function ProfilingContent() {
     if (step === 4) {
       if (bio.trim().length < 30) return "Bio needs at least 30 characters";
     }
+    if (includePlanStep && step === planStepIndex) {
+      if (!selectedPlan) return "Select Free or Premium to continue";
+    }
     return null;
   }, [
     step,
@@ -437,6 +496,9 @@ function ProfilingContent() {
     socials,
     introVideo,
     bio,
+    includePlanStep,
+    planStepIndex,
+    selectedPlan,
   ]);
 
   function next() {
@@ -565,11 +627,10 @@ function ProfilingContent() {
     };
   }
 
-  async function handleSave(_opts: { goLive?: boolean } = {}) {
-    // Always validate the current step first so Save feels local
-    if (stepError) {
+  async function persistProfile(opts: { showDialog?: boolean } = {}) {
+    if (stepError && !isPlanStep) {
       setError(stepError);
-      return;
+      return null;
     }
     setError("");
     setSaveFlash("");
@@ -582,19 +643,107 @@ function ProfilingContent() {
         setProfileImageUrl(saved.profileImageUrl);
       }
       setSaveFlash("Saved");
-      setShowSavedDialog(true);
+      if (opts.showDialog !== false) {
+        setSavedVariant("saved");
+        setShowSavedDialog(true);
+      }
       window.setTimeout(() => setSaveFlash(""), 2000);
+      return saved;
     } catch (err) {
       setError(
         err instanceof ApiError ? err.message : "Failed to save. Try again.",
       );
+      return null;
     } finally {
       setSaving(false);
     }
   }
 
+  async function handleSave() {
+    await persistProfile({ showDialog: true });
+  }
+
+  async function finishWithFree() {
+    setFinishing(true);
+    setError("");
+    try {
+      const saved = await persistProfile({ showDialog: false });
+      if (!saved) return;
+      const res = await premiumMentorApi.chooseFree();
+      setUser(res.user);
+      setSavedVariant("live-free");
+      setShowSavedDialog(true);
+    } catch (err) {
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : "Could not finish setup. Try again.",
+      );
+    } finally {
+      setFinishing(false);
+    }
+  }
+
+  async function finishWithPremium() {
+    setFinishing(true);
+    setError("");
+    try {
+      // Save first so payment abandon never loses profile work.
+      const saved = await persistProfile({ showDialog: false });
+      if (!saved) return;
+      setCheckoutOpen(true);
+    } catch (err) {
+      setError(
+        err instanceof ApiError
+          ? err.message
+          : "Could not prepare checkout. Try again.",
+      );
+    } finally {
+      setFinishing(false);
+    }
+  }
+
   async function handleSubmit() {
-    await handleSave({ goLive: true });
+    if (includePlanStep && isPlanStep) {
+      if (!selectedPlan) {
+        setError("Select Free or Premium to continue");
+        return;
+      }
+      if (selectedPlan === "free") {
+        await finishWithFree();
+      } else {
+        await finishWithPremium();
+      }
+      return;
+    }
+    await persistProfile({ showDialog: true });
+  }
+
+  async function softCommitFree() {
+    try {
+      const res = await premiumMentorApi.chooseFree();
+      setUser(res.user);
+    } catch {
+      /* still let them through — profile is already saved */
+    }
+    setSavedVariant("live-free");
+    setShowSavedDialog(true);
+  }
+
+  function onCheckoutOpenChange(open: boolean) {
+    setCheckoutOpen(open);
+    if (open) {
+      premiumPaidRef.current = false;
+      return;
+    }
+    if (premiumPaidRef.current) {
+      premiumPaidRef.current = false;
+      return;
+    }
+    // Dismissed / closed without pay — go live as Classic (no dead-end).
+    if (includePlanStep) {
+      void softCommitFree();
+    }
   }
 
   function applyPhotoUser(saved: NonNullable<typeof user>, url: string | null) {
@@ -609,7 +758,7 @@ function ProfilingContent() {
     });
   }
 
-  if (loading || !user) {
+  if (loading || !user || includePlanStep === null) {
     return (
       <main className="flex min-h-screen items-center justify-center bg-cream text-sm text-muted">
         Loading…
@@ -673,20 +822,31 @@ function ProfilingContent() {
           })}
         </div>
 
-        <div className="mt-5">
+        <div
+          className={cn(
+            "mt-5",
+            isPlanStep && "mx-auto w-full max-w-[720px] text-center sm:text-left",
+          )}
+        >
           <h1 className="text-2xl font-bold tracking-tight text-ink sm:text-[28px]">
             {step === 0 && "Tell parents who you are"}
             {step === 1 && "What do you teach?"}
             {step === 2 && "When are you available?"}
             {step === 3 && "Links & extras"}
             {step === 4 && "Bio & final check"}
+            {isPlanStep && "Choose your plan"}
           </h1>
           <p className="mt-1 text-sm text-muted">
             {step === 0 && "Name, contact and where you're based."}
             {step === 1 && "Subjects, levels, experience and how you teach."}
             {step === 2 && "Parents only message you inside these windows."}
             {step === 3 && "All optional — these build trust with parents."}
-            {step === 4 && "Write a short bio and you're live."}
+            {step === 4 &&
+              (includePlanStep
+                ? "Write a short bio, then pick Free or Premium."
+                : "Write a short bio and you're live.")}
+            {isPlanStep &&
+              "Free forever, or Premium for more reach. Tap a card to select."}
           </p>
         </div>
 
@@ -1438,6 +1598,17 @@ function ProfilingContent() {
             </div>
           </div>
         )}
+
+        {isPlanStep && (
+          <OnboardingPlanStep
+            selected={selectedPlan}
+            onSelect={(plan) => {
+              setSelectedPlan(plan);
+              setError("");
+            }}
+            disabled={saving || finishing}
+          />
+        )}
       </main>
 
       {/* ------------------------------ footer bar ------------------------------ */}
@@ -1447,7 +1618,7 @@ function ProfilingContent() {
             <button
               type="button"
               onClick={back}
-              disabled={saving}
+              disabled={saving || finishing}
               className="flex h-11 shrink-0 items-center gap-1.5 rounded-md border border-hairline bg-white px-4 text-sm font-semibold text-ink transition hover:bg-cream-band disabled:opacity-50 sm:px-5"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -1460,22 +1631,24 @@ function ProfilingContent() {
           )}
 
           <div className="ml-auto flex min-w-0 flex-1 items-center justify-end gap-2 sm:flex-initial">
-            <button
-              type="button"
-              onClick={() => handleSave()}
-              disabled={saving}
-              className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-sm font-semibold text-ink transition hover:bg-cream disabled:opacity-60 sm:px-4"
-            >
-              {saving ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <Save className="h-3.5 w-3.5" />
-              )}
-              <span className="hidden sm:inline">
-                {saving ? "Saving…" : "Save"}
-              </span>
-              <span className="sm:hidden">{saving ? "…" : "Save"}</span>
-            </button>
+            {!isPlanStep && (
+              <button
+                type="button"
+                onClick={() => void handleSave()}
+                disabled={saving || finishing}
+                className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-sm font-semibold text-ink transition hover:bg-cream disabled:opacity-60 sm:px-4"
+              >
+                {saving ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Save className="h-3.5 w-3.5" />
+                )}
+                <span className="hidden sm:inline">
+                  {saving ? "Saving…" : "Save"}
+                </span>
+                <span className="sm:hidden">{saving ? "…" : "Save"}</span>
+              </button>
+            )}
 
             {step < STEPS.length - 1 ? (
               <button
@@ -1486,11 +1659,38 @@ function ProfilingContent() {
                 Continue
                 <ArrowRight className="h-4 w-4" />
               </button>
+            ) : isPlanStep ? (
+              <button
+                type="button"
+                onClick={() => void handleSubmit()}
+                disabled={saving || finishing || !selectedPlan}
+                className={cn(
+                  "flex h-11 shrink-0 items-center gap-2 rounded-md px-4 text-sm font-semibold text-white shadow-sm transition active:scale-[0.98] disabled:opacity-60 sm:px-6",
+                  selectedPlan === "premium"
+                    ? "bg-ink hover:bg-ink/90"
+                    : "bg-coral hover:bg-coral-dark",
+                )}
+              >
+                {saving || finishing ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : selectedPlan === "premium" ? (
+                  <Crown className="h-4 w-4 text-butter" />
+                ) : (
+                  <BadgeCheck className="h-4 w-4" />
+                )}
+                {saving || finishing
+                  ? "Working…"
+                  : selectedPlan === "premium"
+                    ? "Continue to payment"
+                    : selectedPlan === "free"
+                      ? "Go live free"
+                      : "Select a plan"}
+              </button>
             ) : (
               <button
                 type="button"
-                onClick={handleSubmit}
-                disabled={saving}
+                onClick={() => void handleSubmit()}
+                disabled={saving || finishing}
                 className="flex h-11 shrink-0 items-center gap-2 rounded-md bg-coral px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-coral-dark active:scale-[0.98] disabled:opacity-60 sm:px-6"
               >
                 {saving ? (
@@ -1508,6 +1708,17 @@ function ProfilingContent() {
       <ProfileSavedDialog
         open={showSavedDialog}
         onClose={() => setShowSavedDialog(false)}
+        variant={savedVariant}
+      />
+
+      <PremiumCheckoutDialog
+        open={checkoutOpen}
+        onOpenChange={onCheckoutOpenChange}
+        onSuccess={() => {
+          premiumPaidRef.current = true;
+          setSavedVariant("live-premium");
+          setShowSavedDialog(true);
+        }}
       />
     </div>
   );
