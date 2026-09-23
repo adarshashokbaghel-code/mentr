@@ -859,24 +859,46 @@ export async function runSnapGradeEvaluation(opts: {
     };
   }
 
-  const reserved = await SnapGradeWallet.findOneAndUpdate(
-    { user: opts.userId, creditBalance: { $gte: cost } },
-    { $inc: { creditBalance: -cost, totalSpent: cost } },
-    { new: true },
+  const { User } = await import("../models/User");
+  const { isMentrPremiumActive } = await import("./premium-mentor-billing");
+  const mentorUser = await User.findById(opts.userId).select(
+    "role mentrPremium premiumMentorStatus",
   );
-  if (!reserved) {
-    const latest = await SnapGradeWallet.findOne({ user: opts.userId });
-    return {
-      error: `Not enough credits (need ${cost}, have ${latest?.creditBalance ?? 0})`,
-      code: "INSUFFICIENT_CREDITS" as const,
-      creditBalance: latest?.creditBalance ?? 0,
-    };
+  const premiumUnlimited = Boolean(
+    mentorUser &&
+      mentorUser.role === "faculty" &&
+      isMentrPremiumActive(mentorUser),
+  );
+  const chargeCost = premiumUnlimited ? 0 : cost;
+
+  let reserved: {
+    creditBalance: number;
+  } | null = null;
+  if (chargeCost > 0) {
+    const updated = await SnapGradeWallet.findOneAndUpdate(
+      { user: opts.userId, creditBalance: { $gte: chargeCost } },
+      { $inc: { creditBalance: -chargeCost, totalSpent: chargeCost } },
+      { new: true },
+    );
+    if (!updated) {
+      const latest = await SnapGradeWallet.findOne({ user: opts.userId });
+      return {
+        error: `Not enough credits (need ${chargeCost}, have ${latest?.creditBalance ?? 0})`,
+        code: "INSUFFICIENT_CREDITS" as const,
+        creditBalance: latest?.creditBalance ?? 0,
+      };
+    }
+    reserved = { creditBalance: updated.creditBalance };
+  } else {
+    const wallet = await SnapGradeWallet.findOne({ user: opts.userId });
+    reserved = { creditBalance: wallet?.creditBalance ?? 0 };
   }
 
   const refundCredits = async () => {
+    if (chargeCost <= 0) return;
     await SnapGradeWallet.findOneAndUpdate(
       { user: opts.userId },
-      { $inc: { creditBalance: cost, totalSpent: -cost } },
+      { $inc: { creditBalance: chargeCost, totalSpent: -chargeCost } },
     );
   };
 
@@ -912,7 +934,7 @@ export async function runSnapGradeEvaluation(opts: {
       imagePath: uploaded.imagePath,
       marksAwarded: graded.marksAwarded,
       maxMarks: opts.question.maxMarks,
-      creditsDeducted: cost,
+      creditsDeducted: chargeCost,
       steps: graded.steps,
       overallFeedback: graded.overallFeedback,
       transcript: graded.transcript,
@@ -947,7 +969,7 @@ export async function runSnapGradeEvaluation(opts: {
               questionText: q.questionText,
               marksAwarded: graded.marksAwarded,
               maxMarks: q.maxMarks,
-              creditsDeducted: cost,
+              creditsDeducted: chargeCost,
               overallFeedback: graded.overallFeedback || "",
               transcript: graded.transcript || "",
               relevance: graded.relevance || "",
@@ -961,9 +983,11 @@ export async function runSnapGradeEvaluation(opts: {
           $each: [
             {
               type: "spend" as const,
-              credits: -cost,
-              balanceAfter: reserved.creditBalance,
-              note: `Grade Q${q.questionNumber}`,
+              credits: -chargeCost,
+              balanceAfter: reserved?.creditBalance ?? 0,
+              note: premiumUnlimited
+                ? `Grade Q${q.questionNumber} (Premium unlimited)`
+                : `Grade Q${q.questionNumber}`,
               refId: evaluation._id.toString(),
               at: new Date(),
             },
@@ -977,6 +1001,7 @@ export async function runSnapGradeEvaluation(opts: {
 
   return {
     evaluation,
-    creditBalance: updated?.creditBalance ?? reserved.creditBalance,
+    creditBalance: updated?.creditBalance ?? reserved?.creditBalance ?? 0,
+    premiumUnlimited,
   };
 }

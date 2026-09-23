@@ -203,6 +203,31 @@ export function deleteAdminUser(key: string, userId: string, adminPass: string) 
   });
 }
 
+export function updateAdminUser(
+  key: string,
+  userId: string,
+  adminPass: string,
+  body: {
+    name?: string;
+    email?: string;
+    phone?: string;
+    city?: string;
+    area?: string;
+    country?: string;
+    emailVerified?: boolean;
+    profileCompleted?: boolean;
+  },
+) {
+  return adminFetch<{ user: AdminUserRow }>(
+    key,
+    `/api/admin/users/${encodeURIComponent(userId)}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ ...body, adminPass }),
+    },
+  );
+}
+
 export type AdminConnectionRow = {
   id: string;
   parentName: string;
@@ -450,6 +475,7 @@ export type FeaturedAdminTeacher = {
   city: string;
   imageUrl: string;
   verified: boolean;
+  premium?: boolean;
   hourlyRate: number | null;
   profileComplete: boolean;
 };
@@ -457,6 +483,8 @@ export type FeaturedAdminTeacher = {
 export type FeaturedTutorsState = {
   ids: string[];
   selected: FeaturedAdminTeacher[];
+  /** Active Premium mentors — pinned first on the homepage featured strip. */
+  premiumAuto?: FeaturedAdminTeacher[];
   max: number;
 };
 
@@ -730,29 +758,40 @@ export type AdminPremiumMentorRow = {
   phone: string | null;
   city: string | null;
   area: string | null;
-  status: "pending" | "verified" | "none";
+  status: "pending" | "verified" | "none" | "expired";
   screenshotUrl: string | null;
   submittedAt: string | null;
   verifiedAt: string | null;
+  premiumActive?: boolean;
+  source?: "razorpay" | "screenshot" | "none";
+  expiresAt?: string | null;
+  months?: number | null;
+  amountInr?: number | null;
+  revenueInr?: number | null;
+  paidCount?: number;
+  receiptNumber?: string | null;
+  razorpayPaymentId?: string | null;
+  totalReveals?: number;
+  revealsToday?: number;
+};
+
+export type AdminPremiumMentorStats = {
+  activePremium: number;
+  expired: number;
+  pendingScreenshot: number;
+  razorpayConversions: number;
+  totalRevenueInr: number;
+  revenue7dInr: number;
+  revenue30dInr: number;
+  conversions7d: number;
+  conversions30d: number;
+  totalRevealsAllTime: number;
+  revealsToday: number;
 };
 
 export function fetchAdminPremiumMentors(key: string) {
-  return adminFetch<{ mentors: AdminPremiumMentorRow[] }>(
-    key,
-    "/api/admin/premium-mentors",
-  );
-}
-
-export function verifyAdminPremiumMentor(
-  key: string,
-  userId: string,
-  adminPass: string,
-) {
   return adminFetch<{
-    ok: boolean;
-    mentor: { id: string; status: string; verifiedAt: string };
-  }>(key, `/api/admin/premium-mentors/${encodeURIComponent(userId)}/verify`, {
-    method: "POST",
-    body: JSON.stringify({ adminPass }),
-  });
+    mentors: AdminPremiumMentorRow[];
+    stats?: AdminPremiumMentorStats;
+  }>(key, "/api/admin/premium-mentors");
 }

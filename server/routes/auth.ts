@@ -96,6 +96,22 @@ export function serializeUser(user: IUser) {
     premiumMentorVerifiedAt: user.premiumMentorVerifiedAt
       ? user.premiumMentorVerifiedAt.toISOString()
       : undefined,
+    mentrPremium: user.mentrPremium
+      ? {
+          type: user.mentrPremium.type || "free",
+          firstRechargedAt: user.mentrPremium.firstRechargedAt
+            ? user.mentrPremium.firstRechargedAt.toISOString()
+            : undefined,
+          lastPurchasedAt: user.mentrPremium.lastPurchasedAt
+            ? user.mentrPremium.lastPurchasedAt.toISOString()
+            : undefined,
+          expiresAt: user.mentrPremium.expiresAt
+            ? user.mentrPremium.expiresAt.toISOString()
+            : undefined,
+          currentPlanMonths: user.mentrPremium.currentPlanMonths,
+          lastReceiptNumber: user.mentrPremium.lastReceiptNumber,
+        }
+      : { type: "free" as const },
     lastLoginAt: user.lastLoginAt,
     createdAt: user.createdAt,
   };

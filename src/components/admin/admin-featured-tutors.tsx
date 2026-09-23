@@ -3,6 +3,7 @@
 import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
 import { AdminSection } from "@/components/admin/admin-ui";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
+import { MentorStatusBadges } from "@/components/ui/mentor-status-badges";
 import { Button } from "@/components/ui/button";
 import {
   fetchAdminFeaturedTutors,
@@ -15,6 +16,7 @@ import {
   ArrowDown,
   ArrowUp,
   Check,
+  Crown,
   Loader2,
   Plus,
   Search,
@@ -73,14 +75,15 @@ function TeacherPickRow({
         showInitials={false}
       />
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold text-ink">
-          {teacher.name}
-          {teacher.verified && (
-            <span className="ml-1.5 text-[10px] font-bold uppercase text-sage">
-              Verified
-            </span>
-          )}
-        </p>
+        <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+          <p className="truncate text-sm font-semibold text-ink">
+            {teacher.name}
+          </p>
+          <MentorStatusBadges
+            verified={teacher.verified}
+            premium={teacher.premium}
+          />
+        </div>
         <p className="truncate text-[11px] text-muted">
           {teacher.subjects.slice(0, 3).join(" · ") || "No subjects"}
           {place ? ` · ${place}` : ""}
@@ -125,7 +128,7 @@ function TeacherPickRow({
         >
           <Trash2 className="h-4 w-4" />
         </button>
-      ) : (
+      ) : onToggle ? (
         <button
           type="button"
           onClick={onToggle}
@@ -148,13 +151,19 @@ function TeacherPickRow({
             </>
           )}
         </button>
-      )}
+      ) : teacher.premium ? (
+        <span className="inline-flex h-8 items-center gap-1 rounded-lg bg-ink px-2.5 text-xs font-semibold text-white">
+          <Crown className="h-3.5 w-3.5" />
+          Top
+        </span>
+      ) : null}
     </li>
   );
 }
 
 export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
   const [selected, setSelected] = useState<FeaturedAdminTeacher[]>([]);
+  const [premiumAuto, setPremiumAuto] = useState<FeaturedAdminTeacher[]>([]);
   const [max, setMax] = useState(8);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<FeaturedAdminTeacher[]>([]);
@@ -171,6 +180,11 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
     () => new Set(selected.map((t) => t.id)),
     [selected],
   );
+  const premiumIds = useMemo(
+    () => new Set(premiumAuto.map((t) => t.id)),
+    [premiumAuto],
+  );
+  const curatedFillSlots = Math.max(0, max - premiumAuto.length);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -178,6 +192,7 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
     try {
       const data = await fetchAdminFeaturedTutors(adminKey);
       setSelected(data.selected);
+      setPremiumAuto(data.premiumAuto || []);
       setMax(data.max);
       setDirty(false);
     } catch (e) {
@@ -208,8 +223,12 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
 
   function addTeacher(t: FeaturedAdminTeacher) {
     if (selectedIds.has(t.id)) return;
+    if (premiumIds.has(t.id)) {
+      setError("Already on homepage via active Premium (top of strip)");
+      return;
+    }
     if (selected.length >= max) {
-      setError(`Max ${max} featured tutors`);
+      setError(`Max ${max} curated tutors`);
       return;
     }
     setSelected((prev) => [...prev, t]);
@@ -243,6 +262,7 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
         adminPass,
       );
       setSelected(data.selected);
+      setPremiumAuto(data.premiumAuto || []);
       setMax(data.max);
       setDirty(false);
       setPassOpen(false);
@@ -269,12 +289,12 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
       <AdminSection
         id="featured-tutors"
         title="Featured tutors"
-        description="Pick who appears in “Featured for parents” on the homepage. Order here = order on the site. Max 8."
+        description="Homepage “Featured for parents”: active Premium mentors always lead (linked from Premium), then your curated list fills remaining slots up to 8."
       >
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className="text-xs font-semibold text-muted">
             <Star className="mr-1 inline h-3.5 w-3.5 text-coral" />
-            {selected.length}/{max} selected
+            {premiumAuto.length} Premium auto · {selected.length}/{max} curated
             {dirty && (
               <span className="ml-2 text-coral-dark">Unsaved changes</span>
             )}
@@ -301,7 +321,7 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
                 setPassOpen(true);
               }}
             >
-              Save to homepage
+              Save curated list
             </Button>
           </div>
         </div>
@@ -313,29 +333,54 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
         )}
 
         <div className="mt-4 grid gap-5 lg:grid-cols-2">
-          <div>
-            <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted">
-              On homepage (in order)
-            </p>
-            {selected.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-hairline bg-cream/50 px-4 py-8 text-center text-sm text-muted">
-                None selected — homepage falls back to auto picks until you
-                save a list.
+          <div className="space-y-5">
+            <div>
+              <p className="mb-2 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-muted">
+                <Crown className="h-3.5 w-3.5 text-ink" />
+                Premium — top of homepage ({premiumAuto.length})
               </p>
-            ) : (
-              <ul className="space-y-2">
-                {selected.map((t, i) => (
-                  <TeacherPickRow
-                    key={t.id}
-                    teacher={t}
-                    index={i}
-                    total={selected.length}
-                    onMove={(dir) => moveTeacher(i, dir)}
-                    onRemove={() => removeTeacher(t.id)}
-                  />
-                ))}
-              </ul>
-            )}
+              {premiumAuto.length === 0 ? (
+                <p className="rounded-xl border border-dashed border-hairline bg-cream/50 px-4 py-6 text-center text-sm text-muted">
+                  No active Premium mentors right now. When someone upgrades,
+                  they pin to the top of Featured automatically.
+                </p>
+              ) : (
+                <ul className="space-y-2">
+                  {premiumAuto.map((t) => (
+                    <TeacherPickRow key={t.id} teacher={{ ...t, premium: true }} />
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div>
+              <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted">
+                Curated fill ({selected.length}/{max}
+                {curatedFillSlots < max
+                  ? ` · ~${curatedFillSlots} slots after Premium`
+                  : ""}
+                )
+              </p>
+              {selected.length === 0 ? (
+                <p className="rounded-xl border border-dashed border-hairline bg-cream/50 px-4 py-8 text-center text-sm text-muted">
+                  None curated — homepage shows Premium only (or auto picks if
+                  none).
+                </p>
+              ) : (
+                <ul className="space-y-2">
+                  {selected.map((t, i) => (
+                    <TeacherPickRow
+                      key={t.id}
+                      teacher={t}
+                      index={i}
+                      total={selected.length}
+                      onMove={(dir) => moveTeacher(i, dir)}
+                      onRemove={() => removeTeacher(t.id)}
+                    />
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
           <div>
@@ -366,19 +411,30 @@ export function AdminFeaturedTutors({ adminKey }: { adminKey: string }) {
                 Searching…
               </p>
             )}
-            <ul className="max-h-[420px] space-y-2 overflow-y-auto pr-1">
-              {results.map((t) => (
-                <TeacherPickRow
-                  key={t.id}
-                  teacher={t}
-                  selected={selectedIds.has(t.id)}
-                  onToggle={() =>
-                    selectedIds.has(t.id)
-                      ? removeTeacher(t.id)
-                      : addTeacher(t)
-                  }
-                />
-              ))}
+            <ul className="max-h-[520px] space-y-2 overflow-y-auto pr-1">
+              {results.map((t) => {
+                const onPremium = premiumIds.has(t.id);
+                const onCurated = selectedIds.has(t.id);
+                if (onPremium) {
+                  return (
+                    <TeacherPickRow
+                      key={t.id}
+                      teacher={{ ...t, premium: true }}
+                      selected
+                    />
+                  );
+                }
+                return (
+                  <TeacherPickRow
+                    key={t.id}
+                    teacher={t}
+                    selected={onCurated}
+                    onToggle={() =>
+                      onCurated ? removeTeacher(t.id) : addTeacher(t)
+                    }
+                  />
+                );
+              })}
               {!searching && results.length === 0 && (
                 <p className="py-6 text-center text-sm text-muted">
                   No faculty matched.

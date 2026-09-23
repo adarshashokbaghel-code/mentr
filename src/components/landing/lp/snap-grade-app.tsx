@@ -136,7 +136,8 @@ export function SnapGradeApp() {
   const [exercise, setExercise] = useState("");
   const [questionId, setQuestionId] = useState("");
 
-  const [credits, setCredits] = useState<number | null>(null);
+      const [credits, setCredits] = useState<number | null>(null);
+  const [premiumUnlimited, setPremiumUnlimited] = useState(false);
   const [pricing, setPricing] = useState<SnapGradePricing | null>(null);
   const [history, setHistory] = useState<SnapGradeHistoryItem[]>([]);
   const [recharges, setRecharges] = useState<
@@ -208,6 +209,7 @@ export function SnapGradeApp() {
   const loadAccount = useCallback(async () => {
     if (!user) {
       setCredits(null);
+      setPremiumUnlimited(false);
       setHistory([]);
       setRecharges([]);
       setFreeCreditsClaimed(false);
@@ -220,6 +222,7 @@ export function SnapGradeApp() {
     try {
       const acc = await snapGradeApi.account();
       setCredits(acc.creditBalance);
+      setPremiumUnlimited(Boolean(acc.premiumUnlimited));
       setHistory(acc.history || []);
       setRecharges(acc.recharges || []);
       setFreeCreditsClaimed(Boolean(acc.freeCreditsClaimed));
@@ -465,7 +468,11 @@ export function SnapGradeApp() {
       setError("Review and confirm the digital text before grading");
       return;
     }
-    if (credits !== null && selected.creditsCost > credits) {
+    if (
+      !premiumUnlimited &&
+      credits !== null &&
+      selected.creditsCost > credits
+    ) {
       setError(
         `Not enough credits (need ${selected.creditsCost}, have ${credits}). Recharge to continue.`,
       );
@@ -485,6 +492,7 @@ export function SnapGradeApp() {
       });
       setResult({ evaluation: data.evaluation, question: data.question });
       setCredits(data.creditBalance);
+      if (data.premiumUnlimited) setPremiumUnlimited(true);
       setFlowStep("graded");
       void loadAccount();
     } catch (err) {
@@ -704,7 +712,9 @@ export function SnapGradeApp() {
               </h1>
               <p className="hidden text-[11px] text-muted sm:block">
                 {user
-                  ? "100 free credits once · recharge from ₹1"
+                  ? premiumUnlimited
+                    ? "Premium mentor · unlimited grading"
+                    : "100 free credits once · recharge from ₹1"
                   : "Browse free · log in to grade · 100 free credits"}{" "}
                 ·{" "}
                 <a
@@ -733,10 +743,16 @@ export function SnapGradeApp() {
                   <Wallet className="h-3.5 w-3.5" />
                 </span>
                 <span className="text-[14px] font-extrabold tabular-nums text-ink">
-                  {accountLoading ? "…" : user ? (credits ?? "—") : "—"}
+                  {accountLoading
+                    ? "…"
+                    : user
+                      ? premiumUnlimited
+                        ? "∞"
+                        : (credits ?? "—")
+                      : "—"}
                 </span>
                 <span className="hidden text-[10px] font-bold uppercase tracking-wide text-muted sm:inline">
-                  cr
+                  {premiumUnlimited ? "prem" : "cr"}
                 </span>
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#f3eee6] text-muted">
                   <ChevronRight className="h-3.5 w-3.5" />

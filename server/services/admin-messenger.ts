@@ -58,7 +58,7 @@ export type AdminUserRow = {
   };
 };
 
-function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date; updatedAt: Date }): AdminUserRow {
+export function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date; updatedAt: Date }): AdminUserRow {
   const base: AdminUserRow = {
     id: String(u._id),
     email: u.email,

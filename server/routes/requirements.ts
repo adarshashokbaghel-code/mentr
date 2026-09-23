@@ -14,6 +14,7 @@ import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
 import { notifyParentRequirementPitch } from "../services/parent-notifications";
+import { isMentrPremiumActive } from "../services/premium-mentor-billing";
 
 const router = Router();
 
@@ -25,7 +26,7 @@ const DETAILS_MIN = 20;
 const DETAILS_MAX = 500;
 const PITCH_MIN = 10;
 const PITCH_MAX = 500;
-/** Free-forever spam control: replaces "coins" with a simple daily cap */
+/** Free mentors: 3 pitches/day. Premium: unlimited. */
 const MAX_INTERESTS_PER_DAY = 3;
 
 /** wa.me needs a country code — assume India for bare 10-digit numbers */
@@ -377,12 +378,21 @@ router.get("/board", async (req: AuthenticatedRequest, res: Response) => {
         .map((c) => [c.requirement!.toString(), c]),
     );
 
+    const mentor = await User.findById(req.auth!.sub).select(
+      "mentrPremium premiumMentorStatus",
+    );
+    const premium = mentor ? isMentrPremiumActive(mentor) : false;
+    const dailyLimit = premium ? null : MAX_INTERESTS_PER_DAY;
+
     res.json({
       requirements: requirements.map((r) =>
         serializeForBoard(r, interestByRequirement.get(r._id.toString())),
       ),
-      dailyLimit: MAX_INTERESTS_PER_DAY,
-      usedToday: Math.min(usedToday, MAX_INTERESTS_PER_DAY),
+      dailyLimit,
+      usedToday: premium
+        ? usedToday
+        : Math.min(usedToday, MAX_INTERESTS_PER_DAY),
+      unlimitedPitches: premium,
     });
   } catch (error) {
     console.error("requirements board error:", error);
@@ -578,9 +588,13 @@ router.post(
         return;
       }
 
-      if (countsTowardLimit && usedToday >= MAX_INTERESTS_PER_DAY) {
+      if (
+        countsTowardLimit &&
+        !isMentrPremiumActive(teacher) &&
+        usedToday >= MAX_INTERESTS_PER_DAY
+      ) {
         res.status(429).json({
-          error: `Daily limit reached — you can pitch ${MAX_INTERESTS_PER_DAY} posts per day. Resets at midnight.`,
+          error: `Daily limit reached — you can pitch ${MAX_INTERESTS_PER_DAY} posts per day. Upgrade to Premium for unlimited pitches.`,
           code: "DAILY_LIMIT",
         });
         return;
@@ -636,15 +650,21 @@ router.post(
         );
       }
 
+      const premium = isMentrPremiumActive(teacher);
       res.status(201).json({
         message: alreadyConnected
           ? "Pitch sent — you're already connected on WhatsApp"
           : "Sent — the parent will review your pitch",
-        usedToday: Math.min(
-          countsTowardLimit ? usedToday + 1 : usedToday,
-          MAX_INTERESTS_PER_DAY,
-        ),
-        dailyLimit: MAX_INTERESTS_PER_DAY,
+        usedToday: premium
+          ? countsTowardLimit
+            ? usedToday + 1
+            : usedToday
+          : Math.min(
+              countsTowardLimit ? usedToday + 1 : usedToday,
+              MAX_INTERESTS_PER_DAY,
+            ),
+        dailyLimit: premium ? null : MAX_INTERESTS_PER_DAY,
+        unlimitedPitches: premium,
         alreadyConnected,
       });
     } catch (error) {

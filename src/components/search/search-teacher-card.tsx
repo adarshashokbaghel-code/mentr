@@ -2,6 +2,7 @@
 
 import { ConnectButton } from "@/components/connect/connect-button";
 import { SaveTeacherButton } from "@/components/search/save-teacher-button";
+import { MentorStatusBadges } from "@/components/ui/mentor-status-badges";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { formatDistanceKm } from "@/lib/geo";
 import {
@@ -12,7 +13,6 @@ import {
 import { cn } from "@/lib/utils";
 import {
   Award,
-  BadgeCheck,
   Briefcase,
   CalendarDays,
   Globe2,
@@ -114,12 +114,10 @@ export function SearchTeacherCard({
                   {teacher.name}
                 </Link>
                 <div className="mt-1 flex flex-wrap items-center gap-1">
-                  {teacher.verified && (
-                    <span className="inline-flex items-center gap-0.5 rounded bg-sage-wash px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-sage">
-                      <BadgeCheck className="h-2.5 w-2.5" />
-                      Verified
-                    </span>
-                  )}
+                  <MentorStatusBadges
+                    verified={teacher.verified}
+                    premium={teacher.premium}
+                  />
                   <span className="rounded bg-cream-band px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-muted">
                     {teacher.kind === "mentor" ? "Mentor" : "Tutor"}
                   </span>
@@ -148,12 +146,10 @@ export function SearchTeacherCard({
                 >
                   {teacher.name}
                 </Link>
-                {teacher.verified && (
-                  <span className="inline-flex items-center gap-0.5 rounded bg-sage-wash px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-sage">
-                    <BadgeCheck className="h-3 w-3" />
-                    Verified
-                  </span>
-                )}
+                <MentorStatusBadges
+                  verified={teacher.verified}
+                  premium={teacher.premium}
+                />
                 <span className="rounded bg-cream-band px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-muted">
                   {teacher.kind === "mentor" ? "Mentor" : "Tutor"}
                 </span>

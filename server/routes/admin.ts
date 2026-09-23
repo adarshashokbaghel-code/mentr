@@ -23,6 +23,7 @@ import {
 } from "../services/marketing-links";
 import { getAdminStats } from "../services/admin-stats";
 import { deleteAdminUser } from "../services/admin-delete-user";
+import { updateAdminUser } from "../services/admin-update-user";
 import {
   getAdminLearnEnrollmentDetail,
   getAdminLearnTrack,
@@ -134,6 +135,36 @@ router.delete("/users/:id", requireAdminPass, async (req, res) => {
   } catch (err) {
     console.error("Admin delete user error:", err);
     res.status(500).json({ error: "Failed to delete user" });
+  }
+});
+
+router.patch("/users/:id", requireAdminPass, async (req, res) => {
+  try {
+    const id = String(req.params.id || "");
+    const result = await updateAdminUser(id, {
+      name: req.body?.name,
+      email: req.body?.email,
+      phone: req.body?.phone,
+      city: req.body?.city,
+      area: req.body?.area,
+      country: req.body?.country,
+      emailVerified:
+        typeof req.body?.emailVerified === "boolean"
+          ? req.body.emailVerified
+          : undefined,
+      profileCompleted:
+        typeof req.body?.profileCompleted === "boolean"
+          ? req.body.profileCompleted
+          : undefined,
+    });
+    if ("error" in result) {
+      res.status(result.status).json({ error: result.error });
+      return;
+    }
+    res.json(result);
+  } catch (err) {
+    console.error("Admin update user error:", err);
+    res.status(500).json({ error: "Failed to update user" });
   }
 });
 
@@ -496,87 +527,195 @@ router.get("/snap-grade/evaluations", async (req, res) => {
   }
 });
 
-/** Premium mentor payment screenshots awaiting verification. */
+/** Premium mentors — Razorpay conversions + contact-reveal usage. */
 router.get("/premium-mentors", async (_req, res) => {
   try {
     const { User } = await import("../models/User");
+    const { isMentrPremiumActive } = await import(
+      "../services/premium-mentor-billing"
+    );
+    const { ParentContactReveal } = await import(
+      "../models/ParentContactReveal"
+    );
+    const { startOfDayIst } = await import(
+      "../services/parent-contact-reveal"
+    );
+
+    const now = new Date();
+    const dayStart = startOfDayIst(now);
+    const weekStart = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const monthStart = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
     const mentors = await User.find({
       role: "faculty",
-      premiumMentorStatus: { $in: ["pending", "verified"] },
+      $or: [
+        { "mentrPremium.type": "premium" },
+        { "premiumPayments.status": "paid" },
+        { premiumMentorStatus: { $in: ["pending", "verified"] } },
+      ],
     })
       .select(
-        "email profile.name profile.phoneNumber profile.city profile.area premiumMentorStatus premiumMentorPaymentSsUrl premiumMentorSubmittedAt premiumMentorVerifiedAt createdAt",
+        "email profile.name profile.phoneNumber profile.city profile.area premiumMentorStatus premiumMentorPaymentSsUrl premiumMentorSubmittedAt premiumMentorVerifiedAt mentrPremium premiumPayments createdAt",
       )
-      .sort({ premiumMentorSubmittedAt: -1 })
+      .sort({ "mentrPremium.lastPurchasedAt": -1, premiumMentorSubmittedAt: -1 })
       .lean();
 
-    res.json({
-      mentors: mentors.map((m) => ({
+    const mentorIds = mentors.map((m) => m._id);
+    const revealAgg =
+      mentorIds.length === 0
+        ? []
+        : await ParentContactReveal.aggregate([
+            { $match: { mentor: { $in: mentorIds } } },
+            {
+              $group: {
+                _id: "$mentor",
+                totalReveals: { $sum: 1 },
+                revealsToday: {
+                  $sum: {
+                    $cond: [{ $gte: ["$revealedAt", dayStart] }, 1, 0],
+                  },
+                },
+              },
+            },
+          ]);
+    const revealByMentor = new Map(
+      revealAgg.map((r) => [
+        String(r._id),
+        {
+          totalReveals: Number(r.totalReveals) || 0,
+          revealsToday: Number(r.revealsToday) || 0,
+        },
+      ]),
+    );
+
+    const rows = mentors.map((m) => {
+      const payments = (Array.isArray(m.premiumPayments)
+        ? m.premiumPayments
+        : []) as Array<{
+        status?: string;
+        paidAt?: Date | string;
+        createdAt?: Date | string;
+        amountInr?: number;
+        months?: number;
+        receiptNumber?: string;
+        razorpayPaymentId?: string;
+      }>;
+      const paid = payments.filter((p) => p.status === "paid");
+      const lastPaid = [...paid].sort((a, b) => {
+        const ta = new Date(a.paidAt || a.createdAt || 0).getTime();
+        const tb = new Date(b.paidAt || b.createdAt || 0).getTime();
+        return tb - ta;
+      })[0];
+      const revenueInr = paid.reduce(
+        (sum: number, p) => sum + (Number(p.amountInr) || 0),
+        0,
+      );
+      const active = isMentrPremiumActive({
+        mentrPremium: m.mentrPremium,
+        premiumMentorStatus: m.premiumMentorStatus,
+      } as Parameters<typeof isMentrPremiumActive>[0]);
+      const exp = m.mentrPremium?.expiresAt
+        ? new Date(m.mentrPremium.expiresAt)
+        : null;
+      const reveals = revealByMentor.get(String(m._id)) || {
+        totalReveals: 0,
+        revealsToday: 0,
+      };
+      const source =
+        paid.length > 0
+          ? "razorpay"
+          : m.premiumMentorStatus === "pending" ||
+              m.premiumMentorStatus === "verified"
+            ? "screenshot"
+            : "none";
+
+      let status: "verified" | "expired" | "pending" | "none" = "none";
+      if (active) status = "verified";
+      else if (m.premiumMentorStatus === "pending") status = "pending";
+      else if (paid.length > 0 || m.mentrPremium?.type === "premium")
+        status = "expired";
+
+      return {
         id: String(m._id),
         email: m.email,
         name: m.profile?.name || "—",
         phone: m.profile?.phoneNumber || null,
         city: m.profile?.city || null,
         area: m.profile?.area || null,
-        status: m.premiumMentorStatus || "none",
+        status,
         screenshotUrl: m.premiumMentorPaymentSsUrl || null,
-        submittedAt: m.premiumMentorSubmittedAt
-          ? new Date(m.premiumMentorSubmittedAt).toISOString()
-          : null,
-        verifiedAt: m.premiumMentorVerifiedAt
-          ? new Date(m.premiumMentorVerifiedAt).toISOString()
-          : null,
-      })),
+        submittedAt: lastPaid?.paidAt
+          ? new Date(lastPaid.paidAt).toISOString()
+          : m.premiumMentorSubmittedAt
+            ? new Date(m.premiumMentorSubmittedAt).toISOString()
+            : m.mentrPremium?.lastPurchasedAt
+              ? new Date(m.mentrPremium.lastPurchasedAt).toISOString()
+              : null,
+        verifiedAt: m.mentrPremium?.firstRechargedAt
+          ? new Date(m.mentrPremium.firstRechargedAt).toISOString()
+          : m.premiumMentorVerifiedAt
+            ? new Date(m.premiumMentorVerifiedAt).toISOString()
+            : null,
+        premiumActive: active,
+        source,
+        expiresAt: exp ? exp.toISOString() : null,
+        months: m.mentrPremium?.currentPlanMonths || lastPaid?.months || null,
+        amountInr: lastPaid?.amountInr ?? null,
+        revenueInr,
+        paidCount: paid.length,
+        receiptNumber:
+          m.mentrPremium?.lastReceiptNumber ||
+          lastPaid?.receiptNumber ||
+          null,
+        razorpayPaymentId: lastPaid?.razorpayPaymentId || null,
+        totalReveals: reveals.totalReveals,
+        revealsToday: reveals.revealsToday,
+      };
+    });
+
+    const paidPayments = mentors.flatMap((m) => {
+      const payments = (Array.isArray(m.premiumPayments)
+        ? m.premiumPayments
+        : []) as Array<{
+        status?: string;
+        paidAt?: Date | string;
+        createdAt?: Date | string;
+        amountInr?: number;
+      }>;
+      return payments.filter((p) => p.status === "paid");
+    });
+    const revenueInWindow = (from: Date) =>
+      paidPayments
+        .filter((p) => new Date(p.paidAt || p.createdAt || 0) >= from)
+        .reduce((s, p) => s + (Number(p.amountInr) || 0), 0);
+    const countInWindow = (from: Date) =>
+      paidPayments.filter(
+        (p) => new Date(p.paidAt || p.createdAt || 0) >= from,
+      ).length;
+
+    res.json({
+      stats: {
+        activePremium: rows.filter((r) => r.premiumActive).length,
+        expired: rows.filter((r) => r.status === "expired").length,
+        pendingScreenshot: rows.filter((r) => r.status === "pending").length,
+        razorpayConversions: rows.filter((r) => r.source === "razorpay").length,
+        totalRevenueInr: paidPayments.reduce(
+          (s, p) => s + (Number(p.amountInr) || 0),
+          0,
+        ),
+        revenue7dInr: revenueInWindow(weekStart),
+        revenue30dInr: revenueInWindow(monthStart),
+        conversions7d: countInWindow(weekStart),
+        conversions30d: countInWindow(monthStart),
+        totalRevealsAllTime: rows.reduce((s, r) => s + r.totalReveals, 0),
+        revealsToday: rows.reduce((s, r) => s + r.revealsToday, 0),
+      },
+      mentors: rows,
     });
   } catch (err) {
     console.error("Admin premium mentors list error:", err);
     res.status(500).json({ error: "Failed to load premium mentors" });
   }
 });
-
-router.post(
-  "/premium-mentors/:id/verify",
-  requireAdminPass,
-  async (req, res) => {
-    try {
-      const { User } = await import("../models/User");
-      const id = String(req.params.id || "");
-      const user = await User.findById(id);
-      if (!user || user.role !== "faculty") {
-        res.status(404).json({ error: "Mentor not found" });
-        return;
-      }
-      if (user.premiumMentorStatus !== "pending") {
-        res.status(400).json({
-          error:
-            user.premiumMentorStatus === "verified"
-              ? "Already verified"
-              : "No pending payment screenshot",
-        });
-        return;
-      }
-      if (!user.premiumMentorPaymentSsUrl) {
-        res.status(400).json({ error: "No payment screenshot on file" });
-        return;
-      }
-
-      user.premiumMentorStatus = "verified";
-      user.premiumMentorVerifiedAt = new Date();
-      await user.save();
-
-      res.json({
-        ok: true,
-        mentor: {
-          id: user._id.toString(),
-          status: user.premiumMentorStatus,
-          verifiedAt: user.premiumMentorVerifiedAt.toISOString(),
-        },
-      });
-    } catch (err) {
-      console.error("Admin premium mentor verify error:", err);
-      res.status(500).json({ error: "Failed to verify premium mentor" });
-    }
-  },
-);
 
 export default router;

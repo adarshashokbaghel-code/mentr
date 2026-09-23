@@ -11,6 +11,7 @@ import { RADIUS_OPTIONS_KM } from "@/lib/geo";
 import { cn } from "@/lib/utils";
 import {
   BadgeCheck,
+  Crown,
   List,
   Map as MapIcon,
   Search as SearchIcon,
@@ -28,6 +29,8 @@ export interface SearchFiltersState {
   locality?: string;
   onlyOpen: boolean;
   onlyVerified: boolean;
+  /** Default regular — parents browse non-premium first */
+  mentorTier: "regular" | "premium";
   kind: KindFilter;
   /** Delivery mode: online, in person, or teachers offering both */
   mode: ModeFilter;
@@ -571,6 +574,41 @@ export function SearchHeader({
             scrolled ? "py-2" : "py-3",
           )}
         >
+          {/* Premium / Regular toggle — centered */}
+          <div className="mb-2.5 flex justify-center">
+            <div
+              className="inline-flex w-full max-w-[280px] items-center rounded-lg border-2 border-ink bg-white p-0.5 shadow-[2px_2px_0_0_#1a231c] sm:max-w-[300px]"
+              role="group"
+              aria-label="Mentor tier"
+            >
+              <button
+                type="button"
+                onClick={() => onChange({ mentorTier: "regular" })}
+                className={cn(
+                  "flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition",
+                  filters.mentorTier === "regular"
+                    ? "bg-ink text-white"
+                    : "text-muted hover:text-ink",
+                )}
+              >
+                Regular
+              </button>
+              <button
+                type="button"
+                onClick={() => onChange({ mentorTier: "premium" })}
+                className={cn(
+                  "flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition",
+                  filters.mentorTier === "premium"
+                    ? "bg-butter text-ink"
+                    : "text-muted hover:text-ink",
+                )}
+              >
+                <Crown className="h-3 w-3" />
+                Premium
+              </button>
+            </div>
+          </div>
+
           <div className="flex items-center gap-2">
             <div className="relative min-w-0 flex-1">
               <SearchIcon className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />

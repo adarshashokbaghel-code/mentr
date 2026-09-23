@@ -166,6 +166,14 @@ export interface AuthUser {
   premiumMentorPaymentSsUrl?: string;
   premiumMentorSubmittedAt?: string;
   premiumMentorVerifiedAt?: string;
+  mentrPremium?: {
+    type: "free" | "premium";
+    firstRechargedAt?: string;
+    lastPurchasedAt?: string;
+    expiresAt?: string;
+    currentPlanMonths?: number;
+    lastReceiptNumber?: string;
+  };
   lastLoginAt?: string;
   createdAt: string;
 }
@@ -286,14 +294,202 @@ export const profileApi = {
     request<{ user: AuthUser; message: string }>("/profile/image", {
       method: "DELETE",
     }),
+};
 
-  /** Upload payment screenshot to become a Premium Mentor. */
-  submitPremiumMentor: (imageBase64: string, mimeType?: string) =>
-    request<{ user: AuthUser; message: string }>("/profile/premium-mentor", {
+/* ------------------------------ premium mentor (Razorpay) ------------------------------ */
+
+export type PremiumPlanOption = {
+  months: 2 | 3 | 4;
+  label: string;
+  listInr: number;
+  payInr: number;
+  discountPercent: number;
+  discountInr: number;
+  listUsd: number;
+  payUsdApprox: number;
+  badge: string | null;
+  isDefault: boolean;
+  perMonthInr: number;
+};
+
+export type PremiumPaymentRow = {
+  id: string;
+  receiptNumber: string;
+  razorpayOrderId: string;
+  razorpayPaymentId: string | null;
+  status: "created" | "paid" | "failed";
+  months: number;
+  listInr: number;
+  discountPercent: number;
+  discountInr: number;
+  amountInr: number;
+  amountPaise: number;
+  currency: string;
+  usdPerMonth: number;
+  listUsd: number;
+  usdToInr: number;
+  periodStart: string | null;
+  periodEnd: string | null;
+  method: string | null;
+  createdAt: string | null;
+  paidAt: string | null;
+};
+
+export type PremiumMentorState = {
+  catalog: {
+    usdPerMonth: number;
+    inrPerMonth: number;
+    usdToInr: number;
+    currency: "INR";
+    noGstAdded: boolean;
+    plans: PremiumPlanOption[];
+  };
+  paymentsEnabled: boolean;
+  mentrType: "free" | "premium";
+  premiumActive: boolean;
+  canPurchase: boolean;
+  firstRechargedAt: string | null;
+  lastPurchasedAt: string | null;
+  expiresAt: string | null;
+  currentPlanMonths: number | null;
+  lastReceiptNumber: string | null;
+  payments: PremiumPaymentRow[];
+};
+
+export const premiumMentorApi = {
+  catalog: () =>
+    request<
+      PremiumMentorState["catalog"] & { paymentsEnabled: boolean }
+    >("/premium-mentor/catalog"),
+
+  me: () =>
+    request<{ user: AuthUser; premium: PremiumMentorState }>(
+      "/premium-mentor/me",
+    ),
+
+  createOrder: (months: 2 | 3 | 4) =>
+    request<{
+      orderId: string;
+      amountPaise: number;
+      amountInr: number;
+      currency: string;
+      months: number;
+      listInr: number;
+      discountPercent: number;
+      discountInr: number;
+      listUsd: number;
+      receiptNumber: string;
+      keyId: string;
+      prefill: { email: string; name: string; contact: string };
+    }>("/premium-mentor/order", {
       method: "POST",
-      body: JSON.stringify({ imageBase64, mimeType }),
-      timeoutMs: 60_000,
+      body: JSON.stringify({ months }),
+      timeoutMs: 30_000,
     }),
+
+  verify: (payload: {
+    razorpay_order_id: string;
+    razorpay_payment_id: string;
+    razorpay_signature: string;
+  }) =>
+    request<{
+      alreadyApplied: boolean;
+      user: AuthUser;
+      premium: PremiumMentorState;
+      payment: PremiumPaymentRow;
+    }>("/premium-mentor/verify", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      timeoutMs: 45_000,
+    }),
+
+  cancel: (orderId: string) =>
+    request<{ ok: boolean }>("/premium-mentor/cancel", {
+      method: "POST",
+      body: JSON.stringify({ orderId }),
+    }),
+
+  parents: (opts?: { q?: string; posted?: boolean; limit?: number }) => {
+    const params = new URLSearchParams();
+    if (opts?.q) params.set("q", opts.q);
+    if (opts?.posted) params.set("posted", "1");
+    if (opts?.limit) params.set("limit", String(opts.limit));
+    const qs = params.toString();
+    return request<{
+      parents: PremiumParentRow[];
+      quota: PremiumRevealQuota;
+      premiumActive: boolean;
+      error?: string;
+      code?: string;
+      upgradeUrl?: string;
+    }>(`/premium-mentor/parents${qs ? `?${qs}` : ""}`);
+  },
+
+  revealParent: (parentId: string) =>
+    request<{
+      alreadyRevealed: boolean;
+      reveal: PremiumRevealRow;
+      quota: PremiumRevealQuota;
+      error?: string;
+      code?: string;
+    }>(`/premium-mentor/parents/${encodeURIComponent(parentId)}/reveal`, {
+      method: "POST",
+      body: JSON.stringify({}),
+    }),
+
+  reveals: () =>
+    request<{
+      reveals: PremiumRevealRow[];
+      quota: PremiumRevealQuota;
+      premiumActive: boolean;
+    }>("/premium-mentor/reveals"),
+};
+
+export type PremiumRevealQuota = {
+  dailyLimit: number;
+  usedToday: number;
+  remaining: number;
+};
+
+export type PremiumRevealRow = {
+  id: string;
+  parentId: string;
+  parentName: string;
+  parentPhone: string;
+  parentEmail: string | null;
+  parentCity: string | null;
+  parentArea: string | null;
+  hasPosted: boolean;
+  openPostsAtReveal: number;
+  revealedAt: string | null;
+  whatsappUrl: string | null;
+};
+
+export type PremiumParentRow = {
+  id: string;
+  name: string;
+  initials?: string;
+  imageUrl?: string | null;
+  city: string | null;
+  area: string | null;
+  country: string;
+  hasPosted: boolean;
+  openPosts: number;
+  totalPosts: number;
+  latestPost: {
+    subject: string;
+    classLevel: string;
+    area: string | null;
+    status: string;
+    createdAt: string | null;
+  } | null;
+  joinedAt: string | null;
+  lastLoginAt: string | null;
+  contactRevealed: boolean;
+  phone: string;
+  email: string | null;
+  whatsappUrl: string | null;
+  revealedAt: string | null;
 };
 
 /* ------------------------------ connections ------------------------------ */
@@ -493,15 +689,17 @@ export const requirementsApi = {
   board: () =>
     request<{
       requirements: BoardRequirement[];
-      dailyLimit: number;
+      dailyLimit: number | null;
       usedToday: number;
+      unlimitedPitches?: boolean;
     }>("/requirements/board"),
 
   expressInterest: (id: string, message: string) =>
     request<{
       message: string;
       usedToday: number;
-      dailyLimit: number;
+      dailyLimit: number | null;
+      unlimitedPitches?: boolean;
       alreadyConnected?: boolean;
     }>(`/requirements/${id}/interest`, {
       method: "POST",
@@ -764,6 +962,7 @@ export const snapGradeApi = {
       freeCreditsGranted: number;
       totalRecharged: number;
       totalSpent: number;
+      premiumUnlimited?: boolean;
       history: SnapGradeHistoryItem[];
       recharges: {
         orderId: string;
@@ -838,6 +1037,7 @@ export const snapGradeApi = {
       evaluation: SnapGradeEvaluation;
       question: SnapGradeQuestion;
       creditBalance: number;
+      premiumUnlimited?: boolean;
     }>("/snap-grade/evaluate", {
       method: "POST",
       body: JSON.stringify(payload),

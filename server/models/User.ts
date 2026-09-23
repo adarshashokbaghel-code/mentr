@@ -159,6 +159,46 @@ export interface ILearnProfile {
 
 export type PremiumMentorStatus = "none" | "pending" | "verified";
 
+export type MentrAccountType = "free" | "premium";
+
+export type PremiumPaymentStatus = "created" | "paid" | "failed";
+
+export interface IPremiumMentorPayment {
+  /** Client-facing receipt id */
+  receiptNumber: string;
+  razorpayOrderId: string;
+  razorpayPaymentId?: string;
+  status: PremiumPaymentStatus;
+  months: number;
+  listInr: number;
+  discountPercent: number;
+  discountInr: number;
+  amountInr: number;
+  amountPaise: number;
+  currency: string;
+  usdPerMonth: number;
+  listUsd: number;
+  usdToInr: number;
+  periodStart?: Date;
+  periodEnd?: Date;
+  method?: string;
+  email?: string;
+  createdAt: Date;
+  paidAt?: Date;
+  /** Sanitized Razorpay payment snapshot (no PAN/card). */
+  razorpaySnapshot?: Record<string, unknown>;
+}
+
+export interface IMentrPremium {
+  type: MentrAccountType;
+  firstRechargedAt?: Date;
+  lastPurchasedAt?: Date;
+  expiresAt?: Date;
+  currentPlanMonths?: number;
+  lastReceiptNumber?: string;
+  lastRazorpayPaymentId?: string;
+}
+
 export interface IUser extends Document {
   email: string;
   role: UserRole;
@@ -179,12 +219,19 @@ export interface IUser extends Document {
   profileImageUrl?: string;
   /** Storage object path inside `mentrs_profile` (for replace/delete) */
   profileImagePath?: string;
-  /** Premium mentor upgrade — pay via QR, upload SS, admin verifies */
+  /**
+   * Legacy SS-verify fields (admin QR flow). Prefer `mentrPremium` + Razorpay.
+   * Kept for backwards compatibility with pending SS submissions.
+   */
   premiumMentorStatus?: PremiumMentorStatus;
   premiumMentorPaymentSsUrl?: string;
   premiumMentorPaymentSsPath?: string;
   premiumMentorSubmittedAt?: Date;
   premiumMentorVerifiedAt?: Date;
+  /** Active Premium subscription state (Razorpay). */
+  mentrPremium?: IMentrPremium;
+  /** Payment history (newest last; capped in service). */
+  premiumPayments?: IPremiumMentorPayment[];
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -345,6 +392,50 @@ const learnProfileSchema = new Schema<ILearnProfile>(
   { _id: false },
 );
 
+const premiumMentorPaymentSchema = new Schema<IPremiumMentorPayment>(
+  {
+    receiptNumber: { type: String, required: true, trim: true },
+    razorpayOrderId: { type: String, required: true, trim: true, index: true },
+    razorpayPaymentId: { type: String, trim: true, index: true },
+    status: {
+      type: String,
+      enum: ["created", "paid", "failed"],
+      default: "created",
+    },
+    months: { type: Number, required: true, min: 1, max: 12 },
+    listInr: { type: Number, required: true, min: 0 },
+    discountPercent: { type: Number, default: 0, min: 0, max: 90 },
+    discountInr: { type: Number, default: 0, min: 0 },
+    amountInr: { type: Number, required: true, min: 1 },
+    amountPaise: { type: Number, required: true, min: 100 },
+    currency: { type: String, default: "INR" },
+    usdPerMonth: { type: Number, default: 5 },
+    listUsd: { type: Number, default: 0 },
+    usdToInr: { type: Number, default: 89.8 },
+    periodStart: { type: Date },
+    periodEnd: { type: Date },
+    method: { type: String, trim: true },
+    email: { type: String, trim: true },
+    createdAt: { type: Date, default: Date.now },
+    paidAt: { type: Date },
+    razorpaySnapshot: { type: Schema.Types.Mixed },
+  },
+  { _id: true },
+);
+
+const mentrPremiumSchema = new Schema<IMentrPremium>(
+  {
+    type: { type: String, enum: ["free", "premium"], default: "free" },
+    firstRechargedAt: { type: Date },
+    lastPurchasedAt: { type: Date },
+    expiresAt: { type: Date },
+    currentPlanMonths: { type: Number, min: 1, max: 12 },
+    lastReceiptNumber: { type: String, trim: true },
+    lastRazorpayPaymentId: { type: String, trim: true },
+  },
+  { _id: false },
+);
+
 const userSchema = new Schema<IUser>(
   {
     email: {
@@ -378,6 +469,8 @@ const userSchema = new Schema<IUser>(
     premiumMentorPaymentSsPath: { type: String, trim: true },
     premiumMentorSubmittedAt: { type: Date },
     premiumMentorVerifiedAt: { type: Date },
+    mentrPremium: { type: mentrPremiumSchema, required: false },
+    premiumPayments: { type: [premiumMentorPaymentSchema], default: [] },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },
@@ -387,6 +480,9 @@ const userSchema = new Schema<IUser>(
 );
 
 userSchema.index({ premiumMentorStatus: 1, premiumMentorSubmittedAt: -1 });
+userSchema.index({ "mentrPremium.type": 1, "mentrPremium.expiresAt": 1 });
+userSchema.index({ "premiumPayments.razorpayOrderId": 1 });
+userSchema.index({ "premiumPayments.razorpayPaymentId": 1 }, { sparse: true });
 userSchema.index({ "profile.subjects": 1 });
 userSchema.index({ "profile.city": 1 });
 userSchema.index({ referralUrl: 1 }, { sparse: true });

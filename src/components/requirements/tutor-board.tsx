@@ -186,8 +186,9 @@ function BoardStatusToggle({
 export function RequirementsFeed() {
   const [posts, setPosts] = useState<BoardRequirement[]>([]);
   const [loading, setLoading] = useState(true);
-  const [dailyLimit, setDailyLimit] = useState(3);
+  const [dailyLimit, setDailyLimit] = useState<number | null>(3);
   const [usedToday, setUsedToday] = useState(0);
+  const [unlimitedPitches, setUnlimitedPitches] = useState(false);
   const [pitchFor, setPitchFor] = useState<BoardRequirement | null>(null);
 
   const [sort, setSort] = useState<SortMode>("new");
@@ -204,6 +205,7 @@ export function RequirementsFeed() {
         setPosts(data.requirements);
         setDailyLimit(data.dailyLimit);
         setUsedToday(data.usedToday);
+        setUnlimitedPitches(Boolean(data.unlimitedPitches || data.dailyLimit == null));
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -272,8 +274,10 @@ export function RequirementsFeed() {
     return sorted;
   }, [pool, subject, modeFilter, hidePitched, query, sort]);
 
-  const left = Math.max(0, dailyLimit - usedToday);
-  const atLimit = left <= 0;
+  const left = unlimitedPitches
+    ? Number.POSITIVE_INFINITY
+    : Math.max(0, (dailyLimit ?? 3) - usedToday);
+  const atLimit = !unlimitedPitches && left <= 0;
   const newToday = posts.filter(
     (p) => p.status === "open" && isNewPost(p.postedAt),
   ).length;
@@ -289,10 +293,11 @@ export function RequirementsFeed() {
       {/* mobile: quota + quick stats */}
       <div className="mb-4 grid grid-cols-2 gap-3 lg:hidden">
         <MobileQuotaCard
-          left={left}
-          dailyLimit={dailyLimit}
+          left={unlimitedPitches ? usedToday : left}
+          dailyLimit={unlimitedPitches ? null : dailyLimit}
           atLimit={atLimit}
           usedToday={usedToday}
+          unlimited={unlimitedPitches}
         />
         <div className="rounded-xl border border-hairline bg-white p-4">
           <p className="text-[11px] font-bold tracking-[0.12em] text-muted uppercase">
@@ -440,7 +445,9 @@ export function RequirementsFeed() {
                 variant={atLimit ? "coral" : "sage"}
                 className="shrink-0 px-3 py-1 text-xs font-bold"
               >
-                {left}/{dailyLimit} left today
+                {unlimitedPitches
+                  ? "Unlimited pitches"
+                  : `${left}/${dailyLimit ?? 3} left today`}
               </Badge>
             </div>
 
@@ -575,10 +582,27 @@ export function RequirementsFeed() {
         {/* ── right: widgets (desktop) ── */}
         <aside className="hidden space-y-4 xl:sticky xl:top-[5rem] xl:block xl:self-start">
           <WidgetCard title="Daily quota">
+            {unlimitedPitches ? (
+              <>
+                <p className="text-2xl font-bold tabular-nums text-ink">
+                  ∞
+                  <span className="ml-1 text-sm font-semibold text-sage">
+                    Premium
+                  </span>
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-muted">
+                  Unlimited pitches while Premium is active.
+                  {usedToday > 0
+                    ? ` You’ve sent ${usedToday} today.`
+                    : ""}
+                </p>
+              </>
+            ) : (
+              <>
             <p className="text-2xl font-bold tabular-nums text-ink">
               {left}
               <span className="text-sm font-semibold text-muted">
-                /{dailyLimit}
+                /{dailyLimit ?? 3}
               </span>
             </p>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-cream-band">
@@ -587,7 +611,9 @@ export function RequirementsFeed() {
                   "h-full rounded-full transition-all",
                   left > 0 ? "bg-sage" : "bg-coral",
                 )}
-                style={{ width: `${(left / dailyLimit) * 100}%` }}
+                style={{
+                  width: `${(left / (dailyLimit || 3)) * 100}%`,
+                }}
               />
             </div>
             <p className="mt-2 text-xs leading-relaxed text-muted">
@@ -607,13 +633,15 @@ export function RequirementsFeed() {
                 <Separator className="my-3 bg-hairline" />
                 <p className="flex items-center gap-1.5 text-sm font-semibold text-ink">
                   <Send className="h-3.5 w-3.5 text-sage" />
-                  {usedToday} of {dailyLimit} used today
+                  {usedToday} of {dailyLimit ?? 3} used today
                   {myPitchCount > usedToday && (
                     <span className="font-normal text-muted">
                       · {myPitchCount} all time
                     </span>
                   )}
                 </p>
+              </>
+            )}
               </>
             )}
           </WidgetCard>
@@ -658,12 +686,33 @@ function MobileQuotaCard({
   dailyLimit,
   atLimit,
   usedToday,
+  unlimited,
 }: {
   left: number;
-  dailyLimit: number;
+  dailyLimit: number | null;
   atLimit: boolean;
   usedToday: number;
+  unlimited?: boolean;
 }) {
+  if (unlimited) {
+    return (
+      <div className="rounded-xl border border-hairline bg-white p-4">
+        <p className="text-[11px] font-bold tracking-[0.12em] text-muted uppercase">
+          Daily quota
+        </p>
+        <p className="mt-1 text-2xl font-bold tabular-nums text-ink">
+          ∞
+          <span className="ml-1 text-sm font-semibold text-sage">Premium</span>
+        </p>
+        <p className="mt-2 text-xs leading-relaxed text-muted">
+          Unlimited pitches
+          {usedToday > 0 ? ` · ${usedToday} sent today` : ""}
+        </p>
+      </div>
+    );
+  }
+
+  const limit = dailyLimit ?? 3;
   return (
     <div className="rounded-xl border border-hairline bg-white p-4">
       <p className="text-[11px] font-bold tracking-[0.12em] text-muted uppercase">
@@ -671,7 +720,7 @@ function MobileQuotaCard({
       </p>
       <p className="mt-1 text-2xl font-bold tabular-nums text-ink">
         {left}
-        <span className="text-sm font-semibold text-muted">/{dailyLimit}</span>
+        <span className="text-sm font-semibold text-muted">/{limit}</span>
       </p>
       <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-cream-band">
         <div
@@ -679,7 +728,7 @@ function MobileQuotaCard({
             "h-full rounded-full transition-all",
             left > 0 ? "bg-sage" : "bg-coral",
           )}
-          style={{ width: `${(left / dailyLimit) * 100}%` }}
+          style={{ width: `${(left / limit) * 100}%` }}
         />
       </div>
       <p className="mt-2 text-xs leading-relaxed text-muted">

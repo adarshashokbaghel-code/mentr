@@ -1095,4 +1095,103 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       { label: "Search tutors", href: "/faculty/signup" },
     ],
   },
+
+  "mentr-premium-mentor-guide": {
+    slug: "mentr-premium-mentor-guide",
+    publishedAt: "2026-09-23",
+    updatedAt: "2026-09-23",
+    readTimeMinutes: 8,
+    author: "Mentr Editorial Team",
+    intro:
+      "Mentr Premium is an optional mentor plan for tutors who want more outbound reach: unlimited board pitches, a parent directory with daily contact unlocks, featured landing placement, Premium badges in search, and unlimited Snap & Grade. Free forever still covers core listing and inbound connects. This article summarises the product; the illustrated walkthrough lives on /mentrpremium.",
+    sections: [
+      {
+        heading: "Why Premium exists",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Parents never pay to find tutors on Mentr. Free mentors keep a live profile, receive connection requests, and can pitch three requirement-board posts per day. Premium is for mentors who want to grow faster — more pitches, proactive parent outreach, and stronger visibility in search and on the homepage.",
+          },
+          {
+            type: "callout",
+            title: "Full illustrated guide",
+            text: "For Free vs Premium tables, step-by-step Razorpay upgrade, UI walkthroughs of /parentslist, /board, search toggles, Snap & Grade, and dashboard history, open the dedicated guide at /mentrpremium.",
+          },
+        ],
+      },
+      {
+        heading: "What you get on Premium",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Unlimited requirement-board pitches (Free cap is 3/day)",
+              "Parent directory at /parentslist with 3 contact reveals per day (IST)",
+              "Premium badge next to Verified in search and on your public profile",
+              "Priority placement in the landing Featured mentors strip",
+              "Unlimited Snap & Grade (no credit deduction for Premium faculty)",
+              "Human SPOC support for Premium mentors",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Price is about $5 per month (≈ ₹449). Checkout is Razorpay; Mentr does not add GST on top of the displayed amount.",
+          },
+        ],
+      },
+      {
+        heading: "How to upgrade",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Open /mentrpricing or the Premium card on your mentor dashboard",
+              "Choose 2, 3, or 4 months (volume discounts apply)",
+              "Pay with Razorpay and wait for verify to activate expiresAt",
+              "Open /parentslist and start revealing contacts (3/day)",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Where to find each feature",
+        blocks: [
+          {
+            type: "list",
+            items: [
+              "Parent directory → /parentslist or Dashboard → Pitch parents",
+              "Unlimited pitches → /board (quota shows ∞ Premium)",
+              "Search badge → parents toggle Regular/Premium on /search",
+              "Reveal history → Dashboard → Pitch parents → Reveal history",
+              "Snap & Grade → /snapandgrade/grade (wallet shows ∞)",
+            ],
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "Do parents need Premium?",
+        answer:
+          "No. Parents search and connect for free. Premium is mentor-side only.",
+      },
+      {
+        question: "Where is the full guide with screenshots?",
+        answer:
+          "Open /mentrpremium for the complete Free vs Premium comparison, steps, feature UI mocks, and FAQ.",
+      },
+      {
+        question: "How many contact reveals do I get?",
+        answer:
+          "Three new parent contacts per calendar day (IST). Unlocked contacts stay unlocked.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Full Premium guide", href: "/mentrpremium" },
+      { label: "Mentor pricing", href: "/mentrpricing" },
+      { label: "Parent directory", href: "/parentslist" },
+      { label: "Create free profile", href: "/faculty/signup" },
+    ],
+  },
 };
