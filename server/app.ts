@@ -96,7 +96,7 @@ app.post(
 
 // comment
 // 3mb so cropped profile images can POST as base64 JSON
-app.use(express.json({ limit: "3mb" }));
+app.use(express.json({ limit: "12mb" }));
 app.use(cookieParser());
 
 app.get("/health", (_req, res) => {

@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "google-search-console": {
+      "command": "uvx",
+      "args": ["google-search-console-mcp"],
+      "env": {
+        "GSC_SITE_URL": "https://mentr.in/",
+        "GOOGLE_APPLICATION_CREDENTIALS": "${userHome}/.config/google-mcp/service-account.json",
+        "DO_NOT_TRACK": "1"
+      }
+    },
+    "google-analytics": {
+      "command": "uvx",
+      "args": ["--from", "google-analytics-mcp", "ga4-mcp-server"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${userHome}/.config/google-mcp/service-account.json",
+        "GA4_PROPERTY_ID": "REPLACE_WITH_YOUR_GA4_PROPERTY_ID",
+        "DO_NOT_TRACK": "1"
+      }
+    }
+  }
+}

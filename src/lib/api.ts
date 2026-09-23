@@ -162,6 +162,10 @@ export interface AuthUser {
   };
   profileImageUrl?: string;
   profileImagePath?: string;
+  premiumMentorStatus?: "none" | "pending" | "verified";
+  premiumMentorPaymentSsUrl?: string;
+  premiumMentorSubmittedAt?: string;
+  premiumMentorVerifiedAt?: string;
   lastLoginAt?: string;
   createdAt: string;
 }
@@ -281,6 +285,14 @@ export const profileApi = {
   deleteImage: () =>
     request<{ user: AuthUser; message: string }>("/profile/image", {
       method: "DELETE",
+    }),
+
+  /** Upload payment screenshot to become a Premium Mentor. */
+  submitPremiumMentor: (imageBase64: string, mimeType?: string) =>
+    request<{ user: AuthUser; message: string }>("/profile/premium-mentor", {
+      method: "POST",
+      body: JSON.stringify({ imageBase64, mimeType }),
+      timeoutMs: 60_000,
     }),
 };
 

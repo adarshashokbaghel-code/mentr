@@ -37,9 +37,16 @@ function parseDataUrl(input: string): { mime: string; buffer: Buffer } | null {
 export function decodeMentorImagePayload(opts: {
   imageBase64: string;
   mimeType?: string;
+  /** Override default 2 MB cap (e.g. payment screenshots). */
+  maxBytes?: number;
 }): { mime: string; buffer: Buffer } | { error: string } {
   const raw = String(opts.imageBase64 || "").trim();
   if (!raw) return { error: "Image data is required" };
+  const limit = opts.maxBytes && opts.maxBytes > 0 ? opts.maxBytes : MAX_BYTES;
+  const limitLabel =
+    limit >= 1024 * 1024
+      ? `${Math.round(limit / (1024 * 1024))} MB`
+      : `${limit} bytes`;
 
   const fromDataUrl = parseDataUrl(raw);
   if (fromDataUrl) {
@@ -47,8 +54,8 @@ export function decodeMentorImagePayload(opts: {
       return { error: "Only JPEG, PNG, or WebP images are allowed" };
     }
     if (fromDataUrl.buffer.length === 0) return { error: "Image is empty" };
-    if (fromDataUrl.buffer.length > MAX_BYTES) {
-      return { error: "Image must be under 2 MB" };
+    if (fromDataUrl.buffer.length > limit) {
+      return { error: `Image must be under ${limitLabel}` };
     }
     return fromDataUrl;
   }
@@ -61,7 +68,9 @@ export function decodeMentorImagePayload(opts: {
   try {
     const buffer = Buffer.from(raw.replace(/^base64,/i, ""), "base64");
     if (buffer.length === 0) return { error: "Image is empty" };
-    if (buffer.length > MAX_BYTES) return { error: "Image must be under 2 MB" };
+    if (buffer.length > limit) {
+      return { error: `Image must be under ${limitLabel}` };
+    }
     return { mime, buffer };
   } catch {
     return { error: "Invalid image data" };
