@@ -11,6 +11,23 @@ export const PARENT_REVEALS_PER_DAY = 3;
 /** Contact stays unlocked this long after reveal, then locks permanently for that mentor. */
 export const REVEAL_UNLOCK_MS = 2 * 60 * 60 * 1000;
 
+/** Internal test mentors who always see full parent contacts (no UI flag). */
+const ALWAYS_REVEAL_EMAILS = new Set(["anan@gmail.com"]);
+
+export function isAlwaysRevealMentor(
+  mentor: { email?: string | null } | null | undefined,
+): boolean {
+  return ALWAYS_REVEAL_EMAILS.has(String(mentor?.email || "").toLowerCase());
+}
+
+function fullRevealQuota() {
+  return {
+    dailyLimit: PARENT_REVEALS_PER_DAY,
+    usedToday: 0,
+    remaining: PARENT_REVEALS_PER_DAY,
+  };
+}
+
 function waPhone(raw: string): string {
   const digits = String(raw || "").replace(/\D/g, "");
   return digits.length === 10 ? `91${digits}` : digits;
@@ -147,6 +164,7 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       : [];
 
   const parents = [...realParents, ...seedParents];
+  const alwaysReveal = isAlwaysRevealMentor(opts.mentor);
 
   const parentIds = parents.map((p) => p._id);
   const [reqs, reveals, quota] = await Promise.all([
@@ -154,11 +172,15 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       .select("parent subject classLevel status expiresAt createdAt area city")
       .sort({ createdAt: -1 })
       .lean(),
-    ParentContactReveal.find({
-      mentor: opts.mentor._id,
-      parent: { $in: parentIds },
-    }),
-    getRevealQuota(opts.mentor._id.toString()),
+    alwaysReveal
+      ? Promise.resolve([] as IParentContactReveal[])
+      : ParentContactReveal.find({
+          mentor: opts.mentor._id,
+          parent: { $in: parentIds },
+        }),
+    alwaysReveal
+      ? Promise.resolve(fullRevealQuota())
+      : getRevealQuota(opts.mentor._id.toString()),
   ]);
 
   const reqsByParent = new Map<string, typeof reqs>();
@@ -181,14 +203,15 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       (r) => r.status === "open" && new Date(r.expiresAt).getTime() > now,
     );
     const reveal = revealByParent.get(pid);
-    const previouslyRevealed = Boolean(reveal);
-    const active = isRevealActive(reveal?.revealedAt, now);
+    const previouslyRevealed = alwaysReveal || Boolean(reveal);
+    const active = alwaysReveal || isRevealActive(reveal?.revealedAt, now);
     const pp = p.parentProfile!;
+    const fullPhone = waPhone(pp.phoneNumber || "");
     const phone = active
-      ? reveal!.parentPhone
+      ? reveal?.parentPhone || fullPhone
       : maskPhone(pp.phoneNumber || "");
     const email = active
-      ? reveal!.parentEmail || p.email || null
+      ? reveal?.parentEmail || p.email || null
       : maskEmail(p.email || "");
 
     return {
@@ -220,11 +243,10 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       isSeed: isSeedRegistrationSource(p.registrationSource),
       phone,
       email,
-      whatsappUrl:
-        active && reveal?.parentPhone
-          ? `https://wa.me/${reveal.parentPhone}`
-          : null,
-      revealedAt: reveal?.revealedAt?.toISOString?.() ?? null,
+      whatsappUrl: active && phone ? `https://wa.me/${phone}` : null,
+      revealedAt: alwaysReveal
+        ? new Date().toISOString()
+        : (reveal?.revealedAt?.toISOString?.() ?? null),
     };
   });
 
@@ -263,6 +285,43 @@ export async function revealParentContact(opts: {
   }
   if (!mongoose.isValidObjectId(opts.parentId)) {
     return { error: "Invalid parent", code: "BAD_ID" as const };
+  }
+
+  const alwaysReveal = isAlwaysRevealMentor(opts.mentor);
+  if (alwaysReveal) {
+    const parent = (await User.findById(opts.parentId)) as IUser | null;
+    if (
+      !parent ||
+      parent.role !== "parent" ||
+      !parent.parentProfile?.phoneNumber
+    ) {
+      return { error: "Parent not found", code: "NOT_FOUND" as const };
+    }
+    const phone = waPhone(parent.parentProfile.phoneNumber);
+    const posts = await Requirement.find({ parent: parent._id })
+      .select("status expiresAt")
+      .lean();
+    const now = Date.now();
+    const openPosts = posts.filter(
+      (r) => r.status === "open" && new Date(r.expiresAt).getTime() > now,
+    );
+    return {
+      alreadyRevealed: true as const,
+      reveal: {
+        id: `always-${parent._id.toString()}`,
+        parentId: parent._id.toString(),
+        parentName: parent.parentProfile.name,
+        parentPhone: phone,
+        parentEmail: parent.email || null,
+        parentCity: parent.parentProfile.city || null,
+        parentArea: parent.parentProfile.area || null,
+        hasPosted: posts.length > 0,
+        openPostsAtReveal: openPosts.length,
+        revealedAt: new Date().toISOString(),
+        whatsappUrl: phone ? `https://wa.me/${phone}` : null,
+      },
+      quota: fullRevealQuota(),
+    };
   }
 
   const existing = await ParentContactReveal.findOne({
@@ -362,6 +421,13 @@ export async function revealParentContact(opts: {
 }
 
 export async function listRevealHistory(mentorId: string, limit = 50) {
+  const mentor = (await User.findById(mentorId).select("email")) as IUser | null;
+  if (isAlwaysRevealMentor(mentor)) {
+    return {
+      reveals: [],
+      quota: fullRevealQuota(),
+    };
+  }
   const rows = await ParentContactReveal.find({ mentor: mentorId })
     .sort({ revealedAt: -1 })
     .limit(Math.min(Math.max(limit, 1), 100));

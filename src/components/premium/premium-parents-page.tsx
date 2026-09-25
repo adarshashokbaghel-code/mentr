@@ -4,7 +4,7 @@
  * Layout plan — /parentslist (Premium parent directory)
  *
  * 1. Compact header — brand + title left, reveal quota meter right
- * 2. Sticky controls — Search (Input) · Tabs (All / Hiring / Unlocked) · History
+ * 2. Sticky controls — Search (Input) · Tabs (All / Hiring)
  * 3. Card grid — photo-first shadcn Avatar cards, soft hover lift, stagger fade-in
  * 4. Card body — name, location, need chip, locked contact strip → Reveal / WhatsApp
  * 5. Gate — non-premium full-bleed upgrade state
@@ -13,7 +13,6 @@
  */
 
 import { useAuth } from "@/components/auth/auth-provider";
-import { ParentRevealHistorySidebar } from "@/components/dashboard/parent-reveal-history-sidebar";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import {
@@ -49,13 +48,14 @@ import {
   BookOpen,
   Crown,
   Eye,
-  History,
+  Info,
   Loader2,
   Lock,
   MapPin,
   MessageCircle,
   Phone,
   Search,
+  ShieldAlert,
   Sparkles,
   Unlock,
   Users,
@@ -64,7 +64,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
-type FilterTab = "all" | "hiring" | "unlocked";
+type FilterTab = "all" | "hiring";
 
 function formatJoined(iso: string | null) {
   if (!iso) return null;
@@ -96,7 +96,6 @@ export function PremiumParentsPage() {
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [filter, setFilter] = useState<FilterTab>("all");
   const [revealingId, setRevealingId] = useState<string | null>(null);
-  const [historyOpen, setHistoryOpen] = useState(false);
   const [justUnlocked, setJustUnlocked] = useState<string | null>(null);
 
   useEffect(() => {
@@ -148,12 +147,15 @@ export function PremiumParentsPage() {
   const filtered = useMemo(() => {
     let list = [...parents];
     if (filter === "hiring") list = list.filter((p) => p.hasPosted);
-    if (filter === "unlocked") list = list.filter((p) => p.contactRevealed);
     list.sort((a, b) => {
-      // Real registered parents always above seed / backfill
+      // Genuine (real signups) always above seed / backfill — All + Hiring
       const aSeed = a.isSeed ? 1 : 0;
       const bSeed = b.isSeed ? 1 : 0;
       if (aSeed !== bSeed) return aSeed - bSeed;
+      if (filter === "hiring") {
+        if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
+        return (b.joinedAt || "").localeCompare(a.joinedAt || "");
+      }
       if (a.contactRevealed !== b.contactRevealed)
         return a.contactRevealed ? -1 : 1;
       if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
@@ -167,7 +169,6 @@ export function PremiumParentsPage() {
     () => ({
       all: parents.length,
       hiring: parents.filter((p) => p.hasPosted).length,
-      unlocked: parents.filter((p) => p.contactRevealed).length,
     }),
     [parents],
   );
@@ -250,10 +251,7 @@ export function PremiumParentsPage() {
               <h1 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
                 Find parents to reach
               </h1>
-              <p className="mt-1 max-w-lg text-sm text-muted">
-                Browse profiles, see who&apos;s hiring, reveal up to {limit}{" "}
-                contacts a day — each unlock lasts 2 hours.
-              </p>
+              
             </div>
 
             <div className="flex w-full max-w-xs flex-col gap-2 rounded-2xl border border-hairline bg-white/90 p-4 shadow-[0_1px_3px_rgba(26,35,28,0.06)] backdrop-blur sm:max-w-sm">
@@ -319,38 +317,63 @@ export function PremiumParentsPage() {
                     {counts.hiring}
                   </span>
                 </TabsTrigger>
-                <TabsTrigger
-                  value="unlocked"
-                  className="flex-1 gap-1.5 rounded-lg data-[state=active]:bg-ink data-[state=active]:text-white lg:flex-none lg:px-4"
-                >
-                  <Unlock className="h-3.5 w-3.5" />
-                  Unlocked
-                  <span className="tabular-nums opacity-70">
-                    {counts.unlocked}
-                  </span>
-                </TabsTrigger>
               </TabsList>
             </Tabs>
-
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  className="h-11 shrink-0 gap-1.5 rounded-xl"
-                  onClick={() => setHistoryOpen(true)}
-                >
-                  <History className="h-4 w-4" />
-                  History
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Past contact reveals</TooltipContent>
-            </Tooltip>
           </div>
         </div>
 
         {/* ── 3. Grid ── */}
         <div className="mx-auto w-full max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <div className="mb-5 space-y-3 rounded-2xl border border-hairline bg-white p-4 sm:p-5">
+            <div className="flex items-start gap-2.5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-sage-wash text-sage">
+                <Info className="h-4 w-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-ink">How this list works</p>
+                <ul className="mt-2 space-y-1.5 text-[13px] leading-snug text-muted">
+                  <li>
+                    We list parents who registered on Mentr or enquired about
+                    our portal — everyone who has come through so far, not a
+                    paid lead dump.
+                  </li>
+                  <li>
+                    Reveal a contact to see phone and email. You get{" "}
+                    <span className="font-semibold text-ink">
+                      {limit} reveals per day
+                    </span>
+                    . When you hit the limit, new reveals open again at{" "}
+                    <span className="font-semibold text-ink">
+                      midnight IST
+                    </span>
+                    .
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+
+            <Separator className="bg-hairline" />
+
+            <div className="flex items-start gap-2.5">
+              <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-butter/80 text-ink">
+                <ShieldAlert className="h-4 w-4" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-sm font-bold text-ink">Disclaimer</p>
+                <p className="mt-1.5 text-[13px] leading-snug text-muted">
+                  Email IDs on these profiles are verified (OTP). Mobile numbers
+                  are provided by the parent — we do{" "}
+                  <span className="font-semibold text-ink">
+                    not guarantee 100% authenticity
+                  </span>{" "}
+                  of every phone number. Please introduce yourself politely and
+                  confirm interest before sharing fees or personal details.
+                </p>
+              </div>
+            </div>
+          </div>
+
           {error ? (
             <p className="mb-4 animate-in fade-in slide-in-from-top-1 rounded-xl border border-coral/30 bg-coral-wash/40 px-4 py-3 text-sm text-coral duration-200">
               {error}
@@ -358,11 +381,19 @@ export function PremiumParentsPage() {
           ) : null}
 
           {remaining === 0 ? (
-            <p className="mb-4 flex items-start gap-2 rounded-xl border border-ink/10 bg-butter/60 px-4 py-3 text-sm text-ink animate-in fade-in duration-200">
+            <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-ink/10 bg-butter/60 px-4 py-3.5 text-sm text-ink animate-in fade-in duration-200">
               <Lock className="mt-0.5 h-4 w-4 shrink-0" />
-              Daily reveal limit reached—
-              new reveals reset at midnight IST.
-            </p>
+              <div>
+                <p className="font-semibold">
+                  Daily reveal limit reached
+                </p>
+                <p className="mt-0.5 text-[13px] text-ink/80">
+                  You&apos;ve used all {limit} reveals for today. New reveals
+                  reset at midnight IST. You can still browse the list and open
+                  contacts you already unlocked.
+                </p>
+              </div>
+            </div>
           ) : null}
 
           {loading && parents.length === 0 ? (
@@ -391,10 +422,6 @@ export function PremiumParentsPage() {
         </div>
       </main>
       <Footer />
-      <ParentRevealHistorySidebar
-        open={historyOpen}
-        onClose={() => setHistoryOpen(false)}
-      />
     </TooltipProvider>
   );
 }
@@ -639,11 +666,9 @@ function EmptyState({
       <p className="mt-1 max-w-sm text-sm text-muted">
         {hasQuery
           ? "Try a different search."
-          : filter === "unlocked"
-            ? "Reveal a contact to see them here."
-            : filter === "hiring"
-              ? "No parents with open needs match right now."
-              : "Parents will show up as they join Mentr."}
+          : filter === "hiring"
+            ? "No parents with open needs match right now."
+            : "Parents will show up as they join Mentr."}
       </p>
     </div>
   );
