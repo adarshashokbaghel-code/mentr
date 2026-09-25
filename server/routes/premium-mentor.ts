@@ -75,7 +75,14 @@ router.post(
         return;
       }
       const months = Number(req.body?.months);
-      const result = await createPremiumMentorOrder(req.auth!.sub, months);
+      const acceptedLegal = req.body?.acceptedLegal === true;
+      const result = await createPremiumMentorOrder(req.auth!.sub, months, {
+        acceptedLegal,
+        legalVersion:
+          typeof req.body?.legalVersion === "string"
+            ? req.body.legalVersion.slice(0, 64)
+            : undefined,
+      });
       if ("error" in result) {
         const status =
           result.code === "PAYMENTS_OFF"
@@ -84,7 +91,9 @@ router.post(
               ? 429
               : result.code === "FORBIDDEN"
                 ? 403
-                : 400;
+                : result.code === "LEGAL_CONSENT_REQUIRED"
+                  ? 400
+                  : 400;
         res.status(status).json(result);
         return;
       }

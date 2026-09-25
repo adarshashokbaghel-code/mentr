@@ -20,6 +20,8 @@ export interface IOtpSession extends Document {
   registrationSource?: string;
   acquisitionSlug?: string;
   acquisitionKind?: "blog" | "page" | "referral" | "social";
+  /** Signup only — user checked Terms + Privacy before OTP send. */
+  acceptedLegal?: boolean;
   attempts: number;
   expiresAt: Date;
   consumed: boolean;
@@ -41,6 +43,7 @@ const otpSessionSchema = new Schema<IOtpSession>(
       type: String,
       enum: ["blog", "page", "referral", "social"],
     },
+    acceptedLegal: { type: Boolean, default: false },
     attempts: { type: Number, default: 0 },
     expiresAt: { type: Date, required: true },
     consumed: { type: Boolean, default: false },

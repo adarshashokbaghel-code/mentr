@@ -123,6 +123,8 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
     role: "parent",
     "parentProfile.name": { $exists: true, $ne: "" },
     "parentProfile.phoneNumber": { $exists: true, $ne: "" },
+    // Never surface demo / legacy fake personas (@mentr.local, @mentr.in)
+    email: { $not: /@(mentr\.local|mentr\.in)$/i },
   };
 
   if (opts.query?.trim()) {

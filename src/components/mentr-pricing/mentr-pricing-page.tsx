@@ -177,6 +177,10 @@ const FAQS: { q: string; a: string }[] = [
     a: "When the paid months run out, Premium tools pause and you return to Free features. Your profile stays live. Open Explore (or Renew on your dashboard) to buy another 2–4 month period.",
   },
   {
+    q: "How do cancellations and refunds work?",
+    a: "Premium is charged for access to the features in your plan for the months you select (directory tools, unlocks, pitches, and related Premium benefits). Once that period is active, fees are not refunded for how outreach or conversations go on your side. If you were charged but Premium never activated, or you were charged twice, email hello@mentr.in with your Razorpay receipt and we’ll sort it out.",
+  },
+  {
     q: "What does the SPOC do?",
     a: "Your SPOC is a real person on the Mentr team who can walk you through Premium tools, help with profile or pitch issues, and escalate technical problems. Think of them as your short-cut when you are stuck — not a sales bot.",
   },
@@ -923,6 +927,18 @@ export function MentrPricingPage() {
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-sage" />
                 Premium lasts for the months you paid. When it ends, Free
                 features stay; renew anytime from Explore or your dashboard.
+              </li>
+              <li className="flex gap-2.5">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-sage" />
+                Your plan covers access to the Premium features listed for the
+                months you buy. Details live in our{" "}
+                <Link
+                  href="/terms"
+                  className="font-semibold text-coral underline-offset-2 hover:underline"
+                >
+                  Terms of service
+                </Link>{" "}
+                and the refund FAQ above.
               </li>
               <li className="flex gap-2.5">
                 <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-sage" />

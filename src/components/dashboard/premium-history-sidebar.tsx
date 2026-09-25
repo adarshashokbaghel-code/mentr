@@ -118,6 +118,10 @@ function ReceiptCard({
             <span className="font-semibold text-ink">Coverage: </span>
             {formatDay(payment.periodStart)} → {formatDay(payment.periodEnd)}
           </p>
+          <p className="mt-1 text-[11px] leading-snug">
+            Covers Premium Mentor plan access for this period (features as listed
+            at purchase).
+          </p>
           <p className="mt-1 break-all">
             <span className="font-semibold text-ink">Payment ID: </span>
             {payment.razorpayPaymentId || "—"}
@@ -129,8 +133,10 @@ function ReceiptCard({
         </div>
 
         <p className="text-[10px] leading-relaxed text-muted">
-          Individual Razorpay merchant · payment confirmation only (not a GST
-          tax invoice). hello@mentr.in
+          Payment confirmation only — not a GST tax invoice. Processed via
+          Razorpay on an individual merchant account. Subject to Mentr Terms of
+          service and Privacy policy (mentr.in/terms · mentr.in/privacy).
+          hello@mentr.in
         </p>
       </div>
     </article>

@@ -13,7 +13,6 @@ import { InstantConnectFacultySection } from "@/components/dashboard/instant-con
 import { ParentsReachedCard } from "@/components/dashboard/parents-reached-card";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { PremiumMentorCard } from "@/components/dashboard/premium-mentor-card";
-import { ParentRevealHistorySidebar } from "@/components/dashboard/parent-reveal-history-sidebar";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
@@ -32,7 +31,6 @@ import {
   Check,
   Copy,
   Crown,
-  Eye,
   ExternalLink,
   Inbox,
   Loader2,
@@ -126,7 +124,6 @@ export default function DashboardPage() {
   const [dashTab, setDashTab] = useState<"inbox" | "schedule" | "grow">(
     "inbox",
   );
-  const [revealHistoryOpen, setRevealHistoryOpen] = useState(false);
 
   async function copyListingLink() {
     if (!user) return;
@@ -663,16 +660,6 @@ export default function DashboardPage() {
                             Open parent list
                           </Button>
                         </Link>
-                        <Button
-                          type="button"
-                          size="sm"
-                          variant="secondary"
-                          className="h-9 gap-1.5 border border-ink/15"
-                          onClick={() => setRevealHistoryOpen(true)}
-                        >
-                          <Eye className="h-3.5 w-3.5" />
-                          Reveal history
-                        </Button>
                         <Link href="/board">
                           <Button
                             type="button"
@@ -1008,10 +995,6 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
-      <ParentRevealHistorySidebar
-        open={revealHistoryOpen}
-        onClose={() => setRevealHistoryOpen(false)}
-      />
     </>
   );
 }

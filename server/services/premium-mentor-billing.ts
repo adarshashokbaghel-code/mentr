@@ -222,11 +222,19 @@ export function serializeMentrPremiumState(user: IUser) {
 export async function createPremiumMentorOrder(
   userId: string,
   monthsRaw: number,
+  opts?: { acceptedLegal?: boolean; legalVersion?: string },
 ) {
   if (!isPremiumRazorpayConfigured()) {
     return {
       error: "Payments are temporarily unavailable",
       code: "PAYMENTS_OFF" as const,
+    };
+  }
+
+  if (opts?.acceptedLegal !== true) {
+    return {
+      error: "Please confirm the Terms and Privacy policy to continue.",
+      code: "LEGAL_CONSENT_REQUIRED" as const,
     };
   }
 
@@ -287,6 +295,8 @@ export async function createPremiumMentorOrder(
     listUsd: usdDisplayForMonths(plan.months),
     usdToInr: PREMIUM_USD_TO_INR,
     createdAt: new Date(),
+    termsAcceptedAt: new Date(),
+    termsAcceptedVersion: opts.legalVersion || undefined,
   };
 
   user.premiumPayments = user.premiumPayments || [];

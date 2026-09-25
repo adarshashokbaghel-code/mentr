@@ -1,6 +1,6 @@
 /**
- * Seed genuine-sounding parent profiles (Indian + overseas)
- * and open board requirements.
+ * Seed Indian parent profiles (42 real contacts) and open board requirements.
+ * Purges old foreign / @mentr.in / @mentr.local demo parents on --reset.
  *
  * Run:  npx tsx scripts/seed-parent-profiles.ts
  * Reset: npx tsx scripts/seed-parent-profiles.ts --reset
@@ -23,21 +23,35 @@ function shareToken(): string {
   return randomBytes(12).toString("base64url");
 }
 
-async function resetSeedParents() {
+/** Dummy / legacy seed parents that must not appear in /parentslist. */
+async function findDummyParentIds() {
   const seeded = await User.find({
     role: "parent",
-    registrationSource: { $regex: /^seed:parent-attract/ },
-  }).select("_id email");
+    $or: [
+      { registrationSource: { $regex: /^seed:parent-attract/i } },
+      { email: { $regex: /@(mentr\.local|mentr\.in)$/i } },
+      { email: { $regex: /^demo-parent-/i } },
+    ],
+  }).select("_id email registrationSource");
+  return seeded;
+}
+
+async function resetDummyParents() {
+  const seeded = await findDummyParentIds();
   const ids = seeded.map((u) => u._id);
-  if (ids.length) {
-    const req = await Requirement.deleteMany({ parent: { $in: ids } });
-    const users = await User.deleteMany({ _id: { $in: ids } });
-    console.log(
-      `reset: removed ${users.deletedCount} parent(s), ${req.deletedCount} requirement(s)`,
-    );
-  } else {
+  if (!ids.length) {
     console.log("reset: nothing to remove");
+    return;
   }
+  const req = await Requirement.deleteMany({ parent: { $in: ids } });
+  const users = await User.deleteMany({ _id: { $in: ids } });
+  console.log(
+    `reset: removed ${users.deletedCount} dummy parent(s), ${req.deletedCount} requirement(s)`,
+  );
+  for (const u of seeded.slice(0, 8)) {
+    console.log(`  - ${u.email}`);
+  }
+  if (seeded.length > 8) console.log(`  … +${seeded.length - 8} more`);
 }
 
 async function seedParents() {
@@ -67,7 +81,7 @@ async function seedParents() {
       { upsert: true, returnDocument: "after", setDefaultsOnInsert: true },
     );
     upserted += 1;
-    console.log(`+ parent (${row.region}): ${row.name} · ${row.city}`);
+    console.log(`+ parent: ${row.name} · ${row.city}`);
   }
   console.log(`parents upserted: ${upserted}`);
 }
@@ -91,7 +105,6 @@ async function seedRequirements() {
     const expiresAt = new Date(
       createdAt.getTime() + ttl * 24 * 60 * 60 * 1000,
     );
-    // Keep board posts visible: bump expiry if it already lapsed
     if (expiresAt.getTime() < Date.now()) {
       expiresAt.setTime(Date.now() + 10 * 24 * 60 * 60 * 1000);
     }
@@ -136,12 +149,12 @@ async function main() {
   await connectDb();
   try {
     if (reset) {
-      await resetSeedParents();
+      await resetDummyParents();
     }
     await seedParents();
     await seedRequirements();
     console.log(
-      `\nDone. ${ALL_SEED_PARENTS.length} parents (${ALL_SEED_PARENTS.filter((p) => p.region === "india").length} India / ${ALL_SEED_PARENTS.filter((p) => p.region === "foreign").length} overseas), ${SEED_REQUIREMENTS.length} board posts.`,
+      `\nDone. ${ALL_SEED_PARENTS.length} Indian parents, ${SEED_REQUIREMENTS.length} board posts.`,
     );
     console.log(`Tag: registrationSource=${SEED_PARENT_SOURCE}`);
   } finally {

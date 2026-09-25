@@ -29,6 +29,7 @@ import {
 } from "../lib/marketing-attribution";
 import { clientIpFromRequest, geocodeIp } from "../services/geocode";
 import { ensureFacultyMapLocation } from "../lib/map-location";
+import { LEGAL_DOCS_VERSION } from "../../src/lib/legal";
 
 const router = Router();
 
@@ -231,6 +232,16 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
     const purpose =
       existingUser && existingUser.emailVerified ? "login" : "signup";
 
+    // Signup requires explicit Terms + Privacy acceptance (checkbox).
+    const acceptedLegal = req.body.acceptedLegal === true;
+    if (purpose === "signup" && !acceptedLegal) {
+      res.status(400).json({
+        error: "Please accept the Terms of service and Privacy policy to continue.",
+        code: "LEGAL_CONSENT_REQUIRED",
+      });
+      return;
+    }
+
     // Per-email send cap — consumed sessions still count until TTL purge.
     const windowStart = new Date(Date.now() - 60 * 60 * 1000);
     const recentSends = await OtpSession.countDocuments({
@@ -305,6 +316,7 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       registrationSource,
       acquisitionSlug,
       acquisitionKind,
+      acceptedLegal: purpose === "signup" ? true : false,
       expiresAt: getOtpExpiryDate(),
       purgeAt: getOtpPurgeDate(),
     });
@@ -425,6 +437,12 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
         role: session.role,
         emailVerified: true,
         lastLoginAt: new Date(),
+        ...(session.purpose === "signup" && session.acceptedLegal
+          ? {
+              legalAcceptedAt: new Date(),
+              legalAcceptedVersion: LEGAL_DOCS_VERSION,
+            }
+          : {}),
         ...acquisitionFields,
       });
     } else {
@@ -432,6 +450,14 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
       if (!user.emailVerified) user.role = session.role;
       user.emailVerified = true;
       user.lastLoginAt = new Date();
+      if (
+        session.purpose === "signup" &&
+        session.acceptedLegal &&
+        !user.legalAcceptedAt
+      ) {
+        user.legalAcceptedAt = new Date();
+        user.legalAcceptedVersion = LEGAL_DOCS_VERSION;
+      }
       if (session.purpose === "signup" && !user.registrationSource) {
         if (acquisitionFields.registrationSource) {
           user.registrationSource = acquisitionFields.registrationSource;
