@@ -6,10 +6,6 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import { fetchGithubRepoStats } from "@/lib/github-repo";
 import {
   absoluteUrl,
-  CREATOR_GITHUB_URL,
-  CREATOR_LINKEDIN_URL,
-  CREATOR_NAME,
-  CREATOR_ROLE,
   GITHUB_REPO_URL,
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
@@ -18,10 +14,9 @@ import {
 } from "@/lib/seo";
 import type { Metadata } from "next";
 
-const PAGE_TITLE =
-  "Mentr Open Source — Contribute on GitHub | MIT EdTech by Adarsh Singh";
+const PAGE_TITLE = "Mentr Open Source — Contribute on GitHub | MIT EdTech";
 const PAGE_DESCRIPTION =
-  "Contribute to Mentr, the MIT-licensed open source tutor-parent platform. Fork on GitHub, fix bugs, ship PRs. Created by Adarsh Singh (LinkedIn) at Paprly — ₹0 fees, zero commission, built for developers who want real edtech impact.";
+  "Contribute to Mentr, the MIT-licensed open source tutor-parent platform by Paprly. Fork on GitHub, fix bugs, ship PRs — ₹0 fees, zero commission, built for developers who want real edtech impact.";
 
 export const metadata: Metadata = {
   title: PAGE_TITLE,
@@ -34,10 +29,6 @@ export const metadata: Metadata = {
     "MIT licensed tutor platform",
     "open source project for developers India",
     "good first issue edtech",
-    "creator of Mentr",
-    "Adarsh Singh Mentr",
-    "Adarsh Singh Paprly LinkedIn",
-    "who created Mentr",
     "free open source education platform",
     "Paprly Mentr github",
   ],
@@ -72,39 +63,18 @@ const OPEN_SOURCE_FAQS = [
       "Fork the GitHub repo, set up locally with npm install and .env.example, pick a good first issue or focused fix, run npm run lint and npm run build, then open a pull request. See mentr.in/open-source and CONTRIBUTING.md.",
   },
   {
-    question: "Who created Mentr?",
+    question: "Who maintains Mentr?",
     answer:
-      "Adarsh Singh created Mentr by Paprly. He is a software engineer and ex-Founding Engineer at Paprly. Find him on LinkedIn at linkedin.com/in/adarshsingh05.",
-  },
-  {
-    question: "Where can I find Adarsh Singh, the creator of Mentr?",
-    answer:
-      "Adarsh Singh's LinkedIn is https://www.linkedin.com/in/adarshsingh05. The open source page at mentr.in/open-source also lists the creator, GitHub activity, and how to contribute.",
+      "Mentr is a Paprly product. Maintainers on the Mentr / Paprly team review contributions. Join via GitHub issues and pull requests on the public repository.",
   },
 ];
 
-const personJsonLd = {
+const organizationJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: CREATOR_NAME,
-  url: CREATOR_LINKEDIN_URL,
-  image: absoluteUrl("/team/adarsh-singh.png"),
-  jobTitle: CREATOR_ROLE,
-  description:
-    "Creator of Mentr by Paprly — free open-source tutor-parent connector. Software engineer based in Bengaluru. Builds tools that should stay free.",
-  sameAs: [CREATOR_LINKEDIN_URL, CREATOR_GITHUB_URL, GITHUB_REPO_URL],
-  worksFor: {
-    "@type": "Organization",
-    name: PARENT_COMPANY_NAME,
-    url: PARENT_COMPANY_URL,
-  },
-  knowsAbout: [
-    "Open source",
-    "Edtech",
-    "Tutoring platforms",
-    "Next.js",
-    "TypeScript",
-  ],
+  "@type": "Organization",
+  name: PARENT_COMPANY_NAME,
+  url: PARENT_COMPANY_URL,
+  sameAs: [GITHUB_REPO_URL],
 };
 
 const softwareSourceJsonLd = {
@@ -120,15 +90,9 @@ const softwareSourceJsonLd = {
   license: "https://spdx.org/licenses/MIT.html",
   isAccessibleForFree: true,
   author: {
-    "@type": "Person",
-    name: CREATOR_NAME,
-    url: CREATOR_LINKEDIN_URL,
-    sameAs: [CREATOR_LINKEDIN_URL, CREATOR_GITHUB_URL],
-  },
-  creator: {
-    "@type": "Person",
-    name: CREATOR_NAME,
-    url: CREATOR_LINKEDIN_URL,
+    "@type": "Organization",
+    name: PARENT_COMPANY_NAME,
+    url: PARENT_COMPANY_URL,
   },
   publisher: {
     "@type": "Organization",
@@ -153,9 +117,9 @@ const softwareAppJsonLd = {
     priceCurrency: "INR",
   },
   creator: {
-    "@type": "Person",
-    name: CREATOR_NAME,
-    url: CREATOR_LINKEDIN_URL,
+    "@type": "Organization",
+    name: PARENT_COMPANY_NAME,
+    url: PARENT_COMPANY_URL,
   },
   description:
     "Free open source tutor-parent connector. Search locally or online, connect on WhatsApp, zero platform fees. Contribute on GitHub.",
@@ -169,7 +133,7 @@ const webPageJsonLd = {
   url: absoluteUrl("/open-source"),
   isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: SITE_URL },
   about: softwareSourceJsonLd,
-  mainEntity: personJsonLd,
+  mainEntity: softwareSourceJsonLd,
   speakable: {
     "@type": "SpeakableSpecification",
     cssSelector: ["h1", "h2"],
@@ -200,7 +164,7 @@ export default async function OpenSourcePage() {
           webPageJsonLd,
           softwareSourceJsonLd,
           softwareAppJsonLd,
-          personJsonLd,
+          organizationJsonLd,
           faqJsonLd,
         ]}
       />

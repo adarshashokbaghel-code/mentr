@@ -22,13 +22,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Who is behind Mentr?",
     answer:
-      "Mentr is built by Paprly (paprly.in). The creator of Mentr is Adarsh Singh — Software Engineer, SIH 2024 winner, and ex-Founding Engineer at Paprly. You can find him on LinkedIn at linkedin.com/in/adarshsingh05. Mentr by Paprly is a free tutor-parent connector: search locally or online, post requirements, and connect on WhatsApp with zero platform fees. The product is MIT open source on GitHub. Mentr Learn (mentr.in/learn) is the free Class 3–5 coding track on the same site.",
-  },
-  {
-    category: "general",
-    question: "Who created Mentr? Who is Adarsh Singh?",
-    answer:
-      "Adarsh Singh created Mentr by Paprly. He is a software engineer based in Bengaluru, an ex-Founding Engineer at Paprly, SIH 2024 winner, and builds free open-source education tools. His public LinkedIn is linkedin.com/in/adarshsingh05. The aim behind Mentr is simple: keep things that should be free — searching tutors, connecting on WhatsApp after mutual accept, and listing as faculty — actually free, with no commission engine.",
+      "Mentr is a product of Paprly (paprly.in). It is a free tutor-parent connector: search locally or online, post requirements, and connect on WhatsApp with zero platform fees. The product is MIT open source on GitHub. Mentr Learn (mentr.in/learn) is the free Class 3–5 coding track on the same site.",
   },
   {
     category: "general",

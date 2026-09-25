@@ -19,12 +19,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Mentr by Paprly — Free Open Source Tutor Platform by Adarsh Singh",
+  title: "About Mentr by Paprly — Free Open Source Tutor Platform",
   description:
-    "Mentr by Paprly connects parents and verified tutors worldwide — free, MIT open source, zero commission. Created by Adarsh Singh. Contribute on GitHub or find tutors at ₹0.",
+    "Mentr by Paprly connects parents and verified tutors worldwide — free, MIT open source, zero commission. Contribute on GitHub or find tutors at ₹0.",
   keywords: [
     "about Mentr",
-    "Adarsh Singh Mentr",
     "Paprly open source",
     "free tutor platform",
   ],
@@ -197,22 +196,6 @@ export default function AboutPage() {
                 target="_blank"
               >
                 paprly.in
-              </a>
-              ). Mentr was created by{" "}
-              <Link
-                href="/blog/who-created-mentr-adarsh-singh"
-                className="font-semibold text-coral hover:underline"
-              >
-                Adarsh Singh
-              </Link>
-              {" "}(
-              <a
-                href="https://www.linkedin.com/in/adarshsingh05"
-                className="font-semibold text-coral hover:underline"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                LinkedIn
               </a>
               ). We build free tools for education and business. Mentr&apos;s
               codebase is MIT open source — developers can contribute on our{" "}

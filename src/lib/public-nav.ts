@@ -60,8 +60,13 @@ export function getPublicNavGroups(): PublicNavGroup[] {
       links: [
         {
           label: "Find tutors",
-          href: "/search",
+          href: "/find-tutor",
           description: "Verified tutors nearby or online",
+        },
+        {
+          label: "Get matched instantly",
+          href: "/instant-connect",
+          description: "Tell us what you need — match fast",
         },
         {
           label: "Find mentors",
@@ -177,12 +182,12 @@ export function getPublicNavGroups(): PublicNavGroup[] {
 export function getFooterColumns(): Record<string, PublicNavLink[]> {
   return {
     Find: [
-      { label: "Browse tutors", href: "/search" },
-      { label: "Browse mentors", href: "/search?kind=mentor" },
-      { label: "Find online tutors", href: "/find-online-tutors" },
-      { label: "Find mentors near me", href: "/find-mentors-near-me" },
-      { label: "How it works", href: "/how-it-works" },
+      { label: "Find a Tutor", href: "/find-tutor" },
+      { label: "Get Matched Instantly", href: "/instant-connect" },
       { label: "For parents", href: "/parents" },
+      { label: "Browse tutors", href: "/search" },
+      { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
+      { label: "How it works", href: "/how-it-works" },
     ],
     ...(LEARN_PUBLIC
       ? {

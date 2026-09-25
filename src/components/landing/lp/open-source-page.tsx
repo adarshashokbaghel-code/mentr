@@ -9,7 +9,6 @@ import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ProductHuntBadges, ProductHuntFeaturedBadge } from "@/components/ui/product-hunt-badge";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import {
-  CREATOR_LINKEDIN_URL,
   GITHUB_REPO_URL,
   GLOBAL_REACH_LINE,
   LINKEDIN_URL,
@@ -303,7 +302,7 @@ function RepoLiveCard({ stats }: { stats: GithubRepoStats | null }) {
             />
             <div className="min-w-0">
               <p className="text-[10px] font-medium uppercase tracking-wide text-white/45">
-                Creator
+                GitHub
               </p>
               <p className="truncate font-bold text-butter">
                 @{stats.creator.login}
@@ -588,9 +587,9 @@ function GithubCommunitySection({ stats }: { stats: GithubRepoStats }) {
           ))}
         </div>
 
-        {/* Creator strip */}
+        {/* Repo strip */}
         <a
-          href={stats.creator.profileUrl}
+          href={stats.url}
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
@@ -600,7 +599,7 @@ function GithubCommunitySection({ stats }: { stats: GithubRepoStats }) {
         >
           <Image
             src={stats.creator.avatarUrl}
-            alt={stats.creator.login}
+            alt=""
             width={56}
             height={56}
             className="rounded-full ring-2 ring-butter"
@@ -608,10 +607,10 @@ function GithubCommunitySection({ stats }: { stats: GithubRepoStats }) {
           />
           <div className="min-w-0 flex-1">
             <p className="text-[11px] font-bold uppercase tracking-wide text-butter">
-              Repository creator
+              Public repository
             </p>
             <p className="mt-0.5 truncate text-xl font-bold">
-              @{stats.creator.login}
+              {stats.fullName}
             </p>
             <p className="mt-1 text-sm text-white/60">
               {stats.license ?? "MIT"} · Updated{" "}
@@ -680,7 +679,7 @@ function GithubCommunitySection({ stats }: { stats: GithubRepoStats }) {
                           </p>
                           {c.isCreator && (
                             <span className="rounded bg-ink px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-butter">
-                              Creator
+                              Owner
                             </span>
                           )}
                         </div>
@@ -1179,138 +1178,6 @@ export function OpenSourceLanding({
             </a>{" "}
             or open a GitHub issue.
           </p>
-        </div>
-      </section>
-
-      {/* Creator */}
-      <section className="relative overflow-hidden border-t border-hairline bg-white py-12 sm:py-20 lg:py-24">
-        <LpGridBg className="opacity-20" />
-        <LpBlob
-          color="rgba(255,154,77,0.12)"
-          size={280}
-          className="-right-16 top-10"
-        />
-        <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          <div className="relative max-w-3xl">
-            <p className="inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
-              <span className="h-px w-5 bg-muted/50" aria-hidden />
-              The creator
-              <span className="h-px w-5 bg-muted/50" aria-hidden />
-            </p>
-            <h2 className="mt-4 whitespace-nowrap text-[1.35rem] font-bold tracking-tight text-ink sm:text-3xl lg:text-[42px] lg:leading-[1.12]">
-              Built by someone who{" "}
-              <span className="text-coral">hates paywalls</span>
-            </h2>
-          
-          </div>
-
-          <div
-            className={cn(
-              "mt-10 flex flex-col gap-6 rounded-3xl border-2 border-ink bg-cream/50 p-5 sm:flex-row sm:items-start sm:gap-8 sm:p-7 lg:p-8",
-              hardShadow,
-            )}
-          >
-            <div className="mx-auto w-[140px] shrink-0 sm:mx-0 sm:w-[160px]">
-              <div className="overflow-hidden rounded-2xl border-2 border-ink bg-ink shadow-[3px_3px_0_0_#1c1a17]">
-                <Image
-                  src="/team/adarsh-singh.png"
-                  alt="Adarsh Singh — creator of Mentr by Paprly"
-                  width={320}
-                  height={400}
-                  quality={95}
-                  unoptimized
-                  className="h-auto w-full object-cover object-top"
-                />
-              </div>
-              <p className="mt-2 text-center text-[10px] font-bold uppercase tracking-wide text-muted">
-                Creator · Paprly / Mentr
-              </p>
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <p className="text-[11px] font-bold uppercase tracking-wide text-coral">
-                Meet the human
-              </p>
-              <h3 className="mt-2 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-                Adarsh Singh
-              </h3>
-              <p className="mt-2 text-sm font-semibold text-ink/80">
-                Software Engineer @ upGrad School of Technology · Ex-Founding
-                Engineer @ Paprly · SIH 2024 Winner · Creator of Mentr
-              </p>
-              <p className="mt-1 text-sm text-muted">Bengaluru, India</p>
-
-              <blockquote className="mt-5 border-l-4 border-coral pl-4 text-sm leading-relaxed text-ink sm:text-base">
-                Edtech loves charging you to say hello. Coins. Lead packs.
-                &ldquo;Unlock contact for ₹999.&rdquo;{" "}
-                <span className="font-semibold text-coral">
-                  Mentr is the opposite joke:
-                </span>{" "}
-                parents find tutors for ₹0, tutors keep 100%, and the code is
-                MIT so nobody can quietly reverse that.
-              </blockquote>
-
-              <p className="mt-4 text-sm leading-relaxed text-muted">
-                Aim is simple —{" "}
-                <span className="font-semibold text-ink">
-                  keep things that should be free, free.
-                </span>{" "}
-                Search. Connect. WhatsApp after mutual accept. No commission
-                engine hiding in the repo. If education infrastructure can be
-                open, it should be.
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-2">
-                {[
-                  "₹0 platform fee",
-                  "MIT open source",
-                  "No lead packs",
-                  "Build in public",
-                ].map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-hairline bg-white px-3 py-1 text-[11px] font-semibold text-ink"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={CREATOR_LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button className="gap-2">
-                    <LinkedInIcon className="h-4 w-4" />
-                    LinkedIn
-                    <ExternalLink className="h-3.5 w-3.5 opacity-70" />
-                  </Button>
-                </a>
-                <a
-                  href={GITHUB_REPO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="secondary" className="gap-2">
-                    <GitHubIcon className="h-4 w-4" />
-                    GitHub repo
-                  </Button>
-                </a>
-                <Link href="/blog/who-created-mentr-adarsh-singh">
-                  <Button variant="secondary" className="gap-2">
-                    Creator story
-                  </Button>
-                </Link>
-                <Link href="/blog/contribute-to-mentr-open-source">
-                  <Button variant="secondary" className="gap-2">
-                    Contribute guide
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 

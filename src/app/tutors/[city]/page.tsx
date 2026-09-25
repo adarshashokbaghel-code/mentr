@@ -1,5 +1,6 @@
 import { SeoHubPage } from "@/components/seo/hub-page";
-import { SITE_NAME, hubOpenGraph } from "@/lib/seo";
+import { hubOpenGraph } from "@/lib/seo";
+import { cityGuide } from "@/lib/seo-city-copy";
 import {
   CITY_SUBJECT_PAGES,
   INSTANT_CONNECT_CTA,
@@ -28,7 +29,7 @@ export async function generateMetadata({
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   if (!city) return { title: "Not found", robots: { index: false } };
   const title = `Tutors in ${city.name} — Verified Home & Online`;
-  const description = `Find tutors in ${city.name} on ${SITE_NAME}. Browse verified profiles by subject, connect free, try Instant Connect, or post your requirement.`;
+  const description = `Find a verified tutor in ${city.name}. Free for parents — no commission, no agency fee. Browse profiles or get matched instantly.`;
   const path = cityPath(city.slug);
   return {
     title,
@@ -49,6 +50,7 @@ export default async function CityTutorsHubPage({
 
   const teachers = await liveTeachersForCity(city.slug);
   const path = cityPath(city.slug);
+  const guide = cityGuide(city.slug, city.name, city.local);
   const subjects = [
     ...new Set(
       CITY_SUBJECT_PAGES.filter((p) => p.city === city.slug).map(
@@ -61,24 +63,24 @@ export default async function CityTutorsHubPage({
   return (
     <SeoHubPage
       eyebrow={city.name}
-      title={`Tutors in ${city.name}`}
+      title={`Find a verified tutor in ${city.name}`}
       intro={
         city.local
-          ? `Browse verified tutors across ${city.name} — home visits and online sessions for CBSE, ICSE, and IGCSE. Every profile shows subjects, rates where shared, experience, and open slots.`
-          : `${city.name} families use Mentr for verified online tutors in their time zone — plus home tutors where available. Browse below or post a requirement naming ${city.name}, class, and board.`
+          ? `Free for parents. No commission. No agency fee. Browse verified tutors across ${city.name} — home visits and online. Tell us the subject and class, or get matched instantly.`
+          : `Free for parents. No commission. No agency fee. ${city.name} families browse verified online tutors — or get matched instantly when you need someone fast.`
       }
       teachers={teachers}
       schemaPath={path}
       breadcrumbs={[
         { label: "Home", href: "/" },
-        { label: "Cities", href: "/find-tutors-near-me" },
+        { label: "For parents", href: "/parents" },
         { label: city.name },
       ]}
-      ctaHref={searchHref}
-      ctaLabel={`Search tutors in ${city.name}`}
+      ctaHref="/find-tutor"
+      ctaLabel="Find a Tutor"
       mapHref={`${searchHref}&view=map`}
-      promoHref="/find-tutors-near-me"
-      promoLabel="Find tutors near you"
+      promoHref="/find-tutor"
+      promoLabel="Find a Tutor"
       faqs={cityFaqs(city.name, city.local)}
       requirementHref={REQUIREMENT_CTA.href}
       requirementLabel={REQUIREMENT_CTA.label}
@@ -86,6 +88,10 @@ export default async function CityTutorsHubPage({
       instantHref={INSTANT_CONNECT_CTA.href}
       instantLabel={INSTANT_CONNECT_CTA.label}
       instantBlurb={INSTANT_CONNECT_CTA.blurb}
+      guideSections={guide.sections}
+      pricingContext={guide.pricing}
+      modesContext={guide.modes}
+      verificationContext={guide.verification}
       emptyMessage={
         city.local
           ? undefined
@@ -96,8 +102,8 @@ export default async function CityTutorsHubPage({
           label: `${s} tutors in ${city.name}`,
           href: citySubjectPath(city.slug, s),
         })),
-        { label: "CBSE tutors", href: "/boards/cbse-tutors" },
-        { label: "Find tutors near you", href: "/find-tutors-near-me" },
+        { label: "Find a Tutor", href: "/find-tutor" },
+        { label: "Get Matched Instantly", href: "/instant-connect" },
         ...(city.slug !== "bengaluru"
           ? [{ label: "Tutors in Bengaluru", href: "/tutors/bengaluru" }]
           : []),

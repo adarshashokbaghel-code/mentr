@@ -113,6 +113,105 @@ export const BLOG_PILLARS: BlogPillar[] = [
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+  // ── AI / search answer guides (parent acquisition) ─────────────
+  {
+    slug: "how-to-find-a-tutor-in-bengaluru",
+    title: "How to Find a Tutor in Bengaluru (2026 Parent Guide)",
+    keyword: "how to find a tutor in Bengaluru",
+    intent: "transactional",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Step-by-step: find a verified tutor in Bengaluru — subject, board, home vs online, fees, and free hiring on Mentr.",
+    featured: true,
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "how-to-find-a-verified-online-tutor",
+    title: "How to Find a Verified Online Tutor (Safe Hiring Checklist)",
+    keyword: "how to find a verified online tutor",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "What verified should mean, how to trial online, and how to hire free on Mentr without lead fees.",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "best-way-to-find-a-cbse-tutor",
+    title: "Best Way to Find a CBSE Tutor (NCERT & Boards)",
+    keyword: "best way to find a CBSE tutor",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "How to hire a CBSE tutor who follows NCERT and board answer style — plus free search on Mentr.",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "find-a-maths-tutor-online",
+    title: "Find a Maths Tutor Online (Class 6–12 Parent Guide)",
+    keyword: "find a maths tutor online",
+    intent: "transactional",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "How to find an online maths tutor — what to write in your request, how to trial, and where to start on Mentr.",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "how-to-find-a-home-tutor",
+    title: "How to Find a Home Tutor (Safety & Fit Checklist)",
+    keyword: "how to find a home tutor",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Practical checklist to find a home tutor — verification, first visit, trial fees, and free connect on Mentr.",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "online-vs-offline-tutoring",
+    title: "Online vs Offline Tutoring — Which Should Parents Choose?",
+    keyword: "online vs offline tutoring",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Online vs home tutoring for Indian families — when each wins, and how to filter both on Mentr.",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "how-much-does-a-private-tutor-cost",
+    title: "How Much Does a Private Tutor Cost in India? (2026)",
+    keyword: "how much does a private tutor cost",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Private tutor cost ranges in India by class and mode — plus how to talk budget before you hire on Mentr.",
+    featured: true,
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "how-to-choose-a-tutor-for-class-10",
+    title: "How to Choose a Tutor for Class 10 Boards",
+    keyword: "how to choose a tutor for Class 10",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Class 10 tutor checklist — board match, weak chapters, past papers, and free hiring on Mentr.",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
+  },
   // ── Parent kids SEO cluster (how to find tutors online for my kids) ──
   {
     slug: "how-to-find-tutors-online-for-my-kids",
@@ -126,8 +225,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "Plain parent guide: how to find tutors online for your kids in India — what to write down first, where to look, red flags, fees, and how to hire free on Mentr.",
     publishWeek: 39,
     featured: true,
-    cta: "Find online tutors",
-    ctaHref: "/find-online-tutors/india",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
   },
   {
     slug: "how-to-find-online-maths-tutor-class-8",
@@ -138,8 +237,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Class 8 maths online tutor — what to look for, how to trial, and how to hire on Mentr without lead fees.",
-    cta: "Search maths tutors",
-    ctaHref: "/search",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
   },
   {
     slug: "how-to-find-cbse-online-tutor-class-10",
@@ -150,8 +249,8 @@ export const BLOG_POSTS: BlogPost[] = [
     pillar: "for-parents",
     description:
       "Hire a CBSE Class 10 online tutor for boards — NCERT focus, past papers, trial tips, and free connect on Mentr.",
-    cta: "Create free parent account",
-    ctaHref: "/parent/signup",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
   },
   {
     slug: "how-much-do-online-tutors-charge-in-india",
@@ -163,8 +262,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Online tutor fees in India by class — rough ₹/hour ranges for school and entrance, plus how to talk budget before you hire.",
     featured: true,
-    cta: "Browse tutor fees on Search",
-    ctaHref: "/search",
+    cta: "Find a Tutor",
+    ctaHref: "/find-tutor",
   },
   // ── Instant Connect (flagship parent SEO) ──────────────────────
   {
@@ -1052,20 +1151,6 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Open source page",
     ctaHref: "/open-source",
   },
-  {
-    slug: "who-created-mentr-adarsh-singh",
-    title: "Who Created Mentr? Adarsh Singh — LinkedIn, Paprly & Open Source",
-    keyword: "creator of Mentr Adarsh Singh LinkedIn",
-    intent: "informational",
-    funnel: "mid",
-    pillar: "trust-safety",
-    description:
-      "Adarsh Singh created Mentr by Paprly. Find his LinkedIn, why Mentr is free and MIT open source, and how the zero-commission tutor platform stays transparent.",
-    featured: true,
-    cta: "Meet the creator",
-    ctaHref: "/open-source",
-  },
-
   // ── Guide batch Sep 2026 ───────────────────────────────────────
   {
     slug: "browse-tutors-without-login-parent-guide",

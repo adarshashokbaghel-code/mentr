@@ -17,6 +17,7 @@ import { INSTANT_CONNECT_ARTICLES } from "./instant-connect";
 import { OPEN_SOURCE_SEO_ARTICLES } from "./open-source-seo";
 import { SNAP_GRADE_ARTICLES } from "./snap-grade";
 import { PARENT_KIDS_SEO_ARTICLES } from "./parent-kids-seo";
+import { AI_ANSWER_GUIDES } from "./ai-answer-guides";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
@@ -38,6 +39,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...OPEN_SOURCE_SEO_ARTICLES,
   ...SNAP_GRADE_ARTICLES,
   ...PARENT_KIDS_SEO_ARTICLES,
+  ...AI_ANSWER_GUIDES,
 };
 
 export function getArticleContent(slug: string): ArticleContent {

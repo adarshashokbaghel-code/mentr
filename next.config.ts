@@ -144,6 +144,47 @@ const nextConfig: NextConfig = {
         destination: "/parents",
         permanent: true,
       },
+      {
+        source: "/blog/who-created-mentr-adarsh-singh",
+        destination: "/about",
+        permanent: true,
+      },
+      // Parent-friendly short subject URLs → canonical hub paths
+      {
+        source: "/tutors/:city/maths",
+        destination: "/tutors/:city/mathematics-tutors",
+        permanent: true,
+      },
+      {
+        source: "/tutors/:city/math",
+        destination: "/tutors/:city/mathematics-tutors",
+        permanent: true,
+      },
+      {
+        source: "/tutors/:city/physics",
+        destination: "/tutors/:city/physics-tutors",
+        permanent: true,
+      },
+      {
+        source: "/tutors/:city/chemistry",
+        destination: "/tutors/:city/chemistry-tutors",
+        permanent: true,
+      },
+      {
+        source: "/tutors/:city/english",
+        destination: "/tutors/:city/english-tutors",
+        permanent: true,
+      },
+      {
+        source: "/tutors/:city/coding",
+        destination: "/tutors/:city/coding-tutors",
+        permanent: true,
+      },
+      {
+        source: "/tutors/:city/biology",
+        destination: "/tutors/:city/biology-tutors",
+        permanent: true,
+      },
       // Legacy WordPress sitemaps (2021) → current Next.js sitemap index
       {
         source: "/sitemap_:segment(\\d+)_:segment2(\\d+).xml",
