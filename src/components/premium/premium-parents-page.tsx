@@ -150,6 +150,10 @@ export function PremiumParentsPage() {
     if (filter === "hiring") list = list.filter((p) => p.hasPosted);
     if (filter === "unlocked") list = list.filter((p) => p.contactRevealed);
     list.sort((a, b) => {
+      // Real registered parents always above seed / backfill
+      const aSeed = a.isSeed ? 1 : 0;
+      const bSeed = b.isSeed ? 1 : 0;
+      if (aSeed !== bSeed) return aSeed - bSeed;
       if (a.contactRevealed !== b.contactRevealed)
         return a.contactRevealed ? -1 : 1;
       if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
@@ -180,6 +184,7 @@ export function PremiumParentsPage() {
             ? {
                 ...p,
                 contactRevealed: true,
+                previouslyRevealed: true,
                 phone: res.reveal.parentPhone,
                 email: res.reveal.parentEmail,
                 whatsappUrl: res.reveal.whatsappUrl,
@@ -247,7 +252,7 @@ export function PremiumParentsPage() {
               </h1>
               <p className="mt-1 max-w-lg text-sm text-muted">
                 Browse profiles, see who&apos;s hiring, reveal up to {limit}{" "}
-                contacts a day.
+                contacts a day — each unlock lasts 2 hours.
               </p>
             </div>
 
@@ -355,8 +360,8 @@ export function PremiumParentsPage() {
           {remaining === 0 ? (
             <p className="mb-4 flex items-start gap-2 rounded-xl border border-ink/10 bg-butter/60 px-4 py-3 text-sm text-ink animate-in fade-in duration-200">
               <Lock className="mt-0.5 h-4 w-4 shrink-0" />
-              Daily reveal limit reached. Unlocked contacts stay open — new
-              reveals reset at midnight.
+              Daily reveal limit reached—
+              new reveals reset at midnight IST.
             </p>
           ) : null}
 
@@ -408,6 +413,7 @@ function ParentCard({
   onReveal: () => void;
 }) {
   const locked = !p.contactRevealed;
+  const alreadyUsed = locked && Boolean(p.previouslyRevealed);
   const location = [p.area, p.city].filter(Boolean).join(", ") || "India";
   const joined = formatJoined(p.joinedAt);
   const initials = initialsOf(p.name, p.initials);
@@ -462,6 +468,11 @@ function ParentCard({
           <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-sage shadow-sm">
             <Unlock className="h-2.5 w-2.5" />
             Open
+          </span>
+        ) : alreadyUsed ? (
+          <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full bg-ink/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
+            <Eye className="h-2.5 w-2.5" />
+            Used
           </span>
         ) : (
           <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full bg-ink/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm">
@@ -537,20 +548,35 @@ function ParentCard({
 
           {locked ? (
             <div className="absolute inset-0 flex items-center justify-center bg-white/50 px-3 backdrop-blur-[1.5px] transition group-hover:bg-white/40">
-              <Button
-                type="button"
-                size="sm"
-                className="h-9 gap-1.5 rounded-full bg-ink px-4 text-white shadow-md transition hover:bg-ink/90 hover:scale-[1.02] active:scale-[0.98]"
-                disabled={!canReveal || revealing}
-                onClick={onReveal}
-              >
-                {revealing ? (
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                ) : (
-                  <Unlock className="h-3.5 w-3.5" />
-                )}
-                Reveal contact
-              </Button>
+              {alreadyUsed ? (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="inline-flex h-9 cursor-default items-center gap-1.5 rounded-full border border-ink/15 bg-cream-band px-4 text-xs font-bold text-muted shadow-sm">
+                      <Eye className="h-3.5 w-3.5" />
+                      Already revealed
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent side="top" className="max-w-[220px] text-center">
+                    Already revealed — contact was unlocked for 2 hours and is
+                    locked again.
+                  </TooltipContent>
+                </Tooltip>
+              ) : (
+                <Button
+                  type="button"
+                  size="sm"
+                  className="h-9 gap-1.5 rounded-full bg-ink px-4 text-white shadow-md transition hover:bg-ink/90 hover:scale-[1.02] active:scale-[0.98]"
+                  disabled={!canReveal || revealing}
+                  onClick={onReveal}
+                >
+                  {revealing ? (
+                    <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  ) : (
+                    <Unlock className="h-3.5 w-3.5" />
+                  )}
+                  Reveal contact
+                </Button>
+              )}
             </div>
           ) : null}
         </div>

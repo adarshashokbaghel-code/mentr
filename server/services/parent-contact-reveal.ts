@@ -8,6 +8,8 @@ import { User, type IUser } from "../models/User";
 import { isMentrPremiumActive } from "./premium-mentor-billing";
 
 export const PARENT_REVEALS_PER_DAY = 3;
+/** Contact stays unlocked this long after reveal, then locks permanently for that mentor. */
+export const REVEAL_UNLOCK_MS = 2 * 60 * 60 * 1000;
 
 function waPhone(raw: string): string {
   const digits = String(raw || "").replace(/\D/g, "");
@@ -21,6 +23,16 @@ function initialsOf(name: string): string {
     .slice(0, 2)
     .map((p) => p[0]!.toUpperCase())
     .join("");
+}
+
+export function isRevealActive(
+  revealedAt: Date | string | null | undefined,
+  now = Date.now(),
+): boolean {
+  if (!revealedAt) return false;
+  const ts = new Date(revealedAt).getTime();
+  if (!Number.isFinite(ts)) return false;
+  return now - ts < REVEAL_UNLOCK_MS;
 }
 
 /** Start of today in Asia/Kolkata as a Date (UTC instant). */
@@ -77,6 +89,13 @@ type ParentListOpts = {
   limit?: number;
 };
 
+/** Seed / backfill personas — always sort below real parent signups. */
+const SEED_PARENT_SOURCE_RX = /^seed:parent-attract/i;
+
+function isSeedRegistrationSource(source: string | undefined | null): boolean {
+  return SEED_PARENT_SOURCE_RX.test(String(source || ""));
+}
+
 export async function listParentsForPremiumMentor(opts: ParentListOpts) {
   if (!isMentrPremiumActive(opts.mentor)) {
     return { error: "Premium required", code: "NOT_PREMIUM" as const };
@@ -102,12 +121,32 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
     ];
   }
 
-  const parents = (await User.find(filter)
+  const selectFields =
+    "email parentProfile profileImageUrl createdAt lastLoginAt registrationSource";
+
+  // Real signups first (full limit), then fill remaining slots with seed/backfill.
+  const realFilter = {
+    $and: [filter, { registrationSource: { $not: SEED_PARENT_SOURCE_RX } }],
+  };
+  const seedFilter = {
+    $and: [filter, { registrationSource: SEED_PARENT_SOURCE_RX }],
+  };
+
+  const realParents = (await User.find(realFilter)
     .sort({ createdAt: -1 })
     .limit(limit)
-    .select(
-      "email parentProfile profileImageUrl createdAt lastLoginAt",
-    )) as IUser[];
+    .select(selectFields)) as IUser[];
+
+  const remaining = Math.max(0, limit - realParents.length);
+  const seedParents =
+    remaining > 0
+      ? ((await User.find(seedFilter)
+          .sort({ createdAt: -1 })
+          .limit(remaining)
+          .select(selectFields)) as IUser[])
+      : [];
+
+  const parents = [...realParents, ...seedParents];
 
   const parentIds = parents.map((p) => p._id);
   const [reqs, reveals, quota] = await Promise.all([
@@ -142,12 +181,14 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       (r) => r.status === "open" && new Date(r.expiresAt).getTime() > now,
     );
     const reveal = revealByParent.get(pid);
+    const previouslyRevealed = Boolean(reveal);
+    const active = isRevealActive(reveal?.revealedAt, now);
     const pp = p.parentProfile!;
-    const maskedPhone = reveal
-      ? reveal.parentPhone
+    const phone = active
+      ? reveal!.parentPhone
       : maskPhone(pp.phoneNumber || "");
-    const maskedEmail = reveal
-      ? reveal.parentEmail || p.email || null
+    const email = active
+      ? reveal!.parentEmail || p.email || null
       : maskEmail(p.email || "");
 
     return {
@@ -174,12 +215,15 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
         : null,
       joinedAt: p.createdAt?.toISOString?.() ?? null,
       lastLoginAt: p.lastLoginAt?.toISOString?.() ?? null,
-      contactRevealed: Boolean(reveal),
-      phone: reveal ? reveal.parentPhone : maskedPhone,
-      email: maskedEmail,
-      whatsappUrl: reveal?.parentPhone
-        ? `https://wa.me/${reveal.parentPhone}`
-        : null,
+      contactRevealed: active,
+      previouslyRevealed,
+      isSeed: isSeedRegistrationSource(p.registrationSource),
+      phone,
+      email,
+      whatsappUrl:
+        active && reveal?.parentPhone
+          ? `https://wa.me/${reveal.parentPhone}`
+          : null,
       revealedAt: reveal?.revealedAt?.toISOString?.() ?? null,
     };
   });
@@ -227,10 +271,19 @@ export async function revealParentContact(opts: {
   });
   if (existing) {
     const quota = await getRevealQuota(opts.mentor._id.toString());
+    if (isRevealActive(existing.revealedAt)) {
+      return {
+        alreadyRevealed: true as const,
+        reveal: serializeReveal(existing),
+        quota,
+      };
+    }
     return {
-      alreadyRevealed: true as const,
-      reveal: serializeReveal(existing),
+      error:
+        "Already revealed — contact was unlocked for 2 hours and is now locked again.",
+      code: "ALREADY_REVEALED" as const,
       quota,
+      previouslyRevealed: true as const,
     };
   }
 
@@ -287,10 +340,20 @@ export async function revealParentContact(opts: {
         parent: opts.parentId,
       });
       if (again) {
+        const quota = await getRevealQuota(opts.mentor._id.toString());
+        if (isRevealActive(again.revealedAt)) {
+          return {
+            alreadyRevealed: true as const,
+            reveal: serializeReveal(again),
+            quota,
+          };
+        }
         return {
-          alreadyRevealed: true as const,
-          reveal: serializeReveal(again),
-          quota: await getRevealQuota(opts.mentor._id.toString()),
+          error:
+            "Already revealed — contact was unlocked for 2 hours and is now locked again.",
+          code: "ALREADY_REVEALED" as const,
+          quota,
+          previouslyRevealed: true as const,
         };
       }
     }

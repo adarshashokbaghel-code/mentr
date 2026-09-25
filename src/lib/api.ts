@@ -497,6 +497,10 @@ export type PremiumParentRow = {
   joinedAt: string | null;
   lastLoginAt: string | null;
   contactRevealed: boolean;
+  /** Mentor revealed this parent before (even if the 2h unlock window expired) */
+  previouslyRevealed?: boolean;
+  /** Seed / backfill persona — always listed after real signups */
+  isSeed?: boolean;
   phone: string;
   email: string | null;
   whatsappUrl: string | null;

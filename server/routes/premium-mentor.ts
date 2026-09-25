@@ -254,6 +254,8 @@ router.post(
             ? 403
             : result.code === "DAILY_LIMIT"
               ? 429
+              : result.code === "ALREADY_REVEALED"
+                ? 409
               : result.code === "NOT_FOUND"
                 ? 404
                 : 400;
