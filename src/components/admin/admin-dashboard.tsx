@@ -350,7 +350,7 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                   </p>
                   <div className="mt-4">
                     <AdminTrendChart
-                      height={160}
+                      height={200}
                       emptyLabel="No registrations in the last 30 days"
                       points={(stats.registrations?.timeseries ?? []).map(
                         (p) => ({

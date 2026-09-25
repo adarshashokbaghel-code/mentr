@@ -113,6 +113,59 @@ export const BLOG_PILLARS: BlogPillar[] = [
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+  // ── Parent kids SEO cluster (how to find tutors online for my kids) ──
+  {
+    slug: "how-to-find-tutors-online-for-my-kids",
+    title:
+      "How to Find Tutors Online for My Kids (India Guide for Parents, 2026)",
+    keyword: "how to find tutors online for my kids",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-parents",
+    description:
+      "Plain parent guide: how to find tutors online for your kids in India — what to write down first, where to look, red flags, fees, and how to hire free on Mentr.",
+    publishWeek: 39,
+    featured: true,
+    cta: "Find online tutors",
+    ctaHref: "/find-online-tutors/india",
+  },
+  {
+    slug: "how-to-find-online-maths-tutor-class-8",
+    title: "How to Find an Online Maths Tutor for Class 8 (CBSE & ICSE)",
+    keyword: "online maths tutor for Class 8",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Class 8 maths online tutor — what to look for, how to trial, and how to hire on Mentr without lead fees.",
+    cta: "Search maths tutors",
+    ctaHref: "/search",
+  },
+  {
+    slug: "how-to-find-cbse-online-tutor-class-10",
+    title: "How to Find a CBSE Online Tutor for Class 10 Boards",
+    keyword: "CBSE online tutor for Class 10",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Hire a CBSE Class 10 online tutor for boards — NCERT focus, past papers, trial tips, and free connect on Mentr.",
+    cta: "Create free parent account",
+    ctaHref: "/parent/signup",
+  },
+  {
+    slug: "how-much-do-online-tutors-charge-in-india",
+    title: "How Much Do Online Tutors Charge in India? (2026 Fee Guide)",
+    keyword: "how much do online tutors charge in India",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Online tutor fees in India by class — rough ₹/hour ranges for school and entrance, plus how to talk budget before you hire.",
+    featured: true,
+    cta: "Browse tutor fees on Search",
+    ctaHref: "/search",
+  },
   // ── Instant Connect (flagship parent SEO) ──────────────────────
   {
     slug: "instant-connect-find-tutor-fast-parents",

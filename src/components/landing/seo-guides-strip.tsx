@@ -3,6 +3,16 @@ import { Button } from "@/components/ui/button";
 
 const GUIDES = [
   {
+    label: "Find tutors online for kids",
+    href: "/blog/how-to-find-tutors-online-for-my-kids",
+    desc: "Parent guide — what to ask, red flags, fees",
+  },
+  {
+    label: "What online tutors charge",
+    href: "/blog/how-much-do-online-tutors-charge-in-india",
+    desc: "2026 ₹/hour ranges by class",
+  },
+  {
     label: "What is Snap & Grade?",
     href: "/blog/what-is-snap-and-grade",
     desc: "CBSE photo marking for Class 9–12 — 100 free credits",
