@@ -26,7 +26,7 @@ function shareToken(): string {
 async function resetSeedParents() {
   const seeded = await User.find({
     role: "parent",
-    registrationSource: SEED_PARENT_SOURCE,
+    registrationSource: { $regex: /^seed:parent-attract/ },
   }).select("_id email");
   const ids = seeded.map((u) => u._id);
   if (ids.length) {
@@ -137,7 +137,6 @@ async function main() {
   try {
     if (reset) {
       await resetSeedParents();
-      return;
     }
     await seedParents();
     await seedRequirements();

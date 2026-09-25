@@ -109,25 +109,6 @@ export function RoleChooserModal() {
             <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
           </Link>
 
-          <Link
-            href={`/faculty${nextSuffix}`}
-            onClick={closeRoleChooser}
-            className="group flex items-center gap-4 rounded-xl border-2 border-ink bg-white p-4 transition hover:bg-cream"
-          >
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-ink text-white">
-              <GraduationCap className="h-5 w-5" />
-            </span>
-            <span className="min-w-0 flex-1">
-              <span className="block text-[15px] font-bold text-ink">
-                I&apos;m a tutor
-              </span>
-              <span className="block text-xs text-muted">
-                List free, keep 100% of what you earn
-              </span>
-            </span>
-            <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
-          </Link>
-
           {guestPremium ? (
             <button
               type="button"
@@ -148,6 +129,25 @@ export function RoleChooserModal() {
               <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
             </button>
           ) : null}
+
+          <Link
+            href={`/faculty${nextSuffix}`}
+            onClick={closeRoleChooser}
+            className="group flex items-center gap-4 rounded-xl border-2 border-ink bg-white p-4 transition hover:bg-cream"
+          >
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-ink text-white">
+              <GraduationCap className="h-5 w-5" />
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-[15px] font-bold text-ink">
+                I&apos;m a tutor
+              </span>
+              <span className="block text-xs text-muted">
+                List free, keep 100% of what you earn
+              </span>
+            </span>
+            <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
+          </Link>
         </div>
 
         <p className="mt-5 text-center text-xs text-muted">

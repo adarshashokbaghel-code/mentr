@@ -49,7 +49,7 @@ const PAGE_FAQS = [
   {
     question: "How many parent contacts can I reveal?",
     answer:
-      "Three new parent contacts per day (IST midnight reset). Already unlocked contacts stay visible. History is on your dashboard under Pitch parents → Reveal history.",
+      "Three new parent contacts per day (IST midnight reset). Each unlock stays visible for 2 hours, then locks again with no re-reveal. History is on your dashboard under Pitch parents → Reveal history.",
   },
   {
     question: "How do I upgrade?",
