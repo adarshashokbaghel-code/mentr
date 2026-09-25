@@ -11,6 +11,7 @@ import teacherRoutes from "./routes/teachers";
 import adminRoutes from "./routes/admin";
 import marketingRoutes from "./routes/marketing";
 import feedbackRoutes from "./routes/feedback";
+import guestRequirementRoutes from "./routes/guest-requirements";
 import notificationRoutes from "./routes/notifications";
 import parentHiringRoutes from "./routes/parent-hiring";
 import learnRoutes from "./routes/learn";
@@ -18,7 +19,7 @@ import instantConnectRoutes from "./routes/instant-connect";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
-import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers } from "./public-teacher";
+import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers, getPublicTeacherStats } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 import { ensureDb } from "./middleware/ensure-db";
 
@@ -118,6 +119,10 @@ app.get("/api/teachers/public", (_req, res) => {
   void getPublicTeachers(res);
 });
 
+app.get("/api/teachers/stats", (_req, res) => {
+  void getPublicTeacherStats(res);
+});
+
 app.get("/api/teachers/featured", (_req, res) => {
   void getPublicFeaturedTeachers(res);
 });
@@ -153,6 +158,7 @@ app.post("/api/cron/pitch-digest", async (req, res) => {
 
 app.use("/api/marketing", marketingRoutes);
 app.use("/api/feedback", feedbackRoutes);
+app.use("/api/guest-requirements", guestRequirementRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/connections", connectionRoutes);
 app.use("/api/profile", profileRoutes);

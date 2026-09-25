@@ -12,6 +12,7 @@ import { AdminInteractions } from "@/components/admin/admin-interactions";
 import { AdminLearnTrack } from "@/components/admin/admin-learn";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
+import { AdminGuestRequirementsTable } from "@/components/admin/admin-guest-requirements-table";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
 import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
 import { AdminFeaturedTutors } from "@/components/admin/admin-featured-tutors";
@@ -34,6 +35,7 @@ import {
   Megaphone,
   RefreshCw,
   MessageSquareText,
+  Send,
   Star,
   Target,
   Users,
@@ -47,6 +49,7 @@ const NAV = [
   { id: "featured", label: "Featured tutors", icon: Star },
   { id: "premium", label: "Premium mentors", icon: Crown },
   { id: "requirements", label: "Board posts", icon: Megaphone },
+  { id: "guest-requests", label: "Guest requests", icon: Send },
   { id: "instant-connect", label: "Instant Connect", icon: Zap },
   { id: "snap-grade", label: "Snap & Grade", icon: Camera },
   { id: "connections", label: "Connections", icon: Link2 },
@@ -486,6 +489,16 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                 </div>
               </div>
               <AdminRequirementsTable adminKey={adminKey} />
+            </AdminSection>
+          )}
+
+          {section === "guest-requests" && (
+            <AdminSection
+              id="guest-requests"
+              title="Guest requests"
+              description="Parents who messaged a Premium mentor without creating an account — full contact, need, and mentor outcomes"
+            >
+              <AdminGuestRequirementsTable adminKey={adminKey} />
             </AdminSection>
           )}
 

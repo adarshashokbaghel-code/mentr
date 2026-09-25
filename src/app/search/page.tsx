@@ -88,7 +88,8 @@ function GuestSearchBanner() {
       <div className="mx-auto flex max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-ink">
           <span className="font-semibold">Browsing is free.</span>{" "}
-          Sign in as a parent to view full profiles and connect on WhatsApp.
+          Premium mentors: connect or send a need without an account. Regular
+          tutors need a quick parent sign-in.
         </p>
         <Button
           size="sm"
@@ -129,6 +130,7 @@ function SearchContent() {
     mode: initialMode,
     view: initialView,
   });
+  const [tierDefaulted, setTierDefaulted] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | undefined>();
 
@@ -141,6 +143,19 @@ function SearchContent() {
   const [catalogLoading, setCatalogLoading] = useState(true);
   const [catalogFailed, setCatalogFailed] = useState(false);
   const [catalogReloadKey, setCatalogReloadKey] = useState(0);
+
+  // Guests land on Premium mentors; logged-in parents keep Regular default.
+  useEffect(() => {
+    if (authLoading || tierDefaulted) return;
+    if (!user) {
+      setFilters((prev) =>
+        prev.mentorTier === "premium"
+          ? prev
+          : { ...prev, mentorTier: "premium" },
+      );
+    }
+    setTierDefaulted(true);
+  }, [authLoading, user, tierDefaulted]);
 
   useEffect(() => {
     let cancelled = false;

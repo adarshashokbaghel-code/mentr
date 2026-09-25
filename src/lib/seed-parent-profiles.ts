@@ -30,7 +30,7 @@ export type SeedRequirement = {
   postedHoursAgo: number;
 };
 
-/** 35 Indian parents — Bengaluru-focused, genuine local names & numbers */
+/** 42 Indian parents — Bengaluru-focused + metro India, genuine local names & numbers */
 export const INDIAN_SEED_PARENTS: SeedParent[] = [
   { email: "priya.menon.jayanagar@gmail.com", name: "Priya Menon", phoneNumber: "9845123401", country: "India", city: "Bengaluru", area: "Jayanagar", region: "india" },
   { email: "rajesh.iyer.koramangala@gmail.com", name: "Rajesh Iyer", phoneNumber: "9876501234", country: "India", city: "Bengaluru", area: "Koramangala", region: "india" },
@@ -67,6 +67,13 @@ export const INDIAN_SEED_PARENTS: SeedParent[] = [
   { email: "aishwarya.rao.hsrlayout@gmail.com", name: "Aishwarya Rao", phoneNumber: "9845007788", country: "India", city: "Bengaluru", area: "HSR Layout", region: "india" },
   { email: "rohit.bansal.gurgaon@gmail.com", name: "Rohit Bansal", phoneNumber: "9810099887", country: "India", city: "Gurugram", area: "DLF Phase 3", region: "india" },
   { email: "tanvi.joshi.whitefield2@gmail.com", name: "Tanvi Joshi", phoneNumber: "9886001122", country: "India", city: "Bengaluru", area: "Whitefield", region: "india" },
+  { email: "chitra.nambiar.kalyanangar@gmail.com", name: "Chitra Nambiar", phoneNumber: "9845112233", country: "India", city: "Bengaluru", area: "Kalyan Nagar", region: "india" },
+  { email: "venkatesh.iyer.jayanagar4th@gmail.com", name: "Venkatesh Iyer", phoneNumber: "9731880044", country: "India", city: "Bengaluru", area: "Jayanagar 4th Block", region: "india" },
+  { email: "pallavi.shekar.hsrsector2@gmail.com", name: "Pallavi Shekar", phoneNumber: "9900556677", country: "India", city: "Bengaluru", area: "HSR Layout Sector 2", region: "india" },
+  { email: "imran.qureshi.indiranagar12@gmail.com", name: "Imran Qureshi", phoneNumber: "9886778899", country: "India", city: "Bengaluru", area: "Indiranagar 12th Main", region: "india" },
+  { email: "swati.deshmukh.koregaon@gmail.com", name: "Swati Deshmukh", phoneNumber: "9822011455", country: "India", city: "Pune", area: "Koregaon Park", region: "india" },
+  { email: "abhinav.shukla.vasantkunj@gmail.com", name: "Abhinav Shukla", phoneNumber: "9810455667", country: "India", city: "Delhi", area: "Vasant Kunj", region: "india" },
+  { email: "megha.rao.borivali@gmail.com", name: "Megha Rao", phoneNumber: "9820789012", country: "India", city: "Mumbai", area: "Borivali East", region: "india" },
 ];
 
 /** 25 overseas parents — looking for online / India-curriculum tutors */
@@ -103,7 +110,7 @@ export const ALL_SEED_PARENTS: SeedParent[] = [
   ...FOREIGN_SEED_PARENTS,
 ];
 
-/** 25 board posts from a mix of Indian + foreign parents */
+/** 32 board posts from a mix of Indian + foreign parents */
 export const SEED_REQUIREMENTS: SeedRequirement[] = [
   {
     parentEmail: "priya.menon.jayanagar@gmail.com",
@@ -479,5 +486,110 @@ export const SEED_REQUIREMENTS: SeedRequirement[] = [
     startTimeline: "within_month",
     interestCount: 2,
     postedHoursAgo: 52,
+  },
+  {
+    parentEmail: "chitra.nambiar.kalyanangar@gmail.com",
+    subject: "English",
+    classLevel: "Class 4",
+    city: "Bengaluru",
+    area: "Kalyan Nagar",
+    modes: ["student_home"],
+    budgetMin: 350,
+    budgetMax: 550,
+    details:
+      "Looking for a warm home tutor for Class 4 English — phonics catch-up, reading aloud, and short paragraphs. Daughter is shy so patience matters. Twice a week after 5 pm near HRBR Layout.",
+    startTimeline: "within_week",
+    interestCount: 2,
+    postedHoursAgo: 5,
+  },
+  {
+    parentEmail: "venkatesh.iyer.jayanagar4th@gmail.com",
+    subject: "Mathematics",
+    classLevel: "Class 11",
+    city: "Bengaluru",
+    area: "Jayanagar 4th Block",
+    modes: ["online", "tutor_home"],
+    budgetMin: 700,
+    budgetMax: 1100,
+    details:
+      "CBSE Class 11 maths — limits, derivatives, and trigonometry. Son needs weekly chapter tests and clear board-pattern practice. Prefer evenings or early weekend slots.",
+    startTimeline: "immediately",
+    interestCount: 5,
+    postedHoursAgo: 2,
+  },
+  {
+    parentEmail: "pallavi.shekar.hsrsector2@gmail.com",
+    subject: "Science",
+    classLevel: "Class 8",
+    city: "Bengaluru",
+    area: "HSR Layout Sector 2",
+    modes: ["student_home", "online"],
+    budgetMin: 450,
+    budgetMax: 700,
+    details:
+      "Class 8 CBSE science (physics + chemistry basics). Need someone who explains with everyday examples, not only textbook notes. 3 days a week after school near 27th Main.",
+    startTimeline: "within_week",
+    interestCount: 3,
+    postedHoursAgo: 9,
+  },
+  {
+    parentEmail: "imran.qureshi.indiranagar12@gmail.com",
+    subject: "Coding",
+    classLevel: "Class 7",
+    city: "Bengaluru",
+    area: "Indiranagar 12th Main",
+    modes: ["online"],
+    budgetMin: 500,
+    budgetMax: 850,
+    details:
+      "Want a project-based coding mentor for Class 7 — Scratch moving to beginner Python. Not exam coaching; small games and logic puzzles. One hour on weekday evenings.",
+    startTimeline: "flexible",
+    interestCount: 4,
+    postedHoursAgo: 14,
+  },
+  {
+    parentEmail: "swati.deshmukh.koregaon@gmail.com",
+    subject: "Chemistry",
+    classLevel: "Class 12",
+    city: "Pune",
+    area: "Koregaon Park",
+    modes: ["online", "student_home"],
+    budgetMin: 750,
+    budgetMax: 1200,
+    details:
+      "Maharashtra Board Class 12 Chemistry — organic reactions and numericals. Looking for a tutor who has guided HSC students before. Prefer weekend mornings plus one weekday online session.",
+    startTimeline: "immediately",
+    interestCount: 6,
+    postedHoursAgo: 4,
+  },
+  {
+    parentEmail: "abhinav.shukla.vasantkunj@gmail.com",
+    subject: "Physics",
+    classLevel: "Class 10",
+    city: "Delhi",
+    area: "Vasant Kunj",
+    modes: ["online"],
+    budgetMin: 600,
+    budgetMax: 950,
+    details:
+      "CBSE Class 10 Physics revision before boards — light, electricity, and magnetic effects. Need past-year paper drills and formula clarity. Online only, evenings IST.",
+    startTimeline: "within_week",
+    interestCount: 4,
+    postedHoursAgo: 7,
+  },
+  {
+    parentEmail: "megha.rao.borivali@gmail.com",
+    subject: "Mathematics",
+    classLevel: "Class 5",
+    city: "Mumbai",
+    area: "Borivali East",
+    modes: ["student_home"],
+    budgetMin: 400,
+    budgetMax: 650,
+    details:
+      "Class 5 maths for my son — fractions, decimals, and word problems. Looking for a local home tutor who can build confidence without rushing. Twice a week after 6 pm.",
+    startTimeline: "within_week",
+    interestCount: 3,
+    postedHoursAgo: 11,
   },
 ];

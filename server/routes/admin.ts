@@ -3,7 +3,9 @@ import { ensureDb } from "../middleware/ensure-db";
 import { requireAdminKey } from "../middleware/admin-auth";
 import { requireAdminPass } from "../middleware/admin-pass";
 import {
+  closeAdminRequirement,
   listAdminConnections,
+  listAdminGuestRequirements,
   listAdminOtpActivity,
   listAdminProfileViews,
   listAdminRequirements,
@@ -176,6 +178,32 @@ router.get("/requirements", async (req, res) => {
   } catch (err) {
     console.error("Admin requirements list error:", err);
     res.status(500).json({ error: "Failed to load board posts" });
+  }
+});
+
+router.get("/guest-requirements", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
+    const requests = await listAdminGuestRequirements(limit);
+    res.json({ requests, total: requests.length });
+  } catch (err) {
+    console.error("Admin guest requirements list error:", err);
+    res.status(500).json({ error: "Failed to load guest requests" });
+  }
+});
+
+router.post("/requirements/:id/close", requireAdminPass, async (req, res) => {
+  try {
+    const id = String(req.params.id || "");
+    const result = await closeAdminRequirement(id);
+    if ("error" in result) {
+      res.status(result.status).json({ error: result.error });
+      return;
+    }
+    res.json(result);
+  } catch (err) {
+    console.error("Admin close requirement error:", err);
+    res.status(500).json({ error: "Failed to close post" });
   }
 });
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BENGALURU_SEO_SUBJECTS } from "@/lib/seo-programmatic";
 import { LAUNCH_HUB_CITY, SITE_BRAND } from "@/lib/seo";
+import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
 import { SUBJECTS } from "@/lib/teachers";
 import { slugify } from "@/lib/seo-hubs";
 import { cn } from "@/lib/utils";
@@ -17,14 +18,8 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 
 const SUBJECT_FLOOR = SUBJECTS.length;
-const TUTOR_FLOOR = 200;
-
-function formatCount(n: number, floor: number): string {
-  return `${Math.max(n, floor)}+`;
-}
 
 const highlights = [
   {
@@ -46,7 +41,7 @@ const highlights = [
 
 /**
  * Parent-driven proof section — replaces the old worldwide/map block.
- * Highlights tutor count, subjects, and conversion paths for SEO + clarity.
+ * Highlights live tutor count, subjects, and conversion paths for SEO + clarity.
  */
 export function PlatformProof({
   className,
@@ -55,27 +50,8 @@ export function PlatformProof({
   className?: string;
   id?: string;
 }) {
-  const [facultyCount, setFacultyCount] = useState(TUTOR_FLOOR);
-
-  useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const res = await fetch("/api/teachers/public");
-        if (!res.ok) return;
-        const data = (await res.json()) as { teachers?: unknown[] };
-        const n = Array.isArray(data.teachers) ? data.teachers.length : 0;
-        if (!cancelled && n > 0) setFacultyCount(n);
-      } catch {
-        /* keep floor */
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  const tutorLabel = formatCount(facultyCount, TUTOR_FLOOR);
+  const mentorCount = useMentorCount();
+  const tutorLabel = formatMentorCount(mentorCount);
   const subjectCount = SUBJECT_FLOOR;
 
   const stats = [
@@ -126,7 +102,8 @@ export function PlatformProof({
               Built for parents
             </p>
             <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[40px] lg:leading-[1.15]">
-              {tutorLabel} tutors. {subjectCount}+ subjects.{" "}
+              {tutorLabel === "…" ? "Verified" : tutorLabel} tutors.{" "}
+              {subjectCount}+ subjects.{" "}
               <span className="text-coral">Zero platform fees.</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted lg:mx-0">

@@ -10,6 +10,7 @@ import {
 } from "@/components/dashboard/widgets";
 import { ConnectionRequestsSection } from "@/components/dashboard/connection-requests";
 import { InstantConnectFacultySection } from "@/components/dashboard/instant-connect-faculty";
+import { ParentsReachedCard } from "@/components/dashboard/parents-reached-card";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { PremiumMentorCard } from "@/components/dashboard/premium-mentor-card";
 import { ParentRevealHistorySidebar } from "@/components/dashboard/parent-reveal-history-sidebar";
@@ -40,7 +41,6 @@ import {
   Plus,
   Send,
   ShieldCheck,
-  UsersRound,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -450,17 +450,7 @@ export default function DashboardPage() {
               onRefresh={reloadViews}
             />
 
-            <StatCard
-              label="Parents reached"
-              value={viewsLoading ? null : (views?.totalViewers ?? 0)}
-              icon={UsersRound}
-              tone="bg-lavender text-ink"
-              footer={
-                (views?.totalViewers ?? 0) > 0
-                  ? "unique parents, all time"
-                  : "when parents open your listing"
-              }
-            />
+            <ParentsReachedCard />
 
             <StatCard
               label="Open slots"

@@ -269,6 +269,45 @@ export function fetchAdminRequirements(key: string) {
   );
 }
 
+export type AdminGuestRequirementRow = {
+  id: string;
+  teacherId: string;
+  teacherName: string;
+  teacherEmail: string;
+  name: string;
+  email: string;
+  phone: string;
+  requirement: string;
+  description: string;
+  status: string;
+  activity: { action: string; at: string }[];
+  respondedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export function fetchAdminGuestRequirements(key: string) {
+  return adminFetch<{
+    requests: AdminGuestRequirementRow[];
+    total: number;
+  }>(key, "/api/admin/guest-requirements?limit=500");
+}
+
+export function closeAdminRequirement(
+  key: string,
+  postId: string,
+  adminPass: string,
+) {
+  return adminFetch<{ id: string; status: "closed"; message: string }>(
+    key,
+    `/api/admin/requirements/${encodeURIComponent(postId)}/close`,
+    {
+      method: "POST",
+      body: JSON.stringify({ adminPass }),
+    },
+  );
+}
+
 export type AdminProfileViewRow = {
   id: string;
   teacherName: string;

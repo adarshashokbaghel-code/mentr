@@ -11,6 +11,7 @@ export const PARENT_NOTIFICATION_TYPES = [
   "instant_connect_closed",
   "instant_connect_mentor_found",
   "instant_connect_expired",
+  "guest_requirement",
 ] as const;
 
 export type ParentNotificationType = (typeof PARENT_NOTIFICATION_TYPES)[number];

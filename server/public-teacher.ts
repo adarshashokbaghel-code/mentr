@@ -7,11 +7,35 @@ import { loadFeaturedPublicTeachers } from "./services/featured-tutors";
 import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
 
 const PUBLIC_LIST_TTL_MS = 60_000;
+const PUBLIC_COUNT_TTL_MS = 60_000;
 
 let publicListCache: {
   teachers: Record<string, unknown>[];
   at: number;
 } | null = null;
+
+let publicCountCache: { count: number; at: number } | null = null;
+
+/** Live count of public faculty with completed profiles (no hard floor). */
+export async function countPublicTeachers(): Promise<number> {
+  if (
+    publicCountCache &&
+    Date.now() - publicCountCache.at < PUBLIC_COUNT_TTL_MS
+  ) {
+    return publicCountCache.count;
+  }
+
+  await connectDb();
+
+  const count = await User.countDocuments({
+    role: { $ne: "parent" },
+    profileCompleted: true,
+    "profile.name": { $exists: true, $ne: "" },
+  });
+
+  publicCountCache = { count, at: Date.now() };
+  return count;
+}
 
 /** Load all public faculty profiles for browse (no phone / connection info). */
 export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
@@ -29,7 +53,7 @@ export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
     "profile.name": { $exists: true, $ne: "" },
   })
     .sort({ createdAt: -1 })
-    .limit(200)) as IUser[];
+    .limit(2000)) as IUser[];
 
   const complete = users.filter((u) => isProfileComplete(u));
 
@@ -45,6 +69,18 @@ export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
   );
   publicListCache = { teachers, at: Date.now() };
   return teachers;
+}
+
+/** Public mentor count for landing stats — lightweight, cached. */
+export async function getPublicTeacherStats(res: Response): Promise<void> {
+  try {
+    const count = await countPublicTeachers();
+    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=180");
+    res.json({ count, mentors: count });
+  } catch (error) {
+    console.error("public teacher stats error:", error);
+    res.status(500).json({ error: "Failed to load mentor count" });
+  }
 }
 
 /** Admin-curated featured tutors for the homepage (ordered). */

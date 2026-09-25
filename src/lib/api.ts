@@ -538,6 +538,61 @@ export interface ConnectionRequest {
   respondedAt: string | null;
 }
 
+export type GuestRequirementStatus = "new" | "not_interested" | "got_hired";
+
+export type GuestActivityAction =
+  | "created"
+  | "opened"
+  | "not_interested"
+  | "got_hired";
+
+export interface GuestRequirementLead {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  requirement: string;
+  description: string;
+  status: GuestRequirementStatus;
+  teacherName: string;
+  teacherId?: string;
+  activity: { action: GuestActivityAction; at: string }[];
+  respondedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const guestRequirementsApi = {
+  send: (body: {
+    teacherId: string;
+    name: string;
+    email: string;
+    phone: string;
+    requirement: string;
+    description: string;
+  }) =>
+    request<{ message: string; requirement: GuestRequirementLead }>(
+      "/guest-requirements",
+      { method: "POST", body: JSON.stringify(body) },
+    ),
+
+  mine: () =>
+    request<{
+      total: number;
+      newCount: number;
+      requirements: GuestRequirementLead[];
+    }>("/guest-requirements/mine"),
+
+  action: (
+    id: string,
+    action: "opened" | "not_interested" | "got_hired",
+  ) =>
+    request<{ requirement: GuestRequirementLead }>(
+      `/guest-requirements/${id}`,
+      { method: "PATCH", body: JSON.stringify({ action }) },
+    ),
+};
+
 export const connectionsApi = {
   send: (teacherId: string, message: string) =>
     request<{ connection: ParentConnection; message: string }>("/connections", {
@@ -792,7 +847,13 @@ export type ParentNotificationType =
   | "connection_declined"
   | "requirement_pitch"
   | "teacher_outreach"
-  | "tutor_slots_open";
+  | "tutor_slots_open"
+  | "instant_connect_request"
+  | "instant_connect_submitted"
+  | "instant_connect_closed"
+  | "instant_connect_mentor_found"
+  | "instant_connect_expired"
+  | "guest_requirement";
 
 export interface ParentNotification {
   id: string;

@@ -1,6 +1,6 @@
 /**
- * Seed 60 genuine-sounding parent profiles (35 Indian + 25 overseas)
- * and 25 open board requirements.
+ * Seed genuine-sounding parent profiles (Indian + overseas)
+ * and open board requirements.
  *
  * Run:  npx tsx scripts/seed-parent-profiles.ts
  * Reset: npx tsx scripts/seed-parent-profiles.ts --reset
