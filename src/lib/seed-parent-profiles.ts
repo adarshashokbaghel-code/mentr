@@ -1,8 +1,9 @@
 /**
  * Attract-quality parent personas for seeding (no "demo" label in product UI).
  * Identifiable via registrationSource === SEED_PARENT_SOURCE for reset.
+ * India-only — real contacts (name / phone / email). No overseas fakes.
  */
-export const SEED_PARENT_SOURCE = "seed:parent-attract-v4";
+export const SEED_PARENT_SOURCE = "seed:parent-attract-v5";
 
 export type SeedParent = {
   email: string;
@@ -11,8 +12,8 @@ export type SeedParent = {
   country: string;
   city: string;
   area: string;
-  /** Indian vs overseas persona */
-  region: "india" | "foreign";
+  /** Always india for this seed set */
+  region: "india";
 };
 
 export type SeedRequirement = {
@@ -76,40 +77,10 @@ export const INDIAN_SEED_PARENTS: SeedParent[] = [
   { email: "poojabrathod9860@gmail.com", name: "Pooja Bhimrao Rathod", phoneNumber: "8983097051", country: "India", city: "Nagpur", area: "Dharampeth", region: "india" },
 ];
 
-/** 24 overseas parents — looking for online / India-curriculum tutors */
-export const FOREIGN_SEED_PARENTS: SeedParent[] = [
-  { email: "james.walker.uk92@gmail.com", name: "James Walker", phoneNumber: "+447846291057", country: "United Kingdom", city: "London", area: "Wimbledon", region: "foreign" },
-  { email: "aisha.khan.sg@gmail.com", name: "Aisha Khan", phoneNumber: "+6591827463", country: "Singapore", city: "Singapore", area: "Bukit Timah", region: "foreign" },
-  { email: "michael.chen.nyc@gmail.com", name: "Michael Chen", phoneNumber: "+13476829145", country: "United States", city: "New York", area: "Queens", region: "foreign" },
-  { email: "emily.brown.toronto@gmail.com", name: "Emily Brown", phoneNumber: "+14168294731", country: "Canada", city: "Toronto", area: "North York", region: "foreign" },
-  { email: "omar.hassan.auh@gmail.com", name: "Omar Hassan", phoneNumber: "+971554829173", country: "United Arab Emirates", city: "Abu Dhabi", area: "Al Reem Island", region: "foreign" },
-  { email: "sophia.mueller.berlin@gmail.com", name: "Sophia Müller", phoneNumber: "+491768294715", country: "Germany", city: "Berlin", area: "Charlottenburg", region: "foreign" },
-  { email: "daniel.okonkwo.lagos@gmail.com", name: "Daniel Okonkwo", phoneNumber: "+2348039284716", country: "Nigeria", city: "Lagos", area: "Lekki", region: "foreign" },
-  { email: "priyanka.das.sydney@gmail.com", name: "Priyanka Das", phoneNumber: "+61481293746", country: "Australia", city: "Sydney", area: "Parramatta", region: "foreign" },
-  { email: "thomas.nguyen.hcmc@gmail.com", name: "Thomas Nguyen", phoneNumber: "+84918274635", country: "Vietnam", city: "Ho Chi Minh City", area: "District 7", region: "foreign" },
-  { email: "fatima.alrashid.riyadh@gmail.com", name: "Fatima Al-Rashid", phoneNumber: "+966508294716", country: "Saudi Arabia", city: "Riyadh", area: "Olaya", region: "foreign" },
-  { email: "lucas.silva.sp@gmail.com", name: "Lucas Silva", phoneNumber: "+5511982746351", country: "Brazil", city: "São Paulo", area: "Pinheiros", region: "foreign" },
-  { email: "yuki.tanaka.tokyo@gmail.com", name: "Yuki Tanaka", phoneNumber: "+819082746351", country: "Japan", city: "Tokyo", area: "Setagaya", region: "foreign" },
-  { email: "amelia.scott.mcr@gmail.com", name: "Amelia Scott", phoneNumber: "+447700928473", country: "United Kingdom", city: "Manchester", area: "Didsbury", region: "foreign" },
-  { email: "kevin.obrien.dublin@gmail.com", name: "Kevin O'Brien", phoneNumber: "+353872946183", country: "Ireland", city: "Dublin", area: "Rathmines", region: "foreign" },
-  { email: "nina.petrov.msk@gmail.com", name: "Nina Petrov", phoneNumber: "+79038294716", country: "Russia", city: "Moscow", area: "Khamovniki", region: "foreign" },
-  { email: "hassan.ali.doha@gmail.com", name: "Hassan Ali", phoneNumber: "+97455192847", country: "Qatar", city: "Doha", area: "West Bay", region: "foreign" },
-  { email: "claire.dupont.paris@gmail.com", name: "Claire Dupont", phoneNumber: "+33618294735", country: "France", city: "Paris", area: "15th Arrondissement", region: "foreign" },
-  { email: "rajiv.malhotra.sf@gmail.com", name: "Rajiv Malhotra", phoneNumber: "+14158294716", country: "United States", city: "San Francisco", area: "Sunset District", region: "foreign" },
-  { email: "leila.benali.casa@gmail.com", name: "Leila Benali", phoneNumber: "+212661829473", country: "Morocco", city: "Casablanca", area: "Maarif", region: "foreign" },
-  { email: "anders.berg.sthlm@gmail.com", name: "Anders Berg", phoneNumber: "+46708294716", country: "Sweden", city: "Stockholm", area: "Södermalm", region: "foreign" },
-  { email: "maria.garcia.madrid@gmail.com", name: "María García", phoneNumber: "+34618294735", country: "Spain", city: "Madrid", area: "Chamberí", region: "foreign" },
-  { email: "william.park.seoul@gmail.com", name: "William Park", phoneNumber: "+821082947163", country: "South Korea", city: "Seoul", area: "Gangnam", region: "foreign" },
-  { email: "zara.ahmed.kl@gmail.com", name: "Zara Ahmed", phoneNumber: "+60123829471", country: "Malaysia", city: "Kuala Lumpur", area: "Mont Kiara", region: "foreign" },
-  { email: "ethan.wilson.akl@gmail.com", name: "Ethan Wilson", phoneNumber: "+64218294716", country: "New Zealand", city: "Auckland", area: "Remuera", region: "foreign" },
-];
+/** India-only seed set (42). Foreign fakes removed. */
+export const ALL_SEED_PARENTS: SeedParent[] = [...INDIAN_SEED_PARENTS];
 
-export const ALL_SEED_PARENTS: SeedParent[] = [
-  ...INDIAN_SEED_PARENTS,
-  ...FOREIGN_SEED_PARENTS,
-];
-
-/** Board posts from a mix of Indian + foreign parents */
+/** Board posts from Indian seed parents only */
 export const SEED_REQUIREMENTS: SeedRequirement[] = [
   {
     parentEmail: "pratapkumar33311@gmail.com",
@@ -350,141 +321,6 @@ export const SEED_REQUIREMENTS: SeedRequirement[] = [
     startTimeline: "within_week",
     interestCount: 2,
     postedHoursAgo: 26,
-  },
-  {
-    parentEmail: "fatima.alrashid.riyadh@gmail.com",
-    subject: "Mathematics",
-    classLevel: "Class 9",
-    city: "Riyadh",
-    area: "Olaya",
-    modes: ["online"],
-    budgetMin: 800,
-    budgetMax: 1400,
-    details:
-      "Our daughter follows CBSE via an Indian school in Riyadh. Need an online maths tutor in IST evenings for Class 9 — algebra focus. Clear Indian English preferred.",
-    startTimeline: "within_week",
-    interestCount: 5,
-    postedHoursAgo: 12,
-  },
-  {
-    parentEmail: "james.walker.uk92@gmail.com",
-    subject: "Physics",
-    classLevel: "Class 11",
-    city: "London",
-    area: "Wimbledon",
-    modes: ["online"],
-    budgetMin: 900,
-    budgetMax: 1500,
-    details:
-      "Looking for an online Physics mentor for Class 11 (CBSE) while we are based in London. Prefer tutors experienced with board + competitive exam overlap. GMT evenings / IST mornings.",
-    startTimeline: "flexible",
-    interestCount: 3,
-    postedHoursAgo: 36,
-  },
-  {
-    parentEmail: "aisha.khan.sg@gmail.com",
-    subject: "Chemistry",
-    classLevel: "Class 10",
-    city: "Singapore",
-    area: "Bukit Timah",
-    modes: ["online"],
-    budgetMin: 750,
-    budgetMax: 1200,
-    details:
-      "CBSE Class 10 Chemistry revision before boards — acids, bases, metals. Online only. Looking for patient teaching style.",
-    startTimeline: "immediately",
-    interestCount: 4,
-    postedHoursAgo: 7,
-  },
-  {
-    parentEmail: "michael.chen.nyc@gmail.com",
-    subject: "Mathematics",
-    classLevel: "Class 8",
-    city: "New York",
-    area: "Queens",
-    modes: ["online"],
-    budgetMin: 700,
-    budgetMax: 1100,
-    details:
-      "Son is in an Indian curriculum weekend programme. Need Class 8 maths support online — fractions, linear equations. US Eastern evenings.",
-    startTimeline: "within_month",
-    interestCount: 2,
-    postedHoursAgo: 60,
-  },
-  {
-    parentEmail: "emily.brown.toronto@gmail.com",
-    subject: "English",
-    classLevel: "Class 7",
-    city: "Toronto",
-    area: "North York",
-    modes: ["online"],
-    budgetMin: 600,
-    budgetMax: 950,
-    details:
-      "Want an Indian English tutor for creative writing and grammar (Class 7 level). Helps keep connection with CBSE-style writing.",
-    startTimeline: "flexible",
-    interestCount: 1,
-    postedHoursAgo: 48,
-  },
-  {
-    parentEmail: "omar.hassan.auh@gmail.com",
-    subject: "Mathematics",
-    classLevel: "Class 12",
-    city: "Abu Dhabi",
-    area: "Al Reem Island",
-    modes: ["online"],
-    budgetMin: 1000,
-    budgetMax: 1600,
-    details:
-      "JEE Main maths — calculus and coordinate geometry. Looking for a serious mentor who can run 4 sessions a week online from India.",
-    startTimeline: "immediately",
-    interestCount: 8,
-    postedHoursAgo: 4,
-  },
-  {
-    parentEmail: "priyanka.das.sydney@gmail.com",
-    subject: "Biology",
-    classLevel: "Class 11",
-    city: "Sydney",
-    area: "Parramatta",
-    modes: ["online"],
-    budgetMin: 800,
-    budgetMax: 1300,
-    details:
-      "NEET biology for Class 11 while we are in Australia. Prefer early morning IST / evening AEST slots.",
-    startTimeline: "within_week",
-    interestCount: 3,
-    postedHoursAgo: 22,
-  },
-  {
-    parentEmail: "rajiv.malhotra.sf@gmail.com",
-    subject: "Computer Science",
-    classLevel: "Class 10",
-    city: "San Francisco",
-    area: "Sunset District",
-    modes: ["online"],
-    budgetMin: 900,
-    budgetMax: 1500,
-    details:
-      "Class 10 CS / coding fundamentals with an Indian curriculum tutor. Python preferred. Weekend US Pacific mornings.",
-    startTimeline: "flexible",
-    interestCount: 2,
-    postedHoursAgo: 70,
-  },
-  {
-    parentEmail: "zara.ahmed.kl@gmail.com",
-    subject: "Mathematics",
-    classLevel: "Class 6",
-    city: "Kuala Lumpur",
-    area: "Mont Kiara",
-    modes: ["online"],
-    budgetMin: 500,
-    budgetMax: 850,
-    details:
-      "Class 6 maths for a child in an international school who also follows Indian worksheets at home. Friendly online tutor, 2× week.",
-    startTimeline: "within_month",
-    interestCount: 2,
-    postedHoursAgo: 52,
   },
   {
     parentEmail: "ananya.joshi304@gmail.com",

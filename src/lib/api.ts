@@ -210,6 +210,7 @@ export const authApi = {
     role?: UserRole,
     registrationSource?: string,
     acquisition?: { slug?: string; kind?: "blog" | "page" | "social" },
+    legal?: { acceptedLegal?: boolean },
   ) =>
     request<SendOtpResponse>("/auth/send-otp", {
       method: "POST",
@@ -220,6 +221,7 @@ export const authApi = {
         registrationSource,
         acquisitionSlug: acquisition?.slug,
         acquisitionKind: acquisition?.kind,
+        acceptedLegal: legal?.acceptedLegal === true,
       }),
     }),
 
@@ -368,7 +370,7 @@ export const premiumMentorApi = {
       "/premium-mentor/me",
     ),
 
-  createOrder: (months: 2 | 3 | 4) =>
+  createOrder: (months: 2 | 3 | 4, opts?: { acceptedLegal?: boolean; legalVersion?: string }) =>
     request<{
       orderId: string;
       amountPaise: number;
@@ -384,7 +386,11 @@ export const premiumMentorApi = {
       prefill: { email: string; name: string; contact: string };
     }>("/premium-mentor/order", {
       method: "POST",
-      body: JSON.stringify({ months }),
+      body: JSON.stringify({
+        months,
+        acceptedLegal: opts?.acceptedLegal === true,
+        legalVersion: opts?.legalVersion,
+      }),
       timeoutMs: 30_000,
     }),
 

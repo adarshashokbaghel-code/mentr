@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { LegalConsentCheckbox } from "@/components/auth/legal-consent-checkbox";
 import { LearnDino } from "@/components/landing/lp/learn-dino";
 import {
   downloadReceiptForEnrollment,
@@ -50,6 +51,7 @@ export function LearnEnrollModal({
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [cooldown, setCooldown] = useState(0);
+  const [acceptedLegal, setAcceptedLegal] = useState(false);
   const [enrollment, setEnrollment] = useState<LearnEnrollmentDto | null>(null);
   const [enrollAttemptedFor, setEnrollAttemptedFor] = useState<string | null>(
     null,
@@ -107,6 +109,7 @@ export function LearnEnrollModal({
       setError("");
       setBusy(false);
       setCooldown(0);
+      setAcceptedLegal(false);
       setEnrollment(null);
       setEnrollAttemptedFor(null);
     }
@@ -128,6 +131,10 @@ export function LearnEnrollModal({
 
   async function sendOtp() {
     setError("");
+    if (tab === "signup" && !acceptedLegal) {
+      setError("Please accept the Terms of service and Privacy policy to continue.");
+      return;
+    }
     setBusy(true);
     try {
       const data = await authApi.sendOtp(
@@ -139,6 +146,7 @@ export function LearnEnrollModal({
           slug: acquisition.acquisitionSlug,
           kind: acquisition.acquisitionKind,
         },
+        tab === "signup" ? { acceptedLegal: true } : undefined,
       );
       setSessionId(data.sessionId);
       setStep("otp");
@@ -368,9 +376,20 @@ export function LearnEnrollModal({
                     className="mt-1.5 h-12 w-full rounded-xl border border-[#e8e2d8] bg-white px-3.5 text-[15px] text-[#1c2434] outline-none placeholder:text-[#a39e96] focus:border-[#1c2434]"
                   />
                 </label>
+                {tab === "signup" ? (
+                  <LegalConsentCheckbox
+                    id="learn-legal-consent"
+                    checked={acceptedLegal}
+                    onCheckedChange={setAcceptedLegal}
+                  />
+                ) : null}
                 <button
                   type="submit"
-                  disabled={busy || !email.trim()}
+                  disabled={
+                    busy ||
+                    !email.trim() ||
+                    (tab === "signup" && !acceptedLegal)
+                  }
                   className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#ff6a1a] text-[15px] font-extrabold text-white transition hover:bg-[#e55d12] disabled:opacity-60"
                 >
                   {busy ? (

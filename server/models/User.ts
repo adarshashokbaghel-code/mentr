@@ -185,6 +185,9 @@ export interface IPremiumMentorPayment {
   email?: string;
   createdAt: Date;
   paidAt?: Date;
+  /** Mentor confirmed Terms/Privacy at checkout before Razorpay. */
+  termsAcceptedAt?: Date;
+  termsAcceptedVersion?: string;
   /** Sanitized Razorpay payment snapshot (no PAN/card). */
   razorpaySnapshot?: Record<string, unknown>;
 }
@@ -239,6 +242,10 @@ export interface IUser extends Document {
   loginMapLat?: number;
   loginMapLng?: number;
   loginMapCapturedAt?: Date;
+  /** When the user accepted Terms + Privacy at signup. */
+  legalAcceptedAt?: Date;
+  /** Version string from src/lib/legal.ts at acceptance time. */
+  legalAcceptedVersion?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -420,6 +427,8 @@ const premiumMentorPaymentSchema = new Schema<IPremiumMentorPayment>(
     email: { type: String, trim: true },
     createdAt: { type: Date, default: Date.now },
     paidAt: { type: Date },
+    termsAcceptedAt: { type: Date },
+    termsAcceptedVersion: { type: String, trim: true },
     razorpaySnapshot: { type: Schema.Types.Mixed },
   },
   { _id: true },
@@ -478,6 +487,8 @@ const userSchema = new Schema<IUser>(
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },
     loginMapCapturedAt: { type: Date },
+    legalAcceptedAt: { type: Date },
+    legalAcceptedVersion: { type: String, trim: true },
   },
   { timestamps: true },
 );

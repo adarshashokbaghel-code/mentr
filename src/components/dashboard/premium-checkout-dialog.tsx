@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,9 @@ import {
   type PremiumPlanOption,
   type PremiumMentorState,
 } from "@/lib/api";
+import { LEGAL_DOCS_VERSION } from "@/lib/legal";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 declare global {
@@ -82,6 +85,7 @@ export function PremiumCheckoutDialog({
   const [loadingCatalog, setLoadingCatalog] = useState(false);
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [acceptedLegal, setAcceptedLegal] = useState(true);
 
   const loadCatalog = useCallback(async () => {
     setLoadingCatalog(true);
@@ -102,7 +106,9 @@ export function PremiumCheckoutDialog({
   }, []);
 
   useEffect(() => {
-    if (open) void loadCatalog();
+    if (!open) return;
+    setAcceptedLegal(true);
+    void loadCatalog();
   }, [open, loadCatalog]);
 
   const selected = useMemo(
@@ -120,13 +126,20 @@ export function PremiumCheckoutDialog({
       setError("Payments are temporarily unavailable. Try again later.");
       return;
     }
+    if (!acceptedLegal) {
+      setError("Please confirm the Terms and Privacy policy to continue.");
+      return;
+    }
 
     setPaying(true);
     setError(null);
     let orderId: string | null = null;
 
     try {
-      const order = await premiumMentorApi.createOrder(selected.months);
+      const order = await premiumMentorApi.createOrder(selected.months, {
+        acceptedLegal: true,
+        legalVersion: LEGAL_DOCS_VERSION,
+      });
       orderId = order.orderId;
 
       const ok = await loadRazorpayScript();
@@ -405,6 +418,44 @@ export function PremiumCheckoutDialog({
               </ul>
             </div>
 
+            <label
+              htmlFor="premium-checkout-legal"
+              className="flex cursor-pointer items-start gap-2.5 text-left text-[12px] leading-snug text-muted"
+            >
+              <Checkbox
+                id="premium-checkout-legal"
+                checked={acceptedLegal}
+                onCheckedChange={(v) => setAcceptedLegal(v === true)}
+                disabled={paying}
+                className="mt-0.5 border-[#c9c4bb] data-[state=checked]:border-ink data-[state=checked]:bg-ink"
+                aria-required
+              />
+              <span>
+                I agree to the{" "}
+                <Link
+                  href="/terms"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Terms of service
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Privacy policy
+                </Link>
+                . This plan covers access to the Premium features listed above
+                for the months I select.
+              </span>
+            </label>
+
             {error ? (
               <p
                 className="rounded-lg border border-coral/25 bg-coral-wash/40 px-3 py-2.5 text-sm leading-snug text-coral"
@@ -427,7 +478,13 @@ export function PremiumCheckoutDialog({
           </button>
           <Button
             type="button"
-            disabled={paying || loadingCatalog || !selected || !paymentsEnabled}
+            disabled={
+              paying ||
+              loadingCatalog ||
+              !selected ||
+              !paymentsEnabled ||
+              !acceptedLegal
+            }
             onClick={() => void proceedToPay()}
             className="order-1 h-11 w-full sm:order-2 sm:w-auto sm:min-w-[200px]"
           >

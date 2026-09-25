@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { LegalConsentCheckbox } from "@/components/auth/legal-consent-checkbox";
 import { resolveAcquisition } from "@/lib/marketing-client";
 import { isPublicBrowsePath } from "@/lib/public-browse";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
@@ -44,6 +45,8 @@ export function FacultyAuthForm({
   const [mismatchRole, setMismatchRole] = useState<UserRole | null>(null);
   const [loading, setLoading] = useState(false);
   const [cooldown, setCooldown] = useState(0);
+  /** Signup only — must be explicitly checked (legal apps do not pre-tick). */
+  const [acceptedLegal, setAcceptedLegal] = useState(false);
 
   const base = role === "parent" ? "/parent" : "/faculty";
   const nextSuffix = next ? `?next=${encodeURIComponent(next)}` : "";
@@ -63,6 +66,10 @@ export function FacultyAuthForm({
     setError("");
     setErrorCode("");
     setMismatchRole(null);
+    if (variant === "signup" && !acceptedLegal) {
+      setError("Please accept the Terms of service and Privacy policy to continue.");
+      return;
+    }
     setLoading(true);
     try {
       const data = await authApi.sendOtp(
@@ -74,6 +81,7 @@ export function FacultyAuthForm({
           slug: acquisition.acquisitionSlug,
           kind: acquisition.acquisitionKind,
         },
+        variant === "signup" ? { acceptedLegal: true } : undefined,
       );
       setSessionId(data.sessionId);
       setStep("otp");
@@ -96,7 +104,7 @@ export function FacultyAuthForm({
     } finally {
       setLoading(false);
     }
-  }, [email, variant, role, acquisition]);
+  }, [email, variant, role, acquisition, acceptedLegal]);
 
   async function handleSendOtp(e: React.FormEvent) {
     e.preventDefault();
@@ -225,9 +233,16 @@ export function FacultyAuthForm({
             />
           </label>
 
+          {variant === "signup" ? (
+            <LegalConsentCheckbox
+              checked={acceptedLegal}
+              onCheckedChange={setAcceptedLegal}
+            />
+          ) : null}
+
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || (variant === "signup" && !acceptedLegal)}
             className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-coral text-[15px] font-semibold text-white transition hover:bg-coral-dark disabled:opacity-60"
           >
             {loading ? (
@@ -265,6 +280,26 @@ export function FacultyAuthForm({
 
           <p className="text-center text-xs text-muted">
             We&apos;ll email a one-time code. No password needed.
+            {variant === "login" ? (
+              <>
+                {" "}
+                By signing in you continue under our{" "}
+                <Link
+                  href="/terms"
+                  className="font-semibold text-ink underline underline-offset-2"
+                >
+                  Terms
+                </Link>{" "}
+                and{" "}
+                <Link
+                  href="/privacy"
+                  className="font-semibold text-ink underline underline-offset-2"
+                >
+                  Privacy policy
+                </Link>
+                .
+              </>
+            ) : null}
           </p>
         </form>
       )}
