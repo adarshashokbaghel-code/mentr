@@ -1,14 +1,6 @@
 "use client";
 
 import {
-  authApi,
-  clearToken,
-  saveToken,
-  type AuthUser,
-  type FacultyProfile,
-} from "@/lib/api";
-import { syncShortlistAfterAuth } from "@/lib/shortlist";
-import {
   createContext,
   useCallback,
   useContext,
@@ -16,6 +8,15 @@ import {
   useMemo,
   useState,
 } from "react";
+import { authApi, clearToken, type AuthUser } from "@/lib/api";
+import { syncShortlistAfterAuth } from "@/lib/shortlist";
+
+/** Premium mentor target for guest "send without login" */
+export type GuestPremiumConnect = {
+  teacherId: string;
+  teacherName: string;
+  subjectLine?: string;
+};
 
 interface AuthContextValue {
   user: AuthUser | null;
@@ -25,10 +26,12 @@ interface AuthContextValue {
   closeLogin: () => void;
   /** "Who are you?" gate for unauthenticated users hitting a protected action */
   roleChooserOpen: boolean;
-  /** `next` is the path to return to after login */
-  openRoleChooser: (next?: string) => void;
+  /** `next` is the path to return to after login. Pass guestPremium for Premium connect. */
+  openRoleChooser: (next?: string, guestPremium?: GuestPremiumConnect | null) => void;
   closeRoleChooser: () => void;
   roleChooserNext: string | null;
+  /** Set when guest taps Connect on a Premium mentor */
+  roleChooserGuestPremium: GuestPremiumConnect | null;
   setUser: (user: AuthUser | null) => void;
   logout: () => Promise<void>;
   refreshSession: () => Promise<void>;
@@ -42,6 +45,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loginOpen, setLoginOpen] = useState(false);
   const [roleChooserOpen, setRoleChooserOpen] = useState(false);
   const [roleChooserNext, setRoleChooserNext] = useState<string | null>(null);
+  const [roleChooserGuestPremium, setRoleChooserGuestPremium] =
+    useState<GuestPremiumConnect | null>(null);
 
   const refreshSession = useCallback(async () => {
     try {
@@ -63,11 +68,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const openLogin = useCallback(() => setLoginOpen(true), []);
   const closeLogin = useCallback(() => setLoginOpen(false), []);
 
-  const openRoleChooser = useCallback((next?: string) => {
-    setRoleChooserNext(next ?? null);
-    setRoleChooserOpen(true);
+  const openRoleChooser = useCallback(
+    (next?: string, guestPremium?: GuestPremiumConnect | null) => {
+      setRoleChooserNext(next ?? null);
+      setRoleChooserGuestPremium(guestPremium ?? null);
+      setRoleChooserOpen(true);
+    },
+    [],
+  );
+  const closeRoleChooser = useCallback(() => {
+    setRoleChooserOpen(false);
+    setRoleChooserGuestPremium(null);
   }, []);
-  const closeRoleChooser = useCallback(() => setRoleChooserOpen(false), []);
 
   const logout = useCallback(async () => {
     try {
@@ -95,6 +107,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       openRoleChooser,
       closeRoleChooser,
       roleChooserNext,
+      roleChooserGuestPremium,
       setUser: handleSetUser,
       logout,
       refreshSession,
@@ -109,6 +122,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       openRoleChooser,
       closeRoleChooser,
       roleChooserNext,
+      roleChooserGuestPremium,
       handleSetUser,
       logout,
       refreshSession,
@@ -118,10 +132,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
-export function useAuth() {
+export function useAuth(): AuthContextValue {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be used within AuthProvider");
+  if (!ctx) {
+    throw new Error("useAuth must be used within AuthProvider");
+  }
   return ctx;
 }
-
-export type { AuthUser, FacultyProfile };

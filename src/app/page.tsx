@@ -7,7 +7,8 @@ import { Footer } from "@/components/landing/footer";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
 import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { Hero } from "@/components/landing/hero";
-import { LpStatsBand } from "@/components/landing/lp/shared";
+import { HomeMentorStatsBand } from "@/components/landing/home-mentor-stats-band";
+import { HomePremiumPopup } from "@/components/landing/home-premium-popup";
 import { HowItWorks } from "@/components/landing/how-it-works";
 import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
@@ -19,7 +20,6 @@ import { StatsMarquee } from "@/components/landing/stats-marquee";
 import { SubjectGallery } from "@/components/landing/subject-gallery";
 import { SwitchToChamps } from "@/components/landing/switch-to-champs";
 import { Testimonials } from "@/components/landing/testimonials";
-import { TrustSafety } from "@/components/landing/trust-safety";
 import { WaveSeparator } from "@/components/landing/wave-separator";
 import { ZeroFees } from "@/components/landing/zero-fees";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
@@ -33,8 +33,6 @@ import {
   SITE_URL,
   absoluteUrl,
 } from "@/lib/seo";
-import { SUBJECTS } from "@/lib/teachers";
-import { BookOpen, MessageCircle, Sparkles, Users } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -50,37 +48,6 @@ export const metadata: Metadata = {
     type: "website",
   },
 };
-
-const heroStats = [
-  {
-    value: "200+",
-    label: "Tutors & mentors",
-    tint: "bg-lavender",
-    icon: Users,
-    sub: "Verified profiles",
-  },
-  {
-    value: `${SUBJECTS.length}+`,
-    label: "Subjects offered",
-    tint: "bg-butter",
-    icon: BookOpen,
-    sub: "School · exams · skills",
-  },
-  {
-    value: "₹0",
-    label: "Platform fee",
-    tint: "bg-sage-wash",
-    icon: Sparkles,
-    sub: "Parents & faculty",
-  },
-  {
-    value: "2 ways",
-    label: "To connect",
-    tint: "bg-coral-wash",
-    icon: MessageCircle,
-    sub: "Search or Instant Connect",
-  },
-];
 
 /** Structured data so Google understands who we are and what we answer */
 const jsonLd = [
@@ -144,13 +111,11 @@ export default function Home() {
       <Navbar />
       <main className="w-full max-w-full overflow-x-clip">
         <Hero />
-        <ParentNeedFinder />
-        <LpStatsBand stats={heroStats} />
+        <HomeMentorStatsBand />
         <StatsMarquee />
-        <TrustSafety />
+        <ParentNeedFinder />
         <GlobalReachMap />
         <FeaturedMentors />
-        <PopularSearches />
         <MentrFlow />
         <HowItWorks />
         <SwitchToChamps />
@@ -163,11 +128,13 @@ export default function Home() {
         <ProductHuntSection />
         <SeoGuidesStrip />
         <PublicPlatformSections />
+        <PopularSearches />
         <FAQ />
         <CTA />
       </main>
       <InstantConnectDock />
       <Footer />
+      <HomePremiumPopup />
     </>
   );
 }

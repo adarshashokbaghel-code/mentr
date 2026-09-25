@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
-import { MentorStatusBadges } from "@/components/ui/mentor-status-badges";
+import { MentorStatusBadges, PremiumMentorBadge } from "@/components/ui/mentor-status-badges";
 import {
   fetchPublicTeachers,
   formatHourlyRate,
@@ -12,15 +12,18 @@ import {
 } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
+  Briefcase,
   Globe2,
+  GraduationCap,
   Home,
   MapPin,
   Sparkles,
   Zap,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const FEATURED_LIMIT = 8;
+const SPOTLIGHT_COUNT = 3;
 
 function scoreTeacher(t: Teacher): number {
   let score = 0;
@@ -48,7 +51,6 @@ function pickFeatured(teachers: Teacher[]): Teacher[] {
 function displayName(name: string): string {
   const cleaned = name.replace(/\s+/g, " ").trim();
   const parts = cleaned.split(" ");
-  // Collapse accidental "Name Name" duplication from profile data
   if (parts.length >= 4) {
     const mid = Math.floor(parts.length / 2);
     const a = parts.slice(0, mid).join(" ").toLowerCase();
@@ -58,53 +60,235 @@ function displayName(name: string): string {
   return cleaned;
 }
 
-function shortBio(bio: string): string {
+function shortBio(bio: string, max = 140): string {
   const one = bio.replace(/\s+/g, " ").trim();
-  if (one.length <= 90) return one;
-  return `${one.slice(0, 87).trim()}…`;
+  if (one.length <= max) return one;
+  return `${one.slice(0, max - 1).trim()}…`;
 }
 
-function FeaturedCard({ teacher }: { teacher: Teacher }) {
+function primarySubject(teacher: Teacher): string {
+  return (
+    teacher.subjects[0] ||
+    teacher.subjectLine.split("&")[0]?.trim() ||
+    "Tutor"
+  );
+}
+
+function headline(teacher: Teacher): string {
+  return (
+    teacher.qualification?.trim() ||
+    teacher.designation?.trim() ||
+    teacher.subjectLine
+  );
+}
+
+/** Large equal-width spotlight — premium mentors get stronger visual weight. */
+function SpotlightCard({ teacher }: { teacher: Teacher }) {
   const rate = formatHourlyRate(teacher.hourlyRate);
   const modes = modeLabels(teacher);
   const profileHref = `/teachers/${teacher.id}`;
   const name = displayName(teacher.name);
-  const subject =
-    teacher.subjects[0] || teacher.subjectLine.split("&")[0]?.trim() || "Tutor";
+  const subject = primarySubject(teacher);
+  const cred = headline(teacher);
+  const subjects = teacher.subjects.slice(0, 3);
+  const levels = teacher.levels?.trim();
+  const premium = Boolean(teacher.premium);
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-hairline bg-white transition hover:border-ink/15 hover:shadow-sm">
-      <Link
-        href={profileHref}
-        className="relative block aspect-[4/3] overflow-hidden bg-cream-band"
-      >
-        <MentorPhoto
-          name={name}
-          initials={teacher.initials}
-          kind={teacher.kind}
-          imageUrl={teacher.imageUrl}
-          size="fill"
-          showInitials={false}
-          rounded="xl"
-          className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
-          alt=""
-        />
-        {teacher.verified || teacher.premium ? (
-          <span className="absolute left-2 top-2">
+    <article
+      className={cn(
+        "group flex h-full flex-col overflow-hidden rounded-2xl border bg-white transition duration-300",
+        "hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(28,26,23,0.08)]",
+        premium
+          ? "border-[#e8c84a]/55 shadow-[0_4px_0_0_rgba(232,200,74,0.35)] ring-1 ring-[#e8c84a]/25"
+          : "border-hairline hover:border-ink/15",
+      )}
+    >
+      <div className="relative aspect-[16/11] overflow-hidden bg-cream-band sm:aspect-[5/3]">
+        <Link href={profileHref} className="absolute inset-0 block">
+          <MentorPhoto
+            name={name}
+            initials={teacher.initials}
+            kind={teacher.kind}
+            imageUrl={teacher.imageUrl}
+            size="fill"
+            showInitials={false}
+            rounded="xl"
+            className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0 transition duration-500 group-hover:scale-[1.03]"
+            alt=""
+          />
+          <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/55 to-transparent" />
+          {rate ? (
+            <span className="absolute bottom-3 right-3 rounded-lg bg-white/95 px-2.5 py-1 text-sm font-bold tabular-nums text-ink shadow-sm">
+              {rate}
+            </span>
+          ) : null}
+        </Link>
+
+        {premium ? (
+          <span className="absolute left-3 top-3 z-10">
+            <PremiumMentorBadge size="md" label="Premium mentor" />
+          </span>
+        ) : teacher.verified ? (
+          <span className="absolute left-3 top-3 z-10">
+            <MentorStatusBadges verified size="md" />
+          </span>
+        ) : null}
+      </div>
+
+      <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <Link
+              href={profileHref}
+              className="truncate text-lg font-bold tracking-tight text-ink hover:text-coral sm:text-xl"
+            >
+              {name}
+            </Link>
+            {teacher.verified ? (
+              <MentorStatusBadges verified size="sm" />
+            ) : null}
+          </div>
+          <p className="mt-0.5 text-sm font-semibold text-coral">{subject}</p>
+          {cred ? (
+            <p className="mt-1 flex items-start gap-1.5 text-[12px] font-medium leading-snug text-ink/70">
+              <GraduationCap className="mt-0.5 h-3.5 w-3.5 shrink-0 text-coral" />
+              <span className="line-clamp-2">{cred}</span>
+            </p>
+          ) : null}
+        </div>
+
+        {subjects.length > 0 ? (
+          <div className="flex flex-wrap gap-1.5">
+            {subjects.map((s) => (
+              <span
+                key={s}
+                className="rounded-md bg-cream-band px-2 py-0.5 text-[11px] font-semibold text-ink"
+              >
+                {s}
+              </span>
+            ))}
+            {teacher.subjects.length > subjects.length ? (
+              <span className="rounded-md bg-cream-band px-2 py-0.5 text-[11px] font-semibold text-muted">
+                +{teacher.subjects.length - subjects.length}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
+
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] font-medium text-muted">
+          <span className="inline-flex items-center gap-1">
+            <MapPin className="h-3 w-3 shrink-0 text-coral" />
+            {teacher.locality || teacher.area || "India"}
+          </span>
+          {teacher.experienceYears > 0 ? (
+            <span className="inline-flex items-center gap-1">
+              <Briefcase className="h-3 w-3 shrink-0 text-coral" />
+              {teacher.experienceYears} yrs
+            </span>
+          ) : null}
+          {levels ? (
+            <span className="truncate text-ink/65">{levels}</span>
+          ) : null}
+        </div>
+
+        <div className="flex flex-wrap gap-1.5">
+          {modes.slice(0, 2).map((m) => (
+            <span
+              key={m}
+              className="inline-flex items-center gap-1 rounded-full border border-hairline bg-cream/70 px-2 py-0.5 text-[10px] font-semibold text-ink"
+            >
+              {m === "Online" ? (
+                <Globe2 className="h-2.5 w-2.5 text-coral" />
+              ) : (
+                <Home className="h-2.5 w-2.5 text-coral" />
+              )}
+              {m}
+            </span>
+          ))}
+          {teacher.workplace?.trim() ? (
+            <span className="truncate rounded-full border border-hairline bg-cream/70 px-2 py-0.5 text-[10px] font-semibold text-muted">
+              {teacher.workplace.trim()}
+            </span>
+          ) : null}
+        </div>
+
+        {teacher.bio?.trim() ? (
+          <p className="line-clamp-3 text-[12px] leading-relaxed text-muted">
+            {shortBio(teacher.bio, 160)}
+          </p>
+        ) : null}
+
+        <div className="mt-auto flex gap-2 pt-1">
+          <Link href={profileHref} className="flex-1">
+            <Button
+              size="sm"
+              variant="secondary"
+              className="h-10 w-full rounded-xl text-xs font-semibold"
+            >
+              View profile
+            </Button>
+          </Link>
+          <Link
+            href={`/parent/signup?next=${encodeURIComponent(profileHref)}`}
+            className="flex-1"
+          >
+            <Button
+              size="sm"
+              className={cn(
+                "h-10 w-full rounded-xl text-xs font-semibold",
+                premium && "shadow-[2px_2px_0_0_rgba(28,26,23,0.2)]",
+              )}
+            >
+              Connect
+            </Button>
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/** Compact card for the auto-moving strip. */
+function CarouselCard({ teacher }: { teacher: Teacher }) {
+  const rate = formatHourlyRate(teacher.hourlyRate);
+  const modes = modeLabels(teacher);
+  const profileHref = `/teachers/${teacher.id}`;
+  const name = displayName(teacher.name);
+  const subject = primarySubject(teacher);
+
+  return (
+    <article className="flex w-[240px] shrink-0 flex-col overflow-hidden rounded-xl border border-hairline bg-white shadow-sm sm:w-[260px]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-cream-band">
+        <Link href={profileHref} className="absolute inset-0 block">
+          <MentorPhoto
+            name={name}
+            initials={teacher.initials}
+            kind={teacher.kind}
+            imageUrl={teacher.imageUrl}
+            size="fill"
+            showInitials={false}
+            rounded="xl"
+            className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
+            alt=""
+          />
+          {rate ? (
+            <span className="absolute right-2 top-2 rounded bg-ink/85 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-white">
+              {rate}
+            </span>
+          ) : null}
+        </Link>
+        {(teacher.verified || teacher.premium) && (
+          <span className="absolute left-2 top-2 z-10">
             <MentorStatusBadges
               verified={teacher.verified}
               premium={teacher.premium}
             />
           </span>
-        ) : null}
-        {rate && (
-          <span className="absolute right-2 top-2 rounded bg-ink/85 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-white">
-            {rate}
-          </span>
         )}
-      </Link>
+      </div>
 
-      <div className="flex flex-1 flex-col gap-1.5 p-2.5 sm:p-3">
+      <div className="flex flex-1 flex-col gap-1.5 p-3">
         <div className="min-w-0">
           <Link
             href={profileHref}
@@ -112,9 +296,7 @@ function FeaturedCard({ teacher }: { teacher: Teacher }) {
           >
             {name}
           </Link>
-          <p className="truncate text-[11px] font-medium text-coral">
-            {subject}
-          </p>
+          <p className="truncate text-[11px] font-medium text-coral">{subject}</p>
         </div>
 
         <div className="flex flex-wrap gap-1">
@@ -138,18 +320,12 @@ function FeaturedCard({ teacher }: { teacher: Teacher }) {
           <span className="truncate">
             {teacher.locality || teacher.area || "India"}
           </span>
-          {teacher.experienceYears > 0 && (
+          {teacher.experienceYears > 0 ? (
             <span className="shrink-0">· {teacher.experienceYears} yrs</span>
-          )}
+          ) : null}
         </p>
 
-        {teacher.bio?.trim() && (
-          <p className="line-clamp-2 text-[10px] leading-snug text-muted">
-            {shortBio(teacher.bio)}
-          </p>
-        )}
-
-        <div className="mt-auto flex gap-1.5 pt-1.5">
+        <div className="mt-auto flex gap-1.5 pt-1">
           <Link href={profileHref} className="flex-1">
             <Button
               size="sm"
@@ -173,22 +349,59 @@ function FeaturedCard({ teacher }: { teacher: Teacher }) {
   );
 }
 
+function FeaturedCarousel({ teachers }: { teachers: Teacher[] }) {
+  // Duplicate for seamless loop; keep enough cards for wide screens
+  const loop = useMemo(() => {
+    if (teachers.length === 0) return [];
+    const copies = teachers.length >= 6 ? 2 : 3;
+    return Array.from({ length: copies }, () => teachers).flat();
+  }, [teachers]);
+
+  if (teachers.length === 0) return null;
+
+  return (
+    <div className="relative mt-6 w-full overflow-hidden sm:mt-8">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent sm:w-16" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent sm:w-16" />
+      <div
+        className="flex w-max gap-3 py-1 animate-marquee sm:gap-4"
+        style={{ animationDuration: `${Math.max(28, teachers.length * 6)}s` }}
+      >
+        {loop.map((t, i) => (
+          <CarouselCard key={`${t.id}-${i}`} teacher={t} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function FeaturedSkeleton() {
   return (
-    <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-4">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <div
-          key={i}
-          className="overflow-hidden rounded-xl border border-hairline bg-white"
-        >
-          <div className="aspect-[4/3] animate-pulse bg-cream-band" />
-          <div className="space-y-1.5 p-2.5">
-            <div className="h-3 w-24 animate-pulse rounded bg-cream-band" />
-            <div className="h-2.5 w-16 animate-pulse rounded bg-cream-band" />
-            <div className="h-8 w-full animate-pulse rounded-lg bg-cream-band" />
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div
+            key={i}
+            className="overflow-hidden rounded-2xl border border-hairline bg-white"
+          >
+            <div className="aspect-[16/11] animate-pulse bg-cream-band sm:aspect-[5/3]" />
+            <div className="space-y-2.5 p-4 sm:p-5">
+              <div className="h-5 w-40 animate-pulse rounded bg-cream-band" />
+              <div className="h-3.5 w-24 animate-pulse rounded bg-cream-band" />
+              <div className="h-3 w-full animate-pulse rounded bg-cream-band" />
+              <div className="h-10 w-full animate-pulse rounded-xl bg-cream-band" />
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div className="flex gap-3 overflow-hidden">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div
+            key={i}
+            className="h-[280px] w-[240px] shrink-0 animate-pulse rounded-xl bg-cream-band"
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -240,6 +453,16 @@ export function FeaturedMentors({
 
   if (teachers && teachers.length === 0) return null;
 
+  // Premium mentors lead the spotlight row; remaining fill the carousel.
+  const ordered = teachers
+    ? [
+        ...teachers.filter((t) => t.premium),
+        ...teachers.filter((t) => !t.premium),
+      ]
+    : [];
+  const spotlight = ordered.slice(0, SPOTLIGHT_COUNT);
+  const carousel = ordered.slice(SPOTLIGHT_COUNT);
+
   return (
     <section
       id="featured-tutors"
@@ -287,14 +510,18 @@ export function FeaturedMentors({
           {teachers == null ? (
             <FeaturedSkeleton />
           ) : (
-            <div className="grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 lg:grid-cols-4">
-              {teachers.map((t) => (
-                <FeaturedCard key={t.id} teacher={t} />
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
+              {spotlight.map((t) => (
+                <SpotlightCard key={t.id} teacher={t} />
               ))}
             </div>
           )}
         </div>
       </div>
+
+      {teachers != null && carousel.length > 0 ? (
+        <FeaturedCarousel teachers={carousel} />
+      ) : null}
     </section>
   );
 }

@@ -38,11 +38,11 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Find verified tutors & mentors free on Mentr — 200+ profiles, Instant Connect, WhatsApp after they accept. Also Mentr Learn (Class 3–5 coding) and Snap & Grade (CBSE Class 9–12 NCERT photo marking). No fees, no commission.";
+  "Find verified tutors and mentors free on Mentr. Search by subject, Instant Connect, or post a need — WhatsApp after they accept. Also Mentr Learn (Class 3–5 coding) and Snap & Grade. No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
-  "Mentr by Paprly helps parents find verified tutors and mentors — search by subject, try Instant Connect, or post a requirement. Free for both sides.";
+  "Search verified tutors by subject, try Instant Connect, or post what you need. Free for parents and teachers.";
 
 export const SITE_KEYWORDS = [
   "Mentr by Paprly",

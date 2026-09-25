@@ -9,13 +9,11 @@ import {
   LpGridBg,
   LpLiveDot,
   LpMockStage,
-  LpPill,
 } from "@/components/landing/lp/shared";
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
-import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -327,13 +325,13 @@ function HeroSearchPanel({
 
         <div className="flex items-center justify-between gap-2 border-t border-hairline bg-butter/40 px-4 py-2.5">
           <p className="text-[10px] font-semibold text-muted">
-            Connect → tutor accepts → WhatsApp unlocks
+            They accept → WhatsApp opens
           </p>
           <ParentActionLink
             href="/search"
             className="text-[10px] font-bold text-coral hover:underline"
           >
-            Full search →
+            See all tutors →
           </ParentActionLink>
         </div>
       </div>
@@ -481,41 +479,31 @@ export function Hero() {
 
       <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 short:py-6 shorter:py-4 sm:px-6 sm:py-16 short:sm:py-8 lg:px-8 lg:py-24 short:lg:py-10 shorter:lg:py-8">
         <div className="grid w-full min-w-0 items-center gap-8 short:gap-5 shorter:gap-4 sm:gap-12 short:sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-14 short:lg:gap-8">
-          <div className="min-w-0 w-full max-w-full space-y-5 short:space-y-3 shorter:space-y-2.5 sm:space-y-7 short:sm:space-y-4 text-center lg:text-left">
+          <div className="min-w-0 w-full max-w-full space-y-5 short:space-y-3 shorter:space-y-2.5 sm:space-y-6 short:sm:space-y-4 text-center lg:text-left">
             <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start short:gap-1.5">
               <LpBadge>
                 <ShieldCheck className="h-3.5 w-3.5 text-sage" />
-                Verified faculty
+                Verified tutors
               </LpBadge>
               <LpBadge variant="coral">
                 <Sparkles className="h-3.5 w-3.5" />
-                100% free
+                Free forever
               </LpBadge>
             </div>
 
-            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink short:text-[1.5rem] shorter:text-[1.35rem] sm:text-4xl short:sm:text-[1.85rem] lg:text-[56px] lg:leading-[1.05] short:lg:text-[2.35rem] shorter:lg:text-[2.1rem]">
-              Find verified tutors
+            <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink short:text-[1.5rem] shorter:text-[1.35rem] sm:text-4xl short:sm:text-[1.85rem] lg:text-[52px] lg:leading-[1.05] short:lg:text-[2.35rem] shorter:lg:text-[2.1rem]">
+              Find a verified tutor
               <br />
-              &amp; mentors worldwide.
-              <span className="mt-3 block text-lg font-semibold leading-snug text-coral short:mt-1.5 short:text-base shorter:text-[15px] sm:text-xl short:sm:text-lg lg:text-[2.1rem] short:lg:text-xl">
-                Free for parents. Free for faculty.
+              near you or online.
+              <span className="mt-2.5 block text-lg font-semibold leading-snug text-coral short:mt-1.5 short:text-base shorter:text-[15px] sm:text-xl short:sm:text-lg lg:text-[1.85rem] short:lg:text-xl">
+                Free for parents and teachers.
               </span>
             </h1>
 
-            <p className="mx-auto max-w-lg text-base leading-relaxed text-pretty text-muted lg:mx-0 short:text-sm short:leading-snug shorter:line-clamp-3 sm:text-lg short:sm:text-[15px]">
-              Search open slots near you or online, send a connect request, or
-              post your requirement and review tutor pitches — WhatsApp unlocks
-              once either side accepts. ₹0 platform fee, no commission, ever.
+            <p className="mx-auto max-w-md text-base leading-relaxed text-pretty text-muted lg:mx-0 short:text-sm short:leading-snug sm:text-[17px]">
+              Browse profiles, send a request, or post what you need. Chat on
+              WhatsApp after they accept — no platform fee.
             </p>
-            <p className="mx-auto max-w-lg text-sm leading-relaxed text-muted/90 lg:mx-0 short:hidden short:sm:block short:sm:text-xs shorter:hidden">
-              {GLOBAL_REACH_LINE}
-            </p>
-
-            <div className="flex w-full max-w-full flex-wrap items-center justify-center gap-2 lg:justify-start short:gap-1.5 shorter:hidden sm:flex">
-              <LpPill tint="sage">Search &amp; connect</LpPill>
-              <LpPill tint="butter">Post &amp; get pitches</LpPill>
-              <LpPill tint="coral">Faculty keep 100%</LpPill>
-            </div>
 
             <div className="flex w-full max-w-full flex-col items-stretch gap-3 short:gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
               <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
@@ -535,48 +523,42 @@ export function Hero() {
               />
             </div>
 
-            <div className="grid w-full min-w-0 gap-3 short:gap-2 shorter:hidden sm:grid-cols-2 short:sm:gap-2">
+            <div className="grid w-full min-w-0 gap-2.5 short:gap-2 shorter:hidden sm:grid-cols-2">
               <Link
                 href="/parents"
                 className={cn(
-                  "rounded-xl border-2 border-ink/10 bg-white p-4 text-left transition hover:border-ink hover:bg-cream-band short:p-3",
+                  "rounded-xl border-2 border-ink/10 bg-white px-4 py-3 text-left transition hover:border-ink hover:bg-cream-band short:px-3 short:py-2.5",
                   hardShadowSm,
                   "hover:-translate-y-0.5",
                 )}
               >
                 <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-coral">
                   <Users className="h-3.5 w-3.5" />
-                  For parents
+                  Parents
                 </p>
-                <p className="mt-2 text-sm font-bold text-ink short:mt-1 short:text-[13px]">
-                  Create a free parent account
-                </p>
-                <p className="mt-1 text-xs text-muted short:line-clamp-1">
-                  Then search tutors, post a need, connect on WhatsApp.
+                <p className="mt-1 text-sm font-bold text-ink short:text-[13px]">
+                  Free account · search or post a need
                 </p>
               </Link>
               <Link
                 href="/for-faculty"
                 className={cn(
-                  "rounded-xl border-2 border-ink/10 bg-white p-4 text-left transition hover:border-ink hover:bg-cream-band short:p-3",
+                  "rounded-xl border-2 border-ink/10 bg-white px-4 py-3 text-left transition hover:border-ink hover:bg-cream-band short:px-3 short:py-2.5",
                   hardShadowSm,
                   "hover:-translate-y-0.5",
                 )}
               >
                 <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-sage">
                   <BadgeCheck className="h-3.5 w-3.5" />
-                  For faculty
+                  Teachers
                 </p>
-                <p className="mt-2 text-sm font-bold text-ink short:mt-1 short:text-[13px]">
-                  List free &amp; get found worldwide
-                </p>
-                <p className="mt-1 text-xs text-muted short:line-clamp-1">
-                  Receive requests, pitch on the board, keep every rupee.
+                <p className="mt-1 text-sm font-bold text-ink short:text-[13px]">
+                  List free · keep 100% of fees
                 </p>
               </Link>
             </div>
 
-            <div className="flex items-center justify-center gap-3 pt-1 lg:justify-start short:pt-0 shorter:hidden">
+            <div className="flex items-center justify-center gap-3 pt-0.5 lg:justify-start shorter:hidden">
               <div className="flex -space-x-2">
                 {!ready
                   ? [0, 1, 2, 3].map((i) => (
@@ -598,22 +580,11 @@ export function Hero() {
               <p className="text-left text-xs leading-snug text-muted short:text-[11px]">
                 {ready && pool.length > 0 ? (
                   <>
-                    <span className="font-bold text-ink">
-                      {previewFaces.map((t) => t.name.split(" ")[0]).join(", ")}
-                    </span>
-                    {pool.length > previewFaces.length
-                      ? ` +${pool.length - previewFaces.length} more`
-                      : ""}
-                    <br />
-                    registered tutors, live now
+                    <span className="font-bold text-ink">{pool.length}+</span>{" "}
+                    tutors live now
                   </>
                 ) : (
-                  <>
-                    <span className="font-bold text-ink">Parents &amp; tutors</span>{" "}
-                    connecting
-                    <br />
-                    locally and online this month
-                  </>
+                  <>Tutors joining every week</>
                 )}
               </p>
             </div>
@@ -621,9 +592,8 @@ export function Hero() {
 
           <div className="min-w-0 w-full max-w-full overflow-hidden short-landscape:hidden">
             <HeroInteractiveMock pool={pool} ready={ready} />
-            <p className="mt-4 text-center text-xs leading-relaxed text-muted lg:text-left short:mt-2 short:text-[11px] shorter:hidden">
-              Switch tabs to preview both paths — filter tutors, toggle open
-              slots, or browse live requirements on the board.
+            <p className="mt-3 text-center text-xs text-muted lg:text-left short:mt-2 short:text-[11px] shorter:hidden">
+              Preview search or the requirements board.
             </p>
           </div>
         </div>

@@ -1,6 +1,11 @@
 "use client";
 
-import { fetchAdminRequirements, type AdminRequirementRow } from "@/lib/admin-api";
+import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
+import {
+  closeAdminRequirement,
+  fetchAdminRequirements,
+  type AdminRequirementRow,
+} from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -17,6 +22,9 @@ export function AdminRequirementsTable({ adminKey }: { adminKey: string }) {
   const [rows, setRows] = useState<AdminRequirementRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [closeTarget, setCloseTarget] = useState<AdminRequirementRow | null>(null);
+  const [closing, setClosing] = useState(false);
+  const [closeError, setCloseError] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -35,6 +43,25 @@ export function AdminRequirementsTable({ adminKey }: { adminKey: string }) {
     void load();
   }, [load]);
 
+  async function confirmClose(adminPass: string) {
+    if (!closeTarget) return;
+    setClosing(true);
+    setCloseError(null);
+    try {
+      await closeAdminRequirement(adminKey, closeTarget.id, adminPass);
+      setRows((prev) =>
+        prev.map((r) =>
+          r.id === closeTarget.id ? { ...r, status: "closed" } : r,
+        ),
+      );
+      setCloseTarget(null);
+    } catch (e) {
+      setCloseError(e instanceof Error ? e.message : "Failed to close post");
+    } finally {
+      setClosing(false);
+    }
+  }
+
   return (
     <div className="mt-4 border border-hairline bg-white">
       <div className="border-b border-hairline px-3 py-2">
@@ -51,7 +78,7 @@ export function AdminRequirementsTable({ adminKey }: { adminKey: string }) {
       )}
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[900px] border-collapse text-left text-xs">
+        <table className="w-full min-w-[960px] border-collapse text-left text-xs">
           <thead>
             <tr className="border-b border-hairline bg-cream-band/60 text-[10px] font-semibold uppercase tracking-wider text-muted">
               <th className="px-3 py-2">Subject</th>
@@ -63,12 +90,13 @@ export function AdminRequirementsTable({ adminKey }: { adminKey: string }) {
               <th className="px-3 py-2">Details</th>
               <th className="px-3 py-2">Posted</th>
               <th className="px-3 py-2">Expires</th>
+              <th className="px-3 py-2">Actions</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={9} className="px-3 py-8 text-center text-muted">
+                <td colSpan={10} className="px-3 py-8 text-center text-muted">
                   <span className="inline-flex items-center gap-2">
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                     Loading…
@@ -77,7 +105,7 @@ export function AdminRequirementsTable({ adminKey }: { adminKey: string }) {
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={9} className="px-3 py-8 text-center text-muted">
+                <td colSpan={10} className="px-3 py-8 text-center text-muted">
                   No board posts yet
                 </td>
               </tr>
@@ -107,12 +135,46 @@ export function AdminRequirementsTable({ adminKey }: { adminKey: string }) {
                   </td>
                   <td className="whitespace-nowrap px-3 py-2 text-muted">{formatDate(row.createdAt)}</td>
                   <td className="whitespace-nowrap px-3 py-2 text-muted">{formatDate(row.expiresAt)}</td>
+                  <td className="px-3 py-2">
+                    {row.status === "open" ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCloseError(null);
+                          setCloseTarget(row);
+                        }}
+                        className="text-[11px] font-semibold text-coral hover:underline"
+                      >
+                        Close
+                      </button>
+                    ) : (
+                      <span className="text-muted">—</span>
+                    )}
+                  </td>
                 </tr>
               ))
             )}
           </tbody>
         </table>
       </div>
+
+      {closeTarget && (
+        <AdminPassDialog
+          open
+          title="Close this board post?"
+          description={`Close ${closeTarget.subject} (${closeTarget.classLevel}) from ${closeTarget.parentEmail}. Tutors will no longer see it as open. Enter ADMIN_PASS to confirm.`}
+          confirmLabel="Close post"
+          busy={closing}
+          error={closeError}
+          onConfirm={(pass) => void confirmClose(pass)}
+          onClose={() => {
+            if (!closing) {
+              setCloseTarget(null);
+              setCloseError(null);
+            }
+          }}
+        />
+      )}
     </div>
   );
 }

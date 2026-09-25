@@ -286,7 +286,7 @@ export function SearchTeacherCard({
             {available ? (
               <ConnectButton
                 teacher={teacher}
-                label="Connect free"
+                label={teacher.premium ? "Connect" : "Connect free"}
                 className="inline-flex h-10 flex-1 items-center justify-center gap-1 rounded-lg bg-coral text-sm font-semibold text-white hover:bg-coral-dark"
                 requestedClassName="inline-flex h-10 flex-1 items-center justify-center gap-1 rounded-lg bg-cream text-sm font-semibold text-muted"
               />
@@ -329,7 +329,7 @@ export function SearchTeacherCard({
             {available ? (
               <ConnectButton
                 teacher={teacher}
-                label="Connect free"
+                label={teacher.premium ? "Connect" : "Connect free"}
                 className="inline-flex h-9 w-full items-center justify-center rounded-lg bg-coral text-xs font-semibold text-white hover:bg-coral-dark"
                 requestedClassName="inline-flex h-9 w-full items-center justify-center rounded-lg bg-cream text-xs font-semibold text-muted"
               />

@@ -329,6 +329,112 @@ body:has([data-ic-dock]) [data-toast-viewport] {
   }
 }
 
+/* Home premium popup — glass card + slow mentor marquee */
+.home-premium-glass-card {
+  background:
+    linear-gradient(
+      155deg,
+      rgba(42, 38, 32, 0.92) 0%,
+      rgba(28, 25, 21, 0.96) 48%,
+      rgba(22, 24, 38, 0.97) 100%
+    );
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 28px 80px rgba(0, 0, 0, 0.45),
+    0 0 60px rgba(91, 124, 250, 0.12);
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+.home-premium-glass-shine {
+  background:
+    linear-gradient(
+      115deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.07) 42%,
+      transparent 58%
+    );
+  mix-blend-mode: soft-light;
+  animation: home-premium-shine 7s ease-in-out infinite;
+}
+
+@keyframes home-premium-shine {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: translateX(-8%);
+  }
+  50% {
+    opacity: 0.85;
+    transform: translateX(8%);
+  }
+}
+
+.home-premium-marquee {
+  perspective: 900px;
+}
+
+.home-premium-marquee-track {
+  animation: home-premium-marquee 48s linear infinite;
+  transform-style: preserve-3d;
+}
+
+.home-premium-marquee:hover .home-premium-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes home-premium-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.home-premium-mentor-card {
+  perspective: 600px;
+}
+
+.home-premium-mentor-card-inner {
+  transform: rotateY(-6deg) rotateX(4deg);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: home-premium-card-float 5.5s ease-in-out infinite;
+}
+
+.home-premium-mentor-card:nth-child(even) .home-premium-mentor-card-inner {
+  transform: rotateY(6deg) rotateX(3deg);
+  animation-delay: -2.2s;
+}
+
+.home-premium-mentor-card:hover .home-premium-mentor-card-inner {
+  transform: rotateY(0deg) rotateX(0deg) scale(1.04);
+  animation-play-state: paused;
+}
+
+@keyframes home-premium-card-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-premium-glass-shine,
+  .home-premium-marquee-track,
+  .home-premium-mentor-card-inner {
+    animation: none !important;
+  }
+
+  .home-premium-mentor-card-inner,
+  .home-premium-mentor-card:nth-child(even) .home-premium-mentor-card-inner {
+    transform: none;
+  }
+}
+
 /* Dropdown/popover pop-in (scale + fade from the anchor corner) */
 @keyframes champs-pop {
   from {

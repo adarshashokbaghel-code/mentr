@@ -15,7 +15,7 @@ import {
   Send,
   X,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 const MESSAGE_MIN = 10;
 const MESSAGE_MAX = 500;
@@ -27,6 +27,8 @@ export interface ConnectTeacher {
   phone: string | null;
   connectionStatus?: "none" | ConnectionStatus;
   live?: boolean;
+  /** Active Mentr Premium — enables guest "send without login" */
+  premium?: boolean;
 }
 
 /**
@@ -83,15 +85,42 @@ export function ConnectButton({
   }
 
   if (!user) {
+    const openGuestGate = (e: MouseEvent) => {
+      e.stopPropagation();
+      if (teacher.premium) {
+        openRoleChooser(`/teachers/${teacher.id}`, {
+          teacherId: teacher.id,
+          teacherName: teacher.name,
+          subjectLine: teacher.subjectLine,
+        });
+      } else {
+        openRoleChooser(`/teachers/${teacher.id}`);
+      }
+    };
+
+    // Free mentors: blur Connect until login. Premium: full Connect + guest send option.
+    if (!teacher.premium) {
+      return (
+        <button
+          type="button"
+          onClick={openGuestGate}
+          className={cn(className, "relative overflow-hidden")}
+          title="Sign in to connect"
+        >
+          <span
+            className="pointer-events-none absolute inset-0 z-[1] bg-white/25 backdrop-blur-[3px]"
+            aria-hidden
+          />
+          <span className="relative flex items-center justify-center gap-[inherit] blur-[3px] opacity-80">
+            <MessageCircle className="h-[1em] w-[1em]" />
+            {label}
+          </span>
+        </button>
+      );
+    }
+
     return (
-      <button
-        type="button"
-        onClick={(e) => {
-          e.stopPropagation();
-          openRoleChooser(`/teachers/${teacher.id}`);
-        }}
-        className={className}
-      >
+      <button type="button" onClick={openGuestGate} className={className}>
         <MessageCircle className="h-[1em] w-[1em]" />
         {label}
       </button>
