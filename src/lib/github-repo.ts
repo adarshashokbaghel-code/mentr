@@ -13,7 +13,7 @@ const GITHUB_DISPLAY_OVERRIDES: Record<
   string,
   { displayName: string; linkable: boolean }
 > = {
-  "adarshs-ui": { displayName: "adarshsingh", linkable: false },
+  "adarshs-ui": { displayName: "maintainer", linkable: false },
 };
 
 export function resolveGithubDisplay(login: string): {

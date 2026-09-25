@@ -1,5 +1,6 @@
 import { SeoHubPage } from "@/components/seo/hub-page";
-import { SITE_NAME, hubOpenGraph } from "@/lib/seo";
+import { hubOpenGraph } from "@/lib/seo";
+import { citySubjectGuide } from "@/lib/seo-city-copy";
 import { slugify, subjectHubSlug } from "@/lib/seo-hubs";
 import { SUBJECTS } from "@/lib/teachers";
 import {
@@ -50,7 +51,7 @@ export async function generateMetadata({
   const parsed = parseCitySubject(resolved.city, resolved.subject);
   if (!parsed) return { title: "Not found", robots: { index: false } };
   const title = `${parsed.subject} Tutors in ${parsed.city.name}`;
-  const description = `Find verified ${parsed.subject} tutors in ${parsed.city.name} on ${SITE_NAME}. Compare rates, home & online modes, and bios — connect free or try Instant Connect.`;
+  const description = `Find a verified ${parsed.subject} tutor in ${parsed.city.name}. Free for parents — no commission, no agency fee. Browse or get matched instantly.`;
   const path = citySubjectPath(parsed.city.slug, parsed.subject);
   return {
     title,
@@ -74,23 +75,30 @@ export default async function CitySubjectHubPage({
     parsed.subject,
   );
   const path = citySubjectPath(parsed.city.slug, parsed.subject);
+  const guide = citySubjectGuide(
+    parsed.city.slug,
+    parsed.subject,
+    parsed.city.name,
+    parsed.city.local,
+  );
   const searchHref = `/search?subject=${encodeURIComponent(parsed.subject)}&q=${encodeURIComponent(parsed.city.name)}`;
   const mapHref = `${searchHref}&view=map`;
 
   return (
     <SeoHubPage
       eyebrow={`${parsed.subject} · ${parsed.city.name}`}
-      title={`${parsed.subject} tutors in ${parsed.city.name}`}
-      intro={`Looking for ${parsed.subject} tutors in ${parsed.city.name}? Browse verified profiles below — see rates, home vs online, experience, and areas. Connect free, post a requirement, or try Instant Connect for a fast match.`}
+      title={`Find a verified ${parsed.subject} tutor in ${parsed.city.name}`}
+      intro={`Free for parents. No commission. No agency fee. Looking for ${parsed.subject} tutors in ${parsed.city.name}? Browse verified profiles below — or get matched instantly if you need someone today.`}
       teachers={teachers}
       schemaPath={path}
       breadcrumbs={[
         { label: "Home", href: "/" },
+        { label: "For parents", href: "/parents" },
         { label: parsed.city.name, href: `/tutors/${parsed.city.slug}` },
         { label: parsed.subject },
       ]}
-      ctaHref={searchHref}
-      ctaLabel={`Browse all ${parsed.subject}`}
+      ctaHref="/find-tutor"
+      ctaLabel="Find a Tutor"
       mapHref={mapHref}
       faqs={citySubjectFaqs(
         parsed.subject,
@@ -103,18 +111,21 @@ export default async function CitySubjectHubPage({
       instantHref={INSTANT_CONNECT_CTA.href}
       instantLabel={INSTANT_CONNECT_CTA.label}
       instantBlurb={INSTANT_CONNECT_CTA.blurb}
+      guideSections={guide.sections}
+      pricingContext={guide.pricing}
+      modesContext={guide.modes}
+      verificationContext={guide.verification}
       relatedLinks={[
         {
           label: `All tutors in ${parsed.city.name}`,
           href: `/tutors/${parsed.city.slug}`,
         },
         {
-          label: `${parsed.subject} tutors in Bengaluru`,
+          label: `${parsed.subject} subject hub`,
           href: `/subjects/${subjectHubSlug(parsed.subject)}`,
         },
-        { label: "Find tutors near you", href: "/find-tutors-near-me" },
-        { label: "CBSE tutors", href: "/boards/cbse-tutors" },
-        { label: "Try Instant Connect", href: INSTANT_CONNECT_CTA.href },
+        { label: "Find a Tutor", href: "/find-tutor" },
+        { label: "Get Matched Instantly", href: INSTANT_CONNECT_CTA.href },
       ]}
     />
   );

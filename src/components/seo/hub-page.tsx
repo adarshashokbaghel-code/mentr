@@ -25,6 +25,7 @@ import {
   Home,
   MapPin,
   MessageCircle,
+  Search,
   Zap,
 } from "lucide-react";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
@@ -215,19 +216,23 @@ export function SeoHubPage({
   breadcrumbs,
   schemaPath,
   relatedLinks,
-  ctaHref = "/search",
-  ctaLabel = "Search all tutors",
+  ctaHref = "/find-tutor",
+  ctaLabel = "Find a Tutor",
   promoHref,
-  promoLabel = "Find verified online tutors",
+  promoLabel = "Find a Tutor",
   faqs,
   requirementHref,
   requirementLabel = "Post your requirement",
   requirementBlurb,
   instantHref,
-  instantLabel = "Try Instant Connect",
+  instantLabel = "Get Matched Instantly",
   instantBlurb,
   emptyMessage,
   mapHref,
+  guideSections,
+  pricingContext,
+  modesContext,
+  verificationContext,
 }: {
   eyebrow: string;
   title: string;
@@ -249,6 +254,10 @@ export function SeoHubPage({
   instantBlurb?: string;
   emptyMessage?: string;
   mapHref?: string;
+  guideSections?: { heading: string; body: string }[];
+  pricingContext?: string;
+  modesContext?: string;
+  verificationContext?: string;
 }) {
   const schemaBreadcrumbs = breadcrumbs.map((b, i) => ({
     name: b.label,
@@ -289,25 +298,26 @@ export function SeoHubPage({
             {intro}
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
+            <Link href={ctaHref}>
+              <Button className="gap-1.5">
+                <Search className="h-4 w-4" />
+                {ctaLabel}
+              </Button>
+            </Link>
             {instantHref && (
               <Link href={instantHref}>
-                <Button className="gap-1.5">
+                <Button variant="secondary" className="gap-1.5">
                   <Zap className="h-4 w-4" />
                   {instantLabel}
                 </Button>
               </Link>
             )}
-            <Link href={ctaHref}>
-              <Button variant={instantHref ? "secondary" : "primary"}>
-                {ctaLabel}
-              </Button>
-            </Link>
             {mapHref && (
               <Link href={mapHref}>
                 <Button variant="secondary">View on map</Button>
               </Link>
             )}
-            {promoHref && (
+            {promoHref && promoHref !== ctaHref && (
               <Link href={promoHref}>
                 <Button variant="secondary">{promoLabel}</Button>
               </Link>
@@ -362,6 +372,52 @@ export function SeoHubPage({
               commission.
             </p>
           </section>
+
+          {(guideSections?.length ||
+            pricingContext ||
+            modesContext ||
+            verificationContext) && (
+            <section className="mt-8 max-w-2xl space-y-6">
+              {guideSections?.map((s) => (
+                <div key={s.heading}>
+                  <h2 className="text-base font-bold text-ink">{s.heading}</h2>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                    {s.body}
+                  </p>
+                </div>
+              ))}
+              {pricingContext ? (
+                <div>
+                  <h2 className="text-base font-bold text-ink">
+                    Pricing context
+                  </h2>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                    {pricingContext}
+                  </p>
+                </div>
+              ) : null}
+              {modesContext ? (
+                <div>
+                  <h2 className="text-base font-bold text-ink">
+                    Online and home options
+                  </h2>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                    {modesContext}
+                  </p>
+                </div>
+              ) : null}
+              {verificationContext ? (
+                <div>
+                  <h2 className="text-base font-bold text-ink">
+                    What &quot;verified&quot; means
+                  </h2>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                    {verificationContext}
+                  </p>
+                </div>
+              ) : null}
+            </section>
+          )}
 
           {teachers.length === 0 ? (
             <p className="mt-10 rounded-xl border border-dashed border-hairline bg-white px-5 py-10 text-center text-sm text-muted">

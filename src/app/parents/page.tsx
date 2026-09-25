@@ -1,7 +1,5 @@
-import { ParentsLanding } from "@/components/landing/lp/parents-page";
+import { ParentAcquireLanding } from "@/components/landing/lp/parent-acquire-landing";
 import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
-import { Footer } from "@/components/landing/footer";
-import { Navbar } from "@/components/landing/navbar";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import {
@@ -13,28 +11,24 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Hire a Tutor Free — Create a Parent Account on Mentr",
+  title: "Find a Verified Tutor — Free for Parents · Mentr",
   description:
-    "Parents: create a free account to find verified tutors near you or online, post a requirement, and connect on WhatsApp after accept. ₹0 platform fee — no agent fees.",
+    "Find a verified tutor free for parents. No commission. No agency fee. Browse tutors or get matched instantly — subject, class, location, and mode.",
   keywords: [
-    "hire a tutor free",
-    "create parent account tutor",
-    "find tutor online",
-    "find tutor near me",
-    "free tutor search",
+    "find a tutor",
+    "verified tutor",
+    "maths tutor in Bengaluru",
     "home tutor",
-    "online tutor worldwide",
-    "private tuition",
-    "maths tutor",
-    "verified home tutors",
-    "UrbanPro alternative parents",
+    "online tutor",
+    "free tutor search",
+    "hire tutor free",
     `tutors in ${LAUNCH_HUB_CITY}`,
   ],
   alternates: { canonical: "/parents" },
   openGraph: {
-    title: "Hire a Tutor Free — Parent Account on Mentr by Paprly",
+    title: "Find a Verified Tutor — Free for Parents · Mentr",
     description:
-      "Register free as a parent. Search verified tutors, post requirements, connect on WhatsApp. Completely free — no agent fees.",
+      "Free for parents. No commission. No agency fee. Find a tutor or get matched instantly.",
     url: absoluteUrl("/parents"),
     type: "website",
   },
@@ -43,7 +37,7 @@ export const metadata: Metadata = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Hire a Tutor Free — Create a Parent Account | Mentr by Paprly",
+  name: "Find a Verified Tutor — Free for Parents | Mentr",
   description: GLOBAL_REACH_LINE,
   url: absoluteUrl("/parents"),
   isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },
@@ -71,10 +65,8 @@ export default function ParentsPage() {
         ]}
       />
       <PageMarketing slug="parents" path="/parents" />
-      <Navbar />
-      <ParentsLanding />
+      <ParentAcquireLanding intent="default" />
       <InstantConnectDock />
-      <Footer />
     </>
   );
 }

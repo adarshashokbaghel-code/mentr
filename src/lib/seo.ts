@@ -21,16 +21,6 @@ export const GITHUB_REPO_URL =
 export const LINKEDIN_URL =
   "https://www.linkedin.com/company/mentrbypaprly/";
 
-/** Personal LinkedIn of Mentr / Paprly creator */
-export const CREATOR_LINKEDIN_URL =
-  "https://www.linkedin.com/in/adarshsingh05";
-
-export const CREATOR_NAME = "Adarsh Singh";
-export const CREATOR_ROLE =
-  "Creator of Mentr by Paprly · Software Engineer · Ex-Founding Engineer @ Paprly";
-export const CREATOR_GITHUB_URL =
-  "https://github.com/adarshashokbaghel-code";
-
 /** Primary launch hub — local SEO pages still target this city. */
 export const LAUNCH_HUB_CITY = "Bengaluru";
 

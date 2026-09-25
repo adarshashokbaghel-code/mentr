@@ -18,8 +18,6 @@ export const metadata: Metadata = {
     "is Mentr Learn free",
     "is Mentr free",
     "is Mentr open source",
-    "who created Mentr",
-    "Adarsh Singh Mentr",
     "contribute to Mentr",
     "how to find tutor online",
     "tutor verification",

@@ -1,5 +1,4 @@
 import type { BlogPost } from "@/lib/blog-posts";
-import { slugify } from "@/lib/seo-hubs";
 import {
   SUBJECT_CLASS_PAGES,
   classSubjectPath,
@@ -36,12 +35,12 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
     post.slug.includes("instant-connect")
   ) {
     links.push({
-      label: "Try Instant Connect",
-      href: "/parents",
+      label: "Get Matched Instantly",
+      href: "/instant-connect",
     });
     links.push({
-      label: "Parent dashboard · Quick match",
-      href: "/parent/dashboard#instant-connect",
+      label: "Find a Tutor",
+      href: "/find-tutor",
     });
   }
 
@@ -64,7 +63,7 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
   if (subject && !links.some((l) => l.href.includes("class"))) {
     links.push({
       label: `Find ${subject} tutors`,
-      href: `/subjects/${slugify(subject)}-tutors-bengaluru`,
+      href: citySubjectPath("bengaluru", subject),
     });
   }
 
@@ -92,12 +91,18 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
   if (
     hay.includes("near me") ||
     hay.includes("home tutor") ||
-    hay.includes("find tutor")
+    hay.includes("find tutor") ||
+    hay.includes("find a tutor")
   ) {
     links.push({
-      label: "Find tutors near you",
-      href: "/find-tutors-near-me",
+      label: "Find a Tutor",
+      href: "/find-tutor",
     });
+  }
+
+  // Default acquisition CTA for commercial / transactional parent guides
+  if (!links.some((l) => l.href === "/find-tutor")) {
+    links.push({ label: "Find a Tutor", href: "/find-tutor" });
   }
 
   links.push({

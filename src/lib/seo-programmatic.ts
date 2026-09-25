@@ -55,11 +55,6 @@ export const SEO_CITIES = [
     local: true,
   },
   {
-    slug: "pune",
-    name: "Pune",
-    local: false,
-  },
-  {
     slug: "hyderabad",
     name: "Hyderabad",
     local: false,
@@ -72,6 +67,21 @@ export const SEO_CITIES = [
   {
     slug: "mumbai",
     name: "Mumbai",
+    local: false,
+  },
+  {
+    slug: "pune",
+    name: "Pune",
+    local: false,
+  },
+  {
+    slug: "chennai",
+    name: "Chennai",
+    local: false,
+  },
+  {
+    slug: "kolkata",
+    name: "Kolkata",
     local: false,
   },
 ] as const;
@@ -115,47 +125,46 @@ export const BOARD_COMBO_PAGES: {
   { board: "state-board", level: "10", subject: "Mathematics" },
 ];
 
-/** High-intent subjects for Bengaluru (parent demand queries) */
-export const BENGALURU_SEO_SUBJECTS = [
+/**
+ * Core city × subject matrix for parent acquisition (7 cities × 5 subjects = 35).
+ * Short marketing URLs (/tutors/bengaluru/maths) redirect here.
+ */
+export const CORE_CITY_SEO_SUBJECTS = [
   "Mathematics",
   "Physics",
   "Chemistry",
-  "Biology",
   "English",
   "Coding",
+] as const;
+
+/** Extra Bengaluru depth — high local demand, still curated (not full spam). */
+export const BENGALURU_EXTRA_SEO_SUBJECTS = [
+  "Biology",
   "Computer Science",
-  "History",
-  "Geography",
-  "Economics",
   "Accountancy",
 ] as const;
 
-/** Core subjects for other launch cities */
-const OTHER_CITY_SEO_SUBJECTS = [
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "English",
-  "Coding",
-  "Biology",
-  "History",
+/** All Bengaluru hub subjects (core + extras) — for nav chips / proof strips. */
+export const BENGALURU_SEO_SUBJECTS = [
+  ...CORE_CITY_SEO_SUBJECTS,
+  ...BENGALURU_EXTRA_SEO_SUBJECTS,
 ] as const;
 
-/** City × subject (curated — no full cross-product spam) */
+/** City × subject (curated — ~38 pages, not a full cross-product). */
 export const CITY_SUBJECT_PAGES: { city: SeoCitySlug; subject: string }[] =
   SEO_CITIES.flatMap((city) => {
     const subjects =
       city.slug === "bengaluru"
         ? BENGALURU_SEO_SUBJECTS
-        : OTHER_CITY_SEO_SUBJECTS;
+        : [...CORE_CITY_SEO_SUBJECTS];
     return subjects.map((subject) => ({ city: city.slug, subject }));
   });
 
 export const INSTANT_CONNECT_CTA = {
-  label: "Try Instant Connect",
-  href: "/parent/signup?next=/parent/dashboard%23instant-connect",
+  label: "Get Matched Instantly",
+  href: "/instant-connect",
   blurb:
-    "Need a tutor today? Instant Connect matches you with verified mentors in minutes — free to try.",
+    "Need a tutor today? Tell us what you need — we'll help you find relevant mentors fast. Free for parents.",
 };
 
 export function classSubjectPath(level: ClassLevel, subject: string): string {
@@ -341,22 +350,32 @@ export function citySubjectFaqs(
 ): HubFaq[] {
   return [
     {
-      question: `How many ${subject} tutors are available in ${cityName}?`,
-      answer: local
-        ? `Mentr lists verified ${subject} tutors across ${cityName} — home and online. Browse profiles below for rates, experience, and areas, then connect free or try Instant Connect.`
-        : `Mentr lists online ${subject} tutors who work with ${cityName} families. Compare profiles, then connect free or post a requirement.`,
+      question: `How do I find a ${subject} tutor in ${cityName}?`,
+      answer: `Open Find a Tutor on Mentr, filter by ${subject} and ${cityName} (or online). Compare verified profiles, then send a free connect request — or use Get Matched Instantly if you need someone this week.`,
     },
     {
       question: `What do ${subject} tutors in ${cityName} typically charge?`,
-      answer: `Fees vary by experience, board, and home vs online. Where tutors share a rate you’ll see ₹/hr on the card. Session fees are arranged directly — Mentr takes no commission.`,
+      answer: `Fees vary by class, board, experience, and home vs online. Where tutors share a rate you will see ₹/hr on the card. Always confirm on a trial. Session fees stay between you and the tutor — Mentr takes no commission.`,
     },
     {
       question: `Can I get a ${subject} tutor online in ${cityName}?`,
-      answer: `Yes. Many ${subject} tutors offer online sessions. Look for the Online badge on profiles, or use Instant Connect to match faster.`,
+      answer: `Yes. Many ${subject} tutors offer online sessions. Look for the Online badge, or choose online mode on Find a Tutor. Home visits appear when tutors offer them.`,
     },
     {
-      question: `How do I hire a ${subject} tutor on Mentr?`,
-      answer: `Open a profile → send a free connect request → WhatsApp unlocks after they accept. Or post your requirement / use Instant Connect and let tutors come to you.`,
+      question: `Are tutors on Mentr verified?`,
+      answer: `Verified tutors complete identity and credential checks. Look for the Verified badge, a clear bio, and the classes they teach. WhatsApp unlocks only after they accept your request.`,
+    },
+    {
+      question: `Is Mentr free for parents in ${cityName}?`,
+      answer: `Yes. Search, connect, Instant Connect, and posting a requirement are free for parents. No agency fee and no commission on tuition.`,
+    },
+    {
+      question: local
+        ? `Home tutor or online ${subject} tutor in ${cityName}?`
+        : `Online ${subject} tutoring for ${cityName} families — does it work?`,
+      answer: local
+        ? `Younger kids often do better with home visits; Class 9–12 revision often works online mid-week. Many families mix both. Filter by mode on each profile.`
+        : `Yes — online ${subject} tutors who follow Indian boards work well for ${cityName} schedules. Start with a paid trial and sit nearby for the first session.`,
     },
   ];
 }
