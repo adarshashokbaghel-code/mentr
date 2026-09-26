@@ -2,7 +2,7 @@ import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import { ToolPageBody } from "@/components/tools/tool-page-body";
-import { getToolBySlug, TOOLS } from "@/lib/tools-catalog";
+import { getToolBySlug, TOOLS, toolOgImagePath } from "@/lib/tools-catalog";
 import { getAllToolFaqs } from "@/lib/tools-page-copy";
 import {
   absoluteUrl,
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Absolute title avoids double suffix from root layout template
   const title = tool.metaTitle.replace(/\s*\|\s*Mentr Tools\s*$/i, "");
   const absoluteTitle = `${title} | ${SITE_NAME}`;
+  const ogImage = absoluteUrl(toolOgImagePath(tool.slug));
 
   return {
     title: { absolute: absoluteTitle },
@@ -40,6 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "free online tool",
       "no signup",
       "browser PDF tool",
+      "India education tools",
       SITE_NAME,
     ],
     authors: [{ name: SITE_BRAND, url: SITE_URL }],
@@ -64,11 +66,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "website",
       siteName: SITE_BRAND,
       locale: "en_IN",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: tool.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: absoluteTitle,
       description: tool.metaDescription,
+      images: [ogImage],
     },
   };
 }

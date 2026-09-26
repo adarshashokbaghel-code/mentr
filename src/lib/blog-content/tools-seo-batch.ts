@@ -176,41 +176,41 @@ export const TOOLS_SEO_BATCH: Record<string, ArticleContent> = {
   "worksheet-generator-india": {
     slug: "worksheet-generator-india",
     publishedAt: "2026-09-19",
-    updatedAt: "2026-09-19",
+    updatedAt: "2026-09-26",
     readTimeMinutes: 6,
     author: "Mentr Editorial Team",
     intro:
-      "Indian tutors and parents still need simple lined paper and writing practice sheets — not a full Canva account. This guide covers a free worksheet generator that exports printable PDF lined paper, when to use boxes vs lines, and how it fits Class 1–8 homework routines.",
+      "Indian tutors and parents still need simple printables for the first day of a batch and for weekly planning — not a full Canva account. This guide covers free Mentr classroom helpers (name tags, study timetables, private PDF tools) and how they fit Class 1–8 homework routines.",
     sections: [
       {
-        heading: "What a worksheet generator should do",
+        heading: "What classroom printables should do",
         blocks: [
           {
             type: "paragraph",
-            text: "For handwriting, spelling, and short answers, lined or boxed sheets beat blank A4. You want a title, enough lines, A4 size, and a PDF you can print at a local shop or at home — without login walls.",
+            text: "For first-day batches and weekly planning, you want A4 PDFs you can print at a local shop or at home — without login walls. Name tags calm a new group; a wall timetable keeps revision visible; PDF merge/compress keep WhatsApp homework packs tidy.",
           },
           {
             type: "list",
             items: [
-              "English / Hindi writing practice",
-              "Maths working space with boxes",
-              "Tutor session warm-up sheets",
-              "Holiday homework packets",
+              "Desk name tags for new tuition batches",
+              "Weekly study timetable for board revision",
+              "Merged homework packs for WhatsApp",
+              "Compressed PDFs that fit school portals",
             ],
           },
         ],
       },
       {
-        heading: "Make a free lined worksheet PDF",
+        heading: "Make free classroom PDFs on Mentr",
         blocks: [
           {
             type: "list",
             ordered: true,
             items: [
-              "Open the Mentr worksheet generator.",
-              "Set a title (e.g. “Class 4 English — Friday”).",
-              "Choose lined or boxes and adjust line count.",
-              "Download the PDF and print or share.",
+              "Open Mentr Tools (no signup).",
+              "Use Name tags for the class list, or Study timetable for the week.",
+              "For photo homework, convert Images to PDF, then Merge or Compress as needed.",
+              "Download and print or share on WhatsApp.",
             ],
           },
           {
@@ -221,7 +221,7 @@ export const TOOLS_SEO_BATCH: Record<string, ArticleContent> = {
         ],
       },
       {
-        heading: "Pair worksheets with tutoring",
+        heading: "Pair printables with tutoring",
         blocks: [
           {
             type: "paragraph",
@@ -232,18 +232,18 @@ export const TOOLS_SEO_BATCH: Record<string, ArticleContent> = {
     ],
     faqs: [
       {
-        question: "Is the worksheet generator free in India?",
+        question: "Are Mentr classroom tools free in India?",
         answer:
           "Yes. Download printable PDFs with no signup on Mentr Tools.",
       },
       {
-        question: "Can tutors brand the sheet?",
+        question: "Is there still a lined worksheet generator?",
         answer:
-          "Add your session title in the title field. Sheets include a small Mentr Tools footer line.",
+          "That tool is retired while we rebuild it. Use name tags, study timetable, and PDF helpers on /tools in the meantime.",
       },
     ],
     relatedLinks: [
-      { label: "Worksheet generator", href: "/tools/worksheet-generator" },
+      { label: "All free tools", href: "/tools" },
       { label: "Name tags printable", href: "/tools/name-tags" },
       { label: "Study timetable PDF", href: "/tools/study-timetable" },
       { label: "Search tutors", href: "/search" },
@@ -650,7 +650,7 @@ export const TOOLS_SEO_BATCH: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "Name tags tool", href: "/tools/name-tags" },
-      { label: "Worksheet generator", href: "/tools/worksheet-generator" },
+      { label: "Study timetable", href: "/tools/study-timetable" },
       { label: "Create tutor profile", href: "/faculty/signup" },
       { label: "All tools", href: "/tools" },
     ],

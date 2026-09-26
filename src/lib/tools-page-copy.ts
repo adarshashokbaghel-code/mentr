@@ -34,6 +34,41 @@ const COMMON_FAQS: ToolFaq[] = [
 ];
 
 const COPY: Record<string, ToolPageCopy> = {
+  "cgpa-calculator": {
+    sections: [
+      {
+        heading: "CGPA to percentage in India — what parents and students ask",
+        paragraphs: [
+          "College forms, scholarship portals, and parent WhatsApp groups still ask for “percentage” even when the marksheet shows CGPA on a 10-point scale. A quick converter helps estimate — but the multiplier is not universal. Many CBSE-linked discussions cite ×9.5; some universities use ×10; others publish their own formula on the transcript.",
+          "Use this calculator to get an approximate percentage, then verify against your school circular or university conversion note before submitting applications. Mentr does not claim official board status for any formula.",
+        ],
+      },
+      {
+        heading: "सीजीपीए से प्रतिशत — हिंदी में संक्षेप",
+        paragraphs: [
+          "भारत में कई फॉर्म प्रतिशत माँगते हैं जबकि मार्कशीट पर CGPA होता है। यहाँ ×9.5, ×10 या कस्टम मल्टीप्लायर चुनकर अनुमानित प्रतिशत देखें। यह केवल जानकारी के लिए है — अंतिम आंकड़ा स्कूल / बोर्ड / यूनिवर्सिटी के नियम से मिलाएँ।",
+          "अगर प्रतिशत सही लगे लेकिन विषय कमज़ोर लगे, तो Mentr पर verified tutor खोजें — connect मुफ़्त है।",
+        ],
+      },
+    ],
+    tips: [
+      "Prefer the multiplier printed on your marksheet or circular.",
+      "Round the same way your form expects (often 2 decimals).",
+      "For Class 10–12 board talk, ask your school — do not rely on a web calculator alone.",
+      "After checking CGPA, find a subject tutor if applications need stronger scores next term.",
+    ],
+    extraFaqs: [
+      {
+        question: "Does this work for VTU / GTU / Anna University?",
+        answer:
+          "Enter your CGPA and set a custom multiplier if your university publishes one. Default ×9.5 / ×10 are common estimates only — not official for every institute.",
+      },
+      {
+        question: "Is my CGPA uploaded?",
+        answer: "No. The number stays in your browser tab.",
+      },
+    ],
+  },
   "pdf-merge": {
     sections: [
       {
@@ -48,6 +83,13 @@ const COPY: Record<string, ToolPageCopy> = {
         paragraphs: [
           "Many “free merge PDF” sites ask you to upload documents to a remote server. For school work, report cards, and answer keys, that is an unnecessary risk. Mentr Merge PDF uses browser-side libraries so bytes never leave your device. You still get a downloadable combined file — without creating an account.",
           "If the merged file is still large, open Compress PDF next. If you only needed a few pages from a big scan, use Split PDF first, then merge the pieces you care about.",
+        ],
+      },
+      {
+        heading: "पीडीएफ मर्ज — WhatsApp होमवर्क के लिए",
+        paragraphs: [
+          "ट्यूशन और स्कूल का काम अक्सर कई PDF में बिखरा होता है। एक मर्ज्ड फ़ाइल WhatsApp पर भेजना आसान है और प्रिंट शॉप पर पेज ग़लत नहीं लगते। Mentr पर मर्ज आपके ब्राउज़र में होता है — फाइल सर्वर पर अपलोड नहीं होती।",
+          "होमवर्क पैक तैयार होने के बाद अगर बच्चे को मदद चाहिए, Find a tutor से verified शिक्षक खोजें।",
         ],
       },
     ],
@@ -109,6 +151,13 @@ const COPY: Record<string, ToolPageCopy> = {
         ],
       },
       {
+        heading: "पीडीएफ कंप्रेस — WhatsApp लिमिट से पहले",
+        paragraphs: [
+          "भारत में ट्यूटर्स और पेरेंट्स रोज़ WhatsApp पर PDF भेजते हैं। बड़ी स्कैन फ़ाइल अटक जाती है। यहाँ Light या Strong मोड से साइज़ घटाएँ — फाइल आपके डिवाइस पर रहती है।",
+          "भेजने के बाद विषय समझ नहीं आ रहा हो तो Mentr पर tutor खोजें — connect मुफ़्त।",
+        ],
+      },
+      {
         heading: "Quality vs size — a practical rule",
         paragraphs: [
           "Keep originals for printing answer scripts. Use Strong only for chat sharing. If readability suffers, split into smaller ranges instead of crushing one giant file.",
@@ -135,6 +184,12 @@ const COPY: Record<string, ToolPageCopy> = {
         paragraphs: [
           "Parents photograph notebooks under tube lights. Tutors ask for “one PDF please.” Images to PDF turns JPG, PNG, or WebP shots into a single file you can reorder, then compress for WhatsApp.",
           "Shoot one page per photo, keep the phone parallel to the paper, and check the order before creating the PDF. That alone cuts most “missing page” messages.",
+        ],
+      },
+      {
+        heading: "फोटो से पीडीएफ — होमवर्क के लिए",
+        paragraphs: [
+          "कॉपी की तस्वीरें JPG में रहती हैं; ट्यूटर एक PDF माँगता है। यहाँ इमेज जोड़ें, क्रम ठीक करें, PDF बनाएँ, ज़रूरत हो तो Compress करें। निजी — अपलोड नहीं।",
         ],
       },
     ],
@@ -195,28 +250,6 @@ const COPY: Record<string, ToolPageCopy> = {
       },
     ],
   },
-  "worksheet-generator": {
-    sections: [
-      {
-        heading: "Lined paper without a design suite",
-        paragraphs: [
-          "Class 1–8 handwriting practice still needs ruled sheets. Tutors should not need Canva to print Friday’s English warm-up. Title the sheet, pick lined or boxes, download A4 PDF, and print at home or a neighbourhood shop.",
-          "Pair worksheets with Name tags on day one of a new batch, and with Study timetable when you set holiday homework.",
-        ],
-      },
-    ],
-    tips: [
-      "Use a clear title with class and date.",
-      "Boxes work well for short maths working.",
-      "Print two-sided to save paper for older students.",
-    ],
-    extraFaqs: [
-      {
-        question: "Is the paper A4?",
-        answer: "Yes. Sheets export as A4 PDF ready for standard printers in India.",
-      },
-    ],
-  },
   "name-tags": {
     sections: [
       {
@@ -268,6 +301,12 @@ const COPY: Record<string, ToolPageCopy> = {
         paragraphs: [
           "Before boards or competitive exams, students need a plan they will actually see. Fill Morning / Afternoon / Evening for Mon–Sun, download landscape A4, and stick it on the wall. Tutors can fill it live with the student and share on WhatsApp.",
           "Keep hard subjects in high-energy slots. Leave buffer for rest. Review every Sunday — then adjust next week’s grid.",
+        ],
+      },
+      {
+        heading: "पढ़ाई का टाइमटेबल PDF",
+        paragraphs: [
+          "बोर्ड या कॉम्पिटिटिव तैयारी में दीवार पर लगा टाइमटेबल नोटबुक से बेहतर याद रहता है। सुबह / दोपहर / शाम भरें, PDF डाउनलोड करें, WhatsApp पर भेजें। कमज़ोर विषय के लिए Mentr पर tutor जोड़ें।",
         ],
       },
     ],

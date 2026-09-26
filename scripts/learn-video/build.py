@@ -535,6 +535,261 @@ def render_visual(
         draw_text_centered(draw, "Tap Finish when you're ready, champ!", 520, load_font(36, bold=True), ink, w)
         return
 
+    # ─── A2 · How Computers Understand Us ─────────────────────────────
+    if visual == "a2-welcome":
+        draw_mascot(draw, w // 2, 400, 110, sage, panel, bounce)
+        if focus == "hello":
+            draw_text_centered(draw, "Welcome back to class", 580, load_font(42, bold=True), ink, w)
+        elif focus == "bridge":
+            rounded_rect(draw, (420, 540, w - 420, 700), 28, panel, line, 3)
+            draw_text_centered(draw, "Chapter 1 → Chapter 2", 580, load_font(28, bold=True), coral, w)
+            draw_text_centered(draw, "What is a computer? → How it understands us", 640, load_font(28, bold=True), ink, w)
+        elif focus == "chapter":
+            rounded_rect(draw, (340, 520, w - 340, 740), 28, panel, line, 3)
+            draw_text_centered(draw, "CHAPTER 2 of 5", 560, load_font(26, bold=True), sage, w)
+            draw_text_centered(draw, "How Computers Understand Us", 630, load_font(42, bold=True), ink, w)
+        elif focus == "say":
+            draw_text_centered(draw, "Your turn — say it out loud!", 540, load_font(34, bold=True), coral, w)
+            draw_text_centered(draw, "How Computers Understand Us", 620, load_font(44, bold=True), ink, w)
+        else:
+            draw_text_centered(draw, "Ready for the secret?", 580, load_font(44, bold=True), sage, w)
+        return
+
+    if visual == "a2-hook":
+        if focus == "puzzle":
+            rounded_rect(draw, (360, 300, w - 360, 680), 28, panel, line, 3)
+            draw_text_centered(draw, "Puzzle time", 360, load_font(30, bold=True), coral, w)
+            draw_text_centered(draw, "Computers are clever…", 460, load_font(40, bold=True), ink, w)
+            draw_text_centered(draw, "but they don't speak like us!", 540, load_font(36, bold=True), muted, w)
+        elif focus == "ask":
+            draw_text_centered(draw, "How do they understand", 360, load_font(40, bold=True), ink, w)
+            draw_text_centered(draw, "games · photos · messages?", 460, load_font(44, bold=True), coral, w)
+            for i, label in enumerate(["🎮", "📷", "💬"]):
+                x = 520 + i * 300
+                rounded_rect(draw, (x, 540, x + 240, 680), 24, panel, line, 3)
+                draw_text_centered_x = x + 120
+                # emoji may not render on all fonts — use words
+                words = ["Game", "Photo", "Message"]
+                bbox = draw.textbbox((0, 0), words[i], font=load_font(32, bold=True))
+                tw = bbox[2] - bbox[0]
+                draw.text((draw_text_centered_x - tw // 2, 590), words[i], fill=ink, font=load_font(32, bold=True))
+        elif focus == "think":
+            pulse = 0.92 + 0.08 * math.sin(progress * math.pi * 4)
+            r = int(130 * pulse)
+            draw.ellipse((w // 2 - r, 380 - r, w // 2 + r, 380 + r), fill=coral)
+            draw_text_centered(draw, "YOUR TURN", 360, load_font(36, bold=True), panel, w)
+            draw_text_centered(draw, "Guess how a computer talks!", 520, load_font(40, bold=True), ink, w)
+            draw_text_centered(draw, "3… 2… 1…", 600, load_font(30), muted, w)
+        else:
+            draw_mascot(draw, w // 2, 380, 100, sage, panel, bounce)
+            draw_text_centered(draw, "We'll prove it with light switches", 580, load_font(38, bold=True), ink, w)
+        return
+
+    if visual == "a2-switch":
+        # Big light switch + 0/1 mapping
+        cx, cy = w // 2, 420
+        on = focus in ("switch", "say", "map", "easy")
+        # plate
+        rounded_rect(draw, (cx - 160, cy - 200, cx + 160, cy + 200), 36, panel, line, 4)
+        # toggle track
+        track_fill = sage if on and focus != "intro" else (200, 200, 205)
+        if focus == "intro":
+            track_fill = (200, 200, 205)
+        rounded_rect(draw, (cx - 50, cy - 140, cx + 50, cy + 140), 28, track_fill)
+        # knob position
+        if focus in ("map", "easy") or (focus == "switch" and progress > 0.35):
+            knob_y = cy - 90  # up = ON
+            knob_label = "ON"
+            kn_accent = sage
+        elif focus == "say":
+            # flip mid animation feel
+            knob_y = cy - int(90 * math.sin(progress * math.pi))
+            knob_label = "ON / OFF"
+            kn_accent = coral
+        else:
+            knob_y = cy + 70  # down = OFF
+            knob_label = "OFF"
+            kn_accent = muted
+        draw.ellipse((cx - 70, knob_y - 55, cx + 70, knob_y + 55), fill=kn_accent)
+        bbox = draw.textbbox((0, 0), knob_label, font=load_font(26, bold=True))
+        tw = bbox[2] - bbox[0]
+        draw.text((cx - tw // 2, knob_y - 14), knob_label, fill=panel, font=load_font(26, bold=True))
+
+        if focus == "intro":
+            draw_text_centered(draw, "Only TWO states inside", 700, load_font(40, bold=True), ink, w)
+        elif focus == "switch":
+            draw_text_centered(draw, "ON  ·  or  ·  OFF", 700, load_font(44, bold=True), ink, w)
+        elif focus == "say":
+            draw_text_centered(draw, "Say it: On… or off!", 700, load_font(40, bold=True), coral, w)
+        elif focus == "map":
+            # two cards
+            rounded_rect(draw, (280, 680, 720, 860), 24, panel, line, 3)
+            draw.text((360, 720), "ON  →  1", fill=sage, font=load_font(40, bold=True))
+            rounded_rect(draw, (1200, 680, 1640, 860), 24, panel, line, 3)
+            draw.text((1260, 720), "OFF  →  0", fill=coral, font=load_font(40, bold=True))
+        else:
+            draw_text_centered(draw, "1 means on · 0 means off · Easy!", 700, load_font(40, bold=True), sage, w)
+        return
+
+    if visual == "a2-binary":
+        def draw_three_lights(pattern: list[int], labels: bool = True) -> None:
+            # pattern: 1=on, 0=off for left, mid, right
+            labels_txt = ["Left", "Middle", "Right"]
+            box_w = 280
+            gap = 60
+            total = 3 * box_w + 2 * gap
+            x0 = (w - total) // 2
+            for i, bit in enumerate(pattern):
+                x = x0 + i * (box_w + gap)
+                on = bit == 1
+                accent = sage if on else muted
+                rounded_rect(draw, (x, 300, x + box_w, 620), 28, panel, line, 3)
+                # bulb
+                r = 70
+                bx, by = x + box_w // 2, 420
+                glow = (255, 230, 120) if on else (220, 220, 215)
+                draw.ellipse((bx - r, by - r, bx + r, by + r), fill=glow)
+                draw.rectangle((bx - 18, by + r - 10, bx + 18, by + r + 50), fill=muted)
+                bit_s = "1" if on else "0"
+                state = "ON" if on else "OFF"
+                draw.text((x + 100, 540), f"{bit_s}  {state}", fill=accent, font=load_font(32, bold=True))
+                if labels:
+                    draw.text((x + 90, 260), labels_txt[i], fill=muted, font=load_font(24, bold=True))
+
+        if focus == "row":
+            draw_three_lights([0, 0, 0], labels=True)
+            draw_text_centered(draw, "Three switches in a row", 680, load_font(36, bold=True), ink, w)
+        elif focus == "each":
+            draw_three_lights([1, 0, 1], labels=True)
+            draw_text_centered(draw, "Each switch = 1 or 0", 680, load_font(36, bold=True), ink, w)
+        elif focus == "pat001":
+            draw_three_lights([0, 0, 1])
+            draw_text_centered(draw, "0  0  1", 680, load_font(52, bold=True), sage, w)
+        elif focus == "pat101":
+            draw_three_lights([1, 0, 1])
+            draw_text_centered(draw, "1  0  1", 680, load_font(52, bold=True), coral, w)
+        elif focus == "name":
+            rounded_rect(draw, (400, 320, w - 400, 700), 32, panel, line, 4)
+            draw_text_centered(draw, "BINARY", 420, load_font(56, bold=True), coral, w)
+            draw_text_centered(draw, "Bi = two", 520, load_font(40, bold=True), ink, w)
+            draw_text_centered(draw, "Only two choices: 0 or 1", 600, load_font(34, bold=True), muted, w)
+        else:
+            draw_mascot(draw, w // 2, 380, 100, sage, panel, bounce)
+            draw_text_centered(draw, "Binary = light-switch language", 580, load_font(40, bold=True), ink, w)
+        return
+
+    if visual == "a2-read":
+        patterns = {
+            "p1": ([0, 0, 1], "0 0 1"),
+            "p2": ([1, 1, 0], "1 1 0"),
+            "p3": ([1, 0, 1], "1 0 1"),
+        }
+        if focus == "intro":
+            draw_text_centered(draw, "Read the lights out loud!", 400, load_font(44, bold=True), ink, w)
+            draw_text_centered(draw, "I show · you say zeros and ones", 520, load_font(32), muted, w)
+            return
+        if focus == "done":
+            draw_mascot(draw, w // 2, 380, 110, sage, panel, bounce)
+            draw_text_centered(draw, "Super reading, champ!", 580, load_font(44, bold=True), coral, w)
+            return
+        pat, code = patterns.get(focus, ([0, 0, 0], "???") )
+        box_w = 260
+        gap = 50
+        total = 3 * box_w + 2 * gap
+        x0 = (w - total) // 2
+        for i, bit in enumerate(pat):
+            x = x0 + i * (box_w + gap)
+            on = bit == 1
+            rounded_rect(draw, (x, 280, x + box_w, 560), 28, panel, line, 3)
+            glow = (255, 230, 120) if on else (220, 220, 215)
+            bx, by = x + box_w // 2, 400
+            draw.ellipse((bx - 60, by - 60, bx + 60, by + 60), fill=glow)
+            draw.text((x + 100, 500), "1" if on else "0", fill=sage if on else muted, font=load_font(40, bold=True))
+        draw_text_centered(draw, code, 640, load_font(56, bold=True), ink, w)
+        draw_text_centered(draw, "Say it!", 720, load_font(32, bold=True), coral, w)
+        return
+
+    if visual == "a2-check":
+        if focus == "intro":
+            draw_text_centered(draw, "Practice check", 400, load_font(36, bold=True), coral, w)
+            draw_text_centered(draw, "Same kind of question as your lesson check", 500, load_font(34, bold=True), ink, w)
+            return
+        if focus == "ask":
+            rounded_rect(draw, (360, 300, w - 360, 700), 28, panel, line, 3)
+            draw_text_centered(draw, "If 1 means ON…", 380, load_font(32, bold=True), muted, w)
+            draw_text_centered(draw, "What does 1 0 1 mean?", 480, load_font(48, bold=True), ink, w)
+            draw_text_centered(draw, "on three lights?", 580, load_font(36, bold=True), coral, w)
+            return
+        if focus == "hint":
+            for i, (lab, bit) in enumerate([("Left", "?"), ("Middle", "?"), ("Right", "?")]):
+                x = 280 + i * 480
+                rounded_rect(draw, (x, 340, x + 400, 620), 28, panel, line, 3)
+                draw_text_centered_x = x + 200
+                bbox = draw.textbbox((0, 0), lab, font=load_font(28, bold=True))
+                tw = bbox[2] - bbox[0]
+                draw.text((draw_text_centered_x - tw // 2, 400), lab, fill=muted, font=load_font(28, bold=True))
+                draw.text((draw_text_centered_x - 20, 500), bit, fill=coral, font=load_font(48, bold=True))
+            draw_text_centered(draw, "Think… then answer!", 700, load_font(32, bold=True), coral, w)
+            return
+        # answer
+        for i, (lab, on) in enumerate([("Left", True), ("Middle", False), ("Right", True)]):
+            x = 280 + i * 480
+            accent = sage if on else muted
+            rounded_rect(draw, (x, 300, x + 400, 620), 28, panel, line, 3)
+            glow = (255, 230, 120) if on else (220, 220, 215)
+            draw.ellipse((x + 120, 360, x + 280, 520), fill=glow)
+            state = "ON" if on else "OFF"
+            draw.text((x + 140, 540), f"{'1' if on else '0'}  {state}", fill=accent, font=load_font(32, bold=True))
+        draw_text_centered(draw, "101 → ON · OFF · ON  ✓", 700, load_font(40, bold=True), sage, w)
+        return
+
+    if visual == "a2-why":
+        if focus == "why":
+            items = [("Photo", coral), ("Game", sage), ("Message", coral)]
+            for i, (name, accent) in enumerate(items):
+                x = 280 + i * 480
+                rounded_rect(draw, (x, 320, x + 400, 560), 28, panel, line, 3)
+                draw.rectangle((x, 320, x + 400, 334), fill=accent)
+                draw.text((x + 120, 400), name, fill=ink, font=load_font(36, bold=True))
+                draw.text((x + 90, 480), "→ 0s & 1s", fill=muted, font=load_font(28, bold=True))
+            draw_text_centered(draw, "Everything becomes zeros and ones inside", 660, load_font(34, bold=True), ink, w)
+        elif focus == "bridge":
+            steps = ["Words (you)", "On / Off", "Pictures & sound"]
+            for i, s in enumerate(steps):
+                y = 320 + i * 130
+                rounded_rect(draw, (420, y, w - 420, y + 100), 24, panel, line, 3)
+                draw.ellipse((460, y + 20, 520, y + 80), fill=sage if i == 1 else coral)
+                draw.text((460 + 18, y + 34), str(i + 1), fill=panel, font=load_font(28, bold=True))
+                draw.text((560, y + 30), s, fill=ink, font=load_font(34, bold=True))
+        else:
+            draw_mascot(draw, w // 2, 380, 110, sage, panel, bounce)
+            draw_text_centered(draw, "Binary = light-switch language!", 580, load_font(42, bold=True), coral, w)
+        return
+
+    if visual == "a2-recap":
+        if focus == "map":
+            rounded_rect(draw, (280, 320, 900, 680), 28, panel, line, 3)
+            draw.text((400, 420), "ON  =  1", fill=sage, font=load_font(48, bold=True))
+            rounded_rect(draw, (1020, 320, 1640, 680), 28, panel, line, 3)
+            draw.text((1120, 420), "OFF  =  0", fill=coral, font=load_font(48, bold=True))
+            return
+        if focus == "binary":
+            rounded_rect(draw, (400, 340, w - 400, 680), 32, panel, line, 4)
+            draw_text_centered(draw, "BINARY", 420, load_font(52, bold=True), coral, w)
+            draw_text_centered(draw, "the computer's special language", 540, load_font(34, bold=True), ink, w)
+            return
+        if focus == "read":
+            draw_text_centered(draw, "1 0 1", 380, load_font(64, bold=True), ink, w)
+            draw_text_centered(draw, "→  on · off · on", 520, load_font(44, bold=True), sage, w)
+            return
+        if focus == "done":
+            draw_mascot(draw, w // 2, 400, 110, sage, panel, bounce)
+            draw_text_centered(draw, "Chapter 2 complete!", 580, load_font(48, bold=True), ink, w)
+            return
+        draw_text_centered(draw, "Next up: Quiz time", 400, load_font(44, bold=True), coral, w)
+        draw_text_centered(draw, "Tap Finish when you're ready, champ!", 520, load_font(36, bold=True), ink, w)
+        return
+
     # fallback
     draw_text_centered(draw, focus, 420, load_font(40, bold=True), ink, w)
 
@@ -753,17 +1008,18 @@ async def build_async(lesson_dir: Path) -> Path:
     out_mp4 = lesson_dir / "final.mp4"
     mux(frames_dir, voiceover, out_mp4, fps, lesson_dir / "captions.vtt")
 
-    # Publish into Next public for LMS
+    # Publish into Next public for LMS (module id from scenes.json)
+    module_id = str(meta.get("id") or "A1").upper()
     public_dir = ROOT / "public" / "learn" / "lessons"
     public_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(out_mp4, public_dir / "A1.mp4")
-    shutil.copy2(lesson_dir / "captions.vtt", public_dir / "A1.vtt")
-    shutil.copy2(lesson_dir / "transcript.json", public_dir / "A1.transcript.json")
+    shutil.copy2(out_mp4, public_dir / f"{module_id}.mp4")
+    shutil.copy2(lesson_dir / "captions.vtt", public_dir / f"{module_id}.vtt")
+    shutil.copy2(lesson_dir / "transcript.json", public_dir / f"{module_id}.transcript.json")
 
     shutil.rmtree(work, ignore_errors=True)
     mb = out_mp4.stat().st_size / (1024 * 1024)
     print(f"Done → {out_mp4} ({mb:.1f} MB, ~{cursor:.0f}s)")
-    print(f"LMS  → /learn/app/lesson/A1")
+    print(f"LMS  → /learn/app/lesson/{module_id}")
     return out_mp4
 
 

@@ -1719,16 +1719,16 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "worksheet-generator-india",
-    title: "Free Worksheet Generator India — Lined Paper PDF for Class & Tuition",
+    title: "Classroom Printables for Tutors in India — Free PDF Tools",
     keyword: "worksheet generator India",
     intent: "informational",
     funnel: "top",
     pillar: "for-tutors",
     description:
-      "Printable lined worksheets and writing paper as PDF. Free for tutors and parents — no signup.",
+      "Free printable classroom helpers for tutors in India — name tags, study timetables, and private PDF tools. No signup.",
     publishWeek: 38,
-    cta: "Make a worksheet",
-    ctaHref: "/tools/worksheet-generator",
+    cta: "Browse free tools",
+    ctaHref: "/tools",
   },
   {
     slug: "study-timetable-pdf-students",

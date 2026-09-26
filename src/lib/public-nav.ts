@@ -113,7 +113,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
         {
           label: "Teacher tools",
           href: "/tools#teachers",
-          description: "Worksheets, papers, lesson plans",
+          description: "Name tags, PDF helpers for class",
         },
         {
           label: "Student tools",
@@ -221,11 +221,6 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
       { label: "Class 10 Maths marking", href: "/snapandgrade/class-10-maths" },
       { label: "CBSE marking scheme", href: "/snapandgrade/cbse-marking-scheme" },
       { label: "All free tools", href: "/tools" },
-      { label: "Worksheet generator", href: "/tools/worksheet-generator" },
-      {
-        label: "Question paper generator",
-        href: "/tools/question-paper-generator",
-      },
       { label: "Study timetable", href: "/tools/study-timetable" },
       { label: "CGPA calculator", href: "/tools/cgpa-calculator" },
       { label: "Merge PDF", href: "/tools/pdf-merge" },

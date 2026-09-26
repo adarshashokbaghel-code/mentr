@@ -87,12 +87,11 @@ export function PublicPlatformSections() {
               <h3 className="text-lg font-bold text-ink">Mentr Tools</h3>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
-              Teachers and tutors can generate worksheets, sample question
-              papers, answer keys, and lesson plans. Students get study
-              timetables and calculators. PDF merge and compress run in your
-              browser so school documents stay on your device. Each tool page
-              explains when to use it and how the output works — not just a
-              blank form.
+              Teachers and tutors get printable name tags and private PDF helpers
+              (merge, compress, organize). Students get study timetables and a
+              CGPA calculator. Processing runs in your browser so school
+              documents stay on your device. Each tool page explains when to use
+              it — not just a blank form.
             </p>
             <Link
               href="/tools"

@@ -1,7 +1,7 @@
 "use client";
 
 import { ToolCard } from "@/components/tools/tool-card";
-import { ToolsSoftCta } from "@/components/tools/tools-soft-cta";
+import { ToolsHardCta } from "@/components/tools/tools-hard-cta";
 import {
   TOOLS,
   popularTools,
@@ -43,19 +43,19 @@ const FILTERS: {
   {
     id: "teachers",
     label: "Teachers",
-    hint: "Papers · worksheets · plans",
+                hint: "Name tags · PDFs · WhatsApp",
     icon: GraduationCap,
   },
   {
     id: "students",
     label: "Students",
-    hint: "CGPA · timetable",
+    hint: "CGPA · timetable · essays",
     icon: Users,
   },
   {
     id: "pdf",
     label: "PDF",
-    hint: "Merge · compress · convert",
+    hint: "Merge · compress · photos",
     icon: FileText,
   },
 ];
@@ -252,7 +252,7 @@ export function ToolsHubClient() {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search — question paper, worksheet, CGPA…"
+              placeholder="Search — CGPA, timetable, merge PDF…"
               className="h-14 w-full rounded-2xl border-2 border-ink bg-white py-3.5 pl-12 pr-12 text-[15px] font-semibold text-ink shadow-[3px_3px_0_0_#1c2434] outline-none placeholder:font-medium placeholder:text-muted focus:ring-2 focus:ring-coral/40"
               aria-label="Search tools"
             />
@@ -271,13 +271,11 @@ export function ToolsHubClient() {
           {!query && filter === "all" ? (
             <section className="mt-8">
               <h2 className="text-[1.15rem] font-extrabold text-ink">Popular</h2>
-              <p className="mt-0.5 text-[13px] font-medium text-muted">
-                Highest-intent tools for teachers and students
-              </p>
+              
               <ul className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-                {popular.map((tool) => (
+                {popular.map((tool, i) => (
                   <li key={tool.slug}>
-                    <ToolCard tool={tool} />
+                    <ToolCard tool={tool} priority={i === 0} />
                   </li>
                 ))}
               </ul>
@@ -323,10 +321,10 @@ export function ToolsHubClient() {
             </h2>
             <div className="mt-4 grid gap-6 text-[14px] font-medium leading-relaxed text-muted lg:grid-cols-2">
               <p>
-                Mentr Tools focuses on real teacher and student workflows:
-                worksheets, sample question papers, lesson plans, CGPA checks and
-                private PDF helpers. No signup wall. Browser-side processing
-                where possible.
+                Mentr Tools focuses on real parent and tutor workflows in India:
+                WhatsApp-ready PDFs, study timetables, CGPA checks and private
+                helpers — English + Hindi friendly. No signup wall. When the
+                file is ready, find a verified tutor.
               </p>
               <p>
                 When you need a person after the PDF,{" "}
@@ -343,7 +341,7 @@ export function ToolsHubClient() {
           </section>
 
           <div className="mt-8 pb-10">
-            <ToolsSoftCta slug="tools-hub" />
+            <ToolsHardCta slug="tools-hub" audiences={["students", "teachers", "pdf"]} />
           </div>
         </div>
       </div>

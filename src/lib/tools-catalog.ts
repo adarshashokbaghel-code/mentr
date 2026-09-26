@@ -17,13 +17,9 @@ export type ToolIcon =
   | "image"
   | "organize"
   | "text"
-  | "worksheet"
   | "tags"
   | "counter"
   | "timetable"
-  | "paper"
-  | "key"
-  | "lesson"
   | "cgpa"
   | "attendance"
   | "report"
@@ -62,14 +58,18 @@ export const TOOLS_HUB = {
   path: "/tools",
   title: "Free Education Tools for Teachers, Tutors & Students | Mentr",
   description:
-    "Create worksheets, question papers, study plans and classroom PDFs — free, private and without signup. Built for teachers, tutors, parents and students.",
+    "Free PDF tools for WhatsApp homework, CGPA to percentage, study timetable PDF, name tags & background remover — private, no signup. भारत में tutors और parents के लिए। Find a tutor after you finish.",
   keywords: [
     "free teacher tools",
-    "question paper generator",
-    "worksheet generator",
     "cgpa calculator",
-    "study timetable",
-    "free pdf tools",
+    "cgpa to percentage",
+    "study timetable pdf",
+    "merge pdf online free",
+    "compress pdf for whatsapp",
+    "images to pdf",
+    "free pdf tools India",
+    "पीडीएफ मर्ज",
+    "सीजीपीए कैलकुलेटर",
     "Mentr tools",
   ],
 } as const;
@@ -78,195 +78,38 @@ const privateBrowser =
   "Runs in your browser. We do not upload your inputs to Mentr servers for this tool.";
 
 export const TOOLS: ToolDef[] = [
-  // ── Teacher / tutor (Phase 1+) ─────────────────────────────────
-  {
-    slug: "question-paper-generator",
-    title: "Question Paper Generator",
-    shortTitle: "Question paper",
-    description:
-      "Build printable sample question papers by class, subject, marks and types.",
-    intro:
-      "Teachers and tutors often need a quick practice paper for class tests. This generator creates a printable sample paper from your class, subject, topic and question types. Items are algorithmic practice samples — not official board questions.",
-    howTo: [
-      "Enter class, subject, board label, topic and marks.",
-      "Choose question types and count.",
-      "Generate a preview, then download PDF.",
-      "Open Answer Key Generator to export keys from the same draft.",
-    ],
-    useCases: [
-      "Weekly class tests",
-      "Tuition batch practice papers",
-      "Holiday homework packs",
-      "Revision before unit tests",
-    ],
-    privacyNote: privateBrowser,
-    metaTitle: "Free Question Paper Generator for Teachers | Mentr",
-    metaDescription:
-      "Create printable sample question papers for teachers and tutors. Choose class, subject, marks, difficulty and question types. Free, no signup.",
-    keywords: [
-      "question paper generator",
-      "free question paper generator",
-      "CBSE practice paper generator",
-      "teacher test generator",
-    ],
-    audience: ["teachers"],
-    icon: "paper",
-    accent: "coral",
-    popular: true,
-    faqs: [
-      {
-        question: "Are these official CBSE questions?",
-        answer:
-          "No. Board is a label only. Questions are algorithmic practice samples for classroom use — verify against your textbook.",
-      },
-      {
-        question: "Can I generate an answer key?",
-        answer:
-          "Yes. After generating a paper, open Answer Key Generator — answers load from your draft when available.",
-      },
-    ],
-  },
-  {
-    slug: "worksheet-generator",
-    title: "Worksheet Generator",
-    shortTitle: "Worksheets",
-    description:
-      "Generate printable practice worksheets with MCQ, fill-ups, short and long answers.",
-    intro:
-      "Build a class worksheet with student name/date lines, numbered questions and downloadable PDF. Choose question types and regenerate for a new set. Sample items are practice-oriented, not board-official.",
-    howTo: [
-      "Set class, subject, topic and difficulty.",
-      "Pick question types and count.",
-      "Generate, preview, then download or print.",
-      "Regenerate for a fresh set with the same settings.",
-    ],
-    useCases: [
-      "Class warm-ups",
-      "Homework sheets",
-      "Remedial practice",
-      "Holiday packs",
-    ],
-    privacyNote: privateBrowser,
-    metaTitle: "Free Worksheet Generator for Teachers | Mentr",
-    metaDescription:
-      "Create printable worksheets with multiple choice, fill in the blanks, short and long answers. Free for tutors and teachers — no signup.",
-    keywords: [
-      "worksheet generator",
-      "free worksheet generator",
-      "teacher worksheet india",
-      "printable worksheet PDF",
-    ],
-    audience: ["teachers", "students"],
-    icon: "worksheet",
-    accent: "coral",
-    popular: true,
-    blogSlug: "worksheet-generator-india",
-    faqs: [
-      {
-        question: "Can I print the worksheet?",
-        answer: "Yes. Use Print or Download PDF for A4 printing.",
-      },
-      {
-        question: "Is lined paper still available?",
-        answer:
-          "This upgraded tool focuses on question worksheets. For blank lined paper, use a simple print from your word processor or request it via feedback.",
-      },
-    ],
-  },
-  {
-    slug: "answer-key-generator",
-    title: "Answer Key Generator",
-    shortTitle: "Answer key",
-    description:
-      "Build a printable answer key from a Mentr paper draft or enter answers manually.",
-    intro:
-      "Export keys for your sample paper or paste answers line by line. Add marks and short marking notes, then download a clean PDF for marking.",
-    howTo: [
-      "Generate a question paper first (optional) so answers preload.",
-      "Or paste answers manually, one per line.",
-      "Download the answer key PDF.",
-    ],
-    useCases: [
-      "Marking class tests",
-      "Sharing keys after practice",
-      "Tutor self-check sheets",
-    ],
-    privacyNote: privateBrowser,
-    metaTitle: "Free Answer Key Generator | Mentr Tools",
-    metaDescription:
-      "Create printable answer keys for practice papers. Load from a Mentr question paper or enter answers manually. Free, no signup.",
-    keywords: ["answer key generator", "test answer key PDF", "marking scheme PDF"],
-    audience: ["teachers"],
-    icon: "key",
-    accent: "sage",
-    faqs: [
-      {
-        question: "Where do preloaded answers come from?",
-        answer:
-          "From the last question paper you generated in this browser (session storage). Nothing is sent to Mentr servers.",
-      },
-    ],
-  },
-  {
-    slug: "lesson-plan-generator",
-    title: "Lesson Plan Generator",
-    shortTitle: "Lesson plan",
-    description:
-      "Structure a class lesson: objectives, activities, assessment and homework.",
-    intro:
-      "Fill class, topic, duration and objectives to generate a clear lesson plan outline you can print or download as PDF for your session notes.",
-    howTo: [
-      "Enter class, subject, topic and duration.",
-      "Add learning objectives and teaching method.",
-      "Generate preview, then download PDF.",
-    ],
-    useCases: [
-      "Daily tuition planning",
-      "School observation lessons",
-      "Substitute teacher notes",
-    ],
-    privacyNote: privateBrowser,
-    metaTitle: "Free Lesson Plan Generator for Teachers | Mentr",
-    metaDescription:
-      "Create printable lesson plans with objectives, teaching activities, assessment and homework. Free for tutors — no signup.",
-    keywords: ["lesson plan generator", "free lesson plan template", "tutor lesson plan"],
-    audience: ["teachers"],
-    icon: "lesson",
-    accent: "butter",
-    faqs: [
-      {
-        question: "Can I edit after download?",
-        answer:
-          "The PDF is a snapshot. Change inputs and download again for a new version.",
-      },
-    ],
-  },
+  // ── Student / classroom helpers ────────────────────────────────
   {
     slug: "cgpa-calculator",
     title: "CGPA Calculator",
     shortTitle: "CGPA",
     description:
-      "Convert CGPA to an approximate percentage with clear institution caveats.",
+      "Convert CGPA to approximate percentage (×9.5, ×10, or custom) — free for CBSE / college forms in India.",
     intro:
-      "Enter your CGPA and choose a conversion method. Formulas differ by institution — results are informational only. Always confirm with your school or university.",
+      "Enter your CGPA on a 0–10 scale and choose a conversion method. Many Indian schools cite ×9.5; some universities use ×10 or a custom rule. Results are informational only — always confirm with your board, school, or university before using on applications.",
     howTo: [
       "Enter CGPA (0–10 scale).",
       "Choose ×9.5, ×10, or a custom multiplier.",
       "Read the approximate percentage and the caveat.",
     ],
     useCases: [
-      "Application form estimates",
-      "Parent discussions",
-      "Comparing reported scales",
+      "College / scholarship form estimates",
+      "Parent–teacher percentage discussions",
+      "Comparing CBSE-style vs university scales",
     ],
     privacyNote: "Calculation runs entirely in your browser.",
-    metaTitle: "CGPA to Percentage Calculator | Mentr Tools",
+    metaTitle: "CGPA to Percentage Calculator Free (India) | Mentr",
     metaDescription:
-      "Convert CGPA to percentage with selectable formulas. Clear note that conversion depends on your institution. Free, no signup.",
+      "Free CGPA to percentage calculator for India — ×9.5, ×10 or custom. सीजीपीए से प्रतिशत. Confirm with your school. No signup.",
     keywords: [
       "cgpa calculator",
       "cgpa to percentage",
       "cgpa to percentage calculator",
+      "cgpa to percentage cbse",
+      "सीजीपीए कैलकुलेटर",
+      "सीजीपीए से प्रतिशत",
+      "cgpa ko percentage",
+      "10 point cgpa to percentage",
     ],
     audience: ["students"],
     icon: "cgpa",
@@ -274,9 +117,14 @@ export const TOOLS: ToolDef[] = [
     popular: true,
     faqs: [
       {
-        question: "Is ×9.5 official for everyone?",
+        question: "Is ×9.5 official for everyone in India?",
         answer:
-          "No. Some boards and universities publish different rules. Use custom multiplier when your institution specifies one.",
+          "No. Some CBSE contexts cite ×9.5, but boards and universities publish different rules. Use custom multiplier when your marksheet or circular specifies one.",
+      },
+      {
+        question: "क्या यह प्रतिशत आधिकारिक है?",
+        answer:
+          "नहीं — यह अनुमान है। अपने स्कूल / बोर्ड / यूनिवर्सिटी के नियम से जाँचें।",
       },
     ],
   },
@@ -285,24 +133,32 @@ export const TOOLS: ToolDef[] = [
     title: "Study Timetable Generator",
     shortTitle: "Timetable",
     description:
-      "Build a weekly study plan and download it as a printable PDF.",
+      "Build a weekly study plan and download a printable A4 PDF for boards or tuition.",
     intro:
-      "Fill Morning / Afternoon / Evening cells for Mon–Sun, then download a landscape A4 PDF for the wall or WhatsApp.",
+      "Fill Morning / Afternoon / Evening cells for Mon–Sun, then download a landscape A4 PDF for the wall or WhatsApp. Ideal for CBSE / ICSE board revision and tutor–student shared plans.",
     howTo: [
       "Name the week.",
       "Fill subject slots.",
       "Download the timetable PDF.",
     ],
     useCases: [
-      "Board revision weeks",
-      "Tutor + student shared plans",
-      "Holiday structure",
+      "CBSE / ICSE board revision weeks",
+      "Tutor + student shared plans on WhatsApp",
+      "Holiday homework structure",
     ],
     privacyNote: privateBrowser,
-    metaTitle: "Free Study Timetable PDF Generator | Mentr Tools",
+    metaTitle: "Free Study Timetable PDF Generator India | Mentr",
     metaDescription:
-      "Make a free weekly study timetable PDF for students. Plan subjects and download for printing.",
-    keywords: ["study timetable pdf", "weekly study plan", "timetable generator"],
+      "Make a free weekly study timetable PDF for Class 6–12 and boards. पढ़ाई का टाइमटेबल PDF. Print or WhatsApp — no signup.",
+    keywords: [
+      "study timetable pdf",
+      "weekly study plan",
+      "timetable generator",
+      "board exam timetable",
+      "पढ़ाई का टाइमटेबल",
+      "study timetable for class 10",
+      "NEET study schedule pdf",
+    ],
     audience: ["students", "teachers"],
     icon: "timetable",
     accent: "lavender",
@@ -311,7 +167,7 @@ export const TOOLS: ToolDef[] = [
     faqs: [
       {
         question: "Can tutors fill this with students?",
-        answer: "Yes — build it in a session and share the PDF.",
+        answer: "Yes — build it in a session and share the PDF on WhatsApp.",
       },
     ],
   },
@@ -321,24 +177,38 @@ export const TOOLS: ToolDef[] = [
     slug: "pdf-merge",
     title: "Merge PDF",
     shortTitle: "Merge PDF",
-    description: "Combine multiple PDF files into one — private, in your browser.",
+    description:
+      "Combine homework PDFs into one file for WhatsApp or printing — private, in your browser.",
     intro:
-      "Merge homework packs, notes and worksheets into one file for WhatsApp or printing. Processing stays on your device.",
+      "Merge homework packs, notes and worksheets into one file for WhatsApp or the neighbourhood print shop. Processing stays on your device — no upload to random merge sites.",
     howTo: [
       "Drop two or more PDFs.",
       "Reorder with arrows.",
       "Merge & download.",
     ],
-    useCases: ["Weekly homework packs", "Revision booklets", "Session handouts"],
+    useCases: [
+      "Weekly homework packs for parents",
+      "Board revision booklets",
+      "Tuition session handouts",
+    ],
     privacyNote:
       "Merging runs in your browser. Files are not uploaded to Mentr servers.",
-    metaTitle: "Merge PDF Online Free | Mentr Tools",
+    metaTitle: "Merge PDF Online Free — WhatsApp Homework | Mentr",
     metaDescription:
-      "Merge PDF files free online in your browser. No signup. Files stay on your device.",
-    keywords: ["merge pdf online free", "combine pdf", "merge pdf for teachers"],
+      "Merge PDF free online in your browser for school & tuition. पीडीएफ मर्ज करें — no signup, files stay on your device.",
+    keywords: [
+      "merge pdf online free",
+      "combine pdf",
+      "merge pdf for teachers",
+      "merge homework pdf whatsapp",
+      "पीडीएफ मर्ज",
+      "pdf merge karo",
+      "merge pdf India free",
+    ],
     audience: ["pdf", "teachers", "students"],
     icon: "merge",
     accent: "coral",
+    popular: true,
     blogSlug: "merge-pdf-online-free",
     faqs: [
       {
@@ -351,24 +221,37 @@ export const TOOLS: ToolDef[] = [
     slug: "pdf-compress",
     title: "Compress PDF",
     shortTitle: "Compress PDF",
-    description: "Shrink PDF size for WhatsApp, email, or school portals.",
+    description:
+      "Shrink PDF size for WhatsApp (≈16 MB limit), email, or school portals — private.",
     intro:
-      "Compress homework PDFs in the browser so WhatsApp and portals accept them — without uploading exam papers to a random site.",
+      "Compress homework PDFs in the browser so WhatsApp and school portals accept them — without uploading exam papers to a random site.",
     howTo: [
       "Choose a PDF.",
       "Pick Light or Strong.",
       "Download and check readability.",
     ],
-    useCases: ["WhatsApp sharing", "Portal uploads", "Email attachments"],
+    useCases: [
+      "WhatsApp homework sharing",
+      "School / college portal uploads",
+      "Email attachments under size caps",
+    ],
     privacyNote:
       "Compression runs in your browser. Files are not uploaded to Mentr servers.",
-    metaTitle: "Compress PDF Online Free for WhatsApp | Mentr Tools",
+    metaTitle: "Compress PDF for WhatsApp Free India | Mentr",
     metaDescription:
-      "Compress PDF free for WhatsApp and email in your browser — no upload, no signup.",
-    keywords: ["compress pdf for whatsapp", "reduce pdf size online free"],
+      "Compress PDF free for WhatsApp and school portals — no upload. पीडीएफ कंप्रेस. Light or Strong mode. No signup.",
+    keywords: [
+      "compress pdf for whatsapp",
+      "reduce pdf size online free",
+      "compress pdf India",
+      "whatsapp pdf size limit",
+      "पीडीएफ कंप्रेस",
+      "pdf size kam kare",
+    ],
     audience: ["pdf", "teachers", "students"],
     icon: "compress",
     accent: "butter",
+    popular: true,
     blogSlug: "compress-pdf-for-whatsapp",
     faqs: [
       {
@@ -383,7 +266,7 @@ export const TOOLS: ToolDef[] = [
     title: "Free Background Remover",
     shortTitle: "Background remover",
     description:
-      "Remove image backgrounds automatically and download a clean transparent PNG — 100% free forever, no watermark, no signup.",
+      "Remove image backgrounds and download a transparent PNG — free forever, no watermark, no signup.",
     intro:
       "Upload a photo, remove the background on your device, preview the transparent result, and download a PNG. Free forever with no watermark and no mandatory signup. Processing is private: your image never leaves this browser. Built as a dedicated utility while remove.bg’s standalone site moves into Canva (shutdown announced for 1 December 2026).",
     howTo: [
@@ -394,22 +277,24 @@ export const TOOLS: ToolDef[] = [
     ],
     useCases: [
       "Product photos for worksheets",
-      "Profile / ID-style cutouts",
+      "Student / ID-style cutouts",
       "Classroom slides and posters",
       "Homework images without cluttered backgrounds",
     ],
     privacyNote:
       "Private processing on your device. The model loads from Mentr’s CDN into your browser cache — your image never uploads.",
-    metaTitle:
-      "Free Background Remover — Remove Image Backgrounds | Mentr",
+    metaTitle: "Free Background Remover Online — No Watermark | Mentr",
     metaDescription:
-      "Remove image backgrounds for free and download transparent PNGs. No signup or watermark. Runs privately in your browser.",
+      "Remove image background free — transparent PNG, no watermark, no signup. बैकग्राउंड हटाएँ. Runs privately in your browser.",
     keywords: [
       "free background remover",
       "background remover",
       "remove background online free",
       "transparent PNG",
       "no watermark background remover",
+      "बैकग्राउंड रिमूवर",
+      "photo background hataye",
+      "ID photo background remove",
     ],
     audience: ["pdf", "teachers", "students"],
     icon: "image",
@@ -446,20 +331,29 @@ export const TOOLS: ToolDef[] = [
     slug: "images-to-pdf",
     title: "Images to PDF",
     shortTitle: "Images → PDF",
-    description: "Turn JPG or PNG homework photos into a single PDF.",
+    description:
+      "Turn JPG / PNG homework notebook photos into one PDF for WhatsApp.",
     intro:
-      "Convert camera shots to one reorderable PDF, then compress if WhatsApp complains.",
+      "Convert camera shots of homework into one reorderable PDF, then compress if WhatsApp complains. Built for parents and tutors in India.",
     howTo: ["Add images", "Reorder", "Create PDF"],
-    useCases: ["Homework photos", "Whiteboard shots"],
+    useCases: ["Homework notebook photos", "Whiteboard / board shots"],
     privacyNote:
       "Conversion runs in your browser. Photos are not uploaded to Mentr.",
-    metaTitle: "Images to PDF Free | Mentr Tools",
+    metaTitle: "Images to PDF Free — Homework Photos | Mentr",
     metaDescription:
-      "Convert images to PDF free in your browser. Private, no signup.",
-    keywords: ["images to pdf", "jpg to pdf", "homework photos pdf"],
+      "Convert JPG/PNG homework photos to one PDF free. फोटो से पीडीएफ. Private, reorder pages — then WhatsApp. No signup.",
+    keywords: [
+      "images to pdf",
+      "jpg to pdf",
+      "homework photos pdf",
+      "photo to pdf whatsapp",
+      "फोटो से पीडीएफ",
+      "notebook scan to pdf",
+    ],
     audience: ["pdf", "teachers", "students"],
     icon: "image",
     accent: "lavender",
+    popular: true,
     blogSlug: "images-to-pdf-homework",
     faqs: [
       {
@@ -472,16 +366,22 @@ export const TOOLS: ToolDef[] = [
     slug: "pdf-organize",
     title: "Organize PDF pages",
     shortTitle: "Organize PDF",
-    description: "Reorder or delete pages, then download a clean PDF.",
+    description: "Reorder or delete pages, then download a clean PDF for class.",
     intro:
-      "Fix out-of-order scans and remove blank pages before sharing with parents.",
+      "Fix out-of-order phone scans and remove blank pages before sharing with parents or the print shop.",
     howTo: ["Upload PDF", "Reorder or delete", "Download"],
-    useCases: ["Phone scans", "Clean worksheets"],
+    useCases: ["Phone homework scans", "Clean tuition worksheets"],
     privacyNote: "Page edits stay local. We do not store your PDF.",
     metaTitle: "Reorder & Delete PDF Pages Free | Mentr Tools",
     metaDescription:
-      "Reorder or delete PDF pages free online in your browser — no signup.",
-    keywords: ["reorder pdf pages", "delete pdf pages", "organize pdf"],
+      "Reorder or delete PDF pages free in your browser. स्कैन पेज ठीक करें — no signup, private for school files.",
+    keywords: [
+      "reorder pdf pages",
+      "delete pdf pages",
+      "organize pdf",
+      "fix scan page order",
+      "पीडीएफ पेज ठीक करें",
+    ],
     audience: ["pdf", "teachers"],
     icon: "organize",
     accent: "sky",
@@ -497,16 +397,21 @@ export const TOOLS: ToolDef[] = [
     slug: "pdf-extract-text",
     title: "Extract text from PDF",
     shortTitle: "Extract text",
-    description: "Copy text out of a PDF for notes, quizzes, or editing.",
+    description: "Copy text out of a typed PDF for notes, quizzes, or Docs.",
     intro:
-      "Pull selectable text from typed PDFs. Scanned image-only files need OCR elsewhere.",
+      "Pull selectable text from typed PDFs (notes, worksheets with a text layer). Scanned image-only files need OCR elsewhere first.",
     howTo: ["Choose a text PDF", "Extract", "Copy text"],
-    useCases: ["Quiz building", "Study notes"],
+    useCases: ["Quiz building from notes", "Study summaries in Docs"],
     privacyNote: "Extraction never uploads the PDF.",
     metaTitle: "Extract Text from PDF Free | Mentr Tools",
     metaDescription:
-      "Extract text from PDF free in your browser. No upload, no signup.",
-    keywords: ["extract text from pdf", "pdf to text free"],
+      "Extract text from PDF free in your browser. पीडीएफ से टेक्स्ट कॉपी — no upload, no signup.",
+    keywords: [
+      "extract text from pdf",
+      "pdf to text free",
+      "copy text from pdf",
+      "पीडीएफ से टेक्स्ट",
+    ],
     audience: ["pdf", "teachers", "students"],
     icon: "text",
     accent: "ink",
@@ -524,18 +429,22 @@ export const TOOLS: ToolDef[] = [
     shortTitle: "Split PDF",
     description: "Extract page ranges or split every page into separate PDFs.",
     intro:
-      "Split long scans into the pages you need tonight. Kept for compatibility — not featured as a primary tool.",
+      "Split long scans into the pages you need tonight for WhatsApp — one chapter or one worksheet at a time.",
     howTo: ["Choose PDF", "Enter ranges or every page", "Download"],
-    useCases: ["Extract chapters", "WhatsApp one page"],
+    useCases: ["Extract one chapter", "Send one page on WhatsApp"],
     privacyNote: "Split runs locally.",
     metaTitle: "Split PDF Online Free | Mentr Tools",
     metaDescription:
-      "Split a PDF into pages or ranges. Free, private, browser-only.",
-    keywords: ["split pdf online free", "extract pdf pages"],
+      "Split a PDF into pages or ranges free. पीडीएफ स्प्लिट — private, browser-only, no signup.",
+    keywords: [
+      "split pdf online free",
+      "extract pdf pages",
+      "split pdf whatsapp",
+      "पीडीएफ स्प्लिट",
+    ],
     audience: ["pdf"],
     icon: "split",
     accent: "sage",
-    deEmphasized: true,
     blogSlug: "split-pdf-online-free",
     faqs: [
       {
@@ -545,25 +454,30 @@ export const TOOLS: ToolDef[] = [
     ],
   },
 
-  // ── Kept, de-emphasized ────────────────────────────────────────
+  // ── Classroom printables ───────────────────────────────────────
   {
     slug: "name-tags",
     title: "Name tags & seating labels",
     shortTitle: "Name tags",
-    description: "Printable name tags and desk labels for classrooms and camps.",
+    description:
+      "Printable name tags and desk labels for tuition batches and camps.",
     intro:
-      "Simple desk labels. For a full classroom layout, a seating chart tool is planned next.",
+      "Paste the class list, choose tags per A4 page, download PDF, print and cut. Calm first-day batches without hand-lettering cards.",
     howTo: ["Paste names", "Choose tags per page", "Download PDF"],
-    useCases: ["New batch day", "Camps"],
+    useCases: ["New tuition batch day", "Summer camps"],
     privacyNote: "Names stay in your browser tab.",
-    metaTitle: "Free Name Tag Generator PDF | Mentr Tools",
+    metaTitle: "Free Name Tag Generator PDF for Class | Mentr",
     metaDescription:
-      "Create printable name tags as PDF. Free for tutors and camps.",
-    keywords: ["name tag generator", "classroom name tags"],
+      "Create printable classroom name tags as PDF. ट्यूशन नेम टैग — free for tutors and camps, no signup.",
+    keywords: [
+      "name tag generator",
+      "classroom name tags",
+      "tuition name tags printable",
+      "नेम टैग पीडीएफ",
+    ],
     audience: ["teachers"],
     icon: "tags",
     accent: "butter",
-    deEmphasized: true,
     blogSlug: "name-tag-generator-classroom",
     faqs: [
       {
@@ -577,20 +491,25 @@ export const TOOLS: ToolDef[] = [
     title: "Word counter & reading time",
     shortTitle: "Word counter",
     description:
-      "Count words, characters, and estimate reading time for essays.",
+      "Count words, characters, and estimate reading time for school essays.",
     intro:
-      "Paste text for live word and reading-time stats. Kept available; not featured as a primary education tool.",
+      "Paste text for live word, character, sentence, and reading-time stats (~200 wpm). Useful for CBSE essay limits — text stays in your tab.",
     howTo: ["Paste text", "Read live stats"],
-    useCases: ["Essay limits", "Blog drafts"],
+    useCases: ["CBSE / board essay word limits", "Tutor feedback drafts"],
     privacyNote: "Text stays in your browser tab.",
-    metaTitle: "Free Word Counter & Reading Time | Mentr Tools",
+    metaTitle: "Free Word Counter for Essays & Reading Time | Mentr",
     metaDescription:
-      "Free word counter with reading time. Text stays in your browser.",
-    keywords: ["word counter", "reading time calculator"],
+      "Free word counter with reading time for school essays. शब्द गिनती — text stays in your browser, no signup.",
+    keywords: [
+      "word counter",
+      "reading time calculator",
+      "essay word counter",
+      "CBSE essay word limit",
+      "शब्द गिनती",
+    ],
     audience: ["students", "teachers"],
     icon: "counter",
     accent: "sage",
-    deEmphasized: true,
     blogSlug: "word-counter-reading-time-students",
     faqs: [
       {
@@ -643,4 +562,9 @@ export function searchTools(query: string): ToolDef[] {
       .toLowerCase();
     return hay.includes(q) || q.split(/\s+/).every((w) => hay.includes(w));
   });
+}
+
+/** Cover image path for OG / Twitter (absolute via absoluteUrl in pages). */
+export function toolOgImagePath(slug: string): string {
+  return `/images/tools/${slug}.webp`;
 }

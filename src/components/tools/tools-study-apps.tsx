@@ -1,6 +1,11 @@
 "use client";
 
 import {
+  ToolField,
+  ToolWorkspace,
+  toolInputClass,
+} from "@/components/tools/tool-workspace";
+import {
   ToolsActionBar,
   ToolsDropzone,
   ToolsPrimaryButton,
@@ -409,6 +414,108 @@ export function ToolStudyTimetable() {
           Download timetable PDF
         </ToolsPrimaryButton>
       </ToolsActionBar>
+    </div>
+  );
+}
+
+export function ToolCgpaCalculator() {
+  useToolOpen("cgpa-calculator");
+  const [cgpa, setCgpa] = useState("8.2");
+  const [method, setMethod] = useState<"cbse9.5" | "gtu10" | "custom">("cbse9.5");
+  const [customMult, setCustomMult] = useState("9.5");
+
+  const result = useMemo(() => {
+    const n = Number(cgpa);
+    if (!Number.isFinite(n) || n < 0 || n > 10) {
+      return { ok: false as const, msg: "Enter a CGPA between 0 and 10." };
+    }
+    const mult =
+      method === "cbse9.5"
+        ? 9.5
+        : method === "gtu10"
+          ? 10
+          : Number(customMult);
+    if (!Number.isFinite(mult) || mult <= 0) {
+      return { ok: false as const, msg: "Enter a valid custom multiplier." };
+    }
+    const pct = n * mult;
+    return {
+      ok: true as const,
+      pct: Math.round(pct * 100) / 100,
+      mult,
+      label:
+        method === "cbse9.5"
+          ? "Approximate CBSE-style (× 9.5) — confirm with your school"
+          : method === "gtu10"
+            ? "Simple × 10 scale — confirm with your university"
+            : `Custom × ${mult} — confirm with your institution`,
+    };
+  }, [cgpa, method, customMult]);
+
+  useEffect(() => {
+    if (result.ok) {
+      trackToolEvent("tool_generated", { slug: "cgpa-calculator" });
+    }
+  }, [result]);
+
+  return (
+    <div>
+      <ToolWorkspace
+        form={
+          <>
+            <ToolField label="CGPA">
+              <input
+                className={toolInputClass}
+                inputMode="decimal"
+                value={cgpa}
+                onChange={(e) => setCgpa(e.target.value)}
+              />
+            </ToolField>
+            <ToolField label="Conversion method">
+              <select
+                className={toolInputClass}
+                value={method}
+                onChange={(e) => setMethod(e.target.value as typeof method)}
+              >
+                <option value="cbse9.5">Approx. × 9.5 (often cited for CBSE)</option>
+                <option value="gtu10">× 10 (some universities)</option>
+                <option value="custom">Custom multiplier</option>
+              </select>
+            </ToolField>
+            {method === "custom" ? (
+              <ToolField label="Custom multiplier">
+                <input
+                  className={toolInputClass}
+                  inputMode="decimal"
+                  value={customMult}
+                  onChange={(e) => setCustomMult(e.target.value)}
+                />
+              </ToolField>
+            ) : null}
+            <p className="rounded-xl border border-butter/40 bg-[#fff8e8] px-3 py-2 text-[12px] font-medium text-muted">
+              CGPA conversion depends on your institution&apos;s rules. This
+              calculator is informational only — always verify with your school
+              or university.
+            </p>
+          </>
+        }
+        preview={
+          !result.ok ? (
+            <p className="text-coral">{result.msg}</p>
+          ) : (
+            <div className="space-y-2">
+              <p className="text-[12px] font-bold uppercase text-muted">Approximate %</p>
+              <p className="text-[2.5rem] font-extrabold tabular-nums text-ink">
+                {result.pct}%
+              </p>
+              <p className="text-[13px] text-muted">
+                CGPA {cgpa} × {result.mult} = {result.pct}%
+              </p>
+              <p className="text-[12px] font-medium text-muted">{result.label}</p>
+            </div>
+          )
+        }
+      />
     </div>
   );
 }

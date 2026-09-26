@@ -482,7 +482,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       { label: "How to write a tutor profile that gets chosen", href: "/blog/how-to-write-tutor-profile" },
       { label: "Why you shouldn't pay for every lead", href: "/blog/tutoring-platform-lead-fees" },
       { label: "How to price your sessions", href: "/blog/how-to-price-tutoring-sessions" },
-      { label: "Free teacher tools (PDF & worksheets)", href: "/tools" },
+      { label: "Free teacher tools (PDF & printables)", href: "/tools" },
       { label: "Best free tutor platforms in India", href: "/blog/best-free-tutor-platforms-india" },
     ],
   },

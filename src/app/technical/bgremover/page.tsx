@@ -241,7 +241,7 @@ export default function TechnicalBgRemoverPage() {
                 “free forever, no signup, unlimited.”
               </p>
               <p className="mt-3 text-[15px] font-medium leading-relaxed text-muted">
-                Mentr Tools already ship browser-first (PDF, worksheets) on
+                Mentr Tools already ship browser-first PDF utilities on
                 Vercel + a light API. We do not run a GPU fleet for tools today.
                 A metered remove-bg-style API on every free visit would burn cash
                 or force caps, login walls, or watermarks.

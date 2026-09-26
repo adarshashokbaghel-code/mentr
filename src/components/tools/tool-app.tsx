@@ -8,13 +8,7 @@ import {
   ToolPdfSplit,
 } from "@/components/tools/tools-pdf-apps";
 import {
-  ToolAnswerKeyGenerator,
   ToolCgpaCalculator,
-  ToolLessonPlanGenerator,
-  ToolQuestionPaperGenerator,
-  ToolWorksheetGenerator,
-} from "@/components/tools/tools-generator-apps";
-import {
   ToolNameTags,
   ToolPdfExtractText,
   ToolStudyTimetable,
@@ -38,14 +32,6 @@ export function ToolApp({ slug }: { slug: string }) {
       return <ToolPdfOrganize />;
     case "pdf-extract-text":
       return <ToolPdfExtractText />;
-    case "worksheet-generator":
-      return <ToolWorksheetGenerator />;
-    case "question-paper-generator":
-      return <ToolQuestionPaperGenerator />;
-    case "answer-key-generator":
-      return <ToolAnswerKeyGenerator />;
-    case "lesson-plan-generator":
-      return <ToolLessonPlanGenerator />;
     case "cgpa-calculator":
       return <ToolCgpaCalculator />;
     case "name-tags":

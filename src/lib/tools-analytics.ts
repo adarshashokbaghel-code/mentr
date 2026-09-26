@@ -20,7 +20,12 @@ declare global {
 
 export function trackToolEvent(
   event: ToolEvent,
-  params: { slug: string; cta?: string; detail?: string },
+  params: {
+    slug: string;
+    cta?: string;
+    detail?: string;
+    placement?: string;
+  },
 ) {
   if (typeof window === "undefined") return;
   try {
@@ -29,6 +34,7 @@ export function trackToolEvent(
       tool_slug: params.slug,
       cta: params.cta,
       detail: params.detail,
+      placement: params.placement,
     });
   } catch {
     /* ignore */

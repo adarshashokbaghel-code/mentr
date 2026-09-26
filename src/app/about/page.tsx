@@ -117,7 +117,7 @@ export default function AboutPage() {
               </li>
               <li className="flex gap-2">
                 <span className="font-bold text-coral">→</span>
-                Free classroom and study tools (worksheets, papers, PDFs, calculators)
+                Free classroom and study tools (timetables, PDFs, calculators)
               </li>
               <li className="flex gap-2">
                 <span className="font-bold text-coral">→</span>
