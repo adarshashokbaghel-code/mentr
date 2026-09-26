@@ -54,7 +54,7 @@ const DEFAULT_FILTERS: SearchFiltersState = {
   locality: undefined,
   onlyOpen: false,
   onlyVerified: false,
-  mentorTier: "regular",
+  mentorTier: "premium",
   kind: "all",
   mode: "all",
   language: undefined,
@@ -110,9 +110,7 @@ function SearchContent() {
   const initialSubject = searchParams?.get("subject") || undefined;
   const initialArea = searchParams?.get("area") || undefined;
   const initialQuery = searchParams?.get("q") || "";
-  const kindParam = searchParams?.get("kind");
-  const initialKind =
-    kindParam === "tutor" || kindParam === "mentor" ? kindParam : "all";
+  // Never default kind=tutor|mentor from URL — it often yields 0 matches.
   const modeParam = searchParams?.get("mode");
   const initialMode =
     modeParam === "online" || modeParam === "inperson" || modeParam === "both"
@@ -120,17 +118,20 @@ function SearchContent() {
       : "all";
   const initialView =
     searchParams?.get("view") === "map" ? "map" : "list";
+  const tierParam = searchParams?.get("tier");
+  const initialTier =
+    tierParam === "regular" ? "regular" : "premium";
 
   const [filters, setFilters] = useState<SearchFiltersState>({
     ...DEFAULT_FILTERS,
     query: initialQuery,
     subject: initialSubject,
     locality: initialArea || undefined,
-    kind: initialKind,
+    kind: "all",
+    mentorTier: initialTier,
     mode: initialMode,
     view: initialView,
   });
-  const [tierDefaulted, setTierDefaulted] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selectedId, setSelectedId] = useState<string | undefined>();
 
@@ -143,19 +144,6 @@ function SearchContent() {
   const [catalogLoading, setCatalogLoading] = useState(true);
   const [catalogFailed, setCatalogFailed] = useState(false);
   const [catalogReloadKey, setCatalogReloadKey] = useState(0);
-
-  // Guests land on Premium mentors; logged-in parents keep Regular default.
-  useEffect(() => {
-    if (authLoading || tierDefaulted) return;
-    if (!user) {
-      setFilters((prev) =>
-        prev.mentorTier === "premium"
-          ? prev
-          : { ...prev, mentorTier: "premium" },
-      );
-    }
-    setTierDefaulted(true);
-  }, [authLoading, user, tierDefaulted]);
 
   useEffect(() => {
     let cancelled = false;
@@ -183,7 +171,7 @@ function SearchContent() {
         onlyOpen: filters.view === "map" ? false : filters.onlyOpen,
         onlyVerified: filters.onlyVerified,
         mentorTier: filters.mentorTier,
-        kind: filters.kind,
+        kind: "all",
         mode: filters.mode,
         language: filters.language,
         minExp: filters.minExp,

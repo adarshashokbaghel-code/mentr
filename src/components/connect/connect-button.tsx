@@ -98,27 +98,7 @@ export function ConnectButton({
       }
     };
 
-    // Free mentors: blur Connect until login. Premium: full Connect + guest send option.
-    if (!teacher.premium) {
-      return (
-        <button
-          type="button"
-          onClick={openGuestGate}
-          className={cn(className, "relative overflow-hidden")}
-          title="Sign in to connect"
-        >
-          <span
-            className="pointer-events-none absolute inset-0 z-[1] bg-white/25 backdrop-blur-[3px]"
-            aria-hidden
-          />
-          <span className="relative flex items-center justify-center gap-[inherit] blur-[3px] opacity-80">
-            <MessageCircle className="h-[1em] w-[1em]" />
-            {label}
-          </span>
-        </button>
-      );
-    }
-
+    // Guests: clear Connect CTA → role chooser (Premium also offers send-without-login).
     return (
       <button type="button" onClick={openGuestGate} className={className}>
         <MessageCircle className="h-[1em] w-[1em]" />

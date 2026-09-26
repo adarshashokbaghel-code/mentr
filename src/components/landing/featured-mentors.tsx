@@ -13,6 +13,8 @@ import {
 import { cn } from "@/lib/utils";
 import {
   Briefcase,
+  ChevronLeft,
+  ChevronRight,
   Globe2,
   GraduationCap,
   Home,
@@ -20,10 +22,12 @@ import {
   Sparkles,
   Zap,
 } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const FEATURED_LIMIT = 8;
-const SPOTLIGHT_COUNT = 3;
+const FEATURED_LIMIT = 12;
+/** Same visual width as the old 3-up grid (~1/3 of 1400px rail). */
+const CARD_WIDTH =
+  "w-[min(100%,calc(100vw-2rem))] sm:w-[min(380px,calc(50vw-2.5rem))] lg:w-[min(420px,calc((100vw-8rem)/3))] xl:w-[420px]";
 
 function scoreTeacher(t: Teacher): number {
   let score = 0;
@@ -249,159 +253,150 @@ function SpotlightCard({ teacher }: { teacher: Teacher }) {
   );
 }
 
-/** Compact card for the auto-moving strip. */
-function CarouselCard({ teacher }: { teacher: Teacher }) {
-  const rate = formatHourlyRate(teacher.hourlyRate);
-  const modes = modeLabels(teacher);
-  const profileHref = `/teachers/${teacher.id}`;
-  const name = displayName(teacher.name);
-  const subject = primarySubject(teacher);
+/** One strip of large spotlight cards — arrows + swipe. */
+function FeaturedStrip({ teachers }: { teachers: Teacher[] }) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
 
-  return (
-    <article className="flex w-[240px] shrink-0 flex-col overflow-hidden rounded-xl border border-hairline bg-white shadow-sm sm:w-[260px]">
-      <div className="relative aspect-[4/3] overflow-hidden bg-cream-band">
-        <Link href={profileHref} className="absolute inset-0 block">
-          <MentorPhoto
-            name={name}
-            initials={teacher.initials}
-            kind={teacher.kind}
-            imageUrl={teacher.imageUrl}
-            size="fill"
-            showInitials={false}
-            rounded="xl"
-            className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
-            alt=""
-          />
-          {rate ? (
-            <span className="absolute right-2 top-2 rounded bg-ink/85 px-1.5 py-0.5 text-[10px] font-semibold tabular-nums text-white">
-              {rate}
-            </span>
-          ) : null}
-        </Link>
-        {(teacher.verified || teacher.premium) && (
-          <span className="absolute left-2 top-2 z-10">
-            <MentorStatusBadges
-              verified={teacher.verified}
-              premium={teacher.premium}
-            />
-          </span>
-        )}
-      </div>
+  const updateArrows = useCallback(() => {
+    const el = scrollerRef.current;
+    if (!el) {
+      setCanPrev(false);
+      setCanNext(false);
+      return;
+    }
+    const max = el.scrollWidth - el.clientWidth;
+    setCanPrev(el.scrollLeft > 4);
+    setCanNext(max > 4 && el.scrollLeft < max - 4);
+  }, []);
 
-      <div className="flex flex-1 flex-col gap-1.5 p-3">
-        <div className="min-w-0">
-          <Link
-            href={profileHref}
-            className="block truncate text-[13px] font-semibold text-ink hover:text-coral"
-          >
-            {name}
-          </Link>
-          <p className="truncate text-[11px] font-medium text-coral">{subject}</p>
-        </div>
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    updateArrows();
+    el.addEventListener("scroll", updateArrows, { passive: true });
+    const ro = new ResizeObserver(updateArrows);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", updateArrows);
+      ro.disconnect();
+    };
+  }, [teachers, updateArrows]);
 
-        <div className="flex flex-wrap gap-1">
-          {modes.slice(0, 2).map((m) => (
-            <span
-              key={m}
-              className="inline-flex items-center gap-0.5 rounded-full border border-hairline bg-cream/70 px-1.5 py-px text-[9px] font-semibold text-ink"
-            >
-              {m === "Online" ? (
-                <Globe2 className="h-2.5 w-2.5 text-coral" />
-              ) : (
-                <Home className="h-2.5 w-2.5 text-coral" />
-              )}
-              {m}
-            </span>
-          ))}
-        </div>
-
-        <p className="flex items-center gap-1 text-[10px] text-muted">
-          <MapPin className="h-2.5 w-2.5 shrink-0" />
-          <span className="truncate">
-            {teacher.locality || teacher.area || "India"}
-          </span>
-          {teacher.experienceYears > 0 ? (
-            <span className="shrink-0">· {teacher.experienceYears} yrs</span>
-          ) : null}
-        </p>
-
-        <div className="mt-auto flex gap-1.5 pt-1">
-          <Link href={profileHref} className="flex-1">
-            <Button
-              size="sm"
-              variant="secondary"
-              className="h-8 w-full rounded-lg px-2 text-[11px]"
-            >
-              View
-            </Button>
-          </Link>
-          <Link
-            href={`/parent/signup?next=${encodeURIComponent(profileHref)}`}
-            className="flex-1"
-          >
-            <Button size="sm" className="h-8 w-full rounded-lg px-2 text-[11px]">
-              Connect
-            </Button>
-          </Link>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function FeaturedCarousel({ teachers }: { teachers: Teacher[] }) {
-  // Duplicate for seamless loop; keep enough cards for wide screens
-  const loop = useMemo(() => {
-    if (teachers.length === 0) return [];
-    const copies = teachers.length >= 6 ? 2 : 3;
-    return Array.from({ length: copies }, () => teachers).flat();
-  }, [teachers]);
+  function scrollByDir(dir: -1 | 1) {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const card = el.querySelector<HTMLElement>("[data-featured-card]");
+    const gap = 20;
+    const step = (card?.offsetWidth ?? el.clientWidth * 0.8) + gap;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  }
 
   if (teachers.length === 0) return null;
 
+  const showArrows = teachers.length > 1;
+
   return (
-    <div className="relative mt-6 w-full overflow-hidden sm:mt-8">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-white to-transparent sm:w-16" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-white to-transparent sm:w-16" />
+    <div className="relative">
+      {showArrows ? (
+        <>
+          <button
+            type="button"
+            aria-label="Previous mentors"
+            disabled={!canPrev}
+            onClick={() => scrollByDir(-1)}
+            className={cn(
+              "absolute left-0 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[2px_2px_0_0_#1a231c] transition sm:flex",
+              "hover:bg-cream disabled:pointer-events-none disabled:opacity-30",
+              "-translate-x-1 lg:-translate-x-3",
+            )}
+          >
+            <ChevronLeft className="h-5 w-5" strokeWidth={2.5} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next mentors"
+            disabled={!canNext}
+            onClick={() => scrollByDir(1)}
+            className={cn(
+              "absolute right-0 top-1/2 z-20 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[2px_2px_0_0_#1a231c] transition sm:flex",
+              "hover:bg-cream disabled:pointer-events-none disabled:opacity-30",
+              "translate-x-1 lg:translate-x-3",
+            )}
+          >
+            <ChevronRight className="h-5 w-5" strokeWidth={2.5} />
+          </button>
+        </>
+      ) : null}
+
       <div
-        className="flex w-max gap-3 py-1 animate-marquee sm:gap-4"
-        style={{ animationDuration: `${Math.max(28, teachers.length * 6)}s` }}
+        ref={scrollerRef}
+        className={cn(
+          "flex gap-4 overflow-x-auto overscroll-x-contain pb-2 pt-1",
+          "snap-x snap-mandatory scroll-smooth",
+          "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "sm:gap-5",
+        )}
       >
-        {loop.map((t, i) => (
-          <CarouselCard key={`${t.id}-${i}`} teacher={t} />
+        {teachers.map((t) => (
+          <div
+            key={t.id}
+            data-featured-card
+            className={cn("shrink-0 snap-start", CARD_WIDTH)}
+          >
+            <SpotlightCard teacher={t} />
+          </div>
         ))}
       </div>
+
+      {/* Mobile: compact arrow row */}
+      {showArrows ? (
+        <div className="mt-3 flex items-center justify-center gap-3 sm:hidden">
+          <button
+            type="button"
+            aria-label="Previous mentors"
+            disabled={!canPrev}
+            onClick={() => scrollByDir(-1)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[2px_2px_0_0_#1a231c] disabled:opacity-30"
+          >
+            <ChevronLeft className="h-4 w-4" strokeWidth={2.5} />
+          </button>
+          <button
+            type="button"
+            aria-label="Next mentors"
+            disabled={!canNext}
+            onClick={() => scrollByDir(1)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[2px_2px_0_0_#1a231c] disabled:opacity-30"
+          >
+            <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }
 
 function FeaturedSkeleton() {
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div
-            key={i}
-            className="overflow-hidden rounded-2xl border border-hairline bg-white"
-          >
-            <div className="aspect-[16/11] animate-pulse bg-cream-band sm:aspect-[5/3]" />
-            <div className="space-y-2.5 p-4 sm:p-5">
-              <div className="h-5 w-40 animate-pulse rounded bg-cream-band" />
-              <div className="h-3.5 w-24 animate-pulse rounded bg-cream-band" />
-              <div className="h-3 w-full animate-pulse rounded bg-cream-band" />
-              <div className="h-10 w-full animate-pulse rounded-xl bg-cream-band" />
-            </div>
+    <div className="flex gap-4 overflow-hidden sm:gap-5">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <div
+          key={i}
+          className={cn(
+            "shrink-0 overflow-hidden rounded-2xl border border-hairline bg-white",
+            CARD_WIDTH,
+          )}
+        >
+          <div className="aspect-[16/11] animate-pulse bg-cream-band sm:aspect-[5/3]" />
+          <div className="space-y-2.5 p-4 sm:p-5">
+            <div className="h-5 w-40 animate-pulse rounded bg-cream-band" />
+            <div className="h-3.5 w-24 animate-pulse rounded bg-cream-band" />
+            <div className="h-3 w-full animate-pulse rounded bg-cream-band" />
+            <div className="h-10 w-full animate-pulse rounded-xl bg-cream-band" />
           </div>
-        ))}
-      </div>
-      <div className="flex gap-3 overflow-hidden">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div
-            key={i}
-            className="h-[280px] w-[240px] shrink-0 animate-pulse rounded-xl bg-cream-band"
-          />
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -451,17 +446,14 @@ export function FeaturedMentors({
     };
   }, []);
 
-  if (teachers && teachers.length === 0) return null;
-
-  // Premium mentors lead the spotlight row; remaining fill the carousel.
   const ordered = teachers
     ? [
         ...teachers.filter((t) => t.premium),
         ...teachers.filter((t) => !t.premium),
       ]
     : [];
-  const spotlight = ordered.slice(0, SPOTLIGHT_COUNT);
-  const carousel = ordered.slice(SPOTLIGHT_COUNT);
+
+  if (teachers && teachers.length === 0) return null;
 
   return (
     <section
@@ -479,22 +471,22 @@ export function FeaturedMentors({
               Featured for parents
             </p>
             <h2 className="mt-1.5 text-xl font-bold tracking-tight text-ink sm:text-2xl">
-              Tutors parents are hiring{" "}
-              <span className="text-coral">right now</span>
+              Premium mentors parents{" "}
+              <span className="text-coral">hire first</span>
             </h2>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
-              Hand-picked verified profiles — subjects, areas, and fees. Connect
-              free or try Instant Connect.
+              Same large profiles for every Premium mentor — use the arrows or
+              swipe as the list grows. Connect free or try Instant Connect.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Link href="/search">
+            <Link href="/search?tier=premium">
               <Button
                 size="sm"
                 variant="secondary"
                 className="h-9 rounded-lg text-xs"
               >
-                Browse all
+                Browse Premium
               </Button>
             </Link>
             <Link href="/parent/signup?next=/parent/dashboard%23instant-connect">
@@ -510,18 +502,10 @@ export function FeaturedMentors({
           {teachers == null ? (
             <FeaturedSkeleton />
           ) : (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:gap-5">
-              {spotlight.map((t) => (
-                <SpotlightCard key={t.id} teacher={t} />
-              ))}
-            </div>
+            <FeaturedStrip teachers={ordered} />
           )}
         </div>
       </div>
-
-      {teachers != null && carousel.length > 0 ? (
-        <FeaturedCarousel teachers={carousel} />
-      ) : null}
     </section>
   );
 }

@@ -29,7 +29,7 @@ export interface SearchFiltersState {
   locality?: string;
   onlyOpen: boolean;
   onlyVerified: boolean;
-  /** Default regular — parents browse non-premium first */
+  /** Default premium on /search — Regular tab shows free mentors */
   mentorTier: "regular" | "premium";
   kind: KindFilter;
   /** Delivery mode: online, in person, or teachers offering both */
@@ -325,35 +325,6 @@ function FilterPanel({
 
           <section className="mt-5 space-y-2">
             <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
-              Type
-            </p>
-            <div className="grid grid-cols-3 gap-1.5">
-              {(
-                [
-                  { value: "all", label: "All" },
-                  { value: "tutor", label: "Tutors" },
-                  { value: "mentor", label: "Mentors" },
-                ] as const
-              ).map((opt) => (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() => onChange({ kind: opt.value })}
-                  className={cn(
-                    "rounded-md border py-2 text-xs font-semibold transition",
-                    filters.kind === opt.value
-                      ? "border-coral bg-coral text-white"
-                      : "border-hairline bg-white text-ink hover:border-ink/20",
-                  )}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-5 space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">
               Teaching mode
             </p>
             <div className="grid grid-cols-2 gap-1.5">
@@ -543,7 +514,6 @@ export function SearchHeader({
       !!filters.locality ||
       !!filters.query.trim() ||
       filters.onlyVerified ||
-      filters.kind !== "all" ||
       filters.mode !== "all" ||
       !!filters.language ||
       filters.minExp > 0 ||
@@ -556,7 +526,6 @@ export function SearchHeader({
     filters.subject,
     filters.locality,
     filters.onlyVerified,
-    filters.kind !== "all",
     filters.mode !== "all",
     !!filters.language,
     filters.minExp > 0,
@@ -583,7 +552,7 @@ export function SearchHeader({
             >
               <button
                 type="button"
-                onClick={() => onChange({ mentorTier: "regular" })}
+                onClick={() => onChange({ mentorTier: "regular", kind: "all" })}
                 className={cn(
                   "flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition",
                   filters.mentorTier === "regular"
@@ -595,7 +564,7 @@ export function SearchHeader({
               </button>
               <button
                 type="button"
-                onClick={() => onChange({ mentorTier: "premium" })}
+                onClick={() => onChange({ mentorTier: "premium", kind: "all" })}
                 className={cn(
                   "flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition",
                   filters.mentorTier === "premium"

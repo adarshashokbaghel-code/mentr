@@ -197,7 +197,7 @@ export const SEO_GROWTH_SEP2026: Record<string, ArticleContent> = {
       { label: "Find mentors near me", href: "/find-mentors-near-me" },
       { label: "Find mentors worldwide", href: "/blog/find-mentor-online-any-country" },
       { label: "Best free tutor platforms India", href: "/blog/best-free-tutor-platforms-india" },
-      { label: "Browse mentors on Mentr", href: "/search?kind=mentor" },
+      { label: "Browse mentors on Mentr", href: "/search" },
     ],
   },
 

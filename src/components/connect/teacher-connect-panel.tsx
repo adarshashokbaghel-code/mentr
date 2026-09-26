@@ -202,28 +202,10 @@ export function TeacherConnectPanel({
                   openRoleChooser(pathname ?? undefined);
                 }
               }}
-              className={cn(
-                "mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-coral text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-coral-dark active:scale-[0.98] sm:w-auto sm:px-8",
-                !user && !teacher.premium && "relative overflow-hidden",
-              )}
+              className="mt-4 inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-coral text-sm font-semibold text-white shadow-sm transition-all duration-150 hover:bg-coral-dark active:scale-[0.98] sm:w-auto sm:px-8"
             >
-              {!user && !teacher.premium ? (
-                <>
-                  <span
-                    className="pointer-events-none absolute inset-0 z-[1] rounded-xl bg-white/25 backdrop-blur-[3px]"
-                    aria-hidden
-                  />
-                  <span className="relative flex items-center gap-2 blur-[3px] opacity-80">
-                    <MessageCircle className="h-4 w-4" />
-                    Connect with {firstName}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <MessageCircle className="h-4 w-4" />
-                  Connect with {firstName}
-                </>
-              )}
+              <MessageCircle className="h-4 w-4" />
+              Connect with {firstName}
             </button>
           ) : (
             <span className="mt-4 inline-flex h-11 w-full items-center justify-center rounded-xl bg-cream text-sm font-semibold text-muted sm:w-auto sm:px-8">

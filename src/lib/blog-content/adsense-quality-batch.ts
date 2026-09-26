@@ -622,7 +622,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       { label: "Find mentors near me", href: "/find-mentors-near-me" },
       { label: "Programming mentors", href: "/find-mentors/programming" },
       { label: "Find a career mentor free", href: "/blog/how-to-find-career-mentor-free" },
-      { label: "Browse mentors", href: "/search?kind=mentor" },
+      { label: "Browse mentors", href: "/search" },
     ],
   },
 

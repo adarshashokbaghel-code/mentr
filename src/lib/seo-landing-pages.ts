@@ -379,7 +379,7 @@ function mentorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
     },
     secondaryCta: {
       label: "Browse mentors free",
-      href: "/search?kind=mentor",
+      href: "/search",
     },
     relatedLinks: [
       { label: "Find online tutors", href: geoPath("/find-online-tutors", geo) },

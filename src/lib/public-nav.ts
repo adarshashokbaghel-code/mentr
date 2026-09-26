@@ -70,7 +70,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
         },
         {
           label: "Find mentors",
-          href: "/search?kind=mentor",
+          href: "/search",
           description: "Career, coding, and skill mentors",
         },
         {
