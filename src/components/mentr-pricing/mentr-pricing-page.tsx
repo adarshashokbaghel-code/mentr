@@ -368,18 +368,18 @@ export function MentrPricingPage() {
               </LpBadge>
             </div>
 
-            <p className="mt-5 text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+            <p className="mt-5 text-2xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
               Mentr
             </p>
 
-            <h1 className="mt-3 text-balance text-[1.65rem] font-bold leading-[1.12] tracking-tight text-ink sm:text-4xl lg:text-[2.75rem] lg:leading-[1.08]">
+            <h1 className="mt-3 text-balance text-[1.4rem] font-bold leading-[1.12] tracking-tight text-ink sm:text-4xl lg:text-[2.75rem] lg:leading-[1.08]">
               Free forever.
               <span className="mt-1.5 block text-coral">
                 Premium when you&apos;re ready to scale.
               </span>
             </h1>
 
-            <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted lg:mx-0">
+            <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-muted sm:text-base lg:mx-0">
               Core mentoring stays free. Premium adds unlimited pitches, parent
               contact unlocks, a human SPOC, and featured listing — parents
               never pay to reach you.

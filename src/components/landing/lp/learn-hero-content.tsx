@@ -59,6 +59,18 @@ export function LearnHeroContent({ copy }: { copy: LearnLandingCopy }) {
       <p className="learn-hero-reveal learn-hero-reveal-delay-2 max-w-xl text-[14px] leading-relaxed text-[#5a6472] sm:text-[17px]">
         {copy.heroSub}
       </p>
+      <p className="learn-hero-reveal learn-hero-reveal-delay-2 max-w-xl text-[12px] leading-relaxed text-[#5a6472]/sm:text-[13px]">
+        Parent-enrolled · adult account · no Google AdSense on Learn pages. See
+        our{" "}
+        <Link href="/privacy" className="font-semibold text-[#ff6a1a] hover:underline">
+          Privacy policy
+        </Link>{" "}
+        and{" "}
+        <Link href="/safety" className="font-semibold text-[#ff6a1a] hover:underline">
+          Safety
+        </Link>
+        .
+      </p>
 
       <div className="learn-hero-reveal learn-hero-reveal-delay-2 grid grid-cols-3 gap-2 sm:gap-3">
         {PERKS.map(({ icon: Icon, label, tint }) => (

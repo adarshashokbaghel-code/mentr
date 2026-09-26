@@ -10,6 +10,7 @@ import { getPublicNavGroups, type PublicNavGroup } from "@/lib/public-nav";
 import { cn } from "@/lib/utils";
 import {
   ChevronDown,
+  Crown,
   LayoutDashboard,
   LogOut,
   Megaphone,
@@ -72,7 +73,7 @@ function NavDropdown({
         onClick={() => (open ? onClose() : onOpen())}
       >
         {group.id === "learn" && (
-          <LearnDino size={18} className="h-[18px] w-[18px]" />
+          <LearnDino size={18} className="hidden h-[18px] w-[18px] md:inline" />
         )}
         {group.label}
         <ChevronDown
@@ -154,6 +155,16 @@ export function Navbar() {
               }
             />
           ))}
+          <Link href="/premiummentors" className="ml-0.5">
+            <Button
+              size="sm"
+              variant="secondary"
+              className="gap-1.5 border-0 bg-transparent font-medium text-muted shadow-none hover:bg-cream-band hover:text-ink"
+            >
+              <Crown className="h-3.5 w-3.5 text-[#6b87f5]" />
+              Premium mentors
+            </Button>
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-2.5 md:flex">
@@ -185,6 +196,16 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-1.5 lg:hidden">
+          <Link href="/premiummentors">
+            <Button
+              size="sm"
+              variant="secondary"
+              className="h-9 gap-1 border-0 bg-transparent px-2.5 text-[12px] font-semibold text-muted shadow-none hover:bg-cream-band hover:text-ink"
+            >
+              <Crown className="h-3.5 w-3.5 text-[#6b87f5]" />
+              Premium
+            </Button>
+          </Link>
           {!loading && user?.role === "parent" && <ParentNotificationsBell />}
           <button
             type="button"
@@ -200,6 +221,20 @@ export function Navbar() {
       {open && (
         <div className="border-t border-hairline bg-cream lg:hidden">
           <nav className="flex max-h-[min(80vh,640px)] flex-col gap-1 overflow-y-auto p-4 short:max-h-[min(70dvh,480px)] short:p-3 shorter:max-h-[min(60dvh,360px)]">
+            <Link
+              href="/premiummentors"
+              className="mb-1"
+              onClick={() => setOpen(false)}
+            >
+              <Button
+                size="sm"
+                variant="secondary"
+                className="h-11 w-full justify-start gap-2.5 border-0 bg-transparent px-3 text-sm font-semibold text-ink shadow-none hover:bg-cream-band"
+              >
+                <Crown className="h-4 w-4 text-[#6b87f5]" />
+                Premium mentors
+              </Button>
+            </Link>
             {navGroups.map((group) => {
               const expanded = mobileGroup === group.id;
               return (
@@ -216,7 +251,10 @@ export function Navbar() {
                   >
                     <span className="inline-flex items-center gap-1.5">
                       {group.id === "learn" && (
-                        <LearnDino size={18} className="h-[18px] w-[18px]" />
+                        <LearnDino
+                          size={18}
+                          className="hidden h-[18px] w-[18px] md:inline"
+                        />
                       )}
                       {group.label}
                     </span>

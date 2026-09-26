@@ -1,16 +1,26 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { isAdSenseBlockedPath } from "@/lib/adsense-paths";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const CONSENT_KEY = "mentr_cookie_consent";
 
 export function CookieConsent() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
   const acceptRef = useRef<HTMLButtonElement>(null);
 
+  // No analytics/ads on Learn or private paths — skip the banner there.
+  const skip = isAdSenseBlockedPath(pathname);
+
   useEffect(() => {
+    if (skip) {
+      setVisible(false);
+      return;
+    }
     try {
       if (!localStorage.getItem(CONSENT_KEY)) {
         setVisible(true);
@@ -18,7 +28,7 @@ export function CookieConsent() {
     } catch {
       setVisible(true);
     }
-  }, []);
+  }, [skip]);
 
   const dismiss = useCallback((value: "accepted" | "dismissed") => {
     try {
@@ -42,7 +52,6 @@ export function CookieConsent() {
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("keydown", onKey);
-      // Only restore if focus was lost with the banner, not moved elsewhere.
       if (
         previousFocus instanceof HTMLElement &&
         previousFocus.isConnected &&
@@ -53,7 +62,7 @@ export function CookieConsent() {
     };
   }, [visible, dismiss]);
 
-  if (!visible) return null;
+  if (skip || !visible) return null;
 
   return (
     <div
@@ -69,15 +78,23 @@ export function CookieConsent() {
           id="cookie-notice-description"
           className="min-w-0 max-w-3xl text-sm leading-relaxed text-muted"
         >
-          We use cookies for sign-in, Google Analytics, and Google AdSense ads on
-          public pages (home, blog, guides). Ads help keep Mentr free. See our{" "}
+          We use cookies for sign-in and, on public parent/tutor pages, Google
+          Analytics and Google AdSense. We do not run ads on Mentr Learn. See
+          our{" "}
           <Link
             href="/privacy"
             className="font-semibold text-ink underline-offset-2 hover:underline"
           >
             Privacy policy
           </Link>{" "}
-          for details, opt-out links, and how Google uses data for advertising.
+          and{" "}
+          <Link
+            href="/cookie-policy"
+            className="font-semibold text-ink underline-offset-2 hover:underline"
+          >
+            Cookie policy
+          </Link>
+          .
         </p>
         <div className="flex shrink-0 flex-wrap items-center gap-2">
           <Button

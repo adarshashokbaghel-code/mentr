@@ -28,7 +28,7 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Find verified tutors and mentors free on Mentr. Search by subject, Instant Connect, or post a need — WhatsApp after they accept. Also Mentr Learn (Class 3–5 coding) and Snap & Grade. No fees, no commission.";
+  "Find verified tutors and mentors free on Mentr. Built for parents and adult students: search by subject, Instant Connect, or post a need — WhatsApp after they accept. Free classroom tools and guides. No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
@@ -63,16 +63,10 @@ export const SITE_KEYWORDS = [
   "find mentors near me",
   "online tutor jobs",
   "Instant Connect tutor",
-  "coding for kids Class 5 free",
-  "Mentr Learn",
-  "Learn by Mentr",
-  "mentr.in learn",
-  "mentr.in/learn",
   "Snap & Grade",
   "Snap and Grade",
   "mentr.in/snapandgrade",
   "CBSE Class 9–12 NCERT marking",
-  "free coding kids Mentr Learn",
   "Paprly",
   "Mentr open source",
   "open source tutoring platform",
@@ -80,6 +74,18 @@ export const SITE_KEYWORDS = [
   "MIT licensed tutor platform",
   "contribute to Mentr",
 ];
+
+/**
+ * Publisher identity for About / Contact / legal footers (AdSense transparency).
+ * Use the same postal city you enter in your AdSense payment profile.
+ */
+export const PUBLISHER_LEGAL_NAME = "Paprly";
+export const PUBLISHER_PRODUCT_NAME = "Mentr";
+export const PUBLISHER_LOCATION = "Bengaluru, Karnataka, India";
+export const PUBLISHER_SUPPORT_EMAIL = "hello@mentr.in";
+export const PUBLISHER_SAFETY_EMAIL = "safety@mentr.in";
+export const PUBLISHER_AUDIENCE =
+  "Parents, guardians, adult students, and tutors/mentors (18+). Children's learning products (Mentr Learn) are parent-enrolled and supervised — accounts are created by adults.";
 
 /** JSON-LD snippet for schema.org parentOrganization. */
 export const PARENT_ORG_JSON_LD = {

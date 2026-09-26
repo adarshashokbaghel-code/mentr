@@ -1,38 +1,18 @@
 "use client";
 
 import { ADSENSE_CLIENT_ID } from "@/components/seo/google-verification";
+import { isAdSenseBlockedPath } from "@/lib/adsense-paths";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 
-/** Paths where third-party ads must not load (auth, dashboards, previews). */
-const PRIVATE_PREFIXES = [
-  "/dashboard",
-  "/profiling",
-  "/parent/",
-  "/faculty",
-  "/board",
-  "/login",
-  "/admin",
-  "/admintestingistrueonlyman134hsydsudy4",
-  "/tmp-wa-preview",
-  "/api/",
-];
-
-function isPrivatePath(pathname: string | null): boolean {
-  if (!pathname) return true;
-  if (pathname === "/parent") return true;
-  return PRIVATE_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(prefix),
-  );
-}
-
 /**
- * Path-aware AdSense script for public pages.
- * Root layout also ships a beforeInteractive head script for site verification.
+ * Path-aware AdSense script for adult/parent public pages only.
+ * Never loads on /learn (child-directed) or private account surfaces.
+ * Site ownership still uses the google-adsense-account meta tag in <head>.
  */
 export function AdSenseLoader() {
   const pathname = usePathname();
-  if (isPrivatePath(pathname)) return null;
+  if (isAdSenseBlockedPath(pathname)) return null;
 
   return (
     <Script

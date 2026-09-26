@@ -74,6 +74,12 @@ export default function AboutPage() {
               sides directly on WhatsApp. Our platform fee is ₹0, forever.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
+              Who it is for: parents, guardians, adult students, and tutors
+              (18+). Optional children&apos;s learning products are
+              parent-enrolled and supervised. Operated by {PARENT_COMPANY_NAME},{" "}
+              Bengaluru, Karnataka, India.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-muted">
               Mentr is built by{" "}
               <a
                 href={PARENT_COMPANY_URL}
@@ -153,12 +159,12 @@ export default function AboutPage() {
               How Mentr stays free
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              There is no platform commission on tuition fees and no lead coins
-              for tutors. Core marketplace features — search, profiles, connect
-              requests, and the requirements flow — are free for parents and
-              faculty. Public marketing and guide pages may show Google AdSense
-              ads; logged-in dashboards do not. Optional profile boosts may be
-              offered later for visibility, but contact itself stays free.
+              Core marketplace features — search, profiles, connect requests, and
+              the requirements flow — are free for parents and faculty. Public
+              marketing and guide pages aimed at parents and tutors may show
+              Google AdSense ads; logged-in dashboards and Mentr Learn (/learn)
+              do not. Optional profile boosts may be offered later for
+              visibility, but contact itself stays free.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
               Beyond the marketplace, Mentr publishes free{" "}
@@ -274,8 +280,16 @@ export default function AboutPage() {
               >
                 editorial policy
               </Link>{" "}
-              to see how we research, update, and correct content. Public pages
-              may show Google AdSense ads; logged-in dashboards do not.
+              to see how we research, update, and correct content. Public
+              parent/tutor pages may show Google AdSense ads; Learn and
+              logged-in dashboards do not. Read our{" "}
+              <Link
+                href="/safety"
+                className="font-semibold text-coral hover:underline"
+              >
+                safety page
+              </Link>{" "}
+              for verification and reporting.
             </p>
           </div>
         </section>

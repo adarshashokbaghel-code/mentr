@@ -834,3 +834,46 @@ export function fetchAdminPremiumMentors(key: string) {
     stats?: AdminPremiumMentorStats;
   }>(key, "/api/admin/premium-mentors");
 }
+
+export type AdminPremiumRevealPerson = {
+  id: string;
+  name: string;
+  initials: string;
+  email: string | null;
+  imageUrl: string | null;
+  phone?: string | null;
+  city?: string | null;
+  area?: string | null;
+  premiumType?: string | null;
+};
+
+export type AdminPremiumRevealRow = {
+  id: string;
+  revealedAt: string | null;
+  hasPosted: boolean;
+  openPostsAtReveal: number;
+  mentor: AdminPremiumRevealPerson;
+  parent: AdminPremiumRevealPerson;
+};
+
+export type AdminPremiumRevealStats = {
+  total: number;
+  today: number;
+  uniqueMentors: number;
+  uniqueParents: number;
+  returned: number;
+};
+
+export function fetchAdminPremiumReveals(
+  key: string,
+  opts?: { q?: string; limit?: number },
+) {
+  const params = new URLSearchParams();
+  if (opts?.q) params.set("q", opts.q);
+  if (opts?.limit) params.set("limit", String(opts.limit));
+  const qs = params.toString();
+  return adminFetch<{
+    reveals: AdminPremiumRevealRow[];
+    stats: AdminPremiumRevealStats;
+  }>(key, `/api/admin/premium-reveals${qs ? `?${qs}` : ""}`);
+}

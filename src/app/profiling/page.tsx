@@ -1613,7 +1613,7 @@ function ProfilingContent() {
 
       {/* ------------------------------ footer bar ------------------------------ */}
       <footer className="sticky bottom-0 z-20 border-t border-hairline bg-cream/95 backdrop-blur-md">
-        <div className="mx-auto flex min-h-[68px] w-full max-w-[760px] flex-wrap items-center justify-between gap-2 px-4 py-2.5 sm:flex-nowrap sm:gap-3 sm:px-6">
+        <div className="mx-auto flex min-h-[56px] w-full max-w-[760px] flex-nowrap items-center justify-between gap-1.5 px-3 py-2 sm:min-h-[68px] sm:gap-3 sm:px-6 sm:py-2.5">
           {step > 0 ? (
             <button
               type="button"

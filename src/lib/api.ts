@@ -508,6 +508,8 @@ export type PremiumParentRow = {
   previouslyRevealed?: boolean;
   /** Seed / backfill persona — always listed after real signups */
   isSeed?: boolean;
+  /** Joined after directory cutoff — pinned above legacy-ranked parents */
+  isNewJoin?: boolean;
   phone: string;
   email: string | null;
   whatsappUrl: string | null;

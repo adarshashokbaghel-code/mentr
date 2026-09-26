@@ -16,9 +16,19 @@ const sections = [
   {
     title: "Who this applies to",
     body: [
-      "Mentr (mentr.in) is operated by Paprly. This policy covers everyone who uses the product: parents and students looking for tutors, faculty/mentors listing themselves, Premium mentors using the parent directory, and visitors to public pages.",
+      "Mentr (mentr.in) is operated by Paprly (Bengaluru, Karnataka, India). This policy covers everyone who uses the product: parents and adult students looking for tutors, faculty/mentors listing themselves, Premium mentors using the parent directory, and visitors to public pages.",
+      "Primary audience: parents, guardians, adult students, and tutors/mentors. Mentr is not a social network or entertainment site for children.",
       "On Mentr, “parent” accounts are also used by guardians or adult students arranging tutoring. References to parents below include those student/guardian users unless we say otherwise.",
       "By creating an account you confirm you have read this Privacy policy and our Terms of service. We record the date and version of that acceptance at signup.",
+    ],
+  },
+  {
+    title: "Children under 13 (and Mentr Learn)",
+    body: [
+      "Mentr accounts (parent and faculty) are for adults. You must be old enough to enter a binding contract in your country (generally 18+) to create an account.",
+      "Mentr Learn is an optional Class 3–5 learning product. Enrollment uses a parent/guardian email and OTP. Progress is stored on the parent’s account. Children should use Learn only with parental supervision.",
+      "We do not knowingly collect personal information directly from children under 13 for marketing or advertising. We do not show Google AdSense (or other third-party display ads) on /learn or inside the Learn app.",
+      "If you believe a child under 13 created an account or submitted data without parental consent, email hello@mentr.in and we will delete it promptly.",
     ],
   },
   {
@@ -105,8 +115,8 @@ const sections = [
     title: "Cookies & sessions",
     body: [
       "We use a session cookie / token to keep you signed in.",
-      "We use Google Analytics (gtag.js) on public pages to understand traffic. Analytics may set cookies such as _ga.",
-      "We use Google AdSense on public marketing and guide pages. Google and partners may use cookies for ads, including personalised ads where applicable.",
+      "We use Google Analytics (gtag.js) on public adult/parent marketing and guide pages to understand traffic. Analytics may set cookies such as _ga. We do not load Google Analytics on /learn.",
+      "We use Google AdSense on public marketing and guide pages aimed at parents and tutors. Google and partners may use cookies for ads, including personalised ads where applicable. We do not load AdSense on /learn or logged-in dashboards.",
       "You can manage ad personalisation in Google Ad Settings and control cookies in your browser. See also our Cookie policy.",
     ],
   },
@@ -122,7 +132,7 @@ const sections = [
     title: "Changes",
     body: [
       "Material changes will be noted on this page with an updated date. Continued use after changes means you accept the updated policy where permitted by law. Significant changes may also be flagged at next login or by email.",
-      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — multi-source parent enquiry records, Premium connectivity (no hire guarantee), directory visibility, and signup consent.`,
+      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — children / Mentr Learn (no ads), publisher location, and AdSense path rules.`,
     ],
   },
 ];
@@ -186,9 +196,10 @@ export default function PrivacyPage() {
                     aria-hidden
                     className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-coral"
                   />
-                  Public pages (home, blog, guides, FAQ, and similar) may show
+                  Public pages for parents and tutors (home, blog, guides, FAQ, and similar) may show
                   ads served by Google AdSense (publisher ID {ADSENSE_CLIENT_ID}
-                  ).
+                  ). We do not place AdSense on Mentr Learn (/learn) or other
+                  child-directed learning surfaces.
                 </li>
                 <li className="flex gap-2.5 text-[15px] leading-relaxed text-muted">
                   <span
@@ -269,7 +280,8 @@ export default function PrivacyPage() {
             <section>
               <h2 className="text-lg font-bold text-ink">Contact</h2>
               <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                Privacy questions or deletion requests:{" "}
+                Operator: Paprly · Product: Mentr · Location: Bengaluru,
+                Karnataka, India. Privacy questions or deletion requests:{" "}
                 <a
                   href="mailto:hello@mentr.in"
                   className="font-semibold text-coral underline-offset-2 hover:underline"

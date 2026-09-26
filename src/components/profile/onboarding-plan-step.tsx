@@ -41,7 +41,7 @@ export function OnboardingPlanStep({ selected, onSelect, disabled }: Props) {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 items-stretch gap-3 sm:gap-5">
+      <div className="grid grid-cols-1 items-stretch gap-3 sm:grid-cols-2 sm:gap-5">
         {/* Free — light */}
         <button
           type="button"
@@ -49,7 +49,7 @@ export function OnboardingPlanStep({ selected, onSelect, disabled }: Props) {
           onClick={() => onSelect("free")}
           aria-pressed={selected === "free"}
           className={cn(
-            "group flex min-h-[420px] w-full flex-col rounded-2xl border bg-white p-4 text-left transition sm:min-h-[480px] sm:p-6",
+            "group flex min-h-0 w-full flex-col rounded-2xl border bg-white p-4 text-left transition sm:min-h-[480px] sm:p-6",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/30",
             "disabled:opacity-60",
             selected === "free"
@@ -79,7 +79,7 @@ export function OnboardingPlanStep({ selected, onSelect, disabled }: Props) {
           </div>
 
           <div className="mt-5 flex flex-wrap items-baseline gap-x-1.5">
-            <span className="text-4xl font-bold tracking-tight text-ink sm:text-5xl">
+            <span className="text-3xl font-bold tracking-tight text-ink sm:text-5xl">
               $0
             </span>
             <span className="text-sm font-semibold text-muted">forever</span>
@@ -113,7 +113,7 @@ export function OnboardingPlanStep({ selected, onSelect, disabled }: Props) {
           onClick={() => onSelect("premium")}
           aria-pressed={selected === "premium"}
           className={cn(
-            "group relative flex min-h-[420px] w-full flex-col overflow-hidden rounded-2xl border-2 p-4 text-left transition sm:min-h-[480px] sm:p-6",
+            "group relative flex min-h-0 w-full flex-col overflow-hidden rounded-2xl border-2 p-4 text-left transition sm:min-h-[480px] sm:p-6",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-butter/60",
             "disabled:opacity-60",
             selected === "premium"
@@ -153,7 +153,7 @@ export function OnboardingPlanStep({ selected, onSelect, disabled }: Props) {
           </div>
 
           <div className="relative mt-5 flex flex-wrap items-baseline gap-x-1.5">
-            <span className="text-4xl font-bold tracking-tight sm:text-5xl">
+            <span className="text-3xl font-bold tracking-tight sm:text-5xl">
               $5
             </span>
             <span className="text-sm font-semibold text-white/55">/mo</span>

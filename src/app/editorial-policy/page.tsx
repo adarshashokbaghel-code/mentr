@@ -41,7 +41,7 @@ const sections = [
   {
     title: "Advertising & independence",
     body: [
-      "Mentr is free for parents and tutors. Public marketing and guide pages may show Google AdSense ads. Advertising does not influence which tutors appear in search results, who receives connect requests, or the order of editorial recommendations.",
+      "Mentr is free for parents and tutors. Public marketing and guide pages aimed at parents and tutors may show Google AdSense ads. We do not show AdSense on Mentr Learn (/learn). Advertising does not influence which tutors appear in search results, who receives connect requests, or the order of editorial recommendations.",
       "Sponsored content or paid partnerships, if ever introduced, will be clearly labelled. Today, all guides are editorial.",
     ],
   },
@@ -105,7 +105,8 @@ export default function EditorialPolicyPage() {
                 >
                   <PaprlyWordmark className="align-middle" />
                 </a>{" "}
-                ({PARENT_COMPANY_NAME}). Questions about this policy:{" "}
+                ({PARENT_COMPANY_NAME}), Bengaluru, Karnataka, India. Questions
+                about this policy:{" "}
                 <a
                   href="mailto:hello@mentr.in"
                   className="font-semibold text-coral hover:underline"

@@ -57,6 +57,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/parents", 0.95, "weekly"),
     entry("/find-tutor", 0.95, "weekly"),
     entry("/instant-connect", 0.95, "weekly"),
+    entry("/premiummentors", 0.95, "weekly"),
     entry("/snapandgrade", 0.95, "weekly"),
     entry("/snapandgrade/grade", 0.9, "weekly"),
     ...SNAP_GRADE_CLUSTERS.map((p) =>
@@ -95,6 +96,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/about", 0.7, "monthly"),
     entry("/open-source", 0.9, "weekly"),
     entry("/editorial-policy", 0.6, "monthly"),
+    entry("/safety", 0.7, "monthly"),
     entry("/contact", 0.7, "monthly"),
     entry("/request-feature", 0.7, "monthly"),
     ...VS_PAGES.map((p) => entry(`/vs/${p.slug}`, 0.65, "monthly")),

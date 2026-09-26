@@ -30,7 +30,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
           {
             label: "Mentr Learn",
             href: "/learn",
-            description: "Free coding & AI path for Class 3–5",
+            description: "Parent-enrolled Class 3–5 coding path (no ads)",
           },
           {
             label: "Full syllabus",
@@ -52,7 +52,6 @@ export function getPublicNavGroups(): PublicNavGroup[] {
     : null;
 
   return [
-    ...(learn ? [learn] : []),
     {
       id: "find",
       label: "Find",
@@ -62,6 +61,11 @@ export function getPublicNavGroups(): PublicNavGroup[] {
           label: "Find tutors",
           href: "/find-tutor",
           description: "Verified tutors nearby or online",
+        },
+        {
+          label: "Premium tutors",
+          href: "/premiummentors",
+          description: "100% verified Premium mentors",
         },
         {
           label: "Get matched instantly",
@@ -80,6 +84,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
         },
       ],
     },
+    ...(learn ? [learn] : []),
     {
       id: "tools",
       label: "Tools",
@@ -165,6 +170,11 @@ export function getPublicNavGroups(): PublicNavGroup[] {
           description: "MIT-licensed codebase",
         },
         {
+          label: "Safety",
+          href: "/safety",
+          description: "Verification, reporting, and child safety",
+        },
+        {
           label: "Contact",
           href: "/contact",
           description: "Support, safety, and partnerships",
@@ -232,6 +242,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
     Company: [
       { label: "About", href: "/about" },
       { label: "Open source", href: "/open-source" },
+      { label: "Safety", href: "/safety" },
       { label: "Editorial policy", href: "/editorial-policy" },
       { label: "Contact", href: "/contact" },
       { label: "Privacy", href: "/privacy" },

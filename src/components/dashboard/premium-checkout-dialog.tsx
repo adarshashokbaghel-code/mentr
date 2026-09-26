@@ -254,15 +254,15 @@ export function PremiumCheckoutDialog({
   return (
     <Dialog open={open} onOpenChange={(v) => !paying && onOpenChange(v)}>
       <DialogContent
-        className="max-h-[min(92vh,680px)] gap-0 overflow-y-auto p-0 sm:max-w-[520px]"
+        className="max-h-[min(92dvh,680px)] w-full gap-0 overflow-y-auto p-0 sm:max-w-[520px]"
         showCloseButton={!paying}
       >
-        <div className="border-b border-hairline px-5 pb-4 pt-5 sm:px-6 sm:pt-6">
-          <DialogHeader className="gap-1.5 text-left">
-            <DialogTitle className="text-xl font-bold tracking-tight text-ink">
+        <div className="border-b border-hairline px-4 pb-3 pt-4 sm:px-6 sm:pb-4 sm:pt-6">
+          <DialogHeader className="gap-1 text-left sm:gap-1.5">
+            <DialogTitle className="text-lg font-bold tracking-tight text-ink sm:text-xl">
               Premium Mentor
             </DialogTitle>
-            <DialogDescription className="text-[15px] leading-relaxed text-muted">
+            <DialogDescription className="text-[13px] leading-relaxed text-muted sm:text-[15px]">
               Pick how long you want Premium. Pay once in rupees. Activates
               right after payment.
             </DialogDescription>
@@ -270,11 +270,11 @@ export function PremiumCheckoutDialog({
         </div>
 
         {loadingCatalog ? (
-          <div className="px-5 py-12 text-center text-sm text-muted sm:px-6">
+          <div className="px-4 py-10 text-center text-sm text-muted sm:px-6 sm:py-12">
             Loading prices…
           </div>
         ) : (
-          <div className="space-y-5 px-5 py-5 sm:px-6">
+          <div className="space-y-4 px-4 py-4 sm:space-y-5 sm:px-6 sm:py-5">
             {/* Step 1 */}
             <div>
               <p className="text-[13px] font-semibold text-ink">
@@ -293,13 +293,13 @@ export function PremiumCheckoutDialog({
                       disabled={paying}
                       onClick={() => setMonths(p.months)}
                       className={cn(
-                        "rounded-lg border px-2 py-3 text-center transition",
+                        "rounded-lg border px-1.5 py-2.5 text-center transition sm:px-2 sm:py-3",
                         active
                           ? "border-ink bg-ink text-white"
                           : "border-hairline bg-white text-ink hover:border-ink/30 hover:bg-cream",
                       )}
                     >
-                      <span className="block text-lg font-bold tabular-nums">
+                      <span className="block text-base font-bold tabular-nums sm:text-lg">
                         {p.months}
                       </span>
                       <span

@@ -26,7 +26,7 @@ export function FacultyLoginModal() {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="faculty-login-title"
@@ -37,7 +37,7 @@ export function FacultyLoginModal() {
         aria-label="Close dialog"
         onClick={closeLogin}
       />
-      <div className="relative z-10 max-h-[90vh] w-full max-w-md overflow-y-auto rounded-2xl border-2 border-ink bg-white p-6 shadow-[4px_4px_0_0_#1c1a17] sm:p-8">
+      <div className="relative z-10 max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-t-2xl border-2 border-ink bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-[4px_4px_0_0_#1c1a17] sm:rounded-2xl sm:p-8 sm:pb-8">
         <button
           type="button"
           onClick={closeLogin}

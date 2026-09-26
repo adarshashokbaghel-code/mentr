@@ -109,7 +109,7 @@ export function ShortlistCompareBar() {
 
   return (
     <>
-      <div className="fixed bottom-4 left-1/2 z-40 w-[min(100%-2rem,420px)] -translate-x-1/2">
+      <div className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] left-1/2 z-40 w-[min(100%-1.5rem,420px)] -translate-x-1/2 sm:bottom-4 sm:w-[min(100%-2rem,420px)]">
         <div className="flex items-center gap-2 rounded-xl border border-hairline bg-white p-2 shadow-[0_12px_32px_rgba(26,35,28,0.14)]">
           <div className="min-w-0 flex-1 px-1">
             <p className="text-sm font-bold text-ink">
@@ -151,14 +151,14 @@ export function ShortlistCompareBar() {
 
       {open && (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-4 sm:items-center"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-ink/40 p-0 sm:items-center sm:p-4"
           role="dialog"
           aria-modal="true"
           aria-label="Compare saved tutors"
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-4xl overflow-hidden rounded-xl border border-hairline bg-white shadow-xl"
+            className="w-full max-w-4xl max-h-[92dvh] overflow-hidden rounded-t-xl border border-hairline bg-white shadow-xl sm:rounded-xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-hairline bg-cream px-4 py-3">

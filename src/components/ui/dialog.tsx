@@ -61,7 +61,7 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          "fixed top-[50%] left-[50%] z-[100] grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-xl border border-hairline bg-white p-6 text-ink shadow-[0_20px_50px_rgba(26,35,28,0.18)] duration-200 outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:max-w-lg",
+          "fixed inset-x-0 bottom-0 top-auto z-[100] grid w-full max-h-[min(92dvh,100%)] translate-x-0 translate-y-0 gap-4 overflow-y-auto rounded-t-2xl rounded-b-none border border-hairline bg-white p-4 text-ink shadow-[0_20px_50px_rgba(26,35,28,0.18)] duration-200 outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:inset-auto sm:left-[50%] sm:top-[50%] sm:bottom-auto sm:max-h-[min(92dvh,90vh)] sm:w-full sm:max-w-lg sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-xl sm:p-6",
           className
         )}
         {...props}

@@ -336,7 +336,7 @@ function CloseRequestModal({
         if (e.target === e.currentTarget && !busy) onClose();
       }}
     >
-      <div className="w-full max-w-md overflow-hidden rounded-t-2xl border-2 border-ink bg-white shadow-xl sm:rounded-2xl">
+      <div className="w-full max-w-md max-h-[90dvh] overflow-hidden rounded-t-2xl border-2 border-ink bg-white shadow-xl sm:rounded-2xl flex flex-col">
         <div className="flex items-start justify-between gap-3 border-b border-hairline px-5 py-4">
           <div>
             <h3 className="text-base font-bold text-ink">

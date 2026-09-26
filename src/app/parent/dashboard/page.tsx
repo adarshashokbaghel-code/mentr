@@ -209,18 +209,21 @@ export default function ParentDashboardPage() {
                     {
                       id: "connections" as const,
                       label: "Connections",
+                      shortLabel: "Connects",
                       Icon: Users,
                       count: waitingCount || undefined,
                     },
                     {
                       id: "instant" as const,
                       label: "Instant connect",
+                      shortLabel: "Instant",
                       Icon: Zap,
                       count: undefined,
                     },
                     {
                       id: "posts" as const,
                       label: "My posts",
+                      shortLabel: "Posts",
                       Icon: ClipboardList,
                       count: undefined,
                     },
@@ -233,14 +236,15 @@ export default function ParentDashboardPage() {
                     aria-selected={dashTab === tab.id}
                     onClick={() => setDashTab(tab.id)}
                     className={cn(
-                      "relative flex flex-1 items-center justify-center gap-1.5 rounded-lg px-2 py-2.5 text-[12px] font-bold transition sm:text-[13px]",
+                      "relative flex flex-1 items-center justify-center gap-1 rounded-lg px-1.5 py-2.5 text-[11px] font-bold leading-tight transition sm:gap-1.5 sm:px-2 sm:text-[13px]",
                       dashTab === tab.id
                         ? "bg-ink text-white shadow-sm"
                         : "text-muted hover:bg-cream hover:text-ink",
                     )}
                   >
-                    <tab.Icon className="h-3.5 w-3.5 shrink-0 opacity-90" />
-                    <span className="truncate">{tab.label}</span>
+                    <tab.Icon className="h-3.5 w-3.5 shrink-0" />
+                    <span className="sm:hidden">{tab.shortLabel}</span>
+                    <span className="hidden sm:inline">{tab.label}</span>
                     {tab.count ? (
                       <span
                         className={cn(
@@ -463,7 +467,7 @@ function ConnectionCard({
         <button
           type="button"
           onClick={onViewMessage}
-          className="inline-flex h-8 items-center rounded-md border border-hairline bg-white px-3 text-[12px] font-semibold text-ink hover:bg-cream"
+          className="inline-flex h-10 items-center rounded-md border border-hairline bg-white px-3 text-[13px] font-semibold text-ink hover:bg-cream sm:h-8 sm:text-[12px]"
         >
           Message
         </button>
@@ -476,7 +480,7 @@ function ConnectionCard({
             })}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-8 items-center gap-1.5 rounded-md bg-sage px-3 text-[12px] font-semibold text-white hover:opacity-90"
+            className="inline-flex h-10 items-center gap-1.5 rounded-md bg-sage px-3 text-[13px] font-semibold text-white hover:opacity-90 sm:h-8 sm:text-[12px]"
           >
             <MessageCircle className="h-3.5 w-3.5" />
             WhatsApp
@@ -488,7 +492,7 @@ function ConnectionCard({
               type="button"
               disabled={respondingId === c.id}
               onClick={onAccept}
-              className="inline-flex h-8 items-center gap-1 rounded-md bg-sage px-3 text-[12px] font-semibold text-white disabled:opacity-50"
+              className="inline-flex h-10 items-center gap-1 rounded-md bg-sage px-3 text-[13px] font-semibold text-white disabled:opacity-50 sm:h-8 sm:text-[12px]"
             >
               <BadgeCheck className="h-3.5 w-3.5" />
               Accept
@@ -497,7 +501,7 @@ function ConnectionCard({
               type="button"
               disabled={respondingId === c.id}
               onClick={onDecline}
-              className="inline-flex h-8 items-center rounded-md border border-hairline px-3 text-[12px] font-semibold text-ink disabled:opacity-50"
+              className="inline-flex h-10 items-center rounded-md border border-hairline px-3 text-[13px] font-semibold text-ink disabled:opacity-50 sm:h-8 sm:text-[12px]"
             >
               Decline
             </button>

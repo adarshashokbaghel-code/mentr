@@ -157,6 +157,31 @@ export async function listActivePremiumAdminRows(
   return users.map(toAdminRow).filter((r) => r.profileComplete);
 }
 
+/** Public directory of active Premium mentors (higher cap than homepage featured). */
+export const PUBLIC_PREMIUM_MENTORS_MAX = 80;
+
+export async function loadPublicPremiumTeachers(
+  limit = PUBLIC_PREMIUM_MENTORS_MAX,
+): Promise<Record<string, unknown>[]> {
+  const now = new Date();
+  const cap = Math.min(Math.max(limit, 1), PUBLIC_PREMIUM_MENTORS_MAX);
+  const users = (await User.find(activePremiumMongoFilter(now))
+    .sort({
+      "mentrPremium.lastPurchasedAt": -1,
+      premiumMentorVerifiedAt: -1,
+      createdAt: -1,
+    })
+    .limit(cap)) as IUser[];
+
+  const ordered: Record<string, unknown>[] = [];
+  for (const u of users) {
+    const row = serializePublic(u);
+    if (!row) continue;
+    ordered.push(row);
+  }
+  return ordered;
+}
+
 export async function getAdminFeaturedState(): Promise<{
   ids: string[];
   selected: FeaturedAdminRow[];

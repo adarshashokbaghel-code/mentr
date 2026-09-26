@@ -338,6 +338,19 @@ export async function fetchPublicTeachers(_opts?: {
   return { teachers: live, failed: false };
 }
 
+/** Active Mentr Premium mentors for /premiummentors (public, no phones). */
+export async function fetchPremiumTeachers(): Promise<FetchTeachersResult> {
+  try {
+    const res = await fetch("/api/teachers/premium", { cache: "no-store" });
+    if (!res.ok) return { teachers: [], failed: true };
+    const data = (await res.json()) as { teachers: ApiTeacher[] };
+    const live = (data.teachers || []).map(fromApiTeacher);
+    return { teachers: live, failed: false };
+  } catch {
+    return { teachers: [], failed: true };
+  }
+}
+
 /** Real faculty with completed profiles, straight from the database. */
 export async function fetchLiveTeachers(): Promise<FetchTeachersResult> {
   try {

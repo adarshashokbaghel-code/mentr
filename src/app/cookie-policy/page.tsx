@@ -29,15 +29,16 @@ const sections = [
   {
     title: "Analytics",
     body: [
-      "On public pages we use Google Analytics (gtag.js) to understand which guides and tools people use. Analytics may set cookies such as _ga.",
+      "On public adult/parent marketing and guide pages we use Google Analytics (gtag.js) to understand which guides and tools people use. Analytics may set cookies such as _ga.",
+      "We do not load Google Analytics on Mentr Learn (/learn) or inside the Learn app.",
       "We use this data in aggregate to improve the site. We do not sell personal profile data from analytics to data brokers.",
     ],
   },
   {
     title: "Advertising cookies",
     body: [
-      "Public marketing, tool, and guide pages may show Google AdSense ads. Google and its partners may use cookies to serve and measure ads, including personalised ads where applicable.",
-      "Logged-in dashboards and private account areas do not load third-party AdSense ads.",
+      "Public marketing, tool, and guide pages aimed at parents and tutors may show Google AdSense ads. Google and its partners may use cookies to serve and measure ads, including personalised ads where applicable.",
+      "We do not load AdSense on Mentr Learn (/learn), the Learn app, or logged-in dashboards and private account areas.",
       "You can manage ad personalisation in Google’s Ad Settings (https://adssettings.google.com/). You can also block or delete cookies in your browser settings.",
     ],
   },

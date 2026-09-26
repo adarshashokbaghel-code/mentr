@@ -17,7 +17,7 @@ export function SaveTeacherButton({
 }: SaveTeacherButtonProps) {
   const { isSaved, toggle } = useShortlist();
   const saved = isSaved(teacherId);
-  const dim = size === "sm" ? "h-7 w-7" : "h-8 w-8";
+  const dim = size === "sm" ? "h-9 w-9 sm:h-7 sm:w-7" : "h-10 w-10 sm:h-8 sm:w-8";
   const icon = size === "sm" ? "h-3.5 w-3.5" : "h-4 w-4";
 
   return (

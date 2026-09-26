@@ -2424,6 +2424,13 @@ body:has([data-ic-dock]) [data-toast-viewport] {
   }
 }
 
+@media (max-width: 767px) {
+  /* Free bottom space for Instant Connect — no floating dino on phones */
+  .learn-dino-guide {
+    display: none !important;
+  }
+}
+
 @media print {
   .learn-dino-guide {
     display: none !important;
