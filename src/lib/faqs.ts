@@ -112,7 +112,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "What free tools does Mentr offer?",
     answer:
-      "Mentr Tools includes free utilities for teachers (worksheet, question paper, answer key, and lesson plan generators), students (study timetable, CGPA calculator), and PDF helpers (merge, compress, organize, extract text). Most tools run in the browser without signup. Snap & Grade is a separate CBSE Class 9–12 photo grader at mentr.in/snapandgrade — 100 free credits, then from ₹1.",
+      "Mentr Tools includes free utilities for teachers and students (study timetable, CGPA calculator, name tags) and PDF helpers (merge, compress, organize, extract text, images to PDF). Most tools run in the browser without signup. Snap & Grade is a separate CBSE Class 9–12 photo grader at mentr.in/snapandgrade — 100 free credits, then from ₹1.",
   },
   {
     category: "parents",

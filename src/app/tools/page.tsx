@@ -13,10 +13,23 @@ export const metadata: Metadata = {
   keywords: [...TOOLS_HUB.keywords],
   alternates: { canonical: TOOLS_HUB.path },
   openGraph: {
-    title: "Free Teacher & Student Tools | Mentr",
+    title: "Free Education Tools for Parents & Tutors | Mentr",
     description: TOOLS_HUB.description,
     url: absoluteUrl(TOOLS_HUB.path),
     type: "website",
+    locale: "en_IN",
+    images: [
+      {
+        url: absoluteUrl("/images/tools/pdf-merge.webp"),
+        alt: "Mentr Tools",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Education Tools | Mentr",
+    description: TOOLS_HUB.description,
+    images: [absoluteUrl("/images/tools/pdf-merge.webp")],
   },
 };
 
@@ -70,10 +83,7 @@ export default function ToolsHubPage() {
             <h1 className="mt-2 text-[1.85rem] font-extrabold tracking-tight text-ink sm:text-[2.35rem] sm:leading-[1.12]">
               Free education tools for teachers, tutors, parents &amp; students
             </h1>
-            <p className="mt-2 max-w-xl text-[15px] font-medium leading-relaxed text-muted">
-              Create worksheets, question papers, study plans and classroom PDFs
-              — free, private and without signup.
-            </p>
+            
             </div>
             <ul className="flex flex-wrap gap-2 text-[11px] font-bold sm:justify-end">
               <li className="inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1.5 text-sage ring-1 ring-sage/25">

@@ -1,0 +1,267 @@
+{
+  "id": "A2",
+  "title": "How Computers Understand Us",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "CS · How Computers Work",
+  "slug": "a2-how-computers-understand-us",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "-8%",
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a2-welcome",
+      "beats": [
+        {
+          "vo": "Hello again, champ! Welcome back to Mentr Learn. Nice to see you.",
+          "caption": "Hello again, champ!",
+          "focus": "hello"
+        },
+        {
+          "vo": "Yesterday we learned what a computer is. Today we go one step deeper.",
+          "caption": "Building on Chapter 1",
+          "focus": "bridge"
+        },
+        {
+          "vo": "This is Chapter two. The lesson is: How Computers Understand Us.",
+          "caption": "Chapter 2 · How Computers Understand Us",
+          "focus": "chapter"
+        },
+        {
+          "vo": "Say it with me… How… Computers… Understand… Us.",
+          "caption": "Say with me: How Computers Understand Us",
+          "focus": "say",
+          "pause": 0.8
+        },
+        {
+          "vo": "Brilliant. Let's open the secret of computers.",
+          "caption": "Let's open the secret!",
+          "focus": "go"
+        }
+      ]
+    },
+    {
+      "id": "hook",
+      "visual": "a2-hook",
+      "beats": [
+        {
+          "vo": "Here is a puzzle. Computers are clever… but they do not speak Hindi or English like we do.",
+          "caption": "Computers don't speak like us…",
+          "focus": "puzzle"
+        },
+        {
+          "vo": "So how do they understand games, photos, and messages?",
+          "caption": "How do they understand us?",
+          "focus": "ask"
+        },
+        {
+          "vo": "Pause. Guess for three seconds… how does a computer talk inside?",
+          "caption": "⏸ Your turn — make a guess!",
+          "focus": "think",
+          "pause": 2.4
+        },
+        {
+          "vo": "Keep your guess. We will prove it with light switches.",
+          "caption": "We'll prove it with switches",
+          "focus": "ok"
+        }
+      ]
+    },
+    {
+      "id": "onoff",
+      "visual": "a2-switch",
+      "beats": [
+        {
+          "vo": "The big idea is tiny and powerful. Inside a computer, everything is only two states.",
+          "caption": "Big idea: only TWO states",
+          "focus": "intro"
+        },
+        {
+          "vo": "Like a light switch — ON… or OFF. That is all.",
+          "caption": "Like a light switch: ON or OFF",
+          "focus": "switch"
+        },
+        {
+          "vo": "Say with me: On… or off. Only two choices!",
+          "caption": "Say: On… or off!",
+          "focus": "say",
+          "pause": 0.6
+        },
+        {
+          "vo": "We write ON as the number one. We write OFF as the number zero.",
+          "caption": "ON = 1 · OFF = 0",
+          "focus": "map"
+        },
+        {
+          "vo": "One means on. Zero means off. Easy!",
+          "caption": "1 = on · 0 = off · Easy!",
+          "focus": "easy"
+        }
+      ]
+    },
+    {
+      "id": "binary",
+      "visual": "a2-binary",
+      "beats": [
+        {
+          "vo": "Now imagine three light switches in a row. Left, middle, right.",
+          "caption": "Three switches in a row",
+          "focus": "row"
+        },
+        {
+          "vo": "Each switch can be on or off. So each switch is a one or a zero.",
+          "caption": "Each switch = 1 or 0",
+          "focus": "each"
+        },
+        {
+          "vo": "Look: switch off, off, on — we write zero, zero, one.",
+          "caption": "off off on → 0 0 1",
+          "focus": "pat001"
+        },
+        {
+          "vo": "Or on, off, on — we write one, zero, one.",
+          "caption": "on off on → 1 0 1",
+          "focus": "pat101"
+        },
+        {
+          "vo": "That pattern of ones and zeros is called binary. Bi means two. Two choices only.",
+          "caption": "Binary = language of TWO",
+          "focus": "name"
+        },
+        {
+          "vo": "You do not need hard maths today. Just remember: binary is the computer's light-switch language.",
+          "caption": "Binary = light-switch language",
+          "focus": "remember"
+        }
+      ]
+    },
+    {
+      "id": "practice",
+      "visual": "a2-read",
+      "beats": [
+        {
+          "vo": "Your turn to read! I show a pattern. You say the zeros and ones out loud.",
+          "caption": "Your turn — read the lights!",
+          "focus": "intro"
+        },
+        {
+          "vo": "Pattern one: off, off, on. You say… zero, zero, one!",
+          "caption": "Pattern 1: 0 0 1",
+          "focus": "p1",
+          "pause": 0.9
+        },
+        {
+          "vo": "Pattern two: on, on, off. You say… one, one, zero!",
+          "caption": "Pattern 2: 1 1 0",
+          "focus": "p2",
+          "pause": 0.9
+        },
+        {
+          "vo": "Pattern three: on, off, on. You say… one, zero, one!",
+          "caption": "Pattern 3: 1 0 1",
+          "focus": "p3",
+          "pause": 0.9
+        },
+        {
+          "vo": "Super reading. That is how computers store tiny bits of information.",
+          "caption": "Super! Tiny bits of information",
+          "focus": "done"
+        }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a2-check",
+      "beats": [
+        {
+          "vo": "Practice check — same kind of question you will see later.",
+          "caption": "Practice check",
+          "focus": "intro"
+        },
+        {
+          "vo": "If one means on, what does one-zero-one mean on three lights?",
+          "caption": "What does 1 0 1 mean?",
+          "focus": "ask",
+          "pause": 1.6
+        },
+        {
+          "vo": "Think… left on, middle off, right on.",
+          "caption": "Think: left · middle · right",
+          "focus": "hint"
+        },
+        {
+          "vo": "Yes! One-zero-one means on, off, on. Three lights telling a tiny story.",
+          "caption": "Answer: ON · OFF · ON ✓",
+          "focus": "answer"
+        }
+      ]
+    },
+    {
+      "id": "why",
+      "visual": "a2-why",
+      "beats": [
+        {
+          "vo": "Why learn this? Because every photo, every game, every message becomes ones and zeros inside.",
+          "caption": "Photos, games, messages → 0s & 1s",
+          "focus": "why"
+        },
+        {
+          "vo": "Your brain uses words. The computer uses on and off — then turns it back into pictures and sound for you.",
+          "caption": "Words ↔ on/off ↔ pictures & sound",
+          "focus": "bridge"
+        },
+        {
+          "vo": "So when someone says binary, you can smile and say: light-switch language!",
+          "caption": "Binary = light-switch language!",
+          "focus": "smile"
+        }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a2-recap",
+      "beats": [
+        {
+          "vo": "Lock it in. Computers understand on and off. On is one. Off is zero.",
+          "caption": "ON = 1 · OFF = 0",
+          "focus": "map"
+        },
+        {
+          "vo": "A row of ones and zeros is binary — the computer's special language.",
+          "caption": "Binary = the computer's language",
+          "focus": "binary"
+        },
+        {
+          "vo": "You can read a short pattern like one-zero-one as on, off, on.",
+          "caption": "101 → on, off, on",
+          "focus": "read"
+        },
+        {
+          "vo": "Chapter two done. How Computers Understand Us — excellent work today!",
+          "caption": "Chapter 2 complete!",
+          "focus": "done"
+        },
+        {
+          "vo": "Next, a short quiz to practise. Tap Finish when you are ready. See you there, champ!",
+          "caption": "Next: Quiz · Tap Finish",
+          "focus": "quiz"
+        }
+      ]
+    }
+  ]
+}

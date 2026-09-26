@@ -3,7 +3,10 @@ import { BgRemoverExplainer } from "@/components/tools/bg-remover-explainer";
 import { ToolCard } from "@/components/tools/tool-card";
 import { ToolFaqSearch } from "@/components/tools/tool-faq-search";
 import { ToolIllustration } from "@/components/tools/tool-illustration";
-import { ToolsSoftCta } from "@/components/tools/tools-soft-cta";
+import {
+  ToolsHardCta,
+  ToolsHardCtaCompact,
+} from "@/components/tools/tools-hard-cta";
 import type { ToolDef } from "@/lib/tools-catalog";
 import { relatedTools, TOOLS } from "@/lib/tools-catalog";
 import {
@@ -101,6 +104,7 @@ export function ToolPageBody({ tool }: { tool: ToolDef }) {
         <ToolIllustration
           tool={tool}
           className="hidden min-h-[140px] lg:block lg:min-h-full"
+          priority
         />
       </header>
 
@@ -130,7 +134,11 @@ export function ToolPageBody({ tool }: { tool: ToolDef }) {
             </section>
           ) : null}
 
-          <ToolsSoftCta slug={tool.slug} />
+          <ToolsHardCta
+            slug={tool.slug}
+            audiences={tool.audience}
+            toolLabel={tool.shortTitle}
+          />
 
           {/* Thick SEO article */}
           <article className="space-y-10 rounded-2xl border border-hairline bg-white p-5 sm:p-8">
@@ -332,6 +340,7 @@ export function ToolPageBody({ tool }: { tool: ToolDef }) {
                 <ul className="p-2 text-[13px] font-bold">
                   {[
                     { href: "#tool", label: "Use the tool" },
+                    { href: "#next-step", label: "Find a tutor" },
                     { href: "#faq", label: "Search FAQ" },
                     ...(tool.blogSlug
                       ? [
@@ -384,75 +393,29 @@ export function ToolPageBody({ tool }: { tool: ToolDef }) {
               </p>
             </div>
 
-            <div className="rounded-2xl border-2 border-ink bg-ink p-4 text-white shadow-[3px_3px_0_0_#ff6a1a]">
-              <p className="text-[11px] font-bold uppercase tracking-wider text-white/60">
-                Keep going on Mentr
-              </p>
-              <p className="mt-1 text-[14px] font-extrabold leading-snug">
-                Tool done — find a tutor
-              </p>
-              <Link
-                href="/search"
-                className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-coral px-3 py-2.5 text-[13px] font-extrabold text-white hover:brightness-110"
-              >
-                Find a tutor
-              </Link>
-              <Link
-                href="/learn/start"
-                className="mt-2 inline-flex w-full items-center justify-center rounded-xl border border-white/20 px-3 py-2 text-[12px] font-bold text-white/90 hover:bg-white/10"
-              >
-                Free Learn Class 3–5
-              </Link>
-              <Link
-                href="/faculty/signup"
-                className="mt-2 inline-flex w-full items-center justify-center rounded-xl border border-white/20 px-3 py-2 text-[12px] font-bold text-white/90 hover:bg-white/10"
-              >
-                Create tutor profile
-              </Link>
-            </div>
+            <ToolsHardCtaCompact slug={tool.slug} placement="sidebar" />
           </div>
         </aside>
       </div>
 
       {/* Mobile more tools + CTA strip */}
-      <section className="mt-10 border-t border-hairline pt-8 lg:hidden">
-        <h2 className="text-[1.1rem] font-extrabold text-ink">
-          Continue on Mentr
-        </h2>
-        <ul className="mt-3 grid gap-2 text-[13px] font-semibold sm:grid-cols-2">
-          <li>
-            <Link
-              href="/search"
-              className="block rounded-xl border border-hairline bg-white px-4 py-3"
-            >
-              Find a verified tutor
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/learn/start"
-              className="block rounded-xl border border-hairline bg-white px-4 py-3"
-            >
-              Free Learn for Class 3–5
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/faculty/signup"
-              className="block rounded-xl border border-hairline bg-white px-4 py-3"
-            >
-              Create tutor profile
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/parent/signup"
-              className="block rounded-xl border border-hairline bg-white px-4 py-3"
-            >
-              Parent signup
-            </Link>
-          </li>
-        </ul>
+      <section className="mt-10 space-y-4 border-t border-hairline pt-8 lg:hidden">
+        <ToolsHardCtaCompact slug={tool.slug} placement="mobile" />
+        <div>
+          <h2 className="text-[1.1rem] font-extrabold text-ink">More tools</h2>
+          <ul className="mt-3 grid gap-2 text-[13px] font-semibold sm:grid-cols-2">
+            {moreTools.slice(0, 4).map((t) => (
+              <li key={t.slug}>
+                <Link
+                  href={`/tools/${t.slug}`}
+                  className="block rounded-xl border border-hairline bg-white px-4 py-3"
+                >
+                  {t.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
     </div>
   );

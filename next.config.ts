@@ -201,6 +201,27 @@ const nextConfig: NextConfig = {
         destination: "/sitemap.xml",
         permanent: true,
       },
+      // Retired incomplete classroom generators → tools hub
+      {
+        source: "/tools/worksheet-generator",
+        destination: "/tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/question-paper-generator",
+        destination: "/tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/answer-key-generator",
+        destination: "/tools",
+        permanent: true,
+      },
+      {
+        source: "/tools/lesson-plan-generator",
+        destination: "/tools",
+        permanent: true,
+      },
     ];
   },
 };

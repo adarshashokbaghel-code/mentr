@@ -1,0 +1,149 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:07.970
+Hello again, champ!
+
+2
+00:00:07.970 --> 00:00:14.980
+Building on Chapter 1
+
+3
+00:00:14.980 --> 00:00:21.820
+Chapter 2 · How Computers Understand Us
+
+4
+00:00:21.820 --> 00:00:31.310
+Say with me: How Computers Understand Us
+
+5
+00:00:31.310 --> 00:00:36.790
+Let's open the secret!
+
+6
+00:00:36.790 --> 00:00:45.410
+Computers don't speak like us…
+
+7
+00:00:45.410 --> 00:00:50.790
+How do they understand us?
+
+8
+00:00:50.790 --> 00:00:59.790
+⏸ Your turn — make a guess!
+
+9
+00:00:59.790 --> 00:01:05.270
+We'll prove it with switches
+
+10
+00:01:05.270 --> 00:01:14.130
+Big idea: only TWO states
+
+11
+00:01:14.130 --> 00:01:20.280
+Like a light switch: ON or OFF
+
+12
+00:01:20.280 --> 00:01:27.510
+Say: On… or off!
+
+13
+00:01:27.510 --> 00:01:34.210
+ON = 1 · OFF = 0
+
+14
+00:01:34.210 --> 00:01:40.670
+1 = on · 0 = off · Easy!
+
+15
+00:01:40.670 --> 00:01:47.800
+Three switches in a row
+
+16
+00:01:47.800 --> 00:01:55.220
+Each switch = 1 or 0
+
+17
+00:01:55.220 --> 00:02:02.140
+off off on → 0 0 1
+
+18
+00:02:02.140 --> 00:02:08.430
+on off on → 1 0 1
+
+19
+00:02:08.430 --> 00:02:17.670
+Binary = language of TWO
+
+20
+00:02:17.670 --> 00:02:26.720
+Binary = light-switch language
+
+21
+00:02:26.720 --> 00:02:35.270
+Your turn — read the lights!
+
+22
+00:02:35.270 --> 00:02:44.860
+Pattern 1: 0 0 1
+
+23
+00:02:44.860 --> 00:02:54.240
+Pattern 2: 1 1 0
+
+24
+00:02:54.240 --> 00:03:03.570
+Pattern 3: 1 0 1
+
+25
+00:03:03.570 --> 00:03:10.630
+Super! Tiny bits of information
+
+26
+00:03:10.630 --> 00:03:15.650
+Practice check
+
+27
+00:03:15.650 --> 00:03:23.090
+What does 1 0 1 mean?
+
+28
+00:03:23.090 --> 00:03:28.110
+Think: left · middle · right
+
+29
+00:03:28.110 --> 00:03:37.350
+Answer: ON · OFF · ON ✓
+
+30
+00:03:37.350 --> 00:03:46.910
+Photos, games, messages → 0s & 1s
+
+31
+00:03:46.910 --> 00:03:56.150
+Words ↔ on/off ↔ pictures & sound
+
+32
+00:03:56.150 --> 00:04:03.020
+Binary = light-switch language!
+
+33
+00:04:03.020 --> 00:04:12.480
+ON = 1 · OFF = 0
+
+34
+00:04:12.480 --> 00:04:18.770
+Binary = the computer's language
+
+35
+00:04:18.770 --> 00:04:25.060
+101 → on, off, on
+
+36
+00:04:25.060 --> 00:04:32.100
+Chapter 2 complete!
+
+37
+00:04:32.100 --> 00:04:41.200
+Next: Quiz · Tap Finish

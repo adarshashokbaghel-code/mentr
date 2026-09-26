@@ -1,0 +1,300 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 7.97,
+      "caption": "Hello again, champ!",
+      "text": "Hello again, champ! Welcome back to Mentr Learn. Nice to see you.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 7.97,
+      "end": 14.98,
+      "caption": "Building on Chapter 1",
+      "text": "Yesterday we learned what a computer is. Today we go one step deeper.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.98,
+      "end": 21.82,
+      "caption": "Chapter 2 \u00b7 How Computers Understand Us",
+      "text": "This is Chapter two. The lesson is: How Computers Understand Us.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 21.82,
+      "end": 31.31,
+      "caption": "Say with me: How Computers Understand Us",
+      "text": "Say it with me\u2026 How\u2026 Computers\u2026 Understand\u2026 Us.",
+      "scene": "open",
+      "focus": "say"
+    },
+    {
+      "start": 31.31,
+      "end": 36.79,
+      "caption": "Let's open the secret!",
+      "text": "Brilliant. Let's open the secret of computers.",
+      "scene": "open",
+      "focus": "go"
+    },
+    {
+      "start": 36.79,
+      "end": 45.41,
+      "caption": "Computers don't speak like us\u2026",
+      "text": "Here is a puzzle. Computers are clever\u2026 but they do not speak Hindi or English like we do.",
+      "scene": "hook",
+      "focus": "puzzle"
+    },
+    {
+      "start": 45.41,
+      "end": 50.79,
+      "caption": "How do they understand us?",
+      "text": "So how do they understand games, photos, and messages?",
+      "scene": "hook",
+      "focus": "ask"
+    },
+    {
+      "start": 50.79,
+      "end": 59.79,
+      "caption": "\u23f8 Your turn \u2014 make a guess!",
+      "text": "Pause. Guess for three seconds\u2026 how does a computer talk inside?",
+      "scene": "hook",
+      "focus": "think"
+    },
+    {
+      "start": 59.79,
+      "end": 65.27,
+      "caption": "We'll prove it with switches",
+      "text": "Keep your guess. We will prove it with light switches.",
+      "scene": "hook",
+      "focus": "ok"
+    },
+    {
+      "start": 65.27,
+      "end": 74.13,
+      "caption": "Big idea: only TWO states",
+      "text": "The big idea is tiny and powerful. Inside a computer, everything is only two states.",
+      "scene": "onoff",
+      "focus": "intro"
+    },
+    {
+      "start": 74.13,
+      "end": 80.28,
+      "caption": "Like a light switch: ON or OFF",
+      "text": "Like a light switch \u2014 ON\u2026 or OFF. That is all.",
+      "scene": "onoff",
+      "focus": "switch"
+    },
+    {
+      "start": 80.28,
+      "end": 87.51,
+      "caption": "Say: On\u2026 or off!",
+      "text": "Say with me: On\u2026 or off. Only two choices!",
+      "scene": "onoff",
+      "focus": "say"
+    },
+    {
+      "start": 87.51,
+      "end": 94.21,
+      "caption": "ON = 1 \u00b7 OFF = 0",
+      "text": "We write ON as the number one. We write OFF as the number zero.",
+      "scene": "onoff",
+      "focus": "map"
+    },
+    {
+      "start": 94.21,
+      "end": 100.67,
+      "caption": "1 = on \u00b7 0 = off \u00b7 Easy!",
+      "text": "One means on. Zero means off. Easy!",
+      "scene": "onoff",
+      "focus": "easy"
+    },
+    {
+      "start": 100.67,
+      "end": 107.8,
+      "caption": "Three switches in a row",
+      "text": "Now imagine three light switches in a row. Left, middle, right.",
+      "scene": "binary",
+      "focus": "row"
+    },
+    {
+      "start": 107.8,
+      "end": 115.22,
+      "caption": "Each switch = 1 or 0",
+      "text": "Each switch can be on or off. So each switch is a one or a zero.",
+      "scene": "binary",
+      "focus": "each"
+    },
+    {
+      "start": 115.22,
+      "end": 122.14,
+      "caption": "off off on \u2192 0 0 1",
+      "text": "Look: switch off, off, on \u2014 we write zero, zero, one.",
+      "scene": "binary",
+      "focus": "pat001"
+    },
+    {
+      "start": 122.14,
+      "end": 128.43,
+      "caption": "on off on \u2192 1 0 1",
+      "text": "Or on, off, on \u2014 we write one, zero, one.",
+      "scene": "binary",
+      "focus": "pat101"
+    },
+    {
+      "start": 128.43,
+      "end": 137.67,
+      "caption": "Binary = language of TWO",
+      "text": "That pattern of ones and zeros is called binary. Bi means two. Two choices only.",
+      "scene": "binary",
+      "focus": "name"
+    },
+    {
+      "start": 137.67,
+      "end": 146.72,
+      "caption": "Binary = light-switch language",
+      "text": "You do not need hard maths today. Just remember: binary is the computer's light-switch language.",
+      "scene": "binary",
+      "focus": "remember"
+    },
+    {
+      "start": 146.72,
+      "end": 155.27,
+      "caption": "Your turn \u2014 read the lights!",
+      "text": "Your turn to read! I show a pattern. You say the zeros and ones out loud.",
+      "scene": "practice",
+      "focus": "intro"
+    },
+    {
+      "start": 155.27,
+      "end": 164.86,
+      "caption": "Pattern 1: 0 0 1",
+      "text": "Pattern one: off, off, on. You say\u2026 zero, zero, one!",
+      "scene": "practice",
+      "focus": "p1"
+    },
+    {
+      "start": 164.86,
+      "end": 174.24,
+      "caption": "Pattern 2: 1 1 0",
+      "text": "Pattern two: on, on, off. You say\u2026 one, one, zero!",
+      "scene": "practice",
+      "focus": "p2"
+    },
+    {
+      "start": 174.24,
+      "end": 183.57,
+      "caption": "Pattern 3: 1 0 1",
+      "text": "Pattern three: on, off, on. You say\u2026 one, zero, one!",
+      "scene": "practice",
+      "focus": "p3"
+    },
+    {
+      "start": 183.57,
+      "end": 190.63,
+      "caption": "Super! Tiny bits of information",
+      "text": "Super reading. That is how computers store tiny bits of information.",
+      "scene": "practice",
+      "focus": "done"
+    },
+    {
+      "start": 190.63,
+      "end": 195.65,
+      "caption": "Practice check",
+      "text": "Practice check \u2014 same kind of question you will see later.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 195.65,
+      "end": 203.09,
+      "caption": "What does 1 0 1 mean?",
+      "text": "If one means on, what does one-zero-one mean on three lights?",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 203.09,
+      "end": 208.11,
+      "caption": "Think: left \u00b7 middle \u00b7 right",
+      "text": "Think\u2026 left on, middle off, right on.",
+      "scene": "checkpoint",
+      "focus": "hint"
+    },
+    {
+      "start": 208.11,
+      "end": 217.35,
+      "caption": "Answer: ON \u00b7 OFF \u00b7 ON \u2713",
+      "text": "Yes! One-zero-one means on, off, on. Three lights telling a tiny story.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 217.35,
+      "end": 226.91,
+      "caption": "Photos, games, messages \u2192 0s & 1s",
+      "text": "Why learn this? Because every photo, every game, every message becomes ones and zeros inside.",
+      "scene": "why",
+      "focus": "why"
+    },
+    {
+      "start": 226.91,
+      "end": 236.15,
+      "caption": "Words \u2194 on/off \u2194 pictures & sound",
+      "text": "Your brain uses words. The computer uses on and off \u2014 then turns it back into pictures and sound for you.",
+      "scene": "why",
+      "focus": "bridge"
+    },
+    {
+      "start": 236.15,
+      "end": 243.02,
+      "caption": "Binary = light-switch language!",
+      "text": "So when someone says binary, you can smile and say: light-switch language!",
+      "scene": "why",
+      "focus": "smile"
+    },
+    {
+      "start": 243.02,
+      "end": 252.48,
+      "caption": "ON = 1 \u00b7 OFF = 0",
+      "text": "Lock it in. Computers understand on and off. On is one. Off is zero.",
+      "scene": "recap",
+      "focus": "map"
+    },
+    {
+      "start": 252.48,
+      "end": 258.77,
+      "caption": "Binary = the computer's language",
+      "text": "A row of ones and zeros is binary \u2014 the computer's special language.",
+      "scene": "recap",
+      "focus": "binary"
+    },
+    {
+      "start": 258.77,
+      "end": 265.06,
+      "caption": "101 \u2192 on, off, on",
+      "text": "You can read a short pattern like one-zero-one as on, off, on.",
+      "scene": "recap",
+      "focus": "read"
+    },
+    {
+      "start": 265.06,
+      "end": 272.1,
+      "caption": "Chapter 2 complete!",
+      "text": "Chapter two done. How Computers Understand Us \u2014 excellent work today!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 272.1,
+      "end": 281.2,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Next, a short quiz to practise. Tap Finish when you are ready. See you there, champ!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

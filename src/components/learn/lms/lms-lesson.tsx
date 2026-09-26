@@ -589,8 +589,16 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
         <WatchStage
           title={mod.title}
           moduleId={moduleId}
-          videoSrc={moduleId === "A1" ? "/learn/lessons/A1.mp4" : undefined}
-          captionsSrc={moduleId === "A1" ? "/learn/lessons/A1.vtt" : undefined}
+          videoSrc={
+            moduleId === "A1" || moduleId === "A2"
+              ? `/learn/lessons/${moduleId}.mp4`
+              : undefined
+          }
+          captionsSrc={
+            moduleId === "A1" || moduleId === "A2"
+              ? `/learn/lessons/${moduleId}.vtt`
+              : undefined
+          }
           saving={savingVideo}
           onDone={() => void finishVideo()}
         />

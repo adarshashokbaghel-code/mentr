@@ -13,9 +13,12 @@ const CATEGORY_LABEL: Record<string, string> = {
 export function ToolCard({
   tool,
   featured,
+  priority,
 }: {
   tool: ToolDef;
   featured?: boolean;
+  /** Eager-load theme image for above-the-fold cards (same URL = one cache hit). */
+  priority?: boolean;
 }) {
   const category = tool.audience[0]
     ? CATEGORY_LABEL[tool.audience[0]]
@@ -30,7 +33,11 @@ export function ToolCard({
         featured && "sm:col-span-1",
       )}
     >
-      <ToolIllustration tool={tool} className="aspect-[16/10] w-full" />
+      <ToolIllustration
+        tool={tool}
+        className="aspect-[16/10] w-full"
+        priority={priority}
+      />
       <div className="flex flex-1 flex-col p-4 sm:p-5">
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-[15px] font-extrabold tracking-tight text-ink sm:text-[16px]">
