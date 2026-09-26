@@ -9,6 +9,8 @@ import {
   LAUNCH_HUB_CITY,
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
+  PUBLISHER_LOCATION,
+  PUBLISHER_AUDIENCE,
   SITE_BRAND,
   SITE_URL,
   absoluteUrl,
@@ -155,7 +157,7 @@ export function FeedbackPage({
               <h2 className="text-lg font-bold text-ink">
                 Publisher information
               </h2>
-              <dl className="mt-4 grid gap-4 text-sm text-muted sm:grid-cols-2 lg:grid-cols-4">
+              <dl className="mt-4 grid gap-4 text-sm text-muted sm:grid-cols-2 lg:grid-cols-3">
                 <div>
                   <dt className="font-semibold text-ink">Product</dt>
                   <dd>{SITE_BRAND}</dd>
@@ -175,9 +177,18 @@ export function FeedbackPage({
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-ink">HQ / launch city</dt>
+                  <dt className="font-semibold text-ink">Location</dt>
+                  <dd>{PUBLISHER_LOCATION}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-ink">Audience</dt>
+                  <dd>{PUBLISHER_AUDIENCE}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-ink">Advertising</dt>
                   <dd>
-                    {LAUNCH_HUB_CITY}, India · serving parents worldwide
+                    AdSense may appear on public parent/tutor pages. Not on
+                    Mentr Learn (/learn) or logged-in dashboards.
                   </dd>
                 </div>
                 <div>

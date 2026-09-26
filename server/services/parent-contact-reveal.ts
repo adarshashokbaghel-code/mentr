@@ -132,8 +132,21 @@ type ParentListOpts = {
 /** Seed / backfill personas — always sort below real parent signups. */
 const SEED_PARENT_SOURCE_RX = /^seed:parent-attract/i;
 
+/**
+ * Parents who joined on/after this instant float to the top of /parentslist
+ * (newest first). Everyone before keeps the legacy ranking
+ * (revealed → open posts → has posted → joinedAt).
+ */
+const PARENT_LIST_NEW_JOIN_CUTOFF = new Date("2026-09-26T09:00:00.000Z");
+
 function isSeedRegistrationSource(source: string | undefined | null): boolean {
   return SEED_PARENT_SOURCE_RX.test(String(source || ""));
+}
+
+function isNewDirectoryJoin(joinedAt: string | null | undefined): boolean {
+  if (!joinedAt) return false;
+  const t = new Date(joinedAt).getTime();
+  return Number.isFinite(t) && t >= PARENT_LIST_NEW_JOIN_CUTOFF.getTime();
 }
 
 export async function listParentsForPremiumMentor(opts: ParentListOpts) {
@@ -266,6 +279,7 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       contactRevealed: active,
       previouslyRevealed,
       isSeed: isSeedRegistrationSource(p.registrationSource),
+      isNewJoin: isNewDirectoryJoin(p.createdAt?.toISOString?.() ?? null),
       phone,
       email,
       whatsappUrl: active && phone ? `https://wa.me/${phone}` : null,
@@ -278,6 +292,26 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
   if (opts.onlyPosted) {
     list = list.filter((p) => p.hasPosted);
   }
+
+  // New real signups (post-cutoff) first → legacy ranking for older → seeds last.
+  list.sort((a, b) => {
+    if (a.isSeed !== b.isSeed) return a.isSeed ? 1 : -1;
+
+    const aNew = Boolean(a.isNewJoin);
+    const bNew = Boolean(b.isNewJoin);
+    if (aNew !== bNew) return aNew ? -1 : 1;
+    if (aNew && bNew) {
+      return (b.joinedAt || "").localeCompare(a.joinedAt || "");
+    }
+
+    // Legacy order for parents who joined before the cutoff (freeze relative rank).
+    if (a.contactRevealed !== b.contactRevealed) {
+      return a.contactRevealed ? -1 : 1;
+    }
+    if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
+    if (a.hasPosted !== b.hasPosted) return a.hasPosted ? -1 : 1;
+    return (b.joinedAt || "").localeCompare(a.joinedAt || "");
+  });
 
   return {
     parents: list,

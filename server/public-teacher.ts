@@ -3,7 +3,10 @@ import { connectDb } from "./db";
 import { backfillMapCoords, ensureFacultyMapLocation } from "./lib/map-location";
 import { isProfileComplete } from "./lib/profile-complete";
 import { User, type IUser } from "./models/User";
-import { loadFeaturedPublicTeachers } from "./services/featured-tutors";
+import {
+  loadFeaturedPublicTeachers,
+  loadPublicPremiumTeachers,
+} from "./services/featured-tutors";
 import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
 
 const PUBLIC_LIST_TTL_MS = 60_000;
@@ -93,6 +96,19 @@ export async function getPublicFeaturedTeachers(res: Response): Promise<void> {
   } catch (error) {
     console.error("public featured teachers error:", error);
     res.status(500).json({ error: "Failed to load featured teachers" });
+  }
+}
+
+/** All active Premium mentors for /premiummentors (public, no phones). */
+export async function getPublicPremiumTeachers(res: Response): Promise<void> {
+  try {
+    await connectDb();
+    const teachers = await loadPublicPremiumTeachers();
+    res.set("Cache-Control", "public, max-age=30, stale-while-revalidate=120");
+    res.json({ teachers });
+  } catch (error) {
+    console.error("public premium teachers error:", error);
+    res.status(500).json({ error: "Failed to load premium mentors" });
   }
 }
 

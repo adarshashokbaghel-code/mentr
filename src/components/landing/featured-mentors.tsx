@@ -480,7 +480,7 @@ export function FeaturedMentors({
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <Link href="/search?tier=premium">
+            <Link href="/premiummentors">
               <Button
                 size="sm"
                 variant="secondary"

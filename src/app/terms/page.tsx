@@ -103,9 +103,17 @@ const sections = [
   {
     title: "Advertising on public pages",
     body: [
-      "To support a free product, public marketing and guide pages may show third-party ads (for example Google AdSense) as described in the Privacy policy.",
-      "We do not show third-party ads inside logged-in dashboards or during account signup flows.",
+      "To support a free product, public marketing and guide pages aimed at parents and tutors may show third-party ads (for example Google AdSense) as described in the Privacy policy.",
+      "We do not show third-party ads on Mentr Learn (/learn), inside the Learn app, on logged-in dashboards, or during account signup flows.",
       "Ads lead to third-party sites under their own terms.",
+    ],
+  },
+  {
+    title: "Children & Mentr Learn",
+    body: [
+      "Mentr accounts are for adults (parents, guardians, adult students, and tutors).",
+      "Mentr Learn is parent-enrolled. Children use it under adult supervision. Learn pages do not carry AdSense.",
+      "Do not create accounts for children under 13. Report concerns to safety@mentr.in.",
     ],
   },
   {
@@ -114,7 +122,7 @@ const sections = [
       "Mentr is provided “as is”. To the fullest extent permitted by law, we are not liable for disputes, payments, injuries, or outcomes between users — including failure to obtain students, clients, or income after using Premium or any other feature.",
       "We may suspend or terminate accounts that violate these Terms.",
       "We may update these Terms by posting a new version on this page. Material updates will change the “Last updated” date. Continued use after an update constitutes acceptance where allowed by law.",
-      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — multi-source enquiry records, Premium as connectivity (no hire guarantee), and contact visibility.`,
+      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — children / Learn (no ads) and advertising path rules.`,
     ],
   },
 ];

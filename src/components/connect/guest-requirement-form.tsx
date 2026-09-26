@@ -104,7 +104,7 @@ export function GuestRequirementForm({
         onClick={onClose}
       />
 
-      <div className="champs-pop relative z-10 max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-xl border border-hairline bg-white p-5 shadow-xl sm:rounded-xl sm:p-6">
+      <div className="champs-pop relative z-10 max-h-[92vh] w-full max-w-md overflow-y-auto rounded-t-xl border border-hairline bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-xl sm:rounded-xl sm:p-6 sm:pb-6">
         {sent ? (
           <div className="py-4 text-center">
             <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-sage-wash">

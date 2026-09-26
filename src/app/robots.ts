@@ -19,6 +19,12 @@ const PRIVATE_PATHS = [
   "/learn/app",
 ];
 
+/**
+ * Child-directed Learn product — AdsBot must not crawl for ad placement.
+ * Organic Googlebot can still index Learn via the `*` rule (when public).
+ */
+const ADS_BOT_DISALLOW = ["/learn"];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -29,6 +35,7 @@ export default function robots(): MetadataRoute.Robots {
           "AdsBot-Google-Mobile",
         ],
         allow: "/",
+        disallow: ADS_BOT_DISALLOW,
       },
       {
         userAgent: "*",

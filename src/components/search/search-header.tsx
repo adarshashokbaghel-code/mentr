@@ -544,7 +544,7 @@ export function SearchHeader({
           )}
         >
           {/* Premium / Regular toggle — centered */}
-          <div className="mb-2.5 flex justify-center">
+          <div className="mb-1.5 flex justify-center sm:mb-2.5">
             <div
               className="inline-flex w-full max-w-[280px] items-center rounded-lg border-2 border-ink bg-white p-0.5 shadow-[2px_2px_0_0_#1a231c] sm:max-w-[300px]"
               role="group"
@@ -554,7 +554,7 @@ export function SearchHeader({
                 type="button"
                 onClick={() => onChange({ mentorTier: "regular", kind: "all" })}
                 className={cn(
-                  "flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition",
+                  "flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-xs font-bold transition sm:min-h-0 sm:py-1.5",
                   filters.mentorTier === "regular"
                     ? "bg-ink text-white"
                     : "text-muted hover:text-ink",
@@ -566,7 +566,7 @@ export function SearchHeader({
                 type="button"
                 onClick={() => onChange({ mentorTier: "premium", kind: "all" })}
                 className={cn(
-                  "flex flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-xs font-bold transition",
+                  "flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-md px-3 py-2 text-xs font-bold transition sm:min-h-0 sm:py-1.5",
                   filters.mentorTier === "premium"
                     ? "bg-butter text-ink"
                     : "text-muted hover:text-ink",
@@ -715,13 +715,13 @@ export function SearchHeader({
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="flex h-7 items-center gap-0.5 rounded-md border border-hairline bg-white p-0.5 sm:hidden">
+                  <div className="flex h-9 items-center gap-0.5 rounded-md border border-hairline bg-white p-0.5 sm:hidden">
                     <button
                       type="button"
                       tabIndex={scrolled ? -1 : 0}
                       onClick={() => onChange({ view: "list" })}
                       className={cn(
-                        "rounded px-2 text-[10px] font-semibold",
+                        "min-h-8 rounded px-3 text-xs font-semibold",
                         filters.view === "list"
                           ? "bg-ink text-white"
                           : "text-muted",
@@ -734,7 +734,7 @@ export function SearchHeader({
                       tabIndex={scrolled ? -1 : 0}
                       onClick={() => onChange({ view: "map" })}
                       className={cn(
-                        "rounded px-2 text-[10px] font-semibold",
+                        "min-h-8 rounded px-3 text-xs font-semibold",
                         filters.view === "map"
                           ? "bg-ink text-white"
                           : "text-muted",

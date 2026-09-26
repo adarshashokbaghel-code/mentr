@@ -876,7 +876,7 @@ export default function DashboardPage() {
 
       {addOpen && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] flex items-end justify-center p-0 sm:items-center sm:p-4"
           role="dialog"
           aria-modal="true"
           aria-labelledby="add-slot-title"
@@ -887,7 +887,7 @@ export default function DashboardPage() {
             aria-label="Close dialog"
             onClick={() => setAddOpen(false)}
           />
-          <div className="relative z-10 w-full max-w-sm rounded-xl border border-hairline bg-white p-5 shadow-xl sm:p-6">
+          <div className="relative z-10 w-full max-w-sm rounded-t-xl border border-hairline bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-xl sm:rounded-xl sm:p-6 sm:pb-6">
             <div className="flex items-start justify-between">
               <div>
                 <h2 id="add-slot-title" className="text-lg font-bold text-ink">

@@ -19,7 +19,7 @@ import instantConnectRoutes from "./routes/instant-connect";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
-import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers, getPublicTeacherStats } from "./public-teacher";
+import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers, getPublicPremiumTeachers, getPublicTeacherStats } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 import { ensureDb } from "./middleware/ensure-db";
 
@@ -125,6 +125,10 @@ app.get("/api/teachers/stats", (_req, res) => {
 
 app.get("/api/teachers/featured", (_req, res) => {
   void getPublicFeaturedTeachers(res);
+});
+
+app.get("/api/teachers/premium", (_req, res) => {
+  void getPublicPremiumTeachers(res);
 });
 
 app.get("/api/teachers/public/:id", (req, res) => {

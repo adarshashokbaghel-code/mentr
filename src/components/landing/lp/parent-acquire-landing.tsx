@@ -232,7 +232,7 @@ export function ParentAcquireLanding({
       <Navbar />
       <main className="w-full overflow-x-clip bg-cream">
         {/* Hero — one composition, full-bleed visual */}
-        <section className="relative isolate min-h-[min(92dvh,780px)] overflow-hidden border-b border-hairline">
+        <section className="relative isolate min-h-0 overflow-hidden border-b border-hairline sm:min-h-[min(92dvh,780px)]">
           <Image
             src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=2000&q=80"
             alt=""
@@ -250,15 +250,15 @@ export function ParentAcquireLanding({
             className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-[#fffaf5]/50"
           />
 
-          <div className="relative mx-auto flex min-h-[min(92dvh,780px)] max-w-[1200px] flex-col justify-center px-4 py-16 sm:px-6 lg:px-8">
+          <div className="relative mx-auto flex min-h-0 max-w-[1200px] flex-col justify-center px-4 py-10 pb-28 sm:min-h-[min(92dvh,780px)] sm:px-6 sm:py-16 sm:pb-16 lg:px-8">
             <div className="max-w-xl">
-              <p className="text-base font-bold tracking-tight text-ink sm:text-lg">
+              <p className="text-sm font-bold tracking-tight text-ink sm:text-lg">
                 {SITE_BRAND}
               </p>
-              <h1 className="mt-3 max-w-[14ch] text-[2.5rem] font-bold leading-[1.06] tracking-tight text-ink sm:text-5xl lg:text-[3.5rem]">
+              <h1 className="mt-2 max-w-[14ch] text-[2rem] font-bold leading-[1.06] tracking-tight text-ink sm:mt-3 sm:text-5xl lg:text-[3.5rem]">
                 {headline}
               </h1>
-              <p className="mt-4 max-w-[34ch] text-base leading-relaxed text-ink/75 sm:text-lg">
+              <p className="mt-3 max-w-[34ch] text-[15px] leading-relaxed text-ink/75 sm:mt-4 sm:text-lg">
                 {sub}
               </p>
 

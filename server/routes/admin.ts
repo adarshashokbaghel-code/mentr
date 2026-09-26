@@ -746,4 +746,143 @@ router.get("/premium-mentors", async (_req, res) => {
   }
 });
 
+/** Premium parent-contact reveals — who unlocked whom, when. */
+router.get("/premium-reveals", async (req, res) => {
+  try {
+    const { User } = await import("../models/User");
+    const { ParentContactReveal } = await import(
+      "../models/ParentContactReveal"
+    );
+    const { startOfDayIst } = await import(
+      "../services/parent-contact-reveal"
+    );
+
+    const limit = Math.min(
+      Math.max(Number(req.query.limit) || 100, 1),
+      300,
+    );
+    const q = String(req.query.q || "")
+      .trim()
+      .toLowerCase();
+
+    const reveals = await ParentContactReveal.find({})
+      .sort({ revealedAt: -1 })
+      .limit(limit)
+      .lean();
+
+    const mentorIds = [...new Set(reveals.map((r) => String(r.mentor)))];
+    const parentIds = [...new Set(reveals.map((r) => String(r.parent)))];
+    const users = await User.find({
+      _id: { $in: [...mentorIds, ...parentIds] },
+    })
+      .select(
+        "email role profileImageUrl profile.name profile.phoneNumber profile.city profile.area parentProfile.name parentProfile.phoneNumber parentProfile.city parentProfile.area mentrPremium.type mentrPremium.expiresAt",
+      )
+      .lean();
+
+    const byId = new Map(users.map((u) => [String(u._id), u]));
+
+    function initials(name: string) {
+      return name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((p) => p[0]!.toUpperCase())
+        .join("");
+    }
+
+    let rows = reveals.map((r) => {
+      const mentor = byId.get(String(r.mentor));
+      const parent = byId.get(String(r.parent));
+      const mentorName =
+        mentor?.profile?.name?.trim() ||
+        mentor?.email?.split("@")[0] ||
+        "Mentor";
+      const parentName =
+        r.parentName?.trim() ||
+        parent?.parentProfile?.name?.trim() ||
+        parent?.email?.split("@")[0] ||
+        "Parent";
+      const parentPhone =
+        r.parentPhone || parent?.parentProfile?.phoneNumber || null;
+      const parentEmail = r.parentEmail || parent?.email || null;
+      const parentCity =
+        r.parentCity || parent?.parentProfile?.city || null;
+      const parentArea =
+        r.parentArea || parent?.parentProfile?.area || null;
+
+      return {
+        id: String(r._id),
+        revealedAt: r.revealedAt
+          ? new Date(r.revealedAt).toISOString()
+          : null,
+        hasPosted: Boolean(r.hasPosted),
+        openPostsAtReveal: Number(r.openPostsAtReveal) || 0,
+        mentor: {
+          id: String(r.mentor),
+          name: mentorName,
+          initials: initials(mentorName),
+          email: mentor?.email || null,
+          imageUrl: (mentor?.profileImageUrl || "").trim() || null,
+          city: mentor?.profile?.city || null,
+          area: mentor?.profile?.area || null,
+          phone: mentor?.profile?.phoneNumber || null,
+          premiumType: mentor?.mentrPremium?.type || null,
+        },
+        parent: {
+          id: String(r.parent),
+          name: parentName,
+          initials: initials(parentName),
+          email: parentEmail,
+          imageUrl: (parent?.profileImageUrl || "").trim() || null,
+          phone: parentPhone,
+          city: parentCity,
+          area: parentArea,
+        },
+      };
+    });
+
+    if (q) {
+      rows = rows.filter((row) => {
+        const hay = [
+          row.mentor.name,
+          row.mentor.email,
+          row.mentor.city,
+          row.parent.name,
+          row.parent.email,
+          row.parent.phone,
+          row.parent.city,
+          row.parent.area,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    const dayStart = startOfDayIst();
+    const todayCount = await ParentContactReveal.countDocuments({
+      revealedAt: { $gte: dayStart },
+    });
+    const totalCount = await ParentContactReveal.countDocuments({});
+    const uniqueMentors = await ParentContactReveal.distinct("mentor");
+    const uniqueParents = await ParentContactReveal.distinct("parent");
+
+    res.json({
+      stats: {
+        total: totalCount,
+        today: todayCount,
+        uniqueMentors: uniqueMentors.length,
+        uniqueParents: uniqueParents.length,
+        returned: rows.length,
+      },
+      reveals: rows,
+    });
+  } catch (err) {
+    console.error("Admin premium reveals error:", err);
+    res.status(500).json({ error: "Failed to load premium reveals" });
+  }
+});
+
 export default router;

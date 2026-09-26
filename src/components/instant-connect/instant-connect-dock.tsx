@@ -181,7 +181,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
     <div
       data-ic-dock=""
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-3 pb-[max(0.65rem,env(safe-area-inset-bottom))] short:pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:px-4",
+        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-2.5 pb-[max(0.5rem,env(safe-area-inset-bottom))] short:pb-[max(0.4rem,env(safe-area-inset-bottom))] sm:px-4 sm:pb-[max(0.65rem,env(safe-area-inset-bottom))]",
         className,
       )}
     >
@@ -199,14 +199,14 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
 
       {/* Fixed-width shell — same rect open & closed (Zero Nav) */}
       <div
-        className="pointer-events-auto relative w-full max-w-[min(100%,440px)]"
+        className="pointer-events-auto relative w-full max-w-[min(100%,380px)] sm:max-w-[min(100%,440px)]"
         role="dialog"
         aria-modal={mounted}
         aria-labelledby={mounted ? titleId : undefined}
       >
         <div
           className={cn(
-            "flex w-full max-h-[min(100dvh-0.75rem,100vh-0.75rem)] flex-col overflow-hidden rounded-[28px] p-2 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter] short:rounded-[24px] short:p-1.5 sm:rounded-[32px] sm:p-2.5 short:sm:rounded-[28px] short:sm:p-2",
+            "flex w-full max-h-[min(100dvh-0.75rem,100vh-0.75rem)] flex-col overflow-hidden rounded-[22px] p-1.5 font-sans shadow-[0_12px_40px_rgba(0,0,0,0.28)] ring-1 transition-[background-color,box-shadow,backdrop-filter] short:rounded-[20px] short:p-1 sm:rounded-[32px] sm:p-2.5 short:sm:rounded-[28px] short:sm:p-2",
             mounted
               ? "bg-[rgba(28,28,28,0.78)] shadow-[0_16px_48px_rgba(0,0,0,0.35)] ring-white/12 backdrop-blur-[20px]"
               : showTrack
@@ -231,7 +231,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
             <div className="min-h-0 overflow-hidden">
               <div
                 id={titleId}
-                className="max-h-[min(calc(100dvh-7.25rem),720px)] overflow-y-auto overscroll-contain px-4 pb-3 pt-5 short:max-h-[min(calc(100dvh-6.25rem),560px)] short:px-3 short:pb-2 short:pt-3 shorter:max-h-[min(calc(100dvh-5.75rem),420px)] short-landscape:max-h-[min(calc(100dvh-5.25rem),320px)] sm:max-h-[min(calc(100dvh-7.5rem),680px)] sm:px-6 sm:pb-4 sm:pt-6 short:sm:px-4 short:sm:pb-3 short:sm:pt-4"
+                className="max-h-[min(calc(100dvh-6.5rem),720px)] overflow-y-auto overscroll-contain px-3 pb-2.5 pt-4 short:max-h-[min(calc(100dvh-5.75rem),560px)] short:px-2.5 short:pb-2 short:pt-3 shorter:max-h-[min(calc(100dvh-5.25rem),420px)] short-landscape:max-h-[min(calc(100dvh-5rem),320px)] sm:max-h-[min(calc(100dvh-7.5rem),680px)] sm:px-6 sm:pb-4 sm:pt-6 short:sm:px-4 short:sm:pb-3 short:sm:pt-4"
                 style={{
                   opacity: shown ? 1 : 0,
                   transform: shown ? "translateY(0)" : "translateY(18px)",
@@ -256,7 +256,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
           </div>
 
           <div
-            className="relative z-10 flex shrink-0 items-center gap-1.5 px-0.5 pt-0.5 short:gap-1 sm:gap-2"
+            className="relative z-10 flex shrink-0 items-center gap-1 px-0.5 pt-0.5 short:gap-1 sm:gap-2"
             role="navigation"
             aria-label="Instant Connect"
           >
@@ -269,22 +269,22 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
               onClick={openGuide}
               disabled={showTrack}
               className={cn(
-                "flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98] short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11",
+                "flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition hover:scale-[1.03] active:scale-[0.98] short:h-8 short:w-8 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11",
                 mounted
                   ? "bg-white/15 text-white ring-1 ring-white/20"
                   : "bg-white text-sage shadow-sm",
                 showTrack && "opacity-50",
               )}
             >
-              <Play className="h-3.5 w-3.5 fill-current sm:h-4 sm:w-4" />
+              <Play className="h-3 w-3 fill-current sm:h-4 sm:w-4" />
             </button>
 
             {showTrack ? (
               <Link
                 href="/parent/dashboard#instant-connect"
-                className="flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-white px-3 text-[13px] font-bold tracking-tight text-ink shadow-sm transition hover:bg-white/95 active:scale-[0.99] short:h-9 short:text-[12px] sm:h-[50px] sm:px-4 sm:text-[15px] short:sm:h-11 short:sm:text-[13px]"
+                className="flex h-9 min-w-0 flex-1 items-center justify-center gap-1 rounded-full bg-white px-2.5 text-[12px] font-bold tracking-tight text-ink shadow-sm transition hover:bg-white/95 active:scale-[0.99] short:h-8 short:text-[11px] sm:h-[50px] sm:gap-1.5 sm:px-4 sm:text-[15px] short:sm:h-11 short:sm:text-[13px]"
               >
-                <LayoutDashboard className="h-3.5 w-3.5 shrink-0 opacity-90" />
+                <LayoutDashboard className="h-3 w-3 shrink-0 opacity-90 sm:h-3.5 sm:w-3.5" />
                 Track request
               </Link>
             ) : (
@@ -293,21 +293,21 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 onClick={() => void onMainCta()}
                 disabled={mainDisabled}
                 className={cn(
-                  "flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full px-3 text-[13px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 short:h-9 short:text-[12px] sm:h-[50px] sm:px-4 sm:text-[15px] short:sm:h-11 short:sm:text-[13px]",
+                  "flex h-9 min-w-0 flex-1 items-center justify-center gap-1 rounded-full px-2.5 text-[12px] font-bold tracking-tight transition active:scale-[0.99] disabled:opacity-50 short:h-8 short:text-[11px] sm:h-[50px] sm:gap-1.5 sm:px-4 sm:text-[15px] short:sm:h-11 short:sm:text-[13px]",
                   mounted
                     ? "bg-white text-ink hover:bg-white/90"
                     : "bg-ink text-white shadow-[inset_0_1px_0.5px_rgba(255,255,255,0.3),inset_0_-1.5px_0.5px_rgba(0,0,0,0.3),0_2px_5px_rgba(0,0,0,0.25)] hover:bg-[#2a231c]",
                 )}
               >
                 {cta.busy && panel === "stepper" ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <Loader2 className="h-3.5 w-3.5 animate-spin sm:h-4 sm:w-4" />
                 ) : mainLabel === "Instant Connect" ||
                   mainLabel === "Find mentors" ||
                   mainLabel === "AI match" ||
                   mainLabel.startsWith("Notify") ? (
-                  <Zap className="h-3.5 w-3.5 shrink-0 opacity-90" />
+                  <Zap className="h-3 w-3 shrink-0 opacity-90 sm:h-3.5 sm:w-3.5" />
                 ) : null}
-                {mainLabel}
+                <span className="truncate">{mainLabel}</span>
               </button>
             )}
 
@@ -316,17 +316,17 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 type="button"
                 aria-label="Close"
                 onClick={close}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink transition hover:scale-[1.03] active:scale-[0.98] short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-ink transition hover:scale-[1.03] active:scale-[0.98] short:h-8 short:w-8 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
               >
-                <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.5} />
+                <X className="h-3 w-3 sm:h-4 sm:w-4" strokeWidth={2.5} />
               </button>
             ) : showTrack ? (
               <Link
                 href="/parent/dashboard#instant-connect"
                 aria-label="Track Instant Connect request"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] short:h-8 short:w-8 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
               >
-                <LayoutDashboard className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <LayoutDashboard className="h-3 w-3 sm:h-4 sm:w-4" />
               </Link>
             ) : (
               <button
@@ -334,9 +334,9 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
                 aria-label="Instant Connect"
                 onClick={openStepper}
                 disabled={loading}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 short:h-9 short:w-9 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-ink shadow-sm transition hover:scale-[1.03] active:scale-[0.98] disabled:opacity-60 short:h-8 short:w-8 sm:h-[50px] sm:w-[50px] short:sm:h-11 short:sm:w-11"
               >
-                <Zap className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                <Zap className="h-3 w-3 sm:h-4 sm:w-4" />
               </button>
             )}
           </div>
@@ -381,7 +381,7 @@ function GuidePanel() {
           <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/45 short:text-[9px]">
             Quick guide
           </p>
-          <h2 className="mt-0.5 text-xl font-extrabold leading-tight tracking-tight short:text-lg sm:text-[1.35rem] short:sm:text-xl">
+          <h2 className="mt-0.5 text-lg font-extrabold leading-tight tracking-tight short:text-base sm:text-[1.35rem] short:sm:text-xl">
             How Instant Connect works
           </h2>
         </div>

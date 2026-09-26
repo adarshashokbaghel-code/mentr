@@ -13,6 +13,7 @@ import { HowItWorks } from "@/components/landing/how-it-works";
 import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
 import { PopularSearches } from "@/components/landing/popular-searches";
+import { PremiumMentorsBrowse } from "@/components/landing/premium-mentors-browse";
 import { ProductHuntSection } from "@/components/landing/product-hunt-section";
 import { PublicPlatformSections } from "@/components/landing/public-platform-sections";
 import { SeoGuidesStrip } from "@/components/landing/seo-guides-strip";
@@ -22,8 +23,6 @@ import { SwitchToChamps } from "@/components/landing/switch-to-champs";
 import { Testimonials } from "@/components/landing/testimonials";
 import { WaveSeparator } from "@/components/landing/wave-separator";
 import { ZeroFees } from "@/components/landing/zero-fees";
-import { LEARN_PUBLIC } from "@/lib/learn-flags";
-import { learnCourseJsonLd } from "@/lib/learn-seo";
 import {
   PARENT_ORG_JSON_LD,
   SITE_BRAND,
@@ -36,13 +35,12 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title:
-    "Find Verified Tutors & Mentors — Free Search, Instant Connect · Mentr Learn",
+  title: "Find Verified Tutors & Mentors Free — Instant Connect · Mentr",
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
   alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE_BRAND} — Free Tutors + Mentr Learn kids coding`,
+    title: `${SITE_BRAND} — Free verified tutors & mentors`,
     description: SITE_DESCRIPTION,
     url: absoluteUrl("/"),
     type: "website",
@@ -55,11 +53,17 @@ const jsonLd = [
     "@context": "https://schema.org",
     "@type": "Organization",
     name: SITE_BRAND,
-    alternateName: [SITE_NAME, "Mentr Learn", "Learn by Mentr"],
+    alternateName: [SITE_NAME, "Paprly Mentr"],
     url: SITE_URL,
     logo: absoluteUrl("/mentr-logo.png"),
     description: SITE_DESCRIPTION,
     parentOrganization: PARENT_ORG_JSON_LD,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bengaluru",
+      addressRegion: "Karnataka",
+      addressCountry: "IN",
+    },
     areaServed: [
       { "@type": "Place", name: "Worldwide" },
       { "@type": "City", name: "Bengaluru" },
@@ -68,19 +72,8 @@ const jsonLd = [
       "@type": "ContactPoint",
       email: "hello@mentr.in",
       contactType: "customer support",
+      availableLanguage: ["English", "Hindi"],
     },
-    ...(LEARN_PUBLIC
-      ? {
-          makesOffer: {
-            "@type": "Offer",
-            name: "Mentr Learn — Free Class 3–5 coding",
-            url: absoluteUrl("/learn"),
-            price: "0",
-            priceCurrency: "INR",
-            category: "Free",
-          },
-        }
-      : {}),
   },
   {
     "@context": "https://schema.org",
@@ -97,8 +90,7 @@ const jsonLd = [
       "query-input": "required name=search_term_string",
     },
   },
-  ...(LEARN_PUBLIC ? [learnCourseJsonLd()] : []),
-  // FAQPage schema lives on /faq — duplicating it here would hurt eligibility
+  // Learn Course schema stays on /learn — not on the homepage (AdSense audience clarity)
 ];
 
 export default function Home() {
@@ -115,6 +107,7 @@ export default function Home() {
         <StatsMarquee />
         <ParentNeedFinder />
         <GlobalReachMap />
+        <PremiumMentorsBrowse />
         <FeaturedMentors />
         <MentrFlow />
         <HowItWorks />

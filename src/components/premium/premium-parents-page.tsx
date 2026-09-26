@@ -148,10 +148,20 @@ export function PremiumParentsPage() {
     let list = [...parents];
     if (filter === "hiring") list = list.filter((p) => p.hasPosted);
     list.sort((a, b) => {
-      // Genuine (real signups) always above seed / backfill — All + Hiring
+      // Genuine (real signups) always above seed / backfill
       const aSeed = a.isSeed ? 1 : 0;
       const bSeed = b.isSeed ? 1 : 0;
       if (aSeed !== bSeed) return aSeed - bSeed;
+
+      // New joins (post-cutoff) float to the top — newest first
+      const aNew = a.isNewJoin ? 1 : 0;
+      const bNew = b.isNewJoin ? 1 : 0;
+      if (aNew !== bNew) return bNew - aNew;
+      if (aNew && bNew) {
+        return (b.joinedAt || "").localeCompare(a.joinedAt || "");
+      }
+
+      // Legacy ranking for parents already on the list before the cutoff
       if (filter === "hiring") {
         if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
         return (b.joinedAt || "").localeCompare(a.joinedAt || "");
@@ -456,7 +466,7 @@ function ParentCard({
       )}
     >
       {/* Photo */}
-      <div className="relative aspect-[5/4] overflow-hidden bg-cream-band">
+      <div className="relative aspect-[16/10] overflow-hidden bg-cream-band sm:aspect-[5/4]">
         <Avatar className="absolute inset-0 size-full rounded-none">
           {p.imageUrl ? (
             <AvatarImage

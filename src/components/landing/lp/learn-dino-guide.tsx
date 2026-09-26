@@ -39,26 +39,16 @@ import { LearnDino } from "./learn-dino";
 import { LearnStartButton } from "./learn-start-button";
 
 /**
- * Hide floating dino on work / app surfaces (search, dashboards, auth).
- * Keep it on marketing landings: /, /parents, /for-faculty, /learn, /blog, SEO hubs.
+ * Floating dino is Learn-only.
+ * Showing a kids mascot on the whole marketplace made AdSense reviewers treat
+ * mentr.in as child-directed — keep it on /learn public pages only.
  */
-const HIDDEN_PREFIXES = [
-  "/admin",
-  "/admintestingistrueonlyman134hsydsudy4",
-  "/learn/app",
-  "/search",
-  "/parent",
-  "/faculty",
-  "/profiling",
-  "/dashboard",
-  "/board",
-  "/teachers",
-  "/requirements",
-  "/messenger",
-  "/notifications",
-  "/settings",
-  "/account",
-];
+const LEARN_DINO_ALLOWED = (pathname: string) => {
+  if (!pathname.startsWith("/learn")) return false;
+  // LMS app chrome has its own UI — no floating guide there.
+  if (pathname.startsWith("/learn/app")) return false;
+  return true;
+};
 
 const DINO_FAB_POS_KEY = "mentr_dino_fab_pos_v1";
 
@@ -188,9 +178,7 @@ export function LearnDinoGuide() {
     moved: boolean;
   } | null>(null);
 
-  const hidden = HIDDEN_PREFIXES.some(
-    (p) => pathname === p || pathname.startsWith(`${p}/`),
-  );
+  const hidden = !LEARN_DINO_ALLOWED(pathname);
   const faq = dinoFaqNode(faqId);
   const nextQs = dinoFaqNext(faqId);
 
@@ -236,6 +224,9 @@ export function LearnDinoGuide() {
   useEffect(() => {
     function onResize() {
       setFabPos((prev) => (prev ? clampFabPos(prev.left, prev.top) : prev));
+      if (window.matchMedia("(max-width: 767px)").matches) {
+        setOpen(false);
+      }
     }
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -296,7 +287,7 @@ export function LearnDinoGuide() {
   return (
     <div
       className={cn(
-        "pointer-events-none fixed z-[255]",
+        "learn-dino-guide pointer-events-none fixed z-[255]",
         open
           ? "inset-0 flex items-end justify-center sm:items-end sm:justify-end"
           : usingCustomPos

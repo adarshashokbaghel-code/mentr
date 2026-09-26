@@ -86,7 +86,7 @@ function MentorScrollCard({ teacher }: { teacher: Teacher }) {
   const rate = formatHourlyRate(teacher.hourlyRate);
 
   return (
-    <div className="home-premium-mentor-card group relative h-[158px] w-[138px] shrink-0 sm:h-[180px] sm:w-[158px]">
+    <div className="home-premium-mentor-card group relative h-[132px] w-[118px] shrink-0 sm:h-[180px] sm:w-[158px]">
       <div className="home-premium-mentor-card-inner absolute inset-0 flex flex-col overflow-hidden rounded-lg border border-white/25 bg-white/10 shadow-[0_12px_40px_rgba(0,0,0,0.28)] backdrop-blur-md">
         <div className="relative min-h-0 flex-1 overflow-hidden">
           <MentorPhoto
@@ -104,11 +104,11 @@ function MentorScrollCard({ teacher }: { teacher: Teacher }) {
             </div>
           ) : null}
         </div>
-        <div className="flex shrink-0 flex-col justify-center px-2.5 py-2">
-          <p className="truncate text-[11px] font-bold leading-tight text-white sm:text-xs">
+        <div className="flex shrink-0 flex-col justify-center px-2 py-1.5 sm:px-2.5 sm:py-2">
+          <p className="truncate text-[10px] font-bold leading-tight text-white sm:text-xs">
             {name}
           </p>
-          <p className="truncate text-[10px] font-medium text-white/65">
+          <p className="truncate text-[9px] font-medium text-white/65 sm:text-[10px]">
             {subject}
             {rate ? ` · ${rate}` : ""}
           </p>
@@ -121,8 +121,8 @@ function MentorScrollCard({ teacher }: { teacher: Teacher }) {
 function MentorMarquee({ mentors }: { mentors: Teacher[] }) {
   if (mentors.length === 0) {
     return (
-      <div className="flex h-[158px] items-center justify-center rounded-lg border border-white/15 bg-white/5 sm:h-[180px]">
-        <p className="text-sm text-white/50">Loading premium tutors…</p>
+      <div className="flex h-[132px] items-center justify-center rounded-lg border border-white/15 bg-white/5 sm:h-[180px]">
+        <p className="text-xs text-white/50 sm:text-sm">Loading premium tutors…</p>
       </div>
     );
   }
@@ -130,10 +130,10 @@ function MentorMarquee({ mentors }: { mentors: Teacher[] }) {
   const loop = [...mentors, ...mentors];
 
   return (
-    <div className="home-premium-marquee relative overflow-hidden rounded-lg border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.02] py-3 sm:py-4">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#1c1915] to-transparent sm:w-14" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#1c1915] to-transparent sm:w-14" />
-      <div className="home-premium-marquee-track flex w-max gap-3 px-3 sm:gap-4 sm:px-4">
+    <div className="home-premium-marquee relative overflow-hidden rounded-lg border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.02] py-2.5 sm:py-4">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-[#1c1915] to-transparent sm:w-14" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-[#1c1915] to-transparent sm:w-14" />
+      <div className="home-premium-marquee-track flex w-max gap-2.5 px-2.5 sm:gap-4 sm:px-4">
         {loop.map((t, i) => (
           <MentorScrollCard key={`${t.id}-${i}`} teacher={t} />
         ))}
@@ -214,7 +214,7 @@ export function HomePremiumPopup() {
         aria-modal="true"
         aria-labelledby="home-premium-popup-title"
         className={cn(
-          "home-premium-glass-card relative z-10 flex max-h-[min(94dvh,920px)] w-full max-w-[640px] flex-col overflow-hidden",
+          "home-premium-glass-card relative z-10 flex max-h-[min(90dvh,920px)] w-full max-w-[640px] flex-col overflow-hidden",
           "rounded-t-xl border border-white/20 sm:rounded-xl",
           "champs-pop",
         )}
@@ -236,16 +236,16 @@ export function HomePremiumPopup() {
         <button
           type="button"
           onClick={dismiss}
-          className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-md border border-white/20 bg-white/10 text-white/80 backdrop-blur-md transition hover:bg-white/20 hover:text-white sm:right-4 sm:top-4"
+          className="absolute right-2.5 top-2.5 z-20 flex h-8 w-8 items-center justify-center rounded-md border border-white/20 bg-white/10 text-white/80 backdrop-blur-md transition hover:bg-white/20 hover:text-white sm:right-4 sm:top-4 sm:h-9 sm:w-9"
           aria-label="Close"
         >
-          <X className="h-4 w-4" strokeWidth={2.25} />
+          <X className="h-3.5 w-3.5 sm:h-4 sm:w-4" strokeWidth={2.25} />
         </button>
 
-        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pb-5 pt-6 sm:px-8 sm:pb-8 sm:pt-9">
+        <div className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto px-4 pb-4 pt-5 sm:px-8 sm:pb-8 sm:pt-9">
           <h2
             id="home-premium-popup-title"
-            className="max-w-[20ch] pr-10 text-[1.75rem] font-bold leading-[1.12] tracking-tight text-white sm:text-[2.35rem]"
+            className="max-w-[20ch] pr-9 text-[1.35rem] font-bold leading-[1.12] tracking-tight text-white sm:pr-10 sm:text-[2.35rem]"
           >
             In a hurry? Need an{" "}
             <span className="bg-gradient-to-r from-[#9eb4ff] via-[#c4a574] to-[#e8d5b5] bg-clip-text text-transparent">
@@ -253,19 +253,19 @@ export function HomePremiumPopup() {
             </span>
           </h2>
 
-          <p className="mt-3 max-w-[44ch] text-[13.5px] leading-relaxed text-white/70 sm:mt-3.5 sm:text-[15px]">
+          <p className="mt-2 max-w-[44ch] text-[12.5px] leading-relaxed text-white/70 sm:mt-3.5 sm:text-[15px]">
             Drop your requirement to our premium tutors now — they respond
             fast when you need someone today. Prefer to browse first? Take your
             time, compare profiles, and choose with confidence.
           </p>
 
-          <div className="mt-5 sm:mt-6">
-            <div className="mb-2.5 flex items-center justify-between gap-2">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-white/45">
+          <div className="mt-4 sm:mt-6">
+            <div className="mb-2 flex items-center justify-between gap-2 sm:mb-2.5">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-white/45 sm:text-[11px]">
                 Tutors ready for you
               </p>
-              <span className="inline-flex items-center gap-1 text-[10px] font-medium text-[#c4a574]">
-                <Zap className="h-3 w-3" />
+              <span className="inline-flex items-center gap-1 text-[9px] font-medium text-[#c4a574] sm:text-[10px]">
+                <Zap className="h-2.5 w-2.5 sm:h-3 sm:w-3" />
                 Live profiles
               </span>
             </div>
@@ -273,20 +273,20 @@ export function HomePremiumPopup() {
           </div>
 
           {showGuestCtas ? (
-            <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:gap-3">
+            <div className="mt-4 flex flex-col gap-2 sm:mt-6 sm:gap-3">
               <Link
-                href="/search?tier=premium"
+                href="/premiummentors"
                 onClick={dismiss}
                 className={cn(
-                  "group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-lg",
+                  "group relative flex h-10 items-center justify-center gap-2 overflow-hidden rounded-lg sm:h-12",
                   "bg-gradient-to-r from-[#6b87f5] via-[#7a92f7] to-[#c4a574]",
-                  "text-[14px] font-bold text-[#0f0e0c]",
+                  "text-[13px] font-bold text-[#0f0e0c] sm:text-[14px]",
                   "shadow-[0_10px_28px_rgba(107,135,245,0.35)]",
                   "transition hover:brightness-105 active:scale-[0.99]",
                 )}
               >
                 <span className="relative z-10">Explore premium tutors</span>
-                <ArrowRight className="relative z-10 h-4 w-4 transition group-hover:translate-x-0.5" />
+                <ArrowRight className="relative z-10 h-3.5 w-3.5 sm:h-4 sm:w-4 transition group-hover:translate-x-0.5" />
               </Link>
 
               <button
@@ -296,17 +296,17 @@ export function HomePremiumPopup() {
                   openRoleChooser("/search");
                 }}
                 className={cn(
-                  "flex h-11 items-center justify-center gap-2 rounded-lg",
-                  "border border-white/20 bg-white/5 text-[13px] font-semibold text-white/85",
+                  "flex h-9 items-center justify-center gap-2 rounded-lg sm:h-11",
+                  "border border-white/20 bg-white/5 text-[12px] font-semibold text-white/85 sm:text-[13px]",
                   "backdrop-blur-md transition hover:border-white/35 hover:bg-white/10 hover:text-white",
                 )}
               >
-                <Clock3 className="h-3.5 w-3.5 text-[#c4a574]" />
+                <Clock3 className="h-3 w-3 text-[#c4a574] sm:h-3.5 sm:w-3.5" />
                 Have enough time? Login, search &amp; compare
               </button>
             </div>
           ) : isFaculty ? (
-            <p className="mt-5 text-center text-xs text-white/45 sm:mt-6">
+            <p className="mt-4 text-center text-[11px] text-white/45 sm:mt-6 sm:text-xs">
               Parents see this when they need a tutor fast.
             </p>
           ) : null}
