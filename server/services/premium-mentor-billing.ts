@@ -16,7 +16,6 @@ import {
   type IUser,
 } from "../models/User";
 
-const MAX_OPEN_ORDERS = 4;
 const MAX_PAYMENT_HISTORY = 50;
 
 function getRazorpay() {
@@ -255,14 +254,18 @@ export async function createPremiumMentorOrder(
     };
   }
 
-  const open = (user.premiumPayments || []).filter(
-    (p: IPremiumMentorPayment) => p.status === "created",
-  );
-  if (open.length >= MAX_OPEN_ORDERS) {
-    return {
-      error: "Too many open payment attempts. Finish or wait, then try again.",
-      code: "TOO_MANY_ORDERS" as const,
-    };
+  // Abandoned Razorpay modals / missed cancel calls leave status "created".
+  // Persist supersede before calling Razorpay so retries unblock even if RZP fails.
+  user.premiumPayments = user.premiumPayments || [];
+  let superseded = false;
+  for (const p of user.premiumPayments) {
+    if (p.status === "created") {
+      p.status = "failed";
+      superseded = true;
+    }
+  }
+  if (superseded) {
+    await user.save();
   }
 
   const amountPaise = planToPaise(plan);
@@ -299,7 +302,6 @@ export async function createPremiumMentorOrder(
     termsAcceptedVersion: opts.legalVersion || undefined,
   };
 
-  user.premiumPayments = user.premiumPayments || [];
   user.premiumPayments.push(row);
   if (user.premiumPayments.length > MAX_PAYMENT_HISTORY) {
     user.premiumPayments = user.premiumPayments.slice(-MAX_PAYMENT_HISTORY);

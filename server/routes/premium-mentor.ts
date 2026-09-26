@@ -70,8 +70,11 @@ router.post(
   requireAuth,
   async (req: AuthenticatedRequest, res: Response) => {
     try {
-      if (!rateLimit(`prem-order:${req.auth!.sub}`, 8, 60_000)) {
-        res.status(429).json({ error: "Too many payment attempts. Wait a minute." });
+      if (!rateLimit(`prem-order:${req.auth!.sub}`, 20, 60_000)) {
+        res.status(429).json({
+          error: "Too many payment attempts. Wait a minute, then try again.",
+          code: "RATE_LIMITED",
+        });
         return;
       }
       const months = Number(req.body?.months);
@@ -87,8 +90,8 @@ router.post(
         const status =
           result.code === "PAYMENTS_OFF"
             ? 503
-            : result.code === "TOO_MANY_ORDERS" || result.code === "ALREADY_ACTIVE"
-              ? 429
+            : result.code === "ALREADY_ACTIVE"
+              ? 409
               : result.code === "FORBIDDEN"
                 ? 403
                 : result.code === "LEGAL_CONSENT_REQUIRED"
@@ -137,7 +140,7 @@ router.post(
             : code === "NOT_CAPTURED" || code === "FETCH_FAILED"
               ? 409
               : code === "ALREADY_ACTIVE"
-                ? 429
+                ? 409
                 : 400;
         res.status(status).json(result);
         return;
