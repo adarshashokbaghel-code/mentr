@@ -275,7 +275,7 @@ export function HomePremiumPopup() {
           {showGuestCtas ? (
             <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:gap-3">
               <Link
-                href="/search"
+                href="/search?tier=premium"
                 onClick={dismiss}
                 className={cn(
                   "group relative flex h-12 items-center justify-center gap-2 overflow-hidden rounded-lg",

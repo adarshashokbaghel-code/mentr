@@ -173,28 +173,10 @@ function MapTeacherPreview({
                 openRoleChooser(`/teachers/${teacher.id}`);
               }
             }}
-            className={cn(
-              "inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg bg-coral text-sm font-semibold text-white transition hover:bg-coral-dark",
-              !teacher.premium && "relative overflow-hidden",
-            )}
+            className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg bg-coral text-sm font-semibold text-white transition hover:bg-coral-dark"
           >
-            {!teacher.premium ? (
-              <>
-                <span
-                  className="pointer-events-none absolute inset-0 z-[1] rounded-lg bg-white/25 backdrop-blur-[3px]"
-                  aria-hidden
-                />
-                <span className="relative flex items-center gap-1.5 blur-[3px] opacity-80">
-                  Sign in to connect
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </>
-            ) : (
-              <>
-                Connect
-                <ArrowRight className="h-3.5 w-3.5" />
-              </>
-            )}
+            Connect
+            <ArrowRight className="h-3.5 w-3.5" />
           </button>
         ) : (
           <Link

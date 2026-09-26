@@ -466,6 +466,7 @@ export type PremiumRevealQuota = {
   dailyLimit: number;
   usedToday: number;
   remaining: number;
+  bonusCredits?: number;
 };
 
 export type PremiumRevealRow = {

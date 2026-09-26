@@ -237,6 +237,11 @@ export interface IUser extends Document {
   mentrPremium?: IMentrPremium;
   /** Payment history (newest last; capped in service). */
   premiumPayments?: IPremiumMentorPayment[];
+  /**
+   * Extra parent-contact reveals beyond the daily premium quota.
+   * Consumed when a reveal is made after the daily limit is already used.
+   */
+  parentRevealBonusCredits?: number;
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -483,6 +488,7 @@ const userSchema = new Schema<IUser>(
     premiumMentorVerifiedAt: { type: Date },
     mentrPremium: { type: mentrPremiumSchema, required: false },
     premiumPayments: { type: [premiumMentorPaymentSchema], default: [] },
+    parentRevealBonusCredits: { type: Number, min: 0, default: 0 },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },

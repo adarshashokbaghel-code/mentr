@@ -91,12 +91,35 @@ async function revealsUsedToday(mentorId: string, now = new Date()) {
 }
 
 export async function getRevealQuota(mentorId: string, now = new Date()) {
-  const usedToday = await revealsUsedToday(mentorId, now);
+  const [usedToday, mentor] = await Promise.all([
+    revealsUsedToday(mentorId, now),
+    User.findById(mentorId).select("parentRevealBonusCredits").lean(),
+  ]);
+  const bonus = Math.max(
+    0,
+    Number(
+      (mentor as { parentRevealBonusCredits?: number } | null)
+        ?.parentRevealBonusCredits ?? 0,
+    ) || 0,
+  );
+  const baseRemaining = Math.max(0, PARENT_REVEALS_PER_DAY - usedToday);
   return {
     dailyLimit: PARENT_REVEALS_PER_DAY,
     usedToday: Math.min(usedToday, PARENT_REVEALS_PER_DAY),
-    remaining: Math.max(0, PARENT_REVEALS_PER_DAY - usedToday),
+    remaining: baseRemaining + bonus,
+    bonusCredits: bonus,
   };
+}
+
+async function consumeRevealBonusIfNeeded(mentorId: string, usedBefore: number) {
+  if (usedBefore < PARENT_REVEALS_PER_DAY) return;
+  await User.updateOne(
+    {
+      _id: mentorId,
+      parentRevealBonusCredits: { $gt: 0 },
+    },
+    { $inc: { parentRevealBonusCredits: -1 } },
+  );
 }
 
 type ParentListOpts = {
@@ -370,6 +393,8 @@ export async function revealParentContact(opts: {
     (r) => r.status === "open" && new Date(r.expiresAt).getTime() > now,
   );
 
+  const usedBefore = await revealsUsedToday(opts.mentor._id.toString());
+
   try {
     const row = await ParentContactReveal.create({
       mentor: opts.mentor._id,
@@ -383,6 +408,10 @@ export async function revealParentContact(opts: {
       openPostsAtReveal: openPosts.length,
       revealedAt: new Date(),
     });
+    await consumeRevealBonusIfNeeded(
+      opts.mentor._id.toString(),
+      usedBefore,
+    );
     const nextQuota = await getRevealQuota(opts.mentor._id.toString());
     return {
       alreadyRevealed: false as const,

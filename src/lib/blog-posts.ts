@@ -1594,7 +1594,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "How to find a mentor online in India for coding, career, or exams — verified profiles, free connect, no lead fees on Mentr.",
     publishWeek: 34,
     cta: "Find mentors in India",
-    ctaHref: "/search?kind=mentor",
+    ctaHref: "/search",
   },
   {
     slug: "teacheron-alternatives",

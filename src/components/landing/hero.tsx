@@ -29,7 +29,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-const HERO_ORDER_KEY = "mentr_hero_tutor_order_v1";
+const HERO_ORDER_KEY = "mentr_hero_tutor_order_v2";
 
 function shuffleTeachers(list: Teacher[]): Teacher[] {
   const copy = [...list];
@@ -80,7 +80,10 @@ function useHeroTeachers() {
     let cancelled = false;
     fetchPublicTeachers({ liveOnly: true }).then(({ teachers }) => {
       if (cancelled) return;
-      setPool(orderTeachers(teachers.filter((t) => t.live)));
+      const live = teachers.filter((t) => t.live);
+      const premium = live.filter((t) => t.premium);
+      // Prefer Premium mentors in the search mock (guest Connect is clear for all).
+      setPool(orderTeachers(premium.length > 0 ? premium : live));
       setReady(true);
     });
     return () => {
@@ -173,6 +176,7 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
       {available ? (
         <ConnectButton
           teacher={teacher}
+          label="Connect"
           className="inline-flex shrink-0 items-center gap-1 rounded-lg border-2 border-ink bg-coral px-2.5 py-1.5 text-[11px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17] transition hover:bg-coral-dark"
           requestedClassName="inline-flex shrink-0 items-center gap-1 rounded-lg border-2 border-hairline bg-cream px-2.5 py-1.5 text-[11px] font-bold text-muted"
         />
