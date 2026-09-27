@@ -81,6 +81,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/how-it-works", 0.8, "weekly"),
     entry("/pricing", 0.75, "monthly"),
     entry("/mentrpricing", 0.85, "weekly"),
+    entry("/stats", 0.85, "weekly"),
     entry("/mentrpremium", 0.85, "weekly"),
     entry("/faq", 0.85, "weekly"),
     entry("/blog", 0.85, "weekly"),

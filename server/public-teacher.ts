@@ -75,11 +75,66 @@ export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
 }
 
 /** Public mentor count for landing stats — lightweight, cached. */
+let platformStatsCache: {
+  subjects: number;
+  snapGradeQuestions: number;
+  at: number;
+} | null = null;
+
+/** Distinct subjects across public tutor profiles + Snap & Grade question bank size. */
+async function loadPlatformStats() {
+  if (
+    platformStatsCache &&
+    Date.now() - platformStatsCache.at < PUBLIC_COUNT_TTL_MS
+  ) {
+    return platformStatsCache;
+  }
+  await connectDb();
+  const { SnapGradeQuestion } = await import("./models/SnapGrade");
+  const [subjectRows, snapGradeQuestions] = await Promise.all([
+    User.aggregate<{ n: number }>([
+      {
+        $match: {
+          role: { $ne: "parent" },
+          profileCompleted: true,
+          "profile.name": { $exists: true, $ne: "" },
+        },
+      },
+      { $unwind: "$profile.subjects" },
+      {
+        $group: {
+          _id: { $toLower: { $trim: { input: "$profile.subjects" } } },
+        },
+      },
+      { $match: { _id: { $ne: "" } } },
+      { $count: "n" },
+    ]),
+    SnapGradeQuestion.estimatedDocumentCount(),
+  ]);
+  platformStatsCache = {
+    subjects: subjectRows[0]?.n ?? 0,
+    snapGradeQuestions,
+    at: Date.now(),
+  };
+  return platformStatsCache;
+}
+
 export async function getPublicTeacherStats(res: Response): Promise<void> {
   try {
-    const count = await countPublicTeachers();
+    const [count, platform] = await Promise.all([
+      countPublicTeachers(),
+      loadPlatformStats().catch((err) => {
+        console.error("public platform stats error:", err);
+        return null;
+      }),
+    ]);
     res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=180");
-    res.json({ count, mentors: count });
+    res.json({
+      count,
+      mentors: count,
+      subjects: platform?.subjects ?? null,
+      snapGradeQuestions: platform?.snapGradeQuestions ?? null,
+    });
   } catch (error) {
     console.error("public teacher stats error:", error);
     res.status(500).json({ error: "Failed to load mentor count" });
