@@ -13,6 +13,8 @@ import { useAuth } from "@/components/auth/auth-provider";
 import {
   ApiError,
   premiumMentorApi,
+  type PremiumBillingContext,
+  type PremiumCurrency,
   type PremiumPlanOption,
   type PremiumMentorState,
 } from "@/lib/api";
@@ -65,6 +67,27 @@ function formatInr(n: number) {
   }).format(n);
 }
 
+function formatUsd(n: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(n);
+}
+
+function formatLocal(n: number, currency: string) {
+  try {
+    return new Intl.NumberFormat(undefined, {
+      style: "currency",
+      currency,
+      maximumFractionDigits: n >= 100 ? 0 : 2,
+    }).format(n);
+  } catch {
+    return `${n.toFixed(2)} ${currency}`;
+  }
+}
+
 type Props = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -81,6 +104,8 @@ export function PremiumCheckoutDialog({
   const [usdPerMonth, setUsdPerMonth] = useState(5);
   const [usdToInr, setUsdToInr] = useState(89.8);
   const [paymentsEnabled, setPaymentsEnabled] = useState(true);
+  const [billing, setBilling] = useState<PremiumBillingContext | null>(null);
+  const [currency, setCurrency] = useState<PremiumCurrency>("INR");
   const [months, setMonths] = useState<2 | 3 | 4>(2);
   const [loadingCatalog, setLoadingCatalog] = useState(false);
   const [paying, setPaying] = useState(false);
@@ -96,6 +121,8 @@ export function PremiumCheckoutDialog({
       setUsdPerMonth(cat.usdPerMonth);
       setUsdToInr(cat.usdToInr);
       setPaymentsEnabled(cat.paymentsEnabled);
+      setBilling(cat.billing ?? null);
+      setCurrency(cat.billing?.currency ?? "INR");
       const def = cat.plans.find((p) => p.isDefault) || cat.plans[0];
       if (def) setMonths(def.months);
     } catch (e) {
@@ -115,6 +142,18 @@ export function PremiumCheckoutDialog({
     () => plans.find((p) => p.months === months) || null,
     [plans, months],
   );
+
+  const isUsd = currency === "USD";
+  const canSwitchCurrency = (billing?.availableCurrencies.length ?? 0) > 1;
+  const localEstimate = (usd: number) =>
+    isUsd && billing?.local
+      ? formatLocal(usd * billing.local.usdRate, billing.local.currency)
+      : null;
+  const payLabel = selected
+    ? isUsd
+      ? formatUsd(selected.payUsd)
+      : formatInr(selected.payInr)
+    : "";
 
   async function proceedToPay() {
     if (!user || user.role !== "faculty") {
@@ -139,6 +178,7 @@ export function PremiumCheckoutDialog({
       const order = await premiumMentorApi.createOrder(selected.months, {
         acceptedLegal: true,
         legalVersion: LEGAL_DOCS_VERSION,
+        currency,
       });
       orderId = order.orderId;
 
@@ -152,7 +192,7 @@ export function PremiumCheckoutDialog({
 
       const rzp = new window.Razorpay({
         key: order.keyId,
-        amount: order.amountPaise,
+        amount: order.amountMinor ?? order.amountPaise,
         currency: order.currency,
         name: "Mentr",
         description: `Premium Mentor — ${order.months} months`,
@@ -263,8 +303,9 @@ export function PremiumCheckoutDialog({
               Premium Mentor
             </DialogTitle>
             <DialogDescription className="text-[13px] leading-relaxed text-muted sm:text-[15px]">
-              Pick how long you want Premium. Pay once in rupees. Activates
-              right after payment.
+              Pick how long you want Premium. Pay once
+              {isUsd ? " in US dollars" : " in rupees"}. Activates right after
+              payment.
             </DialogDescription>
           </DialogHeader>
         </div>
@@ -338,9 +379,37 @@ export function PremiumCheckoutDialog({
             {/* Step 2 — bill */}
             {selected ? (
               <div>
-                <p className="text-[13px] font-semibold text-ink">
-                  2. What you pay
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-[13px] font-semibold text-ink">
+                    2. What you pay
+                  </p>
+                  {canSwitchCurrency ? (
+                    <div
+                      role="radiogroup"
+                      aria-label="Payment currency"
+                      className="flex rounded-lg border border-hairline bg-white p-0.5"
+                    >
+                      {(["INR", "USD"] as const).map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          role="radio"
+                          aria-checked={currency === c}
+                          disabled={paying}
+                          onClick={() => setCurrency(c)}
+                          className={cn(
+                            "rounded-md px-2.5 py-1 text-[11px] font-bold transition",
+                            currency === c
+                              ? "bg-ink text-white"
+                              : "text-muted hover:text-ink",
+                          )}
+                        >
+                          {c === "INR" ? "₹ INR" : "$ USD"}
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
                 <div className="mt-3 rounded-lg border border-hairline bg-cream/60">
                   <div className="space-y-0 divide-y divide-hairline px-3.5 text-sm">
                     <div className="flex items-start justify-between gap-3 py-3">
@@ -349,15 +418,34 @@ export function PremiumCheckoutDialog({
                           ${usdPerMonth} × {selected.months} months
                         </p>
                         <p className="mt-0.5 text-xs text-muted">
-                          Listed in USD, charged in INR (≈ ₹{usdToInr} per $1)
+                          {isUsd
+                            ? "Charged in US dollars — price stays fixed"
+                            : `Listed in USD, charged in INR (≈ ₹${usdToInr} per $1)`}
                         </p>
                       </div>
                       <p className="shrink-0 font-medium tabular-nums text-ink">
-                        {formatInr(selected.listInr)}
+                        {isUsd
+                          ? formatUsd(selected.listUsd)
+                          : formatInr(selected.listInr)}
                       </p>
                     </div>
 
-                    {selected.discountInr > 0 ? (
+                    {isUsd && selected.discountUsd > 0 ? (
+                      <div className="flex items-center justify-between gap-3 py-3">
+                        <p className="text-ink">
+                          Discount for {selected.months} months
+                          <span className="text-muted">
+                            {" "}
+                            ({selected.discountPercent}%)
+                          </span>
+                        </p>
+                        <p className="shrink-0 font-medium tabular-nums text-sage">
+                          −{formatUsd(selected.discountUsd)}
+                        </p>
+                      </div>
+                    ) : null}
+
+                    {!isUsd && selected.discountInr > 0 ? (
                       <div className="flex items-center justify-between gap-3 py-3">
                         <p className="text-ink">
                           Discount for {selected.months} months
@@ -376,19 +464,40 @@ export function PremiumCheckoutDialog({
                       <div>
                         <p className="font-bold text-ink">Total due today</p>
                         <p className="mt-0.5 text-xs text-muted">
-                          About ${selected.payUsdApprox} ·{" "}
-                          {formatInr(selected.perMonthInr)}/month effective
+                          {isUsd ? (
+                            <>
+                              {formatUsd(selected.perMonthUsd)}/month effective
+                              {localEstimate(selected.payUsd)
+                                ? ` · ≈ ${localEstimate(selected.payUsd)}`
+                                : ""}
+                            </>
+                          ) : (
+                            <>
+                              About ${selected.payUsdApprox} ·{" "}
+                              {formatInr(selected.perMonthInr)}/month effective
+                            </>
+                          )}
                         </p>
                       </div>
                       <p className="shrink-0 text-xl font-bold tabular-nums text-ink">
-                        {formatInr(selected.payInr)}
+                        {payLabel}
                       </p>
                     </div>
                   </div>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-muted">
-                  No GST added on top of this amount. Paid securely via
-                  Razorpay (UPI, cards, netbanking).
+                  {isUsd ? (
+                    <>
+                      No tax added on top. Your bank converts USD to your
+                      currency — the local amount shown is an estimate. Paid
+                      securely via Razorpay (international cards).
+                    </>
+                  ) : (
+                    <>
+                      No GST added on top of this amount. Paid securely via
+                      Razorpay (UPI, cards, netbanking).
+                    </>
+                  )}
                 </p>
               </div>
             ) : null}
@@ -491,7 +600,7 @@ export function PremiumCheckoutDialog({
             {paying
               ? "Opening payment…"
               : selected
-                ? `Pay ${formatInr(selected.payInr)}`
+                ? `Pay ${payLabel}`
                 : "Pay"}
           </Button>
         </div>

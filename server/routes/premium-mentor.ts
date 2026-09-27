@@ -12,6 +12,11 @@ import {
   verifyPremiumMentorPayment,
 } from "../services/premium-mentor-billing";
 import { serializePremiumCatalog } from "../lib/premium-mentor-plans";
+import {
+  buildPremiumBillingContext,
+  countryFromRequest,
+  parsePremiumCurrency,
+} from "../lib/premium-billing-geo";
 
 const router = Router();
 router.use(ensureDb);
@@ -32,10 +37,13 @@ function rateLimit(key: string, max: number, windowMs: number): boolean {
 }
 
 /** Public catalog — no auth required. */
-router.get("/catalog", (_req, res: Response) => {
+router.get("/catalog", async (req, res: Response) => {
+  const billing = await buildPremiumBillingContext(req);
+  res.setHeader("Cache-Control", "private, no-store");
   res.json({
     ...serializePremiumCatalog(),
     paymentsEnabled: isPremiumRazorpayConfigured(),
+    billing,
   });
 });
 
@@ -85,6 +93,8 @@ router.post(
           typeof req.body?.legalVersion === "string"
             ? req.body.legalVersion.slice(0, 64)
             : undefined,
+        country: countryFromRequest(req),
+        requestedCurrency: parsePremiumCurrency(req.body?.currency),
       });
       if ("error" in result) {
         const status =

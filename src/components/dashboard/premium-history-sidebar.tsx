@@ -16,6 +16,22 @@ function formatInr(n: number) {
   }).format(n);
 }
 
+function formatUsd(n: number) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(n);
+}
+
+function isUsdPayment(p: PremiumPaymentRow) {
+  return p.currency === "USD";
+}
+
+function formatPaid(p: PremiumPaymentRow) {
+  return isUsdPayment(p) ? formatUsd(p.amountCharged) : formatInr(p.amountInr);
+}
+
 function formatDate(iso: string | null) {
   if (!iso) return "—";
   return new Date(iso).toLocaleString("en-IN", {
@@ -92,24 +108,32 @@ function ReceiptCard({
               Premium Mentor · {payment.months} months
             </span>
             <span className="font-medium text-ink">
-              {formatInr(payment.listInr)}
+              {isUsdPayment(payment)
+                ? formatUsd(payment.listUsd)
+                : formatInr(payment.listInr)}
             </span>
           </div>
-          {payment.discountInr > 0 ? (
+          {payment.discountPercent > 0 ? (
             <div className="flex justify-between gap-2 text-sage">
               <span>Discount ({payment.discountPercent}%)</span>
-              <span>−{formatInr(payment.discountInr)}</span>
+              <span>
+                −
+                {isUsdPayment(payment)
+                  ? formatUsd(Math.max(0, payment.listUsd - payment.amountCharged))
+                  : formatInr(payment.discountInr)}
+              </span>
             </div>
           ) : null}
           <div className="flex justify-between gap-2 border-t border-dashed border-hairline pt-2">
             <span className="font-bold text-ink">Amount paid</span>
             <span className="text-base font-bold text-ink">
-              {formatInr(payment.amountInr)}
+              {formatPaid(payment)}
             </span>
           </div>
           <p className="text-[11px] text-muted">
-            List ${payment.listUsd} USD · FX ≈ ₹{payment.usdToInr}/$ · No GST
-            collected on this charge
+            {isUsdPayment(payment)
+              ? `Charged in USD${payment.billingCountry ? ` · ${payment.billingCountry}` : ""} · ≈ ${formatInr(payment.amountInr)} settled · No tax collected on this charge`
+              : `List $${payment.listUsd} USD · FX ≈ ₹${payment.usdToInr}/$ · No GST collected on this charge`}
           </p>
         </div>
 
@@ -242,7 +266,7 @@ export function PremiumHistorySidebar({
                     >
                       <div className="min-w-0">
                         <p className="truncate text-sm font-semibold text-ink">
-                          {p.months} months · {formatInr(p.amountInr)}
+                          {p.months} months · {formatPaid(p)}
                         </p>
                         <p className="text-xs text-muted">
                           {formatDate(p.paidAt)}

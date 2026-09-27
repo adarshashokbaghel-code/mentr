@@ -49,6 +49,11 @@ const PAGE_FAQS = [
     answer:
       "Premium costs $5 per month (about ₹449). The price you see is the price you pay.",
   },
+  {
+    question: "Can mentors outside India buy Premium?",
+    answer:
+      "Yes. Mentors in India pay ₹449 per month in rupees. Mentors outside India pay a fixed $5 per month in US dollars with an international card; your bank converts it to your local currency, so the dollar price never changes.",
+  },
 ];
 
 const productJsonLd = {
@@ -72,6 +77,15 @@ const productJsonLd = {
       name: "Premium",
       price: "5",
       priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      url: absoluteUrl("/mentrpricing#plans"),
+    },
+    {
+      "@type": "Offer",
+      name: "Premium (India)",
+      price: "449",
+      priceCurrency: "INR",
+      eligibleRegion: { "@type": "Country", name: "IN" },
       availability: "https://schema.org/InStock",
       url: absoluteUrl("/mentrpricing#plans"),
     },

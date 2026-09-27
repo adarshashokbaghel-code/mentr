@@ -3,13 +3,15 @@ import Razorpay from "razorpay";
 import { config } from "../config";
 import {
   getPremiumPlan,
-  planToPaise,
+  planAmountMinor,
   PREMIUM_USD_PER_MONTH,
   PREMIUM_USD_TO_INR,
   serializePremiumCatalog,
   usdDisplayForMonths,
+  type PremiumCurrency,
   type PremiumPlanDef,
 } from "../lib/premium-mentor-plans";
+import { resolvePremiumCurrency } from "../lib/premium-billing-geo";
 import {
   User,
   type IPremiumMentorPayment,
@@ -97,10 +99,19 @@ function verifyPaymentSignature(
   }
 }
 
+function rowCurrency(row: IPremiumMentorPayment): PremiumCurrency {
+  return row.currency === "USD" ? "USD" : "INR";
+}
+
+function rowAmountMinor(row: IPremiumMentorPayment): number {
+  return row.amountMinor ?? row.amountPaise;
+}
+
 async function assertPaymentCaptured(
   orderId: string,
   paymentId: string,
-  expectedPaise: number,
+  expectedMinor: number,
+  expectedCurrency: PremiumCurrency,
 ): Promise<
   | { ok: true; payment: Record<string, unknown> }
   | { error: string; code: string }
@@ -111,6 +122,7 @@ async function assertPaymentCaptured(
     const status = String(payment?.status || "");
     const payOrder = String(payment?.order_id || "");
     const amount = Number(payment?.amount || 0);
+    const currency = String(payment?.currency || "").toUpperCase();
     if (payOrder !== orderId) {
       return { error: "Payment order mismatch", code: "ORDER_MISMATCH" };
     }
@@ -120,7 +132,7 @@ async function assertPaymentCaptured(
         code: "NOT_CAPTURED",
       };
     }
-    if (amount !== expectedPaise) {
+    if (amount !== expectedMinor || currency !== expectedCurrency) {
       return { error: "Payment amount mismatch", code: "AMOUNT_MISMATCH" };
     }
     return {
@@ -144,6 +156,9 @@ function sanitizeRazorpaySnapshot(
     order_id: payment.order_id,
     amount: payment.amount,
     currency: payment.currency,
+    base_amount: payment.base_amount,
+    base_currency: payment.base_currency,
+    international: payment.international,
     status: payment.status,
     method: payment.method,
     email: payment.email,
@@ -177,7 +192,10 @@ export function serializePremiumPayment(p: IPremiumMentorPayment) {
     discountInr: p.discountInr,
     amountInr: p.amountInr,
     amountPaise: p.amountPaise,
-    currency: p.currency,
+    currency: rowCurrency(p),
+    amountMinor: rowAmountMinor(p),
+    amountCharged: rowAmountMinor(p) / 100,
+    billingCountry: p.billingCountry || null,
     usdPerMonth: p.usdPerMonth,
     listUsd: p.listUsd,
     usdToInr: p.usdToInr,
@@ -221,7 +239,12 @@ export function serializeMentrPremiumState(user: IUser) {
 export async function createPremiumMentorOrder(
   userId: string,
   monthsRaw: number,
-  opts?: { acceptedLegal?: boolean; legalVersion?: string },
+  opts?: {
+    acceptedLegal?: boolean;
+    legalVersion?: string;
+    country?: string | null;
+    requestedCurrency?: PremiumCurrency | null;
+  },
 ) {
   if (!isPremiumRazorpayConfigured()) {
     return {
@@ -268,18 +291,30 @@ export async function createPremiumMentorOrder(
     await user.save();
   }
 
-  const amountPaise = planToPaise(plan);
+  const currency = resolvePremiumCurrency({
+    country: opts.country ?? null,
+    requested: opts.requestedCurrency ?? null,
+  });
+  const amountMinor = planAmountMinor(plan, currency);
+  // USD rows keep an INR estimate until Razorpay reports the settled base_amount.
+  const amountInr =
+    currency === "USD"
+      ? Math.max(1, Math.round((plan.payUsdCents / 100) * PREMIUM_USD_TO_INR))
+      : plan.payInr;
+  const amountPaise = amountInr * 100;
+  const billingCountry = opts.country || undefined;
   const receiptNumber = makeReceiptNumber(userId);
   const rzp = getRazorpay();
   const order = await rzp.orders.create({
-    amount: amountPaise,
-    currency: "INR",
+    amount: amountMinor,
+    currency,
     receipt: receiptNumber.slice(0, 40),
     notes: {
       purpose: "premium_mentor",
       userId,
       months: String(plan.months),
       receiptNumber,
+      ...(billingCountry ? { country: billingCountry } : {}),
     },
   });
 
@@ -291,9 +326,11 @@ export async function createPremiumMentorOrder(
     listInr: plan.listInr,
     discountPercent: plan.discountPercent,
     discountInr: Math.max(0, plan.listInr - plan.payInr),
-    amountInr: plan.payInr,
+    amountInr,
     amountPaise,
-    currency: "INR",
+    currency,
+    amountMinor,
+    billingCountry,
     usdPerMonth: PREMIUM_USD_PER_MONTH,
     listUsd: usdDisplayForMonths(plan.months),
     usdToInr: PREMIUM_USD_TO_INR,
@@ -310,9 +347,10 @@ export async function createPremiumMentorOrder(
 
   return {
     orderId: String(order.id),
+    amountMinor,
     amountPaise,
-    amountInr: plan.payInr,
-    currency: "INR",
+    amountInr,
+    currency,
     months: plan.months,
     listInr: plan.listInr,
     discountPercent: plan.discountPercent,
@@ -367,14 +405,46 @@ export async function verifyPremiumMentorPayment(opts: {
   paymentId: string;
   signature: string;
 }) {
-  const { userId, orderId, paymentId, signature } = opts;
+  const { orderId, paymentId, signature } = opts;
   if (!orderId || !paymentId || !signature) {
     return { error: "Missing payment references", code: "BAD_PAYMENT" as const };
   }
   if (!verifyPaymentSignature(orderId, paymentId, signature)) {
     return { error: "Invalid payment signature", code: "BAD_SIGNATURE" as const };
   }
+  return applyPremiumPayment(opts);
+}
 
+/**
+ * Razorpay webhook path (HMAC already verified on the raw body). Recovers
+ * payments where the browser closed before /verify — common with 3-D Secure
+ * on international cards.
+ */
+export async function applyPremiumPaymentFromWebhook(opts: {
+  userId?: string;
+  orderId: string;
+  paymentId: string;
+}) {
+  let userId = opts.userId ? String(opts.userId) : "";
+  if (!userId) {
+    const owner = await User.findOne(
+      { "premiumPayments.razorpayOrderId": opts.orderId },
+      { _id: 1 },
+    ).lean();
+    userId = owner ? String(owner._id) : "";
+  }
+  if (!userId) {
+    return { error: "Order not found", code: "ORDER_NOT_FOUND" as const };
+  }
+  return applyPremiumPayment({ userId, orderId: opts.orderId, paymentId: opts.paymentId });
+}
+
+async function applyPremiumPayment(opts: {
+  userId: string;
+  orderId: string;
+  paymentId: string;
+}) {
+  const { userId, orderId, paymentId } = opts;
   const user = await User.findById(userId);
   if (!user || user.role !== "faculty") {
     return { error: "Mentor not found", code: "FORBIDDEN" as const };
@@ -419,15 +489,31 @@ export async function verifyPremiumMentorPayment(opts: {
     };
   }
 
-  const live = await assertPaymentCaptured(orderId, paymentId, row.amountPaise);
+  const currency = rowCurrency(row);
+  const expectedMinor = rowAmountMinor(row);
+  const live = await assertPaymentCaptured(
+    orderId,
+    paymentId,
+    expectedMinor,
+    currency,
+  );
   if (!("ok" in live)) {
     return { error: live.error, code: live.code };
   }
 
   const plan = getPremiumPlan(row.months);
-  if (!plan || planToPaise(plan) !== row.amountPaise) {
+  if (!plan || planAmountMinor(plan, currency) !== expectedMinor) {
     return { error: "Plan amount mismatch", code: "AMOUNT_MISMATCH" as const };
   }
+
+  // International payments settle in INR — record the real rupee value when Razorpay reports it.
+  const baseAmount = Number(live.payment.base_amount || 0);
+  const settledInr =
+    currency === "USD" &&
+    String(live.payment.base_currency || "").toUpperCase() === "INR" &&
+    baseAmount > 0
+      ? { amountPaise: baseAmount, amountInr: Math.round(baseAmount / 100) }
+      : null;
 
   const paidAt = new Date();
   const { periodStart, periodEnd } = applyPlanToUser(
@@ -447,16 +533,26 @@ export async function verifyPremiumMentorPayment(opts: {
   row.email = live.payment.email ? String(live.payment.email) : user.email;
   row.razorpaySnapshot = sanitizeRazorpaySnapshot(live.payment);
 
-  // Atomic claim so double-verify can't double-extend (status flip first via filter)
+  // Atomic claim so double-verify can't double-extend (status flip first via filter).
+  // "failed" is claimable: the checkout may have cancelled an order Razorpay later captured.
   const claimed = await User.findOneAndUpdate(
     {
       _id: userId,
       premiumPayments: {
-        $elemMatch: { razorpayOrderId: orderId, status: "created" },
+        $elemMatch: {
+          razorpayOrderId: orderId,
+          status: { $in: ["created", "failed"] },
+        },
       },
     },
     {
       $set: {
+        ...(settledInr
+          ? {
+              "premiumPayments.$.amountInr": settledInr.amountInr,
+              "premiumPayments.$.amountPaise": settledInr.amountPaise,
+            }
+          : {}),
         "premiumPayments.$.status": "paid",
         "premiumPayments.$.razorpayPaymentId": paymentId,
         "premiumPayments.$.paidAt": paidAt,

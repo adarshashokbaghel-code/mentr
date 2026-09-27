@@ -173,9 +173,14 @@ export interface IPremiumMentorPayment {
   listInr: number;
   discountPercent: number;
   discountInr: number;
+  /** INR value — exact for INR orders; Razorpay settlement (or estimate) for USD. */
   amountInr: number;
   amountPaise: number;
+  /** Charge currency of the Razorpay order. */
   currency: string;
+  /** Charged amount in the smallest unit of `currency` (paise / cents). */
+  amountMinor?: number;
+  billingCountry?: string;
   usdPerMonth: number;
   listUsd: number;
   usdToInr: number;
@@ -424,7 +429,9 @@ const premiumMentorPaymentSchema = new Schema<IPremiumMentorPayment>(
     discountInr: { type: Number, default: 0, min: 0 },
     amountInr: { type: Number, required: true, min: 1 },
     amountPaise: { type: Number, required: true, min: 100 },
-    currency: { type: String, default: "INR" },
+    currency: { type: String, enum: ["INR", "USD"], default: "INR" },
+    amountMinor: { type: Number, min: 1 },
+    billingCountry: { type: String, trim: true, uppercase: true, maxlength: 2 },
     usdPerMonth: { type: Number, default: 5 },
     listUsd: { type: Number, default: 0 },
     usdToInr: { type: Number, default: 89.8 },
