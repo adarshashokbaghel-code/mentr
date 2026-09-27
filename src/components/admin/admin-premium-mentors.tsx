@@ -166,17 +166,64 @@ export function AdminPremiumMentors({ adminKey }: { adminKey: string }) {
                 <p className="text-[11px] text-muted">
                   {r.paidCount ?? 0} payment{(r.paidCount ?? 0) === 1 ? "" : "s"}
                   {" · "}
-                  {r.totalReveals ?? 0} reveals
-                  {(r.revealsToday ?? 0) > 0
-                    ? ` (${r.revealsToday} today)`
-                    : ""}
+                  {r.totalReveals ?? 0} reveals all-time
                 </p>
+                <DailyCredits row={r} />
               </div>
             </li>
           ))}
         </ul>
       )}
     </AdminSection>
+  );
+}
+
+function DailyCredits({ row }: { row: AdminPremiumMentorRow }) {
+  if (!row.premiumActive) {
+    return (
+      <p className="mt-1 text-[11px] font-semibold text-muted">
+        No daily credits (inactive)
+      </p>
+    );
+  }
+  if (row.unlimitedReveals) {
+    return (
+      <p className="mt-1 inline-flex rounded-md bg-sage-wash px-2 py-0.5 text-[11px] font-bold text-sage">
+        Unlimited reveals (test account)
+      </p>
+    );
+  }
+  const limit = row.dailyRevealLimit ?? 3;
+  const used = row.revealsUsedToday ?? 0;
+  const left = row.revealsRemainingToday ?? Math.max(0, limit - used);
+  const bonus = row.revealBonusCredits ?? 0;
+  return (
+    <div className="mt-1.5 sm:ml-auto sm:w-44">
+      <div className="flex items-center justify-between gap-2 text-[11px]">
+        <span className="font-semibold text-muted">Credits today</span>
+        <span
+          className={cn(
+            "font-bold tabular-nums",
+            left === 0 ? "text-coral" : "text-sage",
+          )}
+        >
+          {left} left
+        </span>
+      </div>
+      <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-cream-band">
+        <div
+          className={cn(
+            "h-full rounded-full",
+            left === 0 ? "bg-coral" : "bg-sage",
+          )}
+          style={{ width: `${Math.min(100, (used / limit) * 100)}%` }}
+        />
+      </div>
+      <p className="mt-0.5 text-[10px] text-muted">
+        {used}/{limit} used{bonus > 0 ? ` · +${bonus} bonus` : ""} · resets
+        midnight IST
+      </p>
+    </div>
   );
 }
 

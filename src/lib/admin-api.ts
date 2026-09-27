@@ -812,6 +812,11 @@ export type AdminPremiumMentorRow = {
   razorpayPaymentId?: string | null;
   totalReveals?: number;
   revealsToday?: number;
+  dailyRevealLimit?: number;
+  revealsUsedToday?: number;
+  revealsRemainingToday?: number;
+  revealBonusCredits?: number;
+  unlimitedReveals?: boolean;
 };
 
 export type AdminPremiumMentorStats = {
