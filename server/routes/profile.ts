@@ -23,7 +23,6 @@ import {
   removeMentorProfileImage,
   replaceMentorProfileImage,
 } from "../services/mentor-profile-image";
-
 const router = Router();
 
 router.use(ensureDb);

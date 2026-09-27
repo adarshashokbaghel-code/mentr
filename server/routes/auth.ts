@@ -14,6 +14,7 @@ import {
   verifyOtp,
 } from "../services/otp";
 import { sendOtpEmail } from "../services/mail";
+import { notifyPremiumMentorsOfNewParent } from "../services/premium-new-parent-alert";
 import { signAuthToken } from "../services/jwt";
 import {
   AuthenticatedRequest,
@@ -406,6 +407,7 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
 
     // ——— Code is correct. Resolve the account. ———
     let user = await User.findOne({ email });
+    const wasVerified = Boolean(user?.emailVerified);
 
     // Defense in depth: a verified account never changes role, and never
     // logs in through the other portal — even if send-otp was bypassed.
@@ -488,6 +490,11 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
       { email, consumed: false },
       { $set: { consumed: true } },
     );
+
+    // Awaited (bounded) because Vercel may freeze the function after res.json.
+    if (user.role === "parent" && !wasVerified) {
+      await notifyPremiumMentorsOfNewParent(user._id.toString());
+    }
 
     const token = signAuthToken(user._id.toString(), user.email, user.role);
     setAuthCookie(res, token);

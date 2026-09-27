@@ -242,6 +242,8 @@ export interface IUser extends Document {
    * Consumed when a reveal is made after the daily limit is already used.
    */
   parentRevealBonusCredits?: number;
+  /** Set once premium mentors were emailed about this parent joining. */
+  premiumMentorsNotifiedAt?: Date;
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -489,6 +491,7 @@ const userSchema = new Schema<IUser>(
     mentrPremium: { type: mentrPremiumSchema, required: false },
     premiumPayments: { type: [premiumMentorPaymentSchema], default: [] },
     parentRevealBonusCredits: { type: Number, min: 0, default: 0 },
+    premiumMentorsNotifiedAt: { type: Date },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },
