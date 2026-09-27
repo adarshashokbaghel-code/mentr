@@ -155,10 +155,11 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
   }
 
   const limit = Math.min(Math.max(opts.limit ?? 120, 1), 200);
+  // Listed as soon as the parent verifies their email — profile details
+  // (name, phone, area) fill in when they complete onboarding.
   const filter: Record<string, unknown> = {
     role: "parent",
-    "parentProfile.name": { $exists: true, $ne: "" },
-    "parentProfile.phoneNumber": { $exists: true, $ne: "" },
+    emailVerified: true,
     // Never surface demo / legacy fake personas (@mentr.local, @mentr.in)
     email: { $not: /@(mentr\.local|mentr\.in)$/i },
   };
@@ -243,23 +244,29 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
     const reveal = revealByParent.get(pid);
     const previouslyRevealed = alwaysReveal || Boolean(reveal);
     const active = alwaysReveal || isRevealActive(reveal?.revealedAt, now);
-    const pp = p.parentProfile!;
-    const fullPhone = waPhone(pp.phoneNumber || "");
-    const phone = active
-      ? reveal?.parentPhone || fullPhone
-      : maskPhone(pp.phoneNumber || "");
+    const pp = p.parentProfile;
+    const rawPhone = String(pp?.phoneNumber || "").trim();
+    const detailsPending = !rawPhone;
+    const name = pp?.name?.trim() || "New parent";
+    const fullPhone = waPhone(rawPhone);
+    const phone = detailsPending
+      ? ""
+      : active
+        ? reveal?.parentPhone || fullPhone
+        : maskPhone(rawPhone);
     const email = active
       ? reveal?.parentEmail || p.email || null
       : maskEmail(p.email || "");
 
     return {
       id: pid,
-      name: pp.name,
-      initials: initialsOf(pp.name),
+      name,
+      initials: pp?.name?.trim() ? initialsOf(name) : "",
       imageUrl: (p.profileImageUrl || "").trim() || null,
-      city: pp.city || null,
-      area: pp.area || null,
-      country: pp.country || "India",
+      city: pp?.city || null,
+      area: pp?.area || null,
+      country: pp?.country || "India",
+      detailsPending,
       hasPosted: posts.length > 0,
       openPosts: openPosts.length,
       totalPosts: posts.length,
@@ -415,8 +422,16 @@ export async function revealParentContact(opts: {
   }
 
   const parent = (await User.findById(opts.parentId)) as IUser | null;
-  if (!parent || parent.role !== "parent" || !parent.parentProfile?.phoneNumber) {
+  if (!parent || parent.role !== "parent") {
     return { error: "Parent not found", code: "NOT_FOUND" as const };
+  }
+  if (!parent.parentProfile?.phoneNumber || !parent.parentProfile?.name) {
+    return {
+      error:
+        "This parent is still completing their details — no reveal used. Check back soon.",
+      code: "DETAILS_PENDING" as const,
+      quota,
+    };
   }
 
   const posts = await Requirement.find({ parent: parent._id })

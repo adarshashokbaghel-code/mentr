@@ -510,6 +510,8 @@ export type PremiumParentRow = {
   isSeed?: boolean;
   /** Joined after directory cutoff — pinned above legacy-ranked parents */
   isNewJoin?: boolean;
+  /** Email verified but name / phone not filled yet — reveal unavailable */
+  detailsPending?: boolean;
   phone: string;
   email: string | null;
   whatsappUrl: string | null;

@@ -137,11 +137,13 @@ export function FacultyAuthForm({
             : `/parent/profiling${nextSuffix}`,
         );
       } else {
+        const safeNext =
+          next && next.startsWith("/") && !next.startsWith("//") ? next : null;
         router.push(
-          next && isPublicBrowsePath(next)
-            ? next
+          safeNext && isPublicBrowsePath(safeNext)
+            ? safeNext
             : data.profileCompleted
-              ? "/dashboard"
+              ? safeNext || "/dashboard"
               : "/profiling",
         );
       }

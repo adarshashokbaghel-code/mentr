@@ -46,6 +46,7 @@ import { cn } from "@/lib/utils";
 import {
   ArrowRight,
   BookOpen,
+  Clock,
   Crown,
   Eye,
   Info,
@@ -482,8 +483,9 @@ function ParentCard({
   onReveal: () => void;
 }) {
   const locked = !p.contactRevealed;
+  const pending = Boolean(p.detailsPending);
   const alreadyUsed = locked && Boolean(p.previouslyRevealed);
-  const location = [p.area, p.city].filter(Boolean).join(", ") || "India";
+  const location = [p.area, p.city].filter(Boolean).join(", ") || "Location N/A";
   const joined = formatJoined(p.joinedAt);
   const initials = initialsOf(p.name, p.initials);
 
@@ -533,7 +535,12 @@ function ParentCard({
           )}
         </div>
 
-        {p.contactRevealed ? (
+        {pending && !p.contactRevealed ? (
+          <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full bg-butter px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink shadow-sm">
+            <Clock className="h-2.5 w-2.5" />
+            Just joined
+          </span>
+        ) : p.contactRevealed ? (
           <span className="absolute right-2.5 top-2.5 inline-flex items-center gap-1 rounded-full bg-white/95 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-sage shadow-sm">
             <Unlock className="h-2.5 w-2.5" />
             Open
@@ -608,16 +615,29 @@ function ParentCard({
           >
             <p className="flex items-center gap-1.5 text-sm font-semibold tabular-nums text-ink">
               <Phone className="h-3.5 w-3.5 text-muted" />
-              {p.phone || "••••••••••"}
+              {pending ? "N/A" : p.phone || "••••••••••"}
             </p>
             <p className="truncate pl-5 text-xs text-muted">
-              {p.email || "••••@••••"}
+              {p.email || "N/A"}
             </p>
           </div>
 
           {locked ? (
             <div className="absolute inset-0 flex items-center justify-center bg-white/50 px-3 backdrop-blur-[1.5px] transition group-hover:bg-white/40">
-              {alreadyUsed ? (
+              {pending ? (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="inline-flex h-9 cursor-default items-center gap-1.5 rounded-full border border-ink/15 bg-butter/70 px-4 text-xs font-bold text-ink shadow-sm">
+                      <Clock className="h-3.5 w-3.5" />
+                      Details pending
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent side="top" className="max-w-[220px] text-center">
+                    Email verified — this parent is still adding their name and
+                    phone. Reveal opens once they finish; no credit is used.
+                  </TooltipContent>
+                </Tooltip>
+              ) : alreadyUsed ? (
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <span className="inline-flex h-9 cursor-default items-center gap-1.5 rounded-full border border-ink/15 bg-cream-band px-4 text-xs font-bold text-muted shadow-sm">
