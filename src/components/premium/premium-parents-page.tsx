@@ -66,6 +66,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 type FilterTab = "all" | "hiring";
 
+const IST_OFFSET_MS = (5 * 60 + 30) * 60 * 1000;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+function msUntilNextIstMidnight(now = Date.now()): number {
+  const istNow = now + IST_OFFSET_MS;
+  return DAY_MS - (istNow % DAY_MS);
+}
+
 function formatJoined(iso: string | null) {
   if (!iso) return null;
   return new Date(iso).toLocaleDateString("en-IN", {
@@ -144,6 +152,23 @@ export function PremiumParentsPage() {
     void load();
   }, [authLoading, user, router, load, openRoleChooser]);
 
+  // Quota resets at midnight IST — refresh when the tab regains focus and at
+  // the next IST midnight so a tab left open overnight doesn't stay at 0.
+  useEffect(() => {
+    if (authLoading || user?.role !== "faculty") return;
+    const refresh = () => {
+      if (document.visibilityState === "visible") void load();
+    };
+    document.addEventListener("visibilitychange", refresh);
+    window.addEventListener("focus", refresh);
+    const midnight = window.setTimeout(() => void load(), msUntilNextIstMidnight() + 5_000);
+    return () => {
+      document.removeEventListener("visibilitychange", refresh);
+      window.removeEventListener("focus", refresh);
+      window.clearTimeout(midnight);
+    };
+  }, [authLoading, user, load]);
+
   const filtered = useMemo(() => {
     let list = [...parents];
     if (filter === "hiring") list = list.filter((p) => p.hasPosted);
@@ -207,6 +232,11 @@ export function PremiumParentsPage() {
       setJustUnlocked(parentId);
       window.setTimeout(() => setJustUnlocked(null), 1600);
     } catch (e) {
+      const errQuota =
+        e instanceof ApiError
+          ? (e.data as { quota?: PremiumRevealQuota } | undefined)?.quota
+          : undefined;
+      if (errQuota) setQuota(errQuota);
       setError(e instanceof Error ? e.message : "Could not reveal contact");
     } finally {
       setRevealingId(null);
@@ -232,9 +262,11 @@ export function PremiumParentsPage() {
     );
   }
 
+  const quotaLoaded = quota !== null;
   const used = quota?.usedToday ?? 0;
   const limit = quota?.dailyLimit ?? 3;
   const remaining = quota?.remaining ?? 0;
+  const limitReached = quotaLoaded && remaining === 0;
   const quotaPct = Math.min(100, Math.round((used / limit) * 100));
 
   return (
@@ -271,14 +303,14 @@ export function PremiumParentsPage() {
                   Today&apos;s reveals
                 </p>
                 <p className="text-sm font-bold tabular-nums text-ink">
-                  {remaining} left
+                  {quotaLoaded ? `${remaining} left` : "…"}
                 </p>
               </div>
               <div className="h-2 overflow-hidden rounded-full bg-cream-band">
                 <div
                   className={cn(
                     "h-full rounded-full transition-all duration-500 ease-out",
-                    remaining === 0 ? "bg-coral" : "bg-sage",
+                    limitReached ? "bg-coral" : "bg-sage",
                   )}
                   style={{ width: `${quotaPct}%` }}
                 />
@@ -390,7 +422,7 @@ export function PremiumParentsPage() {
             </p>
           ) : null}
 
-          {remaining === 0 ? (
+          {limitReached ? (
             <div className="mb-4 flex items-start gap-2.5 rounded-xl border border-ink/10 bg-butter/60 px-4 py-3.5 text-sm text-ink animate-in fade-in duration-200">
               <Lock className="mt-0.5 h-4 w-4 shrink-0" />
               <div>
@@ -421,7 +453,7 @@ export function PremiumParentsPage() {
                   <ParentCard
                     parent={p}
                     revealing={revealingId === p.id}
-                    canReveal={remaining > 0 || p.contactRevealed}
+                    canReveal={!limitReached || p.contactRevealed}
                     celebrating={justUnlocked === p.id}
                     onReveal={() => void reveal(p.id)}
                   />

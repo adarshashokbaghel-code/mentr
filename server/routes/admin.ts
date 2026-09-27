@@ -565,9 +565,8 @@ router.get("/premium-mentors", async (_req, res) => {
     const { ParentContactReveal } = await import(
       "../models/ParentContactReveal"
     );
-    const { startOfDayIst } = await import(
-      "../services/parent-contact-reveal"
-    );
+    const { startOfDayIst, PARENT_REVEALS_PER_DAY, isAlwaysRevealMentor } =
+      await import("../services/parent-contact-reveal");
 
     const now = new Date();
     const dayStart = startOfDayIst(now);
@@ -583,7 +582,7 @@ router.get("/premium-mentors", async (_req, res) => {
       ],
     })
       .select(
-        "email profile.name profile.phoneNumber profile.city profile.area premiumMentorStatus premiumMentorPaymentSsUrl premiumMentorSubmittedAt premiumMentorVerifiedAt mentrPremium premiumPayments createdAt",
+        "email profile.name profile.phoneNumber profile.city profile.area premiumMentorStatus premiumMentorPaymentSsUrl premiumMentorSubmittedAt premiumMentorVerifiedAt mentrPremium premiumPayments parentRevealBonusCredits createdAt",
       )
       .sort({ "mentrPremium.lastPurchasedAt": -1, premiumMentorSubmittedAt: -1 })
       .lean();
@@ -698,6 +697,28 @@ router.get("/premium-mentors", async (_req, res) => {
         razorpayPaymentId: lastPaid?.razorpayPaymentId || null,
         totalReveals: reveals.totalReveals,
         revealsToday: reveals.revealsToday,
+        ...(() => {
+          const bonus = Math.max(0, Number(m.parentRevealBonusCredits) || 0);
+          const unlimited = isAlwaysRevealMentor(m);
+          const baseRemaining = Math.max(
+            0,
+            PARENT_REVEALS_PER_DAY - reveals.revealsToday,
+          );
+          return {
+            dailyRevealLimit: PARENT_REVEALS_PER_DAY,
+            revealsUsedToday: Math.min(
+              reveals.revealsToday,
+              PARENT_REVEALS_PER_DAY,
+            ),
+            revealBonusCredits: bonus,
+            revealsRemainingToday: active
+              ? unlimited
+                ? PARENT_REVEALS_PER_DAY
+                : baseRemaining + bonus
+              : 0,
+            unlimitedReveals: unlimited,
+          };
+        })(),
       };
     });
 
