@@ -31,6 +31,8 @@ import {
   ChevronDown,
   Crown,
   Eye,
+  GraduationCap,
+  Heart,
   LayoutDashboard,
   Link2,
   Lock,
@@ -277,21 +279,45 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
           {stats && section === "overview" && (
             <div className="space-y-6">
-              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                <AdminStatCard label="Total users" value={stats.users.total} accent="coral" />
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-6">
+                <AdminStatCard
+                  label="Total users"
+                  value={stats.users.total}
+                  accent="coral"
+                  icon={Users}
+                />
                 <AdminStatCard
                   label="Live tutors"
                   value={stats.users.facultyLive}
                   sub={`${stats.users.faculty} registered`}
                   accent="sage"
+                  icon={GraduationCap}
                 />
-                <AdminStatCard label="Parents" value={stats.users.parents} />
-                <AdminStatCard label="Board posts" value={stats.requirements.total} accent="coral" />
+                <AdminStatCard
+                  label="Premium mentors"
+                  value={stats.users.premiumActive ?? 0}
+                  sub={`${stats.users.premiumEver ?? 0} ever upgraded`}
+                  accent="premium"
+                  icon={Crown}
+                  onClick={() => pick("premium")}
+                />
+                <AdminStatCard
+                  label="Parents"
+                  value={stats.users.parents}
+                  icon={Heart}
+                />
+                <AdminStatCard
+                  label="Board posts"
+                  value={stats.requirements.total}
+                  accent="coral"
+                  icon={Megaphone}
+                />
                 <AdminStatCard
                   label="Connections"
                   value={stats.connections.total}
                   sub={`${stats.connections.accepted} accepted`}
                   accent="butter"
+                  icon={Link2}
                 />
               </div>
               <div className="grid gap-4 sm:grid-cols-2">

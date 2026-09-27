@@ -9,6 +9,8 @@ export type AdminStats = {
     parentsComplete: number;
     newLast7Days: number;
     activeLast30Days: number;
+    premiumActive?: number;
+    premiumEver?: number;
   };
   registrations: {
     timeseries: {
