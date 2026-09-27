@@ -18,10 +18,11 @@ import {
   type PremiumPlanOption,
   type PremiumMentorState,
 } from "@/lib/api";
+import { trackBeginCheckout, trackPurchase } from "@/lib/analytics";
 import { LEGAL_DOCS_VERSION } from "@/lib/legal";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 declare global {
   interface Window {
@@ -138,6 +139,38 @@ export function PremiumCheckoutDialog({
     void loadCatalog();
   }, [open, loadCatalog]);
 
+  /** Per-popup session: order started → Razorpay cancel handles "dismissed"; paid → no dismiss. */
+  const checkoutSession = useRef({ tracked: false, orderStarted: false, paid: false });
+  const isLoggedIn = Boolean(user);
+
+  useEffect(() => {
+    if (!open) {
+      checkoutSession.current = { tracked: false, orderStarted: false, paid: false };
+      return;
+    }
+    if (!isLoggedIn || checkoutSession.current.tracked) return;
+    checkoutSession.current.tracked = true;
+    void premiumMentorApi
+      .trackCheckout({ event: "opened", source: window.location.pathname })
+      .catch(() => {});
+  }, [open, isLoggedIn]);
+
+  function handleOpenChange(next: boolean) {
+    if (paying) return;
+    const s = checkoutSession.current;
+    if (!next && s.tracked && !s.orderStarted && !s.paid) {
+      void premiumMentorApi
+        .trackCheckout({
+          event: "dismissed",
+          months,
+          currency,
+          source: window.location.pathname,
+        })
+        .catch(() => {});
+    }
+    onOpenChange(next);
+  }
+
   const selected = useMemo(
     () => plans.find((p) => p.months === months) || null,
     [plans, months],
@@ -179,8 +212,19 @@ export function PremiumCheckoutDialog({
         acceptedLegal: true,
         legalVersion: LEGAL_DOCS_VERSION,
         currency,
+        source: window.location.pathname,
       });
       orderId = order.orderId;
+      checkoutSession.current.orderStarted = true;
+      trackBeginCheckout({
+        orderId: order.orderId,
+        months: order.months,
+        currency: order.currency,
+        value:
+          order.currency === "INR"
+            ? order.amountInr
+            : (order.amountMinor ?? 0) / 100,
+      });
 
       const ok = await loadRazorpayScript();
       if (!ok || !window.Razorpay) {
@@ -247,6 +291,19 @@ export function PremiumCheckoutDialog({
                 /* ignore */
               }
               setUser(verified.user);
+              trackPurchase({
+                transactionId:
+                  verified.payment?.razorpayPaymentId ||
+                  payload.razorpay_payment_id,
+                months: verified.payment?.months ?? order.months,
+                currency: verified.payment?.currency ?? order.currency,
+                value:
+                  verified.payment?.amountCharged ??
+                  (order.currency === "INR"
+                    ? order.amountInr
+                    : (order.amountMinor ?? 0) / 100),
+              });
+              checkoutSession.current.paid = true;
               onSuccess?.(verified.premium);
               setPaying(false);
               onOpenChange(false);
@@ -275,7 +332,7 @@ export function PremiumCheckoutDialog({
       rzp.on("payment.failed", () => {
         setError("Payment did not go through. You were not charged.");
         setPaying(false);
-        if (orderId) void premiumMentorApi.cancel(orderId);
+        if (orderId) void premiumMentorApi.cancel(orderId, "failed");
       });
 
       rzp.open();
@@ -292,7 +349,7 @@ export function PremiumCheckoutDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={(v) => !paying && onOpenChange(v)}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent
         className="max-h-[min(92dvh,680px)] w-full gap-0 overflow-y-auto p-0 sm:max-w-[520px]"
         showCloseButton={!paying}
@@ -580,7 +637,7 @@ export function PremiumCheckoutDialog({
           <button
             type="button"
             disabled={paying}
-            onClick={() => onOpenChange(false)}
+            onClick={() => handleOpenChange(false)}
             className="order-2 text-sm font-medium text-muted transition hover:text-ink disabled:opacity-50 sm:order-1"
           >
             Not now

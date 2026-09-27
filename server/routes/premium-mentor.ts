@@ -12,6 +12,7 @@ import {
   verifyPremiumMentorPayment,
 } from "../services/premium-mentor-billing";
 import { serializePremiumCatalog } from "../lib/premium-mentor-plans";
+import { recordPremiumCheckoutEvent } from "../services/premium-checkout-tracking";
 import {
   buildPremiumBillingContext,
   countryFromRequest,
@@ -46,6 +47,27 @@ router.get("/catalog", async (req, res: Response) => {
     billing,
   });
 });
+
+/** Checkout popup opened / closed — lets admin follow up on abandoned checkouts. */
+router.post(
+  "/checkout-event",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    if (!rateLimit(`prem-event:${req.auth!.sub}`, 30, 60_000)) {
+      res.status(429).json({ ok: false });
+      return;
+    }
+    await recordPremiumCheckoutEvent({
+      userId: req.auth!.sub,
+      event: req.body?.event === "dismissed" ? "dismissed" : "opened",
+      months: Number(req.body?.months) || undefined,
+      currency:
+        typeof req.body?.currency === "string" ? req.body.currency : undefined,
+      source: typeof req.body?.source === "string" ? req.body.source : undefined,
+    });
+    res.json({ ok: true });
+  },
+);
 
 /** Mentor premium status + paid history. */
 router.get(
@@ -110,6 +132,15 @@ router.post(
         res.status(status).json(result);
         return;
       }
+      await recordPremiumCheckoutEvent({
+        userId: req.auth!.sub,
+        event: "pay_clicked",
+        months: result.months,
+        currency: result.currency,
+        orderId: result.orderId,
+        source:
+          typeof req.body?.source === "string" ? req.body.source : undefined,
+      });
       res.json(result);
     } catch (err) {
       console.error("premium-mentor order error:", err);
@@ -155,6 +186,15 @@ router.post(
         res.status(status).json(result);
         return;
       }
+      if (!result.alreadyApplied) {
+        await recordPremiumCheckoutEvent({
+          userId: req.auth!.sub,
+          event: "paid",
+          months: result.payment?.months,
+          currency: result.payment?.currency,
+          orderId,
+        });
+      }
       res.json({
         alreadyApplied: result.alreadyApplied,
         user: serializeUser(result.user),
@@ -177,6 +217,11 @@ router.post(
       const orderId = String(req.body?.orderId || req.body?.razorpay_order_id || "");
       if (orderId) {
         await markPremiumOrderFailed(req.auth!.sub, orderId);
+        await recordPremiumCheckoutEvent({
+          userId: req.auth!.sub,
+          event: req.body?.reason === "failed" ? "failed" : "dismissed",
+          orderId,
+        });
       }
       res.json({ ok: true });
     } catch (err) {

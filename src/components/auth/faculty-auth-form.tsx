@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { LegalConsentCheckbox } from "@/components/auth/legal-consent-checkbox";
+import { trackSignUp } from "@/lib/analytics";
 import { resolveAcquisition } from "@/lib/marketing-client";
 import { isPublicBrowsePath } from "@/lib/public-browse";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
@@ -39,6 +40,7 @@ export function FacultyAuthForm({
   const [step, setStep] = useState<Step>("email");
   const [email, setEmail] = useState("");
   const [sessionId, setSessionId] = useState("");
+  const [isNewUser, setIsNewUser] = useState(false);
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [errorCode, setErrorCode] = useState("");
@@ -84,6 +86,7 @@ export function FacultyAuthForm({
         variant === "signup" ? { acceptedLegal: true } : undefined,
       );
       setSessionId(data.sessionId);
+      setIsNewUser(Boolean(data.isNewUser));
       setStep("otp");
       setCooldown(60);
     } catch (err) {
@@ -124,6 +127,9 @@ export function FacultyAuthForm({
 
       saveToken(data.token);
       setUser(data.user);
+      if (isNewUser) {
+        trackSignUp({ userId: data.user.id, role: data.user.role });
+      }
       if (data.user.role === "parent" && data.profileCompleted) {
         await syncShortlistAfterAuth(data.user, setUser);
       }

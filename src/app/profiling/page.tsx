@@ -27,6 +27,7 @@ import {
   detectTimezone,
   tzDisplayLabel,
 } from "@/lib/timezone";
+import { trackProfileComplete } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -636,9 +637,13 @@ function ProfilingContent() {
     setSaveFlash("");
     setSaving(true);
     try {
+      const wasCompleted = Boolean(user?.profileCompleted);
       const payload = buildPayload();
       const { user: saved } = await profileApi.save(payload);
       setUser(saved);
+      if (!wasCompleted && saved.profileCompleted) {
+        trackProfileComplete({ userId: saved.id, role: saved.role });
+      }
       if (saved.profileImageUrl) {
         setProfileImageUrl(saved.profileImageUrl);
       }

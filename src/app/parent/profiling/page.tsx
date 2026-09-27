@@ -3,6 +3,7 @@
 import { useAuth } from "@/components/auth/auth-provider";
 import { LocationFields } from "@/components/forms/location-fields";
 import { ProfileImageUploader } from "@/components/profile/profile-image-uploader";
+import { trackProfileComplete } from "@/lib/analytics";
 import { profileApi } from "@/lib/api";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { homeFor } from "@/lib/auth-routes";
@@ -70,6 +71,7 @@ function ParentProfilingContent() {
     }
     setSaving(true);
     try {
+      const wasCompleted = Boolean(user?.profileCompleted);
       const existingName = user?.parentProfile?.name?.trim();
       const { user: updated } = await profileApi.saveParent({
         name: existingName || nameFromEmail(user?.email || ""),
@@ -79,6 +81,9 @@ function ParentProfilingContent() {
         area: area.trim() || undefined,
       });
       setUser(updated);
+      if (!wasCompleted && updated.profileCompleted) {
+        trackProfileComplete({ userId: updated.id, role: updated.role });
+      }
       await syncShortlistAfterAuth(updated, setUser);
       router.replace(next || "/search");
     } catch (err) {

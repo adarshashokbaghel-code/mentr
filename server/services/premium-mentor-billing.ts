@@ -436,7 +436,25 @@ export async function applyPremiumPaymentFromWebhook(opts: {
   if (!userId) {
     return { error: "Order not found", code: "ORDER_NOT_FOUND" as const };
   }
-  return applyPremiumPayment({ userId, orderId: opts.orderId, paymentId: opts.paymentId });
+  const result = await applyPremiumPayment({
+    userId,
+    orderId: opts.orderId,
+    paymentId: opts.paymentId,
+  });
+  if (!("error" in result) && !result.alreadyApplied) {
+    const { recordPremiumCheckoutEvent } = await import(
+      "./premium-checkout-tracking"
+    );
+    await recordPremiumCheckoutEvent({
+      userId,
+      event: "paid",
+      months: result.payment.months,
+      currency: result.payment.currency,
+      orderId: opts.orderId,
+      source: "webhook",
+    });
+  }
+  return result;
 }
 
 async function applyPremiumPayment(opts: {
