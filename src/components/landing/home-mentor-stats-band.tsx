@@ -1,7 +1,7 @@
 "use client";
 
 import { LpStatsBand } from "@/components/landing/lp/shared";
-import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
+import { formatMentorCount, usePlatformStats } from "@/lib/mentor-stats";
 import { SUBJECTS } from "@/lib/teachers";
 import type { LucideIcon } from "lucide-react";
 import { BookOpen, MessageCircle, Sparkles, Users } from "lucide-react";
@@ -19,7 +19,9 @@ type Stat = {
  * Homepage trust stats — mentor count is live from DB (auto-updates).
  */
 export function HomeMentorStatsBand() {
-  const mentorCount = useMentorCount();
+  const platform = usePlatformStats();
+  const mentorCount = platform?.mentors ?? null;
+  const subjectCount = platform?.subjects ?? SUBJECTS.length;
 
   const stats = useMemo<Stat[]>(
     () => [
@@ -31,7 +33,7 @@ export function HomeMentorStatsBand() {
         sub: "Verified profiles",
       },
       {
-        value: `${SUBJECTS.length}+`,
+        value: `${subjectCount}+`,
         label: "Subjects offered",
         tint: "bg-butter",
         icon: BookOpen,
@@ -52,7 +54,7 @@ export function HomeMentorStatsBand() {
         sub: "Search or Instant Connect",
       },
     ],
-    [mentorCount],
+    [mentorCount, subjectCount],
   );
 
   return <LpStatsBand stats={stats} />;
