@@ -113,6 +113,33 @@ export const BLOG_PILLARS: BlogPillar[] = [
 ];
 
 export const BLOG_POSTS: BlogPost[] = [
+  // ── Seasonal parent acquisition (Sep–Oct 2026) ─────────────────
+  {
+    slug: "half-yearly-exam-low-marks-what-parents-should-do",
+    title: "Low Marks in Half-Yearly Exams? What Parents Should Do Next (2026)",
+    keyword: "half yearly exam low marks what to do",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Child scored low in half-yearly exams? A calm 4-week plan: what to say, how to read answer sheets, when tuition helps, and how to find a verified tutor free.",
+    publishWeek: 39,
+    cta: "Find a verified tutor",
+    ctaHref: "/search",
+  },
+  {
+    slug: "cbse-class-10-two-board-exams-2027-parents-guide",
+    title: "CBSE Class 10 Two Board Exams 2027: Complete Parent Guide",
+    keyword: "cbse class 10 two board exams 2027",
+    intent: "informational",
+    funnel: "top",
+    pillar: "exam-prep",
+    description:
+      "CBSE Class 10 2027: first exam compulsory (Feb), second optional (May) for up to 3 subjects. Rules, month-by-month plan, and when a tutor helps.",
+    publishWeek: 39,
+    cta: "Find CBSE Class 10 tutors",
+    ctaHref: "/search",
+  },
   // ── AI / search answer guides (parent acquisition) ─────────────
   {
     slug: "how-to-find-a-tutor-in-bengaluru",
