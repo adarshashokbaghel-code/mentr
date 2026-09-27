@@ -17,6 +17,7 @@ import { AdminRequirementsTable } from "@/components/admin/admin-requirements-ta
 import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
 import { AdminFeaturedTutors } from "@/components/admin/admin-featured-tutors";
 import { AdminPremiumMentors } from "@/components/admin/admin-premium-mentors";
+import { AdminPremiumCheckoutLeads } from "@/components/admin/admin-premium-checkout-leads";
 import { AdminPremiumReveals } from "@/components/admin/admin-premium-reveals";
 import { AdminSnapGrade } from "@/components/admin/admin-snap-grade";
 import { AdminUsersTable } from "@/components/admin/admin-users-table";
@@ -436,7 +437,10 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           )}
 
           {section === "premium" && (
-            <AdminPremiumMentors adminKey={adminKey} />
+            <>
+              <AdminPremiumCheckoutLeads adminKey={adminKey} />
+              <AdminPremiumMentors adminKey={adminKey} />
+            </>
           )}
 
           {section === "premium-reveals" && (

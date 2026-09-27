@@ -555,6 +555,20 @@ router.get("/snap-grade/evaluations", async (req, res) => {
   }
 });
 
+/** Premium checkout funnel — who opened the popup / clicked pay but didn't finish. */
+router.get("/premium-checkout-leads", async (req, res) => {
+  try {
+    const { listPremiumCheckoutLeads } = await import(
+      "../services/premium-checkout-tracking"
+    );
+    const days = Math.min(365, Math.max(1, Number(req.query.days) || 30));
+    res.json(await listPremiumCheckoutLeads({ days }));
+  } catch (err) {
+    console.error("admin premium-checkout-leads error:", err);
+    res.status(500).json({ error: "Failed to load checkout leads" });
+  }
+});
+
 /** Premium mentors — Razorpay conversions + contact-reveal usage. */
 router.get("/premium-mentors", async (_req, res) => {
   try {

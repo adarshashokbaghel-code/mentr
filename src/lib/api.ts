@@ -395,6 +395,7 @@ export const premiumMentorApi = {
       acceptedLegal?: boolean;
       legalVersion?: string;
       currency?: PremiumCurrency;
+      source?: string;
     },
   ) =>
     request<{
@@ -418,6 +419,7 @@ export const premiumMentorApi = {
         acceptedLegal: opts?.acceptedLegal === true,
         legalVersion: opts?.legalVersion,
         currency: opts?.currency,
+        source: opts?.source,
       }),
       timeoutMs: 30_000,
     }),
@@ -438,10 +440,21 @@ export const premiumMentorApi = {
       timeoutMs: 45_000,
     }),
 
-  cancel: (orderId: string) =>
+  cancel: (orderId: string, reason: "dismissed" | "failed" = "dismissed") =>
     request<{ ok: boolean }>("/premium-mentor/cancel", {
       method: "POST",
-      body: JSON.stringify({ orderId }),
+      body: JSON.stringify({ orderId, reason }),
+    }),
+
+  trackCheckout: (body: {
+    event: "opened" | "dismissed";
+    months?: number;
+    currency?: PremiumCurrency;
+    source?: string;
+  }) =>
+    request<{ ok: boolean }>("/premium-mentor/checkout-event", {
+      method: "POST",
+      body: JSON.stringify(body),
     }),
 
   chooseFree: () =>

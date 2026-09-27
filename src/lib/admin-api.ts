@@ -840,6 +840,44 @@ export function fetchAdminPremiumMentors(key: string) {
   }>(key, "/api/admin/premium-mentors");
 }
 
+export type PremiumCheckoutStage =
+  | "opened"
+  | "pay_clicked"
+  | "dismissed"
+  | "failed"
+  | "paid";
+
+export type AdminPremiumCheckoutLead = {
+  userId: string;
+  name: string | null;
+  email: string | null;
+  phone: string | null;
+  role: string;
+  opens: number;
+  payClicks: number;
+  furthestStage: PremiumCheckoutStage;
+  lastEvent: PremiumCheckoutStage;
+  firstSeenAt: string;
+  lastSeenAt: string;
+  lastMonths: number | null;
+  lastCurrency: string | null;
+  lastSource: string | null;
+  paid: boolean;
+};
+
+export function fetchAdminPremiumCheckoutLeads(key: string, days = 30) {
+  return adminFetch<{
+    leads: AdminPremiumCheckoutLead[];
+    stats: {
+      users: number;
+      opened: number;
+      payClicked: number;
+      paid: number;
+      abandoned: number;
+    };
+  }>(key, `/api/admin/premium-checkout-leads?days=${days}`);
+}
+
 export type AdminPremiumRevealPerson = {
   id: string;
   name: string;

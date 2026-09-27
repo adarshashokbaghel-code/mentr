@@ -1,13 +1,14 @@
 "use client";
 
-import { isAdSenseBlockedPath } from "@/lib/adsense-paths";
+import { isAnalyticsBlockedPath } from "@/lib/adsense-paths";
 import { GA_MEASUREMENT_ID } from "@/lib/seo";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 
 /**
- * Google Analytics on adult/parent public pages only.
- * Skips /learn (child-directed) and private account surfaces — same paths as AdSense.
+ * Google Analytics on public, account, and checkout pages.
+ * Skips /learn (child-directed) and admin surfaces.
+ * Add ?ga_debug=1 to any URL once to stream events to GA4 DebugView.
  */
 export function GoogleAnalytics() {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ export function GoogleAnalytics() {
   if (process.env.NODE_ENV !== "production" || !GA_MEASUREMENT_ID) {
     return null;
   }
-  if (isAdSenseBlockedPath(pathname)) return null;
+  if (isAnalyticsBlockedPath(pathname)) return null;
 
   return (
     <>
@@ -28,8 +29,16 @@ export function GoogleAnalytics() {
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
+          window.gtag = gtag;
+          var gaDebug = false;
+          try {
+            var qs = new URLSearchParams(window.location.search);
+            if (qs.get('ga_debug') === '1') localStorage.setItem('mentr_ga_debug', '1');
+            if (qs.get('ga_debug') === '0') localStorage.removeItem('mentr_ga_debug');
+            gaDebug = localStorage.getItem('mentr_ga_debug') === '1';
+          } catch (e) {}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}');
+          gtag('config', '${GA_MEASUREMENT_ID}', gaDebug ? { debug_mode: true } : {});
         `}
       </Script>
     </>

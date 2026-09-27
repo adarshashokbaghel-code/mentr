@@ -4,6 +4,7 @@ import { PremiumCheckoutDialog } from "@/components/dashboard/premium-checkout-d
 import { PremiumHistorySidebar } from "@/components/dashboard/premium-history-sidebar";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
+import { trackPurchase } from "@/lib/analytics";
 import {
   premiumMentorApi,
   type PremiumMentorState,
@@ -82,6 +83,15 @@ export function PremiumMentorCard({
       void premiumMentorApi.verify(payload).then((res) => {
         setUser(res.user);
         setPremium(res.premium);
+        if (res.payment?.status === "paid") {
+          trackPurchase({
+            transactionId:
+              res.payment.razorpayPaymentId || payload.razorpay_payment_id,
+            months: res.payment.months,
+            currency: res.payment.currency,
+            value: res.payment.amountCharged,
+          });
+        }
         sessionStorage.removeItem("mentr_premium_pending_payment");
       });
     } catch {
