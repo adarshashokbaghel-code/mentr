@@ -75,9 +75,12 @@ app.use(
   }),
 );
 
-/** Razorpay webhook needs raw body for HMAC — before express.json. */
+/**
+ * Razorpay webhook needs raw body for HMAC — before express.json.
+ * One endpoint serves Snap & Grade + Premium Mentor (routed by order notes.purpose).
+ */
 app.post(
-  "/api/snap-grade/webhook/razorpay",
+  ["/api/snap-grade/webhook/razorpay", "/api/payments/webhook/razorpay"],
   express.raw({ type: "application/json" }),
   (req, _res, next) => {
     (req as express.Request & { rawBody?: Buffer }).rawBody = Buffer.isBuffer(

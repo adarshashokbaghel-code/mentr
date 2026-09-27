@@ -78,6 +78,8 @@ export const config = {
       process.env.RAZORPAY_KEY_SECRET ||
       "",
     webhookSecret: process.env.RAZORPAY_WEBHOOK_SECRET || "",
+    /** Set only after Razorpay approves International Payments + USD (MCC). */
+    internationalEnabled: process.env.RAZORPAY_INTERNATIONAL_ENABLED === "true",
     /** Paise per credit (default ₹1 = 100). */
     creditPaise: Math.max(
       1,

@@ -1,11 +1,15 @@
 /**
  * Premium Mentor plan catalog — single source of truth for pricing.
- * Display uses USD; checkout charges INR (no GST added on top).
+ * India pays a fixed INR price; everyone else pays a fixed USD price
+ * (their card issuer converts to local currency). No GST added on top.
  */
 export const PREMIUM_USD_PER_MONTH = 5;
 /** Marketing FX for USD→INR display (≈ ₹449 / $5). */
 export const PREMIUM_USD_TO_INR = 89.8;
 export const PREMIUM_INR_PER_MONTH = 449;
+
+export type PremiumCurrency = "INR" | "USD";
+export const PREMIUM_CURRENCIES: PremiumCurrency[] = ["INR", "USD"];
 
 export type PremiumPlanMonths = 2 | 3 | 4;
 
@@ -17,6 +21,10 @@ export type PremiumPlanDef = {
   discountPercent: number;
   /** Amount charged (whole rupees) */
   payInr: number;
+  /** List price in US cents before discount */
+  listUsdCents: number;
+  /** Amount charged in US cents */
+  payUsdCents: number;
   badge?: string;
   default?: boolean;
 };
@@ -32,12 +40,19 @@ function buildPlan(
 ): PremiumPlanDef {
   const listInr = roundInr(PREMIUM_INR_PER_MONTH * months);
   const payInr = roundInr(listInr * (1 - discountPercent / 100));
+  const listUsdCents = Math.round(PREMIUM_USD_PER_MONTH * months * 100);
+  const payUsdCents = Math.max(
+    100,
+    Math.round(listUsdCents * (1 - discountPercent / 100)),
+  );
   return {
     months,
     label: `${months} months`,
     listInr,
     discountPercent,
     payInr,
+    listUsdCents,
+    payUsdCents,
     badge: opts?.badge,
     default: opts?.default,
   };
@@ -61,6 +76,14 @@ export function planToPaise(plan: PremiumPlanDef): number {
   return plan.payInr * 100;
 }
 
+/** Amount in the currency's smallest unit (paise / cents) — what Razorpay charges. */
+export function planAmountMinor(
+  plan: PremiumPlanDef,
+  currency: PremiumCurrency,
+): number {
+  return currency === "USD" ? plan.payUsdCents : planToPaise(plan);
+}
+
 export function usdDisplayForMonths(months: number): number {
   return PREMIUM_USD_PER_MONTH * months;
 }
@@ -79,13 +102,14 @@ export function serializePremiumCatalog() {
       payInr: p.payInr,
       discountPercent: p.discountPercent,
       discountInr: Math.max(0, p.listInr - p.payInr),
-      listUsd: usdDisplayForMonths(p.months),
-      payUsdApprox: Number(
-        (p.payInr / PREMIUM_USD_TO_INR).toFixed(2),
-      ),
+      listUsd: p.listUsdCents / 100,
+      payUsd: p.payUsdCents / 100,
+      discountUsd: Math.max(0, p.listUsdCents - p.payUsdCents) / 100,
+      payUsdApprox: p.payUsdCents / 100,
       badge: p.badge || null,
       isDefault: Boolean(p.default),
       perMonthInr: roundInr(p.payInr / p.months),
+      perMonthUsd: Math.round(p.payUsdCents / p.months) / 100,
     })),
   };
 }

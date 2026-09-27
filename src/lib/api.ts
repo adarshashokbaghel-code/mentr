@@ -309,10 +309,23 @@ export type PremiumPlanOption = {
   discountPercent: number;
   discountInr: number;
   listUsd: number;
+  payUsd: number;
+  discountUsd: number;
   payUsdApprox: number;
   badge: string | null;
   isDefault: boolean;
   perMonthInr: number;
+  perMonthUsd: number;
+};
+
+export type PremiumCurrency = "INR" | "USD";
+
+export type PremiumBillingContext = {
+  country: string | null;
+  currency: PremiumCurrency;
+  internationalEnabled: boolean;
+  availableCurrencies: PremiumCurrency[];
+  local: { currency: string; usdRate: number } | null;
 };
 
 export type PremiumPaymentRow = {
@@ -327,7 +340,10 @@ export type PremiumPaymentRow = {
   discountInr: number;
   amountInr: number;
   amountPaise: number;
-  currency: string;
+  currency: PremiumCurrency;
+  amountMinor: number;
+  amountCharged: number;
+  billingCountry: string | null;
   usdPerMonth: number;
   listUsd: number;
   usdToInr: number;
@@ -362,7 +378,10 @@ export type PremiumMentorState = {
 export const premiumMentorApi = {
   catalog: () =>
     request<
-      PremiumMentorState["catalog"] & { paymentsEnabled: boolean }
+      PremiumMentorState["catalog"] & {
+        paymentsEnabled: boolean;
+        billing?: PremiumBillingContext;
+      }
     >("/premium-mentor/catalog"),
 
   me: () =>
@@ -370,12 +389,20 @@ export const premiumMentorApi = {
       "/premium-mentor/me",
     ),
 
-  createOrder: (months: 2 | 3 | 4, opts?: { acceptedLegal?: boolean; legalVersion?: string }) =>
+  createOrder: (
+    months: 2 | 3 | 4,
+    opts?: {
+      acceptedLegal?: boolean;
+      legalVersion?: string;
+      currency?: PremiumCurrency;
+    },
+  ) =>
     request<{
       orderId: string;
+      amountMinor: number;
       amountPaise: number;
       amountInr: number;
-      currency: string;
+      currency: PremiumCurrency;
       months: number;
       listInr: number;
       discountPercent: number;
@@ -390,6 +417,7 @@ export const premiumMentorApi = {
         months,
         acceptedLegal: opts?.acceptedLegal === true,
         legalVersion: opts?.legalVersion,
+        currency: opts?.currency,
       }),
       timeoutMs: 30_000,
     }),

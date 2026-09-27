@@ -241,6 +241,7 @@ function HeroSearchMock() {
   const [query, setQuery] = useState("");
   const [subject, setSubject] = useState<(typeof FILTERS)[number]>("All");
   const [live, setLive] = useState<Teacher[]>([]);
+  const tutorLabel = formatMentorCount(useMentorCount());
 
   useEffect(() => {
     let cancelled = false;
@@ -274,7 +275,9 @@ function HeroSearchMock() {
     <BrowserFrame url="mentr.in / search" headerClassName="bg-white" className="border-2 border-ink">
       <div className="bg-white">
         <div className="flex items-center justify-between border-b-2 border-ink/10 bg-cream px-4 py-2.5">
-          <LpLiveDot label={`${live.length} tutors online`} />
+          <LpLiveDot
+            label={tutorLabel !== "…" ? `${tutorLabel} tutors listed` : `${live.length} tutors online`}
+          />
           <span className="text-[10px] font-bold text-muted">{results.length} results</span>
         </div>
         <div className="space-y-3 border-b border-hairline px-4 py-3">

@@ -347,8 +347,22 @@ export async function handleRazorpayWebhookPayload(payload: {
     return { error: "Malformed webhook", code: "BAD_WEBHOOK" as const };
   }
 
-  // Only Snap & Grade orders (notes set on create)
   const purpose = payment?.notes?.purpose;
+  if (purpose === "premium_mentor") {
+    const { applyPremiumPaymentFromWebhook } = await import(
+      "./premium-mentor-billing"
+    );
+    const result = await applyPremiumPaymentFromWebhook({
+      userId: payment?.notes?.userId,
+      orderId,
+      paymentId,
+    });
+    return "error" in result
+      ? { error: result.error, code: result.code }
+      : { premiumApplied: true as const, alreadyApplied: result.alreadyApplied };
+  }
+
+  // Only Snap & Grade orders (notes set on create)
   if (purpose && purpose !== "snap_grade_credits") {
     return { ignored: true as const };
   }

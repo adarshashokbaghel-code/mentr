@@ -13,6 +13,7 @@ import {
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
+import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
 import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
@@ -199,6 +200,7 @@ function HeroSearchPanel({
   const [query, setQuery] = useState("");
   const [subject, setSubject] = useState("All");
   const [onlyOpen, setOnlyOpen] = useState(true);
+  const tutorLabel = formatMentorCount(useMentorCount());
 
   const filters = useMemo(() => {
     const seen: string[] = [];
@@ -242,9 +244,11 @@ function HeroSearchPanel({
         <div className="flex items-center justify-between border-b-2 border-ink/10 bg-cream px-4 py-2.5">
           <LpLiveDot
             label={
-              ready
-                ? `${pool.length} tutor${pool.length === 1 ? "" : "s"} listed`
-                : "Loading tutors…"
+              tutorLabel !== "…"
+                ? `${tutorLabel} tutors listed`
+                : ready
+                  ? `${pool.length} tutor${pool.length === 1 ? "" : "s"} listed`
+                  : "Loading tutors…"
             }
           />
           <span className="text-[10px] font-bold text-muted">
@@ -473,6 +477,7 @@ function HeroInteractiveMock({
 export function Hero() {
   const { pool, ready } = useHeroTeachers();
   const previewFaces = pool.slice(0, 4);
+  const tutorLabel = formatMentorCount(useMentorCount());
 
   return (
     <section className="relative overflow-hidden border-b border-hairline bg-cream">
@@ -582,10 +587,10 @@ export function Hero() {
                     ))}
               </div>
               <p className="text-left text-xs leading-snug text-muted short:text-[11px]">
-                {ready && pool.length > 0 ? (
+                {tutorLabel !== "…" ? (
                   <>
-                    <span className="font-bold text-ink">{pool.length}+</span>{" "}
-                    tutors live now
+                    <span className="font-bold text-ink">{tutorLabel}</span>{" "}
+                    verified tutors
                   </>
                 ) : (
                   <>Tutors joining every week</>
