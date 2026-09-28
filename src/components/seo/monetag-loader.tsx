@@ -3,7 +3,7 @@
 import { isAdSenseBlockedPath } from "@/lib/adsense-paths";
 import { usePathname } from "next/navigation";
 
-const MONETAG_ZONE = "288113";
+const MONETAG_ZONE = "288122";
 
 /**
  * Monetag Multitag — same page allowlist as AdSense (never on /learn,
