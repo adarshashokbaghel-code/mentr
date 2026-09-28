@@ -50,6 +50,10 @@ export type AdminStats = {
     parentsComplete: number;
     newLast7Days: number;
     activeLast30Days: number;
+    /** Mentors with Premium active right now */
+    premiumActive: number;
+    /** Mentors who have ever bought Premium */
+    premiumEver: number;
   };
   registrations: {
     timeseries: {
@@ -217,6 +221,33 @@ export async function getAdminStats(): Promise<AdminStats> {
       .lean(),
   ]);
 
+  // Mirrors isMentrPremiumActive: dated Premium not expired, or legacy verified with no expiry.
+  const [premiumActive, premiumEver] = await Promise.all([
+    User.countDocuments({
+      ...excludeDemoUsersFilter,
+      role: "faculty",
+      $or: [
+        {
+          "mentrPremium.type": "premium",
+          "mentrPremium.expiresAt": { $gt: now },
+        },
+        {
+          premiumMentorStatus: "verified",
+          "mentrPremium.type": { $ne: "premium" },
+          "mentrPremium.expiresAt": null,
+        },
+      ],
+    }),
+    User.countDocuments({
+      ...excludeDemoUsersFilter,
+      role: "faculty",
+      $or: [
+        { "mentrPremium.type": "premium" },
+        { premiumPayments: { $elemMatch: { status: "paid" } } },
+      ],
+    }),
+  ]);
+
   const dayMap = new Map<
     string,
     { date: string; total: number; parents: number; faculty: number }
@@ -294,6 +325,8 @@ export async function getAdminStats(): Promise<AdminStats> {
       parentsComplete,
       newLast7Days,
       activeLast30Days,
+      premiumActive,
+      premiumEver,
     },
     registrations: {
       timeseries: [...dayMap.values()],
