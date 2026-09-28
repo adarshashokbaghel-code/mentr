@@ -5,7 +5,6 @@ import { LearnDinoGuide } from "@/components/landing/lp/learn-dino-guide";
 import { AdSenseLoader } from "@/components/seo/adsense-loader";
 import { CookieConsent } from "@/components/seo/cookie-consent";
 import { GoogleAnalytics } from "@/components/seo/google-analytics";
-import { MonetagLoader } from "@/components/seo/monetag-loader";
 import { SkipLink } from "@/components/ui/skip-link";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import {
@@ -84,10 +83,6 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false },
   other: {
     "google-adsense-account": ADSENSE_CLIENT_ID,
-    monetag: [
-      "39bac3cd30ee516c3bfe4534c7a4d95f",
-      "6f9388e3327469a2f290816a734d93b9",
-    ],
   },
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
@@ -112,7 +107,6 @@ export default function RootLayout({
           Ownership verification uses the google-adsense-account meta in <head>.
         */}
         <AdSenseLoader />
-        <MonetagLoader />
         <GoogleAnalytics />
         {/* Dino guide only on /learn — keep the rest of the site adult/parent-facing for AdSense. */}
         {LEARN_PUBLIC ? <LearnDinoGuide /> : null}
