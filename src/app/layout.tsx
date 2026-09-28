@@ -83,6 +83,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false },
   other: {
     "google-adsense-account": ADSENSE_CLIENT_ID,
+    monetag: "39bac3cd30ee516c3bfe4534c7a4d95f",
   },
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
