@@ -1,0 +1,171 @@
+{
+  "id": "A3",
+  "title": "Input & Output Devices",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "CS · How Computers Work",
+  "slug": "a3-input-output-devices",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "-8%",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a3-welcome",
+      "beats": [
+        { "vo": "Hello, champ! Welcome back to Mentr Learn. I am so happy you came back for class.", "caption": "Hello, champ! Welcome back", "focus": "hello" },
+        { "vo": "Quick memory check. In Chapter one, we learned the three jobs: input, process, output. In Chapter two, we learned binary — ones and zeros.", "caption": "Ch 1: Input · Process · Output  ·  Ch 2: Binary", "focus": "bridge" },
+        { "vo": "Today is Chapter three. The lesson is: Input and Output Devices.", "caption": "Chapter 3 · Input & Output Devices", "focus": "chapter" },
+        { "vo": "Say it with me… Input… and… Output… Devices.", "caption": "Say with me: Input & Output Devices", "focus": "say", "pause": 0.8 },
+        { "vo": "Wonderful! Today we will meet real machines you can touch and use.", "caption": "Let's meet real devices!", "focus": "go" }
+      ]
+    },
+    {
+      "id": "hook",
+      "visual": "a3-hook",
+      "beats": [
+        { "vo": "Imagine a computer that is just a closed box. No keyboard, no mouse, no screen, no speaker.", "caption": "A closed box… no keyboard, no screen", "focus": "sealed" },
+        { "vo": "Two questions. How would you tell it what to do? And how would it show you the answer?", "caption": "How do we tell it? How does it answer?", "focus": "ask" },
+        { "vo": "Pause and think for three seconds…", "caption": "Your turn — think!", "focus": "think", "pause": 2.4 },
+        { "vo": "Here is the answer. A computer needs doors — a door for things to come in, and a door for things to go out.", "caption": "It needs an IN door and an OUT door", "focus": "ok" }
+      ]
+    },
+    {
+      "id": "doors",
+      "visual": "a3-doors",
+      "beats": [
+        { "vo": "These doors are special machines called devices.", "caption": "Doors = devices", "focus": "intro" },
+        { "vo": "Input devices bring information IN to the computer.", "caption": "INPUT devices → bring information IN", "focus": "in" },
+        { "vo": "Output devices send information OUT from the computer, to you.", "caption": "OUTPUT devices → send information OUT", "focus": "out" },
+        { "vo": "Remember input, process, output from Chapter one? Input devices do the first job. Output devices do the last job.", "caption": "Input devices · Process · Output devices", "focus": "link" },
+        { "vo": "Say with me: In… comes in. Out… goes out!", "caption": "Say: IN comes in · OUT goes out!", "focus": "say", "pause": 0.6 }
+      ]
+    },
+    {
+      "id": "input",
+      "visual": "a3-input",
+      "beats": [
+        { "vo": "Let's meet the input devices. These are the ones that take things from you.", "caption": "Meet the INPUT devices", "focus": "intro" },
+        { "vo": "Number one: the keyboard. When you type letters and numbers, they go into the computer. Input!", "caption": "Keyboard → you type → INPUT", "focus": "keyboard" },
+        { "vo": "Number two: the mouse. You move it, point, and click. Your click goes in. Input!", "caption": "Mouse → point & click → INPUT", "focus": "mouse" },
+        { "vo": "Number three: the microphone. It listens to your voice and sends it in. Input!", "caption": "Microphone → listens → INPUT", "focus": "mic" },
+        { "vo": "Number four: the camera. It takes your picture or video and sends it in. Input!", "caption": "Camera → takes pictures → INPUT", "focus": "camera" },
+        { "vo": "Keyboard, mouse, microphone, camera — all four bring information in.", "caption": "4 input devices: all bring information IN", "focus": "all" }
+      ]
+    },
+    {
+      "id": "output",
+      "visual": "a3-output",
+      "beats": [
+        { "vo": "Now, the output devices. These give things back to you.", "caption": "Meet the OUTPUT devices", "focus": "intro" },
+        { "vo": "The screen shows you words, pictures, and videos. Output!", "caption": "Screen → shows pictures → OUTPUT", "focus": "screen" },
+        { "vo": "The speaker plays sounds and music for your ears. Output!", "caption": "Speaker → plays sound → OUTPUT", "focus": "speaker" },
+        { "vo": "The printer puts your work on paper, so you can hold it. Output!", "caption": "Printer → prints on paper → OUTPUT", "focus": "printer" },
+        { "vo": "Screen, speaker, printer — they all send information out to you.", "caption": "3 output devices: all send information OUT", "focus": "all" }
+      ]
+    },
+    {
+      "id": "trick",
+      "visual": "a3-trick",
+      "beats": [
+        { "vo": "Now a tricky one. A microphone and a speaker both deal with sound. So which is which?", "caption": "Tricky: mic and speaker both use sound!", "focus": "intro" },
+        { "vo": "The microphone listens. It takes your sound in. So it is input.", "caption": "Microphone listens → takes IN → INPUT", "focus": "mic" },
+        { "vo": "The speaker talks. It gives sound out to you. So it is output.", "caption": "Speaker talks → gives OUT → OUTPUT", "focus": "speaker" },
+        { "vo": "Here is a super trick. Ask: does it take from me, or give to me? Takes from me — input. Gives to me — output.", "caption": "TAKES from me → INPUT · GIVES to me → OUTPUT", "focus": "rule" },
+        { "vo": "Say the trick with me: Takes — input. Gives — output!", "caption": "Say: Takes = input · Gives = output!", "focus": "say", "pause": 0.6 }
+      ]
+    },
+    {
+      "id": "both",
+      "visual": "a3-both",
+      "beats": [
+        { "vo": "Some devices are extra clever. Look at a touchscreen, like on a tablet or phone.", "caption": "Some devices are extra clever…", "focus": "intro" },
+        { "vo": "When you tap it with your finger, your touch goes in. That is input.", "caption": "You tap → your touch goes IN", "focus": "touch" },
+        { "vo": "And the same screen shows you pictures and games. That is output.", "caption": "Screen shows pictures → OUT", "focus": "show" },
+        { "vo": "So a touchscreen does both jobs — input and output!", "caption": "Touchscreen = BOTH input and output", "focus": "both" },
+        { "vo": "A headset with a mic is also both. The mic takes your voice in, and the earphones give sound out.", "caption": "Headset: mic IN + earphones OUT", "focus": "headset" }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "a3-sort",
+      "beats": [
+        { "vo": "Game time! I show a device. You shout: input, output, or both!", "caption": "Sorting game — shout your answer!", "focus": "intro" },
+        { "vo": "Keyboard… input or output?", "caption": "Keyboard — input or output?", "focus": "keyboard-q", "pause": 1.4 },
+        { "vo": "Input! You type, it goes in.", "caption": "Keyboard → INPUT", "focus": "keyboard" },
+        { "vo": "Screen… input or output?", "caption": "Screen — input or output?", "focus": "screen-q", "pause": 1.4 },
+        { "vo": "Output! It shows pictures to you.", "caption": "Screen → OUTPUT", "focus": "screen" },
+        { "vo": "Microphone… input or output?", "caption": "Microphone — input or output?", "focus": "mic-q", "pause": 1.4 },
+        { "vo": "Input! It listens to your voice.", "caption": "Microphone → INPUT", "focus": "mic" },
+        { "vo": "Printer… input or output?", "caption": "Printer — input or output?", "focus": "printer-q", "pause": 1.4 },
+        { "vo": "Output! It gives you paper.", "caption": "Printer → OUTPUT", "focus": "printer" },
+        { "vo": "Camera… input or output?", "caption": "Camera — input or output?", "focus": "camera-q", "pause": 1.4 },
+        { "vo": "Input! It takes your picture in.", "caption": "Camera → INPUT", "focus": "camera" },
+        { "vo": "Speaker… input or output?", "caption": "Speaker — input or output?", "focus": "speaker-q", "pause": 1.4 },
+        { "vo": "Output! It gives sound to your ears.", "caption": "Speaker → OUTPUT", "focus": "speaker" },
+        { "vo": "Last one. Touchscreen… careful!", "caption": "Touchscreen — careful!", "focus": "touch-q", "pause": 1.6 },
+        { "vo": "Both! Your tap goes in, and pictures come out.", "caption": "Touchscreen → BOTH", "focus": "touch" },
+        { "vo": "Seven out of seven? Give yourself a big clap, champ!", "caption": "Big clap for you, champ!", "focus": "done" }
+      ]
+    },
+    {
+      "id": "story",
+      "visual": "a3-story",
+      "beats": [
+        { "vo": "Now a real-life story. You are on a video call with your Nani.", "caption": "Story: a video call with Nani", "focus": "intro" },
+        { "vo": "Your laptop camera sees your smile, and the microphone hears your hello. Those are input devices.", "caption": "Camera + microphone → your face & voice go IN", "focus": "you" },
+        { "vo": "The computers do the process job and send it across the internet.", "caption": "Computers process and send it across", "focus": "process" },
+        { "vo": "On Nani's side, the screen shows your face and the speaker plays your voice. Output devices!", "caption": "Nani's screen + speaker → OUTPUT", "focus": "nani" },
+        { "vo": "And when Nani says, hello beta, the same thing happens back to you. Input, process, output!", "caption": "Same trip back: input → process → output", "focus": "back" }
+      ]
+    },
+    {
+      "id": "home",
+      "visual": "a3-home",
+      "beats": [
+        { "vo": "Your turn to be a detective. Look around your home or classroom.", "caption": "Device detective — look around you!", "focus": "intro" },
+        { "vo": "Find one input device and one output device. Point to them. I will wait.", "caption": "Find 1 INPUT + 1 OUTPUT", "focus": "think", "pause": 3.0 },
+        { "vo": "Here is an example. A TV remote — you press buttons, so it is input. The TV screen shows the cartoon, so it is output.", "caption": "Remote → INPUT · TV screen → OUTPUT", "focus": "tv" },
+        { "vo": "Great detective work, champ!", "caption": "Great detective work!", "focus": "done" }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a3-check",
+      "beats": [
+        { "vo": "Practice check — the same kind of question you will see later.", "caption": "Practice check", "focus": "intro" },
+        { "vo": "Is a speaker an input device or an output device?", "caption": "Speaker: INPUT or OUTPUT?", "focus": "ask", "pause": 1.6 },
+        { "vo": "Use the trick. Does it take from you, or give to you?", "caption": "Trick: takes from you, or gives to you?", "focus": "hint", "pause": 0.8 },
+        { "vo": "Yes! A speaker is output, because it gives sound out to you.", "caption": "Answer: OUTPUT — it gives sound to you", "focus": "answer" }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a3-recap",
+      "beats": [
+        { "vo": "Let's lock it in. Input devices bring information in: keyboard, mouse, microphone, camera.", "caption": "INPUT: keyboard · mouse · mic · camera", "focus": "in" },
+        { "vo": "Output devices send information out: screen, speaker, printer.", "caption": "OUTPUT: screen · speaker · printer", "focus": "out" },
+        { "vo": "Some devices, like a touchscreen, do both.", "caption": "BOTH: touchscreen", "focus": "both" },
+        { "vo": "And the trick: takes from you — input. Gives to you — output.", "caption": "Takes → input · Gives → output", "focus": "rule" },
+        { "vo": "Chapter three done. Input and Output Devices — fantastic work today!", "caption": "Chapter 3 complete!", "focus": "done" },
+        { "vo": "Next, a short quiz to practise. Tap Finish when you are ready. See you there, champ!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

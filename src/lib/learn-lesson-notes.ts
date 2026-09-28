@@ -179,9 +179,90 @@ export const A2_LESSON_NOTES: LessonNotesDoc = {
   dinoLine: "Chapter 2 done. Binary is light-switch language — excellent, champ!",
 };
 
+export const A3_LESSON_NOTES: LessonNotesDoc = {
+  moduleId: "A3",
+  title: "Input & Output Devices",
+  unitLabel: "CS Unit 1 · How Computers Work",
+  chapterLabel: "Chapter 3 of 5",
+  level: "Easy",
+  filename: "Mentr-Learn-A3-Input-Output-Devices-Notes.pdf",
+  bigIdea:
+    "A computer needs doors. Input devices bring information IN to the computer. Output devices send information OUT to you. Some clever devices, like a touchscreen, do both.",
+  definitions: [
+    {
+      term: "Device",
+      meaning: "A machine you can touch that is joined to a computer — like a door in or out.",
+    },
+    {
+      term: "Input device",
+      meaning:
+        "Takes something from you and sends it IN — keyboard, mouse, microphone, camera.",
+    },
+    {
+      term: "Output device",
+      meaning:
+        "Gives something back OUT to you — screen, speaker, printer.",
+    },
+    {
+      term: "Both",
+      meaning:
+        "A device that takes in AND gives out — like a touchscreen or a headset with a mic.",
+    },
+  ],
+  panels: [
+    {
+      title: "Input devices (IN)",
+      body: [
+        "Keyboard → you type letters and numbers.",
+        "Mouse → you point and click.",
+        "Microphone → it listens to your voice.",
+        "Camera → it takes pictures and video.",
+      ],
+    },
+    {
+      title: "Output devices (OUT)",
+      body: [
+        "Screen → shows words, pictures, videos.",
+        "Speaker → plays sound and music.",
+        "Printer → puts your work on paper.",
+      ],
+    },
+    {
+      title: "The super trick",
+      body: [
+        "Ask: does it TAKE from me, or GIVE to me?",
+        "Takes from me → input.",
+        "Gives to me → output.",
+        "Microphone listens (input). Speaker talks (output).",
+      ],
+    },
+    {
+      title: "Real life: a video call",
+      body: [
+        "Your camera and mic take your face and voice in (input).",
+        "The computers process it and send it across the internet.",
+        "Nani’s screen and speaker show and play you (output).",
+        "At home: TV remote = input, TV screen = output.",
+      ],
+    },
+  ],
+  remember: [
+    "Input = comes IN. Output = goes OUT.",
+    "Input: keyboard, mouse, microphone, camera.",
+    "Output: screen, speaker, printer.",
+    "Touchscreen = both input and output.",
+  ],
+  checkYourself: {
+    q: "Is a speaker input or output? Explain in one sentence.",
+    a: "Output — a speaker gives sound out to you.",
+  },
+  dinoLine: "Chapter 3 done. You know the doors of a computer — super work, champ!",
+};
+
 const NOTES_BY_MODULE: Record<string, LessonNotesDoc> = {
   A1: A1_LESSON_NOTES,
   A2: A2_LESSON_NOTES,
+  A3: A3_LESSON_NOTES,
 };
 
 export function getLessonNotes(moduleId: string): LessonNotesDoc | null {

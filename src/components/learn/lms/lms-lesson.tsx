@@ -26,6 +26,8 @@ import {
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
 
+const VIDEO_MODULES = new Set(["A1", "A2", "A3"]);
+
 const DIFF_STYLES: Record<LearnQuizDifficulty, string> = {
   easy: "bg-[#e6f7f4] text-[#0d9488]",
   medium: "bg-[#fff4e8] text-[#ff6a1a]",
@@ -590,12 +592,12 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
           title={mod.title}
           moduleId={moduleId}
           videoSrc={
-            moduleId === "A1" || moduleId === "A2"
+            VIDEO_MODULES.has(moduleId)
               ? `/learn/lessons/${moduleId}.mp4`
               : undefined
           }
           captionsSrc={
-            moduleId === "A1" || moduleId === "A2"
+            VIDEO_MODULES.has(moduleId)
               ? `/learn/lessons/${moduleId}.vtt`
               : undefined
           }

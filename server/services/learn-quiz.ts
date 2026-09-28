@@ -1,5 +1,6 @@
 import { A1_LESSON_SEED, A1_QUIZ_SEED, A1_VIDEO_ID } from "../lib/learn-a1-quiz-seed";
 import { A2_LESSON_SEED, A2_QUIZ_SEED, A2_VIDEO_ID } from "../lib/learn-a2-quiz-seed";
+import { A3_LESSON_SEED, A3_QUIZ_SEED, A3_VIDEO_ID } from "../lib/learn-a3-quiz-seed";
 import { LearnLesson } from "../models/LearnLesson";
 import {
   LearnQuizQuestion,
@@ -102,6 +103,39 @@ export async function ensureA2LessonSeeded() {
   return lesson!;
 }
 
+export async function ensureA3LessonSeeded() {
+  const lesson = await LearnLesson.findOneAndUpdate(
+    { moduleId: "A3" },
+    { $set: A3_LESSON_SEED },
+    { upsert: true, returnDocument: "after" },
+  );
+
+  const keepIds = A3_QUIZ_SEED.map((q) => q.questionId);
+
+  for (const q of A3_QUIZ_SEED) {
+    await LearnQuizQuestion.findOneAndUpdate(
+      { questionId: q.questionId },
+      {
+        $set: {
+          ...q,
+          videoId: A3_VIDEO_ID,
+          moduleId: "A3",
+          lesson: lesson!._id,
+          active: true,
+        },
+      },
+      { upsert: true },
+    );
+  }
+
+  await LearnQuizQuestion.updateMany(
+    { moduleId: "A3", questionId: { $nin: keepIds } },
+    { $set: { active: false } },
+  );
+
+  return lesson!;
+}
+
 export async function getLessonQuizForParent(
   userId: string,
   moduleId: string,
@@ -118,6 +152,8 @@ export async function getLessonQuizForParent(
     await ensureA1LessonSeeded();
   } else if (id === "A2") {
     await ensureA2LessonSeeded();
+  } else if (id === "A3") {
+    await ensureA3LessonSeeded();
   }
 
   const lesson = await LearnLesson.findOne({

@@ -1,0 +1,564 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 8.84,
+      "caption": "Hello, champ! Welcome back",
+      "text": "Hello, champ! Welcome back to Mentr Learn. I am so happy you came back for class.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 8.84,
+      "end": 23.03,
+      "caption": "Ch 1: Input \u00b7 Process \u00b7 Output  \u00b7  Ch 2: Binary",
+      "text": "Quick memory check. In Chapter one, we learned the three jobs: input, process, output. In Chapter two, we learned binary \u2014 ones and zeros.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 23.03,
+      "end": 30.02,
+      "caption": "Chapter 3 \u00b7 Input & Output Devices",
+      "text": "Today is Chapter three. The lesson is: Input and Output Devices.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 30.02,
+      "end": 38.96,
+      "caption": "Say with me: Input & Output Devices",
+      "text": "Say it with me\u2026 Input\u2026 and\u2026 Output\u2026 Devices.",
+      "scene": "open",
+      "focus": "say"
+    },
+    {
+      "start": 38.96,
+      "end": 45.37,
+      "caption": "Let's meet real devices!",
+      "text": "Wonderful! Today we will meet real machines you can touch and use.",
+      "scene": "open",
+      "focus": "go"
+    },
+    {
+      "start": 45.37,
+      "end": 55.26,
+      "caption": "A closed box\u2026 no keyboard, no screen",
+      "text": "Imagine a computer that is just a closed box. No keyboard, no mouse, no screen, no speaker.",
+      "scene": "hook",
+      "focus": "sealed"
+    },
+    {
+      "start": 55.26,
+      "end": 63.09,
+      "caption": "How do we tell it? How does it answer?",
+      "text": "Two questions. How would you tell it what to do? And how would it show you the answer?",
+      "scene": "hook",
+      "focus": "ask"
+    },
+    {
+      "start": 63.09,
+      "end": 68.73,
+      "caption": "Your turn \u2014 think!",
+      "text": "Pause and think for three seconds\u2026",
+      "scene": "hook",
+      "focus": "think"
+    },
+    {
+      "start": 68.73,
+      "end": 78.26,
+      "caption": "It needs an IN door and an OUT door",
+      "text": "Here is the answer. A computer needs doors \u2014 a door for things to come in, and a door for things to go out.",
+      "scene": "hook",
+      "focus": "ok"
+    },
+    {
+      "start": 78.26,
+      "end": 82.8,
+      "caption": "Doors = devices",
+      "text": "These doors are special machines called devices.",
+      "scene": "doors",
+      "focus": "intro"
+    },
+    {
+      "start": 82.8,
+      "end": 87.29,
+      "caption": "INPUT devices \u2192 bring information IN",
+      "text": "Input devices bring information IN to the computer.",
+      "scene": "doors",
+      "focus": "in"
+    },
+    {
+      "start": 87.29,
+      "end": 92.84,
+      "caption": "OUTPUT devices \u2192 send information OUT",
+      "text": "Output devices send information OUT from the computer, to you.",
+      "scene": "doors",
+      "focus": "out"
+    },
+    {
+      "start": 92.84,
+      "end": 104.68,
+      "caption": "Input devices \u00b7 Process \u00b7 Output devices",
+      "text": "Remember input, process, output from Chapter one? Input devices do the first job. Output devices do the last job.",
+      "scene": "doors",
+      "focus": "link"
+    },
+    {
+      "start": 104.68,
+      "end": 111.69,
+      "caption": "Say: IN comes in \u00b7 OUT goes out!",
+      "text": "Say with me: In\u2026 comes in. Out\u2026 goes out!",
+      "scene": "doors",
+      "focus": "say"
+    },
+    {
+      "start": 111.69,
+      "end": 118.56,
+      "caption": "Meet the INPUT devices",
+      "text": "Let's meet the input devices. These are the ones that take things from you.",
+      "scene": "input",
+      "focus": "intro"
+    },
+    {
+      "start": 118.56,
+      "end": 128.24,
+      "caption": "Keyboard \u2192 you type \u2192 INPUT",
+      "text": "Number one: the keyboard. When you type letters and numbers, they go into the computer. Input!",
+      "scene": "input",
+      "focus": "keyboard"
+    },
+    {
+      "start": 128.24,
+      "end": 138.52,
+      "caption": "Mouse \u2192 point & click \u2192 INPUT",
+      "text": "Number two: the mouse. You move it, point, and click. Your click goes in. Input!",
+      "scene": "input",
+      "focus": "mouse"
+    },
+    {
+      "start": 138.52,
+      "end": 147.19,
+      "caption": "Microphone \u2192 listens \u2192 INPUT",
+      "text": "Number three: the microphone. It listens to your voice and sends it in. Input!",
+      "scene": "input",
+      "focus": "mic"
+    },
+    {
+      "start": 147.19,
+      "end": 155.95,
+      "caption": "Camera \u2192 takes pictures \u2192 INPUT",
+      "text": "Number four: the camera. It takes your picture or video and sends it in. Input!",
+      "scene": "input",
+      "focus": "camera"
+    },
+    {
+      "start": 155.95,
+      "end": 162.67,
+      "caption": "4 input devices: all bring information IN",
+      "text": "Keyboard, mouse, microphone, camera \u2014 all four bring information in.",
+      "scene": "input",
+      "focus": "all"
+    },
+    {
+      "start": 162.67,
+      "end": 168.99,
+      "caption": "Meet the OUTPUT devices",
+      "text": "Now, the output devices. These give things back to you.",
+      "scene": "output",
+      "focus": "intro"
+    },
+    {
+      "start": 168.99,
+      "end": 175.35,
+      "caption": "Screen \u2192 shows pictures \u2192 OUTPUT",
+      "text": "The screen shows you words, pictures, and videos. Output!",
+      "scene": "output",
+      "focus": "screen"
+    },
+    {
+      "start": 175.35,
+      "end": 181.23,
+      "caption": "Speaker \u2192 plays sound \u2192 OUTPUT",
+      "text": "The speaker plays sounds and music for your ears. Output!",
+      "scene": "output",
+      "focus": "speaker"
+    },
+    {
+      "start": 181.23,
+      "end": 187.79,
+      "caption": "Printer \u2192 prints on paper \u2192 OUTPUT",
+      "text": "The printer puts your work on paper, so you can hold it. Output!",
+      "scene": "output",
+      "focus": "printer"
+    },
+    {
+      "start": 187.79,
+      "end": 193.99,
+      "caption": "3 output devices: all send information OUT",
+      "text": "Screen, speaker, printer \u2014 they all send information out to you.",
+      "scene": "output",
+      "focus": "all"
+    },
+    {
+      "start": 193.99,
+      "end": 203.14,
+      "caption": "Tricky: mic and speaker both use sound!",
+      "text": "Now a tricky one. A microphone and a speaker both deal with sound. So which is which?",
+      "scene": "trick",
+      "focus": "intro"
+    },
+    {
+      "start": 203.14,
+      "end": 210.56,
+      "caption": "Microphone listens \u2192 takes IN \u2192 INPUT",
+      "text": "The microphone listens. It takes your sound in. So it is input.",
+      "scene": "trick",
+      "focus": "mic"
+    },
+    {
+      "start": 210.56,
+      "end": 217.91,
+      "caption": "Speaker talks \u2192 gives OUT \u2192 OUTPUT",
+      "text": "The speaker talks. It gives sound out to you. So it is output.",
+      "scene": "trick",
+      "focus": "speaker"
+    },
+    {
+      "start": 217.91,
+      "end": 230.15,
+      "caption": "TAKES from me \u2192 INPUT \u00b7 GIVES to me \u2192 OUTPUT",
+      "text": "Here is a super trick. Ask: does it take from me, or give to me? Takes from me \u2014 input. Gives to me \u2014 output.",
+      "scene": "trick",
+      "focus": "rule"
+    },
+    {
+      "start": 230.15,
+      "end": 237.38,
+      "caption": "Say: Takes = input \u00b7 Gives = output!",
+      "text": "Say the trick with me: Takes \u2014 input. Gives \u2014 output!",
+      "scene": "trick",
+      "focus": "say"
+    },
+    {
+      "start": 237.38,
+      "end": 245.33,
+      "caption": "Some devices are extra clever\u2026",
+      "text": "Some devices are extra clever. Look at a touchscreen, like on a tablet or phone.",
+      "scene": "both",
+      "focus": "intro"
+    },
+    {
+      "start": 245.33,
+      "end": 251.93,
+      "caption": "You tap \u2192 your touch goes IN",
+      "text": "When you tap it with your finger, your touch goes in. That is input.",
+      "scene": "both",
+      "focus": "touch"
+    },
+    {
+      "start": 251.93,
+      "end": 258.32,
+      "caption": "Screen shows pictures \u2192 OUT",
+      "text": "And the same screen shows you pictures and games. That is output.",
+      "scene": "both",
+      "focus": "show"
+    },
+    {
+      "start": 258.32,
+      "end": 263.53,
+      "caption": "Touchscreen = BOTH input and output",
+      "text": "So a touchscreen does both jobs \u2014 input and output!",
+      "scene": "both",
+      "focus": "both"
+    },
+    {
+      "start": 263.53,
+      "end": 272.03,
+      "caption": "Headset: mic IN + earphones OUT",
+      "text": "A headset with a mic is also both. The mic takes your voice in, and the earphones give sound out.",
+      "scene": "both",
+      "focus": "headset"
+    },
+    {
+      "start": 272.03,
+      "end": 281.03,
+      "caption": "Sorting game \u2014 shout your answer!",
+      "text": "Game time! I show a device. You shout: input, output, or both!",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 281.03,
+      "end": 286.08,
+      "caption": "Keyboard \u2014 input or output?",
+      "text": "Keyboard\u2026 input or output?",
+      "scene": "sort",
+      "focus": "keyboard-q"
+    },
+    {
+      "start": 286.08,
+      "end": 290.74,
+      "caption": "Keyboard \u2192 INPUT",
+      "text": "Input! You type, it goes in.",
+      "scene": "sort",
+      "focus": "keyboard"
+    },
+    {
+      "start": 290.74,
+      "end": 295.74,
+      "caption": "Screen \u2014 input or output?",
+      "text": "Screen\u2026 input or output?",
+      "scene": "sort",
+      "focus": "screen-q"
+    },
+    {
+      "start": 295.74,
+      "end": 300.26,
+      "caption": "Screen \u2192 OUTPUT",
+      "text": "Output! It shows pictures to you.",
+      "scene": "sort",
+      "focus": "screen"
+    },
+    {
+      "start": 300.26,
+      "end": 305.53,
+      "caption": "Microphone \u2014 input or output?",
+      "text": "Microphone\u2026 input or output?",
+      "scene": "sort",
+      "focus": "mic-q"
+    },
+    {
+      "start": 305.53,
+      "end": 310.05,
+      "caption": "Microphone \u2192 INPUT",
+      "text": "Input! It listens to your voice.",
+      "scene": "sort",
+      "focus": "mic"
+    },
+    {
+      "start": 310.05,
+      "end": 314.98,
+      "caption": "Printer \u2014 input or output?",
+      "text": "Printer\u2026 input or output?",
+      "scene": "sort",
+      "focus": "printer-q"
+    },
+    {
+      "start": 314.98,
+      "end": 319.18,
+      "caption": "Printer \u2192 OUTPUT",
+      "text": "Output! It gives you paper.",
+      "scene": "sort",
+      "focus": "printer"
+    },
+    {
+      "start": 319.18,
+      "end": 324.14,
+      "caption": "Camera \u2014 input or output?",
+      "text": "Camera\u2026 input or output?",
+      "scene": "sort",
+      "focus": "camera-q"
+    },
+    {
+      "start": 324.14,
+      "end": 328.49,
+      "caption": "Camera \u2192 INPUT",
+      "text": "Input! It takes your picture in.",
+      "scene": "sort",
+      "focus": "camera"
+    },
+    {
+      "start": 328.49,
+      "end": 333.59,
+      "caption": "Speaker \u2014 input or output?",
+      "text": "Speaker\u2026 input or output?",
+      "scene": "sort",
+      "focus": "speaker-q"
+    },
+    {
+      "start": 333.59,
+      "end": 338.35,
+      "caption": "Speaker \u2192 OUTPUT",
+      "text": "Output! It gives sound to your ears.",
+      "scene": "sort",
+      "focus": "speaker"
+    },
+    {
+      "start": 338.35,
+      "end": 344.95,
+      "caption": "Touchscreen \u2014 careful!",
+      "text": "Last one. Touchscreen\u2026 careful!",
+      "scene": "sort",
+      "focus": "touch-q"
+    },
+    {
+      "start": 344.95,
+      "end": 350.55,
+      "caption": "Touchscreen \u2192 BOTH",
+      "text": "Both! Your tap goes in, and pictures come out.",
+      "scene": "sort",
+      "focus": "touch"
+    },
+    {
+      "start": 350.55,
+      "end": 356.7,
+      "caption": "Big clap for you, champ!",
+      "text": "Seven out of seven? Give yourself a big clap, champ!",
+      "scene": "sort",
+      "focus": "done"
+    },
+    {
+      "start": 356.7,
+      "end": 363.11,
+      "caption": "Story: a video call with Nani",
+      "text": "Now a real-life story. You are on a video call with your Nani.",
+      "scene": "story",
+      "focus": "intro"
+    },
+    {
+      "start": 363.11,
+      "end": 372.04,
+      "caption": "Camera + microphone \u2192 your face & voice go IN",
+      "text": "Your laptop camera sees your smile, and the microphone hears your hello. Those are input devices.",
+      "scene": "story",
+      "focus": "you"
+    },
+    {
+      "start": 372.04,
+      "end": 377.68,
+      "caption": "Computers process and send it across",
+      "text": "The computers do the process job and send it across the internet.",
+      "scene": "story",
+      "focus": "process"
+    },
+    {
+      "start": 377.68,
+      "end": 386.23,
+      "caption": "Nani's screen + speaker \u2192 OUTPUT",
+      "text": "On Nani's side, the screen shows your face and the speaker plays your voice. Output devices!",
+      "scene": "story",
+      "focus": "nani"
+    },
+    {
+      "start": 386.23,
+      "end": 395.79,
+      "caption": "Same trip back: input \u2192 process \u2192 output",
+      "text": "And when Nani says, hello beta, the same thing happens back to you. Input, process, output!",
+      "scene": "story",
+      "focus": "back"
+    },
+    {
+      "start": 395.79,
+      "end": 402.08,
+      "caption": "Device detective \u2014 look around you!",
+      "text": "Your turn to be a detective. Look around your home or classroom.",
+      "scene": "home",
+      "focus": "intro"
+    },
+    {
+      "start": 402.08,
+      "end": 413.87,
+      "caption": "Find 1 INPUT + 1 OUTPUT",
+      "text": "Find one input device and one output device. Point to them. I will wait.",
+      "scene": "home",
+      "focus": "think"
+    },
+    {
+      "start": 413.87,
+      "end": 426.28,
+      "caption": "Remote \u2192 INPUT \u00b7 TV screen \u2192 OUTPUT",
+      "text": "Here is an example. A TV remote \u2014 you press buttons, so it is input. The TV screen shows the cartoon, so it is output.",
+      "scene": "home",
+      "focus": "tv"
+    },
+    {
+      "start": 426.28,
+      "end": 429.91,
+      "caption": "Great detective work!",
+      "text": "Great detective work, champ!",
+      "scene": "home",
+      "focus": "done"
+    },
+    {
+      "start": 429.91,
+      "end": 435.07,
+      "caption": "Practice check",
+      "text": "Practice check \u2014 the same kind of question you will see later.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 435.07,
+      "end": 441.33,
+      "caption": "Speaker: INPUT or OUTPUT?",
+      "text": "Is a speaker an input device or an output device?",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 441.33,
+      "end": 447.87,
+      "caption": "Trick: takes from you, or gives to you?",
+      "text": "Use the trick. Does it take from you, or give to you?",
+      "scene": "checkpoint",
+      "focus": "hint"
+    },
+    {
+      "start": 447.87,
+      "end": 454.55,
+      "caption": "Answer: OUTPUT \u2014 it gives sound to you",
+      "text": "Yes! A speaker is output, because it gives sound out to you.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 454.55,
+      "end": 464.06,
+      "caption": "INPUT: keyboard \u00b7 mouse \u00b7 mic \u00b7 camera",
+      "text": "Let's lock it in. Input devices bring information in: keyboard, mouse, microphone, camera.",
+      "scene": "recap",
+      "focus": "in"
+    },
+    {
+      "start": 464.06,
+      "end": 470.45,
+      "caption": "OUTPUT: screen \u00b7 speaker \u00b7 printer",
+      "text": "Output devices send information out: screen, speaker, printer.",
+      "scene": "recap",
+      "focus": "out"
+    },
+    {
+      "start": 470.45,
+      "end": 475.42,
+      "caption": "BOTH: touchscreen",
+      "text": "Some devices, like a touchscreen, do both.",
+      "scene": "recap",
+      "focus": "both"
+    },
+    {
+      "start": 475.42,
+      "end": 482.34,
+      "caption": "Takes \u2192 input \u00b7 Gives \u2192 output",
+      "text": "And the trick: takes from you \u2014 input. Gives to you \u2014 output.",
+      "scene": "recap",
+      "focus": "rule"
+    },
+    {
+      "start": 482.34,
+      "end": 489.86,
+      "caption": "Chapter 3 complete!",
+      "text": "Chapter three done. Input and Output Devices \u2014 fantastic work today!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 489.86,
+      "end": 498.96,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Next, a short quiz to practise. Tap Finish when you are ready. See you there, champ!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

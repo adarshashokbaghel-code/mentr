@@ -45,24 +45,24 @@ export const metadata: Metadata = {
 
 const PAGE_FAQS = [
   {
-    question: "Are Premium tutors 100% verified?",
+    question: "What makes a tutor Premium?",
     answer:
-      "Yes. Premium tutors complete identity verification and a full profile before they earn the Premium badge and appear on the Premium tutors page.",
+      "They've verified their identity with us, filled in a complete profile with fees and availability, and we've checked it by hand. Only then do they show up on this page.",
   },
   {
-    question: "Do parents pay for Premium?",
+    question: "Do I pay anything to connect?",
     answer:
-      "No. Parents never pay Mentr to search or send connect requests. Premium is a mentor-side plan. You only pay the tutor for classes after you hire them.",
+      "No. Searching and connecting is free. You pay the tutor directly for classes once you decide to go ahead.",
   },
   {
-    question: "Can I connect without logging in?",
+    question: "Do I need an account?",
     answer:
-      "Yes for Premium tutors. Tap Connect and choose “Send requirement without login,” or register as a parent to manage requests from your dashboard.",
+      "Not for Premium tutors. Tap Connect, tell them what your child needs, and they'll reach out. An account just lets you track replies in one place.",
   },
   {
-    question: "What is the difference between Premium and regular tutors?",
+    question: "How is this different from regular tutors?",
     answer:
-      "Premium tutors opt into a paid mentor plan, pass verification, and get priority placement. Regular tutors remain free to list; Premium profiles are highlighted for parents who want a faster, more serious match.",
+      "Anyone can list on Mentr for free. Premium tutors have gone through extra checks and tend to respond faster, so they're a good place to start if you want a quick, serious match.",
   },
 ];
 

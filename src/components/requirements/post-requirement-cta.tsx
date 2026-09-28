@@ -6,7 +6,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -14,11 +13,26 @@ import { useToast } from "@/components/ui/toast";
 import { PARENT_ROLE_TOAST } from "@/hooks/use-role-action";
 import { homeFor } from "@/lib/auth-routes";
 import { cn } from "@/lib/utils";
-import { Loader2, Megaphone, Users } from "lucide-react";
+import { Loader2, Megaphone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const POST_DEST = "/parent/dashboard";
+
+const GATE_STEPS = [
+  {
+    title: "Post your need",
+    body: "Subject, class and area. You stay anonymous.",
+  },
+  {
+    title: "Get free pitches",
+    body: "Verified tutors reply with their profile.",
+  },
+  {
+    title: "Pick one and chat",
+    body: "Accept a tutor and WhatsApp unlocks. No fees, ever.",
+  },
+];
 
 type PostRequirementButtonProps = {
   label?: string;
@@ -81,59 +95,65 @@ export function PostRequirementButton({
       </Button>
 
       <Dialog open={gateOpen} onOpenChange={setGateOpen}>
-        <DialogContent className="gap-0 overflow-hidden border-hairline bg-white p-0 sm:max-w-md">
-          <DialogHeader className="border-b border-hairline bg-cream/30 px-6 py-5">
-            <span className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-coral-wash">
-              <Users className="h-5 w-5 text-coral" />
+        <DialogContent className="max-h-[min(92dvh,640px)] gap-0 overflow-y-auto rounded-t-3xl border-0 bg-white p-0 sm:max-w-[420px] sm:rounded-3xl sm:p-0">
+          <span
+            aria-hidden
+            className="mx-auto mt-2.5 block h-1 w-10 rounded-full bg-hairline sm:hidden"
+          />
+
+          <DialogHeader className="px-5 pb-1 pt-5 text-left sm:px-7 sm:pt-7">
+            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-coral-wash">
+              <Megaphone className="h-5 w-5 text-coral" />
             </span>
-            <DialogTitle className="text-lg font-bold text-ink">
-              Parents post requirements
+            <DialogTitle className="mt-4 text-[1.35rem] font-bold leading-tight tracking-tight text-ink sm:text-2xl">
+              Post what your child needs
             </DialogTitle>
-            <DialogDescription className="text-sm leading-relaxed text-muted">
-              Only parents can post what their child needs. Verified tutors pitch
-              on the board; you pick who to connect with on WhatsApp.
+            <DialogDescription className="mt-1.5 text-[14px] leading-relaxed text-muted">
+              Posting is for parents only. Tutors reply to you — you decide who
+              to talk to.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-3 px-6 py-5">
-            <ul className="space-y-2 text-sm text-ink">
-              <li className="flex gap-2">
-                <span className="font-bold text-coral">1.</span>
-                Post subject, class & area — stay anonymous
+          <ol className="relative mx-5 mt-5 space-y-4 sm:mx-7">
+            <span
+              aria-hidden
+              className="absolute bottom-4 left-[15px] top-4 w-px bg-hairline"
+            />
+            {GATE_STEPS.map((step, i) => (
+              <li key={step.title} className="relative flex gap-3.5">
+                <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[13px] font-bold text-coral ring-2 ring-coral/25">
+                  {i + 1}
+                </span>
+                <div className="min-w-0 pt-1">
+                  <p className="text-[15px] font-semibold leading-tight text-ink">
+                    {step.title}
+                  </p>
+                  <p className="mt-1 text-[13px] leading-snug text-muted">
+                    {step.body}
+                  </p>
+                </div>
               </li>
-              <li className="flex gap-2">
-                <span className="font-bold text-coral">2.</span>
-                Tutors send free pitches with their profile
-              </li>
-              <li className="flex gap-2">
-                <span className="font-bold text-coral">3.</span>
-                Accept one → WhatsApp unlocks. ₹0 fees
-              </li>
-            </ul>
-          </div>
+            ))}
+          </ol>
 
-          <DialogFooter className="border-t border-hairline bg-cream/20 px-6 py-4 sm:justify-stretch">
+          <div className="mt-6 space-y-2 border-t border-hairline px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-4 sm:px-7 sm:pb-7">
             <Button
-              variant="secondary"
-              className="flex-1"
-              onClick={() => setGateOpen(false)}
-              disabled={switching}
-            >
-              Cancel
-            </Button>
-            <Button
-              className="flex-1"
+              className="h-12 w-full rounded-xl text-[15px] font-bold"
               onClick={handleLoginAsParent}
               disabled={switching}
             >
-              {switching ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Users className="h-4 w-4" />
-              )}
-              {switching ? "Switching…" : "Create free parent account"}
+              {switching ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+              {switching ? "Just a sec…" : "Create free parent account"}
             </Button>
-          </DialogFooter>
+            <button
+              type="button"
+              onClick={() => setGateOpen(false)}
+              disabled={switching}
+              className="h-10 w-full rounded-xl text-sm font-semibold text-muted transition hover:bg-cream hover:text-ink"
+            >
+              Not now
+            </button>
+          </div>
         </DialogContent>
       </Dialog>
     </>

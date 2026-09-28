@@ -12,7 +12,6 @@ import {
 } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
-  Briefcase,
   ChevronLeft,
   ChevronRight,
   Globe2,
@@ -25,9 +24,9 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const FEATURED_LIMIT = 12;
-/** Same visual width as the old 3-up grid (~1/3 of 1400px rail). */
+/** 5 per row on desktop, fewer on smaller screens (gap is 1rem / 1.25rem). */
 const CARD_WIDTH =
-  "w-[min(100%,calc(100vw-2rem))] sm:w-[min(380px,calc(50vw-2.5rem))] lg:w-[min(420px,calc((100vw-8rem)/3))] xl:w-[420px]";
+  "w-[72%] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-3.75rem)/4)] xl:w-[calc((100%-5rem)/5)]";
 
 function scoreTeacher(t: Teacher): number {
   let score = 0;
@@ -94,8 +93,7 @@ function SpotlightCard({ teacher }: { teacher: Teacher }) {
   const name = displayName(teacher.name);
   const subject = primarySubject(teacher);
   const cred = headline(teacher);
-  const subjects = teacher.subjects.slice(0, 3);
-  const levels = teacher.levels?.trim();
+  const place = teacher.locality || teacher.area || "India";
   const premium = Boolean(teacher.premium);
 
   return (
@@ -108,7 +106,7 @@ function SpotlightCard({ teacher }: { teacher: Teacher }) {
           : "border-hairline hover:border-ink/15",
       )}
     >
-      <div className="relative aspect-[16/11] overflow-hidden bg-cream-band sm:aspect-[5/3]">
+      <div className="relative aspect-[4/3] overflow-hidden bg-cream-band">
         <Link href={profileHref} className="absolute inset-0 block">
           <MentorPhoto
             name={name}
@@ -123,114 +121,76 @@ function SpotlightCard({ teacher }: { teacher: Teacher }) {
           />
           <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-ink/55 to-transparent" />
           {rate ? (
-            <span className="absolute bottom-3 right-3 rounded-lg bg-white/95 px-2.5 py-1 text-sm font-bold tabular-nums text-ink shadow-sm">
+            <span className="absolute bottom-2 right-2 rounded-md bg-white/95 px-1.5 py-0.5 text-[12px] font-bold tabular-nums text-ink shadow-sm">
               {rate}
             </span>
           ) : null}
         </Link>
 
         {premium ? (
-          <span className="absolute left-3 top-3 z-10">
-            <PremiumMentorBadge size="md" label="Premium mentor" />
+          <span className="absolute left-2 top-2 z-10">
+            <PremiumMentorBadge size="sm" />
           </span>
         ) : teacher.verified ? (
-          <span className="absolute left-3 top-3 z-10">
-            <MentorStatusBadges verified size="md" />
+          <span className="absolute left-2 top-2 z-10">
+            <MentorStatusBadges verified size="sm" />
           </span>
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
+      <div className="flex flex-1 flex-col gap-2 p-3">
         <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <Link
-              href={profileHref}
-              className="truncate text-lg font-bold tracking-tight text-ink hover:text-coral sm:text-xl"
-            >
-              {name}
-            </Link>
-            {teacher.verified ? (
-              <MentorStatusBadges verified size="sm" />
-            ) : null}
-          </div>
-          <p className="mt-0.5 text-sm font-semibold text-coral">{subject}</p>
+          <Link
+            href={profileHref}
+            className="block truncate text-[15px] font-bold tracking-tight text-ink hover:text-coral"
+          >
+            {name}
+          </Link>
+          <p className="mt-0.5 truncate text-[12px] font-semibold text-coral">
+            {subject}
+            {teacher.experienceYears > 0
+              ? ` · ${teacher.experienceYears} yrs`
+              : ""}
+          </p>
           {cred ? (
-            <p className="mt-1 flex items-start gap-1.5 text-[12px] font-medium leading-snug text-ink/70">
-              <GraduationCap className="mt-0.5 h-3.5 w-3.5 shrink-0 text-coral" />
-              <span className="line-clamp-2">{cred}</span>
+            <p className="mt-1 flex items-center gap-1 text-[11px] font-medium text-ink/65">
+              <GraduationCap className="h-3 w-3 shrink-0 text-coral" />
+              <span className="truncate">{cred}</span>
             </p>
           ) : null}
         </div>
 
-        {subjects.length > 0 ? (
-          <div className="flex flex-wrap gap-1.5">
-            {subjects.map((s) => (
-              <span
-                key={s}
-                className="rounded-md bg-cream-band px-2 py-0.5 text-[11px] font-semibold text-ink"
-              >
-                {s}
-              </span>
-            ))}
-            {teacher.subjects.length > subjects.length ? (
-              <span className="rounded-md bg-cream-band px-2 py-0.5 text-[11px] font-semibold text-muted">
-                +{teacher.subjects.length - subjects.length}
-              </span>
-            ) : null}
-          </div>
-        ) : null}
-
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[12px] font-medium text-muted">
-          <span className="inline-flex items-center gap-1">
+        <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] font-medium text-muted">
+          <span className="inline-flex min-w-0 items-center gap-1">
             <MapPin className="h-3 w-3 shrink-0 text-coral" />
-            {teacher.locality || teacher.area || "India"}
+            <span className="truncate capitalize">{place}</span>
           </span>
-          {teacher.experienceYears > 0 ? (
-            <span className="inline-flex items-center gap-1">
-              <Briefcase className="h-3 w-3 shrink-0 text-coral" />
-              {teacher.experienceYears} yrs
-            </span>
-          ) : null}
-          {levels ? (
-            <span className="truncate text-ink/65">{levels}</span>
-          ) : null}
-        </div>
-
-        <div className="flex flex-wrap gap-1.5">
           {modes.slice(0, 2).map((m) => (
-            <span
-              key={m}
-              className="inline-flex items-center gap-1 rounded-full border border-hairline bg-cream/70 px-2 py-0.5 text-[10px] font-semibold text-ink"
-            >
+            <span key={m} className="inline-flex items-center gap-1">
               {m === "Online" ? (
-                <Globe2 className="h-2.5 w-2.5 text-coral" />
+                <Globe2 className="h-3 w-3 text-coral" />
               ) : (
-                <Home className="h-2.5 w-2.5 text-coral" />
+                <Home className="h-3 w-3 text-coral" />
               )}
               {m}
             </span>
           ))}
-          {teacher.workplace?.trim() ? (
-            <span className="truncate rounded-full border border-hairline bg-cream/70 px-2 py-0.5 text-[10px] font-semibold text-muted">
-              {teacher.workplace.trim()}
-            </span>
-          ) : null}
         </div>
 
         {teacher.bio?.trim() ? (
-          <p className="line-clamp-3 text-[12px] leading-relaxed text-muted">
-            {shortBio(teacher.bio, 160)}
+          <p className="line-clamp-2 text-[11px] leading-relaxed text-muted">
+            {shortBio(teacher.bio, 110)}
           </p>
         ) : null}
 
-        <div className="mt-auto flex gap-2 pt-1">
+        <div className="mt-auto flex gap-1.5 pt-1">
           <Link href={profileHref} className="flex-1">
             <Button
               size="sm"
               variant="secondary"
-              className="h-10 w-full rounded-xl text-xs font-semibold"
+              className="h-8 w-full rounded-lg px-2 text-[11px] font-semibold"
             >
-              View profile
+              Profile
             </Button>
           </Link>
           <Link
@@ -240,7 +200,7 @@ function SpotlightCard({ teacher }: { teacher: Teacher }) {
             <Button
               size="sm"
               className={cn(
-                "h-10 w-full rounded-xl text-xs font-semibold",
+                "h-8 w-full rounded-lg px-2 text-[11px] font-semibold",
                 premium && "shadow-[2px_2px_0_0_rgba(28,26,23,0.2)]",
               )}
             >
@@ -380,7 +340,7 @@ function FeaturedStrip({ teachers }: { teachers: Teacher[] }) {
 function FeaturedSkeleton() {
   return (
     <div className="flex gap-4 overflow-hidden sm:gap-5">
-      {Array.from({ length: 3 }).map((_, i) => (
+      {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}
           className={cn(
@@ -388,12 +348,12 @@ function FeaturedSkeleton() {
             CARD_WIDTH,
           )}
         >
-          <div className="aspect-[16/11] animate-pulse bg-cream-band sm:aspect-[5/3]" />
-          <div className="space-y-2.5 p-4 sm:p-5">
-            <div className="h-5 w-40 animate-pulse rounded bg-cream-band" />
-            <div className="h-3.5 w-24 animate-pulse rounded bg-cream-band" />
+          <div className="aspect-[4/3] animate-pulse bg-cream-band" />
+          <div className="space-y-2 p-3">
+            <div className="h-4 w-32 animate-pulse rounded bg-cream-band" />
+            <div className="h-3 w-20 animate-pulse rounded bg-cream-band" />
             <div className="h-3 w-full animate-pulse rounded bg-cream-band" />
-            <div className="h-10 w-full animate-pulse rounded-xl bg-cream-band" />
+            <div className="h-8 w-full animate-pulse rounded-lg bg-cream-band" />
           </div>
         </div>
       ))}
@@ -475,8 +435,8 @@ export function FeaturedMentors({
               <span className="text-coral">hire first</span>
             </h2>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
-              Same large profiles for every Premium mentor — use the arrows or
-              swipe as the list grows. Connect free or try Instant Connect.
+              Hand-picked, ID-verified tutors. Swipe or use the arrows to see
+              more — connecting is free.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">

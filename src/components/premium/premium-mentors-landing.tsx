@@ -4,13 +4,12 @@ import { useAuth } from "@/components/auth/auth-provider";
 import { ConnectButton } from "@/components/connect/connect-button";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { PremiumMentorBadge } from "@/components/ui/mentor-status-badges";
 import {
-  EXPERIENCE_STEPS,
   fetchPremiumTeachers,
   formatHourlyRate,
-  LOCALITIES,
   modeLabels,
   SUBJECTS,
   type Teacher,
@@ -18,28 +17,51 @@ import {
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
-  BadgeCheck,
-  ChevronDown,
+  Crown,
   Globe2,
   Home,
   MapPin,
+  Plus,
   Search,
-  ShieldCheck,
-  SlidersHorizontal,
-  Sparkles,
   X,
-  Zap,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type FormEvent } from "react";
 
 const SIGNUP_HREF =
   "/parent/signup?next=" + encodeURIComponent("/premiummentors");
 
-type ModeFilter = "all" | "online" | "home";
-type SortKey = "relevance" | "rate_low" | "rate_high" | "experience" | "newest";
+const SUBJECT_TABS = ["All", ...SUBJECTS.slice(0, 8)] as const;
 
-const SUBJECT_CHIPS = ["All", ...SUBJECTS.slice(0, 8)] as const;
+const FAQS = [
+  {
+    q: "What makes a tutor Premium?",
+    a: "They've verified their identity with us, filled in a complete profile with fees and availability, and we've checked it by hand. Only then do they show up on this page.",
+  },
+  {
+    q: "Do I pay anything to connect?",
+    a: "No. Searching and connecting is free. You pay the tutor directly for classes once you decide to go ahead.",
+  },
+  {
+    q: "Do I need an account?",
+    a: "Not for Premium tutors. Tap Connect, tell them what your child needs, and they'll reach out. An account just lets you track replies in one place.",
+  },
+  {
+    q: "How is this different from regular tutors?",
+    a: "Anyone can list on Mentr for free. Premium tutors have gone through extra checks and tend to respond faster, so they're a good place to start if you want a quick, serious match.",
+  },
+];
+
+const connectCls = cn(
+  "inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl",
+  "bg-gradient-to-r from-[#5b7cfa] to-[#c4a574] text-sm font-bold text-white",
+  "shadow-[0_8px_20px_rgba(91,124,250,0.28)] transition hover:brightness-105 active:scale-[0.99]",
+);
+
+const connectRequestedCls = cn(
+  "inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl",
+  "border border-hairline bg-[#f6f5f2] text-sm font-semibold text-muted",
+);
 
 function displayName(name: string): string {
   const cleaned = name.replace(/\s+/g, " ").trim();
@@ -53,9 +75,9 @@ function displayName(name: string): string {
   return cleaned;
 }
 
-function shortBio(bio: string, max = 110): string {
+function shortBio(bio: string, max = 120): string {
   const one = bio.replace(/\s+/g, " ").trim();
-  if (!one) return "Verified Premium tutor ready to teach.";
+  if (!one) return "";
   if (one.length <= max) return one;
   return `${one.slice(0, max - 1).trim()}…`;
 }
@@ -68,99 +90,211 @@ function primarySubject(teacher: Teacher): string {
   );
 }
 
-function matchesMode(t: Teacher, mode: ModeFilter): boolean {
-  if (mode === "all") return true;
-  const modes = t.modes || [];
-  if (modes.length === 0) return true;
-  if (mode === "online") return modes.includes("online");
-  return modes.includes("student_home") || modes.includes("tutor_home");
+function titleCase(s: string): string {
+  return s.replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
-function PremiumListCard({ teacher }: { teacher: Teacher }) {
+/* ── Hero visuals ───────────────────────────────────────────────── */
+
+const FAN_MAX = 5;
+const FAN_INTERVAL_MS = 2800;
+
+function HeroPhotoFan({ mentors }: { mentors: Teacher[] }) {
+  const picks = mentors.slice(0, FAN_MAX);
+  const n = picks.length;
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  useEffect(() => {
+    if (n < 2 || paused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(
+      () => setActive((a) => (a + 1) % n),
+      FAN_INTERVAL_MS,
+    );
+    return () => window.clearInterval(id);
+  }, [n, paused]);
+
+  if (n === 0) return null;
+
+  return (
+    <div
+      className="relative mx-auto h-[420px] w-full max-w-[520px]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {picks.map((t, i) => {
+        const name = displayName(t.name);
+        let offset = (i - active + n) % n;
+        if (offset > n / 2) offset -= n;
+        const dist = Math.abs(offset);
+        return (
+          <Link
+            key={t.id}
+            href={`/teachers/${t.id}`}
+            tabIndex={offset === 0 ? 0 : -1}
+            aria-hidden={offset !== 0}
+            style={{
+              transform: `translateX(-50%) translateX(${offset * 58}%) translateY(${dist * 20}px) rotate(${offset * 7}deg) scale(${1 - dist * 0.1})`,
+              zIndex: 10 - dist,
+              opacity: dist >= 2 ? 0 : dist === 1 ? 0.9 : 1,
+            }}
+            className={cn(
+              "absolute left-1/2 top-0 w-[44%] rounded-2xl bg-white p-2 pb-3",
+              "shadow-[0_24px_48px_rgba(10,14,40,0.35)]",
+              "transition-[transform,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+              dist >= 2 && "pointer-events-none",
+            )}
+          >
+            <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-[#eef1ff]">
+              <MentorPhoto
+                name={name}
+                imageUrl={t.imageUrl}
+                size="fill"
+                rounded="xl"
+                className="!absolute !inset-0 !h-full !w-full !rounded-none object-cover object-top"
+                showInitials
+                alt=""
+              />
+            </div>
+            <p className="mt-2.5 truncate px-1 text-[13px] font-bold text-ink">
+              {name}
+            </p>
+            <p className="truncate px-1 text-[11px] font-semibold text-[#6b87f5]">
+              {primarySubject(t)}
+            </p>
+          </Link>
+        );
+      })}
+
+      {n > 1 ? (
+        <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5">
+          {picks.map((t, i) => (
+            <button
+              key={t.id}
+              type="button"
+              aria-label={`Show ${displayName(t.name)}`}
+              onClick={() => setActive(i)}
+              className={cn(
+                "h-1.5 rounded-full transition-all duration-500",
+                i === active
+                  ? "w-6 bg-[#e8d5b5]"
+                  : "w-1.5 bg-white/35 hover:bg-white/60",
+              )}
+            />
+          ))}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function AvatarStack({ mentors }: { mentors: Teacher[] }) {
+  const picks = mentors.slice(0, 5);
+  if (picks.length === 0) return null;
+  return (
+    <div className="flex -space-x-2.5">
+      {picks.map((t) => (
+        <span
+          key={t.id}
+          className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-[#3a4688] bg-[#eef1ff]"
+        >
+          <MentorPhoto
+            name={displayName(t.name)}
+            imageUrl={t.imageUrl}
+            size="fill"
+            rounded="full"
+            className="!absolute !inset-0 !h-full !w-full object-cover"
+            showInitials
+            alt=""
+          />
+        </span>
+      ))}
+    </div>
+  );
+}
+
+/* ── Card ───────────────────────────────────────────────────────── */
+
+function MentorCard({ teacher }: { teacher: Teacher }) {
   const name = displayName(teacher.name);
   const subject = primarySubject(teacher);
   const rate = formatHourlyRate(teacher.hourlyRate);
   const modes = modeLabels(teacher).slice(0, 2);
   const profileHref = `/teachers/${teacher.id}`;
-  const place = teacher.locality || teacher.area || "India";
+  const place = titleCase(teacher.locality || teacher.area || "");
+  const bio = shortBio(teacher.bio);
 
   return (
     <article
       className={cn(
-        "flex gap-3 rounded-2xl border border-hairline bg-white p-3",
-        "shadow-[0_1px_2px_rgba(28,26,23,0.04)] transition",
-        "hover:border-ink/15 hover:shadow-[0_8px_24px_rgba(28,26,23,0.07)]",
-        "sm:gap-4 sm:p-4",
+        "group flex flex-col overflow-hidden rounded-2xl bg-white",
+        "ring-1 ring-[#c4a574]/30 shadow-[0_10px_30px_rgba(20,28,60,0.08)]",
+        "transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(20,28,60,0.16)]",
       )}
     >
-      <Link
-        href={profileHref}
-        className="relative h-[88px] w-[88px] shrink-0 overflow-hidden rounded-xl bg-cream-band sm:h-[112px] sm:w-[112px]"
-      >
-        <MentorPhoto
-          name={name}
-          imageUrl={teacher.imageUrl}
-          size="fill"
-          rounded="xl"
-          className="!absolute !inset-0 !h-full !w-full !rounded-none object-cover"
-          showInitials
-        />
-        <span className="absolute left-1.5 top-1.5">
-          <PremiumMentorBadge size="sm" />
-        </span>
-      </Link>
-
-      <div className="min-w-0 flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <Link href={profileHref} className="group block min-w-0">
-              <h3 className="flex items-center gap-1 truncate text-[15px] font-bold tracking-tight text-ink group-hover:text-[#5b7cfa] sm:text-base">
-                <span className="truncate">{name}</span>
-                <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-[#5b7cfa]" />
-              </h3>
-            </Link>
-            <p className="mt-0.5 truncate text-[12px] font-semibold text-[#6b87f5] sm:text-[13px]">
+      <div className="relative aspect-[5/4] overflow-hidden bg-[#eef1ff]">
+        <Link href={profileHref} className="absolute inset-0 block">
+          <MentorPhoto
+            name={name}
+            imageUrl={teacher.imageUrl}
+            size="fill"
+            rounded="xl"
+            className="!absolute !inset-0 !h-full !w-full !rounded-none object-cover object-top transition duration-500 group-hover:scale-[1.04]"
+            showInitials
+            alt=""
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#14182a]/85 via-[#14182a]/10 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-4">
+            <h3 className="truncate text-xl font-bold tracking-tight text-white">
+              {name}
+            </h3>
+            <p className="mt-0.5 truncate text-[13px] font-semibold text-[#e8d5b5]">
               {subject}
               {teacher.experienceYears > 0
                 ? ` · ${teacher.experienceYears}+ yrs`
                 : ""}
             </p>
           </div>
-          {rate ? (
-            <div className="shrink-0 text-right">
-              <p className="text-[15px] font-bold tabular-nums text-ink sm:text-base">
-                {rate}
-              </p>
-              <p className="text-[10px] font-medium text-muted">indicative</p>
-            </div>
-          ) : null}
-        </div>
+        </Link>
 
-        <p className="mt-1.5 line-clamp-2 text-[12px] leading-relaxed text-muted sm:mt-2 sm:text-[13px]">
-          {shortBio(teacher.bio)}
-        </p>
-
-        <div className="mt-2 flex flex-wrap items-center gap-1.5">
-          <span className="inline-flex max-w-[160px] items-center gap-0.5 truncate rounded-full border border-hairline bg-cream px-2 py-0.5 text-[10px] font-semibold text-muted sm:max-w-none">
-            <MapPin className="h-2.5 w-2.5 shrink-0" />
-            <span className="truncate">{place}</span>
+        <span className="absolute left-3 top-3 z-10">
+          <PremiumMentorBadge size="md" />
+        </span>
+        {rate ? (
+          <span className="pointer-events-none absolute right-3 top-3 z-10 rounded-lg bg-white/95 px-2 py-1 text-[13px] font-bold tabular-nums text-ink shadow-sm">
+            {rate}
           </span>
+        ) : null}
+      </div>
+
+      <div className="flex flex-1 flex-col p-4">
+        {bio ? (
+          <p className="line-clamp-2 text-[13px] leading-relaxed text-muted">
+            {bio}
+          </p>
+        ) : null}
+
+        <div className="mb-4 mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] font-medium text-ink/70">
+          {place ? (
+            <span className="inline-flex min-w-0 items-center gap-1">
+              <MapPin className="h-3.5 w-3.5 shrink-0 text-[#c4a574]" />
+              <span className="truncate">{place}</span>
+            </span>
+          ) : null}
           {modes.map((m) => (
-            <span
-              key={m}
-              className="inline-flex items-center gap-0.5 rounded-full border border-hairline bg-cream px-2 py-0.5 text-[10px] font-semibold text-ink"
-            >
+            <span key={m} className="inline-flex items-center gap-1">
               {m === "Online" ? (
-                <Globe2 className="h-2.5 w-2.5 text-[#6b87f5]" />
+                <Globe2 className="h-3.5 w-3.5 text-[#6b87f5]" />
               ) : (
-                <Home className="h-2.5 w-2.5 text-[#c4a574]" />
+                <Home className="h-3.5 w-3.5 text-[#c4a574]" />
               )}
               {m}
             </span>
           ))}
         </div>
 
-        <div className="mt-3 flex gap-2">
+        <div className="mt-auto flex gap-2">
           <ConnectButton
             teacher={{
               id: teacher.id,
@@ -172,27 +306,12 @@ function PremiumListCard({ teacher }: { teacher: Teacher }) {
               premium: true,
             }}
             label="Connect"
-            className={cn(
-              "inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl",
-              "bg-gradient-to-r from-[#5b7cfa] to-[#c4a574]",
-              "text-[13px] font-bold text-white",
-              "shadow-[0_6px_16px_rgba(91,124,250,0.25)]",
-              "transition hover:brightness-105 active:scale-[0.99]",
-              "sm:flex-none sm:px-6",
-            )}
-            requestedClassName={cn(
-              "inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-xl",
-              "border border-hairline bg-cream text-[13px] font-semibold text-muted",
-              "sm:flex-none sm:px-6",
-            )}
+            className={connectCls}
+            requestedClassName={connectRequestedCls}
           />
           <Link
             href={profileHref}
-            className={cn(
-              "inline-flex h-10 items-center justify-center rounded-xl border border-hairline bg-white",
-              "px-3 text-[12px] font-semibold text-ink transition hover:bg-cream",
-              "sm:px-4 sm:text-[13px]",
-            )}
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-hairline bg-white px-4 text-sm font-semibold text-ink transition hover:border-[#5b7cfa]/40 hover:text-[#3d4f9c]"
           >
             Profile
           </Link>
@@ -202,160 +321,23 @@ function PremiumListCard({ teacher }: { teacher: Teacher }) {
   );
 }
 
-function FilterSheet({
-  open,
-  onClose,
-  mode,
-  setMode,
-  locality,
-  setLocality,
-  minExp,
-  setMinExp,
-  onClear,
-}: {
-  open: boolean;
-  onClose: () => void;
-  mode: ModeFilter;
-  setMode: (m: ModeFilter) => void;
-  locality: string;
-  setLocality: (v: string) => void;
-  minExp: number;
-  setMinExp: (n: number) => void;
-  onClear: () => void;
-}) {
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open, onClose]);
-
-  if (!open) return null;
-
+function CardSkeleton() {
   return (
-    <div className="fixed inset-0 z-[80]">
-      <button
-        type="button"
-        aria-label="Close filters"
-        className="absolute inset-0 bg-ink/45"
-        onClick={onClose}
-      />
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Filters"
-        className="absolute inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-2xl border border-hairline bg-white p-4 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-2xl sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:w-full sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-2xl sm:p-5"
-      >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-bold text-ink">Filters</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-cream text-ink"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-
-        <section className="space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-muted">
-            Teaching mode
-          </p>
-          <div className="grid grid-cols-3 gap-2">
-            {(
-              [
-                { id: "all", label: "Any" },
-                { id: "online", label: "Online" },
-                { id: "home", label: "At home" },
-              ] as const
-            ).map((opt) => (
-              <button
-                key={opt.id}
-                type="button"
-                onClick={() => setMode(opt.id)}
-                className={cn(
-                  "rounded-xl border py-2.5 text-xs font-semibold transition",
-                  mode === opt.id
-                    ? "border-ink bg-ink text-white"
-                    : "border-hairline bg-white text-ink hover:bg-cream",
-                )}
-              >
-                {opt.label}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-5 space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-muted">
-            Area
-          </p>
-          <select
-            value={locality}
-            onChange={(e) => setLocality(e.target.value)}
-            className="h-11 w-full rounded-xl border border-hairline bg-cream px-3 text-sm font-medium outline-none focus:border-ink/30"
-          >
-            <option value="">All areas</option>
-            {LOCALITIES.map((loc) => (
-              <option key={loc} value={loc}>
-                {loc}
-              </option>
-            ))}
-          </select>
-        </section>
-
-        <section className="mt-5 space-y-2">
-          <p className="text-[11px] font-bold uppercase tracking-wide text-muted">
-            Experience
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {EXPERIENCE_STEPS.map((y) => (
-              <button
-                key={y}
-                type="button"
-                onClick={() => setMinExp(y)}
-                className={cn(
-                  "rounded-full border px-3 py-1.5 text-xs font-semibold transition",
-                  minExp === y
-                    ? "border-ink bg-ink text-white"
-                    : "border-hairline bg-white text-ink hover:bg-cream",
-                )}
-              >
-                {y === 0 ? "Any" : `${y}+ yrs`}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        <div className="mt-6 flex gap-2">
-          <button
-            type="button"
-            onClick={() => {
-              onClear();
-              onClose();
-            }}
-            className="h-11 flex-1 rounded-xl border border-hairline text-sm font-semibold text-ink"
-          >
-            Clear
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            className="h-11 flex-1 rounded-xl bg-ink text-sm font-bold text-white"
-          >
-            Show results
-          </button>
+    <div className="overflow-hidden rounded-2xl bg-white ring-1 ring-[#c4a574]/20">
+      <div className="aspect-[5/4] animate-pulse bg-[#eef1ff]" />
+      <div className="space-y-2.5 p-4">
+        <div className="h-4 w-full animate-pulse rounded bg-[#f1efe9]" />
+        <div className="h-4 w-3/4 animate-pulse rounded bg-[#f1efe9]" />
+        <div className="flex gap-2 pt-3">
+          <div className="h-11 flex-1 animate-pulse rounded-xl bg-[#eef1ff]" />
+          <div className="h-11 w-20 animate-pulse rounded-xl bg-[#f1efe9]" />
         </div>
       </div>
     </div>
   );
 }
+
+/* ── Page ───────────────────────────────────────────────────────── */
 
 export function PremiumMentorsLanding({
   initialMentors,
@@ -367,11 +349,6 @@ export function PremiumMentorsLanding({
   const [loading, setLoading] = useState(initialMentors.length === 0);
   const [query, setQuery] = useState("");
   const [subject, setSubject] = useState("All");
-  const [mode, setMode] = useState<ModeFilter>("all");
-  const [locality, setLocality] = useState("");
-  const [minExp, setMinExp] = useState(0);
-  const [sort, setSort] = useState<SortKey>("relevance");
-  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -385,18 +362,22 @@ export function PremiumMentorsLanding({
     };
   }, []);
 
+  const heroMentors = useMemo(
+    () => [...mentors].sort((a, b) => Number(!!b.imageUrl) - Number(!!a.imageUrl)),
+    [mentors],
+  );
+
+  const subjectCount = useMemo(
+    () => new Set(mentors.flatMap((t) => t.subjects)).size,
+    [mentors],
+  );
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    let list = mentors.filter((t) => {
+    return mentors.filter((t) => {
       if (subject !== "All" && !t.subjects.some((s) => s.includes(subject))) {
         return false;
       }
-      if (!matchesMode(t, mode)) return false;
-      if (locality) {
-        const hay = `${t.locality} ${t.area}`.toLowerCase();
-        if (!hay.includes(locality.toLowerCase())) return false;
-      }
-      if (minExp > 0 && t.experienceYears < minExp) return false;
       if (q) {
         const hay = [
           t.name,
@@ -412,355 +393,310 @@ export function PremiumMentorsLanding({
       }
       return true;
     });
+  }, [mentors, query, subject]);
 
-    list = [...list].sort((a, b) => {
-      if (sort === "rate_low") {
-        return (a.hourlyRate ?? 1e9) - (b.hourlyRate ?? 1e9);
-      }
-      if (sort === "rate_high") {
-        return (b.hourlyRate ?? 0) - (a.hourlyRate ?? 0);
-      }
-      if (sort === "experience") {
-        return b.experienceYears - a.experienceYears;
-      }
-      if (sort === "newest") {
-        return (b.createdAt || "").localeCompare(a.createdAt || "");
-      }
-      return 0;
-    });
-
-    return list;
-  }, [mentors, query, subject, mode, locality, minExp, sort]);
-
-  const activeFilterCount = [
-    mode !== "all",
-    !!locality,
-    minExp > 0,
-  ].filter(Boolean).length;
-
-  const clearExtraFilters = () => {
-    setMode("all");
-    setLocality("");
-    setMinExp(0);
-  };
+  const hasFilters = !!query || subject !== "All";
 
   const clearAll = () => {
     setQuery("");
     setSubject("All");
-    clearExtraFilters();
-    setSort("relevance");
+  };
+
+  const onSearchSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    document
+      .getElementById("premium-grid")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const isGuest = !user;
-  const isParent = user?.role === "parent";
+  const count = filtered.length;
 
   return (
     <div className="min-h-screen bg-[#f6f5f2] text-ink">
       <Navbar />
 
-      <main className="pb-24 short:pb-20 sm:pb-8">
-        {/* Compact trust strip */}
-        <section className="border-b border-hairline bg-gradient-to-r from-[#eef1ff] via-white to-[#f7f1e8]">
-          <div className="mx-auto flex max-w-[1100px] flex-col gap-2 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#6b87f5]">
+      <main className="pb-24 sm:pb-0">
+        {/* Hero — same palette as the homepage Premium strip */}
+        <section className="relative overflow-hidden">
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-br from-[#2f3d7a] via-[#4556a0] to-[#6a5740]"
+          />
+          <div
+            aria-hidden
+            className="absolute -left-24 -top-10 h-80 w-80 rounded-full bg-[#9eb4ff]/30 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="absolute -bottom-32 -right-10 h-96 w-96 rounded-full bg-[#c4a574]/30 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 home-premium-glass-shine opacity-40"
+          />
+
+          <div className="relative mx-auto grid max-w-[1200px] items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-12 lg:px-8 lg:py-20">
+            <div className="min-w-0">
+              <p className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-[#e8d5b5]">
+                <Crown className="h-3.5 w-3.5" />
                 Premium mentors
               </p>
-              <h1 className="mt-0.5 text-xl font-bold tracking-tight sm:text-2xl">
-                100% verified tutors, ready to connect
+              <h1 className="mt-3 text-[2.25rem] font-bold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
+                Tutors we&apos;ve checked,
+                <br />
+                <span className="text-[#e8d5b5]">one by one.</span>
               </h1>
-              <p className="mt-1 max-w-[52ch] text-[13px] leading-relaxed text-muted">
-                Hand-checked Premium mentors. Browse free — connect with or
-                without login. No agency fee.
-              </p>
+             
+
+              <form
+                onSubmit={onSearchSubmit}
+                className="mt-7 flex max-w-xl items-center gap-2 rounded-2xl bg-white p-1.5 shadow-[0_18px_40px_rgba(10,14,40,0.3)]"
+              >
+                <label className="relative min-w-0 flex-1">
+                  <span className="sr-only">Search Premium tutors</span>
+                  <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Maths, Physics, Pimple Saudagar…"
+                    className="h-11 w-full appearance-none rounded-xl bg-transparent pl-9 pr-8 text-[15px] text-ink outline-none placeholder:text-muted/70 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none"
+                  />
+                  {query ? (
+                    <button
+                      type="button"
+                      aria-label="Clear search"
+                      onClick={() => setQuery("")}
+                      className="absolute right-1 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full text-muted hover:bg-[#f6f5f2] hover:text-ink"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  ) : null}
+                </label>
+                <button
+                  type="submit"
+                  aria-label="Find a tutor"
+                  className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-[#5b7cfa] to-[#c4a574] text-white transition hover:brightness-105"
+                >
+                  <ArrowRight className="h-5 w-5" />
+                </button>
+              </form>
+
+              {mentors.length > 0 ? (
+                <div className="mt-6 flex items-center gap-3">
+                  <AvatarStack mentors={heroMentors} />
+                  <p className="text-[13px] text-white/75">
+                  
+                    {subjectCount > 0 ? ` across ${subjectCount} subjects` : ""}
+                    <span className="mx-2 text-white/35">·</span>
+                    <span className="font-semibold text-[#e8d5b5]">
+                      ₹0 to connect
+                    </span>
+                  </p>
+                </div>
+              ) : null}
             </div>
-            <div className="flex flex-wrap gap-2 text-[11px] font-semibold text-muted">
-              <span className="inline-flex items-center gap-1 rounded-full border border-hairline bg-white px-2.5 py-1">
-                <ShieldCheck className="h-3 w-3 text-[#6b87f5]" />
-                Identity verified
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full border border-hairline bg-white px-2.5 py-1">
-                <Sparkles className="h-3 w-3 text-[#a8895a]" />
-                Premium badge
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full border border-hairline bg-white px-2.5 py-1">
-                <Zap className="h-3 w-3 text-[#a8895a]" />
-                Fast response
-              </span>
+
+            <div className="hidden lg:block">
+              <HeroPhotoFan mentors={heroMentors} />
             </div>
           </div>
         </section>
 
-        {/* Sticky search + filters — Urban Company style */}
-        <div className="sticky top-0 z-40 border-b border-hairline bg-white/95 shadow-[0_1px_0_rgba(28,26,23,0.04)] backdrop-blur-md">
-          <div className="mx-auto max-w-[1100px] px-4 py-3 sm:px-6 lg:px-8">
-            <div className="flex items-center gap-2">
-              <label className="relative min-w-0 flex-1">
-                <span className="sr-only">Search Premium mentors</span>
-                <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
-                <input
-                  type="search"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Search subject, name or area…"
-                  className={cn(
-                    "h-12 w-full rounded-2xl border border-hairline bg-[#f6f5f2] pl-10 pr-10",
-                    "text-[15px] text-ink placeholder:text-muted/70 outline-none",
-                    "focus:border-[#6b87f5]/45 focus:bg-white focus:ring-2 focus:ring-[#5b7cfa]/15",
-                  )}
-                />
-                {query ? (
-                  <button
-                    type="button"
-                    aria-label="Clear search"
-                    onClick={() => setQuery("")}
-                    className="absolute right-3 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-hairline text-ink"
-                  >
-                    <X className="h-3.5 w-3.5" />
-                  </button>
-                ) : null}
-              </label>
-
-              <button
-                type="button"
-                onClick={() => setFiltersOpen(true)}
-                className={cn(
-                  "relative inline-flex h-12 shrink-0 items-center gap-1.5 rounded-2xl border border-hairline bg-white px-3.5",
-                  "text-[13px] font-semibold text-ink transition hover:bg-cream",
-                )}
-              >
-                <SlidersHorizontal className="h-4 w-4" />
-                <span className="hidden sm:inline">Filters</span>
-                {activeFilterCount > 0 ? (
-                  <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-[#5b7cfa] px-1 text-[10px] font-bold text-white">
-                    {activeFilterCount}
-                  </span>
-                ) : null}
-              </button>
-            </div>
-
-            {/* Subject chips */}
-            <div className="mt-3 -mx-4 flex gap-2 overflow-x-auto px-4 pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0">
-              {SUBJECT_CHIPS.map((s) => (
+        {/* Filters */}
+        <div className="sticky top-0 z-40 border-b border-hairline bg-white/95 backdrop-blur-md">
+          <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8">
+            <nav
+              aria-label="Subjects"
+              className="-mx-4 flex min-w-0 gap-6 overflow-x-auto px-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:px-0"
+            >
+              {SUBJECT_TABS.map((s) => (
                 <button
                   key={s}
                   type="button"
                   onClick={() => setSubject(s)}
                   className={cn(
-                    "shrink-0 rounded-full border px-3.5 py-1.5 text-[12px] font-semibold transition",
+                    "shrink-0 border-b-2 py-3.5 text-sm font-semibold transition lg:py-4",
                     subject === s
-                      ? "border-ink bg-ink text-white"
-                      : "border-hairline bg-white text-ink hover:border-ink/25",
+                      ? "border-[#5b7cfa] text-ink"
+                      : "border-transparent text-muted hover:text-ink",
                   )}
                 >
                   {s}
                 </button>
               ))}
-            </div>
-
-            {/* Mode + sort + count */}
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
-              <div className="flex flex-wrap gap-1.5">
-                {(
-                  [
-                    { id: "all", label: "Any mode" },
-                    { id: "online", label: "Online" },
-                    { id: "home", label: "At home" },
-                  ] as const
-                ).map((opt) => (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    onClick={() => setMode(opt.id)}
-                    className={cn(
-                      "rounded-lg border px-2.5 py-1 text-[11px] font-semibold transition",
-                      mode === opt.id
-                        ? "border-[#5b7cfa]/40 bg-[#eef1ff] text-[#3d4f9c]"
-                        : "border-transparent bg-[#f6f5f2] text-muted hover:text-ink",
-                    )}
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <p className="text-[12px] font-medium text-muted">
-                  {loading
-                    ? "Loading…"
-                    : `${filtered.length} mentor${filtered.length === 1 ? "" : "s"}`}
-                </p>
-                <label className="relative">
-                  <span className="sr-only">Sort</span>
-                  <select
-                    value={sort}
-                    onChange={(e) => setSort(e.target.value as SortKey)}
-                    className="h-8 appearance-none rounded-lg border border-hairline bg-white py-1 pl-2.5 pr-7 text-[11px] font-semibold text-ink outline-none"
-                  >
-                    <option value="relevance">Best match</option>
-                    <option value="rate_low">Fee: low to high</option>
-                    <option value="rate_high">Fee: high to low</option>
-                    <option value="experience">Most experience</option>
-                    <option value="newest">Newest</option>
-                  </select>
-                  <ChevronDown className="pointer-events-none absolute right-2 top-1/2 h-3 w-3 -translate-y-1/2 text-muted" />
-                </label>
-                {(query ||
-                  subject !== "All" ||
-                  activeFilterCount > 0 ||
-                  sort !== "relevance") && (
-                  <button
-                    type="button"
-                    onClick={clearAll}
-                    className="text-[11px] font-semibold text-[#5b7cfa] hover:underline"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-            </div>
+            </nav>
           </div>
         </div>
 
         {/* Results */}
         <section
           id="premium-grid"
-          className="scroll-mt-28 px-4 py-4 sm:px-6 sm:py-5 lg:px-8"
+          className="mx-auto max-w-[1200px] scroll-mt-28 px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8"
         >
-          <div className="mx-auto max-w-[1100px]">
-            {loading && mentors.length === 0 ? (
-              <div className="space-y-3">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="flex gap-3 rounded-2xl border border-hairline bg-white p-3"
-                  >
-                    <div className="h-[88px] w-[88px] shrink-0 animate-pulse rounded-xl bg-cream-band sm:h-[112px] sm:w-[112px]" />
-                    <div className="flex-1 space-y-2 py-1">
-                      <div className="h-4 w-40 animate-pulse rounded bg-cream-band" />
-                      <div className="h-3 w-28 animate-pulse rounded bg-cream-band" />
-                      <div className="h-3 w-full animate-pulse rounded bg-cream-band" />
-                      <div className="h-9 w-28 animate-pulse rounded-xl bg-cream-band" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : filtered.length === 0 ? (
-              <div className="rounded-2xl border border-hairline bg-white px-5 py-14 text-center">
-                <p className="text-base font-semibold text-ink">
-                  No Premium mentors match
-                </p>
-                <p className="mt-1.5 text-sm text-muted">
-                  Try another subject, clear filters, or browse all tutors.
-                </p>
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-                  <button
-                    type="button"
-                    onClick={clearAll}
-                    className="inline-flex h-10 items-center rounded-xl bg-ink px-4 text-sm font-semibold text-white"
-                  >
-                    Clear filters
-                  </button>
-                  <Link
-                    href="/search"
-                    className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-hairline bg-white px-4 text-sm font-semibold text-ink"
-                  >
-                    Browse all tutors
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col gap-3">
-                {filtered.map((t) => (
-                  <PremiumListCard key={t.id} teacher={t} />
-                ))}
-              </div>
-            )}
-
-            {isGuest ? (
-              <div className="mt-6 flex flex-col gap-3 rounded-2xl border border-[#5b7cfa]/20 bg-gradient-to-r from-[#eef1ff] to-[#f7f1e8] px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-5">
-                <p className="text-[14px] font-semibold text-ink sm:max-w-[40ch]">
-                  Prefer an account? Register free and track connects from your
-                  dashboard.
-                </p>
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <Link
-                    href={SIGNUP_HREF}
-                    className={cn(
-                      "inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4",
-                      "bg-gradient-to-r from-[#5b7cfa] to-[#c4a574]",
-                      "text-[13px] font-bold text-white",
-                    )}
-                  >
-                    Create parent account
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={() => openRoleChooser("/premiummentors")}
-                    className="inline-flex h-10 items-center justify-center rounded-xl border border-hairline bg-white px-4 text-[13px] font-semibold text-ink"
-                  >
-                    Log in
-                  </button>
-                </div>
-              </div>
-            ) : isParent ? (
-              <p className="mt-5 text-center text-[12px] text-muted">
-                You&apos;re signed in as a parent — Connect goes straight to the
-                tutor.
-              </p>
+          <div className="mb-5 flex items-baseline justify-between gap-3">
+            <p className="text-sm text-muted">
+              {loading ? (
+                "Loading tutors…"
+              ) : (
+                <>
+                  <span className="font-bold text-ink">{count}</span> Premium
+                  tutor{count === 1 ? "" : "s"}
+                  {subject !== "All" ? ` for ${subject}` : ""}
+                  {query ? ` matching “${query.trim()}”` : ""}
+                </>
+              )}
+            </p>
+            {hasFilters ? (
+              <button
+                type="button"
+                onClick={clearAll}
+                className="text-sm font-semibold text-[#5b7cfa] hover:underline"
+              >
+                Reset
+              </button>
             ) : null}
+          </div>
+
+          {loading && mentors.length === 0 ? (
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <CardSkeleton key={i} />
+              ))}
+            </div>
+          ) : count === 0 ? (
+            <div className="rounded-2xl bg-white px-6 py-16 text-center ring-1 ring-[#c4a574]/25">
+              <p className="text-lg font-bold text-ink">
+                No Premium tutors match that yet.
+              </p>
+              <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
+                Try another subject, or look through all tutors on Mentr —
+                there are plenty more.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="h-10 rounded-xl border border-hairline bg-white px-4 text-sm font-semibold text-ink hover:bg-[#f6f5f2]"
+                >
+                  Reset filters
+                </button>
+                <Link
+                  href="/search"
+                  className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#5b7cfa] to-[#c4a574] px-4 text-sm font-bold text-white"
+                >
+                  See all tutors
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+              {filtered.map((t) => (
+                <MentorCard key={t.id} teacher={t} />
+              ))}
+            </div>
+          )}
+
+          {isGuest ? (
+            <p className="mt-8 text-center text-sm text-muted">
+              Want to keep track of who replied?{" "}
+              <Link
+                href={SIGNUP_HREF}
+                className="font-semibold text-[#3d4f9c] hover:underline"
+              >
+                Make a free parent account
+              </Link>{" "}
+              or{" "}
+              <button
+                type="button"
+                onClick={() => openRoleChooser("/premiummentors")}
+                className="font-semibold text-[#3d4f9c] hover:underline"
+              >
+                log in
+              </button>
+              .
+            </p>
+          ) : null}
+
+          {/* Fallback CTA */}
+          <div className="relative mt-12 overflow-hidden rounded-3xl sm:mt-16">
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-r from-[#2f3d7a] via-[#4556a0] to-[#6a5740]"
+            />
+            <div
+              aria-hidden
+              className="absolute -right-10 -top-16 h-64 w-64 rounded-full bg-[#c4a574]/30 blur-3xl"
+            />
+            <div className="relative flex flex-col gap-6 px-6 py-8 sm:px-10 sm:py-10 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-lg">
+                <h2 className="text-2xl font-bold tracking-tight text-white sm:text-[1.75rem]">
+                  Didn&apos;t find the right fit?
+                </h2>
+                <p className="mt-2 text-[15px] leading-relaxed text-white/75">
+                  Post what your child needs — subject, class, area — and
+                  tutors will come to you with their profiles.
+                </p>
+              </div>
+              <div className="flex flex-col gap-2.5 sm:flex-row">
+                <PostRequirementButton
+                  label="Post your need"
+                  variant="secondary"
+                  className="h-11 rounded-xl border-0 bg-white px-5 text-sm font-bold text-ink hover:bg-white/90"
+                />
+                <Link
+                  href="/search"
+                  className="inline-flex h-11 items-center justify-center gap-1.5 rounded-xl border border-white/30 bg-white/10 px-5 text-sm font-semibold text-white transition hover:bg-white/15"
+                >
+                  Browse all tutors
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Compact FAQ */}
-        <section className="border-t border-hairline bg-white px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-          <div className="mx-auto max-w-[1100px]">
-            <h2 className="text-lg font-bold tracking-tight sm:text-xl">
-              Premium tutors — FAQs
-            </h2>
-            <dl className="mt-4 grid gap-3 sm:grid-cols-3">
-              {[
-                {
-                  q: "Are Premium tutors 100% verified?",
-                  a: "Yes. They complete identity verification and a full profile before earning the Premium badge.",
-                },
-                {
-                  q: "Do parents pay for Premium?",
-                  a: "No. Parents never pay Mentr to search or connect. You only pay the tutor after you hire them.",
-                },
-                {
-                  q: "Connect without login?",
-                  a: "Yes for Premium tutors. Tap Connect and send a requirement, or register to track replies.",
-                },
-              ].map((item) => (
-                <div
-                  key={item.q}
-                  className="rounded-2xl border border-hairline bg-[#f6f5f2] p-4"
+        {/* FAQ */}
+        <section className="mt-16 border-t border-hairline bg-white sm:mt-20">
+          <div className="mx-auto grid max-w-[1200px] gap-8 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-[1fr_1.6fr] lg:gap-16 lg:px-8">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-[#a8895a]">
+                FAQ
+              </p>
+              <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
+                Questions parents ask
+              </h2>
+              <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted">
+                Anything else?{" "}
+                <Link
+                  href="/faq"
+                  className="font-semibold text-[#3d4f9c] hover:underline"
                 >
-                  <dt className="text-[13px] font-bold text-ink">{item.q}</dt>
-                  <dd className="mt-1.5 text-[12px] leading-relaxed text-muted">
+                  Read the full FAQ
+                </Link>
+                .
+              </p>
+            </div>
+            <div className="divide-y divide-hairline border-y border-hairline">
+              {FAQS.map((item) => (
+                <details key={item.q} className="group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                    {item.q}
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#eef1ff] text-[#5b7cfa] transition group-open:rotate-45 group-open:bg-[#2f3d7a] group-open:text-white">
+                      <Plus className="h-4 w-4" />
+                    </span>
+                  </summary>
+                  <p className="-mt-1 pb-5 pr-10 text-[15px] leading-relaxed text-muted">
                     {item.a}
-                  </dd>
-                </div>
+                  </p>
+                </details>
               ))}
-            </dl>
+            </div>
           </div>
         </section>
       </main>
-
-      <FilterSheet
-        open={filtersOpen}
-        onClose={() => setFiltersOpen(false)}
-        mode={mode}
-        setMode={setMode}
-        locality={locality}
-        setLocality={setLocality}
-        minExp={minExp}
-        setMinExp={setMinExp}
-        onClear={clearExtraFilters}
-      />
 
       <Footer />
     </div>

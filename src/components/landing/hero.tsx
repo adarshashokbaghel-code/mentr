@@ -4,7 +4,6 @@ import { ConnectButton } from "@/components/connect/connect-button";
 import { ParentActionLink, FacultyActionLink } from "@/components/auth/role-guard-link";
 import {
   hardShadowSm,
-  LpBadge,
   LpBlob,
   LpGridBg,
   LpLiveDot,
@@ -21,8 +20,6 @@ import {
   BadgeCheck,
   Megaphone,
   Search,
-  ShieldCheck,
-  Sparkles,
   Users,
 } from "lucide-react";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
@@ -489,17 +486,6 @@ export function Hero() {
       <div className="relative mx-auto w-full max-w-[1400px] px-4 py-10 short:py-6 shorter:py-4 sm:px-6 sm:py-16 short:sm:py-8 lg:px-8 lg:py-24 short:lg:py-10 shorter:lg:py-8">
         <div className="grid w-full min-w-0 items-center gap-8 short:gap-5 shorter:gap-4 sm:gap-12 short:sm:gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-14 short:lg:gap-8">
           <div className="min-w-0 w-full max-w-full space-y-5 short:space-y-3 shorter:space-y-2.5 sm:space-y-6 short:sm:space-y-4 text-center lg:text-left">
-            <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start short:gap-1.5">
-              <LpBadge>
-                <ShieldCheck className="h-3.5 w-3.5 text-sage" />
-                Verified tutors
-              </LpBadge>
-              <LpBadge variant="coral">
-                <Sparkles className="h-3.5 w-3.5" />
-                Free forever
-              </LpBadge>
-            </div>
-
             <h1 className="text-[1.75rem] font-bold leading-[1.08] tracking-tight text-balance text-ink short:text-[1.5rem] shorter:text-[1.35rem] sm:text-4xl short:sm:text-[1.85rem] lg:text-[52px] lg:leading-[1.05] short:lg:text-[2.35rem] shorter:lg:text-[2.1rem]">
               Find a verified tutor
               <br />
