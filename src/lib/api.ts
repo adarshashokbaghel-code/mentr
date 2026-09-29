@@ -492,10 +492,16 @@ export const premiumMentorApi = {
       body: JSON.stringify({}),
     }),
 
-  parents: (opts?: { q?: string; posted?: boolean; limit?: number }) => {
+  parents: (opts?: {
+    q?: string;
+    posted?: boolean;
+    board?: ParentBoard;
+    limit?: number;
+  }) => {
     const params = new URLSearchParams();
     if (opts?.q) params.set("q", opts.q);
     if (opts?.posted) params.set("posted", "1");
+    if (opts?.board) params.set("board", opts.board);
     if (opts?.limit) params.set("limit", String(opts.limit));
     const qs = params.toString();
     return request<{
@@ -549,6 +555,9 @@ export type PremiumRevealRow = {
   whatsappUrl: string | null;
 };
 
+export const PARENT_BOARDS = ["CBSE", "IGCSE"] as const;
+export type ParentBoard = (typeof PARENT_BOARDS)[number];
+
 export type PremiumParentRow = {
   id: string;
   name: string;
@@ -557,6 +566,9 @@ export type PremiumParentRow = {
   city: string | null;
   area: string | null;
   country: string;
+  board: ParentBoard;
+  /** Lives outside India — shown with a "Foreign" tag */
+  overseas: boolean;
   hasPosted: boolean;
   openPosts: number;
   totalPosts: number;

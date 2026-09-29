@@ -39,6 +39,7 @@ import {
 import {
   ApiError,
   premiumMentorApi,
+  type ParentBoard,
   type PremiumParentRow,
   type PremiumRevealQuota,
 } from "@/lib/api";
@@ -49,6 +50,8 @@ import {
   Clock,
   Crown,
   Eye,
+  Globe2,
+  GraduationCap,
   Info,
   Loader2,
   Lock,
@@ -66,6 +69,13 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 type FilterTab = "all" | "hiring";
+type BoardFilter = "all" | ParentBoard;
+
+const BOARD_FILTERS: Array<{ id: BoardFilter; label: string; hint?: string }> = [
+  { id: "all", label: "All boards" },
+  { id: "CBSE", label: "CBSE", hint: "India" },
+  { id: "IGCSE", label: "IGCSE", hint: "Foreign" },
+];
 
 const IST_OFFSET_MS = (5 * 60 + 30) * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -104,6 +114,7 @@ export function PremiumParentsPage() {
   const [query, setQuery] = useState("");
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const [filter, setFilter] = useState<FilterTab>("all");
+  const [board, setBoard] = useState<BoardFilter>("all");
   const [revealingId, setRevealingId] = useState<string | null>(null);
   const [justUnlocked, setJustUnlocked] = useState<string | null>(null);
 
@@ -171,7 +182,7 @@ export function PremiumParentsPage() {
   }, [authLoading, user, load]);
 
   const filtered = useMemo(() => {
-    let list = [...parents];
+    let list = board === "all" ? [...parents] : parents.filter((p) => p.board === board);
     if (filter === "hiring") list = list.filter((p) => p.hasPosted);
     list.sort((a, b) => {
       // Genuine (real signups) always above seed / backfill
@@ -199,15 +210,23 @@ export function PremiumParentsPage() {
       return (b.joinedAt || "").localeCompare(a.joinedAt || "");
     });
     return list;
-  }, [parents, filter]);
+  }, [parents, filter, board]);
 
-  const counts = useMemo(
-    () => ({
-      all: parents.length,
-      hiring: parents.filter((p) => p.hasPosted).length,
-    }),
-    [parents],
-  );
+  const counts = useMemo(() => {
+    const inBoard =
+      board === "all" ? parents : parents.filter((p) => p.board === board);
+    const inTab =
+      filter === "hiring" ? parents.filter((p) => p.hasPosted) : parents;
+    return {
+      all: inBoard.length,
+      hiring: inBoard.filter((p) => p.hasPosted).length,
+      boards: {
+        all: inTab.length,
+        CBSE: inTab.filter((p) => p.board === "CBSE").length,
+        IGCSE: inTab.filter((p) => p.board === "IGCSE").length,
+      } satisfies Record<BoardFilter, number>,
+    };
+  }, [parents, filter, board]);
 
   async function reveal(parentId: string) {
     setRevealingId(parentId);
@@ -362,6 +381,45 @@ export function PremiumParentsPage() {
                 </TabsTrigger>
               </TabsList>
             </Tabs>
+
+            <div
+              role="radiogroup"
+              aria-label="Filter by board"
+              className="flex h-11 w-full shrink-0 items-center gap-1 rounded-xl bg-white p-1 shadow-sm ring-1 ring-hairline lg:w-auto"
+            >
+              {BOARD_FILTERS.map((b) => {
+                const active = board === b.id;
+                return (
+                  <button
+                    key={b.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={active}
+                    onClick={() => setBoard(b.id)}
+                    className={cn(
+                      "inline-flex h-full flex-1 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg px-3 text-sm font-medium transition lg:flex-none",
+                      active ? "bg-ink text-white" : "text-muted hover:text-ink",
+                    )}
+                  >
+                    {b.id === "all" ? <GraduationCap className="h-3.5 w-3.5" /> : null}
+                    {b.label}
+                    {b.hint ? (
+                      <span
+                        className={cn(
+                          "hidden text-[11px] sm:inline",
+                          active ? "text-white/60" : "text-muted/80",
+                        )}
+                      >
+                        {b.hint}
+                      </span>
+                    ) : null}
+                    <span className="tabular-nums opacity-70">
+                      {counts.boards[b.id]}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -442,7 +500,11 @@ export function PremiumParentsPage() {
           {loading && parents.length === 0 ? (
             <CardGridSkeleton />
           ) : filtered.length === 0 ? (
-            <EmptyState filter={filter} hasQuery={Boolean(debouncedQuery)} />
+            <EmptyState
+              filter={filter}
+              board={board}
+              hasQuery={Boolean(debouncedQuery)}
+            />
           ) : (
             <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
               {filtered.map((p, i) => (
@@ -533,6 +595,21 @@ function ParentCard({
               Browsing
             </Badge>
           )}
+          <Badge
+            variant="muted"
+            className="border-0 bg-white/95 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink shadow-sm"
+          >
+            {p.board}
+          </Badge>
+          {p.overseas ? (
+            <Badge
+              variant="muted"
+              className="gap-1 border-0 bg-[#2f3d7a] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white shadow-sm"
+            >
+              <Globe2 className="h-2.5 w-2.5" />
+              Foreign
+            </Badge>
+          ) : null}
         </div>
 
         {pending && !p.contactRevealed ? (
@@ -714,9 +791,11 @@ function CardGridSkeleton() {
 
 function EmptyState({
   filter,
+  board,
   hasQuery,
 }: {
   filter: FilterTab;
+  board: BoardFilter;
   hasQuery: boolean;
 }) {
   return (
@@ -728,7 +807,9 @@ function EmptyState({
       <p className="mt-1 max-w-sm text-sm text-muted">
         {hasQuery
           ? "Try a different search."
-          : filter === "hiring"
+          : board !== "all"
+            ? `No ${board} parents${filter === "hiring" ? " with open needs" : ""} right now. Try another board.`
+            : filter === "hiring"
             ? "No parents with open needs match right now."
             : "Parents will show up as they join Mentr."}
       </p>

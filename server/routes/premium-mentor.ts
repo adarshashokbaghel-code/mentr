@@ -20,6 +20,7 @@ import {
   parsePremiumCurrency,
   resolvePremiumCurrency,
 } from "../lib/premium-billing-geo";
+import { parseParentBoard } from "../lib/parent-board";
 
 const router = Router();
 router.use(ensureDb);
@@ -319,6 +320,7 @@ router.get(
         mentor: user,
         query: String(req.query.q || ""),
         onlyPosted: String(req.query.posted || "") === "1",
+        board: parseParentBoard(req.query.board),
         limit: Number(req.query.limit) || 120,
       });
       if ("error" in result) {
