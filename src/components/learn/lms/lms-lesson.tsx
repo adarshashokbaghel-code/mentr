@@ -1,7 +1,11 @@
 "use client";
 
 import { LearnDino } from "@/components/landing/lp/learn-dino";
-import { getModuleById, getTrackForModule } from "@/lib/learn-curriculum";
+import {
+  getModuleById,
+  getTrackForModule,
+  hasLessonVideo,
+} from "@/lib/learn-curriculum";
 import {
   fetchLessonQuiz,
   submitLessonQuiz,
@@ -25,8 +29,6 @@ import {
   saveLearnEnrollmentLocal,
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
-
-const VIDEO_MODULES = new Set(["A1", "A2", "A3", "A4"]);
 
 const DIFF_STYLES: Record<LearnQuizDifficulty, string> = {
   easy: "bg-[#e6f7f4] text-[#0d9488]",
@@ -592,12 +594,12 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
           title={mod.title}
           moduleId={moduleId}
           videoSrc={
-            VIDEO_MODULES.has(moduleId)
+            hasLessonVideo(moduleId)
               ? `/learn/lessons/${moduleId}.mp4`
               : undefined
           }
           captionsSrc={
-            VIDEO_MODULES.has(moduleId)
+            hasLessonVideo(moduleId)
               ? `/learn/lessons/${moduleId}.vtt`
               : undefined
           }

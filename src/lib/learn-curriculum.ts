@@ -51,6 +51,13 @@ export const VIDEO_LENGTH_BY_UNIT_INDEX = [3, 4, 5, 6] as const;
 
 export const SAMPLE_MODULE_ID = "A1";
 
+/** Lessons whose video is published under `/learn/lessons/{id}.mp4`, in path order. */
+export const LESSON_VIDEO_IDS = ["A1", "A2", "A3", "A4"] as const;
+
+export function hasLessonVideo(moduleId: string): boolean {
+  return (LESSON_VIDEO_IDS as readonly string[]).includes(moduleId);
+}
+
 const csUnits: LearnUnit[] = [
   {
     id: "cs-u1",

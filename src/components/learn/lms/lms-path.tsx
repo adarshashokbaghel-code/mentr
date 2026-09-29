@@ -4,6 +4,7 @@ import { useLmsPotd } from "@/components/learn/lms/lms-potd-context";
 import {
   LEARN_TRACKS,
   SAMPLE_MODULE_ID,
+  hasLessonVideo,
   type LearnTrackId,
 } from "@/lib/learn-curriculum";
 import type { LearnEnrollmentDto } from "@/lib/learn-enroll";
@@ -349,6 +350,7 @@ export function LmsPath() {
                   {unit.modules.map((m, idx) => {
                     const canOpen =
                       m.id === SAMPLE_MODULE_ID ||
+                      hasLessonVideo(m.id) ||
                       hasWatchedVideo(enrollment, m.id) ||
                       hasCompletedQuiz(enrollment, m.id);
                     const videoDone = hasWatchedVideo(enrollment, m.id);
