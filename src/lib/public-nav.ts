@@ -198,6 +198,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
       { label: "Browse tutors", href: "/search" },
       { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
       { label: "How it works", href: "/how-it-works" },
+      { label: "Mentr vs other platforms", href: "/comparison" },
     ],
     ...(LEARN_PUBLIC
       ? {

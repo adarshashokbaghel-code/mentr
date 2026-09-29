@@ -259,10 +259,87 @@ export const A3_LESSON_NOTES: LessonNotesDoc = {
   dinoLine: "Chapter 3 done. You know the doors of a computer — super work, champ!",
 };
 
+export const A4_LESSON_NOTES: LessonNotesDoc = {
+  moduleId: "A4",
+  title: "How Websites Talk to Each Other",
+  unitLabel: "CS Unit 1 · How Computers Work",
+  chapterLabel: "Chapter 4 of 5",
+  level: "Easy",
+  filename: "Mentr-Learn-A4-How-Websites-Talk-Notes.pdf",
+  bigIdea:
+    "The internet is not one big box — it is millions of computers joined together, asking and answering. A website is like a shop with an address (a URL). Wi-Fi and mobile data are the roads that carry the questions and answers.",
+  definitions: [
+    {
+      term: "Internet",
+      meaning: "Millions of computers all over the world, joined together, asking and answering.",
+    },
+    {
+      term: "Server",
+      meaning: "A computer that keeps websites and videos ready, and answers when someone asks.",
+    },
+    {
+      term: "URL",
+      meaning: "A website’s address — like mentr.com. You type it at the top of the screen.",
+    },
+    {
+      term: "Request",
+      meaning: "The message your device sends: “Please send me this page!”",
+    },
+  ],
+  panels: [
+    {
+      title: "Askers and answerers",
+      body: [
+        "Askers: your tablet, phone, or laptop.",
+        "Answerers: servers, far away, awake day and night.",
+        "Internet = asking and answering, again and again.",
+      ],
+    },
+    {
+      title: "A website is like a shop",
+      body: [
+        "Your home has an address so people can find it.",
+        "Every website has an address too — a URL.",
+        "mentr.com → the name (which shop) + the ending (.com).",
+      ],
+    },
+    {
+      title: "The roads",
+      body: [
+        "Wi-Fi → a road from a small box called a router.",
+        "Mobile data → a road through big towers.",
+        "Roads only carry messages. They don’t make the website.",
+      ],
+    },
+    {
+      title: "The trip of a web page",
+      body: [
+        "1. You type the address.",
+        "2. Your device asks (a request).",
+        "3. The server finds the page.",
+        "4. The server sends it back.",
+        "5. The page appears — usually in less than a second!",
+      ],
+    },
+  ],
+  remember: [
+    "Internet = many computers asking and answering.",
+    "Website = shop · URL = its address.",
+    "Wi-Fi and mobile data = roads.",
+    "Type → ask → page appears.",
+  ],
+  checkYourself: {
+    q: "When you open a website, what happens first: the page appears, or your device asks for it?",
+    a: "Your device asks first. Then the server answers and the page appears.",
+  },
+  dinoLine: "Chapter 4 done. You know the secret trip of a website — superb, champ!",
+};
+
 const NOTES_BY_MODULE: Record<string, LessonNotesDoc> = {
   A1: A1_LESSON_NOTES,
   A2: A2_LESSON_NOTES,
   A3: A3_LESSON_NOTES,
+  A4: A4_LESSON_NOTES,
 };
 
 export function getLessonNotes(moduleId: string): LessonNotesDoc | null {

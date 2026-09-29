@@ -1,0 +1,364 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 8.04,
+      "caption": "Hello, champ! Ready for Chapter 4?",
+      "text": "Hello, champ! Welcome back to Mentr Learn. Are you ready for Chapter four?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 8.04,
+      "end": 18.36,
+      "caption": "Ch 1: Computers \u00b7 Ch 2: Binary \u00b7 Ch 3: Devices",
+      "text": "So far, we learned what a computer is, how it thinks in ones and zeros, and the devices that bring information in and out.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 18.36,
+      "end": 23.26,
+      "caption": "Chapter 4 \u00b7 How Websites Talk to Each Other",
+      "text": "Today's lesson is: How Websites Talk to Each Other.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.26,
+      "end": 30.35,
+      "caption": "Say with me: Websites talk to each other!",
+      "text": "Say it with me\u2026 Websites\u2026 talk\u2026 to each other!",
+      "scene": "open",
+      "focus": "say"
+    },
+    {
+      "start": 30.35,
+      "end": 36.69,
+      "caption": "The secret trip of a website",
+      "text": "By the end, you will know the secret trip a website takes to reach your screen.",
+      "scene": "open",
+      "focus": "go"
+    },
+    {
+      "start": 36.69,
+      "end": 42.45,
+      "caption": "Where does the cartoon come from?",
+      "text": "When you open a cartoon on a tablet, where does that cartoon come from?",
+      "scene": "hook",
+      "focus": "ask"
+    },
+    {
+      "start": 42.45,
+      "end": 50.05,
+      "caption": "Is it hiding inside your tablet? Think!",
+      "text": "Is it hiding inside your tablet? Pause and think.",
+      "scene": "hook",
+      "focus": "guess"
+    },
+    {
+      "start": 50.05,
+      "end": 61.84,
+      "caption": "It comes from another computer, far away!",
+      "text": "Here is the surprise. Most of it is not inside your tablet at all. It comes from another computer, far, far away!",
+      "scene": "hook",
+      "focus": "answer"
+    },
+    {
+      "start": 61.84,
+      "end": 74.01,
+      "caption": "Internet = millions of computers joined together",
+      "text": "That is the internet. The internet is not one big box. It is millions of computers, all joined together, all over the world.",
+      "scene": "net",
+      "focus": "intro"
+    },
+    {
+      "start": 74.01,
+      "end": 83.3,
+      "caption": "ASKERS: your tablet, phone, laptop",
+      "text": "Some computers ask for things \u2014 like your tablet, phone, or laptop. Let's call them askers.",
+      "scene": "net",
+      "focus": "asker"
+    },
+    {
+      "start": 83.3,
+      "end": 93.72,
+      "caption": "ANSWERERS: servers keep websites ready",
+      "text": "Other computers answer. They keep websites and videos ready, all day and all night. They are called servers.",
+      "scene": "net",
+      "focus": "server"
+    },
+    {
+      "start": 93.72,
+      "end": 100.23,
+      "caption": "Internet = asking and answering",
+      "text": "So the internet is many computers asking and answering, again and again.",
+      "scene": "net",
+      "focus": "rule"
+    },
+    {
+      "start": 100.23,
+      "end": 105.27,
+      "caption": "Say: Ask\u2026 and answer!",
+      "text": "Say it with me: Ask\u2026 and answer!",
+      "scene": "net",
+      "focus": "say"
+    },
+    {
+      "start": 105.27,
+      "end": 112.33,
+      "caption": "A website is like a shop",
+      "text": "Now, what is a website? A website is like a shop on the internet.",
+      "scene": "shop",
+      "focus": "intro"
+    },
+    {
+      "start": 112.33,
+      "end": 120.3,
+      "caption": "Your home has an address",
+      "text": "Think of your home. It has an address, so a friend or a delivery person can find it.",
+      "scene": "shop",
+      "focus": "home"
+    },
+    {
+      "start": 120.3,
+      "end": 129.95,
+      "caption": "A website's address = URL",
+      "text": "Every website also has an address. It is called a URL. You type it at the top of the screen.",
+      "scene": "shop",
+      "focus": "url"
+    },
+    {
+      "start": 129.95,
+      "end": 139.58,
+      "caption": "mentr.com \u2192 the name + the ending",
+      "text": "For example, mentr dot com. The name tells us which shop, and dot com is like the end of the address.",
+      "scene": "shop",
+      "focus": "parts"
+    },
+    {
+      "start": 139.58,
+      "end": 147.77,
+      "caption": "Say: URL = website address",
+      "text": "Say it with me: U\u2026 R\u2026 L\u2026 means website address!",
+      "scene": "shop",
+      "focus": "say"
+    },
+    {
+      "start": 147.77,
+      "end": 156.94,
+      "caption": "Questions travel on invisible roads",
+      "text": "But how does your question travel so far? On roads! Not real roads \u2014 invisible ones.",
+      "scene": "roads",
+      "focus": "intro"
+    },
+    {
+      "start": 156.94,
+      "end": 164.82,
+      "caption": "Wi-Fi: a road from the router",
+      "text": "Wi-Fi is a road at home or at school. It comes from a small box called a router.",
+      "scene": "roads",
+      "focus": "wifi"
+    },
+    {
+      "start": 164.82,
+      "end": 173.56,
+      "caption": "Mobile data: a road through towers",
+      "text": "Mobile data is another road. It travels through big towers, so it works even outside your home.",
+      "scene": "roads",
+      "focus": "data"
+    },
+    {
+      "start": 173.56,
+      "end": 181.82,
+      "caption": "Roads only CARRY questions and answers",
+      "text": "Remember: roads do not make the website. They just carry the question, and the answer.",
+      "scene": "roads",
+      "focus": "carry"
+    },
+    {
+      "start": 181.82,
+      "end": 186.53,
+      "caption": "Follow one trip, step by step",
+      "text": "Now let's follow one full trip, step by step.",
+      "scene": "trip",
+      "focus": "intro"
+    },
+    {
+      "start": 186.53,
+      "end": 193.13,
+      "caption": "Step 1: You type the address",
+      "text": "Step one: you type the address, mentr dot com, and press enter.",
+      "scene": "trip",
+      "focus": "type"
+    },
+    {
+      "start": 193.13,
+      "end": 202.95,
+      "caption": "Step 2: Your device asks \u2014 a request",
+      "text": "Step two: your device sends a message on the road: Please send me this page! This message is called a request.",
+      "scene": "trip",
+      "focus": "ask"
+    },
+    {
+      "start": 202.95,
+      "end": 208.62,
+      "caption": "Step 3: The server finds the page",
+      "text": "Step three: the server gets the request, and finds the page.",
+      "scene": "trip",
+      "focus": "find"
+    },
+    {
+      "start": 208.62,
+      "end": 215.34,
+      "caption": "Step 4: The server sends it back",
+      "text": "Step four: the server sends the page back, on the road, to your device.",
+      "scene": "trip",
+      "focus": "reply"
+    },
+    {
+      "start": 215.34,
+      "end": 221.51,
+      "caption": "Step 5: The page appears!",
+      "text": "Step five: the page appears on your screen. Ta-da!",
+      "scene": "trip",
+      "focus": "appear"
+    },
+    {
+      "start": 221.51,
+      "end": 228.14,
+      "caption": "All in less than 1 second!",
+      "text": "And guess what? This whole trip usually takes less than one second!",
+      "scene": "trip",
+      "focus": "fast"
+    },
+    {
+      "start": 228.14,
+      "end": 234.22,
+      "caption": "Game: fix the mixed-up steps",
+      "text": "Game time! Here are three steps, all mixed up.",
+      "scene": "order",
+      "focus": "intro"
+    },
+    {
+      "start": 234.22,
+      "end": 249.18,
+      "caption": "Put them in order \u2014 think!",
+      "text": "Page appears. Type address. Device asks. Which comes first, second, and third? Think!",
+      "scene": "order",
+      "focus": "ask"
+    },
+    {
+      "start": 249.18,
+      "end": 260.66,
+      "caption": "Type address \u2192 Device asks \u2192 Page appears",
+      "text": "First, type the address. Second, your device asks. Third, the page appears. Well done!",
+      "scene": "order",
+      "focus": "answer"
+    },
+    {
+      "start": 260.66,
+      "end": 267.0,
+      "caption": "Watching a cartoon online",
+      "text": "One more real-life example. When you watch a cartoon online\u2026",
+      "scene": "video",
+      "focus": "intro"
+    },
+    {
+      "start": 267.0,
+      "end": 277.37,
+      "caption": "Ask for the next piece\u2026 answer\u2026 again!",
+      "text": "\u2026your tablet does not get the whole cartoon at once. It keeps asking for the next little piece, and the server keeps answering.",
+      "scene": "video",
+      "focus": "pieces"
+    },
+    {
+      "start": 277.37,
+      "end": 286.97,
+      "caption": "Slow road \u2192 spinning circle (buffering)",
+      "text": "If the road is slow, the pieces come late. That is why a video sometimes stops and shows a spinning circle!",
+      "scene": "video",
+      "focus": "slow"
+    },
+    {
+      "start": 286.97,
+      "end": 292.45,
+      "caption": "Practice check",
+      "text": "Practice check \u2014 the same kind of question you will see in the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 292.45,
+      "end": 302.73,
+      "caption": "First: page appears, or device asks?",
+      "text": "When you open a website, what happens first? The page appears, or your device asks for it?",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 302.73,
+      "end": 309.1,
+      "caption": "Hint: can a server answer before you ask?",
+      "text": "Think: can a server send a page before anyone asks for it?",
+      "scene": "checkpoint",
+      "focus": "hint"
+    },
+    {
+      "start": 309.1,
+      "end": 316.54,
+      "caption": "Answer: your device ASKS first",
+      "text": "Right! Your device asks first. Then the page appears.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 316.54,
+      "end": 323.74,
+      "caption": "Internet = computers asking & answering",
+      "text": "Let's lock it in. The internet is many computers, asking and answering.",
+      "scene": "recap",
+      "focus": "net"
+    },
+    {
+      "start": 323.74,
+      "end": 329.5,
+      "caption": "Website = shop \u00b7 Address = URL",
+      "text": "A website is like a shop, and its address is called a URL.",
+      "scene": "recap",
+      "focus": "url"
+    },
+    {
+      "start": 329.5,
+      "end": 335.38,
+      "caption": "Wi-Fi & mobile data = roads",
+      "text": "Wi-Fi and mobile data are roads that carry the questions and answers.",
+      "scene": "recap",
+      "focus": "roads"
+    },
+    {
+      "start": 335.38,
+      "end": 341.82,
+      "caption": "Type \u2192 Ask \u2192 Page appears",
+      "text": "And the trip: type the address, your device asks, the page appears.",
+      "scene": "recap",
+      "focus": "steps"
+    },
+    {
+      "start": 341.82,
+      "end": 350.39,
+      "caption": "Chapter 4 complete!",
+      "text": "Chapter four done! Now you know how websites talk. Superb work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 350.39,
+      "end": 359.49,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Next, a short quiz to practise. Tap Finish when you are ready. See you there, champ!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

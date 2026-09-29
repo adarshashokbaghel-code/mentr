@@ -1,7 +1,9 @@
 export type ArticleBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[]; ordered?: boolean }
-  | { type: "callout"; title: string; text: string };
+  | { type: "callout"; title: string; text: string }
+  | { type: "cta"; title: string; text: string; label: string; href: string }
+  | { type: "table"; caption: string; headers: string[]; rows: string[][] };
 
 export type ArticleSection = {
   heading: string;

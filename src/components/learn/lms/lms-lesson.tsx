@@ -26,7 +26,7 @@ import {
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
 
-const VIDEO_MODULES = new Set(["A1", "A2", "A3"]);
+const VIDEO_MODULES = new Set(["A1", "A2", "A3", "A4"]);
 
 const DIFF_STYLES: Record<LearnQuizDifficulty, string> = {
   easy: "bg-[#e6f7f4] text-[#0d9488]",

@@ -19,9 +19,14 @@ import asyncio
 import functools
 import json
 import math
+import multiprocessing
+import os
+import random
 import shutil
 import subprocess
 import sys
+import wave
+from array import array
 from pathlib import Path
 from typing import Any
 
@@ -73,6 +78,132 @@ def load_font(size: int, bold: bool = False) -> ImageFont.ImageFont:
             except OSError:
                 continue
     return ImageFont.load_default()
+
+
+@functools.lru_cache(maxsize=None)
+def scaled_font(path: str, size: int) -> ImageFont.ImageFont:
+    return ImageFont.truetype(path, size=size)
+
+
+class ScaledDraw:
+    """ImageDraw proxy: callers use 1x coordinates, drawing lands on a k-times canvas (supersampling)."""
+
+    def __init__(self, draw: ImageDraw.ImageDraw, k: int) -> None:
+        self._d = draw
+        self.k = k
+
+    def _xy(self, xy):
+        k = self.k
+        if isinstance(xy, (list, tuple)) and xy and isinstance(xy[0], (list, tuple)):
+            return [(p[0] * k, p[1] * k) for p in xy]
+        return [v * k for v in xy]
+
+    def _font(self, font):
+        path = getattr(font, "path", None)
+        if font is None or not path:
+            return font
+        return scaled_font(path, int(round(font.size * self.k)))
+
+    def _kw(self, kw: dict) -> dict:
+        if kw.get("width"):
+            kw["width"] = max(1, int(round(kw["width"] * self.k)))
+        if "radius" in kw:
+            kw["radius"] = kw["radius"] * self.k
+        return kw
+
+    def rectangle(self, xy, **kw):
+        self._d.rectangle(self._xy(xy), **self._kw(kw))
+
+    def rounded_rectangle(self, xy, radius=0, **kw):
+        kw["radius"] = radius
+        self._d.rounded_rectangle(self._xy(xy), **self._kw(kw))
+
+    def ellipse(self, xy, **kw):
+        self._d.ellipse(self._xy(xy), **self._kw(kw))
+
+    def line(self, xy, **kw):
+        self._d.line(self._xy(xy), **self._kw(kw))
+
+    def polygon(self, xy, **kw):
+        self._d.polygon(self._xy(xy), **self._kw(kw))
+
+    def arc(self, xy, start, end, **kw):
+        self._d.arc(self._xy(xy), start, end, **self._kw(kw))
+
+    def chord(self, xy, start, end, **kw):
+        self._d.chord(self._xy(xy), start, end, **self._kw(kw))
+
+    def pieslice(self, xy, start, end, **kw):
+        self._d.pieslice(self._xy(xy), start, end, **self._kw(kw))
+
+    def text(self, xy, text, fill=None, font=None, **kw):
+        self._d.text((xy[0] * self.k, xy[1] * self.k), text, fill=fill, font=self._font(font), **kw)
+
+    def textbbox(self, xy, text, font=None, **kw):
+        b = self._d.textbbox((xy[0] * self.k, xy[1] * self.k), text, font=self._font(font), **kw)
+        return tuple(v / self.k for v in b)
+
+
+SFX_RATE = 44100
+
+
+def _synth(dur: float, voices: list[tuple[float, float, float]], decay: float, vol: float,
+           sweep_to: float | None = None) -> list[float]:
+    """voices: (start_sec, freq, gain)."""
+    n = int(dur * SFX_RATE)
+    out = [0.0] * n
+    for start, freq, gain in voices:
+        s0 = int(start * SFX_RATE)
+        phase = 0.0
+        for i in range(s0, n):
+            t = (i - s0) / SFX_RATE
+            f = freq if sweep_to is None else freq + (sweep_to - freq) * min(1.0, t / dur)
+            phase += 2 * math.pi * f / SFX_RATE
+            env = math.exp(-t * decay) * min(1.0, t / 0.004)
+            out[i] += (math.sin(phase) + 0.22 * math.sin(2 * phase)) * env * gain * vol
+    return out
+
+
+@functools.lru_cache(maxsize=None)
+def sfx_samples(name: str) -> tuple[float, ...]:
+    if name == "pop":
+        return tuple(_synth(0.14, [(0, 520, 1.0)], 28, 0.55, sweep_to=900))
+    if name == "tick":
+        return tuple(_synth(0.06, [(0, 1800, 1.0)], 70, 0.3))
+    if name == "chime":
+        return tuple(_synth(1.0, [(0, 1046.5, 1.0), (0.1, 1318.5, 0.9)], 5, 0.32))
+    if name == "success":
+        notes = [(0, 523.3, 1.0), (0.08, 659.3, 0.9), (0.16, 784.0, 0.9), (0.24, 1046.5, 1.0)]
+        return tuple(_synth(1.1, notes, 6, 0.26))
+    if name == "whoosh":
+        rng = random.Random(7)
+        dur = 0.5
+        n = int(dur * SFX_RATE)
+        out, lp = [], 0.0
+        for i in range(n):
+            t = i / n
+            cutoff = 0.02 + 0.18 * math.sin(math.pi * t)
+            lp += cutoff * (rng.uniform(-1, 1) - lp)
+            out.append(lp * math.sin(math.pi * t) ** 1.5 * 1.6)
+        return tuple(out)
+    return ()
+
+
+def write_sfx_track(events: list[tuple[float, str, float]], total: float, out_path: Path) -> None:
+    n = int(total * SFX_RATE) + SFX_RATE
+    buf = array("h", bytes(2 * n))
+    for at, name, gain in events:
+        start = int(at * SFX_RATE)
+        for j, v in enumerate(sfx_samples(name)):
+            k = start + j
+            if k >= n:
+                break
+            buf[k] = max(-32767, min(32767, buf[k] + int(v * gain * 32767)))
+    with wave.open(str(out_path), "wb") as wf:
+        wf.setnchannels(1)
+        wf.setsampwidth(2)
+        wf.setframerate(SFX_RATE)
+        wf.writeframes(buf.tobytes())
 
 
 def media_duration(path: Path) -> float:
@@ -180,9 +311,10 @@ def paint_background(img: Image.Image, brand: dict[str, str], t: float) -> None:
         base = grad.resize((w, h), Image.Resampling.BILINEAR)
         glow = Image.new("RGBA", (w, h), (0, 0, 0, 0))
         gdraw = ImageDraw.Draw(glow)
-        gdraw.ellipse((w - 720, -220, w + 220, 520), fill=hex_rgb(brand["coral"]) + (36,))
-        gdraw.ellipse((-220, h - 520, 620, h + 220), fill=hex_rgb(brand["sage"]) + (28,))
-        glow = glow.filter(ImageFilter.GaussianBlur(90))
+        k = w / 1920
+        gdraw.ellipse((w - 720 * k, -220 * k, w + 220 * k, 520 * k), fill=hex_rgb(brand["coral"]) + (36,))
+        gdraw.ellipse((-220 * k, h - 520 * k, 620 * k, h + 220 * k), fill=hex_rgb(brand["sage"]) + (28,))
+        glow = glow.filter(ImageFilter.GaussianBlur(90 * k))
         base = Image.alpha_composite(base.convert("RGBA"), glow).convert("RGB")
         _BG_CACHE[key] = base
     # subtle vertical drift via crop/paste offset
@@ -1275,6 +1407,867 @@ def render_a3(draw: ImageDraw.ImageDraw, brand: dict[str, str], visual: str, foc
     return False
 
 
+# ---------------------------------------------------------------------------
+# A4 · How Websites Talk to Each Other — network kit + scenes
+# ---------------------------------------------------------------------------
+
+ROAD = (72, 118, 214)
+ROAD_SOFT = (226, 234, 250)
+SHADOW = (206, 197, 184)
+LED_ON = (80, 220, 160)
+
+
+def qbez(p0, p1, p2, t: float) -> tuple[float, float]:
+    u = 1 - t
+    return (u * u * p0[0] + 2 * u * t * p1[0] + t * t * p2[0],
+            u * u * p0[1] + 2 * u * t * p1[1] + t * t * p2[1])
+
+
+def draw_curve(draw, p0, p1, p2, color, width: int = 8, dashed: bool = False, phase: float = 0.0) -> None:
+    pts = [qbez(p0, p1, p2, i / 80) for i in range(81)]
+    if not dashed:
+        draw.line(pts, fill=color, width=width, joint="curve")
+        return
+    off = int(phase) % 4
+    for i in range(80):
+        if ((i + off) // 2) % 2 == 0:
+            draw.line((pts[i], pts[i + 1]), fill=color, width=width)
+
+
+def draw_server(draw, cx: float, cy: float, s: float, t: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    x0, y0, x1, y1 = cx - S(80), cy - S(130), cx + S(80), cy + S(130)
+    draw.rounded_rectangle((x0 + S(8), y0 + S(10), x1 + S(8), y1 + S(10)), radius=S(18), fill=SHADOW)
+    draw.rounded_rectangle((x0, y0, x1, y1), radius=S(18), fill=DEV_DARK)
+    for i in range(3):
+        uy = y0 + S(22) + i * S(78)
+        draw.rounded_rectangle((x0 + S(16), uy, x1 - S(16), uy + S(58)), radius=S(10), fill=DEV_MID)
+        for j in range(3):
+            lx = x0 + S(36) + j * S(22)
+            on = (int(t * 14 + i * 2 + j * 3) % 4 != 0) if t > 0 else j == 0
+            draw.ellipse((lx - S(6), uy + S(23), lx + S(6), uy + S(35)), fill=LED_ON if on else DEV_DEEP)
+        draw.rounded_rectangle((x1 - S(70), uy + S(24), x1 - S(28), uy + S(34)), radius=S(4), fill=DEV_DEEP)
+
+
+def draw_router(draw, cx: float, cy: float, s: float, t: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    for sx in (-1, 1):
+        draw.line((cx + sx * S(78), cy - S(20), cx + sx * S(98), cy - S(112)), fill=DEV_DARK, width=max(2, int(S(10))))
+        draw.ellipse((cx + sx * S(98) - S(9), cy - S(121), cx + sx * S(98) + S(9), cy - S(103)), fill=DEV_DARK)
+    draw.rounded_rectangle((cx - S(124) + S(6), cy - S(34) + S(8), cx + S(124) + S(6), cy + S(40) + S(8)),
+                           radius=S(20), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(124), cy - S(34), cx + S(124), cy + S(40)), radius=S(20), fill=DEV_DARK)
+    for j in range(4):
+        on = (int(t * 10 + j) % 3 != 0) if t > 0 else True
+        lx = cx - S(70) + j * S(34)
+        draw.ellipse((lx - S(7), cy - S(4), lx + S(7), cy + S(10)), fill=LED_ON if on else DEV_DEEP)
+    count = (1 + int(t * 5) % 3) if t > 0 else 3
+    for i in range(count):
+        r = S(46) + i * S(36)
+        draw.arc((cx - r, cy - S(60) - r, cx + r, cy - S(60) + r), 228, 312, fill=ROAD, width=max(3, int(S(10))))
+
+
+def draw_tower(draw, cx: float, cy: float, s: float, t: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    top_y, base_y = cy - S(170), cy + S(140)
+    half_base = S(90)
+
+    def half_at(y: float) -> float:
+        return half_base * (y - top_y) / (base_y - top_y)
+
+    draw.line([(cx - half_base, base_y), (cx, top_y), (cx + half_base, base_y)], fill=DEV_DARK,
+              width=max(3, int(S(11))), joint="curve")
+    levels = [top_y + (base_y - top_y) * k / 5 for k in range(1, 6)]
+    for k, y in enumerate(levels):
+        h = half_at(y)
+        draw.line((cx - h, y, cx + h, y), fill=DEV_DARK, width=max(2, int(S(6))))
+        if k > 0:
+            py = levels[k - 1]
+            ph = half_at(py)
+            draw.line((cx - ph, py, cx + h, y), fill=DEV_MID, width=max(2, int(S(4))))
+            draw.line((cx + ph, py, cx - h, y), fill=DEV_MID, width=max(2, int(S(4))))
+    draw.ellipse((cx - S(16), top_y - S(16), cx + S(16), top_y + S(16)), fill=hex_rgb("#FF6A1A"))
+    shift = (t * 2.5) % 1.0 if t > 0 else 0.4
+    for i in range(3):
+        r = S(40) + (i + shift) * S(36)
+        for a0, a1 in ((-38, 38), (142, 218)):
+            draw.arc((cx - r, top_y - r, cx + r, top_y + r), a0, a1, fill=ROAD, width=max(3, int(S(8))))
+
+
+def draw_browser(draw, cx: float, cy: float, s: float, brand: dict[str, str], url: str = "www.mentr.com",
+                 typed: float = 1.0, content: float = 1.0, t: float = 0.0, blank_q: bool = False) -> None:
+    def S(v: float) -> float:
+        return v * s
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    line = hex_rgb(brand["line"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    W, H = S(320), S(215)
+    x0, y0, x1, y1 = cx - W, cy - H, cx + W, cy + H
+    bar = (241, 236, 229)
+    draw.rounded_rectangle((x0 + S(10), y0 + S(12), x1 + S(10), y1 + S(12)), radius=S(24), fill=SHADOW)
+    draw.rounded_rectangle((x0, y0, x1, y1), radius=S(24), fill=panel, outline=ink, width=max(2, int(S(5))))
+    draw.rounded_rectangle((x0 + S(4), y0 + S(4), x1 - S(4), y0 + S(80)), radius=S(20), fill=bar)
+    draw.rectangle((x0 + S(4), y0 + S(50), x1 - S(4), y0 + S(80)), fill=bar)
+    draw.line((x0 + S(3), y0 + S(80), x1 - S(3), y0 + S(80)), fill=line, width=max(2, int(S(3))))
+    for i, col in enumerate((coral, (255, 190, 70), sage)):
+        dx = x0 + S(34) + i * S(28)
+        draw.ellipse((dx - S(9), y0 + S(33), dx + S(9), y0 + S(51)), fill=col)
+    ux0 = x0 + S(130)
+    draw.rounded_rectangle((ux0, y0 + S(18), x1 - S(28), y0 + S(64)), radius=S(23), fill=panel, outline=line,
+                           width=max(1, int(S(3))))
+    draw.ellipse((ux0 + S(14), y0 + S(32), ux0 + S(32), y0 + S(50)), fill=sage)
+    font = load_font(max(10, int(S(26))), bold=True)
+    shown = url[: int(round(len(url) * clamp01(typed)))]
+    tx, ty = ux0 + S(44), y0 + S(26)
+    draw.text((tx, ty), shown, fill=ink, font=font)
+    if typed < 1.0 or (t > 0 and content <= 0):
+        bb = draw.textbbox((tx, ty), shown or "|", font=font)
+        cx_cur = bb[2] + S(4) if shown else tx
+        if int(t * 6) % 2 == 0 or typed < 1.0:
+            draw.line((cx_cur, y0 + S(28), cx_cur, y0 + S(56)), fill=coral, width=max(2, int(S(4))))
+    if blank_q:
+        text_at(draw, "?", cx, y0 + S(170), load_font(max(12, int(S(130))), bold=True), line)
+        return
+    c = clamp01(content)
+    if c <= 0:
+        return
+    if c > 0.0:
+        draw.rounded_rectangle((x0 + S(28), y0 + S(100), x1 - S(28), y0 + S(210)), radius=S(16),
+                               fill=hex_rgb(brand["coralSoft"]))
+        draw.ellipse((x0 + S(50), y0 + S(118), x0 + S(124), y0 + S(192)), fill=sage)
+        draw.ellipse((x0 + S(68), y0 + S(142), x0 + S(80), y0 + S(154)), fill=panel)
+        draw.ellipse((x0 + S(94), y0 + S(142), x0 + S(106), y0 + S(154)), fill=panel)
+        draw.rounded_rectangle((x0 + S(150), y0 + S(128), x0 + S(430), y0 + S(146)), radius=S(9), fill=ink)
+        draw.rounded_rectangle((x0 + S(150), y0 + S(162), x0 + S(360), y0 + S(176)), radius=S(7), fill=DEV_MID)
+    for i, col in enumerate((coral, sage, BOTH_COLOR)):
+        if c > 0.25 + i * 0.15:
+            bw = (2 * W - S(56) - S(40)) / 3
+            bx = x0 + S(28) + i * (bw + S(20))
+            draw.rounded_rectangle((bx, y0 + S(230), bx + bw, y0 + S(320)), radius=S(14), fill=col)
+    if c > 0.8:
+        draw.rounded_rectangle((x0 + S(28), y0 + S(344), x1 - S(120), y0 + S(360)), radius=S(8), fill=line)
+        draw.rounded_rectangle((x0 + S(28), y0 + S(374), x1 - S(240), y0 + S(390)), radius=S(8), fill=line)
+
+
+def draw_shop(draw, cx: float, cy: float, s: float, brand: dict[str, str], name: str = "TOY SHOP") -> None:
+    def S(v: float) -> float:
+        return v * s
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    bx0, by0, bx1, by1 = cx - S(200), cy - S(90), cx + S(200), cy + S(170)
+    draw.rounded_rectangle((bx0 + S(10), by0 + S(12), bx1 + S(10), by1 + S(12)), radius=S(12), fill=SHADOW)
+    draw.rounded_rectangle((bx0, by0, bx1, by1), radius=S(12), fill=panel, outline=ink, width=max(2, int(S(5))))
+    draw.rounded_rectangle((cx - S(170), cy - S(196), cx + S(170), cy - S(122)), radius=S(14), fill=ink)
+    text_at(draw, name, cx, cy - S(182), load_font(max(10, int(S(40))), bold=True), panel)
+    stripes = 8
+    sw = (2 * S(220)) / stripes
+    ax0 = cx - S(220)
+    for i in range(stripes):
+        col = coral if i % 2 == 0 else panel
+        draw.rectangle((ax0 + i * sw, cy - S(118), ax0 + (i + 1) * sw, cy - S(70)), fill=col)
+        draw.chord((ax0 + i * sw, cy - S(96), ax0 + (i + 1) * sw, cy - S(48)), 0, 180, fill=col)
+    draw.line((ax0, cy - S(118), ax0 + 2 * S(220), cy - S(118)), fill=ink, width=max(2, int(S(4))))
+    draw.rectangle((cx - S(172), cy - S(24), cx - S(24), cy + S(96)), fill=DEV_SCREEN, outline=ink, width=max(2, int(S(4))))
+    for i, col in enumerate((coral, sage, BOTH_COLOR)):
+        tx = cx - S(146) + i * S(46)
+        draw.ellipse((tx, cy + S(50), tx + S(34), cy + S(84)), fill=col)
+    draw.rectangle((cx + S(36), cy - S(24), cx + S(156), cy + S(170)), fill=sage, outline=ink, width=max(2, int(S(4))))
+    draw.ellipse((cx + S(130), cy + S(70), cx + S(144), cy + S(84)), fill=panel)
+
+
+def draw_house(draw, cx: float, cy: float, s: float, brand: dict[str, str]) -> None:
+    def S(v: float) -> float:
+        return v * s
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    draw.rectangle((cx - S(170) + S(10), cy - S(40) + S(12), cx + S(170) + S(10), cy + S(170) + S(12)), fill=SHADOW)
+    draw.rectangle((cx - S(170), cy - S(40), cx + S(170), cy + S(170)), fill=panel, outline=ink, width=max(2, int(S(5))))
+    draw.polygon([(cx - S(215), cy - S(36)), (cx, cy - S(200)), (cx + S(215), cy - S(36))], fill=coral)
+    draw.rectangle((cx + S(100), cy - S(170), cx + S(140), cy - S(100)), fill=DEV_DARK)
+    draw.rectangle((cx - S(38), cy + S(50), cx + S(38), cy + S(170)), fill=sage, outline=ink, width=max(2, int(S(4))))
+    for wx in (cx - S(130), cx + S(66)):
+        draw.rectangle((wx, cy + S(4), wx + S(64), cy + S(64)), fill=DEV_SCREEN, outline=ink, width=max(2, int(S(4))))
+        draw.line((wx + S(32), cy + S(4), wx + S(32), cy + S(64)), fill=ink, width=max(1, int(S(3))))
+
+
+def draw_envelope(draw, cx: float, cy: float, s: float, color, panel=(255, 255, 255)) -> None:
+    def S(v: float) -> float:
+        return v * s
+    w, h = S(70), S(46)
+    draw.rounded_rectangle((cx - w + S(5), cy - h + S(6), cx + w + S(5), cy + h + S(6)), radius=S(8), fill=SHADOW)
+    draw.rounded_rectangle((cx - w, cy - h, cx + w, cy + h), radius=S(8), fill=panel, outline=color,
+                           width=max(2, int(S(6))))
+    draw.line([(cx - w + S(4), cy - h + S(4)), (cx, cy + S(8)), (cx + w - S(4), cy - h + S(4))], fill=color,
+              width=max(2, int(S(6))), joint="curve")
+
+
+def draw_page(draw, cx: float, cy: float, s: float, brand: dict[str, str]) -> None:
+    def S(v: float) -> float:
+        return v * s
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    w, h = S(60), S(78)
+    pts = [(cx - w, cy - h), (cx + w - S(24), cy - h), (cx + w, cy - h + S(24)), (cx + w, cy + h), (cx - w, cy + h)]
+    draw.polygon([(x + S(5), y + S(6)) for x, y in pts], fill=SHADOW)
+    draw.polygon(pts, fill=panel, outline=ink, width=max(2, int(S(5))))
+    draw.rectangle((cx - w + S(14), cy - h + S(18), cx + w - S(30), cy - S(10)), fill=hex_rgb(brand["sageSoft"]))
+    draw.ellipse((cx - w + S(22), cy - h + S(26), cx - w + S(46), cy - h + S(50)), fill=coral)
+    draw.polygon([(cx - w + S(14), cy - S(10)), (cx - S(10), cy - S(46)), (cx + S(14), cy - S(10))], fill=sage)
+    for i in range(3):
+        ly = cy + S(12) + i * S(20)
+        draw.rounded_rectangle((cx - w + S(14), ly, cx + w - S(14) - i * S(18), ly + S(9)), radius=S(4), fill=DEV_MID)
+
+
+def draw_stopwatch(draw, cx: float, cy: float, r: float, t: float, brand: dict[str, str]) -> None:
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    draw.rounded_rectangle((cx - r * 0.18, cy - r * 1.32, cx + r * 0.18, cy - r * 1.08), radius=r * 0.06, fill=ink)
+    draw.ellipse((cx - r + 10, cy - r + 12, cx + r + 10, cy + r + 12), fill=SHADOW)
+    draw.ellipse((cx - r, cy - r, cx + r, cy + r), fill=panel, outline=ink, width=max(4, int(r * 0.09)))
+    sweep = (t * 360 * 2.2) % 360
+    draw.pieslice((cx - r * 0.82, cy - r * 0.82, cx + r * 0.82, cy + r * 0.82), -90, -90 + sweep,
+                  fill=hex_rgb(brand["coralSoft"]))
+    for k in range(12):
+        a = k * math.tau / 12
+        draw.line((cx + math.cos(a) * r * 0.72, cy + math.sin(a) * r * 0.72,
+                   cx + math.cos(a) * r * 0.84, cy + math.sin(a) * r * 0.84), fill=ink, width=max(2, int(r * 0.04)))
+    a = math.radians(sweep - 90)
+    draw.line((cx, cy, cx + math.cos(a) * r * 0.7, cy + math.sin(a) * r * 0.7), fill=coral, width=max(3, int(r * 0.07)))
+    draw.ellipse((cx - r * 0.08, cy - r * 0.08, cx + r * 0.08, cy + r * 0.08), fill=ink)
+
+
+def draw_spinner(draw, cx: float, cy: float, r: float, t: float, color) -> None:
+    base = (120, 128, 140)
+    for i in range(8):
+        a = i * math.tau / 8 + t * math.tau * 2.5
+        k = i / 7
+        col = tuple(int(lerp(base[j], color[j], k)) for j in range(3))
+        dr = r * (0.12 + 0.08 * k)
+        x, y = cx + math.cos(a) * r, cy + math.sin(a) * r
+        draw.ellipse((x - dr, y - dr, x + dr, y + dr), fill=col)
+
+
+def draw_snail(draw, cx: float, cy: float, s: float, brand: dict[str, str]) -> None:
+    def S(v: float) -> float:
+        return v * s
+    coral = hex_rgb(brand["coral"])
+    panel = hex_rgb(brand["panel"])
+    ink = hex_rgb(brand["ink"])
+    body = (150, 196, 120)
+    draw.rounded_rectangle((cx - S(70), cy, cx + S(58), cy + S(26)), radius=S(13), fill=body)
+    draw.ellipse((cx + S(34), cy - S(22), cx + S(70), cy + S(14)), fill=body)
+    for sx in (S(44), S(60)):
+        draw.line((cx + sx, cy - S(16), cx + sx + S(6), cy - S(44)), fill=body, width=max(2, int(S(5))))
+        draw.ellipse((cx + sx + S(1), cy - S(52), cx + sx + S(13), cy - S(40)), fill=ink)
+    draw.ellipse((cx - S(52), cy - S(62), cx + S(22), cy + S(10)), fill=coral)
+    for i, rr in enumerate((S(26), S(15), S(6))):
+        draw.arc((cx - S(15) - rr, cy - S(26) - rr, cx - S(15) + rr, cy - S(26) + rr), 0, 300, fill=panel,
+                 width=max(2, int(S(5))))
+
+
+def draw_vtablet(draw, cx: float, cy: float, s: float, brand: dict[str, str], t: float,
+                 playing: bool = True, bar: float = 0.5) -> None:
+    def S(v: float) -> float:
+        return v * s
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    W, H = S(240), S(155)
+    draw.rounded_rectangle((cx - W + S(8), cy - H + S(10), cx + W + S(8), cy + H + S(10)), radius=S(28), fill=SHADOW)
+    draw.rounded_rectangle((cx - W, cy - H, cx + W, cy + H), radius=S(28), fill=DEV_DARK)
+    ix0, iy0, ix1, iy1 = cx - W + S(18), cy - H + S(18), cx + W - S(18), cy + H - S(18)
+    if playing:
+        draw.rectangle((ix0, iy0, ix1, iy1), fill=DEV_SCREEN)
+        draw.ellipse((ix1 - S(90), iy0 + S(20), ix1 - S(40), iy0 + S(70)), fill=coral)
+        draw.polygon([(ix0, iy1), (ix0 + S(120), iy0 + S(120)), (ix0 + S(240), iy1)], fill=sage)
+        draw.polygon([(ix0 + S(160), iy1), (ix0 + S(300), iy0 + S(140)), (ix1, iy1)], fill=(20, 150, 136))
+        hop = abs(math.sin(t * math.pi * 6)) * S(40)
+        mx, my = cx - S(20), iy1 - S(70) - hop
+        draw.ellipse((mx - S(34), my - S(34), mx + S(34), my + S(34)), fill=BOTH_COLOR)
+        draw.ellipse((mx - S(16), my - S(10), mx - S(4), my + S(2)), fill=(255, 255, 255))
+        draw.ellipse((mx + S(4), my - S(10), mx + S(16), my + S(2)), fill=(255, 255, 255))
+    else:
+        draw.rectangle((ix0, iy0, ix1, iy1), fill=(62, 70, 86))
+        draw_spinner(draw, cx, cy - S(12), S(46), t, (255, 255, 255))
+    by = iy1 - S(16)
+    draw.rounded_rectangle((ix0 + S(20), by, ix1 - S(20), by + S(8)), radius=S(4), fill=(200, 205, 215))
+    draw.rounded_rectangle((ix0 + S(20), by, ix0 + S(20) + (ix1 - ix0 - S(40)) * clamp01(bar), by + S(8)),
+                           radius=S(4), fill=coral)
+
+
+NET_NODES = [
+    (0.06, 0.30), (0.20, 0.10), (0.18, 0.62), (0.34, 0.38), (0.36, 0.86), (0.50, 0.12),
+    (0.53, 0.60), (0.66, 0.30), (0.70, 0.84), (0.84, 0.10), (0.86, 0.52), (0.96, 0.84),
+]
+NET_EDGES = [
+    (0, 1), (0, 3), (1, 3), (1, 5), (2, 3), (0, 2), (2, 4), (3, 6), (4, 6), (5, 7), (3, 5),
+    (6, 7), (6, 8), (7, 9), (7, 10), (8, 10), (8, 11), (9, 10), (10, 11), (4, 8),
+]
+NET_ASKERS = {0, 2, 4, 8, 11}
+NET_SERVERS = {5, 7, 10}
+
+
+def draw_network(draw, box: tuple[float, float, float, float], t: float, brand: dict[str, str],
+                 grow: float = 1.0, highlight: str | None = None, pulses: bool = True, icon: float = 1.0) -> None:
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    coral_soft = hex_rgb(brand["coralSoft"])
+    sage_soft = hex_rgb(brand["sageSoft"])
+    x0, y0, x1, y1 = box
+    pts = [(x0 + (x1 - x0) * nx, y0 + (y1 - y0) * ny) for nx, ny in NET_NODES]
+    edge_col = (214, 204, 190)
+    n_edges = int(len(NET_EDGES) * clamp01(grow * 1.3))
+    for a, b in NET_EDGES[:n_edges]:
+        draw.line((pts[a], pts[b]), fill=edge_col, width=6)
+    if pulses and grow >= 0.7:
+        for i, (a, b) in enumerate(NET_EDGES):
+            p = (t * 1.6 + i * 0.37) % 1.0
+            if i % 2:
+                a, b = b, a
+            col = coral if a in NET_ASKERS or (b in NET_SERVERS and i % 3 == 0) else sage
+            px = pts[a][0] + (pts[b][0] - pts[a][0]) * p
+            py = pts[a][1] + (pts[b][1] - pts[a][1]) * p
+            draw.ellipse((px - 8, py - 8, px + 8, py + 8), fill=col)
+    for i, (px, py) in enumerate(pts):
+        a = stagger(grow, i, step=0.05, speed=4)
+        if a <= 0:
+            continue
+        sc = icon * (0.7 + 0.3 * a)
+        if i in NET_ASKERS:
+            if highlight == "asker":
+                r = 70 * sc + 6 * math.sin(t * 8 + i)
+                draw.ellipse((px - r, py - r, px + r, py + r), fill=coral_soft, outline=coral, width=4)
+            draw_device(draw, "touch", px, py, 0.26 * sc, brand)
+        elif i in NET_SERVERS:
+            if highlight == "server":
+                r = 74 * sc + 6 * math.sin(t * 8 + i)
+                draw.ellipse((px - r, py - r, px + r, py + r), fill=sage_soft, outline=sage, width=4)
+            draw_server(draw, px, py, 0.3 * sc, t)
+        else:
+            r = 16 * sc
+            draw.ellipse((px - r, py - r, px + r, py + r), fill=DEV_MID)
+            draw.ellipse((px - r * 0.45, py - r * 0.45, px + r * 0.45, py + r * 0.45), fill=(230, 226, 220))
+
+
+def draw_road(draw, x0: float, x1: float, y: float, h: float, t: float, faint: bool = False) -> None:
+    fill = ROAD_SOFT if faint else (214, 218, 228)
+    draw.rounded_rectangle((x0, y - h / 2, x1, y + h / 2), radius=h / 2, fill=fill)
+    draw_dashed(draw, x0 + h / 2, y, x1 - h / 2, y, (255, 255, 255), width=6, dash=30, gap=22, phase=t * 260)
+
+
+def render_a4(draw, brand: dict[str, str], visual: str, focus: str, progress: float, w: int, h: int) -> bool:
+    ink = hex_rgb(brand["ink"])
+    muted = hex_rgb(brand["muted"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    panel = hex_rgb(brand["panel"])
+    line = hex_rgb(brand["line"])
+    coral_soft = hex_rgb(brand["coralSoft"])
+    sage_soft = hex_rgb(brand["sageSoft"])
+    appear = ease_out_cubic(min(1.0, progress * 2.2))
+    bounce = int(10 * math.sin(progress * math.pi * 2))
+    pulse = 0.5 + 0.5 * math.sin(progress * math.pi * 6)
+    lift = int((1 - appear) * 40)
+    cx = w / 2
+
+    def stars_around(y: float, spread: float, n: int = 6) -> None:
+        for i in range(n):
+            side = -1 if i % 2 == 0 else 1
+            sx = cx + side * (spread + 70 * (i // 2))
+            sy = y + 80 * (i // 2) + 14 * math.sin(progress * 8 + i)
+            draw_star(draw, sx, sy, 20 + 6 * pulse, [coral, sage, BOTH_COLOR][i % 3], rot=progress * 3 + i)
+
+    def trip_move(p: float, x_from: float, x_to: float) -> float:
+        return x_from + (x_to - x_from) * ease_in_out(p)
+
+    if visual == "a4-welcome":
+        if focus == "hello":
+            draw_mascot(draw, int(cx), 420, 110, sage, panel, bounce)
+            text_at(draw, "Welcome back, champ!", cx, 590, load_font(52, bold=True), ink)
+            pill(draw, cx, 680, "Chapter 4 today", coral, size=32)
+            return True
+        if focus == "bridge":
+            cards = [("CHAPTER 1", "Computers", coral, "computer"), ("CHAPTER 2", "Binary 1 · 0", sage, None),
+                     ("CHAPTER 3", "Devices", BOTH_COLOR, "keyboard")]
+            for i, (k, v, acc, dev) in enumerate(cards):
+                a = stagger(progress, i, step=0.15)
+                if a <= 0:
+                    continue
+                x = 190 + i * 530
+                y = 280 + int((1 - a) * 60)
+                shadow_card(draw, (x, y, x + 480, y + 330), brand, accent=acc)
+                draw.text((x + 40, y + 70), k, fill=acc, font=load_font(28, bold=True))
+                draw.text((x + 40, y + 114), v, fill=ink, font=load_font(46, bold=True))
+                draw_check(draw, x + 420, y + 88, 24, acc)
+                if dev:
+                    draw_device(draw, dev, x + 240, y + 250, 0.42, brand)
+                else:
+                    text_at(draw, "1 0 1 1", x + 240, y + 210, load_font(56, bold=True), sage)
+            a = stagger(progress, 4, step=0.14)
+            if a > 0:
+                pill(draw, cx, 680 + int((1 - a) * 30), "Today → Chapter 4", ink, size=36)
+            return True
+        if focus == "chapter":
+            shadow_card(draw, (260, 250 + lift, w - 260, 540 + lift), brand, radius=40, accent=coral)
+            text_at(draw, "CHAPTER 4 OF 5", cx, 312 + lift, load_font(32, bold=True), coral)
+            text_at(draw, "How Websites Talk", cx, 370 + lift, load_font(80, bold=True), ink)
+            text_at(draw, "to Each Other", cx, 462 + lift, load_font(44, bold=True), muted)
+            a = stagger(progress, 2)
+            if a > 0:
+                draw_device(draw, "touch", 640, 730, 0.5, brand)
+                draw_dashed(draw, 720, 730, 1200, 730, ROAD, width=8, phase=progress * 300)
+                draw_server(draw, 1280, 730, 0.5, progress)
+                draw_envelope(draw, 720 + 480 * ((progress * 1.5) % 1.0), 700, 0.45, coral)
+            return True
+        if focus == "say":
+            words = [("Websites…", coral), ("talk…", ink), ("to each other!", sage)]
+            xs = [470, 900, 1400]
+            for i, ((wd, col), x) in enumerate(zip(words, xs)):
+                a = stagger(progress, i, step=0.18, speed=4)
+                if a <= 0:
+                    continue
+                text_at(draw, wd, x, 420 + int((1 - a) * 40), load_font(int(60 + 14 * a), bold=True), col)
+            text_at(draw, "Say it out loud with me!", cx, 620, load_font(36, bold=True), coral)
+            return True
+        # go
+        text_at(draw, "The secret trip of a website", cx, 260, load_font(56, bold=True), ink)
+        p0, p1, p2 = (640, 600), (cx, 380), (1280, 600)
+        draw_curve(draw, p0, p1, p2, ROAD, width=8, dashed=True, phase=progress * 40)
+        draw_device(draw, "touch", 480, 620, 0.9, brand)
+        draw_server(draw, 1440, 620, 0.9, progress)
+        p = (progress * 1.2) % 1.0
+        ex, ey = qbez(p0, p1, p2, p)
+        draw_envelope(draw, ex, ey, 0.6, coral)
+        px, py = qbez(p0, p1, p2, 1 - ((progress * 1.2 + 0.5) % 1.0))
+        draw_page(draw, px, py, 0.5, brand)
+        text_at(draw, "You", 480, 790, load_font(34, bold=True), ink)
+        text_at(draw, "Far-away computer", 1440, 790, load_font(34, bold=True), ink)
+        return True
+
+    if visual == "a4-hook":
+        if focus == "ask":
+            draw.ellipse((cx - 250 - 260, 570 - 260, cx - 250 + 260, 570 + 260), fill=coral_soft)
+            draw_device(draw, "touch", cx - 250, 570, 1.35, brand, t=progress)
+            size = int(200 + 20 * pulse)
+            text_at(draw, "?", cx + 300, 440, load_font(size, bold=True), coral)
+            text_at(draw, "Where does it come from?", cx + 300, 720, load_font(40, bold=True), ink)
+            return True
+        if focus == "guess":
+            draw_device(draw, "touch", cx - 360, 590, 1.2, brand)
+            for i, (bx, by, r) in enumerate(((cx - 180, 420, 16), (cx - 120, 370, 24))):
+                draw.ellipse((bx - r, by - r, bx + r, by + r), fill=panel, outline=line, width=4)
+            bx0, by0, bx1, by1 = cx - 80, 240, cx + 560, 480
+            draw.ellipse((bx0 + 10, by0 + 12, bx1 + 10, by1 + 12), fill=SHADOW)
+            draw.ellipse((bx0, by0, bx1, by1), fill=panel, outline=line, width=5)
+            text_at(draw, "Hiding inside", cx + 240, 310, load_font(48, bold=True), ink)
+            text_at(draw, "my tablet?", cx + 240, 372, load_font(48, bold=True), coral)
+            n = max(1, 3 - int(progress * 3))
+            pill(draw, cx + 240, 620, f"Think…  {n}", coral, size=40)
+            return True
+        # answer
+        for i, (hx, hh, col) in enumerate(((760, 90, (208, 232, 226)), (980, 130, (196, 226, 218)), (1180, 80, (208, 232, 226)))):
+            draw.polygon([(hx - 200, 720), (hx, 720 - hh), (hx + 200, 720)], fill=col)
+        p0, p1, p2 = (520, 560), (cx, 260), (1400, 560)
+        draw_curve(draw, p0, p1, p2, ROAD, width=9, dashed=True, phase=progress * 50)
+        draw_device(draw, "touch", 380, 590, 1.0, brand, t=progress)
+        a = stagger(progress, 1, step=0.2)
+        if a > 0:
+            draw.ellipse((1560 - 190, 580 - 190, 1560 + 190, 580 + 190), fill=sage_soft)
+            draw_server(draw, 1560, 580, 1.0 * (0.8 + 0.2 * a), progress)
+            text_at(draw, "Another computer", 1560, 770, load_font(34, bold=True), ink)
+            pp = (progress * 1.1) % 1.0
+            px, py = qbez(p0, p1, p2, 1 - pp)
+            draw_page(draw, px, py, 0.6, brand)
+            pill(draw, cx, 250, "far, far away!", ROAD, size=34)
+        return True
+
+    if visual == "a4-net":
+        if focus == "intro":
+            gx, gy, gr = cx, 560, 300
+            draw.ellipse((gx - gr, gy - gr, gx + gr, gy + gr), fill=(232, 243, 240))
+            for k in (0.4, 0.75):
+                draw.ellipse((gx - gr * k, gy - gr, gx + gr * k, gy + gr), outline=(206, 228, 222), width=4)
+            draw.line((gx - gr, gy, gx + gr, gy), fill=(206, 228, 222), width=4)
+            draw_network(draw, (220, 270, w - 220, 840), progress, brand, grow=clamp01(progress * 1.4))
+            return True
+        if focus in ("asker", "server"):
+            is_a = focus == "asker"
+            col = coral if is_a else sage
+            shadow_card(draw, (150, 250 + lift, 760, 860 + lift), brand, radius=36, accent=col)
+            text_at(draw, "ASKERS" if is_a else "SERVERS", 455, 310 + lift, load_font(60, bold=True), col)
+            text_at(draw, "ask for things" if is_a else "answer, day & night", 455, 390 + lift, load_font(34, bold=True), ink)
+            if is_a:
+                draw_device(draw, "touch", 330, 600 + lift, 0.62, brand, t=progress)
+                draw_device(draw, "laptop", 560, 620 + lift, 0.5, brand, t=progress)
+                text_at(draw, "tablet · phone · laptop", 455, 760 + lift, load_font(30), muted)
+            else:
+                draw.ellipse((455 - 150, 610 + lift - 150, 455 + 150, 610 + lift + 150), fill=sage_soft)
+                draw_server(draw, 455, 610 + lift, 0.95, progress)
+                text_at(draw, "keep websites ready", 455, 780 + lift, load_font(30), muted)
+            draw_network(draw, (860, 290, 1730, 830), progress, brand, grow=1.0, highlight=focus, icon=0.9)
+            return True
+        if focus == "rule":
+            draw_network(draw, (220, 300, w - 220, 840), progress, brand, grow=1.0, icon=1.05)
+            pill(draw, cx - 190, 238, "ASK", coral, size=34)
+            text_at(draw, "&", cx, 238, load_font(44, bold=True), ink)
+            pill(draw, cx + 210, 238, "ANSWER", sage, size=34)
+            return True
+        a1, a2 = stagger(progress, 0, step=0.3), stagger(progress, 1, step=0.3)
+        if a1 > 0:
+            pill(draw, cx, 330 + int((1 - a1) * 40), "Ask…", coral, size=70)
+        if a2 > 0:
+            pill(draw, cx, 520 + int((1 - a2) * 40), "…and answer!", sage, size=70)
+        text_at(draw, "Say it with me!", cx, 740, load_font(36, bold=True), muted)
+        return True
+
+    if visual == "a4-shop":
+        if focus == "intro":
+            a = stagger(progress, 0)
+            draw_shop(draw, 560, 600 + lift, 1.05, brand)
+            pill(draw, 560, 250, "SHOP", coral, size=32)
+            b = stagger(progress, 1, step=0.2)
+            if b > 0:
+                text_at(draw, "=", cx + 30, 520, load_font(110, bold=True), ink)
+                draw_browser(draw, 1390, 600 + int((1 - b) * 40), 0.72, brand, content=1.0)
+                pill(draw, 1390, 250, "WEBSITE", sage, size=32)
+            return True
+        if focus == "home":
+            draw_house(draw, 560, 600 + lift, 1.1, brand)
+            pill(draw, 560, 810, "12, Rose Lane", ink, size=30)
+            px, py = 1330, 450 + 12 * math.sin(progress * math.pi * 4)
+            draw.ellipse((px - 90, py - 90, px + 90, py + 90), fill=coral)
+            draw.polygon([(px - 72, py + 50), (px, py + 190), (px + 72, py + 50)], fill=coral)
+            draw.ellipse((px - 38, py - 38, px + 38, py + 38), fill=panel)
+            text_at(draw, "An address helps", 1330, 690, load_font(44, bold=True), ink)
+            text_at(draw, "people FIND your home", 1330, 750, load_font(44, bold=True), coral)
+            return True
+        if focus == "url":
+            typed = clamp01((progress - 0.1) * 1.8)
+            draw_browser(draw, cx, 630, 1.0, brand, typed=typed, content=clamp01((progress - 0.7) * 4), t=progress)
+            a = stagger(progress, 1)
+            if a > 0:
+                pill(draw, cx, 250, "URL  =  website address", coral, size=38)
+                draw_arrow(draw, cx + 60, 330, cx + 60, 400, coral, width=10, head=26)
+            return True
+        if focus == "parts":
+            f = load_font(170, bold=True)
+            name, end = "mentr", ".com"
+            bn = draw.textbbox((0, 0), name, font=f)
+            be = draw.textbbox((0, 0), end, font=f)
+            wn, we = bn[2] - bn[0], be[2] - be[0]
+            x0 = cx - (wn + we) / 2
+            draw.text((x0, 300), name, fill=coral, font=f)
+            draw.text((x0 + wn, 300), end, fill=sage, font=f)
+            a1, a2 = stagger(progress, 1, step=0.25), stagger(progress, 2, step=0.25)
+            if a1 > 0:
+                draw.rounded_rectangle((x0, 520, x0 + wn, 532), radius=6, fill=coral)
+                pill(draw, x0 + wn / 2, 570, "the NAME → which shop", coral, size=30)
+            if a2 > 0:
+                draw.rounded_rectangle((x0 + wn + 10, 520, x0 + wn + we, 532), radius=6, fill=sage)
+                pill(draw, x0 + wn + we / 2, 660, "the ENDING", sage, size=30)
+            return True
+        pill(draw, cx, 300, "U · R · L", coral, size=96)
+        text_at(draw, "= website address", cx, 520, load_font(60, bold=True), ink)
+        text_at(draw, "Say it with me!", cx, 680, load_font(36, bold=True), muted)
+        return True
+
+    if visual == "a4-roads":
+        if focus == "intro":
+            draw_road(draw, 500, 1420, 590, 80, progress, faint=True)
+            for i in range(6):
+                sx = 560 + i * 160
+                sy = 520 + 30 * math.sin(progress * 6 + i)
+                draw_star(draw, sx, sy, 10 + 4 * pulse, ROAD, rot=progress * 4 + i)
+            draw_device(draw, "touch", 330, 590, 0.9, brand)
+            draw_server(draw, 1590, 590, 0.9, progress)
+            ex = trip_move((progress * 1.1) % 1.0, 540, 1380)
+            draw_envelope(draw, ex, 590, 0.55, coral)
+            pill(draw, cx, 260, "Invisible roads", ROAD, size=40)
+            return True
+        if focus in ("wifi", "data"):
+            is_wifi = focus == "wifi"
+            draw.ellipse((600 - 280, 580 - 280, 600 + 280, 580 + 280), fill=ROAD_SOFT)
+            if is_wifi:
+                draw_house(draw, 600, 640, 1.2, brand)
+                draw_router(draw, 600, 450, 0.75, progress)
+            else:
+                draw_tower(draw, 640, 590, 1.25, progress)
+                draw_device(draw, "touch", 360, 720, 0.45, brand, t=progress)
+            x = 1020
+            pill(draw, 0, 300, "Wi-Fi" if is_wifi else "Mobile data", ROAD, size=48, left=x)
+            lines = (("Comes from a small box", "called a ROUTER", "At home or at school")
+                     if is_wifi else ("Travels through", "big TOWERS", "Works outside too!"))
+            draw.text((x, 440), lines[0], fill=ink, font=load_font(46, bold=True))
+            draw.text((x, 505), lines[1], fill=ROAD, font=load_font(56, bold=True))
+            a = stagger(progress, 2)
+            if a > 0:
+                draw.text((x, 620), lines[2], fill=muted, font=load_font(36))
+            return True
+        # carry
+        draw_road(draw, 330, 1590, 520, 70, progress)
+        draw_road(draw, 330, 1590, 680, 70, -progress)
+        draw_device(draw, "touch", 200, 600, 0.75, brand)
+        draw_server(draw, 1720, 600, 0.8, progress)
+        ex = trip_move((progress * 1.2) % 1.0, 380, 1540)
+        draw_envelope(draw, ex, 520, 0.5, coral)
+        px = trip_move((progress * 1.2 + 0.4) % 1.0, 1540, 380)
+        draw_page(draw, px, 680, 0.42, brand)
+        pill(draw, 520, 420, "question →", coral, size=28)
+        pill(draw, 1400, 760, "← answer", sage, size=28)
+        pill(draw, cx, 250, "Roads only CARRY", ink, size=40)
+        return True
+
+    if visual == "a4-trip":
+        steps = ["Type", "Ask", "Find", "Send back", "Appears"]
+        order = {"type": 0, "ask": 1, "find": 2, "reply": 3, "appear": 4}
+        cur = order.get(focus, -1 if focus == "intro" else 5)
+        for i, lab in enumerate(steps):
+            x = cx + (i - 2) * 310
+            box = (x - 140, 222, x + 140, 290)
+            if i == cur:
+                draw.rounded_rectangle(box, radius=34, fill=coral)
+                fg, num_bg, num_fg = panel, panel, coral
+            elif i < cur:
+                draw.rounded_rectangle(box, radius=34, fill=panel, outline=sage, width=4)
+                fg, num_bg, num_fg = sage, sage, panel
+            else:
+                draw.rounded_rectangle(box, radius=34, fill=panel, outline=line, width=3)
+                fg, num_bg, num_fg = muted, line, muted
+            draw.ellipse((x - 124, 232, x - 76, 280), fill=num_bg)
+            text_at(draw, str(i + 1), x - 100, 238, load_font(28, bold=True), num_fg)
+            text_at(draw, lab, x + 24, 238, load_font(30, bold=True), fg)
+        dev_x, srv_x, road_y = 390, 1560, 640
+        if focus == "fast":
+            draw_road(draw, 680, 1400, road_y, 64, progress * 3)
+            draw_browser(draw, dev_x, 600, 0.76, brand, content=1.0)
+            draw_server(draw, srv_x, 600, 0.95, progress)
+            pz = (progress * 4) % 1.0
+            if pz < 0.5:
+                draw_envelope(draw, trip_move(pz * 2, 680, 1340), road_y, 0.4, coral)
+            else:
+                draw_page(draw, trip_move((pz - 0.5) * 2, 1340, 680), road_y, 0.35, brand)
+            draw_stopwatch(draw, cx, 450, 95, progress, brand)
+            pill(draw, cx, 790, "less than 1 second!", coral, size=36)
+            return True
+        draw_road(draw, 680, 1400, road_y, 64, progress if focus in ("ask", "reply") else 0.0)
+        text_at(draw, "internet road", 1040, road_y + 50, load_font(24, bold=True), muted)
+        typed = 1.0 if cur > 0 else (clamp01(progress * 1.6) if focus == "type" else 0.0)
+        content = 0.0
+        if focus == "appear":
+            content = clamp01((progress - 0.05) * 2.2)
+        draw_browser(draw, dev_x, 600, 0.76, brand, typed=typed, content=content, t=progress)
+        text_at(draw, "You", dev_x, 790, load_font(32, bold=True), ink)
+        if focus == "find":
+            draw.ellipse((srv_x - 190, 600 - 190, srv_x + 190, 600 + 190), fill=sage_soft)
+        draw_server(draw, srv_x, 600, 0.95, progress if focus in ("find", "ask", "reply") else 0.0)
+        text_at(draw, "Server", srv_x, 790, load_font(32, bold=True), ink)
+        if focus == "type":
+            draw_device(draw, "keyboard", dev_x + 330, 800, 0.42, brand, t=progress)
+        elif focus == "ask":
+            p = clamp01((progress - 0.08) / 0.7)
+            ex = trip_move(p, 680, 1340)
+            draw_envelope(draw, ex, road_y - 6, 0.62, coral)
+            pill(draw, ex, road_y - 110, "REQUEST", coral, size=26)
+            bx0, by0 = 560, 330
+            draw.rounded_rectangle((bx0, by0, bx0 + 560, by0 + 90), radius=30, fill=panel, outline=coral, width=4)
+            draw.polygon([(bx0 + 60, by0 + 88), (bx0 + 40, by0 + 130), (bx0 + 110, by0 + 88)], fill=coral)
+            text_at(draw, "Please send me this page!", bx0 + 280, by0 + 24, load_font(34, bold=True), ink)
+        elif focus == "find":
+            ang = progress * math.tau * 1.5
+            mx, my = srv_x + math.cos(ang) * 70, 560 + math.sin(ang) * 50
+            draw.ellipse((mx - 46, my - 46, mx + 46, my + 46), outline=ink, width=10)
+            draw.ellipse((mx - 36, my - 36, mx + 36, my + 36), fill=(225, 240, 250))
+            draw.line((mx + 32, my + 32, mx + 80, my + 80), fill=ink, width=16)
+            a = stagger(progress, 3, step=0.12)
+            if a > 0:
+                draw_page(draw, srv_x - 260, 470 + int((1 - a) * 40), 0.8 * a + 0.01, brand)
+                pill(draw, srv_x - 260, 360, "Found it!", sage, size=28)
+        elif focus == "reply":
+            p = clamp01((progress - 0.08) / 0.7)
+            px = trip_move(p, 1340, 680)
+            draw_page(draw, px, road_y - 10, 0.55, brand)
+            pill(draw, px, road_y - 120, "ANSWER", sage, size=26)
+        elif focus == "appear":
+            if progress > 0.3:
+                stars_around(360, 560, n=4)
+                pill(draw, dev_x, 350, "Ta-da!", coral, size=36)
+        return True
+
+    if visual == "a4-order":
+        cards = {
+            "type": ("Type address", "keyboard"),
+            "ask": ("Device asks", "envelope"),
+            "appear": ("Page appears", "browser"),
+        }
+        shuffled = ["appear", "type", "ask"]
+        correct = ["type", "ask", "appear"]
+        slots = [cx - 540, cx, cx + 540]
+        for key in correct:
+            label, icon = cards[key]
+            si = shuffled.index(key)
+            ci = correct.index(key)
+            if focus == "answer":
+                p = ease_in_out(clamp01((progress - 0.1 - ci * 0.12) * 2.2))
+            else:
+                p = 0.0
+            x = slots[si] + (slots[ci] - slots[si]) * p
+            hop = math.sin(p * math.pi) * 60
+            a = stagger(progress, si, step=0.12) if focus == "intro" else 1.0
+            if a <= 0:
+                continue
+            y0 = 350 - hop + int((1 - a) * 50)
+            placed = focus == "answer" and p >= 1
+            shadow_card(draw, (x - 220, y0, x + 220, y0 + 400), brand, radius=32,
+                        outline=sage if placed else line, outline_w=6 if placed else 3)
+            if icon == "keyboard":
+                draw_device(draw, "keyboard", x, y0 + 160, 0.8, brand)
+            elif icon == "envelope":
+                draw_envelope(draw, x, y0 + 160, 1.2, coral)
+            else:
+                draw_browser(draw, x, y0 + 160, 0.4, brand, content=1.0)
+            text_at(draw, label, x, y0 + 300, load_font(40, bold=True), ink)
+            if placed:
+                draw.ellipse((x - 38, y0 - 38, x + 38, y0 + 38), fill=sage)
+                text_at(draw, str(ci + 1), x, y0 - 24, load_font(40, bold=True), panel)
+        if focus == "ask":
+            for i, x in enumerate(slots):
+                r = int(34 + 4 * pulse)
+                draw.ellipse((x - r, 350 - r, x + r, 350 + r), fill=coral)
+                text_at(draw, "?", x, 326, load_font(44, bold=True), panel)
+            n = max(1, 3 - int(progress * 3))
+            pill(draw, cx, 240, f"Think…  {n}", coral, size=34)
+        elif focus == "intro":
+            pill(draw, cx, 240, "Mixed up!", BOTH_COLOR, size=34)
+        elif focus == "answer" and progress > 0.75:
+            for i in range(2):
+                draw_arrow(draw, slots[i] + 232, 550, slots[i + 1] - 232, 550, sage, width=10, head=26)
+            pill(draw, cx, 240, "Correct order!", sage, size=34)
+        return True
+
+    if visual == "a4-video":
+        slow = focus == "slow"
+        vx, sx, ry = 620, 1580, 590
+        draw_road(draw, 900, 1440, ry, 34 if slow else 64, progress * (0.3 if slow else 2))
+        draw_server(draw, sx, ry, 0.95, progress)
+        bar = 0.25 + 0.5 * progress if focus == "pieces" else (0.35 if focus == "intro" else 0.52)
+        draw_vtablet(draw, vx, ry, 1.05, brand, progress, playing=not slow, bar=bar)
+        if focus == "intro":
+            pill(draw, vx, 290, "Watching a cartoon", coral, size=34)
+        elif focus == "pieces":
+            for i in range(4):
+                p = (progress * 1.3 + i / 4) % 1.0
+                px = trip_move(p, 1440, 900)
+                draw.rounded_rectangle((px - 34, ry - 26, px + 34, ry + 26), radius=8, fill=DEV_DARK)
+                for j in range(3):
+                    draw.rectangle((px - 26 + j * 20, ry - 20, px - 14 + j * 20, ry - 12), fill=panel)
+                    draw.rectangle((px - 26 + j * 20, ry + 12, px - 14 + j * 20, ry + 20), fill=panel)
+                q = (progress * 1.3 + i / 4 + 0.12) % 1.0
+                qx = trip_move(q, 900, 1440)
+                draw.ellipse((qx - 10, ry - 70, qx + 10, ry - 50), fill=coral)
+            pill(draw, 1170, 420, "next piece, please!", coral, size=26)
+            pill(draw, 1170, 720, "here you go!", sage, size=26)
+        else:
+            px = trip_move(clamp01(progress * 0.8), 1440, 1000)
+            draw.rounded_rectangle((px - 30, ry - 22, px + 30, ry + 22), radius=8, fill=DEV_DARK)
+            draw_snail(draw, 1180, ry - 60, 0.9, brand)
+            pill(draw, vx, 290, "Buffering…", coral, size=34)
+        return True
+
+    if visual == "a4-check":
+        if focus == "intro":
+            text_at(draw, "Practice check", cx, 380, load_font(48, bold=True), coral)
+            text_at(draw, "Same kind of question as your lesson quiz", cx, 470, load_font(38, bold=True), ink)
+            return True
+        shadow_card(draw, (150, 260, 820, 860), brand, radius=36)
+        answered = focus == "answer"
+        draw_browser(draw, 485, 520, 0.85, brand, content=clamp01(progress * 2) if answered else 0.0,
+                     blank_q=not answered, t=progress)
+        text_at(draw, "Opening a website…", 485, 760, load_font(34, bold=True), muted)
+        x = 920
+        draw.text((x, 280), "What happens FIRST?", fill=ink, font=load_font(52, bold=True))
+        opts = (("The page appears", coral), ("Your device asks", sage))
+        for i, (lab, col) in enumerate(opts):
+            box = (x, 380 + i * 140, 1760, 490 + i * 140)
+            chosen = answered and i == 1
+            faded = answered and i == 0
+            draw.rounded_rectangle((box[0] + 8, box[1] + 10, box[2] + 8, box[3] + 10), radius=28, fill=SHADOW)
+            draw.rounded_rectangle(box, radius=28, fill=col if chosen else panel,
+                                   outline=line if faded else col, width=6)
+            draw.text((x + 50, box[1] + 30), lab, fill=panel if chosen else (muted if faded else col),
+                      font=load_font(44, bold=True))
+            if chosen:
+                draw_check(draw, box[2] - 60, (box[1] + box[3]) / 2, 30, panel, bg=sage)
+        if focus == "ask":
+            text_at(draw, "Think… then choose!", (x + 1760) / 2, 710, load_font(40, bold=True), coral if pulse > 0.5 else ink)
+        elif focus == "hint":
+            draw.text((x, 690), "Can a server answer", fill=ROAD, font=load_font(40, bold=True))
+            draw.text((x, 745), "before anyone asks?", fill=ROAD, font=load_font(40, bold=True))
+        else:
+            draw.text((x, 700), "1. Device asks   →   2. Page appears", fill=sage, font=load_font(38, bold=True))
+        return True
+
+    if visual == "a4-recap":
+        if focus in ("net", "url", "roads"):
+            spec = {
+                "net": ("The INTERNET", "many computers asking & answering", coral),
+                "url": ("A WEBSITE", "is like a shop · its address is a URL", sage),
+                "roads": ("The ROADS", "Wi-Fi & mobile data carry the messages", ROAD),
+            }[focus]
+            title, sub, col = spec
+            shadow_card(draw, (140, 240 + lift, w - 140, 860 + lift), brand, radius=40, accent=col)
+            text_at(draw, title, cx, 300 + lift, load_font(62, bold=True), col)
+            text_at(draw, sub, cx, 385 + lift, load_font(36, bold=True), ink)
+            if focus == "net":
+                draw_network(draw, (360, 470 + lift, w - 360, 800 + lift), progress, brand, icon=0.7)
+            elif focus == "url":
+                draw_shop(draw, 640, 680 + lift, 0.62, brand)
+                text_at(draw, "=", cx, 600 + lift, load_font(90, bold=True), ink)
+                draw_browser(draw, 1290, 650 + lift, 0.5, brand, typed=clamp01(progress * 2), t=progress)
+            else:
+                draw_router(draw, 560, 690 + lift, 0.7, progress)
+                draw_road(draw, 740, 1180, 680 + lift, 44, progress)
+                draw_tower(draw, 1360, 650 + lift, 0.75, progress)
+            return True
+        if focus == "steps":
+            labels = [("Type address", coral), ("Device asks", ROAD), ("Page appears", sage)]
+            for i, (lab, col) in enumerate(labels):
+                a = stagger(progress, i, step=0.2)
+                if a <= 0:
+                    continue
+                x = cx + (i - 1) * 560
+                y = 380 + int((1 - a) * 40)
+                shadow_card(draw, (x - 230, y, x + 230, y + 260), brand, radius=36, accent=col)
+                draw.ellipse((x - 40, y + 60, x + 40, y + 140), fill=col)
+                text_at(draw, str(i + 1), x, y + 76, load_font(48, bold=True), panel)
+                text_at(draw, lab, x, y + 170, load_font(40, bold=True), ink)
+                if i < 2 and a >= 1:
+                    draw_arrow(draw, x + 240, y + 130, x + 320, y + 130, muted, width=10, head=26)
+            return True
+        if focus == "done":
+            draw_mascot(draw, int(cx), 400, 110, sage, panel, bounce)
+            text_at(draw, "Chapter 4 complete!", cx, 570, load_font(60, bold=True), ink)
+            pill(draw, cx, 670, "How Websites Talk", coral, size=34)
+            stars_around(300, 420, n=8)
+            return True
+        text_at(draw, "Next up: Quiz time", cx, 380, load_font(60, bold=True), coral)
+        text_at(draw, "Tap Finish when you're ready, champ!", cx, 490, load_font(40, bold=True), ink)
+        draw_mascot(draw, int(cx), 680, 80, sage, panel, bounce)
+        return True
+
+    return False
+
+
 def draw_scene_dots(draw: ImageDraw.ImageDraw, brand: dict[str, str], idx: int, total: int, w: int) -> None:
     coral = hex_rgb(brand["coral"])
     line = hex_rgb(brand["line"])
@@ -1305,6 +2298,8 @@ def render_visual(
     h: int,
 ) -> None:
     if visual.startswith("a3-") and render_a3(draw, brand, visual, focus, progress, w, h):
+        return
+    if visual.startswith("a4-") and render_a4(draw, brand, visual, focus, progress, w, h):
         return
     ink = hex_rgb(brand["ink"])
     muted = hex_rgb(brand["muted"])
@@ -1819,16 +2814,40 @@ def render_frame(
     width: int,
     height: int,
     scene_pos: tuple[int, int] | None = None,
+    supersample: int = 1,
 ) -> Image.Image:
-    img = Image.new("RGB", (width, height), hex_rgb(brand["bg"]))
+    k = max(1, supersample)
+    img = Image.new("RGB", (width * k, height * k), hex_rgb(brand["bg"]))
     paint_background(img, brand, progress)
-    draw = ImageDraw.Draw(img)
+    draw = ImageDraw.Draw(img) if k == 1 else ScaledDraw(ImageDraw.Draw(img), k)
     draw_top_bar(draw, brand, title, unit_label, chapter_label, width)
     if scene_pos:
         draw_scene_dots(draw, brand, scene_pos[0], scene_pos[1], width)
     render_visual(img, draw, brand, visual, focus, progress, width, height)
     draw_caption_bar(draw, brand, caption, width, height, min(1.0, progress * 3))
-    return img
+    return img if k == 1 else img.reduce(k)
+
+
+def render_beat_job(job: dict[str, Any]) -> int:
+    """Render every frame of one beat (worker-safe; crossfade uses the previous beat's final frame)."""
+    common = job["common"]
+
+    def frame(b: dict[str, Any], progress: float) -> Image.Image:
+        return render_frame(
+            common["brand"], common["title"], common["unit_label"], common["chapter_label"],
+            b["visual"], b["focus"], b["caption"], progress,
+            common["width"], common["height"], b["scene_pos"], common["supersample"],
+        )
+
+    prev_last = frame(job["prev"], 1.0) if job["prev"] is not None else None
+    n = job["n"]
+    fade_frames = common["fade_frames"]
+    for f in range(n):
+        img = frame(job["beat"], f / max(n - 1, 1))
+        if prev_last is not None and f < fade_frames:
+            img = Image.blend(prev_last, img, ease_in_out((f + 1) / (fade_frames + 1)))
+        img.save(Path(common["frames_dir"]) / f"frame_{job['start'] + f:05d}.png", compress_level=1)
+    return n
 
 
 def concat_wavs(paths: list[Path], out_path: Path) -> None:
@@ -1951,6 +2970,8 @@ async def build_async(lesson_dir: Path) -> Path:
                     "duration": dur + pad,
                     "wav": wav,
                     "pad": pad,
+                    "sfx": beat.get("sfx"),
+                    "sfx_at": float(beat.get("sfxAt") or 0),
                 }
             )
             print(f"   · {scene['id']}/{beat['focus']}: {dur:.2f}s (+{pad:.1f}s)")
@@ -1984,12 +3005,24 @@ async def build_async(lesson_dir: Path) -> Path:
     print("2/4  Rendering production frames (synced to speech)…")
     frame_i = 0
     cues: list[dict[str, Any]] = []
+    sfx_events: list[tuple[float, str, float]] = []
     cursor = 0.0
     scene_ids = [s["id"] for s in meta["scenes"]]
     show_dots = bool(meta.get("sceneDots"))
     crossfade = meta.get("transition") == "crossfade"
-    fade_frames = max(1, int(round(0.28 * fps)))
-    prev_last: Image.Image | None = None
+    common = {
+        "brand": brand,
+        "title": title,
+        "unit_label": unit_label,
+        "chapter_label": chapter_label,
+        "width": width,
+        "height": height,
+        "supersample": int(meta.get("supersample") or 1),
+        "fade_frames": max(1, int(round(0.28 * fps))),
+        "frames_dir": str(frames_dir),
+    }
+    jobs: list[dict[str, Any]] = []
+    prev_ref: dict[str, Any] | None = None
     for beat in flat_beats:
         n = max(1, int(round(beat["duration"] * fps)))
         cues.append(
@@ -2002,30 +3035,52 @@ async def build_async(lesson_dir: Path) -> Path:
                 "focus": beat["focus"],
             }
         )
-        for f in range(n):
-            progress = f / max(n - 1, 1)
-            img = render_frame(
-                brand,
-                title,
-                unit_label,
-                chapter_label,
-                beat["visual"],
-                beat["focus"],
-                beat["caption"],
-                progress,
-                width,
-                height,
-                (scene_ids.index(beat["scene_id"]), len(scene_ids)) if show_dots else None,
-            )
-            if crossfade and prev_last is not None and f < fade_frames:
-                img = Image.blend(prev_last, img, ease_in_out((f + 1) / (fade_frames + 1)))
-            if f == n - 1:
-                prev_last = img
-            img.save(frames_dir / f"frame_{frame_i:05d}.png", compress_level=1)
-            frame_i += 1
-            if frame_i % 100 == 0:
-                print(f"   · frames {frame_i}…")
+        if beat.get("sfx"):
+            sfx_events.append((cursor + beat["sfx_at"] * beat["duration"], beat["sfx"], 1.0))
+        ref = {
+            "visual": beat["visual"],
+            "focus": beat["focus"],
+            "caption": beat["caption"],
+            "scene_pos": (scene_ids.index(beat["scene_id"]), len(scene_ids)) if show_dots else None,
+        }
+        jobs.append({
+            "common": common,
+            "beat": ref,
+            "prev": prev_ref if crossfade else None,
+            "n": n,
+            "start": frame_i,
+        })
+        prev_ref = ref
+        frame_i += n
         cursor += beat["duration"]
+
+    workers = max(1, min(int(meta.get("workers") or (os.cpu_count() or 2) - 1), len(jobs)))
+    done = 0
+    if workers == 1:
+        for job in jobs:
+            done += render_beat_job(job)
+            print(f"   · frames {done}/{frame_i}")
+    else:
+        with multiprocessing.get_context("spawn").Pool(workers) as pool:
+            for n_done in pool.imap_unordered(render_beat_job, jobs):
+                done += n_done
+                print(f"   · frames {done}/{frame_i}")
+
+    if sfx_events:
+        print("   · mixing sound effects…")
+        sfx_wav = work / "sfx.wav"
+        write_sfx_track(sfx_events, cursor, sfx_wav)
+        mixed = work / "mixed.wav"
+        subprocess.run(
+            [
+                FFMPEG, "-y", "-i", str(voiceover), "-i", str(sfx_wav),
+                "-filter_complex",
+                f"[1:a]volume={float(meta.get('sfxVolume') or 0.5):.2f}[s];[0:a][s]amix=inputs=2:duration=first:normalize=0",
+                "-ar", "44100", str(mixed),
+            ],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        shutil.move(str(mixed), str(voiceover))
 
     print("3/4  Writing captions + transcript…")
     write_captions(cues, lesson_dir)

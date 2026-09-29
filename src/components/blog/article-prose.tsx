@@ -18,6 +18,60 @@ function Block({ block }: { block: ArticleBlock }) {
       </Tag>
     );
   }
+  if (block.type === "cta") {
+    return (
+      <aside
+        className={cn(
+          "my-7 rounded-2xl border-2 border-ink bg-butter/60 px-4 py-4 sm:px-5",
+          hardShadowSm,
+        )}
+      >
+        <div className="text-base font-bold text-ink">{block.title}</div>
+        <div className="mt-1 text-sm leading-relaxed text-ink/80">{block.text}</div>
+        <Link
+          href={block.href}
+          className="mt-3 inline-flex min-h-11 items-center justify-center rounded-xl border-2 border-ink bg-coral px-5 text-sm font-bold text-white no-underline touch-manipulation hover:bg-coral-dark"
+        >
+          {block.label} →
+        </Link>
+      </aside>
+    );
+  }
+  if (block.type === "table") {
+    return (
+      <div className="my-6 overflow-x-auto rounded-xl border-2 border-ink/80 bg-white">
+        <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+          <caption className="sr-only">{block.caption}</caption>
+          <thead>
+            <tr className="border-b-2 border-ink/80 bg-cream-band">
+              {block.headers.map((h) => (
+                <th key={h} scope="col" className="px-3 py-2.5 text-xs font-bold uppercase tracking-wide text-ink">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-hairline">
+            {block.rows.map((row) => (
+              <tr key={row[0]} className="align-top">
+                {row.map((cell, i) =>
+                  i === 0 ? (
+                    <th key={i} scope="row" className="px-3 py-2.5 font-semibold text-ink">
+                      {cell}
+                    </th>
+                  ) : (
+                    <td key={i} className="px-3 py-2.5 leading-snug text-ink/85">
+                      {cell}
+                    </td>
+                  ),
+                )}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
   return (
     <aside className="blog-callout">
       <p className="blog-callout-title">{block.title}</p>

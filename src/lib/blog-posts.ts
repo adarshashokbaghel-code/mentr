@@ -502,6 +502,34 @@ export const BLOG_POSTS: BlogPost[] = [
     ctaHref: "/search",
   },
   {
+    slug: "sulekha-tutor-alternatives",
+    title: "Sulekha Tutor Alternatives (2026): No Spam Calls",
+    keyword: "sulekha tutor alternative",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "comparison",
+    featured: true,
+    description:
+      "Tired of 10+ calls after one Sulekha enquiry? Six honest Sulekha alternatives for home and online tuition in India, with costs, privacy and who each suits.",
+    publishWeek: 40,
+    cta: "Search tutors free",
+    ctaHref: "/search",
+  },
+  {
+    slug: "vedantu-alternatives-india",
+    title: "Vedantu Alternatives 2026: 1-on-1 & Budget Options",
+    keyword: "vedantu alternative",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "comparison",
+    featured: true,
+    description:
+      "Child lost in big Vedantu batches? Compare the best Vedantu alternatives in India: one-on-one tutors, Physics Wallah, Unacademy, coaching centres and free tools.",
+    publishWeek: 40,
+    cta: "Find a one-on-one tutor",
+    ctaHref: "/search",
+  },
+  {
     slug: "myprivatetutor-alternatives-india",
     title:
       "MyPrivateTutor Alternatives in India (2026): Free Options Without Lead Fees",

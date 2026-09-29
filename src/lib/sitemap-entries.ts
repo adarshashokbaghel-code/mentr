@@ -100,6 +100,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
     entry("/safety", 0.7, "monthly"),
     entry("/contact", 0.7, "monthly"),
     entry("/request-feature", 0.7, "monthly"),
+    entry("/comparison", 0.9, "weekly"),
     ...VS_PAGES.map((p) => entry(`/vs/${p.slug}`, 0.65, "monthly")),
     entry("/privacy", 0.2, "yearly"),
     entry("/terms", 0.2, "yearly"),
