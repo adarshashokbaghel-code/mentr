@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { deriveParentBoard, type ParentBoard } from "../lib/parent-board";
 import {
   ParentContactReveal,
   type IParentContactReveal,
@@ -126,6 +127,7 @@ type ParentListOpts = {
   mentor: IUser;
   query?: string;
   onlyPosted?: boolean;
+  board?: ParentBoard | null;
   limit?: number;
 };
 
@@ -245,6 +247,8 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
     const previouslyRevealed = alwaysReveal || Boolean(reveal);
     const active = alwaysReveal || isRevealActive(reveal?.revealedAt, now);
     const pp = p.parentProfile;
+    const derived = deriveParentBoard(pp ?? {});
+    const board = pp?.board ?? derived.board;
     const rawPhone = String(pp?.phoneNumber || "").trim();
     const detailsPending = !rawPhone;
     const name = pp?.name?.trim() || "New parent";
@@ -265,7 +269,9 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
       imageUrl: (p.profileImageUrl || "").trim() || null,
       city: pp?.city || null,
       area: pp?.area || null,
-      country: pp?.country || "India",
+      country: derived.country,
+      board,
+      overseas: derived.overseas,
       detailsPending,
       hasPosted: posts.length > 0,
       openPosts: openPosts.length,
@@ -298,6 +304,9 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
 
   if (opts.onlyPosted) {
     list = list.filter((p) => p.hasPosted);
+  }
+  if (opts.board) {
+    list = list.filter((p) => p.board === opts.board);
   }
 
   // New real signups (post-cutoff) first → legacy ranking for older → seeds last.

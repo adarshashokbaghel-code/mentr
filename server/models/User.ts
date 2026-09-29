@@ -1,4 +1,5 @@
 import mongoose, { Document, Schema, Types } from "mongoose";
+import { deriveParentBoard, PARENT_BOARDS, type ParentBoard } from "../lib/parent-board";
 
 export const WEEK_DAYS = [
   "monday",
@@ -89,6 +90,8 @@ export interface IParentProfile {
   country: string;
   city: string;
   area?: string;
+  /** Curriculum tag for the mentor parent list — IGCSE for overseas families */
+  board?: ParentBoard;
   /** Up to 3 tutor IDs the parent saved from search — for compare & return visits */
   shortlistedTeacherIds?: string[];
   /** Hiring checklist — parent self-reported milestones */
@@ -333,6 +336,7 @@ const parentProfileSchema = new Schema<IParentProfile>(
     country: { type: String, default: "India", trim: true },
     city: { type: String, required: true, trim: true },
     area: { type: String, trim: true },
+    board: { type: String, enum: PARENT_BOARDS },
     shortlistedTeacherIds: {
       type: [String],
       default: undefined,
@@ -347,6 +351,16 @@ const parentProfileSchema = new Schema<IParentProfile>(
   },
   { _id: false },
 );
+
+// Profile saves replace the whole subdocument, so a missing board means "re-derive".
+parentProfileSchema.pre("validate", function () {
+  if (this.board && !this.isModified("phoneNumber") && !this.isModified("country")) {
+    return;
+  }
+  const derived = deriveParentBoard(this);
+  this.board = derived.board;
+  this.country = derived.country;
+});
 
 const learnProgressSchema = new Schema<ILearnProgress>(
   {
