@@ -14,6 +14,7 @@ import {
   ApiError,
   premiumMentorApi,
   type PremiumBillingContext,
+  type PremiumCouponQuote,
   type PremiumCurrency,
   type PremiumPlanOption,
   type PremiumMentorState,
@@ -21,6 +22,7 @@ import {
 import { trackBeginCheckout, trackPurchase } from "@/lib/analytics";
 import { LEGAL_DOCS_VERSION } from "@/lib/legal";
 import { cn } from "@/lib/utils";
+import { Check, Loader2, Tag, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -112,6 +114,13 @@ export function PremiumCheckoutDialog({
   const [paying, setPaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [acceptedLegal, setAcceptedLegal] = useState(true);
+  const [couponOpen, setCouponOpen] = useState(false);
+  const [couponInput, setCouponInput] = useState("");
+  const [coupon, setCoupon] = useState<PremiumCouponQuote | null>(null);
+  const [couponError, setCouponError] = useState<string | null>(null);
+  const [couponBusy, setCouponBusy] = useState(false);
+  const appliedCodeRef = useRef<string | null>(null);
+  const couponReqRef = useRef(0);
 
   const loadCatalog = useCallback(async () => {
     setLoadingCatalog(true);
@@ -136,8 +145,66 @@ export function PremiumCheckoutDialog({
   useEffect(() => {
     if (!open) return;
     setAcceptedLegal(true);
+    setCouponOpen(false);
+    setCouponInput("");
+    setCoupon(null);
+    setCouponError(null);
+    appliedCodeRef.current = null;
     void loadCatalog();
   }, [open, loadCatalog]);
+
+  const applyCoupon = useCallback(
+    async (rawCode: string) => {
+      const code = rawCode.trim().toUpperCase().replace(/\s+/g, "");
+      if (!code) {
+        setCouponError("Enter a coupon code.");
+        return;
+      }
+      const reqId = ++couponReqRef.current;
+      setCouponBusy(true);
+      setCouponError(null);
+      try {
+        const res = await premiumMentorApi.validateCoupon({
+          code,
+          months,
+          currency,
+        });
+        if (reqId !== couponReqRef.current) return;
+        setCoupon(res.coupon);
+        setCouponInput(res.coupon.code);
+        appliedCodeRef.current = res.coupon.code;
+      } catch (e) {
+        if (reqId !== couponReqRef.current) return;
+        setCoupon(null);
+        appliedCodeRef.current = null;
+        setCouponOpen(true);
+        setCouponInput(code);
+        setCouponError(
+          e instanceof ApiError || e instanceof Error
+            ? e.message
+            : "Could not check this coupon.",
+        );
+      } finally {
+        if (reqId === couponReqRef.current) setCouponBusy(false);
+      }
+    },
+    [months, currency],
+  );
+
+  // Plan / currency switch changes the price, so re-check an applied code.
+  useEffect(() => {
+    if (!open || !appliedCodeRef.current) return;
+    void applyCoupon(appliedCodeRef.current);
+  }, [open, months, currency, applyCoupon]);
+
+  function removeCoupon() {
+    couponReqRef.current++;
+    appliedCodeRef.current = null;
+    setCoupon(null);
+    setCouponInput("");
+    setCouponError(null);
+    setCouponBusy(false);
+  }
 
   /** Per-popup session: order started → Razorpay cancel handles "dismissed"; paid → no dismiss. */
   const checkoutSession = useRef({ tracked: false, orderStarted: false, paid: false });
@@ -182,10 +249,14 @@ export function PremiumCheckoutDialog({
     isUsd && billing?.local
       ? formatLocal(usd * billing.local.usdRate, billing.local.currency)
       : null;
+  const activeCoupon =
+    coupon && !isUsd && selected && coupon.months === selected.months
+      ? coupon
+      : null;
   const payLabel = selected
     ? isUsd
       ? formatUsd(selected.payUsd)
-      : formatInr(selected.payInr)
+      : formatInr(activeCoupon ? activeCoupon.finalInr : selected.payInr)
     : "";
 
   async function proceedToPay() {
@@ -213,6 +284,7 @@ export function PremiumCheckoutDialog({
         legalVersion: LEGAL_DOCS_VERSION,
         currency,
         source: window.location.pathname,
+        couponCode: activeCoupon?.code ?? null,
       });
       orderId = order.orderId;
       checkoutSession.current.orderStarted = true;
@@ -338,6 +410,18 @@ export function PremiumCheckoutDialog({
       rzp.open();
     } catch (e) {
       setPaying(false);
+      const code =
+        e instanceof ApiError ? String(e.data?.code ?? "") : "";
+      if (code.startsWith("COUPON_")) {
+        couponReqRef.current++;
+        appliedCodeRef.current = null;
+        setCoupon(null);
+        setCouponOpen(true);
+        setCouponError(
+          `${e instanceof Error ? e.message : "Coupon no longer valid."} Remove it or try another code.`,
+        );
+        return;
+      }
       setError(
         e instanceof ApiError
           ? e.message
@@ -517,6 +601,21 @@ export function PremiumCheckoutDialog({
                       </div>
                     ) : null}
 
+                    {activeCoupon ? (
+                      <div className="flex items-center justify-between gap-3 py-3">
+                        <p className="flex min-w-0 items-center gap-1.5 text-ink">
+                          <Tag className="size-3.5 shrink-0 text-sage" aria-hidden />
+                          Coupon
+                          <span className="truncate rounded bg-sage/10 px-1.5 py-0.5 font-mono text-[11px] font-bold text-sage">
+                            {activeCoupon.code}
+                          </span>
+                        </p>
+                        <p className="shrink-0 font-medium tabular-nums text-sage">
+                          −{formatInr(activeCoupon.discountInr)}
+                        </p>
+                      </div>
+                    ) : null}
+
                     <div className="flex items-center justify-between gap-3 py-3.5">
                       <div>
                         <p className="font-bold text-ink">Total due today</p>
@@ -528,6 +627,18 @@ export function PremiumCheckoutDialog({
                                 ? ` · ≈ ${localEstimate(selected.payUsd)}`
                                 : ""}
                             </>
+                          ) : activeCoupon ? (
+                            <>
+                              You save{" "}
+                              {formatInr(
+                                selected.discountInr + activeCoupon.discountInr,
+                              )}{" "}
+                              ·{" "}
+                              {formatInr(
+                                Math.round(activeCoupon.finalInr / selected.months),
+                              )}
+                              /month effective
+                            </>
                           ) : (
                             <>
                               About ${selected.payUsdApprox} ·{" "}
@@ -536,10 +647,132 @@ export function PremiumCheckoutDialog({
                           )}
                         </p>
                       </div>
-                      <p className="shrink-0 text-xl font-bold tabular-nums text-ink">
-                        {payLabel}
-                      </p>
+                      <div className="shrink-0 text-right">
+                        {activeCoupon ? (
+                          <p className="text-xs tabular-nums text-muted line-through">
+                            {formatInr(selected.payInr)}
+                          </p>
+                        ) : null}
+                        <p className="text-xl font-bold tabular-nums text-ink">
+                          {payLabel}
+                        </p>
+                      </div>
                     </div>
+                  </div>
+
+                  <div className="border-t border-dashed border-hairline px-3.5 py-3">
+                    {isUsd ? (
+                      <p className="flex items-center gap-1.5 text-xs text-muted">
+                        <Tag className="size-3.5" aria-hidden />
+                        Coupon codes work on rupee (₹ INR) payments.
+                      </p>
+                    ) : activeCoupon ? (
+                      <div className="flex items-center justify-between gap-3">
+                        <p className="flex min-w-0 items-center gap-1.5 text-[13px] font-medium text-sage">
+                          <Check className="size-4 shrink-0" aria-hidden />
+                          <span className="truncate">
+                            {activeCoupon.code} applied · {formatInr(activeCoupon.discountInr)} off
+                          </span>
+                        </p>
+                        <button
+                          type="button"
+                          disabled={paying}
+                          onClick={removeCoupon}
+                          className="shrink-0 text-xs font-semibold text-muted underline underline-offset-2 transition hover:text-coral disabled:opacity-50"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ) : !couponOpen ? (
+                      <button
+                        type="button"
+                        disabled={paying}
+                        onClick={() => setCouponOpen(true)}
+                        className="flex w-full items-center justify-between gap-2 text-left text-[13px] font-semibold text-ink transition hover:text-sage disabled:opacity-50"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <Tag className="size-4 text-sage" aria-hidden />
+                          Have a coupon code?
+                        </span>
+                        <span className="text-xs font-bold text-sage">Apply</span>
+                      </button>
+                    ) : (
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          void applyCoupon(couponInput);
+                        }}
+                      >
+                        <label
+                          htmlFor="premium-coupon"
+                          className="flex items-center gap-1.5 text-[13px] font-semibold text-ink"
+                        >
+                          <Tag className="size-4 text-sage" aria-hidden />
+                          Coupon code
+                        </label>
+                        <div className="mt-2 flex gap-2">
+                          <div className="relative min-w-0 flex-1">
+                            <input
+                              id="premium-coupon"
+                              autoFocus
+                              autoComplete="off"
+                              autoCapitalize="characters"
+                              spellCheck={false}
+                              maxLength={24}
+                              value={couponInput}
+                              disabled={paying || couponBusy}
+                              onChange={(e) => {
+                                setCouponInput(
+                                  e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ""),
+                                );
+                                if (couponError) setCouponError(null);
+                              }}
+                              placeholder="e.g. OFF20"
+                              aria-invalid={Boolean(couponError)}
+                              aria-describedby={couponError ? "premium-coupon-error" : undefined}
+                              className={cn(
+                                "h-10 w-full rounded-lg border bg-white px-3 pr-8 font-mono text-sm font-semibold uppercase tracking-wide text-ink outline-none transition placeholder:font-sans placeholder:font-normal placeholder:normal-case placeholder:tracking-normal placeholder:text-muted/70 focus:border-ink",
+                                couponError ? "border-coral/60" : "border-hairline",
+                              )}
+                            />
+                            {couponInput && !couponBusy ? (
+                              <button
+                                type="button"
+                                aria-label="Clear coupon code"
+                                onClick={() => {
+                                  setCouponInput("");
+                                  setCouponError(null);
+                                }}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-0.5 text-muted hover:text-ink"
+                              >
+                                <X className="size-3.5" />
+                              </button>
+                            ) : null}
+                          </div>
+                          <Button
+                            type="submit"
+                            variant="secondary"
+                            disabled={paying || couponBusy || !couponInput.trim()}
+                            className="h-10 shrink-0 px-4"
+                          >
+                            {couponBusy ? (
+                              <Loader2 className="size-4 animate-spin" aria-label="Checking" />
+                            ) : (
+                              "Apply"
+                            )}
+                          </Button>
+                        </div>
+                        {couponError ? (
+                          <p
+                            id="premium-coupon-error"
+                            role="alert"
+                            className="mt-1.5 text-xs leading-snug text-coral"
+                          >
+                            {couponError}
+                          </p>
+                        ) : null}
+                      </form>
+                    )}
                   </div>
                 </div>
                 <p className="mt-2 text-xs leading-relaxed text-muted">

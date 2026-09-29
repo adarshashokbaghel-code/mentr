@@ -350,8 +350,20 @@ export type PremiumPaymentRow = {
   periodStart: string | null;
   periodEnd: string | null;
   method: string | null;
+  couponCode: string | null;
+  couponDiscountInr: number;
   createdAt: string | null;
   paidAt: string | null;
+};
+
+export type PremiumCouponQuote = {
+  couponId: string;
+  code: string;
+  months: number;
+  planPayInr: number;
+  discountInr: number;
+  finalInr: number;
+  validUntil: string;
 };
 
 export type PremiumMentorState = {
@@ -396,6 +408,7 @@ export const premiumMentorApi = {
       legalVersion?: string;
       currency?: PremiumCurrency;
       source?: string;
+      couponCode?: string | null;
     },
   ) =>
     request<{
@@ -409,6 +422,7 @@ export const premiumMentorApi = {
       discountPercent: number;
       discountInr: number;
       listUsd: number;
+      coupon: { code: string; discountInr: number } | null;
       receiptNumber: string;
       keyId: string;
       prefill: { email: string; name: string; contact: string };
@@ -420,8 +434,19 @@ export const premiumMentorApi = {
         legalVersion: opts?.legalVersion,
         currency: opts?.currency,
         source: opts?.source,
+        couponCode: opts?.couponCode || undefined,
       }),
       timeoutMs: 30_000,
+    }),
+
+  validateCoupon: (body: {
+    code: string;
+    months: 2 | 3 | 4;
+    currency: PremiumCurrency;
+  }) =>
+    request<{ coupon: PremiumCouponQuote }>("/premium-mentor/coupon/validate", {
+      method: "POST",
+      body: JSON.stringify(body),
     }),
 
   verify: (payload: {

@@ -7,6 +7,7 @@ import {
   AdminTrendChart,
 } from "@/components/admin/admin-ui";
 import { AdminConnectionsTable } from "@/components/admin/admin-connections-table";
+import { AdminCoupons } from "@/components/admin/admin-coupons";
 import { AdminEngagementTables } from "@/components/admin/admin-engagement-tables";
 import { AdminInteractions } from "@/components/admin/admin-interactions";
 import { AdminLearnTrack } from "@/components/admin/admin-learn";
@@ -43,6 +44,7 @@ import {
   Send,
   Star,
   Target,
+  Ticket,
   Users,
   Zap,
 } from "lucide-react";
@@ -54,6 +56,7 @@ const NAV = [
   { id: "featured", label: "Featured tutors", icon: Star },
   { id: "premium", label: "Premium mentors", icon: Crown },
   { id: "premium-reveals", label: "Premium reveals", icon: Eye },
+  { id: "coupons", label: "Coupon codes", icon: Ticket },
   { id: "requirements", label: "Board posts", icon: Megaphone },
   { id: "guest-requests", label: "Guest requests", icon: Send },
   { id: "instant-connect", label: "Instant Connect", icon: Zap },
@@ -472,6 +475,8 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           {section === "premium-reveals" && (
             <AdminPremiumReveals adminKey={adminKey} />
           )}
+
+          {section === "coupons" && <AdminCoupons adminKey={adminKey} />}
 
           {section === "instant-connect" && (
             <AdminInstantConnect adminKey={adminKey} />

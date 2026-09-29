@@ -13,10 +13,12 @@ import {
 } from "../services/premium-mentor-billing";
 import { serializePremiumCatalog } from "../lib/premium-mentor-plans";
 import { recordPremiumCheckoutEvent } from "../services/premium-checkout-tracking";
+import { quoteCouponForCheckout } from "../services/coupons";
 import {
   buildPremiumBillingContext,
   countryFromRequest,
   parsePremiumCurrency,
+  resolvePremiumCurrency,
 } from "../lib/premium-billing-geo";
 
 const router = Router();
@@ -69,6 +71,45 @@ router.post(
   },
 );
 
+/** Checkout "Apply coupon" — returns the discounted total for the chosen plan. */
+router.post(
+  "/coupon/validate",
+  requireAuth,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      if (!rateLimit(`prem-coupon:${req.auth!.sub}`, 15, 60_000)) {
+        res.status(429).json({
+          error: "Too many coupon attempts. Wait a minute, then try again.",
+          code: "RATE_LIMITED",
+        });
+        return;
+      }
+      const user = await User.findById(req.auth!.sub, { role: 1 });
+      if (!user || user.role !== "faculty") {
+        res.status(403).json({ error: "Only mentors can use coupons" });
+        return;
+      }
+      const result = await quoteCouponForCheckout({
+        code: req.body?.code,
+        userId: req.auth!.sub,
+        months: Number(req.body?.months),
+        currency: resolvePremiumCurrency({
+          country: countryFromRequest(req),
+          requested: parsePremiumCurrency(req.body?.currency),
+        }),
+      });
+      if (!result.ok) {
+        res.status(400).json({ error: result.error, code: result.code });
+        return;
+      }
+      res.json({ coupon: result.quote });
+    } catch (err) {
+      console.error("premium-mentor coupon validate error:", err);
+      res.status(500).json({ error: "Could not check coupon" });
+    }
+  },
+);
+
 /** Mentor premium status + paid history. */
 router.get(
   "/me",
@@ -117,6 +158,8 @@ router.post(
             : undefined,
         country: countryFromRequest(req),
         requestedCurrency: parsePremiumCurrency(req.body?.currency),
+        couponCode:
+          typeof req.body?.couponCode === "string" ? req.body.couponCode : null,
       });
       if ("error" in result) {
         const status =

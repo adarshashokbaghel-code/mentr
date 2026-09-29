@@ -922,3 +922,107 @@ export function fetchAdminPremiumReveals(
     stats: AdminPremiumRevealStats;
   }>(key, `/api/admin/premium-reveals${qs ? `?${qs}` : ""}`);
 }
+
+export type AdminCouponStatus =
+  | "active"
+  | "inactive"
+  | "scheduled"
+  | "expired"
+  | "exhausted";
+
+export type AdminCoupon = {
+  id: string;
+  code: string;
+  discountInr: number;
+  description: string;
+  active: boolean;
+  status: AdminCouponStatus;
+  validFrom: string;
+  validUntil: string;
+  planMonths: number[];
+  maxRedemptions: number | null;
+  perUserLimit: number;
+  createdAt: string;
+  stats: {
+    entries: number;
+    uniqueUsers: number;
+    applied: number;
+    rejected: number;
+    redemptions: number;
+    discountGivenInr: number;
+    revenueInr: number;
+  };
+};
+
+export type AdminCouponUsageEvent = {
+  id: string;
+  userId: string;
+  email: string;
+  name: string;
+  event: "applied" | "rejected" | "redeemed";
+  reason: string | null;
+  months: number | null;
+  planPayInr: number | null;
+  discountInr: number | null;
+  finalInr: number | null;
+  orderId: string | null;
+  paymentId: string | null;
+  createdAt: string;
+};
+
+export type AdminCouponInput = {
+  code: string;
+  discountInr: number;
+  planMonths: number[];
+  validFrom?: string;
+  validUntil?: string;
+  maxRedemptions?: number | null;
+  perUserLimit?: number;
+  description?: string;
+  active?: boolean;
+};
+
+export type AdminCouponPatch = Partial<
+  Pick<
+    AdminCouponInput,
+    "active" | "description" | "validUntil" | "maxRedemptions" | "perUserLimit"
+  >
+>;
+
+export function fetchAdminCoupons(key: string) {
+  return adminFetch<{ coupons: AdminCoupon[] }>(key, "/api/admin/coupons");
+}
+
+export function createAdminCoupon(
+  key: string,
+  body: AdminCouponInput,
+  adminPass: string,
+) {
+  return adminFetch<{ coupon: AdminCoupon }>(key, "/api/admin/coupons", {
+    method: "POST",
+    body: JSON.stringify({ ...body, adminPass }),
+  });
+}
+
+export function updateAdminCoupon(
+  key: string,
+  id: string,
+  body: AdminCouponPatch,
+  adminPass: string,
+) {
+  return adminFetch<{ coupon: AdminCoupon }>(
+    key,
+    `/api/admin/coupons/${encodeURIComponent(id)}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ ...body, adminPass }),
+    },
+  );
+}
+
+export function fetchAdminCouponUsage(key: string, id: string) {
+  return adminFetch<{ code: string; events: AdminCouponUsageEvent[] }>(
+    key,
+    `/api/admin/coupons/${encodeURIComponent(id)}/usage`,
+  );
+}

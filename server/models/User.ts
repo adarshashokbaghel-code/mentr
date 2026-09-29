@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 
 export const WEEK_DAYS = [
   "monday",
@@ -195,6 +195,10 @@ export interface IPremiumMentorPayment {
   termsAcceptedVersion?: string;
   /** Sanitized Razorpay payment snapshot (no PAN/card). */
   razorpaySnapshot?: Record<string, unknown>;
+  /** Coupon applied at checkout (INR only). amountInr is already net of it. */
+  couponId?: Types.ObjectId;
+  couponCode?: string;
+  couponDiscountInr?: number;
 }
 
 export interface IMentrPremium {
@@ -444,6 +448,9 @@ const premiumMentorPaymentSchema = new Schema<IPremiumMentorPayment>(
     termsAcceptedAt: { type: Date },
     termsAcceptedVersion: { type: String, trim: true },
     razorpaySnapshot: { type: Schema.Types.Mixed },
+    couponId: { type: Schema.Types.ObjectId, ref: "Coupon" },
+    couponCode: { type: String, trim: true, uppercase: true },
+    couponDiscountInr: { type: Number, min: 0 },
   },
   { _id: true },
 );
