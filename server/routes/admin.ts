@@ -24,6 +24,12 @@ import {
   deleteMarketingLink,
 } from "../services/marketing-links";
 import { getAdminStats } from "../services/admin-stats";
+import {
+  createAdminCoupon,
+  getAdminCouponUsage,
+  listAdminCoupons,
+  updateAdminCoupon,
+} from "../services/coupons";
 import { deleteAdminUser } from "../services/admin-delete-user";
 import { updateAdminUser } from "../services/admin-update-user";
 import {
@@ -204,6 +210,61 @@ router.post("/requirements/:id/close", requireAdminPass, async (req, res) => {
   } catch (err) {
     console.error("Admin close requirement error:", err);
     res.status(500).json({ error: "Failed to close post" });
+  }
+});
+
+router.get("/coupons", async (_req, res) => {
+  try {
+    const coupons = await listAdminCoupons();
+    res.json({ coupons });
+  } catch (err) {
+    console.error("Admin coupons list error:", err);
+    res.status(500).json({ error: "Failed to load coupons" });
+  }
+});
+
+router.post("/coupons", requireAdminPass, async (req, res) => {
+  try {
+    const result = await createAdminCoupon(req.body ?? {});
+    if ("error" in result) {
+      res.status(result.status).json({ error: result.error });
+      return;
+    }
+    res.status(201).json(result);
+  } catch (err) {
+    console.error("Admin coupon create error:", err);
+    res.status(500).json({ error: "Failed to create coupon" });
+  }
+});
+
+router.patch("/coupons/:id", requireAdminPass, async (req, res) => {
+  try {
+    const result = await updateAdminCoupon(String(req.params.id || ""), req.body ?? {});
+    if ("error" in result) {
+      res.status(result.status).json({ error: result.error });
+      return;
+    }
+    res.json(result);
+  } catch (err) {
+    console.error("Admin coupon update error:", err);
+    res.status(500).json({ error: "Failed to update coupon" });
+  }
+});
+
+router.get("/coupons/:id/usage", async (req, res) => {
+  try {
+    const result = await getAdminCouponUsage(
+      String(req.params.id || ""),
+      parseInt(String(req.query.limit || "300"), 10) || 300,
+    );
+    if ("error" in result) {
+      res.status(result.status).json({ error: result.error });
+      return;
+    }
+    res.json(result);
+  } catch (err) {
+    console.error("Admin coupon usage error:", err);
+    res.status(500).json({ error: "Failed to load coupon usage" });
   }
 });
 

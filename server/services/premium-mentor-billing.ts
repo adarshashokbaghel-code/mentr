@@ -1,6 +1,8 @@
 import crypto from "crypto";
+import { Types } from "mongoose";
 import Razorpay from "razorpay";
 import { config } from "../config";
+import { evaluateCoupon, recordCouponRedemption } from "./coupons";
 import {
   getPremiumPlan,
   planAmountMinor,
@@ -202,6 +204,8 @@ export function serializePremiumPayment(p: IPremiumMentorPayment) {
     periodStart: p.periodStart ? p.periodStart.toISOString() : null,
     periodEnd: p.periodEnd ? p.periodEnd.toISOString() : null,
     method: p.method || null,
+    couponCode: p.couponCode || null,
+    couponDiscountInr: p.couponDiscountInr || 0,
     createdAt: p.createdAt ? p.createdAt.toISOString() : null,
     paidAt: p.paidAt ? p.paidAt.toISOString() : null,
   };
@@ -244,6 +248,7 @@ export async function createPremiumMentorOrder(
     legalVersion?: string;
     country?: string | null;
     requestedCurrency?: PremiumCurrency | null;
+    couponCode?: string | null;
   },
 ) {
   if (!isPremiumRazorpayConfigured()) {
@@ -295,12 +300,38 @@ export async function createPremiumMentorOrder(
     country: opts.country ?? null,
     requested: opts.requestedCurrency ?? null,
   });
-  const amountMinor = planAmountMinor(plan, currency);
+  let coupon: {
+    id: string;
+    code: string;
+    discountInr: number;
+    finalInr: number;
+  } | null = null;
+  if (opts.couponCode && String(opts.couponCode).trim()) {
+    const evaluated = await evaluateCoupon({
+      code: opts.couponCode,
+      userId,
+      months: plan.months,
+      currency,
+    });
+    if (!evaluated.ok) {
+      return { error: evaluated.error, code: evaluated.code };
+    }
+    coupon = {
+      id: evaluated.quote.couponId,
+      code: evaluated.quote.code,
+      discountInr: evaluated.quote.discountInr,
+      finalInr: evaluated.quote.finalInr,
+    };
+  }
+
+  const amountMinor = coupon ? coupon.finalInr * 100 : planAmountMinor(plan, currency);
   // USD rows keep an INR estimate until Razorpay reports the settled base_amount.
   const amountInr =
     currency === "USD"
       ? Math.max(1, Math.round((plan.payUsdCents / 100) * PREMIUM_USD_TO_INR))
-      : plan.payInr;
+      : coupon
+        ? coupon.finalInr
+        : plan.payInr;
   const amountPaise = amountInr * 100;
   const billingCountry = opts.country || undefined;
   const receiptNumber = makeReceiptNumber(userId);
@@ -315,6 +346,7 @@ export async function createPremiumMentorOrder(
       months: String(plan.months),
       receiptNumber,
       ...(billingCountry ? { country: billingCountry } : {}),
+      ...(coupon ? { coupon: coupon.code } : {}),
     },
   });
 
@@ -337,6 +369,13 @@ export async function createPremiumMentorOrder(
     createdAt: new Date(),
     termsAcceptedAt: new Date(),
     termsAcceptedVersion: opts.legalVersion || undefined,
+    ...(coupon
+      ? {
+          couponId: new Types.ObjectId(coupon.id),
+          couponCode: coupon.code,
+          couponDiscountInr: coupon.discountInr,
+        }
+      : {}),
   };
 
   user.premiumPayments.push(row);
@@ -356,6 +395,9 @@ export async function createPremiumMentorOrder(
     discountPercent: plan.discountPercent,
     discountInr: Math.max(0, plan.listInr - plan.payInr),
     listUsd: usdDisplayForMonths(plan.months),
+    coupon: coupon
+      ? { code: coupon.code, discountInr: coupon.discountInr }
+      : null,
     receiptNumber,
     keyId: config.razorpay.keyId,
     prefill: {
@@ -520,7 +562,9 @@ async function applyPremiumPayment(opts: {
   }
 
   const plan = getPremiumPlan(row.months);
-  if (!plan || planAmountMinor(plan, currency) !== expectedMinor) {
+  const couponMinor =
+    currency === "INR" && row.couponDiscountInr ? row.couponDiscountInr * 100 : 0;
+  if (!plan || planAmountMinor(plan, currency) - couponMinor !== expectedMinor) {
     return { error: "Plan amount mismatch", code: "AMOUNT_MISMATCH" as const };
   }
 
@@ -626,6 +670,21 @@ async function applyPremiumPayment(opts: {
     claimed.premiumPayments?.find(
       (p: IPremiumMentorPayment) => p.razorpayOrderId === orderId,
     ) || row;
+
+  if (row.couponId && row.couponDiscountInr) {
+    await recordCouponRedemption({
+      couponId: String(row.couponId),
+      userId,
+      orderId,
+      paymentId,
+      months: plan.months,
+      planPayInr: plan.payInr,
+      discountInr: row.couponDiscountInr,
+      finalInr: plan.payInr - row.couponDiscountInr,
+    }).catch((err) =>
+      console.error("[premium-mentor] coupon redemption log failed:", err),
+    );
+  }
 
   return {
     alreadyApplied: false as const,
