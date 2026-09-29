@@ -19,6 +19,7 @@ import { SNAP_GRADE_ARTICLES } from "./snap-grade";
 import { PARENT_KIDS_SEO_ARTICLES } from "./parent-kids-seo";
 import { AI_ANSWER_GUIDES } from "./ai-answer-guides";
 import { PARENT_ACQUISITION_SEP2026 } from "./parent-acquisition-sep2026";
+import { COMPETITOR_ALTERNATIVES_SEP2026 } from "./competitor-alternatives-sep2026";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
@@ -42,6 +43,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...PARENT_KIDS_SEO_ARTICLES,
   ...AI_ANSWER_GUIDES,
   ...PARENT_ACQUISITION_SEP2026,
+  ...COMPETITOR_ALTERNATIVES_SEP2026,
 };
 
 export function getArticleContent(slug: string): ArticleContent {

@@ -724,7 +724,10 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
+      { label: "All tutor platforms compared side by side (2026)", href: "/comparison" },
       { label: "Mentr vs UrbanPro full comparison", href: "/blog/mentr-vs-urbanpro" },
+      { label: "Sulekha tutor alternatives", href: "/blog/sulekha-tutor-alternatives" },
+      { label: "Vedantu alternatives for one-on-one tuition", href: "/blog/vedantu-alternatives-india" },
       { label: "MyPrivateTutor alternatives", href: "/blog/myprivatetutor-alternatives-india" },
       { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
       { label: "Justdial tutor alternatives", href: "/blog/justdial-tutor-alternatives" },

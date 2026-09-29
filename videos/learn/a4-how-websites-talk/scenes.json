@@ -1,0 +1,136 @@
+{
+  "id": "A4",
+  "title": "How Websites Talk to Each Other",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "CS · How Computers Work",
+  "slug": "a4-how-websites-talk",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 24,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "-8%",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.45,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a4-welcome",
+      "beats": [
+        { "vo": "Hello, champ! Welcome back to Mentr Learn. Are you ready for Chapter four?", "caption": "Hello, champ! Ready for Chapter 4?", "focus": "hello", "sfx": "pop" },
+        { "vo": "So far, we learned what a computer is, how it thinks in ones and zeros, and the devices that bring information in and out.", "caption": "Ch 1: Computers · Ch 2: Binary · Ch 3: Devices", "focus": "bridge" },
+        { "vo": "Today's lesson is: How Websites Talk to Each Other.", "caption": "Chapter 4 · How Websites Talk to Each Other", "focus": "chapter", "sfx": "chime" },
+        { "vo": "Say it with me… Websites… talk… to each other!", "caption": "Say with me: Websites talk to each other!", "focus": "say", "pause": 0.8 },
+        { "vo": "By the end, you will know the secret trip a website takes to reach your screen.", "caption": "The secret trip of a website", "focus": "go", "sfx": "whoosh", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "hook",
+      "visual": "a4-hook",
+      "beats": [
+        { "vo": "When you open a cartoon on a tablet, where does that cartoon come from?", "caption": "Where does the cartoon come from?", "focus": "ask" },
+        { "vo": "Is it hiding inside your tablet? Pause and think.", "caption": "Is it hiding inside your tablet? Think!", "focus": "guess", "pause": 2.2 },
+        { "vo": "Here is the surprise. Most of it is not inside your tablet at all. It comes from another computer, far, far away!", "caption": "It comes from another computer, far away!", "focus": "answer", "sfx": "whoosh", "sfxAt": 0.45 }
+      ]
+    },
+    {
+      "id": "net",
+      "visual": "a4-net",
+      "beats": [
+        { "vo": "That is the internet. The internet is not one big box. It is millions of computers, all joined together, all over the world.", "caption": "Internet = millions of computers joined together", "focus": "intro" },
+        { "vo": "Some computers ask for things — like your tablet, phone, or laptop. Let's call them askers.", "caption": "ASKERS: your tablet, phone, laptop", "focus": "asker", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Other computers answer. They keep websites and videos ready, all day and all night. They are called servers.", "caption": "ANSWERERS: servers keep websites ready", "focus": "server", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "So the internet is many computers asking and answering, again and again.", "caption": "Internet = asking and answering", "focus": "rule" },
+        { "vo": "Say it with me: Ask… and answer!", "caption": "Say: Ask… and answer!", "focus": "say", "pause": 0.6 }
+      ]
+    },
+    {
+      "id": "shop",
+      "visual": "a4-shop",
+      "beats": [
+        { "vo": "Now, what is a website? A website is like a shop on the internet.", "caption": "A website is like a shop", "focus": "intro" },
+        { "vo": "Think of your home. It has an address, so a friend or a delivery person can find it.", "caption": "Your home has an address", "focus": "home" },
+        { "vo": "Every website also has an address. It is called a URL. You type it at the top of the screen.", "caption": "A website's address = URL", "focus": "url", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "For example, mentr dot com. The name tells us which shop, and dot com is like the end of the address.", "caption": "mentr.com → the name + the ending", "focus": "parts" },
+        { "vo": "Say it with me: U… R… L… means website address!", "caption": "Say: URL = website address", "focus": "say", "pause": 0.6 }
+      ]
+    },
+    {
+      "id": "roads",
+      "visual": "a4-roads",
+      "beats": [
+        { "vo": "But how does your question travel so far? On roads! Not real roads — invisible ones.", "caption": "Questions travel on invisible roads", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.4 },
+        { "vo": "Wi-Fi is a road at home or at school. It comes from a small box called a router.", "caption": "Wi-Fi: a road from the router", "focus": "wifi" },
+        { "vo": "Mobile data is another road. It travels through big towers, so it works even outside your home.", "caption": "Mobile data: a road through towers", "focus": "data" },
+        { "vo": "Remember: roads do not make the website. They just carry the question, and the answer.", "caption": "Roads only CARRY questions and answers", "focus": "carry" }
+      ]
+    },
+    {
+      "id": "trip",
+      "visual": "a4-trip",
+      "beats": [
+        { "vo": "Now let's follow one full trip, step by step.", "caption": "Follow one trip, step by step", "focus": "intro" },
+        { "vo": "Step one: you type the address, mentr dot com, and press enter.", "caption": "Step 1: You type the address", "focus": "type", "sfx": "pop" },
+        { "vo": "Step two: your device sends a message on the road: Please send me this page! This message is called a request.", "caption": "Step 2: Your device asks — a request", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.15 },
+        { "vo": "Step three: the server gets the request, and finds the page.", "caption": "Step 3: The server finds the page", "focus": "find", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Step four: the server sends the page back, on the road, to your device.", "caption": "Step 4: The server sends it back", "focus": "reply", "sfx": "whoosh", "sfxAt": 0.15 },
+        { "vo": "Step five: the page appears on your screen. Ta-da!", "caption": "Step 5: The page appears!", "focus": "appear", "sfx": "chime", "sfxAt": 0.35 },
+        { "vo": "And guess what? This whole trip usually takes less than one second!", "caption": "All in less than 1 second!", "focus": "fast" }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "a4-order",
+      "beats": [
+        { "vo": "Game time! Here are three steps, all mixed up.", "caption": "Game: fix the mixed-up steps", "focus": "intro", "sfx": "pop" },
+        { "vo": "Page appears. Type address. Device asks. Which comes first, second, and third? Think!", "caption": "Put them in order — think!", "focus": "ask", "pause": 2.6 },
+        { "vo": "First, type the address. Second, your device asks. Third, the page appears. Well done!", "caption": "Type address → Device asks → Page appears", "focus": "answer", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "video",
+      "visual": "a4-video",
+      "beats": [
+        { "vo": "One more real-life example. When you watch a cartoon online…", "caption": "Watching a cartoon online", "focus": "intro" },
+        { "vo": "…your tablet does not get the whole cartoon at once. It keeps asking for the next little piece, and the server keeps answering.", "caption": "Ask for the next piece… answer… again!", "focus": "pieces" },
+        { "vo": "If the road is slow, the pieces come late. That is why a video sometimes stops and shows a spinning circle!", "caption": "Slow road → spinning circle (buffering)", "focus": "slow" }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a4-check",
+      "beats": [
+        { "vo": "Practice check — the same kind of question you will see in the quiz.", "caption": "Practice check", "focus": "intro" },
+        { "vo": "When you open a website, what happens first? The page appears, or your device asks for it?", "caption": "First: page appears, or device asks?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Think: can a server send a page before anyone asks for it?", "caption": "Hint: can a server answer before you ask?", "focus": "hint", "pause": 0.8 },
+        { "vo": "Right! Your device asks first. Then the page appears.", "caption": "Answer: your device ASKS first", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a4-recap",
+      "beats": [
+        { "vo": "Let's lock it in. The internet is many computers, asking and answering.", "caption": "Internet = computers asking & answering", "focus": "net" },
+        { "vo": "A website is like a shop, and its address is called a URL.", "caption": "Website = shop · Address = URL", "focus": "url" },
+        { "vo": "Wi-Fi and mobile data are roads that carry the questions and answers.", "caption": "Wi-Fi & mobile data = roads", "focus": "roads" },
+        { "vo": "And the trip: type the address, your device asks, the page appears.", "caption": "Type → Ask → Page appears", "focus": "steps" },
+        { "vo": "Chapter four done! Now you know how websites talk. Superb work, champ!", "caption": "Chapter 4 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Next, a short quiz to practise. Tap Finish when you are ready. See you there, champ!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

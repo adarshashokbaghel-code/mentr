@@ -99,6 +99,14 @@ export default async function VsPage({
               More comparisons
             </h2>
             <ul className="mt-3 flex flex-wrap gap-2">
+              <li>
+                <Link
+                  href="/comparison"
+                  className="inline-flex rounded-full border border-ink bg-butter px-3 py-1.5 text-sm font-semibold hover:text-coral"
+                >
+                  All platforms compared (2026)
+                </Link>
+              </li>
               {VS_PAGES.filter((p) => p.slug !== slug).map((p) => (
                 <li key={p.slug}>
                   <Link
