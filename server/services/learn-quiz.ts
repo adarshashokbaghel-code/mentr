@@ -2,6 +2,8 @@ import { A1_LESSON_SEED, A1_QUIZ_SEED, A1_VIDEO_ID } from "../lib/learn-a1-quiz-
 import { A2_LESSON_SEED, A2_QUIZ_SEED, A2_VIDEO_ID } from "../lib/learn-a2-quiz-seed";
 import { A3_LESSON_SEED, A3_QUIZ_SEED, A3_VIDEO_ID } from "../lib/learn-a3-quiz-seed";
 import { A4_LESSON_SEED, A4_QUIZ_SEED, A4_VIDEO_ID } from "../lib/learn-a4-quiz-seed";
+import { getLessonContent, getLessonMeta } from "../../src/lib/learn-content";
+import { hasLessonVideo } from "../../src/lib/learn-curriculum";
 import { LearnLesson } from "../models/LearnLesson";
 import {
   LearnQuizQuestion,
@@ -170,6 +172,70 @@ export async function ensureA4LessonSeeded() {
   return lesson!;
 }
 
+/** Durations of published lesson videos beyond the hand-seeded A1–A4. */
+const PUBLISHED_VIDEO_SECONDS: Record<string, number> = { A5: 211 };
+
+/** Seed lesson + quiz for any module in the shared content bank (A5+, B*, C*). */
+export async function ensureBankLessonSeeded(moduleId: string) {
+  const id = moduleId.trim().toUpperCase();
+  const content = getLessonContent(id);
+  const meta = getLessonMeta(id);
+  if (!content?.quiz.length || !meta) return null;
+
+  const videoSeconds = PUBLISHED_VIDEO_SECONDS[id] ?? 0;
+  const hasVideo = hasLessonVideo(id) && videoSeconds > 0;
+  const videoId = `vid_${id.toLowerCase()}_${meta.slug}`;
+
+  const lesson = await LearnLesson.findOneAndUpdate(
+    { moduleId: id },
+    {
+      $set: {
+        videoId,
+        moduleId: id,
+        title: meta.title,
+        unitId: meta.unitId,
+        unitTitle: meta.unitTitle,
+        trackId: meta.trackId,
+        chapterLabel: meta.chapterLabel,
+        level: meta.level,
+        videoSrc: hasVideo ? `/learn/lessons/${id}.mp4` : "",
+        captionsSrc: hasVideo ? `/learn/lessons/${id}.vtt` : "",
+        durationSec: videoSeconds,
+        status: "published",
+      },
+    },
+    { upsert: true, returnDocument: "after" },
+  );
+
+  const keepIds: string[] = [];
+  for (const [i, q] of content.quiz.entries()) {
+    const questionId = `${id}-Q${String(i + 1).padStart(2, "0")}`;
+    keepIds.push(questionId);
+    await LearnQuizQuestion.findOneAndUpdate(
+      { questionId },
+      {
+        $set: {
+          ...q,
+          questionId,
+          sortOrder: i + 1,
+          videoId,
+          moduleId: id,
+          lesson: lesson!._id,
+          active: true,
+        },
+      },
+      { upsert: true },
+    );
+  }
+
+  await LearnQuizQuestion.updateMany(
+    { moduleId: id, questionId: { $nin: keepIds } },
+    { $set: { active: false } },
+  );
+
+  return lesson!;
+}
+
 export async function getLessonQuizForParent(
   userId: string,
   moduleId: string,
@@ -190,6 +256,8 @@ export async function getLessonQuizForParent(
     await ensureA3LessonSeeded();
   } else if (id === "A4") {
     await ensureA4LessonSeeded();
+  } else {
+    await ensureBankLessonSeeded(id);
   }
 
   const lesson = await LearnLesson.findOne({

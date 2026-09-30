@@ -2,6 +2,8 @@
  * Seed Indian parent profiles (42 real contacts) and open board requirements.
  * Purges old foreign / @mentr.in / @mentr.local demo parents on --reset.
  *
+ * Contact data lives in scripts/private/seed-parent-profiles.ts (gitignored) — keep it off GitHub.
+ *
  * Run:  npx tsx scripts/seed-parent-profiles.ts
  * Reset: npx tsx scripts/seed-parent-profiles.ts --reset
  */
@@ -17,7 +19,7 @@ import {
   ALL_SEED_PARENTS,
   SEED_PARENT_SOURCE,
   SEED_REQUIREMENTS,
-} from "../src/lib/seed-parent-profiles";
+} from "./private/seed-parent-profiles";
 
 function shareToken(): string {
   return randomBytes(12).toString("base64url");

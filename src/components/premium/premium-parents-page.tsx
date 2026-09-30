@@ -62,6 +62,7 @@ import {
   ShieldAlert,
   Sparkles,
   Unlock,
+  UserRound,
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -181,34 +182,10 @@ export function PremiumParentsPage() {
     };
   }, [authLoading, user, load]);
 
+  // The API returns parents already ranked; filtering keeps that order.
   const filtered = useMemo(() => {
-    let list = board === "all" ? [...parents] : parents.filter((p) => p.board === board);
+    let list = board === "all" ? parents : parents.filter((p) => p.board === board);
     if (filter === "hiring") list = list.filter((p) => p.hasPosted);
-    list.sort((a, b) => {
-      // Genuine (real signups) always above seed / backfill
-      const aSeed = a.isSeed ? 1 : 0;
-      const bSeed = b.isSeed ? 1 : 0;
-      if (aSeed !== bSeed) return aSeed - bSeed;
-
-      // New joins (post-cutoff) float to the top — newest first
-      const aNew = a.isNewJoin ? 1 : 0;
-      const bNew = b.isNewJoin ? 1 : 0;
-      if (aNew !== bNew) return bNew - aNew;
-      if (aNew && bNew) {
-        return (b.joinedAt || "").localeCompare(a.joinedAt || "");
-      }
-
-      // Legacy ranking for parents already on the list before the cutoff
-      if (filter === "hiring") {
-        if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
-        return (b.joinedAt || "").localeCompare(a.joinedAt || "");
-      }
-      if (a.contactRevealed !== b.contactRevealed)
-        return a.contactRevealed ? -1 : 1;
-      if (a.openPosts !== b.openPosts) return b.openPosts - a.openPosts;
-      if (a.hasPosted !== b.hasPosted) return a.hasPosted ? -1 : 1;
-      return (b.joinedAt || "").localeCompare(a.joinedAt || "");
-    });
     return list;
   }, [parents, filter, board]);
 
@@ -241,6 +218,7 @@ export function PremiumParentsPage() {
                 ...p,
                 contactRevealed: true,
                 previouslyRevealed: true,
+                name: res.reveal.parentName || "Parent",
                 phone: res.reveal.parentPhone,
                 email: res.reveal.parentEmail,
                 whatsappUrl: res.reveal.whatsappUrl,
@@ -251,6 +229,8 @@ export function PremiumParentsPage() {
       );
       setJustUnlocked(parentId);
       window.setTimeout(() => setJustUnlocked(null), 1600);
+      // Photo and other unlocked fields come from the server on refresh.
+      void load();
     } catch (e) {
       const errQuota =
         e instanceof ApiError
@@ -351,7 +331,7 @@ export function PremiumParentsPage() {
                 type="search"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by name, city, or area…"
+                placeholder="Search by city or area…"
                 className="h-11 rounded-xl border-hairline bg-white pl-9 shadow-none focus-visible:border-ink/30"
               />
             </div>
@@ -549,7 +529,8 @@ function ParentCard({
   const alreadyUsed = locked && Boolean(p.previouslyRevealed);
   const location = [p.area, p.city].filter(Boolean).join(", ") || "Location N/A";
   const joined = formatJoined(p.joinedAt);
-  const initials = initialsOf(p.name, p.initials);
+  const initials = p.name ? initialsOf(p.name, p.initials) : "";
+  const genericTitle = `Parent in ${p.city || p.country || "India"}`;
 
   return (
     <article
@@ -563,18 +544,29 @@ function ParentCard({
     >
       {/* Photo */}
       <div className="relative aspect-[16/10] overflow-hidden bg-cream-band sm:aspect-[5/4]">
-        <Avatar className="absolute inset-0 size-full rounded-none">
-          {p.imageUrl ? (
-            <AvatarImage
-              src={p.imageUrl}
-              alt={p.name}
-              className="object-cover transition duration-500 group-hover:scale-[1.04]"
-            />
-          ) : null}
-          <AvatarFallback className="rounded-none bg-gradient-to-br from-cream-band to-lavender/40 text-2xl font-bold text-ink/50">
-            {initials || "P"}
-          </AvatarFallback>
-        </Avatar>
+        {p.name ? (
+          <Avatar className="absolute inset-0 size-full rounded-none">
+            {p.imageUrl ? (
+              <AvatarImage
+                src={p.imageUrl}
+                alt={p.name}
+                className="object-cover transition duration-500 group-hover:scale-[1.04]"
+              />
+            ) : null}
+            <AvatarFallback className="rounded-none bg-gradient-to-br from-cream-band to-lavender/40 text-2xl font-bold text-ink/50">
+              {initials || "P"}
+            </AvatarFallback>
+          </Avatar>
+        ) : (
+          <div
+            aria-hidden
+            className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-cream-band via-lavender/30 to-sage-wash"
+          >
+            <div className="flex size-20 items-center justify-center rounded-full bg-white/60 blur-[2px]">
+              <UserRound className="size-10 text-ink/30" />
+            </div>
+          </div>
+        )}
 
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink/35 to-transparent" />
 
@@ -638,9 +630,19 @@ function ParentCard({
       {/* Body */}
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
-          <h2 className="truncate text-base font-bold tracking-tight text-ink">
-            {p.name}
-          </h2>
+          {p.name ? (
+            <h2 className="truncate text-base font-bold tracking-tight text-ink">
+              {p.name}
+            </h2>
+          ) : (
+            <h2 className="flex items-center gap-2 text-base font-bold tracking-tight text-ink">
+              <span className="truncate">{genericTitle}</span>
+              <span
+                aria-hidden
+                className="h-3.5 w-16 shrink-0 select-none rounded bg-ink/15 blur-[3px]"
+              />
+            </h2>
+          )}
           <p className="mt-1 flex items-center gap-1 text-xs text-muted">
             <MapPin className="h-3 w-3 shrink-0 text-coral" />
             <span className="truncate">{location}</span>
@@ -692,10 +694,10 @@ function ParentCard({
           >
             <p className="flex items-center gap-1.5 text-sm font-semibold tabular-nums text-ink">
               <Phone className="h-3.5 w-3.5 text-muted" />
-              {pending ? "N/A" : p.phone || "••••••••••"}
+              {locked ? "+91 00000 00000" : pending ? "N/A" : p.phone || "N/A"}
             </p>
             <p className="truncate pl-5 text-xs text-muted">
-              {p.email || "N/A"}
+              {locked ? "hidden@mentr.in" : p.email || "N/A"}
             </p>
           </div>
 

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LiveSubjectCount } from "@/components/landing/live-subject-count";
 import { SUBJECTS } from "@/lib/teachers";
 import {
   BookOpen,
@@ -31,7 +32,7 @@ export function SubjectGallery() {
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold text-coral">
-              {SUBJECTS.length}+ subjects · zero upcharges
+<LiveSubjectCount /> subjects · zero upcharges
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[40px]">
               Subjects parents search.{" "}

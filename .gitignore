@@ -63,3 +63,6 @@ public/ncert/**/*.pdf
 # Google MCP service-account keys (never commit)
 .google-mcp/*.json
 **/*service-account*.json
+
+# Real contact data for local seeding — never commit
+/scripts/private/

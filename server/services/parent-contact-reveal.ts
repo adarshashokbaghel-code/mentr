@@ -166,16 +166,17 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
     email: { $not: /@(mentr\.local|mentr\.in)$/i },
   };
 
+  // Location-only search: matching on name or email would let a mentor confirm
+  // who a locked parent is without spending a reveal.
   if (opts.query?.trim()) {
     const rx = new RegExp(
-      opts.query.trim().replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+      opts.query.trim().slice(0, 60).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
       "i",
     );
     filter.$or = [
-      { "parentProfile.name": rx },
       { "parentProfile.city": rx },
       { "parentProfile.area": rx },
-      { email: rx },
+      { "parentProfile.country": rx },
     ];
   }
 
@@ -251,22 +252,17 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
     const board = pp?.board ?? derived.board;
     const rawPhone = String(pp?.phoneNumber || "").trim();
     const detailsPending = !rawPhone;
-    const name = pp?.name?.trim() || "New parent";
-    const fullPhone = waPhone(rawPhone);
-    const phone = detailsPending
-      ? ""
-      : active
-        ? reveal?.parentPhone || fullPhone
-        : maskPhone(rawPhone);
-    const email = active
-      ? reveal?.parentEmail || p.email || null
-      : maskEmail(p.email || "");
+    // Locked rows carry no identity or contact data at all — not even masked
+    // fragments — so nothing useful can be read from the network response.
+    const name = active ? pp?.name?.trim() || "Parent" : null;
+    const phone = active && !detailsPending ? reveal?.parentPhone || waPhone(rawPhone) : "";
+    const email = active ? reveal?.parentEmail || p.email || null : null;
 
     return {
       id: pid,
       name,
-      initials: pp?.name?.trim() ? initialsOf(name) : "",
-      imageUrl: (p.profileImageUrl || "").trim() || null,
+      initials: name ? initialsOf(name) : "",
+      imageUrl: active ? (p.profileImageUrl || "").trim() || null : null,
       city: pp?.city || null,
       area: pp?.area || null,
       country: derived.country,
@@ -288,7 +284,6 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
           }
         : null,
       joinedAt: p.createdAt?.toISOString?.() ?? null,
-      lastLoginAt: p.lastLoginAt?.toISOString?.() ?? null,
       contactRevealed: active,
       previouslyRevealed,
       isSeed: isSeedRegistrationSource(p.registrationSource),
@@ -330,25 +325,15 @@ export async function listParentsForPremiumMentor(opts: ParentListOpts) {
   });
 
   return {
-    parents: list,
+    // Seed status is internal — used for ordering above, never sent to clients.
+    parents: list.map((row) => {
+      const { isSeed, ...rest } = row;
+      void isSeed;
+      return rest;
+    }),
     quota,
     premiumActive: true,
   };
-}
-
-function maskPhone(raw: string): string {
-  const digits = String(raw || "").replace(/\D/g, "");
-  if (digits.length < 4) return "••••••••••";
-  return `${"•".repeat(Math.max(0, digits.length - 4))}${digits.slice(-4)}`;
-}
-
-function maskEmail(email: string): string {
-  const e = String(email || "").trim();
-  if (!e.includes("@")) return "••••@••••";
-  const [user, domain] = e.split("@");
-  const u = user || "";
-  const visible = u.slice(0, Math.min(2, u.length));
-  return `${visible}${"•".repeat(Math.max(3, u.length - visible.length))}@${domain}`;
 }
 
 export async function revealParentContact(opts: {
@@ -521,8 +506,13 @@ export async function listRevealHistory(mentorId: string, limit = 50) {
     .sort({ revealedAt: -1 })
     .limit(Math.min(Math.max(limit, 1), 100));
   const quota = await getRevealQuota(mentorId);
+  const now = Date.now();
   return {
-    reveals: rows.map(serializeReveal),
+    reveals: rows.map((row) => {
+      const serialized = serializeReveal(row);
+      if (isRevealActive(row.revealedAt, now)) return serialized;
+      return { ...serialized, parentPhone: "", parentEmail: null, whatsappUrl: null };
+    }),
     quota,
   };
 }

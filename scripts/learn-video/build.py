@@ -175,6 +175,8 @@ def sfx_samples(name: str) -> tuple[float, ...]:
     if name == "success":
         notes = [(0, 523.3, 1.0), (0.08, 659.3, 0.9), (0.16, 784.0, 0.9), (0.24, 1046.5, 1.0)]
         return tuple(_synth(1.1, notes, 6, 0.26))
+    if name == "buzz":
+        return tuple(_synth(0.38, [(0, 196.0, 1.0), (0.0, 207.7, 0.7), (0.16, 174.6, 0.9)], 7, 0.34))
     if name == "whoosh":
         rng = random.Random(7)
         dur = 0.5
@@ -220,10 +222,25 @@ def media_duration(path: Path) -> float:
     raise RuntimeError(f"Could not read duration for {path}")
 
 
+TRIM_SILENCE_AF = (
+    "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.02,"
+    "areverse,"
+    "silenceremove=start_periods=1:start_threshold=-50dB:start_silence=0.04,"
+    "areverse"
+)
+
+VOICE_POLISH_AF = (
+    "highpass=f=70,"
+    "equalizer=f=3200:t=q:w=1.2:g=2.5,"
+    "acompressor=threshold=-20dB:ratio=2.5:attack=5:release=80:makeup=1.5,"
+    "loudnorm=I=-16:TP=-1.5:LRA=9"
+)
+
+
 async def synthesize_beat(
-    text: str, voice: str, rate: str, out_mp3: Path
+    text: str, voice: str, rate: str, out_mp3: Path, pitch: str = "+0Hz", trim: bool = False
 ) -> tuple[float, Path]:
-    communicate = edge_tts.Communicate(text, voice=voice, rate=rate)
+    communicate = edge_tts.Communicate(text, voice=voice, rate=rate, pitch=pitch)
     await communicate.save(str(out_mp3))
     wav = out_mp3.with_suffix(".wav")
     subprocess.run(
@@ -232,6 +249,7 @@ async def synthesize_beat(
             "-y",
             "-i",
             str(out_mp3),
+            *(["-af", TRIM_SILENCE_AF] if trim else []),
             "-ar",
             "44100",
             "-ac",
@@ -2268,6 +2286,770 @@ def render_a4(draw, brand: dict[str, str], visual: str, focus: str, progress: fl
     return False
 
 
+# ---------------------------------------------------------------------------
+# A5 · Being Safe Online — safety kit + scenes
+# ---------------------------------------------------------------------------
+
+DANGER = (224, 62, 62)
+DANGER_SOFT = (253, 232, 230)
+GOLD = (255, 186, 60)
+HAIR = (40, 34, 30)
+PERSON_COLORS = {
+    "kid": (255, 106, 26), "friend": (255, 186, 60), "mom": (123, 97, 214), "dad": (72, 118, 214),
+    "teacher": (13, 148, 136), "nani": (206, 110, 160), "mystery": (128, 136, 150),
+}
+
+
+def draw_shield(draw, cx: float, cy: float, s: float, color, mark: str = "check") -> None:
+    def S(v: float) -> float:
+        return v * s
+    shape = [(0, -120), (100, -84), (92, 20), (0, 128), (-92, 20), (-100, -84)]
+    draw.polygon([(cx + S(x) + S(8), cy + S(y) + S(10)) for x, y in shape], fill=SHADOW)
+    draw.polygon([(cx + S(x), cy + S(y)) for x, y in shape], fill=color)
+    draw.polygon([(cx + S(x) * 0.8, cy + S(y) * 0.8 - S(4)) for x, y in shape], outline=(255, 255, 255),
+                 width=max(2, int(S(6))))
+    if mark == "check":
+        draw.line([(cx - S(40), cy), (cx - S(10), cy + S(32)), (cx + S(44), cy - S(30))], fill=(255, 255, 255),
+                  width=max(3, int(S(16))), joint="curve")
+    elif mark == "lock":
+        draw_padlock(draw, cx, cy + S(4), s * 0.42, (255, 255, 255), keyhole=color, shadow=False)
+    elif mark:
+        text_at(draw, mark, cx, cy - S(52), load_font(max(12, int(S(96))), bold=True), (255, 255, 255))
+
+
+def draw_padlock(draw, cx: float, cy: float, s: float, color, open_t: float = 0.0,
+                 keyhole=DEV_DEEP, shadow: bool = True) -> None:
+    def S(v: float) -> float:
+        return v * s
+    lift = S(46) * clamp01(open_t)
+    sw = max(3, int(S(20)))
+    draw.arc((cx - S(56), cy - S(128) - lift, cx + S(56), cy - S(16) - lift), 180, 360, fill=DEV_DARK, width=sw)
+    draw.line((cx - S(56) + sw / 2, cy - S(72) - lift, cx - S(56) + sw / 2, cy - S(20) - lift * 0.2),
+              fill=DEV_DARK, width=sw)
+    draw.line((cx + S(56) - sw / 2, cy - S(72) - lift, cx + S(56) - sw / 2, cy - S(20) - lift), fill=DEV_DARK, width=sw)
+    if shadow:
+        draw.rounded_rectangle((cx - S(88) + S(8), cy - S(28) + S(10), cx + S(88) + S(8), cy + S(104) + S(10)),
+                               radius=S(22), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(88), cy - S(28), cx + S(88), cy + S(104)), radius=S(22), fill=color)
+    draw.ellipse((cx - S(18), cy + S(14), cx + S(18), cy + S(50)), fill=keyhole)
+    draw.polygon([(cx - S(10), cy + S(40)), (cx + S(10), cy + S(40)), (cx + S(14), cy + S(80)), (cx - S(14), cy + S(80))],
+                 fill=keyhole)
+
+
+def draw_key(draw, cx: float, cy: float, s: float, color) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.ellipse((cx - S(130) + S(6), cy - S(52) + S(8), cx - S(26) + S(6), cy + S(52) + S(8)), fill=SHADOW)
+    draw.ellipse((cx - S(130), cy - S(52), cx - S(26), cy + S(52)), fill=color)
+    draw.ellipse((cx - S(98), cy - S(20), cx - S(58), cy + S(20)), fill=(255, 255, 255))
+    draw.rounded_rectangle((cx - S(36), cy - S(14), cx + S(130), cy + S(14)), radius=S(6), fill=color)
+    for tx, th in ((S(70), S(44)), (S(104), S(32))):
+        draw.rectangle((cx + tx, cy, cx + tx + S(20), cy + th), fill=color)
+
+
+def draw_person(draw, cx: float, cy: float, s: float, kind: str, t: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    body = PERSON_COLORS.get(kind, (128, 136, 150))
+    cy = cy + S(6) * math.sin(t * math.pi * 4)
+    draw.chord((cx - S(96) + S(6), cy + S(46) + S(8), cx + S(96) + S(6), cy + S(236) + S(8)), 180, 360, fill=SHADOW)
+    draw.chord((cx - S(96), cy + S(46), cx + S(96), cy + S(236)), 180, 360, fill=body)
+    r = S(64)
+    if kind == "mystery":
+        draw.ellipse((cx - r, cy - r, cx + r, cy + r), fill=body)
+        text_at(draw, "?", cx, cy - S(54), load_font(max(12, int(S(96))), bold=True), (255, 255, 255))
+        return
+    if kind == "mom":
+        draw.rounded_rectangle((cx - r * 1.12, cy - r * 0.9, cx + r * 1.12, cy + r * 1.25), radius=r * 0.8, fill=HAIR)
+    draw_face(draw, cx, cy, r, "nani" if kind == "nani" else "kid", 0.6)
+    if kind == "teacher":
+        gw = max(2, int(r * 0.07))
+        for sx in (-1, 1):
+            gx = cx + sx * r * 0.38
+            draw.ellipse((gx - r * 0.24, cy - r * 0.28, gx + r * 0.24, cy + r * 0.18), outline=(40, 44, 56), width=gw)
+        draw.line((cx - r * 0.14, cy - r * 0.05, cx + r * 0.14, cy - r * 0.05), fill=(40, 44, 56), width=gw)
+    if kind == "kid":
+        draw.ellipse((cx + r * 0.55, cy - r * 1.1, cx + r * 1.0, cy - r * 0.65), fill=body)
+    if kind == "dad":
+        draw.arc((cx - r * 0.5, cy + r * 0.25, cx + r * 0.5, cy + r * 0.85), 20, 160, fill=HAIR, width=max(2, int(r * 0.12)))
+
+
+def draw_school(draw, cx: float, cy: float, s: float, brand: dict[str, str]) -> None:
+    def S(v: float) -> float:
+        return v * s
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    ow = max(2, int(S(5)))
+    draw.line((cx, cy - S(128), cx, cy - S(210)), fill=ink, width=max(2, int(S(5))))
+    draw.polygon([(cx, cy - S(210)), (cx + S(64), cy - S(190)), (cx, cy - S(170))], fill=sage)
+    draw.rectangle((cx - S(160) + S(10), cy - S(40) + S(12), cx + S(160) + S(10), cy + S(130) + S(12)), fill=SHADOW)
+    draw.rectangle((cx - S(160), cy - S(40), cx + S(160), cy + S(130)), fill=panel, outline=ink, width=ow)
+    draw.polygon([(cx - S(186), cy - S(38)), (cx, cy - S(132)), (cx + S(186), cy - S(38))], fill=coral, outline=ink)
+    draw.ellipse((cx - S(24), cy - S(98), cx + S(24), cy - S(50)), fill=panel, outline=ink, width=max(1, int(S(3))))
+    draw.rectangle((cx - S(34), cy + S(40), cx + S(34), cy + S(130)), fill=sage, outline=ink, width=max(2, int(S(4))))
+    for wx in (cx - S(130), cx - S(84), cx + S(52), cx + S(98)):
+        draw.rectangle((wx, cy - S(10), wx + S(34), cy + S(30)), fill=DEV_SCREEN, outline=ink, width=max(1, int(S(3))))
+        draw.rectangle((wx, cy + S(58), wx + S(34), cy + S(98)), fill=DEV_SCREEN, outline=ink, width=max(1, int(S(3))))
+
+
+def draw_name_tag(draw, cx: float, cy: float, s: float, brand: dict[str, str]) -> None:
+    def S(v: float) -> float:
+        return v * s
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    muted = hex_rgb(brand["muted"])
+    x0, y0, x1, y1 = cx - S(140), cy - S(92), cx + S(140), cy + S(92)
+    draw.rounded_rectangle((x0 + S(8), y0 + S(10), x1 + S(8), y1 + S(10)), radius=S(22), fill=SHADOW)
+    draw.rounded_rectangle((x0, y0, x1, y1), radius=S(22), fill=panel, outline=ink, width=max(2, int(S(5))))
+    draw.rounded_rectangle((x0, y0, x1, y0 + S(70)), radius=S(22), fill=coral)
+    draw.rectangle((x0, y0 + S(40), x1, y0 + S(70)), fill=coral)
+    text_at(draw, "HELLO", cx, y0 + S(10), load_font(max(10, int(S(40))), bold=True), panel)
+    text_at(draw, "my name is", cx, y0 + S(80), load_font(max(10, int(S(22)))), muted)
+    pts = [(x0 + S(40) + i * S(10), cy + S(52) + S(12) * math.sin(i * 0.9)) for i in range(21)]
+    draw.line(pts, fill=ink, width=max(2, int(S(7))), joint="curve")
+
+
+def draw_map_pin(draw, cx: float, cy: float, s: float, color) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.polygon([(cx - S(40), cy - S(62)), (cx + S(40), cy - S(62)), (cx, cy)], fill=color)
+    draw.ellipse((cx - S(48), cy - S(120), cx + S(48), cy - S(24)), fill=color)
+    draw.ellipse((cx - S(20), cy - S(92), cx + S(20), cy - S(52)), fill=(255, 255, 255))
+
+
+def draw_cross(draw, cx: float, cy: float, r: float, color, bg=(255, 255, 255)) -> None:
+    draw.ellipse((cx - r, cy - r, cx + r, cy + r), fill=color)
+    k = r * 0.42
+    wd = max(3, int(r * 0.22))
+    draw.line((cx - k, cy - k, cx + k, cy + k), fill=bg, width=wd)
+    draw.line((cx - k, cy + k, cx + k, cy - k), fill=bg, width=wd)
+
+
+def draw_heart(draw, cx: float, cy: float, r: float, color) -> None:
+    draw.ellipse((cx - r, cy - r * 0.8, cx, cy + r * 0.2), fill=color)
+    draw.ellipse((cx, cy - r * 0.8, cx + r, cy + r * 0.2), fill=color)
+    draw.polygon([(cx - r * 0.97, cy - r * 0.15), (cx + r * 0.97, cy - r * 0.15), (cx, cy + r * 1.0)], fill=color)
+
+
+def draw_stop_sign(draw, cx: float, cy: float, r: float) -> None:
+    pts = [(cx + r * math.cos(math.radians(22.5 + 45 * i)), cy + r * math.sin(math.radians(22.5 + 45 * i)))
+           for i in range(8)]
+    draw.polygon([(x + 8, y + 10) for x, y in pts], fill=SHADOW)
+    draw.polygon(pts, fill=DANGER)
+    inner = [(cx + (x - cx) * 0.86, cy + (y - cy) * 0.86) for x, y in pts]
+    draw.polygon(inner, outline=(255, 255, 255), width=max(3, int(r * 0.06)))
+    text_at(draw, "STOP", cx, cy - r * 0.3, load_font(max(12, int(r * 0.5)), bold=True), (255, 255, 255))
+
+
+def draw_red_flag(draw, x: float, y: float, s: float) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.line((x, y - S(40), x, y + S(40)), fill=DEV_DARK, width=max(2, int(S(6))))
+    draw.polygon([(x, y - S(40)), (x + S(46), y - S(26)), (x, y - S(10))], fill=DANGER)
+
+
+def draw_chat(draw, box, brand: dict[str, str], header: str, msgs: list[tuple[str, str, str]],
+              reveal: float, t: float = 0.0, avatar=(128, 136, 150)) -> None:
+    """msgs: (side l|r, text, kind them|me|flag)."""
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    line = hex_rgb(brand["line"])
+    x0, y0, x1, y1 = box
+    draw.rounded_rectangle((x0 + 10, y0 + 12, x1 + 10, y1 + 12), radius=44, fill=SHADOW)
+    draw.rounded_rectangle((x0, y0, x1, y1), radius=44, fill=DEV_DARK)
+    sx0, sy0, sx1, sy1 = x0 + 16, y0 + 16, x1 - 16, y1 - 16
+    draw.rounded_rectangle((sx0, sy0, sx1, sy1), radius=32, fill=(246, 243, 238))
+    draw.rounded_rectangle((sx0, sy0, sx1, sy0 + 84), radius=32, fill=panel)
+    draw.rectangle((sx0, sy0 + 50, sx1, sy0 + 84), fill=panel)
+    draw.line((sx0, sy0 + 84, sx1, sy0 + 84), fill=line, width=3)
+    draw.ellipse((sx0 + 24, sy0 + 18, sx0 + 72, sy0 + 66), fill=avatar)
+    text_at(draw, "?", sx0 + 48, sy0 + 18, load_font(34, bold=True), (255, 255, 255))
+    draw.text((sx0 + 90, sy0 + 26), header, fill=ink, font=load_font(30, bold=True))
+    font = load_font(30, bold=True)
+    max_w = int((sx1 - sx0) * 0.72)
+    y = sy0 + 110
+    for i, (side, text, kind) in enumerate(msgs):
+        a = stagger(reveal, i, step=0.2, speed=4)
+        if a <= 0:
+            continue
+        lines = wrap_text(text, font, max_w - 44)
+        tw = max(draw.textbbox((0, 0), ln, font=font)[2] for ln in lines)
+        bw, bh = tw + 48, len(lines) * 40 + 30
+        bx = sx0 + 28 if side == "l" else sx1 - 28 - bw
+        by = y + (1 - a) * 24
+        if kind == "me":
+            fill, fg, out = coral, (255, 255, 255), None
+        elif kind == "flag":
+            fill, fg, out = DANGER_SOFT, DANGER, DANGER
+        else:
+            fill, fg, out = panel, ink, line
+        draw.rounded_rectangle((bx, by, bx + bw, by + bh), radius=22, fill=fill, outline=out, width=3 if out else 0)
+        for j, ln in enumerate(lines):
+            draw.text((bx + 24, by + 14 + j * 40), ln, fill=fg, font=font)
+        if kind == "flag":
+            draw_red_flag(draw, bx + bw + 26, by + bh / 2, 0.7)
+        y += bh + 20
+    if reveal < 1.0 and t > 0 and int(t * 5) % 2 == 0:
+        for k in range(3):
+            draw.ellipse((sx0 + 44 + k * 22, sy1 - 44, sx0 + 58 + k * 22, sy1 - 30), fill=(170, 170, 176))
+
+
+def draw_meter(draw, x0: float, y: float, wd: float, level: float, label: str | None = None) -> None:
+    level = clamp01(level)
+    col = DANGER if level <= 0.35 else GOLD if level <= 0.7 else (13, 148, 136)
+    seg = (wd - 3 * 12) / 4
+    for i in range(4):
+        sx = x0 + i * (seg + 12)
+        on = level >= (i + 0.5) / 4
+        draw.rounded_rectangle((sx, y, sx + seg, y + 22), radius=11, fill=col if on else (226, 220, 210))
+    if label:
+        draw.text((x0, y + 36), label, fill=col, font=load_font(32, bold=True))
+
+
+def draw_field(draw, box, brand: dict[str, str], text: str, typed: float = 1.0, t: float = 0.0) -> None:
+    ink = hex_rgb(brand["ink"])
+    panel = hex_rgb(brand["panel"])
+    coral = hex_rgb(brand["coral"])
+    x0, y0, x1, y1 = box
+    draw.rounded_rectangle((x0 + 6, y0 + 8, x1 + 6, y1 + 8), radius=22, fill=SHADOW)
+    draw.rounded_rectangle((x0, y0, x1, y1), radius=22, fill=panel, outline=ink, width=4)
+    draw_key(draw, x0 + 58, (y0 + y1) / 2, 0.24, GOLD)
+    font = load_font(46, bold=True)
+    shown = text[: int(round(len(text) * clamp01(typed)))]
+    ty = (y0 + y1) / 2 - 28
+    draw.text((x0 + 110, ty), shown, fill=ink, font=font)
+    if typed < 1.0 or int(t * 6) % 2 == 0:
+        bx = draw.textbbox((x0 + 110, ty), shown or " ", font=font)[2] + 6 if shown else x0 + 112
+        draw.line((bx, ty + 4, bx, ty + 58), fill=coral, width=4)
+
+
+def draw_post(draw, box, brand: dict[str, str], user: str, text: str, avatar, pic: str | None = None) -> None:
+    ink = hex_rgb(brand["ink"])
+    muted = hex_rgb(brand["muted"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    x0, y0, x1, y1 = box
+    shadow_card(draw, box, brand, radius=30)
+    draw.ellipse((x0 + 32, y0 + 30, x0 + 96, y0 + 94), fill=avatar)
+    draw.text((x0 + 116, y0 + 34), user, fill=ink, font=load_font(32, bold=True))
+    draw.text((x0 + 116, y0 + 72), "just now", fill=muted, font=load_font(22))
+    tx1 = x1 - 36
+    if pic:
+        px0, py0, px1, py1 = x1 - 300, y0 + 40, x1 - 40, y1 - 40
+        tx1 = px0 - 30
+        draw.rounded_rectangle((px0, py0, px1, py1), radius=18, fill=DEV_SCREEN, outline=ink, width=3)
+        if pic == "icecream":
+            mx = (px0 + px1) / 2
+            draw.polygon([(mx - 48, py0 + 120), (mx + 48, py0 + 120), (mx, py1 - 16)], fill=(222, 170, 100))
+            draw.ellipse((mx - 58, py0 + 60, mx + 58, py0 + 150), fill=(255, 200, 70))
+            draw.ellipse((mx - 40, py0 + 18, mx + 40, py0 + 96), fill=coral)
+        else:
+            draw.ellipse((px1 - 90, py0 + 22, px1 - 36, py0 + 76), fill=GOLD)
+            draw.polygon([(px0 + 6, py1 - 6), (px0 + 90, py0 + 80), (px0 + 170, py1 - 6)], fill=sage)
+            draw.polygon([(px0 + 110, py1 - 6), (px0 + 190, py0 + 110), (px1 - 6, py1 - 6)], fill=(20, 150, 136))
+    font = load_font(42, bold=True)
+    for j, ln in enumerate(wrap_text(text, font, int(tx1 - x0 - 36))[:4]):
+        draw.text((x0 + 36, y0 + 130 + j * 54), ln, fill=ink, font=font)
+
+
+A5_POSTS = [
+    ("Riya_Art", "I love mango ice cream!", True, "icecream"),
+    ("Riya", "Hi, I'm Riya from Green Park School. I live on Rose Street!", False, None),
+    ("Riya_Art", "Look at my new drawing!", True, "drawing"),
+]
+
+
+def render_a5(draw, brand: dict[str, str], visual: str, focus: str, progress: float, w: int, h: int) -> bool:
+    ink = hex_rgb(brand["ink"])
+    muted = hex_rgb(brand["muted"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    panel = hex_rgb(brand["panel"])
+    line = hex_rgb(brand["line"])
+    coral_soft = hex_rgb(brand["coralSoft"])
+    sage_soft = hex_rgb(brand["sageSoft"])
+    appear = ease_out_cubic(min(1.0, progress * 3.0))
+    bounce = int(10 * math.sin(progress * math.pi * 3))
+    pulse = 0.5 + 0.5 * math.sin(progress * math.pi * 8)
+    lift = int((1 - appear) * 40)
+    cx = w / 2
+    rule_specs = [("1", "Private info", "stays private", coral),
+                  ("2", "Passwords", "are secret", BOTH_COLOR),
+                  ("3", "Odd chat?", "Tell an adult", sage)]
+
+    def stars_around(y: float, spread: float, n: int = 6) -> None:
+        for i in range(n):
+            side = -1 if i % 2 == 0 else 1
+            sx = cx + side * (spread + 80 * (i // 2))
+            sy = y + 90 * (i // 2) + 14 * math.sin(progress * 9 + i)
+            draw_star(draw, sx, sy, 22 + 6 * pulse, [coral, sage, BOTH_COLOR, GOLD][i % 4], rot=progress * 3 + i)
+
+    def rule_header(num: str, title: str, col, x: float = 760) -> None:
+        pill(draw, 0, 250 + lift, f"RULE {num}", col, size=30, left=x)
+        for j, ln in enumerate(title.split("\n")):
+            draw.text((x, 330 + lift + j * 96), ln, fill=ink, font=load_font(80, bold=True))
+
+    def three_shields(y: float, s: float, active: int | None = None, upto: int = 3, gap: int = 520) -> None:
+        for i, (num, t1, t2, col) in enumerate(rule_specs[:upto]):
+            a = stagger(progress, i, step=0.14, speed=4) if active is None else 1.0
+            if a <= 0:
+                continue
+            x = cx + (i - 1) * gap
+            dim = active is not None and i != active
+            yy = y + (1 - a) * 50 - (12 * pulse if (active == i) else 0)
+            if active == i:
+                draw.ellipse((x - 150 * s, yy - 150 * s, x + 150 * s, yy + 150 * s), fill=coral_soft)
+            draw_shield(draw, x, yy, s * (1.0 if not dim else 0.86), (196, 190, 182) if dim else col, mark=num)
+            text_at(draw, t1, x, yy + 150 * s, load_font(40, bold=True), muted if dim else ink)
+            text_at(draw, t2, x, yy + 150 * s + 50, load_font(32, bold=True), muted if dim else col)
+
+    # ---- opening ---------------------------------------------------------
+    if visual == "a5-welcome":
+        if focus == "hello":
+            draw_mascot(draw, int(cx), 420, 110, sage, panel, bounce)
+            text_at(draw, "Welcome, champ!", cx, 590, load_font(60, bold=True), ink)
+            pill(draw, cx, 690, "Chapter 5 · last one in Unit 1", coral, size=32)
+            stars_around(380, 330)
+            return True
+        if focus == "bridge":
+            cards = [("CH 1", "Computers", coral, "computer"), ("CH 2", "Binary", sage, None),
+                     ("CH 3", "Devices", BOTH_COLOR, "keyboard"), ("CH 4", "Websites", ROAD, "server")]
+            for i, (k, v, acc, dev) in enumerate(cards):
+                a = stagger(progress, i, step=0.1, speed=5)
+                if a <= 0:
+                    continue
+                x = 130 + i * 425
+                y = 270 + int((1 - a) * 60)
+                shadow_card(draw, (x, y, x + 390, y + 360), brand, accent=acc)
+                draw.text((x + 34, y + 70), k, fill=acc, font=load_font(28, bold=True))
+                draw.text((x + 34, y + 110), v, fill=ink, font=load_font(44, bold=True))
+                draw_check(draw, x + 340, y + 88, 24, acc)
+                if dev == "server":
+                    draw_server(draw, x + 195, y + 270, 0.42, progress)
+                elif dev:
+                    draw_device(draw, dev, x + 195, y + 275, 0.46, brand)
+                else:
+                    text_at(draw, "1 0 1", x + 195, y + 230, load_font(60, bold=True), sage)
+            a = stagger(progress, 4, step=0.12, speed=5)
+            if a > 0:
+                pill(draw, cx, 700 + int((1 - a) * 30), "Today → Chapter 5", ink, size=36)
+            return True
+        if focus == "chapter":
+            shadow_card(draw, (300, 240 + lift, w - 300, 520 + lift), brand, radius=40, accent=coral)
+            text_at(draw, "CHAPTER 5 OF 5", cx, 302 + lift, load_font(32, bold=True), coral)
+            text_at(draw, "Being Safe Online", cx, 362 + lift, load_font(88, bold=True), ink)
+            text_at(draw, "your online superpower", cx, 462 + lift, load_font(38, bold=True), muted)
+            a = stagger(progress, 2, speed=4)
+            if a > 0:
+                draw_shield(draw, cx, 720 + bounce, 0.95 * a, sage, mark="check")
+                stars_around(690, 220, 4)
+            return True
+        three_shields(470, 1.2)
+        a = stagger(progress, 4, speed=4)
+        if a > 0:
+            text_at(draw, "3 super safety rules", cx, 250 + int((1 - a) * 30), load_font(52, bold=True), ink)
+        return True
+
+    # ---- hook ------------------------------------------------------------
+    if visual == "a5-hook":
+        chat_box = (1010, 230, 1560, 880)
+        msgs = [("l", "Hi! I'm 10 too.", "them"), ("l", "Want to be friends?", "them")]
+        if focus == "chat":
+            draw_person(draw, 520, 470, 1.35, "kid", progress)
+            draw_device(draw, "laptop", 520, 790, 0.8, brand, t=progress)
+            draw_chat(draw, chat_box, brand, "CoolGamer10", msgs, min(1.0, progress * 1.6), progress)
+            return True
+        if focus == "ask":
+            draw_chat(draw, (260, 230, 810, 880), brand, "CoolGamer10", msgs, 1.0)
+            draw.rounded_rectangle((1000, 260, 1640, 840), radius=40, fill=DEV_DEEP)
+            draw_person(draw, 1320, 470, 1.3, "mystery", progress)
+            text_at(draw, "?", 1110, 290, load_font(int(90 + 20 * pulse), bold=True), GOLD)
+            text_at(draw, "?", 1540, 330, load_font(int(70 + 20 * (1 - pulse)), bold=True), GOLD)
+            text_at(draw, "Who is really typing?", 1320, 760, load_font(40, bold=True), (255, 255, 255))
+            return True
+        if focus == "answer":
+            draw_chat(draw, (180, 260, 660, 860), brand, "CoolGamer10", msgs, 1.0)
+            text_at(draw, "It could be…", 1250, 250, load_font(48, bold=True), ink)
+            for i, (kind, lab, col) in enumerate((("kid", "a kid", sage), ("mystery", "a grown-up stranger", DANGER))):
+                a = stagger(progress, i + 1, step=0.18, speed=4)
+                if a <= 0:
+                    continue
+                x = 1000 + i * 500
+                draw.ellipse((x - 190, 340, x + 190, 720), fill=sage_soft if i == 0 else DANGER_SOFT)
+                draw_person(draw, x, 470 + (1 - a) * 40, 1.15, kind, progress)
+                text_at(draw, lab, x, 760, load_font(38, bold=True), col)
+            draw_dashed(draw, 680, 560, 790, 560, muted, width=6, phase=progress * 200)
+            return True
+        three_shields(470, 1.1)
+        text_at(draw, "Smart champs follow 3 rules", cx, 250, load_font(52, bold=True), ink)
+        return True
+
+    # ---- rule 1: private info -------------------------------------------
+    info_items = [("tag", "Full name"), ("school", "School"), ("house", "Home address"), ("phone", "Phone number")]
+
+    def info_icon(kind: str, x: float, y: float, s: float) -> None:
+        if kind == "tag":
+            draw_name_tag(draw, x, y, 0.7 * s, brand)
+        elif kind == "school":
+            draw_school(draw, x, y + 20 * s, 0.55 * s, brand)
+        elif kind == "house":
+            draw_house(draw, x, y + 10 * s, 0.46 * s, brand)
+        else:
+            draw_device(draw, "touch", x, y, 0.55 * s, brand)
+
+    if visual == "a5-private":
+        if focus == "intro":
+            draw.ellipse((480 - 250, 560 - 250, 480 + 250, 560 + 250), fill=coral_soft)
+            draw_shield(draw, 480, 560 + bounce, 1.55, coral, mark="lock")
+            rule_header("1", "Private info\nstays private", coral)
+            return True
+        if focus == "items":
+            for i, (kind, lab) in enumerate(info_items):
+                a = stagger(progress, i, step=0.16, speed=4)
+                if a <= 0:
+                    continue
+                x = 120 + i * 430
+                y = 280 + int((1 - a) * 60)
+                shadow_card(draw, (x, y, x + 390, y + 520), brand, outline=coral if a >= 1 else None)
+                info_icon(kind, x + 195, y + 230, 1.0)
+                text_at(draw, lab, x + 195, y + 420, load_font(40, bold=True), ink)
+                draw_padlock(draw, x + 340, y + 50, 0.26, coral)
+            return True
+        if focus == "map":
+            for i, (kind, lab) in enumerate(info_items):
+                y = 300 + i * 150
+                a = stagger(progress, i, step=0.1, speed=5)
+                shadow_card(draw, (140, y - 58, 520, y + 58), brand, radius=24)
+                draw.text((180, y - 24), lab, fill=ink, font=load_font(36, bold=True))
+                p = clamp01((progress - 0.2 - i * 0.06) * 2.2)
+                if p > 0 and a > 0:
+                    draw_curve(draw, (530, y), (900, y), (1260, 560), coral, width=6, dashed=True, phase=progress * 30)
+                    ex, ey = qbez((530, y), (900, y), (1260, 560), ease_in_out(p))
+                    draw.ellipse((ex - 12, ey - 12, ex + 12, ey + 12), fill=coral)
+            draw_house(draw, 1420, 600, 0.9, brand)
+            drop = clamp01((progress - 0.55) * 3)
+            if drop > 0:
+                draw_map_pin(draw, 1420, 400 - (1 - ease_out_cubic(drop)) * 180, 1.0, DANGER)
+                a = ease_out_cubic(clamp01((progress - 0.65) * 3))
+                if a > 0:
+                    pill(draw, 1420, 800 + int((1 - a) * 20), "Together = a map to your door!", DANGER, size=30)
+            return True
+        if focus == "safe":
+            cols = [("OK to share", sage, sage_soft, [("colour", "Favourite colour"), ("nick", "Game nickname"),
+                                                       ("draw", "Your drawing")], True),
+                    ("Keep private", DANGER, DANGER_SOFT, [(k, l) for k, l in info_items[:3]], False)]
+            for ci, (title, col, soft, rows, ok) in enumerate(cols):
+                x0 = 180 + ci * 820
+                a = stagger(progress, ci, step=0.3, speed=4)
+                if a <= 0:
+                    continue
+                draw.rounded_rectangle((x0, 240 + lift, x0 + 740, 870 + lift), radius=36, fill=soft, outline=col, width=4)
+                text_at(draw, title, x0 + 370, 270 + lift, load_font(48, bold=True), col)
+                for ri, (kind, lab) in enumerate(rows):
+                    ra = stagger(progress, ri + ci * 3, step=0.08, speed=5)
+                    if ra <= 0:
+                        continue
+                    ry = 390 + ri * 150 + lift
+                    draw.rounded_rectangle((x0 + 40, ry, x0 + 700, ry + 124), radius=24, fill=panel)
+                    ix = x0 + 110
+                    if kind == "colour":
+                        for k, c in enumerate((coral, GOLD, sage)):
+                            draw.ellipse((ix - 50 + k * 34, ry + 38, ix - 2 + k * 34, ry + 86), fill=c)
+                    elif kind == "nick":
+                        pill(draw, ix, ry + 36, "StarKid", BOTH_COLOR, size=22)
+                    elif kind == "draw":
+                        draw_page(draw, ix, ry + 62, 0.62, brand)
+                    else:
+                        info_icon(kind, ix, ry + 62, 0.4)
+                    draw.text((x0 + 200, ry + 38), lab, fill=ink, font=load_font(38, bold=True))
+                    (draw_check if ok else draw_cross)(draw, x0 + 640, ry + 62, 28, col)
+            return True
+        # say
+        words = [("Private", coral), ("stays", ink), ("private!", sage)]
+        for i, ((wd, col), x) in enumerate(zip(words, (520, 960, 1400))):
+            a = stagger(progress, i, step=0.12, speed=5)
+            if a > 0:
+                text_at(draw, wd, x, 360 + int((1 - a) * 40), load_font(int(70 + 18 * a), bold=True), col)
+        draw_shield(draw, cx, 680 + bounce, 0.9, coral, mark="lock")
+        text_at(draw, "Say it with me!", cx, 250, load_font(38, bold=True), coral)
+        return True
+
+    # ---- safe / unsafe sort game ------------------------------------------
+    if visual == "a5-sort":
+        idx = int(focus[1]) - 1 if focus[:1] in ("q", "a") and focus[1:].isdigit() else -1
+        answered = 0 if idx < 0 else idx + (1 if focus.startswith("a") else 0)
+        bins = [("SAFE", sage, sage_soft, 150, True), ("UNSAFE", DANGER, DANGER_SOFT, 1370, False)]
+        for label, col, soft, bx, ok in bins:
+            glow = idx >= 0 and focus.startswith("a") and A5_POSTS[idx][2] == ok
+            draw.rounded_rectangle((bx, 470, bx + 400, 870), radius=36, fill=soft, outline=col, width=8 if glow else 4)
+            text_at(draw, label, bx + 200, 500, load_font(50, bold=True), col)
+            (draw_check if ok else draw_cross)(draw, bx + 200, 630, 46, col)
+            done = [p for p in A5_POSTS[:answered] if p[2] == ok]
+            for j, _ in enumerate(done):
+                my = 720 + j * 56
+                draw.rounded_rectangle((bx + 60, my, bx + 340, my + 44), radius=14, fill=panel, outline=col, width=3)
+                draw.ellipse((bx + 76, my + 8, bx + 104, my + 36), fill=col)
+                draw.rounded_rectangle((bx + 120, my + 16, bx + 300, my + 28), radius=6, fill=line)
+        if idx < 0:
+            text_at(draw, "Safe or unsafe?", cx, 250 + lift, load_font(64, bold=True), ink)
+            for k in range(3):
+                o = (2 - k) * 22
+                draw.rounded_rectangle((640 + o, 420 - o, 1280 + o, 780 - o), radius=30, fill=panel, outline=line, width=4)
+            text_at(draw, "?", cx + 22, 470, load_font(int(150 + 20 * pulse), bold=True), coral)
+            text_at(draw, "Answer fast!", cx, 820, load_font(36, bold=True), coral)
+            return True
+        user, text, ok, pic = A5_POSTS[idx]
+        box = (590, 250 + lift, 1330, 610 + lift)
+        draw_post(draw, box, brand, user, text, BOTH_COLOR if ok else coral, pic)
+        text_at(draw, f"Post {idx + 1} of 3", cx, 640, load_font(30, bold=True), muted)
+        if focus.startswith("q"):
+            pill(draw, cx, 700, "Safe or unsafe?", ink, size=36)
+            draw_stopwatch(draw, cx, 830, 44, progress, brand)
+        else:
+            a = ease_out_cubic(clamp01(progress * 4))
+            col = sage if ok else DANGER
+            pill(draw, cx, 690, ("SAFE!" if ok else "UNSAFE!"), col, size=int(36 + 12 * (1 - a)))
+            if not ok:
+                for k, word in enumerate(("name", "school", "street")):
+                    ka = stagger(progress, k + 2, step=0.12, speed=5)
+                    if ka > 0:
+                        pill(draw, 680 + k * 280, 780, word, DANGER, size=32, fg=(255, 255, 255))
+            else:
+                stars_around(700, 260, 4)
+        return True
+
+    # ---- rule 2: passwords ---------------------------------------------
+    if visual == "a5-password":
+        if focus == "intro":
+            draw.ellipse((480 - 250, 560 - 250, 480 + 250, 560 + 250), fill=hex_rgb("#EFEAFB"))
+            draw_key(draw, 480, 560 + bounce, 1.5, GOLD)
+            rule_header("2", "Your password\nis a secret key", BOTH_COLOR)
+            return True
+        if focus == "lock":
+            p = clamp01((progress - 0.15) * 1.8)
+            open_t = clamp01((progress - 0.62) * 4)
+            draw_device(draw, "touch", 560, 560, 1.5, brand, lit=open_t > 0)
+            draw_padlock(draw, 560, 540, 0.8, GOLD if open_t <= 0 else sage, open_t=open_t)
+            kx = lerp(1500, 760, ease_in_out(p))
+            draw_key(draw, kx, 600, 1.0, GOLD)
+            text_at(draw, "Locks your games", 1300, 300, load_font(50, bold=True), ink)
+            text_at(draw, "& accounts", 1300, 370, load_font(50, bold=True), ink)
+            if open_t > 0:
+                pill(draw, 1300, 780, "Right key → open!", sage, size=32)
+            return True
+        if focus == "secret":
+            draw_padlock(draw, cx, 520 + bounce, 1.0, GOLD)
+            text_at(draw, "TOP SECRET", cx, 690, load_font(44, bold=True), BOTH_COLOR)
+            specs = [(420, "friend", "Best friend", "Not even them!", False),
+                     (1500, "mom", "Mum & Dad", "Only them", True)]
+            for i, (x, kind, lab, sub, ok) in enumerate(specs):
+                a = stagger(progress, i + 1, step=0.2, speed=4)
+                if a <= 0:
+                    continue
+                draw.ellipse((x - 190, 300, x + 190, 680), fill=sage_soft if ok else DANGER_SOFT)
+                draw_person(draw, x, 430 + (1 - a) * 40, 1.1, kind, progress)
+                (draw_check if ok else draw_cross)(draw, x + 140, 330, 40, sage if ok else DANGER)
+                text_at(draw, lab, x, 720, load_font(42, bold=True), ink)
+                text_at(draw, sub, x, 780, load_font(34, bold=True), sage if ok else DANGER)
+            return True
+        if focus == "weak":
+            text_at(draw, "WEAK passwords", cx, 250 + lift, load_font(60, bold=True), DANGER)
+            for i, pw in enumerate(("1234", "riya")):
+                a = stagger(progress, i, step=0.22, speed=4)
+                if a <= 0:
+                    continue
+                y = 380 + i * 220 + int((1 - a) * 30)
+                draw_field(draw, (420, y, 1140, y + 110), brand, pw)
+                draw_meter(draw, 1200, y + 30, 320, 0.2)
+                draw_cross(draw, 1580, y + 55, 34, DANGER)
+            a = stagger(progress, 3, step=0.16, speed=4)
+            if a > 0:
+                pill(draw, cx, 820, "Too easy to guess!", DANGER, size=32)
+            return True
+        if focus == "strong":
+            text_at(draw, "STRONG password", cx, 250 + lift, load_font(60, bold=True), sage)
+            typed = clamp01(progress * 1.8)
+            draw_field(draw, (360, 360, 1560, 480), brand, "Tiger$Jumps7Mango", typed, progress)
+            draw_meter(draw, 560, 530, 800, typed, "STRONG" if typed >= 1 else None)
+            chips = [("Long", coral), ("Words", BOTH_COLOR), ("Numbers", ROAD), ("Symbols", sage)]
+            for i, (lab, col) in enumerate(chips):
+                a = stagger(progress, i + 5, step=0.08, speed=5)
+                if a > 0:
+                    x = 420 + i * 360
+                    box = pill(draw, x + 60, 680 + int((1 - a) * 20), f"{lab}", col, size=32)
+                    draw_check(draw, box[2] + 26, (box[1] + box[3]) / 2, 20, col)
+            return True
+        # note
+        draw.rounded_rectangle((520 + 10, 260 + 12, 1400 + 10, 820 + 12), radius=20, fill=SHADOW)
+        draw.rounded_rectangle((520, 260, 1400, 820), radius=20, fill=(255, 236, 160))
+        draw.rectangle((880, 240, 1040, 290), fill=(236, 226, 206))
+        text_at(draw, "TIP", cx - 40, 320, load_font(40, bold=True), coral)
+        text_at(draw, "Make your OWN password.", cx - 40, 420, load_font(52, bold=True), ink)
+        text_at(draw, "Never copy the one", cx - 40, 520, load_font(46, bold=True), ink)
+        text_at(draw, "on this screen!", cx - 40, 586, load_font(46, bold=True), ink)
+        draw_padlock(draw, 1250, 720 + bounce, 0.55, BOTH_COLOR)
+        return True
+
+    if visual == "a5-pwgame":
+        options = [("A", "abc123", 0.2), ("B", "BlueKite!Runs42", 1.0)]
+        text_at(draw, "Which is stronger?", cx, 240 + lift, load_font(60, bold=True), ink)
+        for i, (lab, pw, lvl) in enumerate(options):
+            y = 380 + i * 230
+            win = focus == "answer" and lvl >= 1
+            lose = focus == "answer" and lvl < 1
+            if win:
+                draw.rounded_rectangle((250, y - 30, 1670, y + 170), radius=40, fill=sage_soft, outline=sage, width=5)
+            pill(draw, 0, y + 24, lab, BOTH_COLOR if not lose else (190, 184, 176), size=40, left=300)
+            draw_field(draw, (430, y, 1130, y + 120), brand, pw)
+            if focus == "answer":
+                fill = clamp01(progress * 2.5)
+                draw_meter(draw, 1180, y + 40, 320, lvl * fill)
+                (draw_check if win else draw_cross)(draw, 1580, y + 60, 36, sage if win else DANGER)
+            else:
+                text_at(draw, "?", 1340, y + 10, load_font(int(80 + 16 * pulse), bold=True), coral)
+        if focus == "answer":
+            a = stagger(progress, 3, speed=4)
+            if a > 0:
+                pill(draw, cx, 850, "Longer + mixed = harder to guess", sage, size=30)
+        else:
+            draw_stopwatch(draw, cx, 850, 44, progress, brand)
+        return True
+
+    # ---- rule 3: trusted adult ------------------------------------------
+    if visual == "a5-adult":
+        if focus == "intro":
+            draw.ellipse((480 - 260, 560 - 260, 480 + 260, 560 + 260), fill=sage_soft)
+            draw_person(draw, 390, 470, 1.05, "kid", progress)
+            draw_person(draw, 590, 420, 1.25, "mom", progress + 0.3)
+            draw_heart(draw, 490, 300 + bounce, 36, coral)
+            rule_header("3", "Odd chat?\nTell a trusted adult", sage)
+            return True
+        if focus == "signs":
+            msgs = [("l", "Send me a photo of you", "flag"), ("l", "Where do you live?", "flag"),
+                    ("l", "Don't tell your parents!", "flag")]
+            draw_chat(draw, (230, 230, 1010, 880), brand, "Stranger", msgs, min(1.0, progress * 1.3), progress,
+                      avatar=DANGER)
+            text_at(draw, "Red flags!", 1420, 330, load_font(64, bold=True), DANGER)
+            for i, lab in enumerate(("Asks for photos", "Asks where you live", "Says \"don't tell\"")):
+                a = stagger(progress, i + 1, step=0.18, speed=4)
+                if a > 0:
+                    draw_red_flag(draw, 1160, 480 + i * 110, 0.9)
+                    draw.text((1210, 452 + i * 110), lab, fill=ink, font=load_font(40, bold=True))
+            return True
+        if focus == "steps":
+            steps = [("1", "STOP", "stop"), ("2", "Don't reply", "noreply"), ("3", "Tell a grown-up", "tell")]
+            for i, (num, lab, kind) in enumerate(steps):
+                a = stagger(progress, i, step=0.2, speed=4)
+                if a <= 0:
+                    continue
+                x = 160 + i * 540
+                y = 260 + int((1 - a) * 60)
+                shadow_card(draw, (x, y, x + 500, y + 580), brand, accent=[DANGER, GOLD, sage][i])
+                pill(draw, 0, y + 64, num, [DANGER, GOLD, sage][i], size=34, left=x + 36)
+                icx, icy = x + 250, y + 290
+                if kind == "stop":
+                    draw_stop_sign(draw, icx, icy, 120)
+                elif kind == "noreply":
+                    draw.rounded_rectangle((icx - 120, icy - 90, icx + 120, icy + 60), radius=36, fill=coral_soft,
+                                           outline=coral, width=5)
+                    draw.polygon([(icx - 60, icy + 58), (icx - 20, icy + 58), (icx - 70, icy + 110)], fill=coral)
+                    draw_cross(draw, icx, icy - 14, 50, DANGER)
+                else:
+                    draw_person(draw, icx - 70, icy - 60, 0.75, "kid", progress)
+                    draw_person(draw, icx + 80, icy - 90, 0.9, "dad", progress + 0.4)
+                text_at(draw, lab, x + 250, y + 470, load_font(44, bold=True), ink)
+            return True
+        if focus == "who":
+            people = [("mom", "Mum or Dad"), ("teacher", "Your teacher"), ("nani", "Nani & Nana")]
+            text_at(draw, "Trusted adults", cx, 240 + lift, load_font(56, bold=True), ink)
+            for i, (kind, lab) in enumerate(people):
+                a = stagger(progress, i, step=0.16, speed=4)
+                if a <= 0:
+                    continue
+                x = cx + (i - 1) * 520
+                draw.ellipse((x - 190, 340, x + 190, 720), fill=[hex_rgb("#EFEAFB"), sage_soft, coral_soft][i])
+                draw_person(draw, x, 470 + (1 - a) * 40, 1.2, kind, progress + i * 0.2)
+                text_at(draw, lab, x, 760, load_font(42, bold=True), ink)
+                draw_heart(draw, x + 140, 380, 24, coral)
+            return True
+        # never
+        draw.ellipse((cx - 300, 520 - 300, cx + 300, 520 + 300), fill=coral_soft)
+        draw_heart(draw, cx, 470 + bounce, 150, coral)
+        text_at(draw, "Telling is brave!", cx, 700, load_font(72, bold=True), ink)
+        pill(draw, cx, 800, "You're never in trouble for telling", sage, size=32)
+        stars_around(360, 360)
+        return True
+
+    # ---- checkpoint --------------------------------------------------------
+    if visual == "a5-check":
+        if focus == "intro":
+            shadow_card(draw, (460, 300 + lift, w - 460, 700 + lift), brand, radius=40, accent=sage)
+            text_at(draw, "PRACTICE CHECK", cx, 380 + lift, load_font(40, bold=True), sage)
+            text_at(draw, "Just like the quiz!", cx, 470 + lift, load_font(64, bold=True), ink)
+            draw_check(draw, cx, 620 + lift, 44, sage)
+            return True
+        draw.rounded_rectangle((540, 230, 1380, 330), radius=40, fill=DANGER_SOFT, outline=DANGER, width=4)
+        text_at(draw, "\"What's your home address?\"", cx, 254, load_font(46, bold=True), DANGER)
+        draw_red_flag(draw, 1440, 280, 0.9)
+        opts = [("A", "Tell them"), ("B", "Tell only your street"), ("C", "Don't share. Tell a trusted adult")]
+        for i, (lab, txt) in enumerate(opts):
+            a = stagger(progress, i, step=0.12, speed=5) if focus == "ask" else 1.0
+            if a <= 0:
+                continue
+            y = 380 + i * 160 + int((1 - a) * 30)
+            win = focus == "answer" and lab == "C"
+            lose = focus == "answer" and lab != "C"
+            fill = sage_soft if win else panel
+            out = sage if win else line
+            draw.rounded_rectangle((360, y, 1560, y + 130), radius=32, fill=fill, outline=out, width=5 if win else 3)
+            pill(draw, 0, y + 30, lab, sage if win else (190, 184, 176) if lose else BOTH_COLOR, size=34, left=400)
+            draw.text((520, y + 38), txt, fill=muted if lose else ink, font=load_font(46, bold=True))
+            if win:
+                draw_check(draw, 1490, y + 65, 38, sage)
+            elif lose:
+                draw_cross(draw, 1490, y + 65, 30, DANGER)
+        return True
+
+    # ---- recap -------------------------------------------------------------
+    if visual == "a5-recap":
+        if focus in ("r1", "r2", "r3"):
+            n = int(focus[1])
+            text_at(draw, "Lock it in!", cx, 230, load_font(52, bold=True), ink)
+            three_shields(480, 1.15, active=n - 1, upto=n)
+            return True
+        if focus == "three":
+            text_at(draw, "Never post these 3", cx, 240 + lift, load_font(60, bold=True), DANGER)
+            for i, (kind, lab) in enumerate(info_items[:3]):
+                a = stagger(progress, i, step=0.2, speed=4)
+                if a <= 0:
+                    continue
+                x = cx + (i - 1) * 520
+                y = 360 + int((1 - a) * 60)
+                shadow_card(draw, (x - 220, y, x + 220, y + 460), brand, outline=DANGER)
+                info_icon(kind, x, y + 190, 1.0)
+                text_at(draw, lab, x, y + 380, load_font(42, bold=True), ink)
+                draw_cross(draw, x + 180, y + 40, 32, DANGER)
+            return True
+        if focus == "done":
+            draw_mascot(draw, int(cx), 400, 110, sage, panel, bounce)
+            text_at(draw, "Chapter 5 done!", cx, 560, load_font(64, bold=True), ink)
+            pill(draw, cx, 660, "UNIT 1 COMPLETE", coral, size=40)
+            draw_shield(draw, cx - 520, 520, 0.8, sage)
+            draw_shield(draw, cx + 520, 520, 0.8, coral)
+            stars_around(340, 300, 8)
+            return True
+        text_at(draw, "Next up: Quiz time!", cx, 380, load_font(64, bold=True), coral)
+        text_at(draw, "Tap Finish and let's go, champ!", cx, 500, load_font(44, bold=True), ink)
+        draw_arrow(draw, cx - 120, 650, cx + 120 + 20 * pulse, 650, sage, width=16, head=46)
+        return True
+
+    return False
+
+
 def draw_scene_dots(draw: ImageDraw.ImageDraw, brand: dict[str, str], idx: int, total: int, w: int) -> None:
     coral = hex_rgb(brand["coral"])
     line = hex_rgb(brand["line"])
@@ -2300,6 +3082,8 @@ def render_visual(
     if visual.startswith("a3-") and render_a3(draw, brand, visual, focus, progress, w, h):
         return
     if visual.startswith("a4-") and render_a4(draw, brand, visual, focus, progress, w, h):
+        return
+    if visual.startswith("a5-") and render_a5(draw, brand, visual, focus, progress, w, h):
         return
     ink = hex_rgb(brand["ink"])
     muted = hex_rgb(brand["muted"])
@@ -2900,7 +3684,8 @@ def write_captions(cues: list[dict[str, Any]], lesson_dir: Path) -> None:
     )
 
 
-def mux(frames_dir: Path, audio: Path, out_mp4: Path, fps: int, vtt: Path) -> None:
+def mux(frames_dir: Path, audio: Path, out_mp4: Path, fps: int, vtt: Path,
+        crf: int = 18, preset: str = "medium") -> None:
     # Burn soft captions as movable track + hard-burn is already in frames.
     # Also attach soft VTT for LMS.
     cmd = [
@@ -2915,9 +3700,11 @@ def mux(frames_dir: Path, audio: Path, out_mp4: Path, fps: int, vtt: Path) -> No
         "-c:v",
         "libx264",
         "-preset",
-        "medium",
+        preset,
         "-crf",
-        "18",
+        str(crf),
+        "-tune",
+        "animation",
         "-pix_fmt",
         "yuv420p",
         "-c:a",
@@ -2940,6 +3727,9 @@ async def build_async(lesson_dir: Path) -> Path:
     height = int(meta["height"])
     voice = meta["voice"]
     rate = meta.get("voiceRate", "+0%")
+    pitch = meta.get("voicePitch", "+0Hz")
+    trim = bool(meta.get("trimSilence"))
+    beat_gap = float(meta.get("beatGap", 0.22))
     title = meta["title"]
     unit_label = meta.get("unitLabel", "CS · Lesson")
     chapter_label = meta.get("chapterLabel", "Chapter 1")
@@ -2957,9 +3747,9 @@ async def build_async(lesson_dir: Path) -> Path:
     for scene in meta["scenes"]:
         for bi, beat in enumerate(scene["beats"]):
             mp3 = audio_dir / f"{scene['id']}_{bi}.mp3"
-            dur, wav = await synthesize_beat(beat["vo"], voice, rate, mp3)
+            dur, wav = await synthesize_beat(beat["vo"], voice, rate, mp3, pitch=pitch, trim=trim)
             # natural pause + optional interactive think-time
-            pad = 0.22 + float(beat.get("pause") or 0)
+            pad = beat_gap + float(beat.get("pause") or 0)
             flat_beats.append(
                 {
                     "scene_id": scene["id"],
@@ -3001,6 +3791,13 @@ async def build_async(lesson_dir: Path) -> Path:
 
     voiceover = lesson_dir / "voiceover.wav"
     concat_wavs(padded, voiceover)
+    if meta.get("voicePolish"):
+        polished = work / "polished.wav"
+        subprocess.run(
+            [FFMPEG, "-y", "-i", str(voiceover), "-af", VOICE_POLISH_AF, "-ar", "44100", "-ac", "1", str(polished)],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        shutil.move(str(polished), str(voiceover))
 
     print("2/4  Rendering production frames (synced to speech)…")
     frame_i = 0
@@ -3018,7 +3815,7 @@ async def build_async(lesson_dir: Path) -> Path:
         "width": width,
         "height": height,
         "supersample": int(meta.get("supersample") or 1),
-        "fade_frames": max(1, int(round(0.28 * fps))),
+        "fade_frames": max(1, int(round(float(meta.get("fadeSec", 0.28)) * fps))),
         "frames_dir": str(frames_dir),
     }
     jobs: list[dict[str, Any]] = []
@@ -3087,7 +3884,8 @@ async def build_async(lesson_dir: Path) -> Path:
 
     print("4/4  Encoding MP4…")
     out_mp4 = lesson_dir / "final.mp4"
-    mux(frames_dir, voiceover, out_mp4, fps, lesson_dir / "captions.vtt")
+    mux(frames_dir, voiceover, out_mp4, fps, lesson_dir / "captions.vtt",
+        crf=int(meta.get("crf", 18)), preset=str(meta.get("x264Preset", "medium")))
 
     # Publish into Next public for LMS (module id from scenes.json)
     module_id = str(meta.get("id") or "A1").upper()

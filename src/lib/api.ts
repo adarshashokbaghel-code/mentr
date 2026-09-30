@@ -560,7 +560,8 @@ export type ParentBoard = (typeof PARENT_BOARDS)[number];
 
 export type PremiumParentRow = {
   id: string;
-  name: string;
+  /** Null until this mentor's reveal is active — the API sends no identity for locked rows */
+  name: string | null;
   initials?: string;
   imageUrl?: string | null;
   city: string | null;
@@ -580,12 +581,9 @@ export type PremiumParentRow = {
     createdAt: string | null;
   } | null;
   joinedAt: string | null;
-  lastLoginAt: string | null;
   contactRevealed: boolean;
   /** Mentor revealed this parent before (even if the 2h unlock window expired) */
   previouslyRevealed?: boolean;
-  /** Seed / backfill persona — always listed after real signups */
-  isSeed?: boolean;
   /** Joined after directory cutoff — pinned above legacy-ranked parents */
   isNewJoin?: boolean;
   /** Email verified but name / phone not filled yet — reveal unavailable */

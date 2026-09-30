@@ -8,8 +8,14 @@ import { Button } from "@/components/ui/button";
 import { ConnectButton } from "@/components/connect/connect-button";
 import { PARENT_LP_TESTIMONIALS } from "@/lib/demo-users";
 import { useTestimonialNames } from "@/hooks/use-testimonial-names";
-import { fetchPublicTeachers, type Teacher, SUBJECTS } from "@/lib/teachers";
-import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
+import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
+import {
+  SATISFIED_PARENTS,
+  formatMentorCount,
+  formatSubjectCount,
+  useMentorCount,
+  useSubjectCount,
+} from "@/lib/mentor-stats";
 import { GLOBAL_REACH_LINE } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
@@ -58,6 +64,7 @@ const FILTERS = ["All", "Physics", "Mathematics", "English", "Coding"] as const;
 
 function useParentStats() {
   const mentorCount = useMentorCount();
+  const subjectCount = useSubjectCount();
   return [
     {
       value: formatMentorCount(mentorCount),
@@ -74,7 +81,7 @@ function useParentStats() {
       sub: "Free forever",
     },
     {
-      value: `${SUBJECTS.length}+`,
+      value: formatSubjectCount(subjectCount),
       label: "Subjects",
       tint: "bg-sage-wash",
       icon: BookOpen,
@@ -422,7 +429,7 @@ function ParentsHero() {
                 ))}
               </div>
               <p className="text-left text-xs leading-snug text-muted">
-                <span className="font-bold text-ink">200+ parents</span> found tutors
+                <span className="font-bold text-ink">{SATISFIED_PARENTS}+ parents</span> found tutors
                 <br />
                 worldwide this month
               </p>

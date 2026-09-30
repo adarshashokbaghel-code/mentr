@@ -8,7 +8,7 @@ import {
   LpBlob,
   LpGridBg,
 } from "@/components/landing/lp/shared";
-import { usePlatformStats } from "@/lib/mentor-stats";
+import { SATISFIED_PARENTS, usePlatformStats } from "@/lib/mentor-stats";
 import { STATS_FAQS } from "@/lib/stats-page-content";
 import Image from "next/image";
 import { SUBJECTS } from "@/lib/teachers";
@@ -47,7 +47,7 @@ import {
 } from "react";
 
 /** Marketing headline figure for parents, per growth team. */
-const PARENTS_HEADLINE = 100;
+const PARENTS_HEADLINE = SATISFIED_PARENTS;
 const LEARN_CONTENT_HOURS = 5;
 
 /** 4,029 → 4,000 so a "+" suffix stays true as the bank grows. */
@@ -232,7 +232,7 @@ function StatsHero() {
       bar: "bg-butter-deep",
     },
     {
-      to: stats?.subjects ?? SUBJECTS.length,
+      to: stats?.subjects ?? 0,
       suffix: "+",
       label: "Subjects taught",
       sub: "School, exams, languages & skills",

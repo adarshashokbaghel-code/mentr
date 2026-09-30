@@ -53,9 +53,10 @@ const learnLessonSchema = new Schema<ILearnLesson>(
       enum: ["Easy", "Building", "Stretch", "Apply"],
       required: true,
     },
-    videoSrc: { type: String, required: true, trim: true },
-    captionsSrc: { type: String, required: true, trim: true },
-    durationSec: { type: Number, required: true, min: 1 },
+    // Empty for notes-first lessons whose video isn't published yet.
+    videoSrc: { type: String, default: "", trim: true },
+    captionsSrc: { type: String, default: "", trim: true },
+    durationSec: { type: Number, default: 0, min: 0 },
     status: {
       type: String,
       enum: ["draft", "published"],

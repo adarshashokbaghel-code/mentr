@@ -1,0 +1,340 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.01,
+      "caption": "Chapter 5 \u00b7 the last one in Unit 1!",
+      "text": "Hi champ! Welcome to Chapter five, the last chapter of Unit one!",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.01,
+      "end": 10.63,
+      "caption": "Computers \u00b7 Binary \u00b7 Devices \u00b7 Websites",
+      "text": "You already know what a computer is, how it thinks, its devices, and how websites talk.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 10.63,
+      "end": 12.99,
+      "caption": "Chapter 5 \u00b7 Being Safe Online",
+      "text": "Today's big one: Being Safe Online!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 12.99,
+      "end": 16.61,
+      "caption": "3 super safety rules",
+      "text": "You'll learn three super rules that protect you, just like a shield.",
+      "scene": "open",
+      "focus": "rules"
+    },
+    {
+      "start": 16.61,
+      "end": 23.86,
+      "caption": "\"Hi! I'm 10 too. Want to be friends?\"",
+      "text": "Imagine you're playing a game online, and a message pops up: Hi! I'm ten too. Want to be friends?",
+      "scene": "hook",
+      "focus": "chat"
+    },
+    {
+      "start": 23.86,
+      "end": 29.77,
+      "caption": "Can you see who is really typing?",
+      "text": "Quick question. Can you see who is really typing? Think!",
+      "scene": "hook",
+      "focus": "ask"
+    },
+    {
+      "start": 29.77,
+      "end": 37.02,
+      "caption": "Online, anyone can pretend to be anyone",
+      "text": "Nope! Online, anyone can pretend to be anyone. It could be a kid, or a grown-up stranger.",
+      "scene": "hook",
+      "focus": "answer"
+    },
+    {
+      "start": 37.02,
+      "end": 41.38,
+      "caption": "Smart champs follow 3 rules",
+      "text": "That's why smart champs follow three safety rules. Let's go!",
+      "scene": "hook",
+      "focus": "rules"
+    },
+    {
+      "start": 41.38,
+      "end": 43.95,
+      "caption": "Rule 1: Private info stays private",
+      "text": "Rule one: private info stays private.",
+      "scene": "private",
+      "focus": "intro"
+    },
+    {
+      "start": 43.95,
+      "end": 48.63,
+      "caption": "Full name \u00b7 School \u00b7 Home address \u00b7 Phone number",
+      "text": "Private info means your full name, your school, your home address, and your phone number.",
+      "scene": "private",
+      "focus": "items"
+    },
+    {
+      "start": 48.63,
+      "end": 55.18,
+      "caption": "Together, they make a map to your door!",
+      "text": "One piece looks small. But put them together, and it's like a map that leads a stranger straight to your door!",
+      "scene": "private",
+      "focus": "map"
+    },
+    {
+      "start": 55.18,
+      "end": 61.98,
+      "caption": "OK to share: favourite colour, nickname, drawing",
+      "text": "So what can you share? Your favourite colour, a game nickname, or your drawing. Totally fine!",
+      "scene": "private",
+      "focus": "safe"
+    },
+    {
+      "start": 61.98,
+      "end": 64.84,
+      "caption": "Say it: Private stays private!",
+      "text": "Say it with me: private stays private!",
+      "scene": "private",
+      "focus": "say"
+    },
+    {
+      "start": 64.84,
+      "end": 70.38,
+      "caption": "Game: Safe or unsafe?",
+      "text": "Game time! Safe post, or unsafe post? Answer fast!",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 70.38,
+      "end": 73.8,
+      "caption": "Post 1: \"I love mango ice cream!\"",
+      "text": "Post one: I love mango ice cream!",
+      "scene": "sort",
+      "focus": "q1"
+    },
+    {
+      "start": 73.8,
+      "end": 76.59,
+      "caption": "SAFE! Anyone can know that",
+      "text": "Safe! Everybody can know that.",
+      "scene": "sort",
+      "focus": "a1"
+    },
+    {
+      "start": 76.59,
+      "end": 82.18,
+      "caption": "Post 2: name + school + street",
+      "text": "Post two: Hi, I'm Riya from Green Park School, and I live on Rose Street!",
+      "scene": "sort",
+      "focus": "q2"
+    },
+    {
+      "start": 82.18,
+      "end": 88.43,
+      "caption": "UNSAFE! That's a map to Riya's door",
+      "text": "Unsafe! Name, school and street, all together. That's the map again!",
+      "scene": "sort",
+      "focus": "a2"
+    },
+    {
+      "start": 88.43,
+      "end": 91.74,
+      "caption": "Post 3: \"Look at my new drawing!\"",
+      "text": "Post three: a photo of my new drawing.",
+      "scene": "sort",
+      "focus": "q3"
+    },
+    {
+      "start": 91.74,
+      "end": 96.29,
+      "caption": "SAFE! (no school badge or house number)",
+      "text": "Safe! Just don't show your school badge or house number in the picture.",
+      "scene": "sort",
+      "focus": "a3"
+    },
+    {
+      "start": 96.29,
+      "end": 98.93,
+      "caption": "Rule 2: Your password is a secret key",
+      "text": "Rule two: your password is a secret key.",
+      "scene": "password",
+      "focus": "intro"
+    },
+    {
+      "start": 98.93,
+      "end": 102.4,
+      "caption": "It locks your games and accounts",
+      "text": "It locks your games and accounts, just like a key locks your home.",
+      "scene": "password",
+      "focus": "lock"
+    },
+    {
+      "start": 102.4,
+      "end": 108.11,
+      "caption": "Secret, even from friends. Only parents know.",
+      "text": "Keep it secret from everyone, even your best friend! Only your mum and dad can know it.",
+      "scene": "password",
+      "focus": "secret"
+    },
+    {
+      "start": 108.11,
+      "end": 112.6,
+      "caption": "Weak: 1234 or your name",
+      "text": "A weak password is easy to guess, like one two three four, or your own name.",
+      "scene": "password",
+      "focus": "weak"
+    },
+    {
+      "start": 112.6,
+      "end": 120.51,
+      "caption": "Strong: long + words + numbers + symbols",
+      "text": "A strong one is long and mixed up, with words, numbers and symbols. Like Tiger, Jumps, seven, Mango!",
+      "scene": "password",
+      "focus": "strong"
+    },
+    {
+      "start": 120.51,
+      "end": 124.34,
+      "caption": "Make your OWN. Never copy one from a screen.",
+      "text": "Tip: make your own. Never copy the one on the screen!",
+      "scene": "password",
+      "focus": "note"
+    },
+    {
+      "start": 124.34,
+      "end": 131.17,
+      "caption": "Which is stronger? abc123 or BlueKite!Runs42",
+      "text": "Your turn! Which is stronger: a b c one two three, or Blue Kite Runs forty two?",
+      "scene": "pwgame",
+      "focus": "ask"
+    },
+    {
+      "start": 131.17,
+      "end": 136.61,
+      "caption": "B! Longer + mixed = harder to guess",
+      "text": "Blue Kite Runs forty two! It's longer and mixed up, so it's way harder to guess.",
+      "scene": "pwgame",
+      "focus": "answer"
+    },
+    {
+      "start": 136.61,
+      "end": 140.16,
+      "caption": "Rule 3: Odd chat? Tell a trusted adult",
+      "text": "Rule three: if a chat feels odd, tell a trusted adult.",
+      "scene": "adult",
+      "focus": "intro"
+    },
+    {
+      "start": 140.16,
+      "end": 147.68,
+      "caption": "Red flags: photos, where you live, \"don't tell\"",
+      "text": "Odd means someone asks for photos, asks where you live, or says: don't tell your parents. Those are red flags!",
+      "scene": "adult",
+      "focus": "signs"
+    },
+    {
+      "start": 147.68,
+      "end": 154.16,
+      "caption": "Stop \u2192 Don't reply \u2192 Tell a grown-up",
+      "text": "Then do three things. Stop. Don't reply. Tell a grown-up you trust.",
+      "scene": "adult",
+      "focus": "steps"
+    },
+    {
+      "start": 154.16,
+      "end": 158.57,
+      "caption": "Mum or Dad \u00b7 Teacher \u00b7 Nani & Nana",
+      "text": "Who? Your mum or dad, your teacher, or your nani and nana.",
+      "scene": "adult",
+      "focus": "who"
+    },
+    {
+      "start": 158.57,
+      "end": 163.01,
+      "caption": "You're never in trouble for telling",
+      "text": "And remember, you are never in trouble for telling. Telling is brave!",
+      "scene": "adult",
+      "focus": "never"
+    },
+    {
+      "start": 163.01,
+      "end": 165.06,
+      "caption": "Practice check",
+      "text": "Practice check, just like the quiz!",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 165.06,
+      "end": 178.51,
+      "caption": "A new online friend asks for your address\u2026",
+      "text": "A new online friend asks for your home address. What do you do? A: tell them. B: tell only your street. Or C: don't share, and tell a trusted adult.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 178.51,
+      "end": 184.92,
+      "caption": "C: Don't share. Tell a trusted adult.",
+      "text": "C! Never share your address. Tell a grown-up right away. Well done!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 184.92,
+      "end": 189.24,
+      "caption": "Rule 1: Private info stays private",
+      "text": "Let's lock it in! Rule one: private info stays private.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 189.24,
+      "end": 192.6,
+      "caption": "Rule 2: Passwords are secret",
+      "text": "Rule two: passwords are secret, even from friends.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 192.6,
+      "end": 198.07,
+      "caption": "Rule 3: Stop, don't reply, tell an adult",
+      "text": "Rule three: odd chat? Stop, don't reply, and tell a trusted adult.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 198.07,
+      "end": 202.73,
+      "caption": "Never post: full name \u00b7 school \u00b7 home address",
+      "text": "And three things never to post: your full name, your school, and your home address.",
+      "scene": "recap",
+      "focus": "three"
+    },
+    {
+      "start": 202.73,
+      "end": 207.67,
+      "caption": "Unit 1 complete!",
+      "text": "Chapter five done, and Unit one complete! You're a safe online champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 207.67,
+      "end": 211.37,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now a quick quiz. Tap Finish, and let's go!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

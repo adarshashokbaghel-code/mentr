@@ -12,7 +12,7 @@ import {
   type LearnQuizDifficulty,
   type LearnQuizQuestionDto,
 } from "@/lib/learn-quiz";
-import { hasLessonNotes } from "@/lib/learn-lesson-notes";
+import { getLessonNotes, hasLessonNotes } from "@/lib/learn-lesson-notes";
 import { downloadLessonNotes } from "@/lib/learn-lesson-notes-pdf";
 import { cn } from "@/lib/utils";
 import { ArrowLeft, Check, Download, Loader2, Lock } from "lucide-react";
@@ -136,14 +136,122 @@ function WatchStage({
     );
   }
 
+  return <ReadStage title={title} moduleId={moduleId} saving={saving} onDone={onDone} />;
+}
+
+function ReadStage({
+  onDone,
+  title,
+  moduleId,
+  saving,
+}: {
+  onDone: () => void;
+  title: string;
+  moduleId: string;
+  saving?: boolean;
+}) {
+  const notes = getLessonNotes(moduleId);
+  const [showAnswer, setShowAnswer] = useState(false);
+
   return (
-    <div className="overflow-hidden rounded-3xl border border-[#e8e2d8] bg-white p-5">
-      <p className="text-[14px] font-bold text-[#1c2434]">{title}</p>
-      <p className="mt-1 text-[13px] text-[#8a929c]">
-        Video coming soon for this chapter.
+    <div className="overflow-hidden rounded-3xl border border-[#e8e2d8] bg-white p-5 sm:p-6">
+      <p className="text-[11px] font-bold uppercase tracking-wider text-[#ff6a1a]">
+        Read the lesson
       </p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {notesAvailable ? (
+      <p className="mt-1 text-[16px] font-extrabold text-[#1c2434]">{title}</p>
+      {notes ? (
+        <p className="mt-1 text-[12px] font-semibold text-[#8a929c]">
+          {notes.unitLabel} · {notes.chapterLabel} · {notes.level}
+        </p>
+      ) : null}
+
+      {notes ? (
+        <div className="mt-5 space-y-5">
+          <section className="rounded-2xl bg-[#fff4e8] p-4">
+            <p className="text-[11px] font-extrabold uppercase tracking-wider text-[#ff6a1a]">
+              Big idea
+            </p>
+            <p className="mt-1.5 text-[15px] font-bold leading-relaxed text-[#1c2434]">
+              {notes.bigIdea}
+            </p>
+          </section>
+
+          <section>
+            <p className="text-[13px] font-extrabold text-[#1c2434]">Key words</p>
+            <dl className="mt-2 grid gap-2 sm:grid-cols-2">
+              {notes.definitions.map((d) => (
+                <div
+                  key={d.term}
+                  className="rounded-xl border border-[#f0ebe3] bg-[#faf8f4] px-3.5 py-2.5"
+                >
+                  <dt className="text-[13px] font-extrabold text-[#0d9488]">{d.term}</dt>
+                  <dd className="mt-0.5 text-[13px] leading-snug text-[#39424f]">
+                    {d.meaning}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </section>
+
+          {notes.panels.map((panel) => (
+            <section key={panel.title}>
+              <p className="text-[14px] font-extrabold text-[#1c2434]">{panel.title}</p>
+              <ul className="mt-1.5 space-y-1.5">
+                {panel.body.map((line) => (
+                  <li
+                    key={line}
+                    className="flex gap-2 text-[14px] leading-relaxed text-[#39424f]"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ff6a1a]" />
+                    <span>{line}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+
+          <section className="rounded-2xl border-2 border-[#0d9488] bg-[#e6f7f4] p-4">
+            <p className="text-[13px] font-extrabold text-[#0d9488]">Remember</p>
+            <ul className="mt-1.5 space-y-1">
+              {notes.remember.map((line) => (
+                <li key={line} className="flex gap-2 text-[14px] text-[#1c2434]">
+                  <Check className="mt-1 h-3.5 w-3.5 shrink-0 text-[#0d9488]" />
+                  <span>{line}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="rounded-2xl bg-[#eef2ff] p-4">
+            <p className="text-[13px] font-extrabold text-[#4f46e5]">Check yourself</p>
+            <p className="mt-1 text-[14px] font-semibold text-[#1c2434]">
+              {notes.checkYourself.q}
+            </p>
+            {showAnswer ? (
+              <p className="mt-2 text-[14px] text-[#39424f]">{notes.checkYourself.a}</p>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setShowAnswer(true)}
+                className="mt-2 text-[13px] font-extrabold text-[#4f46e5] hover:underline"
+              >
+                Show answer
+              </button>
+            )}
+          </section>
+
+          <p className="text-[13px] font-semibold italic text-[#0d9488]">
+            Dino says: {notes.dinoLine}
+          </p>
+        </div>
+      ) : (
+        <p className="mt-2 text-[13px] text-[#8a929c]">
+          Notes for this chapter are on the way.
+        </p>
+      )}
+
+      <div className="mt-6 flex flex-wrap gap-2 border-t border-[#f0ebe3] pt-4">
+        {notes ? (
           <button
             type="button"
             onClick={() => downloadLessonNotes(moduleId)}
@@ -157,9 +265,9 @@ function WatchStage({
           type="button"
           onClick={onDone}
           disabled={saving}
-          className="rounded-full bg-[#ff6a1a] px-4 py-2.5 text-[13px] font-extrabold text-white"
+          className="rounded-full bg-[#ff6a1a] px-4 py-2.5 text-[13px] font-extrabold text-white disabled:opacity-60"
         >
-          {saving ? "Saving…" : "Mark complete → Quiz"}
+          {saving ? "Saving…" : "I've read it → Quiz"}
         </button>
       </div>
     </div>
@@ -549,7 +657,7 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
                   : "text-[#8a929c]",
               )}
             >
-              Video
+              {hasLessonVideo(moduleId) ? "Video" : "Read"}
             </button>
             <button
               type="button"
@@ -618,14 +726,16 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
               Quiz locked
             </p>
             <p className="mt-1 text-[13px] text-[#8a929c]">
-              Mark the video complete first.
+              {hasLessonVideo(moduleId)
+                ? "Mark the video complete first."
+                : "Finish reading the lesson first."}
             </p>
             <button
               type="button"
               onClick={() => setStage("watch")}
               className="mt-4 rounded-full bg-[#ff6a1a] px-4 py-2 text-[13px] font-extrabold text-white"
             >
-              Back to video
+              {hasLessonVideo(moduleId) ? "Back to video" : "Back to lesson"}
             </button>
           </div>
         )
