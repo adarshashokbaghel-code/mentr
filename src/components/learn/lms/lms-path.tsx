@@ -3,7 +3,7 @@
 import { useLmsPotd } from "@/components/learn/lms/lms-potd-context";
 import {
   LEARN_TRACKS,
-  SAMPLE_MODULE_ID,
+  hasLessonVideo,
   type LearnTrackId,
 } from "@/lib/learn-curriculum";
 import type { LearnEnrollmentDto } from "@/lib/learn-enroll";
@@ -347,10 +347,7 @@ export function LmsPath() {
                     aria-hidden
                   />
                   {unit.modules.map((m, idx) => {
-                    const canOpen =
-                      m.id === SAMPLE_MODULE_ID ||
-                      hasWatchedVideo(enrollment, m.id) ||
-                      hasCompletedQuiz(enrollment, m.id);
+                    const hasVideo = hasLessonVideo(m.id);
                     const videoDone = hasWatchedVideo(enrollment, m.id);
                     const quizDone = hasCompletedQuiz(enrollment, m.id);
                     const done = videoDone && quizDone;
@@ -362,9 +359,7 @@ export function LmsPath() {
                             "relative z-[1] flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-[12px] font-extrabold",
                             done
                               ? "border-[#0d9488] bg-[#0d9488] text-white"
-                              : canOpen
-                                ? "border-[#ff6a1a] bg-[#fff4e8] text-[#ff6a1a]"
-                                : "border-[#e8e2d8] bg-white text-[#a89f91]",
+                              : "border-[#ff6a1a] bg-[#fff4e8] text-[#ff6a1a]",
                           )}
                         >
                           {done ? <Check className="h-4 w-4" /> : idx + 1}
@@ -381,29 +376,24 @@ export function LmsPath() {
                           </div>
 
                           <div className="flex w-full shrink-0 gap-1.5 sm:w-auto sm:gap-2">
-                            {canOpen ? (
-                              <Link
-                                href={`/learn/app/lesson/${m.id}?stage=watch`}
-                                className={cn(
-                                  "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg text-[11px] font-extrabold sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]",
-                                  videoDone
-                                    ? "bg-[#e6f7f4] text-[#0d9488]"
-                                    : "bg-[#fff4e8] text-[#ff6a1a]",
-                                )}
-                              >
-                                {videoDone ? (
-                                  <Check className="h-3.5 w-3.5" />
-                                ) : (
-                                  <Play className="h-3.5 w-3.5 fill-current" />
-                                )}
-                                Video
-                              </Link>
-                            ) : (
-                              <span className="inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg bg-[#f3efe7] text-[11px] font-extrabold text-[#a89f91] sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]">
-                                <Lock className="h-3.5 w-3.5" />
-                                Video
-                              </span>
-                            )}
+                            <Link
+                              href={`/learn/app/lesson/${m.id}?stage=watch`}
+                              className={cn(
+                                "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg text-[11px] font-extrabold sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]",
+                                videoDone
+                                  ? "bg-[#e6f7f4] text-[#0d9488]"
+                                  : "bg-[#fff4e8] text-[#ff6a1a]",
+                              )}
+                            >
+                              {videoDone ? (
+                                <Check className="h-3.5 w-3.5" />
+                              ) : hasVideo ? (
+                                <Play className="h-3.5 w-3.5 fill-current" />
+                              ) : (
+                                <BookOpen className="h-3.5 w-3.5" />
+                              )}
+                              {hasVideo ? "Video" : "Read"}
+                            </Link>
 
                             {videoDone ? (
                               <Link

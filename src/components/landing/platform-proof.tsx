@@ -4,8 +4,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BENGALURU_SEO_SUBJECTS } from "@/lib/seo-programmatic";
 import { LAUNCH_HUB_CITY, SITE_BRAND } from "@/lib/seo";
-import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
-import { SUBJECTS } from "@/lib/teachers";
+import {
+  formatMentorCount,
+  formatSubjectCount,
+  useMentorCount,
+  useSubjectCount,
+} from "@/lib/mentor-stats";
 import { slugify } from "@/lib/seo-hubs";
 import { cn } from "@/lib/utils";
 import {
@@ -18,8 +22,6 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-
-const SUBJECT_FLOOR = SUBJECTS.length;
 
 const highlights = [
   {
@@ -52,7 +54,7 @@ export function PlatformProof({
 }) {
   const mentorCount = useMentorCount();
   const tutorLabel = formatMentorCount(mentorCount);
-  const subjectCount = SUBJECT_FLOOR;
+  const subjectLabel = formatSubjectCount(useSubjectCount());
 
   const stats = [
     {
@@ -63,7 +65,7 @@ export function PlatformProof({
       icon: Users,
     },
     {
-      value: `${subjectCount}+`,
+      value: subjectLabel,
       label: "Subjects offered",
       sub: "School · exams · skills",
       tint: "bg-butter",
@@ -103,7 +105,7 @@ export function PlatformProof({
             </p>
             <h2 className="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-[40px] lg:leading-[1.15]">
               {tutorLabel === "…" ? "Verified" : tutorLabel} tutors.{" "}
-              {subjectCount}+ subjects.{" "}
+              {subjectLabel === "…" ? "Many" : subjectLabel} subjects.{" "}
               <span className="text-coral">Zero platform fees.</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted lg:mx-0">

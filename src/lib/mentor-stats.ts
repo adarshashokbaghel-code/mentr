@@ -12,11 +12,16 @@ let memoryStats: { stats: PlatformStats; at: number } | null = null;
 const MEMORY_TTL_MS = 60_000;
 let inflight: Promise<PlatformStats | null> | null = null;
 
-/** Format live mentor count for marketing UI (e.g. 67 → "67+"). */
+/** Parents-served claim — the one number every marketing page must show. */
+export const SATISFIED_PARENTS = 100;
+
+/** Format a live platform count for marketing UI (e.g. 67 → "67+"). */
 export function formatMentorCount(count: number | null | undefined): string {
   if (count == null || !Number.isFinite(count) || count <= 0) return "…";
   return `${Math.floor(count)}+`;
 }
+
+export const formatSubjectCount = formatMentorCount;
 
 export async function fetchPlatformStats(): Promise<PlatformStats | null> {
   if (memoryStats && Date.now() - memoryStats.at < MEMORY_TTL_MS) {
@@ -81,4 +86,9 @@ export function usePlatformStats(): PlatformStats | null {
 /** Live completed-mentor count from DB — shared across landing surfaces. */
 export function useMentorCount(): number | null {
   return usePlatformStats()?.mentors ?? null;
+}
+
+/** Live distinct-subject count from DB — shared across landing surfaces. */
+export function useSubjectCount(): number | null {
+  return usePlatformStats()?.subjects ?? null;
 }

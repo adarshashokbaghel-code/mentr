@@ -3,6 +3,8 @@
  * (not PPT decks). Simpler wording for Class 3–5.
  */
 
+import { getLessonContent, getLessonMeta } from "./learn-content";
+
 export type LessonNotesDefinition = {
   term: string;
   meaning: string;
@@ -335,17 +337,110 @@ export const A4_LESSON_NOTES: LessonNotesDoc = {
   dinoLine: "Chapter 4 done. You know the secret trip of a website — superb, champ!",
 };
 
+export const A5_LESSON_NOTES: LessonNotesDoc = {
+  moduleId: "A5",
+  title: "Being Safe Online",
+  unitLabel: "CS Unit 1 · How Computers Work",
+  chapterLabel: "Chapter 5 of 5",
+  level: "Easy",
+  filename: "Mentr-Learn-A5-Being-Safe-Online-Notes.pdf",
+  bigIdea:
+    "Online, anyone can pretend to be anyone. Three rules keep you safe: private info stays private, passwords are secret (even from friends), and if a chat feels odd — stop, don’t reply, and tell a trusted adult.",
+  definitions: [
+    {
+      term: "Private info",
+      meaning: "Your full name, school, home address, and phone number. Together they are a map to your door.",
+    },
+    {
+      term: "Password",
+      meaning: "A secret key that locks your games and accounts. Only you and your parents know it.",
+    },
+    {
+      term: "Red flag",
+      meaning: "A warning sign in a chat — like asking for photos, where you live, or saying “don’t tell your parents”.",
+    },
+    {
+      term: "Trusted adult",
+      meaning: "A grown-up who keeps you safe: mum or dad, your teacher, or your nani and nana.",
+    },
+  ],
+  panels: [
+    {
+      title: "Rule 1 · Private info stays private",
+      body: [
+        "Never post: full name, school, home address, phone number.",
+        "One piece looks small — together they lead a stranger to your door.",
+        "OK to share: favourite colour, a game nickname, your drawing.",
+      ],
+    },
+    {
+      title: "Safe or unsafe?",
+      body: [
+        "“I love mango ice cream!” → Safe.",
+        "“I’m Riya from Green Park School, I live on Rose Street” → Unsafe.",
+        "A photo of your drawing → Safe (no school badge or house number in it).",
+      ],
+    },
+    {
+      title: "Rule 2 · Passwords are secret",
+      body: [
+        "Keep it secret from everyone — even your best friend.",
+        "Weak: 1234, or your own name. Easy to guess!",
+        "Strong: long and mixed — words, numbers, symbols. Make your own.",
+      ],
+    },
+    {
+      title: "Rule 3 · Odd chat? Tell a trusted adult",
+      body: [
+        "Red flags: asks for photos, asks where you live, says “don’t tell”.",
+        "1. Stop.  2. Don’t reply.  3. Tell a grown-up you trust.",
+        "You are never in trouble for telling. Telling is brave!",
+      ],
+    },
+  ],
+  remember: [
+    "Private info stays private.",
+    "Passwords are secret, even from friends.",
+    "Odd chat → stop, don’t reply, tell a trusted adult.",
+    "Never post: full name, school, home address.",
+  ],
+  checkYourself: {
+    q: "A new friend online asks for your home address. What should you do?",
+    a: "Don’t share it. Tell a trusted adult (like mum, dad, or your teacher) right away.",
+  },
+  dinoLine: "Chapter 5 done and Unit 1 complete — you’re a safe online champ!",
+};
+
 const NOTES_BY_MODULE: Record<string, LessonNotesDoc> = {
   A1: A1_LESSON_NOTES,
   A2: A2_LESSON_NOTES,
   A3: A3_LESSON_NOTES,
   A4: A4_LESSON_NOTES,
+  A5: A5_LESSON_NOTES,
 };
 
+function notesFromBank(moduleId: string): LessonNotesDoc | null {
+  const notes = getLessonContent(moduleId)?.notes;
+  const meta = getLessonMeta(moduleId);
+  if (!notes || !meta) return null;
+  const titleSlug = meta.title
+    .replace(/[^A-Za-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return {
+    moduleId: meta.moduleId,
+    title: meta.title,
+    unitLabel: meta.unitLabel,
+    chapterLabel: meta.chapterLabel,
+    level: meta.level,
+    filename: `Mentr-Learn-${meta.moduleId}-${titleSlug}-Notes.pdf`,
+    ...notes,
+  };
+}
+
 export function getLessonNotes(moduleId: string): LessonNotesDoc | null {
-  return NOTES_BY_MODULE[moduleId] ?? null;
+  return NOTES_BY_MODULE[moduleId] ?? notesFromBank(moduleId);
 }
 
 export function hasLessonNotes(moduleId: string): boolean {
-  return moduleId in NOTES_BY_MODULE;
+  return moduleId in NOTES_BY_MODULE || Boolean(getLessonContent(moduleId)?.notes);
 }

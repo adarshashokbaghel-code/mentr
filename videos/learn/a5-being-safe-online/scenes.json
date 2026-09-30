@@ -1,0 +1,134 @@
+{
+  "id": "A5",
+  "title": "Being Safe Online",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "CS · How Computers Work",
+  "slug": "a5-being-safe-online",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+12%",
+  "voicePitch": "+2Hz",
+  "trimSilence": true,
+  "beatGap": 0.12,
+  "voicePolish": true,
+  "fadeSec": 0.18,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.4,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a5-welcome",
+      "beats": [
+        { "vo": "Hi champ! Welcome to Chapter five, the last chapter of Unit one!", "caption": "Chapter 5 · the last one in Unit 1!", "focus": "hello", "sfx": "pop" },
+        { "vo": "You already know what a computer is, how it thinks, its devices, and how websites talk.", "caption": "Computers · Binary · Devices · Websites", "focus": "bridge" },
+        { "vo": "Today's big one: Being Safe Online!", "caption": "Chapter 5 · Being Safe Online", "focus": "chapter", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "You'll learn three super rules that protect you, just like a shield.", "caption": "3 super safety rules", "focus": "rules", "sfx": "whoosh", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "hook",
+      "visual": "a5-hook",
+      "beats": [
+        { "vo": "Imagine you're playing a game online, and a message pops up: Hi! I'm ten too. Want to be friends?", "caption": "\"Hi! I'm 10 too. Want to be friends?\"", "focus": "chat", "sfx": "pop", "sfxAt": 0.35 },
+        { "vo": "Quick question. Can you see who is really typing? Think!", "caption": "Can you see who is really typing?", "focus": "ask", "pause": 1.1 },
+        { "vo": "Nope! Online, anyone can pretend to be anyone. It could be a kid, or a grown-up stranger.", "caption": "Online, anyone can pretend to be anyone", "focus": "answer", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "That's why smart champs follow three safety rules. Let's go!", "caption": "Smart champs follow 3 rules", "focus": "rules" }
+      ]
+    },
+    {
+      "id": "private",
+      "visual": "a5-private",
+      "beats": [
+        { "vo": "Rule one: private info stays private.", "caption": "Rule 1: Private info stays private", "focus": "intro", "sfx": "pop" },
+        { "vo": "Private info means your full name, your school, your home address, and your phone number.", "caption": "Full name · School · Home address · Phone number", "focus": "items", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "One piece looks small. But put them together, and it's like a map that leads a stranger straight to your door!", "caption": "Together, they make a map to your door!", "focus": "map", "sfx": "whoosh", "sfxAt": 0.55 },
+        { "vo": "So what can you share? Your favourite colour, a game nickname, or your drawing. Totally fine!", "caption": "OK to share: favourite colour, nickname, drawing", "focus": "safe", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Say it with me: private stays private!", "caption": "Say it: Private stays private!", "focus": "say", "pause": 0.35 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "a5-sort",
+      "beats": [
+        { "vo": "Game time! Safe post, or unsafe post? Answer fast!", "caption": "Game: Safe or unsafe?", "focus": "intro", "sfx": "pop" },
+        { "vo": "Post one: I love mango ice cream!", "caption": "Post 1: \"I love mango ice cream!\"", "focus": "q1", "pause": 0.9 },
+        { "vo": "Safe! Everybody can know that.", "caption": "SAFE! Anyone can know that", "focus": "a1", "sfx": "success", "sfxAt": 0.02 },
+        { "vo": "Post two: Hi, I'm Riya from Green Park School, and I live on Rose Street!", "caption": "Post 2: name + school + street", "focus": "q2", "pause": 0.9 },
+        { "vo": "Unsafe! Name, school and street, all together. That's the map again!", "caption": "UNSAFE! That's a map to Riya's door", "focus": "a2", "sfx": "buzz", "sfxAt": 0.02 },
+        { "vo": "Post three: a photo of my new drawing.", "caption": "Post 3: \"Look at my new drawing!\"", "focus": "q3", "pause": 0.9 },
+        { "vo": "Safe! Just don't show your school badge or house number in the picture.", "caption": "SAFE! (no school badge or house number)", "focus": "a3", "sfx": "success", "sfxAt": 0.02 }
+      ]
+    },
+    {
+      "id": "password",
+      "visual": "a5-password",
+      "beats": [
+        { "vo": "Rule two: your password is a secret key.", "caption": "Rule 2: Your password is a secret key", "focus": "intro", "sfx": "pop" },
+        { "vo": "It locks your games and accounts, just like a key locks your home.", "caption": "It locks your games and accounts", "focus": "lock", "sfx": "tick", "sfxAt": 0.66 },
+        { "vo": "Keep it secret from everyone, even your best friend! Only your mum and dad can know it.", "caption": "Secret, even from friends. Only parents know.", "focus": "secret" },
+        { "vo": "A weak password is easy to guess, like one two three four, or your own name.", "caption": "Weak: 1234 or your name", "focus": "weak", "sfx": "buzz", "sfxAt": 0.5 },
+        { "vo": "A strong one is long and mixed up, with words, numbers and symbols. Like Tiger, Jumps, seven, Mango!", "caption": "Strong: long + words + numbers + symbols", "focus": "strong", "sfx": "success", "sfxAt": 0.75 },
+        { "vo": "Tip: make your own. Never copy the one on the screen!", "caption": "Make your OWN. Never copy one from a screen.", "focus": "note" }
+      ]
+    },
+    {
+      "id": "pwgame",
+      "visual": "a5-pwgame",
+      "beats": [
+        { "vo": "Your turn! Which is stronger: a b c one two three, or Blue Kite Runs forty two?", "caption": "Which is stronger? abc123 or BlueKite!Runs42", "focus": "ask", "pause": 1.1 },
+        { "vo": "Blue Kite Runs forty two! It's longer and mixed up, so it's way harder to guess.", "caption": "B! Longer + mixed = harder to guess", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "adult",
+      "visual": "a5-adult",
+      "beats": [
+        { "vo": "Rule three: if a chat feels odd, tell a trusted adult.", "caption": "Rule 3: Odd chat? Tell a trusted adult", "focus": "intro", "sfx": "pop" },
+        { "vo": "Odd means someone asks for photos, asks where you live, or says: don't tell your parents. Those are red flags!", "caption": "Red flags: photos, where you live, \"don't tell\"", "focus": "signs", "sfx": "buzz", "sfxAt": 0.85 },
+        { "vo": "Then do three things. Stop. Don't reply. Tell a grown-up you trust.", "caption": "Stop → Don't reply → Tell a grown-up", "focus": "steps", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Who? Your mum or dad, your teacher, or your nani and nana.", "caption": "Mum or Dad · Teacher · Nani & Nana", "focus": "who" },
+        { "vo": "And remember, you are never in trouble for telling. Telling is brave!", "caption": "You're never in trouble for telling", "focus": "never", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a5-check",
+      "beats": [
+        { "vo": "Practice check, just like the quiz!", "caption": "Practice check", "focus": "intro" },
+        { "vo": "A new online friend asks for your home address. What do you do? A: tell them. B: tell only your street. Or C: don't share, and tell a trusted adult.", "caption": "A new online friend asks for your address…", "focus": "ask", "pause": 1.2 },
+        { "vo": "C! Never share your address. Tell a grown-up right away. Well done!", "caption": "C: Don't share. Tell a trusted adult.", "focus": "answer", "sfx": "success", "sfxAt": 0.02 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a5-recap",
+      "beats": [
+        { "vo": "Let's lock it in! Rule one: private info stays private.", "caption": "Rule 1: Private info stays private", "focus": "r1", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Rule two: passwords are secret, even from friends.", "caption": "Rule 2: Passwords are secret", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Rule three: odd chat? Stop, don't reply, and tell a trusted adult.", "caption": "Rule 3: Stop, don't reply, tell an adult", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And three things never to post: your full name, your school, and your home address.", "caption": "Never post: full name · school · home address", "focus": "three" },
+        { "vo": "Chapter five done, and Unit one complete! You're a safe online champ!", "caption": "Unit 1 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now a quick quiz. Tap Finish, and let's go!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

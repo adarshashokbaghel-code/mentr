@@ -19,6 +19,11 @@ import {
 } from "@/lib/github-repo";
 import { cn } from "@/lib/utils";
 import {
+  SATISFIED_PARENTS,
+  formatMentorCount,
+  useMentorCount,
+} from "@/lib/mentor-stats";
+import {
   ArrowRight,
   BookOpen,
   Bug,
@@ -61,9 +66,9 @@ import {
 const GITHUB_ISSUES_URL = `${GITHUB_REPO_URL}/issues`;
 const GITHUB_CONTRIBUTING_URL = `${GITHUB_REPO_URL}/blob/main/CONTRIBUTING.md`;
 
-const stats = [
+const buildStats = (tutorLabel: string) => [
   {
-    value: "100+",
+    value: `${SATISFIED_PARENTS}+`,
     label: "Satisfied parents",
     tint: "bg-lavender",
     icon: Users,
@@ -84,7 +89,7 @@ const stats = [
     sub: "Free to fork & use",
   },
   {
-    value: "100+",
+    value: tutorLabel,
     label: "Verified tutors",
     tint: "bg-coral-wash",
     icon: ShieldCheck,
@@ -808,6 +813,7 @@ export function OpenSourceLanding({
   githubStats?: GithubRepoStats | null;
 }) {
   const [activeStep, setActiveStep] = useState(0);
+  const stats = buildStats(formatMentorCount(useMentorCount()));
 
   return (
     <main>
@@ -832,7 +838,7 @@ export function OpenSourceLanding({
             <p className="os-hero-reveal os-hero-reveal-delay-2 mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
               The free tutor-parent connector — built in the open by{" "}
               <PaprlyWordmark className="align-middle" />. 100% zero cut for
-              parents and faculty. Over 100+ satisfied parents worldwide. Fork
+              parents and faculty. {SATISFIED_PARENTS}+ satisfied parents worldwide. Fork
               it, contribute, or deploy it for your community.
             </p>
 
@@ -1136,7 +1142,7 @@ export function OpenSourceLanding({
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Community trust"
-            title="100+ satisfied"
+            title={`${SATISFIED_PARENTS}+ satisfied`}
             accent="parents worldwide"
             description="Real connections, zero platform fees. Parents and tutors choose Mentr because it's free, direct, and transparent."
           />
@@ -1194,7 +1200,7 @@ export function OpenSourceLanding({
           "₹0 forever",
           "MIT licensed",
           "Pull requests welcome",
-          "100+ happy parents",
+          `${SATISFIED_PARENTS}+ happy parents`,
         ]}
       />
     </main>

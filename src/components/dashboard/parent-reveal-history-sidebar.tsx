@@ -142,9 +142,15 @@ export function ParentRevealHistorySidebar({
                         {[r.parentArea, r.parentCity].filter(Boolean).join(", ") ||
                           "—"}
                       </p>
-                      <p className="mt-1 font-mono text-xs tabular-nums text-ink">
-                        {r.parentPhone}
-                      </p>
+                      {r.parentPhone ? (
+                        <p className="mt-1 font-mono text-xs tabular-nums text-ink">
+                          {r.parentPhone}
+                        </p>
+                      ) : (
+                        <p className="mt-1 text-[11px] text-muted">
+                          Contact locked after the 2-hour window
+                        </p>
+                      )}
                     </div>
                     {r.whatsappUrl ? (
                       <a

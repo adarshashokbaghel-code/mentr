@@ -1,8 +1,11 @@
 "use client";
 
 import { LpStatsBand } from "@/components/landing/lp/shared";
-import { formatMentorCount, usePlatformStats } from "@/lib/mentor-stats";
-import { SUBJECTS } from "@/lib/teachers";
+import {
+  formatMentorCount,
+  formatSubjectCount,
+  usePlatformStats,
+} from "@/lib/mentor-stats";
 import type { LucideIcon } from "lucide-react";
 import { BookOpen, MessageCircle, Sparkles, Users } from "lucide-react";
 import { useMemo } from "react";
@@ -21,7 +24,7 @@ type Stat = {
 export function HomeMentorStatsBand() {
   const platform = usePlatformStats();
   const mentorCount = platform?.mentors ?? null;
-  const subjectCount = platform?.subjects ?? SUBJECTS.length;
+  const subjectCount = platform?.subjects ?? null;
 
   const stats = useMemo<Stat[]>(
     () => [
@@ -33,7 +36,7 @@ export function HomeMentorStatsBand() {
         sub: "Verified profiles",
       },
       {
-        value: `${subjectCount}+`,
+        value: formatSubjectCount(subjectCount),
         label: "Subjects offered",
         tint: "bg-butter",
         icon: BookOpen,

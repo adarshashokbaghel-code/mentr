@@ -17,16 +17,6 @@ function escapeHtml(s: string): string {
     .replace(/'/g, "&#39;");
 }
 
-/** Same shape as the /parentslist mask — full email stays behind a reveal. */
-function maskEmail(email: string): string {
-  const e = String(email || "").trim();
-  if (!e.includes("@")) return "••••@••••";
-  const [user, domain] = e.split("@");
-  const u = user || "";
-  const visible = u.slice(0, Math.min(2, u.length));
-  return `${visible}${"•".repeat(Math.max(3, u.length - visible.length))}@${domain}`;
-}
-
 function parentsListUrl(): string {
   const q = new URLSearchParams({
     utm_source: "email",
@@ -38,18 +28,16 @@ function parentsListUrl(): string {
 
 function renderEmail(opts: {
   mentorName: string;
-  parentName: string | null;
-  maskedEmail: string;
   parentLocation: string | null;
+  parentBoard: string | null;
 }) {
   const url = parentsListUrl();
   const mentorName = escapeHtml(opts.mentorName);
-  const parentName = escapeHtml(opts.parentName || "New parent");
-  const parentEmail = escapeHtml(opts.maskedEmail);
   const location = opts.parentLocation ? escapeHtml(opts.parentLocation) : null;
+  const board = opts.parentBoard ? escapeHtml(opts.parentBoard) : null;
 
-  const subject = opts.parentName
-    ? `New parent on Mentr: ${opts.parentName}`
+  const subject = opts.parentLocation
+    ? `New parent on Mentr in ${opts.parentLocation}`
     : "A new parent just joined Mentr";
 
   const text = [
@@ -57,9 +45,9 @@ function renderEmail(opts: {
     "",
     "A new parent just joined Mentr.",
     "",
-    `Name: ${opts.parentName || "New parent"}`,
-    `Email: ${opts.maskedEmail} (hidden until you reveal)`,
     ...(opts.parentLocation ? [`Location: ${opts.parentLocation}`] : []),
+    ...(opts.parentBoard ? [`Board: ${opts.parentBoard}`] : []),
+    "Name, phone and email stay hidden until you reveal.",
     "",
     "Reach out early — open the Premium parent list to reveal their contact:",
     url,
@@ -87,9 +75,9 @@ function renderEmail(opts: {
         A parent has just signed up on Mentr. Premium mentors who reach out first usually get the conversation.
       </p>
       <table role="presentation" cellspacing="0" cellpadding="0" style="width:100%;border:1px solid #eee7da;border-radius:12px;border-collapse:separate;overflow:hidden;background:#fbf8f2;">
-        ${row("Name", parentName)}
-        ${row("Email", `${parentEmail} <span style="color:#8a8373;font-weight:500;font-size:12px;">· hidden until you reveal</span>`)}
         ${location ? row("Location", location) : ""}
+        ${board ? row("Board", board) : ""}
+        ${row("Contact", `<span style="color:#8a8373;font-weight:500;font-size:13px;">Hidden until you reveal</span>`)}
       </table>
       <div style="text-align:center;margin:22px 0 8px;">
         <a href="${url}" style="display:inline-block;background:#1a231c;color:#ffffff;text-decoration:none;font-weight:700;font-size:15px;padding:13px 26px;border-radius:12px;">
@@ -146,16 +134,14 @@ export async function notifyPremiumMentorsOfNewParent(
     const location =
       [pp?.area, pp?.city].filter((s) => s && String(s).trim()).join(", ") ||
       null;
-    const maskedEmail = maskEmail(parent.email);
 
     const sends = mentors
       .filter((m) => m.email && !INTERNAL_EMAIL_RX.test(m.email))
       .map((m) => {
         const email = renderEmail({
           mentorName: m.profile?.name?.trim() || "there",
-          parentName: pp?.name?.trim() || null,
-          maskedEmail,
           parentLocation: location,
+          parentBoard: pp?.board || null,
         });
         return sendAdminEmail(m.email, email.subject, email.text, email.html);
       });

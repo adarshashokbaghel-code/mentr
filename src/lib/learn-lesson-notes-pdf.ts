@@ -38,6 +38,19 @@ function asciiSafe(raw: string): string {
     .replace(/→/g, "->")
     .replace(/·/g, " - ")
     .replace(/…/g, "...")
+    .replace(/↔/g, "<->")
+    .replace(/×/g, "x")
+    .replace(/÷/g, "/")
+    .replace(/−/g, "-")
+    .replace(/≠/g, "!=")
+    .replace(/≈/g, "~")
+    .replace(/°/g, " deg")
+    .replace(/₹/g, "Rs ")
+    .replace(/●/g, "(circle)")
+    .replace(/▲/g, "(triangle)")
+    .replace(/■/g, "(square)")
+    .replace(/★/g, "(star)")
+    .replace(/✔/g, "(tick)")
     .replace(/[^\x20-\x7E]/g, " ");
 }
 

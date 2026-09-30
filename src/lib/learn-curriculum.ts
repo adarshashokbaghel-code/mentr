@@ -51,6 +51,13 @@ export const VIDEO_LENGTH_BY_UNIT_INDEX = [3, 4, 5, 6] as const;
 
 export const SAMPLE_MODULE_ID = "A1";
 
+/** Lessons whose video is published under `/learn/lessons/{id}.mp4`, in path order. */
+export const LESSON_VIDEO_IDS = ["A1", "A2", "A3", "A4", "A5"] as const;
+
+export function hasLessonVideo(moduleId: string): boolean {
+  return (LESSON_VIDEO_IDS as readonly string[]).includes(moduleId);
+}
+
 const csUnits: LearnUnit[] = [
   {
     id: "cs-u1",
@@ -267,6 +274,11 @@ export const LEARN_TRACKS: LearnTrack[] = [
 export const LEARN_MODULE_COUNT = LEARN_TRACKS.reduce(
   (n, t) => n + t.units.reduce((u, unit) => u + unit.modules.length, 0),
   0,
+);
+
+/** Every module id in path order (CS → AI → Math, unit by unit). */
+export const ALL_MODULE_IDS: string[] = LEARN_TRACKS.flatMap((t) =>
+  t.units.flatMap((u) => u.modules.map((m) => m.id)),
 );
 
 export function getModuleById(id: string): LearnModule | undefined {
