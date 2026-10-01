@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
+import { LearnScrollFilm } from "./learn-scroll-film";
 import { LearnStartButton } from "./learn-start-button";
 import { LEARN_SHELL } from "./learn-shell";
 import { hardShadowSm, SectionHeader } from "./shared";
@@ -129,6 +130,8 @@ export function LearnClaritySections({ geo = "global" }: { geo?: LearnGeo }) {
 
   return (
     <>
+      <LearnScrollFilm />
+
       {/* Available today + syllabus roadmap */}
       <section id="available-today" className="border-y border-hairline bg-white py-10 sm:py-16 lg:py-20">
         <div className={LEARN_SHELL}>

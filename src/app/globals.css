@@ -1199,6 +1199,27 @@ body:has([data-ic-dock]) [data-toast-viewport] {
   }
 }
 
+/* Scroll-grown lesson film — JS writes the transform from scroll position. */
+.learn-scroll-stage {
+  perspective: 1100px;
+  perspective-origin: 50% 30%;
+}
+
+.learn-scroll-film {
+  transform: translate3d(0, 48px, 0) rotateX(14deg) rotateY(-7deg) rotateZ(-3.5deg) scale(0.82);
+  transform-origin: center bottom;
+  box-shadow: 16px 18px 0 0 #1c1a17;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learn-scroll-film {
+    transform: none;
+    box-shadow: 6px 6px 0 0 #1c1a17;
+    will-change: auto;
+  }
+}
+
 /* HackerKid-style hero: light, clean ed-tech */
 .learn-hk-hero {
   --hk-orange: #ff6a1a;
