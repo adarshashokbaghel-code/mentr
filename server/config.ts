@@ -28,7 +28,18 @@ export const config = {
   mongoUri: mongoUriFromEnv(),
   jwtSecret: requireEnv("JWT_SECRET"),
   emailUser: requireEnv("EMAIL_USER"),
-  emailPass: requireEnv("EMAIL_PASS").replace(/\s/g, ""),
+  // Gmail app passwords are shown with spaces; other providers' passwords may contain real ones.
+  emailPass: /@gmail\.com$/i.test(process.env.EMAIL_USER || "")
+    ? requireEnv("EMAIL_PASS").replace(/\s/g, "")
+    : requireEnv("EMAIL_PASS"),
+  /** SMTP server for outgoing mail. Defaults to GoDaddy-hosted Titan (hello@mentr.in). */
+  smtp: {
+    host: process.env.SMTP_HOST || "smtpout.secureserver.net",
+    port: parseInt(process.env.SMTP_PORT || "465", 10),
+    /** true = implicit TLS (465); false = STARTTLS (587). */
+    secure: (process.env.SMTP_SECURE ?? String((process.env.SMTP_PORT || "465") === "465")) === "true",
+  },
+  emailFromName: process.env.EMAIL_FROM_NAME || "Mentr by Paprly",
   frontendUrl:
     process.env.VERCEL === "1"
       ? "https://mentr.in"

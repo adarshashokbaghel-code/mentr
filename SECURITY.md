@@ -4,7 +4,7 @@
 
 If you discover a security vulnerability in this project, please report it privately rather than opening a public GitHub issue.
 
-Email: marketing@upgradsot.com
+Email: hello@mentr.in (subject: "Security report")
 
 Please include:
 

@@ -697,7 +697,7 @@ function ParentCard({
               {locked ? "+91 00000 00000" : pending ? "N/A" : p.phone || "N/A"}
             </p>
             <p className="truncate pl-5 text-xs text-muted">
-              {locked ? "hidden@mentr.in" : p.email || "N/A"}
+              {locked ? "••••••••@•••••.com" : p.email || "N/A"}
             </p>
           </div>
 

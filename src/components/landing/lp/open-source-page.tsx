@@ -1177,10 +1177,10 @@ export function OpenSourceLanding({
           <p className="mx-auto mt-8 max-w-lg text-sm text-muted">
             Questions about contributing? Email{" "}
             <a
-              href="mailto:team@mentr.in"
+              href="mailto:hello@mentr.in"
               className="font-semibold text-coral hover:underline"
             >
-              team@mentr.in
+              hello@mentr.in
             </a>{" "}
             or open a GitHub issue.
           </p>

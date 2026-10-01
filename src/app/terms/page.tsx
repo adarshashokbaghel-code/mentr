@@ -97,7 +97,7 @@ const sections = [
     title: "Safety",
     body: [
       "Meet first sessions in public or supervised settings where practical.",
-      "Report concerns to safety@mentr.in. We may suspend accounts while investigating.",
+      "Report concerns to hello@mentr.in. We may suspend accounts while investigating.",
     ],
   },
   {
@@ -113,7 +113,7 @@ const sections = [
     body: [
       "Mentr accounts are for adults (parents, guardians, adult students, and tutors).",
       "Mentr Learn is parent-enrolled. Children use it under adult supervision. Learn pages do not carry AdSense.",
-      "Do not create accounts for children under 13. Report concerns to safety@mentr.in.",
+      "Do not create accounts for children under 13. Report concerns to hello@mentr.in.",
     ],
   },
   {
@@ -181,19 +181,12 @@ export default function TermsPage() {
             <section>
               <h2 className="text-lg font-bold text-ink">Contact</h2>
               <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                Questions:{" "}
+                Questions and safety reports:{" "}
                 <a
                   href="mailto:hello@mentr.in"
                   className="font-semibold text-coral underline-offset-2 hover:underline"
                 >
                   hello@mentr.in
-                </a>
-                . Safety:{" "}
-                <a
-                  href="mailto:safety@mentr.in"
-                  className="font-semibold text-coral underline-offset-2 hover:underline"
-                >
-                  safety@mentr.in
                 </a>
                 .
               </p>

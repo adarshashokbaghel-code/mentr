@@ -217,20 +217,13 @@ export default function AboutPage() {
               <div>
                 <p className="font-semibold text-ink">Contact the team</p>
                 <p className="mt-1 text-sm leading-relaxed text-muted">
-                  General questions, press, and partnerships:{" "}
+                  Questions, safety reports, press, and partnerships:{" "}
                   <a
                     href="mailto:hello@mentr.in"
                     className="inline-flex items-center gap-1 font-semibold text-coral hover:underline"
                   >
                     <Mail className="h-3.5 w-3.5" />
                     hello@mentr.in
-                  </a>
-                  . Safety reports:{" "}
-                  <a
-                    href="mailto:safety@mentr.in"
-                    className="font-semibold text-coral hover:underline"
-                  >
-                    safety@mentr.in
                   </a>
                   . We reply within one working day.
                 </p>
