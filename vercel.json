@@ -1,4 +1,5 @@
 {
+  "installCommand": "npm install",
   "functions": {
     "src/pages/api/[[...all]].ts": {
       "maxDuration": 30
