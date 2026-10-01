@@ -83,7 +83,7 @@ export const PUBLISHER_LEGAL_NAME = "Paprly";
 export const PUBLISHER_PRODUCT_NAME = "Mentr";
 export const PUBLISHER_LOCATION = "Bengaluru, Karnataka, India";
 export const PUBLISHER_SUPPORT_EMAIL = "hello@mentr.in";
-export const PUBLISHER_SAFETY_EMAIL = "safety@mentr.in";
+export const PUBLISHER_SAFETY_EMAIL = PUBLISHER_SUPPORT_EMAIL;
 export const PUBLISHER_AUDIENCE =
   "Parents, guardians, adult students, and tutors/mentors (18+). Children's learning products (Mentr Learn) are parent-enrolled and supervised — accounts are created by adults.";
 

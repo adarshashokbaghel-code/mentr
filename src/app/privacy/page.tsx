@@ -281,19 +281,13 @@ export default function PrivacyPage() {
               <h2 className="text-lg font-bold text-ink">Contact</h2>
               <p className="mt-3 text-[15px] leading-relaxed text-muted">
                 Operator: Paprly · Product: Mentr · Location: Bengaluru,
-                Karnataka, India. Privacy questions or deletion requests:{" "}
+                Karnataka, India. Privacy questions, deletion requests, and
+                safety concerns:{" "}
                 <a
                   href="mailto:hello@mentr.in"
                   className="font-semibold text-coral underline-offset-2 hover:underline"
                 >
                   hello@mentr.in
-                </a>
-                . Safety concerns:{" "}
-                <a
-                  href="mailto:safety@mentr.in"
-                  className="font-semibold text-coral underline-offset-2 hover:underline"
-                >
-                  safety@mentr.in
                 </a>
                 .
               </p>
