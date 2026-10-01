@@ -1,0 +1,324 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.38,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so glad you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.38,
+      "end": 16.08,
+      "caption": "Last time: fixed rules vs learning",
+      "text": "Last time, we learned about fixed rules and learning. A torch just follows its switch. But AI changes what it does, after seeing lots of examples.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.08,
+      "end": 22.54,
+      "caption": "Chapter 3 \u00b7 Where AI Hides in Daily Life",
+      "text": "Today is chapter three of What Is AI. It's called, Where AI Hides in Daily Life.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 22.54,
+      "end": 35.97,
+      "caption": "AI is hiding everywhere. Let's go hunting!",
+      "text": "Here's a fun secret. AI is hiding all around you. At home, in phones, even on the road! So grab your detective hat. Let's go on an AI hunt!",
+      "scene": "open",
+      "focus": "hunt"
+    },
+    {
+      "start": 35.97,
+      "end": 46.75,
+      "caption": "Meet Anaya, and Tara the voice helper",
+      "text": "Meet Anaya. She's ten, she loves cricket, and she lives in Pune. And on the shelf in her living room sits Tara, the family's voice helper.",
+      "scene": "tara",
+      "focus": "meet"
+    },
+    {
+      "start": 46.75,
+      "end": 51.7,
+      "caption": "\"Tara, play my favourite song!\"",
+      "text": "One Saturday morning, Anaya calls out, Tara, play my favourite song!",
+      "scene": "tara",
+      "focus": "ask"
+    },
+    {
+      "start": 51.7,
+      "end": 56.22,
+      "caption": "The song starts playing!",
+      "text": "And the song starts playing! Anaya dances around the room.",
+      "scene": "tara",
+      "focus": "plays"
+    },
+    {
+      "start": 56.22,
+      "end": 67.37,
+      "caption": "How did Tara understand Anaya? Think!",
+      "text": "But wait. How did Tara know what Anaya said? Tara doesn't have ears like us. Think about it for a moment.",
+      "scene": "tara",
+      "focus": "wonder"
+    },
+    {
+      "start": 67.37,
+      "end": 84.07,
+      "caption": "Tara guesses your words from patterns",
+      "text": "Here's the secret. Tara is a voice assistant, and it uses AI. While it was being made, it learned from millions of voice examples. So now it listens to the sounds, guesses your words from patterns, and tries to answer.",
+      "scene": "tara",
+      "focus": "guess"
+    },
+    {
+      "start": 84.07,
+      "end": 95.17,
+      "caption": "Not alive. Not magic. A clever guesser!",
+      "text": "And that smiley face on Tara? It's just lights. Tara isn't alive, and it isn't magic. It's a clever guesser, made by people.",
+      "scene": "tara",
+      "focus": "notalive"
+    },
+    {
+      "start": 95.17,
+      "end": 106.88,
+      "caption": "AI helper = guesses or suggests from patterns",
+      "text": "So, what is an AI helper? An AI helper is a gadget, or an app, that guesses or suggests things, using patterns it learned from lots of examples.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 106.88,
+      "end": 119.73,
+      "caption": "Guessing or suggesting? Probably AI!",
+      "text": "That gives us our detective clue. If something is guessing, or suggesting, it's probably AI. If it does the exact same thing every time, it's probably a simple program.",
+      "scene": "define",
+      "focus": "clue"
+    },
+    {
+      "start": 119.73,
+      "end": 127.43,
+      "caption": "Nani: \"Find the photos of Laddoo!\"",
+      "text": "Let's start hunting. That evening, Nani asks, Anaya, can you find the photos of our dog, Laddoo?",
+      "scene": "photos",
+      "focus": "ask"
+    },
+    {
+      "start": 127.43,
+      "end": 139.38,
+      "caption": "Type \"dog\" \u2192 only the dog photos appear!",
+      "text": "There are thousands of photos on the phone! So Anaya types one word in the search box. Dog. And whoosh! Only the dog photos pop up.",
+      "scene": "photos",
+      "focus": "search"
+    },
+    {
+      "start": 139.38,
+      "end": 146.59,
+      "caption": "Nobody named each photo. How did it know?",
+      "text": "But nobody wrote the word dog on each photo. So how did the phone know?",
+      "scene": "photos",
+      "focus": "how"
+    },
+    {
+      "start": 146.59,
+      "end": 161.95,
+      "caption": "AI learned what dogs look like from examples",
+      "text": "That's photo search, and it uses AI. It learned what dogs look like from many, many dog pictures. Floppy ears, a wet nose, a waggy tail. Now it spots that pattern in your photos too.",
+      "scene": "photos",
+      "focus": "learned"
+    },
+    {
+      "start": 161.95,
+      "end": 173.67,
+      "caption": "Bunny ears sit right on her head!",
+      "text": "Next, Anaya tries a funny photo filter. Bunny ears! And look, they sit right on top of her head. When she moves, the ears move with her.",
+      "scene": "filter",
+      "focus": "ears"
+    },
+    {
+      "start": 173.67,
+      "end": 186.93,
+      "caption": "AI finds the pattern of a face",
+      "text": "How? The filter's AI learned the pattern of a face. Two eyes, a nose, and a mouth, in that shape. Once it finds your face, it knows exactly where the ears should go.",
+      "scene": "filter",
+      "focus": "face"
+    },
+    {
+      "start": 186.93,
+      "end": 192.36,
+      "caption": "Anaya watches a cricket video",
+      "text": "After dinner, Anaya watches a cricket video. What a catch on the boundary!",
+      "scene": "videos",
+      "focus": "watch"
+    },
+    {
+      "start": 192.36,
+      "end": 200.51,
+      "caption": "\"You might like\u2026\" More cricket!",
+      "text": "When it ends, the app shows a row that says, You might like. And what's in it? More cricket videos!",
+      "scene": "videos",
+      "focus": "suggest"
+    },
+    {
+      "start": 200.51,
+      "end": 211.75,
+      "caption": "Recommendation = a suggestion from patterns",
+      "text": "That's called a recommendation. A suggestion made from patterns in what you watched before. Anaya watches lots of cricket, so the AI guesses she'll like more cricket.",
+      "scene": "videos",
+      "focus": "pattern"
+    },
+    {
+      "start": 211.75,
+      "end": 218.99,
+      "caption": "Sunday drive with a map app",
+      "text": "On Sunday, the family drives to Nani's sister's house. Papa opens a map app on his phone.",
+      "scene": "maps",
+      "focus": "drive"
+    },
+    {
+      "start": 218.99,
+      "end": 230.21,
+      "caption": "Why is that road red on the map?",
+      "text": "One road on the map is red. Hmm. Is that road painted red? No! So what does red mean?",
+      "scene": "maps",
+      "focus": "red"
+    },
+    {
+      "start": 230.21,
+      "end": 240.88,
+      "caption": "Red = slow traffic, learned from many phones",
+      "text": "Red means the traffic is slow there. The app learns this from many phones moving on the roads. When lots of phones crawl along slowly, that road turns red.",
+      "scene": "maps",
+      "focus": "slow"
+    },
+    {
+      "start": 240.88,
+      "end": 248.61,
+      "caption": "It suggests a faster road. That's AI!",
+      "text": "So the app suggests a faster road. Guessing, and suggesting, again. That's AI!",
+      "scene": "maps",
+      "focus": "faster"
+    },
+    {
+      "start": 248.61,
+      "end": 260.82,
+      "caption": "Kabir's toy car flashes lights and beeps",
+      "text": "Now careful, detective. Not everything that looks smart is AI. Anaya's little brother, Kabir, has a toy car that flashes blue and red lights, and beeps.",
+      "scene": "notai",
+      "focus": "toy"
+    },
+    {
+      "start": 260.82,
+      "end": 268.68,
+      "caption": "Is the blinking toy car AI? Think!",
+      "text": "It looks very clever! But is it AI? Use our detective clue.",
+      "scene": "notai",
+      "focus": "ask"
+    },
+    {
+      "start": 268.68,
+      "end": 280.58,
+      "caption": "Not AI! Same lights every time: a fixed rule",
+      "text": "No, it isn't! It flashes the same lights, the same way, every single time. It never learns from examples. It just follows a fixed rule.",
+      "scene": "notai",
+      "focus": "answer"
+    },
+    {
+      "start": 280.58,
+      "end": 294.6,
+      "caption": "Shiny or noisy isn't AI. Learning is!",
+      "text": "Same with a doorbell. Press it, it rings. Always. So remember, shiny, or noisy, or full of lights doesn't mean AI. Learning from examples does.",
+      "scene": "notai",
+      "focus": "doorbell"
+    },
+    {
+      "start": 294.6,
+      "end": 309.75,
+      "caption": "Which one in the kitchen uses AI?",
+      "text": "Detective game! Here's Anaya's kitchen. There's a torch, a fridge light, a clock, and a voice speaker. Which one uses AI? Pause, and think.",
+      "scene": "hunt",
+      "focus": "ask"
+    },
+    {
+      "start": 309.75,
+      "end": 320.6,
+      "caption": "The voice speaker! The rest follow fixed rules",
+      "text": "The voice speaker! It guesses your words. The torch, the fridge light, and the clock just follow fixed rules. Great detective work!",
+      "scene": "hunt",
+      "focus": "answer"
+    },
+    {
+      "start": 320.6,
+      "end": 324.55,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 324.55,
+      "end": 334.73,
+      "caption": "Name one AI helper and what it tries to do",
+      "text": "Name one AI helper you have seen, and say what it tries to do. Pause the video, and write it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 334.73,
+      "end": 349.21,
+      "caption": "Voice helper: understands you \u00b7 Map: traffic",
+      "text": "Here are two answers. A voice assistant tries to understand what you say, and answer. A map app tries to show which roads have heavy traffic. Did you think of another one? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 349.21,
+      "end": 357.19,
+      "caption": "Voice \u00b7 Photos \u00b7 Videos \u00b7 Maps use AI",
+      "text": "Let's remember. Voice helpers, photo search, video suggestions, and map traffic all use AI.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 357.19,
+      "end": 361.1,
+      "caption": "AI guesses or suggests from patterns",
+      "text": "AI helpers guess, or suggest, from patterns.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 361.1,
+      "end": 366.19,
+      "caption": "A blinking toy is NOT AI",
+      "text": "A blinking toy car is not AI. It follows a fixed rule.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 366.19,
+      "end": 370.43,
+      "caption": "Ask: does it learn from examples?",
+      "text": "And the detective question? Does it learn from examples?",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 370.43,
+      "end": 375.78,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You're a real AI detective now, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 375.78,
+      "end": 382.58,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

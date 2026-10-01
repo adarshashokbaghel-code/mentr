@@ -1876,6 +1876,46 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Open word counter",
     ctaHref: "/tools/word-counter",
   },
+
+  {
+    slug: "free-coding-videos-class-3-4-5-india",
+    title: "Free Coding Videos for Class 3, 4 and 5 in India",
+    keyword: "free coding videos for class 3 4 5",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "What a free Class 3–5 coding video should teach, how Mentr Learn’s narrated lessons match the 60-chapter syllabus, and where parents enroll at ₹0.",
+    publishWeek: 39,
+    cta: "Watch free on Mentr Learn",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "coding-problem-of-the-day-for-kids",
+    title: "Coding Problem of the Day for Kids: A 5-Minute Parent Guide",
+    keyword: "coding problem of the day for kids",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "kids-learn",
+    description:
+      "How a daily coding question works for Class 3–5: one short problem, a streak, no contest pressure, and how Mentr Learn’s POTD fits the syllabus.",
+    publishWeek: 39,
+    cta: "Start today’s problem",
+    ctaHref: "/learn/start",
+  },
+  {
+    slug: "kids-coding-course-checklist-class-3-5",
+    title: "Kids Coding Course Checklist for Class 3–5 Parents",
+    keyword: "kids coding course checklist class 3 5",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "kids-learn",
+    description:
+      "A parent checklist for a Class 3–5 coding course: syllabus match, video, notes, quiz, and practice on every chapter — and how Mentr Learn lines up.",
+    publishWeek: 39,
+    cta: "Open the syllabus",
+    ctaHref: "/learn/syllabus",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

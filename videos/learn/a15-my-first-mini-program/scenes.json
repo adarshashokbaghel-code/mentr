@@ -1,0 +1,151 @@
+{
+  "id": "A15",
+  "title": "My First Mini Program",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "CS · Building With Blocks",
+  "slug": "a15-my-first-mini-program",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a15-welcome",
+      "beats": [
+        { "vo": "Hey champ! Welcome back. I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you taught your code to make choices, with if and else. If Billu touches the wall, it bounces. Else, it keeps walking. So clever!", "caption": "Last time: if · then · else blocks", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "We're still in Unit three, Building With Blocks. And guess what? This is chapter five. The very last chapter of the unit!", "caption": "Unit 3 · Chapter 5 of 5 · the last one!", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Today's chapter is called, My First Mini Program.", "caption": "Chapter 5 · My First Mini Program", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Today, you won't just learn about blocks. You'll plan, build, test, and fix a tiny program of your very own. Ready? Let's go!", "caption": "Today, you build your own program!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "arjun",
+      "visual": "a15-hook",
+      "beats": [
+        { "vo": "Meet Arjun. He's just learned block coding, and he has a big plan for his cartoon cat.", "caption": "Meet Arjun, a brand new coder", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "He wants Billu to walk across the screen, and then say, Hello!", "caption": "Goal: Billu walks, then says Hello!", "focus": "want" },
+        { "vo": "Arjun is so excited, he skips the planning. He grabs blocks quickly, snaps them together, and clicks the green flag.", "caption": "No plan… grab blocks, snap, click!", "focus": "rush", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Oh no! Billu says hello first, before walking. Then it walks right off the edge of the screen, and disappears!", "caption": "Oops! Hello came first… then it vanished!", "focus": "oops", "sfx": "buzz", "sfxAt": 0.6, "pause": 0.5 },
+        { "vo": "Hmm. What do you think went wrong? Take a moment, and think.", "caption": "What went wrong? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "Arjun isn't bad at coding. He just rushed. Real coders don't rush. They follow four simple steps, every time. Let's learn them, and help Arjun fix his cat.", "caption": "Real coders follow four simple steps", "focus": "because" }
+      ]
+    },
+    {
+      "id": "steps",
+      "visual": "a15-steps",
+      "beats": [
+        { "vo": "Here they are. Idea. Then blocks. Then test. Then fix.", "caption": "Idea → Blocks → Test → Fix", "focus": "intro", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "Idea means deciding what your program will do. Blocks means planning them on paper, then snapping them together. Test means clicking the green flag, and watching. And fix means changing whatever went wrong.", "caption": "Decide · Plan & snap · Watch · Repair", "focus": "each", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "So, what's always the very first step? Picking an idea! You can't build anything until you know what you want to make.", "caption": "Step one is always: pick an idea", "focus": "first", "sfx": "pop", "sfxAt": 0.35 }
+      ]
+    },
+    {
+      "id": "idea",
+      "visual": "a15-idea",
+      "beats": [
+        { "vo": "The secret to a great first idea? Keep it tiny. Like this. Billu walks, then says hello. One character, one short story. That's enough!", "caption": "Keep it tiny: cat walks, then says hello", "focus": "tiny" },
+        { "vo": "Or, make a little joke! Dino walks in, and asks, why did the bat go to school? You get to choose the funny answer.", "caption": "Or a joke: Dino asks a funny question", "focus": "joke", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "But fifty blocks, and ten characters? Whoa. That's way too big for a first program. Small and clear wins, every time.", "caption": "50 blocks, 10 characters? Too big!", "focus": "big", "sfx": "buzz", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "plan",
+      "visual": "a15-plan",
+      "beats": [
+        { "vo": "Next, we plan. Before you touch a single block, you write your plan on paper. Why? So you know which blocks you need, and in what order.", "caption": "Plan on paper: which blocks, what order", "focus": "why" },
+        { "vo": "Let's plan Arjun's cat. First, a start block. When green flag clicked. Then, two motion blocks. Move ten steps, and move ten steps again. And last, one say block. Say hello, for two seconds.", "caption": "Start · Move · Move · Say Hello!", "focus": "write", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "So a good tiny plan is a start block, two motion blocks, and one say block. Small and clear. Easy to build, and easy to check!", "caption": "Start + 2 motions + 1 say = a great plan", "focus": "recipe", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "build",
+      "visual": "a15-build",
+      "beats": [
+        { "vo": "Now, we build. Snap the blocks together in the same order as your plan. Top to bottom, just like reading.", "caption": "Snap blocks in the same order as the plan", "focus": "snap", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "See the yellow block at the very top? When green flag clicked. It usually starts a program, because it tells the computer when to begin.", "caption": "\"When green flag clicked\" starts it all", "focus": "start" },
+        { "vo": "Now, test! Click the green flag, and watch closely. Billu walks, walks again, and says, Hello! Did it do what we planned? Yes!", "caption": "Test: click the flag and watch closely", "focus": "test", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "bugs",
+      "visual": "a15-bug",
+      "beats": [
+        { "vo": "But sometimes, when you test, something surprising happens. The program does something you didn't plan. That's called a bug. A bug is a mistake in the program.", "caption": "Bug = a mistake you didn't plan", "focus": "what", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "And here's the important part. Finding a bug does not mean you're bad at coding. Every coder finds bugs, even the grown-up experts! Testing and fixing is just part of the job.", "caption": "Bugs are normal. Every coder finds them!", "focus": "normal", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "fix-order",
+      "visual": "a15-fix1",
+      "beats": [
+        { "vo": "Let's fix Arjun's first bug. His cat says hello before walking. Look at his blocks. What's wrong, and how would you fix it? Pause, and think.", "caption": "Cat says hello BEFORE walking. Fix it?", "focus": "ask", "pause": 2.2 },
+        { "vo": "The say block is in the wrong place! Move it below the two move blocks. Now Billu walks first, then says hello. Bug fixed!", "caption": "Move the say block below the move blocks", "focus": "answer", "sfx": "success", "sfxAt": 0.55 }
+      ]
+    },
+    {
+      "id": "fix-edge",
+      "visual": "a15-fix2",
+      "beats": [
+        { "vo": "Bug number two. Billu walks off the edge of the screen, and disappears. Which block could fix that? Here's a hint. Think back to last chapter.", "caption": "Cat walks off the edge. Which block helps?", "focus": "ask", "pause": 2.2 },
+        { "vo": "If touching edge, then bounce! When Billu reaches the edge, it bounces back, and stays on the screen. If blocks, to the rescue!", "caption": "if touching edge then bounce!", "focus": "answer", "sfx": "success", "sfxAt": 0.2 },
+        { "vo": "And real coders share one thing they changed after testing. Arjun can proudly say, I moved my say block, and I added a bounce!", "caption": "Share one thing you changed after testing", "focus": "share", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "a15-order",
+      "beats": [
+        { "vo": "Quick game! These steps got jumbled. Test. Idea. Fix. Blocks. Can you put them back in order? Pause, and try.", "caption": "Put these steps back in order!", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.1, "pause": 2.0 },
+        { "vo": "Idea comes first. Then blocks. Then test. And then, fix. Idea, blocks, test, fix. You've got it!", "caption": "Idea → Blocks → Test → Fix", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a15-check",
+      "beats": [
+        { "vo": "Okay champ, now it's your turn to be the coder. Here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "List the blocks you would use for, cat walks, then says hello. You can pause the video, and write them on paper.", "caption": "List the blocks: cat walks, then says hello", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one way. When green flag clicked. Move ten steps. Move ten steps. Say hello! Start block first, then the walk, then the hello. Did yours match? Brilliant!", "caption": "Flag → Move 10 → Move 10 → Say Hello!", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a15-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Real coders follow four steps. Idea, blocks, test, fix.", "caption": "Idea → Blocks → Test → Fix", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A good tiny plan has a start block, two motions, and one say block.", "caption": "Plan: start + 2 motions + 1 say", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Bugs are normal. Every coder finds them, and fixes them.", "caption": "Bugs are normal: find them, fix them", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And share one thing you changed after testing.", "caption": "Share one thing you changed", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means you've finished all of Unit three! You built, tested, and fixed your very first program. I'm so proud of you, champ!", "caption": "Chapter 5 done · Unit 3 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

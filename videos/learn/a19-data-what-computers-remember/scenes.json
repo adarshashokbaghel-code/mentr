@@ -1,0 +1,154 @@
+{
+  "id": "A19",
+  "title": "Data — What Computers Remember",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "CS · Computers in Our World",
+  "slug": "a19-data-what-computers-remember",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a19-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we met robots. We learned that robots follow algorithms, they don't have feelings, and they love doing the same job again and again.", "caption": "Last time: robots follow algorithms", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four of our unit, Computers in Our World. It's called, Data. What computers remember.", "caption": "Chapter 4 · Data — What Computers Remember", "focus": "chapter", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "Have you ever wondered how a game remembers your high score, even after you switch it off? Hmm. Let's find out!", "caption": "How does a game remember your score?", "focus": "wonder", "pause": 0.5 }
+      ]
+    },
+    {
+      "id": "aarav",
+      "visual": "a19-hook",
+      "beats": [
+        { "vo": "Meet Aarav. Aarav loves playing a cricket game on his tablet.", "caption": "Meet Aarav, the cricket game fan", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "One evening, he smashes a six, and then another one! Fifty two runs. His best score ever!", "caption": "52 runs! His best score ever!", "focus": "score", "sfx": "success", "sfxAt": 0.5 },
+        { "vo": "Then mum calls, dinner's ready! So Aarav switches the tablet off, and runs to eat.", "caption": "Dinner time! Tablet switched off", "focus": "off" },
+        { "vo": "The next morning, he opens the game again. And it says, welcome back, Aarav! High score, fifty two.", "caption": "\"Welcome back, Aarav! High score: 52\"", "focus": "next", "sfx": "chime", "sfxAt": 0.45 },
+        { "vo": "But the tablet was off all night. So how did the game remember his name, and his score? Think about it.", "caption": "How did the game remember? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "Here's the secret. Before Aarav switched it off, the game saved those facts. It stored them safely inside the tablet, a bit like writing them in a notebook.", "caption": "The game saved the facts, like a notebook", "focus": "because" }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a19-define",
+      "beats": [
+        { "vo": "Those facts a computer keeps have a special name. They're called data.", "caption": "Those saved facts are called DATA", "focus": "name", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "Data is the facts a computer stores. Things like names, scores, and photos.", "caption": "Data = facts a computer stores", "focus": "meaning" },
+        { "vo": "So Aarav's name is data. His score of fifty two is data. Even his little player picture is data. A computer remembers things by storing data.", "caption": "Name · Score · Picture → all data!", "focus": "parts" }
+      ]
+    },
+    {
+      "id": "everywhere",
+      "visual": "a19-everywhere",
+      "beats": [
+        { "vo": "And once you start looking, you'll find data everywhere!", "caption": "Data is everywhere!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Your name and your class are data. The marks on your test are data. The score in a game, and the nickname you pick, are data too.", "caption": "Name · Class · Marks · Score · Nickname", "focus": "items", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "What about a photo you click on a tablet? Yes! That's data too. The tablet stores every tiny dot of colour, so it can show you the picture later.", "caption": "A photo saved on a tablet is data too!", "focus": "photo", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "school",
+      "visual": "a19-school",
+      "beats": [
+        { "vo": "Now, let's peek into your school office. The school computer stores lots of data about every student.", "caption": "What does a school computer store?", "focus": "intro" },
+        { "vo": "It stores students' names, and roll numbers. It stores marks in each test. And parents' phone numbers, so the teacher can call home.", "caption": "Names · Roll numbers · Marks · Phone numbers", "focus": "items", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "But can it store the taste of your tiffin? Or how the wind feels today? No! Those are feelings, not facts. Data is facts a computer can write down.", "caption": "Tastes and feelings? Not data!", "focus": "not", "sfx": "buzz", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "tidy",
+      "visual": "a19-tidy",
+      "beats": [
+        { "vo": "Here's Meena Ma'am. She wrote everyone's marks on little paper slips, and stuffed them all into her bag.", "caption": "Marks on loose slips, stuffed in a bag", "focus": "messy" },
+        { "vo": "Then the principal asks, what did Rohan get in maths? Oh no! Meena Ma'am digs, and digs, and digs. It takes forever!", "caption": "\"What did Rohan get?\" Dig, dig, dig…", "focus": "search", "sfx": "buzz", "sfxAt": 0.5 },
+        { "vo": "Now look at a register. All the names are in A B C order, with the marks right beside them. Go to R, and there's Rohan. Found in a flash!", "caption": "Register: names in ABC order, marks beside", "focus": "register", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Computers keep data just like that register. Super tidy, organised lists. That's why your game finds your score faster than a blink.", "caption": "Computers keep tidy lists → find data fast", "focus": "computer" }
+      ]
+    },
+    {
+      "id": "find",
+      "visual": "a19-find",
+      "beats": [
+        { "vo": "Let's try it. Which list makes it easier to find Kavya's score? List A, with scores scribbled anywhere? Or list B, with names in A B C order and scores beside them? Pause, and pick.", "caption": "List A or List B? Which is quicker?", "focus": "ask", "pause": 2.0 },
+        { "vo": "List B! Go down to K, and there's Kavya, with forty five points. A tidy list is much faster to search than a messy pile.", "caption": "List B! Tidy lists are quick to search", "focus": "answer", "sfx": "success", "sfxAt": 0.08 }
+      ]
+    },
+    {
+      "id": "private",
+      "visual": "a19-private",
+      "beats": [
+        { "vo": "Now, here's something really important. Some data is okay to share. But some data must stay private.", "caption": "Some data is public. Some is private.", "focus": "intro", "sfx": "pop" },
+        { "vo": "Public data is fine to share. Like your favourite colour, your favourite cricket team, or a cartoon you like.", "caption": "Public: favourite colour, team, cartoon", "focus": "public" },
+        { "vo": "Private data is only for you, and the grown-ups you trust. Your home address. Your phone number. Your birthday. And your passwords.", "caption": "Private: address, phone, birthday, password", "focus": "private", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Why keep it private? Remember being safe online? A stranger could use your address to find you, or use your birthday to trick you.", "caption": "Strangers could find you or trick you", "focus": "why", "sfx": "buzz", "sfxAt": 0.5 },
+        { "vo": "So who can you tell? Only trusted adults. Like mum, dad, or your teacher.", "caption": "Share only with trusted adults", "focus": "adults", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "a19-sort",
+      "beats": [
+        { "vo": "Let's sort! Favourite colour. Home address. Phone number. Favourite cricket team. Which ones are private? Think about it.", "caption": "Public or private? Sort them!", "focus": "ask", "pause": 2.2 },
+        { "vo": "Home address and phone number are private. Favourite colour and cricket team are public. And remember, a phone number isn't just a number. Never post it online!", "caption": "Address & phone: private. Colour & team: public", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "popup",
+      "visual": "a19-popup",
+      "beats": [
+        { "vo": "Uh-oh. You're playing a game, and a pop-up appears. Win a prize! Just type your birthday and your school name. What should you do?", "caption": "Pop-up: \"Type your birthday to win!\"", "focus": "ask", "pause": 2.0 },
+        { "vo": "Don't share it! Close it, and tell a trusted adult. Your birthday and school name are private, and a real prize never needs them.", "caption": "Don't share. Tell a trusted adult!", "focus": "answer", "sfx": "success", "sfxAt": 0.08 },
+        { "vo": "One more. Your class makes a web page that everyone can see. The class name, and the sports day date? Sure. But parents' phone numbers? No way! They stay private.", "caption": "Class web page: no phone numbers!", "focus": "webpage", "sfx": "buzz", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a19-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Is your birthday public data, or private data? And who should you tell? Pause the video, and think.", "caption": "Birthday: public or private? Who to tell?", "focus": "ask", "pause": 2.5 },
+        { "vo": "It's private! You can tell people you trust, like your family, or your teacher. But never strangers online. Did you get it? Brilliant!", "caption": "Private! Tell family or teacher only", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a19-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Data is facts a computer stores, like names, scores, and photos.", "caption": "Data = facts: names, scores, photos", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Tidy lists are much easier to search than a messy pile.", "caption": "Tidy lists beat messy piles", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Private data, like your address and birthday, stays private.", "caption": "Private data stays private", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And you share private data only with trusted adults.", "caption": "Share only with trusted adults", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! Next up is the big one. Your capstone, where you design your very own app!", "caption": "Chapter 4 done! Next: your capstone", "focus": "done", "sfx": "success" },
+        { "vo": "But first, tap Finish, and try the quiz. You've got this, champ!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

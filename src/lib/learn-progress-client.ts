@@ -1,10 +1,16 @@
 /** Client helpers for Learn progress + POTD + practice + leaderboard */
 
+import { ALL_MODULE_IDS } from "@/lib/learn-curriculum";
 import {
   fetchLearnEnrollment,
   saveLearnEnrollmentLocal,
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
+
+function includesModuleId(list: string[] | undefined, moduleId: string) {
+  const id = moduleId.trim().toUpperCase();
+  return (list ?? []).some((item) => item.trim().toUpperCase() === id);
+}
 
 async function learnRequest<T>(
   path: string,
@@ -56,16 +62,71 @@ export function hasWatchedVideo(
   enrollment: LearnEnrollmentDto | null | undefined,
   moduleId: string,
 ) {
-  const watched = enrollment?.progress?.videosWatched ?? [];
-  return watched.includes(moduleId);
+  return includesModuleId(enrollment?.progress?.videosWatched, moduleId);
 }
 
 export function hasCompletedQuiz(
   enrollment: LearnEnrollmentDto | null | undefined,
   moduleId: string,
 ) {
-  const done = enrollment?.progress?.quizzesCompleted ?? [];
-  return done.includes(moduleId);
+  return includesModuleId(enrollment?.progress?.quizzesCompleted, moduleId);
+}
+
+/** Chapters with a finished video or a finished quiz. */
+export function countChaptersDone(
+  enrollment: LearnEnrollmentDto | null | undefined,
+) {
+  const ids = new Set<string>();
+  for (const raw of enrollment?.progress?.videosWatched ?? []) {
+    const id = raw.trim().toUpperCase();
+    if (id) ids.add(id);
+  }
+  for (const raw of enrollment?.progress?.modulesCompleted ?? []) {
+    const id = raw.trim().toUpperCase();
+    if (id) ids.add(id);
+  }
+  return ids.size;
+}
+
+export type LearnContinue = {
+  continueId: string;
+  /** 1-based chapter number on the full 60-lesson path. */
+  chapterNumber: number;
+  upNextIds: string[];
+  allCaughtUp: boolean;
+  /** Earlier lesson whose video is done and quiz is still open. */
+  quizWaitingId: string | null;
+};
+
+/** Next lesson is the first chapter that is not finished (video or quiz). */
+export function getLearnContinue(
+  enrollment: LearnEnrollmentDto | null | undefined,
+): LearnContinue {
+  const ids = ALL_MODULE_IDS;
+  const finished = (id: string) =>
+    hasWatchedVideo(enrollment, id) || hasCompletedQuiz(enrollment, id);
+  const open = ids.findIndex((id) => !finished(id));
+  const allCaughtUp = ids.length > 0 && open === -1;
+  const continueIndex = allCaughtUp ? Math.max(0, ids.length - 1) : Math.max(0, open);
+  const continueId = ids[continueIndex] ?? ids[0] ?? "A1";
+  const upNextIds = allCaughtUp
+    ? []
+    : ids.filter((id, index) => index !== continueIndex && !finished(id)).slice(0, 3);
+  const quizWaitingId =
+    ids.find(
+      (id, index) =>
+        index < continueIndex &&
+        hasWatchedVideo(enrollment, id) &&
+        !hasCompletedQuiz(enrollment, id),
+    ) ?? null;
+
+  return {
+    continueId,
+    chapterNumber: continueIndex + 1,
+    upNextIds,
+    allCaughtUp,
+    quizWaitingId,
+  };
 }
 
 export async function refreshLearnEnrollment() {

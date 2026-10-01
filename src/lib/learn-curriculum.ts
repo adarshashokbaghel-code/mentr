@@ -1,5 +1,7 @@
 /** Mentr Learn — Class 3–5 launch cohort curriculum (static marketing + future app data). */
 
+import videoManifest from "./learn-video-manifest.json";
+
 export type LearnQuizType =
   | "MCQ"
   | "True/False"
@@ -52,10 +54,13 @@ export const VIDEO_LENGTH_BY_UNIT_INDEX = [3, 4, 5, 6] as const;
 export const SAMPLE_MODULE_ID = "A1";
 
 /** Lessons whose video is published under `/learn/lessons/{id}.mp4`, in path order. */
-export const LESSON_VIDEO_IDS = ["A1", "A2", "A3", "A4", "A5"] as const;
+/** Published lesson videos → duration in seconds. Updated by scripts/learn-video/build.py. */
+export const LESSON_VIDEO_SECONDS: Record<string, number> = videoManifest;
+
+export const LESSON_VIDEO_IDS: readonly string[] = Object.keys(videoManifest);
 
 export function hasLessonVideo(moduleId: string): boolean {
-  return (LESSON_VIDEO_IDS as readonly string[]).includes(moduleId);
+  return moduleId in LESSON_VIDEO_SECONDS;
 }
 
 const csUnits: LearnUnit[] = [

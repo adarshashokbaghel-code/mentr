@@ -1,0 +1,169 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.700
+Welcome back, champ!
+
+2
+00:00:04.700 --> 00:00:17.290
+Unit 1 · What Is AI? · done!
+
+3
+00:00:17.290 --> 00:00:22.510
+Unit 2 · How Machines Learn
+
+4
+00:00:22.510 --> 00:00:28.260
+Chapter 1 · Teaching a Computer Like a Puppy
+
+5
+00:00:28.260 --> 00:00:35.380
+A puppy and a computer? Let's find out!
+
+6
+00:00:35.380 --> 00:00:44.500
+Meet Kabir and his puppy, Laddoo!
+
+7
+00:00:44.500 --> 00:00:51.790
+Kabir says it once: "Sit!"
+
+8
+00:00:51.790 --> 00:00:58.980
+Laddoo just chases her tail!
+
+9
+00:00:58.980 --> 00:01:07.110
+Why didn't Laddoo learn? Think!
+
+10
+00:01:07.110 --> 00:01:15.190
+Puppies need many tries, not just one
+
+11
+00:01:15.190 --> 00:01:24.110
+1 · Show: gently help her sit
+
+12
+00:01:24.110 --> 00:01:34.110
+2 · Praise: "Good dog!" and a treat
+
+13
+00:01:34.110 --> 00:01:46.790
+3 · Practise: many tries, then she's got it!
+
+14
+00:01:46.790 --> 00:01:52.330
+We teach a computer in a similar way!
+
+15
+00:01:52.330 --> 00:02:01.380
+Show the AI lots and lots of cat photos
+
+16
+00:02:01.380 --> 00:02:12.480
+Right? Say yes! Wrong? Say no.
+
+17
+00:02:12.480 --> 00:02:23.440
+More practice → better guesses. Not magic!
+
+18
+00:02:23.440 --> 00:02:31.330
+Photo + name sticker = a labelled example
+
+19
+00:02:31.330 --> 00:02:38.460
+Lots of labelled examples = TRAINING
+
+20
+00:02:38.460 --> 00:02:46.410
+Not a train ride! Teaching with examples.
+
+21
+00:02:46.410 --> 00:02:53.710
+You be the teacher! Say yes or no.
+
+22
+00:02:53.710 --> 00:03:09.020
+The AI says "cat" both times. Yes or no?
+
+23
+00:03:09.020 --> 00:03:21.410
+Cat: yes! Dog: no! That helps it learn.
+
+24
+00:03:21.410 --> 00:03:29.960
+Train with just ONE orange cat photo
+
+25
+00:03:29.960 --> 00:03:41.700
+Black cat? The AI says "not a cat"! Why?
+
+26
+00:03:41.700 --> 00:03:52.050
+It thinks all cats are orange! One isn't enough
+
+27
+00:03:52.050 --> 00:03:58.960
+Black · White · Stripy · Big · Tiny
+
+28
+00:03:58.960 --> 00:04:11.240
+Many cats → it learns what all cats share
+
+29
+00:04:11.240 --> 00:04:29.880
+Which set teaches "cat" best?
+
+30
+00:04:29.880 --> 00:04:39.560
+100 different cats wins!
+
+31
+00:04:39.560 --> 00:04:50.390
+Step 1 · TRAIN: lots of labelled examples
+
+32
+00:04:50.390 --> 00:04:59.430
+Step 2 · TEST: a new photo, see its guess
+
+33
+00:04:59.430 --> 00:05:14.510
+Wrong? Train with more, then test again
+
+34
+00:05:14.510 --> 00:05:18.460
+Your turn: practice check
+
+35
+00:05:18.460 --> 00:05:31.950
+Teach "bus": 1 photo or 100? Why?
+
+36
+00:05:31.950 --> 00:05:51.410
+100! Many kinds → it learns what buses share
+
+37
+00:05:51.410 --> 00:05:56.080
+Training = showing lots of examples
+
+38
+00:05:56.080 --> 00:05:59.030
+Labelled examples have their names on
+
+39
+00:05:59.030 --> 00:06:03.420
+One example is not enough
+
+40
+00:06:03.420 --> 00:06:06.130
+First train, then test
+
+41
+00:06:06.130 --> 00:06:14.870
+Chapter 1 done!
+
+42
+00:06:14.870 --> 00:06:21.670
+Next: Quiz · Tap Finish

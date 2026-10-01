@@ -1,0 +1,205 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.340
+Welcome back, champ!
+
+2
+00:00:04.340 --> 00:00:12.780
+Last time: a quarter turn = 90°
+
+3
+00:00:12.780 --> 00:00:19.180
+Unit 3 · Chapter 5 · the last one!
+
+4
+00:00:19.180 --> 00:00:25.350
+Chapter 5 · Draw With Math
+
+5
+00:00:25.350 --> 00:00:34.440
+Draw with commands, like a programmer!
+
+6
+00:00:34.440 --> 00:00:43.440
+Meet Kachhu, the robot turtle
+
+7
+00:00:43.440 --> 00:00:49.520
+"Kachhu, draw a square!"
+
+8
+00:00:49.520 --> 00:00:54.250
+Kachhu doesn't move…
+
+9
+00:00:54.250 --> 00:01:00.690
+Why didn't Kachhu draw? Think!
+
+10
+00:01:00.690 --> 00:01:12.900
+He only understands tiny commands
+
+11
+00:01:12.900 --> 00:01:17.850
+Command = one clear instruction
+
+12
+00:01:17.850 --> 00:01:28.290
+forward 4 → walk 4 steps, draw a line
+
+13
+00:01:28.290 --> 00:01:36.100
+The number = how many steps
+
+14
+00:01:36.100 --> 00:01:50.260
+turn right 90 → spin a quarter turn
+
+15
+00:01:50.260 --> 00:01:55.690
+Forward draws. Turning spins.
+
+16
+00:01:55.690 --> 00:02:04.920
+A square: 4 equal sides, 4 square corners
+
+17
+00:02:04.920 --> 00:02:13.420
+forward 4, turn right 90 · side 1
+
+18
+00:02:13.420 --> 00:02:25.880
+Again… side 2. Again… side 3
+
+19
+00:02:25.880 --> 00:02:37.170
+Side 4 · back to the start!
+
+20
+00:02:37.170 --> 00:02:46.010
+4 times: forward 4, turn right 90
+
+21
+00:02:46.010 --> 00:02:50.260
+8 lines… that's a lot!
+
+22
+00:02:50.260 --> 00:03:01.950
+repeat 4 [forward 4, turn right 90]
+
+23
+00:03:01.950 --> 00:03:07.470
+Repeat = a loop
+
+24
+00:03:07.470 --> 00:03:17.980
+Commands in order = a tiny program!
+
+25
+00:03:17.980 --> 00:03:26.300
+Bigger square? Which number changes?
+
+26
+00:03:26.300 --> 00:03:34.490
+forward 4 → forward 8
+
+27
+00:03:34.490 --> 00:03:45.690
+Keep turn right 90 and repeat 4
+
+28
+00:03:45.690 --> 00:03:54.920
+4 sides × 4 steps = 16 steps
+
+29
+00:03:54.920 --> 00:04:01.380
+4 sides × 8 steps = 32 steps
+
+30
+00:04:01.380 --> 00:04:10.850
+Rectangle: long side 6, short side 3
+
+31
+00:04:10.850 --> 00:04:18.640
+forward 6, turn, forward 3, turn
+
+32
+00:04:18.640 --> 00:04:28.520
+repeat 2 [forward 6, turn, forward 3, turn]
+
+33
+00:04:28.520 --> 00:04:35.330
+How many steps in total?
+
+34
+00:04:35.330 --> 00:04:41.140
+6 + 3 + 6 + 3 = 18 steps
+
+35
+00:04:41.140 --> 00:04:51.740
+Plus sign · new command: back
+
+36
+00:04:51.740 --> 00:04:59.190
+forward 2, back 2, turn right 90
+
+37
+00:04:59.190 --> 00:05:04.230
+repeat 4 → 4 arms → a plus sign!
+
+38
+00:05:04.230 --> 00:05:09.680
+Uh-oh! A broken square
+
+39
+00:05:09.680 --> 00:05:22.170
+Only 3 sides. How do you fix it?
+
+40
+00:05:22.170 --> 00:05:32.150
+Fix: add one more forward 4
+
+41
+00:05:32.150 --> 00:05:45.890
+Faces north · forward 2, right 90 · twice
+
+42
+00:05:45.890 --> 00:05:55.970
+North → East → South
+
+43
+00:05:55.970 --> 00:06:02.370
+Your turn: practice check
+
+44
+00:06:02.370 --> 00:06:12.570
+Write commands: a square, 4 steps a side
+
+45
+00:06:12.570 --> 00:06:26.190
+repeat 4 [forward 4, turn right 90]
+
+46
+00:06:26.190 --> 00:06:32.840
+Square = repeat 4 [forward, turn right 90]
+
+47
+00:06:32.840 --> 00:06:36.040
+Forward number = the size
+
+48
+00:06:36.040 --> 00:06:40.070
+Forward draws. Turning spins.
+
+49
+00:06:40.070 --> 00:06:42.910
+Commands in order = a tiny program
+
+50
+00:06:42.910 --> 00:06:55.660
+Chapter 5 done · Unit 3 complete!
+
+51
+00:06:55.660 --> 00:07:02.460
+Next: Quiz · Tap Finish

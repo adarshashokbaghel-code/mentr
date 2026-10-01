@@ -1,0 +1,143 @@
+{
+  "id": "A9",
+  "title": "If This, Then That",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "CS · Thinking Like a Computer",
+  "slug": "a9-if-this-then-that",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a9-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned about loops. Instead of saying clap, clap, clap, clap, clap, we just said, repeat five times, clap. So smart!", "caption": "Last time: Loops · repeat 5 times: clap", "focus": "bridge", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "Today is chapter four of Unit two, Thinking Like a Computer. And it's called, If This, Then That.", "caption": "Chapter 4 · If This, Then That", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "So far, Robo just follows steps, one after another. But today, Robo learns something new. How to make a choice! Ready?", "caption": "Today: Robo learns to make choices!", "focus": "choice", "sfx": "pop", "sfxAt": 0.6, "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "rain",
+      "visual": "a9-rain",
+      "beats": [
+        { "vo": "Let me tell you about Aarav. It's Monday morning, and Aarav is getting ready for school. Bag packed. Tiffin packed. Shoes on.", "caption": "Monday morning. Aarav is ready for school", "focus": "morning", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Near the door, there's an umbrella. Should Aarav take it with him? What do you think?", "caption": "Should Aarav take the umbrella?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Hmm. The answer is, it depends! It depends on the weather. So before he decides, Aarav does something clever. He looks out of the window, and checks.", "caption": "It depends! First, he checks the weather", "focus": "depends", "sfx": "whoosh", "sfxAt": 0.6 },
+        { "vo": "Dark clouds, and pitter patter, it's raining! So Aarav grabs the umbrella. If it rains, then take an umbrella. That's a rule!", "caption": "If it rains, then take an umbrella", "focus": "yes", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a9-define",
+      "beats": [
+        { "vo": "Rules like this have a special shape. If, something is true, then, do something. We call it an if then rule.", "caption": "IF something is true → THEN do this", "focus": "rule", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "The part after if is called the condition. A condition is the thing you check. Like, is it raining? The answer can only be yes, it's true, or no, it's not true.", "caption": "Condition = the thing you check · true or not", "focus": "condition" },
+        { "vo": "The part after then is the action. And here's the important bit. The then part only happens when the condition is true. No rain? No umbrella!", "caption": "THEN happens only when the condition is true", "focus": "then", "sfx": "pop", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "else",
+      "visual": "a9-else",
+      "beats": [
+        { "vo": "But wait. What about a sunny day? What should Aarav do then?", "caption": "What about a sunny day?", "focus": "sunny", "pause": 1.5 },
+        { "vo": "For that, we add one more little word. Else. Else means, otherwise. Do the other thing. If it rains, then take an umbrella. Else, leave the umbrella at home. Now, rain or shine, Aarav always knows what to do.", "caption": "ELSE = otherwise · leave the umbrella at home", "focus": "else", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Think of it like a fork in the road. The steps come to the condition, and then go one way, or the other way. Never both! This fork is called a branch.", "caption": "A branch: one way OR the other, never both", "focus": "fork", "sfx": "whoosh", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "traffic",
+      "visual": "a9-traffic",
+      "beats": [
+        { "vo": "Now, let's hop into an auto rickshaw! Our driver, Raju bhaiya, comes to a traffic signal. What does he do first? He checks the light.", "caption": "Raju bhaiya checks the traffic light", "focus": "meet", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "His rule is simple. If the light is red, then stop. Else, go carefully. He checks the light every single time, before he decides.", "caption": "If red → stop. Else → go carefully", "focus": "rule", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Now, the light turns green. Should Raju bhaiya stop, or go? Think about it.", "caption": "The light is green. Stop or go?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Go! Green is not red, so the condition is not true. That means the else part happens. Off we go, carefully. Beep beep!", "caption": "Green is not red → the ELSE part: go!", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "story",
+      "visual": "a9-story",
+      "beats": [
+        { "vo": "If then rules hide inside stories too. At lunch time, if Aarav is hungry, then he eats his tiffin. Yum!", "caption": "If Aarav is hungry, then he eats his tiffin", "focus": "tiffin", "sfx": "pop", "sfxAt": 0.7 },
+        { "vo": "Suddenly, ring ring! If the bell rings, then go to class. The bell just rang, so the condition is true. So what does Aarav do? He does the then part, and goes to class!", "caption": "If the bell rings, then go to class", "focus": "bell", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "In the evening, his friends call him to play cricket. But Aarav's mum has a rule. If homework is done, then play cricket. Else, finish homework first! See how the else gives Aarav a sensible other choice? That's fair, isn't it?", "caption": "Homework done? Cricket! Else, homework first", "focus": "homework", "sfx": "tick", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "which",
+      "visual": "a9-which",
+      "beats": [
+        { "vo": "Quick game! Only one of these is an if then rule. I like mangoes. The sky is blue. Chai is hot. If I'm hungry, then I eat my tiffin. Which one is it?", "caption": "Which one is an if-then rule?", "focus": "ask", "pause": 2.0 },
+        { "vo": "If I'm hungry, then I eat my tiffin! It checks something, am I hungry, and then it says what to do. The others are just facts. They don't check anything.", "caption": "It checks something, then says what to do", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "make",
+      "visual": "a9-make",
+      "beats": [
+        { "vo": "Now, let's make our own rule, for bedtime! If I'm sleepy, then, what? And else, what? Think of your own answer.", "caption": "If I'm sleepy, then ___. Else ___.", "focus": "ask", "pause": 2.0 },
+        { "vo": "Here's mine. If I'm sleepy, then I go to bed. Else, I read one more story. Yours can be different, and that's totally okay!", "caption": "Then: go to bed. Else: read one more story", "focus": "answer", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "a9-game",
+      "beats": [
+        { "vo": "Now here's where computers come in. Video game characters follow if then rules all the time!", "caption": "Game characters follow if-then rules too!", "focus": "intro", "sfx": "pop" },
+        { "vo": "In lots of games, you have lives, shown as little hearts. When all the hearts are gone, you have zero lives. So the game has a rule. If lives equals zero, then, game over. Else, keep playing.", "caption": "If lives = 0 → Game over. Else → keep playing", "focus": "rule" },
+        { "vo": "The game checks this rule again and again, every time something happens. Bump! One life gone. Check. Still not zero? Keep playing!", "caption": "The game checks the rule again and again", "focus": "again", "sfx": "buzz", "sfxAt": 0.3 },
+        { "vo": "So, your character has two lives left. What happens? Game over, or keep playing?", "caption": "2 lives left. Game over, or keep playing?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Keep playing! Two is not zero, so the condition isn't true, and the else part runs. Phew!", "caption": "2 is not 0 → else → keep playing!", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a9-check",
+      "beats": [
+        { "vo": "Okay champ, practice time! Here's a check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Fill in the blanks. If the light is red, then, blank. Else, blank. You can pause the video, and try it on paper.", "caption": "If the light is red, then ___. Else ___.", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. If the light is red, then stop. Else, go carefully. Did you get it? Brilliant! You just wrote your own if then else rule.", "caption": "If red, then stop. Else, go carefully.", "focus": "answer", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a9-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. If means, check a condition. Like, is it raining?", "caption": "IF = check a condition", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Then is what to do when the condition is true. Only then!", "caption": "THEN = what to do if it's true", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Else is what to do when it's not true. Otherwise, do the other thing.", "caption": "ELSE = what to do if it's not", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And at the signal? Red light, stop. Else, go!", "caption": "Red light → stop. Else → go", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! Now you can make choices, just like a computer. Super work, champ!", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.12,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for something really fun today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.12,
+      "end": 14.26,
+      "caption": "Last time: chatbots predict \u00b7 keep info private",
+      "text": "Last time, we met chatbots. They predict replies from patterns, they have no feelings, and we never share private info with them.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.26,
+      "end": 19.07,
+      "caption": "Chapter 4 \u00b7 Faces, Filters, and Fun",
+      "text": "Today is chapter four. Faces, filters, and fun!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 19.07,
+      "end": 32.16,
+      "caption": "How does the phone know where to put them?",
+      "text": "You've probably seen a photo filter. Puppy ears, funny glasses, a shiny crown! But how does the phone know where to put them? Hmm. Let's find out.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 32.16,
+      "end": 38.35,
+      "caption": "Meet Kabir, on a birthday video call",
+      "text": "Meet Kabir. It's his cousin Meera's birthday, and the whole family is on a video call.",
+      "scene": "kabir",
+      "focus": "meet"
+    },
+    {
+      "start": 38.35,
+      "end": 46.87,
+      "caption": "Pop! Puppy ears and a tongue!",
+      "text": "Kabir taps a button, and pop! Puppy ears appear on his head, with a long pink tongue. Everyone laughs!",
+      "scene": "kabir",
+      "focus": "ears"
+    },
+    {
+      "start": 46.87,
+      "end": 54.21,
+      "caption": "He turns his head. The ears follow!",
+      "text": "Then Kabir turns his head left, and right. And the ears follow him, staying right on top of his head!",
+      "scene": "kabir",
+      "focus": "turn"
+    },
+    {
+      "start": 54.21,
+      "end": 64.75,
+      "caption": "How does the phone know? A tiny artist?",
+      "text": "How does the phone know where Kabir's head is? Is there a tiny artist inside, painting really fast? What do you think?",
+      "scene": "kabir",
+      "focus": "why"
+    },
+    {
+      "start": 64.75,
+      "end": 74.27,
+      "caption": "No artist, no magic. A program finding patterns!",
+      "text": "No tiny artist, and no magic. Just a clever computer program, finding patterns in the picture. Let's see how it works.",
+      "scene": "kabir",
+      "focus": "tease"
+    },
+    {
+      "start": 74.27,
+      "end": 85.44,
+      "caption": "AR filter: adds fun things on top of the picture",
+      "text": "This kind of camera fun has a name. An A R filter. It's a camera effect that adds fun things, like ears or glasses, on top of the real picture.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 85.44,
+      "end": 94.69,
+      "caption": "Real picture below \u00b7 fun drawings on top",
+      "text": "Think of a clear sticker sheet, laid over a photo. The real picture of your face stays underneath. The fun drawings sit on top.",
+      "scene": "define",
+      "focus": "layers"
+    },
+    {
+      "start": 94.69,
+      "end": 100.17,
+      "caption": "Filter = find the face + draw on top",
+      "text": "So a filter does two big jobs. Find the face, then draw on top.",
+      "scene": "define",
+      "focus": "short"
+    },
+    {
+      "start": 100.17,
+      "end": 111.65,
+      "caption": "Step 1: find the face in the picture",
+      "text": "Step one. Find the face. The program looks at the camera picture, and searches for the pattern of a face. Two eyes, a nose, and a mouth.",
+      "scene": "steps",
+      "focus": "find"
+    },
+    {
+      "start": 111.65,
+      "end": 121.87,
+      "caption": "Step 2: mark points \u00b7 eyes \u00b7 nose \u00b7 mouth \u00b7 head",
+      "text": "Step two. Mark the face points. These are spots like the corners of your eyes, the tip of your nose, your mouth, and the top of your head.",
+      "scene": "steps",
+      "focus": "points"
+    },
+    {
+      "start": 121.87,
+      "end": 131.94,
+      "caption": "Step 3: ears on head points, glasses on eyes",
+      "text": "Step three. Draw on top. Puppy ears go on the head points. Glasses go on the eye points. Ta-da!",
+      "scene": "steps",
+      "focus": "draw"
+    },
+    {
+      "start": 131.94,
+      "end": 138.57,
+      "caption": "No face found? Nowhere to put the ears!",
+      "text": "And the order matters. If the filter can't find a face first, it has nowhere to put the ears!",
+      "scene": "steps",
+      "focus": "order"
+    },
+    {
+      "start": 138.57,
+      "end": 150.33,
+      "caption": "It finds face points again, many times a second",
+      "text": "So why do the ears follow Kabir? Because the filter doesn't find his face just once. It finds his face points again, and again, many times every second.",
+      "scene": "follow",
+      "focus": "again"
+    },
+    {
+      "start": 150.33,
+      "end": 162.6,
+      "caption": "Points move \u2192 ears move. Like a flipbook!",
+      "text": "When Kabir turns his head, the points move. And the filter draws the ears again, on the new points. It's like a flipbook. It happens so fast, it looks smooth.",
+      "scene": "follow",
+      "focus": "turn"
+    },
+    {
+      "start": 162.6,
+      "end": 176.38,
+      "caption": "Uh-oh! Glasses on Meera's forehead. Why?",
+      "text": "But filters can get confused. That night, Meera tries a glasses filter in a dim room. And the glasses land on her forehead! Why do you think that happened?",
+      "scene": "oops",
+      "focus": "light"
+    },
+    {
+      "start": 176.38,
+      "end": 184.61,
+      "caption": "Poor light \u2192 wrong eye points \u2192 wrong spot",
+      "text": "In poor light, the filter marked her eye points in the wrong place. Wrong points, so the glasses went to the wrong spot.",
+      "scene": "oops",
+      "focus": "lightans"
+    },
+    {
+      "start": 184.61,
+      "end": 196.2,
+      "caption": "Half the face hidden? Not enough points!",
+      "text": "Then Kabir's little sister, Pari, covers half her face with her hand. Poof! Her bunny ears disappear. The filter can't find enough face points.",
+      "scene": "oops",
+      "focus": "cover"
+    },
+    {
+      "start": 196.2,
+      "end": 207.3,
+      "caption": "Not magic: hidden patterns cause mistakes",
+      "text": "Remember, a filter is not magic, and it's not alive. It just finds patterns. When the pattern is hidden, or unclear, it makes mistakes.",
+      "scene": "oops",
+      "focus": "why"
+    },
+    {
+      "start": 207.3,
+      "end": 227.32,
+      "caption": "Put the filter steps in order!",
+      "text": "Quick game! These filter steps got mixed up. A, draw glasses on the eye points. B, find the face. C, mark points, like eyes and nose. What's the right order? Pause, and think.",
+      "scene": "order",
+      "focus": "ask"
+    },
+    {
+      "start": 227.32,
+      "end": 237.5,
+      "caption": "B \u2192 C \u2192 A: Find \u00b7 Mark \u00b7 Draw",
+      "text": "B, then C, then A! Find the face. Mark the points. Then draw on top. You've got it!",
+      "scene": "order",
+      "focus": "answer"
+    },
+    {
+      "start": 237.5,
+      "end": 246.91,
+      "caption": "The camera still takes your face picture",
+      "text": "Now, here's something important. Filters are fun. But while you play, the camera is still taking a picture of your face.",
+      "scene": "camera",
+      "focus": "still"
+    },
+    {
+      "start": 246.91,
+      "end": 253.81,
+      "caption": "A face picture is personal, even with a filter",
+      "text": "And a face picture is personal. It shows who you are, even with puppy ears and a funny tongue on top.",
+      "scene": "camera",
+      "focus": "personal"
+    },
+    {
+      "start": 253.81,
+      "end": 265.29,
+      "caption": "Beauty filters aren't real. You're great as you are!",
+      "text": "Some filters even change how skin and faces look, to make them look perfect. But that's not how real faces look. Your real face is great, just as it is!",
+      "scene": "camera",
+      "focus": "beauty"
+    },
+    {
+      "start": 265.29,
+      "end": 281.42,
+      "caption": "Post Meera's filtered photo without asking?",
+      "text": "After the call, Kabir saves a funny picture of Meera, with bunny ears. He wants to post it. The filter hides who she is, right? So can he just post it? Hmm. Think.",
+      "scene": "manners",
+      "focus": "post"
+    },
+    {
+      "start": 281.42,
+      "end": 290.87,
+      "caption": "Still her face. Always ask first!",
+      "text": "No! It's still Meera's face. So Kabir asks, Meera, can I share this? That's good filter manners.",
+      "scene": "manners",
+      "focus": "ask"
+    },
+    {
+      "start": 290.87,
+      "end": 304.44,
+      "caption": "Ask first \u00b7 Be kind \u00b7 Grown-up OK for new apps",
+      "text": "Here are three filter manners. Ask before posting anyone's photo, even your cousin's. Never use filters to make fun of people. And ask a grown-up before you try a new filter app.",
+      "scene": "manners",
+      "focus": "rules"
+    },
+    {
+      "start": 304.44,
+      "end": 308.39,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 308.39,
+      "end": 318.73,
+      "caption": "What must a filter find before adding ears?",
+      "text": "What does a filter need to find, before it can add puppy ears? Pause the video, and write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 318.73,
+      "end": 328.78,
+      "caption": "Your face and its points, like the head top!",
+      "text": "It needs to find your face, and mark its points, like the top of your head. Then it knows exactly where to put the ears. Super thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 328.78,
+      "end": 333.77,
+      "caption": "Filter = find the face + draw on top",
+      "text": "Let's remember. A filter finds your face, then draws on top.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 333.77,
+      "end": 337.88,
+      "caption": "It needs face points first",
+      "text": "It needs face points first, and it finds them again and again.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 337.88,
+      "end": 341.74,
+      "caption": "The camera still takes your face picture",
+      "text": "Even with a filter, the camera still takes your face picture.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 341.74,
+      "end": 344.79,
+      "caption": "Ask before posting someone's photo",
+      "text": "And always ask before posting someone's photo.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 344.79,
+      "end": 350.25,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! Now you know the secret behind filters, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 350.25,
+      "end": 357.05,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

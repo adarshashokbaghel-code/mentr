@@ -1,0 +1,356 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.81,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.81,
+      "end": 24.49,
+      "caption": "Unit 2 \u00b7 Thinking Like a Computer \u00b7 done!",
+      "text": "Last time, you became a bug detective, and found the mistakes hiding in steps. And with that, you finished all of Unit two, Thinking Like a Computer! Algorithms, order, loops, if-then rules, and debugging. Wow. Give yourself a big pat on the back!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 24.49,
+      "end": 31.71,
+      "caption": "Unit 3 \u00b7 Building With Blocks",
+      "text": "Today, we're starting something brand new. Unit three. It's called, Building With Blocks.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 31.71,
+      "end": 34.91,
+      "caption": "Chapter 1 \u00b7 Meet Block Coding",
+      "text": "And chapter one is called, Meet Block Coding.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 34.91,
+      "end": 44.32,
+      "caption": "Code without typing? Let's find out!",
+      "text": "By the end, you'll know how to tell a computer what to do, without typing a single word. Sounds like magic? Let's find out!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 44.32,
+      "end": 52.6,
+      "caption": "Peeking at Riya didi's laptop\u2026",
+      "text": "Picture this. Your big sister, Riya didi, is busy on her laptop. So you peek over her shoulder.",
+      "scene": "didi",
+      "focus": "meet"
+    },
+    {
+      "start": 52.6,
+      "end": 64.14,
+      "caption": "Typed code: lots of strange words!",
+      "text": "Whoa! The screen is full of strange words, brackets, and little dots. Didi is typing code. Code is the words that tell a computer what to do.",
+      "scene": "didi",
+      "focus": "code"
+    },
+    {
+      "start": 64.14,
+      "end": 77.36,
+      "caption": "One tiny typo \u2192 ERROR!",
+      "text": "Then, oops. She types m, v, o, e, instead of move. Just one tiny spelling mistake. And the whole program stops, with a big red error!",
+      "scene": "didi",
+      "focus": "typo"
+    },
+    {
+      "start": 77.36,
+      "end": 88.91,
+      "caption": "Is there an easier way? Think!",
+      "text": "Hmm. Typing all that is tricky, right? So, is there an easier way for kids like you to give a computer instructions? Think about it.",
+      "scene": "didi",
+      "focus": "think"
+    },
+    {
+      "start": 88.91,
+      "end": 95.4,
+      "caption": "\"When I was your age, I started with blocks!\"",
+      "text": "There is! Didi smiles and says, when I was your age, I started with blocks!",
+      "scene": "didi",
+      "focus": "reveal"
+    },
+    {
+      "start": 95.4,
+      "end": 97.38,
+      "caption": "It's called BLOCK CODING",
+      "text": "It's called, block coding.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 97.38,
+      "end": 104.08,
+      "caption": "Snap puzzle-like blocks to give instructions",
+      "text": "Block coding means making programs by snapping puzzle-like blocks together, to give the computer instructions.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 104.08,
+      "end": 115.46,
+      "caption": "Drag \u00b7 Drop \u00b7 Snap!",
+      "text": "Think of LEGO, or the pieces of a jigsaw puzzle. Each block is one instruction. You drag it, drop it, and click! It snaps into place.",
+      "scene": "define",
+      "focus": "lego"
+    },
+    {
+      "start": 115.46,
+      "end": 130.02,
+      "caption": "No typing, no spelling mistakes!",
+      "text": "And here's the best part. You don't need to type any code. So, no spelling mistakes, and no long, tricky words. Remember didi's typo? That just can't happen with blocks!",
+      "scene": "define",
+      "focus": "notype"
+    },
+    {
+      "start": 130.02,
+      "end": 134.7,
+      "caption": "A block coding screen has 3 parts",
+      "text": "Let's peek at a block coding screen. It has three main parts.",
+      "scene": "screen",
+      "focus": "intro"
+    },
+    {
+      "start": 134.7,
+      "end": 141.85,
+      "caption": "Left: the blocks, sorted by colour",
+      "text": "On the left, there's a box full of blocks, sorted by colour. It's like a toy box of instructions.",
+      "scene": "screen",
+      "focus": "palette"
+    },
+    {
+      "start": 141.85,
+      "end": 146.89,
+      "caption": "Middle: snap your blocks together here",
+      "text": "In the middle is the coding area. That's where you snap your blocks together.",
+      "scene": "screen",
+      "focus": "code"
+    },
+    {
+      "start": 146.89,
+      "end": 160.13,
+      "caption": "Right: the stage, with Billu the character",
+      "text": "And on the right is the stage. Look, there's a little cat on it! Let's call him Billu. Billu is our character. That's the little figure on the screen who follows your blocks.",
+      "scene": "screen",
+      "focus": "stage"
+    },
+    {
+      "start": 160.13,
+      "end": 167.82,
+      "caption": "A stack of blocks = a PROGRAM",
+      "text": "When you snap blocks together, one under another, you make a stack. And a stack of blocks is called a program.",
+      "scene": "stack",
+      "focus": "stack"
+    },
+    {
+      "start": 167.82,
+      "end": 175.67,
+      "caption": "Billu follows it from top to bottom",
+      "text": "Billu follows the program from top to bottom. He does the top block first, then the next one, then the next.",
+      "scene": "stack",
+      "focus": "order"
+    },
+    {
+      "start": 175.67,
+      "end": 187.31,
+      "caption": "Just like algorithm steps, in order!",
+      "text": "Hey, does that sound familiar? It's just like the steps of an algorithm from Unit two! Clear steps, in order. Only now, each step is a block.",
+      "scene": "stack",
+      "focus": "algo"
+    },
+    {
+      "start": 187.31,
+      "end": 193.24,
+      "caption": "Meet 4 blocks, each with its own job",
+      "text": "Now let's meet four blocks. Each one has its own colour, and its own job.",
+      "scene": "blocks",
+      "focus": "intro"
+    },
+    {
+      "start": 193.24,
+      "end": 208.76,
+      "caption": "Start: when green flag clicked \u00b7 goes on top",
+      "text": "First, the start block. It says, when green flag clicked. See its round, curvy top? That's because nothing goes above it. It always goes first, right at the top, and it starts the program.",
+      "scene": "blocks",
+      "focus": "start"
+    },
+    {
+      "start": 208.76,
+      "end": 219.05,
+      "caption": "Motion: move 10 steps \u00b7 Billu walks",
+      "text": "Next, a blue motion block. Move ten steps. Motion blocks move or turn the character. So Billu walks forward a little.",
+      "scene": "blocks",
+      "focus": "move"
+    },
+    {
+      "start": 219.05,
+      "end": 227.02,
+      "caption": "Wait: wait 1 seconds \u00b7 a little pause",
+      "text": "This orange one says, wait one seconds. It makes Billu pause for a moment, and then the next block runs.",
+      "scene": "blocks",
+      "focus": "wait"
+    },
+    {
+      "start": 227.02,
+      "end": 233.51,
+      "caption": "Say: say Hello! \u00b7 shows a speech bubble",
+      "text": "And the purple one says, say Hello! It shows a speech bubble, so Billu can talk!",
+      "scene": "blocks",
+      "focus": "say"
+    },
+    {
+      "start": 233.51,
+      "end": 248.27,
+      "caption": "Flag \u2192 Move \u2192 Say \u2192 Wait \u2192 Move",
+      "text": "Let's build a tiny program. Start block on top. Then, move ten steps. Then, say Hello. Then, wait one seconds. And, move ten steps again.",
+      "scene": "run",
+      "focus": "build"
+    },
+    {
+      "start": 248.27,
+      "end": 252.92,
+      "caption": "Click the green flag!",
+      "text": "Now, we click the green flag. And watch Billu go!",
+      "scene": "run",
+      "focus": "click"
+    },
+    {
+      "start": 252.92,
+      "end": 266.01,
+      "caption": "Billu follows every block, in order",
+      "text": "He walks. He says hello. He waits. And he walks again. Exactly in order, from top to bottom. You just read your very first program!",
+      "scene": "run",
+      "focus": "watch"
+    },
+    {
+      "start": 266.01,
+      "end": 274.13,
+      "caption": "Is a start block = a motion block?",
+      "text": "Quick question. Is a start block the same as a motion block? What do you think?",
+      "scene": "startmove",
+      "focus": "q"
+    },
+    {
+      "start": 274.13,
+      "end": 290.42,
+      "caption": "Start = when to begin \u00b7 Motion = move",
+      "text": "Nope! They have different jobs. The start block decides when the program begins. A motion block, like move ten steps, makes the character move. One says, go now! The other says, walk!",
+      "scene": "startmove",
+      "focus": "a"
+    },
+    {
+      "start": 290.42,
+      "end": 310.13,
+      "caption": "Match each block to its job!",
+      "text": "Let's play a matching game. Here are four blocks, and four jobs. Starts the program. Moves the character. Pauses for a moment. Shows a speech bubble. Can you match them? Take your time.",
+      "scene": "match",
+      "focus": "ask"
+    },
+    {
+      "start": 310.13,
+      "end": 324.51,
+      "caption": "Start \u00b7 Move \u00b7 Wait \u00b7 Say, all matched!",
+      "text": "The green flag block starts the program. Move ten steps moves Billu. Wait makes him pause. And say Hello shows a speech bubble. Did you get all four? Super!",
+      "scene": "match",
+      "focus": "answer"
+    },
+    {
+      "start": 324.51,
+      "end": 342.46,
+      "caption": "Click the flag\u2026 nothing happens! Why?",
+      "text": "Detective time! Here's a stack. Move ten steps, and say Hi. We click the green flag, and, nothing happens. Billu doesn't move at all! What's missing? Think.",
+      "scene": "missing",
+      "focus": "ask"
+    },
+    {
+      "start": 342.46,
+      "end": 352.7,
+      "caption": "Missing: the start block on top!",
+      "text": "The start block! Without when green flag clicked on top, the program doesn't know when to begin. Snap it on top, and now Billu moves!",
+      "scene": "missing",
+      "focus": "answer"
+    },
+    {
+      "start": 352.7,
+      "end": 356.58,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 356.58,
+      "end": 366.43,
+      "caption": "Why blocks first, instead of typing code?",
+      "text": "Why do we use blocks first, instead of typing code? Pause the video, and say your answer out loud.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 366.43,
+      "end": 385.0,
+      "caption": "Easy to see & snap \u00b7 no typos \u00b7 focus on ideas",
+      "text": "Here's one great answer. Blocks are easy to see, and easy to snap together. There's no typing, and no spelling mistakes. So you can think about the idea of your program. And later, the same ideas work in typed code too, just like didi's!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 385.0,
+      "end": 392.44,
+      "caption": "Block coding = snap blocks, no typing",
+      "text": "Let's remember what we learned. Block coding means snapping blocks together. No typing needed.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 392.44,
+      "end": 397.62,
+      "caption": "Program = a stack, top to bottom",
+      "text": "A program is a stack of blocks, and the character follows it from top to bottom.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 397.62,
+      "end": 401.93,
+      "caption": "The start block goes on top",
+      "text": "The start block, when green flag clicked, always goes on top.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 401.93,
+      "end": 407.54,
+      "caption": "Start \u00b7 Move \u00b7 Wait \u00b7 Say: each has a job",
+      "text": "And start, move, wait, and say. Each block has its own job.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 407.54,
+      "end": 415.52,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit three, done! You've met block coding, champ. Billu is very proud of you.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 415.52,
+      "end": 422.32,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

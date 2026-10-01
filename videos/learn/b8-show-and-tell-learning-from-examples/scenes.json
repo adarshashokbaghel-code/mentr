@@ -1,0 +1,147 @@
+{
+  "id": "B8",
+  "title": "Show and Tell — Learning From Examples",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "AI · How Machines Learn",
+  "slug": "b8-show-and-tell-learning-from-examples",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b8-welcome",
+      "beats": [
+        { "vo": "Hi champ, welcome back! Ready for a fun game today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we became pattern detectives. We saw how AI finds patterns, like sorting ripe mangoes, super fast.", "caption": "Last time: AI finds patterns, fast", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of How Machines Learn. It's called, Show and Tell. Learning from examples!", "caption": "Chapter 3 · Show and Tell", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Here's a puzzle for you. How does a computer know what a picture is called? Let's find out.", "caption": "How does a computer know names?", "focus": "puzzle", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "pihu",
+      "visual": "b8-hook",
+      "beats": [
+        { "vo": "Meet Arjun. And this is his little sister, Pihu. She's only three, and she's just learning new words.", "caption": "Meet Arjun and his little sister, Pihu", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Arjun holds up a picture card. He points and says, this is a mango. Pihu claps and shouts, mango!", "caption": "\"This is a mango!\" … \"Mango!\"", "focus": "show", "sfx": "pop", "sfxAt": 0.8 },
+        { "vo": "Then he shows her more cards. An auto. A parrot. A cat. Every time, Arjun says the name, and Pihu says it back. Soon, she knows them all!", "caption": "More cards, more names. Pihu learns them all!", "focus": "more", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So, how did Pihu learn all those words? Hmm. What do you think?", "caption": "How did Pihu learn those words? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Someone showed her the picture, and told her its name. Show, and tell. She saw each picture, and heard the right name, again and again. That's how we all learn names!", "caption": "Show the picture, tell the name!", "focus": "because", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b8-define",
+      "beats": [
+        { "vo": "That name, mango, has a special job. It's called a label. A label is a name we stick on an example.", "caption": "Label = a name stuck on an example", "focus": "name", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "It's like writing the word apple, right under a picture of an apple. The picture is the example. The word is its label.", "caption": "Picture = the example. Word = its label.", "focus": "sticker" },
+        { "vo": "And lots and lots of examples, each with the right name on it? That's called labelled data. And labelled data is what we use to train AI.", "caption": "Many examples, right names = labelled data", "focus": "data", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "b8-game",
+      "beats": [
+        { "vo": "Let's play Arjun's show and tell game! Every card gets its right name.", "caption": "Show and tell: every card gets its name", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Card one is a mango. Its label? Mango. Card two is an auto rickshaw. Its label? Auto.", "caption": "Mango → \"mango\". Auto-rickshaw → \"auto\"", "focus": "cards", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Card three is a parrot. What should Arjun say? Pause, and think.", "caption": "A parrot card. What should Arjun say?", "focus": "ask", "pause": 2.0 },
+        { "vo": "This is a bird! A parrot is a kind of bird, so bird is a great label. The name matches the picture.", "caption": "\"This is a bird!\" The name matches.", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "pick",
+      "visual": "b8-pick",
+      "beats": [
+        { "vo": "Quick one! Here's a picture of a mango. Which label is right? Bus, parrot, mango, or pencil? Pick one.", "caption": "Which label fits this picture?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Mango, of course! A good label always matches what's in the picture. Bus, or pencil, would be totally wrong.", "caption": "Mango! The label matches the picture.", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "ai",
+      "visual": "b8-ai",
+      "beats": [
+        { "vo": "Here's the cool part. AI learns names in the very same way! Remember training, from chapter one?", "caption": "AI learns names the same way!", "focus": "same", "sfx": "pop" },
+        { "vo": "We show the computer lots of apple pictures. Each one has the label, apple. Red ones, green ones, big ones, and small ones. Lots of different apples, so it learns what all apples share.", "caption": "Lots of pictures, each labelled \"apple\"", "focus": "show", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "The AI looks for the pattern. A round shape, a little stem, a red or green colour. Pictures like this, mean apple!", "caption": "It finds the pattern: like this = apple", "focus": "pattern", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "So the labels tell the AI what each example is. Without labels, it wouldn't know what to call anything. AI doesn't know names by itself. It only knows what the labels tell it.", "caption": "Labels tell AI what each example is", "focus": "why" }
+      ]
+    },
+    {
+      "id": "oops",
+      "visual": "b8-oops",
+      "beats": [
+        { "vo": "But one day, Arjun's naughty cousin Kabir plays a trick. He takes the banana card, and changes its label to, bus!", "caption": "Cousin Kabir labels the banana \"bus\"!", "focus": "prank", "sfx": "whoosh", "sfxAt": 0.7 },
+        { "vo": "Pihu doesn't know it's a joke. She looks at the card again and again, and learns. Bus! Bus!", "caption": "Pihu learns: banana = \"bus\"", "focus": "learn" },
+        { "vo": "Next morning at breakfast, Pihu points at a real banana and shouts, bus! And when the yellow school bus arrives, she's all confused!", "caption": "A banana? \"Bus!\" A real bus? Confused!", "focus": "breakfast", "sfx": "buzz", "sfxAt": 0.3 },
+        { "vo": "What went wrong here? Think about it.", "caption": "What went wrong? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "The label was wrong! A banana card named bus is mislabelled. That means it has the wrong name. Pihu learned exactly what the label said. So wrong labels confuse people too, not just computers!", "caption": "Wrong name! The card was mislabelled.", "focus": "answer", "sfx": "chime", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "aiwrong",
+      "visual": "b8-aiwrong",
+      "beats": [
+        { "vo": "The same thing can happen to AI. Imagine we train it with lots of banana pictures, all labelled bus.", "caption": "Train AI on bananas labelled \"bus\"", "focus": "train", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "The AI learns, yellow, curved things are buses! It can't tell that the labels are wrong, and it can't fix them by itself. It just believes them.", "caption": "AI learns: yellow, curved things = bus!", "focus": "learns", "sfx": "buzz", "sfxAt": 0.5 },
+        { "vo": "So later, it might call a real banana a bus. Or miss a real bus completely. Wrong labels teach wrong things, to people, and to AI.", "caption": "Wrong labels teach wrong things", "focus": "later", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "checker",
+      "visual": "b8-checker",
+      "beats": [
+        { "vo": "So let's be label checkers! Look at each card. Does the name match the picture?", "caption": "Be a label checker!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Parrot, labelled bird. Apple, labelled apple. Auto rickshaw, labelled auto. And cat, labelled dog. Which card is mislabelled? Take your time.", "caption": "Which card has the wrong label?", "focus": "ask", "pause": 2.2 },
+        { "vo": "The cat labelled dog! A cat is not a dog. Let's fix it. Cross out dog, and write cat. Now every card is right.", "caption": "Cat labelled \"dog\" is wrong! Fix it: \"cat\"", "focus": "answer", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "That's why, before we train AI with a hundred cards, the smartest thing to do is check that every label matches its picture. Right labels help people, and AI, learn the right things.", "caption": "Check every label before training!", "focus": "before", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b8-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "A banana picture is labelled bus. What might the AI get wrong later? Pause the video, and think. Or write it on paper.", "caption": "Banana labelled \"bus\": what goes wrong later?", "focus": "ask", "pause": 2.5 },
+        { "vo": "It might call a real banana a bus. Or get confused when it sees a real bus. It learned the wrong name for the picture. Great thinking!", "caption": "It may call a banana a bus, or miss a real bus", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b8-recap",
+      "beats": [
+        { "vo": "Let's remember. A label is the name on an example.", "caption": "A label is the name on an example", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "AI learns from labelled examples.", "caption": "AI learns from labelled examples", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Wrong labels teach wrong things, to people and to AI.", "caption": "Wrong labels teach wrong things", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "So always check the labels, before teaching.", "caption": "Check labels before teaching", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You're a super label checker, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

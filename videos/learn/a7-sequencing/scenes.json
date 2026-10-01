@@ -1,0 +1,148 @@
+{
+  "id": "A7",
+  "title": "Sequencing",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "CS · Thinking Like a Computer",
+  "slug": "a7-sequencing",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a7-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready for some more computer thinking?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned what an algorithm is. A clear list of steps, in order, to get a job done. Remember Robo, and his glass of water?", "caption": "Last time: algorithm = clear steps, in order", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of Thinking Like a Computer. And it's all about one little word. Sequencing.", "caption": "Chapter 2 · Sequencing", "focus": "chapter", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "Sequencing just means putting steps in the right order. Hmm. But does the order really matter that much?", "caption": "Sequencing = putting steps in the right order", "focus": "word", "pause": 0.5 },
+        { "vo": "Oh, it really does! Let me tell you a funny little story, and you'll see why.", "caption": "Order really matters. Let's see why!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "socks",
+      "visual": "a7-hook",
+      "beats": [
+        { "vo": "One morning, you're running late for school. The school bus is almost here! So you ask Robo to help you get dressed.", "caption": "Running late! Robo, help me get dressed", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "You quickly write two steps for him. Step one, put on shoes. Step two, put on socks.", "caption": "1. Put on shoes · 2. Put on socks", "focus": "list", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Robo follows them exactly. First, the shoes go on. And then, the socks go on, right on top of the shoes! Oh no!", "caption": "Socks on top of the shoes! Oh no!", "focus": "funny", "sfx": "buzz", "sfxAt": 0.65, "pause": 0.5 },
+        { "vo": "So, what went wrong? Was a step missing? Think about it for a moment.", "caption": "What went wrong? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "Nothing was missing! Both steps were there. They were just in the wrong order. Socks have to go on first, and then the shoes.", "caption": "Nothing missing. Just the wrong order!", "focus": "because" },
+        { "vo": "So we swap them around. Step one, socks. Step two, shoes. And now Robo gets it right. Same steps, new order, happy feet!", "caption": "Socks → Shoes. Happy feet!", "focus": "fixed", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a7-define",
+      "beats": [
+        { "vo": "When steps are arranged in a set order, one after another, we call that a sequence.", "caption": "Steps in a set order = a SEQUENCE", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "And sequencing means putting those steps in the right order, so the job works.", "caption": "Sequencing = the right order, so the job works", "focus": "meaning" },
+        { "vo": "Think of climbing the stairs. You step on the first stair, then the second, then the third. You can't start at the top! A sequence works the same way. One step, after another.", "caption": "Like stairs: one step after another", "focus": "stairs", "sfx": "tick", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "matters",
+      "visual": "a7-matters",
+      "beats": [
+        { "vo": "Order matters all around you. Let's look at a few.", "caption": "Order matters everywhere!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Socks first, then shoes. We know that one now! The socks keep your feet comfy inside the shoes.", "caption": "Socks first, then shoes", "focus": "socks" },
+        { "vo": "When you get home, you unlock the door first, and then you open it. You can't open a locked door!", "caption": "Unlock first, then open the door", "focus": "door", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "And at lunch, you open your tiffin box first, and then you eat. Nobody can eat through a closed lid!", "caption": "Open the tiffin first, then eat!", "focus": "tiffin", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "So whenever you put steps in order, ask yourself one question. What must happen first?", "caption": "Ask: what must happen FIRST?", "focus": "tip", "pause": 0.5 }
+      ]
+    },
+    {
+      "id": "guess",
+      "visual": "a7-guess",
+      "beats": [
+        { "vo": "Now, here's something really important about computers. A computer does exactly the next step on its list. It doesn't guess.", "caption": "Computers do exactly the next step", "focus": "intro" },
+        { "vo": "Say Robo's steps are, open the door, then unlock the door. Robo walks up, and pulls the handle. Bonk! The door is still locked.", "caption": "Open, then unlock? Bonk! Still locked.", "focus": "door", "sfx": "buzz", "sfxAt": 0.7 },
+        { "vo": "You or I would think, oh, I should unlock it first. But Robo won't fix the order for you. He just does the next step.", "caption": "Robo won't fix the order for you", "focus": "nofix" },
+        { "vo": "So remember. If the steps go in the wrong order, the result comes out wrong too. Computers follow the list exactly as it's written. So it's our job to get the order right.", "caption": "Wrong order in → wrong result out", "focus": "rule", "sfx": "whoosh", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "scrambled",
+      "visual": "a7-scrambled",
+      "beats": [
+        { "vo": "When steps are all mixed up, we say they're scrambled. Like scrambled eggs, all jumbled together!", "caption": "Scrambled = steps all mixed up", "focus": "word", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Sometimes scrambled steps are just funny. Like socks on top of your shoes. Everyone laughs, but you still can't go to school like that!", "caption": "Some mix-ups are funny…", "focus": "funny" },
+        { "vo": "But sometimes, they're broken. Pour the water, then take a glass? Splash! Water all over the floor.", "caption": "…and some are broken. Splash!", "focus": "broken", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "Here's a sneaky one. When two steps change places with each other, that's called a swap. And just one swap can break the whole job, even when every single step is there.", "caption": "Swap = two steps change places", "focus": "swap", "sfx": "whoosh", "sfxAt": 0.25 }
+      ]
+    },
+    {
+      "id": "brush",
+      "visual": "a7-brush",
+      "beats": [
+        { "vo": "Let's help Robo. He got these steps for brushing his teeth. One, brush teeth. Two, put paste on the brush. Three, pick up the brush. How would you fix it? Think.", "caption": "Brush → Paste → Pick up? How do we fix it?", "focus": "ask", "pause": 2.0 },
+        { "vo": "The steps were back to front! So we flip them. Pick up the brush. Then, put paste on it. Then, brush your teeth. Sparkly clean!", "caption": "Pick up → Paste → Brush. Sparkly clean!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "tiffin",
+      "visual": "a7-tiffin",
+      "beats": [
+        { "vo": "Now, an unscramble game! It's lunchtime, and your tiffin is inside your school bag.", "caption": "Unscramble game: lunchtime!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Here are the steps, all mixed up. Take out the tiffin. Close the zip. Open the zip. Which one comes first? Pause, and think.", "caption": "Which step comes first?", "focus": "ask", "pause": 2.0 },
+        { "vo": "First, open the zip. Then, take out the tiffin. And last, close the zip. Now you can eat! Yum.", "caption": "Open zip → Take out tiffin → Close zip", "focus": "answer", "sfx": "success", "sfxAt": 0.9 }
+      ]
+    },
+    {
+      "id": "lemon",
+      "visual": "a7-lemon",
+      "beats": [
+        { "vo": "One more! Here's how to make nimbu pani. One, drink the juice. Two, squeeze a lemon into water. Three, add sugar and stir. Which step is in the wrong place?", "caption": "Which step is in the wrong place?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Drink the juice! Drinking has to be the very last step, after the juice is made. Otherwise, there's nothing to drink.", "caption": "Drink goes LAST, after the juice is made", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Squeeze, stir, and then drink. Ahh. Nice and cool!", "caption": "Squeeze → Stir → Drink. Ahh!", "focus": "fixed", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a7-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "If pour the milk comes before open the carton, what happens? Pause the video, and say your answer out loud.", "caption": "Pour milk before opening the carton?", "focus": "ask", "pause": 2.5 },
+        { "vo": "No milk comes out, because the carton is still closed! The fix is easy. Open the carton first, then pour. Did you get it? Brilliant!", "caption": "No milk! Open the carton first, then pour", "focus": "answer", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a7-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. Sequencing means putting steps in the right order.", "caption": "Sequencing = the right order", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Socks before shoes. Unlock before open.", "caption": "Socks before shoes, unlock before open", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Computers do exactly the next step. They don't guess, and they won't fix the order for you.", "caption": "Computers do the next step. No guessing!", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And if you swap two steps, the whole job can break.", "caption": "Swap two steps and things can break", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! You know that order matters. Super work, champ!", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

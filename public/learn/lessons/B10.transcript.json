@@ -1,0 +1,300 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 6.62,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Today is a special day. You'll see why at the end!",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 6.62,
+      "end": 18.02,
+      "caption": "Last time: data is AI's food",
+      "text": "Last time, we learned that data is the food AI eats. Pictures, words, and sounds. And we saw that variety helps AI learn better.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 18.02,
+      "end": 25.44,
+      "caption": "Chapter 5 \u00b7 Practice Makes Perfect",
+      "text": "Today is chapter five, the last chapter of How Machines Learn. It's called, Practice Makes Perfect!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 25.44,
+      "end": 37.28,
+      "caption": "Is AI born smart? Think!",
+      "text": "So here's a question for you. Is AI born smart? Does it know everything, from the very first day? Hmm. Think about it.",
+      "scene": "open",
+      "focus": "question"
+    },
+    {
+      "start": 37.28,
+      "end": 45.22,
+      "caption": "Meera gets a shiny new cycle!",
+      "text": "Remember Meera? This summer, she got a shiny new cycle for her birthday. She couldn't wait to ride it!",
+      "scene": "cycle",
+      "focus": "gift"
+    },
+    {
+      "start": 45.22,
+      "end": 57.11,
+      "caption": "First try: wobble, wobble\u2026 oops!",
+      "text": "On her very first try, she wobbled left. She wobbled right. And, oops! She tipped right over. Don't worry, she's fine.",
+      "scene": "cycle",
+      "focus": "wobble"
+    },
+    {
+      "start": 57.11,
+      "end": 71.68,
+      "caption": "She practised every evening",
+      "text": "But Meera didn't give up. She practised every evening in her colony. Monday was very wobbly. Tuesday, a little better. And each day after that, she got steadier, and steadier.",
+      "scene": "cycle",
+      "focus": "practice"
+    },
+    {
+      "start": 71.68,
+      "end": 88.48,
+      "caption": "By Sunday: zoom! Practice made her better.",
+      "text": "By Sunday, she was zooming around, ringing her bell. Tring, tring! So, was Meera born knowing how to ride? No way! Nobody is. She got better with practice, one wobbly try at a time.",
+      "scene": "cycle",
+      "focus": "ride"
+    },
+    {
+      "start": 88.48,
+      "end": 98.31,
+      "caption": "AI's first tries are wobbly too",
+      "text": "AI is just like that. It's not born smart. It has to learn, just like you. And its first tries are wobbly too.",
+      "scene": "wobbly",
+      "focus": "intro"
+    },
+    {
+      "start": 98.31,
+      "end": 111.86,
+      "caption": "Cat \u2192 \"dog\". Cushion \u2192 \"cat\". Oops!",
+      "text": "Meera is training a new app, called Cat Finder. At first, it's a mess! It calls a cat, a dog. And it calls a fluffy cushion, a cat! Silly app.",
+      "scene": "wobbly",
+      "focus": "guesses"
+    },
+    {
+      "start": 111.86,
+      "end": 131.5,
+      "caption": "Practice = trying again and again",
+      "text": "So Meera gives it practice. Practice means trying again and again, to get better. For AI, practice means more examples, and more tries. Big cats, small cats, sleepy cats, stripy cats. Remember? Variety helps!",
+      "scene": "wobbly",
+      "focus": "practice"
+    },
+    {
+      "start": 131.5,
+      "end": 144.23,
+      "caption": "Each round, a little better",
+      "text": "With every round, its guesses get a little steadier. Wrong, wrong, right, right, right! Nobody is born perfect. Not you, and not AI.",
+      "scene": "wobbly",
+      "focus": "better"
+    },
+    {
+      "start": 144.23,
+      "end": 153.98,
+      "caption": "First sums? A few mistakes!",
+      "text": "It's like your maths sums. Remember your very first sums? Maybe you wrote, three plus four equals six. Oops!",
+      "scene": "sums",
+      "focus": "first"
+    },
+    {
+      "start": 153.98,
+      "end": 163.93,
+      "caption": "Practise \u00b7 fix mistakes \u00b7 get better",
+      "text": "But you practised. You found your mistakes, and you fixed them. Three plus four is seven! And you got faster, and better.",
+      "scene": "sums",
+      "focus": "fix"
+    },
+    {
+      "start": 163.93,
+      "end": 172.98,
+      "caption": "Improve = get better, step by step",
+      "text": "That's called improving. Getting better over time, step by step. Kids improve with practice, and so does AI.",
+      "scene": "sums",
+      "focus": "improve"
+    },
+    {
+      "start": 172.98,
+      "end": 183.15,
+      "caption": "How do we know it learned? Test it!",
+      "text": "But wait. How does Meera know if Cat Finder has really learned? Maybe it just got lucky! She has to test it.",
+      "scene": "test",
+      "focus": "how"
+    },
+    {
+      "start": 183.15,
+      "end": 187.79,
+      "caption": "Test = check with new examples",
+      "text": "A test means checking what the AI learned, by giving it new examples.",
+      "scene": "test",
+      "focus": "define"
+    },
+    {
+      "start": 187.79,
+      "end": 198.58,
+      "caption": "New example = never seen in training",
+      "text": "And a new example is something the AI has never seen during training. Like a fresh photo of Nani's cat, Billu, that Cat Finder has never looked at before.",
+      "scene": "test",
+      "focus": "new"
+    },
+    {
+      "start": 198.58,
+      "end": 210.36,
+      "caption": "Same photos? It may just remember them",
+      "text": "Now, why must the test photos be new? Imagine testing Cat Finder with the same photos it practised on. It might just remember them, like remembering answers.",
+      "scene": "trick",
+      "focus": "same"
+    },
+    {
+      "start": 210.36,
+      "end": 223.83,
+      "caption": "Class test: new sums, not practice ones",
+      "text": "It's like your class test. Your teacher doesn't give the exact same sums you practised. She gives new sums. Why? To check that you really understand, not just remember.",
+      "scene": "trick",
+      "focus": "school"
+    },
+    {
+      "start": 223.83,
+      "end": 234.45,
+      "caption": "New things check real learning",
+      "text": "New sums for you. New photos for AI. Both check real learning, with things never seen before. That's the fair way to test.",
+      "scene": "trick",
+      "focus": "check"
+    },
+    {
+      "start": 234.45,
+      "end": 251.59,
+      "caption": "Right on old photos, wrong on new. Why?",
+      "text": "Detective time! Cat Finder gets every training photo right. All one hundred! But on new cat photos, it keeps getting it wrong. What does that tell you? Pause, and think.",
+      "scene": "puzzle",
+      "focus": "ask"
+    },
+    {
+      "start": 251.59,
+      "end": 264.94,
+      "caption": "It remembered, but didn't really learn \"cat\"",
+      "text": "It only remembered the training photos! It didn't really learn what a cat looks like. Pointy ears, whiskers, and a long tail. That's exactly why we test with new examples.",
+      "scene": "puzzle",
+      "focus": "answer"
+    },
+    {
+      "start": 264.94,
+      "end": 274.03,
+      "caption": "Mistakes? Don't throw it away!",
+      "text": "So, what should Meera do when Cat Finder makes mistakes? Throw it away? No! She uses the improve loop.",
+      "scene": "loop",
+      "focus": "intro"
+    },
+    {
+      "start": 274.03,
+      "end": 293.63,
+      "caption": "Train \u2192 Try \u2192 Fix \u2192 Try again",
+      "text": "Step one, train it with examples. Step two, let it try a guess. Step three, fix any wrong labels, or add more examples. Maybe a cushion photo was labelled cat, by mistake. Fix it! And step four, try again!",
+      "scene": "loop",
+      "focus": "steps"
+    },
+    {
+      "start": 293.63,
+      "end": 307.32,
+      "caption": "Each loop, a little better",
+      "text": "And round and round it goes. Train, try, fix, and try again. Each loop, the AI gets a little better. Just like Meera on her cycle, one evening at a time!",
+      "scene": "loop",
+      "focus": "round"
+    },
+    {
+      "start": 307.32,
+      "end": 324.21,
+      "caption": "Put the improve loop in order!",
+      "text": "Oh no, the loop cards got all mixed up! Try again. Fix labels. Train. Try a guess. Which one comes first? Pause, and put them in order.",
+      "scene": "order",
+      "focus": "ask"
+    },
+    {
+      "start": 324.21,
+      "end": 334.79,
+      "caption": "Train \u2192 Try \u2192 Fix labels \u2192 Try again",
+      "text": "First, train. Then, try a guess. Next, fix the labels. And last, try again! Brilliant.",
+      "scene": "order",
+      "focus": "answer"
+    },
+    {
+      "start": 334.79,
+      "end": 338.69,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's your practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 338.69,
+      "end": 349.88,
+      "caption": "Why test a cat finder on a NEW cat photo?",
+      "text": "Why should we test a cat finder on a new cat photo, and not only on the training photos? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 349.88,
+      "end": 364.35,
+      "caption": "It may just remember. New photos show real learning",
+      "text": "Here's one answer. Because the AI may just remember the training photos. A new photo is a fair test. It shows if Cat Finder really learned what cats look like. Super thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 364.35,
+      "end": 369.11,
+      "caption": "Practice makes AI better",
+      "text": "Let's remember what we learned. Practice makes AI better.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 369.11,
+      "end": 371.89,
+      "caption": "First tries are wobbly. That's okay!",
+      "text": "First tries are wobbly, and that's okay.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 371.89,
+      "end": 375.06,
+      "caption": "Test with NEW examples",
+      "text": "Test with new examples, not the old ones.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 375.06,
+      "end": 379.23,
+      "caption": "Train \u2192 Try \u2192 Fix \u2192 Try again",
+      "text": "And to improve, train, try, fix, and try again.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 379.23,
+      "end": 390.44,
+      "caption": "Chapter 5 done \u00b7 Unit 2 complete!",
+      "text": "Chapter five, done! And that means you've finished all of Unit two, How Machines Learn! Give yourself a big cheer, champ. Hip hip, hooray!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 390.44,
+      "end": 397.24,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

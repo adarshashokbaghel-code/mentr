@@ -1,0 +1,161 @@
+{
+  "id": "C15",
+  "title": "Draw With Math",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "Math · Shapes, Grids & Coordinates",
+  "slug": "c15-draw-with-math",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c15-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Today's a special one.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned about turns. A quarter turn is ninety degrees, and four quarter turns bring you all the way around.", "caption": "Last time: a quarter turn = 90°", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Today is chapter five, the very last chapter of Unit three, Shapes, Grids and Coordinates.", "caption": "Unit 3 · Chapter 5 · the last one!", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "It's called, Draw With Math. We're going to draw shapes using only words and numbers.", "caption": "Chapter 5 · Draw With Math", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "No pencil in your hand. Just clear commands, like a real programmer. Ready? Let's go!", "caption": "Draw with commands, like a programmer!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "kachhu",
+      "visual": "c15-hook",
+      "beats": [
+        { "vo": "Meet Kachhu. Kachhu is a little robot turtle, with a pen tucked under his tummy. When he walks, he draws a line.", "caption": "Meet Kachhu, the robot turtle", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Your friend Meera puts him on a big sheet of paper, and says, Kachhu, draw a square!", "caption": "\"Kachhu, draw a square!\"", "focus": "ask" },
+        { "vo": "And Kachhu just sits there. He doesn't move one bit.", "caption": "Kachhu doesn't move…", "focus": "stuck", "pause": 0.5 },
+        { "vo": "Hmm. Why not? Think about it for a moment.", "caption": "Why didn't Kachhu draw? Think!", "focus": "why", "pause": 1.8 },
+        { "vo": "Here's the thing. Kachhu doesn't know what a square is. He only understands a few tiny commands. So we have to tell him, step by step, exactly what to do.", "caption": "He only understands tiny commands", "focus": "because" }
+      ]
+    },
+    {
+      "id": "commands",
+      "visual": "c15-commands",
+      "beats": [
+        { "vo": "A command is one clear instruction. Kachhu knows just two of them.", "caption": "Command = one clear instruction", "focus": "intro", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "The first one is, forward. Forward four means, walk four steps straight ahead. His pen is down, so he draws a line as he walks.", "caption": "forward 4 → walk 4 steps, draw a line", "focus": "forward", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "The number tells him how far to go. Forward two makes a short line. Forward eight makes a long one.", "caption": "The number = how many steps", "focus": "number" },
+        { "vo": "The second command is, turn right ninety. Remember last chapter? That's a quarter turn, clockwise. Kachhu spins on the spot. He doesn't walk, so no line is drawn.", "caption": "turn right 90 → spin a quarter turn", "focus": "turn", "sfx": "whoosh", "sfxAt": 0.45 },
+        { "vo": "So here's the rule. Forward draws. Turning just spins.", "caption": "Forward draws. Turning spins.", "focus": "rule", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "square",
+      "visual": "c15-square",
+      "beats": [
+        { "vo": "Now, let's draw that square! First, what does a square have? Four equal sides, and four square corners.", "caption": "A square: 4 equal sides, 4 square corners", "focus": "plan" },
+        { "vo": "So we say, forward four. Kachhu draws the first side. Then, turn right ninety, for the corner.", "caption": "forward 4, turn right 90 · side 1", "focus": "side1", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Again! Forward four, turn right ninety. That's side two. And again. Forward four, turn right ninety. Side three.", "caption": "Again… side 2. Again… side 3", "focus": "side2" },
+        { "vo": "One last time. Forward four, turn right ninety. Look! The lines meet, and Kachhu is back where he started, facing the same way.", "caption": "Side 4 · back to the start!", "focus": "side4", "sfx": "success", "sfxAt": 0.7 },
+        { "vo": "Four sides, four corners. A perfect square! We did forward four, turn right ninety, four times.", "caption": "4 times: forward 4, turn right 90", "focus": "done" }
+      ]
+    },
+    {
+      "id": "repeat",
+      "visual": "c15-repeat",
+      "beats": [
+        { "vo": "But writing all eight lines is a lot of work. Phew!", "caption": "8 lines… that's a lot!", "focus": "long" },
+        { "vo": "So programmers use a shortcut, called repeat. Repeat four, forward four, turn right ninety. It means, do these two commands, four times.", "caption": "repeat 4 [forward 4, turn right 90]", "focus": "repeat", "sfx": "whoosh", "sfxAt": 0.15 },
+        { "vo": "In coding, this is called a loop. Do it, and again, and again.", "caption": "Repeat = a loop", "focus": "loop" },
+        { "vo": "And a list of commands that a computer follows in order? That's a program. So you just wrote a tiny program! How cool is that?", "caption": "Commands in order = a tiny program!", "focus": "program", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "bigger",
+      "visual": "c15-bigger",
+      "beats": [
+        { "vo": "Now Meera wants a bigger square. Which number should we change? Have a think.", "caption": "Bigger square? Which number changes?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Just the forward number! Change forward four, into forward eight. Every side gets twice as long.", "caption": "forward 4 → forward 8", "focus": "answer", "sfx": "pop", "sfxAt": 0.15 },
+        { "vo": "But keep turn right ninety, and keep repeat four. A square always needs four square corners. Turn only forty-five, and you won't get a square at all!", "caption": "Keep turn right 90 and repeat 4", "focus": "keep", "sfx": "buzz", "sfxAt": 0.75 },
+        { "vo": "Let's count how far Kachhu walks. Four sides, with four steps each. Four times four, equals sixteen steps.", "caption": "4 sides × 4 steps = 16 steps", "focus": "count", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "And the big square? Four sides of eight steps. That's thirty-two steps!", "caption": "4 sides × 8 steps = 32 steps", "focus": "count8", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "rectangle",
+      "visual": "c15-rect",
+      "beats": [
+        { "vo": "What about a rectangle? It has two long sides, and two short sides. Let's make it six steps long, and three steps tall.", "caption": "Rectangle: long side 6, short side 3", "focus": "intro" },
+        { "vo": "Forward six, turn right ninety. Forward three, turn right ninety. That's half of it.", "caption": "forward 6, turn, forward 3, turn", "focus": "half", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Do that two times, and it's done! Repeat two. Forward six, turn right ninety, forward three, turn right ninety.", "caption": "repeat 2 [forward 6, turn, forward 3, turn]", "focus": "repeat", "sfx": "success", "sfxAt": 0.7 },
+        { "vo": "So how many steps does Kachhu walk this time? Try adding it up.", "caption": "How many steps in total?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Six, plus three, plus six, plus three. That's eighteen steps!", "caption": "6 + 3 + 6 + 3 = 18 steps", "focus": "answer", "sfx": "chime", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "plus",
+      "visual": "c15-plus",
+      "beats": [
+        { "vo": "Here's a fun one. A plus sign! Kachhu starts in the middle, and learns one new command. Back, which means walk backwards.", "caption": "Plus sign · new command: back", "focus": "intro", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Forward two, back two, turn right ninety. That draws one arm, and brings him back to the middle.", "caption": "forward 2, back 2, turn right 90", "focus": "arm" },
+        { "vo": "Repeat that four times, and you get four arms. A plus sign!", "caption": "repeat 4 → 4 arms → a plus sign!", "focus": "all", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "bug",
+      "visual": "c15-fix",
+      "beats": [
+        { "vo": "Uh oh. Meera wrote a square program, but Kachhu drew something strange.", "caption": "Uh-oh! A broken square", "focus": "intro", "sfx": "buzz", "sfxAt": 0.5 },
+        { "vo": "Forward four, turn right ninety. Three times. Only three sides! What's the bug? How would you fix it?", "caption": "Only 3 sides. How do you fix it?", "focus": "q", "pause": 2.2 },
+        { "vo": "Add one more forward four! That draws the missing side. Checking each command in order to find the mistake? That's debugging.", "caption": "Fix: add one more forward 4", "focus": "a", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "facing",
+      "visual": "c15-facing",
+      "beats": [
+        { "vo": "One more puzzle. Kachhu faces north, towards the top. He does forward two, turn right ninety, two times. Which way is he facing now?", "caption": "Faces north · forward 2, right 90 · twice", "focus": "q", "pause": 2.2 },
+        { "vo": "South! The first turn takes him from north to east. The second, from east to south. Two quarter turns make a half turn.", "caption": "North → East → South", "focus": "a", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c15-check",
+      "beats": [
+        { "vo": "Okay champ, your turn to be the programmer! Here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Write the commands to draw a square, with four steps on each side. Pause the video, and try it on paper.", "caption": "Write commands: a square, 4 steps a side", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one way. Forward four, turn right ninety, and do it four times. Or the short way. Repeat four, forward four, turn right ninety. Brilliant!", "caption": "repeat 4 [forward 4, turn right 90]", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c15-recap",
+      "beats": [
+        { "vo": "Let's remember. A square is, repeat four, forward, then turn right ninety.", "caption": "Square = repeat 4 [forward, turn right 90]", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Change the forward number, to change the size.", "caption": "Forward number = the size", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Forward draws. Turning just spins on the spot.", "caption": "Forward draws. Turning spins.", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And commands in order make a tiny program.", "caption": "Commands in order = a tiny program", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means all of Unit three is complete! Shapes, grids, symmetry, turns, and now drawing with commands. Wow, champ!", "caption": "Chapter 5 done · Unit 3 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import {
   LmsBadgesPanel,
   LmsCohortLeaderboard,
 } from "@/components/learn/lms/lms-cohort-board";
+import { LmsPotdHistory } from "@/components/learn/lms/lms-potd-history";
 import { LmsPointsGuide } from "@/components/learn/lms/lms-points-guide";
 import { LearnDino } from "@/components/landing/lp/learn-dino";
 import {
@@ -227,7 +228,7 @@ export function LmsProgress() {
               Progress
             </h1>
             <p className="mt-1 text-[14px] font-medium text-[#8a929c]">
-              Points, XP, streak, badges, and cohort leaderboard.
+              Points, XP, streak, POTD history, badges, and cohort leaderboard.
             </p>
           </div>
         </div>
@@ -316,25 +317,17 @@ export function LmsProgress() {
         </p>
       ) : null}
 
+      <LmsPotdHistory
+        streak={enrollment?.progress?.streakDays ?? 0}
+        chaptersDone={done}
+        videos={videos}
+        quizzes={quizzes}
+      />
+
       <div id="points" className="scroll-mt-4 grid gap-4 lg:grid-cols-2 lg:items-stretch">
         <LmsPointsGuide className="min-h-[520px] lg:max-h-[640px]" />
         <LmsCohortLeaderboard xp={xp} className="min-h-[520px] lg:max-h-[640px]" />
       </div>
-
-      <section className="rounded-2xl border border-[#e8e2d8] bg-white p-4 sm:p-5">
-        <h2 className="text-[15px] font-extrabold text-[#1c2434]">
-          Course completion
-        </h2>
-        <div className="mt-3 h-3 overflow-hidden rounded-full bg-[#efe6d8]">
-          <div
-            className="h-full rounded-full bg-[#ff6a1a] transition-all duration-700"
-            style={{ width: `${Math.max(2, Math.round((done / 60) * 100))}%` }}
-          />
-        </div>
-        <p className="mt-2 text-[13px] font-semibold text-[#8a929c]">
-          {done} / 60 chapters · {videos} videos watched · {quizzes} quizzes done
-        </p>
-      </section>
 
       <LmsBadgesPanel xp={xp} />
     </div>

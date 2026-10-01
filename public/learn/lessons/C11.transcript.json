@@ -1,0 +1,404 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.33,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.33,
+      "end": 15.05,
+      "caption": "Unit 2 \u00b7 Logic & Reasoning \u00b7 done!",
+      "text": "Last time, you solved logic puzzles, one clue at a time. And with that, you finished all of Unit two. Give yourself a big pat on the back!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.05,
+      "end": 21.69,
+      "caption": "Unit 3 \u00b7 Shapes, Grids & Coordinates",
+      "text": "Today, we're starting Unit three. It's called, Shapes, Grids, and Coordinates.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 21.69,
+      "end": 24.81,
+      "caption": "Chapter 1 \u00b7 Shapes All Around",
+      "text": "And chapter one is called, Shapes All Around!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.81,
+      "end": 32.53,
+      "caption": "Name a shape, just by counting!",
+      "text": "By the end, you'll be able to name a shape, just by counting. Ready? Let's go!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 32.53,
+      "end": 37.49,
+      "caption": "Meet Aarav!",
+      "text": "Meet Aarav. He's in class four, and he loves a good challenge.",
+      "scene": "hunt",
+      "focus": "meet"
+    },
+    {
+      "start": 37.49,
+      "end": 46.97,
+      "caption": "\"Find shapes in the classroom, in 1 minute!\"",
+      "text": "One morning, his teacher says, find as many shapes in our classroom as you can, in one minute! Ready, steady, go!",
+      "scene": "hunt",
+      "focus": "task"
+    },
+    {
+      "start": 46.97,
+      "end": 56.63,
+      "caption": "Blackboard, clock, carrom board\u2026",
+      "text": "Aarav looks around. The blackboard. The clock on the wall. The carrom board in the corner. Shapes everywhere!",
+      "scene": "hunt",
+      "focus": "look"
+    },
+    {
+      "start": 56.63,
+      "end": 66.11,
+      "caption": "How do you know a shape's name? Think!",
+      "text": "But wait. How do you know what a shape is called? What's the secret? Think about it.",
+      "scene": "hunt",
+      "focus": "why"
+    },
+    {
+      "start": 66.11,
+      "end": 73.92,
+      "caption": "Count the sides and the corners!",
+      "text": "The secret is counting! Count the straight sides, and count the corners. Those numbers tell you the name.",
+      "scene": "hunt",
+      "focus": "secret"
+    },
+    {
+      "start": 73.92,
+      "end": 83.36,
+      "caption": "2D shape = a flat shape you can draw",
+      "text": "First, a few shape words. A two D shape is a flat shape, one you can draw on paper. Like a square, or a circle.",
+      "scene": "define",
+      "focus": "flat"
+    },
+    {
+      "start": 83.36,
+      "end": 90.8,
+      "caption": "Side = a straight edge",
+      "text": "A side is a straight edge of a shape. Let's count this triangle's sides. One, two, three.",
+      "scene": "define",
+      "focus": "side"
+    },
+    {
+      "start": 90.8,
+      "end": 104.02,
+      "caption": "Corner = where 2 sides meet (a vertex)",
+      "text": "A corner is the point where two sides meet. One, two, three corners! A corner has another name too, vertex. And when there's more than one, we say, vertices.",
+      "scene": "define",
+      "focus": "corner"
+    },
+    {
+      "start": 104.02,
+      "end": 112.11,
+      "caption": "Triangle: 3 sides, 3 corners",
+      "text": "So a triangle has three sides, and three corners. Tri means three, just like a tricycle has three wheels!",
+      "scene": "define",
+      "focus": "tri"
+    },
+    {
+      "start": 112.11,
+      "end": 125.53,
+      "caption": "Square: 4 sides, all equal",
+      "text": "Now, a square. Count its sides with me. One, two, three, four. And look, all four sides are exactly the same length. That's what makes it a square.",
+      "scene": "four",
+      "focus": "square"
+    },
+    {
+      "start": 125.53,
+      "end": 138.2,
+      "caption": "Rectangle: 4 sides, opposite sides equal",
+      "text": "A rectangle has four sides too. But they're not all the same. The two long sides match each other. And the two short sides match each other. Just like a door!",
+      "scene": "four",
+      "focus": "rect"
+    },
+    {
+      "start": 138.2,
+      "end": 146.93,
+      "caption": "Square: all 4 equal \u00b7 Rectangle: opposite",
+      "text": "That's the big difference. A square has all four sides equal. A rectangle only has its opposite sides equal.",
+      "scene": "four",
+      "focus": "diff"
+    },
+    {
+      "start": 146.93,
+      "end": 159.4,
+      "caption": "Circle: no sides, no corners",
+      "text": "And a circle? It's just one smooth, curvy line. No straight sides, and no corners. Nothing to count! Just like a roti, or a bangle.",
+      "scene": "four",
+      "focus": "circle"
+    },
+    {
+      "start": 159.4,
+      "end": 163.86,
+      "caption": "More sides \u2192 a new name!",
+      "text": "Here's where it gets fun. More sides means a new name!",
+      "scene": "more",
+      "focus": "intro"
+    },
+    {
+      "start": 163.86,
+      "end": 172.67,
+      "caption": "Pentagon: 5 sides",
+      "text": "Five sides? That's a pentagon. Count with me. One, two, three, four, five.",
+      "scene": "more",
+      "focus": "penta"
+    },
+    {
+      "start": 172.67,
+      "end": 182.36,
+      "caption": "Hexagon: 6 sides, like a honeycomb cell",
+      "text": "Six sides is a hexagon. Bees build their honeycomb out of hexagons! Every little cell has six sides, and six corners.",
+      "scene": "more",
+      "focus": "hexa"
+    },
+    {
+      "start": 182.36,
+      "end": 190.24,
+      "caption": "Octagon: 8 sides. Octopus: 8 arms!",
+      "text": "And eight sides? That's an octagon. Octo means eight, just like an octopus has eight arms!",
+      "scene": "more",
+      "focus": "octa"
+    },
+    {
+      "start": 190.24,
+      "end": 204.84,
+      "caption": "Tip: same number of sides and corners",
+      "text": "Here's a handy tip. In these shapes, the sides and corners are always the same number. Five sides, five corners. Six sides, six corners. Eight sides, eight corners.",
+      "scene": "more",
+      "focus": "tip"
+    },
+    {
+      "start": 204.84,
+      "end": 208.1,
+      "caption": "Game: name that shape!",
+      "text": "Game time! Let's name that shape.",
+      "scene": "game",
+      "focus": "intro"
+    },
+    {
+      "start": 208.1,
+      "end": 220.34,
+      "caption": "Count the STOP sign's sides. What shape?",
+      "text": "Near Aarav's school, there's a red sign that says, stop. Count its sides. What shape is it? Pause, and count.",
+      "scene": "game",
+      "focus": "ask"
+    },
+    {
+      "start": 220.34,
+      "end": 229.56,
+      "caption": "8 sides \u2192 an octagon!",
+      "text": "Eight sides! So a stop sign is an octagon. Eight sides, and eight corners. Did you count them all?",
+      "scene": "game",
+      "focus": "ans"
+    },
+    {
+      "start": 229.56,
+      "end": 238.15,
+      "caption": "True or false: a triangle has 4 corners?",
+      "text": "Now, true or false? A triangle has four corners. Hmm. Think carefully.",
+      "scene": "game",
+      "focus": "ask2"
+    },
+    {
+      "start": 238.15,
+      "end": 244.97,
+      "caption": "False! 3 sides \u2192 3 corners",
+      "text": "False! A triangle has three sides, so it has three corners. Not four.",
+      "scene": "game",
+      "focus": "ans2"
+    },
+    {
+      "start": 244.97,
+      "end": 251.1,
+      "caption": "Back to Aarav's shape hunt!",
+      "text": "Now, remember Aarav's challenge? Let's help him name each shape, by counting.",
+      "scene": "spot",
+      "focus": "intro"
+    },
+    {
+      "start": 251.1,
+      "end": 257.32,
+      "caption": "Blackboard \u2192 rectangle",
+      "text": "The blackboard. Four sides, two long and two short. It's a rectangle!",
+      "scene": "spot",
+      "focus": "board"
+    },
+    {
+      "start": 257.32,
+      "end": 263.34,
+      "caption": "Wall clock \u2192 circle",
+      "text": "The wall clock. One curvy line, and no corners. A circle!",
+      "scene": "spot",
+      "focus": "clock"
+    },
+    {
+      "start": 263.34,
+      "end": 271.06,
+      "caption": "Samosa \u2192 triangle. Yum!",
+      "text": "The samosa in his tiffin. Three sides, three corners. A triangle! Yum.",
+      "scene": "spot",
+      "focus": "samosa"
+    },
+    {
+      "start": 271.06,
+      "end": 276.32,
+      "caption": "Carrom board \u2192 square",
+      "text": "And the carrom board. Four equal sides. A square!",
+      "scene": "spot",
+      "focus": "carrom"
+    },
+    {
+      "start": 276.32,
+      "end": 287.89,
+      "caption": "Your turn: how many rectangles around you?",
+      "text": "Now you try. Look around your room. How many rectangles can you spot in one minute? Doors, windows, books!",
+      "scene": "spot",
+      "focus": "you"
+    },
+    {
+      "start": 287.89,
+      "end": 296.95,
+      "caption": "Screens are made of tiny squares: pixels",
+      "text": "Shapes are on every screen too! Zoom in really close, and a screen picture is made of tiny squares of light, called pixels.",
+      "scene": "screen",
+      "focus": "pixels"
+    },
+    {
+      "start": 296.95,
+      "end": 304.53,
+      "caption": "Game house = square + triangle roof",
+      "text": "In a video game, a house can be built from just two shapes. A square for the walls, and a triangle for the roof.",
+      "scene": "screen",
+      "focus": "house"
+    },
+    {
+      "start": 304.53,
+      "end": 314.25,
+      "caption": "4 + 3 = 7 sides altogether",
+      "text": "So how many sides altogether? The square has four. The triangle has three. Four plus three, equals seven sides!",
+      "scene": "screen",
+      "focus": "count"
+    },
+    {
+      "start": 314.25,
+      "end": 327.75,
+      "caption": "2 square windows + 1 triangle flag = ? sides",
+      "text": "Ready for a harder one? Aarav's classroom wall has two square windows, and one triangle flag. How many sides altogether? Take your time.",
+      "scene": "addup",
+      "focus": "ask"
+    },
+    {
+      "start": 327.75,
+      "end": 336.5,
+      "caption": "4 + 4 + 3 = 11 sides",
+      "text": "Each square has four sides. Four plus four is eight. Add the triangle's three, and that makes eleven sides!",
+      "scene": "addup",
+      "focus": "ans"
+    },
+    {
+      "start": 336.5,
+      "end": 344.8,
+      "caption": "Hexagon + triangle: how many corners?",
+      "text": "One more. How many corners do one hexagon and one triangle have, together?",
+      "scene": "addup",
+      "focus": "ask2"
+    },
+    {
+      "start": 344.8,
+      "end": 352.79,
+      "caption": "6 + 3 = 9 corners",
+      "text": "The hexagon has six corners. The triangle has three. Six plus three, equals nine corners!",
+      "scene": "addup",
+      "focus": "ans2"
+    },
+    {
+      "start": 352.79,
+      "end": 356.49,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 356.49,
+      "end": 365.41,
+      "caption": "How many sides does a hexagon have?",
+      "text": "How many sides does a hexagon have? Pause the video, and draw one on paper if you like.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 365.41,
+      "end": 374.39,
+      "caption": "6 sides and 6 corners, like a honeycomb cell",
+      "text": "Six sides! And six corners too, just like one cell of a honeycomb. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 374.39,
+      "end": 378.6,
+      "caption": "Count the sides to name the shape",
+      "text": "Let's remember. Count the sides, to name the shape.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 378.6,
+      "end": 384.17,
+      "caption": "Square: 4 equal \u00b7 Rectangle: opposite equal",
+      "text": "A square has four equal sides. A rectangle has opposite sides equal.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 384.17,
+      "end": 391.44,
+      "caption": "Triangle 3 \u00b7 Pentagon 5 \u00b7 Hexagon 6 \u00b7 Octagon 8",
+      "text": "Triangle three. Pentagon five. Hexagon six. Octagon eight.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 391.44,
+      "end": 394.49,
+      "caption": "Circle: no sides, no corners",
+      "text": "And a circle has no sides, and no corners.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 394.49,
+      "end": 400.37,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit three, done! You're a real shape detective now, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 400.37,
+      "end": 407.17,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

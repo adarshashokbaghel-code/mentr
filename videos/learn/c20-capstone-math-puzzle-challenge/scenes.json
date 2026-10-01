@@ -1,0 +1,151 @@
+{
+  "id": "C20",
+  "title": "Capstone: Math Puzzle Challenge",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "Math · Problem Solver",
+  "slug": "c20-capstone-math-puzzle-challenge",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c20-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Today is a really special day.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we broke big problems into small ones. Just like Riya cleaning her room, one small job at a time.", "caption": "Last time: big job → small jobs", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "This is chapter five of Problem Solver. The very last chapter of the whole Math track! It's called, Capstone, Math Puzzle Challenge.", "caption": "Chapter 5 · Capstone: Math Puzzle Challenge", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "A capstone is the top stone that finishes an arch. So a capstone challenge is your final challenge, where you use everything you've learned. Patterns, logic, grids, chance, and problem solving!", "caption": "Capstone = the final challenge", "focus": "word", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "So grab a pencil and some paper. Let's solve some puzzles together!", "caption": "Grab a pencil. Puzzle time!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "mela",
+      "visual": "c20-hook",
+      "beats": [
+        { "vo": "Meet Ishaan. His school is having a Maths Mela, and there's a puzzle trail with five stations.", "caption": "Meet Ishaan at the school Maths Mela!", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Solve the puzzle at each station, and you win a star. Collect all five stars, and you get the golden puzzle badge!", "caption": "5 stations · 5 stars · 1 golden badge", "focus": "trail", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Ishaan gulps. What if I get stuck? Hmm. What could help him, when a puzzle feels hard? Think about it.", "caption": "What could help when a puzzle feels hard?", "focus": "nervous", "pause": 1.8 },
+        { "vo": "His teacher smiles, and says, don't just guess. Pick a strategy!", "caption": "\"Don't just guess. Pick a strategy!\"", "focus": "plan", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "strategy",
+      "visual": "c20-strategy",
+      "beats": [
+        { "vo": "A strategy is a plan for solving a problem.", "caption": "Strategy = a plan for solving a problem", "focus": "name", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "And you already know lots of them! Find the rule. Draw it. Break it into parts. And work backwards.", "caption": "Find the rule · Draw it · Break it · Go back", "focus": "tools", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Here's one more golden rule. Show your working. That means writing each step, so someone else can follow your thinking. And then, check your answer.", "caption": "Show your working, then check it", "focus": "working", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "patterns",
+      "visual": "c20-pattern",
+      "beats": [
+        { "vo": "Station one. Patterns! Ishaan reads the first card. Two, four, six, eight. What comes next? Pause, and think.", "caption": "2, 4, 6, 8, ___?", "focus": "ask1", "sfx": "whoosh", "sfxAt": 0.05, "pause": 2.0 },
+        { "vo": "Ten! The rule is, add two each time. Eight plus two equals ten.", "caption": "10! Rule: add 2 each time", "focus": "ans1", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Now a trickier one. One, three, six, ten. What comes next? Look at the jumps between the numbers.", "caption": "1, 3, 6, 10, ___? Look at the jumps!", "focus": "ask2", "pause": 2.2 },
+        { "vo": "From one to three is a jump of two. Then a jump of three, then a jump of four. So the next jump is five! Ten plus five equals fifteen. The jumps grow by one each time.", "caption": "+2, +3, +4, then +5 → 10 + 5 = 15", "focus": "ans2", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "sorting",
+      "visual": "c20-sort",
+      "beats": [
+        { "vo": "Station two. Sorting! Put these numbers in order, from smallest to biggest. Forty five, twelve, thirty.", "caption": "Sort smallest to biggest: 45, 12, 30", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.05, "pause": 1.8 },
+        { "vo": "Twelve is the smallest. Then thirty, then forty five. Twelve, thirty, forty five!", "caption": "12, 30, 45!", "focus": "ans", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "Next, a Venn diagram. Two circles that overlap. One says, red things. The other says, fruits. A fire truck is red, but it's not a fruit. A banana is a fruit, but it's not red.", "caption": "Venn diagram: red things · fruits", "focus": "venn", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "So, where does a red apple go? Think.", "caption": "Where does a red apple go?", "focus": "vennq", "pause": 2.0 },
+        { "vo": "In the middle! A red apple is red, and it's a fruit. So it goes where the two circles overlap.", "caption": "The middle! Red AND a fruit", "focus": "venna", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "grid",
+      "visual": "c20-grid",
+      "beats": [
+        { "vo": "Station three. Grids! Remember, a grid address is written as across, then up.", "caption": "Grid address = (across, up)", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.05 },
+        { "vo": "So for the point three, one, we go three across, and one up. The first number is across. The second number is up.", "caption": "(3, 1) → 3 across, 1 up", "focus": "point", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Now the big puzzle. Start at one, one. Move two right, then three up, then one right. Where do you land? Try it with your finger!", "caption": "Start (1, 1): 2 right, 3 up, 1 right. Where?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Let's show our working. Across, one plus two plus one equals four. Up, one plus three equals four. We land on four, four!", "caption": "Across 1 + 2 + 1 = 4 · Up 1 + 3 = 4 → (4, 4)", "focus": "ans", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "chance",
+      "visual": "c20-chance",
+      "beats": [
+        { "vo": "Station four. Ishaan is facing east. He makes a half turn. Which way is he facing now?", "caption": "Facing east. Half turn. Which way now?", "focus": "turn", "sfx": "whoosh", "sfxAt": 0.05, "pause": 1.8 },
+        { "vo": "West! A half turn spins you right around, so you face the opposite way.", "caption": "West! A half turn faces the opposite way", "focus": "turna", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Next card. True or false? A normal coin will land on heads, for certain.", "caption": "True or false? A coin lands heads for certain", "focus": "coin", "pause": 1.8 },
+        { "vo": "False! It could land on heads, or on tails. They're about equally likely. So it's not certain at all.", "caption": "False! Heads or tails: about equally likely", "focus": "coina", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "Remember our chance words. Impossible, unlikely, likely, and certain.", "caption": "Impossible · Unlikely · Likely · Certain", "focus": "words", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "backwards",
+      "visual": "c20-back",
+      "beats": [
+        { "vo": "Last station! Ishaan's friend Priya bought six more beads. Now she has fifteen. How many beads did she have at the start? Pause, and think.", "caption": "Priya bought 6 beads. Now 15. Start with?", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.05, "pause": 2.2 },
+        { "vo": "Let's draw it. Start, then plus six, gives fifteen. To work backwards, we flip plus six into minus six.", "caption": "Draw it, then flip it: +6 becomes −6", "focus": "draw", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Fifteen minus six equals nine. Now check it forwards. Nine plus six equals fifteen. Yes! Priya started with nine beads.", "caption": "15 − 6 = 9 · Check: 9 + 6 = 15", "focus": "ans", "sfx": "success", "sfxAt": 0.8 },
+        { "vo": "Five stars! Ishaan wins the golden puzzle badge!", "caption": "5 stars! The golden puzzle badge!", "focus": "badge", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "computers",
+      "visual": "c20-computers",
+      "beats": [
+        { "vo": "Now here's the coolest part. The maths you learned helps computers and AI too!", "caption": "Your maths helps computers and AI!", "focus": "intro", "sfx": "pop" },
+        { "vo": "A screen is a giant grid of tiny dots, called pixels. Every pixel has its own address, across and up, so the computer knows exactly where each colour goes.", "caption": "Screens are grids: every pixel has an address", "focus": "pixels", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "And AI uses chance, which is also called probability. When a phone guesses your next word, it picks the word that's most likely, after learning from lots of examples.", "caption": "AI uses probability to pick what's most likely", "focus": "ai", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c20-check",
+      "beats": [
+        { "vo": "Okay champ, here's your capstone check, just like the quiz.", "caption": "Your turn: capstone check", "focus": "intro" },
+        { "vo": "Name two maths ideas from this track that help us understand computers, or AI. Pause the video, and write them down.", "caption": "Name 2 maths ideas that help computers or AI", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. Grids and coordinates, because screens place every pixel by its address. And probability, because AI guesses what is most likely. Breaking problems into parts helps too! Brilliant!", "caption": "Grids & coordinates · Probability", "focus": "answer", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c20-recap",
+      "beats": [
+        { "vo": "Let's remember. To continue a pattern, find the rule.", "caption": "Find the rule to continue a pattern", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A grid address is across, then up.", "caption": "Grid address = (across, up)", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chance words are certain, likely, unlikely, and impossible.", "caption": "Certain · Likely · Unlikely · Impossible", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And always show your working, and check your answer.", "caption": "Show your working and check it", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Look how far you've come, champ! Numbers computers love. Logic and reasoning. Shapes, grids, and coordinates. And now, problem solving.", "caption": "All 4 Math units, done!", "focus": "journey", "sfx": "chime", "sfxAt": 0.8 },
+        { "vo": "The whole Math track, done! Just like Ishaan, you think like a real problem solver. I'm so proud of you!", "caption": "Math track complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now tap Finish, and try the final quiz. You've got this, champ!", "caption": "Next: Final quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

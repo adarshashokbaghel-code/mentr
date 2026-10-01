@@ -1,0 +1,324 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.11,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for something really cool today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.11,
+      "end": 15.75,
+      "caption": "Last time: Input \u2192 Process \u2192 Output",
+      "text": "Last time, we found out how apps work. Input, process, output. You give it something, it works, and it gives something back.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.75,
+      "end": 22.2,
+      "caption": "Chapter 3 \u00b7 Robots & Automation",
+      "text": "Today is chapter three of Computers in Our World. It's all about robots, and automation!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 22.2,
+      "end": 31.94,
+      "caption": "Au \u00b7 to \u00b7 ma \u00b7 tion. Another big word!",
+      "text": "Automation. Hmm, another big word! Don't worry. By the end of today, you'll be explaining it to your friends.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 31.94,
+      "end": 43.28,
+      "caption": "Meet Bolt, the robot waiter!",
+      "text": "Picture this. Your family goes to a new restaurant in the city. And guess who brings the food? A robot waiter! Let's call her, Bolt.",
+      "scene": "bolt",
+      "focus": "meet"
+    },
+    {
+      "start": 43.28,
+      "end": 52.74,
+      "caption": "Bolt brings your dosa, then rolls back",
+      "text": "Bolt rolls up to your table, and hands you a plate of hot, crispy dosa. Then she rolls right back to the kitchen. Wow!",
+      "scene": "bolt",
+      "focus": "serve"
+    },
+    {
+      "start": 52.74,
+      "end": 63.46,
+      "caption": "Is Bolt happy? Does she like her job?",
+      "text": "Your little brother whispers, is Bolt happy to see us? Does she like her job? Hmm. What do you think?",
+      "scene": "bolt",
+      "focus": "ask"
+    },
+    {
+      "start": 63.46,
+      "end": 75.08,
+      "caption": "Bolt doesn't feel. The smile is just a picture.",
+      "text": "Here's the surprising truth. Bolt doesn't feel happy, or sad, or bored. That smiley face on her screen is just a picture. Someone put it there.",
+      "scene": "bolt",
+      "focus": "truth"
+    },
+    {
+      "start": 75.08,
+      "end": 82.93,
+      "caption": "Robot = a machine that follows instructions",
+      "text": "So what is a robot, really? A robot is a machine that does jobs, by following instructions written by people.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 82.93,
+      "end": 97.88,
+      "caption": "Bolt's algorithm: Go \u00b7 Give the plate \u00b7 Come back",
+      "text": "And step-by-step instructions have a name you already know. An algorithm! It's the robot's recipe. Bolt's algorithm says, go to the table. Give the plate. Come back.",
+      "scene": "define",
+      "focus": "algo"
+    },
+    {
+      "start": 97.88,
+      "end": 110.29,
+      "caption": "No steps? The robot doesn't know what to do",
+      "text": "Someone wrote those steps for Bolt. Without them, she'd just stand there, blinking. Remember Robo, who didn't know how to get water? Same thing!",
+      "scene": "define",
+      "focus": "nosteps"
+    },
+    {
+      "start": 110.29,
+      "end": 119.96,
+      "caption": "Automation: a machine does a job by itself",
+      "text": "Now, what about automation? Automation means letting a machine do a job by itself, again and again, without a person doing each step.",
+      "scene": "loop",
+      "focus": "intro"
+    },
+    {
+      "start": 119.96,
+      "end": 134.2,
+      "caption": "Forward, turn. Forward, turn. Again and again!",
+      "text": "Have you seen a robot vacuum? It cleans the floor, row by row. Go forward, and turn. Go forward, and turn. Again and again, until the whole room is clean.",
+      "scene": "loop",
+      "focus": "vacuum"
+    },
+    {
+      "start": 134.2,
+      "end": 143.22,
+      "caption": "Repeating the same steps = a LOOP",
+      "text": "Doing the same steps again and again is called a loop. And robots love loops! They never get tired of doing the same thing.",
+      "scene": "loop",
+      "focus": "loop"
+    },
+    {
+      "start": 143.22,
+      "end": 157.31,
+      "caption": "Repeat: forward, turn\u2026 until clean",
+      "text": "So the vacuum's whole algorithm can be tiny. Repeat. Go forward. Turn. Keep repeating, until the room is clean. Short, clear, and it works!",
+      "scene": "loop",
+      "focus": "code"
+    },
+    {
+      "start": 157.31,
+      "end": 167.32,
+      "caption": "A factory arm fixes the same part on every car",
+      "text": "Now picture a big car factory. A robot arm fixes the same part, on every single car. Car after car, all day long.",
+      "scene": "factory",
+      "focus": "arm"
+    },
+    {
+      "start": 167.32,
+      "end": 181.05,
+      "caption": "Pick up box, put on belt\u2026 again and again",
+      "text": "Other robot arms pack boxes. Pick up a box. Put it on the belt. Pick up the next box. Same steps, every single time. That's automation!",
+      "scene": "factory",
+      "focus": "boxes"
+    },
+    {
+      "start": 181.05,
+      "end": 191.6,
+      "caption": "Robots are great at repeat jobs!",
+      "text": "Would you get bored doing that a thousand times? I would! But the robot doesn't mind at all. That's why robots are great at repeat jobs.",
+      "scene": "factory",
+      "focus": "great"
+    },
+    {
+      "start": 191.6,
+      "end": 204.4,
+      "caption": "Oh no! Juice spilled on the floor!",
+      "text": "But robots have a weak spot too. Let's go back to Bolt. Oh no! Your little brother knocks over his mango juice. Splash! It's all over the floor.",
+      "scene": "messy",
+      "focus": "spill"
+    },
+    {
+      "start": 204.4,
+      "end": 213.15,
+      "caption": "What will Bolt do? Think!",
+      "text": "What do you think Bolt will do? Clean it up? Call for help? Think about it.",
+      "scene": "messy",
+      "focus": "ask"
+    },
+    {
+      "start": 213.15,
+      "end": 225.4,
+      "caption": "Bolt just keeps following her steps",
+      "text": "Bolt just keeps following her steps. Go to the table. Give the plate. Come back. A spill isn't in her instructions, so she does nothing about it.",
+      "scene": "messy",
+      "focus": "answer"
+    },
+    {
+      "start": 225.4,
+      "end": 236.4,
+      "caption": "New, messy jobs? People do better!",
+      "text": "A person would grab a cloth right away! People are much better at brand-new, messy problems. Robots are poor at them, unless someone gives them steps.",
+      "scene": "messy",
+      "focus": "people"
+    },
+    {
+      "start": 236.4,
+      "end": 243.18,
+      "caption": "Game: Robot CAN or robot CAN'T?",
+      "text": "Let's play a game. Robot can, or robot can't! Here are four jobs.",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 243.18,
+      "end": 259.97,
+      "caption": "Which jobs can a robot do?",
+      "text": "Pack the same box, five hundred times. Invent a brand-new game. Sweep the floor every day. Comfort a sad friend. Which ones can a robot do? Pause, and think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 259.97,
+      "end": 276.3,
+      "caption": "Repeat jobs: CAN. Ideas & feelings: CAN'T",
+      "text": "Packing boxes, and sweeping every day? Robot can! Those are repeat jobs with clear steps. Inventing a game, and comforting a friend? Robot can't. Those need new ideas, and feelings.",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 276.3,
+      "end": 283.27,
+      "caption": "Home robot: sweeps your room",
+      "text": "Robots come in all shapes and sizes. There's the home robot, like a vacuum that sweeps your room.",
+      "scene": "types",
+      "focus": "home"
+    },
+    {
+      "start": 283.27,
+      "end": 288.53,
+      "caption": "Factory robot: builds cars, packs boxes",
+      "text": "The factory robot, like a robot arm that builds cars, or packs boxes.",
+      "scene": "types",
+      "focus": "factory"
+    },
+    {
+      "start": 288.53,
+      "end": 294.21,
+      "caption": "Space robot: a rover on Mars",
+      "text": "And the space robot, like a rover driving on Mars, taking photos of the red rocks!",
+      "scene": "types",
+      "focus": "space"
+    },
+    {
+      "start": 294.21,
+      "end": 301.19,
+      "caption": "Same idea: they all follow instructions",
+      "text": "Different jobs, but the same big idea. Every one of them follows instructions, written by people.",
+      "scene": "types",
+      "focus": "same"
+    },
+    {
+      "start": 301.19,
+      "end": 320.84,
+      "caption": "Pick up can \u2192 Walk \u2192 ??? \u2192 Walk back",
+      "text": "One more! Let's finish a robot's algorithm to water a plant. One, pick up the can. Two, walk to the plant. Three, hmm, something's missing. Four, walk back. So, what's step three?",
+      "scene": "finish",
+      "focus": "ask"
+    },
+    {
+      "start": 320.84,
+      "end": 326.88,
+      "caption": "Step 3: tip the can to pour water!",
+      "text": "Tip the can, to pour the water! Without that step, the plant would stay thirsty.",
+      "scene": "finish",
+      "focus": "answer"
+    },
+    {
+      "start": 326.88,
+      "end": 330.83,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 330.83,
+      "end": 342.13,
+      "caption": "Why can't a vacuum robot invent a new game?",
+      "text": "Why can't a vacuum robot invent a new game by itself? Pause the video, and think. Or write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 342.13,
+      "end": 355.23,
+      "caption": "It only follows steps. No steps for new games!",
+      "text": "Here's one answer. It only follows the steps that people gave it. Nobody gave it steps for making a new game, and it can't think up new ideas by itself. Great thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 355.23,
+      "end": 363.04,
+      "caption": "Robots follow algorithms. They don't feel.",
+      "text": "Let's remember. Robots follow algorithms, steps written by people. They don't have feelings.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 363.04,
+      "end": 367.21,
+      "caption": "Great at repeat jobs: loops!",
+      "text": "They're great at repeat jobs. Hello, loops!",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 367.21,
+      "end": 371.54,
+      "caption": "Poor at new, messy jobs without steps",
+      "text": "But they're poor at brand-new, messy jobs, without instructions.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 371.54,
+      "end": 377.63,
+      "caption": "Home \u00b7 Factory \u00b7 Space: same idea",
+      "text": "And home, factory, and space robots? Same idea, different jobs.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 377.63,
+      "end": 383.84,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! Now you know what robots can, and can't do, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 383.84,
+      "end": 390.64,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

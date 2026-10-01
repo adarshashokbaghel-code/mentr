@@ -1,0 +1,356 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 15.44,
+      "caption": "Last time: work backwards \u00b7 9 + 3 = 12",
+      "text": "Last time, we worked backwards. Mina had nine stickers after losing three. So we added the three back, and found she started with twelve.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.44,
+      "end": 22.26,
+      "caption": "Chapter 4 \u00b7 Breaking Big Problems Into Small Ones",
+      "text": "Today is chapter four of Problem Solver. It's called, Breaking Big Problems Into Small Ones.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 22.26,
+      "end": 32.47,
+      "caption": "Ever felt a job was way too big?",
+      "text": "Have you ever looked at a job and thought, whoa, that's way too big? Hmm. Today, I'll show you a trick that makes big jobs feel small.",
+      "scene": "open",
+      "focus": "big"
+    },
+    {
+      "start": 32.47,
+      "end": 41.29,
+      "caption": "\"Riya, please clean your room!\"",
+      "text": "Meet Riya. It's Sunday morning, and Mum calls out, Riya, Nani is coming this evening. Please clean your room!",
+      "scene": "room",
+      "focus": "meet"
+    },
+    {
+      "start": 41.29,
+      "end": 52.39,
+      "caption": "Toys, books, a messy bed\u2026 Oh no!",
+      "text": "Riya looks around. Toys on the floor. Books everywhere. And the bed is one big, crumpled mess. Oh no!",
+      "scene": "room",
+      "focus": "mess"
+    },
+    {
+      "start": 52.39,
+      "end": 65.35,
+      "caption": "Where do I even start? What would you do?",
+      "text": "Riya just stands there. Where do I even start? It all feels too big. What would you do, if you were Riya? Think for a moment.",
+      "scene": "room",
+      "focus": "stuck"
+    },
+    {
+      "start": 65.35,
+      "end": 78.12,
+      "caption": "Toys \u00b7 Books \u00b7 Bed: three small jobs",
+      "text": "Here's a smart idea. Don't clean the whole room at once. Split it into small jobs. Pick up the toys. Put the books on the shelf. Make the bed.",
+      "scene": "room",
+      "focus": "split"
+    },
+    {
+      "start": 78.12,
+      "end": 92.39,
+      "caption": "One small job at a time \u2192 clean room!",
+      "text": "Now Riya does one small job at a time. Toys, done. Books, done. Bed, done. And look! The whole room is clean, and it didn't even feel hard.",
+      "scene": "room",
+      "focus": "done"
+    },
+    {
+      "start": 92.39,
+      "end": 97.0,
+      "caption": "That trick is called DECOMPOSITION",
+      "text": "What Riya did has a special name. It's called decomposition.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 97.0,
+      "end": 108.53,
+      "caption": "Breaking a big problem into small parts",
+      "text": "De, com, po, si, tion. A long word, but the meaning is simple. Decomposition means breaking a big problem into smaller, easier parts.",
+      "scene": "define",
+      "focus": "word"
+    },
+    {
+      "start": 108.53,
+      "end": 120.26,
+      "caption": "A roti: one small bite at a time",
+      "text": "Think about eating a roti. You can't stuff the whole roti in your mouth at once! You tear it into small pieces, and eat one bite at a time. Yum.",
+      "scene": "define",
+      "focus": "roti"
+    },
+    {
+      "start": 120.26,
+      "end": 126.93,
+      "caption": "Small task = one job you can finish",
+      "text": "Each piece is a small task. A small task is one simple job that you can finish on its own.",
+      "scene": "define",
+      "focus": "small"
+    },
+    {
+      "start": 126.93,
+      "end": 132.4,
+      "caption": "Big job: pack the school bag",
+      "text": "That night, Riya has another big job. Packing her school bag for Monday.",
+      "scene": "bag",
+      "focus": "big"
+    },
+    {
+      "start": 132.4,
+      "end": 140.17,
+      "caption": "Books \u00b7 Bottle \u00b7 Lunch box \u00b7 Pencil box",
+      "text": "What small jobs are hiding inside it? Her books, her water bottle, her lunch box, and her pencil box.",
+      "scene": "bag",
+      "focus": "parts"
+    },
+    {
+      "start": 140.17,
+      "end": 153.01,
+      "caption": "Timetable \u2192 Books \u2192 Bottle \u2192 Lunch box",
+      "text": "Now let's put them in order. One, check today's timetable. Two, put in those books. Three, fill the water bottle. Four, add the lunch box.",
+      "scene": "bag",
+      "focus": "steps"
+    },
+    {
+      "start": 153.01,
+      "end": 165.49,
+      "caption": "Then decide: first, next, last",
+      "text": "Why check the timetable first? Because it tells you which books you need! So after you break a job, you also decide the order. What comes first, next, and last.",
+      "scene": "bag",
+      "focus": "why"
+    },
+    {
+      "start": 165.49,
+      "end": 173.75,
+      "caption": "Nani is here! Riya makes nimbu pani",
+      "text": "Let's go back to the evening. Nani arrives, and it's so hot! Riya decides to make her some nimbu pani.",
+      "scene": "nimbu",
+      "focus": "intro"
+    },
+    {
+      "start": 173.75,
+      "end": 184.42,
+      "caption": "Squeeze \u2192 Water \u2192 Sugar \u2192 Pour & serve",
+      "text": "First, squeeze the lemons. Then, add water. Next, stir in some sugar. And last, pour it into a glass, and serve.",
+      "scene": "nimbu",
+      "focus": "steps"
+    },
+    {
+      "start": 184.42,
+      "end": 195.16,
+      "caption": "Serve first? Nothing to pour! Serve LAST",
+      "text": "Could Riya pour and serve it first? No way! There's nothing to pour yet. Serving comes last, because you can only serve it after it's made.",
+      "scene": "nimbu",
+      "focus": "oops"
+    },
+    {
+      "start": 195.16,
+      "end": 201.96,
+      "caption": "Nani's puzzle: what is 23 + 45?",
+      "text": "Nani loves maths puzzles. She asks Riya, what is twenty three plus forty five?",
+      "scene": "add",
+      "focus": "ask"
+    },
+    {
+      "start": 201.96,
+      "end": 210.78,
+      "caption": "23 = 20 + 3 \u00b7 45 = 40 + 5",
+      "text": "Riya breaks each number into tens and ones. Twenty three is twenty and three. Forty five is forty and five.",
+      "scene": "add",
+      "focus": "split"
+    },
+    {
+      "start": 210.78,
+      "end": 219.97,
+      "caption": "Tens: 20 + 40 = 60 \u00b7 Ones: 3 + 5 = 8",
+      "text": "Add the tens. Twenty plus forty equals sixty. Now add the ones. Three plus five equals eight.",
+      "scene": "add",
+      "focus": "tens"
+    },
+    {
+      "start": 219.97,
+      "end": 227.98,
+      "caption": "60 + 8 = 68!",
+      "text": "Put them together. Sixty and eight make sixty eight! Two small sums were easier than one big one.",
+      "scene": "add",
+      "focus": "total"
+    },
+    {
+      "start": 227.98,
+      "end": 237.1,
+      "caption": "What is 6 \u00d7 14?",
+      "text": "Nani smiles, and asks a trickier one. What is six times fourteen? Hmm. That's a big one to do in your head.",
+      "scene": "times",
+      "focus": "ask"
+    },
+    {
+      "start": 237.1,
+      "end": 245.39,
+      "caption": "Break it up: 14 = 10 + 4",
+      "text": "So let's break fourteen into ten and four. Look at the dots. Six rows of ten, and six rows of four.",
+      "scene": "times",
+      "focus": "split"
+    },
+    {
+      "start": 245.39,
+      "end": 250.3,
+      "caption": "6 \u00d7 10 = 60 \u00b7 6 \u00d7 4 = 24",
+      "text": "Six times ten is sixty. And six times four is twenty four.",
+      "scene": "times",
+      "focus": "parts"
+    },
+    {
+      "start": 250.3,
+      "end": 258.67,
+      "caption": "60 + 24 = 84. So 6 \u00d7 14 = 84!",
+      "text": "Now add them up. Sixty plus twenty four equals eighty four. So, six times fourteen is eighty four!",
+      "scene": "times",
+      "focus": "total"
+    },
+    {
+      "start": 258.67,
+      "end": 268.13,
+      "caption": "Coders use decomposition every day!",
+      "text": "Riya's cousin Arjun is a coder. He makes games! And guess what? He uses decomposition every single day.",
+      "scene": "code",
+      "focus": "intro"
+    },
+    {
+      "start": 268.13,
+      "end": 282.14,
+      "caption": "Pitch \u00b7 Bat \u00b7 Ball \u00b7 Score",
+      "text": "Arjun wants to make a cricket game. That's huge! So he breaks it into parts. Draw the pitch. Make the bat swing. Move the ball. Keep the score.",
+      "scene": "code",
+      "focus": "parts"
+    },
+    {
+      "start": 282.14,
+      "end": 295.16,
+      "caption": "Algorithms are built in small parts too",
+      "text": "Each part gets its own step by step plan. And a step by step plan to solve a problem is called an algorithm. Big programs are built from small, clear parts, in the right order.",
+      "scene": "code",
+      "focus": "algo"
+    },
+    {
+      "start": 295.16,
+      "end": 313.03,
+      "caption": "Which is NOT part of cleaning a room?",
+      "text": "Game time! Remember Riya's room? Which of these is NOT a small part of cleaning a room? Pick up toys. Make the bed. Fly a kite. Put books on the shelf. Think!",
+      "scene": "odd",
+      "focus": "ask"
+    },
+    {
+      "start": 313.03,
+      "end": 322.23,
+      "caption": "Fly a kite doesn't help clean the room!",
+      "text": "Fly a kite! It's lots of fun, but it doesn't help clean the room at all. Every small part should help finish the big job.",
+      "scene": "odd",
+      "focus": "answer"
+    },
+    {
+      "start": 322.23,
+      "end": 343.39,
+      "caption": "Party steps are mixed up! What's the order?",
+      "text": "One more! Riya's class is having a party. Here are the steps, all mixed up. Buy snacks. Set up, and enjoy. Pick a date. Make a guest list. What's the best order? Pause, and think.",
+      "scene": "party",
+      "focus": "ask"
+    },
+    {
+      "start": 343.39,
+      "end": 358.23,
+      "caption": "Date \u2192 Guest list \u2192 Snacks \u2192 Set up & enjoy",
+      "text": "First, pick a date. Then, make a guest list, so you know who's coming. Next, buy snacks. And last, set up, and enjoy! Plan first, then shop, then party.",
+      "scene": "party",
+      "focus": "answer"
+    },
+    {
+      "start": 358.23,
+      "end": 363.53,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, your turn. Here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 363.53,
+      "end": 378.54,
+      "caption": "Break 'make a birthday card' into 4 steps",
+      "text": "Tomorrow is Nani's birthday, and Riya wants to make her a card. Break, make a birthday card, into four small steps, in order. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 378.54,
+      "end": 398.1,
+      "caption": "Fold \u2192 Draw \u2192 Write \u2192 Sign & give",
+      "text": "Here's one way. One, fold the paper. Two, draw a picture on the front. Three, write a message inside. Four, sign your name, and give it. Folding comes first, because you need a card before you can draw on it! Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 398.1,
+      "end": 404.48,
+      "caption": "Big job \u2192 small jobs",
+      "text": "Let's remember what we learned. Decomposition means breaking a big job into small jobs.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 404.48,
+      "end": 407.21,
+      "caption": "Put the small jobs in order",
+      "text": "Then, put the small jobs in order.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 407.21,
+      "end": 412.22,
+      "caption": "Do one small job at a time",
+      "text": "Do one small job at a time, just like eating a roti, bite by bite.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 412.22,
+      "end": 416.39,
+      "caption": "Algorithms & sums are built in parts",
+      "text": "And algorithms, and even big sums, are built in parts too.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 416.39,
+      "end": 424.91,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! You can break big jobs into small steps, just like Riya. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 424.91,
+      "end": 431.71,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.65,
+      "caption": "Welcome back, champ!",
+      "text": "Hi champ, welcome back! Ready for a fun game today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.65,
+      "end": 13.95,
+      "caption": "Last time: AI finds patterns, fast",
+      "text": "Last time, we became pattern detectives. We saw how AI finds patterns, like sorting ripe mangoes, super fast.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 13.95,
+      "end": 21.86,
+      "caption": "Chapter 3 \u00b7 Show and Tell",
+      "text": "Today is chapter three of How Machines Learn. It's called, Show and Tell. Learning from examples!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 21.86,
+      "end": 29.08,
+      "caption": "How does a computer know names?",
+      "text": "Here's a puzzle for you. How does a computer know what a picture is called? Let's find out.",
+      "scene": "open",
+      "focus": "puzzle"
+    },
+    {
+      "start": 29.08,
+      "end": 37.71,
+      "caption": "Meet Arjun and his little sister, Pihu",
+      "text": "Meet Arjun. And this is his little sister, Pihu. She's only three, and she's just learning new words.",
+      "scene": "pihu",
+      "focus": "meet"
+    },
+    {
+      "start": 37.71,
+      "end": 46.14,
+      "caption": "\"This is a mango!\" \u2026 \"Mango!\"",
+      "text": "Arjun holds up a picture card. He points and says, this is a mango. Pihu claps and shouts, mango!",
+      "scene": "pihu",
+      "focus": "show"
+    },
+    {
+      "start": 46.14,
+      "end": 60.16,
+      "caption": "More cards, more names. Pihu learns them all!",
+      "text": "Then he shows her more cards. An auto. A parrot. A cat. Every time, Arjun says the name, and Pihu says it back. Soon, she knows them all!",
+      "scene": "pihu",
+      "focus": "more"
+    },
+    {
+      "start": 60.16,
+      "end": 68.28,
+      "caption": "How did Pihu learn those words? Think!",
+      "text": "So, how did Pihu learn all those words? Hmm. What do you think?",
+      "scene": "pihu",
+      "focus": "ask"
+    },
+    {
+      "start": 68.28,
+      "end": 81.29,
+      "caption": "Show the picture, tell the name!",
+      "text": "Someone showed her the picture, and told her its name. Show, and tell. She saw each picture, and heard the right name, again and again. That's how we all learn names!",
+      "scene": "pihu",
+      "focus": "because"
+    },
+    {
+      "start": 81.29,
+      "end": 89.94,
+      "caption": "Label = a name stuck on an example",
+      "text": "That name, mango, has a special job. It's called a label. A label is a name we stick on an example.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 89.94,
+      "end": 99.02,
+      "caption": "Picture = the example. Word = its label.",
+      "text": "It's like writing the word apple, right under a picture of an apple. The picture is the example. The word is its label.",
+      "scene": "define",
+      "focus": "sticker"
+    },
+    {
+      "start": 99.02,
+      "end": 109.35,
+      "caption": "Many examples, right names = labelled data",
+      "text": "And lots and lots of examples, each with the right name on it? That's called labelled data. And labelled data is what we use to train AI.",
+      "scene": "define",
+      "focus": "data"
+    },
+    {
+      "start": 109.35,
+      "end": 114.82,
+      "caption": "Show and tell: every card gets its name",
+      "text": "Let's play Arjun's show and tell game! Every card gets its right name.",
+      "scene": "game",
+      "focus": "intro"
+    },
+    {
+      "start": 114.82,
+      "end": 124.89,
+      "caption": "Mango \u2192 \"mango\". Auto-rickshaw \u2192 \"auto\"",
+      "text": "Card one is a mango. Its label? Mango. Card two is an auto rickshaw. Its label? Auto.",
+      "scene": "game",
+      "focus": "cards"
+    },
+    {
+      "start": 124.89,
+      "end": 132.78,
+      "caption": "A parrot card. What should Arjun say?",
+      "text": "Card three is a parrot. What should Arjun say? Pause, and think.",
+      "scene": "game",
+      "focus": "ask"
+    },
+    {
+      "start": 132.78,
+      "end": 140.72,
+      "caption": "\"This is a bird!\" The name matches.",
+      "text": "This is a bird! A parrot is a kind of bird, so bird is a great label. The name matches the picture.",
+      "scene": "game",
+      "focus": "answer"
+    },
+    {
+      "start": 140.72,
+      "end": 153.55,
+      "caption": "Which label fits this picture?",
+      "text": "Quick one! Here's a picture of a mango. Which label is right? Bus, parrot, mango, or pencil? Pick one.",
+      "scene": "pick",
+      "focus": "ask"
+    },
+    {
+      "start": 153.55,
+      "end": 162.82,
+      "caption": "Mango! The label matches the picture.",
+      "text": "Mango, of course! A good label always matches what's in the picture. Bus, or pencil, would be totally wrong.",
+      "scene": "pick",
+      "focus": "answer"
+    },
+    {
+      "start": 162.82,
+      "end": 170.81,
+      "caption": "AI learns names the same way!",
+      "text": "Here's the cool part. AI learns names in the very same way! Remember training, from chapter one?",
+      "scene": "ai",
+      "focus": "same"
+    },
+    {
+      "start": 170.81,
+      "end": 186.25,
+      "caption": "Lots of pictures, each labelled \"apple\"",
+      "text": "We show the computer lots of apple pictures. Each one has the label, apple. Red ones, green ones, big ones, and small ones. Lots of different apples, so it learns what all apples share.",
+      "scene": "ai",
+      "focus": "show"
+    },
+    {
+      "start": 186.25,
+      "end": 195.94,
+      "caption": "It finds the pattern: like this = apple",
+      "text": "The AI looks for the pattern. A round shape, a little stem, a red or green colour. Pictures like this, mean apple!",
+      "scene": "ai",
+      "focus": "pattern"
+    },
+    {
+      "start": 195.94,
+      "end": 209.25,
+      "caption": "Labels tell AI what each example is",
+      "text": "So the labels tell the AI what each example is. Without labels, it wouldn't know what to call anything. AI doesn't know names by itself. It only knows what the labels tell it.",
+      "scene": "ai",
+      "focus": "why"
+    },
+    {
+      "start": 209.25,
+      "end": 217.86,
+      "caption": "Cousin Kabir labels the banana \"bus\"!",
+      "text": "But one day, Arjun's naughty cousin Kabir plays a trick. He takes the banana card, and changes its label to, bus!",
+      "scene": "oops",
+      "focus": "prank"
+    },
+    {
+      "start": 217.86,
+      "end": 226.57,
+      "caption": "Pihu learns: banana = \"bus\"",
+      "text": "Pihu doesn't know it's a joke. She looks at the card again and again, and learns. Bus! Bus!",
+      "scene": "oops",
+      "focus": "learn"
+    },
+    {
+      "start": 226.57,
+      "end": 236.04,
+      "caption": "A banana? \"Bus!\" A real bus? Confused!",
+      "text": "Next morning at breakfast, Pihu points at a real banana and shouts, bus! And when the yellow school bus arrives, she's all confused!",
+      "scene": "oops",
+      "focus": "breakfast"
+    },
+    {
+      "start": 236.04,
+      "end": 241.28,
+      "caption": "What went wrong? Think!",
+      "text": "What went wrong here? Think about it.",
+      "scene": "oops",
+      "focus": "ask"
+    },
+    {
+      "start": 241.28,
+      "end": 256.7,
+      "caption": "Wrong name! The card was mislabelled.",
+      "text": "The label was wrong! A banana card named bus is mislabelled. That means it has the wrong name. Pihu learned exactly what the label said. So wrong labels confuse people too, not just computers!",
+      "scene": "oops",
+      "focus": "answer"
+    },
+    {
+      "start": 256.7,
+      "end": 264.14,
+      "caption": "Train AI on bananas labelled \"bus\"",
+      "text": "The same thing can happen to AI. Imagine we train it with lots of banana pictures, all labelled bus.",
+      "scene": "aiwrong",
+      "focus": "train"
+    },
+    {
+      "start": 264.14,
+      "end": 274.93,
+      "caption": "AI learns: yellow, curved things = bus!",
+      "text": "The AI learns, yellow, curved things are buses! It can't tell that the labels are wrong, and it can't fix them by itself. It just believes them.",
+      "scene": "aiwrong",
+      "focus": "learns"
+    },
+    {
+      "start": 274.93,
+      "end": 286.52,
+      "caption": "Wrong labels teach wrong things",
+      "text": "So later, it might call a real banana a bus. Or miss a real bus completely. Wrong labels teach wrong things, to people, and to AI.",
+      "scene": "aiwrong",
+      "focus": "later"
+    },
+    {
+      "start": 286.52,
+      "end": 293.18,
+      "caption": "Be a label checker!",
+      "text": "So let's be label checkers! Look at each card. Does the name match the picture?",
+      "scene": "checker",
+      "focus": "intro"
+    },
+    {
+      "start": 293.18,
+      "end": 309.23,
+      "caption": "Which card has the wrong label?",
+      "text": "Parrot, labelled bird. Apple, labelled apple. Auto rickshaw, labelled auto. And cat, labelled dog. Which card is mislabelled? Take your time.",
+      "scene": "checker",
+      "focus": "ask"
+    },
+    {
+      "start": 309.23,
+      "end": 320.25,
+      "caption": "Cat labelled \"dog\" is wrong! Fix it: \"cat\"",
+      "text": "The cat labelled dog! A cat is not a dog. Let's fix it. Cross out dog, and write cat. Now every card is right.",
+      "scene": "checker",
+      "focus": "answer"
+    },
+    {
+      "start": 320.25,
+      "end": 332.93,
+      "caption": "Check every label before training!",
+      "text": "That's why, before we train AI with a hundred cards, the smartest thing to do is check that every label matches its picture. Right labels help people, and AI, learn the right things.",
+      "scene": "checker",
+      "focus": "before"
+    },
+    {
+      "start": 332.93,
+      "end": 336.63,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 336.63,
+      "end": 349.44,
+      "caption": "Banana labelled \"bus\": what goes wrong later?",
+      "text": "A banana picture is labelled bus. What might the AI get wrong later? Pause the video, and think. Or write it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 349.44,
+      "end": 359.83,
+      "caption": "It may call a banana a bus, or miss a real bus",
+      "text": "It might call a real banana a bus. Or get confused when it sees a real bus. It learned the wrong name for the picture. Great thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 359.83,
+      "end": 364.25,
+      "caption": "A label is the name on an example",
+      "text": "Let's remember. A label is the name on an example.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 364.25,
+      "end": 366.86,
+      "caption": "AI learns from labelled examples",
+      "text": "AI learns from labelled examples.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 366.86,
+      "end": 371.06,
+      "caption": "Wrong labels teach wrong things",
+      "text": "Wrong labels teach wrong things, to people and to AI.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 371.06,
+      "end": 374.05,
+      "caption": "Check labels before teaching",
+      "text": "So always check the labels, before teaching.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 374.05,
+      "end": 378.94,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You're a super label checker, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 378.94,
+      "end": 385.74,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

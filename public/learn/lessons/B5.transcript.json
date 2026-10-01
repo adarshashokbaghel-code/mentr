@@ -1,0 +1,324 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.81,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.81,
+      "end": 15.02,
+      "caption": "Last time: AI can be wrong. Check with a person!",
+      "text": "Last time, we learned that AI can make mistakes. Like calling a dog a muffin! So for important things, we always check with a grown-up.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.02,
+      "end": 24.77,
+      "caption": "Chapter 5 \u00b7 AI Helpers Around the World",
+      "text": "Today is chapter five. It's the last chapter of Unit one, What Is AI? And it's all about AI helpers, around the world!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.77,
+      "end": 33.13,
+      "caption": "Let's see how AI helps people every day!",
+      "text": "So pack your bags, champ. We're going on a little trip, to see how AI helps people, every single day.",
+      "scene": "open",
+      "focus": "trip"
+    },
+    {
+      "start": 33.13,
+      "end": 39.0,
+      "caption": "Meet Meera from Chennai. She speaks Tamil.",
+      "text": "Meet Meera. She lives in Chennai, she loves cricket, and she speaks Tamil.",
+      "scene": "meera",
+      "focus": "meet"
+    },
+    {
+      "start": 39.0,
+      "end": 48.48,
+      "caption": "New neighbour Arjun speaks Hindi",
+      "text": "One day, a new family moves in next door. Their son is called Arjun. He's just come from Lucknow, and he speaks Hindi.",
+      "scene": "meera",
+      "focus": "arjun"
+    },
+    {
+      "start": 48.48,
+      "end": 59.59,
+      "caption": "\"Vaa, cricket vilaiyaadalaam!\" Arjun is lost",
+      "text": "Meera runs over with her bat, and says in Tamil, come, let's play cricket! But Arjun just blinks. He doesn't understand a single word.",
+      "scene": "meera",
+      "focus": "try"
+    },
+    {
+      "start": 59.59,
+      "end": 68.35,
+      "caption": "How can they understand each other? Think!",
+      "text": "Hmm. Meera really wants a new friend. How could these two understand each other? Think about it.",
+      "scene": "meera",
+      "focus": "ask"
+    },
+    {
+      "start": 68.35,
+      "end": 76.86,
+      "caption": "Appa opens a translation app",
+      "text": "Meera's appa has an idea. He opens a translation app on his phone. And Meera speaks into it, in Tamil.",
+      "scene": "translate",
+      "focus": "app"
+    },
+    {
+      "start": 76.86,
+      "end": 87.45,
+      "caption": "It says it in Hindi: \"Aao, cricket khelein!\"",
+      "text": "Then the app says the very same words, in Hindi! Aao, cricket khelein! Arjun grins, and grabs the ball. Game on!",
+      "scene": "translate",
+      "focus": "turn"
+    },
+    {
+      "start": 87.45,
+      "end": 97.35,
+      "caption": "Translation: words from one language to another",
+      "text": "That's called translation. Translation means changing words from one language to another. Like Tamil to Hindi, or English to Bengali.",
+      "scene": "translate",
+      "focus": "define"
+    },
+    {
+      "start": 97.35,
+      "end": 112.34,
+      "caption": "Not magic: it learned patterns from examples",
+      "text": "So how does the app know? It isn't magic. The AI learned patterns, from millions of sentences that people had already translated. But remember last time? It can still make funny mistakes.",
+      "scene": "translate",
+      "focus": "how"
+    },
+    {
+      "start": 112.34,
+      "end": 119.56,
+      "caption": "Sunday trip to nani's house!",
+      "text": "On Sunday, Meera's family drives to nani's house. It's far away, on the other side of the city.",
+      "scene": "map",
+      "focus": "trip"
+    },
+    {
+      "start": 119.56,
+      "end": 129.33,
+      "caption": "Map app = navigation: finding the way",
+      "text": "Amma opens a map app. It shows the road to take, like a line drawn just for them. Finding the way like this is called navigation.",
+      "scene": "map",
+      "focus": "route"
+    },
+    {
+      "start": 129.33,
+      "end": 140.72,
+      "caption": "It warns about a traffic jam ahead",
+      "text": "Oh! The app warns them. Traffic jam ahead! It has noticed lots of cars moving slowly on that road. So it finds another way.",
+      "scene": "map",
+      "focus": "traffic"
+    },
+    {
+      "start": 140.72,
+      "end": 148.47,
+      "caption": "\"Turn left in 200 metres.\"",
+      "text": "And it even talks! Turn left, in two hundred metres. So appa can keep his eyes on the road.",
+      "scene": "map",
+      "focus": "speak"
+    },
+    {
+      "start": 148.47,
+      "end": 156.82,
+      "caption": "Nani can't hear very well",
+      "text": "At last, they reach nani's house. Nani is watching a cricket match. But nani can't hear very well anymore.",
+      "scene": "captions",
+      "focus": "nani"
+    },
+    {
+      "start": 156.82,
+      "end": 166.95,
+      "caption": "Captions: words on a video to read what is said",
+      "text": "So Meera turns on captions. Captions are words shown on a video, so you can read what people are saying. Now nani can follow every ball!",
+      "scene": "captions",
+      "focus": "cc"
+    },
+    {
+      "start": 166.95,
+      "end": 177.6,
+      "caption": "Captions help in noisy rooms too!",
+      "text": "Captions help in a noisy room too. Wheee! There goes the pressure cooker. Nobody can hear the TV now, but everyone can still read it.",
+      "scene": "captions",
+      "focus": "noisy"
+    },
+    {
+      "start": 177.6,
+      "end": 185.42,
+      "caption": "Psst\u2026 these words are captions too!",
+      "text": "Hey, look down at the bottom of this video, champ. See those words? Those are captions too!",
+      "scene": "captions",
+      "focus": "look"
+    },
+    {
+      "start": 185.42,
+      "end": 190.3,
+      "caption": "Let's zoom out to the whole world!",
+      "text": "Now let's zoom out. All the way out, to the whole wide world!",
+      "scene": "world",
+      "focus": "globe"
+    },
+    {
+      "start": 190.3,
+      "end": 204.16,
+      "caption": "Japan \u00b7 Brazil \u00b7 Kenya \u00b7 India",
+      "text": "A girl in Japan uses a map app to find her new school. A boy in Brazil watches cartoons with captions. A family in Kenya translates a menu. And in India, you're watching right now!",
+      "scene": "world",
+      "focus": "kids"
+    },
+    {
+      "start": 204.16,
+      "end": 215.35,
+      "caption": "Same idea, in local languages",
+      "text": "It's the same idea everywhere, but in each place's own local language. Konnichiwa! Ol\u00e1! Jambo! And, namaste!",
+      "scene": "world",
+      "focus": "same"
+    },
+    {
+      "start": 215.35,
+      "end": 225.14,
+      "caption": "Will AI replace teachers and parents?",
+      "text": "So here's a big question. Will AI helpers replace your teachers, or your parents? What do you think?",
+      "scene": "helper",
+      "focus": "ask"
+    },
+    {
+      "start": 225.14,
+      "end": 236.79,
+      "caption": "AI helps people. It doesn't replace them.",
+      "text": "Nope! AI helpers are there to help people, not to replace them. The map app showed the way, but appa still drove the car, and decided where to stop for chai.",
+      "scene": "helper",
+      "focus": "drive"
+    },
+    {
+      "start": 236.79,
+      "end": 247.31,
+      "caption": "Teachers and parents still guide you",
+      "text": "The app helped with words, but Meera made the friend. And your teachers and parents still guide you, and make the big decisions. AI just helps.",
+      "scene": "helper",
+      "focus": "people"
+    },
+    {
+      "start": 247.31,
+      "end": 255.56,
+      "caption": "Match the helper to the job!",
+      "text": "Let's play a matching game! Here are three helpers. The map app, captions, and translation.",
+      "scene": "match",
+      "focus": "intro"
+    },
+    {
+      "start": 255.56,
+      "end": 269.21,
+      "caption": "Which helper does which job?",
+      "text": "Which one says, turn left in two hundred metres? Which one shows words on a video? And which one turns Hindi into Tamil? Pause, and match them.",
+      "scene": "match",
+      "focus": "ask"
+    },
+    {
+      "start": 269.21,
+      "end": 281.84,
+      "caption": "Map: directions \u00b7 Captions: words \u00b7 Translate",
+      "text": "Turn left? That's the map app. Words on a video? Captions. And Hindi into Tamil? Translation! Well done, champ.",
+      "scene": "match",
+      "focus": "answer"
+    },
+    {
+      "start": 281.84,
+      "end": 298.85,
+      "caption": "Read a strange sign, then find the hotel?",
+      "text": "One more, a bit harder. Meera's family visits a new city. They see a sign in a language they can't read. And they need to find their hotel. Which two helpers should they use? Think!",
+      "scene": "trip",
+      "focus": "ask"
+    },
+    {
+      "start": 298.85,
+      "end": 307.38,
+      "caption": "Translation for the sign + map for the hotel",
+      "text": "Translation, to read the sign. And the map app, to find the hotel. Two helpers, working together!",
+      "scene": "trip",
+      "focus": "answer"
+    },
+    {
+      "start": 307.38,
+      "end": 311.33,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 311.33,
+      "end": 321.43,
+      "caption": "How can translation AI help two children?",
+      "text": "How could translation AI help two children who speak different languages? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 321.43,
+      "end": 335.78,
+      "caption": "It turns words into the other child's language",
+      "text": "Here's one answer. It can turn one child's words into the other child's language. So they can understand each other, talk, and play together. Just like Meera and Arjun! Brilliant.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 335.78,
+      "end": 341.65,
+      "caption": "Translation: across languages",
+      "text": "Let's remember. Translation AI helps people who speak different languages.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 341.65,
+      "end": 344.49,
+      "caption": "Map apps: find the way",
+      "text": "Map AI helps people find their way.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 344.49,
+      "end": 346.93,
+      "caption": "Captions: read what is said",
+      "text": "Captions help people read what is said.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 346.93,
+      "end": 351.32,
+      "caption": "AI helps. It doesn't replace people.",
+      "text": "And AI is a helper. It doesn't replace people.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 351.32,
+      "end": 365.85,
+      "caption": "Chapter 5 done \u00b7 Unit 1 complete!",
+      "text": "Chapter five, done! And that means all of Unit one is complete! You know what AI is, where to find it, when it goes wrong, and how it helps the world. I'm so proud of you, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 365.85,
+      "end": 372.65,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

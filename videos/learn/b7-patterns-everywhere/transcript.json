@@ -1,0 +1,388 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.81,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.81,
+      "end": 13.82,
+      "caption": "Last time: train with examples, then test",
+      "text": "Last time, we found out how to teach a computer, a bit like teaching a puppy. Show it lots of examples, then test it.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 13.82,
+      "end": 19.44,
+      "caption": "Chapter 2 \u00b7 Patterns Everywhere",
+      "text": "Today is chapter two of How Machines Learn. It's called, Patterns Everywhere!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 19.44,
+      "end": 26.74,
+      "caption": "Let's become pattern detectives!",
+      "text": "By the end, you'll be a real pattern detective. And you'll see how AI uses patterns too.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 26.74,
+      "end": 33.6,
+      "caption": "Meet Meera, making a Diwali garland",
+      "text": "Picture this. It's Diwali time, and Meera is helping her mum make a flower garland for the front door.",
+      "scene": "garland",
+      "focus": "meet"
+    },
+    {
+      "start": 33.6,
+      "end": 41.9,
+      "caption": "Orange, yellow, orange, yellow\u2026",
+      "text": "Mum threads the marigolds. Orange, yellow. Orange, yellow. Orange, yellow.",
+      "scene": "garland",
+      "focus": "string"
+    },
+    {
+      "start": 41.9,
+      "end": 51.48,
+      "caption": "\"Meera, can you carry on?\"",
+      "text": "Then, ding dong! Someone's at the door. Mum says, Meera, can you carry on? And off she goes.",
+      "scene": "garland",
+      "focus": "leave"
+    },
+    {
+      "start": 51.48,
+      "end": 61.87,
+      "caption": "Orange or yellow next? Think!",
+      "text": "Meera looks at the garland. Which flower should she add next? Orange, or yellow? What do you think?",
+      "scene": "garland",
+      "focus": "ask"
+    },
+    {
+      "start": 61.87,
+      "end": 72.49,
+      "caption": "Orange! Meera spotted a pattern",
+      "text": "Orange! Meera didn't need to ask anyone. The colours were taking turns, so she could guess what comes next. She spotted a pattern!",
+      "scene": "garland",
+      "focus": "answer"
+    },
+    {
+      "start": 72.49,
+      "end": 78.92,
+      "caption": "Pattern = repeats in a way you can predict",
+      "text": "So, what is a pattern? A pattern is something that repeats, in a way you can predict.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 78.92,
+      "end": 87.52,
+      "caption": "Repeats \u00b7 and you can predict what's next",
+      "text": "Repeats means the same thing comes back, again and again. And predict means you can guess what's coming, before you even see it.",
+      "scene": "define",
+      "focus": "parts"
+    },
+    {
+      "start": 87.52,
+      "end": 98.61,
+      "caption": "Sequence: things in a row, one after another",
+      "text": "Things lined up one after another, like the flowers on Meera's garland, are called a sequence. Look closely at a sequence, and you can often find a pattern hiding inside.",
+      "scene": "define",
+      "focus": "sequence"
+    },
+    {
+      "start": 98.61,
+      "end": 106.55,
+      "caption": "Nothing repeats? No pattern. Can't guess!",
+      "text": "But if things are all jumbled up, with nothing repeating? Then there's no pattern, and no way to guess what comes next.",
+      "scene": "define",
+      "focus": "random"
+    },
+    {
+      "start": 106.55,
+      "end": 111.12,
+      "caption": "Three kinds of patterns",
+      "text": "Patterns come in lots of kinds. Let's look at three of them.",
+      "scene": "kinds",
+      "focus": "intro"
+    },
+    {
+      "start": 111.12,
+      "end": 119.13,
+      "caption": "Colours: red, blue, red, blue \u2192 red!",
+      "text": "Colour patterns. Red, blue, red, blue. What comes next? Red!",
+      "scene": "kinds",
+      "focus": "colour"
+    },
+    {
+      "start": 119.13,
+      "end": 126.71,
+      "caption": "Shapes: circle, square, circle, square \u2192 circle",
+      "text": "Shape patterns. Circle, square, circle, square. And next comes, a circle!",
+      "scene": "kinds",
+      "focus": "shape"
+    },
+    {
+      "start": 126.71,
+      "end": 136.02,
+      "caption": "Beats: clap, clap, stamp!",
+      "text": "And beat patterns, that you can hear. Clap, clap, stamp. Clap, clap, stamp. Try it with me!",
+      "scene": "kinds",
+      "focus": "beat"
+    },
+    {
+      "start": 136.02,
+      "end": 143.91,
+      "caption": "Find the part that repeats",
+      "text": "Every pattern has a little part that repeats. Find that part, and you can keep the pattern going, forever.",
+      "scene": "kinds",
+      "focus": "unit"
+    },
+    {
+      "start": 143.91,
+      "end": 149.22,
+      "caption": "Game: what comes next?",
+      "text": "Okay, detective. Game time! What comes next?",
+      "scene": "next",
+      "focus": "intro"
+    },
+    {
+      "start": 149.22,
+      "end": 157.79,
+      "caption": "Clap, clap, stamp, clap, clap, ___?",
+      "text": "Clap, clap, stamp. Clap, clap, and then? Pause, and think.",
+      "scene": "next",
+      "focus": "ask1"
+    },
+    {
+      "start": 157.79,
+      "end": 162.52,
+      "caption": "Stamp! The beat is clap, clap, stamp",
+      "text": "Stamp! The part that repeats is clap, clap, stamp.",
+      "scene": "next",
+      "focus": "ans1"
+    },
+    {
+      "start": 162.52,
+      "end": 177.3,
+      "caption": "Circle, circle, triangle\u2026 circle, circle, ___?",
+      "text": "Here's a trickier one. Circle, circle, triangle. Circle, circle, triangle. Circle, circle, and then? Take your time.",
+      "scene": "next",
+      "focus": "ask2"
+    },
+    {
+      "start": 177.3,
+      "end": 185.16,
+      "caption": "Triangle! Two circles, then a triangle",
+      "text": "Triangle! Two circles, then a triangle, again and again. You're getting really good at this!",
+      "scene": "next",
+      "focus": "ans2"
+    },
+    {
+      "start": 185.16,
+      "end": 191.47,
+      "caption": "Sorting: putting alike things into groups",
+      "text": "Patterns help us sort things, too. Sorting means putting things that are alike into groups.",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 191.47,
+      "end": 202.17,
+      "caption": "Red, blue, circles, squares, all mixed up!",
+      "text": "Oh no! Meera's little brother tipped over his toy box. Red circles, red squares, blue circles, and blue squares, all mixed up!",
+      "scene": "sort",
+      "focus": "mess"
+    },
+    {
+      "start": 202.17,
+      "end": 210.8,
+      "caption": "Sort by colour: reds here, blues there",
+      "text": "Meera sorts them by colour. All the red ones go here. All the blue ones go there. Two neat groups!",
+      "scene": "sort",
+      "focus": "colour"
+    },
+    {
+      "start": 210.8,
+      "end": 222.3,
+      "caption": "Sort by shape: where do the circles go?",
+      "text": "Now, what if she sorts the very same toys by shape? Where does the red circle go? And the blue circle? Think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 222.3,
+      "end": 235.08,
+      "caption": "All circles together, all squares together",
+      "text": "Together! All the circles go in one group, whatever their colour. All the squares go in another. Same toys, different groups. You choose the pattern!",
+      "scene": "sort",
+      "focus": "shape"
+    },
+    {
+      "start": 235.08,
+      "end": 243.12,
+      "caption": "AI looks for patterns too!",
+      "text": "Now here's the exciting part. AI looks for patterns too! The same kinds of patterns that you notice.",
+      "scene": "ai",
+      "focus": "intro"
+    },
+    {
+      "start": 243.12,
+      "end": 257.25,
+      "caption": "Many cat photos \u2192 a pattern: ears, whiskers\u2026",
+      "text": "Remember our cat photos from last time? What did the computer learn from all of them? A pattern! Pointy ears, whiskers, a long tail. Things that show up again and again.",
+      "scene": "ai",
+      "focus": "cats"
+    },
+    {
+      "start": 257.25,
+      "end": 267.12,
+      "caption": "Not magic, not alive. It finds patterns.",
+      "text": "So AI isn't magic, and it isn't alive. It's a computer program that finds patterns, in pictures, numbers, and sounds.",
+      "scene": "ai",
+      "focus": "notmagic"
+    },
+    {
+      "start": 267.12,
+      "end": 274.16,
+      "caption": "Nani's mango farm: thousands of mangoes!",
+      "text": "Meera's nani has a big mango farm. At harvest time, there are thousands and thousands of mangoes!",
+      "scene": "mango",
+      "focus": "farm"
+    },
+    {
+      "start": 274.16,
+      "end": 283.39,
+      "caption": "Which are ripe? What would you look for?",
+      "text": "Which mangoes are ripe, and ready to sell? What pattern would you look for? Think about it.",
+      "scene": "mango",
+      "focus": "ask"
+    },
+    {
+      "start": 283.39,
+      "end": 293.58,
+      "caption": "Ripe: yellow \u00b7 plump \u00b7 no dark spots",
+      "text": "A ripe mango is yellow, nice and plump, with no dark spots. A green one isn't ready yet. It's all about how the mango looks!",
+      "scene": "mango",
+      "focus": "pattern"
+    },
+    {
+      "start": 293.58,
+      "end": 305.95,
+      "caption": "An AI machine checks each mango's pattern",
+      "text": "Meera can check a few mangoes every minute. But the farm uses an AI sorting machine. A camera looks at each mango, checks the pattern, and sends it to the right basket.",
+      "scene": "mango",
+      "focus": "machine"
+    },
+    {
+      "start": 305.95,
+      "end": 314.73,
+      "caption": "Thousands of mangoes, super fast!",
+      "text": "Zip, zip, zip! It can sort thousands of mangoes, much faster than any person. And it never gets tired.",
+      "scene": "mango",
+      "focus": "fast"
+    },
+    {
+      "start": 314.73,
+      "end": 321.41,
+      "caption": "You find patterns with eyes and ears",
+      "text": "So, you and AI both find patterns. You notice them with your eyes, and your ears.",
+      "scene": "compare",
+      "focus": "you"
+    },
+    {
+      "start": 321.41,
+      "end": 325.59,
+      "caption": "AI: numbers, pictures, and sounds",
+      "text": "AI notices patterns in numbers, pictures, and sounds.",
+      "scene": "compare",
+      "focus": "ai"
+    },
+    {
+      "start": 325.59,
+      "end": 338.73,
+      "caption": "Same idea. AI just checks thousands, fast!",
+      "text": "The big difference? AI can check thousands of things, very fast. Same idea as you, just on lots and lots of things. And it only learns from the examples people give it.",
+      "scene": "compare",
+      "focus": "diff"
+    },
+    {
+      "start": 338.73,
+      "end": 342.43,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 342.43,
+      "end": 356.36,
+      "caption": "Red, blue, red, blue, ___? And why?",
+      "text": "What pattern do you see? Red, blue, red, blue, and then? What comes next, and why? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 356.36,
+      "end": 368.84,
+      "caption": "Red! The colours take turns",
+      "text": "Red! The colours take turns. Red, then blue, then red again. So the next one is red. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 368.84,
+      "end": 375.03,
+      "caption": "A pattern repeats: colour, shape, beat",
+      "text": "Let's remember. A pattern repeats, like the same colour, shape, or beat.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 375.03,
+      "end": 378.29,
+      "caption": "Sorting = grouping things that are alike",
+      "text": "Sorting means putting things that are alike into groups.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 378.29,
+      "end": 382.19,
+      "caption": "AI finds patterns people notice too",
+      "text": "AI finds the same kinds of patterns that people notice.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 382.19,
+      "end": 386.06,
+      "caption": "AI does it on thousands of things, fast",
+      "text": "And AI can do it on thousands of things, very fast.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 386.06,
+      "end": 392.31,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! You can spot patterns, just like AI does, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 392.31,
+      "end": 399.11,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

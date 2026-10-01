@@ -1,0 +1,151 @@
+{
+  "id": "B20",
+  "title": "Capstone: Imagine Your Own AI Helper",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "AI · Smart & Safe With AI",
+  "slug": "b20-capstone-imagine-your-own-ai-helper",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b20-welcome",
+      "beats": [
+        { "vo": "Hey champ! Welcome back. Today is a very special day.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we saw AI helping doctors, scientists, and artists. And we learned that AI is a tool. People stay in charge.", "caption": "Last time: AI helps, people stay in charge", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five, the final chapter of the whole AI track. It's your capstone. Imagine your own AI helper!", "caption": "Chapter 5 · Capstone: Imagine Your Own AI Helper", "focus": "chapter", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "Capstone. Remember? It's the very last stone, right on top. So this is your big, final project!", "caption": "Capstone = your big, final project", "focus": "word", "pause": 0.4 },
+        { "vo": "Today, you are the AI designer. No coding needed. Just a clear idea, a pencil, and your imagination.", "caption": "You're the AI designer! No coding needed", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "meera",
+      "visual": "b20-hook",
+      "beats": [
+        { "vo": "Remember Meera? She and her nani have a little balcony garden. A tulsi plant, a money plant, and two rose pots.", "caption": "Meera's balcony garden", "focus": "meet", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "But everyone at home is so busy. Some days, nobody waters the plants. And the leaves go droopy, and brown. Oh no!", "caption": "Oh no! The plants are drooping", "focus": "droop", "sfx": "buzz", "sfxAt": 0.7, "pause": 0.4 },
+        { "vo": "What kind of AI helper could help Meera's family? Think for a moment.", "caption": "What AI helper could help? Think!", "focus": "idea", "pause": 2.0 },
+        { "vo": "Meera has an idea. An AI helper called, Plant Pal! Let's design it together, step by step. Then you'll imagine your own.", "caption": "Meera's idea: Plant Pal!", "focus": "reveal", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "steps",
+      "visual": "b20-steps",
+      "beats": [
+        { "vo": "Designing an AI helper takes four simple steps.", "caption": "Four steps to design an AI helper", "focus": "intro", "sfx": "pop" },
+        { "vo": "Step one, who it helps, and what job it does. Step two, what data it learns from. Step three, a privacy rule, to keep people safe. And step four, present it in one minute.", "caption": "Who & job → Data → Privacy rule → Present", "focus": "all", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "job",
+      "visual": "b20-job",
+      "beats": [
+        { "vo": "Step one. Always decide this first. Who does your helper help? That person is called the user. Plant Pal's users are Meera's family.", "caption": "Step 1: User = the person it helps", "focus": "user" },
+        { "vo": "Then, give it one job. Something it does really well. Not ten jobs, just one! Plant Pal's job is to tell the family when a plant needs water.", "caption": "One job: tell us when a plant needs water", "focus": "job", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Try saying it like this. Plant Pal helps my family, water our plants on time. And see? A fun name makes it easy to remember!", "caption": "\"It helps ___ to ___.\"", "focus": "sentence", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "data",
+      "visual": "b20-data",
+      "beats": [
+        { "vo": "Step two. What data does it learn from? Remember, AI learns from examples. Those examples are called data. They can be pictures, sounds, or words.", "caption": "Step 2: Data = the examples it learns from", "focus": "intro" },
+        { "vo": "Plant Pal learns from lots and lots of leaf photos. Fresh, healthy, green leaves. And dry, droopy, brown leaves.", "caption": "Healthy leaves and dry leaves", "focus": "examples", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "From many examples, it spots a pattern. A pattern is something that repeats. Droopy, brown leaves usually mean, I need water!", "caption": "Pattern: droopy, brown leaves → needs water", "focus": "pattern", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "And to be fair, it needs many kinds of examples. Big plants and small plants. Sunny days and cloudy days. Otherwise, it might only work for roses!", "caption": "Many kinds of examples make it fairer", "focus": "fair" }
+      ]
+    },
+    {
+      "id": "dataq",
+      "visual": "b20-dataq",
+      "beats": [
+        { "vo": "Quick check! Plant Pal learns from many photos of dry and healthy leaves. Those photos are its, passwords? Wake words? Or examples? Think.", "caption": "Those leaf photos are its…?", "focus": "q", "pause": 2.0 },
+        { "vo": "Examples! The photos are its data. The examples it learns patterns from.", "caption": "Examples! That's its data.", "focus": "a", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "privacy",
+      "visual": "b20-privacy",
+      "beats": [
+        { "vo": "Step three. A privacy rule. That's a promise about what your helper will never collect, or store.", "caption": "Step 3: A privacy rule", "focus": "intro", "sfx": "pop" },
+        { "vo": "Here's the golden rule. Only collect what the job needs. Nothing extra. Plant Pal needs leaf photos. Does it need your face? Your home address? Where you are right now? No way!", "caption": "Only collect what the job needs", "focus": "only", "sfx": "buzz", "sfxAt": 0.85 },
+        { "vo": "So Plant Pal's privacy rule is, it must never store photos of people.", "caption": "Rule: never store photos of people", "focus": "rule", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "And remember, people stay in charge. Plant Pal can say, water me! But nani decides how much water to give.", "caption": "People stay in charge", "focus": "charge" }
+      ]
+    },
+    {
+      "id": "needs",
+      "visual": "b20-needs",
+      "beats": [
+        { "vo": "Let's sort! A spelling helper helps kids practise spellings. Which data does it not need? A list of spelling words. The child's home address. Common spelling mistakes. Or which words the child got right. Think.", "caption": "Spelling helper: which data is NOT needed?", "focus": "q", "pause": 2.2 },
+        { "vo": "The home address! Spelling practice doesn't need it. So should a helper grab as much information as it can, just in case? Nope! Only what the job needs.", "caption": "Home address! Only collect what's needed.", "focus": "a", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "pitch",
+      "visual": "b20-pitch",
+      "beats": [
+        { "vo": "Step four. Present your helper in about one minute. Short, and clear.", "caption": "Step 4: Present in about 1 minute", "focus": "intro", "sfx": "pop" },
+        { "vo": "Like this. Meet Tiffin Buddy! It helps class four kids pick a healthy snack. It learns from pictures of snacks. And it never stores anyone's face.", "caption": "\"Meet Tiffin Buddy!\"", "focus": "example", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Speak slowly. Show your drawing. And smile! Then take a bow.", "caption": "Speak slowly · Show a drawing · Smile", "focus": "tips", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "clear",
+      "visual": "b20-clear",
+      "beats": [
+        { "vo": "Detective time! Which plan is the clearest, and the safest? A, a helper. B, it does everything for everyone, and saves all data. C, Tiffin Buddy helps class four kids pick healthy snacks. It learns from snack pictures. It never stores faces. Or D, a helper that knows where all my friends live.", "caption": "Which plan is clearest AND safest?", "focus": "ask", "pause": 2.2 },
+        { "vo": "C! It has a user, a job, data, and a privacy rule. Clear, and safe.", "caption": "C! User, job, data, privacy rule", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b20-check",
+      "beats": [
+        { "vo": "Okay champ, here's your capstone challenge.", "caption": "Your turn: capstone challenge", "focus": "intro" },
+        { "vo": "Name your helper. Say who it helps. And one thing it must not store. Pause the video, and try it on paper.", "caption": "Name · who it helps · one thing not to store", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's Meera's. Plant Pal helps my family water plants on time. It learns from leaf photos. It must never store photos of people. How did yours turn out? I bet it's amazing!", "caption": "Plant Pal · my family · no photos of people", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b20-recap",
+      "beats": [
+        { "vo": "Let's remember. A helper has a user, a job, and a privacy rule.", "caption": "Helper = user + job + privacy rule", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "It learns patterns from examples. That's its data.", "caption": "It learns patterns from data", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Collect only what the job needs.", "caption": "Collect only what the job needs", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And present it clearly, in one minute.", "caption": "Present clearly in 1 minute", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And champ, look how far you've come. What is AI. How machines learn. AI that sees, hears, and talks. And being smart and safe with AI.", "caption": "All 4 AI units: done!", "focus": "journey", "sfx": "chime", "sfxAt": 0.85 },
+        { "vo": "You've finished the whole AI track! You can spot patterns, stay safe, and design your own AI helper. I'm so proud of you. You're an AI champ!", "caption": "AI track complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Tap Finish, and try your final quiz. Then go imagine your own amazing AI helper!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

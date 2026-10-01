@@ -1,0 +1,380 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.48,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.48,
+      "end": 15.89,
+      "caption": "Last time: AND \u00b7 OR \u00b7 NOT",
+      "text": "Last time, you learned three tiny logic words. The word and needs both. The word or needs at least one. And the word not flips things around.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.89,
+      "end": 21.96,
+      "caption": "Chapter 3 \u00b7 Sorting and Comparing",
+      "text": "Today is chapter three of Logic and Reasoning. It's called, Sorting and Comparing!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 21.96,
+      "end": 30.16,
+      "caption": "Bigger? Smaller? In order?",
+      "text": "Which is bigger? Which is smaller? And how do we line things up in order? Let's find out.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 30.16,
+      "end": 36.57,
+      "caption": "Meet Aarav and Zara, marble fans!",
+      "text": "Meet Aarav. He loves marbles! And his best friend Zara loves them too.",
+      "scene": "marbles",
+      "focus": "meet"
+    },
+    {
+      "start": 36.57,
+      "end": 44.32,
+      "caption": "Aarav: 36 marbles \u00b7 Zara: 63 marbles",
+      "text": "Aarav counts his marbles. Thirty six! Zara counts hers. Sixty three!",
+      "scene": "marbles",
+      "focus": "count"
+    },
+    {
+      "start": 44.32,
+      "end": 54.64,
+      "caption": "36 or 63. Who has more? Think!",
+      "text": "Hmm. Both numbers use the same digits, a three and a six. So who has more marbles? Think about it.",
+      "scene": "marbles",
+      "focus": "ask"
+    },
+    {
+      "start": 54.64,
+      "end": 67.88,
+      "caption": "63 = 6 tens \u00b7 36 = 3 tens \u2192 63 is bigger",
+      "text": "Zara does! Sixty three is six tens and three ones. Thirty six is only three tens and six ones. Six tens is more than three tens, so sixty three is bigger.",
+      "scene": "marbles",
+      "focus": "answer"
+    },
+    {
+      "start": 67.88,
+      "end": 75.21,
+      "caption": "Comparing: bigger, smaller, or the same?",
+      "text": "What we just did is called comparing. Checking which number is bigger, which is smaller, or if they're the same.",
+      "scene": "marbles",
+      "focus": "define"
+    },
+    {
+      "start": 75.21,
+      "end": 79.92,
+      "caption": "Three comparing signs",
+      "text": "Maths has three special signs for comparing. Let's meet them.",
+      "scene": "signs",
+      "focus": "intro"
+    },
+    {
+      "start": 79.92,
+      "end": 89.0,
+      "caption": "> greater than \u00b7 9 > 4",
+      "text": "This sign means greater than. Nine is greater than four. Nine laddoos are more than four laddoos. Yum!",
+      "scene": "signs",
+      "focus": "greater"
+    },
+    {
+      "start": 89.0,
+      "end": 93.16,
+      "caption": "< less than \u00b7 3 < 8",
+      "text": "This one means less than. Three is less than eight.",
+      "scene": "signs",
+      "focus": "less"
+    },
+    {
+      "start": 93.16,
+      "end": 100.66,
+      "caption": "= equal \u00b7 7 = 7",
+      "text": "And these two little lines mean equal. Seven equals seven. Both sides are exactly the same.",
+      "scene": "signs",
+      "focus": "equal"
+    },
+    {
+      "start": 100.66,
+      "end": 107.03,
+      "caption": "Meet Chompy the crocodile!",
+      "text": "But how do you remember which way the sign points? Meet Chompy, the hungry crocodile!",
+      "scene": "croc",
+      "focus": "intro"
+    },
+    {
+      "start": 107.03,
+      "end": 115.13,
+      "caption": "The open mouth eats the bigger number",
+      "text": "Chompy is always hungry. So he opens his mouth towards the bigger number. He wants to eat the most!",
+      "scene": "croc",
+      "focus": "rule"
+    },
+    {
+      "start": 115.13,
+      "end": 123.86,
+      "caption": "15 > 12 \u00b7 the mouth faces 15",
+      "text": "Fifteen and twelve. Fifteen is bigger, so Chompy's mouth faces fifteen. Fifteen is greater than twelve.",
+      "scene": "croc",
+      "focus": "big"
+    },
+    {
+      "start": 123.86,
+      "end": 136.63,
+      "caption": "8 < 10 \u00b7 the mouth faces 10",
+      "text": "Eight and ten. Ten is bigger, so now the mouth faces ten. Eight is less than ten. See? The small pointy end always points to the smaller number.",
+      "scene": "croc",
+      "focus": "small"
+    },
+    {
+      "start": 136.63,
+      "end": 143.32,
+      "caption": "Compare the biggest place first",
+      "text": "Now, here's the secret for comparing bigger numbers. Always look at the biggest place first.",
+      "scene": "place",
+      "focus": "intro"
+    },
+    {
+      "start": 143.32,
+      "end": 155.0,
+      "caption": "3 tens < 6 tens, so 36 < 63",
+      "text": "Remember the marbles? Three tens, and six tens. Three tens is less, so thirty six is less than sixty three. We didn't even need the ones!",
+      "scene": "place",
+      "focus": "tens"
+    },
+    {
+      "start": 155.0,
+      "end": 169.34,
+      "caption": "Same tens? Check ones: 45 < 48",
+      "text": "But what if the tens are the same? Forty five, and forty eight. Both have four tens. So we check the ones. Five is less than eight, so forty five is less than forty eight.",
+      "scene": "place",
+      "focus": "ones"
+    },
+    {
+      "start": 169.34,
+      "end": 186.6,
+      "caption": "Same hundreds \u00b7 0 tens < 5 tens \u2192 305 < 350",
+      "text": "It works for big numbers too. Three hundred and five, and three hundred and fifty. Same hundreds. So, check the tens. Zero tens is less than five tens. So three hundred and five is less than three hundred and fifty.",
+      "scene": "place",
+      "focus": "hundreds"
+    },
+    {
+      "start": 186.6,
+      "end": 205.31,
+      "caption": "Only one is true. Which one?",
+      "text": "Your turn! Only one of these is true. Nine is less than four. Fifteen is greater than twelve. Twenty equals twenty one. Eight is greater than ten. Which one is true? Think.",
+      "scene": "truecheck",
+      "focus": "ask"
+    },
+    {
+      "start": 205.31,
+      "end": 216.32,
+      "caption": "15 > 12 is the true one!",
+      "text": "Fifteen is greater than twelve! Nine is bigger than four, not less. Twenty and twenty one aren't equal. And eight is smaller than ten.",
+      "scene": "truecheck",
+      "focus": "answer"
+    },
+    {
+      "start": 216.32,
+      "end": 222.11,
+      "caption": "Sorting = putting things in order",
+      "text": "Now let's sort! Sorting means putting things in order, like smallest to biggest.",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 222.11,
+      "end": 231.61,
+      "caption": "Toy car boxes: 12, 5, 30, 21, 9",
+      "text": "Aarav keeps his toy cars in five boxes. Twelve cars, five, thirty, twenty one, and nine. All jumbled up!",
+      "scene": "sort",
+      "focus": "boxes"
+    },
+    {
+      "start": 231.61,
+      "end": 241.66,
+      "caption": "Find the smallest \u00b7 write it \u00b7 cross it out",
+      "text": "Here's a neat trick. Find the smallest number. Write it down, and cross it out. Then do it again, with what's left.",
+      "scene": "sort",
+      "focus": "trick"
+    },
+    {
+      "start": 241.66,
+      "end": 253.19,
+      "caption": "5 \u2192 9 \u2192 12 \u2192 21 \u2192 30",
+      "text": "The smallest is five. Cross it out. Next, nine. Then twelve. Then twenty one. And last, thirty.",
+      "scene": "sort",
+      "focus": "steps"
+    },
+    {
+      "start": 253.19,
+      "end": 263.6,
+      "caption": "Sorted! The biggest box has 30 cars",
+      "text": "Five, nine, twelve, twenty one, thirty. Sorted! And now the biggest box is easy to spot. Thirty cars!",
+      "scene": "sort",
+      "focus": "done"
+    },
+    {
+      "start": 263.6,
+      "end": 281.94,
+      "caption": "Up: 8, 17, 25 \u00b7 Down: 25, 17, 8",
+      "text": "You can sort two ways. Take twenty five, eight, and seventeen. Smallest to biggest is eight, seventeen, twenty five. Like climbing up the stairs. Biggest to smallest is twenty five, seventeen, eight. Like walking down.",
+      "scene": "order",
+      "focus": "two"
+    },
+    {
+      "start": 281.94,
+      "end": 298.17,
+      "caption": "Which list is biggest to smallest?",
+      "text": "Which list goes from biggest to smallest? Fifty, forty two, thirty one, nineteen, six. Or, forty two, fifty, thirty one, nineteen, six? Think.",
+      "scene": "order",
+      "focus": "ask"
+    },
+    {
+      "start": 298.17,
+      "end": 310.37,
+      "caption": "50, 42, 31, 19, 6 \u00b7 each one smaller",
+      "text": "The first one! Each number is smaller than the one before. In the second list, fifty comes after forty two, and fifty is bigger. Oops, not sorted.",
+      "scene": "order",
+      "focus": "answer"
+    },
+    {
+      "start": 310.37,
+      "end": 321.81,
+      "caption": "14, 3, 27, 3. Two 3s! What now?",
+      "text": "Now a tricky one. Fourteen, three, twenty seven, and three again. Two threes! What do we do with them?",
+      "scene": "tricky",
+      "focus": "ask"
+    },
+    {
+      "start": 321.81,
+      "end": 333.95,
+      "caption": "Keep both: 3, 3, 14, 27",
+      "text": "Keep both! Three, three, fourteen, twenty seven. When you sort, never throw a number away. Same number twice? It stays twice.",
+      "scene": "tricky",
+      "focus": "answer"
+    },
+    {
+      "start": 333.95,
+      "end": 348.76,
+      "caption": "Pencils: 9, 14, 6, 11, 8 cm. The middle one?",
+      "text": "One more. Five pencils, nine, fourteen, six, eleven, and eight centimetres long. Sort them, smallest to biggest. Which one is in the middle?",
+      "scene": "tricky",
+      "focus": "pencils"
+    },
+    {
+      "start": 348.76,
+      "end": 360.22,
+      "caption": "6, 8, 9, 11, 14 \u00b7 the middle is 9 cm",
+      "text": "Six, eight, nine, eleven, fourteen. The middle one is nine centimetres. Two shorter ones on one side, and two longer ones on the other!",
+      "scene": "tricky",
+      "focus": "middle"
+    },
+    {
+      "start": 360.22,
+      "end": 366.59,
+      "caption": "Sorted lists are faster to search",
+      "text": "So, why do computers love sorting? Because a sorted list is much faster to search.",
+      "scene": "fast",
+      "focus": "intro"
+    },
+    {
+      "start": 366.59,
+      "end": 375.78,
+      "caption": "Messy list: check one by one\u2026 slow!",
+      "text": "Imagine looking for roll number twenty seven in a messy class list. You check one, by one, by one. So slow!",
+      "scene": "fast",
+      "focus": "messy"
+    },
+    {
+      "start": 375.78,
+      "end": 386.39,
+      "caption": "Sorted list: jump near the end. Found!",
+      "text": "But in a sorted list, roll numbers go one, two, three, all the way up. Twenty seven? Jump near the end. Found it!",
+      "scene": "fast",
+      "focus": "sorted"
+    },
+    {
+      "start": 386.39,
+      "end": 390.09,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 390.09,
+      "end": 401.57,
+      "caption": "Sort 19, 7, 42, 7 (smallest first)",
+      "text": "Put nineteen, seven, forty two, and seven in order, from smallest to biggest. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 401.57,
+      "end": 409.03,
+      "caption": "7, 7, 19, 42 \u00b7 both 7s stay!",
+      "text": "Seven, seven, nineteen, forty two. And did you keep both sevens? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 409.03,
+      "end": 417.43,
+      "caption": "> greater \u00b7 < less \u00b7 = equal",
+      "text": "Let's remember. Greater than, less than, and equal. Chompy's open mouth faces the bigger number.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 417.43,
+      "end": 419.56,
+      "caption": "Compare the biggest place first",
+      "text": "Compare the biggest place first.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 419.56,
+      "end": 424.34,
+      "caption": "Sort: smallest, then the next",
+      "text": "To sort, find the smallest, then the next, and keep any repeats.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 424.34,
+      "end": 426.99,
+      "caption": "Sorted lists are faster to search",
+      "text": "And sorted lists are faster to search.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 426.99,
+      "end": 432.72,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You can compare and sort like a computer, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 432.72,
+      "end": 439.52,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

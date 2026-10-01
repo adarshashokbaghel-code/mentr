@@ -1,0 +1,316 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 16.3,
+      "caption": "Last time: Loops \u00b7 repeat 5 times: clap",
+      "text": "Last time, you learned about loops. Instead of saying clap, clap, clap, clap, clap, we just said, repeat five times, clap. So smart!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.3,
+      "end": 23.52,
+      "caption": "Chapter 4 \u00b7 If This, Then That",
+      "text": "Today is chapter four of Unit two, Thinking Like a Computer. And it's called, If This, Then That.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.52,
+      "end": 35.03,
+      "caption": "Today: Robo learns to make choices!",
+      "text": "So far, Robo just follows steps, one after another. But today, Robo learns something new. How to make a choice! Ready?",
+      "scene": "open",
+      "focus": "choice"
+    },
+    {
+      "start": 35.03,
+      "end": 46.1,
+      "caption": "Monday morning. Aarav is ready for school",
+      "text": "Let me tell you about Aarav. It's Monday morning, and Aarav is getting ready for school. Bag packed. Tiffin packed. Shoes on.",
+      "scene": "rain",
+      "focus": "morning"
+    },
+    {
+      "start": 46.1,
+      "end": 54.47,
+      "caption": "Should Aarav take the umbrella?",
+      "text": "Near the door, there's an umbrella. Should Aarav take it with him? What do you think?",
+      "scene": "rain",
+      "focus": "ask"
+    },
+    {
+      "start": 54.47,
+      "end": 67.17,
+      "caption": "It depends! First, he checks the weather",
+      "text": "Hmm. The answer is, it depends! It depends on the weather. So before he decides, Aarav does something clever. He looks out of the window, and checks.",
+      "scene": "rain",
+      "focus": "depends"
+    },
+    {
+      "start": 67.17,
+      "end": 78.0,
+      "caption": "If it rains, then take an umbrella",
+      "text": "Dark clouds, and pitter patter, it's raining! So Aarav grabs the umbrella. If it rains, then take an umbrella. That's a rule!",
+      "scene": "rain",
+      "focus": "yes"
+    },
+    {
+      "start": 78.0,
+      "end": 86.94,
+      "caption": "IF something is true \u2192 THEN do this",
+      "text": "Rules like this have a special shape. If, something is true, then, do something. We call it an if then rule.",
+      "scene": "define",
+      "focus": "rule"
+    },
+    {
+      "start": 86.94,
+      "end": 99.31,
+      "caption": "Condition = the thing you check \u00b7 true or not",
+      "text": "The part after if is called the condition. A condition is the thing you check. Like, is it raining? The answer can only be yes, it's true, or no, it's not true.",
+      "scene": "define",
+      "focus": "condition"
+    },
+    {
+      "start": 99.31,
+      "end": 111.03,
+      "caption": "THEN happens only when the condition is true",
+      "text": "The part after then is the action. And here's the important bit. The then part only happens when the condition is true. No rain? No umbrella!",
+      "scene": "define",
+      "focus": "then"
+    },
+    {
+      "start": 111.03,
+      "end": 117.95,
+      "caption": "What about a sunny day?",
+      "text": "But wait. What about a sunny day? What should Aarav do then?",
+      "scene": "else",
+      "focus": "sunny"
+    },
+    {
+      "start": 117.95,
+      "end": 136.88,
+      "caption": "ELSE = otherwise \u00b7 leave the umbrella at home",
+      "text": "For that, we add one more little word. Else. Else means, otherwise. Do the other thing. If it rains, then take an umbrella. Else, leave the umbrella at home. Now, rain or shine, Aarav always knows what to do.",
+      "scene": "else",
+      "focus": "else"
+    },
+    {
+      "start": 136.88,
+      "end": 148.27,
+      "caption": "A branch: one way OR the other, never both",
+      "text": "Think of it like a fork in the road. The steps come to the condition, and then go one way, or the other way. Never both! This fork is called a branch.",
+      "scene": "else",
+      "focus": "fork"
+    },
+    {
+      "start": 148.27,
+      "end": 159.86,
+      "caption": "Raju bhaiya checks the traffic light",
+      "text": "Now, let's hop into an auto rickshaw! Our driver, Raju bhaiya, comes to a traffic signal. What does he do first? He checks the light.",
+      "scene": "traffic",
+      "focus": "meet"
+    },
+    {
+      "start": 159.86,
+      "end": 171.07,
+      "caption": "If red \u2192 stop. Else \u2192 go carefully",
+      "text": "His rule is simple. If the light is red, then stop. Else, go carefully. He checks the light every single time, before he decides.",
+      "scene": "traffic",
+      "focus": "rule"
+    },
+    {
+      "start": 171.07,
+      "end": 180.23,
+      "caption": "The light is green. Stop or go?",
+      "text": "Now, the light turns green. Should Raju bhaiya stop, or go? Think about it.",
+      "scene": "traffic",
+      "focus": "ask"
+    },
+    {
+      "start": 180.23,
+      "end": 191.75,
+      "caption": "Green is not red \u2192 the ELSE part: go!",
+      "text": "Go! Green is not red, so the condition is not true. That means the else part happens. Off we go, carefully. Beep beep!",
+      "scene": "traffic",
+      "focus": "answer"
+    },
+    {
+      "start": 191.75,
+      "end": 200.95,
+      "caption": "If Aarav is hungry, then he eats his tiffin",
+      "text": "If then rules hide inside stories too. At lunch time, if Aarav is hungry, then he eats his tiffin. Yum!",
+      "scene": "story",
+      "focus": "tiffin"
+    },
+    {
+      "start": 200.95,
+      "end": 215.66,
+      "caption": "If the bell rings, then go to class",
+      "text": "Suddenly, ring ring! If the bell rings, then go to class. The bell just rang, so the condition is true. So what does Aarav do? He does the then part, and goes to class!",
+      "scene": "story",
+      "focus": "bell"
+    },
+    {
+      "start": 215.66,
+      "end": 233.96,
+      "caption": "Homework done? Cricket! Else, homework first",
+      "text": "In the evening, his friends call him to play cricket. But Aarav's mum has a rule. If homework is done, then play cricket. Else, finish homework first! See how the else gives Aarav a sensible other choice? That's fair, isn't it?",
+      "scene": "story",
+      "focus": "homework"
+    },
+    {
+      "start": 233.96,
+      "end": 250.77,
+      "caption": "Which one is an if-then rule?",
+      "text": "Quick game! Only one of these is an if then rule. I like mangoes. The sky is blue. Chai is hot. If I'm hungry, then I eat my tiffin. Which one is it?",
+      "scene": "which",
+      "focus": "ask"
+    },
+    {
+      "start": 250.77,
+      "end": 262.88,
+      "caption": "It checks something, then says what to do",
+      "text": "If I'm hungry, then I eat my tiffin! It checks something, am I hungry, and then it says what to do. The others are just facts. They don't check anything.",
+      "scene": "which",
+      "focus": "answer"
+    },
+    {
+      "start": 262.88,
+      "end": 275.87,
+      "caption": "If I'm sleepy, then ___. Else ___.",
+      "text": "Now, let's make our own rule, for bedtime! If I'm sleepy, then, what? And else, what? Think of your own answer.",
+      "scene": "make",
+      "focus": "ask"
+    },
+    {
+      "start": 275.87,
+      "end": 286.65,
+      "caption": "Then: go to bed. Else: read one more story",
+      "text": "Here's mine. If I'm sleepy, then I go to bed. Else, I read one more story. Yours can be different, and that's totally okay!",
+      "scene": "make",
+      "focus": "answer"
+    },
+    {
+      "start": 286.65,
+      "end": 293.08,
+      "caption": "Game characters follow if-then rules too!",
+      "text": "Now here's where computers come in. Video game characters follow if then rules all the time!",
+      "scene": "game",
+      "focus": "intro"
+    },
+    {
+      "start": 293.08,
+      "end": 309.71,
+      "caption": "If lives = 0 \u2192 Game over. Else \u2192 keep playing",
+      "text": "In lots of games, you have lives, shown as little hearts. When all the hearts are gone, you have zero lives. So the game has a rule. If lives equals zero, then, game over. Else, keep playing.",
+      "scene": "game",
+      "focus": "rule"
+    },
+    {
+      "start": 309.71,
+      "end": 322.45,
+      "caption": "The game checks the rule again and again",
+      "text": "The game checks this rule again and again, every time something happens. Bump! One life gone. Check. Still not zero? Keep playing!",
+      "scene": "game",
+      "focus": "again"
+    },
+    {
+      "start": 322.45,
+      "end": 331.82,
+      "caption": "2 lives left. Game over, or keep playing?",
+      "text": "So, your character has two lives left. What happens? Game over, or keep playing?",
+      "scene": "game",
+      "focus": "ask"
+    },
+    {
+      "start": 331.82,
+      "end": 339.73,
+      "caption": "2 is not 0 \u2192 else \u2192 keep playing!",
+      "text": "Keep playing! Two is not zero, so the condition isn't true, and the else part runs. Phew!",
+      "scene": "game",
+      "focus": "answer"
+    },
+    {
+      "start": 339.73,
+      "end": 345.0,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice time! Here's a check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 345.0,
+      "end": 357.76,
+      "caption": "If the light is red, then ___. Else ___.",
+      "text": "Fill in the blanks. If the light is red, then, blank. Else, blank. You can pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 357.76,
+      "end": 370.8,
+      "caption": "If red, then stop. Else, go carefully.",
+      "text": "Here's one answer. If the light is red, then stop. Else, go carefully. Did you get it? Brilliant! You just wrote your own if then else rule.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 370.8,
+      "end": 377.7,
+      "caption": "IF = check a condition",
+      "text": "Let's remember what we learned. If means, check a condition. Like, is it raining?",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 377.7,
+      "end": 382.15,
+      "caption": "THEN = what to do if it's true",
+      "text": "Then is what to do when the condition is true. Only then!",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 382.15,
+      "end": 387.32,
+      "caption": "ELSE = what to do if it's not",
+      "text": "Else is what to do when it's not true. Otherwise, do the other thing.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 387.32,
+      "end": 392.89,
+      "caption": "Red light \u2192 stop. Else \u2192 go",
+      "text": "And at the signal? Red light, stop. Else, go!",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 392.89,
+      "end": 400.82,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! Now you can make choices, just like a computer. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 400.82,
+      "end": 407.62,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

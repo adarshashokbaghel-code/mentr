@@ -1,0 +1,356 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 14.83,
+      "caption": "Last time: robots follow algorithms",
+      "text": "Last time, we met robots. We learned that robots follow algorithms, they don't have feelings, and they love doing the same job again and again.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.83,
+      "end": 23.5,
+      "caption": "Chapter 4 \u00b7 Data \u2014 What Computers Remember",
+      "text": "Today is chapter four of our unit, Computers in Our World. It's called, Data. What computers remember.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.5,
+      "end": 32.46,
+      "caption": "How does a game remember your score?",
+      "text": "Have you ever wondered how a game remembers your high score, even after you switch it off? Hmm. Let's find out!",
+      "scene": "open",
+      "focus": "wonder"
+    },
+    {
+      "start": 32.46,
+      "end": 37.21,
+      "caption": "Meet Aarav, the cricket game fan",
+      "text": "Meet Aarav. Aarav loves playing a cricket game on his tablet.",
+      "scene": "aarav",
+      "focus": "meet"
+    },
+    {
+      "start": 37.21,
+      "end": 45.63,
+      "caption": "52 runs! His best score ever!",
+      "text": "One evening, he smashes a six, and then another one! Fifty two runs. His best score ever!",
+      "scene": "aarav",
+      "focus": "score"
+    },
+    {
+      "start": 45.63,
+      "end": 52.25,
+      "caption": "Dinner time! Tablet switched off",
+      "text": "Then mum calls, dinner's ready! So Aarav switches the tablet off, and runs to eat.",
+      "scene": "aarav",
+      "focus": "off"
+    },
+    {
+      "start": 52.25,
+      "end": 61.47,
+      "caption": "\"Welcome back, Aarav! High score: 52\"",
+      "text": "The next morning, he opens the game again. And it says, welcome back, Aarav! High score, fifty two.",
+      "scene": "aarav",
+      "focus": "next"
+    },
+    {
+      "start": 61.47,
+      "end": 71.58,
+      "caption": "How did the game remember? Think!",
+      "text": "But the tablet was off all night. So how did the game remember his name, and his score? Think about it.",
+      "scene": "aarav",
+      "focus": "why"
+    },
+    {
+      "start": 71.58,
+      "end": 82.7,
+      "caption": "The game saved the facts, like a notebook",
+      "text": "Here's the secret. Before Aarav switched it off, the game saved those facts. It stored them safely inside the tablet, a bit like writing them in a notebook.",
+      "scene": "aarav",
+      "focus": "because"
+    },
+    {
+      "start": 82.7,
+      "end": 87.89,
+      "caption": "Those saved facts are called DATA",
+      "text": "Those facts a computer keeps have a special name. They're called data.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 87.89,
+      "end": 94.3,
+      "caption": "Data = facts a computer stores",
+      "text": "Data is the facts a computer stores. Things like names, scores, and photos.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 94.3,
+      "end": 105.66,
+      "caption": "Name \u00b7 Score \u00b7 Picture \u2192 all data!",
+      "text": "So Aarav's name is data. His score of fifty two is data. Even his little player picture is data. A computer remembers things by storing data.",
+      "scene": "define",
+      "focus": "parts"
+    },
+    {
+      "start": 105.66,
+      "end": 109.4,
+      "caption": "Data is everywhere!",
+      "text": "And once you start looking, you'll find data everywhere!",
+      "scene": "everywhere",
+      "focus": "intro"
+    },
+    {
+      "start": 109.4,
+      "end": 118.61,
+      "caption": "Name \u00b7 Class \u00b7 Marks \u00b7 Score \u00b7 Nickname",
+      "text": "Your name and your class are data. The marks on your test are data. The score in a game, and the nickname you pick, are data too.",
+      "scene": "everywhere",
+      "focus": "items"
+    },
+    {
+      "start": 118.61,
+      "end": 130.3,
+      "caption": "A photo saved on a tablet is data too!",
+      "text": "What about a photo you click on a tablet? Yes! That's data too. The tablet stores every tiny dot of colour, so it can show you the picture later.",
+      "scene": "everywhere",
+      "focus": "photo"
+    },
+    {
+      "start": 130.3,
+      "end": 137.89,
+      "caption": "What does a school computer store?",
+      "text": "Now, let's peek into your school office. The school computer stores lots of data about every student.",
+      "scene": "school",
+      "focus": "intro"
+    },
+    {
+      "start": 137.89,
+      "end": 148.1,
+      "caption": "Names \u00b7 Roll numbers \u00b7 Marks \u00b7 Phone numbers",
+      "text": "It stores students' names, and roll numbers. It stores marks in each test. And parents' phone numbers, so the teacher can call home.",
+      "scene": "school",
+      "focus": "items"
+    },
+    {
+      "start": 148.1,
+      "end": 160.79,
+      "caption": "Tastes and feelings? Not data!",
+      "text": "But can it store the taste of your tiffin? Or how the wind feels today? No! Those are feelings, not facts. Data is facts a computer can write down.",
+      "scene": "school",
+      "focus": "not"
+    },
+    {
+      "start": 160.79,
+      "end": 168.3,
+      "caption": "Marks on loose slips, stuffed in a bag",
+      "text": "Here's Meena Ma'am. She wrote everyone's marks on little paper slips, and stuffed them all into her bag.",
+      "scene": "tidy",
+      "focus": "messy"
+    },
+    {
+      "start": 168.3,
+      "end": 178.88,
+      "caption": "\"What did Rohan get?\" Dig, dig, dig\u2026",
+      "text": "Then the principal asks, what did Rohan get in maths? Oh no! Meena Ma'am digs, and digs, and digs. It takes forever!",
+      "scene": "tidy",
+      "focus": "search"
+    },
+    {
+      "start": 178.88,
+      "end": 190.4,
+      "caption": "Register: names in ABC order, marks beside",
+      "text": "Now look at a register. All the names are in A B C order, with the marks right beside them. Go to R, and there's Rohan. Found in a flash!",
+      "scene": "tidy",
+      "focus": "register"
+    },
+    {
+      "start": 190.4,
+      "end": 200.71,
+      "caption": "Computers keep tidy lists \u2192 find data fast",
+      "text": "Computers keep data just like that register. Super tidy, organised lists. That's why your game finds your score faster than a blink.",
+      "scene": "tidy",
+      "focus": "computer"
+    },
+    {
+      "start": 200.71,
+      "end": 218.84,
+      "caption": "List A or List B? Which is quicker?",
+      "text": "Let's try it. Which list makes it easier to find Kavya's score? List A, with scores scribbled anywhere? Or list B, with names in A B C order and scores beside them? Pause, and pick.",
+      "scene": "find",
+      "focus": "ask"
+    },
+    {
+      "start": 218.84,
+      "end": 228.57,
+      "caption": "List B! Tidy lists are quick to search",
+      "text": "List B! Go down to K, and there's Kavya, with forty five points. A tidy list is much faster to search than a messy pile.",
+      "scene": "find",
+      "focus": "answer"
+    },
+    {
+      "start": 228.57,
+      "end": 237.09,
+      "caption": "Some data is public. Some is private.",
+      "text": "Now, here's something really important. Some data is okay to share. But some data must stay private.",
+      "scene": "private",
+      "focus": "intro"
+    },
+    {
+      "start": 237.09,
+      "end": 244.25,
+      "caption": "Public: favourite colour, team, cartoon",
+      "text": "Public data is fine to share. Like your favourite colour, your favourite cricket team, or a cartoon you like.",
+      "scene": "private",
+      "focus": "public"
+    },
+    {
+      "start": 244.25,
+      "end": 255.43,
+      "caption": "Private: address, phone, birthday, password",
+      "text": "Private data is only for you, and the grown-ups you trust. Your home address. Your phone number. Your birthday. And your passwords.",
+      "scene": "private",
+      "focus": "private"
+    },
+    {
+      "start": 255.43,
+      "end": 264.67,
+      "caption": "Strangers could find you or trick you",
+      "text": "Why keep it private? Remember being safe online? A stranger could use your address to find you, or use your birthday to trick you.",
+      "scene": "private",
+      "focus": "why"
+    },
+    {
+      "start": 264.67,
+      "end": 271.93,
+      "caption": "Share only with trusted adults",
+      "text": "So who can you tell? Only trusted adults. Like mum, dad, or your teacher.",
+      "scene": "private",
+      "focus": "adults"
+    },
+    {
+      "start": 271.93,
+      "end": 286.74,
+      "caption": "Public or private? Sort them!",
+      "text": "Let's sort! Favourite colour. Home address. Phone number. Favourite cricket team. Which ones are private? Think about it.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 286.74,
+      "end": 298.96,
+      "caption": "Address & phone: private. Colour & team: public",
+      "text": "Home address and phone number are private. Favourite colour and cricket team are public. And remember, a phone number isn't just a number. Never post it online!",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 298.96,
+      "end": 312.09,
+      "caption": "Pop-up: \"Type your birthday to win!\"",
+      "text": "Uh-oh. You're playing a game, and a pop-up appears. Win a prize! Just type your birthday and your school name. What should you do?",
+      "scene": "popup",
+      "focus": "ask"
+    },
+    {
+      "start": 312.09,
+      "end": 321.73,
+      "caption": "Don't share. Tell a trusted adult!",
+      "text": "Don't share it! Close it, and tell a trusted adult. Your birthday and school name are private, and a real prize never needs them.",
+      "scene": "popup",
+      "focus": "answer"
+    },
+    {
+      "start": 321.73,
+      "end": 337.16,
+      "caption": "Class web page: no phone numbers!",
+      "text": "One more. Your class makes a web page that everyone can see. The class name, and the sports day date? Sure. But parents' phone numbers? No way! They stay private.",
+      "scene": "popup",
+      "focus": "webpage"
+    },
+    {
+      "start": 337.16,
+      "end": 340.86,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 340.86,
+      "end": 351.31,
+      "caption": "Birthday: public or private? Who to tell?",
+      "text": "Is your birthday public data, or private data? And who should you tell? Pause the video, and think.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 351.31,
+      "end": 362.97,
+      "caption": "Private! Tell family or teacher only",
+      "text": "It's private! You can tell people you trust, like your family, or your teacher. But never strangers online. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 362.97,
+      "end": 370.59,
+      "caption": "Data = facts: names, scores, photos",
+      "text": "Let's remember what we learned. Data is facts a computer stores, like names, scores, and photos.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 370.59,
+      "end": 374.0,
+      "caption": "Tidy lists beat messy piles",
+      "text": "Tidy lists are much easier to search than a messy pile.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 374.0,
+      "end": 378.2,
+      "caption": "Private data stays private",
+      "text": "Private data, like your address and birthday, stays private.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 378.2,
+      "end": 381.49,
+      "caption": "Share only with trusted adults",
+      "text": "And you share private data only with trusted adults.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 381.49,
+      "end": 389.39,
+      "caption": "Chapter 4 done! Next: your capstone",
+      "text": "Chapter four, done! Next up is the big one. Your capstone, where you design your very own app!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 389.39,
+      "end": 394.96,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "But first, tap Finish, and try the quiz. You've got this, champ!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

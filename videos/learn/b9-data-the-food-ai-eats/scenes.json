@@ -1,0 +1,144 @@
+{
+  "id": "B9",
+  "title": "Data — The Food AI Eats",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "AI · How Machines Learn",
+  "slug": "b9-data-the-food-ai-eats",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b9-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we played show and tell with labels. A label is the name we stick on an example, like apple. And we saw that wrong labels teach wrong things!", "caption": "Last time: labels must be right", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four of How Machines Learn. It's called, Data, the food AI eats!", "caption": "Chapter 4 · Data — The Food AI Eats", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Wait. AI eats food? Does it munch on samosas? Hmm. Not quite! Let's find out what AI really eats.", "caption": "AI eats food?! Let's find out.", "focus": "hook", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "meera",
+      "visual": "b9-hook",
+      "beats": [
+        { "vo": "Meet Meera. She's ten years old, and she loves dogs. Her puppy Bruno is small, brown, and very naughty.", "caption": "Meet Meera and her puppy, Bruno", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "For her science fair, Meera makes a little AI app called Dog Spotter. She shows it five hundred photos. All of them are Bruno, labelled dog.", "caption": "Dog Spotter learns from 500 photos of Bruno", "focus": "train", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "The next day, Moti walks past her gate. Moti is the big, white street dog everyone loves. Meera points her tablet at him. And Dog Spotter says, not a dog!", "caption": "Big, white Moti → \"Not a dog!\"", "focus": "moti", "sfx": "buzz", "sfxAt": 0.85 },
+        { "vo": "Huh? Moti is clearly a dog! Why do you think the app got it wrong? Think about it.", "caption": "Why did the app get it wrong? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "Hold that thought. We'll come back to Meera very soon. First, we need one important word.", "caption": "Hold that thought…", "focus": "later" }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b9-define",
+      "beats": [
+        { "vo": "That word is data. Data is the information AI learns from. Pictures, words, sounds, and even numbers.", "caption": "DATA = information AI learns from", "focus": "name", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "You can think of data as the food AI eats. You need food to grow strong. And AI needs data to learn. No data, no learning!", "caption": "Data is the food AI eats", "focus": "food", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "When we put lots of data together, like one thousand dog photos, we call it a dataset. A dataset is a big collection of data.", "caption": "Dataset = a big collection of data", "focus": "dataset", "sfx": "whoosh", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "menu",
+      "visual": "b9-kinds",
+      "beats": [
+        { "vo": "So, what's on AI's menu? First, pictures. Photos of cats, mangoes, buses, anything!", "caption": "Pictures: cats, mangoes, buses", "focus": "pictures", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Next, words. Stories, messages, and questions that people type.", "caption": "Words: stories, messages, questions", "focus": "words", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And sounds! Voices, songs, even a dog barking. A voice assistant learned to understand people by listening to lots and lots of voices.", "caption": "Sounds: voices, songs, barking", "focus": "sounds", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "But careful. A real glass of water, or a real pair of shoes, is not data. A photo of your shoes? That's data! AI learns from information, not from real things.", "caption": "Real shoes: not data. A photo of shoes: data!", "focus": "notdata", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "thali",
+      "visual": "b9-variety",
+      "beats": [
+        { "vo": "Now, think about your own food. What if you ate only rice? Rice for breakfast, rice for lunch, rice for dinner. Every single day!", "caption": "Only rice, every single day? Hmm…", "focus": "rice", "pause": 0.4 },
+        { "vo": "You'd miss so much! A good thali has dal, sabzi, roti, curd, and fruit. Different foods help you grow strong. Yum.", "caption": "A thali: dal, sabzi, roti, curd, fruit", "focus": "thali", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "AI is just the same. It learns best from variety. Variety means many different kinds, not just one kind, again and again.", "caption": "Variety = many different kinds", "focus": "variety", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "fix",
+      "visual": "b9-fix",
+      "beats": [
+        { "vo": "Now, remember Meera's Dog Spotter? It only ever saw Bruno. Small, and brown. So what did it learn? That a dog means small and brown!", "caption": "Only Bruno → it thinks dog = small & brown", "focus": "remember" },
+        { "vo": "So when big, white Moti came along, the app was confused. It had never seen a dog like him.", "caption": "Moti didn't match anything it had seen", "focus": "moti", "sfx": "buzz", "sfxAt": 0.3 },
+        { "vo": "So Meera adds variety. Big dogs, small dogs. Brown, white, black, and spotty dogs. Hundreds of different dogs!", "caption": "Big · small · brown · white · spotty dogs", "focus": "fix", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Now the app finds what all dogs share. Four legs, a tail, a furry body, and a wet nose. And this time, it spots Moti right away! Woof!", "caption": "Now it spots Moti! Variety works.", "focus": "works", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "pick",
+      "visual": "b9-pick",
+      "beats": [
+        { "vo": "Your turn! Which dataset would teach AI dog the best? A, five hundred photos of only brown puppies. B, just one photo of a dog. Or C, five hundred photos of big, small, brown, white, and spotty dogs. Pause, and think.", "caption": "Which dataset teaches \"dog\" best?", "focus": "ask", "pause": 2.2 },
+        { "vo": "It's C! Lots of photos, and lots of variety. A shows only one kind of dog, and B is far too little. One photo can't teach a whole idea.", "caption": "C! Lots of photos AND lots of variety", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "private",
+      "visual": "b9-private",
+      "beats": [
+        { "vo": "Now, here's something very important. Not all data should be collected. Some data is private.", "caption": "Some data should stay private", "focus": "intro", "sfx": "pop" },
+        { "vo": "Public data is okay to share. Pictures of trees, animals, or famous buildings, like the Taj Mahal.", "caption": "Public: trees, animals, the Taj Mahal", "focus": "public", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Private data is about a person, and it should stay safe. Like your home address, your phone number, and your family photos.", "caption": "Private: address, phone number, family photos", "focus": "private", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "So, what if an app quietly collects everyone's family photos, without asking? That's not okay! Private data should not be collected without permission.", "caption": "No collecting private data without permission!", "focus": "permission", "sfx": "buzz", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "b9-sort",
+      "beats": [
+        { "vo": "Quick game! Public, or private? A photo of a tree. Your home address. A picture of the Taj Mahal. Your phone number. Pause, and sort them.", "caption": "Public or private? Sort them!", "focus": "ask", "pause": 2.2 },
+        { "vo": "The tree and the Taj Mahal are public. Your address and your phone number are private. Keep those safe, champ!", "caption": "Tree, Taj Mahal: public. Address, phone: private", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b9-check",
+      "beats": [
+        { "vo": "Okay champ, here's your practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "An AI needs to learn bird. Is two hundred photos of only parrots enough? Why, or why not? Pause the video, and try it on paper.", "caption": "200 photos of only parrots: enough? Why?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. No, it's not enough! The AI might think only parrots are birds. Then it sees a crow, and says, not a bird! It needs many kinds, like crows, sparrows, pigeons, and peacocks, to learn what all birds share. Brilliant!", "caption": "No! It needs crows, sparrows, pigeons, peacocks…", "focus": "answer", "sfx": "success", "sfxAt": 0.9 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b9-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Data is the food AI eats.", "caption": "Data is the food AI eats", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Pictures, words, and sounds are all data.", "caption": "Pictures, words & sounds are data", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Varied data, with many different kinds, teaches AI better.", "caption": "Variety teaches AI better", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And some data, like your home address, should stay private.", "caption": "Some data should stay private", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! Now you know what AI eats, champ. Just one more chapter in this unit!", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

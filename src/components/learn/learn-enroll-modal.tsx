@@ -15,6 +15,7 @@ import { resolveAcquisition } from "@/lib/marketing-client";
 import { ApiError, authApi, saveToken, type UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import {
+  ArrowLeft,
   ArrowRight,
   Check,
   Download,
@@ -445,14 +446,15 @@ export function LearnEnrollModal({
                 <div className="flex items-center justify-between gap-2 text-[12px] font-semibold">
                   <button
                     type="button"
-                    className="text-[#8a929c] hover:text-[#1c2434]"
+                    className="inline-flex items-center gap-1 text-[#8a929c] hover:text-[#1c2434]"
                     onClick={() => {
                       setStep("email");
                       setOtp("");
                       setError("");
                     }}
                   >
-                    ← Change email
+                    <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+                    Change email
                   </button>
                   <button
                     type="button"

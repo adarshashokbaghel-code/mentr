@@ -1,0 +1,158 @@
+{
+  "id": "A20",
+  "title": "Capstone: Design Your Dream App",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "CS · Computers in Our World",
+  "slug": "a20-capstone-design-your-dream-app",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a20-welcome",
+      "beats": [
+        { "vo": "Hey champ! Welcome back. Today is a very special day.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned about data. The facts computers remember, like names and scores. And we learned that private data stays private.", "caption": "Last time: data, and keeping it private", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five, the final chapter of Computers in Our World. It's your capstone. Design your dream app!", "caption": "Chapter 5 · Capstone: Design Your Dream App", "focus": "chapter", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "Capstone. Hmm, what's that? A capstone is the very last stone, placed right on top of a building. So this is your big, final project!", "caption": "Capstone = your big, final project", "focus": "word", "pause": 0.4 },
+        { "vo": "Today, you are the app designer. And guess what? No coding needed. Just a clear idea, a pencil, and your imagination.", "caption": "You're the designer! No coding needed", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "kabir",
+      "visual": "a20-hook",
+      "beats": [
+        { "vo": "Meet Kabir. He's in class four, and he's a lovely kid. But he has one big problem.", "caption": "Meet Kabir, Class 4", "focus": "meet", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Every morning, he packs his bag in a big rush. And every week, he forgets something. His maths book. His drawing book. His water bottle!", "caption": "Kabir keeps forgetting things!", "focus": "forget", "sfx": "buzz", "sfxAt": 0.7 },
+        { "vo": "At school, his teacher asks, Kabir, where's your maths book? And Kabir says, oh no. I forgot it, again.", "caption": "\"Kabir, where's your maths book?\"", "focus": "sad", "pause": 0.5 },
+        { "vo": "What if an app could help Kabir? What would you make for him? Think for a moment.", "caption": "What app would help Kabir? Think!", "focus": "idea", "pause": 2.0 },
+        { "vo": "Here's one idea. An app called, Bag Buddy! Let's design it together, step by step. Then you'll design your own.", "caption": "Idea: Bag Buddy! Let's design it.", "focus": "reveal", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "steps",
+      "visual": "a20-steps",
+      "beats": [
+        { "vo": "Designing an app takes just four simple steps.", "caption": "Four steps to design an app", "focus": "intro", "sfx": "pop" },
+        { "vo": "Step one, find a problem. Step two, write the plan. Step three, draw two screens. And step four, present it in one minute.", "caption": "Problem → Plan → 2 screens → 1-minute pitch", "focus": "all", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "problem",
+      "visual": "a20-problem",
+      "beats": [
+        { "vo": "Step one. Find a problem. Your app should help a child in class three, four, or five. Not a rocket, not a factory. Kids just like you!", "caption": "Step 1: Help a Class 3–5 child", "focus": "who" },
+        { "vo": "So think. What's hard, or boring, for kids your age? Forgetting homework? Packing your bag? Learning spellings? Forgetting to drink water?", "caption": "Homework? Bag? Spellings? Water?", "focus": "ideas", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Pick one, and give your app a fun name. Like Bag Buddy, or Spell Star!", "caption": "Give it a fun name: Bag Buddy, Spell Star", "focus": "name", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "plan",
+      "visual": "a20-plan",
+      "beats": [
+        { "vo": "Step two. Write the plan. A good plan answers three questions. Who uses it? What goes in? And what comes out?", "caption": "Step 2: Who? What goes in? What comes out?", "focus": "intro" },
+        { "vo": "The person who uses your app is called the user. For Bag Buddy, the user is class four kids who forget their books.", "caption": "User: the person who uses the app", "focus": "user" },
+        { "vo": "Quick one! An app called Tiffin Timer reminds kids to eat their lunch at school. Who's the user?", "caption": "Tiffin Timer: who is the user?", "focus": "tiffinq", "pause": 1.8 },
+        { "vo": "Not the tiffin box, silly! It's a school child.", "caption": "The user is a school child!", "focus": "tiffina", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "Remember input and output from our very first unit? Input is what the user gives the app. For Bag Buddy, the child taps tomorrow's subjects.", "caption": "Input: what the user gives the app", "focus": "input" },
+        { "vo": "And output is what the app shows back. Bag Buddy shows a checklist of books to pack. Maths book, tick. Drawing book, tick!", "caption": "Output: what the app shows back", "focus": "output", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "io",
+      "visual": "a20-io",
+      "beats": [
+        { "vo": "Let's practise. In a spelling app, the child types a word. Is that the input, or the output? Think.", "caption": "Child types a word: input or output?", "focus": "spellq", "pause": 2.0 },
+        { "vo": "It's the input! The child gives the word to the app. And the star the app shows back? That's the output.", "caption": "Input! The star shown back is the output.", "focus": "spella", "sfx": "success", "sfxAt": 0.08 },
+        { "vo": "Now, Riya's app is called Bus Buddy. She types her stop name, and the app shows when the school bus will arrive. What's the output?", "caption": "Bus Buddy: what's the output?", "focus": "busq", "pause": 2.0 },
+        { "vo": "The bus arrival time on the screen! Riya typing her stop is the input. The time shown back is the output.", "caption": "Output: the bus arrival time!", "focus": "busa", "sfx": "success", "sfxAt": 0.08 }
+      ]
+    },
+    {
+      "id": "screens",
+      "visual": "a20-screens",
+      "beats": [
+        { "vo": "Step three. Draw two screens. A screen is one page of your app. Just two. Not ten, not fifty!", "caption": "Step 3: Draw 2 screens", "focus": "intro", "sfx": "pop" },
+        { "vo": "Screen one is where the user gives the input. For Bag Buddy, that's buttons for each subject. Maths, English, Science, Art.", "caption": "Screen 1: input · tap the subjects", "focus": "s1" },
+        { "vo": "Screen two is where the app shows the output. A checklist of books, with a happy message. All packed!", "caption": "Screen 2: output · the checklist", "focus": "s2", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "And you don't need a computer for this. A pencil, some paper, and a few colours are enough. No coding at all!", "caption": "Paper and pencil. No coding needed!", "focus": "paper" }
+      ]
+    },
+    {
+      "id": "ideas",
+      "visual": "a20-ideas",
+      "beats": [
+        { "vo": "Now, add one idea from your earlier chapters. Pick any one of these three.", "caption": "Add one idea from earlier chapters", "focus": "intro" },
+        { "vo": "A variable. Remember? A box that holds a number that changes. Like a star score, or a counter for the glasses of water you drink.", "caption": "Variable: a box holding a changing number", "focus": "variable", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "A loop. Doing something again and again. Like a reminder that pops up every single evening. Pack your bag!", "caption": "Loop: a reminder every evening", "focus": "loop" },
+        { "vo": "Or a safety rule. Like, your app never asks for a home address. Private data stays private!", "caption": "Safety rule: never ask for a home address", "focus": "safety", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "clear",
+      "visual": "a20-clear",
+      "beats": [
+        { "vo": "Detective time! Which app idea is the clearest? A, a cool app that does stuff. B, an app for everyone that does everything. C, a game, not sure who plays it yet. Or D, Spell Star. For class three kids. Input, a word they type. Output, a star if it's right.", "caption": "Which app idea is the clearest?", "focus": "ask", "pause": 2.2 },
+        { "vo": "D! It says who the user is, what the input is, and what the output is. Clear and simple. That's a great plan.", "caption": "D! Clear user, input, and output", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "pitch",
+      "visual": "a20-pitch",
+      "beats": [
+        { "vo": "Step four. Present your app in about one minute. That short talk is called a pitch.", "caption": "Step 4: a one-minute pitch", "focus": "intro", "sfx": "pop" },
+        { "vo": "Say the name of your app. Say who it's for. Say the input, and the output. Then show your two screens.", "caption": "Name · User · Input · Output · Screens", "focus": "parts", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "End with one reason it helps kids. Then, take a bow! Everyone claps for you.", "caption": "One reason it helps. Then take a bow!", "focus": "bow", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a20-check",
+      "beats": [
+        { "vo": "Okay champ, here's your capstone challenge.", "caption": "Your turn: capstone challenge", "focus": "intro" },
+        { "vo": "Draw or list four things. Your app's name. Who uses it. One input. And one output. Pause the video, and try it on paper.", "caption": "Write: name, user, one input, one output", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one example. Spell Star. For class three kids. Input, the child types a spelling word. Output, a star if it's spelt right. How did yours turn out? I bet it's amazing!", "caption": "Spell Star · Class 3 · types a word → a star", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a20-recap",
+      "beats": [
+        { "vo": "Let's remember. Your app helps a child in class three to five.", "caption": "Your app helps a Class 3–5 child", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Your plan has a name, a user, an input, and an output.", "caption": "Plan: name · user · input · output", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "You draw two screens. No coding needed.", "caption": "Draw 2 screens · no coding", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And you present in one minute, with one idea from earlier, like a loop, a variable, or a safety rule.", "caption": "1-minute pitch + one earlier idea", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And champ, look how far you've come. How computers work. Thinking like a computer. Building with blocks. And computers in our world.", "caption": "All 4 units: done!", "focus": "journey", "sfx": "chime", "sfxAt": 0.85 },
+        { "vo": "You've finished the whole Computer Science track! I'm so proud of you. You're a real computer scientist now.", "caption": "Computer Science track complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Tap Finish, and try your final quiz. Then go design that dream app!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

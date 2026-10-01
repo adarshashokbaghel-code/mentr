@@ -1,0 +1,149 @@
+{
+  "id": "C5",
+  "title": "Number Patterns Playground",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "Math · Numbers Computers Love",
+  "slug": "c5-number-patterns-playground",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c5-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready to play with some numbers today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned skip counting. Two, four, six, eight. And you found the rule of a sequence, like add three, for three, six, nine, twelve.", "caption": "Last time: skip counting · rule = add 3", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five, the very last chapter of Numbers Computers Love. It's called, Number Patterns Playground!", "caption": "Chapter 5 · Number Patterns Playground", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "In this playground, the patterns don't just march along. They grow! Bigger, and bigger, and bigger. Hmm. But how do they know how much to grow?", "caption": "These patterns GROW! But how?", "focus": "grow", "pause": 0.5 },
+        { "vo": "That's our mystery for today. Let's start with a little story.", "caption": "Let's find out with a story!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "coins",
+      "visual": "c5-hook",
+      "beats": [
+        { "vo": "Meet Riya. Riya loves her gullak, her little piggy bank. And every day after school, she builds a coin tower on the table.", "caption": "Meet Riya, her gullak, and her coin towers", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "On Monday, her tower has one coin. On Tuesday, two coins. On Wednesday, three. And on Thursday, four.", "caption": "Mon 1 · Tue 2 · Wed 3 · Thu 4 coins", "focus": "towers", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So, how many coins will her tower have on Friday? Think about it.", "caption": "How many coins on Friday? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Five coins! Every day, the tower gets one coin taller. Four plus one, equals five.", "caption": "Five! 4 + 1 = 5", "focus": "answer", "sfx": "success", "sfxAt": 0.2 },
+        { "vo": "And how did you know? You didn't guess. You spotted the rule. Add one coin each step. Once you know the rule, you can build Friday's tower without even waiting for Friday!", "caption": "The rule: add 1 coin each step", "focus": "rule" }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c5-define",
+      "beats": [
+        { "vo": "Riya's towers make a growing pattern. A growing pattern is a pattern that gets bigger each step, by following a rule.", "caption": "Growing pattern = bigger each step, by a rule", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Each picture in the pattern is called a step. The first tower is step one. The next is step two. Then step three, and so on.", "caption": "Each picture is a STEP: step 1, 2, 3…", "focus": "step", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "And here's the big trick of this chapter. Always say the rule in words first. Like, add one coin each time. If you can say it, you can draw the next step!", "caption": "Say the rule in words → draw the next step", "focus": "words" }
+      ]
+    },
+    {
+      "id": "blocks",
+      "visual": "c5-blocks",
+      "beats": [
+        { "vo": "Now Riya gets out her toy blocks. Two blocks, four blocks, six blocks, eight blocks. How much does each tower grow?", "caption": "Towers of 2, 4, 6, 8 blocks. How much growth?", "focus": "towers", "pause": 1.8 },
+        { "vo": "Let's check the jumps. Four minus two is two. Six minus four is two. Eight minus six is two. Every jump is two!", "caption": "Check the jumps: +2, +2, +2", "focus": "jumps", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So the rule is, add two blocks each time. The next tower has eight plus two. That's ten blocks!", "caption": "Rule: add 2. Next tower: 8 + 2 = 10", "focus": "next", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Here's another one. Three, five, seven, nine. Check the jumps. Two, two, two. Same rule, add two each time! It just starts at a different number.", "caption": "3, 5, 7, 9 → also add 2 each time", "focus": "odd" }
+      ]
+    },
+    {
+      "id": "double",
+      "visual": "c5-double",
+      "beats": [
+        { "vo": "Some patterns grow even faster. Watch the squares Riya draws in her notebook.", "caption": "Some patterns grow faster!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Step one, one square. Step two, two squares. Step three, four squares. Step four, eight squares.", "caption": "1 → 2 → 4 → 8 squares", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Each step doubles. Double means add the number to itself. One plus one is two. Two plus two is four. Four plus four is eight.", "caption": "Double = add it to itself: 4 + 4 = 8", "focus": "rule" },
+        { "vo": "So what comes after eight? Pause, and think.", "caption": "What comes after 8?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Eight plus eight, sixteen squares! Wow, look how quickly that grew. Doubling is a speedy rule.", "caption": "8 + 8 = 16. Doubling grows fast!", "focus": "answer", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "laddoos",
+      "visual": "c5-laddoo",
+      "beats": [
+        { "vo": "On Sunday, Riya visits the sweet shop. Shyam bhaiya is stacking laddoos into a triangle. Yum!", "caption": "Shyam bhaiya's laddoo triangle", "focus": "intro", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Row one has one laddoo. That's one in total. Then he adds a row of two. Now there are three. Then a row of three. Now there are six.", "caption": "Rows of 1, 2, 3 → totals 1, 3, 6", "focus": "rows", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Each new row has one more laddoo than the row before. So how many are in the next row, and how many laddoos in all? Think.", "caption": "Next row? How many laddoos in all?", "focus": "ask", "pause": 2.0 },
+        { "vo": "The next row has four laddoos. Six plus four, equals ten! Ten yummy laddoos.", "caption": "Row of 4: 6 + 4 = 10 laddoos!", "focus": "answer", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "See how drawing the next row helped us check? Whenever you're not sure, draw the next step. The picture shows you the answer!", "caption": "Not sure? Draw the next step to check", "focus": "draw" }
+      ]
+    },
+    {
+      "id": "jumps",
+      "visual": "c5-jumps",
+      "beats": [
+        { "vo": "Here's a tricky one. One, two, four, seven, eleven. The jumps aren't the same! Look. Plus one, plus two, plus three, plus four. So what comes next? Think.", "caption": "1, 2, 4, 7, 11… what comes next?", "focus": "ask", "pause": 2.2 },
+        { "vo": "The jumps grow by one each time. So the next jump is five. Eleven plus five, equals sixteen!", "caption": "Next jump is +5: 11 + 5 = 16", "focus": "answer", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "lasttwo",
+      "visual": "c5-fib",
+      "beats": [
+        { "vo": "Now, a very special pattern. It starts with one, and one.", "caption": "A special pattern: 1, 1…", "focus": "intro", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "To get the next number, add the last two numbers together. One plus one is two. One plus two is three. Two plus three is five.", "caption": "Add the last two: 1+1=2, 1+2=3, 2+3=5", "focus": "rule", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So, what comes after one, one, two, three, five? Pause, and think.", "caption": "1, 1, 2, 3, 5… what's next?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Three plus five, equals eight! Not six, not seven. Eight.", "caption": "3 + 5 = 8!", "focus": "answer", "sfx": "success", "sfxAt": 0.2 },
+        { "vo": "And guess what? Nature loves this pattern. Count the petals on lots of flowers, and you'll often find three, five, or eight!", "caption": "Nature loves it: 3, 5, 8 petals!", "focus": "nature" }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "c5-game",
+      "beats": [
+        { "vo": "Riya has a challenge for you! It uses the same add the last two rule, but it starts at two. Two, three, five, eight. What comes next?", "caption": "2, 3, 5, 8… add the last two. Next?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Five plus eight, thirteen! Riya is cheering for you. You're a pattern pro, champ.", "caption": "5 + 8 = 13. Pattern pro!", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c5-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Squares are stacked in steps. Step one has one square. Step two has three. Step three has six. How many in the next step, if we add one more row? Grab some paper, pause, and draw it.", "caption": "Squares: 1, 3, 6. Add one more row. How many?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Ten squares! The rows go one, two, three. So the next row has four squares. Six plus four, equals ten. Just like Shyam bhaiya's laddoos! Did you get it? Brilliant!", "caption": "Next row has 4: 6 + 4 = 10 squares", "focus": "answer", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c5-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. Growing patterns get bigger by following a rule.", "caption": "Growing patterns follow a rule", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Say the rule in words first. Like, add two each time, or double it.", "caption": "Say the rule in words first", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Not sure? Draw the next step to check.", "caption": "Draw the next step to check", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And for one, one, two, three, five, add the last two numbers.", "caption": "1, 1, 2, 3, 5 → add the last two", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means you've finished all of Unit one, Numbers Computers Love! Binary, odd and even, place value, skip counting, and now patterns. Wow, champ. Give yourself a big pat on the back!", "caption": "Chapter 5 done · Unit 1 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

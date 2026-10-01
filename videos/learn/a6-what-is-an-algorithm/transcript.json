@@ -1,0 +1,364 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.45,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm really happy you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.45,
+      "end": 15.37,
+      "caption": "Unit 1 \u00b7 How Computers Work \u00b7 done!",
+      "text": "You finished all of Unit one. You learned how computers work, and how to stay safe online. That's a big deal, so give yourself a pat on the back!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.37,
+      "end": 20.81,
+      "caption": "Unit 2 \u00b7 Thinking Like a Computer",
+      "text": "Today, we're starting Unit two. It's called, Thinking Like a Computer.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 20.81,
+      "end": 26.11,
+      "caption": "Chapter 1 \u00b7 What Is an Algorithm?",
+      "text": "And chapter one is all about one important question. What is an algorithm?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 26.11,
+      "end": 32.86,
+      "caption": "Al \u00b7 go \u00b7 rithm. Sounds big, right?",
+      "text": "Algorithm. Hmm. It sounds like a big, fancy word, doesn't it?",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 32.86,
+      "end": 40.56,
+      "caption": "You already do it every day!",
+      "text": "But here's a little secret. It's something you already do, every single day. Let me show you how.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 40.56,
+      "end": 47.23,
+      "caption": "Meet Robo, your robot helper",
+      "text": "Picture this. You have a little robot helper at home. Let's call him, Robo.",
+      "scene": "robo",
+      "focus": "meet"
+    },
+    {
+      "start": 47.23,
+      "end": 54.22,
+      "caption": "\"Robo, please get me some water!\"",
+      "text": "One hot afternoon, you're really thirsty. So you say, Robo, please get me some water!",
+      "scene": "robo",
+      "focus": "ask"
+    },
+    {
+      "start": 54.22,
+      "end": 60.49,
+      "caption": "Robo just stands there\u2026",
+      "text": "And Robo just stands there. Blinking. Not moving at all.",
+      "scene": "robo",
+      "focus": "stuck"
+    },
+    {
+      "start": 60.49,
+      "end": 66.58,
+      "caption": "Why didn't Robo move? Think!",
+      "text": "Why do you think that happened? Think about it for a moment.",
+      "scene": "robo",
+      "focus": "why"
+    },
+    {
+      "start": 66.58,
+      "end": 79.47,
+      "caption": "Robo needs every step, told clearly",
+      "text": "Here's the thing. Robo isn't lazy. Robo simply doesn't know how. A robot can't figure things out on its own. Someone has to tell it every single step.",
+      "scene": "robo",
+      "focus": "because"
+    },
+    {
+      "start": 79.47,
+      "end": 94.49,
+      "caption": "Glass \u2192 Filter \u2192 Fill \u2192 Bring it to me",
+      "text": "So let's try again, with steps. Step one, pick up a glass. Step two, go to the water filter. Step three, fill the glass with water. And step four, bring the glass to me.",
+      "scene": "robo",
+      "focus": "steps"
+    },
+    {
+      "start": 94.49,
+      "end": 106.49,
+      "caption": "Clear steps \u2192 Robo gets it right!",
+      "text": "And now, look at that! Robo does it perfectly. Same robot, same water. The only thing that changed? We gave him clear steps.",
+      "scene": "robo",
+      "focus": "works"
+    },
+    {
+      "start": 106.49,
+      "end": 112.13,
+      "caption": "That list is called an ALGORITHM",
+      "text": "That list of steps we just made has a special name. It's called an algorithm.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 112.13,
+      "end": 116.97,
+      "caption": "A clear list of steps, in order, to get a job done",
+      "text": "An algorithm is a clear list of steps, in order, to get a job done.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 116.97,
+      "end": 131.84,
+      "caption": "Steps \u00b7 In order \u00b7 A job done",
+      "text": "Let's look at that slowly. A list of steps means more than one small thing to do. In order means, first this, then that. And a job done means there's a goal at the end, like a glass of water in your hand.",
+      "scene": "define",
+      "focus": "parts"
+    },
+    {
+      "start": 131.84,
+      "end": 138.78,
+      "caption": "Have you watched someone make chai?",
+      "text": "Now, have you ever watched someone at home make chai? Maybe your mum, or your nani?",
+      "scene": "chai",
+      "focus": "ask"
+    },
+    {
+      "start": 138.78,
+      "end": 153.27,
+      "caption": "Boil water \u2192 Tea leaves \u2192 Milk & sugar \u2192 Pour",
+      "text": "They don't throw everything in at once, right? First, they boil some water. Then, they add the tea leaves. Next, the milk and sugar go in. And finally, they pour it into a cup.",
+      "scene": "chai",
+      "focus": "steps"
+    },
+    {
+      "start": 153.27,
+      "end": 160.84,
+      "caption": "A recipe is an algorithm!",
+      "text": "So a recipe is really an algorithm for cooking! Follow the steps in order, and you get a lovely cup of chai.",
+      "scene": "chai",
+      "focus": "recipe"
+    },
+    {
+      "start": 160.84,
+      "end": 172.89,
+      "caption": "Wrong order = no chai. Order matters!",
+      "text": "But imagine doing it out of order. Pouring into the cup first, before anything is even boiled? That's just an empty cup! So the order of the steps really matters.",
+      "scene": "chai",
+      "focus": "oops"
+    },
+    {
+      "start": 172.89,
+      "end": 179.29,
+      "caption": "You follow an algorithm every morning!",
+      "text": "Here's something cool. You follow an algorithm every morning, without even noticing!",
+      "scene": "morning",
+      "focus": "intro"
+    },
+    {
+      "start": 179.29,
+      "end": 190.18,
+      "caption": "Brush \u00b7 Bath \u00b7 Uniform \u00b7 Bag \u00b7 Tiffin",
+      "text": "You brush your teeth. You take a bath. You put on your uniform. You pack your school bag. And, you don't forget your tiffin!",
+      "scene": "morning",
+      "focus": "steps"
+    },
+    {
+      "start": 190.18,
+      "end": 200.46,
+      "caption": "5 steps in order \u2192 ready for school!",
+      "text": "See? Five clear steps, in order, and the job is done. You're ready for school! You've been running algorithms since you were little.",
+      "scene": "morning",
+      "focus": "wow"
+    },
+    {
+      "start": 200.46,
+      "end": 208.84,
+      "caption": "Robots follow exactly. They can't guess.",
+      "text": "Now, remember Robo? Robots follow your steps exactly as you say them. They can't guess what you mean.",
+      "scene": "clear",
+      "focus": "intro"
+    },
+    {
+      "start": 208.84,
+      "end": 220.19,
+      "caption": "\"Help the plant\" \u2192 Help it how?",
+      "text": "So if you tell Robo, help the plant, what will he do? Hmm. Help it how? Talk to it? Sing to it? Robo has no idea!",
+      "scene": "clear",
+      "focus": "vague"
+    },
+    {
+      "start": 220.19,
+      "end": 226.97,
+      "caption": "Clear: \"Pour one cup of water on the soil\"",
+      "text": "But if you say, pour one cup of water on the soil, now Robo knows exactly what to do, and how much!",
+      "scene": "clear",
+      "focus": "clear"
+    },
+    {
+      "start": 226.97,
+      "end": 235.37,
+      "caption": "Good algorithms: Short \u00b7 Clear \u00b7 Complete",
+      "text": "So, what makes an algorithm a really good one? Three things. It's short, it's clear, and it's complete.",
+      "scene": "good",
+      "focus": "intro"
+    },
+    {
+      "start": 235.37,
+      "end": 244.43,
+      "caption": "Short: no extra steps (no chai dance!)",
+      "text": "Short means no extra steps you don't need. If your chai recipe said, do a little dance, that's fun, but it's not needed!",
+      "scene": "good",
+      "focus": "short"
+    },
+    {
+      "start": 244.43,
+      "end": 249.58,
+      "caption": "Clear: each step says exactly what to do",
+      "text": "Clear means every step says exactly what to do, just like we did for Robo.",
+      "scene": "good",
+      "focus": "clear"
+    },
+    {
+      "start": 249.58,
+      "end": 256.93,
+      "caption": "Complete: no missing steps",
+      "text": "And complete means no step is missing. Because if even one step is missing, the whole job can go wrong.",
+      "scene": "good",
+      "focus": "complete"
+    },
+    {
+      "start": 256.93,
+      "end": 261.7,
+      "caption": "Detective game: find the missing step!",
+      "text": "Let's play a little detective game. Can you find the missing step?",
+      "scene": "missing",
+      "focus": "intro"
+    },
+    {
+      "start": 261.7,
+      "end": 276.31,
+      "caption": "Take a glass \u2192 ??? \u2192 Drink the water",
+      "text": "Step one, take a glass. Step two, hmm, something's missing here. Step three, drink the water. So, what's missing? Take your time.",
+      "scene": "missing",
+      "focus": "q"
+    },
+    {
+      "start": 276.31,
+      "end": 284.93,
+      "caption": "Missing step: pour water into the glass!",
+      "text": "Pour the water into the glass! Without that step, you'd be drinking from an empty glass. That's why complete matters.",
+      "scene": "missing",
+      "focus": "a"
+    },
+    {
+      "start": 284.93,
+      "end": 292.43,
+      "caption": "Uh-oh! The sandwich steps are mixed up",
+      "text": "One more! Oh no, these sandwich steps got all mixed up. Let's put them back in order.",
+      "scene": "order",
+      "focus": "intro"
+    },
+    {
+      "start": 292.43,
+      "end": 307.74,
+      "caption": "Which step comes first?",
+      "text": "Spread jam on one slice. Take two slices of bread. Cut it and enjoy. Put the other slice on top. Which one comes first? Pause, and think.",
+      "scene": "order",
+      "focus": "ask"
+    },
+    {
+      "start": 307.74,
+      "end": 321.22,
+      "caption": "Bread \u2192 Jam \u2192 Top slice \u2192 Cut & enjoy",
+      "text": "First, take two slices of bread. Then, spread jam on one slice. Next, put the other slice on top. And last, cut it, and enjoy! Yum.",
+      "scene": "order",
+      "focus": "answer"
+    },
+    {
+      "start": 321.22,
+      "end": 327.94,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, now it's your turn to be the programmer. Here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 327.94,
+      "end": 338.78,
+      "caption": "Write 4 steps to water a plant, for Robo",
+      "text": "Write four steps to water a plant, so clearly that Robo could follow them. You can pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 338.78,
+      "end": 355.19,
+      "caption": "Can \u2192 Fill \u2192 Walk \u2192 Pour on the soil",
+      "text": "Here's one way. One, pick up the watering can. Two, fill it with water. Three, walk to the plant. Four, pour the water on the soil. Did yours look something like that? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 355.19,
+      "end": 362.85,
+      "caption": "Algorithm = clear steps, in order",
+      "text": "Let's remember what we learned today. An algorithm is a clear list of steps, in order, to get a job done.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 362.85,
+      "end": 367.72,
+      "caption": "Recipes & routines are algorithms",
+      "text": "Recipes, and your morning routine? Those are algorithms too.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 367.72,
+      "end": 373.29,
+      "caption": "Robots can't guess, so be clear",
+      "text": "Robots follow exactly. They can't guess, so every step must be clear.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 373.29,
+      "end": 376.79,
+      "caption": "Good = Short \u00b7 Clear \u00b7 Complete",
+      "text": "And good algorithms are short, clear, and complete.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 376.79,
+      "end": 382.89,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit two, done! You're already thinking like a computer, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 382.89,
+      "end": 389.69,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

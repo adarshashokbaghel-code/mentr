@@ -1,0 +1,340 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.28,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Today is a big day.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.28,
+      "end": 17.53,
+      "caption": "Last time: game rules \u00b7 Unit 3 done!",
+      "text": "Last time, you wrote rules for game characters, like Sheru the tiger guard. If the player is near, chase. Else, patrol. And with that, you finished all of Unit three!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.53,
+      "end": 23.79,
+      "caption": "Unit 4 \u00b7 Being Smart and Safe With AI",
+      "text": "Today, we're starting Unit four. It's called, Being Smart and Safe With AI.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 23.79,
+      "end": 28.95,
+      "caption": "Chapter 1 \u00b7 Is AI Fair?",
+      "text": "And chapter one asks a really important question. Is AI fair?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 28.95,
+      "end": 40.86,
+      "caption": "Can a computer be fair, or unfair?",
+      "text": "Fair. Hmm. You know what fair means when you share sweets with your friends. But can a computer be fair, or unfair? Let's find out.",
+      "scene": "open",
+      "focus": "sweets"
+    },
+    {
+      "start": 40.86,
+      "end": 51.21,
+      "caption": "Meet Ishaan and his hat finder",
+      "text": "Meet Ishaan. He's building a hat finder for his school science fair. It's an AI that looks at a photo, and says, hat, or not a hat.",
+      "scene": "hats",
+      "focus": "meet"
+    },
+    {
+      "start": 51.21,
+      "end": 65.16,
+      "caption": "He teaches it with 50 photos\u2026 all red caps",
+      "text": "To teach it, Ishaan uses photos from his cricket team. Fifty photos of hats. And every single one is a red cap. The hat finder studies them all, looking for what they have in common.",
+      "scene": "hats",
+      "focus": "train"
+    },
+    {
+      "start": 65.16,
+      "end": 71.47,
+      "caption": "Red cap? \"Hat!\" Perfect.",
+      "text": "Test time! He shows it a red cap. Hat! Perfect.",
+      "scene": "hats",
+      "focus": "test"
+    },
+    {
+      "start": 71.47,
+      "end": 81.33,
+      "caption": "Nani's blue woolly cap? \"Not a hat!\"",
+      "text": "Then Nani walks in, wearing her blue, woolly winter cap. The hat finder looks at her, and says, not a hat! Oh no!",
+      "scene": "hats",
+      "focus": "nani"
+    },
+    {
+      "start": 81.33,
+      "end": 89.66,
+      "caption": "Why did it get it wrong? Think!",
+      "text": "Nani is laughing. But why did the hat finder get it wrong? Think about it.",
+      "scene": "hats",
+      "focus": "ask"
+    },
+    {
+      "start": 89.66,
+      "end": 97.96,
+      "caption": "Training examples: what AI learns from",
+      "text": "Remember, AI learns from examples. The pictures, sounds, or words it learns from are called training examples.",
+      "scene": "why",
+      "focus": "examples"
+    },
+    {
+      "start": 97.96,
+      "end": 109.32,
+      "caption": "The pattern it found: \"hats are red\"",
+      "text": "The hat finder looked for a pattern in its examples. And the pattern it found was, hats are red! It never saw a blue hat, so it didn't know blue hats exist.",
+      "scene": "why",
+      "focus": "pattern"
+    },
+    {
+      "start": 109.32,
+      "end": 121.41,
+      "caption": "Only seen red apples? A green one looks odd!",
+      "text": "Imagine you had only ever seen red apples. The first time you saw a green apple, you might say, hmm, that's not an apple! The hat finder did the same thing.",
+      "scene": "why",
+      "focus": "apple"
+    },
+    {
+      "start": 121.41,
+      "end": 134.54,
+      "caption": "Not mean. It just didn't learn enough.",
+      "text": "So, is the hat finder being mean to Nani? No! It's not mean, and it's not alive. It just didn't learn enough. AI only knows what its examples show it.",
+      "scene": "why",
+      "focus": "notmean"
+    },
+    {
+      "start": 134.54,
+      "end": 146.85,
+      "caption": "FAIR = works well for everyone",
+      "text": "So, what does fair mean for AI? A fair AI works well for everyone, not just some people. Just like a fair game has rules that work the same for every player.",
+      "scene": "fair",
+      "focus": "fair"
+    },
+    {
+      "start": 146.85,
+      "end": 158.99,
+      "caption": "Unfair AI (bias): not enough kinds of examples",
+      "text": "When AI works worse for some things or people, because it didn't see enough kinds of examples, we call it unfair AI. Grown-ups have a word for this. Bias.",
+      "scene": "fair",
+      "focus": "unfair"
+    },
+    {
+      "start": 158.99,
+      "end": 165.22,
+      "caption": "One kind of example \u2192 confused by others",
+      "text": "So if AI only sees one kind of example, it can get confused by every other kind.",
+      "scene": "fair",
+      "focus": "onekind"
+    },
+    {
+      "start": 165.22,
+      "end": 175.98,
+      "caption": "Add blue, green, striped, woolly hats!",
+      "text": "So how can Ishaan fix it? He adds more kinds of hats. Blue hats, green hats, striped hats, woolly hats, even a big sun hat!",
+      "scene": "fix",
+      "focus": "add"
+    },
+    {
+      "start": 175.98,
+      "end": 187.19,
+      "caption": "VARIETY = many different kinds",
+      "text": "Many different kinds of something is called variety. Now the hat finder learns a better pattern. A hat sits on your head. Any colour, any shape.",
+      "scene": "fix",
+      "focus": "variety"
+    },
+    {
+      "start": 187.19,
+      "end": 193.0,
+      "caption": "Nani's cap? \"Hat!\" Fixed!",
+      "text": "Nani tries again. Hat! She gives Ishaan a big thumbs up.",
+      "scene": "fix",
+      "focus": "works"
+    },
+    {
+      "start": 193.0,
+      "end": 202.58,
+      "caption": "Only a red crayon? No green tree, no blue sky!",
+      "text": "Think of a box of crayons. If you only had a red crayon, could you draw a green tree, and a blue sky? Not really!",
+      "scene": "crayons",
+      "focus": "one"
+    },
+    {
+      "start": 202.58,
+      "end": 206.82,
+      "caption": "Many colours \u2192 a better picture",
+      "text": "But with crayons of many colours, your picture comes out just right.",
+      "scene": "crayons",
+      "focus": "many"
+    },
+    {
+      "start": 206.82,
+      "end": 219.46,
+      "caption": "Many kinds of examples \u2192 a fairer AI",
+      "text": "AI is the same. Many kinds of faces, voices, and stories make a fairer AI. Young and old, with glasses, with beards. All kinds!",
+      "scene": "crayons",
+      "focus": "ai"
+    },
+    {
+      "start": 219.46,
+      "end": 233.28,
+      "caption": "Voice helper learned only grown-up voices",
+      "text": "This happens in real life too. Ishaan's little sister asks a voice helper, play my song! But it doesn't understand her. Why? It learned mostly from grown-up voices.",
+      "scene": "real",
+      "focus": "voice"
+    },
+    {
+      "start": 233.28,
+      "end": 243.09,
+      "caption": "Face unlock needs many kinds of faces",
+      "text": "A face unlock app that learned from only a few kinds of faces may not open for some people. Its makers should add many kinds of faces to its examples.",
+      "scene": "real",
+      "focus": "face"
+    },
+    {
+      "start": 243.09,
+      "end": 248.93,
+      "caption": "A doctor's AI needs X-rays from everyone",
+      "text": "A doctor's helper AI needs X-rays from many kinds of people, so it can help everyone.",
+      "scene": "real",
+      "focus": "doctor"
+    },
+    {
+      "start": 248.93,
+      "end": 256.57,
+      "caption": "People must test it works for everyone",
+      "text": "And people must always check and test that an AI works for everyone. AI is never fair automatically.",
+      "scene": "real",
+      "focus": "test"
+    },
+    {
+      "start": 256.57,
+      "end": 278.88,
+      "caption": "Which photos are fairer for a dog finder?",
+      "text": "Let's play! Ishaan's friend wants to build a dog finder. Which set of photos is fairer? Set A. One hundred photos, all of white puppies. Set B. Big dogs, small dogs, spotted, brown, and black dogs. Pause, and pick.",
+      "scene": "pick",
+      "focus": "ask"
+    },
+    {
+      "start": 278.88,
+      "end": 289.63,
+      "caption": "Set B! 100 of one kind still isn't variety",
+      "text": "Set B! Set A has a hundred photos, but they're all one kind. Like ten red crayons. Lots of the same thing isn't variety.",
+      "scene": "pick",
+      "focus": "answer"
+    },
+    {
+      "start": 289.63,
+      "end": 304.71,
+      "caption": "Finish it: \"AI needs ___ examples.\"",
+      "text": "Now, finish this sentence. AI needs, blank, examples. Only red? Just one? Or, many kinds of? Think!",
+      "scene": "sentence",
+      "focus": "ask"
+    },
+    {
+      "start": 304.71,
+      "end": 312.97,
+      "caption": "AI needs MANY KINDS OF examples!",
+      "text": "Many kinds of! AI needs many kinds of examples. More variety makes AI helpers fairer.",
+      "scene": "sentence",
+      "focus": "answer"
+    },
+    {
+      "start": 312.97,
+      "end": 327.92,
+      "caption": "True or false: AI is fair automatically?",
+      "text": "One more. True or false? An AI helper is fair to everyone automatically, even if it only saw one kind of example. Hmm. What do you say?",
+      "scene": "sentence",
+      "focus": "tfask"
+    },
+    {
+      "start": 327.92,
+      "end": 336.9,
+      "caption": "FALSE! AI is only as fair as its examples",
+      "text": "False! AI is only as fair as the examples it learns from. That's why people choose its examples carefully.",
+      "scene": "sentence",
+      "focus": "tfanswer"
+    },
+    {
+      "start": 336.9,
+      "end": 340.85,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 340.85,
+      "end": 352.64,
+      "caption": "Only saw red hats. What about a blue hat?",
+      "text": "A hat finder only saw red hats. What happens when it sees a blue hat? Pause the video, and write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 352.64,
+      "end": 365.41,
+      "caption": "May say \"not a hat\". It needs many kinds!",
+      "text": "Here's one answer. It may say, not a hat, because it never saw blue ones. To be fair, it needs many kinds of hats in its examples. Great thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 365.41,
+      "end": 370.03,
+      "caption": "AI learns only from its examples",
+      "text": "Let's remember. AI learns only from its examples.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 370.03,
+      "end": 374.95,
+      "caption": "One kind of example \u2192 unfair AI",
+      "text": "If it sees only one kind of example, it can be unfair to other kinds.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 374.95,
+      "end": 379.9,
+      "caption": "AI needs many kinds of examples",
+      "text": "So AI needs many kinds of examples, like a box of many crayons.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 379.9,
+      "end": 383.67,
+      "caption": "More variety \u2192 fairer helpers",
+      "text": "And more variety makes helpers fairer, for everyone.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 383.67,
+      "end": 389.9,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit four, done! You're thinking like a real AI expert, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 389.9,
+      "end": 396.7,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

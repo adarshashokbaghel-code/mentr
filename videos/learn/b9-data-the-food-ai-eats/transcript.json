@@ -1,0 +1,324 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.81,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.81,
+      "end": 16.47,
+      "caption": "Last time: labels must be right",
+      "text": "Last time, we played show and tell with labels. A label is the name we stick on an example, like apple. And we saw that wrong labels teach wrong things!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.47,
+      "end": 23.25,
+      "caption": "Chapter 4 \u00b7 Data \u2014 The Food AI Eats",
+      "text": "Today is chapter four of How Machines Learn. It's called, Data, the food AI eats!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.25,
+      "end": 34.21,
+      "caption": "AI eats food?! Let's find out.",
+      "text": "Wait. AI eats food? Does it munch on samosas? Hmm. Not quite! Let's find out what AI really eats.",
+      "scene": "open",
+      "focus": "hook"
+    },
+    {
+      "start": 34.21,
+      "end": 43.48,
+      "caption": "Meet Meera and her puppy, Bruno",
+      "text": "Meet Meera. She's ten years old, and she loves dogs. Her puppy Bruno is small, brown, and very naughty.",
+      "scene": "meera",
+      "focus": "meet"
+    },
+    {
+      "start": 43.48,
+      "end": 54.28,
+      "caption": "Dog Spotter learns from 500 photos of Bruno",
+      "text": "For her science fair, Meera makes a little AI app called Dog Spotter. She shows it five hundred photos. All of them are Bruno, labelled dog.",
+      "scene": "meera",
+      "focus": "train"
+    },
+    {
+      "start": 54.28,
+      "end": 67.78,
+      "caption": "Big, white Moti \u2192 \"Not a dog!\"",
+      "text": "The next day, Moti walks past her gate. Moti is the big, white street dog everyone loves. Meera points her tablet at him. And Dog Spotter says, not a dog!",
+      "scene": "meera",
+      "focus": "moti"
+    },
+    {
+      "start": 67.78,
+      "end": 77.36,
+      "caption": "Why did the app get it wrong? Think!",
+      "text": "Huh? Moti is clearly a dog! Why do you think the app got it wrong? Think about it.",
+      "scene": "meera",
+      "focus": "why"
+    },
+    {
+      "start": 77.36,
+      "end": 85.0,
+      "caption": "Hold that thought\u2026",
+      "text": "Hold that thought. We'll come back to Meera very soon. First, we need one important word.",
+      "scene": "meera",
+      "focus": "later"
+    },
+    {
+      "start": 85.0,
+      "end": 94.09,
+      "caption": "DATA = information AI learns from",
+      "text": "That word is data. Data is the information AI learns from. Pictures, words, sounds, and even numbers.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 94.09,
+      "end": 105.46,
+      "caption": "Data is the food AI eats",
+      "text": "You can think of data as the food AI eats. You need food to grow strong. And AI needs data to learn. No data, no learning!",
+      "scene": "define",
+      "focus": "food"
+    },
+    {
+      "start": 105.46,
+      "end": 114.69,
+      "caption": "Dataset = a big collection of data",
+      "text": "When we put lots of data together, like one thousand dog photos, we call it a dataset. A dataset is a big collection of data.",
+      "scene": "define",
+      "focus": "dataset"
+    },
+    {
+      "start": 114.69,
+      "end": 123.66,
+      "caption": "Pictures: cats, mangoes, buses",
+      "text": "So, what's on AI's menu? First, pictures. Photos of cats, mangoes, buses, anything!",
+      "scene": "menu",
+      "focus": "pictures"
+    },
+    {
+      "start": 123.66,
+      "end": 129.54,
+      "caption": "Words: stories, messages, questions",
+      "text": "Next, words. Stories, messages, and questions that people type.",
+      "scene": "menu",
+      "focus": "words"
+    },
+    {
+      "start": 129.54,
+      "end": 140.28,
+      "caption": "Sounds: voices, songs, barking",
+      "text": "And sounds! Voices, songs, even a dog barking. A voice assistant learned to understand people by listening to lots and lots of voices.",
+      "scene": "menu",
+      "focus": "sounds"
+    },
+    {
+      "start": 140.28,
+      "end": 154.49,
+      "caption": "Real shoes: not data. A photo of shoes: data!",
+      "text": "But careful. A real glass of water, or a real pair of shoes, is not data. A photo of your shoes? That's data! AI learns from information, not from real things.",
+      "scene": "menu",
+      "focus": "notdata"
+    },
+    {
+      "start": 154.49,
+      "end": 165.97,
+      "caption": "Only rice, every single day? Hmm\u2026",
+      "text": "Now, think about your own food. What if you ate only rice? Rice for breakfast, rice for lunch, rice for dinner. Every single day!",
+      "scene": "thali",
+      "focus": "rice"
+    },
+    {
+      "start": 165.97,
+      "end": 176.99,
+      "caption": "A thali: dal, sabzi, roti, curd, fruit",
+      "text": "You'd miss so much! A good thali has dal, sabzi, roti, curd, and fruit. Different foods help you grow strong. Yum.",
+      "scene": "thali",
+      "focus": "thali"
+    },
+    {
+      "start": 176.99,
+      "end": 187.32,
+      "caption": "Variety = many different kinds",
+      "text": "AI is just the same. It learns best from variety. Variety means many different kinds, not just one kind, again and again.",
+      "scene": "thali",
+      "focus": "variety"
+    },
+    {
+      "start": 187.32,
+      "end": 199.99,
+      "caption": "Only Bruno \u2192 it thinks dog = small & brown",
+      "text": "Now, remember Meera's Dog Spotter? It only ever saw Bruno. Small, and brown. So what did it learn? That a dog means small and brown!",
+      "scene": "fix",
+      "focus": "remember"
+    },
+    {
+      "start": 199.99,
+      "end": 207.46,
+      "caption": "Moti didn't match anything it had seen",
+      "text": "So when big, white Moti came along, the app was confused. It had never seen a dog like him.",
+      "scene": "fix",
+      "focus": "moti"
+    },
+    {
+      "start": 207.46,
+      "end": 218.68,
+      "caption": "Big \u00b7 small \u00b7 brown \u00b7 white \u00b7 spotty dogs",
+      "text": "So Meera adds variety. Big dogs, small dogs. Brown, white, black, and spotty dogs. Hundreds of different dogs!",
+      "scene": "fix",
+      "focus": "fix"
+    },
+    {
+      "start": 218.68,
+      "end": 231.06,
+      "caption": "Now it spots Moti! Variety works.",
+      "text": "Now the app finds what all dogs share. Four legs, a tail, a furry body, and a wet nose. And this time, it spots Moti right away! Woof!",
+      "scene": "fix",
+      "focus": "works"
+    },
+    {
+      "start": 231.06,
+      "end": 253.92,
+      "caption": "Which dataset teaches \"dog\" best?",
+      "text": "Your turn! Which dataset would teach AI dog the best? A, five hundred photos of only brown puppies. B, just one photo of a dog. Or C, five hundred photos of big, small, brown, white, and spotty dogs. Pause, and think.",
+      "scene": "pick",
+      "focus": "ask"
+    },
+    {
+      "start": 253.92,
+      "end": 265.72,
+      "caption": "C! Lots of photos AND lots of variety",
+      "text": "It's C! Lots of photos, and lots of variety. A shows only one kind of dog, and B is far too little. One photo can't teach a whole idea.",
+      "scene": "pick",
+      "focus": "answer"
+    },
+    {
+      "start": 265.72,
+      "end": 273.72,
+      "caption": "Some data should stay private",
+      "text": "Now, here's something very important. Not all data should be collected. Some data is private.",
+      "scene": "private",
+      "focus": "intro"
+    },
+    {
+      "start": 273.72,
+      "end": 281.37,
+      "caption": "Public: trees, animals, the Taj Mahal",
+      "text": "Public data is okay to share. Pictures of trees, animals, or famous buildings, like the Taj Mahal.",
+      "scene": "private",
+      "focus": "public"
+    },
+    {
+      "start": 281.37,
+      "end": 289.74,
+      "caption": "Private: address, phone number, family photos",
+      "text": "Private data is about a person, and it should stay safe. Like your home address, your phone number, and your family photos.",
+      "scene": "private",
+      "focus": "private"
+    },
+    {
+      "start": 289.74,
+      "end": 300.94,
+      "caption": "No collecting private data without permission!",
+      "text": "So, what if an app quietly collects everyone's family photos, without asking? That's not okay! Private data should not be collected without permission.",
+      "scene": "private",
+      "focus": "permission"
+    },
+    {
+      "start": 300.94,
+      "end": 317.33,
+      "caption": "Public or private? Sort them!",
+      "text": "Quick game! Public, or private? A photo of a tree. Your home address. A picture of the Taj Mahal. Your phone number. Pause, and sort them.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 317.33,
+      "end": 325.73,
+      "caption": "Tree, Taj Mahal: public. Address, phone: private",
+      "text": "The tree and the Taj Mahal are public. Your address and your phone number are private. Keep those safe, champ!",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 325.73,
+      "end": 329.63,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's your practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 329.63,
+      "end": 343.3,
+      "caption": "200 photos of only parrots: enough? Why?",
+      "text": "An AI needs to learn bird. Is two hundred photos of only parrots enough? Why, or why not? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 343.3,
+      "end": 363.78,
+      "caption": "No! It needs crows, sparrows, pigeons, peacocks\u2026",
+      "text": "Here's one answer. No, it's not enough! The AI might think only parrots are birds. Then it sees a crow, and says, not a bird! It needs many kinds, like crows, sparrows, pigeons, and peacocks, to learn what all birds share. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 363.78,
+      "end": 368.79,
+      "caption": "Data is the food AI eats",
+      "text": "Let's remember what we learned. Data is the food AI eats.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 368.79,
+      "end": 372.03,
+      "caption": "Pictures, words & sounds are data",
+      "text": "Pictures, words, and sounds are all data.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 372.03,
+      "end": 376.59,
+      "caption": "Variety teaches AI better",
+      "text": "Varied data, with many different kinds, teaches AI better.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 376.59,
+      "end": 380.57,
+      "caption": "Some data should stay private",
+      "text": "And some data, like your home address, should stay private.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 380.57,
+      "end": 388.7,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! Now you know what AI eats, champ. Just one more chapter in this unit!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 388.7,
+      "end": 395.5,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "id": "C14",
+  "title": "Angles and Turns",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "Math · Shapes, Grids & Coordinates",
+  "slug": "c14-angles-and-turns",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c14-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we folded shapes to find lines of symmetry, and finished patterns, like Riya's rangoli.", "caption": "Last time: symmetry and patterns", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four of Shapes, Grids and Coordinates. It's called, Angles and Turns!", "caption": "Chapter 4 · Angles and Turns", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "By the end, you'll turn exactly like a coding robot. Let's spin into it!", "caption": "Turn like a coding robot!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "assembly",
+      "visual": "c14-hook",
+      "beats": [
+        { "vo": "Picture this. It's morning assembly at school. Meet Arjun! He's standing in line, and the PT sir is calling out commands.", "caption": "Meet Arjun at morning assembly", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Right turn! Arjun swings round, to face his right side.", "caption": "\"Right turn!\"", "focus": "right", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Then sir shouts, About turn! And Arjun spins round, to face the opposite way.", "caption": "\"About turn!\" Now he faces the other way", "focus": "about", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Here's a question. Did Arjun walk anywhere? Think about it.", "caption": "Did Arjun walk anywhere? Think!", "focus": "ask", "pause": 1.8 },
+        { "vo": "No! His feet stayed on the same spot. He only changed the way he was facing. And that's exactly what a turn is.", "caption": "Same spot! Only the way he faces changed", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c14-define",
+      "beats": [
+        { "vo": "A turn means changing the way you face, without moving from your spot.", "caption": "Turn: change the way you face, stay on the spot", "focus": "turn", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "How much you turn is called an angle. We measure angles in degrees. When you see a tiny circle after a number, it means degrees.", "caption": "How much you turn = an angle, in degrees (°)", "focus": "angle" },
+        { "vo": "Spin all the way round, until you face the same way again. That's a full turn. And a full turn is three hundred and sixty degrees.", "caption": "All the way round = full turn = 360°", "focus": "full", "sfx": "whoosh", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "quarter",
+      "visual": "c14-quarter",
+      "beats": [
+        { "vo": "Now cut that full turn into four equal parts. One part is a quarter turn. It makes a square corner, just like the corner of your notebook.", "caption": "Quarter turn: a square corner", "focus": "corner", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A quarter turn is ninety degrees. That's the turn Arjun makes when sir says, right turn!", "caption": "Quarter turn = 90°", "focus": "ninety", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Look around you. Square corners are everywhere! The corner of a door, a window, even a carrom board. Each one is a quarter turn, ninety degrees.", "caption": "Square corners everywhere: 90°", "focus": "around", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "You can see it on a clock, too. When the minute hand moves from twelve to three, it makes a quarter turn. Ninety degrees!", "caption": "Clock: 12 → 3 is a quarter turn (90°)", "focus": "clock", "sfx": "tick", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "more",
+      "visual": "c14-half",
+      "beats": [
+        { "vo": "So, what do two quarter turns make? Ninety, plus ninety, is one hundred and eighty degrees. That's a half turn.", "caption": "2 quarter turns = 90° + 90° = 180°", "focus": "two", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "After a half turn, you face the opposite way. That was Arjun's about turn! On the clock, twelve to six is a half turn.", "caption": "Half turn: face the opposite way · 12 → 6", "focus": "opposite" },
+        { "vo": "Three quarter turns make two hundred and seventy degrees. Almost all the way round! Like the minute hand going from twelve, to three, to six, to nine.", "caption": "3 quarter turns = 270° · 12 → 9", "focus": "three", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "And four quarter turns? Ninety, ninety, ninety, ninety. That's three hundred and sixty degrees, a full turn. You're back, facing the same way you started!", "caption": "4 quarter turns = 360° = full turn!", "focus": "four", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "directions",
+      "visual": "c14-compass",
+      "beats": [
+        { "vo": "To keep track of turns, we use four directions. North, east, south, and west. On a map, north is at the top, south is at the bottom, east is on the right, and west is on the left.", "caption": "Four directions: North, East, South, West", "focus": "intro", "sfx": "pop" },
+        { "vo": "A right turn goes clockwise. That's the same way a clock's hands move. Turning right, you go north, then east, then south, then west.", "caption": "Right turn = clockwise: N → E → S → W", "focus": "right", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "A left turn goes the other way. We call it anticlockwise. Turning left, you go north, then west, then south, then east.", "caption": "Left turn = anticlockwise: N → W → S → E", "focus": "left", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Here's a trick to remember the clockwise order. Never Eat Soggy Wheat! North, east, south, west.", "caption": "Never Eat Soggy Wheat → N, E, S, W", "focus": "trick", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "c14-game",
+      "beats": [
+        { "vo": "Game time! Arjun is standing in the middle of the school ground, facing north.", "caption": "Game time! Arjun faces north", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "One quarter turn right. Which way is he facing now?", "caption": "Facing north. 1 quarter turn right → ?", "focus": "q1", "pause": 1.8 },
+        { "vo": "East! Right is clockwise, so north goes to east.", "caption": "East! Right is clockwise", "focus": "a1", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Now Arjun faces east, and makes one quarter turn left. Which way now? Think carefully.", "caption": "Facing east. 1 quarter turn left → ?", "focus": "q2", "pause": 2.0 },
+        { "vo": "North! Left is anticlockwise, so from east, he turns back to north.", "caption": "North! Left is anticlockwise", "focus": "a2", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Tricky one. He faces north, and makes three quarter turns right. Count them!", "caption": "Facing north. 3 quarter turns right → ?", "focus": "q3", "pause": 2.2 },
+        { "vo": "One, east. Two, south. Three, west! He's facing west. Three quarter turns is two hundred and seventy degrees.", "caption": "West! N → E → S → W is 270°", "focus": "a3", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "mistake",
+      "visual": "c14-mistake",
+      "beats": [
+        { "vo": "Arjun's friend Kavya says, turn right ninety means a quarter turn anticlockwise. Hmm. Is she right? What do you think?", "caption": "\"Turn right 90° is anticlockwise.\" True?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Not quite! A right turn is clockwise, the same way a clock's hands move. Anticlockwise is a left turn.", "caption": "False! Right turn = clockwise", "focus": "answer", "sfx": "buzz", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "robot",
+      "visual": "c14-robot",
+      "beats": [
+        { "vo": "Turns are super important in coding. In block coding, a robot turtle obeys commands like, turn right ninety.", "caption": "Coding: \"turn right 90\"", "focus": "turtle", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "And just like Arjun, the turtle spins on its spot. It does not walk. It only changes the way it faces.", "caption": "It spins on the spot. No walking!", "focus": "spin" },
+        { "vo": "Turn right ninety, four times, and the turtle is back where it started, facing the same way. A full turn!", "caption": "turn right 90 × 4 = a full turn", "focus": "four", "sfx": "success", "sfxAt": 0.85 },
+        { "vo": "In the next chapter, you'll mix turns with steps, to draw shapes. So exciting!", "caption": "Next chapter: draw shapes with turns!", "focus": "next", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c14-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "You face north. You make two quarter turns right. Which way are you facing now? Pause the video, and try it.", "caption": "Face north. 2 quarter turns right. Which way?", "focus": "ask", "pause": 2.5 },
+        { "vo": "South! North to east is one turn. East to south is two. Two quarter turns make a half turn, so you face the opposite way. Brilliant!", "caption": "South! N → E → S is a half turn", "focus": "answer", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c14-recap",
+      "beats": [
+        { "vo": "Let's remember. Ninety degrees is a quarter turn. One hundred and eighty is a half turn. And three hundred and sixty is a full turn.", "caption": "90° quarter · 180° half · 360° full", "focus": "r1", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Four quarter turns bring you all the way back.", "caption": "4 quarter turns bring you back", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "A right turn is clockwise. North, east, south, west.", "caption": "Right turn = clockwise: N → E → S → W", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And a turn changes where you face, not where you stand.", "caption": "A turn changes where you face", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! You can turn like a coding turtle, champ.", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

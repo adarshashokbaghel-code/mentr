@@ -1,0 +1,146 @@
+{
+  "id": "B16",
+  "title": "Is AI Fair?",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "AI · Smart & Safe With AI",
+  "slug": "b16-is-ai-fair",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b16-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Today is a big day.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you wrote rules for game characters, like Sheru the tiger guard. If the player is near, chase. Else, patrol. And with that, you finished all of Unit three!", "caption": "Last time: game rules · Unit 3 done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Today, we're starting Unit four. It's called, Being Smart and Safe With AI.", "caption": "Unit 4 · Being Smart and Safe With AI", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one asks a really important question. Is AI fair?", "caption": "Chapter 1 · Is AI Fair?", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Fair. Hmm. You know what fair means when you share sweets with your friends. But can a computer be fair, or unfair? Let's find out.", "caption": "Can a computer be fair, or unfair?", "focus": "sweets", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "hats",
+      "visual": "b16-hook",
+      "beats": [
+        { "vo": "Meet Ishaan. He's building a hat finder for his school science fair. It's an AI that looks at a photo, and says, hat, or not a hat.", "caption": "Meet Ishaan and his hat finder", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "To teach it, Ishaan uses photos from his cricket team. Fifty photos of hats. And every single one is a red cap. The hat finder studies them all, looking for what they have in common.", "caption": "He teaches it with 50 photos… all red caps", "focus": "train", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Test time! He shows it a red cap. Hat! Perfect.", "caption": "Red cap? \"Hat!\" Perfect.", "focus": "test", "sfx": "success", "sfxAt": 0.5 },
+        { "vo": "Then Nani walks in, wearing her blue, woolly winter cap. The hat finder looks at her, and says, not a hat! Oh no!", "caption": "Nani's blue woolly cap? \"Not a hat!\"", "focus": "nani", "sfx": "buzz", "sfxAt": 0.7 },
+        { "vo": "Nani is laughing. But why did the hat finder get it wrong? Think about it.", "caption": "Why did it get it wrong? Think!", "focus": "ask", "pause": 2.0 }
+      ]
+    },
+    {
+      "id": "why",
+      "visual": "b16-why",
+      "beats": [
+        { "vo": "Remember, AI learns from examples. The pictures, sounds, or words it learns from are called training examples.", "caption": "Training examples: what AI learns from", "focus": "examples", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "The hat finder looked for a pattern in its examples. And the pattern it found was, hats are red! It never saw a blue hat, so it didn't know blue hats exist.", "caption": "The pattern it found: \"hats are red\"", "focus": "pattern", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Imagine you had only ever seen red apples. The first time you saw a green apple, you might say, hmm, that's not an apple! The hat finder did the same thing.", "caption": "Only seen red apples? A green one looks odd!", "focus": "apple", "pause": 0.4 },
+        { "vo": "So, is the hat finder being mean to Nani? No! It's not mean, and it's not alive. It just didn't learn enough. AI only knows what its examples show it.", "caption": "Not mean. It just didn't learn enough.", "focus": "notmean", "sfx": "chime", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "fair",
+      "visual": "b16-fair",
+      "beats": [
+        { "vo": "So, what does fair mean for AI? A fair AI works well for everyone, not just some people. Just like a fair game has rules that work the same for every player.", "caption": "FAIR = works well for everyone", "focus": "fair", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "When AI works worse for some things or people, because it didn't see enough kinds of examples, we call it unfair AI. Grown-ups have a word for this. Bias.", "caption": "Unfair AI (bias): not enough kinds of examples", "focus": "unfair", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "So if AI only sees one kind of example, it can get confused by every other kind.", "caption": "One kind of example → confused by others", "focus": "onekind" }
+      ]
+    },
+    {
+      "id": "fix",
+      "visual": "b16-fix",
+      "beats": [
+        { "vo": "So how can Ishaan fix it? He adds more kinds of hats. Blue hats, green hats, striped hats, woolly hats, even a big sun hat!", "caption": "Add blue, green, striped, woolly hats!", "focus": "add", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Many different kinds of something is called variety. Now the hat finder learns a better pattern. A hat sits on your head. Any colour, any shape.", "caption": "VARIETY = many different kinds", "focus": "variety", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Nani tries again. Hat! She gives Ishaan a big thumbs up.", "caption": "Nani's cap? \"Hat!\" Fixed!", "focus": "works", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "crayons",
+      "visual": "b16-crayon",
+      "beats": [
+        { "vo": "Think of a box of crayons. If you only had a red crayon, could you draw a green tree, and a blue sky? Not really!", "caption": "Only a red crayon? No green tree, no blue sky!", "focus": "one", "pause": 0.4 },
+        { "vo": "But with crayons of many colours, your picture comes out just right.", "caption": "Many colours → a better picture", "focus": "many", "sfx": "success", "sfxAt": 0.5 },
+        { "vo": "AI is the same. Many kinds of faces, voices, and stories make a fairer AI. Young and old, with glasses, with beards. All kinds!", "caption": "Many kinds of examples → a fairer AI", "focus": "ai", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "real",
+      "visual": "b16-real",
+      "beats": [
+        { "vo": "This happens in real life too. Ishaan's little sister asks a voice helper, play my song! But it doesn't understand her. Why? It learned mostly from grown-up voices.", "caption": "Voice helper learned only grown-up voices", "focus": "voice", "sfx": "buzz", "sfxAt": 0.55 },
+        { "vo": "A face unlock app that learned from only a few kinds of faces may not open for some people. Its makers should add many kinds of faces to its examples.", "caption": "Face unlock needs many kinds of faces", "focus": "face", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "A doctor's helper AI needs X-rays from many kinds of people, so it can help everyone.", "caption": "A doctor's AI needs X-rays from everyone", "focus": "doctor", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "And people must always check and test that an AI works for everyone. AI is never fair automatically.", "caption": "People must test it works for everyone", "focus": "test", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "pick",
+      "visual": "b16-pick",
+      "beats": [
+        { "vo": "Let's play! Ishaan's friend wants to build a dog finder. Which set of photos is fairer? Set A. One hundred photos, all of white puppies. Set B. Big dogs, small dogs, spotted, brown, and black dogs. Pause, and pick.", "caption": "Which photos are fairer for a dog finder?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Set B! Set A has a hundred photos, but they're all one kind. Like ten red crayons. Lots of the same thing isn't variety.", "caption": "Set B! 100 of one kind still isn't variety", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "sentence",
+      "visual": "b16-sentence",
+      "beats": [
+        { "vo": "Now, finish this sentence. AI needs, blank, examples. Only red? Just one? Or, many kinds of? Think!", "caption": "Finish it: \"AI needs ___ examples.\"", "focus": "ask", "pause": 2.0 },
+        { "vo": "Many kinds of! AI needs many kinds of examples. More variety makes AI helpers fairer.", "caption": "AI needs MANY KINDS OF examples!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "One more. True or false? An AI helper is fair to everyone automatically, even if it only saw one kind of example. Hmm. What do you say?", "caption": "True or false: AI is fair automatically?", "focus": "tfask", "pause": 2.0 },
+        { "vo": "False! AI is only as fair as the examples it learns from. That's why people choose its examples carefully.", "caption": "FALSE! AI is only as fair as its examples", "focus": "tfanswer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b16-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "A hat finder only saw red hats. What happens when it sees a blue hat? Pause the video, and write your answer on paper.", "caption": "Only saw red hats. What about a blue hat?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. It may say, not a hat, because it never saw blue ones. To be fair, it needs many kinds of hats in its examples. Great thinking!", "caption": "May say \"not a hat\". It needs many kinds!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b16-recap",
+      "beats": [
+        { "vo": "Let's remember. AI learns only from its examples.", "caption": "AI learns only from its examples", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "If it sees only one kind of example, it can be unfair to other kinds.", "caption": "One kind of example → unfair AI", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "So AI needs many kinds of examples, like a box of many crayons.", "caption": "AI needs many kinds of examples", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And more variety makes helpers fairer, for everyone.", "caption": "More variety → fairer helpers", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit four, done! You're thinking like a real AI expert, champ.", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

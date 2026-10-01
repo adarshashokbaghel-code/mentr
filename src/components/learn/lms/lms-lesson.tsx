@@ -18,7 +18,7 @@ import { cn } from "@/lib/utils";
 import { ArrowLeft, Check, Download, Loader2, Lock } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   hasCompletedQuiz,
   hasWatchedVideo,
@@ -26,6 +26,7 @@ import {
   refreshLearnEnrollment,
 } from "@/lib/learn-progress-client";
 import {
+  readLearnEnrollmentLocal,
   saveLearnEnrollmentLocal,
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
@@ -79,7 +80,10 @@ function WatchStage({
             autoPlay
             onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
             onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
-            onEnded={() => setEnded(true)}
+            onEnded={() => {
+              setEnded(true);
+              onDone();
+            }}
           >
             <source src={videoSrc} type="video/mp4" />
             {captionsSrc ? (
@@ -573,6 +577,7 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
   const [stage, setStage] = useState<"watch" | "quiz" | "done">("watch");
   const [savingVideo, setSavingVideo] = useState(false);
   const [localVideoDone, setLocalVideoDone] = useState(false);
+  const finishingVideo = useRef(false);
 
   const videoDone =
     localVideoDone || hasWatchedVideo(enrollment, moduleId);
@@ -592,13 +597,30 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
   }, [search, videoDone, localVideoDone]);
 
   async function finishVideo() {
+    if (finishingVideo.current) {
+      setStage("quiz");
+      return;
+    }
+    finishingVideo.current = true;
     setSavingVideo(true);
     setLocalVideoDone(true);
+    const id = moduleId.trim().toUpperCase();
+    const cached = readLearnEnrollmentLocal();
+    if (cached && !hasWatchedVideo(cached, id)) {
+      saveLearnEnrollmentLocal({
+        ...cached,
+        progress: {
+          ...cached.progress,
+          videosWatched: [...(cached.progress.videosWatched ?? []), id],
+          currentModuleId: id,
+        },
+      });
+    }
     try {
       const next = await recordVideoComplete(moduleId);
       setEnrollment(next);
     } catch {
-      /* local unlock */
+      finishingVideo.current = false;
     } finally {
       setSavingVideo(false);
       setStage("quiz");
@@ -616,8 +638,12 @@ export function LmsLesson({ moduleId }: { moduleId: string }) {
         <p className="text-[16px] font-extrabold text-[#1c2434]">
           Lesson not found
         </p>
-        <Link href="/learn/app" className="font-bold text-[#ff6a1a]">
-          ← Home
+        <Link
+          href="/learn/app"
+          className="inline-flex items-center justify-center gap-1 font-bold text-[#ff6a1a]"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden />
+          Home
         </Link>
       </div>
     );

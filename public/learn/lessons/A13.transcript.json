@@ -1,0 +1,396 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 14.97,
+      "caption": "Last time: green flag \u00b7 move \u00b7 turn",
+      "text": "Last time, you made a character move. You clicked the green flag, and your blocks said, move ten steps, and turn. Nice driving!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.97,
+      "end": 17.93,
+      "caption": "Unit 3 \u00b7 Building With Blocks",
+      "text": "We're still in Unit three, Building With Blocks.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 17.93,
+      "end": 23.38,
+      "caption": "Chapter 3 \u00b7 Variables",
+      "text": "And today is chapter three. Variables, boxes that store things.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.38,
+      "end": 31.28,
+      "caption": "How does a game remember your score?",
+      "text": "Have you ever wondered how a game remembers your score? Or how many lives you have left? Hmm.",
+      "scene": "open",
+      "focus": "wonder"
+    },
+    {
+      "start": 31.28,
+      "end": 37.0,
+      "caption": "Let's find out the secret!",
+      "text": "By the end of today, you'll know the secret. And you'll be able to use it yourself!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 37.0,
+      "end": 43.25,
+      "caption": "Riya plays a coin game in the auto",
+      "text": "Meet Riya. She's playing a coin game on her dad's phone, on the way to school in an auto.",
+      "scene": "riya",
+      "focus": "meet"
+    },
+    {
+      "start": 43.25,
+      "end": 56.38,
+      "caption": "Coin! Score 0 \u2192 1 \u2192 2 \u2192 3",
+      "text": "Her cat jumps, and grabs a coin. Ding! The score goes from zero, to one. Another coin. Two! Another. Three!",
+      "scene": "riya",
+      "focus": "coins"
+    },
+    {
+      "start": 56.38,
+      "end": 64.95,
+      "caption": "Spike! Lives 3 \u2192 2",
+      "text": "Then, oops, Billu bumps into a spike. One heart disappears. Three lives, now just two.",
+      "scene": "riya",
+      "focus": "spike"
+    },
+    {
+      "start": 64.95,
+      "end": 75.67,
+      "caption": "Where does the game keep these numbers?",
+      "text": "So here's a question. The game keeps changing these numbers. But where does it keep them? Think about it.",
+      "scene": "riya",
+      "focus": "why"
+    },
+    {
+      "start": 75.67,
+      "end": 84.48,
+      "caption": "In a named box, called a VARIABLE",
+      "text": "Here's the secret. The game keeps each number in a little box, with a name on it. That box is called a variable.",
+      "scene": "riya",
+      "focus": "secret"
+    },
+    {
+      "start": 84.48,
+      "end": 94.87,
+      "caption": "Var \u00b7 i \u00b7 a \u00b7 ble \u2192 it can change",
+      "text": "Variable. Say it with me. Va, ri, a, ble. It comes from the word vary, which means, to change.",
+      "scene": "define",
+      "focus": "word"
+    },
+    {
+      "start": 94.87,
+      "end": 105.61,
+      "caption": "A named box that holds one value",
+      "text": "A variable is a box with a name on it. It holds one thing, like a number, or a word. And you can change what's inside, while your game runs.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 105.61,
+      "end": 117.63,
+      "caption": "Name outside \u00b7 Value inside",
+      "text": "So every variable has two parts. The name, on the outside, tells you what the box is for. And the value, on the inside, is what the box holds right now.",
+      "scene": "define",
+      "focus": "parts"
+    },
+    {
+      "start": 117.63,
+      "end": 123.39,
+      "caption": "Name: score \u00b7 Value: 5",
+      "text": "This box is named score. And its value right now? Five.",
+      "scene": "define",
+      "focus": "example"
+    },
+    {
+      "start": 123.39,
+      "end": 129.72,
+      "caption": "Your tiffin box has a name label",
+      "text": "You already use boxes like this! Think of your tiffin box, with your name stuck on top.",
+      "scene": "tiffin",
+      "focus": "intro"
+    },
+    {
+      "start": 129.72,
+      "end": 137.71,
+      "caption": "Label = whose box \u00b7 Inside = lunch",
+      "text": "The label says, Aarav. That tells everyone whose box it is. And inside, there's today's lunch.",
+      "scene": "tiffin",
+      "focus": "label"
+    },
+    {
+      "start": 137.71,
+      "end": 146.4,
+      "caption": "Mon poha \u00b7 Tue paratha \u00b7 Wed idli",
+      "text": "On Monday, it's poha. On Tuesday, aloo paratha. On Wednesday, idli. Yum!",
+      "scene": "tiffin",
+      "focus": "days"
+    },
+    {
+      "start": 146.4,
+      "end": 156.69,
+      "caption": "Same name, changing value = variable",
+      "text": "See what happened? The name on the box stayed the same. But what's inside kept changing. That's exactly how a variable works.",
+      "scene": "tiffin",
+      "focus": "same"
+    },
+    {
+      "start": 156.69,
+      "end": 161.42,
+      "caption": "Games are full of variables",
+      "text": "Now let's peek inside a game. Games are full of variables.",
+      "scene": "game",
+      "focus": "intro"
+    },
+    {
+      "start": 161.42,
+      "end": 167.41,
+      "caption": "score \u00b7 counts points \u00b7 starts at 0",
+      "text": "Score is a variable. It counts your points, and it usually starts at zero.",
+      "scene": "game",
+      "focus": "score"
+    },
+    {
+      "start": 167.41,
+      "end": 173.52,
+      "caption": "lives \u00b7 chances left \u00b7 like 3",
+      "text": "Lives is a variable too. It counts how many chances you have left, like three.",
+      "scene": "game",
+      "focus": "lives"
+    },
+    {
+      "start": 173.52,
+      "end": 185.85,
+      "caption": "name \u00b7 holds a word, like \"Riya\"",
+      "text": "And here's a fun one. Name! It holds the player's nickname, like Riya. That's a word, not a number. So a variable can hold words too!",
+      "scene": "game",
+      "focus": "name"
+    },
+    {
+      "start": 185.85,
+      "end": 196.07,
+      "caption": "Screen glass, charger \u2192 not variables",
+      "text": "But the screen glass, or the charger? Those are things you can touch. They're not values the game stores. So they aren't variables.",
+      "scene": "game",
+      "focus": "notvar"
+    },
+    {
+      "start": 196.07,
+      "end": 202.83,
+      "caption": "Two variable blocks: set and change",
+      "text": "So how do we put things into the box? In block coding, we use two orange variable blocks.",
+      "scene": "blocks",
+      "focus": "intro"
+    },
+    {
+      "start": 202.83,
+      "end": 211.74,
+      "caption": "set score to 0 \u2192 the box now holds 0",
+      "text": "The first is the set block. Set score to zero. It throws out whatever was inside, and puts in a brand new value.",
+      "scene": "blocks",
+      "focus": "set"
+    },
+    {
+      "start": 211.74,
+      "end": 219.73,
+      "caption": "Set at the start \u2192 every game starts fresh",
+      "text": "We put set score to zero right under the green flag. That way, every new game starts fresh, from zero.",
+      "scene": "blocks",
+      "focus": "fresh"
+    },
+    {
+      "start": 219.73,
+      "end": 230.17,
+      "caption": "change score by 1 \u2192 5 becomes 6",
+      "text": "The second is the change block. Change score by one. It adds one to what's already there. If score is five, it becomes six.",
+      "scene": "blocks",
+      "focus": "change"
+    },
+    {
+      "start": 230.17,
+      "end": 239.81,
+      "caption": "change score by \u22121 \u2192 6 becomes 5",
+      "text": "And to take one away, we change by minus one. If score is six, and a bug bites, change score by minus one makes it five again.",
+      "scene": "blocks",
+      "focus": "minus"
+    },
+    {
+      "start": 239.81,
+      "end": 245.16,
+      "caption": "Good names, bad names",
+      "text": "Now, every box needs a good name. Let's look at some names.",
+      "scene": "names",
+      "focus": "intro"
+    },
+    {
+      "start": 245.16,
+      "end": 258.51,
+      "caption": "x1 \u00b7 box \u00b7 abc \u2192 what's inside?",
+      "text": "x one. box. a b c. Hmm. What's inside these? Nobody can tell! Not you, not your friend, not even you, next week.",
+      "scene": "names",
+      "focus": "bad"
+    },
+    {
+      "start": 258.51,
+      "end": 271.2,
+      "caption": "stars \u00b7 lives \u00b7 score \u2192 short and clear",
+      "text": "Now look. stars. lives. score. You know right away what each one stores. Short and clear, like the label on your school bag.",
+      "scene": "names",
+      "focus": "good"
+    },
+    {
+      "start": 271.2,
+      "end": 282.65,
+      "caption": "Best name for counting stars?",
+      "text": "Quick question. Which is the best name for a box that counts stars collected? x one, box, stars, or a b c?",
+      "scene": "names",
+      "focus": "ask"
+    },
+    {
+      "start": 282.65,
+      "end": 290.61,
+      "caption": "stars! Clear names help people",
+      "text": "Stars! It's short, and it says exactly what's inside. Clear names help people understand your code.",
+      "scene": "names",
+      "focus": "answer"
+    },
+    {
+      "start": 290.61,
+      "end": 295.65,
+      "caption": "Detective time: follow the score box",
+      "text": "Detective time! Let's follow a score box, step by step.",
+      "scene": "puzzle",
+      "focus": "intro"
+    },
+    {
+      "start": 295.65,
+      "end": 310.05,
+      "caption": "set 0 \u00b7 coin \u00b7 coin \u00b7 coin \u00b7 bug",
+      "text": "The game starts with set score to zero. Then Billu collects three coins. Each coin does, change score by one. Then, it hits a bug, which does, change score by minus one.",
+      "scene": "puzzle",
+      "focus": "run"
+    },
+    {
+      "start": 310.05,
+      "end": 318.45,
+      "caption": "What is the score at the end?",
+      "text": "So what's the score at the end? Count it on your fingers. Take your time.",
+      "scene": "puzzle",
+      "focus": "ask"
+    },
+    {
+      "start": 318.45,
+      "end": 333.18,
+      "caption": "0 \u2192 1 \u2192 2 \u2192 3 \u2192 2. The score is 2!",
+      "text": "Let's check. Zero. Coin, one. Coin, two. Coin, three. Then the bug takes one away. Three minus one is two. The score is two!",
+      "scene": "puzzle",
+      "focus": "answer"
+    },
+    {
+      "start": 333.18,
+      "end": 337.06,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 337.06,
+      "end": 349.1,
+      "caption": "3 lives. Hit a spike. Lives become\u2026?",
+      "text": "A game has three lives. The player hits a spike. What should the lives box become? Pause the video, and work it out.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 349.1,
+      "end": 359.48,
+      "caption": "change lives by \u22121 \u2192 3 \u2212 1 = 2",
+      "text": "Two! Hitting the spike runs, change lives by minus one. Three minus one is two. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 359.48,
+      "end": 369.01,
+      "caption": "Bonus: 3 lives, 2 spikes. Lives = ?",
+      "text": "Bonus round. Riya's lives start at three, and she hits a spike two times. Now what?",
+      "scene": "checkpoint",
+      "focus": "bonus"
+    },
+    {
+      "start": 369.01,
+      "end": 378.28,
+      "caption": "3 \u2192 2 \u2192 1. One life left!",
+      "text": "One life left! Each spike takes away one. Three, then two, then one. Careful, Riya!",
+      "scene": "checkpoint",
+      "focus": "bonusA"
+    },
+    {
+      "start": 378.28,
+      "end": 383.97,
+      "caption": "Variable = a named box with a value",
+      "text": "Let's remember. A variable is a box with a name, that holds a value.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 383.97,
+      "end": 390.59,
+      "caption": "It can change \u00b7 numbers or words",
+      "text": "You can change what's inside, even while the game runs. And it can hold numbers, or words.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 390.59,
+      "end": 395.61,
+      "caption": "+1 goes up \u00b7 \u22121 goes down",
+      "text": "Change by one adds one. Change by minus one takes one away.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 395.61,
+      "end": 399.94,
+      "caption": "Clear names: stars, not x1",
+      "text": "And use short, clear names, like stars, not x one.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 399.94,
+      "end": 407.51,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three of Unit three, done! You can store and change values, champ. Super work!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 407.51,
+      "end": 414.31,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

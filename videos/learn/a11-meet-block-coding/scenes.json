@@ -1,0 +1,154 @@
+{
+  "id": "A11",
+  "title": "Meet Block Coding",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "CS · Building With Blocks",
+  "slug": "a11-meet-block-coding",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a11-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you became a bug detective, and found the mistakes hiding in steps. And with that, you finished all of Unit two, Thinking Like a Computer! Algorithms, order, loops, if-then rules, and debugging. Wow. Give yourself a big pat on the back!", "caption": "Unit 2 · Thinking Like a Computer · done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Today, we're starting something brand new. Unit three. It's called, Building With Blocks.", "caption": "Unit 3 · Building With Blocks", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one is called, Meet Block Coding.", "caption": "Chapter 1 · Meet Block Coding", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "By the end, you'll know how to tell a computer what to do, without typing a single word. Sounds like magic? Let's find out!", "caption": "Code without typing? Let's find out!", "focus": "promise", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "didi",
+      "visual": "a11-hook",
+      "beats": [
+        { "vo": "Picture this. Your big sister, Riya didi, is busy on her laptop. So you peek over her shoulder.", "caption": "Peeking at Riya didi's laptop…", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Whoa! The screen is full of strange words, brackets, and little dots. Didi is typing code. Code is the words that tell a computer what to do.", "caption": "Typed code: lots of strange words!", "focus": "code" },
+        { "vo": "Then, oops. She types m, v, o, e, instead of move. Just one tiny spelling mistake. And the whole program stops, with a big red error!", "caption": "One tiny typo → ERROR!", "focus": "typo", "sfx": "buzz", "sfxAt": 0.6, "pause": 0.5 },
+        { "vo": "Hmm. Typing all that is tricky, right? So, is there an easier way for kids like you to give a computer instructions? Think about it.", "caption": "Is there an easier way? Think!", "focus": "think", "pause": 2.0 },
+        { "vo": "There is! Didi smiles and says, when I was your age, I started with blocks!", "caption": "\"When I was your age, I started with blocks!\"", "focus": "reveal", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a11-define",
+      "beats": [
+        { "vo": "It's called, block coding.", "caption": "It's called BLOCK CODING", "focus": "name", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Block coding means making programs by snapping puzzle-like blocks together, to give the computer instructions.", "caption": "Snap puzzle-like blocks to give instructions", "focus": "meaning" },
+        { "vo": "Think of LEGO, or the pieces of a jigsaw puzzle. Each block is one instruction. You drag it, drop it, and click! It snaps into place.", "caption": "Drag · Drop · Snap!", "focus": "lego", "sfx": "pop", "sfxAt": 0.75 },
+        { "vo": "And here's the best part. You don't need to type any code. So, no spelling mistakes, and no long, tricky words. Remember didi's typo? That just can't happen with blocks!", "caption": "No typing, no spelling mistakes!", "focus": "notype", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "screen",
+      "visual": "a11-screen",
+      "beats": [
+        { "vo": "Let's peek at a block coding screen. It has three main parts.", "caption": "A block coding screen has 3 parts", "focus": "intro" },
+        { "vo": "On the left, there's a box full of blocks, sorted by colour. It's like a toy box of instructions.", "caption": "Left: the blocks, sorted by colour", "focus": "palette", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "In the middle is the coding area. That's where you snap your blocks together.", "caption": "Middle: snap your blocks together here", "focus": "code", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And on the right is the stage. Look, there's a little cat on it! Let's call him Billu. Billu is our character. That's the little figure on the screen who follows your blocks.", "caption": "Right: the stage, with Billu the character", "focus": "stage", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "stack",
+      "visual": "a11-stack",
+      "beats": [
+        { "vo": "When you snap blocks together, one under another, you make a stack. And a stack of blocks is called a program.", "caption": "A stack of blocks = a PROGRAM", "focus": "stack", "sfx": "chime", "sfxAt": 0.8 },
+        { "vo": "Billu follows the program from top to bottom. He does the top block first, then the next one, then the next.", "caption": "Billu follows it from top to bottom", "focus": "order", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Hey, does that sound familiar? It's just like the steps of an algorithm from Unit two! Clear steps, in order. Only now, each step is a block.", "caption": "Just like algorithm steps, in order!", "focus": "algo", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "blocks",
+      "visual": "a11-blocks",
+      "beats": [
+        { "vo": "Now let's meet four blocks. Each one has its own colour, and its own job.", "caption": "Meet 4 blocks, each with its own job", "focus": "intro", "sfx": "pop" },
+        { "vo": "First, the start block. It says, when green flag clicked. See its round, curvy top? That's because nothing goes above it. It always goes first, right at the top, and it starts the program.", "caption": "Start: when green flag clicked · goes on top", "focus": "start", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Next, a blue motion block. Move ten steps. Motion blocks move or turn the character. So Billu walks forward a little.", "caption": "Motion: move 10 steps · Billu walks", "focus": "move", "sfx": "whoosh", "sfxAt": 0.6 },
+        { "vo": "This orange one says, wait one seconds. It makes Billu pause for a moment, and then the next block runs.", "caption": "Wait: wait 1 seconds · a little pause", "focus": "wait", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "And the purple one says, say Hello! It shows a speech bubble, so Billu can talk!", "caption": "Say: say Hello! · shows a speech bubble", "focus": "say", "sfx": "pop", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "run",
+      "visual": "a11-run",
+      "beats": [
+        { "vo": "Let's build a tiny program. Start block on top. Then, move ten steps. Then, say Hello. Then, wait one seconds. And, move ten steps again.", "caption": "Flag → Move → Say → Wait → Move", "focus": "build", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Now, we click the green flag. And watch Billu go!", "caption": "Click the green flag!", "focus": "click", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "He walks. He says hello. He waits. And he walks again. Exactly in order, from top to bottom. You just read your very first program!", "caption": "Billu follows every block, in order", "focus": "watch", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "startmove",
+      "visual": "a11-startmove",
+      "beats": [
+        { "vo": "Quick question. Is a start block the same as a motion block? What do you think?", "caption": "Is a start block = a motion block?", "focus": "q", "pause": 1.8 },
+        { "vo": "Nope! They have different jobs. The start block decides when the program begins. A motion block, like move ten steps, makes the character move. One says, go now! The other says, walk!", "caption": "Start = when to begin · Motion = move", "focus": "a", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "match",
+      "visual": "a11-match",
+      "beats": [
+        { "vo": "Let's play a matching game. Here are four blocks, and four jobs. Starts the program. Moves the character. Pauses for a moment. Shows a speech bubble. Can you match them? Take your time.", "caption": "Match each block to its job!", "focus": "ask", "sfx": "pop", "pause": 2.2 },
+        { "vo": "The green flag block starts the program. Move ten steps moves Billu. Wait makes him pause. And say Hello shows a speech bubble. Did you get all four? Super!", "caption": "Start · Move · Wait · Say, all matched!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "missing",
+      "visual": "a11-missing",
+      "beats": [
+        { "vo": "Detective time! Here's a stack. Move ten steps, and say Hi. We click the green flag, and, nothing happens. Billu doesn't move at all! What's missing? Think.", "caption": "Click the flag… nothing happens! Why?", "focus": "ask", "sfx": "buzz", "sfxAt": 0.55, "pause": 2.0 },
+        { "vo": "The start block! Without when green flag clicked on top, the program doesn't know when to begin. Snap it on top, and now Billu moves!", "caption": "Missing: the start block on top!", "focus": "answer", "sfx": "success", "sfxAt": 0.35 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a11-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Why do we use blocks first, instead of typing code? Pause the video, and say your answer out loud.", "caption": "Why blocks first, instead of typing code?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one great answer. Blocks are easy to see, and easy to snap together. There's no typing, and no spelling mistakes. So you can think about the idea of your program. And later, the same ideas work in typed code too, just like didi's!", "caption": "Easy to see & snap · no typos · focus on ideas", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a11-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Block coding means snapping blocks together. No typing needed.", "caption": "Block coding = snap blocks, no typing", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A program is a stack of blocks, and the character follows it from top to bottom.", "caption": "Program = a stack, top to bottom", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "The start block, when green flag clicked, always goes on top.", "caption": "The start block goes on top", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And start, move, wait, and say. Each block has its own job.", "caption": "Start · Move · Wait · Say: each has a job", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit three, done! You've met block coding, champ. Billu is very proud of you.", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

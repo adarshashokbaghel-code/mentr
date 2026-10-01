@@ -12,7 +12,6 @@ import { recordDailyCheckIn } from "@/lib/learn-progress-client";
 import { cn } from "@/lib/utils";
 import {
   Blocks,
-  CalendarDays,
   Flame,
   Home,
   Library,
@@ -34,7 +33,6 @@ const NAV: {
   { href: "/learn/app/path", label: "Learn", icon: Map },
   { href: "/learn/app/build", label: "Build", icon: Blocks },
   { href: "/learn/app/practice", label: "Practice", icon: Library },
-  { href: "/learn/app/potd", label: "POTD", icon: CalendarDays },
   { href: "/learn/app/progress", label: "Progress", icon: Sparkles },
   { href: "/learn/app/me", label: "Me", icon: UserRound },
 ];
@@ -63,10 +61,10 @@ function ShellChrome({ children }: { children: ReactNode }) {
   return (
     <div className="flex h-dvh max-h-dvh flex-col overflow-hidden bg-[#f6f4f0] font-[family-name:var(--font-learn-face),var(--font-sans-face),sans-serif] lg:flex-row">
       {/* Desktop sidebar — own scroll so footer stays reachable */}
-      <aside className="hidden h-full w-[88px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-[#e8e2d8] bg-white lg:flex xl:w-[220px]">
-        <div className="sticky top-0 z-10 flex shrink-0 items-center gap-2.5 border-b border-[#f0ebe3] bg-white px-3 py-4 xl:px-4">
+      <aside className="hidden h-full w-[260px] shrink-0 flex-col overflow-y-auto overscroll-contain border-r border-[#e8e2d8] bg-white lg:flex">
+        <div className="sticky top-0 z-10 flex shrink-0 items-center gap-2.5 border-b border-[#f0ebe3] bg-white px-4 py-4">
           <LearnDino size={40} className="h-10 w-10 shrink-0" priority />
-          <div className="hidden min-w-0 xl:block">
+          <div className="min-w-0">
             <p className="truncate text-[15px] font-extrabold text-[#1c2434]">
               Mentr Learn
             </p>
@@ -76,7 +74,7 @@ function ShellChrome({ children }: { children: ReactNode }) {
           </div>
         </div>
 
-        <nav className="flex flex-1 flex-col gap-1 p-2 xl:p-3">
+        <nav className="flex shrink-0 flex-col gap-1 p-3">
           {NAV.map((item) => {
             const active = item.exact
               ? pathname === item.href
@@ -87,26 +85,24 @@ function ShellChrome({ children }: { children: ReactNode }) {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 rounded-2xl px-3 py-3 text-[14px] font-bold transition xl:px-3.5",
+                  "flex w-full items-center gap-3 rounded-2xl px-3.5 py-3 text-[14px] font-bold transition",
                   active
                     ? "bg-[#fff4e8] text-[#ff6a1a]"
                     : "text-[#5a6472] hover:bg-[#faf8f4] hover:text-[#1c2434]",
                 )}
               >
                 <Icon
-                  className="mx-auto h-6 w-6 shrink-0 xl:mx-0"
+                  className="h-6 w-6 shrink-0"
                   strokeWidth={2.25}
                 />
-                <span className="hidden xl:inline">{item.label}</span>
+                <span>{item.label}</span>
               </Link>
             );
           })}
         </nav>
 
-        <div className="mt-auto shrink-0 border-t border-[#f0ebe3] bg-white p-2 xl:p-3">
-          <div className="hidden xl:block">
-            <LmsSidebarPotd />
-          </div>
+        <div className="mt-auto shrink-0 border-t border-[#f0ebe3] bg-white p-3">
+          <LmsSidebarPotd />
         </div>
       </aside>
 
@@ -143,13 +139,13 @@ function ShellChrome({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-4 pb-24 sm:px-6 sm:py-6 lg:px-8 lg:pb-8 xl:px-10">
+        <main className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-3 py-4 pb-[calc(5.75rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-6 lg:px-8 lg:pb-8 xl:px-10">
           {children}
         </main>
       </div>
 
       {/* Mobile bottom nav */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-7 border-t border-[#e8e2d8] bg-white/95 px-0.5 pb-[env(safe-area-inset-bottom)] pt-1 backdrop-blur-md lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-6 border-t border-[#e8e2d8] bg-white/95 px-0.5 pb-[env(safe-area-inset-bottom)] pt-1 backdrop-blur-md lg:hidden">
         {NAV.map((item) => {
           const active = item.exact
             ? pathname === item.href
@@ -160,12 +156,12 @@ function ShellChrome({ children }: { children: ReactNode }) {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center gap-0.5 rounded-xl px-0.5 py-1.5 text-[9px] font-bold sm:py-2 sm:text-[10px]",
+                "flex min-h-11 touch-manipulation flex-col items-center justify-center gap-0.5 rounded-xl px-0.5 py-1.5 text-[10px] font-bold leading-none sm:text-[11px]",
                 active ? "text-[#ff6a1a]" : "text-[#8a929c]",
               )}
             >
-              <Icon className="h-[18px] w-[18px] sm:h-5 sm:w-5" strokeWidth={2.25} />
-              {item.label}
+              <Icon className="h-5 w-5 shrink-0" strokeWidth={2.25} />
+              <span className="max-w-full truncate">{item.label}</span>
             </Link>
           );
         })}

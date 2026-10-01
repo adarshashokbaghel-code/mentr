@@ -1,0 +1,356 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.03,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for some more computer thinking?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.03,
+      "end": 16.01,
+      "caption": "Last time: algorithm = clear steps, in order",
+      "text": "Last time, you learned what an algorithm is. A clear list of steps, in order, to get a job done. Remember Robo, and his glass of water?",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.01,
+      "end": 23.49,
+      "caption": "Chapter 2 \u00b7 Sequencing",
+      "text": "Today is chapter two of Thinking Like a Computer. And it's all about one little word. Sequencing.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.49,
+      "end": 31.81,
+      "caption": "Sequencing = putting steps in the right order",
+      "text": "Sequencing just means putting steps in the right order. Hmm. But does the order really matter that much?",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 31.81,
+      "end": 37.69,
+      "caption": "Order really matters. Let's see why!",
+      "text": "Oh, it really does! Let me tell you a funny little story, and you'll see why.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 37.69,
+      "end": 46.43,
+      "caption": "Running late! Robo, help me get dressed",
+      "text": "One morning, you're running late for school. The school bus is almost here! So you ask Robo to help you get dressed.",
+      "scene": "socks",
+      "focus": "meet"
+    },
+    {
+      "start": 46.43,
+      "end": 54.18,
+      "caption": "1. Put on shoes \u00b7 2. Put on socks",
+      "text": "You quickly write two steps for him. Step one, put on shoes. Step two, put on socks.",
+      "scene": "socks",
+      "focus": "list"
+    },
+    {
+      "start": 54.18,
+      "end": 65.36,
+      "caption": "Socks on top of the shoes! Oh no!",
+      "text": "Robo follows them exactly. First, the shoes go on. And then, the socks go on, right on top of the shoes! Oh no!",
+      "scene": "socks",
+      "focus": "funny"
+    },
+    {
+      "start": 65.36,
+      "end": 73.61,
+      "caption": "What went wrong? Think!",
+      "text": "So, what went wrong? Was a step missing? Think about it for a moment.",
+      "scene": "socks",
+      "focus": "why"
+    },
+    {
+      "start": 73.61,
+      "end": 83.48,
+      "caption": "Nothing missing. Just the wrong order!",
+      "text": "Nothing was missing! Both steps were there. They were just in the wrong order. Socks have to go on first, and then the shoes.",
+      "scene": "socks",
+      "focus": "because"
+    },
+    {
+      "start": 83.48,
+      "end": 96.31,
+      "caption": "Socks \u2192 Shoes. Happy feet!",
+      "text": "So we swap them around. Step one, socks. Step two, shoes. And now Robo gets it right. Same steps, new order, happy feet!",
+      "scene": "socks",
+      "focus": "fixed"
+    },
+    {
+      "start": 96.31,
+      "end": 101.88,
+      "caption": "Steps in a set order = a SEQUENCE",
+      "text": "When steps are arranged in a set order, one after another, we call that a sequence.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 101.88,
+      "end": 106.73,
+      "caption": "Sequencing = the right order, so the job works",
+      "text": "And sequencing means putting those steps in the right order, so the job works.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 106.73,
+      "end": 121.02,
+      "caption": "Like stairs: one step after another",
+      "text": "Think of climbing the stairs. You step on the first stair, then the second, then the third. You can't start at the top! A sequence works the same way. One step, after another.",
+      "scene": "define",
+      "focus": "stairs"
+    },
+    {
+      "start": 121.02,
+      "end": 125.06,
+      "caption": "Order matters everywhere!",
+      "text": "Order matters all around you. Let's look at a few.",
+      "scene": "matters",
+      "focus": "intro"
+    },
+    {
+      "start": 125.06,
+      "end": 132.9,
+      "caption": "Socks first, then shoes",
+      "text": "Socks first, then shoes. We know that one now! The socks keep your feet comfy inside the shoes.",
+      "scene": "matters",
+      "focus": "socks"
+    },
+    {
+      "start": 132.9,
+      "end": 139.7,
+      "caption": "Unlock first, then open the door",
+      "text": "When you get home, you unlock the door first, and then you open it. You can't open a locked door!",
+      "scene": "matters",
+      "focus": "door"
+    },
+    {
+      "start": 139.7,
+      "end": 146.91,
+      "caption": "Open the tiffin first, then eat!",
+      "text": "And at lunch, you open your tiffin box first, and then you eat. Nobody can eat through a closed lid!",
+      "scene": "matters",
+      "focus": "tiffin"
+    },
+    {
+      "start": 146.91,
+      "end": 153.87,
+      "caption": "Ask: what must happen FIRST?",
+      "text": "So whenever you put steps in order, ask yourself one question. What must happen first?",
+      "scene": "matters",
+      "focus": "tip"
+    },
+    {
+      "start": 153.87,
+      "end": 163.68,
+      "caption": "Computers do exactly the next step",
+      "text": "Now, here's something really important about computers. A computer does exactly the next step on its list. It doesn't guess.",
+      "scene": "guess",
+      "focus": "intro"
+    },
+    {
+      "start": 163.68,
+      "end": 175.16,
+      "caption": "Open, then unlock? Bonk! Still locked.",
+      "text": "Say Robo's steps are, open the door, then unlock the door. Robo walks up, and pulls the handle. Bonk! The door is still locked.",
+      "scene": "guess",
+      "focus": "door"
+    },
+    {
+      "start": 175.16,
+      "end": 184.4,
+      "caption": "Robo won't fix the order for you",
+      "text": "You or I would think, oh, I should unlock it first. But Robo won't fix the order for you. He just does the next step.",
+      "scene": "guess",
+      "focus": "nofix"
+    },
+    {
+      "start": 184.4,
+      "end": 197.47,
+      "caption": "Wrong order in \u2192 wrong result out",
+      "text": "So remember. If the steps go in the wrong order, the result comes out wrong too. Computers follow the list exactly as it's written. So it's our job to get the order right.",
+      "scene": "guess",
+      "focus": "rule"
+    },
+    {
+      "start": 197.47,
+      "end": 204.61,
+      "caption": "Scrambled = steps all mixed up",
+      "text": "When steps are all mixed up, we say they're scrambled. Like scrambled eggs, all jumbled together!",
+      "scene": "scrambled",
+      "focus": "word"
+    },
+    {
+      "start": 204.61,
+      "end": 214.43,
+      "caption": "Some mix-ups are funny\u2026",
+      "text": "Sometimes scrambled steps are just funny. Like socks on top of your shoes. Everyone laughs, but you still can't go to school like that!",
+      "scene": "scrambled",
+      "focus": "funny"
+    },
+    {
+      "start": 214.43,
+      "end": 223.23,
+      "caption": "\u2026and some are broken. Splash!",
+      "text": "But sometimes, they're broken. Pour the water, then take a glass? Splash! Water all over the floor.",
+      "scene": "scrambled",
+      "focus": "broken"
+    },
+    {
+      "start": 223.23,
+      "end": 235.34,
+      "caption": "Swap = two steps change places",
+      "text": "Here's a sneaky one. When two steps change places with each other, that's called a swap. And just one swap can break the whole job, even when every single step is there.",
+      "scene": "scrambled",
+      "focus": "swap"
+    },
+    {
+      "start": 235.34,
+      "end": 252.78,
+      "caption": "Brush \u2192 Paste \u2192 Pick up? How do we fix it?",
+      "text": "Let's help Robo. He got these steps for brushing his teeth. One, brush teeth. Two, put paste on the brush. Three, pick up the brush. How would you fix it? Think.",
+      "scene": "brush",
+      "focus": "ask"
+    },
+    {
+      "start": 252.78,
+      "end": 265.58,
+      "caption": "Pick up \u2192 Paste \u2192 Brush. Sparkly clean!",
+      "text": "The steps were back to front! So we flip them. Pick up the brush. Then, put paste on it. Then, brush your teeth. Sparkly clean!",
+      "scene": "brush",
+      "focus": "answer"
+    },
+    {
+      "start": 265.58,
+      "end": 272.08,
+      "caption": "Unscramble game: lunchtime!",
+      "text": "Now, an unscramble game! It's lunchtime, and your tiffin is inside your school bag.",
+      "scene": "tiffin",
+      "focus": "intro"
+    },
+    {
+      "start": 272.08,
+      "end": 286.43,
+      "caption": "Which step comes first?",
+      "text": "Here are the steps, all mixed up. Take out the tiffin. Close the zip. Open the zip. Which one comes first? Pause, and think.",
+      "scene": "tiffin",
+      "focus": "ask"
+    },
+    {
+      "start": 286.43,
+      "end": 296.89,
+      "caption": "Open zip \u2192 Take out tiffin \u2192 Close zip",
+      "text": "First, open the zip. Then, take out the tiffin. And last, close the zip. Now you can eat! Yum.",
+      "scene": "tiffin",
+      "focus": "answer"
+    },
+    {
+      "start": 296.89,
+      "end": 313.73,
+      "caption": "Which step is in the wrong place?",
+      "text": "One more! Here's how to make nimbu pani. One, drink the juice. Two, squeeze a lemon into water. Three, add sugar and stir. Which step is in the wrong place?",
+      "scene": "lemon",
+      "focus": "ask"
+    },
+    {
+      "start": 313.73,
+      "end": 322.48,
+      "caption": "Drink goes LAST, after the juice is made",
+      "text": "Drink the juice! Drinking has to be the very last step, after the juice is made. Otherwise, there's nothing to drink.",
+      "scene": "lemon",
+      "focus": "answer"
+    },
+    {
+      "start": 322.48,
+      "end": 328.28,
+      "caption": "Squeeze \u2192 Stir \u2192 Drink. Ahh!",
+      "text": "Squeeze, stir, and then drink. Ahh. Nice and cool!",
+      "scene": "lemon",
+      "focus": "fixed"
+    },
+    {
+      "start": 328.28,
+      "end": 332.16,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 332.16,
+      "end": 342.02,
+      "caption": "Pour milk before opening the carton?",
+      "text": "If pour the milk comes before open the carton, what happens? Pause the video, and say your answer out loud.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 342.02,
+      "end": 353.94,
+      "caption": "No milk! Open the carton first, then pour",
+      "text": "No milk comes out, because the carton is still closed! The fix is easy. Open the carton first, then pour. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 353.94,
+      "end": 359.76,
+      "caption": "Sequencing = the right order",
+      "text": "Let's remember what we learned today. Sequencing means putting steps in the right order.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 359.76,
+      "end": 363.62,
+      "caption": "Socks before shoes, unlock before open",
+      "text": "Socks before shoes. Unlock before open.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 363.62,
+      "end": 369.97,
+      "caption": "Computers do the next step. No guessing!",
+      "text": "Computers do exactly the next step. They don't guess, and they won't fix the order for you.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 369.97,
+      "end": 373.36,
+      "caption": "Swap two steps and things can break",
+      "text": "And if you swap two steps, the whole job can break.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 373.36,
+      "end": 380.03,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! You know that order matters. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 380.03,
+      "end": 386.83,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

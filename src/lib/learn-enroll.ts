@@ -95,8 +95,75 @@ export function readLearnEnrollmentLocal(): LearnEnrollmentDto | null {
   }
 }
 
+export const LEARN_PROGRESS_EVENT = "mentr-learn-progress";
+
+function unionModuleIds(a?: string[], b?: string[]) {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const raw of [...(a ?? []), ...(b ?? [])]) {
+    const id = raw.trim().toUpperCase();
+    if (!id || seen.has(id)) continue;
+    seen.add(id);
+    out.push(id);
+  }
+  return out;
+}
+
+/** Keep completion the server confirmed and anything this device already saved. */
+export function mergeLearnEnrollment(
+  incoming: LearnEnrollmentDto,
+  previous: LearnEnrollmentDto | null,
+): LearnEnrollmentDto {
+  if (!previous || previous.receiptNumber !== incoming.receiptNumber) {
+    return incoming;
+  }
+  return {
+    ...incoming,
+    progress: {
+      ...incoming.progress,
+      videosWatched: unionModuleIds(
+        incoming.progress.videosWatched,
+        previous.progress.videosWatched,
+      ),
+      quizzesCompleted: unionModuleIds(
+        incoming.progress.quizzesCompleted,
+        previous.progress.quizzesCompleted,
+      ),
+      modulesCompleted: unionModuleIds(
+        incoming.progress.modulesCompleted,
+        previous.progress.modulesCompleted,
+      ),
+      buildsCompleted: unionModuleIds(
+        incoming.progress.buildsCompleted,
+        previous.progress.buildsCompleted,
+      ),
+      xp: Math.max(incoming.progress.xp ?? 0, previous.progress.xp ?? 0),
+    },
+  };
+}
+
 export function saveLearnEnrollmentLocal(enrollment: LearnEnrollmentDto) {
-  localStorage.setItem(LEARN_ENROLL_STORAGE_KEY, JSON.stringify(enrollment));
+  const next = mergeLearnEnrollment(enrollment, readLearnEnrollmentLocal());
+  localStorage.setItem(LEARN_ENROLL_STORAGE_KEY, JSON.stringify(next));
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event(LEARN_PROGRESS_EVENT));
+  }
+  return next;
+}
+
+/** Device caches for this Learn session. Cleared on logout. */
+const LEARN_CLIENT_CACHE_KEYS = [
+  LEARN_ENROLL_STORAGE_KEY,
+  "mentr_learn_week_snap_v1",
+  "mentr_learn_practice_answers",
+  "mentr_learn_builds_v1",
+];
+
+export function clearLearnClientCache() {
+  if (typeof window === "undefined") return;
+  for (const key of LEARN_CLIENT_CACHE_KEYS) {
+    localStorage.removeItem(key);
+  }
 }
 
 export async function fetchLearnEnrollment(): Promise<LearnEnrollmentDto | null> {
@@ -109,7 +176,7 @@ export async function fetchLearnEnrollment(): Promise<LearnEnrollmentDto | null>
     const data = await learnRequest<{ enrollment: LearnEnrollmentDto | null }>(
       "/learn/enrollment",
     );
-    if (data.enrollment) saveLearnEnrollmentLocal(data.enrollment);
+    if (data.enrollment) return saveLearnEnrollmentLocal(data.enrollment);
     return data.enrollment;
   } catch {
     return null;

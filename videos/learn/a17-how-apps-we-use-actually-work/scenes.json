@@ -1,0 +1,149 @@
+{
+  "id": "A17",
+  "title": "How Apps We Use Actually Work",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "CS · Computers in Our World",
+  "slug": "a17-how-apps-we-use-actually-work",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a17-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we met the people who build things with computers. Game makers, animators, robot builders, and app developers, who made the maps and payment apps your family uses.", "caption": "Last time: people who build with computers", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of Computers in Our World. It's called, How Apps We Use Actually Work.", "caption": "Chapter 2 · How Apps We Use Actually Work", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And here's a fun secret. Every app you have ever used, games, maps, cameras, all of them, follows the same three little steps. By the end of today, you'll spot them everywhere!", "caption": "Every app follows the same 3 steps!", "focus": "secret", "sfx": "pop", "sfxAt": 0.4, "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "trip",
+      "visual": "a17-hook",
+      "beats": [
+        { "vo": "Picture this. It's Sunday evening, and your family is going to India Gate for ice cream. Yum!", "caption": "Sunday trip to India Gate!", "focus": "trip", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "But Papa isn't sure of the way. Left? Right? Hmm.", "caption": "Papa isn't sure of the way…", "focus": "lost", "pause": 0.5 },
+        { "vo": "So you pick up his phone, open the maps app, and type, India Gate.", "caption": "You type \"India Gate\" into the maps app", "focus": "type", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "And in a second, a bright blue line appears on the map, showing the whole way there!", "caption": "A blue route appears in a second!", "focus": "route", "sfx": "success", "sfxAt": 0.4 },
+        { "vo": "How did the app know the way? Think about it for a moment.", "caption": "How did the app know the way? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "It wasn't magic. The app followed three steps. You gave it something. It did some work inside. And then, it showed you a result.", "caption": "Give it something · It works · It shows a result", "focus": "answer" }
+      ]
+    },
+    {
+      "id": "ipo",
+      "visual": "a17-ipo",
+      "beats": [
+        { "vo": "Those three steps have names. Input. Process. And output.", "caption": "Input → Process → Output", "focus": "name", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Input is what you give the app. Like typing a place, tapping a button, or taking a photo.", "caption": "Input: what you GIVE the app", "focus": "input" },
+        { "vo": "Process is the work the app does inside, where you can't see it. Like finding the best path.", "caption": "Process: the work it does INSIDE", "focus": "process" },
+        { "vo": "And output is what the app shows, or says, back to you. Like a route, a photo, or a green tick.", "caption": "Output: what it SHOWS or SAYS back", "focus": "output" }
+      ]
+    },
+    {
+      "id": "mixie",
+      "visual": "a17-mixie",
+      "beats": [
+        { "vo": "Here's an easy way to remember it. Think of the mixie in your kitchen, on a hot summer day.", "caption": "Think of the mixie in your kitchen", "focus": "intro", "sfx": "pop" },
+        { "vo": "You put in mango and milk. That's the input. The mixie whirrs, and blends it all up. That's the process. And out comes a cold mango shake. That's the output!", "caption": "Mango & milk → Blend → Mango shake!", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Something goes in, work happens, and something comes out. Apps work the same way, just with information instead of mangoes.", "caption": "In → Work → Out. Apps do it too!", "focus": "rule", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "maps",
+      "visual": "a17-maps",
+      "beats": [
+        { "vo": "Let's go back to the maps app, and look at each step. First, the input. You typed, India Gate. That's what you gave the app.", "caption": "INPUT: you type \"India Gate\"", "focus": "input", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Next, the process. Inside, the app looks at lots and lots of roads, and works out a good path, from your home to India Gate. Finding the best path is the process.", "caption": "PROCESS: the app finds a good path", "focus": "process" },
+        { "vo": "And then, the output! The app draws the route on the map, so you can see it.", "caption": "OUTPUT: the route drawn on the map", "focus": "output", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "As you drive, it even talks to you. Turn left in two hundred metres! That spoken direction is output too, because the app is telling you a result.", "caption": "\"Turn left in 200 metres\" is output too!", "focus": "voice", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "camera",
+      "visual": "a17-camera",
+      "beats": [
+        { "vo": "Let's try another app. The camera! You press the round button. That's the input.", "caption": "Camera INPUT: press the button", "focus": "input", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "The app catches the picture, and saves it. That's the process.", "caption": "PROCESS: the app saves the picture", "focus": "process" },
+        { "vo": "And there's your photo, on the screen. Say cheese! That photo is the output.", "caption": "OUTPUT: the photo on the screen", "focus": "output", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "Now you try. Think of your favourite app. What do you give it? And what does it give back?", "caption": "Your favourite app: what goes in and out?", "focus": "fav", "pause": 2.0 }
+      ]
+    },
+    {
+      "id": "quiz",
+      "visual": "a17-quiz",
+      "beats": [
+        { "vo": "Okay, detective time! Here's a quiz app, a bit like the ones on Mentr.", "caption": "Detective time: a quiz app!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "You tap an answer. The app checks if it's right. Then, it shows a green tick.", "caption": "Tap → Check → Green tick", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "So, which part is the process? Tapping, checking, or the green tick? Take a moment.", "caption": "Which part is the PROCESS?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Checking the answer! That's the work the app does inside. Tapping is the input, and the green tick is the output.", "caption": "Process = checking if it's right!", "focus": "answer", "sfx": "success", "sfxAt": 0.02 }
+      ]
+    },
+    {
+      "id": "pattern",
+      "visual": "a17-pattern",
+      "beats": [
+        { "vo": "Now, here's something clever some apps do. Say you love cricket. You watch one cricket video. Then another. And another!", "caption": "You watch cricket… and more cricket!", "focus": "watch", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "The video app notices that. Cricket, again and again. Something that happens again and again is called a pattern.", "caption": "Again and again = a PATTERN", "focus": "notice", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "So what does the app show you next? More cricket! It can't read your mind, and it isn't picking at random. It just noticed your pattern.", "caption": "Pattern noticed → more cricket next!", "focus": "suggest", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "We'll learn a lot more about this when we study AI. For now, just remember. Apps can notice patterns.", "caption": "More about patterns when we study AI!", "focus": "ai" }
+      ]
+    },
+    {
+      "id": "decide",
+      "visual": "a17-decide",
+      "beats": [
+        { "vo": "So, true or false? Apps never decide anything for you. Hmm. What do you think?", "caption": "True or false: apps never decide for you?", "focus": "ask", "pause": 1.8 },
+        { "vo": "False! Apps do decide some things for you. The maps app decides which road it thinks is best. And the video app decides which videos to suggest next.", "caption": "False! Apps decide some things for you", "focus": "answer", "sfx": "chime", "sfxAt": 0.05 },
+        { "vo": "But here's the important part. You can still choose. You can take a different road, or tap a different video. Apps only suggest. You're the boss!", "caption": "Apps only suggest. You still choose!", "focus": "choose", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a17-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "For a maps app, what is the input, and what is the output? Pause the video, and say it out loud, or write it on paper.", "caption": "Maps app: what's the input? The output?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. The input is the place you type in, like India Gate. The output is the route drawn on the map, and the directions it tells you. Did you get it? Brilliant!", "caption": "Input: place typed · Output: route & directions", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a17-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Every app follows three steps. Input, process, and output.", "caption": "Input → Process → Output", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "In maps, the place goes in, the path is found, and the route comes out.", "caption": "Maps: place in → path found → route out", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Video apps suggest things by noticing patterns.", "caption": "Video apps notice patterns", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And apps decide some things for you, like the next video. But you can still choose.", "caption": "Apps decide some things. You still choose!", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! Now you can spot input, process, and output in any app, champ.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

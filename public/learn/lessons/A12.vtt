@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.470
+Welcome back, champ!
+
+2
+00:00:06.470 --> 00:00:16.350
+Last time: Start · Move · Wait · Say
+
+3
+00:00:16.350 --> 00:00:20.270
+Chapter 2 · Making a Character Move
+
+4
+00:00:20.270 --> 00:00:32.090
+Walk, and turn corners!
+
+5
+00:00:32.090 --> 00:00:44.660
+Billu is hungry!
+
+6
+00:00:44.660 --> 00:00:54.260
+Walk → turn the corner → walk
+
+7
+00:00:54.260 --> 00:01:08.120
+Which blocks get Billu there? Think!
+
+8
+00:01:08.120 --> 00:01:13.840
+First: an EVENT block
+
+9
+00:01:13.840 --> 00:01:28.230
+Event = starts when something happens
+
+10
+00:01:28.230 --> 00:01:38.200
+when green flag clicked · always on top
+
+11
+00:01:38.200 --> 00:01:47.460
+Motion block: move 10 steps
+
+12
+00:01:47.460 --> 00:01:56.330
+Steps = how far Billu goes
+
+13
+00:01:56.330 --> 00:02:03.690
+move 20 = twice as far as move 10
+
+14
+00:02:03.690 --> 00:02:11.650
+Motion block: turn 90 degrees
+
+15
+00:02:11.650 --> 00:02:21.050
+90 degrees = a quarter turn, like a corner
+
+16
+00:02:21.050 --> 00:02:38.380
+One turn → facing a new way
+
+17
+00:02:38.380 --> 00:02:44.300
+1 turn: a corner
+
+18
+00:02:44.300 --> 00:02:50.460
+2 turns: facing the other way!
+
+19
+00:02:50.460 --> 00:02:58.380
+4 turns: back where he started
+
+20
+00:02:58.380 --> 00:03:05.670
+Tip: start small · move 10 · turn 90
+
+21
+00:03:05.670 --> 00:03:17.640
+move 1000? Zoom, off the screen!
+
+22
+00:03:17.640 --> 00:03:25.530
+Small steps are easy to check
+
+23
+00:03:25.530 --> 00:03:43.280
+Flag → Move 10 → Turn 90 → Move 10
+
+24
+00:03:43.280 --> 00:03:51.330
+Walk, turn, walk… milk time!
+
+25
+00:03:51.330 --> 00:04:03.190
+Event on top, motion blocks below
+
+26
+00:04:03.190 --> 00:04:17.420
+Try · Watch · Change one block
+
+27
+00:04:17.420 --> 00:04:23.380
+Try: click the green flag
+
+28
+00:04:23.380 --> 00:04:32.740
+Watch: he turned too early!
+
+29
+00:04:32.740 --> 00:04:48.200
+Change one: move 10 → move 20
+
+30
+00:04:48.200 --> 00:04:55.500
+One change at a time, so you know what worked
+
+31
+00:04:55.500 --> 00:05:10.030
+To go straight, which block comes out?
+
+32
+00:05:10.030 --> 00:05:22.410
+Take out turn 90 → straight ahead!
+
+33
+00:05:22.410 --> 00:05:26.110
+Your turn: practice check
+
+34
+00:05:26.110 --> 00:05:35.420
+Face the other way: how many 90° turns?
+
+35
+00:05:35.420 --> 00:05:50.970
+Two! 2 quarter turns = a half turn
+
+36
+00:05:50.970 --> 00:05:56.820
+Event on top: when green flag clicked
+
+37
+00:05:56.820 --> 00:06:02.580
+Motion: move 10 steps · turn 90 degrees
+
+38
+00:06:02.580 --> 00:06:08.180
+Two 90° turns = face the other way
+
+39
+00:06:08.180 --> 00:06:12.780
+Try · Watch · Change one block
+
+40
+00:06:12.780 --> 00:06:19.380
+Chapter 2 done!
+
+41
+00:06:19.380 --> 00:06:24.290
+Next: Quiz · Tap Finish

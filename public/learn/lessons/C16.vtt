@@ -1,0 +1,189 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.480
+Welcome back, champ!
+
+2
+00:00:04.480 --> 00:00:14.310
+Unit 3 · Shapes, Grids & Coordinates · done!
+
+3
+00:00:14.310 --> 00:00:20.070
+Unit 4 · Thinking Like a Problem Solver
+
+4
+00:00:20.070 --> 00:00:24.550
+Chapter 1 · Estimation & Guess-Check-Improve
+
+5
+00:00:24.550 --> 00:00:32.740
+A coder's trick for tricky questions!
+
+6
+00:00:32.740 --> 00:00:41.170
+Riya finds a jar of laddoos at the mela
+
+7
+00:00:41.170 --> 00:00:46.630
+"Guess how many laddoos and win the jar!"
+
+8
+00:00:46.630 --> 00:00:51.520
+The lid is sealed. No counting!
+
+9
+00:00:51.520 --> 00:00:58.580
+What should Riya do? Think!
+
+10
+00:00:58.580 --> 00:01:08.930
+"A million!" "Three!" Do those make sense?
+
+11
+00:01:08.930 --> 00:01:17.790
+Riya thinks: "Hmm, about 20?"
+
+12
+00:01:17.790 --> 00:01:22.580
+That's called an ESTIMATE
+
+13
+00:01:22.580 --> 00:01:26.820
+A sensible guess, close to the real answer
+
+14
+00:01:26.820 --> 00:01:40.140
+Not exact · Not wild · Smart and close
+
+15
+00:01:40.140 --> 00:01:46.460
+Use what you know to guess well
+
+16
+00:01:46.460 --> 00:02:04.670
+Pencil: about 15 cm, not 15 m, not 1 cm
+
+17
+00:02:04.670 --> 00:02:21.980
+School bus: about 40 children
+
+18
+00:02:21.980 --> 00:02:32.100
+Clues: too small · too big · just right
+
+19
+00:02:32.100 --> 00:02:39.590
+Guess 20 → "Too small!" → go bigger
+
+20
+00:02:39.590 --> 00:02:49.220
+Guess 30 → "Too big!" → between 20 and 30
+
+21
+00:02:49.220 --> 00:02:58.370
+Guess 25 → "Just right!" Riya wins!
+
+22
+00:02:58.370 --> 00:03:10.140
+Guess → Check → Improve
+
+23
+00:03:10.140 --> 00:03:17.270
+Too small → go bigger. Too big → go smaller.
+
+24
+00:03:17.270 --> 00:03:34.340
+40 is too big. 30 is too small. Where is it?
+
+25
+00:03:34.340 --> 00:03:39.790
+Between 30 and 40!
+
+26
+00:03:39.790 --> 00:03:46.260
+Secret number: between 1 and 100
+
+27
+00:03:46.260 --> 00:03:57.970
+50 is too big · 25 is too small
+
+28
+00:03:57.970 --> 00:04:08.990
+What's the smartest next guess?
+
+29
+00:04:08.990 --> 00:04:22.920
+About 37 · halfway between 25 and 50
+
+30
+00:04:22.920 --> 00:04:29.040
+Coders guess, check and improve too!
+
+31
+00:04:29.040 --> 00:04:41.820
+Try → Test → Fix = debugging
+
+32
+00:04:41.820 --> 00:04:55.290
+Meera's square: test, find the bug, fix it
+
+33
+00:04:55.290 --> 00:05:03.750
+Riya's first guess was wrong. Is that bad?
+
+34
+00:05:03.750 --> 00:05:18.920
+Every try teaches you something!
+
+35
+00:05:18.920 --> 00:05:26.290
+How many steps across the hall?
+
+36
+00:05:26.290 --> 00:05:32.760
+Hall ≈ 10 m · one step ≈ 50 cm
+
+37
+00:05:32.760 --> 00:05:44.020
+2 steps = 1 m → 10 m ≈ 20 steps
+
+38
+00:05:44.020 --> 00:05:54.290
+1,000 cm ÷ 50 cm = 20 steps
+
+39
+00:05:54.290 --> 00:05:59.670
+Your turn: practice check
+
+40
+00:05:59.670 --> 00:06:13.410
+1 m shelf · books 2 cm thick · how many?
+
+41
+00:06:13.410 --> 00:06:28.030
+100 cm ÷ 2 cm = about 50 books
+
+42
+00:06:28.030 --> 00:06:33.910
+Estimate = a sensible guess
+
+43
+00:06:33.910 --> 00:06:38.440
+Guess → Check → Improve
+
+44
+00:06:38.440 --> 00:06:44.530
+Too small → bigger · Too big → smaller
+
+45
+00:06:44.530 --> 00:06:50.080
+First guesses can be wrong. Keep improving!
+
+46
+00:06:50.080 --> 00:06:56.480
+Chapter 1 done!
+
+47
+00:06:56.480 --> 00:07:03.280
+Next: Quiz · Tap Finish

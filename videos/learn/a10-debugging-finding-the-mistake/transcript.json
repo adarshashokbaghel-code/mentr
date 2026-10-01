@@ -1,0 +1,332 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 6.13,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Today is a special one, so I'm extra happy you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 6.13,
+      "end": 17.27,
+      "caption": "Last time: If \u00b7 Then \u00b7 Else",
+      "text": "Last time, you learned if, then, and else. If the light is red, then stop. Else, go. Now Robo can make choices!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.27,
+      "end": 26.58,
+      "caption": "Chapter 5 \u00b7 Debugging \u2014 Finding the Mistake",
+      "text": "Today is chapter five. The very last chapter of Unit two! It's called, Debugging. Finding the mistake.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 26.58,
+      "end": 38.75,
+      "caption": "De \u00b7 bug \u00b7 ging? Bugs?!",
+      "text": "De, bug, ging. Hmm. Does that sound like it has something to do with bugs? Well, it does! But maybe not the kind you're thinking of.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 38.75,
+      "end": 55.48,
+      "caption": "Open bag \u2192 Books \u2192 Tiffin \u2192 Walk to school",
+      "text": "Remember Robo? Today, Robo is packing his school bag. Here are his steps. One, open the bag. Two, put the books in. Three, put the tiffin in. Four, walk to school.",
+      "scene": "bag",
+      "focus": "steps"
+    },
+    {
+      "start": 55.48,
+      "end": 68.36,
+      "caption": "Oh no! Everything fell out!",
+      "text": "Off goes Robo. Step, step, step. And then, oh no! Books on the road. Tiffin on the road. Everything fell out!",
+      "scene": "bag",
+      "focus": "walk"
+    },
+    {
+      "start": 68.36,
+      "end": 76.1,
+      "caption": "Is Robo being naughty? Think!",
+      "text": "So, what went wrong? Is Robo being naughty? Think about it.",
+      "scene": "bag",
+      "focus": "ask"
+    },
+    {
+      "start": 76.1,
+      "end": 89.48,
+      "caption": "Robo followed exactly. A step was wrong.",
+      "text": "Nope! Robo did exactly what the steps said. Every single one. So if the result is wrong, a step must be wrong. The mistake is in the steps, not in Robo.",
+      "scene": "bag",
+      "focus": "because"
+    },
+    {
+      "start": 89.48,
+      "end": 93.84,
+      "caption": "A mistake in the steps is called a BUG",
+      "text": "A mistake in the steps has a funny name. It's called a bug.",
+      "scene": "define",
+      "focus": "bug"
+    },
+    {
+      "start": 93.84,
+      "end": 108.21,
+      "caption": "Long ago, a real moth got stuck in a computer!",
+      "text": "Why a bug? Long ago, computers were as big as a whole room. One day, people found a real moth stuck inside one! They taped it into their notebook, and the name bug became famous.",
+      "scene": "define",
+      "focus": "moth"
+    },
+    {
+      "start": 108.21,
+      "end": 116.78,
+      "caption": "Not an insect. Not a naughty computer.",
+      "text": "But today, a bug isn't a real insect. And it's not a naughty computer either. It's just a mistake in the steps.",
+      "scene": "define",
+      "focus": "not"
+    },
+    {
+      "start": 116.78,
+      "end": 127.99,
+      "caption": "Debugging = finding the bug and fixing it",
+      "text": "And debugging means finding the bug, and fixing it. De bug. Take the bug out! Every time you fix a mistake in your steps, you're debugging.",
+      "scene": "define",
+      "focus": "debug"
+    },
+    {
+      "start": 127.99,
+      "end": 134.16,
+      "caption": "How to hunt a bug: 3 detective steps",
+      "text": "So how do we hunt for a bug? Like a detective! There are three steps.",
+      "scene": "hunt",
+      "focus": "intro"
+    },
+    {
+      "start": 134.16,
+      "end": 142.07,
+      "caption": "1 \u00b7 Read the steps slowly, one by one",
+      "text": "One. Read the steps slowly, one by one, like a detective looking for clues. Don't rush!",
+      "scene": "hunt",
+      "focus": "read"
+    },
+    {
+      "start": 142.07,
+      "end": 159.53,
+      "caption": "2 \u00b7 Find where it goes wrong: bag not closed!",
+      "text": "Two. Find the step where it goes wrong. Open the bag, okay. Books in, okay. Tiffin in, okay. Walk to school, and everything falls out. Wait! The bag was never closed!",
+      "scene": "hunt",
+      "focus": "find"
+    },
+    {
+      "start": 159.53,
+      "end": 169.56,
+      "caption": "3 \u00b7 Change one thing: add \"Close the bag\"",
+      "text": "Three. Change one thing, then test again. Let's add just one step. Close the bag, right before walk to school.",
+      "scene": "hunt",
+      "focus": "fix"
+    },
+    {
+      "start": 169.56,
+      "end": 180.31,
+      "caption": "Test again \u2192 it works! Bug squashed!",
+      "text": "Now, test. Robo walks, step, step, step, and everything stays inside. It works! Bug squashed!",
+      "scene": "hunt",
+      "focus": "test"
+    },
+    {
+      "start": 180.31,
+      "end": 184.58,
+      "caption": "Three kinds of bugs",
+      "text": "Bugs usually come in three kinds. Let's meet them.",
+      "scene": "kinds",
+      "focus": "intro"
+    },
+    {
+      "start": 184.58,
+      "end": 190.41,
+      "caption": "Missing step: something was forgotten",
+      "text": "A missing step. Something was forgotten, like Robo forgetting to close his bag.",
+      "scene": "kinds",
+      "focus": "missing"
+    },
+    {
+      "start": 190.41,
+      "end": 195.13,
+      "caption": "Wrong order: right steps, mixed up",
+      "text": "Wrong order. All the right steps are there, but they're mixed up.",
+      "scene": "kinds",
+      "focus": "order"
+    },
+    {
+      "start": 195.13,
+      "end": 200.36,
+      "caption": "Extra step: doesn't belong, take it out",
+      "text": "And an extra step. A step that doesn't belong, and should be taken out.",
+      "scene": "kinds",
+      "focus": "extra"
+    },
+    {
+      "start": 200.36,
+      "end": 217.21,
+      "caption": "Shoes \u2192 Socks \u2192 Go outside. What's the bug?",
+      "text": "Let's spot some bugs! Aarav is getting ready to play. Step one, wear shoes. Step two, wear socks. Step three, go outside. What kind of bug is this?",
+      "scene": "socks",
+      "focus": "ask"
+    },
+    {
+      "start": 217.21,
+      "end": 228.53,
+      "caption": "Wrong order! Swap: socks first, then shoes",
+      "text": "Wrong order! Socks on top of the shoes? That looks so silly! Socks must come before shoes. Just swap them, and it works.",
+      "scene": "socks",
+      "focus": "answer"
+    },
+    {
+      "start": 228.53,
+      "end": 244.25,
+      "caption": "Brush \u00b7 Paste \u00b7 Dance on the bed \u00b7 Brush teeth",
+      "text": "Next one. Brushing teeth. Pick up the brush. Put paste on it. Dance on the bed. Brush your teeth. Hmm. Can you find the bug?",
+      "scene": "brush",
+      "focus": "ask"
+    },
+    {
+      "start": 244.25,
+      "end": 254.84,
+      "caption": "Extra step! Remove \"Dance on the bed\"",
+      "text": "Dance on the bed! That's fun, but it has nothing to do with brushing. It's an extra step. Take it out, and the steps are perfect.",
+      "scene": "brush",
+      "focus": "answer"
+    },
+    {
+      "start": 254.84,
+      "end": 261.17,
+      "caption": "Why change just one thing at a time?",
+      "text": "Now, why do we change only one thing at a time? Imagine your torch won't switch on.",
+      "scene": "one",
+      "focus": "intro"
+    },
+    {
+      "start": 261.17,
+      "end": 274.06,
+      "caption": "Changed 3 things at once\u2026 which one worked?",
+      "text": "So you change the batteries, the bulb, and the switch, all at once. And now it works! But wait. Which change fixed it? You can't tell!",
+      "scene": "one",
+      "focus": "many"
+    },
+    {
+      "start": 274.06,
+      "end": 288.99,
+      "caption": "One change, then test \u2192 you know what worked",
+      "text": "So instead, change one thing, then test. New batteries. Test. It works! Now you know exactly what fixed it. That's why one change at a time is so smart.",
+      "scene": "one",
+      "focus": "single"
+    },
+    {
+      "start": 288.99,
+      "end": 298.66,
+      "caption": "True or false? The computer is being naughty.",
+      "text": "Quick quiz! True or false? When the steps don't work, it means the computer is being naughty.",
+      "scene": "truefalse",
+      "focus": "ask"
+    },
+    {
+      "start": 298.66,
+      "end": 310.26,
+      "caption": "False! The mistake is in the steps",
+      "text": "False! The computer follows the steps exactly. So the mistake is always in the steps. And that's good news, because steps are something you can fix!",
+      "scene": "truefalse",
+      "focus": "answer"
+    },
+    {
+      "start": 310.26,
+      "end": 321.34,
+      "caption": "Every programmer finds bugs, every day!",
+      "text": "Here's a secret. Every programmer in the world finds bugs. Every single day! Even the people who make your favourite games, and the apps on your phone.",
+      "scene": "cheer",
+      "focus": "every"
+    },
+    {
+      "start": 321.34,
+      "end": 333.18,
+      "caption": "Found a bug? Celebrate! \"Bug squashed!\"",
+      "text": "So when you find a bug, don't feel bad. Celebrate! Finding a bug means you're getting better. Fix it, test it, and shout, bug squashed!",
+      "scene": "cheer",
+      "focus": "celebrate"
+    },
+    {
+      "start": 333.18,
+      "end": 338.45,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice time! Here's a check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 338.45,
+      "end": 355.81,
+      "caption": "Tea steps: what's the bug?",
+      "text": "These steps make tea. Add tea leaves to the water. Add milk and sugar. Pour into a cup. But the tea is cold, and yucky! What's the bug? Pause, and try it.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 355.81,
+      "end": 370.06,
+      "caption": "Missing step: boil the water first!",
+      "text": "It's a missing step! The water was never boiled. So the fix is, add boil the water, before adding the tea leaves. Now that's a lovely, hot cup of chai. Bug squashed!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 370.06,
+      "end": 377.06,
+      "caption": "Bug = a mistake in the steps",
+      "text": "Let's remember what we learned. A bug is a mistake in the steps. Not a naughty computer.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 377.06,
+      "end": 380.24,
+      "caption": "Debugging = find it and fix it",
+      "text": "Debugging means finding the bug, and fixing it.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 380.24,
+      "end": 384.53,
+      "caption": "Missing \u00b7 Extra \u00b7 Wrong order",
+      "text": "Bugs can be a missing step, an extra step, or the wrong order.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 384.53,
+      "end": 387.65,
+      "caption": "Change one thing, then test",
+      "text": "And change one thing at a time, then test.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 387.65,
+      "end": 401.88,
+      "caption": "Chapter 5 done \u00b7 Unit 2 complete!",
+      "text": "Chapter five, done! And that means, you've finished all of Unit two! Algorithms, order, loops, if then else, and now debugging. You really are thinking like a computer, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 401.88,
+      "end": 408.68,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

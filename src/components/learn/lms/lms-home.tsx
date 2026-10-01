@@ -13,10 +13,12 @@ import {
 } from "@/lib/learn-curriculum";
 import {
   fetchLearnEnrollment,
+  LEARN_PROGRESS_EVENT,
   readLearnEnrollmentLocal,
   type LearnEnrollmentDto,
 } from "@/lib/learn-enroll";
 import {
+  getLearnContinue,
   hasCompletedQuiz,
   hasWatchedVideo,
 } from "@/lib/learn-progress-client";
@@ -30,7 +32,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 export function LmsHome() {
   const { openPotd, today, setToday, refreshToday, noteAttempt } = useLmsPotd();
@@ -38,16 +40,14 @@ export function LmsHome() {
   const potdSolved = Boolean(today?.attempted && today.attempt?.correct);
   const potdMissed = Boolean(today?.attempted && today.attempt && !today.attempt.correct);
 
-  const continueIdx = Math.max(
-    0,
-    ALL_MODULE_IDS.findIndex(
-      (id) => !hasWatchedVideo(enrollment, id) || !hasCompletedQuiz(enrollment, id),
-    ),
+  const continueState = useMemo(
+    () => getLearnContinue(enrollment),
+    [enrollment],
   );
-  const continueId = ALL_MODULE_IDS[continueIdx] ?? SAMPLE_MODULE.id;
+  const continueId = continueState.continueId;
   const continueModule = getModuleById(continueId) ?? SAMPLE_MODULE;
   const continueHasVideo = hasLessonVideo(continueId);
-  const upNext = ALL_MODULE_IDS.slice(continueIdx + 1, continueIdx + 4);
+  const upNext = continueState.upNextIds;
 
   const videoDone = hasWatchedVideo(enrollment, continueId);
   const quizDone = hasCompletedQuiz(enrollment, continueId);
@@ -57,9 +57,16 @@ export function LmsHome() {
   const quizzes = enrollment?.progress?.quizzesCompleted?.length ?? 0;
 
   useEffect(() => {
-    setEnrollment(readLearnEnrollmentLocal());
-    void fetchLearnEnrollment().then(setEnrollment);
+    function sync() {
+      setEnrollment(readLearnEnrollmentLocal());
+    }
+    sync();
+    void fetchLearnEnrollment().then((remote) => {
+      if (remote) setEnrollment(remote);
+    });
     if (!today) void refreshToday();
+    window.addEventListener(LEARN_PROGRESS_EVENT, sync);
+    return () => window.removeEventListener(LEARN_PROGRESS_EVENT, sync);
   }, [today, refreshToday]);
 
   return (
@@ -151,8 +158,12 @@ export function LmsHome() {
       {/* Continue + POTD — equal height */}
       <div className="grid gap-4 md:grid-cols-2">
         <Link
-          href={`/learn/app/lesson/${continueId}?stage=${videoDone && !quizDone ? "quiz" : "watch"}`}
-          className="group relative mx-auto block h-[440px] w-full max-w-md overflow-hidden rounded-[1.75rem] shadow-[3px_3px_0_0_#ff6a1a] ring-2 ring-[#1c2434] transition hover:-translate-y-0.5 md:mx-0 md:max-w-none"
+          href={
+            continueState.allCaughtUp
+              ? "/learn/app/path"
+              : `/learn/app/lesson/${continueId}?stage=${videoDone && !quizDone ? "quiz" : "watch"}`
+          }
+          className="group relative mx-auto block h-[300px] w-full max-w-md overflow-hidden rounded-[1.75rem] shadow-[3px_3px_0_0_#ff6a1a] ring-2 ring-[#1c2434] transition hover:-translate-y-0.5 sm:h-[380px] md:mx-0 md:h-[440px] md:max-w-none"
         >
           <Image
             src="/learn/learn-offer-video.png"
@@ -165,34 +176,44 @@ export function LmsHome() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#1c2434]/95 via-[#1c2434]/55 to-[#1c2434]/25" />
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 py-7 text-center text-white">
             <p className="text-[13px] font-bold uppercase tracking-wider text-[#ffb27a]">
-              Continue · {continueModule.id}
+              {continueState.allCaughtUp
+                ? "Path complete"
+                : `Next · Chapter ${continueState.chapterNumber}`}
             </p>
             <p className="mt-3 max-w-[15ch] text-[1.45rem] font-extrabold leading-snug sm:text-[1.55rem]">
-              {continueModule.title}
+              {continueState.allCaughtUp ? "You finished every chapter" : continueModule.title}
             </p>
             <span className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#ff6a1a] px-5 py-2.5 text-[15px] font-extrabold">
-              {continueHasVideo ? (
+              {continueState.allCaughtUp ? (
+                <Sparkles className="h-4 w-4" />
+              ) : continueHasVideo ? (
                 <Play className="h-4 w-4 fill-current" />
               ) : (
                 <BookOpen className="h-4 w-4" />
               )}
-              {videoDone ? "Resume" : "Start"}
+              {continueState.allCaughtUp
+                ? "Review path"
+                : videoDone
+                  ? "Resume"
+                  : "Start"}
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </span>
             <p className="mt-3 text-[13px] font-semibold text-white/75">
-              {videoDone
-                ? quizDone
-                  ? "Lesson + quiz done"
-                  : "Quiz unlocked"
-                : continueHasVideo
-                  ? "Watch, then quiz"
-                  : "Read the notes, then quiz"}
+              {continueState.allCaughtUp
+                ? `${continueModule.id} was the last lesson`
+                : videoDone
+                  ? quizDone
+                    ? "Lesson + quiz done"
+                    : "Quiz unlocked"
+                  : continueHasVideo
+                    ? `${continueModule.id} · watch, then quiz`
+                    : `${continueModule.id} · read the notes, then quiz`}
             </p>
           </div>
         </Link>
 
         <section
-          className={`mx-auto flex h-[440px] w-full max-w-md flex-col overflow-hidden rounded-[1.75rem] border-2 bg-white p-3.5 md:mx-0 md:max-w-none ${
+          className={`mx-auto flex h-auto max-h-[70dvh] min-h-[280px] w-full max-w-md flex-col overflow-hidden rounded-[1.75rem] border-2 bg-white p-3.5 sm:h-[380px] md:mx-0 md:h-[440px] md:max-h-none md:max-w-none ${
             potdSolved
               ? "border-[#0d9488] shadow-[3px_3px_0_0_#0d9488]"
               : potdMissed
@@ -216,7 +237,7 @@ export function LmsHome() {
               </span>
             </p>
             <Link
-              href="/learn/app/potd"
+              href="/learn/app/progress#potd"
               className="text-[11px] font-bold text-[#8a929c] hover:text-[#0d9488]"
             >
               Calendar →
@@ -238,6 +259,27 @@ export function LmsHome() {
         </section>
       </div>
 
+      {continueState.quizWaitingId ? (
+        <Link
+          href={`/learn/app/lesson/${continueState.quizWaitingId}?stage=quiz`}
+          className="flex items-center justify-between gap-3 rounded-2xl border-2 border-[#0d9488] bg-[#f3fbf8] px-4 py-3"
+        >
+          <span>
+            <span className="block text-[11px] font-bold uppercase tracking-wider text-[#0d9488]">
+              Quiz still open
+            </span>
+            <span className="mt-0.5 block text-[14px] font-extrabold text-[#115e59]">
+              {continueState.quizWaitingId} ·{" "}
+              {getModuleById(continueState.quizWaitingId)?.title}
+            </span>
+          </span>
+          <span className="inline-flex items-center gap-1 text-[13px] font-extrabold text-[#0d9488]">
+            Finish
+            <ArrowRight className="h-4 w-4" />
+          </span>
+        </Link>
+      ) : null}
+
       <div className="grid gap-5 lg:grid-cols-2">
         <section className="rounded-3xl border border-[#e8e2d8] bg-white p-5 sm:p-6">
           <div className="flex items-center justify-between">
@@ -252,36 +294,41 @@ export function LmsHome() {
             </Link>
           </div>
           <ul className="mt-4 space-y-2">
-            {upNext.map((id) => {
-              const mod = getModuleById(id);
-              if (!mod) return null;
-              const hasVideo = hasLessonVideo(id);
-              return (
-                <li key={id}>
-                  <Link
-                    href={`/learn/app/lesson/${id}?stage=watch`}
-                    className="flex items-center gap-3 rounded-2xl border border-[#f0ebe3] bg-[#faf8f4] px-3.5 py-3 transition hover:border-[#ff6a1a]"
-                  >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#fff4e8] text-[#ff6a1a]">
-                      {hasVideo ? (
-                        <Play className="h-4 w-4 fill-current" />
-                      ) : (
-                        <BookOpen className="h-4 w-4" />
-                      )}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="text-[11px] font-bold text-[#8a929c]">
-                        {id}
-                        {hasVideo ? " · Video" : " · Notes + quiz"}
-                      </p>
-                      <p className="truncate text-[14px] font-bold text-[#1c2434]">
-                        {mod.title}
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              );
-            })}
+            {upNext.length === 0 ? (
+              <li className="rounded-2xl border border-[#f0ebe3] bg-[#faf8f4] px-3.5 py-3 text-[13px] font-semibold text-[#8a929c]">
+                {continueState.allCaughtUp
+                  ? "Every chapter is done. Replay any lesson from the path."
+                  : "This is the last open chapter."}
+              </li>
+            ) : (
+              upNext.map((id) => {
+                const mod = getModuleById(id);
+                if (!mod) return null;
+                const hasVideo = hasLessonVideo(id);
+                const chapter = ALL_MODULE_IDS.indexOf(id) + 1;
+                return (
+                  <li key={id}>
+                    <Link
+                      href={`/learn/app/lesson/${id}?stage=watch`}
+                      className="flex items-center gap-3 rounded-2xl border border-[#f0ebe3] bg-[#faf8f4] px-3.5 py-3 transition hover:border-[#ff6a1a]"
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#fff4e8] text-[13px] font-extrabold text-[#ff6a1a]">
+                        {chapter}
+                      </span>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[11px] font-bold text-[#8a929c]">
+                          {id}
+                          {hasVideo ? " · Video" : " · Notes + quiz"}
+                        </p>
+                        <p className="truncate text-[14px] font-bold text-[#1c2434]">
+                          {mod.title}
+                        </p>
+                      </div>
+                    </Link>
+                  </li>
+                );
+              })
+            )}
           </ul>
         </section>
 
@@ -298,7 +345,7 @@ export function LmsHome() {
               Progress
             </Link>
           </div>
-          <div className="mt-4 grid grid-cols-4 gap-3">
+          <div className="mt-4 grid grid-cols-2 gap-3 min-[420px]:grid-cols-4">
             {LEARN_BADGES.slice(0, 4).map((b) => {
               const earned = xp >= b.xp;
               return (

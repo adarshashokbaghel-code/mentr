@@ -1,0 +1,340 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.06,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Pixi and I are so glad you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.06,
+      "end": 17.56,
+      "caption": "Last time: AI finds patterns, then guesses",
+      "text": "Last time, we learned that AI is maths, not magic. It finds patterns in lots of examples, and then it makes a guess. And sometimes, that guess is wrong!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.56,
+      "end": 23.63,
+      "caption": "Chapter 2 \u00b7 Smart vs. Simple",
+      "text": "Today is chapter two of, What Is AI? It's called, Smart versus Simple.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.63,
+      "end": 32.0,
+      "caption": "Is every gadget with a button AI?",
+      "text": "Here's a puzzle for you. Is every gadget with a button, AI? Hmm. Let's find out.",
+      "scene": "open",
+      "focus": "question"
+    },
+    {
+      "start": 32.0,
+      "end": 43.57,
+      "caption": "6:30 on a Saturday. Ring, ring!",
+      "text": "It's Saturday morning at Kabir's house. Ring, ring, ring! His alarm clock goes off at six thirty. Ugh. It's a holiday!",
+      "scene": "mini",
+      "focus": "alarm"
+    },
+    {
+      "start": 43.57,
+      "end": 56.03,
+      "caption": "Mini: \"This torch is so smart. It's AI!\"",
+      "text": "Later, the power goes out. His little sister Mini grabs a torch, clicks it on, and shouts, wow! This torch is so smart. It must be AI!",
+      "scene": "mini",
+      "focus": "torch"
+    },
+    {
+      "start": 56.03,
+      "end": 63.12,
+      "caption": "Is a torch AI? What do you think?",
+      "text": "Is Mini right? Is a torch AI? What do you think?",
+      "scene": "mini",
+      "focus": "ask"
+    },
+    {
+      "start": 63.12,
+      "end": 75.07,
+      "caption": "Two kinds: simple and smart",
+      "text": "Let's find out. Because there are two kinds of programs. Simple ones, and smart ones. By the end of today, you'll tell them apart like a detective!",
+      "scene": "mini",
+      "focus": "two"
+    },
+    {
+      "start": 75.07,
+      "end": 81.51,
+      "caption": "Simple programs follow FIXED RULES",
+      "text": "Simple programs follow fixed rules. A fixed rule is an instruction that never changes.",
+      "scene": "simple",
+      "focus": "rule"
+    },
+    {
+      "start": 81.51,
+      "end": 95.5,
+      "caption": "If the button is pressed \u2192 play a sound",
+      "text": "Like a doorbell. If the button is pressed, play a sound. Press it today. Ding dong! Press it next week. Ding dong! Exactly the same.",
+      "scene": "simple",
+      "focus": "doorbell"
+    },
+    {
+      "start": 95.5,
+      "end": 108.08,
+      "caption": "At 6:30 \u2192 ring. Every single day!",
+      "text": "Kabir's alarm clock has a fixed rule too. At six thirty, ring. Monday, ring. Saturday, ring. Even on his birthday, ring!",
+      "scene": "simple",
+      "focus": "alarm"
+    },
+    {
+      "start": 108.08,
+      "end": 117.89,
+      "caption": "Torch: switch on \u2192 light on",
+      "text": "And Mini's torch? Switch on, light on. Switch off, light off. That's it. One fixed rule.",
+      "scene": "simple",
+      "focus": "torch"
+    },
+    {
+      "start": 117.89,
+      "end": 128.31,
+      "caption": "Simple programs never learn anything new",
+      "text": "Here's the key thing. A simple program never learns anything new. The alarm clock will never figure out that Kabir likes to sleep in on Saturdays.",
+      "scene": "simple",
+      "focus": "never"
+    },
+    {
+      "start": 128.31,
+      "end": 140.75,
+      "caption": "Sunday, 6:30. What will the alarm do?",
+      "text": "Quick question. Tomorrow is Sunday, and Kabir really wants to sleep late. What will his alarm clock do at six thirty? Think!",
+      "scene": "predict",
+      "focus": "ask"
+    },
+    {
+      "start": 140.75,
+      "end": 153.2,
+      "caption": "Ring! The fixed rule never changes.",
+      "text": "Ring, ring, ring! Of course. It follows its fixed rule, no matter what. It can't learn that Sunday is different. Poor Kabir!",
+      "scene": "predict",
+      "focus": "answer"
+    },
+    {
+      "start": 153.2,
+      "end": 164.18,
+      "caption": "AI learns from examples, and changes",
+      "text": "Now, smart programs, like AI, are different. They learn from examples. And they change what they do, after seeing more examples.",
+      "scene": "smart",
+      "focus": "intro"
+    },
+    {
+      "start": 164.18,
+      "end": 172.94,
+      "caption": "Learning = getting better from more examples",
+      "text": "Learning here doesn't mean thinking like you do. It just means the program gets better at its job, by looking at more and more examples.",
+      "scene": "smart",
+      "focus": "learn"
+    },
+    {
+      "start": 172.94,
+      "end": 185.47,
+      "caption": "A voice assistant hears millions of voices",
+      "text": "Think of a voice assistant. At first, it might mix up your words. But it hears millions of voices. Voices from Delhi, Chennai, Kolkata, and everywhere!",
+      "scene": "smart",
+      "focus": "voice"
+    },
+    {
+      "start": 185.47,
+      "end": 192.91,
+      "caption": "More examples \u2192 better at understanding",
+      "text": "Over time, it gets better at understanding all kinds of accents. More examples, better guesses!",
+      "scene": "smart",
+      "focus": "better"
+    },
+    {
+      "start": 192.91,
+      "end": 203.64,
+      "caption": "Oops! You type \"becuase\"",
+      "text": "Here's another one. Spellcheck. You're typing a message to your nani. You want to type, because, but oops, the letters get mixed up.",
+      "scene": "spell",
+      "focus": "typo"
+    },
+    {
+      "start": 203.64,
+      "end": 211.76,
+      "caption": "Spellcheck learned words from lots of writing",
+      "text": "And spellcheck suggests, because! How does it know? It learned common words from lots and lots of writing.",
+      "scene": "spell",
+      "focus": "fix"
+    },
+    {
+      "start": 211.76,
+      "end": 222.77,
+      "caption": "Photo search learned from example photos",
+      "text": "Or photo search. Type dog in a photo app, and it finds all your dog pictures. It learned what dogs look like, from lots of example photos.",
+      "scene": "spell",
+      "focus": "photos"
+    },
+    {
+      "start": 222.77,
+      "end": 234.62,
+      "caption": "Video suggestions change as you watch more",
+      "text": "And remember Kabir's cricket cartoons? Video suggestions change too, as you watch more. Watch lots of animal videos, and soon, you'll see more animals!",
+      "scene": "spell",
+      "focus": "videos"
+    },
+    {
+      "start": 234.62,
+      "end": 241.91,
+      "caption": "Does it change after more examples?",
+      "text": "So here's a super question, to test any gadget. Does it change what it does, after more examples?",
+      "scene": "test",
+      "focus": "ask"
+    },
+    {
+      "start": 241.91,
+      "end": 250.85,
+      "caption": "Yes \u2192 it may be AI",
+      "text": "If yes, it may be AI. Like the voice assistant, or spellcheck. They keep getting better with more examples.",
+      "scene": "test",
+      "focus": "yes"
+    },
+    {
+      "start": 250.85,
+      "end": 264.97,
+      "caption": "No \u2192 a simple, fixed-rule program",
+      "text": "If no, it's a simple, fixed rule program. Like the doorbell. Does it have a screen? Is it expensive? Those questions don't help. Only this one does!",
+      "scene": "test",
+      "focus": "no"
+    },
+    {
+      "start": 264.97,
+      "end": 270.06,
+      "caption": "Sort it: fixed rule, or learns?",
+      "text": "Let's play, sort it! Fixed rule, or learns from examples?",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 270.06,
+      "end": 286.75,
+      "caption": "Which ones learn from examples?",
+      "text": "Alarm clock. Spellcheck. Doorbell. Voice assistant. Calculator. Photo search. Which ones learn from examples? Pause, and think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 286.75,
+      "end": 303.1,
+      "caption": "3 follow fixed rules \u00b7 3 learn from examples",
+      "text": "The alarm clock, doorbell, and calculator follow fixed rules. Spellcheck, the voice assistant, and photo search learn from examples. How did you do? Oh, and a ceiling fan switch? Fixed rule too!",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 303.1,
+      "end": 313.53,
+      "caption": "A DESIGNER writes and plans a program",
+      "text": "Now, one more big idea. Who makes all these programs? People! The person who writes and plans a program is called a designer.",
+      "scene": "people",
+      "focus": "design"
+    },
+    {
+      "start": 313.53,
+      "end": 324.63,
+      "caption": "People design simple programs AND AI",
+      "text": "People design the doorbell's simple rule. If pressed, play a sound. And people design AI too. They write the program, and they test it.",
+      "scene": "people",
+      "focus": "both"
+    },
+    {
+      "start": 324.63,
+      "end": 333.14,
+      "caption": "People choose the examples AI learns from",
+      "text": "People even choose the examples that AI learns from. Like picking thousands of cat photos, to teach it what a cat looks like.",
+      "scene": "people",
+      "focus": "examples"
+    },
+    {
+      "start": 333.14,
+      "end": 341.75,
+      "caption": "AI doesn't build itself. People are in charge!",
+      "text": "So AI doesn't build itself out of nothing. Every AI has human designers. People are still in charge.",
+      "scene": "people",
+      "focus": "charge"
+    },
+    {
+      "start": 341.75,
+      "end": 345.7,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 345.7,
+      "end": 359.12,
+      "caption": "Is a torch AI? Why or why not?",
+      "text": "Remember Mini? Is a torch AI? Why, or why not? Pause the video, and think. Or write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 359.12,
+      "end": 375.46,
+      "caption": "No! One fixed rule. It never learns or changes.",
+      "text": "No, it's not! A torch follows one fixed rule. Switch on, light on. It never learns from examples, and it never changes what it does. Sorry, Mini! Great thinking, champ.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 375.46,
+      "end": 381.23,
+      "caption": "Simple programs follow fixed rules",
+      "text": "Let's remember. Simple programs follow fixed rules, like a doorbell.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 381.23,
+      "end": 385.17,
+      "caption": "AI changes after seeing more examples",
+      "text": "AI changes what it does, after seeing more examples.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 385.17,
+      "end": 389.48,
+      "caption": "A torch is not AI. It just follows a switch.",
+      "text": "A torch is not AI. It just follows a switch.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 389.48,
+      "end": 393.26,
+      "caption": "People design both",
+      "text": "And people design both simple programs, and AI.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 393.26,
+      "end": 398.61,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! Now you can tell smart from simple, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 398.61,
+      "end": 405.41,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

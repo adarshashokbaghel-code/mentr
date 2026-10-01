@@ -1,0 +1,145 @@
+{
+  "id": "A14",
+  "title": "Making Choices in Code",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "CS · Building With Blocks",
+  "slug": "a14-making-choices-in-code",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a14-welcome",
+      "beats": [
+        { "vo": "Hi champ, welcome back! Ready for something really cool today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you made variable boxes. Score, lives, and name. You learned to set them, and change them by one. Super useful!", "caption": "Last time: variable boxes · set · change", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "We're still in Unit three, Building With Blocks. And this is chapter four.", "caption": "Unit 3 · Building With Blocks", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "It's called, Making Choices in Code.", "caption": "Chapter 4 · Making Choices in Code", "focus": "chapter", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "You make choices all day long. Should I wear a sweater? Should I play, or do homework first? Hmm. But can a computer make choices too?", "caption": "Can code make choices too?", "focus": "wonder", "pause": 0.5 },
+        { "vo": "It can! And by the end of today, you'll teach it how.", "caption": "Yes! And you'll teach it how", "focus": "promise", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "rain",
+      "visual": "a14-hook",
+      "beats": [
+        { "vo": "Picture this. It's a school morning, and you look out of the window. Dark clouds, everywhere.", "caption": "School morning. Dark clouds!", "focus": "morning", "sfx": "whoosh", "sfxAt": 0.5 },
+        { "vo": "Your mum says, if it is raining, take an umbrella. Else, wear a cap.", "caption": "\"If raining, umbrella. Else, a cap.\"", "focus": "mum" },
+        { "vo": "Does that sound familiar? Yes! In Unit two, we made if, then stories, just like this one.", "caption": "Remember Unit 2? If-then stories!", "focus": "remember", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "So here's a question. What should you do if it's sunny, and not raining at all? Think.", "caption": "Not raining. What do you do?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Wear a cap! That's the else part. Else means, otherwise. It's what you do when the answer is no.", "caption": "Else = otherwise → wear a cap", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "And today, we'll build this exact same thinking, with coding blocks.", "caption": "Same thinking, now with blocks!", "focus": "code", "sfx": "pop", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a14-define",
+      "beats": [
+        { "vo": "Every choice starts with a question. In code, we call it a condition.", "caption": "The question is called a CONDITION", "focus": "condition", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "A condition is a question with only two answers. Yes, or no. Like, is it raining? Or, is Billu touching the wall?", "caption": "A question with a yes or no answer", "focus": "yesno" },
+        { "vo": "Computers say it a little differently. Yes is called true. And no is called false.", "caption": "Yes = TRUE · No = FALSE", "focus": "truefalse", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "And the if block is the block that asks the question. It's shaped like a mouth, or a letter C, so other blocks can sit inside it. It runs those inside blocks, only when the condition is true.", "caption": "If block: inside runs only when TRUE", "focus": "ifblock" }
+      ]
+    },
+    {
+      "id": "ifthen",
+      "visual": "a14-if",
+      "beats": [
+        { "vo": "Let's read one together. If touching coin, then change score by one.", "caption": "if touching coin then change score by 1", "focus": "show", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "The blue part, touching coin, is the condition. It fits in this pointy slot. And the block tucked inside is what happens when it's true.", "caption": "Pointy slot = condition · inside = action", "focus": "parts" },
+        { "vo": "Billu runs, and touches the coin. Is it touching coin? True! So the inside block runs, and the score goes up by one.", "caption": "Touching coin? TRUE → score goes up", "focus": "yes", "sfx": "success", "sfxAt": 0.55 },
+        { "vo": "Now Billu jumps right over the coin, and misses it. Touching coin? False. So the inside block is skipped. Nothing happens. The score stays the same.", "caption": "Missed it? FALSE → nothing happens", "focus": "no", "sfx": "buzz", "sfxAt": 0.45 }
+      ]
+    },
+    {
+      "id": "else",
+      "visual": "a14-else",
+      "beats": [
+        { "vo": "Now let's add an else. If touching wall, then bounce. Else, move ten steps.", "caption": "if touching wall then bounce, else move 10", "focus": "show", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Billu is in the middle of the stage, far from the wall. Touching wall? False. So the else part runs. Move ten steps. Walk, walk, walk.", "caption": "Not touching → FALSE → move 10 steps", "focus": "false", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "Now Billu reaches the wall. Touching wall? True! So Billu bounces, and turns around.", "caption": "Touching wall → TRUE → bounce!", "focus": "true", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "See? It's just like the rain story from this morning. If raining, umbrella. Else, cap. One question, and two paths to choose from.", "caption": "One question, two paths", "focus": "paths", "sfx": "chime", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "truefalse",
+      "visual": "a14-spot",
+      "beats": [
+        { "vo": "Let's play, true or false! Remember, true means yes, and false means no. I'll show you Billu, and you tell me the answer.", "caption": "Game time: True or false?", "focus": "intro", "sfx": "pop" },
+        { "vo": "The condition is, touching wall. Here's Billu, right up against the wall. True, or false?", "caption": "Touching wall? True or false?", "focus": "q1", "pause": 1.8 },
+        { "vo": "True! Billu is touching the wall, so it would bounce.", "caption": "TRUE! Billu is touching the wall", "focus": "a1", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Same condition, touching wall. Now Billu is far away, in the middle. True, or false?", "caption": "Touching wall? True or false?", "focus": "q2", "pause": 1.8 },
+        { "vo": "False! Billu is not touching anything. So if there's an else, the else part runs, and Billu keeps walking.", "caption": "FALSE! So the else part runs", "focus": "a2", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "match",
+      "visual": "a14-match",
+      "beats": [
+        { "vo": "Now let's match a story to a block. Story: when the ball touches the goal, the crowd cheers.", "caption": "Story: ball touches goal → crowd cheers", "focus": "story", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "What's the question here? Touching goal! And what happens? Play a cheer sound. So the block is, if touching goal, then play cheer sound. Easy, right?", "caption": "if touching goal then play cheer sound", "focus": "block", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Your turn. A dog in a game should bark, only when it touches the cat. Which block is right? Touching edge, touching cat, or forever say woof?", "caption": "Dog barks only when it touches the cat?", "focus": "ask", "pause": 2.0 },
+        { "vo": "If touching cat, then say woof! The condition must be about the cat. Forever would bark all the time. So noisy!", "caption": "if touching cat then say \"Woof!\"", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "one",
+      "visual": "a14-one",
+      "beats": [
+        { "vo": "One last tip. When you're starting out, check just one condition in each if block.", "caption": "Tip: one condition at a time", "focus": "intro", "sfx": "pop" },
+        { "vo": "If you ask, is it raining, and is it Monday, and is it hot, all at once, it gets confusing, fast!", "caption": "Too many questions at once = confusing!", "focus": "messy", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "One question. One clear answer. True, or false. Simple code is easier to read, and easier to fix. Bigger programs can ask more later. But for now, one at a time.", "caption": "One question → one clear answer", "focus": "clean", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a14-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time. Just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "If touching coin, then add one to score. What happens when the character misses the coin? Pause, and think it through.", "caption": "Billu misses the coin. What happens?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Nothing changes! The condition is false, and there's no else part. So the inside block is skipped, and the score stays exactly the same. Great thinking!", "caption": "FALSE, no else → score stays the same", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Bonus. If touching star, then change score by one. The score is four. Billu jumps over the star, without touching it. What's the score?", "caption": "Score 4 · jumps over the star · score = ?", "focus": "bonus", "pause": 2.0 },
+        { "vo": "Still four! It never touched the star, so the condition was false. Brilliant!", "caption": "Still 4! Never touched → FALSE", "focus": "bonusA", "sfx": "chime", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a14-recap",
+      "beats": [
+        { "vo": "Let's remember. If the condition is true, the blocks inside run.", "caption": "TRUE → the inside blocks run", "focus": "r1", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Else runs when the condition is false. It means, otherwise.", "caption": "FALSE → the else part runs", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Check one condition at a time. Keep it simple.", "caption": "One condition at a time", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And no else, plus a false condition? Nothing happens.", "caption": "No else + FALSE = nothing happens", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four of Unit three, done! Your code can make choices now, champ. Super work!", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

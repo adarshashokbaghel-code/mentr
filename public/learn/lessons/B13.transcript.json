@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.75,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy you're here again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.75,
+      "end": 14.66,
+      "caption": "Last time: Sound \u2192 Words \u2192 Patterns",
+      "text": "Last time, we learned how computers listen. First they hear the sound, then they turn it into words, and then they match those words to patterns.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.66,
+      "end": 18.88,
+      "caption": "Chapter 3 \u00b7 Chatting With Computers",
+      "text": "Today is chapter three, and it's all about chatting with computers!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 18.88,
+      "end": 29.59,
+      "caption": "How does a computer decide what to say?",
+      "text": "Have you ever typed a question, and a computer typed an answer right back? Hmm. How does it decide what to say? Let's find out.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 29.59,
+      "end": 35.5,
+      "caption": "Meet Anaya and her panda project",
+      "text": "Meet Anaya. She's ten, and she has a school project all about pandas.",
+      "scene": "anaya",
+      "focus": "meet"
+    },
+    {
+      "start": 35.5,
+      "end": 43.91,
+      "caption": "Anaya types: \"What do pandas eat?\"",
+      "text": "With her papa sitting right beside her, she opens a chat helper app called Pip. And she types, what do pandas eat?",
+      "scene": "anaya",
+      "focus": "ask"
+    },
+    {
+      "start": 43.91,
+      "end": 51.55,
+      "caption": "Pip: \"Pandas mostly eat bamboo!\"",
+      "text": "In a blink, Pip types back. Pandas mostly eat bamboo! Wow, that was fast.",
+      "scene": "anaya",
+      "focus": "reply"
+    },
+    {
+      "start": 51.55,
+      "end": 61.83,
+      "caption": "How did Pip know? A tiny person inside?",
+      "text": "So how did Pip know what to say? Is there a tiny person hiding inside, typing really fast? What do you think?",
+      "scene": "anaya",
+      "focus": "why"
+    },
+    {
+      "start": 61.83,
+      "end": 70.63,
+      "caption": "No person inside. Pip is a chatbot!",
+      "text": "Nope! No person at all. Pip is a chatbot. And today, you'll find out exactly how it works.",
+      "scene": "anaya",
+      "focus": "truth"
+    },
+    {
+      "start": 70.63,
+      "end": 75.73,
+      "caption": "Chatbot = a program that chats by typing replies",
+      "text": "A chatbot is a computer program that chats with you, by typing replies.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 75.73,
+      "end": 83.06,
+      "caption": "Homework apps \u00b7 Game help \u00b7 Ticket apps",
+      "text": "You might find one in a homework app, behind a game's help button, or in a train ticket app that answers questions.",
+      "scene": "define",
+      "focus": "where"
+    },
+    {
+      "start": 83.06,
+      "end": 91.95,
+      "caption": "A program. Not a person, not magic.",
+      "text": "But remember, it's a program. It's not a person, and it's not magic. So how does it pick its words?",
+      "scene": "define",
+      "focus": "not"
+    },
+    {
+      "start": 91.95,
+      "end": 100.52,
+      "caption": "Step 1: spot the key words \u00b7 pandas \u00b7 eat",
+      "text": "First, Pip spots the key words in your message. In, what do pandas eat, the key words are pandas, and eat.",
+      "scene": "how",
+      "focus": "keys"
+    },
+    {
+      "start": 100.52,
+      "end": 109.89,
+      "caption": "It learned patterns from lots of examples",
+      "text": "Pip learned from lots and lots of examples of writing. And in those examples, pandas and eat often came together with the word, bamboo.",
+      "scene": "how",
+      "focus": "patterns"
+    },
+    {
+      "start": 109.89,
+      "end": 117.13,
+      "caption": "Predict = a smart guess about what comes next",
+      "text": "So Pip predicts a reply. Predict means making a smart guess about what comes next, using patterns.",
+      "scene": "how",
+      "focus": "predict"
+    },
+    {
+      "start": 117.13,
+      "end": 126.61,
+      "caption": "Twinkle, twinkle, little ___?",
+      "text": "You can do it too! Twinkle, twinkle, little, what comes next? Say it out loud.",
+      "scene": "how",
+      "focus": "try"
+    },
+    {
+      "start": 126.61,
+      "end": 136.46,
+      "caption": "Star! You predicted from a pattern.",
+      "text": "Star! You predicted it, because you've heard that pattern so many times. A chatbot does the same thing, one word at a time.",
+      "scene": "how",
+      "focus": "star"
+    },
+    {
+      "start": 136.46,
+      "end": 145.72,
+      "caption": "Chat tree: if the user says this, reply that",
+      "text": "Some simple chatbots use a chat tree. A chat tree is a map of choices. If the user says this, reply with that.",
+      "scene": "tree",
+      "focus": "intro"
+    },
+    {
+      "start": 145.72,
+      "end": 152.54,
+      "caption": "\"I feel bored.\" \u2192 \"Want a fun animal fact?\"",
+      "text": "Say you type, I feel bored. The tree says, reply with, want a fun animal fact?",
+      "scene": "tree",
+      "focus": "bored"
+    },
+    {
+      "start": 152.54,
+      "end": 164.57,
+      "caption": "Yes \u2192 octopus fact \u00b7 No \u2192 a riddle",
+      "text": "If you say yes, it replies, an octopus has three hearts! If you say no, it asks, how about a riddle instead? Each answer leads down a different branch.",
+      "scene": "tree",
+      "focus": "branches"
+    },
+    {
+      "start": 164.57,
+      "end": 188.32,
+      "caption": "\"I feel bored.\" Which reply is best?",
+      "text": "Your turn to be the chatbot! The user types, I feel bored. Which reply is best? A, want to hear a fun animal fact? B, the capital of France is Paris. C, please type your phone number. Or D, goodbye. Pause, and pick one.",
+      "scene": "pick",
+      "focus": "ask"
+    },
+    {
+      "start": 188.32,
+      "end": 197.77,
+      "caption": "A: it matches, and it's safe!",
+      "text": "A! It matches what the user said, and it's safe. And C? A good chatbot should never ask for your phone number.",
+      "scene": "pick",
+      "focus": "answer"
+    },
+    {
+      "start": 197.77,
+      "end": 207.29,
+      "caption": "Pip: \"I'm your best friend!\"",
+      "text": "Back to Anaya. After a while, Pip types, I'm your best friend! Aww. That sounds sweet, doesn't it?",
+      "scene": "friend",
+      "focus": "says"
+    },
+    {
+      "start": 207.29,
+      "end": 215.95,
+      "caption": "Does Pip really know her? Think!",
+      "text": "But is it true? Does Pip really know Anaya, and care about her? Think about it.",
+      "scene": "friend",
+      "focus": "ask"
+    },
+    {
+      "start": 215.95,
+      "end": 226.6,
+      "caption": "No feelings. Just predicting friendly words.",
+      "text": "Here's the truth. A chatbot has no feelings, and it doesn't know you. It's just predicting friendly-sounding words, because friendly words fit the pattern.",
+      "scene": "friend",
+      "focus": "truth"
+    },
+    {
+      "start": 226.6,
+      "end": 236.21,
+      "caption": "Real friends are real people!",
+      "text": "It can't come to your birthday, and it won't keep your secrets. Real friends are real people, like your classmates, your cousins, and your family.",
+      "scene": "friend",
+      "focus": "real"
+    },
+    {
+      "start": 236.21,
+      "end": 247.94,
+      "caption": "Pip: \"A spider has six legs.\" Right?",
+      "text": "Next, Anaya asks, how many legs does a spider have? And Pip says, six legs. Hmm. Is that right?",
+      "scene": "wrong",
+      "focus": "ask"
+    },
+    {
+      "start": 247.94,
+      "end": 254.37,
+      "caption": "The book says eight legs! Pip was wrong.",
+      "text": "Anaya checks her science book. A spider has eight legs! Pip got it wrong.",
+      "scene": "wrong",
+      "focus": "check"
+    },
+    {
+      "start": 254.37,
+      "end": 267.21,
+      "caption": "Predictions are guesses. They can be wrong.",
+      "text": "Was Pip lying? Was it sleepy? No! A chatbot predicts from patterns, and patterns can be wrong. Insects have six legs, so the guess got mixed up.",
+      "scene": "wrong",
+      "focus": "why"
+    },
+    {
+      "start": 267.21,
+      "end": 271.4,
+      "caption": "Check big facts with a grown-up or a book",
+      "text": "So for big facts, always check with a grown-up, or a good book.",
+      "scene": "wrong",
+      "focus": "tip"
+    },
+    {
+      "start": 271.4,
+      "end": 279.57,
+      "caption": "Safe or unsafe to type?",
+      "text": "Now, the most important part. Some things are safe to type to a chatbot. And some things are not.",
+      "scene": "safe",
+      "focus": "intro"
+    },
+    {
+      "start": 279.57,
+      "end": 300.28,
+      "caption": "Which ones are safe to type?",
+      "text": "Here are six. What do pandas eat? Your home address. Tell me a dragon story. Your password. Your school name. And where your house keys are hidden. Which ones are safe? Pause, and sort them.",
+      "scene": "safe",
+      "focus": "ask"
+    },
+    {
+      "start": 300.28,
+      "end": 317.13,
+      "caption": "Questions & stories: safe. Private info: never!",
+      "text": "Pandas, and a dragon story? Safe! They share nothing private. Your address, password, school name, and where the keys hide? Never! That's private info, things only you and your family should know.",
+      "scene": "safe",
+      "focus": "answer"
+    },
+    {
+      "start": 317.13,
+      "end": 332.17,
+      "caption": "Chats can be saved. Ask a grown-up first!",
+      "text": "Why? Because what you type may be saved, and seen by other people. So always ask a grown-up before using a chat app. And if a chat ever asks for private things, stop, and tell a trusted adult.",
+      "scene": "safe",
+      "focus": "saved"
+    },
+    {
+      "start": 332.17,
+      "end": 336.12,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 336.12,
+      "end": 347.72,
+      "caption": "Tell a chatbot where the keys hide? Why?",
+      "text": "Should you tell a chatbot that your house keys hide under the mat? Why, or why not? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 347.72,
+      "end": 361.21,
+      "caption": "No! It's private, and chats can be saved.",
+      "text": "No way! That's private info. A chatbot isn't a friend, and what you type can be saved, or seen by others. Keep home secrets at home. Brilliant thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 361.21,
+      "end": 367.18,
+      "caption": "Chatbots predict replies from patterns",
+      "text": "Let's remember. A chatbot predicts its reply, from patterns in your words.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 367.18,
+      "end": 371.55,
+      "caption": "Chatbots have no feelings",
+      "text": "It sounds friendly, but it has no feelings, and it doesn't know you.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 371.55,
+      "end": 374.75,
+      "caption": "They can be wrong. Check big facts!",
+      "text": "It can give wrong answers, so check big facts.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 374.75,
+      "end": 378.84,
+      "caption": "Never share secrets or private info",
+      "text": "And never share secrets, or private info, with a chatbot.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 378.84,
+      "end": 384.13,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! Now you know how chatbots talk, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 384.13,
+      "end": 390.93,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

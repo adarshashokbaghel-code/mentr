@@ -1,0 +1,158 @@
+{
+  "id": "C9",
+  "title": "Sets — Things That Belong Together",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "Math · Logic & Reasoning",
+  "slug": "c9-sets-things-that-belong-together",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c9-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you compared numbers, and sorted toy cars from smallest to biggest. Five, nine, twelve, twenty one, thirty. Remember?", "caption": "Last time: sorting 5, 9, 12, 21, 30", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four of Logic and Reasoning. It's called, Sets. Things that belong together.", "caption": "Chapter 4 · Sets", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Sorting by size is one way to tidy up. But sometimes, we sort things into groups instead. Hmm. So how do we decide what goes where?", "caption": "Sort into groups. But what goes where?", "focus": "word", "pause": 0.5 },
+        { "vo": "Let's find out, with a very messy little story.", "caption": "Let's find out with a messy story!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "chintu",
+      "visual": "c9-hook",
+      "beats": [
+        { "vo": "Meet your little cousin, Chintu. Oh no! He's tipped out the fruit basket and the toy box, all over the floor. Mangoes, bananas, a cricket bat, a football, everything!", "caption": "Chintu tipped everything onto the floor!", "focus": "mess", "sfx": "whoosh", "sfxAt": 0.2, "pause": 0.4 },
+        { "vo": "Mum says, put the things that belong together, back together. How would you tidy this up? Think for a moment.", "caption": "How would you tidy this up? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "The fruits go back in the basket. Mango, banana, apple, guava. And the sports things go in the toy box. Cricket bat, football.", "caption": "Fruits → basket · Sports things → toy box", "focus": "sort", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Ahh, much better! Each group has things that belong together. And now Chintu can find his football in one second.", "caption": "Each group belongs together. Tidy!", "focus": "done", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c9-define",
+      "beats": [
+        { "vo": "In maths, a group of things that belong together has a special name. It's called a set.", "caption": "A group that belongs together = a SET", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "So the basket is the set of fruits. The toy box is the set of sports things. Even the things in your school bag make a set!", "caption": "Fruits · Sports things · My school bag", "focus": "meaning" },
+        { "vo": "Each thing inside a set is called a member. Mango is a member of the set, fruits. Is the football a member of fruits? No way! It belongs with the sports things.", "caption": "Mango is a MEMBER of the set \"fruits\"", "focus": "member", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "belong",
+      "visual": "c9-belong",
+      "beats": [
+        { "vo": "Let's check some sets. Here's the set, fruits. Mango, banana, apple, guava. Yes, they all belong!", "caption": "Fruits: mango, banana, apple, guava", "focus": "fruits", "sfx": "pop", "sfxAt": 0.8 },
+        { "vo": "Now, the set, sports. Cricket. Kabaddi. Football. Samosa. Wait a minute! Which one doesn't belong? Think.", "caption": "Sports: which one doesn't belong?", "focus": "sports", "pause": 2.0 },
+        { "vo": "Samosa! It's yummy, but it's a snack, not a sport. So it doesn't belong in this set. You can't play a match of samosa!", "caption": "Samosa is a snack, not a sport!", "focus": "odd", "sfx": "buzz", "sfxAt": 0.08 }
+      ]
+    },
+    {
+      "id": "circle",
+      "visual": "c9-circle",
+      "beats": [
+        { "vo": "Here's a neat way to show a set. We draw a big circle, and put its members inside. This circle is the set, red things.", "caption": "Show a set as a circle: \"red things\"", "focus": "circle", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "A red apple? Inside. A red toy car? Inside. A red ball? Inside too!", "caption": "Red apple, red car, red ball → inside", "focus": "inside", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "And a green leaf? It's not red, so it stays outside the circle. Inside means it belongs. Outside means it doesn't.", "caption": "Green leaf → outside. It doesn't belong.", "focus": "outside" }
+      ]
+    },
+    {
+      "id": "venn",
+      "visual": "c9-venn",
+      "beats": [
+        { "vo": "Now let's draw two circles that overlap, like this. Circle A is red things. Circle B is round things. This picture is called a Venn diagram.", "caption": "Two circles = a VENN DIAGRAM", "focus": "setup", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "A red toy car. Is it red? Yes. Is it round? No. So it goes only in circle A.", "caption": "Red toy car → only A (red)", "focus": "car", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "An orange ball. Is it red? No. Is it round? Yes! So it goes only in circle B.", "caption": "Orange ball → only B (round)", "focus": "orange", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Now, a red ball. It's red, and it's round! So where should it go? Think.", "caption": "Red ball: red AND round. Where?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Right in the middle, where the circles overlap! The overlap is for things that belong to both sets. Red, and round.", "caption": "The middle (overlap) = in BOTH sets", "focus": "middle", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "And a yellow banana? Is it red? No. Is it round? No. So it goes outside both circles. We call that, neither.", "caption": "Banana: not red, not round → outside", "focus": "banana", "sfx": "whoosh", "sfxAt": 0.5 },
+        { "vo": "So every item gets exactly one spot. Only A. Only B. Both, in the middle. Or neither, outside. Just ask the two questions each time.", "caption": "Only A · Only B · Both · Neither", "focus": "spots", "sfx": "tick", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "bag",
+      "visual": "c9-bag",
+      "beats": [
+        { "vo": "Let's try Chintu's school bag. Circle A is things you write with. Circle B is things made of wood.", "caption": "A: things you write with · B: made of wood", "focus": "setup", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "First, a wooden pencil. You write with it, and it's made of wood. Both! So it goes in the middle.", "caption": "Wooden pencil → both → the middle", "focus": "pencil", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "A pen? You write with it, but it's plastic. Only A. A wooden ruler? Made of wood, but you don't write with it. Only B. And the water bottle? Neither!", "caption": "Pen → A · Ruler → B · Bottle → neither", "focus": "rest", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "c9-game",
+      "beats": [
+        { "vo": "Now, a sorting game! New circles. Circle A is yellow things. Circle B is things you eat.", "caption": "A: yellow things · B: things you eat", "focus": "intro", "sfx": "pop" },
+        { "vo": "Here comes a yellow school bus. Where does it go? Think!", "caption": "Yellow school bus. Where does it go?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Only in yellow things! The bus is yellow, but you definitely can't eat it. Crunch!", "caption": "Bus → only yellow. You can't eat a bus!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "A banana is yellow, and you can eat it, so it goes in the middle. A roti is food, but it's not yellow, so only things you eat. And a blue pencil? Neither!", "caption": "Banana → both · Roti → eat · Pencil → neither", "focus": "more", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "games",
+      "visual": "c9-games",
+      "beats": [
+        { "vo": "Here's a tricky one. Circle A is games played with a ball. Circle B is games played in a team.", "caption": "A: games with a ball · B: team games", "focus": "setup", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Running race. Chess. Swimming. Football. Which one goes in the middle? Take your time.", "caption": "Which one goes in the middle?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Football! It uses a ball, and you play it in a team. A running race, chess and swimming? No ball, and no team. So they go outside.", "caption": "Football: ball AND team → the middle!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "numbers",
+      "visual": "c9-numbers",
+      "beats": [
+        { "vo": "Sets work with numbers too! Set A is two, four, six, eight. Set B is three, six, nine.", "caption": "Set A: 2, 4, 6, 8 · Set B: 3, 6, 9", "focus": "setup", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Is there a number that's in both sets? Look carefully.", "caption": "Which number is in BOTH sets?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Six! It's in set A, and it's in set B. So six goes in the middle. Two, four and eight stay in A. Three and nine stay in B.", "caption": "6 is in both → it goes in the middle", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c9-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time. Just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "The circles are red things, and things you eat. Where does an apple go? Pause the video, and decide.", "caption": "Red things · Things you eat. An apple?", "focus": "ask", "pause": 2.5 },
+        { "vo": "In the middle! An apple is red, and you can eat it. So it belongs to both sets. Did you get it? Brilliant!", "caption": "Apple → middle: red AND you can eat it", "focus": "answer", "sfx": "success", "sfxAt": 0.2 },
+        { "vo": "And Chintu's red toy car? It's red, but please don't eat it! So it goes only in red things. Not the middle.", "caption": "Red toy car → only red things", "focus": "trap", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c9-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. A set is a group of things that belong together.", "caption": "Set = a group that belongs together", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "In a Venn diagram, each circle is one set.", "caption": "Each circle is one set", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "The middle, where the circles overlap, is for things in both sets.", "caption": "Middle = in both sets", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And outside the circles means, neither set.", "caption": "Outside = in neither set", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! You sort things like a real maths detective, champ.", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

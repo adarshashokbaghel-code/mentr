@@ -1,0 +1,144 @@
+{
+  "id": "A18",
+  "title": "Robots & Automation",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "CS · Computers in Our World",
+  "slug": "a18-robots-automation",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a18-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready for something really cool today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we found out how apps work. Input, process, output. You give it something, it works, and it gives something back.", "caption": "Last time: Input → Process → Output", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Computers in Our World. It's all about robots, and automation!", "caption": "Chapter 3 · Robots & Automation", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Automation. Hmm, another big word! Don't worry. By the end of today, you'll be explaining it to your friends.", "caption": "Au · to · ma · tion. Another big word!", "focus": "word", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "bolt",
+      "visual": "a18-hook",
+      "beats": [
+        { "vo": "Picture this. Your family goes to a new restaurant in the city. And guess who brings the food? A robot waiter! Let's call her, Bolt.", "caption": "Meet Bolt, the robot waiter!", "focus": "meet", "sfx": "pop", "sfxAt": 0.7 },
+        { "vo": "Bolt rolls up to your table, and hands you a plate of hot, crispy dosa. Then she rolls right back to the kitchen. Wow!", "caption": "Bolt brings your dosa, then rolls back", "focus": "serve" },
+        { "vo": "Your little brother whispers, is Bolt happy to see us? Does she like her job? Hmm. What do you think?", "caption": "Is Bolt happy? Does she like her job?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Here's the surprising truth. Bolt doesn't feel happy, or sad, or bored. That smiley face on her screen is just a picture. Someone put it there.", "caption": "Bolt doesn't feel. The smile is just a picture.", "focus": "truth", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a18-define",
+      "beats": [
+        { "vo": "So what is a robot, really? A robot is a machine that does jobs, by following instructions written by people.", "caption": "Robot = a machine that follows instructions", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "And step-by-step instructions have a name you already know. An algorithm! It's the robot's recipe. Bolt's algorithm says, go to the table. Give the plate. Come back.", "caption": "Bolt's algorithm: Go · Give the plate · Come back", "focus": "algo", "sfx": "tick", "sfxAt": 0.55 },
+        { "vo": "Someone wrote those steps for Bolt. Without them, she'd just stand there, blinking. Remember Robo, who didn't know how to get water? Same thing!", "caption": "No steps? The robot doesn't know what to do", "focus": "nosteps", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "loop",
+      "visual": "a18-loop",
+      "beats": [
+        { "vo": "Now, what about automation? Automation means letting a machine do a job by itself, again and again, without a person doing each step.", "caption": "Automation: a machine does a job by itself", "focus": "intro", "sfx": "pop" },
+        { "vo": "Have you seen a robot vacuum? It cleans the floor, row by row. Go forward, and turn. Go forward, and turn. Again and again, until the whole room is clean.", "caption": "Forward, turn. Forward, turn. Again and again!", "focus": "vacuum", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Doing the same steps again and again is called a loop. And robots love loops! They never get tired of doing the same thing.", "caption": "Repeating the same steps = a LOOP", "focus": "loop", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "So the vacuum's whole algorithm can be tiny. Repeat. Go forward. Turn. Keep repeating, until the room is clean. Short, clear, and it works!", "caption": "Repeat: forward, turn… until clean", "focus": "code", "sfx": "tick", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "factory",
+      "visual": "a18-factory",
+      "beats": [
+        { "vo": "Now picture a big car factory. A robot arm fixes the same part, on every single car. Car after car, all day long.", "caption": "A factory arm fixes the same part on every car", "focus": "arm", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Other robot arms pack boxes. Pick up a box. Put it on the belt. Pick up the next box. Same steps, every single time. That's automation!", "caption": "Pick up box, put on belt… again and again", "focus": "boxes", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Would you get bored doing that a thousand times? I would! But the robot doesn't mind at all. That's why robots are great at repeat jobs.", "caption": "Robots are great at repeat jobs!", "focus": "great", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "messy",
+      "visual": "a18-messy",
+      "beats": [
+        { "vo": "But robots have a weak spot too. Let's go back to Bolt. Oh no! Your little brother knocks over his mango juice. Splash! It's all over the floor.", "caption": "Oh no! Juice spilled on the floor!", "focus": "spill", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "What do you think Bolt will do? Clean it up? Call for help? Think about it.", "caption": "What will Bolt do? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Bolt just keeps following her steps. Go to the table. Give the plate. Come back. A spill isn't in her instructions, so she does nothing about it.", "caption": "Bolt just keeps following her steps", "focus": "answer" },
+        { "vo": "A person would grab a cloth right away! People are much better at brand-new, messy problems. Robots are poor at them, unless someone gives them steps.", "caption": "New, messy jobs? People do better!", "focus": "people", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "a18-sort",
+      "beats": [
+        { "vo": "Let's play a game. Robot can, or robot can't! Here are four jobs.", "caption": "Game: Robot CAN or robot CAN'T?", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Pack the same box, five hundred times. Invent a brand-new game. Sweep the floor every day. Comfort a sad friend. Which ones can a robot do? Pause, and think.", "caption": "Which jobs can a robot do?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Packing boxes, and sweeping every day? Robot can! Those are repeat jobs with clear steps. Inventing a game, and comforting a friend? Robot can't. Those need new ideas, and feelings.", "caption": "Repeat jobs: CAN. Ideas & feelings: CAN'T", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "types",
+      "visual": "a18-types",
+      "beats": [
+        { "vo": "Robots come in all shapes and sizes. There's the home robot, like a vacuum that sweeps your room.", "caption": "Home robot: sweeps your room", "focus": "home", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "The factory robot, like a robot arm that builds cars, or packs boxes.", "caption": "Factory robot: builds cars, packs boxes", "focus": "factory", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "And the space robot, like a rover driving on Mars, taking photos of the red rocks!", "caption": "Space robot: a rover on Mars", "focus": "space", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Different jobs, but the same big idea. Every one of them follows instructions, written by people.", "caption": "Same idea: they all follow instructions", "focus": "same", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "finish",
+      "visual": "a18-finish",
+      "beats": [
+        { "vo": "One more! Let's finish a robot's algorithm to water a plant. One, pick up the can. Two, walk to the plant. Three, hmm, something's missing. Four, walk back. So, what's step three?", "caption": "Pick up can → Walk → ??? → Walk back", "focus": "ask", "pause": 2.0 },
+        { "vo": "Tip the can, to pour the water! Without that step, the plant would stay thirsty.", "caption": "Step 3: tip the can to pour water!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a18-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Why can't a vacuum robot invent a new game by itself? Pause the video, and think. Or write your answer on paper.", "caption": "Why can't a vacuum robot invent a new game?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. It only follows the steps that people gave it. Nobody gave it steps for making a new game, and it can't think up new ideas by itself. Great thinking!", "caption": "It only follows steps. No steps for new games!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a18-recap",
+      "beats": [
+        { "vo": "Let's remember. Robots follow algorithms, steps written by people. They don't have feelings.", "caption": "Robots follow algorithms. They don't feel.", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "They're great at repeat jobs. Hello, loops!", "caption": "Great at repeat jobs: loops!", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "But they're poor at brand-new, messy jobs, without instructions.", "caption": "Poor at new, messy jobs without steps", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And home, factory, and space robots? Same idea, different jobs.", "caption": "Home · Factory · Space: same idea", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! Now you know what robots can, and can't do, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

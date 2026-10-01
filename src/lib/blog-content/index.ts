@@ -17,6 +17,7 @@ import { INSTANT_CONNECT_ARTICLES } from "./instant-connect";
 import { OPEN_SOURCE_SEO_ARTICLES } from "./open-source-seo";
 import { SNAP_GRADE_ARTICLES } from "./snap-grade";
 import { PARENT_KIDS_SEO_ARTICLES } from "./parent-kids-seo";
+import { LEARN_SEO_OCT2026 } from "./learn-seo-oct2026";
 import { AI_ANSWER_GUIDES } from "./ai-answer-guides";
 import { PARENT_ACQUISITION_SEP2026 } from "./parent-acquisition-sep2026";
 import { COMPETITOR_ALTERNATIVES_SEP2026 } from "./competitor-alternatives-sep2026";
@@ -44,6 +45,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...AI_ANSWER_GUIDES,
   ...PARENT_ACQUISITION_SEP2026,
   ...COMPETITOR_ALTERNATIVES_SEP2026,
+  ...LEARN_SEO_OCT2026,
 };
 
 export function getArticleContent(slug: string): ArticleContent {

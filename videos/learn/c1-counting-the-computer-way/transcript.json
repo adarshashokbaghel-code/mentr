@@ -1,0 +1,372 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 6.24,
+      "caption": "Hello, champ! Welcome!",
+      "text": "Hey champ! Welcome to a brand new adventure. I'm so happy you're here!",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 6.24,
+      "end": 15.12,
+      "caption": "Something new: the Maths track!",
+      "text": "Maybe you've already explored computers and AI with us. Today, we're starting something new. The Maths track!",
+      "scene": "open",
+      "focus": "track"
+    },
+    {
+      "start": 15.12,
+      "end": 22.3,
+      "caption": "Numbers Computers Love \u00b7 Chapter 1",
+      "text": "Our first unit is called, Numbers Computers Love. And chapter one is, Counting the Computer Way.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 22.3,
+      "end": 34.55,
+      "caption": "We use 10 digits. Computers use just 2!",
+      "text": "Here's something surprising. We count with ten digits, zero to nine. But a computer counts with just two! Hmm. How can that even work?",
+      "scene": "open",
+      "focus": "question"
+    },
+    {
+      "start": 34.55,
+      "end": 42.7,
+      "caption": "Meet Meera, and her friend Kabir",
+      "text": "Let me tell you about Meera. She's nine. And her best friend Kabir lives in the building right across the lane.",
+      "scene": "meera",
+      "focus": "meet"
+    },
+    {
+      "start": 42.7,
+      "end": 54.06,
+      "caption": "Secret plan: send a number with 3 lamps",
+      "text": "One night, they make a secret plan. Meera has three lamps in her window. She'll switch them on and off, to tell Kabir how many laddoos Nani has saved for them.",
+      "scene": "meera",
+      "focus": "plan"
+    },
+    {
+      "start": 54.06,
+      "end": 68.45,
+      "caption": "Each lamp is only ON or OFF. How to show 5?",
+      "text": "But here's the tricky part. Each lamp can only be on, or off. Nothing in between. So how can three little lamps show the number five? Think about it.",
+      "scene": "meera",
+      "focus": "puzzle"
+    },
+    {
+      "start": 68.45,
+      "end": 78.62,
+      "caption": "Computers do this all the time!",
+      "text": "Good thinking! Computers solve this exact puzzle, millions of times every second. And by the end of today, you'll know Meera's trick.",
+      "scene": "meera",
+      "focus": "tease"
+    },
+    {
+      "start": 78.62,
+      "end": 89.82,
+      "caption": "Inside a computer: tiny on/off switches",
+      "text": "Inside every computer, there are tiny, tiny switches. Far too small to see. And just like a lamp, each switch can only be on, or off.",
+      "scene": "switches",
+      "focus": "inside"
+    },
+    {
+      "start": 89.82,
+      "end": 99.09,
+      "caption": "ON = 1 \u00b7 OFF = 0",
+      "text": "So computers use a very simple code. A switch that is on is written as one. A switch that is off is written as zero.",
+      "scene": "switches",
+      "focus": "code"
+    },
+    {
+      "start": 99.09,
+      "end": 107.52,
+      "caption": "Games, photos, songs: all 0s and 1s!",
+      "text": "That's it. Every game, every photo, every song on a computer is made of millions of these zeros and ones.",
+      "scene": "switches",
+      "focus": "everything"
+    },
+    {
+      "start": 107.52,
+      "end": 118.51,
+      "caption": "Counting with 0 and 1 is called BINARY",
+      "text": "Counting with only two digits, zero and one, has a special name. It's called binary. Bi means two, just like a bicycle has two wheels.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 118.51,
+      "end": 130.8,
+      "caption": "Us: 0 to 9 \u00b7 Binary: just 0 and 1",
+      "text": "We use ten digits. Zero, one, two, all the way up to nine. Binary uses just two. Zero, and one. That's all!",
+      "scene": "define",
+      "focus": "compare"
+    },
+    {
+      "start": 130.8,
+      "end": 139.64,
+      "caption": "One light = one BIT (a single 0 or 1)",
+      "text": "And one single light, showing just one zero or one, is called a bit. A bit is the tiniest piece of computer information.",
+      "scene": "define",
+      "focus": "bit"
+    },
+    {
+      "start": 139.64,
+      "end": 146.46,
+      "caption": "Your 3 fingers = 3 light switches",
+      "text": "Let's try it with your hand. Hold up three fingers. Each finger is a light switch.",
+      "scene": "fingers",
+      "focus": "intro"
+    },
+    {
+      "start": 146.46,
+      "end": 152.8,
+      "caption": "Finger up = 1 \u00b7 Finger down = 0",
+      "text": "Finger up means on, so that's a one. Finger down means off, so that's a zero.",
+      "scene": "fingers",
+      "focus": "rule"
+    },
+    {
+      "start": 152.8,
+      "end": 165.01,
+      "caption": "All down = 000 \u00b7 All up = 111",
+      "text": "Put all three fingers down. Zero, zero, zero. Now lift them all up. One, one, one. Look at you, speaking binary!",
+      "scene": "fingers",
+      "focus": "try"
+    },
+    {
+      "start": 165.01,
+      "end": 171.45,
+      "caption": "Each place has its own value",
+      "text": "Now for the clever part. Each light in the row has its own value, depending on its place.",
+      "scene": "places",
+      "focus": "intro"
+    },
+    {
+      "start": 171.45,
+      "end": 181.75,
+      "caption": "Left = 4 \u00b7 Middle = 2 \u00b7 Right = 1",
+      "text": "With three lights, the left one is worth four. The middle one is worth two. And the right one is worth one. Four, two, one.",
+      "scene": "places",
+      "focus": "values"
+    },
+    {
+      "start": 181.75,
+      "end": 188.45,
+      "caption": "Add the values of the lights that are ON",
+      "text": "To read a number, add up the values of the lights that are on. A light that's off adds nothing.",
+      "scene": "places",
+      "focus": "rule"
+    },
+    {
+      "start": 188.45,
+      "end": 202.17,
+      "caption": "1 0 1 \u2192 4 + 0 + 1 = 5",
+      "text": "So here's Meera's trick! Left lamp on, middle lamp off, right lamp on. One, zero, one. Four, plus zero, plus one. That's five!",
+      "scene": "places",
+      "focus": "meera"
+    },
+    {
+      "start": 202.17,
+      "end": 209.72,
+      "caption": "Kabir reads it: five laddoos!",
+      "text": "Kabir looks across the lane, adds it up, and grins. Five laddoos! Yum.",
+      "scene": "places",
+      "focus": "kabir"
+    },
+    {
+      "start": 209.72,
+      "end": 218.48,
+      "caption": "0 = 000 (all off)",
+      "text": "Let's count from zero to five, the computer way. Zero is all lights off. Zero, zero, zero.",
+      "scene": "count",
+      "focus": "zero"
+    },
+    {
+      "start": 218.48,
+      "end": 228.32,
+      "caption": "1 = 001 \u00b7 2 = 010",
+      "text": "One is just the right light. Zero, zero, one. Two is just the middle light. Zero, one, zero.",
+      "scene": "count",
+      "focus": "onetwo"
+    },
+    {
+      "start": 228.32,
+      "end": 236.8,
+      "caption": "3 = 011 (2 + 1)",
+      "text": "Three? We need two plus one. So the middle light and the right light. Zero, one, one.",
+      "scene": "count",
+      "focus": "three"
+    },
+    {
+      "start": 236.8,
+      "end": 246.69,
+      "caption": "4 = 100 \u00b7 5 = 101 (4 + 1)",
+      "text": "Four is just the left light. One, zero, zero. And five is four plus one. One, zero, one.",
+      "scene": "count",
+      "focus": "fourfive"
+    },
+    {
+      "start": 246.69,
+      "end": 253.61,
+      "caption": "Each number adds one more laddoo",
+      "text": "See? Each new number just adds one more. Like putting one more laddoo on the plate.",
+      "scene": "count",
+      "focus": "grow"
+    },
+    {
+      "start": 253.61,
+      "end": 269.87,
+      "caption": "001 and 100: the same number?",
+      "text": "Now look at these two. Zero, zero, one. And one, zero, zero. Both have just one light on. So, are they the same number? What do you think?",
+      "scene": "place-matters",
+      "focus": "ask"
+    },
+    {
+      "start": 269.87,
+      "end": 282.06,
+      "caption": "001 = 1 \u00b7 100 = 4. The place matters!",
+      "text": "Nope! Zero, zero, one is one. But one, zero, zero is four! The light sits in a different place, so it's worth a different amount.",
+      "scene": "place-matters",
+      "focus": "answer"
+    },
+    {
+      "start": 282.06,
+      "end": 291.88,
+      "caption": "Like 23 and 32: same digits, not the same!",
+      "text": "Our normal numbers work like this too. Twenty-three and thirty-two use the same digits, but they're not the same at all. More on that soon!",
+      "scene": "place-matters",
+      "focus": "like"
+    },
+    {
+      "start": 291.88,
+      "end": 301.45,
+      "caption": "Light game: what number is 010?",
+      "text": "Let's play a light-reading game! What number does zero, one, zero show? Take a moment.",
+      "scene": "read",
+      "focus": "q1"
+    },
+    {
+      "start": 301.45,
+      "end": 309.44,
+      "caption": "010 \u2192 0 + 2 + 0 = 2",
+      "text": "It's two! Only the middle light is on, and it's worth two. Zero plus two plus zero, is two.",
+      "scene": "read",
+      "focus": "a1"
+    },
+    {
+      "start": 309.44,
+      "end": 316.56,
+      "caption": "Which lights show 4?",
+      "text": "Now the other way round. Which lights would you switch on, to show four?",
+      "scene": "read",
+      "focus": "q2"
+    },
+    {
+      "start": 316.56,
+      "end": 324.24,
+      "caption": "4 = 100 (only the left light)",
+      "text": "Just the left light! One, zero, zero. Four plus zero plus zero, is four.",
+      "scene": "read",
+      "focus": "a2"
+    },
+    {
+      "start": 324.24,
+      "end": 342.33,
+      "caption": "001, 010, 011, \u2026 what comes next?",
+      "text": "One more! Meera is counting in binary. Zero, zero, one. Zero, one, zero. Zero, one, one. What comes next? Pause, and think.",
+      "scene": "next",
+      "focus": "ask"
+    },
+    {
+      "start": 342.33,
+      "end": 351.91,
+      "caption": "Not 012! Binary has no digit 2",
+      "text": "Careful! Some people say zero, one, two. But binary has no digit two. Only zeros and ones!",
+      "scene": "next",
+      "focus": "trap"
+    },
+    {
+      "start": 351.91,
+      "end": 361.67,
+      "caption": "011 is 3, so next is 4 = 100",
+      "text": "Zero, one, one is three. So next comes four. And four is one, zero, zero. Brilliant!",
+      "scene": "next",
+      "focus": "answer"
+    },
+    {
+      "start": 361.67,
+      "end": 365.55,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 365.55,
+      "end": 379.39,
+      "caption": "Show 3 using three on/off lights",
+      "text": "Show the number three, using three on, off lights. Draw three circles on paper, and colour in the ones that are on. Pause the video, and try.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 379.39,
+      "end": 395.32,
+      "caption": "Off, on, on \u2192 011 \u2192 2 + 1 = 3",
+      "text": "Here's the answer. Off, on, on. Zero, one, one. The middle light is worth two, the right light is worth one, and two plus one makes three. Did you get it? Super!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 395.32,
+      "end": 402.02,
+      "caption": "Binary uses only 0 and 1",
+      "text": "Let's remember what we learned today. Binary uses only two digits, zero and one.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 402.02,
+      "end": 405.0,
+      "caption": "ON = 1 \u00b7 OFF = 0",
+      "text": "On is one. Off is zero.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 405.0,
+      "end": 410.85,
+      "caption": "Three lights are worth 4, 2, 1",
+      "text": "Three lights in a row are worth four, two, and one. Add the ones that are on.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 410.85,
+      "end": 416.96,
+      "caption": "3 = 011 \u00b7 5 = 101",
+      "text": "So three is zero, one, one. And five is one, zero, one.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 416.96,
+      "end": 424.03,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one, done! You can count to five the computer way. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 424.03,
+      "end": 430.83,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

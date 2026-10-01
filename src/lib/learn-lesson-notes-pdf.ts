@@ -1,5 +1,5 @@
 /**
- * Class notes PDF — comic-panel layout, serious Helvetica typography.
+ * Class notes PDF — same cards, type, and colors as the Read lesson screen.
  * No external deps. Client-safe.
  */
 
@@ -16,15 +16,18 @@ const CONTENT_W = PAGE_W - MARGIN * 2;
 
 type RGB = [number, number, number];
 
-const INK: RGB = [28, 36, 52];
-const ORANGE: RGB = [255, 106, 26];
-const CREAM: RGB = [255, 250, 245];
+const INK: RGB = [28, 36, 52]; // #1c2434
+const BODY: RGB = [57, 66, 79]; // #39424f
+const ORANGE: RGB = [255, 106, 26]; // #ff6a1a
+const META: RGB = [138, 146, 156]; // #8a929c
+const TEAL: RGB = [13, 148, 136]; // #0d9488
+const PEACH: RGB = [255, 244, 232]; // #fff4e8
+const CARD: RGB = [250, 248, 244]; // #faf8f4
+const CARD_LINE: RGB = [240, 235, 227]; // #f0ebe3
+const REMEMBER_BG: RGB = [230, 247, 244]; // #e6f7f4
+const CHECK_BG: RGB = [238, 242, 255]; // #eef2ff
+const INDIGO: RGB = [79, 70, 229]; // #4f46e5
 const WHITE: RGB = [255, 255, 255];
-const MUTED: RGB = [90, 100, 114];
-const HAIR: RGB = [232, 226, 216];
-const TEAL: RGB = [13, 148, 136];
-const DINO: RGB = [45, 160, 110];
-const DINO_DARK: RGB = [28, 110, 78];
 
 function rgbOp(c: RGB): string {
   return `${(c[0] / 255).toFixed(3)} ${(c[1] / 255).toFixed(3)} ${(c[2] / 255).toFixed(3)}`;
@@ -83,33 +86,49 @@ function fillRect(x: number, y: number, w: number, h: number, color: RGB): strin
   return `${rgbOp(color)} rg ${x.toFixed(2)} ${y.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re f`;
 }
 
-function strokeRect(
-  x: number,
-  y: number,
-  w: number,
-  h: number,
-  color: RGB,
-  width = 1.4,
-): string {
-  return `${rgbOp(color)} RG ${width} w ${x.toFixed(2)} ${y.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re S`;
-}
-
 function textAt(
   x: number,
   y: number,
   text: string,
   size: number,
-  bold: boolean,
+  font: 1 | 2 | 3,
   color: RGB,
 ): string {
   return [
     "BT",
-    `/F${bold ? 2 : 1} ${size} Tf`,
+    `/F${font} ${size} Tf`,
     `${rgbOp(color)} rg`,
     `1 0 0 1 ${x.toFixed(2)} ${y.toFixed(2)} Tm`,
     `(${pdfEscape(text)}) Tj`,
     "ET",
   ].join(" ");
+}
+
+function roundBox(
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  r: number,
+  fill: RGB,
+  stroke?: RGB,
+  sw = 1.2,
+): string {
+  const radius = Math.min(r, w / 2, h / 2);
+  const k = radius * 0.5522847498;
+  const path = [
+    `${(x + radius).toFixed(2)} ${y.toFixed(2)} m`,
+    `${(x + w - radius).toFixed(2)} ${y.toFixed(2)} l`,
+    `${(x + w - radius + k).toFixed(2)} ${y.toFixed(2)} ${(x + w).toFixed(2)} ${(y + k).toFixed(2)} ${(x + w).toFixed(2)} ${(y + radius).toFixed(2)} c`,
+    `${(x + w).toFixed(2)} ${(y + h - radius).toFixed(2)} l`,
+    `${(x + w).toFixed(2)} ${(y + h - radius + k).toFixed(2)} ${(x + w - radius + k).toFixed(2)} ${(y + h).toFixed(2)} ${(x + w - radius).toFixed(2)} ${(y + h).toFixed(2)} c`,
+    `${(x + radius).toFixed(2)} ${(y + h).toFixed(2)} l`,
+    `${(x + radius - k).toFixed(2)} ${(y + h).toFixed(2)} ${x.toFixed(2)} ${(y + h - radius + k).toFixed(2)} ${x.toFixed(2)} ${(y + h - radius).toFixed(2)} c`,
+    `${x.toFixed(2)} ${(y + radius).toFixed(2)} l`,
+    `${x.toFixed(2)} ${(y + radius - k).toFixed(2)} ${(x + radius - k).toFixed(2)} ${y.toFixed(2)} ${(x + radius).toFixed(2)} ${y.toFixed(2)} c`,
+  ].join(" ");
+  if (!stroke) return `${rgbOp(fill)} rg ${path} f`;
+  return `${rgbOp(fill)} rg ${rgbOp(stroke)} RG ${sw} w ${path} B`;
 }
 
 function fillCircle(cx: number, cy: number, r: number, color: RGB): string {
@@ -126,24 +145,19 @@ function fillCircle(cx: number, cy: number, r: number, color: RGB): string {
   ].join(" ");
 }
 
-/** Tiny comic dino head (serious notes, playful mark). */
-function drawDino(cx: number, cy: number, scale = 1): string[] {
-  const s = scale;
-  const ops: string[] = [];
-  ops.push(fillCircle(cx, cy, 16 * s, DINO));
-  ops.push(fillCircle(cx + 10 * s, cy + 2 * s, 10 * s, DINO)); // snout
-  ops.push(fillCircle(cx - 5 * s, cy + 6 * s, 3.2 * s, WHITE)); // eye white
-  ops.push(fillCircle(cx - 4.2 * s, cy + 6.2 * s, 1.6 * s, INK)); // pupil
-  ops.push(fillCircle(cx + 14 * s, cy + 4 * s, 2.2 * s, DINO_DARK)); // nose
-  // smile arc as thick line approximation with small rects
-  ops.push(fillRect(cx + 6 * s, cy - 4 * s, 8 * s, 1.4 * s, DINO_DARK));
-  return ops;
+function checkMark(x: number, y: number): string {
+  return [
+    `${rgbOp(TEAL)} RG 1.5 w 1 J`,
+    `${x.toFixed(2)} ${(y + 2).toFixed(2)} m ${(x + 2.4).toFixed(2)} ${y.toFixed(2)} l S`,
+    `${(x + 2.4).toFixed(2)} ${y.toFixed(2)} m ${(x + 6.2).toFixed(2)} ${(y + 5.2).toFixed(2)} l S`,
+  ].join(" ");
 }
 
 class NotesPdf {
   private pages: string[][] = [];
   private ops: string[] = [];
   private y = PAGE_H;
+  private readonly bottom = 42;
 
   private commit() {
     if (this.ops.length) this.pages.push(this.ops);
@@ -152,104 +166,205 @@ class NotesPdf {
 
   private docMeta: LessonNotesDoc | null = null;
   private pageIndex = 0;
-  private pageTotal = 2;
 
-  startPage(doc: LessonNotesDoc, pageLabel?: string) {
+  private room() {
+    return this.y - this.bottom;
+  }
+
+  startPage(doc: LessonNotesDoc, continued = false) {
     this.docMeta = doc;
     this.pageIndex += 1;
     this.commit();
-    this.ops = [fillRect(0, 0, PAGE_W, PAGE_H, CREAM)];
-    this.ops.push(fillRect(0, PAGE_H - 52, PAGE_W, 52, INK));
-    this.ops.push(fillRect(0, PAGE_H - 56, PAGE_W, 4, ORANGE));
-    this.ops.push(textAt(MARGIN, PAGE_H - 28, "MENTR LEARN", 11, true, ORANGE));
+    this.ops = [fillRect(0, 0, PAGE_W, PAGE_H, WHITE)];
     this.ops.push(
-      textAt(MARGIN + 88, PAGE_H - 28, "Class notes", 10, false, WHITE),
+      textAt(PAGE_W - MARGIN - 72, 22, `@@P${this.pageIndex}@@`, 8, 1, META),
     );
-    const label =
-      pageLabel ?? `Page ${this.pageIndex} of ${this.pageTotal}`;
+
+    if (!continued) {
+      this.y = PAGE_H - 34;
+      this.ops.push(textAt(MARGIN, this.y - 9, "READ THE LESSON", 9, 2, ORANGE));
+      this.y -= 24;
+      for (const line of wrap(doc.title, 16, CONTENT_W)) {
+        this.ops.push(textAt(MARGIN, this.y - 16, line, 16, 2, INK));
+        this.y -= 20;
+      }
+      this.y -= 2;
+      const meta = `${doc.unitLabel}   |   ${doc.chapterLabel}   |   ${doc.level}`;
+      for (const line of wrap(meta, 9, CONTENT_W)) {
+        this.ops.push(textAt(MARGIN, this.y - 9, line, 9, 1, META));
+        this.y -= 13;
+      }
+      this.y -= 12;
+      return;
+    }
+
+    this.y = PAGE_H - 32;
+    this.ops.push(textAt(MARGIN, this.y - 11, doc.title, 11, 2, INK));
+    this.y -= 16;
     this.ops.push(
-      textAt(PAGE_W - MARGIN - 110, PAGE_H - 28, label, 9, false, [180, 186, 194]),
+      textAt(MARGIN, this.y - 8, `${doc.chapterLabel}   |   ${doc.level}`, 8, 1, META),
     );
-    this.ops.push(...drawDino(PAGE_W - MARGIN - 22, PAGE_H - 26, 0.85));
-    this.ops.push(
-      textAt(MARGIN, PAGE_H - 72, `${doc.moduleId}  |  ${doc.chapterLabel}  |  ${doc.level}`, 9, true, ORANGE),
-    );
-    this.ops.push(textAt(MARGIN, PAGE_H - 90, doc.title, 18, true, INK));
-    this.ops.push(textAt(MARGIN, PAGE_H - 106, doc.unitLabel, 10, false, MUTED));
-    this.ops.push(fillRect(MARGIN, PAGE_H - 114, CONTENT_W, 1, HAIR));
-    this.y = PAGE_H - 128;
+    this.y -= 14;
+    this.ops.push(fillRect(MARGIN, this.y, CONTENT_W, 1, CARD_LINE));
+    this.y -= 14;
   }
 
-  private newPageIfNeeded(h: number) {
-    if (this.y - h >= 48) return;
+  private turnPage() {
     if (!this.docMeta) return;
-    this.pageTotal = Math.max(this.pageTotal, this.pageIndex + 1);
-    this.startPage(this.docMeta);
+    this.startPage(this.docMeta, true);
   }
 
-  gap(n: number) {
-    this.y -= n;
+  bigIdea(text: string) {
+    const pad = 14;
+    const body = wrap(text, 11, CONTENT_W - pad * 2);
+    const h = pad + 16 + body.length * 15 + pad;
+    if (h > this.room()) this.turnPage();
+    const boxY = this.y - h;
+    this.ops.push(roundBox(MARGIN, boxY, CONTENT_W, h, 12, PEACH));
+    let ty = this.y - pad;
+    this.ops.push(textAt(MARGIN + pad, ty - 8, "BIG IDEA", 8, 2, ORANGE));
+    ty -= 16;
+    for (const line of body) {
+      this.ops.push(textAt(MARGIN + pad, ty - 11, line, 11, 2, INK));
+      ty -= 15;
+    }
+    this.y = boxY - 16;
   }
 
-  ensure(h: number) {
-    this.newPageIfNeeded(h);
-    return this.y - h >= 48;
+  heading(text: string) {
+    if (20 > this.room()) this.turnPage();
+    this.ops.push(textAt(MARGIN, this.y - 12, text, 12, 2, INK));
+    this.y -= 20;
   }
 
-  line(text: string, size: number, bold: boolean, color: RGB, leading = 4, x = MARGIN, maxW = CONTENT_W) {
-    const lines = wrap(text, size, maxW);
-    for (const line of lines) {
-      this.ops.push(textAt(x, this.y - size, line, size, bold, color));
-      this.y -= size + leading;
+  definitions(items: { term: string; meaning: string }[]) {
+    const gap = 8;
+    const colW = (CONTENT_W - gap) / 2;
+    const inner = colW - 20;
+    for (let i = 0; i < items.length; i += 2) {
+      const pair = items.slice(i, i + 2);
+      const measured = pair.map((d) => {
+        const term = wrap(d.term, 10, inner);
+        const meaning = wrap(d.meaning, 9, inner);
+        const h = 10 + term.length * 13 + 3 + meaning.length * 12 + 10;
+        return { term, meaning, h };
+      });
+      const h = Math.max(...measured.map((m) => m.h));
+      if (h > this.room()) this.turnPage();
+      measured.forEach((m, idx) => {
+        const x = MARGIN + idx * (colW + gap);
+        const boxY = this.y - h;
+        this.ops.push(roundBox(x, boxY, colW, h, 8, CARD, CARD_LINE, 0.9));
+        let ty = this.y - 10;
+        for (const line of m.term) {
+          this.ops.push(textAt(x + 10, ty - 10, line, 10, 2, TEAL));
+          ty -= 13;
+        }
+        ty -= 2;
+        for (const line of m.meaning) {
+          this.ops.push(textAt(x + 10, ty - 9, line, 9, 1, BODY));
+          ty -= 12;
+        }
+      });
+      this.y -= h + 6;
+    }
+    this.y -= 8;
+  }
+
+  bullets(title: string, lines: string[]) {
+    const titleLines = wrap(title, 11, CONTENT_W);
+    const rows = lines.flatMap((src) =>
+      wrap(src, 10, CONTENT_W - 16).map((line, i) => ({ line, dot: i === 0 })),
+    );
+    if (titleLines.length * 14 + 18 > this.room()) this.turnPage();
+    for (const line of titleLines) {
+      this.ops.push(textAt(MARGIN, this.y - 11, line, 11, 2, INK));
+      this.y -= 14;
+    }
+    this.y -= 3;
+    for (const row of rows) {
+      if (16 > this.room()) this.turnPage();
+      if (row.dot) this.ops.push(fillCircle(MARGIN + 3, this.y - 6, 2.1, ORANGE));
+      this.ops.push(textAt(MARGIN + 12, this.y - 10, row.line, 10, 1, BODY));
+      this.y -= 14;
+    }
+    this.y -= 8;
+  }
+
+  remember(lines: string[]) {
+    const pad = 12;
+    const rows = lines.flatMap((src) =>
+      wrap(src, 10, CONTENT_W - pad * 2 - 16).map((line, i) => ({
+        line,
+        mark: i === 0,
+      })),
+    );
+    let cursor = 0;
+    let part = 0;
+    while (part === 0 || cursor < rows.length) {
+      part += 1;
+      const title = part === 1 ? "Remember" : "Remember (continued)";
+      if (pad + 18 + 16 + pad > this.room()) this.turnPage();
+      const fit = Math.max(1, Math.floor((this.room() - pad - 18 - pad) / 15));
+      const chunk = rows.slice(cursor, cursor + fit);
+      cursor += chunk.length;
+      const h = pad + 18 + chunk.length * 15 + pad;
+      const boxY = this.y - h;
+      this.ops.push(roundBox(MARGIN, boxY, CONTENT_W, h, 12, REMEMBER_BG, TEAL, 1.7));
+      let ty = this.y - pad;
+      this.ops.push(textAt(MARGIN + pad, ty - 11, title, 11, 2, TEAL));
+      ty -= 18;
+      for (const row of chunk) {
+        if (row.mark) this.ops.push(checkMark(MARGIN + pad, ty - 9));
+        this.ops.push(textAt(MARGIN + pad + 12, ty - 10, row.line, 10, 1, INK));
+        ty -= 15;
+      }
+      this.y = boxY - 12;
+      if (cursor >= rows.length) break;
     }
   }
 
-  /** Comic panel card with thick border */
-  panel(title: string, lines: string[], accent: RGB = INK) {
+  check(question: string, answer: string) {
     const pad = 12;
-    const titleH = 16;
-    const bodyLines = lines.flatMap((t) => wrap(t, 10, CONTENT_W - pad * 2 - 8));
-    const bodyH = bodyLines.length * 14;
-    const h = pad + titleH + 8 + bodyH + pad;
-    if (!this.ensure(h + 10)) return;
-
+    const qLines = wrap(question, 10, CONTENT_W - pad * 2);
+    const aLines = wrap(answer, 10, CONTENT_W - pad * 2);
+    const h = pad + 18 + qLines.length * 14 + 6 + aLines.length * 14 + pad;
+    if (h > this.room()) this.turnPage();
     const boxY = this.y - h;
-    // Drop shadow
-    this.ops.push(fillRect(MARGIN + 2.5, boxY - 2.5, CONTENT_W, h, HAIR));
-    this.ops.push(fillRect(MARGIN, boxY, CONTENT_W, h, WHITE));
-    this.ops.push(strokeRect(MARGIN, boxY, CONTENT_W, h, accent, 1.8));
-    this.ops.push(fillRect(MARGIN, boxY + h - 5, CONTENT_W, 5, accent));
-
-    let ty = this.y - pad - 2;
-    this.ops.push(textAt(MARGIN + pad, ty - 11, title.toUpperCase(), 9, true, accent));
-    ty -= titleH + 4;
-    for (const line of bodyLines) {
-      this.ops.push(textAt(MARGIN + pad, ty - 10, line, 10, false, INK));
+    this.ops.push(roundBox(MARGIN, boxY, CONTENT_W, h, 12, CHECK_BG));
+    let ty = this.y - pad;
+    this.ops.push(textAt(MARGIN + pad, ty - 11, "Check yourself", 11, 2, INDIGO));
+    ty -= 18;
+    for (const line of qLines) {
+      this.ops.push(textAt(MARGIN + pad, ty - 10, line, 10, 2, INK));
+      ty -= 14;
+    }
+    ty -= 4;
+    for (const line of aLines) {
+      this.ops.push(textAt(MARGIN + pad, ty - 10, line, 10, 1, BODY));
       ty -= 14;
     }
     this.y = boxY - 12;
   }
 
-  defRow(term: string, meaning: string) {
-    const meaningLines = wrap(meaning, 10, CONTENT_W - 110);
-    const h = Math.max(28, meaningLines.length * 13 + 12);
-    if (!this.ensure(h + 6)) return;
-    const boxY = this.y - h;
-    this.ops.push(fillRect(MARGIN, boxY, CONTENT_W, h, WHITE));
-    this.ops.push(strokeRect(MARGIN, boxY, CONTENT_W, h, HAIR, 1));
-    this.ops.push(fillRect(MARGIN, boxY, 4, h, ORANGE));
-    this.ops.push(textAt(MARGIN + 14, boxY + h / 2 - 4, term, 11, true, ORANGE));
-    let my = boxY + h - 14;
-    for (const line of meaningLines) {
-      this.ops.push(textAt(MARGIN + 100, my, line, 10, false, INK));
-      my -= 13;
+  dino(line: string) {
+    const rows = wrap(`Dino says: ${line}`, 10, CONTENT_W);
+    if (rows.length * 14 > this.room()) this.turnPage();
+    for (const row of rows) {
+      this.ops.push(textAt(MARGIN, this.y - 10, row, 10, 3, TEAL));
+      this.y -= 14;
     }
-    this.y = boxY - 8;
   }
 
   finish(): Uint8Array {
     this.commit();
-    return packPdf(this.pages.map((ops) => ops.join("\n")));
+    const total = this.pages.length;
+    const streams = this.pages.map((ops) =>
+      ops
+        .join("\n")
+        .replace(/@@P(\d+)@@/g, (_, n) => `Page ${n} of ${total}`),
+    );
+    return packPdf(streams);
   }
 }
 
@@ -258,7 +373,8 @@ function packPdf(streams: string[]): Uint8Array {
   const kids: string[] = [];
   const font1 = 3 + streams.length * 2;
   const font2 = font1 + 1;
-  const infoId = font2 + 1;
+  const font3 = font2 + 1;
+  const infoId = font3 + 1;
   const pagesObj = 2;
 
   streams.forEach((stream, i) => {
@@ -267,7 +383,7 @@ function packPdf(streams: string[]): Uint8Array {
     kids.push(`${pageId} 0 R`);
     objs[pageId - 1] =
       `<< /Type /Page /Parent ${pagesObj} 0 R /MediaBox [0 0 ${PAGE_W} ${PAGE_H}] ` +
-      `/Contents ${contentId} 0 R /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R >> >> >>`;
+      `/Contents ${contentId} 0 R /Resources << /Font << /F1 ${font1} 0 R /F2 ${font2} 0 R /F3 ${font3} 0 R >> >> >>`;
     objs[contentId - 1] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
   });
 
@@ -275,6 +391,7 @@ function packPdf(streams: string[]): Uint8Array {
   objs[1] = `<< /Type /Pages /Kids [${kids.join(" ")}] /Count ${streams.length} >>`;
   objs[font1 - 1] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
   objs[font2 - 1] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>";
+  objs[font3 - 1] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique >>";
   objs[infoId - 1] =
     "<< /Title (Mentr Learn Class Notes) /Author (Mentr Learn) /Creator (Mentr) /Subject (Lesson class notes) >>";
 
@@ -296,39 +413,14 @@ function packPdf(streams: string[]): Uint8Array {
 
 export function buildLessonNotesPdf(doc: LessonNotesDoc = A1_LESSON_NOTES): Uint8Array {
   const pdf = new NotesPdf();
-
-  // Page 1 — big idea + definitions
   pdf.startPage(doc);
-  pdf.panel("Big idea", [doc.bigIdea], ORANGE);
-  pdf.gap(4);
-  pdf.line("Words to know (simple meanings)", 12, true, INK, 8);
-  for (const d of doc.definitions) {
-    pdf.defRow(d.term, d.meaning);
-  }
-  pdf.gap(6);
-  pdf.panel("Dino says", [doc.dinoLine], TEAL);
-
-  // Stories + remember + check (auto-paginates)
-  pdf.startPage(doc);
-  for (const panel of doc.panels) {
-    pdf.panel(panel.title, panel.body, INK);
-  }
-  pdf.panel("Remember", doc.remember, ORANGE);
-  pdf.panel(
-    "Check yourself",
-    [`Q: ${doc.checkYourself.q}`, `A: ${doc.checkYourself.a}`],
-    TEAL,
-  );
-  pdf.gap(8);
-  pdf.line(
-    "Notes from the class video script. Keep this for revision before the quiz.",
-    9,
-    false,
-    MUTED,
-    4,
-  );
-  pdf.line("mentr.in/learn", 10, true, ORANGE, 3);
-
+  pdf.bigIdea(doc.bigIdea);
+  pdf.heading("Key words");
+  pdf.definitions(doc.definitions);
+  for (const panel of doc.panels) pdf.bullets(panel.title, panel.body);
+  pdf.remember(doc.remember);
+  pdf.check(doc.checkYourself.q, doc.checkYourself.a);
+  pdf.dino(doc.dinoLine);
   return pdf.finish();
 }
 

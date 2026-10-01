@@ -1,0 +1,141 @@
+{
+  "id": "B10",
+  "title": "Practice Makes Perfect",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "AI · How Machines Learn",
+  "slug": "b10-practice-makes-perfect",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b10-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Today is a special day. You'll see why at the end!", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned that data is the food AI eats. Pictures, words, and sounds. And we saw that variety helps AI learn better.", "caption": "Last time: data is AI's food", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five, the last chapter of How Machines Learn. It's called, Practice Makes Perfect!", "caption": "Chapter 5 · Practice Makes Perfect", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "So here's a question for you. Is AI born smart? Does it know everything, from the very first day? Hmm. Think about it.", "caption": "Is AI born smart? Think!", "focus": "question", "pause": 1.8 }
+      ]
+    },
+    {
+      "id": "cycle",
+      "visual": "b10-cycle",
+      "beats": [
+        { "vo": "Remember Meera? This summer, she got a shiny new cycle for her birthday. She couldn't wait to ride it!", "caption": "Meera gets a shiny new cycle!", "focus": "gift", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "On her very first try, she wobbled left. She wobbled right. And, oops! She tipped right over. Don't worry, she's fine.", "caption": "First try: wobble, wobble… oops!", "focus": "wobble", "sfx": "buzz", "sfxAt": 0.7 },
+        { "vo": "But Meera didn't give up. She practised every evening in her colony. Monday was very wobbly. Tuesday, a little better. And each day after that, she got steadier, and steadier.", "caption": "She practised every evening", "focus": "practice", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "By Sunday, she was zooming around, ringing her bell. Tring, tring! So, was Meera born knowing how to ride? No way! Nobody is. She got better with practice, one wobbly try at a time.", "caption": "By Sunday: zoom! Practice made her better.", "focus": "ride", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "wobbly",
+      "visual": "b10-wobbly",
+      "beats": [
+        { "vo": "AI is just like that. It's not born smart. It has to learn, just like you. And its first tries are wobbly too.", "caption": "AI's first tries are wobbly too", "focus": "intro", "sfx": "pop" },
+        { "vo": "Meera is training a new app, called Cat Finder. At first, it's a mess! It calls a cat, a dog. And it calls a fluffy cushion, a cat! Silly app.", "caption": "Cat → \"dog\". Cushion → \"cat\". Oops!", "focus": "guesses", "sfx": "buzz", "sfxAt": 0.75 },
+        { "vo": "So Meera gives it practice. Practice means trying again and again, to get better. For AI, practice means more examples, and more tries. Big cats, small cats, sleepy cats, stripy cats. Remember? Variety helps!", "caption": "Practice = trying again and again", "focus": "practice", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "With every round, its guesses get a little steadier. Wrong, wrong, right, right, right! Nobody is born perfect. Not you, and not AI.", "caption": "Each round, a little better", "focus": "better", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "sums",
+      "visual": "b10-sums",
+      "beats": [
+        { "vo": "It's like your maths sums. Remember your very first sums? Maybe you wrote, three plus four equals six. Oops!", "caption": "First sums? A few mistakes!", "focus": "first", "sfx": "buzz", "sfxAt": 0.8 },
+        { "vo": "But you practised. You found your mistakes, and you fixed them. Three plus four is seven! And you got faster, and better.", "caption": "Practise · fix mistakes · get better", "focus": "fix", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "That's called improving. Getting better over time, step by step. Kids improve with practice, and so does AI.", "caption": "Improve = get better, step by step", "focus": "improve", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "test",
+      "visual": "b10-test",
+      "beats": [
+        { "vo": "But wait. How does Meera know if Cat Finder has really learned? Maybe it just got lucky! She has to test it.", "caption": "How do we know it learned? Test it!", "focus": "how", "pause": 0.4 },
+        { "vo": "A test means checking what the AI learned, by giving it new examples.", "caption": "Test = check with new examples", "focus": "define", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "And a new example is something the AI has never seen during training. Like a fresh photo of Nani's cat, Billu, that Cat Finder has never looked at before.", "caption": "New example = never seen in training", "focus": "new", "sfx": "pop", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "trick",
+      "visual": "b10-trick",
+      "beats": [
+        { "vo": "Now, why must the test photos be new? Imagine testing Cat Finder with the same photos it practised on. It might just remember them, like remembering answers.", "caption": "Same photos? It may just remember them", "focus": "same" },
+        { "vo": "It's like your class test. Your teacher doesn't give the exact same sums you practised. She gives new sums. Why? To check that you really understand, not just remember.", "caption": "Class test: new sums, not practice ones", "focus": "school", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "New sums for you. New photos for AI. Both check real learning, with things never seen before. That's the fair way to test.", "caption": "New things check real learning", "focus": "check", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "puzzle",
+      "visual": "b10-puzzle",
+      "beats": [
+        { "vo": "Detective time! Cat Finder gets every training photo right. All one hundred! But on new cat photos, it keeps getting it wrong. What does that tell you? Pause, and think.", "caption": "Right on old photos, wrong on new. Why?", "focus": "ask", "pause": 2.2 },
+        { "vo": "It only remembered the training photos! It didn't really learn what a cat looks like. Pointy ears, whiskers, and a long tail. That's exactly why we test with new examples.", "caption": "It remembered, but didn't really learn \"cat\"", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "loop",
+      "visual": "b10-loop",
+      "beats": [
+        { "vo": "So, what should Meera do when Cat Finder makes mistakes? Throw it away? No! She uses the improve loop.", "caption": "Mistakes? Don't throw it away!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.6 },
+        { "vo": "Step one, train it with examples. Step two, let it try a guess. Step three, fix any wrong labels, or add more examples. Maybe a cushion photo was labelled cat, by mistake. Fix it! And step four, try again!", "caption": "Train → Try → Fix → Try again", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "And round and round it goes. Train, try, fix, and try again. Each loop, the AI gets a little better. Just like Meera on her cycle, one evening at a time!", "caption": "Each loop, a little better", "focus": "round", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "b10-order",
+      "beats": [
+        { "vo": "Oh no, the loop cards got all mixed up! Try again. Fix labels. Train. Try a guess. Which one comes first? Pause, and put them in order.", "caption": "Put the improve loop in order!", "focus": "ask", "pause": 2.2 },
+        { "vo": "First, train. Then, try a guess. Next, fix the labels. And last, try again! Brilliant.", "caption": "Train → Try → Fix labels → Try again", "focus": "answer", "sfx": "success", "sfxAt": 0.9 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b10-check",
+      "beats": [
+        { "vo": "Okay champ, here's your practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Why should we test a cat finder on a new cat photo, and not only on the training photos? Pause the video, and try it on paper.", "caption": "Why test a cat finder on a NEW cat photo?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. Because the AI may just remember the training photos. A new photo is a fair test. It shows if Cat Finder really learned what cats look like. Super thinking!", "caption": "It may just remember. New photos show real learning", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b10-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Practice makes AI better.", "caption": "Practice makes AI better", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "First tries are wobbly, and that's okay.", "caption": "First tries are wobbly. That's okay!", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Test with new examples, not the old ones.", "caption": "Test with NEW examples", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And to improve, train, try, fix, and try again.", "caption": "Train → Try → Fix → Try again", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means you've finished all of Unit two, How Machines Learn! Give yourself a big cheer, champ. Hip hip, hooray!", "caption": "Chapter 5 done · Unit 2 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

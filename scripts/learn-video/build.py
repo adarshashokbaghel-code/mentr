@@ -65,6 +65,7 @@ def ease_in_out(t: float) -> float:
 
 @functools.lru_cache(maxsize=None)
 def load_font(size: int, bold: bool = False) -> ImageFont.ImageFont:
+    size = max(1, int(size))
     paths = [
         "/System/Library/Fonts/Supplemental/Arial Bold.ttf" if bold else "/System/Library/Fonts/Supplemental/Arial.ttf",
         "/Library/Fonts/Arial Bold.ttf" if bold else "/Library/Fonts/Arial.ttf",
@@ -102,7 +103,7 @@ class ScaledDraw:
         path = getattr(font, "path", None)
         if font is None or not path:
             return font
-        return scaled_font(path, int(round(font.size * self.k)))
+        return scaled_font(path, max(1, int(round(font.size * self.k))))
 
     def _kw(self, kw: dict) -> dict:
         if kw.get("width"):
@@ -240,8 +241,16 @@ VOICE_POLISH_AF = (
 async def synthesize_beat(
     text: str, voice: str, rate: str, out_mp3: Path, pitch: str = "+0Hz", trim: bool = False
 ) -> tuple[float, Path]:
-    communicate = edge_tts.Communicate(text, voice=voice, rate=rate, pitch=pitch)
-    await communicate.save(str(out_mp3))
+    for attempt in range(5):
+        try:
+            communicate = edge_tts.Communicate(text, voice=voice, rate=rate, pitch=pitch)
+            await asyncio.wait_for(communicate.save(str(out_mp3)), timeout=60)
+            break
+        except Exception as exc:  # network stalls/drops from the TTS service
+            if attempt == 4:
+                raise
+            print(f"TTS retry {attempt + 1} for {out_mp3.name}: {exc!r}", flush=True)
+            await asyncio.sleep(5 * (attempt + 1))
     wav = out_mp3.with_suffix(".wav")
     subprocess.run(
         [
@@ -3050,6 +3059,1189 @@ def render_a5(draw, brand: dict[str, str], visual: str, focus: str, progress: fl
     return False
 
 
+# ---------------------------------------------------------------------------
+# A6 · What Is an Algorithm? — Robo, kitchen + morning kit, step cards
+# ---------------------------------------------------------------------------
+
+BOT = (86, 132, 214)
+BOT_DARK = (50, 84, 156)
+WATER = (120, 190, 242)
+WATER_DEEP = (62, 142, 222)
+CHAI = (186, 124, 74)
+LEAF = (70, 156, 92)
+LEAF_DRY = (176, 160, 92)
+TERRACOTTA = (204, 108, 70)
+BREAD = (240, 196, 128)
+CRUST = (188, 128, 66)
+JAM = (214, 52, 72)
+STEEL = (178, 186, 198)
+STEEL_DARK = (128, 136, 150)
+CORAL = (255, 106, 26)
+
+
+def draw_robot(draw, cx: float, cy: float, s: float, t: float = 0.0, mood: str = "idle",
+               wave: float = 0.0, hold: bool = False) -> tuple[float, float]:
+    """cy = body centre. Returns the right-hand position (for held items)."""
+    def S(v: float) -> float:
+        return v * s
+    y = cy + S(6) * math.sin(t * math.pi * 4)
+    draw.ellipse((cx - S(120), cy + S(204), cx + S(120), cy + S(236)), fill=SHADOW)
+    for sx in (-1, 1):
+        lx = cx + sx * S(48)
+        draw.rounded_rectangle((lx - S(20), y + S(90), lx + S(20), y + S(196)), radius=S(10), fill=BOT_DARK)
+        draw.rounded_rectangle((lx - S(36), y + S(186), lx + S(36), y + S(216)), radius=S(12), fill=DEV_DARK)
+    arm_w = max(3, int(S(26)))
+    lh = (cx - S(152), y + S(62))
+    draw.line([(cx - S(96), y - S(36)), lh], fill=BOT_DARK, width=arm_w, joint="curve")
+    draw.ellipse((lh[0] - S(22), lh[1] - S(22), lh[0] + S(22), lh[1] + S(22)), fill=DEV_DARK)
+    if hold:
+        rh = (cx + S(176), y - S(6))
+    elif wave > 0:
+        rh = (cx + S(160) + S(26) * math.sin(wave * math.pi * 6), y - S(156))
+    else:
+        rh = (cx + S(152), y + S(62))
+    draw.line([(cx + S(96), y - S(36)), rh], fill=BOT_DARK, width=arm_w, joint="curve")
+    draw.ellipse((rh[0] - S(22), rh[1] - S(22), rh[0] + S(22), rh[1] + S(22)), fill=DEV_DARK)
+    draw.rounded_rectangle((cx - S(100) + S(8), y - S(70) + S(10), cx + S(100) + S(8), y + S(110) + S(10)),
+                           radius=S(36), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(100), y - S(70), cx + S(100), y + S(110)), radius=S(36), fill=BOT)
+    draw.rounded_rectangle((cx - S(58), y - S(30), cx + S(58), y + S(52)), radius=S(16), fill=(232, 240, 252))
+    for i, c in enumerate((CORAL, GOLD, LED_ON)):
+        on = int(t * 10 + i) % 3 != 0
+        lx = cx - S(34) + i * S(34)
+        draw.ellipse((lx - S(11), y + S(11) - S(11), lx + S(11), y + S(11) + S(11)),
+                     fill=c if on else (200, 208, 222))
+    draw.rectangle((cx - S(22), y - S(94), cx + S(22), y - S(66)), fill=BOT_DARK)
+    for sx in (-1, 1):
+        ex = cx + sx * S(106)
+        draw.rounded_rectangle((ex - S(14), y - S(196), ex + S(14), y - S(140)), radius=S(8), fill=BOT_DARK)
+    draw.rounded_rectangle((cx - S(96) + S(8), y - S(252) + S(10), cx + S(96) + S(8), y - S(88) + S(10)),
+                           radius=S(40), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(96), y - S(252), cx + S(96), y - S(88)), radius=S(40), fill=BOT)
+    draw.rounded_rectangle((cx - S(74), y - S(230), cx + S(74), y - S(110)), radius=S(28), fill=DEV_DEEP)
+    ey = y - S(178)
+    ew = max(2, int(S(8)))
+    for i, sx in enumerate((-1, 1)):
+        ex = cx + sx * S(34)
+        if mood == "happy":
+            draw.arc((ex - S(18), ey - S(8), ex + S(18), ey + S(26)), 200, 340, fill=LED_ON, width=ew)
+        elif mood == "blank" or (mood == "idle" and (t * 2.3) % 1 > 0.9):
+            draw.line((ex - S(16), ey + S(4), ex + S(16), ey + S(4)), fill=LED_ON, width=ew)
+        elif mood == "confused":
+            r = S(18) if i == 0 else S(9)
+            draw.ellipse((ex - r, ey - r, ex + r, ey + r), fill=LED_ON)
+        else:
+            draw.ellipse((ex - S(15), ey - S(15), ex + S(15), ey + S(15)), fill=LED_ON)
+    my = y - S(138)
+    if mood == "happy":
+        draw.arc((cx - S(30), my - S(26), cx + S(30), my + S(10)), 20, 160, fill=LED_ON, width=ew)
+    elif mood == "confused":
+        pts = [(cx - S(26) + k * S(13), my - S(4) + (S(6) if k % 2 else -S(6))) for k in range(5)]
+        draw.line(pts, fill=LED_ON, width=ew)
+    elif mood == "blank":
+        draw.line((cx - S(20), my - S(6), cx + S(20), my - S(6)), fill=LED_ON, width=ew)
+    else:
+        draw.arc((cx - S(22), my - S(22), cx + S(22), my + S(4)), 30, 150, fill=LED_ON, width=ew)
+    draw.line((cx, y - S(252), cx, y - S(300)), fill=BOT_DARK, width=max(2, int(S(8))))
+    glow = mood == "happy" and int(t * 8) % 2 == 0
+    if glow:
+        draw.ellipse((cx - S(28), y - S(328), cx + S(28), y - S(272)), fill=(255, 220, 190))
+    draw.ellipse((cx - S(16), y - S(316), cx + S(16), y - S(284)), fill=CORAL)
+    return rh
+
+
+def draw_steam(draw, cx: float, y: float, s: float, t: float, n: int = 3) -> None:
+    for i in range(n):
+        x0 = cx + (i - (n - 1) / 2) * 30 * s
+        pts = [(x0 + 10 * s * math.sin(t * 10 + k * 0.8 + i), y - k * 14 * s) for k in range(8)]
+        draw.line(pts, fill=(206, 206, 212), width=max(2, int(6 * s)), joint="curve")
+
+
+def draw_glass(draw, cx: float, by: float, s: float, level: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    tw, bw, h = S(48), S(36), S(124)
+
+    def w_at(yy: float) -> float:
+        return bw + (tw - bw) * ((by - yy) / h)
+    pts = [(cx - tw, by - h), (cx + tw, by - h), (cx + bw, by), (cx - bw, by)]
+    draw.polygon([(x + S(6), yy + S(8)) for x, yy in pts], fill=SHADOW)
+    draw.polygon(pts, fill=(238, 247, 253))
+    lv = clamp01(level)
+    if lv > 0:
+        wy = by - h * 0.88 * lv
+        draw.polygon([(cx - w_at(wy), wy), (cx + w_at(wy), wy), (cx + bw, by), (cx - bw, by)], fill=WATER)
+    draw.polygon(pts, outline=DEV_DARK, width=max(2, int(S(5))))
+    draw.line((cx - tw + S(14), by - h + S(16), cx - bw + S(12), by - S(14)), fill=(255, 255, 255),
+              width=max(2, int(S(6))))
+
+
+def draw_filter(draw, cx: float, cy: float, s: float, t: float = 0.0, pouring: bool = False) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.rounded_rectangle((cx - S(74) + S(8), cy - S(134) + S(10), cx + S(74) + S(8), cy + S(114) + S(10)),
+                           radius=S(26), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(74), cy - S(134), cx + S(74), cy + S(114)), radius=S(26), fill=(236, 243, 250),
+                           outline=DEV_DARK, width=max(2, int(S(5))))
+    draw.rounded_rectangle((cx - S(54), cy - S(112), cx + S(54), cy - S(10)), radius=S(16), fill=WATER)
+    wave = [(cx - S(54) + k * S(12), cy - S(86) + S(5) * math.sin(t * 8 + k)) for k in range(10)]
+    draw.line(wave, fill=(255, 255, 255), width=max(2, int(S(4))))
+    draw.rounded_rectangle((cx + S(66), cy + S(28), cx + S(116), cy + S(48)), radius=S(6), fill=DEV_MID)
+    draw.rectangle((cx + S(100), cy + S(44), cx + S(116), cy + S(70)), fill=DEV_MID)
+    draw.ellipse((cx - S(14), cy + S(40), cx + S(14), cy + S(68)), fill=LED_ON)
+    if pouring:
+        draw.line((cx + S(108), cy + S(70), cx + S(108), cy + S(150)), fill=WATER_DEEP, width=max(2, int(S(9))))
+        for k in range(3):
+            dy = ((t * 3 + k / 3) % 1) * S(80)
+            draw.ellipse((cx + S(100), cy + S(80) + dy, cx + S(116), cy + S(96) + dy), fill=WATER_DEEP)
+
+
+def draw_pot(draw, cx: float, cy: float, s: float, t: float = 0.0, liquid=None, flame: bool = True) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.rounded_rectangle((cx - S(136), cy + S(46), cx + S(136), cy + S(92)), radius=S(14), fill=DEV_DARK)
+    if flame:
+        for k in range(5):
+            fx = cx - S(80) + k * S(40)
+            fh = S(26) + S(8) * math.sin(t * 20 + k)
+            draw.polygon([(fx - S(12), cy + S(46)), (fx + S(12), cy + S(46)), (fx, cy + S(46) - fh)], fill=CORAL)
+            draw.polygon([(fx - S(6), cy + S(46)), (fx + S(6), cy + S(46)), (fx, cy + S(46) - fh * 0.55)], fill=GOLD)
+    draw.line((cx - S(100), cy - S(50), cx - S(190), cy - S(70)), fill=DEV_DARK, width=max(3, int(S(16))))
+    draw.rounded_rectangle((cx - S(104), cy - S(70), cx + S(104), cy + S(34)), radius=S(22), fill=STEEL)
+    draw.rectangle((cx - S(104), cy - S(70), cx + S(104), cy - S(52)), fill=STEEL_DARK)
+    if liquid:
+        draw.ellipse((cx - S(92), cy - S(80), cx + S(92), cy - S(56)), fill=liquid)
+        draw_steam(draw, cx, cy - S(100), s, t)
+
+
+def draw_cup(draw, cx: float, cy: float, s: float, t: float = 0.0, fill=CHAI, steam: bool = True) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.ellipse((cx - S(110), cy + S(46), cx + S(110), cy + S(84)), fill=SHADOW)
+    draw.ellipse((cx - S(104), cy + S(40), cx + S(104), cy + S(76)), fill=(240, 236, 228), outline=DEV_DARK,
+                 width=max(2, int(S(4))))
+    draw.arc((cx + S(40), cy - S(36), cx + S(110), cy + S(30)), 270, 90, fill=DEV_DARK, width=max(3, int(S(12))))
+    draw.rounded_rectangle((cx - S(70), cy - S(62), cx + S(70), cy + S(56)), radius=S(30), fill=(255, 255, 255),
+                           outline=DEV_DARK, width=max(2, int(S(5))))
+    draw.rectangle((cx - S(70), cy - S(62), cx + S(70), cy - S(36)), fill=(255, 255, 255))
+    draw.line((cx - S(70), cy - S(62), cx - S(70), cy - S(20)), fill=DEV_DARK, width=max(2, int(S(5))))
+    draw.line((cx + S(70), cy - S(62), cx + S(70), cy - S(20)), fill=DEV_DARK, width=max(2, int(S(5))))
+    draw.ellipse((cx - S(70), cy - S(76), cx + S(70), cy - S(48)), fill=fill or (236, 232, 224), outline=DEV_DARK,
+                 width=max(2, int(S(5))))
+    draw.rounded_rectangle((cx - S(40), cy - S(10), cx + S(40), cy + S(18)), radius=S(8), fill=CORAL)
+    if steam and fill:
+        draw_steam(draw, cx, cy - S(96), s, t)
+
+
+def draw_leaves(draw, cx: float, cy: float, s: float) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.chord((cx - S(96), cy - S(60), cx + S(96), cy + S(70)), 0, 180, fill=(236, 226, 206), outline=DEV_DARK,
+               width=max(2, int(S(5))))
+    for k, (dx, dy) in enumerate(((-50, -2), (-14, -16), (24, -6), (56, 4), (-30, 18), (10, 14), (44, 22))):
+        x, y = cx + S(dx), cy + S(dy)
+        col = (96, 70, 44) if k % 2 else (74, 110, 60)
+        draw.polygon([(x - S(20), y), (x, y - S(12)), (x + S(20), y), (x, y + S(12))], fill=col)
+
+
+def draw_milk(draw, cx: float, cy: float, s: float) -> None:
+    def S(v: float) -> float:
+        return v * s
+    jug = [(cx - S(50), cy - S(80)), (cx + S(34), cy - S(80)), (cx + S(58), cy - S(100)), (cx + S(54), cy - S(66)),
+           (cx + S(50), cy + S(70)), (cx - S(54), cy + S(70))]
+    draw.polygon([(x + S(6), y + S(8)) for x, y in jug], fill=SHADOW)
+    draw.polygon(jug, fill=(255, 255, 255), outline=DEV_DARK, width=max(2, int(S(5))))
+    draw.rectangle((cx - S(50), cy - S(14), cx + S(48), cy + S(26)), fill=ROAD)
+    text_at(draw, "MILK", cx, cy - S(12), load_font(max(10, int(S(28))), bold=True), (255, 255, 255))
+    for k in range(3):
+        bx = cx + S(78) + (k % 2) * S(34)
+        by = cy + S(34) - (k // 2) * S(34)
+        draw.rounded_rectangle((bx, by, bx + S(30), by + S(30)), radius=S(5), fill=(255, 255, 255), outline=DEV_DARK,
+                               width=max(1, int(S(3))))
+
+
+def draw_toothbrush(draw, cx: float, cy: float, s: float) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.rounded_rectangle((cx - S(120), cy - S(14), cx + S(60), cy + S(14)), radius=S(14), fill=CORAL)
+    draw.rounded_rectangle((cx + S(40), cy - S(18), cx + S(124), cy + S(14)), radius=S(12), fill=(240, 240, 244),
+                           outline=DEV_DARK, width=max(1, int(S(3))))
+    for k in range(6):
+        bx = cx + S(50) + k * S(12)
+        draw.rectangle((bx, cy - S(54), bx + S(7), cy - S(18)), fill=(140, 200, 236))
+    draw.rounded_rectangle((cx + S(48), cy - S(78), cx + S(122), cy - S(50)), radius=S(14), fill=(255, 255, 255),
+                           outline=(160, 210, 220), width=max(1, int(S(3))))
+    draw.line((cx + S(58), cy - S(64), cx + S(112), cy - S(64)), fill=(13, 148, 136), width=max(2, int(S(6))))
+
+
+def draw_shower(draw, cx: float, cy: float, s: float, t: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.line((cx - S(110), cy - S(110), cx - S(110), cy - S(70), cx - S(30), cy - S(70)), fill=STEEL_DARK,
+              width=max(3, int(S(14))), joint="curve")
+    draw.chord((cx - S(70), cy - S(100), cx + S(70), cy - S(20)), 0, 180, fill=STEEL)
+    for k in range(9):
+        dx = (k % 3 - 1) * S(34) + ((k // 3) - 1) * S(12)
+        dy = ((t * 2.5 + k * 0.37) % 1) * S(120)
+        draw.ellipse((cx + dx - S(7), cy - S(10) + dy, cx + dx + S(7), cy + S(8) + dy), fill=WATER_DEEP)
+
+
+def draw_shirt(draw, cx: float, cy: float, s: float) -> None:
+    def S(v: float) -> float:
+        return v * s
+    shirt = [(cx - S(40), cy - S(90)), (cx + S(40), cy - S(90)), (cx + S(110), cy - S(50)), (cx + S(86), cy - S(4)),
+             (cx + S(60), cy - S(18)), (cx + S(60), cy + S(92)), (cx - S(60), cy + S(92)), (cx - S(60), cy - S(18)),
+             (cx - S(86), cy - S(4)), (cx - S(110), cy - S(50))]
+    draw.polygon([(x + S(6), y + S(8)) for x, y in shirt], fill=SHADOW)
+    draw.polygon(shirt, fill=(206, 226, 248), outline=DEV_DARK, width=max(2, int(S(5))))
+    draw.polygon([(cx - S(40), cy - S(90)), (cx, cy - S(54)), (cx - S(18), cy - S(40))], fill=(255, 255, 255),
+                 outline=DEV_DARK)
+    draw.polygon([(cx + S(40), cy - S(90)), (cx, cy - S(54)), (cx + S(18), cy - S(40))], fill=(255, 255, 255),
+                 outline=DEV_DARK)
+    draw.polygon([(cx - S(12), cy - S(52)), (cx + S(12), cy - S(52)), (cx + S(18), cy + S(40)), (cx, cy + S(60)),
+                  (cx - S(18), cy + S(40))], fill=(40, 60, 120))
+
+
+def draw_bag(draw, cx: float, cy: float, s: float, color=CORAL) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.arc((cx - S(50), cy - S(130), cx + S(50), cy - S(50)), 180, 360, fill=DEV_DARK, width=max(3, int(S(12))))
+    draw.rounded_rectangle((cx - S(90) + S(8), cy - S(90) + S(10), cx + S(90) + S(8), cy + S(100) + S(10)),
+                           radius=S(34), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(90), cy - S(90), cx + S(90), cy + S(100)), radius=S(34), fill=color)
+    draw.rounded_rectangle((cx - S(90), cy - S(90), cx + S(90), cy - S(10)), radius=S(34), fill=tuple(
+        int(c * 0.82) for c in color))
+    draw.rounded_rectangle((cx - S(54), cy + S(20), cx + S(54), cy + S(80)), radius=S(16), fill=tuple(
+        min(255, int(c * 1.12)) for c in color), outline=(255, 255, 255), width=max(1, int(S(3))))
+    draw.ellipse((cx - S(10), cy - S(24), cx + S(10), cy - S(4)), fill=GOLD)
+
+
+def draw_tiffin(draw, cx: float, cy: float, s: float) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.arc((cx - S(50), cy - S(140), cx + S(50), cy - S(60)), 180, 360, fill=STEEL_DARK, width=max(3, int(S(12))))
+    for k in range(3):
+        y0 = cy - S(100) + k * S(66)
+        draw.rounded_rectangle((cx - S(84) + S(6), y0 + S(8), cx + S(84) + S(6), y0 + S(60) + S(8)), radius=S(18),
+                               fill=SHADOW)
+        draw.rounded_rectangle((cx - S(84), y0, cx + S(84), y0 + S(60)), radius=S(18), fill=STEEL, outline=STEEL_DARK,
+                               width=max(2, int(S(4))))
+        draw.line((cx - S(60), y0 + S(16), cx + S(40), y0 + S(16)), fill=(230, 234, 240), width=max(2, int(S(6))))
+    draw.line((cx - S(96), cy - S(96), cx - S(96), cy + S(96)), fill=STEEL_DARK, width=max(2, int(S(8))))
+    draw.line((cx + S(96), cy - S(96), cx + S(96), cy + S(96)), fill=STEEL_DARK, width=max(2, int(S(8))))
+
+
+def draw_plant(draw, cx: float, by: float, s: float, health: float = 1.0, flower: float = 0.0,
+               t: float = 0.0) -> None:
+    def S(v: float) -> float:
+        return v * s
+    hp = clamp01(health)
+    col = tuple(int(lerp(a, b, hp)) for a, b in zip(LEAF_DRY, LEAF))
+    pot = [(cx - S(80), by - S(110)), (cx + S(80), by - S(110)), (cx + S(60), by), (cx - S(60), by)]
+    draw.polygon([(x + S(6), y + S(8)) for x, y in pot], fill=SHADOW)
+    draw.polygon(pot, fill=TERRACOTTA)
+    draw.rectangle((cx - S(88), by - S(126), cx + S(88), by - S(100)), fill=tuple(int(c * 0.9) for c in TERRACOTTA))
+    draw.ellipse((cx - S(76), by - S(124), cx + S(76), by - S(104)), fill=(110, 76, 52))
+    top_y = by - S(120) - S(150) * (0.7 + 0.3 * hp)
+    lean = S(36) * (1 - hp)
+    stem = [(cx, by - S(116)), (cx + lean * 0.3, by - S(190)), (cx + lean, top_y)]
+    draw.line(stem, fill=col, width=max(3, int(S(12))), joint="curve")
+    sway = 0.06 * math.sin(t * 6)
+    for k, (fy, side) in enumerate(((0.35, -1), (0.55, 1), (0.75, -1))):
+        lx, ly = cx + lean * fy, by - S(116) - (by - S(116) - top_y) * fy
+        droop = (1 - hp) * 0.9
+        ang = (-0.55 + droop + sway) if side > 0 else (math.pi + 0.55 - droop - sway)
+        tipx, tipy = lx + math.cos(ang) * S(80), ly + math.sin(ang) * S(80)
+        nx, ny = -math.sin(ang) * S(22), math.cos(ang) * S(22)
+        mx, my = (lx + tipx) / 2, (ly + tipy) / 2
+        draw.polygon([(lx, ly), (mx + nx, my + ny), (tipx, tipy), (mx - nx, my - ny)], fill=col)
+    if flower > 0:
+        r = S(26) * ease_out_cubic(clamp01(flower))
+        fx, fy = cx + lean, top_y - S(6)
+        for k in range(6):
+            a = k * math.pi / 3 + t
+            px, py = fx + math.cos(a) * r, fy + math.sin(a) * r
+            draw.ellipse((px - r * 0.7, py - r * 0.7, px + r * 0.7, py + r * 0.7), fill=(255, 140, 170))
+        draw.ellipse((fx - r * 0.6, fy - r * 0.6, fx + r * 0.6, fy + r * 0.6), fill=GOLD)
+
+
+def draw_can(draw, cx: float, cy: float, s: float, t: float = 0.0, pouring: bool = False,
+             full: bool = True) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.arc((cx - S(110), cy - S(110), cx - S(10), cy + S(10)), 150, 300, fill=(10, 120, 110),
+             width=max(3, int(S(16))))
+    draw.line((cx + S(60), cy - S(10), cx + S(170), cy - S(90)), fill=(10, 120, 110), width=max(3, int(S(20))))
+    draw.rounded_rectangle((cx + S(158), cy - S(110), cx + S(196), cy - S(76)), radius=S(8), fill=(10, 120, 110))
+    draw.rounded_rectangle((cx - S(90) + S(8), cy - S(60) + S(10), cx + S(80) + S(8), cy + S(80) + S(10)),
+                           radius=S(26), fill=SHADOW)
+    draw.rounded_rectangle((cx - S(90), cy - S(60), cx + S(80), cy + S(80)), radius=S(26), fill=(13, 148, 136))
+    if full:
+        draw.rounded_rectangle((cx - S(70), cy - S(10), cx + S(60), cy + S(10)), radius=S(8), fill=WATER)
+    if pouring:
+        for k in range(6):
+            p = (t * 2.6 + k / 6) % 1
+            dx = S(196) + S(30) * p
+            dy = -S(80) + S(200) * p * p
+            draw.ellipse((cx + dx - S(8), cy + dy - S(8), cx + dx + S(8), cy + dy + S(8)), fill=WATER_DEEP)
+
+
+def draw_feet(draw, cx: float, cy: float, s: float, color=DEV_MID) -> None:
+    def S(v: float) -> float:
+        return v * s
+    for sx, oy in ((-1, S(20)), (1, -S(30))):
+        fx, fy = cx + sx * S(40), cy + oy
+        draw.ellipse((fx - S(26), fy - S(40), fx + S(26), fy + S(40)), fill=color)
+        for k in range(4):
+            tx = fx - S(18) + k * S(12)
+            draw.ellipse((tx - S(6), fy - S(62), tx + S(6), fy - S(50)), fill=color)
+
+
+def draw_bread(draw, cx: float, cy: float, s: float, jam: bool = False, top: bool = False,
+               cut: bool = False, count: int = 1) -> None:
+    def S(v: float) -> float:
+        return v * s
+
+    def slice_at(x: float, y: float) -> None:
+        draw.rounded_rectangle((x - S(70) + S(6), y - S(66) + S(8), x + S(70) + S(6), y + S(66) + S(8)), radius=S(30),
+                               fill=SHADOW)
+        draw.rounded_rectangle((x - S(70), y - S(66), x + S(70), y + S(66)), radius=S(30), fill=CRUST)
+        draw.rounded_rectangle((x - S(56), y - S(52), x + S(56), y + S(56)), radius=S(24), fill=BREAD)
+    if count == 2:
+        slice_at(cx - S(80), cy)
+        slice_at(cx + S(80), cy)
+        return
+    slice_at(cx, cy)
+    if jam:
+        draw.rounded_rectangle((cx - S(46), cy - S(40), cx + S(46), cy + S(44)), radius=S(20), fill=JAM)
+    if top:
+        slice_at(cx + S(10), cy - S(20))
+        if jam:
+            draw.line((cx - S(56), cy + S(44), cx + S(66), cy + S(44)), fill=JAM, width=max(2, int(S(8))))
+    if cut:
+        draw.line((cx - S(70), cy + S(60), cx + S(80), cy - S(80)), fill=hex_rgb("#FFF8EF"), width=max(3, int(S(12))))
+
+
+def draw_notes(draw, cx: float, cy: float, s: float, t: float, color=BOTH_COLOR) -> None:
+    def S(v: float) -> float:
+        return v * s
+    for k, (dx, dy) in enumerate(((-40, 0), (40, -30))):
+        x, y = cx + S(dx), cy + S(dy) + S(10) * math.sin(t * 8 + k)
+        draw.ellipse((x - S(22), y + S(20), x + S(14), y + S(48)), fill=color)
+        draw.line((x + S(12), y + S(32), x + S(12), y - S(40)), fill=color, width=max(2, int(S(7))))
+        draw.line((x + S(12), y - S(40), x + S(40), y - S(24)), fill=color, width=max(2, int(S(7))))
+
+
+def draw_magnifier(draw, cx: float, cy: float, s: float, color=CORAL) -> None:
+    def S(v: float) -> float:
+        return v * s
+    draw.line((cx + S(40), cy + S(40), cx + S(110), cy + S(110)), fill=DEV_DARK, width=max(3, int(S(22))))
+    draw.ellipse((cx - S(70), cy - S(70), cx + S(70), cy + S(70)), fill=(230, 246, 252), outline=color,
+                 width=max(3, int(S(16))))
+    draw.arc((cx - S(44), cy - S(44), cx + S(20), cy + S(20)), 190, 260, fill=(255, 255, 255), width=max(2, int(S(8))))
+
+
+def draw_bubble(draw, box, brand: dict[str, str], text: str, tail: str = "left", size: int = 40,
+                color=None, fg=None) -> None:
+    x0, y0, x1, y1 = box
+    ink = hex_rgb(brand["ink"])
+    fill = color or hex_rgb(brand["panel"])
+    draw.rounded_rectangle((x0 + 8, y0 + 10, x1 + 8, y1 + 10), radius=36, fill=SHADOW)
+    draw.rounded_rectangle(box, radius=36, fill=fill, outline=ink, width=4)
+    if tail == "left":
+        tx = x0 + 70
+        draw.polygon([(tx, y1 - 2), (tx + 50, y1 - 2), (tx - 10, y1 + 54)], fill=fill)
+        draw.line((tx, y1 - 1, tx - 10, y1 + 54, tx + 50, y1 - 1), fill=ink, width=4)
+    elif tail == "right":
+        tx = x1 - 120
+        draw.polygon([(tx, y1 - 2), (tx + 50, y1 - 2), (tx + 60, y1 + 54)], fill=fill)
+        draw.line((tx, y1 - 1, tx + 60, y1 + 54, tx + 50, y1 - 1), fill=ink, width=4)
+    font = load_font(size, bold=True)
+    lines = wrap_text(text, font, int(x1 - x0 - 60))
+    lh = int(size * 1.25)
+    ty = (y0 + y1) / 2 - len(lines) * lh / 2
+    for j, ln in enumerate(lines):
+        text_at(draw, ln, (x0 + x1) / 2, ty + j * lh, font, fg or ink)
+
+
+def a6_icon(draw, kind: str, x: float, y: float, s: float, t: float = 0.0) -> None:
+    if kind == "glass":
+        draw_glass(draw, x, y + 70 * s, 1.0 * s, 0.0)
+    elif kind == "fullglass":
+        draw_glass(draw, x, y + 70 * s, 1.0 * s, 1.0)
+    elif kind == "filter":
+        draw_filter(draw, x - 20 * s, y, 0.8 * s, t)
+    elif kind == "fill":
+        draw_filter(draw, x - 50 * s, y - 10 * s, 0.62 * s, t, pouring=True)
+        draw_glass(draw, x + 18 * s, y + 104 * s, 0.6 * s, 0.4 + 0.6 * ((t * 1.2) % 1))
+    elif kind == "bring":
+        draw_glass(draw, x - 40 * s, y + 70 * s, 0.9 * s, 1.0)
+        draw_arrow(draw, x + 10 * s, y + 10 * s, x + 110 * s, y + 10 * s, CORAL, width=max(3, int(12 * s)),
+                   head=int(34 * s))
+    elif kind == "drink":
+        draw_glass(draw, x - 30 * s, y + 70 * s, 0.9 * s, 0.25)
+        draw_heart(draw, x + 70 * s, y - 40 * s, 26 * s, CORAL)
+    elif kind == "boil":
+        draw_pot(draw, x, y + 10 * s, 0.8 * s, t, liquid=WATER)
+    elif kind == "leaves":
+        draw_leaves(draw, x, y + 10 * s, 1.0 * s)
+    elif kind == "milk":
+        draw_milk(draw, x - 30 * s, y, 0.9 * s)
+    elif kind == "cup":
+        draw_cup(draw, x, y + 20 * s, 0.9 * s, t)
+    elif kind == "emptycup":
+        draw_cup(draw, x, y + 20 * s, 0.9 * s, t, fill=None)
+    elif kind == "brush":
+        draw_toothbrush(draw, x - 6 * s, y + 30 * s, 0.9 * s)
+    elif kind == "bath":
+        draw_shower(draw, x + 20 * s, y, 0.9 * s, t)
+    elif kind == "uniform":
+        draw_shirt(draw, x, y, 0.9 * s)
+    elif kind == "bag":
+        draw_bag(draw, x, y + 10 * s, 0.85 * s)
+    elif kind == "tiffin":
+        draw_tiffin(draw, x, y + 10 * s, 0.85 * s)
+    elif kind == "can":
+        draw_can(draw, x - 40 * s, y + 20 * s, 0.7 * s, t, full=False)
+    elif kind == "fillcan":
+        draw_filter(draw, x - 70 * s, y - 10 * s, 0.6 * s, t, pouring=True)
+        draw_can(draw, x + 40 * s, y + 80 * s, 0.42 * s, t)
+    elif kind == "walk":
+        draw_feet(draw, x - 40 * s, y + 20 * s, 0.9 * s)
+        draw_plant(draw, x + 80 * s, y + 110 * s, 0.5 * s, 0.4)
+    elif kind == "pour":
+        draw_can(draw, x - 80 * s, y - 40 * s, 0.5 * s, t, pouring=True)
+        draw_plant(draw, x + 60 * s, y + 120 * s, 0.6 * s, 1.0)
+    elif kind == "bread2":
+        draw_bread(draw, x, y + 10 * s, 0.75 * s, count=2)
+    elif kind == "jam":
+        draw_bread(draw, x, y + 10 * s, 0.95 * s, jam=True)
+    elif kind == "top":
+        draw_bread(draw, x, y + 20 * s, 0.95 * s, jam=True, top=True)
+    elif kind == "cut":
+        draw_bread(draw, x, y + 20 * s, 0.95 * s, jam=True, top=True, cut=True)
+    elif kind == "dance":
+        draw_notes(draw, x, y, 1.1 * s, t)
+
+
+A6_ROBO_STEPS = [("glass", "Pick up a glass"), ("filter", "Go to the filter"),
+                 ("fill", "Fill it with water"), ("bring", "Bring it to me")]
+A6_CHAI_STEPS = [("boil", "Boil water"), ("leaves", "Add tea leaves"),
+                 ("milk", "Milk & sugar"), ("cup", "Pour into a cup")]
+A6_MORNING = [("brush", "Brush teeth"), ("bath", "Take a bath"), ("uniform", "Uniform on"),
+              ("bag", "Pack your bag"), ("tiffin", "Take tiffin")]
+A6_SANDWICH = [("jam", "Spread jam on one slice"), ("bread2", "Take two slices of bread"),
+               ("cut", "Cut it and enjoy"), ("top", "Put the other slice on top")]
+A6_SANDWICH_ORDER = [1, 0, 3, 2]
+A6_PLANT_STEPS = [("can", "Pick up the watering can"), ("fillcan", "Fill it with water"),
+                  ("walk", "Walk to the plant"), ("pour", "Pour water on the soil")]
+
+
+def render_a6(draw, brand: dict[str, str], visual: str, focus: str, progress: float, w: int, h: int) -> bool:
+    ink = hex_rgb(brand["ink"])
+    muted = hex_rgb(brand["muted"])
+    coral = hex_rgb(brand["coral"])
+    sage = hex_rgb(brand["sage"])
+    panel = hex_rgb(brand["panel"])
+    line = hex_rgb(brand["line"])
+    coral_soft = hex_rgb(brand["coralSoft"])
+    sage_soft = hex_rgb(brand["sageSoft"])
+    lav_soft = hex_rgb("#EFEAFB")
+    blue_soft = hex_rgb("#E6EEFB")
+    appear = ease_out_cubic(min(1.0, progress * 3.0))
+    bounce = int(10 * math.sin(progress * math.pi * 3))
+    pulse = 0.5 + 0.5 * math.sin(progress * math.pi * 8)
+    lift = int((1 - appear) * 40)
+    cx = w / 2
+    t = progress
+
+    def stars_around(y: float, spread: float, n: int = 6) -> None:
+        for i in range(n):
+            side = -1 if i % 2 == 0 else 1
+            sx = cx + side * (spread + 80 * (i // 2))
+            sy = y + 90 * (i // 2) + 14 * math.sin(progress * 9 + i)
+            draw_star(draw, sx, sy, 22 + 6 * pulse, [coral, sage, BOTH_COLOR, GOLD][i % 4], rot=progress * 3 + i)
+
+    def stars_at(x: float, y: float, r: float, n: int = 4) -> None:
+        for i in range(n):
+            a = i * 2 * math.pi / n + 0.4
+            sx = x + math.cos(a) * r
+            sy = y + math.sin(a) * r * 0.7 + 10 * math.sin(progress * 9 + i)
+            draw_star(draw, sx, sy, 20 + 6 * pulse, [coral, sage, BOTH_COLOR, GOLD][i % 4], rot=progress * 3 + i)
+
+    def dashed_box(box, color, width: int = 5) -> None:
+        x0, y0, x1, y1 = box
+        ph = progress * 120
+        draw_dashed(draw, x0 + 30, y0, x1 - 30, y0, color, width=width, phase=ph)
+        draw_dashed(draw, x0 + 30, y1, x1 - 30, y1, color, width=width, phase=ph)
+        draw_dashed(draw, x0, y0 + 30, x0, y1 - 30, color, width=width, phase=ph)
+        draw_dashed(draw, x1, y0 + 30, x1, y1 - 30, color, width=width, phase=ph)
+        for ax, ay, a0 in ((x0, y0, 180), (x1 - 60, y0, 270), (x1 - 60, y1 - 60, 0), (x0, y1 - 60, 90)):
+            draw.arc((ax, ay, ax + 60, ay + 60), a0, a0 + 90, fill=color, width=width)
+
+    def step_card(box, num, label: str, kind: str | None, col, state: str = "normal", label_size: int = 34,
+                  icon_s: float = 1.0) -> None:
+        x0, y0, x1, y1 = box
+        mx = (x0 + x1) / 2
+        if state == "missing":
+            draw.rounded_rectangle(box, radius=28, fill=coral_soft)
+            dashed_box(box, coral)
+            text_at(draw, "?", mx, y0 + (y1 - y0) * 0.22, load_font(int(150 + 24 * pulse), bold=True), coral)
+            if num is not None:
+                pill(draw, 0, y0 + 20, str(num), coral, size=28, left=x0 + 20)
+            return
+        out = sage if state == "win" else DANGER if state == "bad" else None
+        shadow_card(draw, box, brand, radius=28, outline=out, outline_w=6 if out else 3)
+        if state == "win":
+            draw.rounded_rectangle((x0 + 6, y0 + 6, x1 - 6, y1 - 6), radius=24, fill=sage_soft)
+        if num is not None:
+            pill(draw, 0, y0 + 20, str(num), col, size=28, left=x0 + 20)
+        if kind:
+            a6_icon(draw, kind, mx, y0 + (y1 - y0) * 0.44, icon_s, progress)
+        font = load_font(label_size, bold=True)
+        lines = wrap_text(label, font, int(x1 - x0 - 40))
+        lh = int(label_size * 1.2)
+        ty = y1 - 28 - len(lines) * lh
+        for j, ln in enumerate(lines):
+            text_at(draw, ln, mx, ty + j * lh, font, ink)
+        if state == "win":
+            draw_check(draw, x1 - 44, y0 + 44, 26, sage)
+        elif state == "bad":
+            draw_cross(draw, x1 - 44, y0 + 44, 26, DANGER)
+
+    def card_row(steps, y0: float, y1: float, col, n_shown: float | None = None, arrows: bool = True,
+                 states: list[str] | None = None, cw: int = 380, gap: int = 56, label_size: int = 34,
+                 icon_s: float = 1.0, nums: bool = True) -> None:
+        n = len(steps)
+        x_start = cx - (n * cw + (n - 1) * gap) / 2
+        for i, (kind, lab) in enumerate(steps):
+            a = 1.0 if n_shown is None else ease_out_cubic(clamp01((n_shown - i) * 2.5))
+            if a <= 0:
+                continue
+            x0 = x_start + i * (cw + gap)
+            yy = (1 - a) * 50
+            st = states[i] if states else "normal"
+            step_card((x0, y0 + yy, x0 + cw, y1 + yy), (i + 1) if nums else None, lab, kind, col, st,
+                      label_size=label_size, icon_s=icon_s)
+            if arrows and i < n - 1:
+                na = 1.0 if n_shown is None else clamp01((n_shown - i - 0.6) * 3)
+                if na > 0:
+                    ax = x0 + cw + 8
+                    draw_arrow(draw, ax, (y0 + y1) / 2, ax + (gap - 16) * na, (y0 + y1) / 2, muted, width=8, head=22)
+
+    # ---- opening -----------------------------------------------------------
+    if visual == "a6-welcome":
+        if focus == "hello":
+            draw_mascot(draw, int(cx - 260), 450, 110, sage, panel, bounce)
+            draw_robot(draw, cx + 260, 480, 0.95, t, mood="happy", wave=t)
+            text_at(draw, "Welcome back, champ!", cx, 730, load_font(60, bold=True), ink)
+            stars_around(330, 470)
+            return True
+        if focus == "bridge":
+            shadow_card(draw, (300, 250 + lift, w - 300, 840 + lift), brand, radius=40, accent=sage)
+            text_at(draw, "UNIT 1 · HOW COMPUTERS WORK", cx, 330 + lift, load_font(34, bold=True), sage)
+            chips = ["Computers", "Binary", "Devices", "Websites", "Safety"]
+            for i, lab in enumerate(chips):
+                a = stagger(progress, i, step=0.1, speed=5)
+                if a <= 0:
+                    continue
+                x = 470 + i * 245
+                y = 450 + int((1 - a) * 40)
+                draw.ellipse((x - 70, y - 70, x + 70, y + 70), fill=sage_soft)
+                draw_check(draw, x, y, 46, sage)
+                text_at(draw, lab, x, y + 92, load_font(30, bold=True), ink)
+            a = stagger(progress, 6, step=0.1, speed=4)
+            if a > 0:
+                pill(draw, cx, 710 + int((1 - a) * 20), "ALL DONE!", coral, size=40)
+                stars_around(740, 420, 4)
+            return True
+        if focus == "unit":
+            draw.ellipse((520 - 240, 560 - 240, 520 + 240, 560 + 240), fill=blue_soft)
+            draw_robot(draw, 520, 600, 0.95, t, mood="idle")
+            pill(draw, 0, 300 + lift, "UNIT 2", coral, size=34, left=880)
+            text_at(draw, "Thinking Like", 1280, 380 + lift, load_font(84, bold=True), ink)
+            text_at(draw, "a Computer", 1280, 480 + lift, load_font(84, bold=True), ink)
+            for i in range(5):
+                a = stagger(progress, i + 2, step=0.08, speed=5)
+                if a > 0:
+                    x = 1040 + i * 120
+                    draw.rounded_rectangle((x - 46, 650, x + 46, 742), radius=22, fill=panel, outline=line, width=3)
+                    text_at(draw, str(i + 1), x, 664, load_font(46, bold=True), coral if i == 0 else muted)
+            text_at(draw, "5 chapters", 1280, 770, load_font(30, bold=True), muted)
+            return True
+        if focus == "chapter":
+            shadow_card(draw, (300, 240 + lift, w - 300, 520 + lift), brand, radius=40, accent=coral)
+            text_at(draw, "CHAPTER 1 OF 5", cx, 302 + lift, load_font(32, bold=True), coral)
+            text_at(draw, "What Is an Algorithm?", cx, 362 + lift, load_font(88, bold=True), ink)
+            for i in range(3):
+                a = stagger(progress, i + 2, step=0.12, speed=4)
+                if a <= 0:
+                    continue
+                x = cx + (i - 1) * 300
+                y = 640 + int((1 - a) * 30)
+                draw.rounded_rectangle((x - 110, y, x + 110, y + 120), radius=28, fill=panel, outline=line, width=3)
+                pill(draw, x, y + 34, f"Step {i + 1}", [coral, BOTH_COLOR, sage][i], size=30)
+                if i < 2:
+                    draw_arrow(draw, x + 120, y + 60, x + 180, y + 60, muted, width=8, head=22)
+            return True
+        if focus == "word":
+            for i, (syl, col) in enumerate((("Al", coral), ("go", BOTH_COLOR), ("rithm", sage))):
+                a = stagger(progress, i, step=0.12, speed=5)
+                if a <= 0:
+                    continue
+                x = cx + (i - 1) * 380
+                y = 330 + int((1 - a) * 50)
+                draw.rounded_rectangle((x - 170, y, x + 170, y + 200), radius=40, fill=panel, outline=col, width=6)
+                text_at(draw, syl, x, y + 40, load_font(100, bold=True), col)
+            a = stagger(progress, 4, step=0.12, speed=4)
+            if a > 0:
+                for k, (qx, qy) in enumerate(((cx - 680, 330), (cx + 690, 360), (cx + 600, 640))):
+                    text_at(draw, "?", qx, qy, load_font(int(70 + 20 * (pulse if k % 2 else 1 - pulse)), bold=True),
+                            GOLD)
+                text_at(draw, "Sounds big, right?", cx, 640, load_font(54, bold=True), muted)
+            return True
+        # promise
+        text_at(draw, "You already do it", cx, 250 + lift, load_font(66, bold=True), ink)
+        text_at(draw, "every day!", cx, 336 + lift, load_font(66, bold=True), coral)
+        for i, (kind, lab) in enumerate((("cup", "Making chai"), ("brush", "Getting ready"), ("bag", "Packing a bag"))):
+            a = stagger(progress, i + 1, step=0.14, speed=4)
+            if a <= 0:
+                continue
+            x = cx + (i - 1) * 470
+            y = 500 + int((1 - a) * 40)
+            draw.ellipse((x - 150, y - 110, x + 150, y + 190), fill=[coral_soft, sage_soft, lav_soft][i])
+            a6_icon(draw, kind, x, y + 20, 1.0, t)
+            text_at(draw, lab, x, y + 210, load_font(38, bold=True), ink)
+        return True
+
+    # ---- Robo story ----------------------------------------------------------
+    if visual == "a6-hook":
+        if focus == "meet":
+            draw.ellipse((620 - 280, 560 - 280, 620 + 280, 560 + 280), fill=blue_soft)
+            draw_robot(draw, 620, 600, 1.15, t, mood="happy", wave=t)
+            text_at(draw, "Meet", 1290, 330 + lift, load_font(60, bold=True), muted)
+            text_at(draw, "Robo!", 1290, 400 + lift, load_font(130, bold=True), BOT)
+            pill(draw, 1290, 600, "your robot helper", sage, size=36)
+            stars_around(400, 640, 4)
+            return True
+        if focus == "ask":
+            draw_person(draw, 420, 470, 1.25, "kid", t)
+            draw_bubble(draw, (560, 230, 1180, 420), brand, "Robo, please get me some water!", tail="left", size=44)
+            draw_robot(draw, 1480, 600, 1.0, t, mood="idle")
+            text_at(draw, "Hot afternoon…", 420, 800, load_font(34, bold=True), muted)
+            return True
+        if focus == "stuck":
+            draw_person(draw, 380, 470, 1.15, "kid", 0)
+            draw_robot(draw, cx + 120, 610, 1.1, t, mood="blank")
+            dots = int(progress * 6) % 4
+            draw_bubble(draw, (cx + 260, 230, cx + 560, 360), brand, "." * max(1, dots), tail="left", size=60)
+            text_at(draw, "Not moving at all", 380, 790, load_font(36, bold=True), muted)
+            return True
+        if focus == "why":
+            draw.ellipse((cx - 300, 560 - 300, cx + 300, 560 + 300), fill=lav_soft)
+            draw_robot(draw, cx, 610, 1.05, t, mood="confused")
+            for k, (qx, qy) in enumerate(((cx - 380, 300), (cx + 360, 280), (cx - 440, 560), (cx + 420, 540))):
+                text_at(draw, "?", qx, qy, load_font(int(90 + 24 * (pulse if k % 2 else 1 - pulse)), bold=True), GOLD)
+            text_at(draw, "Why didn't Robo move?", cx, 210, load_font(48, bold=True), ink)
+            draw_stopwatch(draw, cx + 600, 760, 50, progress, brand)
+            return True
+        if focus == "because":
+            draw_robot(draw, 470, 610, 1.0, t, mood="confused")
+            reasons = [("Robo isn't lazy", sage, True), ("He doesn't know HOW", coral, False),
+                       ("Tell him every step", BOTH_COLOR, True)]
+            for i, (lab, col, ok) in enumerate(reasons):
+                a = stagger(progress, i, step=0.22, speed=4)
+                if a <= 0:
+                    continue
+                y = 290 + i * 180 + int((1 - a) * 30)
+                draw.rounded_rectangle((860, y, 1660, y + 140), radius=36, fill=panel, outline=col, width=5)
+                draw.ellipse((890, y + 30, 970, y + 110), fill=col)
+                text_at(draw, str(i + 1), 930, y + 38, load_font(48, bold=True), (255, 255, 255))
+                draw.text((1000, y + 42), lab, fill=ink, font=load_font(50, bold=True))
+            return True
+        if focus == "steps":
+            card_row(A6_ROBO_STEPS, 270, 820, coral, n_shown=progress * 5.2 - 0.3, label_size=36)
+            return True
+        # works
+        n_done = min(4, int(progress * 5))
+        draw.rounded_rectangle((120, 250, 760, 860), radius=36, fill=panel, outline=line, width=3)
+        text_at(draw, "Robo's steps", 440, 280, load_font(40, bold=True), coral)
+        for i, (_, lab) in enumerate(A6_ROBO_STEPS):
+            y = 370 + i * 112
+            done = i < n_done
+            draw.rounded_rectangle((160, y, 720, y + 90), radius=24, fill=sage_soft if done else (246, 243, 238))
+            pill(draw, 0, y + 20, str(i + 1), sage if done else muted, size=26, left=180)
+            draw.text((260, y + 24), lab, fill=ink, font=load_font(36, bold=True))
+            if done:
+                draw_check(draw, 680, y + 45, 22, sage)
+        fill = clamp01(progress * 1.4)
+        draw.ellipse((1100 - 260, 560 - 260, 1100 + 260, 560 + 260), fill=blue_soft)
+        hx, hy = draw_robot(draw, 1060, 620, 1.0, t, mood="happy", hold=True)
+        draw_glass(draw, hx + 10, hy + 40, 0.8, fill)
+        draw_person(draw, 1560, 470, 1.05, "kid", t)
+        if progress > 0.75:
+            draw_heart(draw, 1640, 330 + bounce, 30, coral)
+            stars_at(1560, 520, 230, 4)
+        return True
+
+    # ---- definition -------------------------------------------------------------
+    if visual == "a6-define":
+        if focus == "name":
+            draw.rounded_rectangle((140, 280, 700, 820), radius=30, fill=(255, 250, 238), outline=line, width=4)
+            draw.rounded_rectangle((350, 250, 490, 300), radius=14, fill=STEEL_DARK)
+            for i, (_, lab) in enumerate(A6_ROBO_STEPS):
+                y = 360 + i * 110
+                pill(draw, 0, y, str(i + 1), coral, size=26, left=180)
+                draw.text((260, y + 4), lab, fill=ink, font=load_font(36, bold=True))
+            a = ease_out_cubic(clamp01((progress - 0.35) * 2.5))
+            if a > 0:
+                draw_arrow(draw, 740, 550, 740 + 200 * a, 550, coral, width=14, head=40)
+            b = ease_out_cubic(clamp01((progress - 0.55) * 2.5))
+            if b > 0:
+                s = 0.8 + 0.2 * b
+                bx0, by0, bx1, by1 = 1000, 400, 1800, 700
+                mxc, myc = (bx0 + bx1) / 2, (by0 + by1) / 2
+                hw, hh = (bx1 - bx0) / 2 * s, (by1 - by0) / 2 * s
+                shadow_card(draw, (mxc - hw, myc - hh, mxc + hw, myc + hh), brand, radius=40, outline=coral,
+                            outline_w=6)
+                text_at(draw, "It's called an", mxc, myc - 110, load_font(int(40 * s), bold=True), muted)
+                text_at(draw, "ALGORITHM", mxc, myc - 40, load_font(int(96 * s), bold=True), coral)
+            return True
+        if focus == "meaning":
+            shadow_card(draw, (200, 250 + lift, w - 200, 840 + lift), brand, radius=40, accent=coral)
+            text_at(draw, "An algorithm is…", cx, 340 + lift, load_font(46, bold=True), muted)
+            parts = [("a clear list of steps,", coral), ("in order,", BOTH_COLOR), ("to get a job done.", sage)]
+            for i, (txt, col) in enumerate(parts):
+                a = stagger(progress, i, step=0.22, speed=4)
+                if a <= 0:
+                    continue
+                y = 440 + i * 120 + int((1 - a) * 30)
+                text_at(draw, txt, cx, y, load_font(72, bold=True), col)
+            return True
+        # parts
+        cols = [("Steps", coral, coral_soft, "more than one thing to do"),
+                ("In order", BOTH_COLOR, lav_soft, "first this, then that"),
+                ("A job done", sage, sage_soft, "a goal at the end")]
+        for i, (title, col, soft, sub) in enumerate(cols):
+            a = stagger(progress, i, step=0.25, speed=3.5)
+            if a <= 0:
+                continue
+            x0 = 150 + i * 560
+            y0 = 250 + int((1 - a) * 50)
+            draw.rounded_rectangle((x0, y0, x0 + 500, y0 + 600), radius=40, fill=soft, outline=col, width=5)
+            text_at(draw, title, x0 + 250, y0 + 40, load_font(56, bold=True), col)
+            ix, iy = x0 + 250, y0 + 290
+            if i == 0:
+                for k in range(3):
+                    yy = iy - 90 + k * 70
+                    draw.rounded_rectangle((ix - 150, yy, ix + 150, yy + 50), radius=18, fill=panel)
+                    draw.ellipse((ix - 134, yy + 10, ix - 104, yy + 40), fill=col)
+                    draw.rounded_rectangle((ix - 86, yy + 18, ix + 120, yy + 32), radius=7, fill=line)
+            elif i == 1:
+                for k in range(3):
+                    x = ix - 140 + k * 140
+                    draw.ellipse((x - 44, iy - 44, x + 44, iy + 44), fill=col)
+                    text_at(draw, str(k + 1), x, iy - 32, load_font(52, bold=True), (255, 255, 255))
+                    if k < 2:
+                        draw_arrow(draw, x + 48, iy, x + 92, iy, col, width=7, head=18)
+            else:
+                draw_glass(draw, ix - 30, iy + 90, 1.2, 1.0)
+                draw_check(draw, ix + 100, iy - 70, 40, col)
+            text_at(draw, sub, x0 + 250, y0 + 500, load_font(34, bold=True), ink)
+        return True
+
+    # ---- chai recipe ---------------------------------------------------------------
+    if visual == "a6-chai":
+        if focus == "ask":
+            draw.ellipse((480 - 260, 540 - 260, 480 + 260, 540 + 260), fill=lav_soft)
+            draw_person(draw, 480, 440, 1.25, "mom", t)
+            draw_pot(draw, 1060, 620, 1.2, t, liquid=CHAI)
+            draw_cup(draw, 1520, 650, 1.1, t)
+            text_at(draw, "Chai time!", 1290, 260, load_font(64, bold=True), coral)
+            return True
+        if focus == "steps":
+            card_row(A6_CHAI_STEPS, 270, 820, coral, n_shown=progress * 5.0 - 0.4, label_size=36)
+            return True
+        if focus == "recipe":
+            draw.rounded_rectangle((180 + 10, 240 + 12, 960 + 10, 860 + 12), radius=24, fill=SHADOW)
+            draw.rounded_rectangle((180, 240, 960, 860), radius=24, fill=(255, 250, 238))
+            for k in range(6):
+                yy = 380 + k * 80
+                draw.line((220, yy + 66, 920, yy + 66), fill=(220, 210, 232), width=2)
+            draw.line((280, 250, 280, 850), fill=(240, 170, 170), width=3)
+            text_at(draw, "Chai Recipe", 570, 280, load_font(52, bold=True), coral)
+            for i, (_, lab) in enumerate(A6_CHAI_STEPS):
+                a = stagger(progress, i, step=0.1, speed=5)
+                if a <= 0:
+                    continue
+                y = 400 + i * 100
+                draw.text((310, y), f"{i + 1}.  {lab}", fill=ink, font=load_font(44, bold=True))
+                draw_check(draw, 880, y + 26, 22, sage)
+            draw_cup(draw, 1360, 520, 1.5, t)
+            a = stagger(progress, 5, step=0.1, speed=4)
+            if a > 0:
+                pill(draw, 1360, 720 + int((1 - a) * 20), "Recipe = algorithm!", sage, size=40)
+            return True
+        # oops
+        wrong = [("emptycup", "Pour into a cup"), ("boil", "Boil water"), ("leaves", "Add tea leaves"),
+                 ("milk", "Milk & sugar")]
+        card_row(wrong, 250, 720, coral, n_shown=None, states=["bad", "normal", "normal", "normal"], label_size=34,
+                 icon_s=0.9)
+        a = stagger(progress, 3, step=0.1, speed=4)
+        if a > 0:
+            pill(draw, cx, 770 + int((1 - a) * 20), "Order matters!", DANGER, size=40)
+        return True
+
+    # ---- morning routine -------------------------------------------------------------
+    if visual == "a6-morning":
+        if focus == "intro":
+            sun_y = 520 - 120 * ease_out_cubic(clamp01(progress * 2))
+            for k in range(8):
+                ang = k * math.pi / 4 + t
+                draw.line((1300 + math.cos(ang) * 120, sun_y + math.sin(ang) * 120,
+                           1300 + math.cos(ang) * 170, sun_y + math.sin(ang) * 170), fill=GOLD, width=12)
+            draw.ellipse((1300 - 95, sun_y - 95, 1300 + 95, sun_y + 95), fill=GOLD)
+            draw.rectangle((900, 640, 1700, 660), fill=(232, 222, 204))
+            draw_person(draw, 560, 440, 1.3, "kid", t)
+            text_at(draw, "Every morning…", 560, 780, load_font(46, bold=True), ink)
+            return True
+        if focus == "steps":
+            n = len(A6_MORNING)
+            shown = progress * (n + 1) - 0.3
+            draw.line((240, 470, 1680, 470), fill=line, width=10)
+            for i, (kind, lab) in enumerate(A6_MORNING):
+                a = ease_out_cubic(clamp01((shown - i) * 2.5))
+                x = 240 + i * 360
+                if a <= 0:
+                    draw.ellipse((x - 20, 450, x + 20, 490), fill=line)
+                    continue
+                r = 140 * (0.8 + 0.2 * a)
+                draw.ellipse((x - r + 8, 470 - r + 10, x + r + 8, 470 + r + 10), fill=SHADOW)
+                draw.ellipse((x - r, 470 - r, x + r, 470 + r), fill=panel, outline=coral if a >= 1 else line, width=5)
+                a6_icon(draw, kind, x, 450, 0.9, t)
+                pill(draw, x, 260, str(i + 1), coral, size=28)
+                text_at(draw, lab, x, 650, load_font(38, bold=True), ink)
+            return True
+        # wow
+        draw_school(draw, 1420, 600, 1.0, brand)
+        draw_person(draw, 560, 430, 1.3, "kid", t)
+        draw_bag(draw, 760, 640, 0.75)
+        draw_arrow(draw, 860, 560, 1150 + 20 * pulse, 560, coral, width=14, head=40)
+        text_at(draw, "Ready for school!", cx, 250 + lift, load_font(60, bold=True), sage)
+        a = stagger(progress, 2, step=0.1, speed=4)
+        if a > 0:
+            pill(draw, 1420, 800 + int((1 - a) * 20), "5 steps · in order · done!", coral, size=32)
+        stars_around(380, 640, 4)
+        return True
+
+    # ---- robots can't guess ----------------------------------------------------------
+    if visual == "a6-clear":
+        if focus == "intro":
+            draw.ellipse((560 - 270, 560 - 270, 560 + 270, 560 + 270), fill=blue_soft)
+            draw_robot(draw, 560, 610, 1.05, t, mood="idle")
+            rules = [("Follows EXACTLY", sage, True), ("Can't guess", DANGER, False)]
+            for i, (lab, col, ok) in enumerate(rules):
+                a = stagger(progress, i, step=0.25, speed=4)
+                if a <= 0:
+                    continue
+                y = 330 + i * 230 + int((1 - a) * 30)
+                draw.rounded_rectangle((980, y, 1720, y + 170), radius=40, fill=sage_soft if ok else DANGER_SOFT,
+                                       outline=col, width=5)
+                (draw_check if ok else draw_cross)(draw, 1060, y + 85, 40, col)
+                draw.text((1130, y + 52), lab, fill=ink, font=load_font(56, bold=True))
+            return True
+        if focus == "vague":
+            draw_bubble(draw, (200, 240, 760, 400), brand, "\"Help the plant.\"", tail="right", size=50)
+            draw_person(draw, 640, 560, 0.9, "kid", 0)
+            draw_robot(draw, 1080, 620, 0.95, t, mood="confused")
+            draw_plant(draw, 1560, 820, 1.1, health=0.25, t=t)
+            for i, lab in enumerate(("Talk to it?", "Sing to it?", "???")):
+                a = stagger(progress, i + 1, step=0.18, speed=4)
+                if a <= 0:
+                    continue
+                bx = 860 + i * 280
+                by = 230 + (i % 2) * 70 + int((1 - a) * 20)
+                draw.rounded_rectangle((bx, by, bx + 250, by + 84), radius=40, fill=lav_soft, outline=BOTH_COLOR,
+                                       width=3)
+                text_at(draw, lab, bx + 125, by + 20, load_font(34, bold=True), BOTH_COLOR)
+            draw_cross(draw, 740, 250, 34, DANGER)
+            return True
+        # clear
+        draw_bubble(draw, (140, 240, 860, 420), brand, "\"Pour one cup of water on the soil.\"", tail="right", size=44)
+        draw_person(draw, 640, 580, 0.85, "kid", 0)
+        draw_robot(draw, 1040, 620, 0.95, t, mood="happy")
+        pour = clamp01((progress - 0.2) * 2)
+        draw_can(draw, 1260, 470, 0.7, t, pouring=pour > 0)
+        draw_plant(draw, 1580, 820, 1.1, health=0.25 + 0.75 * pour, flower=clamp01((progress - 0.65) * 3), t=t)
+        draw_check(draw, 840, 260, 34, sage)
+        return True
+
+    # ---- short / clear / complete -------------------------------------------------------
+    good_specs = [("Short", coral, coral_soft), ("Clear", BOTH_COLOR, lav_soft), ("Complete", sage, sage_soft)]
+
+    def good_icon(i: int, x: float, y: float, s: float = 1.0) -> None:
+        col = good_specs[i][1]
+        if i == 0:
+            draw.rounded_rectangle((x - 110 * s, y - 50 * s, x + 110 * s, y - 14 * s), radius=18 * s, fill=line)
+            draw.rounded_rectangle((x - 110 * s, y + 14 * s, x + 10 * s, y + 50 * s), radius=18 * s, fill=col)
+        elif i == 1:
+            draw_magnifier(draw, x - 10 * s, y - 10 * s, 0.8 * s, col)
+        else:
+            for k in range(3):
+                yy = y - 60 * s + k * 50 * s
+                draw_check(draw, x - 70 * s, yy, 18 * s, col)
+                draw.rounded_rectangle((x - 40 * s, yy - 10 * s, x + 100 * s, yy + 10 * s), radius=10 * s, fill=line)
+
+    if visual == "a6-good":
+        if focus == "intro":
+            for i, (lab, col, soft) in enumerate(good_specs):
+                a = stagger(progress, i, step=0.2, speed=4)
+                if a <= 0:
+                    continue
+                x = cx + (i - 1) * 540
+                y = 280 + int((1 - a) * 50)
+                draw.rounded_rectangle((x - 230, y, x + 230, y + 520), radius=44, fill=soft, outline=col, width=5)
+                good_icon(i, x, y + 200)
+                text_at(draw, lab, x, y + 360, load_font(62, bold=True), col)
+            return True
+        if focus == "short":
+            pill(draw, 0, 250, "SHORT", coral, size=34, left=180)
+            draw.rounded_rectangle((180, 330, 1100, 860), radius=30, fill=(255, 250, 238), outline=line, width=3)
+            rows = ["Boil water", "Add tea leaves", "Do a little dance", "Milk & sugar", "Pour into a cup"]
+            for i, lab in enumerate(rows):
+                y = 360 + i * 96
+                extra = i == 2
+                draw.text((230, y + 10), f"{i + 1}.  {lab}", fill=muted if extra else ink, font=load_font(44, bold=True))
+                if extra:
+                    strike = clamp01((progress - 0.45) * 3)
+                    if strike > 0:
+                        draw.line((220, y + 40, 220 + 560 * strike, y + 40), fill=DANGER, width=8)
+                        draw_cross(draw, 1040, y + 38, 26, DANGER)
+            draw_notes(draw, 1420, 480, 1.6, t, BOTH_COLOR)
+            text_at(draw, "Fun, but not needed!", 1420, 720, load_font(44, bold=True), coral)
+            return True
+        if focus == "clear":
+            pill(draw, 0, 250, "CLEAR", BOTH_COLOR, size=34, left=180)
+            opts = [("\"Help the plant\"", False), ("\"Pour one cup of water on the soil\"", True)]
+            for i, (lab, ok) in enumerate(opts):
+                a = stagger(progress, i, step=0.25, speed=4)
+                if a <= 0:
+                    continue
+                y = 360 + i * 220 + int((1 - a) * 30)
+                col = sage if ok else DANGER
+                draw.rounded_rectangle((180, y, 1500, y + 170), radius=40, fill=sage_soft if ok else DANGER_SOFT,
+                                       outline=col, width=5)
+                draw.text((240, y + 54), lab, fill=ink if ok else muted, font=load_font(54, bold=True))
+                (draw_check if ok else draw_cross)(draw, 1420, y + 85, 40, col)
+            draw_robot(draw, 1700, 640, 0.6, t, mood="happy" if progress > 0.4 else "confused")
+            return True
+        # complete
+        pill(draw, 0, 250, "COMPLETE", sage, size=34, left=180)
+        steps = [("glass", "Take a glass"), (None, ""), ("drink", "Drink the water")]
+        fill_in = clamp01((progress - 0.5) * 3)
+        n = len(steps)
+        cw, gap = 420, 90
+        x_start = cx - (n * cw + (n - 1) * gap) / 2
+        for i, (kind, lab) in enumerate(steps):
+            x0 = x_start + i * (cw + gap)
+            box = (x0, 340, x0 + cw, 820)
+            if kind is None:
+                if fill_in > 0:
+                    step_card(box, 2, "Pour the water", "fill", sage, "win")
+                else:
+                    step_card(box, 2, "", None, coral, "missing")
+            else:
+                step_card(box, i + 1, lab, kind, sage)
+            if i < n - 1:
+                draw_arrow(draw, x0 + cw + 12, 580, x0 + cw + gap - 12, 580, muted, width=8, head=24)
+        return True
+
+    # ---- missing-step game ---------------------------------------------------------
+    if visual == "a6-missing":
+        if focus == "intro":
+            draw_magnifier(draw, 560, 540, 1.8, coral)
+            text_at(draw, "Find the", 1260, 330 + lift, load_font(64, bold=True), ink)
+            text_at(draw, "missing step!", 1260, 420 + lift, load_font(80, bold=True), coral)
+            for k in range(3):
+                x = 1060 + k * 200
+                if k == 1:
+                    draw.rounded_rectangle((x - 80, 600, x + 80, 760), radius=24, fill=coral_soft)
+                    dashed_box((x - 80, 600, x + 80, 760), coral, width=4)
+                    text_at(draw, "?", x, 620, load_font(90, bold=True), coral)
+                else:
+                    draw.rounded_rectangle((x - 80, 600, x + 80, 760), radius=24, fill=panel, outline=line, width=3)
+                    text_at(draw, str(k + 1), x, 630, load_font(70, bold=True), muted)
+            return True
+        steps = [("glass", "Take a glass"), ("fill", "Pour water into the glass"), ("drink", "Drink the water")]
+        ans = focus == "a"
+        n = 3
+        cw, gap = 440, 80
+        x_start = cx - (n * cw + (n - 1) * gap) / 2
+        for i, (kind, lab) in enumerate(steps):
+            x0 = x_start + i * (cw + gap)
+            box = (x0, 250, x0 + cw, 780)
+            if i == 1 and not ans:
+                step_card(box, 2, "", None, coral, "missing")
+            else:
+                step_card(box, i + 1, lab, kind, sage, "win" if (i == 1 and ans) else "normal", label_size=34)
+            if i < n - 1:
+                draw_arrow(draw, x0 + cw + 10, 515, x0 + cw + gap - 10, 515, muted, width=8, head=24)
+        if not ans:
+            draw_stopwatch(draw, cx, 830, 40, progress, brand)
+        else:
+            stars_around(820, 600, 2)
+        return True
+
+    # ---- sandwich order game ---------------------------------------------------------
+    if visual == "a6-order":
+        jumbled_pos = {i: i for i in range(4)}
+        sorted_pos = {idx: rank for rank, idx in enumerate(A6_SANDWICH_ORDER)}
+        move = ease_in_out(clamp01((progress - 0.05) * 1.25)) if focus == "answer" else 0.0
+        rank_shown = progress * 5 if focus == "answer" else -1
+        for i, (kind, lab) in enumerate(A6_SANDWICH):
+            pos = lerp(jumbled_pos[i], sorted_pos[i], move)
+            y = 240 + pos * 158
+            jitter = 0 if focus == "answer" else (i % 2 * 2 - 1) * 40
+            x0 = 320 + jitter * (1 - move)
+            rank = sorted_pos[i]
+            placed = focus == "answer" and rank_shown > rank + 0.5
+            fill = sage_soft if placed else panel
+            draw.rounded_rectangle((x0 + 8, y + 10, x0 + 1000 + 8, y + 136 + 10), radius=30, fill=SHADOW)
+            draw.rounded_rectangle((x0, y, x0 + 1000, y + 136), radius=30, fill=fill,
+                                   outline=sage if placed else line, width=5 if placed else 3)
+            badge = str(rank + 1) if focus == "answer" else "ABCD"[i]
+            pill(draw, 0, y + 40, badge, sage if focus == "answer" else BOTH_COLOR, size=30, left=x0 + 30)
+            a6_icon(draw, kind, x0 + 200, y + 60, 0.42, t)
+            draw.text((x0 + 300, y + 44), lab, fill=ink, font=load_font(44, bold=True))
+            if placed:
+                draw_check(draw, x0 + 940, y + 68, 26, sage)
+        if focus == "intro":
+            text_at(draw, "Mixed up!", 1580, 380, load_font(64, bold=True), DANGER)
+            draw_bread(draw, 1580, 620, 1.1, jam=True, top=True)
+            for k in range(3):
+                text_at(draw, "?", 1440 + k * 140, 470 + (k % 2) * 40, load_font(int(60 + 16 * pulse), bold=True), GOLD)
+        elif focus == "ask":
+            text_at(draw, "Which comes", 1600, 380, load_font(54, bold=True), ink)
+            text_at(draw, "first?", 1600, 450, load_font(70, bold=True), coral)
+            draw_stopwatch(draw, 1600, 680, 56, progress, brand)
+        else:
+            stage = min(3, int(progress * 4.4))
+            draw.ellipse((1600 - 200, 600 - 200, 1600 + 200, 600 + 200), fill=coral_soft)
+            if stage <= 0:
+                draw_bread(draw, 1600, 600, 0.9, count=2)
+            else:
+                draw_bread(draw, 1600, 620, 1.3, jam=True, top=stage >= 2, cut=stage >= 3)
+            if progress > 0.85:
+                stars_at(1600, 600, 250, 4)
+        return True
+
+    # ---- checkpoint -------------------------------------------------------------------
+    if visual == "a6-check":
+        if focus == "intro":
+            shadow_card(draw, (460, 300 + lift, w - 460, 700 + lift), brand, radius=40, accent=sage)
+            text_at(draw, "PRACTICE CHECK", cx, 380 + lift, load_font(40, bold=True), sage)
+            text_at(draw, "You're the programmer!", cx, 470 + lift, load_font(64, bold=True), ink)
+            draw_check(draw, cx, 620 + lift, 44, sage)
+            return True
+        ans = focus == "answer"
+        draw.rounded_rectangle((140 + 10, 230 + 12, 1060 + 10, 870 + 12), radius=24, fill=SHADOW)
+        draw.rounded_rectangle((140, 230, 1060, 870), radius=24, fill=(255, 250, 238))
+        text_at(draw, "Water the plant · 4 steps", 600, 260, load_font(42, bold=True), coral)
+        for i, (kind, lab) in enumerate(A6_PLANT_STEPS):
+            y = 360 + i * 124
+            shown = ans and progress * 5.2 - 0.4 > i
+            draw.line((200, y + 92, 1010, y + 92), fill=(220, 210, 232), width=3)
+            pill(draw, 0, y + 20, str(i + 1), sage if shown else muted, size=30, left=190)
+            if shown:
+                draw.text((290, y + 26), lab, fill=ink, font=load_font(44, bold=True))
+                draw_check(draw, 980, y + 50, 22, sage)
+        if ans:
+            pour = clamp01((progress - 0.62) * 3)
+            draw_robot(draw, 1350, 620, 0.85, t, mood="happy" if pour > 0 else "idle")
+            draw_can(draw, 1500, 460, 0.55, t, pouring=pour > 0)
+            draw_plant(draw, 1730, 840, 1.0, health=0.25 + 0.75 * pour, flower=clamp01((progress - 0.8) * 4), t=t)
+        else:
+            draw_robot(draw, 1380, 620, 0.85, t, mood="idle")
+            draw_plant(draw, 1720, 840, 1.0, health=0.25, t=t)
+            pill(draw, 1500, 250, "Pause & try!", coral, size=36)
+            draw_stopwatch(draw, 1240, 290, 40, progress, brand)
+        return True
+
+    # ---- recap ----------------------------------------------------------------------
+    if visual == "a6-recap":
+        recap = [("Clear steps, in order", coral, "steps"), ("Recipes & routines", GOLD, "cup"),
+                 ("Robots can't guess", BOT, "robot"), ("Short · Clear · Complete", sage, "good")]
+        if focus in ("r1", "r2", "r3", "r4"):
+            n = int(focus[1])
+            text_at(draw, "Remember", cx, 220, load_font(50, bold=True), ink)
+            for i, (lab, col, kind) in enumerate(recap[:n]):
+                active = i == n - 1
+                a = ease_out_cubic(clamp01(progress * 3)) if active else 1.0
+                x0 = 110 + i * 435
+                y0 = 300 + int((1 - a) * 50) - (int(10 * pulse) if active else 0)
+                draw.rounded_rectangle((x0, y0, x0 + 400, y0 + 520), radius=36,
+                                       fill=coral_soft if active else panel, outline=col if active else line,
+                                       width=6 if active else 3)
+                ix, iy = x0 + 200, y0 + 210
+                if kind == "steps":
+                    for k in range(3):
+                        yy = iy - 80 + k * 64
+                        pill(draw, 0, yy, str(k + 1), col, size=24, left=ix - 130)
+                        draw.rounded_rectangle((ix - 60, yy + 14, ix + 130, yy + 34), radius=10, fill=line)
+                elif kind == "cup":
+                    draw_cup(draw, ix, iy + 10, 0.9, t)
+                elif kind == "robot":
+                    draw_robot(draw, ix, iy + 40, 0.5, t, mood="idle")
+                else:
+                    for k in range(3):
+                        good_icon(k, ix - 110 + k * 110, iy, 0.42)
+                font = load_font(36, bold=True)
+                lines = wrap_text(lab, font, 340)
+                for j, ln in enumerate(lines):
+                    text_at(draw, ln, x0 + 200, y0 + 400 + j * 44, font, ink)
+            return True
+        if focus == "done":
+            draw_mascot(draw, int(cx - 300), 430, 110, sage, panel, bounce)
+            draw_robot(draw, cx + 300, 470, 0.85, t, mood="happy", wave=t)
+            text_at(draw, "Chapter 1 done!", cx, 660, load_font(68, bold=True), ink)
+            pill(draw, cx, 760, "Thinking like a computer", coral, size=36)
+            stars_around(320, 520, 8)
+            return True
+        text_at(draw, "Next up: Quiz time!", cx, 380, load_font(64, bold=True), coral)
+        text_at(draw, "Tap Finish and let's go, champ!", cx, 500, load_font(44, bold=True), ink)
+        draw_arrow(draw, cx - 120, 650, cx + 120 + 20 * pulse, 650, sage, width=16, head=46)
+        return True
+
+    return False
+
+
+LESSONS_DIR = Path(__file__).resolve().parent / "lessons"
+
+
+@functools.lru_cache(maxsize=None)
+def lesson_plugin(visual: str):
+    """Per-lesson renderer: visual "a7-hook" → scripts/learn-video/lessons/a7.py exposing render(...)."""
+    prefix = visual.split("-", 1)[0].lower()
+    path = LESSONS_DIR / f"{prefix}.py"
+    if not path.exists():
+        return None
+    import importlib.util
+    sys.modules.setdefault("build", sys.modules[__name__])
+    spec = importlib.util.spec_from_file_location(f"learn_lesson_{prefix}", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    return mod
+
+
+def update_video_manifest(module_id: str, seconds: float) -> None:
+    manifest_path = ROOT / "src" / "lib" / "learn-video-manifest.json"
+    data = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    data[module_id] = int(round(seconds))
+    track_order = {"A": 0, "B": 1, "C": 2}
+    ordered = dict(sorted(data.items(), key=lambda kv: (track_order.get(kv[0][0], 9), int(kv[0][1:]))))
+    manifest_path.write_text(json.dumps(ordered, indent=2) + "\n", encoding="utf-8")
+
+
 def draw_scene_dots(draw: ImageDraw.ImageDraw, brand: dict[str, str], idx: int, total: int, w: int) -> None:
     coral = hex_rgb(brand["coral"])
     line = hex_rgb(brand["line"])
@@ -3084,6 +4276,11 @@ def render_visual(
     if visual.startswith("a4-") and render_a4(draw, brand, visual, focus, progress, w, h):
         return
     if visual.startswith("a5-") and render_a5(draw, brand, visual, focus, progress, w, h):
+        return
+    if visual.startswith("a6-") and render_a6(draw, brand, visual, focus, progress, w, h):
+        return
+    plugin = lesson_plugin(visual)
+    if plugin is not None and plugin.render(draw, brand, visual, focus, progress, w, h):
         return
     ink = hex_rgb(brand["ink"])
     muted = hex_rgb(brand["muted"])
@@ -3601,14 +4798,18 @@ def render_frame(
     supersample: int = 1,
 ) -> Image.Image:
     k = max(1, supersample)
+    cinematic = visual.startswith("film-")
     img = Image.new("RGB", (width * k, height * k), hex_rgb(brand["bg"]))
-    paint_background(img, brand, progress)
+    if not cinematic:
+        paint_background(img, brand, progress)
     draw = ImageDraw.Draw(img) if k == 1 else ScaledDraw(ImageDraw.Draw(img), k)
-    draw_top_bar(draw, brand, title, unit_label, chapter_label, width)
-    if scene_pos:
-        draw_scene_dots(draw, brand, scene_pos[0], scene_pos[1], width)
+    if not cinematic:
+        draw_top_bar(draw, brand, title, unit_label, chapter_label, width)
+        if scene_pos:
+            draw_scene_dots(draw, brand, scene_pos[0], scene_pos[1], width)
     render_visual(img, draw, brand, visual, focus, progress, width, height)
-    draw_caption_bar(draw, brand, caption, width, height, min(1.0, progress * 3))
+    if not cinematic:
+        draw_caption_bar(draw, brand, caption, width, height, min(1.0, progress * 3))
     return img if k == 1 else img.reduce(k)
 
 
@@ -3879,6 +5080,35 @@ async def build_async(lesson_dir: Path) -> Path:
         )
         shutil.move(str(mixed), str(voiceover))
 
+    if meta.get("musicBed") == "soft":
+        print("   · mixing a quiet music bed…")
+        bed = work / "bed.wav"
+        fade_out = max(0.0, cursor - 2.8)
+        subprocess.run(
+            [
+                FFMPEG, "-y",
+                "-f", "lavfi", "-t", f"{cursor:.2f}", "-i", "sine=frequency=98:sample_rate=44100",
+                "-f", "lavfi", "-t", f"{cursor:.2f}", "-i", "sine=frequency=147:sample_rate=44100",
+                "-f", "lavfi", "-t", f"{cursor:.2f}", "-i", "sine=frequency=196:sample_rate=44100",
+                "-filter_complex",
+                "[0:a][1:a][2:a]amix=inputs=3:normalize=0,lowpass=f=720,volume=-30dB,"
+                f"afade=t=in:st=0:d=1.8,afade=t=out:st={fade_out:.2f}:d=2.6[bed]",
+                "-map", "[bed]", "-ar", "44100", "-ac", "1", str(bed),
+            ],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        with_bed = work / "with_bed.wav"
+        subprocess.run(
+            [
+                FFMPEG, "-y", "-i", str(voiceover), "-i", str(bed),
+                "-filter_complex",
+                "[0:a][1:a]amix=inputs=2:duration=first:normalize=0",
+                "-ar", "44100", "-ac", "1", str(with_bed),
+            ],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+        shutil.move(str(with_bed), str(voiceover))
+
     print("3/4  Writing captions + transcript…")
     write_captions(cues, lesson_dir)
 
@@ -3887,18 +5117,26 @@ async def build_async(lesson_dir: Path) -> Path:
     mux(frames_dir, voiceover, out_mp4, fps, lesson_dir / "captions.vtt",
         crf=int(meta.get("crf", 18)), preset=str(meta.get("x264Preset", "medium")))
 
-    # Publish into Next public for LMS (module id from scenes.json)
-    module_id = str(meta.get("id") or "A1").upper()
-    public_dir = ROOT / "public" / "learn" / "lessons"
-    public_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(out_mp4, public_dir / f"{module_id}.mp4")
-    shutil.copy2(lesson_dir / "captions.vtt", public_dir / f"{module_id}.vtt")
-    shutil.copy2(lesson_dir / "transcript.json", public_dir / f"{module_id}.transcript.json")
+    if meta.get("publishLms", True):
+        # Publish into Next public for LMS (module id from scenes.json)
+        module_id = str(meta.get("id") or "A1").upper()
+        public_dir = ROOT / "public" / "learn" / "lessons"
+        public_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(out_mp4, public_dir / f"{module_id}.mp4")
+        shutil.copy2(lesson_dir / "captions.vtt", public_dir / f"{module_id}.vtt")
+        shutil.copy2(lesson_dir / "transcript.json", public_dir / f"{module_id}.transcript.json")
+        update_video_manifest(module_id, cursor)
+        print(f"LMS  → /learn/app/lesson/{module_id}")
+    else:
+        public = ROOT / "public" / "learn" / "launch.mp4"
+        public.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(out_mp4, public)
+        shutil.copy2(lesson_dir / "captions.vtt", public.with_suffix(".vtt"))
+        print(f"Watch → {public}")
 
     shutil.rmtree(work, ignore_errors=True)
     mb = out_mp4.stat().st_size / (1024 * 1024)
     print(f"Done → {out_mp4} ({mb:.1f} MB, ~{cursor:.0f}s)")
-    print(f"LMS  → /learn/app/lesson/{module_id}")
     return out_mp4
 
 

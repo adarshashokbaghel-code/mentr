@@ -1,0 +1,332 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 6.47,
+      "caption": "Welcome back, champ!",
+      "text": "Hi champ! Welcome back to Unit three, Building With Blocks. I missed you!",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 6.47,
+      "end": 16.35,
+      "caption": "Last time: Start \u00b7 Move \u00b7 Wait \u00b7 Say",
+      "text": "Last time, you met block coding. You learned that a program is a stack of blocks, and you met the start, move, wait, and say blocks.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.35,
+      "end": 20.27,
+      "caption": "Chapter 2 \u00b7 Making a Character Move",
+      "text": "Today is chapter two. Making a Character Move!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 20.27,
+      "end": 32.09,
+      "caption": "Walk, and turn corners!",
+      "text": "Have you ever wished you could make a cartoon walk around, all by itself? Today, you'll make Billu walk, and even turn corners. Ready? Let's go!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 32.09,
+      "end": 44.66,
+      "caption": "Billu is hungry!",
+      "text": "Remember Billu, our cat? Well, today Billu is hungry. Very, very hungry. Listen. Meow! That's his tummy talking.",
+      "scene": "hungry",
+      "focus": "meet"
+    },
+    {
+      "start": 44.66,
+      "end": 54.26,
+      "caption": "Walk \u2192 turn the corner \u2192 walk",
+      "text": "His bowl of milk is over here. But look, it's not straight ahead. Billu has to walk, then turn the corner, then walk again.",
+      "scene": "hungry",
+      "focus": "bowl"
+    },
+    {
+      "start": 54.26,
+      "end": 68.12,
+      "caption": "Which blocks get Billu there? Think!",
+      "text": "So, which blocks should we snap together, to get Billu to his milk? Remember, he can't guess. We have to tell him every step. Have a think.",
+      "scene": "hungry",
+      "focus": "think"
+    },
+    {
+      "start": 68.12,
+      "end": 73.84,
+      "caption": "First: an EVENT block",
+      "text": "Every program needs a beginning. So first, we need an event block.",
+      "scene": "event",
+      "focus": "name"
+    },
+    {
+      "start": 73.84,
+      "end": 88.23,
+      "caption": "Event = starts when something happens",
+      "text": "An event block starts things when something happens. It's like the school bell. When the bell rings, everyone goes to class! The bell ringing is the event. Going to class is what happens next.",
+      "scene": "event",
+      "focus": "bell"
+    },
+    {
+      "start": 88.23,
+      "end": 98.2,
+      "caption": "when green flag clicked \u00b7 always on top",
+      "text": "Our event block is, when green flag clicked. When you click the green flag, the program starts. That's why it always sits on top.",
+      "scene": "event",
+      "focus": "flag"
+    },
+    {
+      "start": 98.2,
+      "end": 107.46,
+      "caption": "Motion block: move 10 steps",
+      "text": "Next, we need a motion block. Motion blocks move or turn the character. Here's one. Move ten steps.",
+      "scene": "move",
+      "focus": "block"
+    },
+    {
+      "start": 107.46,
+      "end": 116.33,
+      "caption": "Steps = how far Billu goes",
+      "text": "Steps tell Billu how far to go. Ten steps is a short walk forward, in the direction he's facing. Like this.",
+      "scene": "move",
+      "focus": "steps"
+    },
+    {
+      "start": 116.33,
+      "end": 123.69,
+      "caption": "move 20 = twice as far as move 10",
+      "text": "Now, what if we change ten to twenty? Twenty is double ten, so Billu goes twice as far!",
+      "scene": "move",
+      "focus": "double"
+    },
+    {
+      "start": 123.69,
+      "end": 131.65,
+      "caption": "Motion block: turn 90 degrees",
+      "text": "But walking straight isn't enough. Billu has to turn the corner. So we use, turn ninety degrees.",
+      "scene": "turn",
+      "focus": "block"
+    },
+    {
+      "start": 131.65,
+      "end": 141.05,
+      "caption": "90 degrees = a quarter turn, like a corner",
+      "text": "Ninety degrees is a quarter turn. Imagine walking to the end of your street, and turning the corner. That's one quarter turn.",
+      "scene": "turn",
+      "focus": "quarter"
+    },
+    {
+      "start": 141.05,
+      "end": 158.38,
+      "caption": "One turn \u2192 facing a new way",
+      "text": "Watch Billu. He was facing this way. And now, after one turn, he's facing a new way. Notice something? He didn't walk anywhere. He stayed in the same spot. Turning only changes which way he faces.",
+      "scene": "turn",
+      "focus": "watch"
+    },
+    {
+      "start": 158.38,
+      "end": 164.3,
+      "caption": "1 turn: a corner",
+      "text": "Let's keep turning! After one ninety degree turn, Billu has turned a corner.",
+      "scene": "around",
+      "focus": "one"
+    },
+    {
+      "start": 164.3,
+      "end": 170.46,
+      "caption": "2 turns: facing the other way!",
+      "text": "Two turns, and now Billu faces the other way! Two quarter turns make a half turn.",
+      "scene": "around",
+      "focus": "two"
+    },
+    {
+      "start": 170.46,
+      "end": 178.38,
+      "caption": "4 turns: back where he started",
+      "text": "And four turns? Billu spins all the way round, and faces exactly where he started. Wheee!",
+      "scene": "around",
+      "focus": "four"
+    },
+    {
+      "start": 178.38,
+      "end": 185.67,
+      "caption": "Tip: start small \u00b7 move 10 \u00b7 turn 90",
+      "text": "Here's a smart coder tip. When you start, use small numbers, like move ten, and turn ninety.",
+      "scene": "small",
+      "focus": "rule"
+    },
+    {
+      "start": 185.67,
+      "end": 197.64,
+      "caption": "move 1000? Zoom, off the screen!",
+      "text": "Why? Well, imagine you type move one thousand steps. Zoom! Billu shoots right off the screen. Oh no, where did he go?",
+      "scene": "small",
+      "focus": "big"
+    },
+    {
+      "start": 197.64,
+      "end": 205.53,
+      "caption": "Small steps are easy to check",
+      "text": "Small steps are easy to watch, and easy to check. If Billu goes too short, you can always add a little more later.",
+      "scene": "small",
+      "focus": "why"
+    },
+    {
+      "start": 205.53,
+      "end": 223.28,
+      "caption": "Flag \u2192 Move 10 \u2192 Turn 90 \u2192 Move 10",
+      "text": "Now, let's build Billu's path. When green flag clicked, on top. Then, move ten steps. Then, turn ninety degrees. Then, move ten steps again. One event block, and three motion blocks.",
+      "scene": "path",
+      "focus": "build"
+    },
+    {
+      "start": 223.28,
+      "end": 231.33,
+      "caption": "Walk, turn, walk\u2026 milk time!",
+      "text": "Click the green flag! Billu walks, turns the corner, and walks again. Yum, milk time!",
+      "scene": "path",
+      "focus": "go"
+    },
+    {
+      "start": 231.33,
+      "end": 243.19,
+      "caption": "Event on top, motion blocks below",
+      "text": "But what if we put the flag block at the bottom? That's the wrong order! The event always goes first, on top. Then the motion blocks follow, below it.",
+      "scene": "path",
+      "focus": "order"
+    },
+    {
+      "start": 243.19,
+      "end": 257.42,
+      "caption": "Try \u00b7 Watch \u00b7 Change one block",
+      "text": "The next day, Billu wants his ball of wool. But sometimes, a path goes wrong. That's okay! Coders use three magic words. Try, watch, change one block.",
+      "scene": "debug",
+      "focus": "intro"
+    },
+    {
+      "start": 257.42,
+      "end": 263.38,
+      "caption": "Try: click the green flag",
+      "text": "Try. Click the green flag, and let the program run, all the way to the end.",
+      "scene": "debug",
+      "focus": "try"
+    },
+    {
+      "start": 263.38,
+      "end": 272.74,
+      "caption": "Watch: he turned too early!",
+      "text": "Watch. Where did Billu really go? Hmm. He turned too early! He didn't walk far enough.",
+      "scene": "debug",
+      "focus": "watch"
+    },
+    {
+      "start": 272.74,
+      "end": 288.2,
+      "caption": "Change one: move 10 \u2192 move 20",
+      "text": "Change one block. Let's change only the first move ten, to move twenty, so he walks twice as far before turning. Try again, and, yes! He reaches the wool. Good job, Billu!",
+      "scene": "debug",
+      "focus": "change"
+    },
+    {
+      "start": 288.2,
+      "end": 295.5,
+      "caption": "One change at a time, so you know what worked",
+      "text": "Why only one change? Because if you change lots of blocks at once, you won't know which change fixed it!",
+      "scene": "debug",
+      "focus": "whyone"
+    },
+    {
+      "start": 295.5,
+      "end": 310.03,
+      "caption": "To go straight, which block comes out?",
+      "text": "Puzzle time! This stack makes Billu walk, turn, and walk. But what if we want him to go straight instead? Which block should we take out? Think.",
+      "scene": "straight",
+      "focus": "ask"
+    },
+    {
+      "start": 310.03,
+      "end": 322.41,
+      "caption": "Take out turn 90 \u2192 straight ahead!",
+      "text": "The turn ninety degrees block! Without the turn, both moves go the same way. Ten steps, and ten more steps, in one straight line. Straight ahead!",
+      "scene": "straight",
+      "focus": "answer"
+    },
+    {
+      "start": 322.41,
+      "end": 326.11,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 326.11,
+      "end": 335.42,
+      "caption": "Face the other way: how many 90\u00b0 turns?",
+      "text": "To make Billu face the other way, how many ninety degree turns do you need? Pause, and think.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 335.42,
+      "end": 350.97,
+      "caption": "Two! 2 quarter turns = a half turn",
+      "text": "Two! Each ninety degree turn is a quarter turn. So two of them make a half turn, and Billu faces the other way. And four turns? He'd be right back where he started facing. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 350.97,
+      "end": 356.82,
+      "caption": "Event on top: when green flag clicked",
+      "text": "Let's remember. The event block, when green flag clicked, goes on top.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 356.82,
+      "end": 362.58,
+      "caption": "Motion: move 10 steps \u00b7 turn 90 degrees",
+      "text": "Motion blocks, like move ten steps and turn ninety degrees, move and turn the character.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 362.58,
+      "end": 368.18,
+      "caption": "Two 90\u00b0 turns = face the other way",
+      "text": "One ninety degree turn is a corner. Two turns, and you face the other way.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 368.18,
+      "end": 372.78,
+      "caption": "Try \u00b7 Watch \u00b7 Change one block",
+      "text": "And when a path goes wrong, try, watch, and change one block.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 372.78,
+      "end": 379.38,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! Billu is one happy cat, and you're a real coder now, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 379.38,
+      "end": 384.29,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now, tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

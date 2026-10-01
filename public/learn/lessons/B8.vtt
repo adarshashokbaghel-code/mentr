@@ -1,0 +1,173 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.650
+Welcome back, champ!
+
+2
+00:00:04.650 --> 00:00:13.950
+Last time: AI finds patterns, fast
+
+3
+00:00:13.950 --> 00:00:21.860
+Chapter 3 · Show and Tell
+
+4
+00:00:21.860 --> 00:00:29.080
+How does a computer know names?
+
+5
+00:00:29.080 --> 00:00:37.710
+Meet Arjun and his little sister, Pihu
+
+6
+00:00:37.710 --> 00:00:46.140
+"This is a mango!" … "Mango!"
+
+7
+00:00:46.140 --> 00:01:00.160
+More cards, more names. Pihu learns them all!
+
+8
+00:01:00.160 --> 00:01:08.280
+How did Pihu learn those words? Think!
+
+9
+00:01:08.280 --> 00:01:21.290
+Show the picture, tell the name!
+
+10
+00:01:21.290 --> 00:01:29.940
+Label = a name stuck on an example
+
+11
+00:01:29.940 --> 00:01:39.020
+Picture = the example. Word = its label.
+
+12
+00:01:39.020 --> 00:01:49.350
+Many examples, right names = labelled data
+
+13
+00:01:49.350 --> 00:01:54.820
+Show and tell: every card gets its name
+
+14
+00:01:54.820 --> 00:02:04.890
+Mango → "mango". Auto-rickshaw → "auto"
+
+15
+00:02:04.890 --> 00:02:12.780
+A parrot card. What should Arjun say?
+
+16
+00:02:12.780 --> 00:02:20.720
+"This is a bird!" The name matches.
+
+17
+00:02:20.720 --> 00:02:33.550
+Which label fits this picture?
+
+18
+00:02:33.550 --> 00:02:42.820
+Mango! The label matches the picture.
+
+19
+00:02:42.820 --> 00:02:50.810
+AI learns names the same way!
+
+20
+00:02:50.810 --> 00:03:06.250
+Lots of pictures, each labelled "apple"
+
+21
+00:03:06.250 --> 00:03:15.940
+It finds the pattern: like this = apple
+
+22
+00:03:15.940 --> 00:03:29.250
+Labels tell AI what each example is
+
+23
+00:03:29.250 --> 00:03:37.860
+Cousin Kabir labels the banana "bus"!
+
+24
+00:03:37.860 --> 00:03:46.570
+Pihu learns: banana = "bus"
+
+25
+00:03:46.570 --> 00:03:56.040
+A banana? "Bus!" A real bus? Confused!
+
+26
+00:03:56.040 --> 00:04:01.280
+What went wrong? Think!
+
+27
+00:04:01.280 --> 00:04:16.700
+Wrong name! The card was mislabelled.
+
+28
+00:04:16.700 --> 00:04:24.140
+Train AI on bananas labelled "bus"
+
+29
+00:04:24.140 --> 00:04:34.930
+AI learns: yellow, curved things = bus!
+
+30
+00:04:34.930 --> 00:04:46.520
+Wrong labels teach wrong things
+
+31
+00:04:46.520 --> 00:04:53.180
+Be a label checker!
+
+32
+00:04:53.180 --> 00:05:09.230
+Which card has the wrong label?
+
+33
+00:05:09.230 --> 00:05:20.250
+Cat labelled "dog" is wrong! Fix it: "cat"
+
+34
+00:05:20.250 --> 00:05:32.930
+Check every label before training!
+
+35
+00:05:32.930 --> 00:05:36.630
+Your turn: practice check
+
+36
+00:05:36.630 --> 00:05:49.440
+Banana labelled "bus": what goes wrong later?
+
+37
+00:05:49.440 --> 00:05:59.830
+It may call a banana a bus, or miss a real bus
+
+38
+00:05:59.830 --> 00:06:04.250
+A label is the name on an example
+
+39
+00:06:04.250 --> 00:06:06.860
+AI learns from labelled examples
+
+40
+00:06:06.860 --> 00:06:11.060
+Wrong labels teach wrong things
+
+41
+00:06:11.060 --> 00:06:14.050
+Check labels before teaching
+
+42
+00:06:14.050 --> 00:06:18.940
+Chapter 3 done!
+
+43
+00:06:18.940 --> 00:06:25.740
+Next: Quiz · Tap Finish

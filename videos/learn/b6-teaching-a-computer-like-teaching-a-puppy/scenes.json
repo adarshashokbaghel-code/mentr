@@ -1,0 +1,146 @@
+{
+  "id": "B6",
+  "title": "Teaching a Computer Like Teaching a Puppy",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "AI · How Machines Learn",
+  "slug": "b6-teaching-a-computer-like-teaching-a-puppy",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b6-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so excited about today.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "You finished all of Unit one! You learned what AI is, and you met AI helpers that translate, find the way, and show captions. Give yourself a big pat on the back!", "caption": "Unit 1 · What Is AI? · done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today, we're starting Unit two. It's called, How Machines Learn.", "caption": "Unit 2 · How Machines Learn", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one has a funny name. Teaching a computer, like teaching a puppy!", "caption": "Chapter 1 · Teaching a Computer Like a Puppy", "focus": "chapter", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "A puppy, and a computer? What could they possibly have in common? Let's find out.", "caption": "A puppy and a computer? Let's find out!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "laddoo",
+      "visual": "b6-hook",
+      "beats": [
+        { "vo": "Meet Kabir. And this is his brand new puppy. Her name is Laddoo, because she's round, and golden, and sweet!", "caption": "Meet Kabir and his puppy, Laddoo!", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Kabir wants to teach Laddoo to sit. So he says it once, nice and loud. Sit!", "caption": "Kabir says it once: \"Sit!\"", "focus": "sit" },
+        { "vo": "And Laddoo wags her tail, and chases it, round and round and round. Not sitting at all!", "caption": "Laddoo just chases her tail!", "focus": "spin", "sfx": "whoosh", "sfxAt": 0.2, "pause": 0.5 },
+        { "vo": "Why didn't Laddoo learn? Kabir did tell her, didn't he? Think about it.", "caption": "Why didn't Laddoo learn? Think!", "focus": "why", "pause": 1.8 },
+        { "vo": "Here's the thing. A puppy doesn't learn from just one try. She needs to be shown, again and again.", "caption": "Puppies need many tries, not just one", "focus": "because" }
+      ]
+    },
+    {
+      "id": "teach",
+      "visual": "b6-teach",
+      "beats": [
+        { "vo": "So Kabir tries a smarter way. He says sit, and gently helps Laddoo sit down. That shows her what sit means.", "caption": "1 · Show: gently help her sit", "focus": "show", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "The moment she sits, Kabir says, good dog! And gives her a treat. Yum! Now Laddoo knows, that was right.", "caption": "2 · Praise: \"Good dog!\" and a treat", "focus": "praise", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Then they practise. Again tomorrow, and the day after that. Many, many tries. And one day, Kabir says sit, and Laddoo sits, every single time!", "caption": "3 · Practise: many tries, then she's got it!", "focus": "practise", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "computer",
+      "visual": "b6-computer",
+      "beats": [
+        { "vo": "Now, here's the cool part. We teach a computer in a very similar way!", "caption": "We teach a computer in a similar way!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Say we want an AI to know what a cat looks like. We don't just tell it once. We show it lots and lots of cat photos.", "caption": "Show the AI lots and lots of cat photos", "focus": "show", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Then it starts guessing. When it's right, we tell it, yes! When it's wrong, we tell it, no. Just like Kabir saying, good dog.", "caption": "Right? Say yes! Wrong? Say no.", "focus": "guess" },
+        { "vo": "And with more practice, its guesses get better and better. It isn't magic, and it isn't alive. It's finding patterns, in the examples we show it.", "caption": "More practice → better guesses. Not magic!", "focus": "better", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "labels",
+      "visual": "b6-labels",
+      "beats": [
+        { "vo": "Each cat photo has its name stuck on it, like a little sticker that says, cat. That's called a labelled example.", "caption": "Photo + name sticker = a labelled example", "focus": "label", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "And showing an AI lots and lots of labelled examples has a special name. It's called, training.", "caption": "Lots of labelled examples = TRAINING", "focus": "train", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "No, not a train ride! Choo choo! Training just means teaching, with lots of examples.", "caption": "Not a train ride! Teaching with examples.", "focus": "notrain", "sfx": "whoosh", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "feedback",
+      "visual": "b6-feedback",
+      "beats": [
+        { "vo": "Let's play. You be the teacher! The AI will guess, and you say yes, or no.", "caption": "You be the teacher! Say yes or no.", "focus": "intro", "sfx": "pop" },
+        { "vo": "Here's a stripy cat. The AI says, cat. And here's a dog. The AI says, cat. What do you tell it each time? Pause, and think.", "caption": "The AI says \"cat\" both times. Yes or no?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Stripy cat? Yes, well done! The dog? No, try again! Your yes and no help the AI learn, just like praise helps Laddoo.", "caption": "Cat: yes! Dog: no! That helps it learn.", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "one",
+      "visual": "b6-one",
+      "beats": [
+        { "vo": "Now, how many photos should we show? Let's try just one. One photo of an orange cat, labelled cat.", "caption": "Train with just ONE orange cat photo", "focus": "setup", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Then we show it a black cat. And the AI says, not a cat! Oh no. What went wrong? Think.", "caption": "Black cat? The AI says \"not a cat\"! Why?", "focus": "test", "sfx": "buzz", "sfxAt": 0.35, "pause": 1.8 },
+        { "vo": "With only one photo, the AI thought orange was part of being a cat! So it thinks all cats are orange. One example is never enough.", "caption": "It thinks all cats are orange! One isn't enough", "focus": "why" }
+      ]
+    },
+    {
+      "id": "many",
+      "visual": "b6-many",
+      "beats": [
+        { "vo": "But real cats come in so many kinds. Black, white, stripy, big, and tiny!", "caption": "Black · White · Stripy · Big · Tiny", "focus": "kinds", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "When the AI sees lots of different cats, it learns what all cats share. Pointy ears, whiskers, and a long tail. Now it can spot a cat it has never seen before!", "caption": "Many cats → it learns what all cats share", "focus": "share", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Quick quiz! Which set teaches cat best? One orange cat. Five photos of the same cat. A hundred dog photos. Or a hundred photos of many different cats? Pause, and pick.", "caption": "Which set teaches \"cat\" best?", "focus": "ask", "pause": 2.2 },
+        { "vo": "A hundred photos of many different cats! Lots of examples, and lots of kinds. And the dog photos won't teach cat at all!", "caption": "100 different cats wins!", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "test",
+      "visual": "b6-test",
+      "beats": [
+        { "vo": "So, how do we know if the AI really learned? We do two steps. Step one, train. Show it lots of labelled examples.", "caption": "Step 1 · TRAIN: lots of labelled examples", "focus": "train", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Step two, test. Give it a brand new photo, one it has never seen, with no label. And see what it guesses.", "caption": "Step 2 · TEST: a new photo, see its guess", "focus": "test", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Wrong guess? No problem. Show it more examples, and test again. First train, then test. Just like Laddoo. If she forgets, Kabir practises with her some more.", "caption": "Wrong? Train with more, then test again", "focus": "again", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b6-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Kabir wants to teach an AI what a bus is. Should he show one photo, or a hundred? And why? Pause the video, and try it on paper.", "caption": "Teach \"bus\": 1 photo or 100? Why?", "focus": "ask", "pause": 2.5 },
+        { "vo": "A hundred photos! Buses come in many colours and sizes. Red city buses, yellow school buses, even double-deckers. With lots of labelled bus photos, the AI learns what all buses share. Not just one bus. Super thinking!", "caption": "100! Many kinds → it learns what buses share", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b6-recap",
+      "beats": [
+        { "vo": "Let's remember. Training means showing lots of examples.", "caption": "Training = showing lots of examples", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Labelled examples have their names stuck on them.", "caption": "Labelled examples have their names on", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "One example is not enough. Remember the orange cat?", "caption": "One example is not enough", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And first we train, then we test.", "caption": "First train, then test", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit two, done! You just learned how computers learn, champ. Laddoo is very proud of you!", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.38,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so glad you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.38,
+      "end": 16.28,
+      "caption": "Last time: Find face \u2192 Mark points \u2192 Draw",
+      "text": "Last time, we found out how face filters work. First, find the face. Then, mark the points. Then, draw puppy ears on top!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.28,
+      "end": 24.75,
+      "caption": "Chapter 5 \u00b7 AI in Games",
+      "text": "Today is chapter five, the very last chapter of Unit three. And it's a fun one. AI in games!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.75,
+      "end": 33.1,
+      "caption": "How do game characters know where you are?",
+      "text": "Have you ever wondered how the characters in a game seem to know exactly where you are? Hmm. Let's find out.",
+      "scene": "open",
+      "focus": "wonder"
+    },
+    {
+      "start": 33.1,
+      "end": 41.61,
+      "caption": "Meet Riya, playing Mango Maze",
+      "text": "Meet Riya. It's summer vacation, and she's playing her favourite game on the tablet. It's called, Mango Maze.",
+      "scene": "riya",
+      "focus": "meet"
+    },
+    {
+      "start": 41.61,
+      "end": 51.82,
+      "caption": "Collect mangoes\u2026 but watch out for Sheru!",
+      "text": "Riya moves her little runner through the maze, collecting mangoes. But watch out! There's a tiger guard called Sheru, walking up and down the path.",
+      "scene": "riya",
+      "focus": "maze"
+    },
+    {
+      "start": 51.82,
+      "end": 61.69,
+      "caption": "Too close! Sheru starts chasing!",
+      "text": "Riya sneaks a little too close. And Sheru turns, and starts chasing her! Oh no! Run, Riya, run!",
+      "scene": "riya",
+      "focus": "chase"
+    },
+    {
+      "start": 61.69,
+      "end": 74.93,
+      "caption": "Is someone hiding inside, moving Sheru?",
+      "text": "Her little cousin Kabir gasps. Sheru is so clever! Is someone hiding inside the tablet, moving him? Hmm. What do you think?",
+      "scene": "riya",
+      "focus": "ask"
+    },
+    {
+      "start": 74.93,
+      "end": 84.11,
+      "caption": "No one inside! Sheru follows rules.",
+      "text": "Here's the truth. Nobody is hiding in there! Sheru is just following a few simple rules. Let's see how.",
+      "scene": "riya",
+      "focus": "truth"
+    },
+    {
+      "start": 84.11,
+      "end": 94.33,
+      "caption": "The PLAYER: the character you control",
+      "text": "In a game, there are two kinds of characters. First, there's you, the player. You control your character, with your fingers or buttons.",
+      "scene": "npc",
+      "focus": "player"
+    },
+    {
+      "start": 94.33,
+      "end": 103.67,
+      "caption": "NPC = non-player character",
+      "text": "Then, there are characters the computer controls, like Sheru. These are called NPCs. That's short for, non-player characters.",
+      "scene": "npc",
+      "focus": "npc"
+    },
+    {
+      "start": 103.67,
+      "end": 116.07,
+      "caption": "Guards \u00b7 Ghosts \u00b7 Shopkeepers: all NPCs",
+      "text": "A guard in a maze. A ghost floating around. A shopkeeper who says hello. Nobody holds a controller for them. The game moves them, using rules.",
+      "scene": "npc",
+      "focus": "examples"
+    },
+    {
+      "start": 116.07,
+      "end": 127.99,
+      "caption": "IF something happens, THEN do this",
+      "text": "So, what kind of rules? They're called, if, then rules. If something happens, then do this. Like, if it rains, then take an umbrella!",
+      "scene": "rule",
+      "focus": "ifthen"
+    },
+    {
+      "start": 127.99,
+      "end": 138.32,
+      "caption": "If player is near \u2192 chase. Else \u2192 patrol.",
+      "text": "Sheru has just two rules. Rule one. If the player is near, then chase. Rule two. Else, patrol.",
+      "scene": "rule",
+      "focus": "sheru"
+    },
+    {
+      "start": 138.32,
+      "end": 145.92,
+      "caption": "ELSE means: otherwise, if not",
+      "text": "Else is a small word that means, otherwise. So, if the player is not near, Sheru does the other thing.",
+      "scene": "rule",
+      "focus": "else"
+    },
+    {
+      "start": 145.92,
+      "end": 157.05,
+      "caption": "Chase: go to the player \u00b7 Patrol: back & forth",
+      "text": "Chase means moving towards the player, to catch them. And patrol means walking back and forth along a path, watching. Just like a watchman doing his rounds!",
+      "scene": "rule",
+      "focus": "words"
+    },
+    {
+      "start": 157.05,
+      "end": 172.93,
+      "caption": "Is the player near? No\u2026 No\u2026 YES! Chase!",
+      "text": "Now here's the clever part. Sheru checks his rule again and again. Is the player near? No. Is the player near? No. Is the player near? Yes! Chase!",
+      "scene": "fast",
+      "focus": "check"
+    },
+    {
+      "start": 172.93,
+      "end": 182.69,
+      "caption": "Checks many times a second, like filters!",
+      "text": "He checks many, many times every second. Remember the face filter, finding your face points again and again? Same idea!",
+      "scene": "fast",
+      "focus": "quick"
+    },
+    {
+      "start": 182.69,
+      "end": 196.62,
+      "caption": "Not alive! Just clear rules, followed fast",
+      "text": "That's why Sheru seems smart. But he isn't alive. He has no feelings, and he can't read your mind. He just follows clear rules, very quickly. That's simple AI.",
+      "scene": "fast",
+      "focus": "smart"
+    },
+    {
+      "start": 196.62,
+      "end": 204.8,
+      "caption": "Steps a computer follows = an ALGORITHM",
+      "text": "And here's a word you may know from computer science. Step-by-step instructions that a computer follows are called an algorithm.",
+      "scene": "algo",
+      "focus": "intro"
+    },
+    {
+      "start": 204.8,
+      "end": 218.65,
+      "caption": "Check \u2192 Yes: chase \u00b7 No: patrol \u2192 again",
+      "text": "Sheru's algorithm goes like this. Check, is the player near? If yes, chase. If no, patrol. Then go back, and check again. Over and over!",
+      "scene": "algo",
+      "focus": "loop"
+    },
+    {
+      "start": 218.65,
+      "end": 225.43,
+      "caption": "Game rules are algorithms!",
+      "text": "So game rules are algorithms! Every guard, ghost, and coin in a game is following one.",
+      "scene": "algo",
+      "focus": "same"
+    },
+    {
+      "start": 225.43,
+      "end": 231.61,
+      "caption": "Rules for lots of game things!",
+      "text": "Game makers write rules for lots of things, not just guards. Let's look at three.",
+      "scene": "rules",
+      "focus": "intro"
+    },
+    {
+      "start": 231.61,
+      "end": 239.59,
+      "caption": "Coin: if touched \u2192 disappear, +1 point",
+      "text": "A coin. If the player touches it, then it disappears, and adds one point to the score. Ching!",
+      "scene": "rules",
+      "focus": "coin"
+    },
+    {
+      "start": 239.59,
+      "end": 243.87,
+      "caption": "Door: if player has the key \u2192 open",
+      "text": "A door. If the player has the key, then it opens.",
+      "scene": "rules",
+      "focus": "door"
+    },
+    {
+      "start": 243.87,
+      "end": 254.66,
+      "caption": "Ghost: if player eats a power berry \u2192 run",
+      "text": "And a ghost. If the player eats a power berry, then the ghost runs away! See? Each one is a clear, simple, if, then rule.",
+      "scene": "rules",
+      "focus": "ghost"
+    },
+    {
+      "start": 254.66,
+      "end": 277.72,
+      "caption": "Match each character to its rule!",
+      "text": "Quick game! Match each character to its rule. A mango, a gate, and a sleepy owl. And the rules? Open, if the player has the key. Hoot, if the player comes close. Disappear and add a point, if touched. Pause, and match them.",
+      "scene": "match",
+      "focus": "ask"
+    },
+    {
+      "start": 277.72,
+      "end": 289.17,
+      "caption": "Mango: +1 \u00b7 Gate: key opens \u00b7 Owl: hoots",
+      "text": "The mango disappears, and adds a point. The gate opens, if you have the key. And the owl wakes up and hoots, when you come close. Well done!",
+      "scene": "match",
+      "focus": "answer"
+    },
+    {
+      "start": 289.17,
+      "end": 310.25,
+      "caption": "Which guard rules are better: A or B?",
+      "text": "Now Riya wants to make her own guard. Which pair of rules is better? Pair A. If the player is near, chase. Else, patrol. Pair B. If the player is near, sleep. Else, sleep. Think!",
+      "scene": "best",
+      "focus": "ask"
+    },
+    {
+      "start": 310.25,
+      "end": 322.67,
+      "caption": "A! It reacts and keeps watch. B just sleeps.",
+      "text": "Pair A! That guard reacts to the player, and keeps watch the rest of the time. The pair B guard just sleeps, all day long. Easy to win, but not much fun!",
+      "scene": "best",
+      "focus": "answer"
+    },
+    {
+      "start": 322.67,
+      "end": 329.5,
+      "caption": "Project: design your own maze guard!",
+      "text": "Now it's your turn to be a game maker! Here's your project. Design your own maze guard.",
+      "scene": "project",
+      "focus": "intro"
+    },
+    {
+      "start": 329.5,
+      "end": 338.96,
+      "caption": "1 \u00b7 Draw a tiny maze, pick your guard",
+      "text": "Step one. Draw a tiny maze on paper, and pick your guard. A guard, a robot, or a tiger, like Sheru.",
+      "scene": "project",
+      "focus": "step1"
+    },
+    {
+      "start": 338.96,
+      "end": 347.43,
+      "caption": "2 \u00b7 Write 2 rules: If near\u2026 Else\u2026",
+      "text": "Step two. Write two rules. If the player is near, then, what? And else, what?",
+      "scene": "project",
+      "focus": "step2"
+    },
+    {
+      "start": 347.43,
+      "end": 361.93,
+      "caption": "3 \u00b7 Act it out with a friend, fix, try again",
+      "text": "Step three. Test it with a friend. You be the guard, and act out your rules. Does it work? If not, fix it, and try again. That's what real game makers do!",
+      "scene": "project",
+      "focus": "step3"
+    },
+    {
+      "start": 361.93,
+      "end": 365.88,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 365.88,
+      "end": 375.13,
+      "caption": "Write one rule for a coin that disappears",
+      "text": "Write one rule for a coin that disappears when it's touched. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 375.13,
+      "end": 386.01,
+      "caption": "If player touches coin \u2192 disappear, +1",
+      "text": "Here's one answer. If the player touches the coin, then the coin disappears, and the score goes up by one. If yours has an if, and a then, brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 386.01,
+      "end": 394.06,
+      "caption": "NPCs follow if/then rules",
+      "text": "Let's remember. Characters the computer controls are called NPCs. They follow if, then rules.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 394.06,
+      "end": 398.31,
+      "caption": "If near, chase. Else, patrol.",
+      "text": "If the player is near, chase. Else, patrol.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 398.31,
+      "end": 404.26,
+      "caption": "No one inside: just clear, fast rules",
+      "text": "No real person is hiding inside the game. Just clear rules, followed fast.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 404.26,
+      "end": 406.48,
+      "caption": "Game rules are algorithms",
+      "text": "And game rules are algorithms.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 406.48,
+      "end": 419.38,
+      "caption": "Chapter 5 done \u00b7 Unit 3 complete!",
+      "text": "Chapter five, done! And that means you've finished all of Unit three! Computers that see, listen, chat, find faces, and play games. Wow, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 419.38,
+      "end": 426.18,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

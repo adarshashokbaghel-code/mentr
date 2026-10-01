@@ -561,7 +561,7 @@ export function LmsBadgesPanel({ xp }: { xp: number }) {
           </button>
         </div>
 
-        <div className="mt-4 grid grid-cols-5 gap-2 sm:gap-3">
+        <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-5 sm:gap-3">
           {preview.map((badge) => (
             <BadgeTile
               key={badge.label}

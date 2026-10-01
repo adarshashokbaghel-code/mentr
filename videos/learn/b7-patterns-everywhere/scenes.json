@@ -1,0 +1,152 @@
+{
+  "id": "B7",
+  "title": "Patterns Everywhere",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "AI · How Machines Learn",
+  "slug": "b7-patterns-everywhere",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b7-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we found out how to teach a computer, a bit like teaching a puppy. Show it lots of examples, then test it.", "caption": "Last time: train with examples, then test", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of How Machines Learn. It's called, Patterns Everywhere!", "caption": "Chapter 2 · Patterns Everywhere", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "By the end, you'll be a real pattern detective. And you'll see how AI uses patterns too.", "caption": "Let's become pattern detectives!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "garland",
+      "visual": "b7-hook",
+      "beats": [
+        { "vo": "Picture this. It's Diwali time, and Meera is helping her mum make a flower garland for the front door.", "caption": "Meet Meera, making a Diwali garland", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Mum threads the marigolds. Orange, yellow. Orange, yellow. Orange, yellow.", "caption": "Orange, yellow, orange, yellow…", "focus": "string", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Then, ding dong! Someone's at the door. Mum says, Meera, can you carry on? And off she goes.", "caption": "\"Meera, can you carry on?\"", "focus": "leave", "sfx": "chime", "sfxAt": 0.1 },
+        { "vo": "Meera looks at the garland. Which flower should she add next? Orange, or yellow? What do you think?", "caption": "Orange or yellow next? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Orange! Meera didn't need to ask anyone. The colours were taking turns, so she could guess what comes next. She spotted a pattern!", "caption": "Orange! Meera spotted a pattern", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b7-define",
+      "beats": [
+        { "vo": "So, what is a pattern? A pattern is something that repeats, in a way you can predict.", "caption": "Pattern = repeats in a way you can predict", "focus": "name", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Repeats means the same thing comes back, again and again. And predict means you can guess what's coming, before you even see it.", "caption": "Repeats · and you can predict what's next", "focus": "parts" },
+        { "vo": "Things lined up one after another, like the flowers on Meera's garland, are called a sequence. Look closely at a sequence, and you can often find a pattern hiding inside.", "caption": "Sequence: things in a row, one after another", "focus": "sequence", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "But if things are all jumbled up, with nothing repeating? Then there's no pattern, and no way to guess what comes next.", "caption": "Nothing repeats? No pattern. Can't guess!", "focus": "random", "sfx": "buzz", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "kinds",
+      "visual": "b7-kinds",
+      "beats": [
+        { "vo": "Patterns come in lots of kinds. Let's look at three of them.", "caption": "Three kinds of patterns", "focus": "intro", "sfx": "pop" },
+        { "vo": "Colour patterns. Red, blue, red, blue. What comes next? Red!", "caption": "Colours: red, blue, red, blue → red!", "focus": "colour", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Shape patterns. Circle, square, circle, square. And next comes, a circle!", "caption": "Shapes: circle, square, circle, square → circle", "focus": "shape", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "And beat patterns, that you can hear. Clap, clap, stamp. Clap, clap, stamp. Try it with me!", "caption": "Beats: clap, clap, stamp!", "focus": "beat", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Every pattern has a little part that repeats. Find that part, and you can keep the pattern going, forever.", "caption": "Find the part that repeats", "focus": "unit", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "next",
+      "visual": "b7-next",
+      "beats": [
+        { "vo": "Okay, detective. Game time! What comes next?", "caption": "Game: what comes next?", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Clap, clap, stamp. Clap, clap, and then? Pause, and think.", "caption": "Clap, clap, stamp, clap, clap, ___?", "focus": "ask1", "pause": 2.0 },
+        { "vo": "Stamp! The part that repeats is clap, clap, stamp.", "caption": "Stamp! The beat is clap, clap, stamp", "focus": "ans1", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Here's a trickier one. Circle, circle, triangle. Circle, circle, triangle. Circle, circle, and then? Take your time.", "caption": "Circle, circle, triangle… circle, circle, ___?", "focus": "ask2", "pause": 2.2 },
+        { "vo": "Triangle! Two circles, then a triangle, again and again. You're getting really good at this!", "caption": "Triangle! Two circles, then a triangle", "focus": "ans2", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "b7-sort",
+      "beats": [
+        { "vo": "Patterns help us sort things, too. Sorting means putting things that are alike into groups.", "caption": "Sorting: putting alike things into groups", "focus": "intro", "sfx": "pop" },
+        { "vo": "Oh no! Meera's little brother tipped over his toy box. Red circles, red squares, blue circles, and blue squares, all mixed up!", "caption": "Red, blue, circles, squares, all mixed up!", "focus": "mess", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Meera sorts them by colour. All the red ones go here. All the blue ones go there. Two neat groups!", "caption": "Sort by colour: reds here, blues there", "focus": "colour", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Now, what if she sorts the very same toys by shape? Where does the red circle go? And the blue circle? Think.", "caption": "Sort by shape: where do the circles go?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Together! All the circles go in one group, whatever their colour. All the squares go in another. Same toys, different groups. You choose the pattern!", "caption": "All circles together, all squares together", "focus": "shape", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "ai",
+      "visual": "b7-ai",
+      "beats": [
+        { "vo": "Now here's the exciting part. AI looks for patterns too! The same kinds of patterns that you notice.", "caption": "AI looks for patterns too!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Remember our cat photos from last time? What did the computer learn from all of them? A pattern! Pointy ears, whiskers, a long tail. Things that show up again and again.", "caption": "Many cat photos → a pattern: ears, whiskers…", "focus": "cats", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "So AI isn't magic, and it isn't alive. It's a computer program that finds patterns, in pictures, numbers, and sounds.", "caption": "Not magic, not alive. It finds patterns.", "focus": "notmagic", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "mango",
+      "visual": "b7-mango",
+      "beats": [
+        { "vo": "Meera's nani has a big mango farm. At harvest time, there are thousands and thousands of mangoes!", "caption": "Nani's mango farm: thousands of mangoes!", "focus": "farm", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Which mangoes are ripe, and ready to sell? What pattern would you look for? Think about it.", "caption": "Which are ripe? What would you look for?", "focus": "ask", "pause": 2.0 },
+        { "vo": "A ripe mango is yellow, nice and plump, with no dark spots. A green one isn't ready yet. It's all about how the mango looks!", "caption": "Ripe: yellow · plump · no dark spots", "focus": "pattern", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Meera can check a few mangoes every minute. But the farm uses an AI sorting machine. A camera looks at each mango, checks the pattern, and sends it to the right basket.", "caption": "An AI machine checks each mango's pattern", "focus": "machine", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Zip, zip, zip! It can sort thousands of mangoes, much faster than any person. And it never gets tired.", "caption": "Thousands of mangoes, super fast!", "focus": "fast", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "compare",
+      "visual": "b7-compare",
+      "beats": [
+        { "vo": "So, you and AI both find patterns. You notice them with your eyes, and your ears.", "caption": "You find patterns with eyes and ears", "focus": "you", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "AI notices patterns in numbers, pictures, and sounds.", "caption": "AI: numbers, pictures, and sounds", "focus": "ai", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "The big difference? AI can check thousands of things, very fast. Same idea as you, just on lots and lots of things. And it only learns from the examples people give it.", "caption": "Same idea. AI just checks thousands, fast!", "focus": "diff", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b7-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "What pattern do you see? Red, blue, red, blue, and then? What comes next, and why? Pause the video, and try it on paper.", "caption": "Red, blue, red, blue, ___? And why?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Red! The colours take turns. Red, then blue, then red again. So the next one is red. Did you get it? Brilliant!", "caption": "Red! The colours take turns", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b7-recap",
+      "beats": [
+        { "vo": "Let's remember. A pattern repeats, like the same colour, shape, or beat.", "caption": "A pattern repeats: colour, shape, beat", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Sorting means putting things that are alike into groups.", "caption": "Sorting = grouping things that are alike", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "AI finds the same kinds of patterns that people notice.", "caption": "AI finds patterns people notice too", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And AI can do it on thousands of things, very fast.", "caption": "AI does it on thousands of things, fast", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! You can spot patterns, just like AI does, champ.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

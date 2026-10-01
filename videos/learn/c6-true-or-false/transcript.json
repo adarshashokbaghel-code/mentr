@@ -1,0 +1,372 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 15.67,
+      "caption": "Unit 1 \u00b7 Numbers Computers Love \u00b7 done!",
+      "text": "Last time, you grew number patterns, like one, one, two, three, five. And with that, you finished all of Unit one. Wow!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.67,
+      "end": 25.9,
+      "caption": "Unit 2 \u00b7 Logic & Reasoning",
+      "text": "Today, we start Unit two. It's called, Logic and Reasoning. That's a fancy way of saying, thinking clearly, like a detective.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 25.9,
+      "end": 31.57,
+      "caption": "Chapter 1 \u00b7 True or False?",
+      "text": "And chapter one is a game you're going to love. It's called, True or False?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 31.57,
+      "end": 37.46,
+      "caption": "Become a logic detective!",
+      "text": "By the end, you'll check sentences like a real logic detective. Let's go!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 37.46,
+      "end": 49.24,
+      "caption": "Meet Kabir \u00b7 a green TRUE card, a red FALSE card",
+      "text": "Meet Kabir. Kabir's class is playing a game with Miss Rao. Every child has two cards. A green card that says true, and a red card that says false.",
+      "scene": "kabir",
+      "focus": "meet"
+    },
+    {
+      "start": 49.24,
+      "end": 59.95,
+      "caption": "\"The sun rises in the east.\" \u2192 TRUE",
+      "text": "Miss Rao says, the sun rises in the east. Up go all the green cards. True! Every morning, the sun comes up in the east.",
+      "scene": "kabir",
+      "focus": "sun"
+    },
+    {
+      "start": 59.95,
+      "end": 68.24,
+      "caption": "\"All birds can fly.\" Kabir holds up FALSE!",
+      "text": "Then she says, all birds can fly. Almost everyone holds up green. But Kabir holds up red!",
+      "scene": "kabir",
+      "focus": "birds"
+    },
+    {
+      "start": 68.24,
+      "end": 77.77,
+      "caption": "Why did Kabir say FALSE? Think!",
+      "text": "Hmm. Why would Kabir say false? Birds fly, don't they? What do you think?",
+      "scene": "kabir",
+      "focus": "ask"
+    },
+    {
+      "start": 77.77,
+      "end": 82.68,
+      "caption": "Hold that thought\u2026",
+      "text": "Keep that thought. We'll come back to Kabir's red card very soon.",
+      "scene": "kabir",
+      "focus": "later"
+    },
+    {
+      "start": 82.68,
+      "end": 90.32,
+      "caption": "Statement = tells something you can check",
+      "text": "Miss Rao's sentences are called statements. A statement is a sentence that tells something, and can be checked.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 90.32,
+      "end": 99.46,
+      "caption": "TRUE = matches the facts \u00b7 FALSE = doesn't",
+      "text": "When we check it, there are only two answers. True means it matches the facts. False means it does not match the facts.",
+      "scene": "define",
+      "focus": "tf"
+    },
+    {
+      "start": 99.46,
+      "end": 110.91,
+      "caption": "\"A cat has four legs.\" Check\u2026 TRUE!",
+      "text": "For example, a cat has four legs. Let's check. One, two, three, four. Yes! It matches, so it's true.",
+      "scene": "define",
+      "focus": "cat"
+    },
+    {
+      "start": 110.91,
+      "end": 129.39,
+      "caption": "Which one can be TRUE or FALSE?",
+      "text": "But careful! Not every sentence is a statement. Please close the door. What time is it? Wow! A week has seven days. Which one can you mark true or false? Think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 129.39,
+      "end": 136.83,
+      "caption": "\"A week has 7 days\" \u2192 a statement, TRUE",
+      "text": "A week has seven days! You can count the days and check. So it's a statement, and it's true.",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 136.83,
+      "end": 149.67,
+      "caption": "Request \u00b7 Question \u00b7 Shout \u2192 not statements",
+      "text": "And the others? Please close the door is a request. What time is it, is a question. And wow is just a happy shout. You can't mark those true or false.",
+      "scene": "sort",
+      "focus": "why"
+    },
+    {
+      "start": 149.67,
+      "end": 164.81,
+      "caption": "No maybe! Only TRUE or FALSE",
+      "text": "Here's the most important rule of this game. There's no maybe. Every statement is either true, or false. Just like the switches in binary. On, or off. Never in between.",
+      "scene": "nomaybe",
+      "focus": "intro"
+    },
+    {
+      "start": 164.81,
+      "end": 177.52,
+      "caption": "5 + 3 = 8 \u2192 count it\u2026 TRUE",
+      "text": "Let's test one. Five plus three equals eight. Count the counters. Five, and three more. Six, seven, eight. True!",
+      "scene": "nomaybe",
+      "focus": "add"
+    },
+    {
+      "start": 177.52,
+      "end": 189.63,
+      "caption": "5 + 3 = 9 \u2192 it's 8, so FALSE",
+      "text": "Now, five plus three equals nine. But we just counted eight, not nine. So it's false. One wrong number makes the whole sentence false.",
+      "scene": "nomaybe",
+      "focus": "add9"
+    },
+    {
+      "start": 189.63,
+      "end": 201.0,
+      "caption": "\"10 is odd\" \u2192 5 pairs, none left \u2192 FALSE",
+      "text": "Ten is an odd number. Let's pair up ten counters. Five pairs, and nothing left over. So ten is even, and that statement is false.",
+      "scene": "nomaybe",
+      "focus": "ten"
+    },
+    {
+      "start": 201.0,
+      "end": 216.88,
+      "caption": "Quick round: true or false?",
+      "text": "Quick round, detective! Three is bigger than eight. A square has three sides. Cricket is played with a bat. True, or false? Pause, and decide.",
+      "scene": "quick",
+      "focus": "ask"
+    },
+    {
+      "start": 216.88,
+      "end": 225.19,
+      "caption": "3 comes before 8 \u2192 smaller \u2192 FALSE",
+      "text": "Three is bigger than eight? On the number line, three comes way before eight, so three is smaller. False!",
+      "scene": "quick",
+      "focus": "num"
+    },
+    {
+      "start": 225.19,
+      "end": 235.15,
+      "caption": "A square has 4 sides \u2192 FALSE",
+      "text": "A square has three sides? Let's count. One, two, three, four. Four sides! False again.",
+      "scene": "quick",
+      "focus": "square"
+    },
+    {
+      "start": 235.15,
+      "end": 240.01,
+      "caption": "Cricket is played with a bat \u2192 TRUE",
+      "text": "Cricket is played with a bat? Of course! True.",
+      "scene": "quick",
+      "focus": "bat"
+    },
+    {
+      "start": 240.01,
+      "end": 252.41,
+      "caption": "Remember Kabir? Parrot, crow, sparrow\u2026 fly!",
+      "text": "Now, remember Kabir's red card? All birds can fly. Let's check. A parrot flies. A crow flies. A sparrow flies.",
+      "scene": "penguin",
+      "focus": "birds"
+    },
+    {
+      "start": 252.41,
+      "end": 262.24,
+      "caption": "A penguin is a bird that can't fly!",
+      "text": "But what about a penguin? A penguin is a bird. And a penguin cannot fly! It waddles, and swims instead.",
+      "scene": "penguin",
+      "focus": "penguin"
+    },
+    {
+      "start": 262.24,
+      "end": 272.05,
+      "caption": "One counter-example \u2192 \"all\" is FALSE",
+      "text": "So just one penguin makes all birds can fly, false. That one example is called a counter-example. It breaks the statement.",
+      "scene": "penguin",
+      "focus": "one"
+    },
+    {
+      "start": 272.05,
+      "end": 283.9,
+      "caption": "\"All\" and \"every\" must work every time",
+      "text": "Watch out for words like all, and every. They must work every single time. Even one miss, and the statement is false. Smart thinking, Kabir!",
+      "scene": "penguin",
+      "focus": "all"
+    },
+    {
+      "start": 283.9,
+      "end": 298.03,
+      "caption": "\"All fruits are red.\" Which fruit breaks it?",
+      "text": "Your turn, detective. All fruits are red. Which fruit proves that's false? An apple, a strawberry, a banana, or a cherry? Think.",
+      "scene": "fruit",
+      "focus": "ask"
+    },
+    {
+      "start": 298.03,
+      "end": 310.09,
+      "caption": "Banana! A yellow fruit \u2192 FALSE",
+      "text": "The banana! It's a fruit, and it's yellow, not red. The apple, strawberry and cherry are red, so they can't break the rule. One banana is enough!",
+      "scene": "fruit",
+      "focus": "answer"
+    },
+    {
+      "start": 310.09,
+      "end": 320.29,
+      "caption": "\"Every number ending in 5 is odd.\" T or F?",
+      "text": "Here's a tricky one. Every number that ends in five is odd. True, or false? Think.",
+      "scene": "five",
+      "focus": "ask"
+    },
+    {
+      "start": 320.29,
+      "end": 334.32,
+      "caption": "5, 15, 25 \u2192 always one left over \u2192 TRUE",
+      "text": "Let's pair up. Five makes two pairs, with one left over. Fifteen makes seven pairs, with one left over. Twenty five makes twelve pairs, and one left over. True!",
+      "scene": "five",
+      "focus": "pairs"
+    },
+    {
+      "start": 334.32,
+      "end": 346.9,
+      "caption": "Tens pair up \u00b7 the 5 leaves one alone",
+      "text": "And here's why it always works. Tens always pair up perfectly. The five at the end makes two pairs, and leaves one alone. So every number ending in five is odd.",
+      "scene": "five",
+      "focus": "why"
+    },
+    {
+      "start": 346.9,
+      "end": 355.36,
+      "caption": "Computers check TRUE or FALSE to decide",
+      "text": "Now, here's why computers love this game. They check true or false questions all the time, to decide what to do next.",
+      "scene": "code",
+      "focus": "intro"
+    },
+    {
+      "start": 355.36,
+      "end": 365.88,
+      "caption": "More than 10 wins. Score 12: true or false?",
+      "text": "A game says, if your score is more than ten, you win. Your score is twelve. Is that true, or false?",
+      "scene": "code",
+      "focus": "ask"
+    },
+    {
+      "start": 365.88,
+      "end": 374.31,
+      "caption": "12 \u2192 TRUE, you win! 7 \u2192 FALSE, play again",
+      "text": "True! Twelve is more than ten, so you win! But if your score was seven, it's false, so you play again.",
+      "scene": "code",
+      "focus": "answer"
+    },
+    {
+      "start": 374.31,
+      "end": 383.8,
+      "caption": "A true or false check in code = a condition",
+      "text": "That true or false check is called a condition. You met it in coding, with if this, then that. Every game and app is full of them!",
+      "scene": "code",
+      "focus": "cond"
+    },
+    {
+      "start": 383.8,
+      "end": 387.68,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 387.68,
+      "end": 403.74,
+      "caption": "Every even number ends in 0, 2, 4, 6 or 8?",
+      "text": "True or false? Every even number ends with zero, two, four, six, or eight. Try a few numbers on paper, and hunt for a counter-example. Pause, and think.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 403.74,
+      "end": 423.17,
+      "caption": "TRUE! 14, 20, 36\u2026 no counter-example",
+      "text": "It's true! Fourteen ends in four. Twenty ends in zero. Thirty six ends in six. The tens always pair up, so only the last digit decides. And the even digits are zero, two, four, six, and eight. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 423.17,
+      "end": 429.45,
+      "caption": "A statement is true or false",
+      "text": "Let's remember what we learned today. A statement is a sentence that's true, or false.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 429.45,
+      "end": 431.8,
+      "caption": "No \"maybe\" in this game",
+      "text": "In this game, there's no maybe.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 431.8,
+      "end": 436.02,
+      "caption": "One counter-example makes \"all\" false",
+      "text": "One counter-example, like a penguin, makes all false.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 436.02,
+      "end": 439.38,
+      "caption": "Code uses true or false to decide",
+      "text": "And code uses true or false to decide what to do.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 439.38,
+      "end": 445.27,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit two, done! You're a real logic detective now, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 445.27,
+      "end": 452.07,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

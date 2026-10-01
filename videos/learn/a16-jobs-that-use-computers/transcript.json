@@ -1,0 +1,332 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.28,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.28,
+      "end": 15.92,
+      "caption": "Unit 3 \u00b7 Building With Blocks \u00b7 done!",
+      "text": "Last time, you built your very first program. You planned it, tested it, and fixed the bugs. And that finished all of Unit three. Amazing work!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.92,
+      "end": 25.4,
+      "caption": "Unit 4 \u00b7 Computers in Our World",
+      "text": "Today, we're starting a brand new unit. Unit four. It's called, Computers in Our World. Welcome aboard!",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 25.4,
+      "end": 29.29,
+      "caption": "Chapter 1 \u00b7 Jobs That Use Computers",
+      "text": "And chapter one is all about, Jobs That Use Computers.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 29.29,
+      "end": 35.85,
+      "caption": "Who makes your games and cartoons?",
+      "text": "Have you ever wondered who makes the games you play, or the cartoons you watch? Let's find out!",
+      "scene": "open",
+      "focus": "wonder"
+    },
+    {
+      "start": 35.85,
+      "end": 42.07,
+      "caption": "Meet Meera. She loves drawing & stories",
+      "text": "Meet Meera. She's nine years old, and she loves drawing, and making up stories.",
+      "scene": "meera",
+      "focus": "meet"
+    },
+    {
+      "start": 42.07,
+      "end": 56.73,
+      "caption": "Game \u00b7 Cartoon \u00b7 Phone payment \u00b7 Maps",
+      "text": "On Sunday, Meera plays a game on the tablet. Then she watches her favourite cartoon. At the chai stall, Papa pays by scanning a code on his phone. And they use a maps app, to find the new park.",
+      "scene": "meera",
+      "focus": "day"
+    },
+    {
+      "start": 56.73,
+      "end": 64.28,
+      "caption": "Who made all of these? Think!",
+      "text": "So here's a question. Who made all of these things? Think about it.",
+      "scene": "meera",
+      "focus": "ask"
+    },
+    {
+      "start": 64.28,
+      "end": 71.75,
+      "caption": "Real people, using computers at work!",
+      "text": "Real people did! People who use computers in their jobs. And today, you'll meet four of them.",
+      "scene": "meera",
+      "focus": "people"
+    },
+    {
+      "start": 71.75,
+      "end": 82.5,
+      "caption": "Game dev \u00b7 App dev \u00b7 Animator \u00b7 Robots",
+      "text": "Lots of people use computers to do their jobs. Today's four are, a game developer, an app developer, an animator, and a robotics engineer.",
+      "scene": "jobs",
+      "focus": "four"
+    },
+    {
+      "start": 82.5,
+      "end": 91.84,
+      "caption": "Developer = someone who builds with computers",
+      "text": "Developer is just a big word for a builder. Someone who builds things, using a computer. Like games, or apps.",
+      "scene": "jobs",
+      "focus": "builder"
+    },
+    {
+      "start": 91.84,
+      "end": 105.75,
+      "caption": "Game developer: levels \u00b7 characters \u00b7 rules",
+      "text": "First up, the game developer. A game developer builds video games. The levels, the characters, and the rules. They decide how high the hero can jump, and what happens when you grab a coin.",
+      "scene": "game",
+      "focus": "meet"
+    },
+    {
+      "start": 105.75,
+      "end": 112.62,
+      "caption": "\"if touching coin then change score by 1\"",
+      "text": "In a coin game, a game developer might tell the computer, if touching coin, then change score by one.",
+      "scene": "game",
+      "focus": "code"
+    },
+    {
+      "start": 112.62,
+      "end": 124.47,
+      "caption": "An if-block + a variable. You know these!",
+      "text": "Wait a minute! That's an if block, which makes a choice. And score is a variable, a box that holds a number. You learned both of those in Unit three!",
+      "scene": "game",
+      "focus": "ideas"
+    },
+    {
+      "start": 124.47,
+      "end": 135.57,
+      "caption": "App developer: apps for phones & tablets",
+      "text": "Next, the app developer. An app developer builds apps for phones and tablets. Every little app on a phone was built by people, one step at a time.",
+      "scene": "app",
+      "focus": "meet"
+    },
+    {
+      "start": 135.57,
+      "end": 145.14,
+      "caption": "Maps app: built by app developers",
+      "text": "Remember the maps app that found the park? App developers and engineers built that. You type where you want to go, and it shows you the way.",
+      "scene": "app",
+      "focus": "maps"
+    },
+    {
+      "start": 145.14,
+      "end": 155.46,
+      "caption": "UPI payment app: one scan to pay",
+      "text": "And the app Papa used at the chai stall? That's a U P I payment app. App developers built it too, so paying takes just one scan!",
+      "scene": "app",
+      "focus": "upi"
+    },
+    {
+      "start": 155.46,
+      "end": 169.41,
+      "caption": "Animator: makes cartoons on computers",
+      "text": "Then there's the animator. An animator uses computers to make cartoons, and moving pictures. Think of your favourite cartoon. Every jump, and every smile, was made by an animator.",
+      "scene": "animator",
+      "focus": "meet"
+    },
+    {
+      "start": 169.41,
+      "end": 183.18,
+      "caption": "Move a little, again and again \u2192 motion!",
+      "text": "How do cartoons move? The animator tells the computer, move the character a little, again and again. Each picture is a tiny bit different. Play them fast, and it looks like magic!",
+      "scene": "animator",
+      "focus": "frames"
+    },
+    {
+      "start": 183.18,
+      "end": 193.0,
+      "caption": "Meera loves drawing. Which job suits her?",
+      "text": "Now, remember Meera, who loves drawing and stories? Which job might suit her best? Think!",
+      "scene": "animator",
+      "focus": "ask"
+    },
+    {
+      "start": 193.0,
+      "end": 199.24,
+      "caption": "Animator! Drawing + stories = cartoons",
+      "text": "An animator! Drawing, plus stories, plus a computer, makes cartoons.",
+      "scene": "animator",
+      "focus": "answer"
+    },
+    {
+      "start": 199.24,
+      "end": 207.88,
+      "caption": "Robotics engineer: builds robots",
+      "text": "And last, the robotics engineer. A robotics engineer builds robots, and writes the steps that tell them what to do.",
+      "scene": "robot",
+      "focus": "meet"
+    },
+    {
+      "start": 207.88,
+      "end": 216.33,
+      "caption": "Pick up box \u2192 Turn \u2192 Put down box",
+      "text": "For a robot in a big warehouse, the steps might be, pick up the box. Turn around. Put down the box.",
+      "scene": "robot",
+      "focus": "steps"
+    },
+    {
+      "start": 216.33,
+      "end": 229.76,
+      "caption": "Robots follow algorithms people write",
+      "text": "Step by step instructions. Sound familiar? It's an algorithm! Robots can't guess, just like Robo in Unit two. They follow the algorithms that people write.",
+      "scene": "robot",
+      "focus": "algo"
+    },
+    {
+      "start": 229.76,
+      "end": 234.66,
+      "caption": "You already know their tools!",
+      "text": "Here's the coolest part. You already know the tools these people use!",
+      "scene": "tools",
+      "focus": "intro"
+    },
+    {
+      "start": 234.66,
+      "end": 252.78,
+      "caption": "Algorithms \u00b7 Blocks \u00b7 Variables \u00b7 If-blocks",
+      "text": "Algorithms, step by step instructions, from Unit two. Blocks, variables, and if blocks, from Unit three. Real developers use these same ideas, every single day. So when you snapped blocks together, you were working just like them!",
+      "scene": "tools",
+      "focus": "list"
+    },
+    {
+      "start": 252.78,
+      "end": 265.37,
+      "caption": "Match each job to what it tells a computer",
+      "text": "Let's play, match it! Three jobs, and three things they might tell a computer. Which goes with which? Pause, and match them.",
+      "scene": "match",
+      "focus": "ask"
+    },
+    {
+      "start": 265.37,
+      "end": 281.26,
+      "caption": "Animator \u00b7 Game developer \u00b7 Robotics engineer",
+      "text": "Move the character a little each frame? That's the animator. Touching a coin adds to the score? The game developer. Pick up the box and turn? The robotics engineer. Great matching!",
+      "scene": "match",
+      "focus": "answer"
+    },
+    {
+      "start": 281.26,
+      "end": 290.57,
+      "caption": "Nobody is born knowing how to code",
+      "text": "Now, you might think, these jobs are only for geniuses. But here's a secret. Nobody is born knowing how to code.",
+      "scene": "practice",
+      "focus": "genius"
+    },
+    {
+      "start": 290.57,
+      "end": 301.13,
+      "caption": "Like cricket: practise a little, often",
+      "text": "Coding is like cricket. The first time you held a bat, you probably missed the ball! But you practised a little, often, and you got better and better.",
+      "scene": "practice",
+      "focus": "cricket"
+    },
+    {
+      "start": 301.13,
+      "end": 310.55,
+      "caption": "True or false: only adults can code?",
+      "text": "So, true or false? Only adults can learn to code. Hmm. What do you think?",
+      "scene": "practice",
+      "focus": "ask"
+    },
+    {
+      "start": 310.55,
+      "end": 319.21,
+      "caption": "False! Kids can code. You already do!",
+      "text": "False! Kids can code too. You've been coding all through Unit three. You're already a coder, champ!",
+      "scene": "practice",
+      "focus": "answer"
+    },
+    {
+      "start": 319.21,
+      "end": 323.16,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 323.16,
+      "end": 334.43,
+      "caption": "Name a job + one thing it tells a computer",
+      "text": "Name one job that uses computers, and one thing that person might tell a computer to do. You can pause, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 334.43,
+      "end": 346.23,
+      "caption": "Game dev: touch a coin \u2192 add 1 to score",
+      "text": "Here's one answer. A game developer might tell the computer, if the player touches a coin, add one to the score. Did you pick a different job? Wonderful!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 346.23,
+      "end": 353.42,
+      "caption": "People use computers to make games & apps",
+      "text": "Let's remember. Games, apps, cartoons, and robots are made by people using computers.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 353.42,
+      "end": 357.09,
+      "caption": "Developers use algorithms & blocks",
+      "text": "Developers use algorithms and blocks, just like you!",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 357.09,
+      "end": 361.76,
+      "caption": "No genius needed: practise often",
+      "text": "You don't need to be a genius. Practise a little, often.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 361.76,
+      "end": 365.38,
+      "caption": "Kids can code, not only adults!",
+      "text": "And kids can learn to code too, not only adults.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 365.38,
+      "end": 371.42,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit four, done! Welcome to Computers in Our World, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 371.42,
+      "end": 378.22,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

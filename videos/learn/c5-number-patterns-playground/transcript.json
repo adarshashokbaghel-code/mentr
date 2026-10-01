@@ -1,0 +1,364 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.08,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready to play with some numbers today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.08,
+      "end": 17.5,
+      "caption": "Last time: skip counting \u00b7 rule = add 3",
+      "text": "Last time, you learned skip counting. Two, four, six, eight. And you found the rule of a sequence, like add three, for three, six, nine, twelve.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.5,
+      "end": 25.79,
+      "caption": "Chapter 5 \u00b7 Number Patterns Playground",
+      "text": "Today is chapter five, the very last chapter of Numbers Computers Love. It's called, Number Patterns Playground!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 25.79,
+      "end": 38.75,
+      "caption": "These patterns GROW! But how?",
+      "text": "In this playground, the patterns don't just march along. They grow! Bigger, and bigger, and bigger. Hmm. But how do they know how much to grow?",
+      "scene": "open",
+      "focus": "grow"
+    },
+    {
+      "start": 38.75,
+      "end": 43.24,
+      "caption": "Let's find out with a story!",
+      "text": "That's our mystery for today. Let's start with a little story.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 43.24,
+      "end": 52.52,
+      "caption": "Meet Riya, her gullak, and her coin towers",
+      "text": "Meet Riya. Riya loves her gullak, her little piggy bank. And every day after school, she builds a coin tower on the table.",
+      "scene": "coins",
+      "focus": "meet"
+    },
+    {
+      "start": 52.52,
+      "end": 62.65,
+      "caption": "Mon 1 \u00b7 Tue 2 \u00b7 Wed 3 \u00b7 Thu 4 coins",
+      "text": "On Monday, her tower has one coin. On Tuesday, two coins. On Wednesday, three. And on Thursday, four.",
+      "scene": "coins",
+      "focus": "towers"
+    },
+    {
+      "start": 62.65,
+      "end": 69.66,
+      "caption": "How many coins on Friday? Think!",
+      "text": "So, how many coins will her tower have on Friday? Think about it.",
+      "scene": "coins",
+      "focus": "ask"
+    },
+    {
+      "start": 69.66,
+      "end": 77.6,
+      "caption": "Five! 4 + 1 = 5",
+      "text": "Five coins! Every day, the tower gets one coin taller. Four plus one, equals five.",
+      "scene": "coins",
+      "focus": "answer"
+    },
+    {
+      "start": 77.6,
+      "end": 91.05,
+      "caption": "The rule: add 1 coin each step",
+      "text": "And how did you know? You didn't guess. You spotted the rule. Add one coin each step. Once you know the rule, you can build Friday's tower without even waiting for Friday!",
+      "scene": "coins",
+      "focus": "rule"
+    },
+    {
+      "start": 91.05,
+      "end": 99.32,
+      "caption": "Growing pattern = bigger each step, by a rule",
+      "text": "Riya's towers make a growing pattern. A growing pattern is a pattern that gets bigger each step, by following a rule.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 99.32,
+      "end": 109.96,
+      "caption": "Each picture is a STEP: step 1, 2, 3\u2026",
+      "text": "Each picture in the pattern is called a step. The first tower is step one. The next is step two. Then step three, and so on.",
+      "scene": "define",
+      "focus": "step"
+    },
+    {
+      "start": 109.96,
+      "end": 121.99,
+      "caption": "Say the rule in words \u2192 draw the next step",
+      "text": "And here's the big trick of this chapter. Always say the rule in words first. Like, add one coin each time. If you can say it, you can draw the next step!",
+      "scene": "define",
+      "focus": "words"
+    },
+    {
+      "start": 121.99,
+      "end": 133.26,
+      "caption": "Towers of 2, 4, 6, 8 blocks. How much growth?",
+      "text": "Now Riya gets out her toy blocks. Two blocks, four blocks, six blocks, eight blocks. How much does each tower grow?",
+      "scene": "blocks",
+      "focus": "towers"
+    },
+    {
+      "start": 133.26,
+      "end": 144.01,
+      "caption": "Check the jumps: +2, +2, +2",
+      "text": "Let's check the jumps. Four minus two is two. Six minus four is two. Eight minus six is two. Every jump is two!",
+      "scene": "blocks",
+      "focus": "jumps"
+    },
+    {
+      "start": 144.01,
+      "end": 152.2,
+      "caption": "Rule: add 2. Next tower: 8 + 2 = 10",
+      "text": "So the rule is, add two blocks each time. The next tower has eight plus two. That's ten blocks!",
+      "scene": "blocks",
+      "focus": "next"
+    },
+    {
+      "start": 152.2,
+      "end": 166.84,
+      "caption": "3, 5, 7, 9 \u2192 also add 2 each time",
+      "text": "Here's another one. Three, five, seven, nine. Check the jumps. Two, two, two. Same rule, add two each time! It just starts at a different number.",
+      "scene": "blocks",
+      "focus": "odd"
+    },
+    {
+      "start": 166.84,
+      "end": 172.37,
+      "caption": "Some patterns grow faster!",
+      "text": "Some patterns grow even faster. Watch the squares Riya draws in her notebook.",
+      "scene": "double",
+      "focus": "intro"
+    },
+    {
+      "start": 172.37,
+      "end": 182.89,
+      "caption": "1 \u2192 2 \u2192 4 \u2192 8 squares",
+      "text": "Step one, one square. Step two, two squares. Step three, four squares. Step four, eight squares.",
+      "scene": "double",
+      "focus": "steps"
+    },
+    {
+      "start": 182.89,
+      "end": 194.55,
+      "caption": "Double = add it to itself: 4 + 4 = 8",
+      "text": "Each step doubles. Double means add the number to itself. One plus one is two. Two plus two is four. Four plus four is eight.",
+      "scene": "double",
+      "focus": "rule"
+    },
+    {
+      "start": 194.55,
+      "end": 200.62,
+      "caption": "What comes after 8?",
+      "text": "So what comes after eight? Pause, and think.",
+      "scene": "double",
+      "focus": "ask"
+    },
+    {
+      "start": 200.62,
+      "end": 209.02,
+      "caption": "8 + 8 = 16. Doubling grows fast!",
+      "text": "Eight plus eight, sixteen squares! Wow, look how quickly that grew. Doubling is a speedy rule.",
+      "scene": "double",
+      "focus": "answer"
+    },
+    {
+      "start": 209.02,
+      "end": 217.23,
+      "caption": "Shyam bhaiya's laddoo triangle",
+      "text": "On Sunday, Riya visits the sweet shop. Shyam bhaiya is stacking laddoos into a triangle. Yum!",
+      "scene": "laddoos",
+      "focus": "intro"
+    },
+    {
+      "start": 217.23,
+      "end": 229.98,
+      "caption": "Rows of 1, 2, 3 \u2192 totals 1, 3, 6",
+      "text": "Row one has one laddoo. That's one in total. Then he adds a row of two. Now there are three. Then a row of three. Now there are six.",
+      "scene": "laddoos",
+      "focus": "rows"
+    },
+    {
+      "start": 229.98,
+      "end": 241.14,
+      "caption": "Next row? How many laddoos in all?",
+      "text": "Each new row has one more laddoo than the row before. So how many are in the next row, and how many laddoos in all? Think.",
+      "scene": "laddoos",
+      "focus": "ask"
+    },
+    {
+      "start": 241.14,
+      "end": 248.34,
+      "caption": "Row of 4: 6 + 4 = 10 laddoos!",
+      "text": "The next row has four laddoos. Six plus four, equals ten! Ten yummy laddoos.",
+      "scene": "laddoos",
+      "focus": "answer"
+    },
+    {
+      "start": 248.34,
+      "end": 257.11,
+      "caption": "Not sure? Draw the next step to check",
+      "text": "See how drawing the next row helped us check? Whenever you're not sure, draw the next step. The picture shows you the answer!",
+      "scene": "laddoos",
+      "focus": "draw"
+    },
+    {
+      "start": 257.11,
+      "end": 275.98,
+      "caption": "1, 2, 4, 7, 11\u2026 what comes next?",
+      "text": "Here's a tricky one. One, two, four, seven, eleven. The jumps aren't the same! Look. Plus one, plus two, plus three, plus four. So what comes next? Think.",
+      "scene": "jumps",
+      "focus": "ask"
+    },
+    {
+      "start": 275.98,
+      "end": 284.26,
+      "caption": "Next jump is +5: 11 + 5 = 16",
+      "text": "The jumps grow by one each time. So the next jump is five. Eleven plus five, equals sixteen!",
+      "scene": "jumps",
+      "focus": "answer"
+    },
+    {
+      "start": 284.26,
+      "end": 289.77,
+      "caption": "A special pattern: 1, 1\u2026",
+      "text": "Now, a very special pattern. It starts with one, and one.",
+      "scene": "lasttwo",
+      "focus": "intro"
+    },
+    {
+      "start": 289.77,
+      "end": 300.54,
+      "caption": "Add the last two: 1+1=2, 1+2=3, 2+3=5",
+      "text": "To get the next number, add the last two numbers together. One plus one is two. One plus two is three. Two plus three is five.",
+      "scene": "lasttwo",
+      "focus": "rule"
+    },
+    {
+      "start": 300.54,
+      "end": 309.15,
+      "caption": "1, 1, 2, 3, 5\u2026 what's next?",
+      "text": "So, what comes after one, one, two, three, five? Pause, and think.",
+      "scene": "lasttwo",
+      "focus": "ask"
+    },
+    {
+      "start": 309.15,
+      "end": 315.55,
+      "caption": "3 + 5 = 8!",
+      "text": "Three plus five, equals eight! Not six, not seven. Eight.",
+      "scene": "lasttwo",
+      "focus": "answer"
+    },
+    {
+      "start": 315.55,
+      "end": 325.41,
+      "caption": "Nature loves it: 3, 5, 8 petals!",
+      "text": "And guess what? Nature loves this pattern. Count the petals on lots of flowers, and you'll often find three, five, or eight!",
+      "scene": "lasttwo",
+      "focus": "nature"
+    },
+    {
+      "start": 325.41,
+      "end": 338.68,
+      "caption": "2, 3, 5, 8\u2026 add the last two. Next?",
+      "text": "Riya has a challenge for you! It uses the same add the last two rule, but it starts at two. Two, three, five, eight. What comes next?",
+      "scene": "game",
+      "focus": "ask"
+    },
+    {
+      "start": 338.68,
+      "end": 345.93,
+      "caption": "5 + 8 = 13. Pattern pro!",
+      "text": "Five plus eight, thirteen! Riya is cheering for you. You're a pattern pro, champ.",
+      "scene": "game",
+      "focus": "answer"
+    },
+    {
+      "start": 345.93,
+      "end": 349.81,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 349.81,
+      "end": 368.65,
+      "caption": "Squares: 1, 3, 6. Add one more row. How many?",
+      "text": "Squares are stacked in steps. Step one has one square. Step two has three. Step three has six. How many in the next step, if we add one more row? Grab some paper, pause, and draw it.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 368.65,
+      "end": 385.01,
+      "caption": "Next row has 4: 6 + 4 = 10 squares",
+      "text": "Ten squares! The rows go one, two, three. So the next row has four squares. Six plus four, equals ten. Just like Shyam bhaiya's laddoos! Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 385.01,
+      "end": 390.93,
+      "caption": "Growing patterns follow a rule",
+      "text": "Let's remember what we learned today. Growing patterns get bigger by following a rule.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 390.93,
+      "end": 396.5,
+      "caption": "Say the rule in words first",
+      "text": "Say the rule in words first. Like, add two each time, or double it.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 396.5,
+      "end": 400.01,
+      "caption": "Draw the next step to check",
+      "text": "Not sure? Draw the next step to check.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 400.01,
+      "end": 405.28,
+      "caption": "1, 1, 2, 3, 5 \u2192 add the last two",
+      "text": "And for one, one, two, three, five, add the last two numbers.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 405.28,
+      "end": 423.31,
+      "caption": "Chapter 5 done \u00b7 Unit 1 complete!",
+      "text": "Chapter five, done! And that means you've finished all of Unit one, Numbers Computers Love! Binary, odd and even, place value, skip counting, and now patterns. Wow, champ. Give yourself a big pat on the back!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 423.31,
+      "end": 430.11,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

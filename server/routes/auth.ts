@@ -286,6 +286,11 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
     );
 
     const code = generateOtpCode();
+    // Local debugging only — SMTP often fails in dev, and NODE_ENV is
+    // "production" in .env, so this is gated on not running on Vercel.
+    if (process.env.VERCEL !== "1") {
+      console.log(`[otp] ${purpose} code for ${email}: ${code}`);
+    }
     const otpHash = await hashOtp(code);
     const sessionId = randomUUID();
 

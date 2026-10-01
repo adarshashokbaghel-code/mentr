@@ -1,0 +1,356 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 6.13,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Today is a special one, so I'm extra happy you're here.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 6.13,
+      "end": 17.01,
+      "caption": "Last time: Sets & Venn diagrams",
+      "text": "Last time, you sorted things into sets, with Venn diagrams. Remember the red ball? Red, and round, so it went right in the middle!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.01,
+      "end": 26.19,
+      "caption": "Chapter 5 \u00b7 Solving Puzzles Step by Step",
+      "text": "Today is chapter five. The very last chapter of Logic and Reasoning! It's called, Solving puzzles, step by step.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 26.19,
+      "end": 36.47,
+      "caption": "A secret trick: no guessing!",
+      "text": "Do you like puzzles? Riddles, brain teasers, mystery games? Today, you'll learn a secret trick to solve them, without guessing.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 36.47,
+      "end": 40.62,
+      "caption": "Detective cap on. Let's go!",
+      "text": "So put on your detective cap, champ. Let's go!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 40.62,
+      "end": 54.4,
+      "caption": "Chintu, Arjun and Zoya: seats 1, 2, 3",
+      "text": "Remember Chintu? Today, his class is going on a school trip! Chintu and his friends, Arjun and Zoya, get three seats in a row. Seat one, seat two, and seat three.",
+      "scene": "trip",
+      "focus": "meet"
+    },
+    {
+      "start": 54.4,
+      "end": 65.16,
+      "caption": "Clue 1: Zoya is last \u00b7 Clue 2: Chintu not first",
+      "text": "The teacher smiles, and gives them two clues. Clue one. Zoya sits last. Clue two. Chintu does not sit first.",
+      "scene": "trip",
+      "focus": "clues"
+    },
+    {
+      "start": 65.16,
+      "end": 80.0,
+      "caption": "A quick guess breaks clue 1!",
+      "text": "Chintu jumps up. I'll just guess! Zoya first, then me, then Arjun! Hmm. But wait. Zoya should be last. That guess breaks clue one!",
+      "scene": "trip",
+      "focus": "guess"
+    },
+    {
+      "start": 80.0,
+      "end": 87.03,
+      "caption": "How do we solve it without guessing?",
+      "text": "So how can we solve it, without guessing? Think about it for a moment.",
+      "scene": "trip",
+      "focus": "ask"
+    },
+    {
+      "start": 87.03,
+      "end": 93.72,
+      "caption": "CLUE = a small fact that helps",
+      "text": "First, a clue is a small fact that helps you solve the puzzle. Like, Zoya is last.",
+      "scene": "define",
+      "focus": "clue"
+    },
+    {
+      "start": 93.72,
+      "end": 101.13,
+      "caption": "Logic puzzle: think step by step, no guessing",
+      "text": "And a puzzle like this is called a logic puzzle. You solve it by thinking step by step, not by guessing.",
+      "scene": "define",
+      "focus": "puzzle"
+    },
+    {
+      "start": 101.13,
+      "end": 115.0,
+      "caption": "Use a clue \u00b7 Cross out \u00b7 Next clue",
+      "text": "Here's the detective's plan. We call it a strategy. Use one clue. Cross out what can't be true. Then use the next clue. Again and again, until it's solved!",
+      "scene": "define",
+      "focus": "strategy"
+    },
+    {
+      "start": 115.0,
+      "end": 124.97,
+      "caption": "With 3 seats, last = seat 3",
+      "text": "Let's solve Chintu's puzzle on a grid. Names down the side, seats along the top. And with three seats, last means seat three.",
+      "scene": "seats",
+      "focus": "setup"
+    },
+    {
+      "start": 124.97,
+      "end": 140.18,
+      "caption": "Clue 1: Zoya \u2192 seat 3. Cross out the rest.",
+      "text": "Clue one. Zoya is last. So Zoya gets seat three. Tick! Now nobody else can sit in seat three, and Zoya can't sit anywhere else. Cross, cross, cross!",
+      "scene": "seats",
+      "focus": "clue1"
+    },
+    {
+      "start": 140.18,
+      "end": 150.43,
+      "caption": "Clue 2: not seat 1, so Chintu \u2192 seat 2",
+      "text": "Clue two. Chintu is not first. So cross out seat one for Chintu. What's left for him? Only seat two!",
+      "scene": "seats",
+      "focus": "clue2"
+    },
+    {
+      "start": 150.43,
+      "end": 163.94,
+      "caption": "Arjun 1 \u00b7 Chintu 2 \u00b7 Zoya 3. Solved!",
+      "text": "And look. Only seat one is empty, and only Arjun is left. So Arjun sits first! Arjun, Chintu, Zoya. Solved, without a single guess!",
+      "scene": "seats",
+      "focus": "solved"
+    },
+    {
+      "start": 163.94,
+      "end": 173.94,
+      "caption": "Riya, Sam, Tara \u00b7 hat, bag, bottle",
+      "text": "Ready for another one? Riya, Sam and Tara each have one thing. A hat, a bag, and a bottle. Who owns what?",
+      "scene": "hat",
+      "focus": "setup"
+    },
+    {
+      "start": 173.94,
+      "end": 184.4,
+      "caption": "Clue 1: Sam owns the bag",
+      "text": "Clue one. Sam owns the bag. Tick! So cross out the bag for Riya and Tara, and cross out the hat and the bottle for Sam.",
+      "scene": "hat",
+      "focus": "clue1"
+    },
+    {
+      "start": 184.4,
+      "end": 194.59,
+      "caption": "Clue 2: Riya has no hat \u2192 the bottle",
+      "text": "Clue two. Riya has no hat. Cross that out. The bag's already gone, so what's left for Riya? The bottle!",
+      "scene": "hat",
+      "focus": "clue2"
+    },
+    {
+      "start": 194.59,
+      "end": 200.05,
+      "caption": "So who owns the hat?",
+      "text": "So, who owns the hat? Think!",
+      "scene": "hat",
+      "focus": "ask"
+    },
+    {
+      "start": 200.05,
+      "end": 207.45,
+      "caption": "Only the hat and Tara are left \u2192 Tara!",
+      "text": "Tara! The hat is the only thing left, and Tara is the only one left. A hat for Tara!",
+      "scene": "hat",
+      "focus": "answer"
+    },
+    {
+      "start": 207.45,
+      "end": 217.13,
+      "caption": "Pinky taller than Golu \u00b7 Golu taller than Tinku",
+      "text": "Here's a quick one. Clue one. Pinky is taller than Golu. Clue two. Golu is taller than Tinku.",
+      "scene": "tall",
+      "focus": "clues"
+    },
+    {
+      "start": 217.13,
+      "end": 222.33,
+      "caption": "Who is the shortest?",
+      "text": "Who is the shortest? Take your time.",
+      "scene": "tall",
+      "focus": "ask"
+    },
+    {
+      "start": 222.33,
+      "end": 236.01,
+      "caption": "Pinky, Golu, Tinku \u2192 Tinku is the shortest",
+      "text": "Let's line them up, one clue at a time. Pinky is taller than Golu, so Pinky stands higher. Golu is taller than Tinku, so Tinku is shorter still. Tinku is the shortest!",
+      "scene": "tall",
+      "focus": "answer"
+    },
+    {
+      "start": 236.01,
+      "end": 254.11,
+      "caption": "4\u00d74 \u00b7 each row & column has 1, 2, 3, 4 once",
+      "text": "Now, a puzzle with a grid. It's called Sudoku lite. It has four rows, and four columns. The rule is simple. Each row, and each column, must have one, two, three and four, exactly once. No repeats!",
+      "scene": "sudoku",
+      "focus": "rule"
+    },
+    {
+      "start": 254.11,
+      "end": 263.11,
+      "caption": "Row: 1, 2, __, 4. What's missing?",
+      "text": "Here's a row. One, two, blank, four. What's missing? Think.",
+      "scene": "sudoku",
+      "focus": "ask"
+    },
+    {
+      "start": 263.11,
+      "end": 269.77,
+      "caption": "1, 2 and 4 are used \u2192 3!",
+      "text": "Three! One, two and four are already there. So the only number left is three.",
+      "scene": "sudoku",
+      "focus": "answer"
+    },
+    {
+      "start": 269.77,
+      "end": 279.15,
+      "caption": "Star, circle, triangle, __. Which shape?",
+      "text": "It works with shapes too. Star, circle, triangle, blank. Which shape is missing?",
+      "scene": "sudoku",
+      "focus": "shapes"
+    },
+    {
+      "start": 279.15,
+      "end": 283.25,
+      "caption": "The square! Each shape just once.",
+      "text": "The square! Each shape goes just once in the row.",
+      "scene": "sudoku",
+      "focus": "square"
+    },
+    {
+      "start": 283.25,
+      "end": 299.53,
+      "caption": "Row 2: 3, 4, __, 2. What goes in?",
+      "text": "Let's try a tricky one. Row one is, one, two, three, four. Row two is, three, four, blank, two. What goes in the blank? Pause, and think.",
+      "scene": "grid",
+      "focus": "ask"
+    },
+    {
+      "start": 299.53,
+      "end": 306.04,
+      "caption": "Row 2 already has 3, 4, 2 \u2192 it needs 1",
+      "text": "One! Row two already has three, four and two. So it needs a one.",
+      "scene": "grid",
+      "focus": "answer"
+    },
+    {
+      "start": 306.04,
+      "end": 315.93,
+      "caption": "Check the column: above is 3. It fits!",
+      "text": "And let's double check the column. Above the blank is a three, not a one. So, no repeats. It fits perfectly!",
+      "scene": "grid",
+      "focus": "column"
+    },
+    {
+      "start": 315.93,
+      "end": 324.49,
+      "caption": "Write the clue next to each answer",
+      "text": "Here's one more detective habit. Write down the clues you used. Next to each answer, write the clue that gave it.",
+      "scene": "write",
+      "focus": "habit"
+    },
+    {
+      "start": 324.49,
+      "end": 332.75,
+      "caption": "Seat 3 = Zoya (clue 1) \u00b7 Seat 2 = Chintu (clue 2)",
+      "text": "Like this. Seat three is Zoya, because of clue one. Seat two is Chintu, because of clue two.",
+      "scene": "write",
+      "focus": "example"
+    },
+    {
+      "start": 332.75,
+      "end": 343.2,
+      "caption": "Written clues help you check your answer",
+      "text": "Why bother? Because if something doesn't fit, you can look back, and find exactly where you slipped. Writing it down helps you check your answer.",
+      "scene": "write",
+      "focus": "why"
+    },
+    {
+      "start": 343.2,
+      "end": 347.75,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time. Just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 347.75,
+      "end": 363.69,
+      "caption": "Ravi not first \u00b7 Meera last. Who is first?",
+      "text": "There are three children. Ravi, Meera and Neha. Ravi is not first. Meera is last. Who can be first? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 363.69,
+      "end": 377.63,
+      "caption": "Meera 3 \u00b7 Ravi 2 \u00b7 Neha 1 \u2192 Neha is first!",
+      "text": "Neha! Meera is last, so she takes seat three. Ravi can't be first, so Ravi is second. That leaves seat one for Neha. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 377.63,
+      "end": 383.04,
+      "caption": "Use one clue at a time",
+      "text": "Let's remember what we learned. Solve logic puzzles one clue at a time.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 383.04,
+      "end": 386.62,
+      "caption": "Cross out what can't be true",
+      "text": "Cross out what can't be true, then use the next clue.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 386.62,
+      "end": 391.51,
+      "caption": "Sudoku-lite: each number once per row & column",
+      "text": "In Sudoku lite, each number goes once in every row and every column.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 391.51,
+      "end": 395.24,
+      "caption": "Write down the clues you used",
+      "text": "And write down the clues you used, so you can check your answer.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 395.24,
+      "end": 410.59,
+      "caption": "Chapter 5 done \u00b7 Unit 2 complete!",
+      "text": "Chapter five, done! And that means, you've finished all of Unit two! True or false. AND, OR, NOT. Sorting, sets, and now puzzles. You're a real logic champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 410.59,
+      "end": 417.39,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

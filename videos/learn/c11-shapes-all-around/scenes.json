@@ -1,0 +1,154 @@
+{
+  "id": "C11",
+  "title": "Shapes All Around",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "Math · Shapes, Grids & Coordinates",
+  "slug": "c11-shapes-all-around",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c11-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you solved logic puzzles, one clue at a time. And with that, you finished all of Unit two. Give yourself a big pat on the back!", "caption": "Unit 2 · Logic & Reasoning · done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Today, we're starting Unit three. It's called, Shapes, Grids, and Coordinates.", "caption": "Unit 3 · Shapes, Grids & Coordinates", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one is called, Shapes All Around!", "caption": "Chapter 1 · Shapes All Around", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "By the end, you'll be able to name a shape, just by counting. Ready? Let's go!", "caption": "Name a shape, just by counting!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "hunt",
+      "visual": "c11-hook",
+      "beats": [
+        { "vo": "Meet Aarav. He's in class four, and he loves a good challenge.", "caption": "Meet Aarav!", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "One morning, his teacher says, find as many shapes in our classroom as you can, in one minute! Ready, steady, go!", "caption": "\"Find shapes in the classroom, in 1 minute!\"", "focus": "task", "sfx": "tick", "sfxAt": 0.7 },
+        { "vo": "Aarav looks around. The blackboard. The clock on the wall. The carrom board in the corner. Shapes everywhere!", "caption": "Blackboard, clock, carrom board…", "focus": "look" },
+        { "vo": "But wait. How do you know what a shape is called? What's the secret? Think about it.", "caption": "How do you know a shape's name? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "The secret is counting! Count the straight sides, and count the corners. Those numbers tell you the name.", "caption": "Count the sides and the corners!", "focus": "secret", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c11-define",
+      "beats": [
+        { "vo": "First, a few shape words. A two D shape is a flat shape, one you can draw on paper. Like a square, or a circle.", "caption": "2D shape = a flat shape you can draw", "focus": "flat", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "A side is a straight edge of a shape. Let's count this triangle's sides. One, two, three.", "caption": "Side = a straight edge", "focus": "side", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "A corner is the point where two sides meet. One, two, three corners! A corner has another name too, vertex. And when there's more than one, we say, vertices.", "caption": "Corner = where 2 sides meet (a vertex)", "focus": "corner" },
+        { "vo": "So a triangle has three sides, and three corners. Tri means three, just like a tricycle has three wheels!", "caption": "Triangle: 3 sides, 3 corners", "focus": "tri", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "four",
+      "visual": "c11-four",
+      "beats": [
+        { "vo": "Now, a square. Count its sides with me. One, two, three, four. And look, all four sides are exactly the same length. That's what makes it a square.", "caption": "Square: 4 sides, all equal", "focus": "square", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "A rectangle has four sides too. But they're not all the same. The two long sides match each other. And the two short sides match each other. Just like a door!", "caption": "Rectangle: 4 sides, opposite sides equal", "focus": "rect" },
+        { "vo": "That's the big difference. A square has all four sides equal. A rectangle only has its opposite sides equal.", "caption": "Square: all 4 equal · Rectangle: opposite", "focus": "diff", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "And a circle? It's just one smooth, curvy line. No straight sides, and no corners. Nothing to count! Just like a roti, or a bangle.", "caption": "Circle: no sides, no corners", "focus": "circle", "sfx": "pop", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "more",
+      "visual": "c11-more",
+      "beats": [
+        { "vo": "Here's where it gets fun. More sides means a new name!", "caption": "More sides → a new name!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Five sides? That's a pentagon. Count with me. One, two, three, four, five.", "caption": "Pentagon: 5 sides", "focus": "penta", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Six sides is a hexagon. Bees build their honeycomb out of hexagons! Every little cell has six sides, and six corners.", "caption": "Hexagon: 6 sides, like a honeycomb cell", "focus": "hexa", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "And eight sides? That's an octagon. Octo means eight, just like an octopus has eight arms!", "caption": "Octagon: 8 sides. Octopus: 8 arms!", "focus": "octa", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Here's a handy tip. In these shapes, the sides and corners are always the same number. Five sides, five corners. Six sides, six corners. Eight sides, eight corners.", "caption": "Tip: same number of sides and corners", "focus": "tip" }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "c11-game",
+      "beats": [
+        { "vo": "Game time! Let's name that shape.", "caption": "Game: name that shape!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Near Aarav's school, there's a red sign that says, stop. Count its sides. What shape is it? Pause, and count.", "caption": "Count the STOP sign's sides. What shape?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Eight sides! So a stop sign is an octagon. Eight sides, and eight corners. Did you count them all?", "caption": "8 sides → an octagon!", "focus": "ans", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Now, true or false? A triangle has four corners. Hmm. Think carefully.", "caption": "True or false: a triangle has 4 corners?", "focus": "ask2", "pause": 2.0 },
+        { "vo": "False! A triangle has three sides, so it has three corners. Not four.", "caption": "False! 3 sides → 3 corners", "focus": "ans2", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "spot",
+      "visual": "c11-spot",
+      "beats": [
+        { "vo": "Now, remember Aarav's challenge? Let's help him name each shape, by counting.", "caption": "Back to Aarav's shape hunt!", "focus": "intro", "sfx": "pop" },
+        { "vo": "The blackboard. Four sides, two long and two short. It's a rectangle!", "caption": "Blackboard → rectangle", "focus": "board", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "The wall clock. One curvy line, and no corners. A circle!", "caption": "Wall clock → circle", "focus": "clock", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "The samosa in his tiffin. Three sides, three corners. A triangle! Yum.", "caption": "Samosa → triangle. Yum!", "focus": "samosa", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "And the carrom board. Four equal sides. A square!", "caption": "Carrom board → square", "focus": "carrom", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Now you try. Look around your room. How many rectangles can you spot in one minute? Doors, windows, books!", "caption": "Your turn: how many rectangles around you?", "focus": "you", "pause": 1.8 }
+      ]
+    },
+    {
+      "id": "screen",
+      "visual": "c11-screen",
+      "beats": [
+        { "vo": "Shapes are on every screen too! Zoom in really close, and a screen picture is made of tiny squares of light, called pixels.", "caption": "Screens are made of tiny squares: pixels", "focus": "pixels", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "In a video game, a house can be built from just two shapes. A square for the walls, and a triangle for the roof.", "caption": "Game house = square + triangle roof", "focus": "house", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "So how many sides altogether? The square has four. The triangle has three. Four plus three, equals seven sides!", "caption": "4 + 3 = 7 sides altogether", "focus": "count", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "addup",
+      "visual": "c11-addup",
+      "beats": [
+        { "vo": "Ready for a harder one? Aarav's classroom wall has two square windows, and one triangle flag. How many sides altogether? Take your time.", "caption": "2 square windows + 1 triangle flag = ? sides", "focus": "ask", "pause": 2.5 },
+        { "vo": "Each square has four sides. Four plus four is eight. Add the triangle's three, and that makes eleven sides!", "caption": "4 + 4 + 3 = 11 sides", "focus": "ans", "sfx": "success", "sfxAt": 0.85 },
+        { "vo": "One more. How many corners do one hexagon and one triangle have, together?", "caption": "Hexagon + triangle: how many corners?", "focus": "ask2", "pause": 2.2 },
+        { "vo": "The hexagon has six corners. The triangle has three. Six plus three, equals nine corners!", "caption": "6 + 3 = 9 corners", "focus": "ans2", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c11-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "How many sides does a hexagon have? Pause the video, and draw one on paper if you like.", "caption": "How many sides does a hexagon have?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Six sides! And six corners too, just like one cell of a honeycomb. Did you get it? Brilliant!", "caption": "6 sides and 6 corners, like a honeycomb cell", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c11-recap",
+      "beats": [
+        { "vo": "Let's remember. Count the sides, to name the shape.", "caption": "Count the sides to name the shape", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A square has four equal sides. A rectangle has opposite sides equal.", "caption": "Square: 4 equal · Rectangle: opposite equal", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Triangle three. Pentagon five. Hexagon six. Octagon eight.", "caption": "Triangle 3 · Pentagon 5 · Hexagon 6 · Octagon 8", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And a circle has no sides, and no corners.", "caption": "Circle: no sides, no corners", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit three, done! You're a real shape detective now, champ.", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

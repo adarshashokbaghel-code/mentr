@@ -117,14 +117,16 @@ export function LmsBuildStagePath({
                 <span className="text-[13px]">{isWatered ? "💧" : mark}</span>
               ) : null}
               {isHere ? (
-                <LearnDino
-                  size={28}
-                  action={status === "success" ? "cheer" : "wave"}
-                  className={cn(
-                    "h-7 w-7 transition-transform duration-300",
-                    DIR_ROT[pos.dir],
-                  )}
-                />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <LearnDino
+                    size={22}
+                    action="still"
+                    className={cn(
+                      "h-[22px] w-[22px] origin-center transition-transform duration-300",
+                      DIR_ROT[pos.dir],
+                    )}
+                  />
+                </span>
               ) : null}
             </div>
           );

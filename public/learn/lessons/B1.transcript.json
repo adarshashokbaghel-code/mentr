@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 6.24,
+      "caption": "Hello, champ! Welcome!",
+      "text": "Hey champ! Welcome to a brand new adventure. I'm so happy you're here!",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 6.24,
+      "end": 17.53,
+      "caption": "Something new: the AI track!",
+      "text": "If you've done our computer lessons, you already know that computers follow steps, written by people. Today, we're starting something new. The AI track!",
+      "scene": "open",
+      "focus": "track"
+    },
+    {
+      "start": 17.53,
+      "end": 28.65,
+      "caption": "What Is AI? \u00b7 Chapter 1 \u00b7 Magic or Math?",
+      "text": "Our first unit is called, What Is AI? And chapter one asks a fun question. Meet AI. Is it magic, or is it maths?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 28.65,
+      "end": 39.92,
+      "caption": "Magic? Or maths? Let's find out!",
+      "text": "Hmm. Phones that talk back. Apps that seem to know what you like. It can really feel like magic, can't it? Let's find out the truth, together.",
+      "scene": "open",
+      "focus": "question"
+    },
+    {
+      "start": 39.92,
+      "end": 48.81,
+      "caption": "Meet Kabir, a big cricket fan",
+      "text": "Meet Kabir. He's nine, and he loves cricket. One evening, he's watching a funny cricket cartoon on his mum's phone.",
+      "scene": "kabir",
+      "focus": "watch"
+    },
+    {
+      "start": 48.81,
+      "end": 58.41,
+      "caption": "The app shows more cricket cartoons!",
+      "text": "The cartoon ends. And straight away, the app shows him another cricket cartoon. And another. And another!",
+      "scene": "kabir",
+      "focus": "suggest"
+    },
+    {
+      "start": 58.41,
+      "end": 70.51,
+      "caption": "How did it know? Is it magic?",
+      "text": "Kabir's eyes go wide. How did the phone know I love cricket? Is it magic? Can it read my mind? What do you think?",
+      "scene": "kabir",
+      "focus": "magic"
+    },
+    {
+      "start": 70.51,
+      "end": 80.5,
+      "caption": "Not magic! Let's find out how.",
+      "text": "Good thinking. The answer is, no. It's not magic. And by the end of today, you'll know exactly how the phone did it.",
+      "scene": "kabir",
+      "focus": "tease"
+    },
+    {
+      "start": 80.5,
+      "end": 86.63,
+      "caption": "AI = Artificial Intelligence",
+      "text": "The phone used something called AI. That's short for, Artificial Intelligence.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 86.63,
+      "end": 96.64,
+      "caption": "Artificial: made by people \u00b7 Intelligence: clever",
+      "text": "Artificial means made by people, not by nature. And intelligence means being clever. So AI is a clever tool that people made.",
+      "scene": "define",
+      "focus": "words"
+    },
+    {
+      "start": 96.64,
+      "end": 106.04,
+      "caption": "AI learns patterns from examples, then guesses",
+      "text": "So what does AI actually do? AI is a computer program that learns patterns from lots of examples, and then makes a guess.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 106.04,
+      "end": 118.4,
+      "caption": "Meet Pixi, our cartoon AI helper",
+      "text": "Let me introduce our helper for this track. Say hi to Pixi! Pixi is just a cartoon, to help us learn. Real AI has no face, and no feelings.",
+      "scene": "define",
+      "focus": "pixi"
+    },
+    {
+      "start": 118.4,
+      "end": 131.36,
+      "caption": "AI is not alive. It's a program made with maths.",
+      "text": "And that's important. AI is not alive. It doesn't think or feel like you do. It's a program, written by people, using maths. No spells inside!",
+      "scene": "define",
+      "focus": "notalive"
+    },
+    {
+      "start": 131.36,
+      "end": 138.45,
+      "caption": "Pattern: something that repeats or looks alike",
+      "text": "So, what's a pattern? A pattern is something that repeats, or looks alike, again and again.",
+      "scene": "pattern",
+      "focus": "what"
+    },
+    {
+      "start": 138.45,
+      "end": 151.66,
+      "caption": "Red, yellow, blue, red, yellow\u2026 what's next?",
+      "text": "Look at these beads. Red, yellow, blue. Red, yellow, blue. Red, yellow, and then? What comes next?",
+      "scene": "pattern",
+      "focus": "beads"
+    },
+    {
+      "start": 151.66,
+      "end": 160.24,
+      "caption": "Blue! You spotted the pattern!",
+      "text": "Blue! You spotted the pattern. And that's exactly what AI is good at. Spotting patterns.",
+      "scene": "pattern",
+      "focus": "beadsans"
+    },
+    {
+      "start": 160.24,
+      "end": 170.92,
+      "caption": "Cats: whiskers \u00b7 fur \u00b7 pointy ears",
+      "text": "Patterns are everywhere. Think about cats. Almost every cat has whiskers, fur, and pointy ears. That's a cat pattern!",
+      "scene": "pattern",
+      "focus": "cats"
+    },
+    {
+      "start": 170.92,
+      "end": 178.07,
+      "caption": "AI is shown thousands of cat photos",
+      "text": "So how could AI learn to spot a cat? First, people show it thousands and thousands of cat photos.",
+      "scene": "cat",
+      "focus": "photos"
+    },
+    {
+      "start": 178.07,
+      "end": 191.94,
+      "caption": "It notices the pattern: whiskers, fur, ears",
+      "text": "Big cats, small cats, sleepy cats. Slowly, the program notices the pattern. Whiskers. Fur. Pointy ears. Again, and again.",
+      "scene": "cat",
+      "focus": "notice"
+    },
+    {
+      "start": 191.94,
+      "end": 199.3,
+      "caption": "New photo? \"This looks like a cat!\"",
+      "text": "Now we show it a brand new photo, one it has never seen before. And it guesses, this looks like a cat!",
+      "scene": "cat",
+      "focus": "guess"
+    },
+    {
+      "start": 199.3,
+      "end": 207.5,
+      "caption": "Examples + a pattern + maths = a guess",
+      "text": "No magic at all. Just lots of examples, a pattern, and a good guess, all worked out with maths.",
+      "scene": "cat",
+      "focus": "maths"
+    },
+    {
+      "start": 207.5,
+      "end": 218.14,
+      "caption": "Calculator: 7 + 2 = ?",
+      "text": "Now, let's compare AI with something you know well. A calculator. Type seven plus two. What does it show?",
+      "scene": "calculator",
+      "focus": "calc"
+    },
+    {
+      "start": 218.14,
+      "end": 234.37,
+      "caption": "7 + 2 is always 9. A fixed rule.",
+      "text": "Nine! Type it again. Nine. Tomorrow? Next year? Still nine. A calculator follows a fixed rule. Same question, same answer, every single time.",
+      "scene": "calculator",
+      "focus": "rule"
+    },
+    {
+      "start": 234.37,
+      "end": 242.8,
+      "caption": "AI guesses from what it has seen",
+      "text": "AI is different. It doesn't follow one fixed rule. It makes a guess, based on what it has seen before.",
+      "scene": "calculator",
+      "focus": "ai"
+    },
+    {
+      "start": 242.8,
+      "end": 251.06,
+      "caption": "Calculator: fixed rule \u00b7 AI: a guess",
+      "text": "So here's the big difference. A calculator follows a fixed rule. AI makes a guess, from patterns.",
+      "scene": "calculator",
+      "focus": "compare"
+    },
+    {
+      "start": 251.06,
+      "end": 260.38,
+      "caption": "The AI says \"Cat!\" Hmm\u2026 look closely",
+      "text": "And guesses can go wrong! A cat spotter AI sees this photo, and says, cat! Hmm. Look closely.",
+      "scene": "wrong",
+      "focus": "oops"
+    },
+    {
+      "start": 260.38,
+      "end": 271.06,
+      "caption": "Oops! It's a fox, not a cat",
+      "text": "It's a fox! It has fur, pointy ears, and whiskers, a lot like a cat. So the AI made a wrong guess. Oops!",
+      "scene": "wrong",
+      "focus": "fox"
+    },
+    {
+      "start": 271.06,
+      "end": 283.65,
+      "caption": "AI can be wrong. A calculator doesn't guess.",
+      "text": "That's why we say, AI can be wrong. Good guesses are often right, but not always. A calculator doesn't guess. Seven plus two won't suddenly become ten!",
+      "scene": "wrong",
+      "focus": "why"
+    },
+    {
+      "start": 283.65,
+      "end": 299.7,
+      "caption": "The app found a pattern in what Kabir watched",
+      "text": "Now, remember Kabir and his cricket cartoons? The app saw that he watched lots of cricket videos. It found a pattern in what he likes, and guessed he'd enjoy another one. Not mind reading. Patterns!",
+      "scene": "around",
+      "focus": "video"
+    },
+    {
+      "start": 299.7,
+      "end": 309.28,
+      "caption": "Voice assistants guess words from many voices",
+      "text": "Or think of a voice assistant. When you say, play a song, it guesses the words you said, because it has heard many, many voices before.",
+      "scene": "around",
+      "focus": "voice"
+    },
+    {
+      "start": 309.28,
+      "end": 318.73,
+      "caption": "Riya: \"AI works by magic!\" What do you say?",
+      "text": "Kabir's friend Riya says, AI works by magic! What would you tell her? Think for a moment.",
+      "scene": "riya",
+      "focus": "ask"
+    },
+    {
+      "start": 318.73,
+      "end": 327.2,
+      "caption": "No! AI uses maths to find patterns.",
+      "text": "You could say, no, Riya! AI uses maths to find patterns in examples. And people made it.",
+      "scene": "riya",
+      "focus": "answer"
+    },
+    {
+      "start": 327.2,
+      "end": 346.39,
+      "caption": "Which one is most like AI?",
+      "text": "Quick game! Which of these is most like AI? A ruler measuring a line. A video app suggesting a cartoon. A calculator adding five plus five. Or a switch turning on a bulb. Pause, and think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 346.39,
+      "end": 358.57,
+      "caption": "The video suggestion! It guesses from patterns.",
+      "text": "The video suggestion! It guesses from patterns in what you watched. The ruler, the calculator, and the switch? They just do the same fixed thing, every time.",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 358.57,
+      "end": 362.52,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 362.52,
+      "end": 374.96,
+      "caption": "Why is suggesting a cartoon more like AI?",
+      "text": "Why is recommending a cartoon closer to AI than adding seven plus two? Pause the video, and think. Or write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 374.96,
+      "end": 391.37,
+      "caption": "7 + 2: a fixed rule. A cartoon: a guess.",
+      "text": "Here's one answer. Adding seven plus two follows one fixed rule, and always gives nine. But recommending a cartoon means guessing, from patterns in what you watched before. And that's what AI does! Great thinking.",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 391.37,
+      "end": 396.42,
+      "caption": "AI is maths, not magic",
+      "text": "Let's remember what we learned. AI is maths, not magic.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 396.42,
+      "end": 400.94,
+      "caption": "AI finds patterns in lots of examples",
+      "text": "It finds patterns in lots of examples, like whiskers on cats.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 400.94,
+      "end": 405.74,
+      "caption": "Calculator: fixed rule. AI: a guess.",
+      "text": "A calculator follows a fixed rule. AI makes a guess.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 405.74,
+      "end": 409.1,
+      "caption": "AI is not alive, and it can be wrong",
+      "text": "And AI is not alive, and it can be wrong.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 409.1,
+      "end": 417.31,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one, done! Welcome to the AI track, champ. You're officially an AI explorer!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 417.31,
+      "end": 424.11,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

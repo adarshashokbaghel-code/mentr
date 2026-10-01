@@ -1,0 +1,412 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.7,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for some more maths fun?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.7,
+      "end": 17.13,
+      "caption": "Last time: 101 \u2192 4 + 0 + 1 = 5",
+      "text": "Last time, we counted the computer way, with lamps that are on or off. Remember? One, zero, one, was four plus one. Five!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.13,
+      "end": 24.11,
+      "caption": "Chapter 2 \u00b7 Odd, Even, and Patterns",
+      "text": "Today is chapter two of Numbers Computers Love. It's called, Odd, Even, and Patterns!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.11,
+      "end": 31.55,
+      "caption": "Share, hop, and clap!",
+      "text": "We'll share some laddoos, hop along a number line, and even clap out a pattern. Let's go!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 31.55,
+      "end": 41.65,
+      "caption": "Riya shares laddoos: two on every plate",
+      "text": "Meet Riya. It's Diwali, and Nani has made a big box of laddoos. Riya's job is to share them out, two laddoos on every plate.",
+      "scene": "laddoos",
+      "focus": "meet"
+    },
+    {
+      "start": 41.65,
+      "end": 52.06,
+      "caption": "8 laddoos \u2192 4 pairs, none left over",
+      "text": "First, she has eight laddoos. Two, four, six, eight. That's four plates, with nothing left over. Perfect!",
+      "scene": "laddoos",
+      "focus": "eight"
+    },
+    {
+      "start": 52.06,
+      "end": 62.47,
+      "caption": "7 laddoos \u2192 3 pairs and 1 left over",
+      "text": "The next day, there are seven laddoos. Two, four, six, and, oh no! One laddoo is left all alone, with no partner.",
+      "scene": "laddoos",
+      "focus": "seven"
+    },
+    {
+      "start": 62.47,
+      "end": 72.76,
+      "caption": "Why is one laddoo left over? Think!",
+      "text": "Hmm. Why do some numbers share perfectly into pairs, while others always leave one behind? Think about it.",
+      "scene": "laddoos",
+      "focus": "ask"
+    },
+    {
+      "start": 72.76,
+      "end": 79.77,
+      "caption": "Two kinds of numbers. Let's name them!",
+      "text": "Here's the secret. Every number is one of two kinds. And each kind has a special name.",
+      "scene": "laddoos",
+      "focus": "answer"
+    },
+    {
+      "start": 79.77,
+      "end": 89.74,
+      "caption": "EVEN: makes pairs, nothing left over",
+      "text": "A number that splits into pairs, with nothing left over, is called an even number. Every laddoo has a partner. So eight is even.",
+      "scene": "define",
+      "focus": "even"
+    },
+    {
+      "start": 89.74,
+      "end": 99.89,
+      "caption": "ODD: one left over",
+      "text": "A number that leaves one left over, when you make pairs, is called an odd number. One laddoo has no partner. So seven is odd.",
+      "scene": "define",
+      "focus": "odd"
+    },
+    {
+      "start": 99.89,
+      "end": 105.89,
+      "caption": "Every whole number is odd OR even",
+      "text": "Every whole number is either odd, or even. Never both, and never neither!",
+      "scene": "define",
+      "focus": "every"
+    },
+    {
+      "start": 105.89,
+      "end": 113.21,
+      "caption": "Pairs test: make pairs, see what's left",
+      "text": "So here's a simple test. Make pairs, and see if anything is left. Let's try it.",
+      "scene": "pairs",
+      "focus": "intro"
+    },
+    {
+      "start": 113.21,
+      "end": 119.4,
+      "caption": "6 \u2192 3 pairs, none left \u2192 EVEN",
+      "text": "Six. Three pairs, and nothing left over. So six is even.",
+      "scene": "pairs",
+      "focus": "six"
+    },
+    {
+      "start": 119.4,
+      "end": 125.35,
+      "caption": "9 \u2192 4 pairs + 1 left \u2192 ODD",
+      "text": "Nine. Four pairs, and one left over. So nine is odd.",
+      "scene": "pairs",
+      "focus": "nine"
+    },
+    {
+      "start": 125.35,
+      "end": 133.39,
+      "caption": "11 \u2192 5 pairs + 1 left \u2192 ODD",
+      "text": "And what if Riya has eleven laddoos? Five pairs, and one left over. So eleven is odd too.",
+      "scene": "pairs",
+      "focus": "eleven"
+    },
+    {
+      "start": 133.39,
+      "end": 143.57,
+      "caption": "Big number? Just look at the last digit!",
+      "text": "But what about a big number, like thirty-eight? Making pairs would take forever! Here's a quick trick. Just look at the last digit.",
+      "scene": "digit",
+      "focus": "intro"
+    },
+    {
+      "start": 143.57,
+      "end": 149.54,
+      "caption": "Ends in 0, 2, 4, 6, 8 \u2192 EVEN",
+      "text": "If the last digit is zero, two, four, six, or eight, the number is even.",
+      "scene": "digit",
+      "focus": "even"
+    },
+    {
+      "start": 149.54,
+      "end": 154.66,
+      "caption": "Ends in 1, 3, 5, 7, 9 \u2192 ODD",
+      "text": "If it's one, three, five, seven, or nine, the number is odd.",
+      "scene": "digit",
+      "focus": "odd"
+    },
+    {
+      "start": 154.66,
+      "end": 162.65,
+      "caption": "38 ends in 8 \u2192 even \u00b7 25 ends in 5 \u2192 odd",
+      "text": "So thirty-eight ends in eight. It's even! And twenty-five ends in five. It's odd!",
+      "scene": "digit",
+      "focus": "try"
+    },
+    {
+      "start": 162.65,
+      "end": 173.48,
+      "caption": "Tens always make pairs, so the last digit decides",
+      "text": "Why does this trick work? Because tens always split into pairs perfectly. Thirty is fifteen pairs. So only the last digit decides!",
+      "scene": "digit",
+      "focus": "why"
+    },
+    {
+      "start": 173.48,
+      "end": 180.5,
+      "caption": "1 to 20: odd in orange, even in green",
+      "text": "Now let's line up the numbers from one to twenty. Odd numbers in orange, and even numbers in green.",
+      "scene": "line",
+      "focus": "intro"
+    },
+    {
+      "start": 180.5,
+      "end": 194.22,
+      "caption": "Odd, even, odd, even\u2026 they take turns!",
+      "text": "Look at that! Odd, even, odd, even. They take turns, all the way along. Just like your feet when you walk. Left, right, left, right.",
+      "scene": "line",
+      "focus": "turns"
+    },
+    {
+      "start": 194.22,
+      "end": 202.89,
+      "caption": "How many odd numbers from 1 to 10?",
+      "text": "Here's a question. How many odd numbers are there, from one to ten? Count them.",
+      "scene": "line",
+      "focus": "ask"
+    },
+    {
+      "start": 202.89,
+      "end": 214.4,
+      "caption": "Five! 1, 3, 5, 7, 9",
+      "text": "Five! One, three, five, seven, and nine. And there are five even numbers too. Two, four, six, eight, and ten.",
+      "scene": "line",
+      "focus": "answer"
+    },
+    {
+      "start": 214.4,
+      "end": 223.55,
+      "caption": "Tinku the frog skips every other number",
+      "text": "Now meet Tinku, Riya's pet frog. Tinku loves hopping along the number line. But he always skips every other number.",
+      "scene": "skip",
+      "focus": "intro"
+    },
+    {
+      "start": 223.55,
+      "end": 233.23,
+      "caption": "Start at 2: 2, 4, 6, 8, 10 \u2192 evens",
+      "text": "Start at two, and skip one each time. Two, four, six, eight, ten. Tinku lands only on even numbers!",
+      "scene": "skip",
+      "focus": "evens"
+    },
+    {
+      "start": 233.23,
+      "end": 242.71,
+      "caption": "Start at 1: 1, 3, 5, 7, 9 \u2192 odds",
+      "text": "Now start at one. One, three, five, seven, nine. This time, he lands only on odd numbers.",
+      "scene": "skip",
+      "focus": "odds"
+    },
+    {
+      "start": 242.71,
+      "end": 252.0,
+      "caption": "Start at 1\u2026 will Tinku land on 20?",
+      "text": "So, if Tinku starts at one and keeps hopping, will he ever land on twenty? What do you think?",
+      "scene": "skip",
+      "focus": "ask"
+    },
+    {
+      "start": 252.0,
+      "end": 263.35,
+      "caption": "No! 20 is even. He lands on 19, then 21",
+      "text": "No! Starting at one, he only lands on odd numbers. Twenty is even, so he hops right over it. Nineteen, then twenty-one.",
+      "scene": "skip",
+      "focus": "answer"
+    },
+    {
+      "start": 263.35,
+      "end": 271.79,
+      "caption": "The rule: add 2 each time",
+      "text": "Tinku's hops make a number pattern. Each number is two more than the one before. So the rule is, add two.",
+      "scene": "next",
+      "focus": "intro"
+    },
+    {
+      "start": 271.79,
+      "end": 280.21,
+      "caption": "2, 4, 6, 8, ___?",
+      "text": "Two, four, six, eight. What comes next? Pause, and think.",
+      "scene": "next",
+      "focus": "ask1"
+    },
+    {
+      "start": 280.21,
+      "end": 283.58,
+      "caption": "10! 8 + 2 = 10",
+      "text": "Ten! Eight plus two equals ten.",
+      "scene": "next",
+      "focus": "ans1"
+    },
+    {
+      "start": 283.58,
+      "end": 291.77,
+      "caption": "10, 12, 14, ___?",
+      "text": "Here's another one. Ten, twelve, fourteen. What comes next?",
+      "scene": "next",
+      "focus": "ask2"
+    },
+    {
+      "start": 291.77,
+      "end": 297.98,
+      "caption": "16! 14 + 2 = 16",
+      "text": "Sixteen! Fourteen plus two equals sixteen. You're a pattern pro!",
+      "scene": "next",
+      "focus": "ans2"
+    },
+    {
+      "start": 297.98,
+      "end": 309.29,
+      "caption": "A pattern repeats by a rule: clap, snap\u2026",
+      "text": "Patterns aren't only numbers. A pattern is anything that repeats by a rule. Like this. Clap, snap. Clap, snap.",
+      "scene": "clap",
+      "focus": "intro"
+    },
+    {
+      "start": 309.29,
+      "end": 316.92,
+      "caption": "Clap, snap, clap, snap, clap, ___?",
+      "text": "Clap, snap, clap, snap, clap, and then? What comes next?",
+      "scene": "clap",
+      "focus": "ask"
+    },
+    {
+      "start": 316.92,
+      "end": 322.36,
+      "caption": "Snap! They take turns, like odd and even",
+      "text": "Snap! Clap and snap take turns, just like odd and even numbers do.",
+      "scene": "clap",
+      "focus": "answer"
+    },
+    {
+      "start": 322.36,
+      "end": 337.94,
+      "caption": "Clap on the even numbers: 2, 4, 6, 8",
+      "text": "Now let's mix in numbers. Count to eight, and clap only on the even ones. One, two, clap. Three, four, clap. Five, six, clap. Seven, eight, clap!",
+      "scene": "clap",
+      "focus": "even"
+    },
+    {
+      "start": 337.94,
+      "end": 346.37,
+      "caption": "Code loves rules that repeat!",
+      "text": "Computers love patterns too. A rule that repeats is how code does a job again and again, without ever getting bored.",
+      "scene": "clap",
+      "focus": "code"
+    },
+    {
+      "start": 346.37,
+      "end": 360.21,
+      "caption": "7, 12, 15, 20, 3, 18: which are even?",
+      "text": "Sorting time! Seven, twelve, fifteen, twenty, three, and eighteen. Which ones go in the even basket? Use the last digit trick.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 360.21,
+      "end": 372.03,
+      "caption": "Even: 12, 20, 18 \u00b7 Odd: 7, 15, 3",
+      "text": "Twelve, twenty, and eighteen are even. They end in two, zero, and eight. Seven, fifteen, and three are odd. Brilliant sorting!",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 372.03,
+      "end": 375.73,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 375.73,
+      "end": 385.37,
+      "caption": "Is 14 odd or even? How do you know?",
+      "text": "Is fourteen odd, or even? And how do you know? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 385.37,
+      "end": 395.88,
+      "caption": "Even! 7 pairs, none left over, ends in 4",
+      "text": "Fourteen is even! It makes seven pairs, with nothing left over. And it ends in four. Two ways to know. Super!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 395.88,
+      "end": 401.24,
+      "caption": "Even = pairs, nothing left over",
+      "text": "Let's remember. Even numbers make pairs, with nothing left over.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 401.24,
+      "end": 403.99,
+      "caption": "Odd = one left over",
+      "text": "Odd numbers always have one left over.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 403.99,
+      "end": 410.3,
+      "caption": "Last digit 0, 2, 4, 6, 8 \u2192 even",
+      "text": "Check the last digit. Zero, two, four, six, or eight means even.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 410.3,
+      "end": 414.97,
+      "caption": "Patterns repeat by a rule",
+      "text": "And patterns repeat by a rule, like add two, or clap, snap.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 414.97,
+      "end": 422.89,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! You can sort odd and even, and spot patterns. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 422.89,
+      "end": 429.69,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

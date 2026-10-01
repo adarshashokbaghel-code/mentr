@@ -1,0 +1,141 @@
+{
+  "id": "C13",
+  "title": "Symmetry and Patterns",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "Math · Shapes, Grids & Coordinates",
+  "slug": "c13-symmetry-and-patterns",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c13-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so nice to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we found points on a grid. Across first, then up, like four, two.", "caption": "Last time: grids · across first, then up", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Shapes, Grids and Coordinates. It's called, Symmetry and Patterns!", "caption": "Chapter 3 · Symmetry and Patterns", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "We'll fold shapes, play with mirrors, and finish patterns like a real rangoli artist. Ready?", "caption": "Fold · Mirror · Pattern", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "rangoli",
+      "visual": "c13-hook",
+      "beats": [
+        { "vo": "Picture this. It's Diwali morning, and Riya is making a rangoli at the front door, with her nani.", "caption": "Meet Riya, making a Diwali rangoli", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Nani draws one wing of a butterfly with coloured powder. Then she smiles and says, Riya, you draw the other wing. But it must match exactly!", "caption": "\"Draw the other wing. Make it match!\"", "focus": "half" },
+        { "vo": "Hmm. How can Riya check that both wings really match? What do you think?", "caption": "How can Riya check? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Nani has a clever trick. She cuts out a paper butterfly, and folds it, right down the middle.", "caption": "Nani's trick: fold it down the middle", "focus": "fold", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Look! One wing sits exactly on top of the other. No bits sticking out. Both halves match perfectly!", "caption": "Both halves match exactly!", "focus": "match", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c13-define",
+      "beats": [
+        { "vo": "That fold line has a special name. It's called a line of symmetry.", "caption": "That fold line is a LINE OF SYMMETRY", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "A line of symmetry is a fold line where both halves match exactly.", "caption": "A fold line where both halves match exactly", "focus": "meaning" },
+        { "vo": "It works just like a mirror. Stand a mirror on the line, and the reflection looks exactly like the other half.", "caption": "It works just like a mirror", "focus": "mirror", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A shape with at least one line of symmetry is called symmetrical. Riya's butterfly is symmetrical!", "caption": "Symmetrical: has at least one fold line", "focus": "word" },
+        { "vo": "But careful! Not every line works. Fold the butterfly across the middle instead, and the top and bottom don't match at all. So that's not a line of symmetry.", "caption": "Not every line works! Halves must match", "focus": "notany", "sfx": "buzz", "sfxAt": 0.35 }
+      ]
+    },
+    {
+      "id": "foldtest",
+      "visual": "c13-fold",
+      "beats": [
+        { "vo": "Let's try the fold test on more things. Here's a little house. Fold it straight down the middle. The roof matches, and the walls match. One line of symmetry!", "caption": "House: fold down the middle → it matches!", "focus": "house", "sfx": "pop", "sfxAt": 0.7 },
+        { "vo": "Now, letters! Here's A, and here's F. Which one can you fold down the middle, so both sides match? Think.", "caption": "A or F: which one folds and matches?", "focus": "ask", "pause": 2.0 },
+        { "vo": "A! Its left side is a mirror of its right side. But F? Its arms only point one way. Fold it, and the halves don't match. So F has no line of symmetry. Neither do G or R.", "caption": "A matches! F, G and R don't", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "count",
+      "visual": "c13-count",
+      "beats": [
+        { "vo": "Some shapes have more than one line of symmetry. Let's count them!", "caption": "Some shapes have more than one!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Here's a square tile. Fold it up and down. It matches! Fold it across. It matches! Now fold it corner to corner. Matches again! And the other corner to corner, too. That's four lines of symmetry!", "caption": "Square: 4 lines of symmetry", "focus": "square", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Now a rectangle, like your notebook. It's longer than it is wide. Fold it up and down. Matches! Fold it across. Matches! That's two lines.", "caption": "Rectangle: up-down and across", "focus": "rect", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "But what about corner to corner? Look closely. The corners stick out. The halves don't sit on top of each other. So a rectangle that isn't a square has just two lines of symmetry.", "caption": "Corner to corner? No match! Only 2 lines", "focus": "diag", "sfx": "buzz", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "missing",
+      "visual": "c13-half",
+      "beats": [
+        { "vo": "Now, back to Riya's rangoli. She needs to draw the missing wing. Here's the secret. The fold line works like a mirror.", "caption": "The fold line works like a mirror", "focus": "intro", "sfx": "pop" },
+        { "vo": "Look at this dot. It's two squares to the left of the fold line. So its matching dot goes two squares to the right. Same distance, just on the other side.", "caption": "2 left of the fold → 2 right of the fold", "focus": "rule", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Your turn. This dot is three squares to the left of the fold. Where does its partner go? Take your time.", "caption": "3 squares left → where's its partner?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Three squares to the right! Riya does that for every dot, and joins them up. Ta-da! The wing is complete, and it matches perfectly.", "caption": "3 squares right! Same distance, other side", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "pattern",
+      "visual": "c13-pattern",
+      "beats": [
+        { "vo": "Riya's rangoli also has a pretty border around it. And that border is a pattern.", "caption": "The rangoli border is a pattern", "focus": "intro", "sfx": "pop" },
+        { "vo": "Remember, a pattern repeats in the same order, again and again. The small part that repeats is called the pattern unit.", "caption": "Pattern unit: the small part that repeats", "focus": "unit", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Like red, blue, red, blue, red. What comes next? Blue! Because the pattern unit is red, blue.", "caption": "Red, blue, red, blue, red → blue!", "focus": "colour", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Now Riya's border. Star, dot, dot. Star, dot, dot. Star, and then? What are the next two?", "caption": "Star, dot, dot, star, dot, dot, star, ?, ?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Dot, dot! The pattern unit is star, dot, dot. So after every star come two dots.", "caption": "Dot, dot! The unit is star, dot, dot", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "tiles",
+      "visual": "c13-tiles",
+      "beats": [
+        { "vo": "Here's a real brain teaser. Floor tiles go square, triangle, triangle, square, triangle, triangle. What is the tenth tile? Take your time.", "caption": "Square, triangle, triangle… what's tile 10?", "focus": "ask", "pause": 2.5 },
+        { "vo": "First, find the pattern unit. Square, triangle, triangle. That's three tiles, and then it starts again.", "caption": "Unit: square, triangle, triangle (3 tiles)", "focus": "unit", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "So a new unit starts at tile one, tile four, tile seven, and tile ten. Each of those is a square. So the tenth tile is a square!", "caption": "Tiles 1, 4, 7, 10 are squares → square!", "focus": "count", "sfx": "success", "sfxAt": 0.75 },
+        { "vo": "Game artists use this trick too. They draw one small tile, and repeat it again and again, to fill a whole game world!", "caption": "Game art repeats one small tile", "focus": "games", "sfx": "whoosh", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c13-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Does a heart have a line of symmetry? Draw it, or describe it. Pause the video, and try it on paper.", "caption": "Does a heart have a line of symmetry?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Yes! One line, straight down the middle, from the dip at the top to the point at the bottom. Fold it there, and both halves match. Brilliant!", "caption": "Yes! One line, top dip to bottom point", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c13-recap",
+      "beats": [
+        { "vo": "Let's remember. Symmetry means you can fold a shape, and both halves match exactly.", "caption": "Symmetry = fold, and both halves match", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A square has four lines of symmetry. A rectangle has two.", "caption": "Square: 4 lines · Rectangle: 2 lines", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "To draw a missing half, use the same distance, on the other side of the fold.", "caption": "Missing half: same distance, other side", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And to continue a pattern, find the pattern unit that repeats.", "caption": "Find the repeating unit", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You fold and pattern like a true rangoli artist, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

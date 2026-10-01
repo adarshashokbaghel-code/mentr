@@ -1,0 +1,151 @@
+{
+  "id": "A10",
+  "title": "Debugging — Finding the Mistake",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "CS · Thinking Like a Computer",
+  "slug": "a10-debugging-finding-the-mistake",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a10-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Today is a special one, so I'm extra happy you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned if, then, and else. If the light is red, then stop. Else, go. Now Robo can make choices!", "caption": "Last time: If · Then · Else", "focus": "bridge", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Today is chapter five. The very last chapter of Unit two! It's called, Debugging. Finding the mistake.", "caption": "Chapter 5 · Debugging — Finding the Mistake", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "De, bug, ging. Hmm. Does that sound like it has something to do with bugs? Well, it does! But maybe not the kind you're thinking of.", "caption": "De · bug · ging? Bugs?!", "focus": "word", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "bag",
+      "visual": "a10-bag",
+      "beats": [
+        { "vo": "Remember Robo? Today, Robo is packing his school bag. Here are his steps. One, open the bag. Two, put the books in. Three, put the tiffin in. Four, walk to school.", "caption": "Open bag → Books → Tiffin → Walk to school", "focus": "steps", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Off goes Robo. Step, step, step. And then, oh no! Books on the road. Tiffin on the road. Everything fell out!", "caption": "Oh no! Everything fell out!", "focus": "walk", "sfx": "buzz", "sfxAt": 0.55, "pause": 0.5 },
+        { "vo": "So, what went wrong? Is Robo being naughty? Think about it.", "caption": "Is Robo being naughty? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Nope! Robo did exactly what the steps said. Every single one. So if the result is wrong, a step must be wrong. The mistake is in the steps, not in Robo.", "caption": "Robo followed exactly. A step was wrong.", "focus": "because" }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a10-define",
+      "beats": [
+        { "vo": "A mistake in the steps has a funny name. It's called a bug.", "caption": "A mistake in the steps is called a BUG", "focus": "bug", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Why a bug? Long ago, computers were as big as a whole room. One day, people found a real moth stuck inside one! They taped it into their notebook, and the name bug became famous.", "caption": "Long ago, a real moth got stuck in a computer!", "focus": "moth" },
+        { "vo": "But today, a bug isn't a real insect. And it's not a naughty computer either. It's just a mistake in the steps.", "caption": "Not an insect. Not a naughty computer.", "focus": "not" },
+        { "vo": "And debugging means finding the bug, and fixing it. De bug. Take the bug out! Every time you fix a mistake in your steps, you're debugging.", "caption": "Debugging = finding the bug and fixing it", "focus": "debug", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "hunt",
+      "visual": "a10-hunt",
+      "beats": [
+        { "vo": "So how do we hunt for a bug? Like a detective! There are three steps.", "caption": "How to hunt a bug: 3 detective steps", "focus": "intro", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "One. Read the steps slowly, one by one, like a detective looking for clues. Don't rush!", "caption": "1 · Read the steps slowly, one by one", "focus": "read", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Two. Find the step where it goes wrong. Open the bag, okay. Books in, okay. Tiffin in, okay. Walk to school, and everything falls out. Wait! The bag was never closed!", "caption": "2 · Find where it goes wrong: bag not closed!", "focus": "find", "sfx": "buzz", "sfxAt": 0.8 },
+        { "vo": "Three. Change one thing, then test again. Let's add just one step. Close the bag, right before walk to school.", "caption": "3 · Change one thing: add \"Close the bag\"", "focus": "fix", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Now, test. Robo walks, step, step, step, and everything stays inside. It works! Bug squashed!", "caption": "Test again → it works! Bug squashed!", "focus": "test", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "kinds",
+      "visual": "a10-kinds",
+      "beats": [
+        { "vo": "Bugs usually come in three kinds. Let's meet them.", "caption": "Three kinds of bugs", "focus": "intro", "sfx": "pop" },
+        { "vo": "A missing step. Something was forgotten, like Robo forgetting to close his bag.", "caption": "Missing step: something was forgotten", "focus": "missing", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Wrong order. All the right steps are there, but they're mixed up.", "caption": "Wrong order: right steps, mixed up", "focus": "order", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And an extra step. A step that doesn't belong, and should be taken out.", "caption": "Extra step: doesn't belong, take it out", "focus": "extra", "sfx": "pop", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "socks",
+      "visual": "a10-socks",
+      "beats": [
+        { "vo": "Let's spot some bugs! Aarav is getting ready to play. Step one, wear shoes. Step two, wear socks. Step three, go outside. What kind of bug is this?", "caption": "Shoes → Socks → Go outside. What's the bug?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Wrong order! Socks on top of the shoes? That looks so silly! Socks must come before shoes. Just swap them, and it works.", "caption": "Wrong order! Swap: socks first, then shoes", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "brush",
+      "visual": "a10-brush",
+      "beats": [
+        { "vo": "Next one. Brushing teeth. Pick up the brush. Put paste on it. Dance on the bed. Brush your teeth. Hmm. Can you find the bug?", "caption": "Brush · Paste · Dance on the bed · Brush teeth", "focus": "ask", "pause": 2.0 },
+        { "vo": "Dance on the bed! That's fun, but it has nothing to do with brushing. It's an extra step. Take it out, and the steps are perfect.", "caption": "Extra step! Remove \"Dance on the bed\"", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "one",
+      "visual": "a10-one",
+      "beats": [
+        { "vo": "Now, why do we change only one thing at a time? Imagine your torch won't switch on.", "caption": "Why change just one thing at a time?", "focus": "intro" },
+        { "vo": "So you change the batteries, the bulb, and the switch, all at once. And now it works! But wait. Which change fixed it? You can't tell!", "caption": "Changed 3 things at once… which one worked?", "focus": "many", "sfx": "buzz", "sfxAt": 0.7, "pause": 0.5 },
+        { "vo": "So instead, change one thing, then test. New batteries. Test. It works! Now you know exactly what fixed it. That's why one change at a time is so smart.", "caption": "One change, then test → you know what worked", "focus": "single", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "truefalse",
+      "visual": "a10-tf",
+      "beats": [
+        { "vo": "Quick quiz! True or false? When the steps don't work, it means the computer is being naughty.", "caption": "True or false? The computer is being naughty.", "focus": "ask", "pause": 2.0 },
+        { "vo": "False! The computer follows the steps exactly. So the mistake is always in the steps. And that's good news, because steps are something you can fix!", "caption": "False! The mistake is in the steps", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "cheer",
+      "visual": "a10-cheer",
+      "beats": [
+        { "vo": "Here's a secret. Every programmer in the world finds bugs. Every single day! Even the people who make your favourite games, and the apps on your phone.", "caption": "Every programmer finds bugs, every day!", "focus": "every", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "So when you find a bug, don't feel bad. Celebrate! Finding a bug means you're getting better. Fix it, test it, and shout, bug squashed!", "caption": "Found a bug? Celebrate! \"Bug squashed!\"", "focus": "celebrate", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a10-check",
+      "beats": [
+        { "vo": "Okay champ, practice time! Here's a check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "These steps make tea. Add tea leaves to the water. Add milk and sugar. Pour into a cup. But the tea is cold, and yucky! What's the bug? Pause, and try it.", "caption": "Tea steps: what's the bug?", "focus": "ask", "pause": 2.5 },
+        { "vo": "It's a missing step! The water was never boiled. So the fix is, add boil the water, before adding the tea leaves. Now that's a lovely, hot cup of chai. Bug squashed!", "caption": "Missing step: boil the water first!", "focus": "answer", "sfx": "success", "sfxAt": 0.55 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a10-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. A bug is a mistake in the steps. Not a naughty computer.", "caption": "Bug = a mistake in the steps", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Debugging means finding the bug, and fixing it.", "caption": "Debugging = find it and fix it", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Bugs can be a missing step, an extra step, or the wrong order.", "caption": "Missing · Extra · Wrong order", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And change one thing at a time, then test.", "caption": "Change one thing, then test", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means, you've finished all of Unit two! Algorithms, order, loops, if then else, and now debugging. You really are thinking like a computer, champ!", "caption": "Chapter 5 done · Unit 2 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}
