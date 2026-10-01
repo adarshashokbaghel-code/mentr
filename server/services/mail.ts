@@ -2,7 +2,9 @@ import nodemailer from "nodemailer";
 import { config } from "../config";
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: config.smtp.host,
+  port: config.smtp.port,
+  secure: config.smtp.secure,
   auth: {
     user: config.emailUser,
     pass: config.emailPass,
@@ -12,6 +14,13 @@ const transporter = nodemailer.createTransport({
   socketTimeout: 30_000,
 });
 
+const FROM = `"${config.emailFromName}" <${config.emailUser}>`;
+
+/** Checks SMTP login without sending anything. */
+export function verifyMailTransport(): Promise<true> {
+  return transporter.verify();
+}
+
 export async function sendAdminEmail(
   to: string,
   subject: string,
@@ -19,7 +28,7 @@ export async function sendAdminEmail(
   html: string,
 ): Promise<void> {
   await transporter.sendMail({
-    from: `"Mentr by Paprly" <${config.emailUser}>`,
+    from: FROM,
     to,
     subject,
     text,
@@ -35,7 +44,7 @@ export async function sendOtpEmail(
   const action = purpose === "signup" ? "complete your signup" : "log in";
 
   await transporter.sendMail({
-    from: `"Mentr by Paprly" <${config.emailUser}>`,
+    from: FROM,
     to,
     subject: `${code} is your Mentr by Paprly verification code`,
     text: `Your Mentr by Paprly verification code is ${code}. Use it to ${action}. It expires in ${config.otp.expiryMinutes} minutes. If you didn't request this, ignore this email.`,

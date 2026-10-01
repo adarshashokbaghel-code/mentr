@@ -82,7 +82,7 @@ See [open-source page](https://www.mentr.in/open-source) for the full public fea
 
 - Node.js 20+ (repo developed on Node 24)
 - A MongoDB instance (local `mongod`, Docker, or [MongoDB Atlas](https://www.mongodb.com/atlas))
-- A Gmail account with an [App Password](https://support.google.com/accounts/answer/185833) for sending OTP emails
+- An SMTP mailbox for sending OTP emails (defaults to Titan; set `SMTP_HOST`/`SMTP_PORT` for others, e.g. Gmail with an [App Password](https://support.google.com/accounts/answer/185833))
 
 ### Setup
 
