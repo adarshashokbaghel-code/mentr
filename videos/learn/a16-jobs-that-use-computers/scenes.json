@@ -1,0 +1,151 @@
+{
+  "id": "A16",
+  "title": "Jobs That Use Computers",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "CS · Computers in Our World",
+  "slug": "a16-jobs-that-use-computers",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a16-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you built your very first program. You planned it, tested it, and fixed the bugs. And that finished all of Unit three. Amazing work!", "caption": "Unit 3 · Building With Blocks · done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today, we're starting a brand new unit. Unit four. It's called, Computers in Our World. Welcome aboard!", "caption": "Unit 4 · Computers in Our World", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one is all about, Jobs That Use Computers.", "caption": "Chapter 1 · Jobs That Use Computers", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Have you ever wondered who makes the games you play, or the cartoons you watch? Let's find out!", "caption": "Who makes your games and cartoons?", "focus": "wonder", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "meera",
+      "visual": "a16-hook",
+      "beats": [
+        { "vo": "Meet Meera. She's nine years old, and she loves drawing, and making up stories.", "caption": "Meet Meera. She loves drawing & stories", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "On Sunday, Meera plays a game on the tablet. Then she watches her favourite cartoon. At the chai stall, Papa pays by scanning a code on his phone. And they use a maps app, to find the new park.", "caption": "Game · Cartoon · Phone payment · Maps", "focus": "day", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "So here's a question. Who made all of these things? Think about it.", "caption": "Who made all of these? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Real people did! People who use computers in their jobs. And today, you'll meet four of them.", "caption": "Real people, using computers at work!", "focus": "people", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "jobs",
+      "visual": "a16-jobs",
+      "beats": [
+        { "vo": "Lots of people use computers to do their jobs. Today's four are, a game developer, an app developer, an animator, and a robotics engineer.", "caption": "Game dev · App dev · Animator · Robots", "focus": "four", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Developer is just a big word for a builder. Someone who builds things, using a computer. Like games, or apps.", "caption": "Developer = someone who builds with computers", "focus": "builder" }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "a16-game",
+      "beats": [
+        { "vo": "First up, the game developer. A game developer builds video games. The levels, the characters, and the rules. They decide how high the hero can jump, and what happens when you grab a coin.", "caption": "Game developer: levels · characters · rules", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "In a coin game, a game developer might tell the computer, if touching coin, then change score by one.", "caption": "\"if touching coin then change score by 1\"", "focus": "code", "sfx": "chime", "sfxAt": 0.75 },
+        { "vo": "Wait a minute! That's an if block, which makes a choice. And score is a variable, a box that holds a number. You learned both of those in Unit three!", "caption": "An if-block + a variable. You know these!", "focus": "ideas", "sfx": "pop", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "app",
+      "visual": "a16-app",
+      "beats": [
+        { "vo": "Next, the app developer. An app developer builds apps for phones and tablets. Every little app on a phone was built by people, one step at a time.", "caption": "App developer: apps for phones & tablets", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Remember the maps app that found the park? App developers and engineers built that. You type where you want to go, and it shows you the way.", "caption": "Maps app: built by app developers", "focus": "maps" },
+        { "vo": "And the app Papa used at the chai stall? That's a U P I payment app. App developers built it too, so paying takes just one scan!", "caption": "UPI payment app: one scan to pay", "focus": "upi", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "animator",
+      "visual": "a16-anim",
+      "beats": [
+        { "vo": "Then there's the animator. An animator uses computers to make cartoons, and moving pictures. Think of your favourite cartoon. Every jump, and every smile, was made by an animator.", "caption": "Animator: makes cartoons on computers", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "How do cartoons move? The animator tells the computer, move the character a little, again and again. Each picture is a tiny bit different. Play them fast, and it looks like magic!", "caption": "Move a little, again and again → motion!", "focus": "frames", "sfx": "whoosh", "sfxAt": 0.7 },
+        { "vo": "Now, remember Meera, who loves drawing and stories? Which job might suit her best? Think!", "caption": "Meera loves drawing. Which job suits her?", "focus": "ask", "pause": 1.8 },
+        { "vo": "An animator! Drawing, plus stories, plus a computer, makes cartoons.", "caption": "Animator! Drawing + stories = cartoons", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "robot",
+      "visual": "a16-robot",
+      "beats": [
+        { "vo": "And last, the robotics engineer. A robotics engineer builds robots, and writes the steps that tell them what to do.", "caption": "Robotics engineer: builds robots", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "For a robot in a big warehouse, the steps might be, pick up the box. Turn around. Put down the box.", "caption": "Pick up box → Turn → Put down box", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Step by step instructions. Sound familiar? It's an algorithm! Robots can't guess, just like Robo in Unit two. They follow the algorithms that people write.", "caption": "Robots follow algorithms people write", "focus": "algo", "sfx": "chime", "sfxAt": 0.35 }
+      ]
+    },
+    {
+      "id": "tools",
+      "visual": "a16-tools",
+      "beats": [
+        { "vo": "Here's the coolest part. You already know the tools these people use!", "caption": "You already know their tools!", "focus": "intro", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Algorithms, step by step instructions, from Unit two. Blocks, variables, and if blocks, from Unit three. Real developers use these same ideas, every single day. So when you snapped blocks together, you were working just like them!", "caption": "Algorithms · Blocks · Variables · If-blocks", "focus": "list", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "match",
+      "visual": "a16-match",
+      "beats": [
+        { "vo": "Let's play, match it! Three jobs, and three things they might tell a computer. Which goes with which? Pause, and match them.", "caption": "Match each job to what it tells a computer", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.1, "pause": 2.2 },
+        { "vo": "Move the character a little each frame? That's the animator. Touching a coin adds to the score? The game developer. Pick up the box and turn? The robotics engineer. Great matching!", "caption": "Animator · Game developer · Robotics engineer", "focus": "answer", "sfx": "success", "sfxAt": 0.9 }
+      ]
+    },
+    {
+      "id": "practice",
+      "visual": "a16-practice",
+      "beats": [
+        { "vo": "Now, you might think, these jobs are only for geniuses. But here's a secret. Nobody is born knowing how to code.", "caption": "Nobody is born knowing how to code", "focus": "genius" },
+        { "vo": "Coding is like cricket. The first time you held a bat, you probably missed the ball! But you practised a little, often, and you got better and better.", "caption": "Like cricket: practise a little, often", "focus": "cricket", "sfx": "pop", "sfxAt": 0.8 },
+        { "vo": "So, true or false? Only adults can learn to code. Hmm. What do you think?", "caption": "True or false: only adults can code?", "focus": "ask", "pause": 1.8 },
+        { "vo": "False! Kids can code too. You've been coding all through Unit three. You're already a coder, champ!", "caption": "False! Kids can code. You already do!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a16-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Name one job that uses computers, and one thing that person might tell a computer to do. You can pause, and try it on paper.", "caption": "Name a job + one thing it tells a computer", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. A game developer might tell the computer, if the player touches a coin, add one to the score. Did you pick a different job? Wonderful!", "caption": "Game dev: touch a coin → add 1 to score", "focus": "answer", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a16-recap",
+      "beats": [
+        { "vo": "Let's remember. Games, apps, cartoons, and robots are made by people using computers.", "caption": "People use computers to make games & apps", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Developers use algorithms and blocks, just like you!", "caption": "Developers use algorithms & blocks", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "You don't need to be a genius. Practise a little, often.", "caption": "No genius needed: practise often", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And kids can learn to code too, not only adults.", "caption": "Kids can code, not only adults!", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit four, done! Welcome to Computers in Our World, champ.", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

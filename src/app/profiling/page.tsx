@@ -787,9 +787,10 @@ function ProfilingContent() {
         <div className="mx-auto flex h-11 w-full max-w-[760px] items-center justify-between gap-3 px-4 sm:px-6">
           <Link
             href="/dashboard"
-            className="text-xs font-semibold text-muted transition hover:text-ink"
+            className="inline-flex items-center gap-1 text-xs font-semibold text-muted transition hover:text-ink"
           >
-            ← Dashboard
+            <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
+            Dashboard
           </Link>
           {saveFlash && (
             <span className="text-xs font-semibold text-sage">{saveFlash}</span>

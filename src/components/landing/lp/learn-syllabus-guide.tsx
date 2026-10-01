@@ -13,7 +13,7 @@ import {
   type SyllabusUnit,
 } from "@/lib/learn-syllabus-doc";
 import { cn } from "@/lib/utils";
-import { ChevronDown, Download } from "lucide-react";
+import { ArrowLeft, ChevronDown, Download } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { SyllabusDownloadButton } from "@/components/learn/syllabus-download-button";
@@ -204,8 +204,12 @@ export function LearnSyllabusGuide() {
   return (
     <div className={cn(LEARN_SHELL, "py-10 sm:py-14")}>
       <div className="print:hidden mb-8 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/learn#curriculum" className="text-sm font-semibold text-coral hover:underline">
-          ← Back to Learn
+        <Link
+          href="/learn#curriculum"
+          className="inline-flex items-center gap-1 text-sm font-semibold text-coral hover:underline"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden />
+          Back to Learn
         </Link>
         <div className="flex flex-wrap gap-2">
           <SyllabusDownloadButton

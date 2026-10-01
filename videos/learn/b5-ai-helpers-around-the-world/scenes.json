@@ -1,0 +1,144 @@
+{
+  "id": "B5",
+  "title": "AI Helpers Around the World",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "AI · What Is AI?",
+  "slug": "b5-ai-helpers-around-the-world",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b5-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned that AI can make mistakes. Like calling a dog a muffin! So for important things, we always check with a grown-up.", "caption": "Last time: AI can be wrong. Check with a person!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five. It's the last chapter of Unit one, What Is AI? And it's all about AI helpers, around the world!", "caption": "Chapter 5 · AI Helpers Around the World", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "So pack your bags, champ. We're going on a little trip, to see how AI helps people, every single day.", "caption": "Let's see how AI helps people every day!", "focus": "trip", "sfx": "pop", "sfxAt": 0.4, "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "meera",
+      "visual": "b5-hook",
+      "beats": [
+        { "vo": "Meet Meera. She lives in Chennai, she loves cricket, and she speaks Tamil.", "caption": "Meet Meera from Chennai. She speaks Tamil.", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "One day, a new family moves in next door. Their son is called Arjun. He's just come from Lucknow, and he speaks Hindi.", "caption": "New neighbour Arjun speaks Hindi", "focus": "arjun", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Meera runs over with her bat, and says in Tamil, come, let's play cricket! But Arjun just blinks. He doesn't understand a single word.", "caption": "\"Vaa, cricket vilaiyaadalaam!\" Arjun is lost", "focus": "try", "pause": 0.5 },
+        { "vo": "Hmm. Meera really wants a new friend. How could these two understand each other? Think about it.", "caption": "How can they understand each other? Think!", "focus": "ask", "pause": 2.0 }
+      ]
+    },
+    {
+      "id": "translate",
+      "visual": "b5-translate",
+      "beats": [
+        { "vo": "Meera's appa has an idea. He opens a translation app on his phone. And Meera speaks into it, in Tamil.", "caption": "Appa opens a translation app", "focus": "app", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Then the app says the very same words, in Hindi! Aao, cricket khelein! Arjun grins, and grabs the ball. Game on!", "caption": "It says it in Hindi: \"Aao, cricket khelein!\"", "focus": "turn", "sfx": "success", "sfxAt": 0.35 },
+        { "vo": "That's called translation. Translation means changing words from one language to another. Like Tamil to Hindi, or English to Bengali.", "caption": "Translation: words from one language to another", "focus": "define", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "So how does the app know? It isn't magic. The AI learned patterns, from millions of sentences that people had already translated. But remember last time? It can still make funny mistakes.", "caption": "Not magic: it learned patterns from examples", "focus": "how" }
+      ]
+    },
+    {
+      "id": "map",
+      "visual": "b5-map",
+      "beats": [
+        { "vo": "On Sunday, Meera's family drives to nani's house. It's far away, on the other side of the city.", "caption": "Sunday trip to nani's house!", "focus": "trip", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Amma opens a map app. It shows the road to take, like a line drawn just for them. Finding the way like this is called navigation.", "caption": "Map app = navigation: finding the way", "focus": "route", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Oh! The app warns them. Traffic jam ahead! It has noticed lots of cars moving slowly on that road. So it finds another way.", "caption": "It warns about a traffic jam ahead", "focus": "traffic", "sfx": "buzz", "sfxAt": 0.15 },
+        { "vo": "And it even talks! Turn left, in two hundred metres. So appa can keep his eyes on the road.", "caption": "\"Turn left in 200 metres.\"", "focus": "speak", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "captions",
+      "visual": "b5-captions",
+      "beats": [
+        { "vo": "At last, they reach nani's house. Nani is watching a cricket match. But nani can't hear very well anymore.", "caption": "Nani can't hear very well", "focus": "nani" },
+        { "vo": "So Meera turns on captions. Captions are words shown on a video, so you can read what people are saying. Now nani can follow every ball!", "caption": "Captions: words on a video to read what is said", "focus": "cc", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "Captions help in a noisy room too. Wheee! There goes the pressure cooker. Nobody can hear the TV now, but everyone can still read it.", "caption": "Captions help in noisy rooms too!", "focus": "noisy", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Hey, look down at the bottom of this video, champ. See those words? Those are captions too!", "caption": "Psst… these words are captions too!", "focus": "look", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "world",
+      "visual": "b5-world",
+      "beats": [
+        { "vo": "Now let's zoom out. All the way out, to the whole wide world!", "caption": "Let's zoom out to the whole world!", "focus": "globe", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "A girl in Japan uses a map app to find her new school. A boy in Brazil watches cartoons with captions. A family in Kenya translates a menu. And in India, you're watching right now!", "caption": "Japan · Brazil · Kenya · India", "focus": "kids", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "It's the same idea everywhere, but in each place's own local language. Konnichiwa! Olá! Jambo! And, namaste!", "caption": "Same idea, in local languages", "focus": "same", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "helper",
+      "visual": "b5-helper",
+      "beats": [
+        { "vo": "So here's a big question. Will AI helpers replace your teachers, or your parents? What do you think?", "caption": "Will AI replace teachers and parents?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Nope! AI helpers are there to help people, not to replace them. The map app showed the way, but appa still drove the car, and decided where to stop for chai.", "caption": "AI helps people. It doesn't replace them.", "focus": "drive", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "The app helped with words, but Meera made the friend. And your teachers and parents still guide you, and make the big decisions. AI just helps.", "caption": "Teachers and parents still guide you", "focus": "people", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "match",
+      "visual": "b5-match",
+      "beats": [
+        { "vo": "Let's play a matching game! Here are three helpers. The map app, captions, and translation.", "caption": "Match the helper to the job!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Which one says, turn left in two hundred metres? Which one shows words on a video? And which one turns Hindi into Tamil? Pause, and match them.", "caption": "Which helper does which job?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Turn left? That's the map app. Words on a video? Captions. And Hindi into Tamil? Translation! Well done, champ.", "caption": "Map: directions · Captions: words · Translate", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "trip",
+      "visual": "b5-trip",
+      "beats": [
+        { "vo": "One more, a bit harder. Meera's family visits a new city. They see a sign in a language they can't read. And they need to find their hotel. Which two helpers should they use? Think!", "caption": "Read a strange sign, then find the hotel?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Translation, to read the sign. And the map app, to find the hotel. Two helpers, working together!", "caption": "Translation for the sign + map for the hotel", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b5-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "How could translation AI help two children who speak different languages? Pause the video, and try it on paper.", "caption": "How can translation AI help two children?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. It can turn one child's words into the other child's language. So they can understand each other, talk, and play together. Just like Meera and Arjun! Brilliant.", "caption": "It turns words into the other child's language", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b5-recap",
+      "beats": [
+        { "vo": "Let's remember. Translation AI helps people who speak different languages.", "caption": "Translation: across languages", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Map AI helps people find their way.", "caption": "Map apps: find the way", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Captions help people read what is said.", "caption": "Captions: read what is said", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And AI is a helper. It doesn't replace people.", "caption": "AI helps. It doesn't replace people.", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means all of Unit one is complete! You know what AI is, where to find it, when it goes wrong, and how it helps the world. I'm so proud of you, champ!", "caption": "Chapter 5 done · Unit 1 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

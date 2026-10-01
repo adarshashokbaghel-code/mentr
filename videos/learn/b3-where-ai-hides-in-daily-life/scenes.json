@@ -1,0 +1,144 @@
+{
+  "id": "B3",
+  "title": "Where AI Hides in Daily Life",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "AI · What Is AI?",
+  "slug": "b3-where-ai-hides-in-daily-life",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b3-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so glad you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned about fixed rules and learning. A torch just follows its switch. But AI changes what it does, after seeing lots of examples.", "caption": "Last time: fixed rules vs learning", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of What Is AI. It's called, Where AI Hides in Daily Life.", "caption": "Chapter 3 · Where AI Hides in Daily Life", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Here's a fun secret. AI is hiding all around you. At home, in phones, even on the road! So grab your detective hat. Let's go on an AI hunt!", "caption": "AI is hiding everywhere. Let's go hunting!", "focus": "hunt", "sfx": "pop", "sfxAt": 0.7, "pause": 0.3 }
+      ]
+    },
+    {
+      "id": "tara",
+      "visual": "b3-hook",
+      "beats": [
+        { "vo": "Meet Anaya. She's ten, she loves cricket, and she lives in Pune. And on the shelf in her living room sits Tara, the family's voice helper.", "caption": "Meet Anaya, and Tara the voice helper", "focus": "meet", "sfx": "pop", "sfxAt": 0.75 },
+        { "vo": "One Saturday morning, Anaya calls out, Tara, play my favourite song!", "caption": "\"Tara, play my favourite song!\"", "focus": "ask" },
+        { "vo": "And the song starts playing! Anaya dances around the room.", "caption": "The song starts playing!", "focus": "plays", "sfx": "success", "sfxAt": 0.15 },
+        { "vo": "But wait. How did Tara know what Anaya said? Tara doesn't have ears like us. Think about it for a moment.", "caption": "How did Tara understand Anaya? Think!", "focus": "wonder", "pause": 2.0 },
+        { "vo": "Here's the secret. Tara is a voice assistant, and it uses AI. While it was being made, it learned from millions of voice examples. So now it listens to the sounds, guesses your words from patterns, and tries to answer.", "caption": "Tara guesses your words from patterns", "focus": "guess", "sfx": "chime", "sfxAt": 0.1 },
+        { "vo": "And that smiley face on Tara? It's just lights. Tara isn't alive, and it isn't magic. It's a clever guesser, made by people.", "caption": "Not alive. Not magic. A clever guesser!", "focus": "notalive", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b3-define",
+      "beats": [
+        { "vo": "So, what is an AI helper? An AI helper is a gadget, or an app, that guesses or suggests things, using patterns it learned from lots of examples.", "caption": "AI helper = guesses or suggests from patterns", "focus": "name", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "That gives us our detective clue. If something is guessing, or suggesting, it's probably AI. If it does the exact same thing every time, it's probably a simple program.", "caption": "Guessing or suggesting? Probably AI!", "focus": "clue", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "photos",
+      "visual": "b3-photos",
+      "beats": [
+        { "vo": "Let's start hunting. That evening, Nani asks, Anaya, can you find the photos of our dog, Laddoo?", "caption": "Nani: \"Find the photos of Laddoo!\"", "focus": "ask" },
+        { "vo": "There are thousands of photos on the phone! So Anaya types one word in the search box. Dog. And whoosh! Only the dog photos pop up.", "caption": "Type \"dog\" → only the dog photos appear!", "focus": "search", "sfx": "whoosh", "sfxAt": 0.7 },
+        { "vo": "But nobody wrote the word dog on each photo. So how did the phone know?", "caption": "Nobody named each photo. How did it know?", "focus": "how", "pause": 1.8 },
+        { "vo": "That's photo search, and it uses AI. It learned what dogs look like from many, many dog pictures. Floppy ears, a wet nose, a waggy tail. Now it spots that pattern in your photos too.", "caption": "AI learned what dogs look like from examples", "focus": "learned", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "filter",
+      "visual": "b3-filter",
+      "beats": [
+        { "vo": "Next, Anaya tries a funny photo filter. Bunny ears! And look, they sit right on top of her head. When she moves, the ears move with her.", "caption": "Bunny ears sit right on her head!", "focus": "ears", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "How? The filter's AI learned the pattern of a face. Two eyes, a nose, and a mouth, in that shape. Once it finds your face, it knows exactly where the ears should go.", "caption": "AI finds the pattern of a face", "focus": "face", "sfx": "tick", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "videos",
+      "visual": "b3-videos",
+      "beats": [
+        { "vo": "After dinner, Anaya watches a cricket video. What a catch on the boundary!", "caption": "Anaya watches a cricket video", "focus": "watch" },
+        { "vo": "When it ends, the app shows a row that says, You might like. And what's in it? More cricket videos!", "caption": "\"You might like…\" More cricket!", "focus": "suggest", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "That's called a recommendation. A suggestion made from patterns in what you watched before. Anaya watches lots of cricket, so the AI guesses she'll like more cricket.", "caption": "Recommendation = a suggestion from patterns", "focus": "pattern", "sfx": "chime", "sfxAt": 0.15 }
+      ]
+    },
+    {
+      "id": "maps",
+      "visual": "b3-maps",
+      "beats": [
+        { "vo": "On Sunday, the family drives to Nani's sister's house. Papa opens a map app on his phone.", "caption": "Sunday drive with a map app", "focus": "drive" },
+        { "vo": "One road on the map is red. Hmm. Is that road painted red? No! So what does red mean?", "caption": "Why is that road red on the map?", "focus": "red", "pause": 1.8 },
+        { "vo": "Red means the traffic is slow there. The app learns this from many phones moving on the roads. When lots of phones crawl along slowly, that road turns red.", "caption": "Red = slow traffic, learned from many phones", "focus": "slow" },
+        { "vo": "So the app suggests a faster road. Guessing, and suggesting, again. That's AI!", "caption": "It suggests a faster road. That's AI!", "focus": "faster", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "notai",
+      "visual": "b3-notai",
+      "beats": [
+        { "vo": "Now careful, detective. Not everything that looks smart is AI. Anaya's little brother, Kabir, has a toy car that flashes blue and red lights, and beeps.", "caption": "Kabir's toy car flashes lights and beeps", "focus": "toy", "sfx": "pop", "sfxAt": 0.7 },
+        { "vo": "It looks very clever! But is it AI? Use our detective clue.", "caption": "Is the blinking toy car AI? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "No, it isn't! It flashes the same lights, the same way, every single time. It never learns from examples. It just follows a fixed rule.", "caption": "Not AI! Same lights every time: a fixed rule", "focus": "answer", "sfx": "buzz", "sfxAt": 0.05 },
+        { "vo": "Same with a doorbell. Press it, it rings. Always. So remember, shiny, or noisy, or full of lights doesn't mean AI. Learning from examples does.", "caption": "Shiny or noisy isn't AI. Learning is!", "focus": "doorbell" }
+      ]
+    },
+    {
+      "id": "hunt",
+      "visual": "b3-hunt",
+      "beats": [
+        { "vo": "Detective game! Here's Anaya's kitchen. There's a torch, a fridge light, a clock, and a voice speaker. Which one uses AI? Pause, and think.", "caption": "Which one in the kitchen uses AI?", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.05, "pause": 2.2 },
+        { "vo": "The voice speaker! It guesses your words. The torch, the fridge light, and the clock just follow fixed rules. Great detective work!", "caption": "The voice speaker! The rest follow fixed rules", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b3-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Name one AI helper you have seen, and say what it tries to do. Pause the video, and write it on paper.", "caption": "Name one AI helper and what it tries to do", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here are two answers. A voice assistant tries to understand what you say, and answer. A map app tries to show which roads have heavy traffic. Did you think of another one? Brilliant!", "caption": "Voice helper: understands you · Map: traffic", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b3-recap",
+      "beats": [
+        { "vo": "Let's remember. Voice helpers, photo search, video suggestions, and map traffic all use AI.", "caption": "Voice · Photos · Videos · Maps use AI", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "AI helpers guess, or suggest, from patterns.", "caption": "AI guesses or suggests from patterns", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "A blinking toy car is not AI. It follows a fixed rule.", "caption": "A blinking toy is NOT AI", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And the detective question? Does it learn from examples?", "caption": "Ask: does it learn from examples?", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You're a real AI detective now, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

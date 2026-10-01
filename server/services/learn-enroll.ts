@@ -148,7 +148,15 @@ export async function withStarterProgress(
   }
   const progress = ensureProgressShape(user.learn.starter.progress);
   await mutator(progress);
-  user.learn.starter.progress = progress;
+  const progressDoc = user.learn.starter.progress as {
+    set?: (value: unknown) => void;
+  };
+  if (progressDoc && typeof progressDoc.set === "function") {
+    progressDoc.set(progress);
+  } else {
+    user.learn.starter.progress = progress as typeof user.learn.starter.progress;
+  }
+  user.markModified("learn.starter.progress");
   user.markModified("learn");
   await user.save();
   return {

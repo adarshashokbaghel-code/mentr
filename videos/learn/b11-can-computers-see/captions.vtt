@@ -1,0 +1,173 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:04.810
+Welcome back, champ!
+
+2
+00:00:04.810 --> 00:00:19.560
+Unit 2 · How Machines Learn · done!
+
+3
+00:00:19.560 --> 00:00:29.680
+Unit 3 · AI That Sees, Hears, and Talks
+
+4
+00:00:29.680 --> 00:00:34.380
+Chapter 1 · Can Computers See?
+
+5
+00:00:34.380 --> 00:00:46.230
+No eyeballs! So how can it see?
+
+6
+00:00:46.230 --> 00:00:58.890
+Meet Kabir and his cat, Coco
+
+7
+00:00:58.890 --> 00:01:06.610
+Kabir types "cat" in the photo app
+
+8
+00:01:06.610 --> 00:01:16.500
+Whoosh! Every cat photo, found!
+
+9
+00:01:16.500 --> 00:01:24.410
+How did the phone know? Think!
+
+10
+00:01:24.410 --> 00:01:34.840
+But one Coco photo was missing…
+
+11
+00:01:34.840 --> 00:01:44.030
+Let's zoom in on Coco's photo…
+
+12
+00:01:44.030 --> 00:01:57.280
+Tiny coloured dots called PIXELS
+
+13
+00:01:57.280 --> 00:02:09.810
+The computer sees dots, not a cat
+
+14
+00:02:09.810 --> 00:02:18.030
+It looks for PATTERNS
+
+15
+00:02:18.030 --> 00:02:30.410
+Clues: Edges · Shapes · Colours
+
+16
+00:02:30.410 --> 00:02:45.290
+Every ball is round. That's a pattern!
+
+17
+00:02:45.290 --> 00:02:55.860
+Pointy ears + whiskers → maybe a cat!
+
+18
+00:02:55.860 --> 00:03:07.660
+It learns patterns from many examples
+
+19
+00:03:07.660 --> 00:03:22.180
+Many bottle photos → tall shape + cap
+
+20
+00:03:22.180 --> 00:03:32.410
+Computer vision = matching patterns in pixels
+
+21
+00:03:32.410 --> 00:03:39.620
+Not magic. Not alive. Just patterns!
+
+22
+00:03:39.620 --> 00:03:51.540
+Object spotting: what's on Kabir's table?
+
+23
+00:03:51.540 --> 00:04:08.920
+Round → ball · Cap → bottle · Pages → book
+
+24
+00:04:08.920 --> 00:04:19.760
+Face unlock matches your face's pattern
+
+25
+00:04:19.760 --> 00:04:26.880
+Photo apps group dogs, beaches, and cats
+
+26
+00:04:26.880 --> 00:04:37.160
+Some apps can name a flower from a photo
+
+27
+00:04:37.160 --> 00:04:43.820
+Computers can be wrong!
+
+28
+00:04:43.820 --> 00:04:51.140
+Dark light: the edges disappear
+
+29
+00:04:51.140 --> 00:05:01.800
+Odd angle or tiny: a ball becomes a dot
+
+30
+00:05:01.800 --> 00:05:11.000
+Partly hidden: only half the pattern
+
+31
+00:05:11.000 --> 00:05:24.720
+Why did the app miss this Coco photo?
+
+32
+00:05:24.720 --> 00:05:35.250
+Coco was hidden. Not enough pattern!
+
+33
+00:05:35.250 --> 00:05:57.670
+Which photo is HARDEST to spot the cat in?
+
+34
+00:05:57.670 --> 00:06:09.370
+Tiny + dark = hardest to spot!
+
+35
+00:06:09.370 --> 00:06:13.320
+Your turn: practice check
+
+36
+00:06:13.320 --> 00:06:25.160
+Why miss a black cat on a black sofa?
+
+37
+00:06:25.160 --> 00:06:37.740
+Same colour → no edges → no cat shape
+
+38
+00:06:37.740 --> 00:06:44.410
+Computers see pixels, not things
+
+39
+00:06:44.410 --> 00:06:49.170
+Seeing = matching patterns
+
+40
+00:06:49.170 --> 00:06:52.690
+Patterns are learned from many examples
+
+41
+00:06:52.690 --> 00:06:58.480
+Dark, tiny, or hidden things can fool it
+
+42
+00:06:58.480 --> 00:07:04.390
+Chapter 1 done!
+
+43
+00:07:04.390 --> 00:07:11.190
+Next: Quiz · Tap Finish

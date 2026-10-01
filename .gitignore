@@ -45,6 +45,8 @@ next-env.d.ts
 .venv-video/
 videos/**/_build/
 videos/**/voiceover.wav
+# Render masters stay on disk. The site plays public/learn/lessons/*.mp4.
+videos/**/*.mp4
 
 # Background remover ONNX + ORT wasm (fetched by scripts/fetch-bg-models.mjs)
 /public/models/**/*.onnx

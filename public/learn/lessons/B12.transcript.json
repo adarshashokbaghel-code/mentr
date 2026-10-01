@@ -1,0 +1,332 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.61,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready to use your ears today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.61,
+      "end": 15.55,
+      "caption": "Last time: pixels \u2192 patterns \u2192 seeing!",
+      "text": "Last time, we found out how computers see. They look at tiny pixels, and match patterns. Remember Coco, hiding behind the school bag?",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.55,
+      "end": 23.39,
+      "caption": "Chapter 2 \u00b7 Can Computers Listen?",
+      "text": "Today is chapter two of AI That Sees, Hears, and Talks. And the question is, can computers listen?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.39,
+      "end": 31.31,
+      "caption": "No ears! So how can it hear?",
+      "text": "Hmm. A computer has no ears either! So how can it hear you? Let's find out.",
+      "scene": "open",
+      "focus": "ears"
+    },
+    {
+      "start": 31.31,
+      "end": 39.74,
+      "caption": "Meet Riya and her smart speaker",
+      "text": "Meet Riya. Her family has a little smart speaker in the living room. It's round, and it glows when it's listening.",
+      "scene": "riya",
+      "focus": "meet"
+    },
+    {
+      "start": 39.74,
+      "end": 49.3,
+      "caption": "\"Hey helper, play my favourite song!\"",
+      "text": "Riya says, Hey helper, play my favourite song! The speaker lights up, and the music starts. Riya starts dancing!",
+      "scene": "riya",
+      "focus": "song"
+    },
+    {
+      "start": 49.3,
+      "end": 60.48,
+      "caption": "Aarav says \"Play music\"\u2026 nothing!",
+      "text": "Then her little brother, Aarav, tries. He says, play music. And nothing happens. The speaker just sits there, silent.",
+      "scene": "riya",
+      "focus": "brother"
+    },
+    {
+      "start": 60.48,
+      "end": 71.09,
+      "caption": "How did it hear Riya? Why not Aarav?",
+      "text": "Two questions for you. How did the speaker understand Riya? And why did it ignore Aarav? Think about it.",
+      "scene": "riya",
+      "focus": "why"
+    },
+    {
+      "start": 71.09,
+      "end": 76.51,
+      "caption": "How a computer listens: 3 steps",
+      "text": "Let's start with how a computer listens. It happens in three quick steps.",
+      "scene": "listen",
+      "focus": "intro"
+    },
+    {
+      "start": 76.51,
+      "end": 85.65,
+      "caption": "1 \u00b7 It hears the sound of your voice",
+      "text": "Step one. It hears the sound. A tiny microphone inside catches your voice, as it travels through the air in waves.",
+      "scene": "listen",
+      "focus": "hear"
+    },
+    {
+      "start": 85.65,
+      "end": 101.98,
+      "caption": "2 \u00b7 Sound \u2192 words: speech recognition",
+      "text": "Step two. It turns that sound into words. Play. My. Favourite. Song. This is called speech recognition. That's when a computer turns spoken sounds into written words.",
+      "scene": "listen",
+      "focus": "words"
+    },
+    {
+      "start": 101.98,
+      "end": 111.87,
+      "caption": "3 \u00b7 Words \u2192 patterns \u2192 what you want",
+      "text": "Step three. It matches those words to patterns, to work out what you want. Play, plus song, means, start the music!",
+      "scene": "listen",
+      "focus": "match"
+    },
+    {
+      "start": 111.87,
+      "end": 125.31,
+      "caption": "It learned from thousands of examples",
+      "text": "But how does it know those patterns? Just like seeing, it learns from examples. It has heard thousands and thousands of people say things like, play a song, set a timer, or what's the weather.",
+      "scene": "learn",
+      "focus": "examples"
+    },
+    {
+      "start": 125.31,
+      "end": 140.18,
+      "caption": "Many voices, many accents, more examples",
+      "text": "Kids' voices, grown-up voices, fast talkers, slow talkers, and lots of different accents. An accent is the special way people from a place say their words. The more examples it hears, the better it gets.",
+      "scene": "learn",
+      "focus": "voices"
+    },
+    {
+      "start": 140.18,
+      "end": 150.4,
+      "caption": "Not mind reading. Just patterns!",
+      "text": "So it's not reading your mind, and it isn't alive. It doesn't really understand like you do. It's matching sounds and words to patterns it learned.",
+      "scene": "learn",
+      "focus": "notmagic"
+    },
+    {
+      "start": 150.4,
+      "end": 156.39,
+      "caption": "A listening helper = a VOICE ASSISTANT",
+      "text": "A helper that listens and answers is called a voice assistant. You might have one at home!",
+      "scene": "helpers",
+      "focus": "intro"
+    },
+    {
+      "start": 156.39,
+      "end": 163.27,
+      "caption": "Smart speakers: songs and weather",
+      "text": "Smart speakers, like Riya's, can play your favourite songs, or tell you if it will be sunny or rainy today.",
+      "scene": "helpers",
+      "focus": "speaker"
+    },
+    {
+      "start": 163.27,
+      "end": 169.24,
+      "caption": "Phone helpers: set alarms, call nani",
+      "text": "Phone helpers can set an alarm for school, or call nani, without you pressing a single button.",
+      "scene": "helpers",
+      "focus": "phone"
+    },
+    {
+      "start": 169.24,
+      "end": 176.92,
+      "caption": "Voice typing: talk, and words appear",
+      "text": "And voice typing writes your words on the screen, while you talk! Great for sending a message when your hands are busy.",
+      "scene": "helpers",
+      "focus": "typing"
+    },
+    {
+      "start": 176.92,
+      "end": 183.91,
+      "caption": "Aarav forgot the WAKE WORD!",
+      "text": "Now, back to Aarav. Why did the speaker ignore him? He forgot the wake word!",
+      "scene": "wake",
+      "focus": "name"
+    },
+    {
+      "start": 183.91,
+      "end": 194.45,
+      "caption": "Wake word = \"Start listening now!\"",
+      "text": "A wake word is a special word or name, that tells the helper, start listening now. Riya said, Hey helper, first. That woke it up!",
+      "scene": "wake",
+      "focus": "meaning"
+    },
+    {
+      "start": 194.45,
+      "end": 202.69,
+      "caption": "Like calling a friend's name first",
+      "text": "It's like calling your friend's name across the playground, before you tell them something. Without it, they don't know you're talking to them.",
+      "scene": "wake",
+      "focus": "like"
+    },
+    {
+      "start": 202.69,
+      "end": 210.98,
+      "caption": "\"Hey helper, play music!\" It works!",
+      "text": "So Aarav tries again. Hey helper, play music! And there it goes. Dance party!",
+      "scene": "wake",
+      "focus": "fixed"
+    },
+    {
+      "start": 210.98,
+      "end": 214.69,
+      "caption": "Some things make listening harder",
+      "text": "But even with the wake word, some things make listening harder.",
+      "scene": "harder",
+      "focus": "intro"
+    },
+    {
+      "start": 214.69,
+      "end": 224.93,
+      "caption": "Noise: TV, mixer, busy market",
+      "text": "Noise is a big one. A loud TV, a whirring mixer, or a busy market. The helper hears your voice all jumbled up with other sounds.",
+      "scene": "harder",
+      "focus": "noise"
+    },
+    {
+      "start": 224.93,
+      "end": 234.16,
+      "caption": "Whispers, mumbles, and talking too fast",
+      "text": "Whispers and mumbling are another. The sound is too soft, or too unclear. And talking super fast can mix up the words too.",
+      "scene": "harder",
+      "focus": "whisper"
+    },
+    {
+      "start": 234.16,
+      "end": 244.53,
+      "caption": "\"Set a timer\" \u2192 \"Set a tiger?\" Oops!",
+      "text": "Then it makes mistakes! You mumble, set a timer, and it hears, set a tiger! Oh no. Computers can get it wrong.",
+      "scene": "harder",
+      "focus": "oops"
+    },
+    {
+      "start": 244.53,
+      "end": 261.41,
+      "caption": "The mixer is loud. What should Riya do?",
+      "text": "Here's Riya again. Mum's mixer is running. Whirr! Riya softly says, hey helper, weather? And the speaker gets confused. What should Riya do? Think.",
+      "scene": "mixer",
+      "focus": "ask"
+    },
+    {
+      "start": 261.41,
+      "end": 274.8,
+      "caption": "Wait for quiet, then ask clearly and fully",
+      "text": "Wait for the mixer to stop. Then say it clearly, and in full. Hey helper, what's the weather today? Now the helper understands. Sunny, with a little breeze!",
+      "scene": "mixer",
+      "focus": "answer"
+    },
+    {
+      "start": 274.8,
+      "end": 292.39,
+      "caption": "Which voice command is good?",
+      "text": "Let's play, good command or poor command! Umm, do that thing. Hey helper, set a timer for ten minutes. Do the stuff from yesterday. Which one is good? Pause, and think.",
+      "scene": "commands",
+      "focus": "ask"
+    },
+    {
+      "start": 292.39,
+      "end": 307.88,
+      "caption": "Good = wake word + one short, clear ask",
+      "text": "Hey helper, set a timer for ten minutes! It has the wake word, and one short, exact ask. The others are too unclear. Do what thing? What stuff? The helper can't guess.",
+      "scene": "commands",
+      "focus": "answer"
+    },
+    {
+      "start": 307.88,
+      "end": 317.78,
+      "caption": "Wake word \u00b7 Speak clearly \u00b7 Quiet room",
+      "text": "So here are your tips. Say the wake word first. Speak clearly, in a quieter room. And ask one thing at a time.",
+      "scene": "commands",
+      "focus": "tips"
+    },
+    {
+      "start": 317.78,
+      "end": 321.73,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 321.73,
+      "end": 330.8,
+      "caption": "Write one clear command for a voice helper",
+      "text": "Write one clear command you could say to a voice helper. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 330.8,
+      "end": 343.0,
+      "caption": "\"Hey helper, what's the weather in Delhi?\"",
+      "text": "Here's one. Hey helper, what's the weather in Delhi today? Wake word first, then one short, clear ask. Did yours have both? Super!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 343.0,
+      "end": 349.18,
+      "caption": "Listening = sound \u2192 words \u2192 patterns",
+      "text": "Let's remember what we learned. Listening means sound, then words, then patterns.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 349.18,
+      "end": 352.8,
+      "caption": "Say the wake word first",
+      "text": "Say the wake word first, so the helper starts listening.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 352.8,
+      "end": 355.21,
+      "caption": "Speak clearly in a quiet room",
+      "text": "Speak clearly, in a quiet room.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 355.21,
+      "end": 359.84,
+      "caption": "Noise and whispers make it harder",
+      "text": "Because noise and whispers make it harder, and computers can make mistakes.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 359.84,
+      "end": 369.55,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! Now you know how computers listen, champ. Next time you talk to a helper, remember Riya and Aarav.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 369.55,
+      "end": 376.35,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

@@ -1,0 +1,340 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.7,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so excited about today.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.7,
+      "end": 17.29,
+      "caption": "Unit 1 \u00b7 What Is AI? \u00b7 done!",
+      "text": "You finished all of Unit one! You learned what AI is, and you met AI helpers that translate, find the way, and show captions. Give yourself a big pat on the back!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.29,
+      "end": 22.51,
+      "caption": "Unit 2 \u00b7 How Machines Learn",
+      "text": "Today, we're starting Unit two. It's called, How Machines Learn.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 22.51,
+      "end": 28.26,
+      "caption": "Chapter 1 \u00b7 Teaching a Computer Like a Puppy",
+      "text": "And chapter one has a funny name. Teaching a computer, like teaching a puppy!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 28.26,
+      "end": 35.38,
+      "caption": "A puppy and a computer? Let's find out!",
+      "text": "A puppy, and a computer? What could they possibly have in common? Let's find out.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 35.38,
+      "end": 44.5,
+      "caption": "Meet Kabir and his puppy, Laddoo!",
+      "text": "Meet Kabir. And this is his brand new puppy. Her name is Laddoo, because she's round, and golden, and sweet!",
+      "scene": "laddoo",
+      "focus": "meet"
+    },
+    {
+      "start": 44.5,
+      "end": 51.79,
+      "caption": "Kabir says it once: \"Sit!\"",
+      "text": "Kabir wants to teach Laddoo to sit. So he says it once, nice and loud. Sit!",
+      "scene": "laddoo",
+      "focus": "sit"
+    },
+    {
+      "start": 51.79,
+      "end": 58.98,
+      "caption": "Laddoo just chases her tail!",
+      "text": "And Laddoo wags her tail, and chases it, round and round and round. Not sitting at all!",
+      "scene": "laddoo",
+      "focus": "spin"
+    },
+    {
+      "start": 58.98,
+      "end": 67.11,
+      "caption": "Why didn't Laddoo learn? Think!",
+      "text": "Why didn't Laddoo learn? Kabir did tell her, didn't he? Think about it.",
+      "scene": "laddoo",
+      "focus": "why"
+    },
+    {
+      "start": 67.11,
+      "end": 75.19,
+      "caption": "Puppies need many tries, not just one",
+      "text": "Here's the thing. A puppy doesn't learn from just one try. She needs to be shown, again and again.",
+      "scene": "laddoo",
+      "focus": "because"
+    },
+    {
+      "start": 75.19,
+      "end": 84.11,
+      "caption": "1 \u00b7 Show: gently help her sit",
+      "text": "So Kabir tries a smarter way. He says sit, and gently helps Laddoo sit down. That shows her what sit means.",
+      "scene": "teach",
+      "focus": "show"
+    },
+    {
+      "start": 84.11,
+      "end": 94.11,
+      "caption": "2 \u00b7 Praise: \"Good dog!\" and a treat",
+      "text": "The moment she sits, Kabir says, good dog! And gives her a treat. Yum! Now Laddoo knows, that was right.",
+      "scene": "teach",
+      "focus": "praise"
+    },
+    {
+      "start": 94.11,
+      "end": 106.79,
+      "caption": "3 \u00b7 Practise: many tries, then she's got it!",
+      "text": "Then they practise. Again tomorrow, and the day after that. Many, many tries. And one day, Kabir says sit, and Laddoo sits, every single time!",
+      "scene": "teach",
+      "focus": "practise"
+    },
+    {
+      "start": 106.79,
+      "end": 112.33,
+      "caption": "We teach a computer in a similar way!",
+      "text": "Now, here's the cool part. We teach a computer in a very similar way!",
+      "scene": "computer",
+      "focus": "intro"
+    },
+    {
+      "start": 112.33,
+      "end": 121.38,
+      "caption": "Show the AI lots and lots of cat photos",
+      "text": "Say we want an AI to know what a cat looks like. We don't just tell it once. We show it lots and lots of cat photos.",
+      "scene": "computer",
+      "focus": "show"
+    },
+    {
+      "start": 121.38,
+      "end": 132.48,
+      "caption": "Right? Say yes! Wrong? Say no.",
+      "text": "Then it starts guessing. When it's right, we tell it, yes! When it's wrong, we tell it, no. Just like Kabir saying, good dog.",
+      "scene": "computer",
+      "focus": "guess"
+    },
+    {
+      "start": 132.48,
+      "end": 143.44,
+      "caption": "More practice \u2192 better guesses. Not magic!",
+      "text": "And with more practice, its guesses get better and better. It isn't magic, and it isn't alive. It's finding patterns, in the examples we show it.",
+      "scene": "computer",
+      "focus": "better"
+    },
+    {
+      "start": 143.44,
+      "end": 151.33,
+      "caption": "Photo + name sticker = a labelled example",
+      "text": "Each cat photo has its name stuck on it, like a little sticker that says, cat. That's called a labelled example.",
+      "scene": "labels",
+      "focus": "label"
+    },
+    {
+      "start": 151.33,
+      "end": 158.46,
+      "caption": "Lots of labelled examples = TRAINING",
+      "text": "And showing an AI lots and lots of labelled examples has a special name. It's called, training.",
+      "scene": "labels",
+      "focus": "train"
+    },
+    {
+      "start": 158.46,
+      "end": 166.41,
+      "caption": "Not a train ride! Teaching with examples.",
+      "text": "No, not a train ride! Choo choo! Training just means teaching, with lots of examples.",
+      "scene": "labels",
+      "focus": "notrain"
+    },
+    {
+      "start": 166.41,
+      "end": 173.71,
+      "caption": "You be the teacher! Say yes or no.",
+      "text": "Let's play. You be the teacher! The AI will guess, and you say yes, or no.",
+      "scene": "feedback",
+      "focus": "intro"
+    },
+    {
+      "start": 173.71,
+      "end": 189.02,
+      "caption": "The AI says \"cat\" both times. Yes or no?",
+      "text": "Here's a stripy cat. The AI says, cat. And here's a dog. The AI says, cat. What do you tell it each time? Pause, and think.",
+      "scene": "feedback",
+      "focus": "ask"
+    },
+    {
+      "start": 189.02,
+      "end": 201.41,
+      "caption": "Cat: yes! Dog: no! That helps it learn.",
+      "text": "Stripy cat? Yes, well done! The dog? No, try again! Your yes and no help the AI learn, just like praise helps Laddoo.",
+      "scene": "feedback",
+      "focus": "answer"
+    },
+    {
+      "start": 201.41,
+      "end": 209.96,
+      "caption": "Train with just ONE orange cat photo",
+      "text": "Now, how many photos should we show? Let's try just one. One photo of an orange cat, labelled cat.",
+      "scene": "one",
+      "focus": "setup"
+    },
+    {
+      "start": 209.96,
+      "end": 221.7,
+      "caption": "Black cat? The AI says \"not a cat\"! Why?",
+      "text": "Then we show it a black cat. And the AI says, not a cat! Oh no. What went wrong? Think.",
+      "scene": "one",
+      "focus": "test"
+    },
+    {
+      "start": 221.7,
+      "end": 232.05,
+      "caption": "It thinks all cats are orange! One isn't enough",
+      "text": "With only one photo, the AI thought orange was part of being a cat! So it thinks all cats are orange. One example is never enough.",
+      "scene": "one",
+      "focus": "why"
+    },
+    {
+      "start": 232.05,
+      "end": 238.96,
+      "caption": "Black \u00b7 White \u00b7 Stripy \u00b7 Big \u00b7 Tiny",
+      "text": "But real cats come in so many kinds. Black, white, stripy, big, and tiny!",
+      "scene": "many",
+      "focus": "kinds"
+    },
+    {
+      "start": 238.96,
+      "end": 251.24,
+      "caption": "Many cats \u2192 it learns what all cats share",
+      "text": "When the AI sees lots of different cats, it learns what all cats share. Pointy ears, whiskers, and a long tail. Now it can spot a cat it has never seen before!",
+      "scene": "many",
+      "focus": "share"
+    },
+    {
+      "start": 251.24,
+      "end": 269.88,
+      "caption": "Which set teaches \"cat\" best?",
+      "text": "Quick quiz! Which set teaches cat best? One orange cat. Five photos of the same cat. A hundred dog photos. Or a hundred photos of many different cats? Pause, and pick.",
+      "scene": "many",
+      "focus": "ask"
+    },
+    {
+      "start": 269.88,
+      "end": 279.56,
+      "caption": "100 different cats wins!",
+      "text": "A hundred photos of many different cats! Lots of examples, and lots of kinds. And the dog photos won't teach cat at all!",
+      "scene": "many",
+      "focus": "answer"
+    },
+    {
+      "start": 279.56,
+      "end": 290.39,
+      "caption": "Step 1 \u00b7 TRAIN: lots of labelled examples",
+      "text": "So, how do we know if the AI really learned? We do two steps. Step one, train. Show it lots of labelled examples.",
+      "scene": "test",
+      "focus": "train"
+    },
+    {
+      "start": 290.39,
+      "end": 299.43,
+      "caption": "Step 2 \u00b7 TEST: a new photo, see its guess",
+      "text": "Step two, test. Give it a brand new photo, one it has never seen, with no label. And see what it guesses.",
+      "scene": "test",
+      "focus": "test"
+    },
+    {
+      "start": 299.43,
+      "end": 314.51,
+      "caption": "Wrong? Train with more, then test again",
+      "text": "Wrong guess? No problem. Show it more examples, and test again. First train, then test. Just like Laddoo. If she forgets, Kabir practises with her some more.",
+      "scene": "test",
+      "focus": "again"
+    },
+    {
+      "start": 314.51,
+      "end": 318.46,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 318.46,
+      "end": 331.95,
+      "caption": "Teach \"bus\": 1 photo or 100? Why?",
+      "text": "Kabir wants to teach an AI what a bus is. Should he show one photo, or a hundred? And why? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 331.95,
+      "end": 351.41,
+      "caption": "100! Many kinds \u2192 it learns what buses share",
+      "text": "A hundred photos! Buses come in many colours and sizes. Red city buses, yellow school buses, even double-deckers. With lots of labelled bus photos, the AI learns what all buses share. Not just one bus. Super thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 351.41,
+      "end": 356.08,
+      "caption": "Training = showing lots of examples",
+      "text": "Let's remember. Training means showing lots of examples.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 356.08,
+      "end": 359.03,
+      "caption": "Labelled examples have their names on",
+      "text": "Labelled examples have their names stuck on them.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 359.03,
+      "end": 363.42,
+      "caption": "One example is not enough",
+      "text": "One example is not enough. Remember the orange cat?",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 363.42,
+      "end": 366.13,
+      "caption": "First train, then test",
+      "text": "And first we train, then we test.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 366.13,
+      "end": 374.87,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit two, done! You just learned how computers learn, champ. Laddoo is very proud of you!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 374.87,
+      "end": 381.67,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

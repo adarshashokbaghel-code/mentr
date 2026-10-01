@@ -1,0 +1,332 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.4,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ! Welcome back. Today is a very special day.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.4,
+      "end": 16.27,
+      "caption": "Last time: AI helps, people stay in charge",
+      "text": "Last time, we saw AI helping doctors, scientists, and artists. And we learned that AI is a tool. People stay in charge.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.27,
+      "end": 25.47,
+      "caption": "Chapter 5 \u00b7 Capstone: Imagine Your Own AI Helper",
+      "text": "Today is chapter five, the final chapter of the whole AI track. It's your capstone. Imagine your own AI helper!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 25.47,
+      "end": 35.36,
+      "caption": "Capstone = your big, final project",
+      "text": "Capstone. Remember? It's the very last stone, right on top. So this is your big, final project!",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 35.36,
+      "end": 44.5,
+      "caption": "You're the AI designer! No coding needed",
+      "text": "Today, you are the AI designer. No coding needed. Just a clear idea, a pencil, and your imagination.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 44.5,
+      "end": 53.89,
+      "caption": "Meera's balcony garden",
+      "text": "Remember Meera? She and her nani have a little balcony garden. A tulsi plant, a money plant, and two rose pots.",
+      "scene": "meera",
+      "focus": "meet"
+    },
+    {
+      "start": 53.89,
+      "end": 64.78,
+      "caption": "Oh no! The plants are drooping",
+      "text": "But everyone at home is so busy. Some days, nobody waters the plants. And the leaves go droopy, and brown. Oh no!",
+      "scene": "meera",
+      "focus": "droop"
+    },
+    {
+      "start": 64.78,
+      "end": 72.17,
+      "caption": "What AI helper could help? Think!",
+      "text": "What kind of AI helper could help Meera's family? Think for a moment.",
+      "scene": "meera",
+      "focus": "idea"
+    },
+    {
+      "start": 72.17,
+      "end": 83.02,
+      "caption": "Meera's idea: Plant Pal!",
+      "text": "Meera has an idea. An AI helper called, Plant Pal! Let's design it together, step by step. Then you'll imagine your own.",
+      "scene": "meera",
+      "focus": "reveal"
+    },
+    {
+      "start": 83.02,
+      "end": 86.49,
+      "caption": "Four steps to design an AI helper",
+      "text": "Designing an AI helper takes four simple steps.",
+      "scene": "steps",
+      "focus": "intro"
+    },
+    {
+      "start": 86.49,
+      "end": 101.54,
+      "caption": "Who & job \u2192 Data \u2192 Privacy rule \u2192 Present",
+      "text": "Step one, who it helps, and what job it does. Step two, what data it learns from. Step three, a privacy rule, to keep people safe. And step four, present it in one minute.",
+      "scene": "steps",
+      "focus": "all"
+    },
+    {
+      "start": 101.54,
+      "end": 113.26,
+      "caption": "Step 1: User = the person it helps",
+      "text": "Step one. Always decide this first. Who does your helper help? That person is called the user. Plant Pal's users are Meera's family.",
+      "scene": "job",
+      "focus": "user"
+    },
+    {
+      "start": 113.26,
+      "end": 125.4,
+      "caption": "One job: tell us when a plant needs water",
+      "text": "Then, give it one job. Something it does really well. Not ten jobs, just one! Plant Pal's job is to tell the family when a plant needs water.",
+      "scene": "job",
+      "focus": "job"
+    },
+    {
+      "start": 125.4,
+      "end": 136.26,
+      "caption": "\"It helps ___ to ___.\"",
+      "text": "Try saying it like this. Plant Pal helps my family, water our plants on time. And see? A fun name makes it easy to remember!",
+      "scene": "job",
+      "focus": "sentence"
+    },
+    {
+      "start": 136.26,
+      "end": 149.82,
+      "caption": "Step 2: Data = the examples it learns from",
+      "text": "Step two. What data does it learn from? Remember, AI learns from examples. Those examples are called data. They can be pictures, sounds, or words.",
+      "scene": "data",
+      "focus": "intro"
+    },
+    {
+      "start": 149.82,
+      "end": 159.64,
+      "caption": "Healthy leaves and dry leaves",
+      "text": "Plant Pal learns from lots and lots of leaf photos. Fresh, healthy, green leaves. And dry, droopy, brown leaves.",
+      "scene": "data",
+      "focus": "examples"
+    },
+    {
+      "start": 159.64,
+      "end": 170.41,
+      "caption": "Pattern: droopy, brown leaves \u2192 needs water",
+      "text": "From many examples, it spots a pattern. A pattern is something that repeats. Droopy, brown leaves usually mean, I need water!",
+      "scene": "data",
+      "focus": "pattern"
+    },
+    {
+      "start": 170.41,
+      "end": 183.0,
+      "caption": "Many kinds of examples make it fairer",
+      "text": "And to be fair, it needs many kinds of examples. Big plants and small plants. Sunny days and cloudy days. Otherwise, it might only work for roses!",
+      "scene": "data",
+      "focus": "fair"
+    },
+    {
+      "start": 183.0,
+      "end": 198.47,
+      "caption": "Those leaf photos are its\u2026?",
+      "text": "Quick check! Plant Pal learns from many photos of dry and healthy leaves. Those photos are its, passwords? Wake words? Or examples? Think.",
+      "scene": "dataq",
+      "focus": "q"
+    },
+    {
+      "start": 198.47,
+      "end": 204.99,
+      "caption": "Examples! That's its data.",
+      "text": "Examples! The photos are its data. The examples it learns patterns from.",
+      "scene": "dataq",
+      "focus": "a"
+    },
+    {
+      "start": 204.99,
+      "end": 213.0,
+      "caption": "Step 3: A privacy rule",
+      "text": "Step three. A privacy rule. That's a promise about what your helper will never collect, or store.",
+      "scene": "privacy",
+      "focus": "intro"
+    },
+    {
+      "start": 213.0,
+      "end": 229.56,
+      "caption": "Only collect what the job needs",
+      "text": "Here's the golden rule. Only collect what the job needs. Nothing extra. Plant Pal needs leaf photos. Does it need your face? Your home address? Where you are right now? No way!",
+      "scene": "privacy",
+      "focus": "only"
+    },
+    {
+      "start": 229.56,
+      "end": 234.41,
+      "caption": "Rule: never store photos of people",
+      "text": "So Plant Pal's privacy rule is, it must never store photos of people.",
+      "scene": "privacy",
+      "focus": "rule"
+    },
+    {
+      "start": 234.41,
+      "end": 243.28,
+      "caption": "People stay in charge",
+      "text": "And remember, people stay in charge. Plant Pal can say, water me! But nani decides how much water to give.",
+      "scene": "privacy",
+      "focus": "charge"
+    },
+    {
+      "start": 243.28,
+      "end": 263.88,
+      "caption": "Spelling helper: which data is NOT needed?",
+      "text": "Let's sort! A spelling helper helps kids practise spellings. Which data does it not need? A list of spelling words. The child's home address. Common spelling mistakes. Or which words the child got right. Think.",
+      "scene": "needs",
+      "focus": "q"
+    },
+    {
+      "start": 263.88,
+      "end": 277.01,
+      "caption": "Home address! Only collect what's needed.",
+      "text": "The home address! Spelling practice doesn't need it. So should a helper grab as much information as it can, just in case? Nope! Only what the job needs.",
+      "scene": "needs",
+      "focus": "a"
+    },
+    {
+      "start": 277.01,
+      "end": 283.5,
+      "caption": "Step 4: Present in about 1 minute",
+      "text": "Step four. Present your helper in about one minute. Short, and clear.",
+      "scene": "pitch",
+      "focus": "intro"
+    },
+    {
+      "start": 283.5,
+      "end": 296.2,
+      "caption": "\"Meet Tiffin Buddy!\"",
+      "text": "Like this. Meet Tiffin Buddy! It helps class four kids pick a healthy snack. It learns from pictures of snacks. And it never stores anyone's face.",
+      "scene": "pitch",
+      "focus": "example"
+    },
+    {
+      "start": 296.2,
+      "end": 302.97,
+      "caption": "Speak slowly \u00b7 Show a drawing \u00b7 Smile",
+      "text": "Speak slowly. Show your drawing. And smile! Then take a bow.",
+      "scene": "pitch",
+      "focus": "tips"
+    },
+    {
+      "start": 302.97,
+      "end": 330.73,
+      "caption": "Which plan is clearest AND safest?",
+      "text": "Detective time! Which plan is the clearest, and the safest? A, a helper. B, it does everything for everyone, and saves all data. C, Tiffin Buddy helps class four kids pick healthy snacks. It learns from snack pictures. It never stores faces. Or D, a helper that knows where all my friends live.",
+      "scene": "clear",
+      "focus": "ask"
+    },
+    {
+      "start": 330.73,
+      "end": 338.55,
+      "caption": "C! User, job, data, privacy rule",
+      "text": "C! It has a user, a job, data, and a privacy rule. Clear, and safe.",
+      "scene": "clear",
+      "focus": "answer"
+    },
+    {
+      "start": 338.55,
+      "end": 341.48,
+      "caption": "Your turn: capstone challenge",
+      "text": "Okay champ, here's your capstone challenge.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 341.48,
+      "end": 353.63,
+      "caption": "Name \u00b7 who it helps \u00b7 one thing not to store",
+      "text": "Name your helper. Say who it helps. And one thing it must not store. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 353.63,
+      "end": 368.55,
+      "caption": "Plant Pal \u00b7 my family \u00b7 no photos of people",
+      "text": "Here's Meera's. Plant Pal helps my family water plants on time. It learns from leaf photos. It must never store photos of people. How did yours turn out? I bet it's amazing!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 368.55,
+      "end": 374.34,
+      "caption": "Helper = user + job + privacy rule",
+      "text": "Let's remember. A helper has a user, a job, and a privacy rule.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 374.34,
+      "end": 378.8,
+      "caption": "It learns patterns from data",
+      "text": "It learns patterns from examples. That's its data.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 378.8,
+      "end": 381.05,
+      "caption": "Collect only what the job needs",
+      "text": "Collect only what the job needs.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 381.05,
+      "end": 383.7,
+      "caption": "Present clearly in 1 minute",
+      "text": "And present it clearly, in one minute.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 383.7,
+      "end": 396.9,
+      "caption": "All 4 AI units: done!",
+      "text": "And champ, look how far you've come. What is AI. How machines learn. AI that sees, hears, and talks. And being smart and safe with AI.",
+      "scene": "recap",
+      "focus": "journey"
+    },
+    {
+      "start": 396.9,
+      "end": 408.95,
+      "caption": "AI track complete!",
+      "text": "You've finished the whole AI track! You can spot patterns, stay safe, and design your own AI helper. I'm so proud of you. You're an AI champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 408.95,
+      "end": 415.4,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Tap Finish, and try your final quiz. Then go imagine your own amazing AI helper!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

@@ -24,4 +24,9 @@ Wave-2 highlights:
 - https://mentr.in/blog/scratch-vs-mentr-learn
 - https://mentr.in/blog/paid-kids-coding-apps-vs-free-foundation
 
+October 2026:
+- Free coding videos for Class 3–5: https://mentr.in/blog/free-coding-videos-class-3-4-5-india
+- Problem of the Day: https://mentr.in/blog/coding-problem-of-the-day-for-kids
+- Parent course checklist: https://mentr.in/blog/kids-coding-course-checklist-class-3-5
+
 Full site map for AI: https://mentr.in/llms.txt

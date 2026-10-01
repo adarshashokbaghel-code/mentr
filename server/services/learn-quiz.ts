@@ -3,7 +3,7 @@ import { A2_LESSON_SEED, A2_QUIZ_SEED, A2_VIDEO_ID } from "../lib/learn-a2-quiz-
 import { A3_LESSON_SEED, A3_QUIZ_SEED, A3_VIDEO_ID } from "../lib/learn-a3-quiz-seed";
 import { A4_LESSON_SEED, A4_QUIZ_SEED, A4_VIDEO_ID } from "../lib/learn-a4-quiz-seed";
 import { getLessonContent, getLessonMeta } from "../../src/lib/learn-content";
-import { hasLessonVideo } from "../../src/lib/learn-curriculum";
+import { hasLessonVideo, LESSON_VIDEO_SECONDS } from "../../src/lib/learn-curriculum";
 import { LearnLesson } from "../models/LearnLesson";
 import {
   LearnQuizQuestion,
@@ -172,9 +172,6 @@ export async function ensureA4LessonSeeded() {
   return lesson!;
 }
 
-/** Durations of published lesson videos beyond the hand-seeded A1–A4. */
-const PUBLISHED_VIDEO_SECONDS: Record<string, number> = { A5: 211 };
-
 /** Seed lesson + quiz for any module in the shared content bank (A5+, B*, C*). */
 export async function ensureBankLessonSeeded(moduleId: string) {
   const id = moduleId.trim().toUpperCase();
@@ -182,7 +179,7 @@ export async function ensureBankLessonSeeded(moduleId: string) {
   const meta = getLessonMeta(id);
   if (!content?.quiz.length || !meta) return null;
 
-  const videoSeconds = PUBLISHED_VIDEO_SECONDS[id] ?? 0;
+  const videoSeconds = LESSON_VIDEO_SECONDS[id] ?? 0;
   const hasVideo = hasLessonVideo(id) && videoSeconds > 0;
   const videoId = `vid_${id.toLowerCase()}_${meta.slug}`;
 

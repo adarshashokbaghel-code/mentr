@@ -1,0 +1,154 @@
+{
+  "id": "C19",
+  "title": "Breaking Big Problems Into Small Ones",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "Math · Problem Solver",
+  "slug": "c19-breaking-big-problems-into-small-ones",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c19-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we worked backwards. Mina had nine stickers after losing three. So we added the three back, and found she started with twelve.", "caption": "Last time: work backwards · 9 + 3 = 12", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four of Problem Solver. It's called, Breaking Big Problems Into Small Ones.", "caption": "Chapter 4 · Breaking Big Problems Into Small Ones", "focus": "chapter", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "Have you ever looked at a job and thought, whoa, that's way too big? Hmm. Today, I'll show you a trick that makes big jobs feel small.", "caption": "Ever felt a job was way too big?", "focus": "big", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "room",
+      "visual": "c19-hook",
+      "beats": [
+        { "vo": "Meet Riya. It's Sunday morning, and Mum calls out, Riya, Nani is coming this evening. Please clean your room!", "caption": "\"Riya, please clean your room!\"", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Riya looks around. Toys on the floor. Books everywhere. And the bed is one big, crumpled mess. Oh no!", "caption": "Toys, books, a messy bed… Oh no!", "focus": "mess", "pause": 0.5 },
+        { "vo": "Riya just stands there. Where do I even start? It all feels too big. What would you do, if you were Riya? Think for a moment.", "caption": "Where do I even start? What would you do?", "focus": "stuck", "pause": 2.0 },
+        { "vo": "Here's a smart idea. Don't clean the whole room at once. Split it into small jobs. Pick up the toys. Put the books on the shelf. Make the bed.", "caption": "Toys · Books · Bed: three small jobs", "focus": "split", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Now Riya does one small job at a time. Toys, done. Books, done. Bed, done. And look! The whole room is clean, and it didn't even feel hard.", "caption": "One small job at a time → clean room!", "focus": "done", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c19-define",
+      "beats": [
+        { "vo": "What Riya did has a special name. It's called decomposition.", "caption": "That trick is called DECOMPOSITION", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "De, com, po, si, tion. A long word, but the meaning is simple. Decomposition means breaking a big problem into smaller, easier parts.", "caption": "Breaking a big problem into small parts", "focus": "word" },
+        { "vo": "Think about eating a roti. You can't stuff the whole roti in your mouth at once! You tear it into small pieces, and eat one bite at a time. Yum.", "caption": "A roti: one small bite at a time", "focus": "roti", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Each piece is a small task. A small task is one simple job that you can finish on its own.", "caption": "Small task = one job you can finish", "focus": "small" }
+      ]
+    },
+    {
+      "id": "bag",
+      "visual": "c19-bag",
+      "beats": [
+        { "vo": "That night, Riya has another big job. Packing her school bag for Monday.", "caption": "Big job: pack the school bag", "focus": "big", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "What small jobs are hiding inside it? Her books, her water bottle, her lunch box, and her pencil box.", "caption": "Books · Bottle · Lunch box · Pencil box", "focus": "parts", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Now let's put them in order. One, check today's timetable. Two, put in those books. Three, fill the water bottle. Four, add the lunch box.", "caption": "Timetable → Books → Bottle → Lunch box", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Why check the timetable first? Because it tells you which books you need! So after you break a job, you also decide the order. What comes first, next, and last.", "caption": "Then decide: first, next, last", "focus": "why" }
+      ]
+    },
+    {
+      "id": "nimbu",
+      "visual": "c19-nimbu",
+      "beats": [
+        { "vo": "Let's go back to the evening. Nani arrives, and it's so hot! Riya decides to make her some nimbu pani.", "caption": "Nani is here! Riya makes nimbu pani", "focus": "intro", "sfx": "pop" },
+        { "vo": "First, squeeze the lemons. Then, add water. Next, stir in some sugar. And last, pour it into a glass, and serve.", "caption": "Squeeze → Water → Sugar → Pour & serve", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Could Riya pour and serve it first? No way! There's nothing to pour yet. Serving comes last, because you can only serve it after it's made.", "caption": "Serve first? Nothing to pour! Serve LAST", "focus": "oops", "sfx": "buzz", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "add",
+      "visual": "c19-add",
+      "beats": [
+        { "vo": "Nani loves maths puzzles. She asks Riya, what is twenty three plus forty five?", "caption": "Nani's puzzle: what is 23 + 45?", "focus": "ask", "pause": 0.5 },
+        { "vo": "Riya breaks each number into tens and ones. Twenty three is twenty and three. Forty five is forty and five.", "caption": "23 = 20 + 3 · 45 = 40 + 5", "focus": "split" },
+        { "vo": "Add the tens. Twenty plus forty equals sixty. Now add the ones. Three plus five equals eight.", "caption": "Tens: 20 + 40 = 60 · Ones: 3 + 5 = 8", "focus": "tens", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Put them together. Sixty and eight make sixty eight! Two small sums were easier than one big one.", "caption": "60 + 8 = 68!", "focus": "total", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "times",
+      "visual": "c19-times",
+      "beats": [
+        { "vo": "Nani smiles, and asks a trickier one. What is six times fourteen? Hmm. That's a big one to do in your head.", "caption": "What is 6 × 14?", "focus": "ask", "pause": 0.5 },
+        { "vo": "So let's break fourteen into ten and four. Look at the dots. Six rows of ten, and six rows of four.", "caption": "Break it up: 14 = 10 + 4", "focus": "split", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Six times ten is sixty. And six times four is twenty four.", "caption": "6 × 10 = 60 · 6 × 4 = 24", "focus": "parts" },
+        { "vo": "Now add them up. Sixty plus twenty four equals eighty four. So, six times fourteen is eighty four!", "caption": "60 + 24 = 84. So 6 × 14 = 84!", "focus": "total", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "code",
+      "visual": "c19-code",
+      "beats": [
+        { "vo": "Riya's cousin Arjun is a coder. He makes games! And guess what? He uses decomposition every single day.", "caption": "Coders use decomposition every day!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Arjun wants to make a cricket game. That's huge! So he breaks it into parts. Draw the pitch. Make the bat swing. Move the ball. Keep the score.", "caption": "Pitch · Bat · Ball · Score", "focus": "parts", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Each part gets its own step by step plan. And a step by step plan to solve a problem is called an algorithm. Big programs are built from small, clear parts, in the right order.", "caption": "Algorithms are built in small parts too", "focus": "algo", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "odd",
+      "visual": "c19-odd",
+      "beats": [
+        { "vo": "Game time! Remember Riya's room? Which of these is NOT a small part of cleaning a room? Pick up toys. Make the bed. Fly a kite. Put books on the shelf. Think!", "caption": "Which is NOT part of cleaning a room?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Fly a kite! It's lots of fun, but it doesn't help clean the room at all. Every small part should help finish the big job.", "caption": "Fly a kite doesn't help clean the room!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "party",
+      "visual": "c19-party",
+      "beats": [
+        { "vo": "One more! Riya's class is having a party. Here are the steps, all mixed up. Buy snacks. Set up, and enjoy. Pick a date. Make a guest list. What's the best order? Pause, and think.", "caption": "Party steps are mixed up! What's the order?", "focus": "ask", "sfx": "whoosh", "sfxAt": 0.1, "pause": 2.2 },
+        { "vo": "First, pick a date. Then, make a guest list, so you know who's coming. Next, buy snacks. And last, set up, and enjoy! Plan first, then shop, then party.", "caption": "Date → Guest list → Snacks → Set up & enjoy", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c19-check",
+      "beats": [
+        { "vo": "Okay champ, your turn. Here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Tomorrow is Nani's birthday, and Riya wants to make her a card. Break, make a birthday card, into four small steps, in order. Pause the video, and try it on paper.", "caption": "Break 'make a birthday card' into 4 steps", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one way. One, fold the paper. Two, draw a picture on the front. Three, write a message inside. Four, sign your name, and give it. Folding comes first, because you need a card before you can draw on it! Brilliant!", "caption": "Fold → Draw → Write → Sign & give", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c19-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Decomposition means breaking a big job into small jobs.", "caption": "Big job → small jobs", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Then, put the small jobs in order.", "caption": "Put the small jobs in order", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Do one small job at a time, just like eating a roti, bite by bite.", "caption": "Do one small job at a time", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And algorithms, and even big sums, are built in parts too.", "caption": "Algorithms & sums are built in parts", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! You can break big jobs into small steps, just like Riya. Super work, champ!", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

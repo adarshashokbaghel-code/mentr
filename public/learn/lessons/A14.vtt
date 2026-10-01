@@ -1,0 +1,189 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.170
+Welcome back, champ!
+
+2
+00:00:05.170 --> 00:00:16.680
+Last time: variable boxes · set · change
+
+3
+00:00:16.680 --> 00:00:21.850
+Unit 3 · Building With Blocks
+
+4
+00:00:21.850 --> 00:00:24.580
+Chapter 4 · Making Choices in Code
+
+5
+00:00:24.580 --> 00:00:37.020
+Can code make choices too?
+
+6
+00:00:37.020 --> 00:00:41.490
+Yes! And you'll teach it how
+
+7
+00:00:41.490 --> 00:00:48.850
+School morning. Dark clouds!
+
+8
+00:00:48.850 --> 00:00:54.580
+"If raining, umbrella. Else, a cap."
+
+9
+00:00:54.580 --> 00:01:03.020
+Remember Unit 2? If-then stories!
+
+10
+00:01:03.020 --> 00:01:11.720
+Not raining. What do you do?
+
+11
+00:01:11.720 --> 00:01:20.450
+Else = otherwise → wear a cap
+
+12
+00:01:20.450 --> 00:01:25.270
+Same thinking, now with blocks!
+
+13
+00:01:25.270 --> 00:01:30.420
+The question is called a CONDITION
+
+14
+00:01:30.420 --> 00:01:40.640
+A question with a yes or no answer
+
+15
+00:01:40.640 --> 00:01:47.460
+Yes = TRUE · No = FALSE
+
+16
+00:01:47.460 --> 00:02:00.270
+If block: inside runs only when TRUE
+
+17
+00:02:00.270 --> 00:02:05.890
+if touching coin then change score by 1
+
+18
+00:02:05.890 --> 00:02:15.430
+Pointy slot = condition · inside = action
+
+19
+00:02:15.430 --> 00:02:25.630
+Touching coin? TRUE → score goes up
+
+20
+00:02:25.630 --> 00:02:39.340
+Missed it? FALSE → nothing happens
+
+21
+00:02:39.340 --> 00:02:46.670
+if touching wall then bounce, else move 10
+
+22
+00:02:46.670 --> 00:03:00.560
+Not touching → FALSE → move 10 steps
+
+23
+00:03:00.560 --> 00:03:08.810
+Touching wall → TRUE → bounce!
+
+24
+00:03:08.810 --> 00:03:20.490
+One question, two paths
+
+25
+00:03:20.490 --> 00:03:30.620
+Game time: True or false?
+
+26
+00:03:30.620 --> 00:03:40.330
+Touching wall? True or false?
+
+27
+00:03:40.330 --> 00:03:44.720
+TRUE! Billu is touching the wall
+
+28
+00:03:44.720 --> 00:03:54.490
+Touching wall? True or false?
+
+29
+00:03:54.490 --> 00:04:03.530
+FALSE! So the else part runs
+
+30
+00:04:03.530 --> 00:04:10.550
+Story: ball touches goal → crowd cheers
+
+31
+00:04:10.550 --> 00:04:24.340
+if touching goal then play cheer sound
+
+32
+00:04:24.340 --> 00:04:37.680
+Dog barks only when it touches the cat?
+
+33
+00:04:37.680 --> 00:04:47.610
+if touching cat then say "Woof!"
+
+34
+00:04:47.610 --> 00:04:53.790
+Tip: one condition at a time
+
+35
+00:04:53.790 --> 00:05:01.570
+Too many questions at once = confusing!
+
+36
+00:05:01.570 --> 00:05:17.290
+One question → one clear answer
+
+37
+00:05:17.290 --> 00:05:21.840
+Your turn: practice check
+
+38
+00:05:21.840 --> 00:05:32.820
+Billu misses the coin. What happens?
+
+39
+00:05:32.820 --> 00:05:44.990
+FALSE, no else → score stays the same
+
+40
+00:05:44.990 --> 00:05:59.430
+Score 4 · jumps over the star · score = ?
+
+41
+00:05:59.430 --> 00:06:06.400
+Still 4! Never touched → FALSE
+
+42
+00:06:06.400 --> 00:06:11.630
+TRUE → the inside blocks run
+
+43
+00:06:11.630 --> 00:06:16.380
+FALSE → the else part runs
+
+44
+00:06:16.380 --> 00:06:20.180
+One condition at a time
+
+45
+00:06:20.180 --> 00:06:24.740
+No else + FALSE = nothing happens
+
+46
+00:06:24.740 --> 00:06:32.430
+Chapter 4 done!
+
+47
+00:06:32.430 --> 00:06:39.230
+Next: Quiz · Tap Finish

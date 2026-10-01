@@ -9,9 +9,12 @@ import {
 import type { LearnEnrollmentDto } from "@/lib/learn-enroll";
 import {
   fetchLearnEnrollment,
+  LEARN_PROGRESS_EVENT,
   readLearnEnrollmentLocal,
 } from "@/lib/learn-enroll";
 import {
+  countChaptersDone,
+  getLearnContinue,
   hasCompletedQuiz,
   hasWatchedVideo,
 } from "@/lib/learn-progress-client";
@@ -23,7 +26,11 @@ import {
   ArrowRight,
   Blocks,
   BookOpen,
+  Bot,
+  Calculator,
   CalendarDays,
+  Laptop,
+  type LucideIcon,
   Check,
   Download,
   Gamepad2,
@@ -37,6 +44,12 @@ import { useEffect, useMemo, useState } from "react";
 import { SyllabusDownloadButton } from "@/components/learn/syllabus-download-button";
 import { hasLessonNotes } from "@/lib/learn-lesson-notes";
 import { downloadLessonNotes } from "@/lib/learn-lesson-notes-pdf";
+
+const TRACK_TAB: Record<LearnTrackId, { Icon: LucideIcon; label: string; color: string }> = {
+  cs: { Icon: Laptop, label: "CS", color: "#ff6a1a" },
+  ai: { Icon: Bot, label: "AI", color: "#7b61d6" },
+  math: { Icon: Calculator, label: "Math", color: "#0d9488" },
+};
 
 function PathSideRail({
   done,
@@ -220,7 +233,7 @@ function PathMobileShortcuts() {
   const potdDone = Boolean(today?.attempted);
 
   return (
-    <div className="mb-6 flex gap-2 overflow-x-auto pb-1 lg:hidden">
+    <div className="-mx-3 mb-6 flex snap-x gap-2 overflow-x-auto px-3 pb-1 lg:hidden">
       <Link
         href={SYLLABUS_VIEW_HREF}
         className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-[#e8e2d8] bg-white px-3.5 py-2 text-[12px] font-extrabold text-[#1c2434]"
@@ -260,15 +273,27 @@ export function LmsPath() {
   const track = LEARN_TRACKS.find((t) => t.id === trackId)!;
 
   useEffect(() => {
-    setEnrollment(readLearnEnrollmentLocal());
-    void fetchLearnEnrollment().then(setEnrollment);
+    function sync() {
+      setEnrollment(readLearnEnrollmentLocal());
+    }
+    sync();
+    void fetchLearnEnrollment().then((remote) => {
+      if (remote) setEnrollment(remote);
+    });
+    window.addEventListener(LEARN_PROGRESS_EVENT, sync);
+    return () => window.removeEventListener(LEARN_PROGRESS_EVENT, sync);
   }, []);
 
   const stats = useMemo(() => {
-    const done = enrollment?.progress?.modulesCompleted?.length ?? 0;
+    const done = countChaptersDone(enrollment);
     const xp = enrollment?.progress?.xp ?? 0;
     return { done, xp, pct: Math.min(100, Math.round((done / 60) * 100)) };
   }, [enrollment]);
+
+  const continueState = useMemo(
+    () => getLearnContinue(enrollment),
+    [enrollment],
+  );
 
   return (
     <div className="w-full pb-8">
@@ -309,13 +334,25 @@ export function LmsPath() {
                   type="button"
                   onClick={() => setTrackId(t.id)}
                   className={cn(
-                    "rounded-xl py-2.5 text-[13px] font-extrabold transition",
+                    "flex items-center justify-center gap-1.5 rounded-xl py-2.5 text-[13px] font-extrabold transition",
                     trackId === t.id
                       ? "bg-white text-[#1c2434] shadow-sm"
                       : "text-[#8a929c] hover:text-[#5a6472]",
                   )}
                 >
-                  {t.id === "cs" ? "CS" : t.id === "ai" ? "AI" : "Math"}
+                  {(() => {
+                    const { Icon, label, color } = TRACK_TAB[t.id];
+                    return (
+                      <>
+                        <Icon
+                          className="size-4 shrink-0"
+                          style={trackId === t.id ? { color } : undefined}
+                          aria-hidden
+                        />
+                        {label}
+                      </>
+                    );
+                  })()}
                 </button>
               ))}
             </div>
@@ -350,27 +387,55 @@ export function LmsPath() {
                     const hasVideo = hasLessonVideo(m.id);
                     const videoDone = hasWatchedVideo(enrollment, m.id);
                     const quizDone = hasCompletedQuiz(enrollment, m.id);
-                    const done = videoDone && quizDone;
+                    const done = videoDone || quizDone;
+                    const isNext =
+                      !continueState.allCaughtUp &&
+                      m.id === continueState.continueId;
 
                     return (
                       <li key={m.id} className="relative flex gap-3 pb-4">
                         <div
                           className={cn(
-                            "relative z-[1] flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-[12px] font-extrabold",
+                            "relative z-[1] flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 text-[13px] font-extrabold",
                             done
-                              ? "border-[#0d9488] bg-[#0d9488] text-white"
-                              : "border-[#ff6a1a] bg-[#fff4e8] text-[#ff6a1a]",
+                              ? "border-[#0d9488] bg-[#0d9488] text-white shadow-[0_0_0_4px_#d8f3ee]"
+                              : isNext
+                                ? "border-[#ff6a1a] bg-[#ff6a1a] text-white shadow-[0_0_0_4px_#ffe4d1]"
+                                : "border-[#ff6a1a] bg-[#fff4e8] text-[#ff6a1a]",
                           )}
                         >
-                          {done ? <Check className="h-4 w-4" /> : idx + 1}
+                          {idx + 1}
                         </div>
 
-                        <div className="flex min-w-0 flex-1 flex-col gap-3 rounded-2xl border border-[#e8e2d8] bg-white p-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+                        <div
+                          className={cn(
+                            "flex min-w-0 flex-1 flex-col gap-3 rounded-2xl border-2 p-3.5 sm:flex-row sm:items-center sm:justify-between sm:gap-4",
+                            done
+                              ? "border-[#0d9488] bg-[#f3fbf8]"
+                              : isNext
+                                ? "border-[#ff6a1a] bg-white"
+                                : "border-[#e8e2d8] bg-white",
+                          )}
+                        >
                           <div className="min-w-0">
-                            <p className="text-[11px] font-bold text-[#a89f91]">
+                            <p
+                              className={cn(
+                                "flex items-center gap-1.5 text-[11px] font-bold",
+                                done ? "text-[#0d9488]" : "text-[#a89f91]",
+                              )}
+                            >
+                              {done ? (
+                                <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                              ) : null}
                               {m.id}
+                              {done ? " · Done" : isNext ? " · Next" : ""}
                             </p>
-                            <p className="mt-0.5 text-[15px] font-extrabold leading-snug text-[#1c2434]">
+                            <p
+                              className={cn(
+                                "mt-0.5 text-[15px] font-extrabold leading-snug",
+                                done ? "text-[#115e59]" : "text-[#1c2434]",
+                              )}
+                            >
                               {m.title}
                             </p>
                           </div>
@@ -380,12 +445,12 @@ export function LmsPath() {
                               href={`/learn/app/lesson/${m.id}?stage=watch`}
                               className={cn(
                                 "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg text-[11px] font-extrabold sm:h-9 sm:w-[4.75rem] sm:flex-none sm:gap-1.5 sm:rounded-xl sm:text-[12px]",
-                                videoDone
+                                videoDone || quizDone
                                   ? "bg-[#e6f7f4] text-[#0d9488]"
                                   : "bg-[#fff4e8] text-[#ff6a1a]",
                               )}
                             >
-                              {videoDone ? (
+                              {videoDone || quizDone ? (
                                 <Check className="h-3.5 w-3.5" />
                               ) : hasVideo ? (
                                 <Play className="h-3.5 w-3.5 fill-current" />
@@ -395,7 +460,7 @@ export function LmsPath() {
                               {hasVideo ? "Video" : "Read"}
                             </Link>
 
-                            {videoDone ? (
+                            {videoDone || quizDone ? (
                               <Link
                                 href={`/learn/app/lesson/${m.id}?stage=quiz`}
                                 className={cn(

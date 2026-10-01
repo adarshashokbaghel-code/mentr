@@ -1,0 +1,364 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 17.46,
+      "caption": "Last time: people who build with computers",
+      "text": "Last time, we met the people who build things with computers. Game makers, animators, robot builders, and app developers, who made the maps and payment apps your family uses.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.46,
+      "end": 24.24,
+      "caption": "Chapter 2 \u00b7 How Apps We Use Actually Work",
+      "text": "Today is chapter two of Computers in Our World. It's called, How Apps We Use Actually Work.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.24,
+      "end": 38.39,
+      "caption": "Every app follows the same 3 steps!",
+      "text": "And here's a fun secret. Every app you have ever used, games, maps, cameras, all of them, follows the same three little steps. By the end of today, you'll spot them everywhere!",
+      "scene": "open",
+      "focus": "secret"
+    },
+    {
+      "start": 38.39,
+      "end": 46.18,
+      "caption": "Sunday trip to India Gate!",
+      "text": "Picture this. It's Sunday evening, and your family is going to India Gate for ice cream. Yum!",
+      "scene": "trip",
+      "focus": "trip"
+    },
+    {
+      "start": 46.18,
+      "end": 52.91,
+      "caption": "Papa isn't sure of the way\u2026",
+      "text": "But Papa isn't sure of the way. Left? Right? Hmm.",
+      "scene": "trip",
+      "focus": "lost"
+    },
+    {
+      "start": 52.91,
+      "end": 57.83,
+      "caption": "You type \"India Gate\" into the maps app",
+      "text": "So you pick up his phone, open the maps app, and type, India Gate.",
+      "scene": "trip",
+      "focus": "type"
+    },
+    {
+      "start": 57.83,
+      "end": 63.0,
+      "caption": "A blue route appears in a second!",
+      "text": "And in a second, a bright blue line appears on the map, showing the whole way there!",
+      "scene": "trip",
+      "focus": "route"
+    },
+    {
+      "start": 63.0,
+      "end": 69.13,
+      "caption": "How did the app know the way? Think!",
+      "text": "How did the app know the way? Think about it for a moment.",
+      "scene": "trip",
+      "focus": "why"
+    },
+    {
+      "start": 69.13,
+      "end": 80.51,
+      "caption": "Give it something \u00b7 It works \u00b7 It shows a result",
+      "text": "It wasn't magic. The app followed three steps. You gave it something. It did some work inside. And then, it showed you a result.",
+      "scene": "trip",
+      "focus": "answer"
+    },
+    {
+      "start": 80.51,
+      "end": 87.22,
+      "caption": "Input \u2192 Process \u2192 Output",
+      "text": "Those three steps have names. Input. Process. And output.",
+      "scene": "ipo",
+      "focus": "name"
+    },
+    {
+      "start": 87.22,
+      "end": 93.57,
+      "caption": "Input: what you GIVE the app",
+      "text": "Input is what you give the app. Like typing a place, tapping a button, or taking a photo.",
+      "scene": "ipo",
+      "focus": "input"
+    },
+    {
+      "start": 93.57,
+      "end": 99.96,
+      "caption": "Process: the work it does INSIDE",
+      "text": "Process is the work the app does inside, where you can't see it. Like finding the best path.",
+      "scene": "ipo",
+      "focus": "process"
+    },
+    {
+      "start": 99.96,
+      "end": 107.67,
+      "caption": "Output: what it SHOWS or SAYS back",
+      "text": "And output is what the app shows, or says, back to you. Like a route, a photo, or a green tick.",
+      "scene": "ipo",
+      "focus": "output"
+    },
+    {
+      "start": 107.67,
+      "end": 114.04,
+      "caption": "Think of the mixie in your kitchen",
+      "text": "Here's an easy way to remember it. Think of the mixie in your kitchen, on a hot summer day.",
+      "scene": "mixie",
+      "focus": "intro"
+    },
+    {
+      "start": 114.04,
+      "end": 128.11,
+      "caption": "Mango & milk \u2192 Blend \u2192 Mango shake!",
+      "text": "You put in mango and milk. That's the input. The mixie whirrs, and blends it all up. That's the process. And out comes a cold mango shake. That's the output!",
+      "scene": "mixie",
+      "focus": "steps"
+    },
+    {
+      "start": 128.11,
+      "end": 136.93,
+      "caption": "In \u2192 Work \u2192 Out. Apps do it too!",
+      "text": "Something goes in, work happens, and something comes out. Apps work the same way, just with information instead of mangoes.",
+      "scene": "mixie",
+      "focus": "rule"
+    },
+    {
+      "start": 136.93,
+      "end": 147.55,
+      "caption": "INPUT: you type \"India Gate\"",
+      "text": "Let's go back to the maps app, and look at each step. First, the input. You typed, India Gate. That's what you gave the app.",
+      "scene": "maps",
+      "focus": "input"
+    },
+    {
+      "start": 147.55,
+      "end": 160.05,
+      "caption": "PROCESS: the app finds a good path",
+      "text": "Next, the process. Inside, the app looks at lots and lots of roads, and works out a good path, from your home to India Gate. Finding the best path is the process.",
+      "scene": "maps",
+      "focus": "process"
+    },
+    {
+      "start": 160.05,
+      "end": 165.94,
+      "caption": "OUTPUT: the route drawn on the map",
+      "text": "And then, the output! The app draws the route on the map, so you can see it.",
+      "scene": "maps",
+      "focus": "output"
+    },
+    {
+      "start": 165.94,
+      "end": 176.71,
+      "caption": "\"Turn left in 200 metres\" is output too!",
+      "text": "As you drive, it even talks to you. Turn left in two hundred metres! That spoken direction is output too, because the app is telling you a result.",
+      "scene": "maps",
+      "focus": "voice"
+    },
+    {
+      "start": 176.71,
+      "end": 184.47,
+      "caption": "Camera INPUT: press the button",
+      "text": "Let's try another app. The camera! You press the round button. That's the input.",
+      "scene": "camera",
+      "focus": "input"
+    },
+    {
+      "start": 184.47,
+      "end": 189.42,
+      "caption": "PROCESS: the app saves the picture",
+      "text": "The app catches the picture, and saves it. That's the process.",
+      "scene": "camera",
+      "focus": "process"
+    },
+    {
+      "start": 189.42,
+      "end": 196.22,
+      "caption": "OUTPUT: the photo on the screen",
+      "text": "And there's your photo, on the screen. Say cheese! That photo is the output.",
+      "scene": "camera",
+      "focus": "output"
+    },
+    {
+      "start": 196.22,
+      "end": 206.08,
+      "caption": "Your favourite app: what goes in and out?",
+      "text": "Now you try. Think of your favourite app. What do you give it? And what does it give back?",
+      "scene": "camera",
+      "focus": "fav"
+    },
+    {
+      "start": 206.08,
+      "end": 212.24,
+      "caption": "Detective time: a quiz app!",
+      "text": "Okay, detective time! Here's a quiz app, a bit like the ones on Mentr.",
+      "scene": "quiz",
+      "focus": "intro"
+    },
+    {
+      "start": 212.24,
+      "end": 219.19,
+      "caption": "Tap \u2192 Check \u2192 Green tick",
+      "text": "You tap an answer. The app checks if it's right. Then, it shows a green tick.",
+      "scene": "quiz",
+      "focus": "steps"
+    },
+    {
+      "start": 219.19,
+      "end": 228.69,
+      "caption": "Which part is the PROCESS?",
+      "text": "So, which part is the process? Tapping, checking, or the green tick? Take a moment.",
+      "scene": "quiz",
+      "focus": "ask"
+    },
+    {
+      "start": 228.69,
+      "end": 236.9,
+      "caption": "Process = checking if it's right!",
+      "text": "Checking the answer! That's the work the app does inside. Tapping is the input, and the green tick is the output.",
+      "scene": "quiz",
+      "focus": "answer"
+    },
+    {
+      "start": 236.9,
+      "end": 248.29,
+      "caption": "You watch cricket\u2026 and more cricket!",
+      "text": "Now, here's something clever some apps do. Say you love cricket. You watch one cricket video. Then another. And another!",
+      "scene": "pattern",
+      "focus": "watch"
+    },
+    {
+      "start": 248.29,
+      "end": 257.38,
+      "caption": "Again and again = a PATTERN",
+      "text": "The video app notices that. Cricket, again and again. Something that happens again and again is called a pattern.",
+      "scene": "pattern",
+      "focus": "notice"
+    },
+    {
+      "start": 257.38,
+      "end": 268.25,
+      "caption": "Pattern noticed \u2192 more cricket next!",
+      "text": "So what does the app show you next? More cricket! It can't read your mind, and it isn't picking at random. It just noticed your pattern.",
+      "scene": "pattern",
+      "focus": "suggest"
+    },
+    {
+      "start": 268.25,
+      "end": 276.65,
+      "caption": "More about patterns when we study AI!",
+      "text": "We'll learn a lot more about this when we study AI. For now, just remember. Apps can notice patterns.",
+      "scene": "pattern",
+      "focus": "ai"
+    },
+    {
+      "start": 276.65,
+      "end": 286.43,
+      "caption": "True or false: apps never decide for you?",
+      "text": "So, true or false? Apps never decide anything for you. Hmm. What do you think?",
+      "scene": "decide",
+      "focus": "ask"
+    },
+    {
+      "start": 286.43,
+      "end": 297.89,
+      "caption": "False! Apps decide some things for you",
+      "text": "False! Apps do decide some things for you. The maps app decides which road it thinks is best. And the video app decides which videos to suggest next.",
+      "scene": "decide",
+      "focus": "answer"
+    },
+    {
+      "start": 297.89,
+      "end": 309.84,
+      "caption": "Apps only suggest. You still choose!",
+      "text": "But here's the important part. You can still choose. You can take a different road, or tap a different video. Apps only suggest. You're the boss!",
+      "scene": "decide",
+      "focus": "choose"
+    },
+    {
+      "start": 309.84,
+      "end": 313.79,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 313.79,
+      "end": 325.1,
+      "caption": "Maps app: what's the input? The output?",
+      "text": "For a maps app, what is the input, and what is the output? Pause the video, and say it out loud, or write it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 325.1,
+      "end": 338.86,
+      "caption": "Input: place typed \u00b7 Output: route & directions",
+      "text": "Here's one answer. The input is the place you type in, like India Gate. The output is the route drawn on the map, and the directions it tells you. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 338.86,
+      "end": 346.74,
+      "caption": "Input \u2192 Process \u2192 Output",
+      "text": "Let's remember what we learned. Every app follows three steps. Input, process, and output.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 346.74,
+      "end": 351.72,
+      "caption": "Maps: place in \u2192 path found \u2192 route out",
+      "text": "In maps, the place goes in, the path is found, and the route comes out.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 351.72,
+      "end": 354.87,
+      "caption": "Video apps notice patterns",
+      "text": "Video apps suggest things by noticing patterns.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 354.87,
+      "end": 360.69,
+      "caption": "Apps decide some things. You still choose!",
+      "text": "And apps decide some things for you, like the next video. But you can still choose.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 360.69,
+      "end": 367.72,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! Now you can spot input, process, and output in any app, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 367.72,
+      "end": 374.52,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

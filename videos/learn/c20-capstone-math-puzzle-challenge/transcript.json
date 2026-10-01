@@ -1,0 +1,380 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.79,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Today is a really special day.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.79,
+      "end": 13.09,
+      "caption": "Last time: big job \u2192 small jobs",
+      "text": "Last time, we broke big problems into small ones. Just like Riya cleaning her room, one small job at a time.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 13.09,
+      "end": 23.33,
+      "caption": "Chapter 5 \u00b7 Capstone: Math Puzzle Challenge",
+      "text": "This is chapter five of Problem Solver. The very last chapter of the whole Math track! It's called, Capstone, Math Puzzle Challenge.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.33,
+      "end": 37.31,
+      "caption": "Capstone = the final challenge",
+      "text": "A capstone is the top stone that finishes an arch. So a capstone challenge is your final challenge, where you use everything you've learned. Patterns, logic, grids, chance, and problem solving!",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 37.31,
+      "end": 43.02,
+      "caption": "Grab a pencil. Puzzle time!",
+      "text": "So grab a pencil and some paper. Let's solve some puzzles together!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 43.02,
+      "end": 49.69,
+      "caption": "Meet Ishaan at the school Maths Mela!",
+      "text": "Meet Ishaan. His school is having a Maths Mela, and there's a puzzle trail with five stations.",
+      "scene": "mela",
+      "focus": "meet"
+    },
+    {
+      "start": 49.69,
+      "end": 57.76,
+      "caption": "5 stations \u00b7 5 stars \u00b7 1 golden badge",
+      "text": "Solve the puzzle at each station, and you win a star. Collect all five stars, and you get the golden puzzle badge!",
+      "scene": "mela",
+      "focus": "trail"
+    },
+    {
+      "start": 57.76,
+      "end": 69.32,
+      "caption": "What could help when a puzzle feels hard?",
+      "text": "Ishaan gulps. What if I get stuck? Hmm. What could help him, when a puzzle feels hard? Think about it.",
+      "scene": "mela",
+      "focus": "nervous"
+    },
+    {
+      "start": 69.32,
+      "end": 74.81,
+      "caption": "\"Don't just guess. Pick a strategy!\"",
+      "text": "His teacher smiles, and says, don't just guess. Pick a strategy!",
+      "scene": "mela",
+      "focus": "plan"
+    },
+    {
+      "start": 74.81,
+      "end": 77.71,
+      "caption": "Strategy = a plan for solving a problem",
+      "text": "A strategy is a plan for solving a problem.",
+      "scene": "strategy",
+      "focus": "name"
+    },
+    {
+      "start": 77.71,
+      "end": 87.59,
+      "caption": "Find the rule \u00b7 Draw it \u00b7 Break it \u00b7 Go back",
+      "text": "And you already know lots of them! Find the rule. Draw it. Break it into parts. And work backwards.",
+      "scene": "strategy",
+      "focus": "tools"
+    },
+    {
+      "start": 87.59,
+      "end": 99.33,
+      "caption": "Show your working, then check it",
+      "text": "Here's one more golden rule. Show your working. That means writing each step, so someone else can follow your thinking. And then, check your answer.",
+      "scene": "strategy",
+      "focus": "working"
+    },
+    {
+      "start": 99.33,
+      "end": 113.69,
+      "caption": "2, 4, 6, 8, ___?",
+      "text": "Station one. Patterns! Ishaan reads the first card. Two, four, six, eight. What comes next? Pause, and think.",
+      "scene": "patterns",
+      "focus": "ask1"
+    },
+    {
+      "start": 113.69,
+      "end": 119.96,
+      "caption": "10! Rule: add 2 each time",
+      "text": "Ten! The rule is, add two each time. Eight plus two equals ten.",
+      "scene": "patterns",
+      "focus": "ans1"
+    },
+    {
+      "start": 119.96,
+      "end": 131.78,
+      "caption": "1, 3, 6, 10, ___? Look at the jumps!",
+      "text": "Now a trickier one. One, three, six, ten. What comes next? Look at the jumps between the numbers.",
+      "scene": "patterns",
+      "focus": "ask2"
+    },
+    {
+      "start": 131.78,
+      "end": 146.36,
+      "caption": "+2, +3, +4, then +5 \u2192 10 + 5 = 15",
+      "text": "From one to three is a jump of two. Then a jump of three, then a jump of four. So the next jump is five! Ten plus five equals fifteen. The jumps grow by one each time.",
+      "scene": "patterns",
+      "focus": "ans2"
+    },
+    {
+      "start": 146.36,
+      "end": 158.0,
+      "caption": "Sort smallest to biggest: 45, 12, 30",
+      "text": "Station two. Sorting! Put these numbers in order, from smallest to biggest. Forty five, twelve, thirty.",
+      "scene": "sorting",
+      "focus": "ask"
+    },
+    {
+      "start": 158.0,
+      "end": 165.83,
+      "caption": "12, 30, 45!",
+      "text": "Twelve is the smallest. Then thirty, then forty five. Twelve, thirty, forty five!",
+      "scene": "sorting",
+      "focus": "ans"
+    },
+    {
+      "start": 165.83,
+      "end": 182.61,
+      "caption": "Venn diagram: red things \u00b7 fruits",
+      "text": "Next, a Venn diagram. Two circles that overlap. One says, red things. The other says, fruits. A fire truck is red, but it's not a fruit. A banana is a fruit, but it's not red.",
+      "scene": "sorting",
+      "focus": "venn"
+    },
+    {
+      "start": 182.61,
+      "end": 188.61,
+      "caption": "Where does a red apple go?",
+      "text": "So, where does a red apple go? Think.",
+      "scene": "sorting",
+      "focus": "vennq"
+    },
+    {
+      "start": 188.61,
+      "end": 196.29,
+      "caption": "The middle! Red AND a fruit",
+      "text": "In the middle! A red apple is red, and it's a fruit. So it goes where the two circles overlap.",
+      "scene": "sorting",
+      "focus": "venna"
+    },
+    {
+      "start": 196.29,
+      "end": 203.96,
+      "caption": "Grid address = (across, up)",
+      "text": "Station three. Grids! Remember, a grid address is written as across, then up.",
+      "scene": "grid",
+      "focus": "intro"
+    },
+    {
+      "start": 203.96,
+      "end": 213.26,
+      "caption": "(3, 1) \u2192 3 across, 1 up",
+      "text": "So for the point three, one, we go three across, and one up. The first number is across. The second number is up.",
+      "scene": "grid",
+      "focus": "point"
+    },
+    {
+      "start": 213.26,
+      "end": 227.59,
+      "caption": "Start (1, 1): 2 right, 3 up, 1 right. Where?",
+      "text": "Now the big puzzle. Start at one, one. Move two right, then three up, then one right. Where do you land? Try it with your finger!",
+      "scene": "grid",
+      "focus": "ask"
+    },
+    {
+      "start": 227.59,
+      "end": 239.26,
+      "caption": "Across 1 + 2 + 1 = 4 \u00b7 Up 1 + 3 = 4 \u2192 (4, 4)",
+      "text": "Let's show our working. Across, one plus two plus one equals four. Up, one plus three equals four. We land on four, four!",
+      "scene": "grid",
+      "focus": "ans"
+    },
+    {
+      "start": 239.26,
+      "end": 249.5,
+      "caption": "Facing east. Half turn. Which way now?",
+      "text": "Station four. Ishaan is facing east. He makes a half turn. Which way is he facing now?",
+      "scene": "chance",
+      "focus": "turn"
+    },
+    {
+      "start": 249.5,
+      "end": 255.06,
+      "caption": "West! A half turn faces the opposite way",
+      "text": "West! A half turn spins you right around, so you face the opposite way.",
+      "scene": "chance",
+      "focus": "turna"
+    },
+    {
+      "start": 255.06,
+      "end": 263.61,
+      "caption": "True or false? A coin lands heads for certain",
+      "text": "Next card. True or false? A normal coin will land on heads, for certain.",
+      "scene": "chance",
+      "focus": "coin"
+    },
+    {
+      "start": 263.61,
+      "end": 272.89,
+      "caption": "False! Heads or tails: about equally likely",
+      "text": "False! It could land on heads, or on tails. They're about equally likely. So it's not certain at all.",
+      "scene": "chance",
+      "focus": "coina"
+    },
+    {
+      "start": 272.89,
+      "end": 279.34,
+      "caption": "Impossible \u00b7 Unlikely \u00b7 Likely \u00b7 Certain",
+      "text": "Remember our chance words. Impossible, unlikely, likely, and certain.",
+      "scene": "chance",
+      "focus": "words"
+    },
+    {
+      "start": 279.34,
+      "end": 293.76,
+      "caption": "Priya bought 6 beads. Now 15. Start with?",
+      "text": "Last station! Ishaan's friend Priya bought six more beads. Now she has fifteen. How many beads did she have at the start? Pause, and think.",
+      "scene": "backwards",
+      "focus": "ask"
+    },
+    {
+      "start": 293.76,
+      "end": 303.32,
+      "caption": "Draw it, then flip it: +6 becomes \u22126",
+      "text": "Let's draw it. Start, then plus six, gives fifteen. To work backwards, we flip plus six into minus six.",
+      "scene": "backwards",
+      "focus": "draw"
+    },
+    {
+      "start": 303.32,
+      "end": 314.93,
+      "caption": "15 \u2212 6 = 9 \u00b7 Check: 9 + 6 = 15",
+      "text": "Fifteen minus six equals nine. Now check it forwards. Nine plus six equals fifteen. Yes! Priya started with nine beads.",
+      "scene": "backwards",
+      "focus": "ans"
+    },
+    {
+      "start": 314.93,
+      "end": 319.19,
+      "caption": "5 stars! The golden puzzle badge!",
+      "text": "Five stars! Ishaan wins the golden puzzle badge!",
+      "scene": "backwards",
+      "focus": "badge"
+    },
+    {
+      "start": 319.19,
+      "end": 325.04,
+      "caption": "Your maths helps computers and AI!",
+      "text": "Now here's the coolest part. The maths you learned helps computers and AI too!",
+      "scene": "computers",
+      "focus": "intro"
+    },
+    {
+      "start": 325.04,
+      "end": 336.38,
+      "caption": "Screens are grids: every pixel has an address",
+      "text": "A screen is a giant grid of tiny dots, called pixels. Every pixel has its own address, across and up, so the computer knows exactly where each colour goes.",
+      "scene": "computers",
+      "focus": "pixels"
+    },
+    {
+      "start": 336.38,
+      "end": 347.95,
+      "caption": "AI uses probability to pick what's most likely",
+      "text": "And AI uses chance, which is also called probability. When a phone guesses your next word, it picks the word that's most likely, after learning from lots of examples.",
+      "scene": "computers",
+      "focus": "ai"
+    },
+    {
+      "start": 347.95,
+      "end": 351.96,
+      "caption": "Your turn: capstone check",
+      "text": "Okay champ, here's your capstone check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 351.96,
+      "end": 363.14,
+      "caption": "Name 2 maths ideas that help computers or AI",
+      "text": "Name two maths ideas from this track that help us understand computers, or AI. Pause the video, and write them down.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 363.14,
+      "end": 379.61,
+      "caption": "Grids & coordinates \u00b7 Probability",
+      "text": "Here's one answer. Grids and coordinates, because screens place every pixel by its address. And probability, because AI guesses what is most likely. Breaking problems into parts helps too! Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 379.61,
+      "end": 384.21,
+      "caption": "Find the rule to continue a pattern",
+      "text": "Let's remember. To continue a pattern, find the rule.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 384.21,
+      "end": 386.88,
+      "caption": "Grid address = (across, up)",
+      "text": "A grid address is across, then up.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 386.88,
+      "end": 391.44,
+      "caption": "Certain \u00b7 Likely \u00b7 Unlikely \u00b7 Impossible",
+      "text": "Chance words are certain, likely, unlikely, and impossible.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 391.44,
+      "end": 394.57,
+      "caption": "Show your working and check it",
+      "text": "And always show your working, and check your answer.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 394.57,
+      "end": 407.46,
+      "caption": "All 4 Math units, done!",
+      "text": "Look how far you've come, champ! Numbers computers love. Logic and reasoning. Shapes, grids, and coordinates. And now, problem solving.",
+      "scene": "recap",
+      "focus": "journey"
+    },
+    {
+      "start": 407.46,
+      "end": 416.14,
+      "caption": "Math track complete!",
+      "text": "The whole Math track, done! Just like Ishaan, you think like a real problem solver. I'm so proud of you!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 416.14,
+      "end": 421.6,
+      "caption": "Next: Final quiz \u00b7 Tap Finish",
+      "text": "Now tap Finish, and try the final quiz. You've got this, champ!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

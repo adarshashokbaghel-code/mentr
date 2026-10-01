@@ -1,0 +1,147 @@
+{
+  "id": "A13",
+  "title": "Variables — Boxes That Store Things",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "CS · Building With Blocks",
+  "slug": "a13-variables-boxes-that-store-things",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a13-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you made a character move. You clicked the green flag, and your blocks said, move ten steps, and turn. Nice driving!", "caption": "Last time: green flag · move · turn", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "We're still in Unit three, Building With Blocks.", "caption": "Unit 3 · Building With Blocks", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And today is chapter three. Variables, boxes that store things.", "caption": "Chapter 3 · Variables", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Have you ever wondered how a game remembers your score? Or how many lives you have left? Hmm.", "caption": "How does a game remember your score?", "focus": "wonder", "pause": 0.5 },
+        { "vo": "By the end of today, you'll know the secret. And you'll be able to use it yourself!", "caption": "Let's find out the secret!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "riya",
+      "visual": "a13-hook",
+      "beats": [
+        { "vo": "Meet Riya. She's playing a coin game on her dad's phone, on the way to school in an auto.", "caption": "Riya plays a coin game in the auto", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Her cat jumps, and grabs a coin. Ding! The score goes from zero, to one. Another coin. Two! Another. Three!", "caption": "Coin! Score 0 → 1 → 2 → 3", "focus": "coins", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Then, oops, Billu bumps into a spike. One heart disappears. Three lives, now just two.", "caption": "Spike! Lives 3 → 2", "focus": "spike", "sfx": "buzz", "sfxAt": 0.3 },
+        { "vo": "So here's a question. The game keeps changing these numbers. But where does it keep them? Think about it.", "caption": "Where does the game keep these numbers?", "focus": "why", "pause": 2.0 },
+        { "vo": "Here's the secret. The game keeps each number in a little box, with a name on it. That box is called a variable.", "caption": "In a named box, called a VARIABLE", "focus": "secret", "sfx": "chime", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a13-define",
+      "beats": [
+        { "vo": "Variable. Say it with me. Va, ri, a, ble. It comes from the word vary, which means, to change.", "caption": "Var · i · a · ble → it can change", "focus": "word", "pause": 0.4 },
+        { "vo": "A variable is a box with a name on it. It holds one thing, like a number, or a word. And you can change what's inside, while your game runs.", "caption": "A named box that holds one value", "focus": "meaning" },
+        { "vo": "So every variable has two parts. The name, on the outside, tells you what the box is for. And the value, on the inside, is what the box holds right now.", "caption": "Name outside · Value inside", "focus": "parts", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "This box is named score. And its value right now? Five.", "caption": "Name: score · Value: 5", "focus": "example", "sfx": "pop", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "tiffin",
+      "visual": "a13-tiffin",
+      "beats": [
+        { "vo": "You already use boxes like this! Think of your tiffin box, with your name stuck on top.", "caption": "Your tiffin box has a name label", "focus": "intro" },
+        { "vo": "The label says, Aarav. That tells everyone whose box it is. And inside, there's today's lunch.", "caption": "Label = whose box · Inside = lunch", "focus": "label", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "On Monday, it's poha. On Tuesday, aloo paratha. On Wednesday, idli. Yum!", "caption": "Mon poha · Tue paratha · Wed idli", "focus": "days", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "See what happened? The name on the box stayed the same. But what's inside kept changing. That's exactly how a variable works.", "caption": "Same name, changing value = variable", "focus": "same", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "a13-game",
+      "beats": [
+        { "vo": "Now let's peek inside a game. Games are full of variables.", "caption": "Games are full of variables", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Score is a variable. It counts your points, and it usually starts at zero.", "caption": "score · counts points · starts at 0", "focus": "score", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Lives is a variable too. It counts how many chances you have left, like three.", "caption": "lives · chances left · like 3", "focus": "lives", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And here's a fun one. Name! It holds the player's nickname, like Riya. That's a word, not a number. So a variable can hold words too!", "caption": "name · holds a word, like \"Riya\"", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "But the screen glass, or the charger? Those are things you can touch. They're not values the game stores. So they aren't variables.", "caption": "Screen glass, charger → not variables", "focus": "notvar", "sfx": "buzz", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "blocks",
+      "visual": "a13-blocks",
+      "beats": [
+        { "vo": "So how do we put things into the box? In block coding, we use two orange variable blocks.", "caption": "Two variable blocks: set and change", "focus": "intro", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "The first is the set block. Set score to zero. It throws out whatever was inside, and puts in a brand new value.", "caption": "set score to 0 → the box now holds 0", "focus": "set", "sfx": "whoosh", "sfxAt": 0.5 },
+        { "vo": "We put set score to zero right under the green flag. That way, every new game starts fresh, from zero.", "caption": "Set at the start → every game starts fresh", "focus": "fresh" },
+        { "vo": "The second is the change block. Change score by one. It adds one to what's already there. If score is five, it becomes six.", "caption": "change score by 1 → 5 becomes 6", "focus": "change", "sfx": "chime", "sfxAt": 0.75 },
+        { "vo": "And to take one away, we change by minus one. If score is six, and a bug bites, change score by minus one makes it five again.", "caption": "change score by −1 → 6 becomes 5", "focus": "minus", "sfx": "buzz", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "names",
+      "visual": "a13-names",
+      "beats": [
+        { "vo": "Now, every box needs a good name. Let's look at some names.", "caption": "Good names, bad names", "focus": "intro" },
+        { "vo": "x one. box. a b c. Hmm. What's inside these? Nobody can tell! Not you, not your friend, not even you, next week.", "caption": "x1 · box · abc → what's inside?", "focus": "bad", "sfx": "buzz", "sfxAt": 0.4 },
+        { "vo": "Now look. stars. lives. score. You know right away what each one stores. Short and clear, like the label on your school bag.", "caption": "stars · lives · score → short and clear", "focus": "good", "sfx": "success", "sfxAt": 0.4 },
+        { "vo": "Quick question. Which is the best name for a box that counts stars collected? x one, box, stars, or a b c?", "caption": "Best name for counting stars?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Stars! It's short, and it says exactly what's inside. Clear names help people understand your code.", "caption": "stars! Clear names help people", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "puzzle",
+      "visual": "a13-puzzle",
+      "beats": [
+        { "vo": "Detective time! Let's follow a score box, step by step.", "caption": "Detective time: follow the score box", "focus": "intro", "sfx": "pop" },
+        { "vo": "The game starts with set score to zero. Then Billu collects three coins. Each coin does, change score by one. Then, it hits a bug, which does, change score by minus one.", "caption": "set 0 · coin · coin · coin · bug", "focus": "run", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "So what's the score at the end? Count it on your fingers. Take your time.", "caption": "What is the score at the end?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Let's check. Zero. Coin, one. Coin, two. Coin, three. Then the bug takes one away. Three minus one is two. The score is two!", "caption": "0 → 1 → 2 → 3 → 2. The score is 2!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a13-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "A game has three lives. The player hits a spike. What should the lives box become? Pause the video, and work it out.", "caption": "3 lives. Hit a spike. Lives become…?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Two! Hitting the spike runs, change lives by minus one. Three minus one is two. Did you get it? Brilliant!", "caption": "change lives by −1 → 3 − 1 = 2", "focus": "answer", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "Bonus round. Riya's lives start at three, and she hits a spike two times. Now what?", "caption": "Bonus: 3 lives, 2 spikes. Lives = ?", "focus": "bonus", "pause": 2.0 },
+        { "vo": "One life left! Each spike takes away one. Three, then two, then one. Careful, Riya!", "caption": "3 → 2 → 1. One life left!", "focus": "bonusA", "sfx": "chime", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a13-recap",
+      "beats": [
+        { "vo": "Let's remember. A variable is a box with a name, that holds a value.", "caption": "Variable = a named box with a value", "focus": "r1", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "You can change what's inside, even while the game runs. And it can hold numbers, or words.", "caption": "It can change · numbers or words", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Change by one adds one. Change by minus one takes one away.", "caption": "+1 goes up · −1 goes down", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And use short, clear names, like stars, not x one.", "caption": "Clear names: stars, not x1", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three of Unit three, done! You can store and change values, champ. Super work!", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

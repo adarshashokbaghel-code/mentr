@@ -1,0 +1,143 @@
+{
+  "id": "C7",
+  "title": "AND, OR, NOT for Kids",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "Math · Logic & Reasoning",
+  "slug": "c7-and-or-not-for-kids",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c7-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready for some more logic fun?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you became a logic detective. You learned that a statement is either true, or false. A week has seven days? True! All birds can fly? False, because of penguins!", "caption": "Last time: every statement is true or false", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of Logic and Reasoning. And it's all about three tiny words. The word and. The word or. And the word not.", "caption": "Chapter 2 · AND, OR, NOT", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "They look small, right? But these little words help computers, and games, make big decisions, every single second.", "caption": "Tiny words → big decisions", "focus": "word", "pause": 0.4 },
+        { "vo": "And to learn them, we're going to a birthday party! Let's go.", "caption": "Let's go to a birthday party!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "party",
+      "visual": "c7-party",
+      "beats": [
+        { "vo": "It's Anaya's birthday party! And guess who's guarding the door? Robo, our robot friend! He checks every guest, before they come in.", "caption": "Robo guards the door at Anaya's party", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Anaya gives Robo one rule. Bring cake and juice. A rule is a check that gives a yes, or a no. Yes, come in. Or no, sorry.", "caption": "Rule: bring cake AND juice", "focus": "rule", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Ding dong! Here comes Arjun. He's carrying a big chocolate cake. Yum. But, no juice.", "caption": "Arjun brings cake… but no juice", "focus": "arjun", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "So, does Robo let Arjun in? Yes, or no? Think about it.", "caption": "Can Arjun come in? Think!", "focus": "why", "pause": 2.0 },
+        { "vo": "The answer is no. The rule says cake and juice, and that means you need both. Arjun has the cake, but the juice is missing. So Robo says, sorry!", "caption": "No! AND needs both. Juice is missing.", "focus": "answer", "sfx": "buzz", "sfxAt": 0.1 },
+        { "vo": "Arjun runs home, and comes back with a juice box. Cake, and juice. Now Robo says, yes, come in!", "caption": "Cake AND juice → Yes, come in!", "focus": "fixed", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "and",
+      "visual": "c7-and",
+      "beats": [
+        { "vo": "So here's our first tiny word. The word and means both things must be true.", "caption": "AND = both must be true", "focus": "intro", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Let's check four guests. Cake and juice? Yes! Only cake? No. Only juice? No. And nothing at all? Definitely no.", "caption": "Both → Yes. Anything less → No.", "focus": "table", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "See? The word and is a little fussy. It wants everything on the list. If even one thing is missing, the answer is no.", "caption": "AND is fussy. One missing → No!", "focus": "fussy" },
+        { "vo": "Quick check. The rule is, bring a gift and a card. Kabir brings a gift, but no card. Can he come in?", "caption": "Gift AND card. Kabir has only a gift.", "focus": "kabir-q", "pause": 1.8 },
+        { "vo": "No! He has the gift, but no card. And needs both, so Kabir has to go and make a card.", "caption": "No. AND needs both, the card is missing", "focus": "kabir-a", "sfx": "buzz", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "or",
+      "visual": "c7-or",
+      "beats": [
+        { "vo": "Now our second word. Or. Imagine the rule at the fun fair gate is, enter with a ticket, or a pass.", "caption": "Fun fair rule: a ticket OR a pass", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "The word or means at least one thing must be true. Only a ticket? Yes! Only a pass? Yes!", "caption": "OR = at least one must be true", "focus": "rows", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "And what if you have both, a ticket and a pass? Still yes! Two is more than enough. The word or is happy with one, or both.", "caption": "Both? Still YES! Both is fine too.", "focus": "both", "sfx": "chime", "sfxAt": 0.35 },
+        { "vo": "It only says no when you have neither. No ticket, and no pass. Sorry!", "caption": "Neither → No", "focus": "neither", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "Quick check. Sara has only a pass. Can she enter?", "caption": "Sara has only a pass. Can she enter?", "focus": "sara-q", "pause": 1.8 },
+        { "vo": "Yes! With or, one is enough, and Sara has her pass. Have fun on the big wheel, Sara!", "caption": "Yes! For OR, one is enough", "focus": "sara-a", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "not",
+      "visual": "c7-not",
+      "beats": [
+        { "vo": "And our third word is not. Not means the opposite. It flips things around.", "caption": "NOT = the opposite. It flips it!", "focus": "flip", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Not true becomes false. And not false becomes true. Just like flipping a light switch, from on, to off.", "caption": "NOT true = false · NOT false = true", "focus": "truefalse", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Here's a rule at Nani's house. Come in only if you are not wearing muddy shoes. Clean shoes? Yes, come in. Muddy shoes? No way! Nani just cleaned the floor.", "caption": "Rule: NOT wearing muddy shoes", "focus": "shoes" },
+        { "vo": "Now Aman walks up. His shoes are clean, so they're not muddy. The rule is true, and Aman can go in!", "caption": "Clean shoes → not muddy → Aman goes in", "focus": "aman", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "games",
+      "visual": "c7-games",
+      "beats": [
+        { "vo": "Now here's where computers come in. Video games use these little words all the time, to decide what happens.", "caption": "Games use AND and OR to decide", "focus": "intro", "sfx": "pop" },
+        { "vo": "A game might say, if you have a key and a torch, open the cave. That's an if-both rule. You need both.", "caption": "Key AND torch → open the cave (if-both)", "focus": "cave", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Another might say, if you find a coin or a gem, get a point. That's an if-either rule. Either one works.", "caption": "Coin OR gem → get a point (if-either)", "focus": "coin", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "And the game checks these rules again and again, many times every second, while you play!", "caption": "Checked many times every second!", "focus": "fast", "sfx": "whoosh", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "cave",
+      "visual": "c7-cave",
+      "beats": [
+        { "vo": "Let's play! Four explorers reach the cave. Tia has only a key. Raj has only a torch. Zoya has a key and a torch. And Neel has neither. Who can open the cave? Think.", "caption": "Key AND torch. Who can open the cave?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Only Zoya! The rule needs both. Tia and Raj each have just one. And Neel has nothing. Go on Zoya, open the cave!", "caption": "Only Zoya has both the key and the torch", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "combo",
+      "visual": "c7-combo",
+      "beats": [
+        { "vo": "Now, a tricky one! Pooja's party rule says, bring juice or sweets, and do not come late. Pooja brings a box of sweets, and she arrives on time. Can she come in? Think it through.", "caption": "Juice OR sweets, AND NOT late. Pooja?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Let's check it in parts. Part one, juice or sweets. She has sweets, and one is enough, so that part is true.", "caption": "Part 1: juice OR sweets → true", "focus": "or", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Part two, do not come late. She came on time, so she's not late. True again!", "caption": "Part 2: NOT late → true", "focus": "not", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "Both parts are true, and the word and joins them together. So yes, Pooja can come in. Enjoy the party!", "caption": "True AND true → Yes, Pooja comes in!", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c7-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "You need a hat and a ticket to enter. You have only a ticket. Can you enter? Pause the video, and say your answer out loud.", "caption": "Hat AND ticket. You have only a ticket.", "focus": "ask", "pause": 2.5 },
+        { "vo": "No, you can't. The rule needs both, and you're missing the hat. Grab a hat, then come back! Did you get it? Brilliant!", "caption": "No! AND needs both. Grab a hat!", "focus": "answer", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c7-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. The word and, means both must be true.", "caption": "AND → both must be true", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "The word or, means at least one is true. And both is fine too.", "caption": "OR → at least one is true", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "The word not, flips it to the opposite. Not true is false.", "caption": "NOT → flip it to the opposite", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And games use if-both, and if-either rules, to decide what happens.", "caption": "Games use if-both and if-either", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! You're a party-planning logic pro, champ!", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

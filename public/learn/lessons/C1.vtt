@@ -1,0 +1,185 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.240
+Hello, champ! Welcome!
+
+2
+00:00:06.240 --> 00:00:15.120
+Something new: the Maths track!
+
+3
+00:00:15.120 --> 00:00:22.300
+Numbers Computers Love · Chapter 1
+
+4
+00:00:22.300 --> 00:00:34.550
+We use 10 digits. Computers use just 2!
+
+5
+00:00:34.550 --> 00:00:42.700
+Meet Meera, and her friend Kabir
+
+6
+00:00:42.700 --> 00:00:54.060
+Secret plan: send a number with 3 lamps
+
+7
+00:00:54.060 --> 00:01:08.450
+Each lamp is only ON or OFF. How to show 5?
+
+8
+00:01:08.450 --> 00:01:18.620
+Computers do this all the time!
+
+9
+00:01:18.620 --> 00:01:29.820
+Inside a computer: tiny on/off switches
+
+10
+00:01:29.820 --> 00:01:39.090
+ON = 1 · OFF = 0
+
+11
+00:01:39.090 --> 00:01:47.520
+Games, photos, songs: all 0s and 1s!
+
+12
+00:01:47.520 --> 00:01:58.510
+Counting with 0 and 1 is called BINARY
+
+13
+00:01:58.510 --> 00:02:10.800
+Us: 0 to 9 · Binary: just 0 and 1
+
+14
+00:02:10.800 --> 00:02:19.640
+One light = one BIT (a single 0 or 1)
+
+15
+00:02:19.640 --> 00:02:26.460
+Your 3 fingers = 3 light switches
+
+16
+00:02:26.460 --> 00:02:32.800
+Finger up = 1 · Finger down = 0
+
+17
+00:02:32.800 --> 00:02:45.010
+All down = 000 · All up = 111
+
+18
+00:02:45.010 --> 00:02:51.450
+Each place has its own value
+
+19
+00:02:51.450 --> 00:03:01.750
+Left = 4 · Middle = 2 · Right = 1
+
+20
+00:03:01.750 --> 00:03:08.450
+Add the values of the lights that are ON
+
+21
+00:03:08.450 --> 00:03:22.170
+1 0 1 → 4 + 0 + 1 = 5
+
+22
+00:03:22.170 --> 00:03:29.720
+Kabir reads it: five laddoos!
+
+23
+00:03:29.720 --> 00:03:38.480
+0 = 000 (all off)
+
+24
+00:03:38.480 --> 00:03:48.320
+1 = 001 · 2 = 010
+
+25
+00:03:48.320 --> 00:03:56.800
+3 = 011 (2 + 1)
+
+26
+00:03:56.800 --> 00:04:06.690
+4 = 100 · 5 = 101 (4 + 1)
+
+27
+00:04:06.690 --> 00:04:13.610
+Each number adds one more laddoo
+
+28
+00:04:13.610 --> 00:04:29.870
+001 and 100: the same number?
+
+29
+00:04:29.870 --> 00:04:42.060
+001 = 1 · 100 = 4. The place matters!
+
+30
+00:04:42.060 --> 00:04:51.880
+Like 23 and 32: same digits, not the same!
+
+31
+00:04:51.880 --> 00:05:01.450
+Light game: what number is 010?
+
+32
+00:05:01.450 --> 00:05:09.440
+010 → 0 + 2 + 0 = 2
+
+33
+00:05:09.440 --> 00:05:16.560
+Which lights show 4?
+
+34
+00:05:16.560 --> 00:05:24.240
+4 = 100 (only the left light)
+
+35
+00:05:24.240 --> 00:05:42.330
+001, 010, 011, … what comes next?
+
+36
+00:05:42.330 --> 00:05:51.910
+Not 012! Binary has no digit 2
+
+37
+00:05:51.910 --> 00:06:01.670
+011 is 3, so next is 4 = 100
+
+38
+00:06:01.670 --> 00:06:05.550
+Your turn: practice check
+
+39
+00:06:05.550 --> 00:06:19.390
+Show 3 using three on/off lights
+
+40
+00:06:19.390 --> 00:06:35.320
+Off, on, on → 011 → 2 + 1 = 3
+
+41
+00:06:35.320 --> 00:06:42.020
+Binary uses only 0 and 1
+
+42
+00:06:42.020 --> 00:06:45.000
+ON = 1 · OFF = 0
+
+43
+00:06:45.000 --> 00:06:50.850
+Three lights are worth 4, 2, 1
+
+44
+00:06:50.850 --> 00:06:56.960
+3 = 011 · 5 = 101
+
+45
+00:06:56.960 --> 00:07:04.030
+Chapter 1 done!
+
+46
+00:07:04.030 --> 00:07:10.830
+Next: Quiz · Tap Finish

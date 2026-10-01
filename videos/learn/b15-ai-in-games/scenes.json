@@ -1,0 +1,153 @@
+{
+  "id": "B15",
+  "title": "AI in Games",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "AI · Sees, Hears & Talks",
+  "slug": "b15-ai-in-games",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b15-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so glad you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we found out how face filters work. First, find the face. Then, mark the points. Then, draw puppy ears on top!", "caption": "Last time: Find face → Mark points → Draw", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five, the very last chapter of Unit three. And it's a fun one. AI in games!", "caption": "Chapter 5 · AI in Games", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Have you ever wondered how the characters in a game seem to know exactly where you are? Hmm. Let's find out.", "caption": "How do game characters know where you are?", "focus": "wonder", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "riya",
+      "visual": "b15-hook",
+      "beats": [
+        { "vo": "Meet Riya. It's summer vacation, and she's playing her favourite game on the tablet. It's called, Mango Maze.", "caption": "Meet Riya, playing Mango Maze", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Riya moves her little runner through the maze, collecting mangoes. But watch out! There's a tiger guard called Sheru, walking up and down the path.", "caption": "Collect mangoes… but watch out for Sheru!", "focus": "maze" },
+        { "vo": "Riya sneaks a little too close. And Sheru turns, and starts chasing her! Oh no! Run, Riya, run!", "caption": "Too close! Sheru starts chasing!", "focus": "chase", "sfx": "whoosh", "sfxAt": 0.35 },
+        { "vo": "Her little cousin Kabir gasps. Sheru is so clever! Is someone hiding inside the tablet, moving him? Hmm. What do you think?", "caption": "Is someone hiding inside, moving Sheru?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Here's the truth. Nobody is hiding in there! Sheru is just following a few simple rules. Let's see how.", "caption": "No one inside! Sheru follows rules.", "focus": "truth", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "npc",
+      "visual": "b15-npc",
+      "beats": [
+        { "vo": "In a game, there are two kinds of characters. First, there's you, the player. You control your character, with your fingers or buttons.", "caption": "The PLAYER: the character you control", "focus": "player", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Then, there are characters the computer controls, like Sheru. These are called NPCs. That's short for, non-player characters.", "caption": "NPC = non-player character", "focus": "npc", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "A guard in a maze. A ghost floating around. A shopkeeper who says hello. Nobody holds a controller for them. The game moves them, using rules.", "caption": "Guards · Ghosts · Shopkeepers: all NPCs", "focus": "examples", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "rule",
+      "visual": "b15-rule",
+      "beats": [
+        { "vo": "So, what kind of rules? They're called, if, then rules. If something happens, then do this. Like, if it rains, then take an umbrella!", "caption": "IF something happens, THEN do this", "focus": "ifthen" },
+        { "vo": "Sheru has just two rules. Rule one. If the player is near, then chase. Rule two. Else, patrol.", "caption": "If player is near → chase. Else → patrol.", "focus": "sheru", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Else is a small word that means, otherwise. So, if the player is not near, Sheru does the other thing.", "caption": "ELSE means: otherwise, if not", "focus": "else" },
+        { "vo": "Chase means moving towards the player, to catch them. And patrol means walking back and forth along a path, watching. Just like a watchman doing his rounds!", "caption": "Chase: go to the player · Patrol: back & forth", "focus": "words", "sfx": "pop", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "fast",
+      "visual": "b15-fast",
+      "beats": [
+        { "vo": "Now here's the clever part. Sheru checks his rule again and again. Is the player near? No. Is the player near? No. Is the player near? Yes! Chase!", "caption": "Is the player near? No… No… YES! Chase!", "focus": "check", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "He checks many, many times every second. Remember the face filter, finding your face points again and again? Same idea!", "caption": "Checks many times a second, like filters!", "focus": "quick" },
+        { "vo": "That's why Sheru seems smart. But he isn't alive. He has no feelings, and he can't read your mind. He just follows clear rules, very quickly. That's simple AI.", "caption": "Not alive! Just clear rules, followed fast", "focus": "smart", "sfx": "chime", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "algo",
+      "visual": "b15-algo",
+      "beats": [
+        { "vo": "And here's a word you may know from computer science. Step-by-step instructions that a computer follows are called an algorithm.", "caption": "Steps a computer follows = an ALGORITHM", "focus": "intro", "sfx": "pop" },
+        { "vo": "Sheru's algorithm goes like this. Check, is the player near? If yes, chase. If no, patrol. Then go back, and check again. Over and over!", "caption": "Check → Yes: chase · No: patrol → again", "focus": "loop", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So game rules are algorithms! Every guard, ghost, and coin in a game is following one.", "caption": "Game rules are algorithms!", "focus": "same", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "rules",
+      "visual": "b15-rules",
+      "beats": [
+        { "vo": "Game makers write rules for lots of things, not just guards. Let's look at three.", "caption": "Rules for lots of game things!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "A coin. If the player touches it, then it disappears, and adds one point to the score. Ching!", "caption": "Coin: if touched → disappear, +1 point", "focus": "coin", "sfx": "pop", "sfxAt": 0.8 },
+        { "vo": "A door. If the player has the key, then it opens.", "caption": "Door: if player has the key → open", "focus": "door", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "And a ghost. If the player eats a power berry, then the ghost runs away! See? Each one is a clear, simple, if, then rule.", "caption": "Ghost: if player eats a power berry → run", "focus": "ghost", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "match",
+      "visual": "b15-match",
+      "beats": [
+        { "vo": "Quick game! Match each character to its rule. A mango, a gate, and a sleepy owl. And the rules? Open, if the player has the key. Hoot, if the player comes close. Disappear and add a point, if touched. Pause, and match them.", "caption": "Match each character to its rule!", "focus": "ask", "pause": 2.2 },
+        { "vo": "The mango disappears, and adds a point. The gate opens, if you have the key. And the owl wakes up and hoots, when you come close. Well done!", "caption": "Mango: +1 · Gate: key opens · Owl: hoots", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "best",
+      "visual": "b15-best",
+      "beats": [
+        { "vo": "Now Riya wants to make her own guard. Which pair of rules is better? Pair A. If the player is near, chase. Else, patrol. Pair B. If the player is near, sleep. Else, sleep. Think!", "caption": "Which guard rules are better: A or B?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Pair A! That guard reacts to the player, and keeps watch the rest of the time. The pair B guard just sleeps, all day long. Easy to win, but not much fun!", "caption": "A! It reacts and keeps watch. B just sleeps.", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "project",
+      "visual": "b15-project",
+      "beats": [
+        { "vo": "Now it's your turn to be a game maker! Here's your project. Design your own maze guard.", "caption": "Project: design your own maze guard!", "focus": "intro", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Step one. Draw a tiny maze on paper, and pick your guard. A guard, a robot, or a tiger, like Sheru.", "caption": "1 · Draw a tiny maze, pick your guard", "focus": "step1", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Step two. Write two rules. If the player is near, then, what? And else, what?", "caption": "2 · Write 2 rules: If near… Else…", "focus": "step2", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Step three. Test it with a friend. You be the guard, and act out your rules. Does it work? If not, fix it, and try again. That's what real game makers do!", "caption": "3 · Act it out with a friend, fix, try again", "focus": "step3", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b15-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Write one rule for a coin that disappears when it's touched. Pause the video, and try it on paper.", "caption": "Write one rule for a coin that disappears", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. If the player touches the coin, then the coin disappears, and the score goes up by one. If yours has an if, and a then, brilliant!", "caption": "If player touches coin → disappear, +1", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b15-recap",
+      "beats": [
+        { "vo": "Let's remember. Characters the computer controls are called NPCs. They follow if, then rules.", "caption": "NPCs follow if/then rules", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "If the player is near, chase. Else, patrol.", "caption": "If near, chase. Else, patrol.", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "No real person is hiding inside the game. Just clear rules, followed fast.", "caption": "No one inside: just clear, fast rules", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And game rules are algorithms.", "caption": "Game rules are algorithms", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means you've finished all of Unit three! Computers that see, listen, chat, find faces, and play games. Wow, champ!", "caption": "Chapter 5 done · Unit 3 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

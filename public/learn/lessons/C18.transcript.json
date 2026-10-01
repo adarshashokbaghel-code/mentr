@@ -1,0 +1,372 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.45,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for another puzzle?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.45,
+      "end": 13.65,
+      "caption": "Last time: certain \u00b7 likely \u00b7 unlikely \u00b7 impossible",
+      "text": "Last time, we talked about chances. Certain, likely, unlikely, and impossible. You were brilliant!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 13.65,
+      "end": 19.18,
+      "caption": "Chapter 3 \u00b7 Working Backwards",
+      "text": "Today is chapter three of Problem Solver. It's called, Working Backwards.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 19.18,
+      "end": 28.17,
+      "caption": "Know the end? Walk back to the start!",
+      "text": "It's a real detective trick. When you know how a story ends, you can walk back, step by step, and find out how it began!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 28.17,
+      "end": 39.55,
+      "caption": "Meet Kabir and his tiffin of laddoos",
+      "text": "Meet Kabir. He loves cricket, and he loves sweets even more! At lunch, he opens his tiffin, and finds some laddoos inside. Yum!",
+      "scene": "laddoos",
+      "focus": "meet"
+    },
+    {
+      "start": 39.55,
+      "end": 45.88,
+      "caption": "Zoya gives him 4 more. Now he has 12!",
+      "text": "Then his best friend Zoya gives him four more laddoos. Now Kabir has twelve laddoos!",
+      "scene": "laddoos",
+      "focus": "gift"
+    },
+    {
+      "start": 45.88,
+      "end": 59.29,
+      "caption": "How many did he have at the start? Think!",
+      "text": "That evening, Nani asks, Kabir, how many laddoos did you have before Zoya gave you some? Hmm. Kabir forgot! Can you help him? Think.",
+      "scene": "laddoos",
+      "focus": "ask"
+    },
+    {
+      "start": 59.29,
+      "end": 69.62,
+      "caption": "We know the end (12) and the step (+4)",
+      "text": "We don't know the start. But we do know the end, twelve. And we know what happened, four more were added. That's enough to solve it!",
+      "scene": "laddoos",
+      "focus": "clue"
+    },
+    {
+      "start": 69.62,
+      "end": 77.12,
+      "caption": "Working backwards: start at the end, undo steps",
+      "text": "This trick is called working backwards. You start from the end, and undo each step, to find the start.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 77.12,
+      "end": 81.61,
+      "caption": "Useful when you know the end, not the start",
+      "text": "It's most useful when you know how a story ends, but not how it began.",
+      "scene": "define",
+      "focus": "when"
+    },
+    {
+      "start": 81.61,
+      "end": 91.06,
+      "caption": "Like rewinding a replay",
+      "text": "It's a bit like rewinding a cricket replay. Everything goes back, to exactly where it started. Even the ball flies back to the bowler!",
+      "scene": "define",
+      "focus": "rewind"
+    },
+    {
+      "start": 91.06,
+      "end": 101.85,
+      "caption": "Draw it: ? \u2192 +4 \u2192 12",
+      "text": "First, draw the story. A box for the start, with a question mark. An arrow that says, plus four. And then the end, twelve.",
+      "scene": "draw",
+      "focus": "forward"
+    },
+    {
+      "start": 101.85,
+      "end": 110.79,
+      "caption": "Reverse the arrow: +4 becomes \u22124",
+      "text": "Now, reverse the arrow! Start at twelve, and go backwards. The opposite of adding four is taking away four.",
+      "scene": "draw",
+      "focus": "reverse"
+    },
+    {
+      "start": 110.79,
+      "end": 116.25,
+      "caption": "12 \u2212 4 = 8. Kabir started with 8!",
+      "text": "Twelve minus four equals eight. So Kabir started with eight laddoos!",
+      "scene": "draw",
+      "focus": "solve"
+    },
+    {
+      "start": 116.25,
+      "end": 124.73,
+      "caption": "Check forwards: 8 + 4 = 12. Yes!",
+      "text": "Always check by going forwards. Eight plus four equals twelve. Yes! It matches the end.",
+      "scene": "draw",
+      "focus": "check"
+    },
+    {
+      "start": 124.73,
+      "end": 133.79,
+      "caption": "Undo = do the opposite. Add 5 \u2194 subtract 5",
+      "text": "To undo a step, you do the opposite action. So the undo of add five is, subtract five. Let's learn the flips.",
+      "scene": "flip",
+      "focus": "intro"
+    },
+    {
+      "start": 133.79,
+      "end": 139.25,
+      "caption": "Got \u00b7 found \u00b7 bought \u2192 undo by subtracting",
+      "text": "If someone got more, found some, or bought some, you undo it by subtracting.",
+      "scene": "flip",
+      "focus": "more"
+    },
+    {
+      "start": 139.25,
+      "end": 145.23,
+      "caption": "Lost \u00b7 gave away \u00b7 ate \u2192 undo by adding",
+      "text": "If someone lost some, gave some away, or ate some, you undo it by adding them back.",
+      "scene": "flip",
+      "focus": "less"
+    },
+    {
+      "start": 145.23,
+      "end": 154.81,
+      "caption": "Doubled \u2192 undo by halving",
+      "text": "And if something was doubled, you undo it by halving. Adding and subtracting undo each other. Doubling and halving undo each other too.",
+      "scene": "flip",
+      "focus": "double"
+    },
+    {
+      "start": 154.81,
+      "end": 166.21,
+      "caption": "Got 20 rupees, now has 50. How much before?",
+      "text": "Let's try one. Riya's mum gave her twenty rupees. Now Riya has fifty rupees. How much did she have before?",
+      "scene": "try",
+      "focus": "riya"
+    },
+    {
+      "start": 166.21,
+      "end": 178.78,
+      "caption": "50 \u2212 20 = 30 rupees. Check: 30 + 20 = 50. Yes!",
+      "text": "She got more, so we subtract. Fifty minus twenty equals thirty. Riya had thirty rupees. Check: thirty plus twenty is fifty. Yes!",
+      "scene": "try",
+      "focus": "riya_ans"
+    },
+    {
+      "start": 178.78,
+      "end": 191.04,
+      "caption": "Gave away 5, now has 10. How many at first?",
+      "text": "Next one. Arjun gave five marbles to his sister. Now he has ten. How many did he have at first? Think!",
+      "scene": "try",
+      "focus": "arjun"
+    },
+    {
+      "start": 191.04,
+      "end": 199.44,
+      "caption": "10 + 5 = 15 marbles",
+      "text": "He gave them away, so we add them back. Ten plus five equals fifteen. Arjun had fifteen marbles.",
+      "scene": "try",
+      "focus": "arjun_ans"
+    },
+    {
+      "start": 199.44,
+      "end": 203.15,
+      "caption": "Detective game: spot the mistake!",
+      "text": "Detective game! Can you spot the mistake?",
+      "scene": "trap",
+      "focus": "intro"
+    },
+    {
+      "start": 203.15,
+      "end": 213.66,
+      "caption": "\"To undo gave away 3, subtract 3.\" Right?",
+      "text": "Dev says, to undo, gave away three, you subtract three. Is Dev right? Hmm. Take a moment.",
+      "scene": "trap",
+      "focus": "ask"
+    },
+    {
+      "start": 213.66,
+      "end": 224.7,
+      "caption": "No! Undo gave away 3 by ADDING 3 back",
+      "text": "Not quite, Dev! Giving away took three off. So to undo it, you add three back. Subtracting again would make it even smaller!",
+      "scene": "trap",
+      "focus": "answer"
+    },
+    {
+      "start": 224.7,
+      "end": 235.7,
+      "caption": "Got 6, gave away 4, now has 10. Start?",
+      "text": "Now a two step story. Kabir got six cards. Then he gave away four. Now he has ten. How many did he start with?",
+      "scene": "two",
+      "focus": "story"
+    },
+    {
+      "start": 235.7,
+      "end": 248.92,
+      "caption": "Undo the LAST step first, like shoes then socks",
+      "text": "Here's the rule. Undo the last step first. Think of socks and shoes. You put your socks on first, then your shoes. But to take them off, the shoes come off first!",
+      "scene": "two",
+      "focus": "socks"
+    },
+    {
+      "start": 248.92,
+      "end": 263.49,
+      "caption": "10 + 4 = 14, then 14 \u2212 6 = 8",
+      "text": "The last step was, gave away four. Undo it by adding. Ten plus four equals fourteen. Then undo, got six, by subtracting. Fourteen minus six equals eight.",
+      "scene": "two",
+      "focus": "solve"
+    },
+    {
+      "start": 263.49,
+      "end": 276.72,
+      "caption": "Check: 8 + 6 = 14, 14 \u2212 4 = 10. Yes!",
+      "text": "So Kabir started with eight cards. Check forwards. Eight plus six is fourteen. Fourteen minus four is ten. Perfect! You undid both steps.",
+      "scene": "two",
+      "focus": "check"
+    },
+    {
+      "start": 276.72,
+      "end": 291.63,
+      "caption": "? \u2192 +7 \u2192 double \u2192 30. What's the number?",
+      "text": "Ready for a tricky one? I'm thinking of a number. I add seven, and then I double it. I get thirty. What was my number? Try it!",
+      "scene": "puzzle",
+      "focus": "ask"
+    },
+    {
+      "start": 291.63,
+      "end": 299.26,
+      "caption": "Undo double: half of 30 is 15",
+      "text": "Work backwards. The last step was doubling, so we halve it. Half of thirty is fifteen.",
+      "scene": "puzzle",
+      "focus": "halve"
+    },
+    {
+      "start": 299.26,
+      "end": 308.16,
+      "caption": "Undo +7: 15 \u2212 7 = 8",
+      "text": "Before that, I added seven, so take away seven. Fifteen minus seven equals eight. My number was eight!",
+      "scene": "puzzle",
+      "focus": "sub"
+    },
+    {
+      "start": 308.16,
+      "end": 315.82,
+      "caption": "Check: 8 + 7 = 15, double 15 = 30. Yes!",
+      "text": "Let's check it. Eight plus seven is fifteen. Double fifteen is thirty. Yes!",
+      "scene": "puzzle",
+      "focus": "check"
+    },
+    {
+      "start": 315.82,
+      "end": 322.78,
+      "caption": "Working backwards = the Undo button",
+      "text": "Working backwards is also exactly what the Undo button does, in drawing apps, in games, and in code.",
+      "scene": "undo",
+      "focus": "button"
+    },
+    {
+      "start": 322.78,
+      "end": 334.13,
+      "caption": "Tree \u2192 sun \u2192 scribble. Undo: scribble goes!",
+      "text": "Say you draw a tree, then a sun, then a big scribble. Oops! Press Undo, and the last thing you did disappears. The scribble goes first.",
+      "scene": "undo",
+      "focus": "draw"
+    },
+    {
+      "start": 334.13,
+      "end": 343.17,
+      "caption": "Undo again: the sun goes. Last step first!",
+      "text": "Press it again, and the sun goes. The computer undoes your steps backwards, last step first. Just like we did!",
+      "scene": "undo",
+      "focus": "again"
+    },
+    {
+      "start": 343.17,
+      "end": 346.87,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 346.87,
+      "end": 358.06,
+      "caption": "9 stickers after losing 3. How many at start?",
+      "text": "Mina has nine stickers after losing three. How many did she start with? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 358.06,
+      "end": 369.67,
+      "caption": "9 + 3 = 12. Check: 12 \u2212 3 = 9. Yes!",
+      "text": "Twelve stickers! Losing is undone by adding. Nine plus three equals twelve. Check: twelve minus three is nine. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 369.67,
+      "end": 375.95,
+      "caption": "Know the end? Work backwards",
+      "text": "Let's remember. Know the end, but not the start? Work backwards.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 375.95,
+      "end": 383.34,
+      "caption": "Add \u2194 subtract \u00b7 Double \u2194 halve",
+      "text": "Flip each step. Adding and subtracting undo each other. Doubling and halving undo each other.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 383.34,
+      "end": 386.27,
+      "caption": "Undo the last step first",
+      "text": "With two steps, undo the last step first.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 386.27,
+      "end": 389.48,
+      "caption": "Check your answer going forwards",
+      "text": "And always check your answer, by going forwards.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 389.48,
+      "end": 396.39,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You can rewind any story now, like a true detective, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 396.39,
+      "end": 403.19,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

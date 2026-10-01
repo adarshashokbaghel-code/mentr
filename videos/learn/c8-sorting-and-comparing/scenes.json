@@ -1,0 +1,157 @@
+{
+  "id": "C8",
+  "title": "Sorting and Comparing",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "Math · Logic & Reasoning",
+  "slug": "c8-sorting-and-comparing",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c8-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned three tiny logic words. The word and needs both. The word or needs at least one. And the word not flips things around.", "caption": "Last time: AND · OR · NOT", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Logic and Reasoning. It's called, Sorting and Comparing!", "caption": "Chapter 3 · Sorting and Comparing", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Which is bigger? Which is smaller? And how do we line things up in order? Let's find out.", "caption": "Bigger? Smaller? In order?", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "marbles",
+      "visual": "c8-hook",
+      "beats": [
+        { "vo": "Meet Aarav. He loves marbles! And his best friend Zara loves them too.", "caption": "Meet Aarav and Zara, marble fans!", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Aarav counts his marbles. Thirty six! Zara counts hers. Sixty three!", "caption": "Aarav: 36 marbles · Zara: 63 marbles", "focus": "count", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Hmm. Both numbers use the same digits, a three and a six. So who has more marbles? Think about it.", "caption": "36 or 63. Who has more? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Zara does! Sixty three is six tens and three ones. Thirty six is only three tens and six ones. Six tens is more than three tens, so sixty three is bigger.", "caption": "63 = 6 tens · 36 = 3 tens → 63 is bigger", "focus": "answer", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "What we just did is called comparing. Checking which number is bigger, which is smaller, or if they're the same.", "caption": "Comparing: bigger, smaller, or the same?", "focus": "define", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "signs",
+      "visual": "c8-signs",
+      "beats": [
+        { "vo": "Maths has three special signs for comparing. Let's meet them.", "caption": "Three comparing signs", "focus": "intro", "sfx": "pop" },
+        { "vo": "This sign means greater than. Nine is greater than four. Nine laddoos are more than four laddoos. Yum!", "caption": "> greater than · 9 > 4", "focus": "greater", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "This one means less than. Three is less than eight.", "caption": "< less than · 3 < 8", "focus": "less", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "And these two little lines mean equal. Seven equals seven. Both sides are exactly the same.", "caption": "= equal · 7 = 7", "focus": "equal", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "croc",
+      "visual": "c8-croc",
+      "beats": [
+        { "vo": "But how do you remember which way the sign points? Meet Chompy, the hungry crocodile!", "caption": "Meet Chompy the crocodile!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Chompy is always hungry. So he opens his mouth towards the bigger number. He wants to eat the most!", "caption": "The open mouth eats the bigger number", "focus": "rule" },
+        { "vo": "Fifteen and twelve. Fifteen is bigger, so Chompy's mouth faces fifteen. Fifteen is greater than twelve.", "caption": "15 > 12 · the mouth faces 15", "focus": "big", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Eight and ten. Ten is bigger, so now the mouth faces ten. Eight is less than ten. See? The small pointy end always points to the smaller number.", "caption": "8 < 10 · the mouth faces 10", "focus": "small", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "place",
+      "visual": "c8-place",
+      "beats": [
+        { "vo": "Now, here's the secret for comparing bigger numbers. Always look at the biggest place first.", "caption": "Compare the biggest place first", "focus": "intro", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Remember the marbles? Three tens, and six tens. Three tens is less, so thirty six is less than sixty three. We didn't even need the ones!", "caption": "3 tens < 6 tens, so 36 < 63", "focus": "tens", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "But what if the tens are the same? Forty five, and forty eight. Both have four tens. So we check the ones. Five is less than eight, so forty five is less than forty eight.", "caption": "Same tens? Check ones: 45 < 48", "focus": "ones", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "It works for big numbers too. Three hundred and five, and three hundred and fifty. Same hundreds. So, check the tens. Zero tens is less than five tens. So three hundred and five is less than three hundred and fifty.", "caption": "Same hundreds · 0 tens < 5 tens → 305 < 350", "focus": "hundreds", "sfx": "tick", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "truecheck",
+      "visual": "c8-try",
+      "beats": [
+        { "vo": "Your turn! Only one of these is true. Nine is less than four. Fifteen is greater than twelve. Twenty equals twenty one. Eight is greater than ten. Which one is true? Think.", "caption": "Only one is true. Which one?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Fifteen is greater than twelve! Nine is bigger than four, not less. Twenty and twenty one aren't equal. And eight is smaller than ten.", "caption": "15 > 12 is the true one!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "c8-sort",
+      "beats": [
+        { "vo": "Now let's sort! Sorting means putting things in order, like smallest to biggest.", "caption": "Sorting = putting things in order", "focus": "intro", "sfx": "pop" },
+        { "vo": "Aarav keeps his toy cars in five boxes. Twelve cars, five, thirty, twenty one, and nine. All jumbled up!", "caption": "Toy car boxes: 12, 5, 30, 21, 9", "focus": "boxes", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Here's a neat trick. Find the smallest number. Write it down, and cross it out. Then do it again, with what's left.", "caption": "Find the smallest · write it · cross it out", "focus": "trick" },
+        { "vo": "The smallest is five. Cross it out. Next, nine. Then twelve. Then twenty one. And last, thirty.", "caption": "5 → 9 → 12 → 21 → 30", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Five, nine, twelve, twenty one, thirty. Sorted! And now the biggest box is easy to spot. Thirty cars!", "caption": "Sorted! The biggest box has 30 cars", "focus": "done", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "c8-order",
+      "beats": [
+        { "vo": "You can sort two ways. Take twenty five, eight, and seventeen. Smallest to biggest is eight, seventeen, twenty five. Like climbing up the stairs. Biggest to smallest is twenty five, seventeen, eight. Like walking down.", "caption": "Up: 8, 17, 25 · Down: 25, 17, 8", "focus": "two", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Which list goes from biggest to smallest? Fifty, forty two, thirty one, nineteen, six. Or, forty two, fifty, thirty one, nineteen, six? Think.", "caption": "Which list is biggest to smallest?", "focus": "ask", "pause": 2.0 },
+        { "vo": "The first one! Each number is smaller than the one before. In the second list, fifty comes after forty two, and fifty is bigger. Oops, not sorted.", "caption": "50, 42, 31, 19, 6 · each one smaller", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "tricky",
+      "visual": "c8-twins",
+      "beats": [
+        { "vo": "Now a tricky one. Fourteen, three, twenty seven, and three again. Two threes! What do we do with them?", "caption": "14, 3, 27, 3. Two 3s! What now?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Keep both! Three, three, fourteen, twenty seven. When you sort, never throw a number away. Same number twice? It stays twice.", "caption": "Keep both: 3, 3, 14, 27", "focus": "answer", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "One more. Five pencils, nine, fourteen, six, eleven, and eight centimetres long. Sort them, smallest to biggest. Which one is in the middle?", "caption": "Pencils: 9, 14, 6, 11, 8 cm. The middle one?", "focus": "pencils", "pause": 2.0 },
+        { "vo": "Six, eight, nine, eleven, fourteen. The middle one is nine centimetres. Two shorter ones on one side, and two longer ones on the other!", "caption": "6, 8, 9, 11, 14 · the middle is 9 cm", "focus": "middle", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "fast",
+      "visual": "c8-fast",
+      "beats": [
+        { "vo": "So, why do computers love sorting? Because a sorted list is much faster to search.", "caption": "Sorted lists are faster to search", "focus": "intro", "sfx": "pop" },
+        { "vo": "Imagine looking for roll number twenty seven in a messy class list. You check one, by one, by one. So slow!", "caption": "Messy list: check one by one… slow!", "focus": "messy", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "But in a sorted list, roll numbers go one, two, three, all the way up. Twenty seven? Jump near the end. Found it!", "caption": "Sorted list: jump near the end. Found!", "focus": "sorted", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c8-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Put nineteen, seven, forty two, and seven in order, from smallest to biggest. Pause the video, and try it on paper.", "caption": "Sort 19, 7, 42, 7 (smallest first)", "focus": "ask", "pause": 2.5 },
+        { "vo": "Seven, seven, nineteen, forty two. And did you keep both sevens? Brilliant!", "caption": "7, 7, 19, 42 · both 7s stay!", "focus": "answer", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c8-recap",
+      "beats": [
+        { "vo": "Let's remember. Greater than, less than, and equal. Chompy's open mouth faces the bigger number.", "caption": "> greater · < less · = equal", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Compare the biggest place first.", "caption": "Compare the biggest place first", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "To sort, find the smallest, then the next, and keep any repeats.", "caption": "Sort: smallest, then the next", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And sorted lists are faster to search.", "caption": "Sorted lists are faster to search", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You can compare and sort like a computer, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

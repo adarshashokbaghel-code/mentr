@@ -1,0 +1,156 @@
+{
+  "id": "C4",
+  "title": "Skip Counting & Sequences",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "Math · Numbers Computers Love",
+  "slug": "c4-skip-counting-sequences",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c4-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so glad you're here. Grab a pencil and some paper, you'll want them today.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you powered up your place value. Forty-seven is four tens and seven ones. The place tells a digit's value.", "caption": "Last time: 47 = 4 tens + 7 ones", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four of Numbers Computers Love. It's called, Skip Counting and Sequences!", "caption": "Chapter 4 · Skip Counting & Sequences", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Here's a challenge. Can you count all the way to fifty, in just ten jumps? Sounds impossible? Let's see!", "caption": "Count to 50 in just 10 jumps?", "focus": "challenge", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "gullak",
+      "visual": "c4-hook",
+      "beats": [
+        { "vo": "It's Meera's birthday! She and her friend Kabir open her clay gullak, her piggy bank. Out tumble ten shiny five-rupee coins!", "caption": "Meera's gullak: ten 5-rupee coins!", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Meera counts the money, one rupee at a time. One, two, three, four, five, for the first coin. Six, seven, eight, nine, ten, for the next. Phew! This is taking forever.", "caption": "One rupee at a time… so slow!", "focus": "slow", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Kabir grins. Watch this! Five, ten, fifteen, twenty, twenty-five, thirty, thirty-five, forty, forty-five, fifty. Fifty rupees!", "caption": "Kabir: 5, 10, 15, 20 … 50!", "focus": "fast", "sfx": "chime", "sfxAt": 0.85 },
+        { "vo": "Kabir counted so fast! How did he do it? Think about it.", "caption": "How did Kabir count so fast? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Each coin is worth five rupees. So Kabir jumped by five each time, instead of counting every rupee. Ten jumps of five took him all the way to fifty!", "caption": "He jumped by 5 each time. 10 jumps → 50!", "focus": "answer", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c4-define",
+      "beats": [
+        { "vo": "That trick has a name. It's called skip counting. Skip counting means counting by jumping the same amount, each time.", "caption": "Skip counting: jump the same amount each time", "focus": "name", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "Look at this number line. Start at zero, and jump two. Jump two again. And again. Zero, two, four, six, eight, ten. Every jump is the same size.", "caption": "0 → 2 → 4 → 6 → 8 → 10", "focus": "line", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "And each jump means, add the same number. So skip counting by two means, add two, again and again.", "caption": "Each jump = add the same number", "focus": "add" }
+      ]
+    },
+    {
+      "id": "twos",
+      "visual": "c4-twos",
+      "beats": [
+        { "vo": "Let's skip count by twos. Look at the chappals by Nani's door. They come in pairs! Two, four, six, eight, ten, twelve.", "caption": "Pairs of chappals: 2, 4, 6, 8, 10, 12", "focus": "pairs", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Hey, remember chapter two? These are the even numbers! Counting by twos from two lands on every even number.", "caption": "Counting by 2s → the even numbers!", "focus": "even", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Here's a puzzle. If you count by twos, from two up to twenty, how many numbers do you say? Use your fingers.", "caption": "Count by 2s from 2 to 20. How many numbers?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Two, four, six, eight, ten, twelve, fourteen, sixteen, eighteen, twenty. That's ten numbers! One for each finger.", "caption": "2, 4, 6 … 20 → that's 10 numbers!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "fives",
+      "visual": "c4-fives",
+      "beats": [
+        { "vo": "Now let's count by fives, just like Kabir. Five, ten, fifteen, twenty, twenty-five, and on, all the way to fifty.", "caption": "By 5s: 5, 10, 15, 20, 25 … 50", "focus": "count", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Look at the last digit. Five, zero, five, zero. When you count by fives, every number ends in five or zero!", "caption": "By 5s, numbers end in 5 or 0", "focus": "ends", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "So, which number will you not say, when you count by fives? Thirty-five, forty-two, or forty-five? Think.", "caption": "Not said by 5s: 35, 42 or 45?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Forty-two! It ends in a two, not a five or a zero. So we jump right over it.", "caption": "42! It ends in 2, so we skip it", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "tens",
+      "visual": "c4-tens",
+      "beats": [
+        { "vo": "Counting by tens is super easy. Remember our bundles of ten sticks? Ten, twenty, thirty, forty, fifty. One ten, two tens, three tens. Only the tens digit changes, and the ones digit stays zero!", "caption": "By 10s: 10, 20, 30, 40, 50", "focus": "count", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "What's missing here? Ten, twenty, something, forty, fifty. Pause, and think.", "caption": "10, 20, ___, 40, 50. What's missing?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Thirty! Twenty plus ten equals thirty. Three bundles of ten.", "caption": "30! 20 + 10 = 30", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "sequence",
+      "visual": "c4-sequence",
+      "beats": [
+        { "vo": "A list of numbers that follows a rule is called a sequence. The rule tells you how to get the next number. Skip counting makes a sequence too!", "caption": "Sequence: numbers in order, following a rule", "focus": "name", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Look at this one. Three, six, nine, twelve. What's the rule? Let's check each jump. Six minus three is three. Nine minus six is three. Twelve minus nine is three.", "caption": "3, 6, 9, 12: each jump is 3", "focus": "jumps", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Every jump is three. So the rule is, add three. And the next three numbers are fifteen, eighteen, and twenty-one.", "caption": "Rule: add 3 → 15, 18, 21", "focus": "rule", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "cricket",
+      "visual": "c4-cricket",
+      "beats": [
+        { "vo": "Now, cricket time! Kabir is batting, and he scores four runs, every single over.", "caption": "Kabir scores 4 runs every over", "focus": "intro", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "After one over, four runs. After two overs, eight. After three overs, twelve. The rule is, add four.", "caption": "4, 8, 12 … rule: add 4", "focus": "table", "sfx": "tick", "sfxAt": 0.15 },
+        { "vo": "So how many runs after five overs? Keep adding four. Take your time.", "caption": "How many runs after 5 overs?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Twelve plus four is sixteen, after four overs. Sixteen plus four is twenty, after five overs. Twenty runs! Shabaash, Kabir!", "caption": "16 after 4 overs, 20 after 5 overs!", "focus": "answer", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "game",
+      "visual": "c4-game",
+      "beats": [
+        { "vo": "Quick game! Fill in the next three numbers. Five, ten, fifteen, and then?", "caption": "5, 10, 15, ___, ___, ___ ?", "focus": "ask1", "pause": 2.0 },
+        { "vo": "Twenty, twenty-five, thirty! The rule is, add five.", "caption": "20, 25, 30! Rule: add 5", "focus": "ans1", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Now, spot the fake. Which one is not skip counting by fives? Twenty-five, thirty, thirty-five, forty. Or, five, ten, twenty, forty?", "caption": "Which one is NOT counting by 5s?", "focus": "ask2", "pause": 2.0 },
+        { "vo": "Five, ten, twenty, forty is the fake! Its jumps keep changing. Five, then ten, then twenty. In skip counting, every jump is the same.", "caption": "5, 10, 20, 40: the jumps change!", "focus": "ans2", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "loop",
+      "visual": "c4-loop",
+      "beats": [
+        { "vo": "Maybe you've met loops in our computer lessons. A loop tells a computer to do the same step, again and again.", "caption": "A loop: the same step, again and again", "focus": "remember", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Here's skip counting as a loop. Start at zero. Repeat: add two, and say the number. Zero, two, four, six, eight, ten.", "caption": "Start at 0 · Repeat: add 2, say it", "focus": "code", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Same step, again and again. So, repeat add two is a loop! Skip counting is the beat of a loop. And a computer never gets bored, and never skips a step.", "caption": "\"Repeat add 2\" is a loop!", "focus": "same", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c4-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "What is the rule for five, ten, fifteen, twenty? Pause the video, and work it out on paper.", "caption": "What is the rule for 5, 10, 15, 20?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Add five, each time! Ten minus five is five. Fifteen minus ten is five. Twenty minus fifteen is five. Did you get it? Brilliant!", "caption": "Add 5! Every jump is 5", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c4-recap",
+      "beats": [
+        { "vo": "Let's remember. Skip counting means adding the same amount, each time.", "caption": "Skip counting = add the same amount", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "The rule tells you the next number.", "caption": "The rule tells the next number", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "To find the rule, check the jump between the numbers.", "caption": "Check the jump between numbers", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And repeat add two? That's a loop!", "caption": "\"Repeat add 2\" is a loop", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! You can skip count, and find the rule. Super work, champ!", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

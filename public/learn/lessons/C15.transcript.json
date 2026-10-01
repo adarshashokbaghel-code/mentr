@@ -1,0 +1,412 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.34,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Today's a special one.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.34,
+      "end": 12.78,
+      "caption": "Last time: a quarter turn = 90\u00b0",
+      "text": "Last time, you learned about turns. A quarter turn is ninety degrees, and four quarter turns bring you all the way around.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 12.78,
+      "end": 19.18,
+      "caption": "Unit 3 \u00b7 Chapter 5 \u00b7 the last one!",
+      "text": "Today is chapter five, the very last chapter of Unit three, Shapes, Grids and Coordinates.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 19.18,
+      "end": 25.35,
+      "caption": "Chapter 5 \u00b7 Draw With Math",
+      "text": "It's called, Draw With Math. We're going to draw shapes using only words and numbers.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 25.35,
+      "end": 34.44,
+      "caption": "Draw with commands, like a programmer!",
+      "text": "No pencil in your hand. Just clear commands, like a real programmer. Ready? Let's go!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 34.44,
+      "end": 43.44,
+      "caption": "Meet Kachhu, the robot turtle",
+      "text": "Meet Kachhu. Kachhu is a little robot turtle, with a pen tucked under his tummy. When he walks, he draws a line.",
+      "scene": "kachhu",
+      "focus": "meet"
+    },
+    {
+      "start": 43.44,
+      "end": 49.52,
+      "caption": "\"Kachhu, draw a square!\"",
+      "text": "Your friend Meera puts him on a big sheet of paper, and says, Kachhu, draw a square!",
+      "scene": "kachhu",
+      "focus": "ask"
+    },
+    {
+      "start": 49.52,
+      "end": 54.25,
+      "caption": "Kachhu doesn't move\u2026",
+      "text": "And Kachhu just sits there. He doesn't move one bit.",
+      "scene": "kachhu",
+      "focus": "stuck"
+    },
+    {
+      "start": 54.25,
+      "end": 60.69,
+      "caption": "Why didn't Kachhu draw? Think!",
+      "text": "Hmm. Why not? Think about it for a moment.",
+      "scene": "kachhu",
+      "focus": "why"
+    },
+    {
+      "start": 60.69,
+      "end": 72.9,
+      "caption": "He only understands tiny commands",
+      "text": "Here's the thing. Kachhu doesn't know what a square is. He only understands a few tiny commands. So we have to tell him, step by step, exactly what to do.",
+      "scene": "kachhu",
+      "focus": "because"
+    },
+    {
+      "start": 72.9,
+      "end": 77.85,
+      "caption": "Command = one clear instruction",
+      "text": "A command is one clear instruction. Kachhu knows just two of them.",
+      "scene": "commands",
+      "focus": "intro"
+    },
+    {
+      "start": 77.85,
+      "end": 88.29,
+      "caption": "forward 4 \u2192 walk 4 steps, draw a line",
+      "text": "The first one is, forward. Forward four means, walk four steps straight ahead. His pen is down, so he draws a line as he walks.",
+      "scene": "commands",
+      "focus": "forward"
+    },
+    {
+      "start": 88.29,
+      "end": 96.1,
+      "caption": "The number = how many steps",
+      "text": "The number tells him how far to go. Forward two makes a short line. Forward eight makes a long one.",
+      "scene": "commands",
+      "focus": "number"
+    },
+    {
+      "start": 96.1,
+      "end": 110.26,
+      "caption": "turn right 90 \u2192 spin a quarter turn",
+      "text": "The second command is, turn right ninety. Remember last chapter? That's a quarter turn, clockwise. Kachhu spins on the spot. He doesn't walk, so no line is drawn.",
+      "scene": "commands",
+      "focus": "turn"
+    },
+    {
+      "start": 110.26,
+      "end": 115.69,
+      "caption": "Forward draws. Turning spins.",
+      "text": "So here's the rule. Forward draws. Turning just spins.",
+      "scene": "commands",
+      "focus": "rule"
+    },
+    {
+      "start": 115.69,
+      "end": 124.92,
+      "caption": "A square: 4 equal sides, 4 square corners",
+      "text": "Now, let's draw that square! First, what does a square have? Four equal sides, and four square corners.",
+      "scene": "square",
+      "focus": "plan"
+    },
+    {
+      "start": 124.92,
+      "end": 133.42,
+      "caption": "forward 4, turn right 90 \u00b7 side 1",
+      "text": "So we say, forward four. Kachhu draws the first side. Then, turn right ninety, for the corner.",
+      "scene": "square",
+      "focus": "side1"
+    },
+    {
+      "start": 133.42,
+      "end": 145.88,
+      "caption": "Again\u2026 side 2. Again\u2026 side 3",
+      "text": "Again! Forward four, turn right ninety. That's side two. And again. Forward four, turn right ninety. Side three.",
+      "scene": "square",
+      "focus": "side2"
+    },
+    {
+      "start": 145.88,
+      "end": 157.17,
+      "caption": "Side 4 \u00b7 back to the start!",
+      "text": "One last time. Forward four, turn right ninety. Look! The lines meet, and Kachhu is back where he started, facing the same way.",
+      "scene": "square",
+      "focus": "side4"
+    },
+    {
+      "start": 157.17,
+      "end": 166.01,
+      "caption": "4 times: forward 4, turn right 90",
+      "text": "Four sides, four corners. A perfect square! We did forward four, turn right ninety, four times.",
+      "scene": "square",
+      "focus": "done"
+    },
+    {
+      "start": 166.01,
+      "end": 170.26,
+      "caption": "8 lines\u2026 that's a lot!",
+      "text": "But writing all eight lines is a lot of work. Phew!",
+      "scene": "repeat",
+      "focus": "long"
+    },
+    {
+      "start": 170.26,
+      "end": 181.95,
+      "caption": "repeat 4 [forward 4, turn right 90]",
+      "text": "So programmers use a shortcut, called repeat. Repeat four, forward four, turn right ninety. It means, do these two commands, four times.",
+      "scene": "repeat",
+      "focus": "repeat"
+    },
+    {
+      "start": 181.95,
+      "end": 187.47,
+      "caption": "Repeat = a loop",
+      "text": "In coding, this is called a loop. Do it, and again, and again.",
+      "scene": "repeat",
+      "focus": "loop"
+    },
+    {
+      "start": 187.47,
+      "end": 197.98,
+      "caption": "Commands in order = a tiny program!",
+      "text": "And a list of commands that a computer follows in order? That's a program. So you just wrote a tiny program! How cool is that?",
+      "scene": "repeat",
+      "focus": "program"
+    },
+    {
+      "start": 197.98,
+      "end": 206.3,
+      "caption": "Bigger square? Which number changes?",
+      "text": "Now Meera wants a bigger square. Which number should we change? Have a think.",
+      "scene": "bigger",
+      "focus": "ask"
+    },
+    {
+      "start": 206.3,
+      "end": 214.49,
+      "caption": "forward 4 \u2192 forward 8",
+      "text": "Just the forward number! Change forward four, into forward eight. Every side gets twice as long.",
+      "scene": "bigger",
+      "focus": "answer"
+    },
+    {
+      "start": 214.49,
+      "end": 225.69,
+      "caption": "Keep turn right 90 and repeat 4",
+      "text": "But keep turn right ninety, and keep repeat four. A square always needs four square corners. Turn only forty-five, and you won't get a square at all!",
+      "scene": "bigger",
+      "focus": "keep"
+    },
+    {
+      "start": 225.69,
+      "end": 234.92,
+      "caption": "4 sides \u00d7 4 steps = 16 steps",
+      "text": "Let's count how far Kachhu walks. Four sides, with four steps each. Four times four, equals sixteen steps.",
+      "scene": "bigger",
+      "focus": "count"
+    },
+    {
+      "start": 234.92,
+      "end": 241.38,
+      "caption": "4 sides \u00d7 8 steps = 32 steps",
+      "text": "And the big square? Four sides of eight steps. That's thirty-two steps!",
+      "scene": "bigger",
+      "focus": "count8"
+    },
+    {
+      "start": 241.38,
+      "end": 250.85,
+      "caption": "Rectangle: long side 6, short side 3",
+      "text": "What about a rectangle? It has two long sides, and two short sides. Let's make it six steps long, and three steps tall.",
+      "scene": "rectangle",
+      "focus": "intro"
+    },
+    {
+      "start": 250.85,
+      "end": 258.64,
+      "caption": "forward 6, turn, forward 3, turn",
+      "text": "Forward six, turn right ninety. Forward three, turn right ninety. That's half of it.",
+      "scene": "rectangle",
+      "focus": "half"
+    },
+    {
+      "start": 258.64,
+      "end": 268.52,
+      "caption": "repeat 2 [forward 6, turn, forward 3, turn]",
+      "text": "Do that two times, and it's done! Repeat two. Forward six, turn right ninety, forward three, turn right ninety.",
+      "scene": "rectangle",
+      "focus": "repeat"
+    },
+    {
+      "start": 268.52,
+      "end": 275.33,
+      "caption": "How many steps in total?",
+      "text": "So how many steps does Kachhu walk this time? Try adding it up.",
+      "scene": "rectangle",
+      "focus": "ask"
+    },
+    {
+      "start": 275.33,
+      "end": 281.14,
+      "caption": "6 + 3 + 6 + 3 = 18 steps",
+      "text": "Six, plus three, plus six, plus three. That's eighteen steps!",
+      "scene": "rectangle",
+      "focus": "answer"
+    },
+    {
+      "start": 281.14,
+      "end": 291.74,
+      "caption": "Plus sign \u00b7 new command: back",
+      "text": "Here's a fun one. A plus sign! Kachhu starts in the middle, and learns one new command. Back, which means walk backwards.",
+      "scene": "plus",
+      "focus": "intro"
+    },
+    {
+      "start": 291.74,
+      "end": 299.19,
+      "caption": "forward 2, back 2, turn right 90",
+      "text": "Forward two, back two, turn right ninety. That draws one arm, and brings him back to the middle.",
+      "scene": "plus",
+      "focus": "arm"
+    },
+    {
+      "start": 299.19,
+      "end": 304.23,
+      "caption": "repeat 4 \u2192 4 arms \u2192 a plus sign!",
+      "text": "Repeat that four times, and you get four arms. A plus sign!",
+      "scene": "plus",
+      "focus": "all"
+    },
+    {
+      "start": 304.23,
+      "end": 309.68,
+      "caption": "Uh-oh! A broken square",
+      "text": "Uh oh. Meera wrote a square program, but Kachhu drew something strange.",
+      "scene": "bug",
+      "focus": "intro"
+    },
+    {
+      "start": 309.68,
+      "end": 322.17,
+      "caption": "Only 3 sides. How do you fix it?",
+      "text": "Forward four, turn right ninety. Three times. Only three sides! What's the bug? How would you fix it?",
+      "scene": "bug",
+      "focus": "q"
+    },
+    {
+      "start": 322.17,
+      "end": 332.15,
+      "caption": "Fix: add one more forward 4",
+      "text": "Add one more forward four! That draws the missing side. Checking each command in order to find the mistake? That's debugging.",
+      "scene": "bug",
+      "focus": "a"
+    },
+    {
+      "start": 332.15,
+      "end": 345.89,
+      "caption": "Faces north \u00b7 forward 2, right 90 \u00b7 twice",
+      "text": "One more puzzle. Kachhu faces north, towards the top. He does forward two, turn right ninety, two times. Which way is he facing now?",
+      "scene": "facing",
+      "focus": "q"
+    },
+    {
+      "start": 345.89,
+      "end": 355.97,
+      "caption": "North \u2192 East \u2192 South",
+      "text": "South! The first turn takes him from north to east. The second, from east to south. Two quarter turns make a half turn.",
+      "scene": "facing",
+      "focus": "a"
+    },
+    {
+      "start": 355.97,
+      "end": 362.37,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, your turn to be the programmer! Here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 362.37,
+      "end": 372.57,
+      "caption": "Write commands: a square, 4 steps a side",
+      "text": "Write the commands to draw a square, with four steps on each side. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 372.57,
+      "end": 386.19,
+      "caption": "repeat 4 [forward 4, turn right 90]",
+      "text": "Here's one way. Forward four, turn right ninety, and do it four times. Or the short way. Repeat four, forward four, turn right ninety. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 386.19,
+      "end": 392.84,
+      "caption": "Square = repeat 4 [forward, turn right 90]",
+      "text": "Let's remember. A square is, repeat four, forward, then turn right ninety.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 392.84,
+      "end": 396.04,
+      "caption": "Forward number = the size",
+      "text": "Change the forward number, to change the size.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 396.04,
+      "end": 400.07,
+      "caption": "Forward draws. Turning spins.",
+      "text": "Forward draws. Turning just spins on the spot.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 400.07,
+      "end": 402.91,
+      "caption": "Commands in order = a tiny program",
+      "text": "And commands in order make a tiny program.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 402.91,
+      "end": 415.66,
+      "caption": "Chapter 5 done \u00b7 Unit 3 complete!",
+      "text": "Chapter five, done! And that means all of Unit three is complete! Shapes, grids, symmetry, turns, and now drawing with commands. Wow, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 415.66,
+      "end": 422.46,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

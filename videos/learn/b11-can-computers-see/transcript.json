@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.81,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.81,
+      "end": 19.56,
+      "caption": "Unit 2 \u00b7 How Machines Learn \u00b7 done!",
+      "text": "Last time, you learned that practice makes perfect. AI gets better with more examples, and we test it with new ones. And that means you finished all of Unit two! Give yourself a big pat on the back.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 19.56,
+      "end": 29.68,
+      "caption": "Unit 3 \u00b7 AI That Sees, Hears, and Talks",
+      "text": "Today, we're starting Unit three. It's called, AI That Sees, Hears, and Talks. Ooh, sounds exciting, right?",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 29.68,
+      "end": 34.38,
+      "caption": "Chapter 1 \u00b7 Can Computers See?",
+      "text": "And chapter one asks a fun question. Can computers see?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 34.38,
+      "end": 46.23,
+      "caption": "No eyeballs! So how can it see?",
+      "text": "Hmm. A computer doesn't have eyes. No eyeballs, no eyelashes, nothing! So how could it possibly see? Let's find out.",
+      "scene": "open",
+      "focus": "eyes"
+    },
+    {
+      "start": 46.23,
+      "end": 58.89,
+      "caption": "Meet Kabir and his cat, Coco",
+      "text": "Meet Kabir. He's ten, and he loves his fluffy cat, Coco. He takes photos of Coco all the time. Coco sleeping, Coco eating, Coco chasing a ball.",
+      "scene": "kabir",
+      "focus": "meet"
+    },
+    {
+      "start": 58.89,
+      "end": 66.61,
+      "caption": "Kabir types \"cat\" in the photo app",
+      "text": "One day, Kabir opens the photo app on his mum's phone. He types just one word. Cat.",
+      "scene": "kabir",
+      "focus": "search"
+    },
+    {
+      "start": 66.61,
+      "end": 76.5,
+      "caption": "Whoosh! Every cat photo, found!",
+      "text": "And whoosh! The app shows every photo of Coco, out of hundreds of photos! Kabir never told the phone which ones had a cat in them.",
+      "scene": "kabir",
+      "focus": "found"
+    },
+    {
+      "start": 76.5,
+      "end": 84.41,
+      "caption": "How did the phone know? Think!",
+      "text": "So how did the phone know? It doesn't have eyes! Think about it for a moment.",
+      "scene": "kabir",
+      "focus": "ask"
+    },
+    {
+      "start": 84.41,
+      "end": 94.84,
+      "caption": "But one Coco photo was missing\u2026",
+      "text": "Oh, and one more thing. One photo of Coco was missing! Hmm. We'll solve that mystery later, so keep it in mind.",
+      "scene": "kabir",
+      "focus": "missing"
+    },
+    {
+      "start": 94.84,
+      "end": 104.03,
+      "caption": "Let's zoom in on Coco's photo\u2026",
+      "text": "Here's the first secret. Let's zoom in on a photo of Coco. Closer. Closer. Even closer!",
+      "scene": "pixels",
+      "focus": "zoom"
+    },
+    {
+      "start": 104.03,
+      "end": 117.28,
+      "caption": "Tiny coloured dots called PIXELS",
+      "text": "See that? The picture is made of tiny coloured squares. Each tiny dot is called a pixel. A photo has thousands of pixels, like tiny tiles making one big floor pattern.",
+      "scene": "pixels",
+      "focus": "dots"
+    },
+    {
+      "start": 117.28,
+      "end": 129.81,
+      "caption": "The computer sees dots, not a cat",
+      "text": "So when a computer looks at a photo, it doesn't see a cat at all. It sees thousands of coloured dots. Orange here. White there. Black over here.",
+      "scene": "pixels",
+      "focus": "notcat"
+    },
+    {
+      "start": 129.81,
+      "end": 138.03,
+      "caption": "It looks for PATTERNS",
+      "text": "So how does it find the cat? It looks for patterns. A pattern is something that shows up again, and again.",
+      "scene": "pattern",
+      "focus": "name"
+    },
+    {
+      "start": 138.03,
+      "end": 150.41,
+      "caption": "Clues: Edges \u00b7 Shapes \u00b7 Colours",
+      "text": "The computer checks the dots for three kinds of clues. Edges, where one colour suddenly changes into another. Shapes, like round or pointy. And colours.",
+      "scene": "pattern",
+      "focus": "clues"
+    },
+    {
+      "start": 150.41,
+      "end": 165.29,
+      "caption": "Every ball is round. That's a pattern!",
+      "text": "Think about a ball. A cricket ball, a football, a tennis ball. Different balls, but every one is round. Round, round, round! That round shape is a pattern.",
+      "scene": "pattern",
+      "focus": "ball"
+    },
+    {
+      "start": 165.29,
+      "end": 175.86,
+      "caption": "Pointy ears + whiskers \u2192 maybe a cat!",
+      "text": "And cats? Pointy ears, whiskers, two eyes, and a furry body. Put those clues together, and the computer says, maybe a cat!",
+      "scene": "pattern",
+      "focus": "cat"
+    },
+    {
+      "start": 175.86,
+      "end": 187.66,
+      "caption": "It learns patterns from many examples",
+      "text": "But wait. How does the computer know what a cat looks like? Remember Unit two? It learns from examples. Lots and lots of examples.",
+      "scene": "learn",
+      "focus": "examples"
+    },
+    {
+      "start": 187.66,
+      "end": 202.18,
+      "caption": "Many bottle photos \u2192 tall shape + cap",
+      "text": "To learn bottles, it's shown thousands of bottle photos. Big bottles, small bottles, water bottles, juice bottles. Slowly, it finds the pattern. A tall shape, with a cap on top.",
+      "scene": "learn",
+      "focus": "bottles"
+    },
+    {
+      "start": 202.18,
+      "end": 212.41,
+      "caption": "Computer vision = matching patterns in pixels",
+      "text": "This has a special name. Computer vision. Computer vision is when a computer finds things in pictures, by matching patterns in the pixels.",
+      "scene": "learn",
+      "focus": "define"
+    },
+    {
+      "start": 212.41,
+      "end": 219.62,
+      "caption": "Not magic. Not alive. Just patterns!",
+      "text": "It isn't magic, and the computer isn't alive. It's just very, very good at matching patterns.",
+      "scene": "learn",
+      "focus": "notmagic"
+    },
+    {
+      "start": 219.62,
+      "end": 231.54,
+      "caption": "Object spotting: what's on Kabir's table?",
+      "text": "Let's try object spotting! That means finding and naming things in a photo. Here's Kabir's study table. What things can you spot?",
+      "scene": "spot",
+      "focus": "ask"
+    },
+    {
+      "start": 231.54,
+      "end": 248.92,
+      "caption": "Round \u2192 ball \u00b7 Cap \u2192 bottle \u00b7 Pages \u2192 book",
+      "text": "The computer finds a round shape. Maybe a ball! A tall shape with a cap. Maybe a bottle! And a flat box with pages. Maybe a book! Ball, bottle, book. Spotted!",
+      "scene": "spot",
+      "focus": "answer"
+    },
+    {
+      "start": 248.92,
+      "end": 259.76,
+      "caption": "Face unlock matches your face's pattern",
+      "text": "Computers see all around you! Face unlock on a phone matches the pattern of your face. Your eyes, nose, and mouth, in just the right places.",
+      "scene": "around",
+      "focus": "face"
+    },
+    {
+      "start": 259.76,
+      "end": 266.88,
+      "caption": "Photo apps group dogs, beaches, and cats",
+      "text": "Photo apps can group all your pictures of dogs, or of the beach. Just like Kabir's cat photos!",
+      "scene": "around",
+      "focus": "group"
+    },
+    {
+      "start": 266.88,
+      "end": 277.16,
+      "caption": "Some apps can name a flower from a photo",
+      "text": "And some apps can even name a flower, from just one photo. Hibiscus? Marigold? The app checks the petals, and the colours.",
+      "scene": "around",
+      "focus": "flower"
+    },
+    {
+      "start": 277.16,
+      "end": 283.82,
+      "caption": "Computers can be wrong!",
+      "text": "But here's something important. Computers can be wrong! Some pictures can fool them.",
+      "scene": "fool",
+      "focus": "intro"
+    },
+    {
+      "start": 283.82,
+      "end": 291.14,
+      "caption": "Dark light: the edges disappear",
+      "text": "Dark light is one. In a dark photo, all the dots look almost the same, so the edges disappear.",
+      "scene": "fool",
+      "focus": "dark"
+    },
+    {
+      "start": 291.14,
+      "end": 301.8,
+      "caption": "Odd angle or tiny: a ball becomes a dot",
+      "text": "An odd angle, or a tiny size, is another. A ball far away looks like a little dot. And a bottle seen from the top looks like a circle!",
+      "scene": "fool",
+      "focus": "angle"
+    },
+    {
+      "start": 301.8,
+      "end": 311.0,
+      "caption": "Partly hidden: only half the pattern",
+      "text": "And hidden parts. If half a bottle is behind a bag, the computer only sees half the pattern. It may miss it completely.",
+      "scene": "fool",
+      "focus": "hidden"
+    },
+    {
+      "start": 311.0,
+      "end": 324.72,
+      "caption": "Why did the app miss this Coco photo?",
+      "text": "Now, remember Kabir's missing photo? Here it is. Coco is behind Kabir's school bag. Why do you think the app missed her? Think.",
+      "scene": "fool",
+      "focus": "mysteryask"
+    },
+    {
+      "start": 324.72,
+      "end": 335.25,
+      "caption": "Coco was hidden. Not enough pattern!",
+      "text": "Most of Coco was hidden! The app could only see one ear, and a tail. That's not enough of the cat pattern to match. Mystery solved!",
+      "scene": "fool",
+      "focus": "mysteryanswer"
+    },
+    {
+      "start": 335.25,
+      "end": 357.67,
+      "caption": "Which photo is HARDEST to spot the cat in?",
+      "text": "Quick game! Which photo is the hardest for a computer to spot a cat in? A bright cat on green grass. A big, clear cat face. A cat on a white rug, in daylight. Or a tiny cat, far away, in a dark room. Pause, and pick one.",
+      "scene": "harder",
+      "focus": "ask"
+    },
+    {
+      "start": 357.67,
+      "end": 369.37,
+      "caption": "Tiny + dark = hardest to spot!",
+      "text": "The tiny cat in the dark room! It's tiny, so there are very few dots. And it's dark, so the edges are hard to find. Two tricky things at once!",
+      "scene": "harder",
+      "focus": "answer"
+    },
+    {
+      "start": 369.37,
+      "end": 373.32,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 373.32,
+      "end": 385.16,
+      "caption": "Why miss a black cat on a black sofa?",
+      "text": "Why might a computer miss a black cat, sitting on a black sofa? Pause the video, and think. Or write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 385.16,
+      "end": 397.74,
+      "caption": "Same colour \u2192 no edges \u2192 no cat shape",
+      "text": "Here's one answer. The cat and the sofa are the same dark colour. So the computer can't find the edges, or the shape of the cat, in the pixels. Brilliant thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 397.74,
+      "end": 404.41,
+      "caption": "Computers see pixels, not things",
+      "text": "Let's remember what we learned. Computers see pixels, tiny coloured dots, not things.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 404.41,
+      "end": 409.17,
+      "caption": "Seeing = matching patterns",
+      "text": "Seeing means matching patterns, like edges, shapes, and colours.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 409.17,
+      "end": 412.69,
+      "caption": "Patterns are learned from many examples",
+      "text": "They learn those patterns from many, many examples.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 412.69,
+      "end": 418.48,
+      "caption": "Dark, tiny, or hidden things can fool it",
+      "text": "And dark, tiny, or hidden things can fool them. Computers can be wrong!",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 418.48,
+      "end": 424.39,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit three, done! Now you know how computers see, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 424.39,
+      "end": 431.19,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

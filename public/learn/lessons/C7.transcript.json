@@ -1,0 +1,364 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.72,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for some more logic fun?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.72,
+      "end": 20.39,
+      "caption": "Last time: every statement is true or false",
+      "text": "Last time, you became a logic detective. You learned that a statement is either true, or false. A week has seven days? True! All birds can fly? False, because of penguins!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 20.39,
+      "end": 31.45,
+      "caption": "Chapter 2 \u00b7 AND, OR, NOT",
+      "text": "Today is chapter two of Logic and Reasoning. And it's all about three tiny words. The word and. The word or. And the word not.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 31.45,
+      "end": 40.31,
+      "caption": "Tiny words \u2192 big decisions",
+      "text": "They look small, right? But these little words help computers, and games, make big decisions, every single second.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 40.31,
+      "end": 45.15,
+      "caption": "Let's go to a birthday party!",
+      "text": "And to learn them, we're going to a birthday party! Let's go.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 45.15,
+      "end": 55.9,
+      "caption": "Robo guards the door at Anaya's party",
+      "text": "It's Anaya's birthday party! And guess who's guarding the door? Robo, our robot friend! He checks every guest, before they come in.",
+      "scene": "party",
+      "focus": "meet"
+    },
+    {
+      "start": 55.9,
+      "end": 68.15,
+      "caption": "Rule: bring cake AND juice",
+      "text": "Anaya gives Robo one rule. Bring cake and juice. A rule is a check that gives a yes, or a no. Yes, come in. Or no, sorry.",
+      "scene": "party",
+      "focus": "rule"
+    },
+    {
+      "start": 68.15,
+      "end": 77.91,
+      "caption": "Arjun brings cake\u2026 but no juice",
+      "text": "Ding dong! Here comes Arjun. He's carrying a big chocolate cake. Yum. But, no juice.",
+      "scene": "party",
+      "focus": "arjun"
+    },
+    {
+      "start": 77.91,
+      "end": 86.06,
+      "caption": "Can Arjun come in? Think!",
+      "text": "So, does Robo let Arjun in? Yes, or no? Think about it.",
+      "scene": "party",
+      "focus": "why"
+    },
+    {
+      "start": 86.06,
+      "end": 98.4,
+      "caption": "No! AND needs both. Juice is missing.",
+      "text": "The answer is no. The rule says cake and juice, and that means you need both. Arjun has the cake, but the juice is missing. So Robo says, sorry!",
+      "scene": "party",
+      "focus": "answer"
+    },
+    {
+      "start": 98.4,
+      "end": 107.89,
+      "caption": "Cake AND juice \u2192 Yes, come in!",
+      "text": "Arjun runs home, and comes back with a juice box. Cake, and juice. Now Robo says, yes, come in!",
+      "scene": "party",
+      "focus": "fixed"
+    },
+    {
+      "start": 107.89,
+      "end": 113.43,
+      "caption": "AND = both must be true",
+      "text": "So here's our first tiny word. The word and means both things must be true.",
+      "scene": "and",
+      "focus": "intro"
+    },
+    {
+      "start": 113.43,
+      "end": 128.02,
+      "caption": "Both \u2192 Yes. Anything less \u2192 No.",
+      "text": "Let's check four guests. Cake and juice? Yes! Only cake? No. Only juice? No. And nothing at all? Definitely no.",
+      "scene": "and",
+      "focus": "table"
+    },
+    {
+      "start": 128.02,
+      "end": 137.91,
+      "caption": "AND is fussy. One missing \u2192 No!",
+      "text": "See? The word and is a little fussy. It wants everything on the list. If even one thing is missing, the answer is no.",
+      "scene": "and",
+      "focus": "fussy"
+    },
+    {
+      "start": 137.91,
+      "end": 148.63,
+      "caption": "Gift AND card. Kabir has only a gift.",
+      "text": "Quick check. The rule is, bring a gift and a card. Kabir brings a gift, but no card. Can he come in?",
+      "scene": "and",
+      "focus": "kabir-q"
+    },
+    {
+      "start": 148.63,
+      "end": 156.34,
+      "caption": "No. AND needs both, the card is missing",
+      "text": "No! He has the gift, but no card. And needs both, so Kabir has to go and make a card.",
+      "scene": "and",
+      "focus": "kabir-a"
+    },
+    {
+      "start": 156.34,
+      "end": 164.66,
+      "caption": "Fun fair rule: a ticket OR a pass",
+      "text": "Now our second word. Or. Imagine the rule at the fun fair gate is, enter with a ticket, or a pass.",
+      "scene": "or",
+      "focus": "intro"
+    },
+    {
+      "start": 164.66,
+      "end": 174.48,
+      "caption": "OR = at least one must be true",
+      "text": "The word or means at least one thing must be true. Only a ticket? Yes! Only a pass? Yes!",
+      "scene": "or",
+      "focus": "rows"
+    },
+    {
+      "start": 174.48,
+      "end": 184.83,
+      "caption": "Both? Still YES! Both is fine too.",
+      "text": "And what if you have both, a ticket and a pass? Still yes! Two is more than enough. The word or is happy with one, or both.",
+      "scene": "or",
+      "focus": "both"
+    },
+    {
+      "start": 184.83,
+      "end": 191.16,
+      "caption": "Neither \u2192 No",
+      "text": "It only says no when you have neither. No ticket, and no pass. Sorry!",
+      "scene": "or",
+      "focus": "neither"
+    },
+    {
+      "start": 191.16,
+      "end": 198.36,
+      "caption": "Sara has only a pass. Can she enter?",
+      "text": "Quick check. Sara has only a pass. Can she enter?",
+      "scene": "or",
+      "focus": "sara-q"
+    },
+    {
+      "start": 198.36,
+      "end": 206.57,
+      "caption": "Yes! For OR, one is enough",
+      "text": "Yes! With or, one is enough, and Sara has her pass. Have fun on the big wheel, Sara!",
+      "scene": "or",
+      "focus": "sara-a"
+    },
+    {
+      "start": 206.57,
+      "end": 212.81,
+      "caption": "NOT = the opposite. It flips it!",
+      "text": "And our third word is not. Not means the opposite. It flips things around.",
+      "scene": "not",
+      "focus": "flip"
+    },
+    {
+      "start": 212.81,
+      "end": 221.3,
+      "caption": "NOT true = false \u00b7 NOT false = true",
+      "text": "Not true becomes false. And not false becomes true. Just like flipping a light switch, from on, to off.",
+      "scene": "not",
+      "focus": "truefalse"
+    },
+    {
+      "start": 221.3,
+      "end": 236.27,
+      "caption": "Rule: NOT wearing muddy shoes",
+      "text": "Here's a rule at Nani's house. Come in only if you are not wearing muddy shoes. Clean shoes? Yes, come in. Muddy shoes? No way! Nani just cleaned the floor.",
+      "scene": "not",
+      "focus": "shoes"
+    },
+    {
+      "start": 236.27,
+      "end": 244.61,
+      "caption": "Clean shoes \u2192 not muddy \u2192 Aman goes in",
+      "text": "Now Aman walks up. His shoes are clean, so they're not muddy. The rule is true, and Aman can go in!",
+      "scene": "not",
+      "focus": "aman"
+    },
+    {
+      "start": 244.61,
+      "end": 252.14,
+      "caption": "Games use AND and OR to decide",
+      "text": "Now here's where computers come in. Video games use these little words all the time, to decide what happens.",
+      "scene": "games",
+      "focus": "intro"
+    },
+    {
+      "start": 252.14,
+      "end": 260.49,
+      "caption": "Key AND torch \u2192 open the cave (if-both)",
+      "text": "A game might say, if you have a key and a torch, open the cave. That's an if-both rule. You need both.",
+      "scene": "games",
+      "focus": "cave"
+    },
+    {
+      "start": 260.49,
+      "end": 269.2,
+      "caption": "Coin OR gem \u2192 get a point (if-either)",
+      "text": "Another might say, if you find a coin or a gem, get a point. That's an if-either rule. Either one works.",
+      "scene": "games",
+      "focus": "coin"
+    },
+    {
+      "start": 269.2,
+      "end": 274.88,
+      "caption": "Checked many times every second!",
+      "text": "And the game checks these rules again and again, many times every second, while you play!",
+      "scene": "games",
+      "focus": "fast"
+    },
+    {
+      "start": 274.88,
+      "end": 293.78,
+      "caption": "Key AND torch. Who can open the cave?",
+      "text": "Let's play! Four explorers reach the cave. Tia has only a key. Raj has only a torch. Zoya has a key and a torch. And Neel has neither. Who can open the cave? Think.",
+      "scene": "cave",
+      "focus": "ask"
+    },
+    {
+      "start": 293.78,
+      "end": 305.35,
+      "caption": "Only Zoya has both the key and the torch",
+      "text": "Only Zoya! The rule needs both. Tia and Raj each have just one. And Neel has nothing. Go on Zoya, open the cave!",
+      "scene": "cave",
+      "focus": "answer"
+    },
+    {
+      "start": 305.35,
+      "end": 322.7,
+      "caption": "Juice OR sweets, AND NOT late. Pooja?",
+      "text": "Now, a tricky one! Pooja's party rule says, bring juice or sweets, and do not come late. Pooja brings a box of sweets, and she arrives on time. Can she come in? Think it through.",
+      "scene": "combo",
+      "focus": "ask"
+    },
+    {
+      "start": 322.7,
+      "end": 331.95,
+      "caption": "Part 1: juice OR sweets \u2192 true",
+      "text": "Let's check it in parts. Part one, juice or sweets. She has sweets, and one is enough, so that part is true.",
+      "scene": "combo",
+      "focus": "or"
+    },
+    {
+      "start": 331.95,
+      "end": 339.25,
+      "caption": "Part 2: NOT late \u2192 true",
+      "text": "Part two, do not come late. She came on time, so she's not late. True again!",
+      "scene": "combo",
+      "focus": "not"
+    },
+    {
+      "start": 339.25,
+      "end": 347.92,
+      "caption": "True AND true \u2192 Yes, Pooja comes in!",
+      "text": "Both parts are true, and the word and joins them together. So yes, Pooja can come in. Enjoy the party!",
+      "scene": "combo",
+      "focus": "answer"
+    },
+    {
+      "start": 347.92,
+      "end": 351.8,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 351.8,
+      "end": 364.56,
+      "caption": "Hat AND ticket. You have only a ticket.",
+      "text": "You need a hat and a ticket to enter. You have only a ticket. Can you enter? Pause the video, and say your answer out loud.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 364.56,
+      "end": 375.8,
+      "caption": "No! AND needs both. Grab a hat!",
+      "text": "No, you can't. The rule needs both, and you're missing the hat. Grab a hat, then come back! Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 375.8,
+      "end": 381.56,
+      "caption": "AND \u2192 both must be true",
+      "text": "Let's remember what we learned today. The word and, means both must be true.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 381.56,
+      "end": 386.74,
+      "caption": "OR \u2192 at least one is true",
+      "text": "The word or, means at least one is true. And both is fine too.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 386.74,
+      "end": 391.58,
+      "caption": "NOT \u2192 flip it to the opposite",
+      "text": "The word not, flips it to the opposite. Not true is false.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 391.58,
+      "end": 396.27,
+      "caption": "Games use if-both and if-either",
+      "text": "And games use if-both, and if-either rules, to decide what happens.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 396.27,
+      "end": 401.42,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! You're a party-planning logic pro, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 401.42,
+      "end": 408.22,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

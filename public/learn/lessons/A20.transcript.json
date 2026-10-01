@@ -1,0 +1,388 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.4,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ! Welcome back. Today is a very special day.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.4,
+      "end": 16.11,
+      "caption": "Last time: data, and keeping it private",
+      "text": "Last time, we learned about data. The facts computers remember, like names and scores. And we learned that private data stays private.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.11,
+      "end": 24.72,
+      "caption": "Chapter 5 \u00b7 Capstone: Design Your Dream App",
+      "text": "Today is chapter five, the final chapter of Computers in Our World. It's your capstone. Design your dream app!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.72,
+      "end": 36.98,
+      "caption": "Capstone = your big, final project",
+      "text": "Capstone. Hmm, what's that? A capstone is the very last stone, placed right on top of a building. So this is your big, final project!",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 36.98,
+      "end": 47.77,
+      "caption": "You're the designer! No coding needed",
+      "text": "Today, you are the app designer. And guess what? No coding needed. Just a clear idea, a pencil, and your imagination.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 47.77,
+      "end": 54.94,
+      "caption": "Meet Kabir, Class 4",
+      "text": "Meet Kabir. He's in class four, and he's a lovely kid. But he has one big problem.",
+      "scene": "kabir",
+      "focus": "meet"
+    },
+    {
+      "start": 54.94,
+      "end": 67.14,
+      "caption": "Kabir keeps forgetting things!",
+      "text": "Every morning, he packs his bag in a big rush. And every week, he forgets something. His maths book. His drawing book. His water bottle!",
+      "scene": "kabir",
+      "focus": "forget"
+    },
+    {
+      "start": 67.14,
+      "end": 76.01,
+      "caption": "\"Kabir, where's your maths book?\"",
+      "text": "At school, his teacher asks, Kabir, where's your maths book? And Kabir says, oh no. I forgot it, again.",
+      "scene": "kabir",
+      "focus": "sad"
+    },
+    {
+      "start": 76.01,
+      "end": 84.04,
+      "caption": "What app would help Kabir? Think!",
+      "text": "What if an app could help Kabir? What would you make for him? Think for a moment.",
+      "scene": "kabir",
+      "focus": "idea"
+    },
+    {
+      "start": 84.04,
+      "end": 93.97,
+      "caption": "Idea: Bag Buddy! Let's design it.",
+      "text": "Here's one idea. An app called, Bag Buddy! Let's design it together, step by step. Then you'll design your own.",
+      "scene": "kabir",
+      "focus": "reveal"
+    },
+    {
+      "start": 93.97,
+      "end": 97.06,
+      "caption": "Four steps to design an app",
+      "text": "Designing an app takes just four simple steps.",
+      "scene": "steps",
+      "focus": "intro"
+    },
+    {
+      "start": 97.06,
+      "end": 108.81,
+      "caption": "Problem \u2192 Plan \u2192 2 screens \u2192 1-minute pitch",
+      "text": "Step one, find a problem. Step two, write the plan. Step three, draw two screens. And step four, present it in one minute.",
+      "scene": "steps",
+      "focus": "all"
+    },
+    {
+      "start": 108.81,
+      "end": 121.49,
+      "caption": "Step 1: Help a Class 3\u20135 child",
+      "text": "Step one. Find a problem. Your app should help a child in class three, four, or five. Not a rocket, not a factory. Kids just like you!",
+      "scene": "problem",
+      "focus": "who"
+    },
+    {
+      "start": 121.49,
+      "end": 133.98,
+      "caption": "Homework? Bag? Spellings? Water?",
+      "text": "So think. What's hard, or boring, for kids your age? Forgetting homework? Packing your bag? Learning spellings? Forgetting to drink water?",
+      "scene": "problem",
+      "focus": "ideas"
+    },
+    {
+      "start": 133.98,
+      "end": 139.93,
+      "caption": "Give it a fun name: Bag Buddy, Spell Star",
+      "text": "Pick one, and give your app a fun name. Like Bag Buddy, or Spell Star!",
+      "scene": "problem",
+      "focus": "name"
+    },
+    {
+      "start": 139.93,
+      "end": 151.51,
+      "caption": "Step 2: Who? What goes in? What comes out?",
+      "text": "Step two. Write the plan. A good plan answers three questions. Who uses it? What goes in? And what comes out?",
+      "scene": "plan",
+      "focus": "intro"
+    },
+    {
+      "start": 151.51,
+      "end": 159.35,
+      "caption": "User: the person who uses the app",
+      "text": "The person who uses your app is called the user. For Bag Buddy, the user is class four kids who forget their books.",
+      "scene": "plan",
+      "focus": "user"
+    },
+    {
+      "start": 159.35,
+      "end": 168.98,
+      "caption": "Tiffin Timer: who is the user?",
+      "text": "Quick one! An app called Tiffin Timer reminds kids to eat their lunch at school. Who's the user?",
+      "scene": "plan",
+      "focus": "tiffinq"
+    },
+    {
+      "start": 168.98,
+      "end": 173.32,
+      "caption": "The user is a school child!",
+      "text": "Not the tiffin box, silly! It's a school child.",
+      "scene": "plan",
+      "focus": "tiffina"
+    },
+    {
+      "start": 173.32,
+      "end": 183.65,
+      "caption": "Input: what the user gives the app",
+      "text": "Remember input and output from our very first unit? Input is what the user gives the app. For Bag Buddy, the child taps tomorrow's subjects.",
+      "scene": "plan",
+      "focus": "input"
+    },
+    {
+      "start": 183.65,
+      "end": 194.03,
+      "caption": "Output: what the app shows back",
+      "text": "And output is what the app shows back. Bag Buddy shows a checklist of books to pack. Maths book, tick. Drawing book, tick!",
+      "scene": "plan",
+      "focus": "output"
+    },
+    {
+      "start": 194.03,
+      "end": 205.21,
+      "caption": "Child types a word: input or output?",
+      "text": "Let's practise. In a spelling app, the child types a word. Is that the input, or the output? Think.",
+      "scene": "io",
+      "focus": "spellq"
+    },
+    {
+      "start": 205.21,
+      "end": 213.77,
+      "caption": "Input! The star shown back is the output.",
+      "text": "It's the input! The child gives the word to the app. And the star the app shows back? That's the output.",
+      "scene": "io",
+      "focus": "spella"
+    },
+    {
+      "start": 213.77,
+      "end": 225.83,
+      "caption": "Bus Buddy: what's the output?",
+      "text": "Now, Riya's app is called Bus Buddy. She types her stop name, and the app shows when the school bus will arrive. What's the output?",
+      "scene": "io",
+      "focus": "busq"
+    },
+    {
+      "start": 225.83,
+      "end": 233.99,
+      "caption": "Output: the bus arrival time!",
+      "text": "The bus arrival time on the screen! Riya typing her stop is the input. The time shown back is the output.",
+      "scene": "io",
+      "focus": "busa"
+    },
+    {
+      "start": 233.99,
+      "end": 244.32,
+      "caption": "Step 3: Draw 2 screens",
+      "text": "Step three. Draw two screens. A screen is one page of your app. Just two. Not ten, not fifty!",
+      "scene": "screens",
+      "focus": "intro"
+    },
+    {
+      "start": 244.32,
+      "end": 254.4,
+      "caption": "Screen 1: input \u00b7 tap the subjects",
+      "text": "Screen one is where the user gives the input. For Bag Buddy, that's buttons for each subject. Maths, English, Science, Art.",
+      "scene": "screens",
+      "focus": "s1"
+    },
+    {
+      "start": 254.4,
+      "end": 262.04,
+      "caption": "Screen 2: output \u00b7 the checklist",
+      "text": "Screen two is where the app shows the output. A checklist of books, with a happy message. All packed!",
+      "scene": "screens",
+      "focus": "s2"
+    },
+    {
+      "start": 262.04,
+      "end": 270.87,
+      "caption": "Paper and pencil. No coding needed!",
+      "text": "And you don't need a computer for this. A pencil, some paper, and a few colours are enough. No coding at all!",
+      "scene": "screens",
+      "focus": "paper"
+    },
+    {
+      "start": 270.87,
+      "end": 276.64,
+      "caption": "Add one idea from earlier chapters",
+      "text": "Now, add one idea from your earlier chapters. Pick any one of these three.",
+      "scene": "ideas",
+      "focus": "intro"
+    },
+    {
+      "start": 276.64,
+      "end": 287.3,
+      "caption": "Variable: a box holding a changing number",
+      "text": "A variable. Remember? A box that holds a number that changes. Like a star score, or a counter for the glasses of water you drink.",
+      "scene": "ideas",
+      "focus": "variable"
+    },
+    {
+      "start": 287.3,
+      "end": 296.58,
+      "caption": "Loop: a reminder every evening",
+      "text": "A loop. Doing something again and again. Like a reminder that pops up every single evening. Pack your bag!",
+      "scene": "ideas",
+      "focus": "loop"
+    },
+    {
+      "start": 296.58,
+      "end": 304.59,
+      "caption": "Safety rule: never ask for a home address",
+      "text": "Or a safety rule. Like, your app never asks for a home address. Private data stays private!",
+      "scene": "ideas",
+      "focus": "safety"
+    },
+    {
+      "start": 304.59,
+      "end": 332.06,
+      "caption": "Which app idea is the clearest?",
+      "text": "Detective time! Which app idea is the clearest? A, a cool app that does stuff. B, an app for everyone that does everything. C, a game, not sure who plays it yet. Or D, Spell Star. For class three kids. Input, a word they type. Output, a star if it's right.",
+      "scene": "clear",
+      "focus": "ask"
+    },
+    {
+      "start": 332.06,
+      "end": 342.42,
+      "caption": "D! Clear user, input, and output",
+      "text": "D! It says who the user is, what the input is, and what the output is. Clear and simple. That's a great plan.",
+      "scene": "clear",
+      "focus": "answer"
+    },
+    {
+      "start": 342.42,
+      "end": 349.34,
+      "caption": "Step 4: a one-minute pitch",
+      "text": "Step four. Present your app in about one minute. That short talk is called a pitch.",
+      "scene": "pitch",
+      "focus": "intro"
+    },
+    {
+      "start": 349.34,
+      "end": 358.32,
+      "caption": "Name \u00b7 User \u00b7 Input \u00b7 Output \u00b7 Screens",
+      "text": "Say the name of your app. Say who it's for. Say the input, and the output. Then show your two screens.",
+      "scene": "pitch",
+      "focus": "parts"
+    },
+    {
+      "start": 358.32,
+      "end": 365.33,
+      "caption": "One reason it helps. Then take a bow!",
+      "text": "End with one reason it helps kids. Then, take a bow! Everyone claps for you.",
+      "scene": "pitch",
+      "focus": "bow"
+    },
+    {
+      "start": 365.33,
+      "end": 368.26,
+      "caption": "Your turn: capstone challenge",
+      "text": "Okay champ, here's your capstone challenge.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 368.26,
+      "end": 383.31,
+      "caption": "Write: name, user, one input, one output",
+      "text": "Draw or list four things. Your app's name. Who uses it. One input. And one output. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 383.31,
+      "end": 400.11,
+      "caption": "Spell Star \u00b7 Class 3 \u00b7 types a word \u2192 a star",
+      "text": "Here's one example. Spell Star. For class three kids. Input, the child types a spelling word. Output, a star if it's spelt right. How did yours turn out? I bet it's amazing!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 400.11,
+      "end": 405.06,
+      "caption": "Your app helps a Class 3\u20135 child",
+      "text": "Let's remember. Your app helps a child in class three to five.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 405.06,
+      "end": 409.4,
+      "caption": "Plan: name \u00b7 user \u00b7 input \u00b7 output",
+      "text": "Your plan has a name, a user, an input, and an output.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 409.4,
+      "end": 412.97,
+      "caption": "Draw 2 screens \u00b7 no coding",
+      "text": "You draw two screens. No coding needed.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 412.97,
+      "end": 419.94,
+      "caption": "1-minute pitch + one earlier idea",
+      "text": "And you present in one minute, with one idea from earlier, like a loop, a variable, or a safety rule.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 419.94,
+      "end": 431.6,
+      "caption": "All 4 units: done!",
+      "text": "And champ, look how far you've come. How computers work. Thinking like a computer. Building with blocks. And computers in our world.",
+      "scene": "recap",
+      "focus": "journey"
+    },
+    {
+      "start": 431.6,
+      "end": 439.6,
+      "caption": "Computer Science track complete!",
+      "text": "You've finished the whole Computer Science track! I'm so proud of you. You're a real computer scientist now.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 439.6,
+      "end": 444.89,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Tap Finish, and try your final quiz. Then go design that dream app!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

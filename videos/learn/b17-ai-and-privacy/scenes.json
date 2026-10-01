@@ -1,0 +1,147 @@
+{
+  "id": "B17",
+  "title": "AI and Privacy",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "AI · Smart & Safe With AI",
+  "slug": "b17-ai-and-privacy",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b17-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so good to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned that AI needs many kinds of examples to be fair. Just like a crayon box, with lots of colours.", "caption": "Last time: fair AI needs many kinds of examples", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of Smart and Safe With AI. It's all about AI, and privacy.", "caption": "Chapter 2 · AI and Privacy", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Privacy. Hmm. What does that mean? And why does it matter when we use AI apps? Let's find out together.", "caption": "Pri · va · cy. What does it mean?", "focus": "word", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "aarav",
+      "visual": "b17-hook",
+      "beats": [
+        { "vo": "Meet Aarav. He's nine, he loves cricket, and today, he's stuck on his science homework.", "caption": "Meet Aarav, stuck on his science homework", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "So his mum lets him use a homework helper on her tablet. It's an AI helper. You type a question, and it explains things.", "caption": "An AI homework helper on Mum's tablet", "focus": "app" },
+        { "vo": "The helper says, hi! How can I help? And Aarav gets so excited, he types everything. My name is Aarav Sharma. I study at Green Valley School. I live at twelve Lotus Lane.", "caption": "\"I'm Aarav Sharma. I live at 12 Lotus Lane…\"", "focus": "typing", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Wait a second. Is that a good idea? Does a homework helper need all of that? Think about it.", "caption": "Does the helper need all that? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Nope! To help with science, it only needs one thing. His question. Not his full name, not his school, and definitely not where he lives.", "caption": "It only needs his question!", "focus": "answer", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b17-define",
+      "beats": [
+        { "vo": "Keeping some things about you safe, and to yourself, has a name. It's called privacy.", "caption": "Keeping your things safe = PRIVACY", "focus": "name", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "Privacy means keeping your personal things safe, and only sharing them with people you trust, like your family.", "caption": "Share personal things only with people you trust", "focus": "meaning" },
+        { "vo": "So, what's personal info? It's things about you. Your full name. Your school. Your address. Your phone number. And photos of you, or your home.", "caption": "Name · School · Address · Phone · Photos", "focus": "personal", "sfx": "tick", "sfxAt": 0.15 }
+      ]
+    },
+    {
+      "id": "need",
+      "visual": "b17-need",
+      "beats": [
+        { "vo": "Think about buying samosas at the shop near your school. The uncle needs your order. Two samosas, please! Does he need your home address? Of course not!", "caption": "Samosa uncle needs your order, not your address", "focus": "shop", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "An AI helper is the same. Type, explain how plants make food. That's perfect! It's a great question, and it shares nothing private.", "caption": "\"Explain how plants make food\" → perfect!", "focus": "helper", "sfx": "success", "sfxAt": 0.5 },
+        { "vo": "And here's something important. What you type or upload into an app can be saved by the app. Once it's sent, you can't always take it back. So think before you type.", "caption": "Apps can save what you type. Think first!", "focus": "saved", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "extra",
+      "visual": "b17-extra",
+      "beats": [
+        { "vo": "Some info needs extra care. Let's look at three kinds.", "caption": "Extra-careful info: three kinds", "focus": "intro", "sfx": "pop" },
+        { "vo": "One. Your real full name, and your school. Together, they tell a stranger exactly who you are, and where to find you.", "caption": "1 · Your real full name and your school", "focus": "name", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Two. Your home address, and your live location. Live location means where you are right now, shown on a map. That's very private!", "caption": "2 · Home address and live location", "focus": "location", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Three. Photos of your home. A house number, a street sign, or your school badge can quietly show where you live.", "caption": "3 · Photos of home, house number, school badge", "focus": "photos", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Why so careful? Because your name and address together can lead someone right to your door.", "caption": "Name + address can lead someone to your home", "focus": "why", "pause": 0.5 }
+      ]
+    },
+    {
+      "id": "photo",
+      "visual": "b17-photo",
+      "beats": [
+        { "vo": "Let's play detective! Aarav got a new cycle, and he wants to upload this photo to the homework app, just for fun.", "caption": "Detective game: Aarav's new cycle photo", "focus": "intro", "sfx": "pop" },
+        { "vo": "Look closely. What in this photo could show where Aarav lives, or where he studies? Pause, and spot them.", "caption": "What gives away private info? Spot it!", "focus": "ask", "pause": 2.2 },
+        { "vo": "There's the house number on the gate. The street sign, Lotus Lane. And the school badge on his shirt! Three clues, in one happy photo.", "caption": "House number · Street sign · School badge", "focus": "answer", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "So, what should Aarav do? Ask a parent before sharing any photo with an app. A grown-up can help check that it's safe.", "caption": "Ask a parent before sharing photos", "focus": "parent", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "b17-sort",
+      "beats": [
+        { "vo": "Quick game! Share, or don't share? Here come six cards.", "caption": "Game: Share or don't share?", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Your homework question. A nickname. Your favourite animal. Your home address. Your phone number. Your password. Which ones are okay to share with an app? Think.", "caption": "Which ones are okay to share?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Your question, a nickname, and your favourite animal? Those are fine. But your address, your phone number, and your password? Keep those private. Not sure? Stop, and ask a grown-up first.", "caption": "Share fun stuff. Keep private stuff private!", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "friendly",
+      "visual": "b17-friendly",
+      "beats": [
+        { "vo": "Now, AI helpers can sound really friendly. They say nice things, like, great question! You're so smart!", "caption": "AI helpers can sound super friendly", "focus": "intro", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "But remember. An AI helper isn't a person, and it isn't a friend who keeps your secrets. It's a computer program that finds patterns in words.", "caption": "It's a program, not a secret-keeping friend", "focus": "truth" },
+        { "vo": "So, friendly doesn't mean safe. Even if an app is fun and kind, don't tell it your school name, or where you live.", "caption": "Friendly doesn't mean safe!", "focus": "rule", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "settings",
+      "visual": "b17-settings",
+      "beats": [
+        { "vo": "Here's some good news. Phones and apps have settings. Settings are like switches. They choose what an app can see, and share.", "caption": "Settings = switches for what apps can see", "focus": "intro", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Your parents can use these switches to limit what an app is allowed to see. That's a big help in keeping you safe.", "caption": "Parents can use settings to limit sharing", "focus": "parents" },
+        { "vo": "Here's a puzzle. For a kids' game, which setting is safer? Location, always on? Or location, off? Think.", "caption": "Which is safer for a kids' game?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Location, off! When it's off, the game can't see where you are. And share my contacts, or show my real name to everyone? Those stay off too.", "caption": "Location: OFF is safer", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b17-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "You open a fun drawing game, and it asks, can I use your live location? What should you do? Pause the video, and think. Or write it on paper.", "caption": "A drawing game wants your location. Now what?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. Say no, and don't allow it. A drawing game doesn't need to know where you are! Then ask a parent, or a grown-up, to check the settings. Super thinking!", "caption": "Say no, and ask a grown-up to check", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b17-recap",
+      "beats": [
+        { "vo": "Let's remember. An AI helper doesn't need your life story. Just your question.", "caption": "AI doesn't need your life story", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Keep your full name, your location, and photos of your home private.", "caption": "Keep name, location, home photos private", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Ask a parent before sharing photos with any app.", "caption": "Ask a parent before sharing photos", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And settings can limit what an app sees, and shares.", "caption": "Settings can limit what's shared", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! Now you know what to keep private, champ. That's smart, and safe!", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "id": "C1",
+  "title": "Counting the Computer Way",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "Math · Numbers Computers Love",
+  "slug": "c1-counting-the-computer-way",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c1-welcome",
+      "beats": [
+        { "vo": "Hey champ! Welcome to a brand new adventure. I'm so happy you're here!", "caption": "Hello, champ! Welcome!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Maybe you've already explored computers and AI with us. Today, we're starting something new. The Maths track!", "caption": "Something new: the Maths track!", "focus": "track", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Our first unit is called, Numbers Computers Love. And chapter one is, Counting the Computer Way.", "caption": "Numbers Computers Love · Chapter 1", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Here's something surprising. We count with ten digits, zero to nine. But a computer counts with just two! Hmm. How can that even work?", "caption": "We use 10 digits. Computers use just 2!", "focus": "question", "pause": 0.5 }
+      ]
+    },
+    {
+      "id": "meera",
+      "visual": "c1-hook",
+      "beats": [
+        { "vo": "Let me tell you about Meera. She's nine. And her best friend Kabir lives in the building right across the lane.", "caption": "Meet Meera, and her friend Kabir", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "One night, they make a secret plan. Meera has three lamps in her window. She'll switch them on and off, to tell Kabir how many laddoos Nani has saved for them.", "caption": "Secret plan: send a number with 3 lamps", "focus": "plan" },
+        { "vo": "But here's the tricky part. Each lamp can only be on, or off. Nothing in between. So how can three little lamps show the number five? Think about it.", "caption": "Each lamp is only ON or OFF. How to show 5?", "focus": "puzzle", "pause": 2.0 },
+        { "vo": "Good thinking! Computers solve this exact puzzle, millions of times every second. And by the end of today, you'll know Meera's trick.", "caption": "Computers do this all the time!", "focus": "tease", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "switches",
+      "visual": "c1-switch",
+      "beats": [
+        { "vo": "Inside every computer, there are tiny, tiny switches. Far too small to see. And just like a lamp, each switch can only be on, or off.", "caption": "Inside a computer: tiny on/off switches", "focus": "inside" },
+        { "vo": "So computers use a very simple code. A switch that is on is written as one. A switch that is off is written as zero.", "caption": "ON = 1 · OFF = 0", "focus": "code", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "That's it. Every game, every photo, every song on a computer is made of millions of these zeros and ones.", "caption": "Games, photos, songs: all 0s and 1s!", "focus": "everything", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c1-define",
+      "beats": [
+        { "vo": "Counting with only two digits, zero and one, has a special name. It's called binary. Bi means two, just like a bicycle has two wheels.", "caption": "Counting with 0 and 1 is called BINARY", "focus": "name", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "We use ten digits. Zero, one, two, all the way up to nine. Binary uses just two. Zero, and one. That's all!", "caption": "Us: 0 to 9 · Binary: just 0 and 1", "focus": "compare" },
+        { "vo": "And one single light, showing just one zero or one, is called a bit. A bit is the tiniest piece of computer information.", "caption": "One light = one BIT (a single 0 or 1)", "focus": "bit" }
+      ]
+    },
+    {
+      "id": "fingers",
+      "visual": "c1-fingers",
+      "beats": [
+        { "vo": "Let's try it with your hand. Hold up three fingers. Each finger is a light switch.", "caption": "Your 3 fingers = 3 light switches", "focus": "intro", "sfx": "pop" },
+        { "vo": "Finger up means on, so that's a one. Finger down means off, so that's a zero.", "caption": "Finger up = 1 · Finger down = 0", "focus": "rule" },
+        { "vo": "Put all three fingers down. Zero, zero, zero. Now lift them all up. One, one, one. Look at you, speaking binary!", "caption": "All down = 000 · All up = 111", "focus": "try", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "places",
+      "visual": "c1-places",
+      "beats": [
+        { "vo": "Now for the clever part. Each light in the row has its own value, depending on its place.", "caption": "Each place has its own value", "focus": "intro" },
+        { "vo": "With three lights, the left one is worth four. The middle one is worth two. And the right one is worth one. Four, two, one.", "caption": "Left = 4 · Middle = 2 · Right = 1", "focus": "values", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "To read a number, add up the values of the lights that are on. A light that's off adds nothing.", "caption": "Add the values of the lights that are ON", "focus": "rule" },
+        { "vo": "So here's Meera's trick! Left lamp on, middle lamp off, right lamp on. One, zero, one. Four, plus zero, plus one. That's five!", "caption": "1 0 1 → 4 + 0 + 1 = 5", "focus": "meera", "sfx": "success", "sfxAt": 0.85 },
+        { "vo": "Kabir looks across the lane, adds it up, and grins. Five laddoos! Yum.", "caption": "Kabir reads it: five laddoos!", "focus": "kabir", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "count",
+      "visual": "c1-count",
+      "beats": [
+        { "vo": "Let's count from zero to five, the computer way. Zero is all lights off. Zero, zero, zero.", "caption": "0 = 000 (all off)", "focus": "zero" },
+        { "vo": "One is just the right light. Zero, zero, one. Two is just the middle light. Zero, one, zero.", "caption": "1 = 001 · 2 = 010", "focus": "onetwo", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Three? We need two plus one. So the middle light and the right light. Zero, one, one.", "caption": "3 = 011 (2 + 1)", "focus": "three" },
+        { "vo": "Four is just the left light. One, zero, zero. And five is four plus one. One, zero, one.", "caption": "4 = 100 · 5 = 101 (4 + 1)", "focus": "fourfive", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "See? Each new number just adds one more. Like putting one more laddoo on the plate.", "caption": "Each number adds one more laddoo", "focus": "grow", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "place-matters",
+      "visual": "c1-matters",
+      "beats": [
+        { "vo": "Now look at these two. Zero, zero, one. And one, zero, zero. Both have just one light on. So, are they the same number? What do you think?", "caption": "001 and 100: the same number?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Nope! Zero, zero, one is one. But one, zero, zero is four! The light sits in a different place, so it's worth a different amount.", "caption": "001 = 1 · 100 = 4. The place matters!", "focus": "answer", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Our normal numbers work like this too. Twenty-three and thirty-two use the same digits, but they're not the same at all. More on that soon!", "caption": "Like 23 and 32: same digits, not the same!", "focus": "like" }
+      ]
+    },
+    {
+      "id": "read",
+      "visual": "c1-read",
+      "beats": [
+        { "vo": "Let's play a light-reading game! What number does zero, one, zero show? Take a moment.", "caption": "Light game: what number is 010?", "focus": "q1", "pause": 2.0 },
+        { "vo": "It's two! Only the middle light is on, and it's worth two. Zero plus two plus zero, is two.", "caption": "010 → 0 + 2 + 0 = 2", "focus": "a1", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Now the other way round. Which lights would you switch on, to show four?", "caption": "Which lights show 4?", "focus": "q2", "pause": 2.0 },
+        { "vo": "Just the left light! One, zero, zero. Four plus zero plus zero, is four.", "caption": "4 = 100 (only the left light)", "focus": "a2", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "next",
+      "visual": "c1-next",
+      "beats": [
+        { "vo": "One more! Meera is counting in binary. Zero, zero, one. Zero, one, zero. Zero, one, one. What comes next? Pause, and think.", "caption": "001, 010, 011, … what comes next?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Careful! Some people say zero, one, two. But binary has no digit two. Only zeros and ones!", "caption": "Not 012! Binary has no digit 2", "focus": "trap", "sfx": "buzz", "sfxAt": 0.3 },
+        { "vo": "Zero, one, one is three. So next comes four. And four is one, zero, zero. Brilliant!", "caption": "011 is 3, so next is 4 = 100", "focus": "answer", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c1-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Show the number three, using three on, off lights. Draw three circles on paper, and colour in the ones that are on. Pause the video, and try.", "caption": "Show 3 using three on/off lights", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's the answer. Off, on, on. Zero, one, one. The middle light is worth two, the right light is worth one, and two plus one makes three. Did you get it? Super!", "caption": "Off, on, on → 011 → 2 + 1 = 3", "focus": "answer", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c1-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. Binary uses only two digits, zero and one.", "caption": "Binary uses only 0 and 1", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "On is one. Off is zero.", "caption": "ON = 1 · OFF = 0", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Three lights in a row are worth four, two, and one. Add the ones that are on.", "caption": "Three lights are worth 4, 2, 1", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "So three is zero, one, one. And five is one, zero, one.", "caption": "3 = 011 · 5 = 101", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one, done! You can count to five the computer way. Super work, champ!", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

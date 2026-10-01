@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.7,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so nice to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.7,
+      "end": 12.37,
+      "caption": "Last time: guess \u2192 check \u2192 improve",
+      "text": "Last time, you became a super guesser. Guess, check, and improve, just like a coder fixing a bug.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 12.37,
+      "end": 19.45,
+      "caption": "Chapter 2 \u00b7 Probability",
+      "text": "Today is chapter two of Problem Solver. It's called, Probability. What are the chances?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 19.45,
+      "end": 29.83,
+      "caption": "Probability = chance. How likely is it?",
+      "text": "Probability sounds like a huge word, doesn't it? But it just means chance. How likely is something to happen? Let's find out!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 29.83,
+      "end": 37.62,
+      "caption": "Meet Aarav, playing Ludo with Nani",
+      "text": "Meet Aarav. Every Sunday, he plays Ludo with his nani. And Nani is very hard to beat!",
+      "scene": "ludo",
+      "focus": "meet"
+    },
+    {
+      "start": 37.62,
+      "end": 45.66,
+      "caption": "\"Please be a six!\"",
+      "text": "In Ludo, you need a six to move your first piece out. Aarav shakes the die, and whispers, please be a six!",
+      "scene": "ludo",
+      "focus": "rule"
+    },
+    {
+      "start": 45.66,
+      "end": 54.38,
+      "caption": "A six on the first roll? Think!",
+      "text": "Will Aarav get a six on his very first roll? What do you think? Yes, or no?",
+      "scene": "ludo",
+      "focus": "ask"
+    },
+    {
+      "start": 54.38,
+      "end": 68.53,
+      "caption": "Nobody knows for sure, but we know how likely",
+      "text": "Here's the honest answer. Nobody knows for sure! It might be a six. It might not. But we can still say how likely it is. And that's what probability is all about.",
+      "scene": "ludo",
+      "focus": "answer"
+    },
+    {
+      "start": 68.53,
+      "end": 75.98,
+      "caption": "Probability = the chance something happens",
+      "text": "Probability means the chance that something will happen. Not what will happen. Just how likely it is.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 75.98,
+      "end": 87.27,
+      "caption": "Impossible \u2192 Unlikely \u2192 Likely \u2192 Certain",
+      "text": "We can put chances on a chance line. At one end is impossible. Then comes unlikely, then likely. And at the other end, certain.",
+      "scene": "define",
+      "focus": "line"
+    },
+    {
+      "start": 87.27,
+      "end": 99.68,
+      "caption": "Never \u00b7 Probably not \u00b7 Probably \u00b7 Surely",
+      "text": "Impossible means it can never happen. Unlikely means it could happen, but probably won't. Likely means it will probably happen. And certain means it will surely happen.",
+      "scene": "define",
+      "focus": "words"
+    },
+    {
+      "start": 99.68,
+      "end": 107.44,
+      "caption": "The sun will rise tomorrow \u2192 certain",
+      "text": "Let's try some. The sun will rise tomorrow. That happens every single day, so it's certain.",
+      "scene": "scale",
+      "focus": "certain"
+    },
+    {
+      "start": 107.44,
+      "end": 117.48,
+      "caption": "Roll a 7 on a normal die \u2192 impossible",
+      "text": "Rolling a seven on a normal die? A die only has the numbers one to six. There is no seven! So that's impossible.",
+      "scene": "scale",
+      "focus": "impossible"
+    },
+    {
+      "start": 117.48,
+      "end": 128.83,
+      "caption": "A 6 on the first roll: 1 out of 6 \u2192 unlikely",
+      "text": "Now, Aarav's six on the first roll. A six is just one face out of six. It could happen, but it probably won't. So it's unlikely.",
+      "scene": "scale",
+      "focus": "unlikely"
+    },
+    {
+      "start": 128.83,
+      "end": 140.09,
+      "caption": "Smaller than 6: 5 out of 6 \u2192 likely",
+      "text": "And rolling any number smaller than six? One, two, three, four, or five. That's five faces out of six. So that's likely!",
+      "scene": "scale",
+      "focus": "likely"
+    },
+    {
+      "start": 140.09,
+      "end": 148.55,
+      "caption": "The cricket toss: heads or tails?",
+      "text": "Now, think of a cricket match. Before it starts, the captains toss a coin. Heads, or tails?",
+      "scene": "coin",
+      "focus": "toss"
+    },
+    {
+      "start": 148.55,
+      "end": 157.46,
+      "caption": "Heads: 1 out of 2 \u00b7 Tails: 1 out of 2",
+      "text": "A coin has two sides. Heads is one side out of two. Tails is one side out of two. Same chance!",
+      "scene": "coin",
+      "focus": "sides"
+    },
+    {
+      "start": 157.46,
+      "end": 169.65,
+      "caption": "Lots of tosses \u2192 about half and half",
+      "text": "So heads and tails are equally likely. If you toss a coin ten times, you might not get exactly five heads. But over lots of tosses, it comes out about half and half.",
+      "scene": "coin",
+      "focus": "equal"
+    },
+    {
+      "start": 169.65,
+      "end": 177.63,
+      "caption": "Fair = every result has the same chance",
+      "text": "That's why the toss is fair. Fair means every result has the same chance. Nobody gets a head start!",
+      "scene": "coin",
+      "focus": "fair"
+    },
+    {
+      "start": 177.63,
+      "end": 184.8,
+      "caption": "6 faces \u00b7 each number is 1 out of 6",
+      "text": "A normal die is fair too. It has six faces, so each number has a chance of one out of six.",
+      "scene": "dice",
+      "focus": "faces"
+    },
+    {
+      "start": 184.8,
+      "end": 195.34,
+      "caption": "Chance of an even number? Count!",
+      "text": "Here's one for you. What's the chance of rolling an even number? Count the even faces. Take your time.",
+      "scene": "dice",
+      "focus": "ask"
+    },
+    {
+      "start": 195.34,
+      "end": 206.0,
+      "caption": "Even: 2, 4, 6 \u2192 3 out of 6",
+      "text": "The even numbers are two, four, and six. That's three faces. So the chance is three out of six. That's half the faces!",
+      "scene": "dice",
+      "focus": "answer"
+    },
+    {
+      "start": 206.0,
+      "end": 214.51,
+      "caption": "7 blue marbles and 3 yellow marbles",
+      "text": "Nani has a cloth bag of marbles. Seven blue marbles, and three yellow marbles. She gives it a good shake.",
+      "scene": "marbles",
+      "focus": "bag"
+    },
+    {
+      "start": 214.51,
+      "end": 226.15,
+      "caption": "Chance of yellow? Likely or unlikely?",
+      "text": "Aarav picks one without looking. What's the chance it's yellow? And is that likely, or unlikely? Pause and think.",
+      "scene": "marbles",
+      "focus": "ask"
+    },
+    {
+      "start": 226.15,
+      "end": 242.69,
+      "caption": "Yellow: 3 out of 10 \u00b7 Blue: 7 out of 10",
+      "text": "First, count them all. Seven plus three makes ten marbles. Three are yellow, so the chance is three out of ten. That's unlikely. And blue? Seven out of ten. That's likely!",
+      "scene": "marbles",
+      "focus": "answer"
+    },
+    {
+      "start": 242.69,
+      "end": 256.43,
+      "caption": "No red marbles \u2192 red is impossible",
+      "text": "Now a new bag, with five green marbles, and no red ones at all. Picking a red marble? Impossible! There are none. And picking green? Certain!",
+      "scene": "marbles",
+      "focus": "green"
+    },
+    {
+      "start": 256.43,
+      "end": 268.02,
+      "caption": "4 equal parts \u2192 fair",
+      "text": "Spinners can be fair, or unfair. This spinner has four equal parts, each a different colour. Every colour has the same chance. That's fair.",
+      "scene": "spinner",
+      "focus": "fair"
+    },
+    {
+      "start": 268.02,
+      "end": 278.42,
+      "caption": "3 red, 1 blue \u2192 red is more likely",
+      "text": "This one has four equal parts too, but three are red, and only one is blue. Red has three parts out of four. So red is more likely!",
+      "scene": "spinner",
+      "focus": "red"
+    },
+    {
+      "start": 278.42,
+      "end": 288.56,
+      "caption": "One part is half the circle. Fair?",
+      "text": "And look at this one. One part is half of the whole circle! Is this spinner fair? Think about it.",
+      "scene": "spinner",
+      "focus": "ask"
+    },
+    {
+      "start": 288.56,
+      "end": 298.14,
+      "caption": "Not fair! Fair spinners have equal parts",
+      "text": "Not fair! The big part takes up half the circle, so the arrow stops there much more often. Fair spinners have equal parts.",
+      "scene": "spinner",
+      "focus": "answer"
+    },
+    {
+      "start": 298.14,
+      "end": 302.34,
+      "caption": "AI uses chance too!",
+      "text": "Here's something cool. AI uses chance too!",
+      "scene": "ai",
+      "focus": "intro"
+    },
+    {
+      "start": 302.34,
+      "end": 312.11,
+      "caption": "Seen lots of cats \u2192 pointy ears? Likely a cat",
+      "text": "Remember how AI learns from examples? If it has seen a hundred cat photos with pointy ears, then a new photo with pointy ears is likely a cat.",
+      "scene": "ai",
+      "focus": "cats"
+    },
+    {
+      "start": 312.11,
+      "end": 321.28,
+      "caption": "\"Happy\u2026\" \u2192 \"birthday\" is most likely",
+      "text": "Your phone does it too. Type, happy, and it suggests, birthday. It picks the word that's most likely to come next.",
+      "scene": "ai",
+      "focus": "phone"
+    },
+    {
+      "start": 321.28,
+      "end": 330.83,
+      "caption": "Most likely is not certain. AI can be wrong!",
+      "text": "But AI is not always certain. It picks what's most likely, and sometimes, it guesses wrong. Just like us!",
+      "scene": "ai",
+      "focus": "wrong"
+    },
+    {
+      "start": 330.83,
+      "end": 334.53,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 334.53,
+      "end": 346.22,
+      "caption": "Rolling a 7: impossible or unlikely? Why?",
+      "text": "Is rolling a seven on a normal die impossible, or unlikely? And why? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 346.22,
+      "end": 358.36,
+      "caption": "Impossible! A die only has 1 to 6",
+      "text": "Impossible! A normal die only has the numbers one to six. So a seven can never come up, not even once. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 358.36,
+      "end": 365.3,
+      "caption": "Impossible \u2192 unlikely \u2192 likely \u2192 certain",
+      "text": "Let's remember. Chances go from impossible, to unlikely, to likely, to certain.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 365.3,
+      "end": 369.25,
+      "caption": "Coin: heads and tails equally likely",
+      "text": "A coin has two sides, so heads and tails are equally likely.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 369.25,
+      "end": 375.65,
+      "caption": "Fair = every result, same chance",
+      "text": "Fair means every result has the same chance, like a normal die, or a spinner with equal parts.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 375.65,
+      "end": 380.02,
+      "caption": "AI picks the most likely, from examples",
+      "text": "And AI picks what's most likely, from lots of examples.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 380.02,
+      "end": 385.53,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! You can talk about chances like a pro, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 385.53,
+      "end": 392.33,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

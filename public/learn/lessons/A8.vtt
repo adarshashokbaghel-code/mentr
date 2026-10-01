@@ -1,0 +1,161 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:05.590
+Welcome back, champ!
+
+2
+00:00:05.590 --> 00:00:13.370
+Last time: sequencing = the right order
+
+3
+00:00:13.370 --> 00:00:21.510
+Chapter 3 · Loops
+
+4
+00:00:21.510 --> 00:00:32.880
+Same thing, again and again? There's a trick!
+
+5
+00:00:32.880 --> 00:00:39.810
+Sports Day! Robo, cheer for our team!
+
+6
+00:00:39.810 --> 00:00:51.300
+Clap · Clap · Clap · Clap · Clap
+
+7
+00:00:51.300 --> 00:01:01.480
+100 claps? That's a LOT of writing!
+
+8
+00:01:01.480 --> 00:01:08.700
+Is there a shorter way? Think!
+
+9
+00:01:08.700 --> 00:01:21.310
+"Clap 5 times." Same claps, much shorter!
+
+10
+00:01:21.310 --> 00:01:25.530
+That trick is called a LOOP
+
+11
+00:01:25.530 --> 00:01:39.110
+Loop = do the same steps again and again
+
+12
+00:01:39.110 --> 00:01:50.530
+Repeat 5 times: clap
+
+13
+00:01:50.530 --> 00:01:59.490
+Round and round, like a running track
+
+14
+00:01:59.490 --> 00:02:04.870
+Why are loops helpful?
+
+15
+00:02:04.870 --> 00:02:18.140
+10 lines → just 1 loop!
+
+16
+00:02:18.140 --> 00:02:34.450
+Short · Saves time · Fewer mistakes
+
+17
+00:02:34.450 --> 00:02:42.210
+Kind 1: repeat a fixed number of times
+
+18
+00:02:42.210 --> 00:03:00.200
+One over: repeat 6 times: bowl one ball
+
+19
+00:03:00.200 --> 00:03:10.870
+Repeat 20 times: skip
+
+20
+00:03:10.870 --> 00:03:19.360
+You choose: 2, 5, 20… not always 10!
+
+21
+00:03:19.360 --> 00:03:24.890
+Kind 2: repeat UNTIL something is done
+
+22
+00:03:24.890 --> 00:03:34.280
+Stir until the sugar melts
+
+23
+00:03:34.280 --> 00:03:44.110
+Brush each tooth until all are clean
+
+24
+00:03:44.110 --> 00:03:55.690
+It stops when the job is done!
+
+25
+00:03:55.690 --> 00:04:11.570
+Which one is a loop?
+
+26
+00:04:11.570 --> 00:04:28.440
+Stirring until the sugar melts = a loop!
+
+27
+00:04:28.440 --> 00:04:40.770
+Five jumps. Which loop is the same?
+
+28
+00:04:40.770 --> 00:04:51.480
+Repeat 5 times: jump
+
+29
+00:04:51.480 --> 00:05:03.440
+A square: 4 sides, 4 corners
+
+30
+00:05:03.440 --> 00:05:17.330
+Draw, turn · Draw, turn · Draw, turn · Draw, turn
+
+31
+00:05:17.330 --> 00:05:28.330
+Same 2 steps, 4 times. A pattern!
+
+32
+00:05:28.330 --> 00:05:32.230
+Your turn: practice check
+
+33
+00:05:32.230 --> 00:05:41.340
+Write a loop to draw a square
+
+34
+00:05:41.340 --> 00:05:55.740
+Repeat 4 times: draw a side, turn
+
+35
+00:05:55.740 --> 00:06:00.920
+Loop = do it again
+
+36
+00:06:00.920 --> 00:06:05.510
+Repeat N times, or repeat until done
+
+37
+00:06:05.510 --> 00:06:08.740
+Loops keep steps short and save time
+
+38
+00:06:08.740 --> 00:06:14.990
+Square: repeat 4 times: draw a side, turn
+
+39
+00:06:14.990 --> 00:06:22.230
+Chapter 3 done!
+
+40
+00:06:22.230 --> 00:06:29.030
+Next: Quiz · Tap Finish

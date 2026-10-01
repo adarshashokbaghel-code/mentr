@@ -25,7 +25,27 @@ const PRIVATE_PATHS = [
  */
 const ADS_BOT_DISALLOW = ["/learn"];
 
+/** Answer engines and AI crawlers may read public pages. Private app routes stay closed. */
+const ANSWER_ENGINE_BOTS = [
+  "GPTBot",
+  "ChatGPT-User",
+  "OAI-SearchBot",
+  "ClaudeBot",
+  "Claude-SearchBot",
+  "PerplexityBot",
+  "Perplexity-User",
+  "Google-Extended",
+  "Applebot-Extended",
+  "Amazonbot",
+  "DuckAssistBot",
+  "YouBot",
+];
+
 export default function robots(): MetadataRoute.Robots {
+  const privatePaths = LEARN_PUBLIC
+    ? PRIVATE_PATHS
+    : [...PRIVATE_PATHS, "/learn"];
+
   return {
     rules: [
       {
@@ -38,9 +58,21 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ADS_BOT_DISALLOW,
       },
       {
+        userAgent: ANSWER_ENGINE_BOTS,
+        allow: [
+          "/",
+          "/learn",
+          "/learn/llms.txt",
+          "/llms.txt",
+          "/blog",
+          "/ads.txt",
+        ],
+        disallow: privatePaths,
+      },
+      {
         userAgent: "*",
-        allow: ["/", "/ads.txt"],
-        disallow: LEARN_PUBLIC ? PRIVATE_PATHS : [...PRIVATE_PATHS, "/learn"],
+        allow: ["/", "/ads.txt", "/llms.txt", "/learn/llms.txt"],
+        disallow: privatePaths,
       },
     ],
     sitemap: absoluteUrl("/sitemap.xml"),

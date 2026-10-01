@@ -10,6 +10,7 @@ import {
   CalendarDays,
   ChevronLeft,
   ChevronRight,
+  Home,
   Loader2,
 } from "lucide-react";
 import Link from "next/link";
@@ -94,7 +95,7 @@ export function LmsSidebarPotd() {
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-1">
         <Link
-          href="/learn/app/potd"
+          href="/learn/app/progress#potd"
           className="flex min-w-0 items-center gap-1.5 text-[12px] font-extrabold text-[#1c2434] hover:text-[#ff6a1a]"
         >
           <CalendarDays className="h-4 w-4 shrink-0 text-[#0d9488]" />
@@ -182,10 +183,11 @@ export function LmsSidebarPotd() {
       </button>
 
       <Link
-        href="/learn/app/potd"
-        className="block text-center text-[10px] font-bold text-[#8a929c] hover:text-[#1c2434]"
+        href="/"
+        className="flex items-center justify-center gap-1 rounded-lg bg-[#faf8f4] py-1.5 text-[10px] font-extrabold text-[#5a6472] transition hover:text-[#1c2434]"
       >
-        Full calendar →
+        <Home className="h-3 w-3" />
+        Go back home
       </Link>
     </div>
   );

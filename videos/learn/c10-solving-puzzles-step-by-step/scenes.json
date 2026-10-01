@@ -1,0 +1,148 @@
+{
+  "id": "C10",
+  "title": "Solving Puzzles Step by Step",
+  "chapterLabel": "Chapter 5 of 5",
+  "unitLabel": "Math · Logic & Reasoning",
+  "slug": "c10-solving-puzzles-step-by-step",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c10-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Today is a special one, so I'm extra happy you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you sorted things into sets, with Venn diagrams. Remember the red ball? Red, and round, so it went right in the middle!", "caption": "Last time: Sets & Venn diagrams", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter five. The very last chapter of Logic and Reasoning! It's called, Solving puzzles, step by step.", "caption": "Chapter 5 · Solving Puzzles Step by Step", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Do you like puzzles? Riddles, brain teasers, mystery games? Today, you'll learn a secret trick to solve them, without guessing.", "caption": "A secret trick: no guessing!", "focus": "word", "pause": 0.4 },
+        { "vo": "So put on your detective cap, champ. Let's go!", "caption": "Detective cap on. Let's go!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "trip",
+      "visual": "c10-hook",
+      "beats": [
+        { "vo": "Remember Chintu? Today, his class is going on a school trip! Chintu and his friends, Arjun and Zoya, get three seats in a row. Seat one, seat two, and seat three.", "caption": "Chintu, Arjun and Zoya: seats 1, 2, 3", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "The teacher smiles, and gives them two clues. Clue one. Zoya sits last. Clue two. Chintu does not sit first.", "caption": "Clue 1: Zoya is last · Clue 2: Chintu not first", "focus": "clues", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Chintu jumps up. I'll just guess! Zoya first, then me, then Arjun! Hmm. But wait. Zoya should be last. That guess breaks clue one!", "caption": "A quick guess breaks clue 1!", "focus": "guess", "sfx": "buzz", "sfxAt": 0.75, "pause": 0.4 },
+        { "vo": "So how can we solve it, without guessing? Think about it for a moment.", "caption": "How do we solve it without guessing?", "focus": "ask", "pause": 1.8 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c10-define",
+      "beats": [
+        { "vo": "First, a clue is a small fact that helps you solve the puzzle. Like, Zoya is last.", "caption": "CLUE = a small fact that helps", "focus": "clue", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "And a puzzle like this is called a logic puzzle. You solve it by thinking step by step, not by guessing.", "caption": "Logic puzzle: think step by step, no guessing", "focus": "puzzle", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "Here's the detective's plan. We call it a strategy. Use one clue. Cross out what can't be true. Then use the next clue. Again and again, until it's solved!", "caption": "Use a clue · Cross out · Next clue", "focus": "strategy", "sfx": "tick", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "seats",
+      "visual": "c10-seats",
+      "beats": [
+        { "vo": "Let's solve Chintu's puzzle on a grid. Names down the side, seats along the top. And with three seats, last means seat three.", "caption": "With 3 seats, last = seat 3", "focus": "setup", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Clue one. Zoya is last. So Zoya gets seat three. Tick! Now nobody else can sit in seat three, and Zoya can't sit anywhere else. Cross, cross, cross!", "caption": "Clue 1: Zoya → seat 3. Cross out the rest.", "focus": "clue1", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Clue two. Chintu is not first. So cross out seat one for Chintu. What's left for him? Only seat two!", "caption": "Clue 2: not seat 1, so Chintu → seat 2", "focus": "clue2", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "And look. Only seat one is empty, and only Arjun is left. So Arjun sits first! Arjun, Chintu, Zoya. Solved, without a single guess!", "caption": "Arjun 1 · Chintu 2 · Zoya 3. Solved!", "focus": "solved", "sfx": "success", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "hat",
+      "visual": "c10-hat",
+      "beats": [
+        { "vo": "Ready for another one? Riya, Sam and Tara each have one thing. A hat, a bag, and a bottle. Who owns what?", "caption": "Riya, Sam, Tara · hat, bag, bottle", "focus": "setup", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Clue one. Sam owns the bag. Tick! So cross out the bag for Riya and Tara, and cross out the hat and the bottle for Sam.", "caption": "Clue 1: Sam owns the bag", "focus": "clue1", "sfx": "tick", "sfxAt": 0.25 },
+        { "vo": "Clue two. Riya has no hat. Cross that out. The bag's already gone, so what's left for Riya? The bottle!", "caption": "Clue 2: Riya has no hat → the bottle", "focus": "clue2", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "So, who owns the hat? Think!", "caption": "So who owns the hat?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Tara! The hat is the only thing left, and Tara is the only one left. A hat for Tara!", "caption": "Only the hat and Tara are left → Tara!", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "tall",
+      "visual": "c10-tall",
+      "beats": [
+        { "vo": "Here's a quick one. Clue one. Pinky is taller than Golu. Clue two. Golu is taller than Tinku.", "caption": "Pinky taller than Golu · Golu taller than Tinku", "focus": "clues", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Who is the shortest? Take your time.", "caption": "Who is the shortest?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Let's line them up, one clue at a time. Pinky is taller than Golu, so Pinky stands higher. Golu is taller than Tinku, so Tinku is shorter still. Tinku is the shortest!", "caption": "Pinky, Golu, Tinku → Tinku is the shortest", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "sudoku",
+      "visual": "c10-sudoku",
+      "beats": [
+        { "vo": "Now, a puzzle with a grid. It's called Sudoku lite. It has four rows, and four columns. The rule is simple. Each row, and each column, must have one, two, three and four, exactly once. No repeats!", "caption": "4×4 · each row & column has 1, 2, 3, 4 once", "focus": "rule", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Here's a row. One, two, blank, four. What's missing? Think.", "caption": "Row: 1, 2, __, 4. What's missing?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Three! One, two and four are already there. So the only number left is three.", "caption": "1, 2 and 4 are used → 3!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "It works with shapes too. Star, circle, triangle, blank. Which shape is missing?", "caption": "Star, circle, triangle, __. Which shape?", "focus": "shapes", "pause": 1.8 },
+        { "vo": "The square! Each shape goes just once in the row.", "caption": "The square! Each shape just once.", "focus": "square", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "grid",
+      "visual": "c10-grid",
+      "beats": [
+        { "vo": "Let's try a tricky one. Row one is, one, two, three, four. Row two is, three, four, blank, two. What goes in the blank? Pause, and think.", "caption": "Row 2: 3, 4, __, 2. What goes in?", "focus": "ask", "pause": 2.2 },
+        { "vo": "One! Row two already has three, four and two. So it needs a one.", "caption": "Row 2 already has 3, 4, 2 → it needs 1", "focus": "answer", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "And let's double check the column. Above the blank is a three, not a one. So, no repeats. It fits perfectly!", "caption": "Check the column: above is 3. It fits!", "focus": "column", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "write",
+      "visual": "c10-write",
+      "beats": [
+        { "vo": "Here's one more detective habit. Write down the clues you used. Next to each answer, write the clue that gave it.", "caption": "Write the clue next to each answer", "focus": "habit", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Like this. Seat three is Zoya, because of clue one. Seat two is Chintu, because of clue two.", "caption": "Seat 3 = Zoya (clue 1) · Seat 2 = Chintu (clue 2)", "focus": "example", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Why bother? Because if something doesn't fit, you can look back, and find exactly where you slipped. Writing it down helps you check your answer.", "caption": "Written clues help you check your answer", "focus": "why" }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c10-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time. Just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "There are three children. Ravi, Meera and Neha. Ravi is not first. Meera is last. Who can be first? Pause the video, and try it on paper.", "caption": "Ravi not first · Meera last. Who is first?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Neha! Meera is last, so she takes seat three. Ravi can't be first, so Ravi is second. That leaves seat one for Neha. Did you get it? Brilliant!", "caption": "Meera 3 · Ravi 2 · Neha 1 → Neha is first!", "focus": "answer", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c10-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Solve logic puzzles one clue at a time.", "caption": "Use one clue at a time", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Cross out what can't be true, then use the next clue.", "caption": "Cross out what can't be true", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "In Sudoku lite, each number goes once in every row and every column.", "caption": "Sudoku-lite: each number once per row & column", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And write down the clues you used, so you can check your answer.", "caption": "Write down the clues you used", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter five, done! And that means, you've finished all of Unit two! True or false. AND, OR, NOT. Sorting, sets, and now puzzles. You're a real logic champ!", "caption": "Chapter 5 done · Unit 2 complete!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

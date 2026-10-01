@@ -1,0 +1,144 @@
+{
+  "id": "B18",
+  "title": "Real or AI-Made?",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "AI · Smart & Safe With AI",
+  "slug": "b18-real-or-ai-made",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b18-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready to become a picture detective today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned about privacy. Keep your name, your location, and photos of your home safe. And ask a grown-up before you share.", "caption": "Last time: keep your private info safe", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Smart and Safe With AI. Real, or AI-made?", "caption": "Chapter 3 · Real or AI-Made?", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Here's a question for you. Can you always believe your eyes? Hmm. Let's find out.", "caption": "Can you always believe your eyes?", "focus": "eyes", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "tiger",
+      "visual": "b18-hook",
+      "beats": [
+        { "vo": "Remember Aarav, from last time? One evening, his cousin Riya sends a photo to the family chat group.", "caption": "Aarav gets a photo in the family chat", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "It's a tiger! Sitting at a desk in a classroom, wearing round glasses, and reading a book. Whoa!", "caption": "A tiger in glasses, reading in class!", "focus": "photo", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Aarav's eyes go wide. Is this real? Did a tiger really go to school? What do you think?", "caption": "Is it real? What do you think?", "focus": "ask", "pause": 2.0 },
+        { "vo": "It's not a real photo. Nobody took it with a camera. It was made by AI! And it looks so real, Aarav almost believed it.", "caption": "Not a real photo. It was made by AI!", "focus": "answer", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b18-define",
+      "beats": [
+        { "vo": "A picture like this is called an AI-made image. It's a picture made by a computer from patterns, not taken with a camera.", "caption": "AI-made image: made from patterns, no camera", "focus": "name", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "How does it work? The AI learned from millions of photos. It found patterns. What tigers look like. What classrooms look like. What glasses look like.", "caption": "AI learned patterns from millions of photos", "focus": "learn", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Then it mixes those patterns to make a brand-new picture. It's not magic, and the AI isn't alive. It's just very good at patterns. So some pictures look real, even though they never happened.", "caption": "New pictures of things that never happened", "focus": "mix", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "voice",
+      "visual": "b18-voice",
+      "beats": [
+        { "vo": "And it's not only pictures. AI can copy voices too! It learns the patterns in how a person talks, and copies them.", "caption": "AI can copy voices too!", "focus": "intro", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Imagine a voice message that sounds just like a famous cricketer, saying, hi Aarav, you're my favourite fan! Exciting, right? But it might not be real at all.", "caption": "A voice message may not be real", "focus": "msg" },
+        { "vo": "So if a voice message sounds surprising, or asks you to do something, check with a grown-up first.", "caption": "Surprising voice note? Check with a grown-up", "focus": "check", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "clues",
+      "visual": "b18-clues",
+      "beats": [
+        { "vo": "So how can we spot an AI-made picture? We look for clues. A clue is a small sign that helps you think.", "caption": "Clues: small signs that help you think", "focus": "intro", "sfx": "pop" },
+        { "vo": "Clue one. Odd hands. AI often gets hands wrong. Count the fingers! Six fingers? Or fingers melting together? That's a clue.", "caption": "Clue 1 · Odd hands: six fingers!", "focus": "hands", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Clue two. Weird writing. Look at shop signs, or posters. AI often makes jumbled letters that make no sense. A sweet shop sign might say, sweerts shpo!", "caption": "Clue 2 · Weird text: jumbled letters", "focus": "text", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Clue three. Too perfect faces. Shiny, plastic-looking skin, with no marks at all. Real skin has little marks, and real hair is a bit messy.", "caption": "Clue 3 · Too-perfect, plastic-looking faces", "focus": "face", "sfx": "tick", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "detect",
+      "visual": "b18-detect",
+      "beats": [
+        { "vo": "Detective time! Here's a birthday party picture. Can you find the clues that it might be AI-made? Pause, and look closely.", "caption": "Find the clues in this party picture!", "focus": "ask", "pause": 2.2 },
+        { "vo": "Let's check. The banner says, hapy brithdya. Jumbled! The hand holding the cake has six fingers. And that face is shiny, like plastic. Three clues! So we should be careful.", "caption": "Jumbled banner · Six fingers · Plastic face", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "careful",
+      "visual": "b18-careful",
+      "beats": [
+        { "vo": "But wait. Here's something really important. Clues help us, but they aren't proof.", "caption": "Careful! Clues aren't proof", "focus": "intro", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "Not every strange photo is fake. Real life can be surprising! Have you ever seen a cow sitting calmly next to a scooter, in the middle of the road? That can be totally real!", "caption": "Strange doesn't always mean fake", "focus": "strange" },
+        { "vo": "And not every real photo looks perfect. Your friend's photo from a cricket match might be blurry, or dark. Blurry doesn't mean fake.", "caption": "Real photos can be blurry or dark", "focus": "blurry" },
+        { "vo": "Also, AI pictures keep getting better and better. So clues can miss. That's why, even after checking the clues, we still ask a grown-up.", "caption": "AI keeps getting better, so clues can miss", "focus": "better", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "b18-sort",
+      "beats": [
+        { "vo": "Let's play a game! Could be real, or be careful? Here come four pictures.", "caption": "Game: Could be real, or be careful?", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "A blurry, dark photo from a cricket match. A sweet shop sign with jumbled letters. A hand with six fingers. And a rainbow over a school. Which ones need extra care? Think.", "caption": "Which pictures need extra care?", "focus": "ask", "pause": 2.2 },
+        { "vo": "The jumbled sign, and the six fingers? Be careful! Those are clues. But the blurry match photo, and the rainbow? Those could be real. Blurry is okay, and rainbows really happen! And if you're still not sure, ask a grown-up.", "caption": "Clues → be careful. The others could be real", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "steps",
+      "visual": "b18-steps",
+      "beats": [
+        { "vo": "So, what do you do when you see a surprising picture? Three simple steps.", "caption": "Surprising picture? Three steps", "focus": "intro", "sfx": "pop" },
+        { "vo": "Step one. Pause. Stop, and think, before you believe it.", "caption": "1 · Pause before you believe it", "focus": "pause", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Step two. Ask a trusted adult to help you check. Like your mum, your dad, your teacher, or your nani.", "caption": "2 · Ask a trusted adult to help check", "focus": "ask", "sfx": "tick", "sfxAt": 0.05 },
+        { "vo": "Step three. Don't share it, or forward it to your class group, until you know it's real. Sharing a fake picture can fool lots of people.", "caption": "3 · Don't share until you know it's real", "focus": "share", "sfx": "tick", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b18-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "You see a photo of a school bus, flying high above the clouds! What two things should you do? Pause the video, and think. Or write it on paper.", "caption": "A flying school bus! What two things do you do?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. One, pause, and don't believe it straight away. Two, ask a trusted adult to help check if it's real. And until then, don't share it. Brilliant!", "caption": "Pause, then ask a trusted adult to check", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b18-recap",
+      "beats": [
+        { "vo": "Let's remember. AI can make pictures that look very real.", "caption": "AI can make real-looking pictures", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Check the clues. Hands, writing, and faces.", "caption": "Check hands, text, and faces", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Pause, before believing, or sharing.", "caption": "Pause before believing or sharing", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And still not sure? Ask a trusted adult.", "caption": "Still unsure? Ask a trusted adult", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You're a real picture detective now, champ. Pause, check, and ask!", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

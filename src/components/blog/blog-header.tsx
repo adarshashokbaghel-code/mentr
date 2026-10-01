@@ -1,6 +1,7 @@
 import { getBlogHeaderCopy } from "@/lib/blog-header-copy";
 import type { BlogPillarId } from "@/lib/blog-posts";
 import { cn } from "@/lib/utils";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
@@ -43,9 +44,10 @@ export function BlogHeader({ pillar = "all" }: Props) {
         {pillar !== "all" && (
           <Link
             href="/blog"
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-coral touch-manipulation hover:underline"
+            className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-coral touch-manipulation hover:underline"
           >
-            ← All guides
+            <ArrowLeft className="h-4 w-4" aria-hidden />
+            All guides
           </Link>
         )}
 

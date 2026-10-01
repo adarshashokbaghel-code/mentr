@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so good to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.59,
+      "end": 13.57,
+      "caption": "Last time: fair AI needs many kinds of examples",
+      "text": "Last time, we learned that AI needs many kinds of examples to be fair. Just like a crayon box, with lots of colours.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 13.57,
+      "end": 20.14,
+      "caption": "Chapter 2 \u00b7 AI and Privacy",
+      "text": "Today is chapter two of Smart and Safe With AI. It's all about AI, and privacy.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 20.14,
+      "end": 30.99,
+      "caption": "Pri \u00b7 va \u00b7 cy. What does it mean?",
+      "text": "Privacy. Hmm. What does that mean? And why does it matter when we use AI apps? Let's find out together.",
+      "scene": "open",
+      "focus": "word"
+    },
+    {
+      "start": 30.99,
+      "end": 38.06,
+      "caption": "Meet Aarav, stuck on his science homework",
+      "text": "Meet Aarav. He's nine, he loves cricket, and today, he's stuck on his science homework.",
+      "scene": "aarav",
+      "focus": "meet"
+    },
+    {
+      "start": 38.06,
+      "end": 47.5,
+      "caption": "An AI homework helper on Mum's tablet",
+      "text": "So his mum lets him use a homework helper on her tablet. It's an AI helper. You type a question, and it explains things.",
+      "scene": "aarav",
+      "focus": "app"
+    },
+    {
+      "start": 47.5,
+      "end": 62.87,
+      "caption": "\"I'm Aarav Sharma. I live at 12 Lotus Lane\u2026\"",
+      "text": "The helper says, hi! How can I help? And Aarav gets so excited, he types everything. My name is Aarav Sharma. I study at Green Valley School. I live at twelve Lotus Lane.",
+      "scene": "aarav",
+      "focus": "typing"
+    },
+    {
+      "start": 62.87,
+      "end": 72.84,
+      "caption": "Does the helper need all that? Think!",
+      "text": "Wait a second. Is that a good idea? Does a homework helper need all of that? Think about it.",
+      "scene": "aarav",
+      "focus": "ask"
+    },
+    {
+      "start": 72.84,
+      "end": 84.1,
+      "caption": "It only needs his question!",
+      "text": "Nope! To help with science, it only needs one thing. His question. Not his full name, not his school, and definitely not where he lives.",
+      "scene": "aarav",
+      "focus": "answer"
+    },
+    {
+      "start": 84.1,
+      "end": 90.58,
+      "caption": "Keeping your things safe = PRIVACY",
+      "text": "Keeping some things about you safe, and to yourself, has a name. It's called privacy.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 90.58,
+      "end": 97.18,
+      "caption": "Share personal things only with people you trust",
+      "text": "Privacy means keeping your personal things safe, and only sharing them with people you trust, like your family.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 97.18,
+      "end": 111.44,
+      "caption": "Name \u00b7 School \u00b7 Address \u00b7 Phone \u00b7 Photos",
+      "text": "So, what's personal info? It's things about you. Your full name. Your school. Your address. Your phone number. And photos of you, or your home.",
+      "scene": "define",
+      "focus": "personal"
+    },
+    {
+      "start": 111.44,
+      "end": 123.88,
+      "caption": "Samosa uncle needs your order, not your address",
+      "text": "Think about buying samosas at the shop near your school. The uncle needs your order. Two samosas, please! Does he need your home address? Of course not!",
+      "scene": "need",
+      "focus": "shop"
+    },
+    {
+      "start": 123.88,
+      "end": 135.29,
+      "caption": "\"Explain how plants make food\" \u2192 perfect!",
+      "text": "An AI helper is the same. Type, explain how plants make food. That's perfect! It's a great question, and it shares nothing private.",
+      "scene": "need",
+      "focus": "helper"
+    },
+    {
+      "start": 135.29,
+      "end": 147.67,
+      "caption": "Apps can save what you type. Think first!",
+      "text": "And here's something important. What you type or upload into an app can be saved by the app. Once it's sent, you can't always take it back. So think before you type.",
+      "scene": "need",
+      "focus": "saved"
+    },
+    {
+      "start": 147.67,
+      "end": 152.13,
+      "caption": "Extra-careful info: three kinds",
+      "text": "Some info needs extra care. Let's look at three kinds.",
+      "scene": "extra",
+      "focus": "intro"
+    },
+    {
+      "start": 152.13,
+      "end": 161.16,
+      "caption": "1 \u00b7 Your real full name and your school",
+      "text": "One. Your real full name, and your school. Together, they tell a stranger exactly who you are, and where to find you.",
+      "scene": "extra",
+      "focus": "name"
+    },
+    {
+      "start": 161.16,
+      "end": 171.56,
+      "caption": "2 \u00b7 Home address and live location",
+      "text": "Two. Your home address, and your live location. Live location means where you are right now, shown on a map. That's very private!",
+      "scene": "extra",
+      "focus": "location"
+    },
+    {
+      "start": 171.56,
+      "end": 179.96,
+      "caption": "3 \u00b7 Photos of home, house number, school badge",
+      "text": "Three. Photos of your home. A house number, a street sign, or your school badge can quietly show where you live.",
+      "scene": "extra",
+      "focus": "photos"
+    },
+    {
+      "start": 179.96,
+      "end": 186.52,
+      "caption": "Name + address can lead someone to your home",
+      "text": "Why so careful? Because your name and address together can lead someone right to your door.",
+      "scene": "extra",
+      "focus": "why"
+    },
+    {
+      "start": 186.52,
+      "end": 194.42,
+      "caption": "Detective game: Aarav's new cycle photo",
+      "text": "Let's play detective! Aarav got a new cycle, and he wants to upload this photo to the homework app, just for fun.",
+      "scene": "photo",
+      "focus": "intro"
+    },
+    {
+      "start": 194.42,
+      "end": 204.57,
+      "caption": "What gives away private info? Spot it!",
+      "text": "Look closely. What in this photo could show where Aarav lives, or where he studies? Pause, and spot them.",
+      "scene": "photo",
+      "focus": "ask"
+    },
+    {
+      "start": 204.57,
+      "end": 215.34,
+      "caption": "House number \u00b7 Street sign \u00b7 School badge",
+      "text": "There's the house number on the gate. The street sign, Lotus Lane. And the school badge on his shirt! Three clues, in one happy photo.",
+      "scene": "photo",
+      "focus": "answer"
+    },
+    {
+      "start": 215.34,
+      "end": 224.23,
+      "caption": "Ask a parent before sharing photos",
+      "text": "So, what should Aarav do? Ask a parent before sharing any photo with an app. A grown-up can help check that it's safe.",
+      "scene": "photo",
+      "focus": "parent"
+    },
+    {
+      "start": 224.23,
+      "end": 229.9,
+      "caption": "Game: Share or don't share?",
+      "text": "Quick game! Share, or don't share? Here come six cards.",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 229.9,
+      "end": 247.23,
+      "caption": "Which ones are okay to share?",
+      "text": "Your homework question. A nickname. Your favourite animal. Your home address. Your phone number. Your password. Which ones are okay to share with an app? Think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 247.23,
+      "end": 263.11,
+      "caption": "Share fun stuff. Keep private stuff private!",
+      "text": "Your question, a nickname, and your favourite animal? Those are fine. But your address, your phone number, and your password? Keep those private. Not sure? Stop, and ask a grown-up first.",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 263.11,
+      "end": 272.27,
+      "caption": "AI helpers can sound super friendly",
+      "text": "Now, AI helpers can sound really friendly. They say nice things, like, great question! You're so smart!",
+      "scene": "friendly",
+      "focus": "intro"
+    },
+    {
+      "start": 272.27,
+      "end": 283.24,
+      "caption": "It's a program, not a secret-keeping friend",
+      "text": "But remember. An AI helper isn't a person, and it isn't a friend who keeps your secrets. It's a computer program that finds patterns in words.",
+      "scene": "friendly",
+      "focus": "truth"
+    },
+    {
+      "start": 283.24,
+      "end": 291.08,
+      "caption": "Friendly doesn't mean safe!",
+      "text": "So, friendly doesn't mean safe. Even if an app is fun and kind, don't tell it your school name, or where you live.",
+      "scene": "friendly",
+      "focus": "rule"
+    },
+    {
+      "start": 291.08,
+      "end": 300.83,
+      "caption": "Settings = switches for what apps can see",
+      "text": "Here's some good news. Phones and apps have settings. Settings are like switches. They choose what an app can see, and share.",
+      "scene": "settings",
+      "focus": "intro"
+    },
+    {
+      "start": 300.83,
+      "end": 308.1,
+      "caption": "Parents can use settings to limit sharing",
+      "text": "Your parents can use these switches to limit what an app is allowed to see. That's a big help in keeping you safe.",
+      "scene": "settings",
+      "focus": "parents"
+    },
+    {
+      "start": 308.1,
+      "end": 321.17,
+      "caption": "Which is safer for a kids' game?",
+      "text": "Here's a puzzle. For a kids' game, which setting is safer? Location, always on? Or location, off? Think.",
+      "scene": "settings",
+      "focus": "ask"
+    },
+    {
+      "start": 321.17,
+      "end": 333.2,
+      "caption": "Location: OFF is safer",
+      "text": "Location, off! When it's off, the game can't see where you are. And share my contacts, or show my real name to everyone? Those stay off too.",
+      "scene": "settings",
+      "focus": "answer"
+    },
+    {
+      "start": 333.2,
+      "end": 337.15,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 337.15,
+      "end": 351.01,
+      "caption": "A drawing game wants your location. Now what?",
+      "text": "You open a fun drawing game, and it asks, can I use your live location? What should you do? Pause the video, and think. Or write it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 351.01,
+      "end": 364.88,
+      "caption": "Say no, and ask a grown-up to check",
+      "text": "Here's one answer. Say no, and don't allow it. A drawing game doesn't need to know where you are! Then ask a parent, or a grown-up, to check the settings. Super thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 364.88,
+      "end": 371.81,
+      "caption": "AI doesn't need your life story",
+      "text": "Let's remember. An AI helper doesn't need your life story. Just your question.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 371.81,
+      "end": 375.98,
+      "caption": "Keep name, location, home photos private",
+      "text": "Keep your full name, your location, and photos of your home private.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 375.98,
+      "end": 379.07,
+      "caption": "Ask a parent before sharing photos",
+      "text": "Ask a parent before sharing photos with any app.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 379.07,
+      "end": 382.42,
+      "caption": "Settings can limit what's shared",
+      "text": "And settings can limit what an app sees, and shares.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 382.42,
+      "end": 390.04,
+      "caption": "Chapter 2 done!",
+      "text": "Chapter two, done! Now you know what to keep private, champ. That's smart, and safe!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 390.04,
+      "end": 396.84,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

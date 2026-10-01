@@ -1,0 +1,316 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.16,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready for a really important chapter?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.16,
+      "end": 15.19,
+      "caption": "Last time: AI in voice, photos, videos, maps",
+      "text": "Last time, we went on an AI hunt. We found AI hiding in voice helpers, photo search, video suggestions, and map traffic.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.19,
+      "end": 21.01,
+      "caption": "Chapter 4 \u00b7 AI Can Be Wrong Too",
+      "text": "Today is chapter four of What Is AI. It's called, AI Can Be Wrong Too.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 21.01,
+      "end": 27.81,
+      "caption": "Is AI always right? Let's find out!",
+      "text": "Hmm. AI is so clever. But is it always right? Let's find out.",
+      "scene": "open",
+      "focus": "question"
+    },
+    {
+      "start": 27.81,
+      "end": 39.18,
+      "caption": "\"Tara, play Baby Shark!\"",
+      "text": "Remember Anaya, and Tara, the voice helper? One evening, Anaya's little cousin Mini is visiting. Anaya calls out, Tara, play Baby Shark!",
+      "scene": "shark",
+      "focus": "ask"
+    },
+    {
+      "start": 39.18,
+      "end": 48.29,
+      "caption": "Oops! Tara plays a song about a baby car!",
+      "text": "And Tara plays a song about, a baby car! Vroom, vroom! Mini giggles. Anaya just stares.",
+      "scene": "shark",
+      "focus": "oops"
+    },
+    {
+      "start": 48.29,
+      "end": 54.87,
+      "caption": "Why did Tara get it wrong? Think!",
+      "text": "Why did Tara get it wrong? Think about how Tara works.",
+      "scene": "shark",
+      "focus": "why"
+    },
+    {
+      "start": 54.87,
+      "end": 66.73,
+      "caption": "Tara guessed the words wrongly",
+      "text": "Remember, Tara guesses your words from patterns. Shark and car sound a little bit alike. And the TV was loud too! So Tara guessed the words wrongly.",
+      "scene": "shark",
+      "focus": "guess"
+    },
+    {
+      "start": 66.73,
+      "end": 76.47,
+      "caption": "Said clearly, Tara gets it right!",
+      "text": "Anaya says it again, slowly and clearly. Baby, Shark. And this time, Tara gets it right. Phew!",
+      "scene": "shark",
+      "focus": "fix"
+    },
+    {
+      "start": 76.47,
+      "end": 84.67,
+      "caption": "AI makes guesses. Guesses can be wrong!",
+      "text": "So here's the big idea. AI makes guesses, and guesses can be wrong. AI is not always right.",
+      "scene": "define",
+      "focus": "truth"
+    },
+    {
+      "start": 84.67,
+      "end": 100.46,
+      "caption": "AI can make mistakes, just like people",
+      "text": "A wrong answer is called a mistake. People make mistakes, and AI can make mistakes too. That's okay, as long as we remember it. So we use AI like a helpful friend, and we keep our own brains switched on!",
+      "scene": "define",
+      "focus": "mistake"
+    },
+    {
+      "start": 100.46,
+      "end": 114.93,
+      "caption": "Puppy or muffin? Look closely!",
+      "text": "Let's play a game. Look at these two pictures. One is a little brown puppy. The other is a muffin with raisins. Which is which? Look closely.",
+      "scene": "muffin",
+      "focus": "look"
+    },
+    {
+      "start": 114.93,
+      "end": 125.45,
+      "caption": "An AI once called a dog photo a muffin!",
+      "text": "Tricky, right? Both are round and brown, with dark dots. Well, an AI once looked at a dog photo, and said, muffin!",
+      "scene": "muffin",
+      "focus": "label"
+    },
+    {
+      "start": 125.45,
+      "end": 139.6,
+      "caption": "Similar pattern, wrong guess",
+      "text": "The AI saw a similar pattern, round, brown, with dots, but it guessed wrong. It doesn't really know what a puppy is. It only matches patterns. Clever, but not perfect.",
+      "scene": "muffin",
+      "focus": "why"
+    },
+    {
+      "start": 139.6,
+      "end": 148.31,
+      "caption": "Why does AI make mistakes? Three reasons",
+      "text": "So why does AI make mistakes? It isn't tired, or angry, or trying to trick you. There are three main reasons.",
+      "scene": "reasons",
+      "focus": "intro"
+    },
+    {
+      "start": 148.31,
+      "end": 161.32,
+      "caption": "1 \u00b7 Too few examples",
+      "text": "One. Too few examples. If AI has only seen two or three cat photos, it hasn't learned the pattern well yet. That's like learning cricket from just one ball!",
+      "scene": "reasons",
+      "focus": "few"
+    },
+    {
+      "start": 161.32,
+      "end": 171.62,
+      "caption": "2 \u00b7 Messy examples: blurry or wrong names",
+      "text": "Two. Messy examples. Blurry photos, or wrong names, like a dog photo labelled cat. Those confuse the AI.",
+      "scene": "reasons",
+      "focus": "messy"
+    },
+    {
+      "start": 171.62,
+      "end": 186.83,
+      "caption": "3 \u00b7 Something new it has never seen",
+      "text": "And three. Something brand new it has never seen before. A dog in a lion costume could fool it! The AI has never seen that, so it makes its best guess. And the guess might be, lion!",
+      "scene": "reasons",
+      "focus": "new"
+    },
+    {
+      "start": 186.83,
+      "end": 204.16,
+      "caption": "3 blurry photos, or thousands of clear ones?",
+      "text": "Quick question! AI number one learned cat from only three blurry photos. AI number two learned from thousands of clear cat photos. Which one will make more mistakes spotting cats? Pause, and think.",
+      "scene": "cats",
+      "focus": "ask"
+    },
+    {
+      "start": 204.16,
+      "end": 214.37,
+      "caption": "Few, blurry examples \u2192 more mistakes",
+      "text": "AI number one! Few and messy examples mean more mistakes. More examples, and clearer ones, help AI learn better.",
+      "scene": "cats",
+      "focus": "answer"
+    },
+    {
+      "start": 214.37,
+      "end": 226.57,
+      "caption": "A map app suggests a road that's closed today",
+      "text": "Oops moments happen every day. A map app might send Papa down a road that's closed today, for repairs. Roads change, and the app hadn't learned about the repairs yet!",
+      "scene": "oops",
+      "focus": "map"
+    },
+    {
+      "start": 226.57,
+      "end": 243.77,
+      "caption": "Translation mix-up: kal = yesterday or tomorrow?",
+      "text": "And a translation app can mix up words. In Hindi, kal can mean yesterday, or tomorrow. So the app might say yesterday, when you meant tomorrow! The app guessed, and guessed wrong. Funny, but it shows AI can mess up.",
+      "scene": "oops",
+      "focus": "translate"
+    },
+    {
+      "start": 243.77,
+      "end": 255.33,
+      "caption": "Health \u00b7 Safety \u00b7 Food \u2192 ask a trusted grown-up",
+      "text": "So here's a very important rule. If it's about health, safety, or food, always check with a trusted grown-up. Like your parents, your teacher, or Nani.",
+      "scene": "grownup",
+      "focus": "rule"
+    },
+    {
+      "start": 255.33,
+      "end": 260.96,
+      "caption": "Never eat, touch, or go just because an app said",
+      "text": "Never eat something, touch something, or go somewhere, just because an app said so.",
+      "scene": "grownup",
+      "focus": "never"
+    },
+    {
+      "start": 260.96,
+      "end": 270.63,
+      "caption": "AI helps. Grown-ups decide big things.",
+      "text": "AI is a helper, like a friend with ideas. But it's not the boss of big decisions. You and your grown-ups decide the big things.",
+      "scene": "grownup",
+      "focus": "boss"
+    },
+    {
+      "start": 270.63,
+      "end": 281.9,
+      "caption": "The app says the mushroom is safe to eat!",
+      "text": "Back to Anaya. In Nani's village, she finds a white mushroom growing under a tree. She points a plant app at it, and the app says, safe to eat!",
+      "scene": "mushroom",
+      "focus": "find"
+    },
+    {
+      "start": 281.9,
+      "end": 287.49,
+      "caption": "What should Anaya do? Think!",
+      "text": "What should Anaya do? Pause, and think.",
+      "scene": "mushroom",
+      "focus": "ask"
+    },
+    {
+      "start": 287.49,
+      "end": 300.37,
+      "caption": "Don't eat it! Ask a grown-up first.",
+      "text": "Don't eat it! She asks Nani first. Some wild mushrooms can make you very sick, and the app could be wrong. Even if the app says yes twice, that doesn't make it right.",
+      "scene": "mushroom",
+      "focus": "answer"
+    },
+    {
+      "start": 300.37,
+      "end": 318.34,
+      "caption": "Which one most needs a grown-up to check?",
+      "text": "Last game! Which of these most needs a grown-up to check? An app suggests a song. A filter adds cat ears. An app picks a colour for your drawing. Or, an app says a medicine is fine to take.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 318.34,
+      "end": 328.19,
+      "caption": "Medicine! Health means ask a grown-up.",
+      "text": "The medicine! That's about health, so a grown-up must check. A wrong song, or wonky cat ears? No big deal!",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 328.19,
+      "end": 332.14,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 332.14,
+      "end": 344.14,
+      "caption": "AI says a plant is safe to eat. Should you?",
+      "text": "AI says a plant is safe to eat. Should you eat it? Why? Pause the video, and write your answer on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 344.14,
+      "end": 356.4,
+      "caption": "No! AI can be wrong. Ask a grown-up first.",
+      "text": "Here's one answer. No! AI can be wrong, and eating the wrong plant could make you sick. Always ask a trusted grown-up first. Smart thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 356.4,
+      "end": 361.48,
+      "caption": "AI can be wrong",
+      "text": "Let's remember. AI can be wrong, because it makes guesses.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 361.48,
+      "end": 364.64,
+      "caption": "Few or messy examples cause mistakes",
+      "text": "Few, or messy examples cause mistakes.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 364.64,
+      "end": 370.46,
+      "caption": "Important facts? Check with a person",
+      "text": "Important things, like health, safety, and food? Check with a person.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 370.46,
+      "end": 373.89,
+      "caption": "AI helps. Grown-ups decide big things.",
+      "text": "AI helps, but grown-ups decide the big things.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 373.89,
+      "end": 379.64,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! You're a smart, careful AI user now, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 379.64,
+      "end": 386.44,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

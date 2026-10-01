@@ -1,0 +1,372 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 8.52,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so glad you're here. Grab a pencil and some paper, you'll want them today.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 8.52,
+      "end": 17.67,
+      "caption": "Last time: 47 = 4 tens + 7 ones",
+      "text": "Last time, you powered up your place value. Forty-seven is four tens and seven ones. The place tells a digit's value.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 17.67,
+      "end": 24.53,
+      "caption": "Chapter 4 \u00b7 Skip Counting & Sequences",
+      "text": "Today is chapter four of Numbers Computers Love. It's called, Skip Counting and Sequences!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.53,
+      "end": 34.2,
+      "caption": "Count to 50 in just 10 jumps?",
+      "text": "Here's a challenge. Can you count all the way to fifty, in just ten jumps? Sounds impossible? Let's see!",
+      "scene": "open",
+      "focus": "challenge"
+    },
+    {
+      "start": 34.2,
+      "end": 43.77,
+      "caption": "Meera's gullak: ten 5-rupee coins!",
+      "text": "It's Meera's birthday! She and her friend Kabir open her clay gullak, her piggy bank. Out tumble ten shiny five-rupee coins!",
+      "scene": "gullak",
+      "focus": "meet"
+    },
+    {
+      "start": 43.77,
+      "end": 60.0,
+      "caption": "One rupee at a time\u2026 so slow!",
+      "text": "Meera counts the money, one rupee at a time. One, two, three, four, five, for the first coin. Six, seven, eight, nine, ten, for the next. Phew! This is taking forever.",
+      "scene": "gullak",
+      "focus": "slow"
+    },
+    {
+      "start": 60.0,
+      "end": 73.36,
+      "caption": "Kabir: 5, 10, 15, 20 \u2026 50!",
+      "text": "Kabir grins. Watch this! Five, ten, fifteen, twenty, twenty-five, thirty, thirty-five, forty, forty-five, fifty. Fifty rupees!",
+      "scene": "gullak",
+      "focus": "fast"
+    },
+    {
+      "start": 73.36,
+      "end": 80.95,
+      "caption": "How did Kabir count so fast? Think!",
+      "text": "Kabir counted so fast! How did he do it? Think about it.",
+      "scene": "gullak",
+      "focus": "ask"
+    },
+    {
+      "start": 80.95,
+      "end": 92.24,
+      "caption": "He jumped by 5 each time. 10 jumps \u2192 50!",
+      "text": "Each coin is worth five rupees. So Kabir jumped by five each time, instead of counting every rupee. Ten jumps of five took him all the way to fifty!",
+      "scene": "gullak",
+      "focus": "answer"
+    },
+    {
+      "start": 92.24,
+      "end": 101.25,
+      "caption": "Skip counting: jump the same amount each time",
+      "text": "That trick has a name. It's called skip counting. Skip counting means counting by jumping the same amount, each time.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 101.25,
+      "end": 116.37,
+      "caption": "0 \u2192 2 \u2192 4 \u2192 6 \u2192 8 \u2192 10",
+      "text": "Look at this number line. Start at zero, and jump two. Jump two again. And again. Zero, two, four, six, eight, ten. Every jump is the same size.",
+      "scene": "define",
+      "focus": "line"
+    },
+    {
+      "start": 116.37,
+      "end": 124.34,
+      "caption": "Each jump = add the same number",
+      "text": "And each jump means, add the same number. So skip counting by two means, add two, again and again.",
+      "scene": "define",
+      "focus": "add"
+    },
+    {
+      "start": 124.34,
+      "end": 135.26,
+      "caption": "Pairs of chappals: 2, 4, 6, 8, 10, 12",
+      "text": "Let's skip count by twos. Look at the chappals by Nani's door. They come in pairs! Two, four, six, eight, ten, twelve.",
+      "scene": "twos",
+      "focus": "pairs"
+    },
+    {
+      "start": 135.26,
+      "end": 143.95,
+      "caption": "Counting by 2s \u2192 the even numbers!",
+      "text": "Hey, remember chapter two? These are the even numbers! Counting by twos from two lands on every even number.",
+      "scene": "twos",
+      "focus": "even"
+    },
+    {
+      "start": 143.95,
+      "end": 154.91,
+      "caption": "Count by 2s from 2 to 20. How many numbers?",
+      "text": "Here's a puzzle. If you count by twos, from two up to twenty, how many numbers do you say? Use your fingers.",
+      "scene": "twos",
+      "focus": "ask"
+    },
+    {
+      "start": 154.91,
+      "end": 165.89,
+      "caption": "2, 4, 6 \u2026 20 \u2192 that's 10 numbers!",
+      "text": "Two, four, six, eight, ten, twelve, fourteen, sixteen, eighteen, twenty. That's ten numbers! One for each finger.",
+      "scene": "twos",
+      "focus": "answer"
+    },
+    {
+      "start": 165.89,
+      "end": 175.63,
+      "caption": "By 5s: 5, 10, 15, 20, 25 \u2026 50",
+      "text": "Now let's count by fives, just like Kabir. Five, ten, fifteen, twenty, twenty-five, and on, all the way to fifty.",
+      "scene": "fives",
+      "focus": "count"
+    },
+    {
+      "start": 175.63,
+      "end": 185.68,
+      "caption": "By 5s, numbers end in 5 or 0",
+      "text": "Look at the last digit. Five, zero, five, zero. When you count by fives, every number ends in five or zero!",
+      "scene": "fives",
+      "focus": "ends"
+    },
+    {
+      "start": 185.68,
+      "end": 196.86,
+      "caption": "Not said by 5s: 35, 42 or 45?",
+      "text": "So, which number will you not say, when you count by fives? Thirty-five, forty-two, or forty-five? Think.",
+      "scene": "fives",
+      "focus": "ask"
+    },
+    {
+      "start": 196.86,
+      "end": 204.29,
+      "caption": "42! It ends in 2, so we skip it",
+      "text": "Forty-two! It ends in a two, not a five or a zero. So we jump right over it.",
+      "scene": "fives",
+      "focus": "answer"
+    },
+    {
+      "start": 204.29,
+      "end": 222.32,
+      "caption": "By 10s: 10, 20, 30, 40, 50",
+      "text": "Counting by tens is super easy. Remember our bundles of ten sticks? Ten, twenty, thirty, forty, fifty. One ten, two tens, three tens. Only the tens digit changes, and the ones digit stays zero!",
+      "scene": "tens",
+      "focus": "count"
+    },
+    {
+      "start": 222.32,
+      "end": 232.14,
+      "caption": "10, 20, ___, 40, 50. What's missing?",
+      "text": "What's missing here? Ten, twenty, something, forty, fifty. Pause, and think.",
+      "scene": "tens",
+      "focus": "ask"
+    },
+    {
+      "start": 232.14,
+      "end": 238.09,
+      "caption": "30! 20 + 10 = 30",
+      "text": "Thirty! Twenty plus ten equals thirty. Three bundles of ten.",
+      "scene": "tens",
+      "focus": "answer"
+    },
+    {
+      "start": 238.09,
+      "end": 248.27,
+      "caption": "Sequence: numbers in order, following a rule",
+      "text": "A list of numbers that follows a rule is called a sequence. The rule tells you how to get the next number. Skip counting makes a sequence too!",
+      "scene": "sequence",
+      "focus": "name"
+    },
+    {
+      "start": 248.27,
+      "end": 264.42,
+      "caption": "3, 6, 9, 12: each jump is 3",
+      "text": "Look at this one. Three, six, nine, twelve. What's the rule? Let's check each jump. Six minus three is three. Nine minus six is three. Twelve minus nine is three.",
+      "scene": "sequence",
+      "focus": "jumps"
+    },
+    {
+      "start": 264.42,
+      "end": 273.49,
+      "caption": "Rule: add 3 \u2192 15, 18, 21",
+      "text": "Every jump is three. So the rule is, add three. And the next three numbers are fifteen, eighteen, and twenty-one.",
+      "scene": "sequence",
+      "focus": "rule"
+    },
+    {
+      "start": 273.49,
+      "end": 280.46,
+      "caption": "Kabir scores 4 runs every over",
+      "text": "Now, cricket time! Kabir is batting, and he scores four runs, every single over.",
+      "scene": "cricket",
+      "focus": "intro"
+    },
+    {
+      "start": 280.46,
+      "end": 290.74,
+      "caption": "4, 8, 12 \u2026 rule: add 4",
+      "text": "After one over, four runs. After two overs, eight. After three overs, twelve. The rule is, add four.",
+      "scene": "cricket",
+      "focus": "table"
+    },
+    {
+      "start": 290.74,
+      "end": 299.31,
+      "caption": "How many runs after 5 overs?",
+      "text": "So how many runs after five overs? Keep adding four. Take your time.",
+      "scene": "cricket",
+      "focus": "ask"
+    },
+    {
+      "start": 299.31,
+      "end": 310.83,
+      "caption": "16 after 4 overs, 20 after 5 overs!",
+      "text": "Twelve plus four is sixteen, after four overs. Sixteen plus four is twenty, after five overs. Twenty runs! Shabaash, Kabir!",
+      "scene": "cricket",
+      "focus": "answer"
+    },
+    {
+      "start": 310.83,
+      "end": 320.05,
+      "caption": "5, 10, 15, ___, ___, ___ ?",
+      "text": "Quick game! Fill in the next three numbers. Five, ten, fifteen, and then?",
+      "scene": "game",
+      "focus": "ask1"
+    },
+    {
+      "start": 320.05,
+      "end": 325.15,
+      "caption": "20, 25, 30! Rule: add 5",
+      "text": "Twenty, twenty-five, thirty! The rule is, add five.",
+      "scene": "game",
+      "focus": "ans1"
+    },
+    {
+      "start": 325.15,
+      "end": 340.49,
+      "caption": "Which one is NOT counting by 5s?",
+      "text": "Now, spot the fake. Which one is not skip counting by fives? Twenty-five, thirty, thirty-five, forty. Or, five, ten, twenty, forty?",
+      "scene": "game",
+      "focus": "ask2"
+    },
+    {
+      "start": 340.49,
+      "end": 353.69,
+      "caption": "5, 10, 20, 40: the jumps change!",
+      "text": "Five, ten, twenty, forty is the fake! Its jumps keep changing. Five, then ten, then twenty. In skip counting, every jump is the same.",
+      "scene": "game",
+      "focus": "ans2"
+    },
+    {
+      "start": 353.69,
+      "end": 361.56,
+      "caption": "A loop: the same step, again and again",
+      "text": "Maybe you've met loops in our computer lessons. A loop tells a computer to do the same step, again and again.",
+      "scene": "loop",
+      "focus": "remember"
+    },
+    {
+      "start": 361.56,
+      "end": 373.49,
+      "caption": "Start at 0 \u00b7 Repeat: add 2, say it",
+      "text": "Here's skip counting as a loop. Start at zero. Repeat: add two, and say the number. Zero, two, four, six, eight, ten.",
+      "scene": "loop",
+      "focus": "code"
+    },
+    {
+      "start": 373.49,
+      "end": 386.1,
+      "caption": "\"Repeat add 2\" is a loop!",
+      "text": "Same step, again and again. So, repeat add two is a loop! Skip counting is the beat of a loop. And a computer never gets bored, and never skips a step.",
+      "scene": "loop",
+      "focus": "same"
+    },
+    {
+      "start": 386.1,
+      "end": 389.8,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 389.8,
+      "end": 399.67,
+      "caption": "What is the rule for 5, 10, 15, 20?",
+      "text": "What is the rule for five, ten, fifteen, twenty? Pause the video, and work it out on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 399.67,
+      "end": 412.9,
+      "caption": "Add 5! Every jump is 5",
+      "text": "Add five, each time! Ten minus five is five. Fifteen minus ten is five. Twenty minus fifteen is five. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 412.9,
+      "end": 418.5,
+      "caption": "Skip counting = add the same amount",
+      "text": "Let's remember. Skip counting means adding the same amount, each time.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 418.5,
+      "end": 420.7,
+      "caption": "The rule tells the next number",
+      "text": "The rule tells you the next number.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 420.7,
+      "end": 424.1,
+      "caption": "Check the jump between numbers",
+      "text": "To find the rule, check the jump between the numbers.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 424.1,
+      "end": 427.47,
+      "caption": "\"Repeat add 2\" is a loop",
+      "text": "And repeat add two? That's a loop!",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 427.47,
+      "end": 434.74,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! You can skip count, and find the rule. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 434.74,
+      "end": 441.54,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "id": "C12",
+  "title": "Grids and Coordinates",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "Math · Shapes, Grids & Coordinates",
+  "slug": "c12-grids-and-coordinates",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c12-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you named shapes just by counting their sides. Triangle, three. Square, four. Hexagon, six!", "caption": "Last time: count the sides, name the shape", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Today is chapter two of Shapes, Grids, and Coordinates. It's called, Grids and Coordinates!", "caption": "Chapter 2 · Grids and Coordinates", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "By the end, you'll be able to find any spot on a grid, just like reading a treasure map!", "caption": "Find any spot, like a treasure map!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "ball",
+      "visual": "c12-hook",
+      "beats": [
+        { "vo": "Remember Aarav? Today he's playing on the terrace with his little sister, Diya. The floor is covered in square tiles, rows and rows of them.", "caption": "Aarav and Diya on the tiled terrace", "focus": "meet", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Diya hides Aarav's cricket ball, and gives him a clue. Your ball is at, four, two!", "caption": "Diya: \"Your ball is at (4, 2)!\"", "focus": "hide", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Aarav starts at the corner. He walks two tiles across, then four tiles up. He looks down. No ball! Oh no.", "caption": "2 across, 4 up… no ball!", "focus": "wrong", "sfx": "buzz", "sfxAt": 0.85, "pause": 0.5 },
+        { "vo": "Hmm. He used both numbers. So why didn't he find the ball? Think about it.", "caption": "He used both numbers. What went wrong?", "focus": "why", "pause": 2.0 },
+        { "vo": "He used them in the wrong order! Diya meant four across first, then two up. And there's the ball! The order of the numbers really matters.", "caption": "4 across first, then 2 up. Found it!", "focus": "answer", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "grid",
+      "visual": "c12-grid",
+      "beats": [
+        { "vo": "Aarav's tiled floor is a grid. A grid is made of lines going across, and lines going up. Just like a chessboard!", "caption": "Grid = lines going across and up", "focus": "grid", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "The lines make rows, that go side to side, and columns, that stand up tall. A chessboard has eight rows, and eight columns.", "caption": "Rows go side to side · columns stand tall", "focus": "rows", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Every grid needs a starting point. It's the bottom left corner, and we call it, zero, zero. It has a special name too, the origin.", "caption": "Start at (0, 0), the origin, bottom left", "focus": "origin", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "address",
+      "visual": "c12-address",
+      "beats": [
+        { "vo": "Every point on a grid has an address, called its coordinates. We write two numbers inside brackets, like four, two.", "caption": "Coordinates = a point's address, like (4, 2)", "focus": "name", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "The first number tells you how far to go across, to the right. Its short name is x.", "caption": "1st number: how far across (x)", "focus": "x" },
+        { "vo": "The second number tells you how far to go up. Its short name is y.", "caption": "2nd number: how far up (y)", "focus": "y" },
+        { "vo": "So, to reach four, two, start at zero, zero. Walk four across. One, two, three, four. Then climb two up. One, two. You're there!", "caption": "(4, 2): 4 across, then 2 up", "focus": "walk", "sfx": "success", "sfxAt": 0.9 },
+        { "vo": "Here's a trick to remember it. Walk along the floor, before you climb the stairs. Across first, then up!", "caption": "Walk along, then climb up: across, then up!", "focus": "rhyme", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "c12-order",
+      "beats": [
+        { "vo": "Watch what happens when we swap the numbers. Four, two, is here. But two, four, means two across, and four up. That's a totally different spot!", "caption": "(4, 2) and (2, 4) are different places!", "focus": "swap", "sfx": "whoosh", "sfxAt": 0.4 },
+        { "vo": "Quick question. In the address three, five, which number tells you how far to go across? Think.", "caption": "In (3, 5), which number is across?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Three! The first number is always across. And five is up.", "caption": "3 is across, 5 is up", "focus": "ans", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Your turn. Start at zero, zero. Go two across, and three up. What's your address? Pause, and think.", "caption": "From (0, 0): 2 across, 3 up. Address?", "focus": "ask2", "pause": 2.0 },
+        { "vo": "Two, three! The across number goes first, and the up number goes second.", "caption": "(2, 3)! Across first, then up", "focus": "ans2", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "move",
+      "visual": "c12-move",
+      "beats": [
+        { "vo": "Now let's move around! Aarav is at one, two. He moves three steps to the right. Moving right adds to the across number. One plus three is four. So now he's at four, two.", "caption": "(1, 2) → 3 right → (4, 2)", "focus": "right", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Diya is at four, one. She moves two steps up. Moving up adds to the up number. One plus two is three. So she's at four, three!", "caption": "(4, 1) → 2 up → (4, 3)", "focus": "up", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "And moving left takes away from the across number. From five, three, one step left takes you to, four, three.", "caption": "(5, 3) → 1 left → (4, 3)", "focus": "left", "sfx": "tick", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "path",
+      "visual": "c12-path",
+      "beats": [
+        { "vo": "Here's a tricky one! Start at two, two. Move three right, then two up, then one left. Where do you end up? Take your time.", "caption": "(2, 2): 3 right, 2 up, 1 left. Where now?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Step by step. Three right takes you to five, two. Two up takes you to five, four. One left takes you to, four, four!", "caption": "(5, 2) → (5, 4) → (4, 4)!", "focus": "ans", "sfx": "success", "sfxAt": 0.9 },
+        { "vo": "And if a chess piece moves from one, one, to one, five? The across number stays the same. The up number goes from one to five. So it moved four up!", "caption": "(1, 1) → (1, 5): it moved 4 up", "focus": "chess", "sfx": "chime", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "ship",
+      "visual": "c12-ship",
+      "beats": [
+        { "vo": "Game time! Let's play battleship. Aarav hides a ship on a five by five grid, and Diya has to guess where it is.", "caption": "Battleship on a 5 × 5 grid!", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Shh, don't tell Diya. The ship is hiding at three, four. Three across, four up.", "caption": "The ship hides at (3, 4)", "focus": "hide", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Diya guesses four, three. Is that a hit, or a miss? Think!", "caption": "Diya guesses (4, 3). Hit or miss?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Splash, it's a miss! Four, three, is a different spot. The numbers are swapped.", "caption": "(4, 3) → Miss! The numbers are swapped", "focus": "miss", "sfx": "buzz", "sfxAt": 0.1 },
+        { "vo": "Then she guesses three, four. Boom! A hit! So always read the address carefully. Across, then up.", "caption": "(3, 4) → Hit! Across, then up", "focus": "hit", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "pixels",
+      "visual": "c12-pixels",
+      "beats": [
+        { "vo": "Guess what? Computers use grids too! A screen is a giant grid of tiny squares, called pixels.", "caption": "A screen is a giant grid of pixels", "focus": "screen", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Every pixel has its own address, like one hundred and twenty, forty five. The computer uses that address to know exactly which pixel to colour.", "caption": "Each pixel has an address, like (120, 45)", "focus": "address", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Colour the right pixels, and a picture appears! That's how every game and cartoon gets onto your screen.", "caption": "Colour the right pixels → a picture!", "focus": "art", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c12-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Mark four, two on a grid. Which number is across? Pause the video, and try it on paper.", "caption": "Mark (4, 2). Which number is across?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Four is across! Start at zero, zero. Go four across, then two up, and mark your point. Did you get it? Brilliant!", "caption": "4 is across: 4 across, then 2 up", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c12-recap",
+      "beats": [
+        { "vo": "Let's remember. A grid has rows and columns.", "caption": "A grid has rows and columns", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "An address is two numbers. Across, then up.", "caption": "Address = (across, up)", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Across first, then up. The order matters!", "caption": "Across first, then up. Order matters!", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And screens are giant grids of pixels.", "caption": "Screens are grids of pixels", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! You can find any point on a grid now, champ.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

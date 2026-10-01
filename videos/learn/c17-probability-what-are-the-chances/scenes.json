@@ -1,0 +1,147 @@
+{
+  "id": "C17",
+  "title": "Probability — What Are the Chances?",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "Math · Problem Solver",
+  "slug": "c17-probability-what-are-the-chances",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c17-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! It's so nice to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you became a super guesser. Guess, check, and improve, just like a coder fixing a bug.", "caption": "Last time: guess → check → improve", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of Problem Solver. It's called, Probability. What are the chances?", "caption": "Chapter 2 · Probability", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Probability sounds like a huge word, doesn't it? But it just means chance. How likely is something to happen? Let's find out!", "caption": "Probability = chance. How likely is it?", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "ludo",
+      "visual": "c17-hook",
+      "beats": [
+        { "vo": "Meet Aarav. Every Sunday, he plays Ludo with his nani. And Nani is very hard to beat!", "caption": "Meet Aarav, playing Ludo with Nani", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "In Ludo, you need a six to move your first piece out. Aarav shakes the die, and whispers, please be a six!", "caption": "\"Please be a six!\"", "focus": "rule", "sfx": "tick", "sfxAt": 0.6 },
+        { "vo": "Will Aarav get a six on his very first roll? What do you think? Yes, or no?", "caption": "A six on the first roll? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Here's the honest answer. Nobody knows for sure! It might be a six. It might not. But we can still say how likely it is. And that's what probability is all about.", "caption": "Nobody knows for sure, but we know how likely", "focus": "answer", "sfx": "chime", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c17-define",
+      "beats": [
+        { "vo": "Probability means the chance that something will happen. Not what will happen. Just how likely it is.", "caption": "Probability = the chance something happens", "focus": "name", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "We can put chances on a chance line. At one end is impossible. Then comes unlikely, then likely. And at the other end, certain.", "caption": "Impossible → Unlikely → Likely → Certain", "focus": "line", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Impossible means it can never happen. Unlikely means it could happen, but probably won't. Likely means it will probably happen. And certain means it will surely happen.", "caption": "Never · Probably not · Probably · Surely", "focus": "words" }
+      ]
+    },
+    {
+      "id": "scale",
+      "visual": "c17-scale",
+      "beats": [
+        { "vo": "Let's try some. The sun will rise tomorrow. That happens every single day, so it's certain.", "caption": "The sun will rise tomorrow → certain", "focus": "certain", "sfx": "pop", "sfxAt": 0.7 },
+        { "vo": "Rolling a seven on a normal die? A die only has the numbers one to six. There is no seven! So that's impossible.", "caption": "Roll a 7 on a normal die → impossible", "focus": "impossible", "sfx": "buzz", "sfxAt": 0.75 },
+        { "vo": "Now, Aarav's six on the first roll. A six is just one face out of six. It could happen, but it probably won't. So it's unlikely.", "caption": "A 6 on the first roll: 1 out of 6 → unlikely", "focus": "unlikely", "sfx": "pop", "sfxAt": 0.75 },
+        { "vo": "And rolling any number smaller than six? One, two, three, four, or five. That's five faces out of six. So that's likely!", "caption": "Smaller than 6: 5 out of 6 → likely", "focus": "likely", "sfx": "success", "sfxAt": 0.75 }
+      ]
+    },
+    {
+      "id": "coin",
+      "visual": "c17-coin",
+      "beats": [
+        { "vo": "Now, think of a cricket match. Before it starts, the captains toss a coin. Heads, or tails?", "caption": "The cricket toss: heads or tails?", "focus": "toss", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "A coin has two sides. Heads is one side out of two. Tails is one side out of two. Same chance!", "caption": "Heads: 1 out of 2 · Tails: 1 out of 2", "focus": "sides", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "So heads and tails are equally likely. If you toss a coin ten times, you might not get exactly five heads. But over lots of tosses, it comes out about half and half.", "caption": "Lots of tosses → about half and half", "focus": "equal" },
+        { "vo": "That's why the toss is fair. Fair means every result has the same chance. Nobody gets a head start!", "caption": "Fair = every result has the same chance", "focus": "fair", "sfx": "chime", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "dice",
+      "visual": "c17-dice",
+      "beats": [
+        { "vo": "A normal die is fair too. It has six faces, so each number has a chance of one out of six.", "caption": "6 faces · each number is 1 out of 6", "focus": "faces", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Here's one for you. What's the chance of rolling an even number? Count the even faces. Take your time.", "caption": "Chance of an even number? Count!", "focus": "ask", "pause": 2.0 },
+        { "vo": "The even numbers are two, four, and six. That's three faces. So the chance is three out of six. That's half the faces!", "caption": "Even: 2, 4, 6 → 3 out of 6", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "marbles",
+      "visual": "c17-marbles",
+      "beats": [
+        { "vo": "Nani has a cloth bag of marbles. Seven blue marbles, and three yellow marbles. She gives it a good shake.", "caption": "7 blue marbles and 3 yellow marbles", "focus": "bag", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Aarav picks one without looking. What's the chance it's yellow? And is that likely, or unlikely? Pause and think.", "caption": "Chance of yellow? Likely or unlikely?", "focus": "ask", "pause": 2.2 },
+        { "vo": "First, count them all. Seven plus three makes ten marbles. Three are yellow, so the chance is three out of ten. That's unlikely. And blue? Seven out of ten. That's likely!", "caption": "Yellow: 3 out of 10 · Blue: 7 out of 10", "focus": "answer", "sfx": "success", "sfxAt": 0.35 },
+        { "vo": "Now a new bag, with five green marbles, and no red ones at all. Picking a red marble? Impossible! There are none. And picking green? Certain!", "caption": "No red marbles → red is impossible", "focus": "green", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "spinner",
+      "visual": "c17-spinner",
+      "beats": [
+        { "vo": "Spinners can be fair, or unfair. This spinner has four equal parts, each a different colour. Every colour has the same chance. That's fair.", "caption": "4 equal parts → fair", "focus": "fair", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "This one has four equal parts too, but three are red, and only one is blue. Red has three parts out of four. So red is more likely!", "caption": "3 red, 1 blue → red is more likely", "focus": "red", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "And look at this one. One part is half of the whole circle! Is this spinner fair? Think about it.", "caption": "One part is half the circle. Fair?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Not fair! The big part takes up half the circle, so the arrow stops there much more often. Fair spinners have equal parts.", "caption": "Not fair! Fair spinners have equal parts", "focus": "answer", "sfx": "buzz", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "ai",
+      "visual": "c17-ai",
+      "beats": [
+        { "vo": "Here's something cool. AI uses chance too!", "caption": "AI uses chance too!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Remember how AI learns from examples? If it has seen a hundred cat photos with pointy ears, then a new photo with pointy ears is likely a cat.", "caption": "Seen lots of cats → pointy ears? Likely a cat", "focus": "cats", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Your phone does it too. Type, happy, and it suggests, birthday. It picks the word that's most likely to come next.", "caption": "\"Happy…\" → \"birthday\" is most likely", "focus": "phone", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "But AI is not always certain. It picks what's most likely, and sometimes, it guesses wrong. Just like us!", "caption": "Most likely is not certain. AI can be wrong!", "focus": "wrong", "sfx": "buzz", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c17-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Is rolling a seven on a normal die impossible, or unlikely? And why? Pause the video, and try it on paper.", "caption": "Rolling a 7: impossible or unlikely? Why?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Impossible! A normal die only has the numbers one to six. So a seven can never come up, not even once. Did you get it? Brilliant!", "caption": "Impossible! A die only has 1 to 6", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c17-recap",
+      "beats": [
+        { "vo": "Let's remember. Chances go from impossible, to unlikely, to likely, to certain.", "caption": "Impossible → unlikely → likely → certain", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A coin has two sides, so heads and tails are equally likely.", "caption": "Coin: heads and tails equally likely", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Fair means every result has the same chance, like a normal die, or a spinner with equal parts.", "caption": "Fair = every result, same chance", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And AI picks what's most likely, from lots of examples.", "caption": "AI picks the most likely, from examples", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! You can talk about chances like a pro, champ.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

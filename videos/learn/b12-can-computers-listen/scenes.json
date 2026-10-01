@@ -1,0 +1,145 @@
+{
+  "id": "B12",
+  "title": "Can Computers Listen?",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "AI · Sees, Hears & Talks",
+  "slug": "b12-can-computers-listen",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b12-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready to use your ears today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we found out how computers see. They look at tiny pixels, and match patterns. Remember Coco, hiding behind the school bag?", "caption": "Last time: pixels → patterns → seeing!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of AI That Sees, Hears, and Talks. And the question is, can computers listen?", "caption": "Chapter 2 · Can Computers Listen?", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Hmm. A computer has no ears either! So how can it hear you? Let's find out.", "caption": "No ears! So how can it hear?", "focus": "ears", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "riya",
+      "visual": "b12-hook",
+      "beats": [
+        { "vo": "Meet Riya. Her family has a little smart speaker in the living room. It's round, and it glows when it's listening.", "caption": "Meet Riya and her smart speaker", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Riya says, Hey helper, play my favourite song! The speaker lights up, and the music starts. Riya starts dancing!", "caption": "\"Hey helper, play my favourite song!\"", "focus": "song", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Then her little brother, Aarav, tries. He says, play music. And nothing happens. The speaker just sits there, silent.", "caption": "Aarav says \"Play music\"… nothing!", "focus": "brother", "sfx": "buzz", "sfxAt": 0.6, "pause": 0.5 },
+        { "vo": "Two questions for you. How did the speaker understand Riya? And why did it ignore Aarav? Think about it.", "caption": "How did it hear Riya? Why not Aarav?", "focus": "why", "pause": 2.0 }
+      ]
+    },
+    {
+      "id": "listen",
+      "visual": "b12-steps",
+      "beats": [
+        { "vo": "Let's start with how a computer listens. It happens in three quick steps.", "caption": "How a computer listens: 3 steps", "focus": "intro", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Step one. It hears the sound. A tiny microphone inside catches your voice, as it travels through the air in waves.", "caption": "1 · It hears the sound of your voice", "focus": "hear", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Step two. It turns that sound into words. Play. My. Favourite. Song. This is called speech recognition. That's when a computer turns spoken sounds into written words.", "caption": "2 · Sound → words: speech recognition", "focus": "words", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Step three. It matches those words to patterns, to work out what you want. Play, plus song, means, start the music!", "caption": "3 · Words → patterns → what you want", "focus": "match", "sfx": "tick", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "learn",
+      "visual": "b12-learn",
+      "beats": [
+        { "vo": "But how does it know those patterns? Just like seeing, it learns from examples. It has heard thousands and thousands of people say things like, play a song, set a timer, or what's the weather.", "caption": "It learned from thousands of examples", "focus": "examples" },
+        { "vo": "Kids' voices, grown-up voices, fast talkers, slow talkers, and lots of different accents. An accent is the special way people from a place say their words. The more examples it hears, the better it gets.", "caption": "Many voices, many accents, more examples", "focus": "voices" },
+        { "vo": "So it's not reading your mind, and it isn't alive. It doesn't really understand like you do. It's matching sounds and words to patterns it learned.", "caption": "Not mind reading. Just patterns!", "focus": "notmagic", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "helpers",
+      "visual": "b12-helpers",
+      "beats": [
+        { "vo": "A helper that listens and answers is called a voice assistant. You might have one at home!", "caption": "A listening helper = a VOICE ASSISTANT", "focus": "intro", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Smart speakers, like Riya's, can play your favourite songs, or tell you if it will be sunny or rainy today.", "caption": "Smart speakers: songs and weather", "focus": "speaker", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Phone helpers can set an alarm for school, or call nani, without you pressing a single button.", "caption": "Phone helpers: set alarms, call nani", "focus": "phone", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "And voice typing writes your words on the screen, while you talk! Great for sending a message when your hands are busy.", "caption": "Voice typing: talk, and words appear", "focus": "typing", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "wake",
+      "visual": "b12-wake",
+      "beats": [
+        { "vo": "Now, back to Aarav. Why did the speaker ignore him? He forgot the wake word!", "caption": "Aarav forgot the WAKE WORD!", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "A wake word is a special word or name, that tells the helper, start listening now. Riya said, Hey helper, first. That woke it up!", "caption": "Wake word = \"Start listening now!\"", "focus": "meaning" },
+        { "vo": "It's like calling your friend's name across the playground, before you tell them something. Without it, they don't know you're talking to them.", "caption": "Like calling a friend's name first", "focus": "like" },
+        { "vo": "So Aarav tries again. Hey helper, play music! And there it goes. Dance party!", "caption": "\"Hey helper, play music!\" It works!", "focus": "fixed", "sfx": "success", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "harder",
+      "visual": "b12-noise",
+      "beats": [
+        { "vo": "But even with the wake word, some things make listening harder.", "caption": "Some things make listening harder", "focus": "intro" },
+        { "vo": "Noise is a big one. A loud TV, a whirring mixer, or a busy market. The helper hears your voice all jumbled up with other sounds.", "caption": "Noise: TV, mixer, busy market", "focus": "noise", "sfx": "buzz", "sfxAt": 0.3 },
+        { "vo": "Whispers and mumbling are another. The sound is too soft, or too unclear. And talking super fast can mix up the words too.", "caption": "Whispers, mumbles, and talking too fast", "focus": "whisper" },
+        { "vo": "Then it makes mistakes! You mumble, set a timer, and it hears, set a tiger! Oh no. Computers can get it wrong.", "caption": "\"Set a timer\" → \"Set a tiger?\" Oops!", "focus": "oops", "sfx": "buzz", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "mixer",
+      "visual": "b12-mixer",
+      "beats": [
+        { "vo": "Here's Riya again. Mum's mixer is running. Whirr! Riya softly says, hey helper, weather? And the speaker gets confused. What should Riya do? Think.", "caption": "The mixer is loud. What should Riya do?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Wait for the mixer to stop. Then say it clearly, and in full. Hey helper, what's the weather today? Now the helper understands. Sunny, with a little breeze!", "caption": "Wait for quiet, then ask clearly and fully", "focus": "answer", "sfx": "success", "sfxAt": 0.55 }
+      ]
+    },
+    {
+      "id": "commands",
+      "visual": "b12-commands",
+      "beats": [
+        { "vo": "Let's play, good command or poor command! Umm, do that thing. Hey helper, set a timer for ten minutes. Do the stuff from yesterday. Which one is good? Pause, and think.", "caption": "Which voice command is good?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Hey helper, set a timer for ten minutes! It has the wake word, and one short, exact ask. The others are too unclear. Do what thing? What stuff? The helper can't guess.", "caption": "Good = wake word + one short, clear ask", "focus": "answer", "sfx": "success", "sfxAt": 0.08 },
+        { "vo": "So here are your tips. Say the wake word first. Speak clearly, in a quieter room. And ask one thing at a time.", "caption": "Wake word · Speak clearly · Quiet room", "focus": "tips", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b12-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Write one clear command you could say to a voice helper. Pause the video, and try it on paper.", "caption": "Write one clear command for a voice helper", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one. Hey helper, what's the weather in Delhi today? Wake word first, then one short, clear ask. Did yours have both? Super!", "caption": "\"Hey helper, what's the weather in Delhi?\"", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b12-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. Listening means sound, then words, then patterns.", "caption": "Listening = sound → words → patterns", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Say the wake word first, so the helper starts listening.", "caption": "Say the wake word first", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Speak clearly, in a quiet room.", "caption": "Speak clearly in a quiet room", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Because noise and whispers make it harder, and computers can make mistakes.", "caption": "Noise and whispers make it harder", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! Now you know how computers listen, champ. Next time you talk to a helper, remember Riya and Aarav.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

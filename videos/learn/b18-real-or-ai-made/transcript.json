@@ -1,0 +1,324 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.31,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready to become a picture detective today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.31,
+      "end": 15.47,
+      "caption": "Last time: keep your private info safe",
+      "text": "Last time, we learned about privacy. Keep your name, your location, and photos of your home safe. And ask a grown-up before you share.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 15.47,
+      "end": 21.54,
+      "caption": "Chapter 3 \u00b7 Real or AI-Made?",
+      "text": "Today is chapter three of Smart and Safe With AI. Real, or AI-made?",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 21.54,
+      "end": 29.28,
+      "caption": "Can you always believe your eyes?",
+      "text": "Here's a question for you. Can you always believe your eyes? Hmm. Let's find out.",
+      "scene": "open",
+      "focus": "eyes"
+    },
+    {
+      "start": 29.28,
+      "end": 36.68,
+      "caption": "Aarav gets a photo in the family chat",
+      "text": "Remember Aarav, from last time? One evening, his cousin Riya sends a photo to the family chat group.",
+      "scene": "tiger",
+      "focus": "meet"
+    },
+    {
+      "start": 36.68,
+      "end": 44.71,
+      "caption": "A tiger in glasses, reading in class!",
+      "text": "It's a tiger! Sitting at a desk in a classroom, wearing round glasses, and reading a book. Whoa!",
+      "scene": "tiger",
+      "focus": "photo"
+    },
+    {
+      "start": 44.71,
+      "end": 54.54,
+      "caption": "Is it real? What do you think?",
+      "text": "Aarav's eyes go wide. Is this real? Did a tiger really go to school? What do you think?",
+      "scene": "tiger",
+      "focus": "ask"
+    },
+    {
+      "start": 54.54,
+      "end": 64.97,
+      "caption": "Not a real photo. It was made by AI!",
+      "text": "It's not a real photo. Nobody took it with a camera. It was made by AI! And it looks so real, Aarav almost believed it.",
+      "scene": "tiger",
+      "focus": "answer"
+    },
+    {
+      "start": 64.97,
+      "end": 73.31,
+      "caption": "AI-made image: made from patterns, no camera",
+      "text": "A picture like this is called an AI-made image. It's a picture made by a computer from patterns, not taken with a camera.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 73.31,
+      "end": 86.86,
+      "caption": "AI learned patterns from millions of photos",
+      "text": "How does it work? The AI learned from millions of photos. It found patterns. What tigers look like. What classrooms look like. What glasses look like.",
+      "scene": "define",
+      "focus": "learn"
+    },
+    {
+      "start": 86.86,
+      "end": 101.49,
+      "caption": "New pictures of things that never happened",
+      "text": "Then it mixes those patterns to make a brand-new picture. It's not magic, and the AI isn't alive. It's just very good at patterns. So some pictures look real, even though they never happened.",
+      "scene": "define",
+      "focus": "mix"
+    },
+    {
+      "start": 101.49,
+      "end": 110.93,
+      "caption": "AI can copy voices too!",
+      "text": "And it's not only pictures. AI can copy voices too! It learns the patterns in how a person talks, and copies them.",
+      "scene": "voice",
+      "focus": "intro"
+    },
+    {
+      "start": 110.93,
+      "end": 123.07,
+      "caption": "A voice message may not be real",
+      "text": "Imagine a voice message that sounds just like a famous cricketer, saying, hi Aarav, you're my favourite fan! Exciting, right? But it might not be real at all.",
+      "scene": "voice",
+      "focus": "msg"
+    },
+    {
+      "start": 123.07,
+      "end": 129.22,
+      "caption": "Surprising voice note? Check with a grown-up",
+      "text": "So if a voice message sounds surprising, or asks you to do something, check with a grown-up first.",
+      "scene": "voice",
+      "focus": "check"
+    },
+    {
+      "start": 129.22,
+      "end": 137.31,
+      "caption": "Clues: small signs that help you think",
+      "text": "So how can we spot an AI-made picture? We look for clues. A clue is a small sign that helps you think.",
+      "scene": "clues",
+      "focus": "intro"
+    },
+    {
+      "start": 137.31,
+      "end": 150.79,
+      "caption": "Clue 1 \u00b7 Odd hands: six fingers!",
+      "text": "Clue one. Odd hands. AI often gets hands wrong. Count the fingers! Six fingers? Or fingers melting together? That's a clue.",
+      "scene": "clues",
+      "focus": "hands"
+    },
+    {
+      "start": 150.79,
+      "end": 164.56,
+      "caption": "Clue 2 \u00b7 Weird text: jumbled letters",
+      "text": "Clue two. Weird writing. Look at shop signs, or posters. AI often makes jumbled letters that make no sense. A sweet shop sign might say, sweerts shpo!",
+      "scene": "clues",
+      "focus": "text"
+    },
+    {
+      "start": 164.56,
+      "end": 176.63,
+      "caption": "Clue 3 \u00b7 Too-perfect, plastic-looking faces",
+      "text": "Clue three. Too perfect faces. Shiny, plastic-looking skin, with no marks at all. Real skin has little marks, and real hair is a bit messy.",
+      "scene": "clues",
+      "focus": "face"
+    },
+    {
+      "start": 176.63,
+      "end": 188.65,
+      "caption": "Find the clues in this party picture!",
+      "text": "Detective time! Here's a birthday party picture. Can you find the clues that it might be AI-made? Pause, and look closely.",
+      "scene": "detect",
+      "focus": "ask"
+    },
+    {
+      "start": 188.65,
+      "end": 204.7,
+      "caption": "Jumbled banner \u00b7 Six fingers \u00b7 Plastic face",
+      "text": "Let's check. The banner says, hapy brithdya. Jumbled! The hand holding the cake has six fingers. And that face is shiny, like plastic. Three clues! So we should be careful.",
+      "scene": "detect",
+      "focus": "answer"
+    },
+    {
+      "start": 204.7,
+      "end": 211.62,
+      "caption": "Careful! Clues aren't proof",
+      "text": "But wait. Here's something really important. Clues help us, but they aren't proof.",
+      "scene": "careful",
+      "focus": "intro"
+    },
+    {
+      "start": 211.62,
+      "end": 224.53,
+      "caption": "Strange doesn't always mean fake",
+      "text": "Not every strange photo is fake. Real life can be surprising! Have you ever seen a cow sitting calmly next to a scooter, in the middle of the road? That can be totally real!",
+      "scene": "careful",
+      "focus": "strange"
+    },
+    {
+      "start": 224.53,
+      "end": 234.01,
+      "caption": "Real photos can be blurry or dark",
+      "text": "And not every real photo looks perfect. Your friend's photo from a cricket match might be blurry, or dark. Blurry doesn't mean fake.",
+      "scene": "careful",
+      "focus": "blurry"
+    },
+    {
+      "start": 234.01,
+      "end": 245.34,
+      "caption": "AI keeps getting better, so clues can miss",
+      "text": "Also, AI pictures keep getting better and better. So clues can miss. That's why, even after checking the clues, we still ask a grown-up.",
+      "scene": "careful",
+      "focus": "better"
+    },
+    {
+      "start": 245.34,
+      "end": 251.79,
+      "caption": "Game: Could be real, or be careful?",
+      "text": "Let's play a game! Could be real, or be careful? Here come four pictures.",
+      "scene": "sort",
+      "focus": "intro"
+    },
+    {
+      "start": 251.79,
+      "end": 269.23,
+      "caption": "Which pictures need extra care?",
+      "text": "A blurry, dark photo from a cricket match. A sweet shop sign with jumbled letters. A hand with six fingers. And a rainbow over a school. Which ones need extra care? Think.",
+      "scene": "sort",
+      "focus": "ask"
+    },
+    {
+      "start": 269.23,
+      "end": 288.37,
+      "caption": "Clues \u2192 be careful. The others could be real",
+      "text": "The jumbled sign, and the six fingers? Be careful! Those are clues. But the blurry match photo, and the rainbow? Those could be real. Blurry is okay, and rainbows really happen! And if you're still not sure, ask a grown-up.",
+      "scene": "sort",
+      "focus": "answer"
+    },
+    {
+      "start": 288.37,
+      "end": 293.84,
+      "caption": "Surprising picture? Three steps",
+      "text": "So, what do you do when you see a surprising picture? Three simple steps.",
+      "scene": "steps",
+      "focus": "intro"
+    },
+    {
+      "start": 293.84,
+      "end": 299.85,
+      "caption": "1 \u00b7 Pause before you believe it",
+      "text": "Step one. Pause. Stop, and think, before you believe it.",
+      "scene": "steps",
+      "focus": "pause"
+    },
+    {
+      "start": 299.85,
+      "end": 308.45,
+      "caption": "2 \u00b7 Ask a trusted adult to help check",
+      "text": "Step two. Ask a trusted adult to help you check. Like your mum, your dad, your teacher, or your nani.",
+      "scene": "steps",
+      "focus": "ask"
+    },
+    {
+      "start": 308.45,
+      "end": 318.32,
+      "caption": "3 \u00b7 Don't share until you know it's real",
+      "text": "Step three. Don't share it, or forward it to your class group, until you know it's real. Sharing a fake picture can fool lots of people.",
+      "scene": "steps",
+      "focus": "share"
+    },
+    {
+      "start": 318.32,
+      "end": 322.27,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, it's practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 322.27,
+      "end": 335.91,
+      "caption": "A flying school bus! What two things do you do?",
+      "text": "You see a photo of a school bus, flying high above the clouds! What two things should you do? Pause the video, and think. Or write it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 335.91,
+      "end": 350.18,
+      "caption": "Pause, then ask a trusted adult to check",
+      "text": "Here's one answer. One, pause, and don't believe it straight away. Two, ask a trusted adult to help check if it's real. And until then, don't share it. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 350.18,
+      "end": 355.08,
+      "caption": "AI can make real-looking pictures",
+      "text": "Let's remember. AI can make pictures that look very real.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 355.08,
+      "end": 359.49,
+      "caption": "Check hands, text, and faces",
+      "text": "Check the clues. Hands, writing, and faces.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 359.49,
+      "end": 362.28,
+      "caption": "Pause before believing or sharing",
+      "text": "Pause, before believing, or sharing.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 362.28,
+      "end": 366.08,
+      "caption": "Still unsure? Ask a trusted adult",
+      "text": "And still not sure? Ask a trusted adult.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 366.08,
+      "end": 374.2,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You're a real picture detective now, champ. Pause, check, and ask!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 374.2,
+      "end": 381.0,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

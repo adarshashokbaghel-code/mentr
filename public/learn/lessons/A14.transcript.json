@@ -1,0 +1,380 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.17,
+      "caption": "Welcome back, champ!",
+      "text": "Hi champ, welcome back! Ready for something really cool today?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.17,
+      "end": 16.68,
+      "caption": "Last time: variable boxes \u00b7 set \u00b7 change",
+      "text": "Last time, you made variable boxes. Score, lives, and name. You learned to set them, and change them by one. Super useful!",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 16.68,
+      "end": 21.85,
+      "caption": "Unit 3 \u00b7 Building With Blocks",
+      "text": "We're still in Unit three, Building With Blocks. And this is chapter four.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 21.85,
+      "end": 24.58,
+      "caption": "Chapter 4 \u00b7 Making Choices in Code",
+      "text": "It's called, Making Choices in Code.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.58,
+      "end": 37.02,
+      "caption": "Can code make choices too?",
+      "text": "You make choices all day long. Should I wear a sweater? Should I play, or do homework first? Hmm. But can a computer make choices too?",
+      "scene": "open",
+      "focus": "wonder"
+    },
+    {
+      "start": 37.02,
+      "end": 41.49,
+      "caption": "Yes! And you'll teach it how",
+      "text": "It can! And by the end of today, you'll teach it how.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 41.49,
+      "end": 48.85,
+      "caption": "School morning. Dark clouds!",
+      "text": "Picture this. It's a school morning, and you look out of the window. Dark clouds, everywhere.",
+      "scene": "rain",
+      "focus": "morning"
+    },
+    {
+      "start": 48.85,
+      "end": 54.58,
+      "caption": "\"If raining, umbrella. Else, a cap.\"",
+      "text": "Your mum says, if it is raining, take an umbrella. Else, wear a cap.",
+      "scene": "rain",
+      "focus": "mum"
+    },
+    {
+      "start": 54.58,
+      "end": 63.02,
+      "caption": "Remember Unit 2? If-then stories!",
+      "text": "Does that sound familiar? Yes! In Unit two, we made if, then stories, just like this one.",
+      "scene": "rain",
+      "focus": "remember"
+    },
+    {
+      "start": 63.02,
+      "end": 71.72,
+      "caption": "Not raining. What do you do?",
+      "text": "So here's a question. What should you do if it's sunny, and not raining at all? Think.",
+      "scene": "rain",
+      "focus": "ask"
+    },
+    {
+      "start": 71.72,
+      "end": 80.45,
+      "caption": "Else = otherwise \u2192 wear a cap",
+      "text": "Wear a cap! That's the else part. Else means, otherwise. It's what you do when the answer is no.",
+      "scene": "rain",
+      "focus": "answer"
+    },
+    {
+      "start": 80.45,
+      "end": 85.27,
+      "caption": "Same thinking, now with blocks!",
+      "text": "And today, we'll build this exact same thinking, with coding blocks.",
+      "scene": "rain",
+      "focus": "code"
+    },
+    {
+      "start": 85.27,
+      "end": 90.42,
+      "caption": "The question is called a CONDITION",
+      "text": "Every choice starts with a question. In code, we call it a condition.",
+      "scene": "define",
+      "focus": "condition"
+    },
+    {
+      "start": 90.42,
+      "end": 100.64,
+      "caption": "A question with a yes or no answer",
+      "text": "A condition is a question with only two answers. Yes, or no. Like, is it raining? Or, is Billu touching the wall?",
+      "scene": "define",
+      "focus": "yesno"
+    },
+    {
+      "start": 100.64,
+      "end": 107.46,
+      "caption": "Yes = TRUE \u00b7 No = FALSE",
+      "text": "Computers say it a little differently. Yes is called true. And no is called false.",
+      "scene": "define",
+      "focus": "truefalse"
+    },
+    {
+      "start": 107.46,
+      "end": 120.27,
+      "caption": "If block: inside runs only when TRUE",
+      "text": "And the if block is the block that asks the question. It's shaped like a mouth, or a letter C, so other blocks can sit inside it. It runs those inside blocks, only when the condition is true.",
+      "scene": "define",
+      "focus": "ifblock"
+    },
+    {
+      "start": 120.27,
+      "end": 125.89,
+      "caption": "if touching coin then change score by 1",
+      "text": "Let's read one together. If touching coin, then change score by one.",
+      "scene": "ifthen",
+      "focus": "show"
+    },
+    {
+      "start": 125.89,
+      "end": 135.43,
+      "caption": "Pointy slot = condition \u00b7 inside = action",
+      "text": "The blue part, touching coin, is the condition. It fits in this pointy slot. And the block tucked inside is what happens when it's true.",
+      "scene": "ifthen",
+      "focus": "parts"
+    },
+    {
+      "start": 135.43,
+      "end": 145.63,
+      "caption": "Touching coin? TRUE \u2192 score goes up",
+      "text": "Billu runs, and touches the coin. Is it touching coin? True! So the inside block runs, and the score goes up by one.",
+      "scene": "ifthen",
+      "focus": "yes"
+    },
+    {
+      "start": 145.63,
+      "end": 159.34,
+      "caption": "Missed it? FALSE \u2192 nothing happens",
+      "text": "Now Billu jumps right over the coin, and misses it. Touching coin? False. So the inside block is skipped. Nothing happens. The score stays the same.",
+      "scene": "ifthen",
+      "focus": "no"
+    },
+    {
+      "start": 159.34,
+      "end": 166.67,
+      "caption": "if touching wall then bounce, else move 10",
+      "text": "Now let's add an else. If touching wall, then bounce. Else, move ten steps.",
+      "scene": "else",
+      "focus": "show"
+    },
+    {
+      "start": 166.67,
+      "end": 180.56,
+      "caption": "Not touching \u2192 FALSE \u2192 move 10 steps",
+      "text": "Billu is in the middle of the stage, far from the wall. Touching wall? False. So the else part runs. Move ten steps. Walk, walk, walk.",
+      "scene": "else",
+      "focus": "false"
+    },
+    {
+      "start": 180.56,
+      "end": 188.81,
+      "caption": "Touching wall \u2192 TRUE \u2192 bounce!",
+      "text": "Now Billu reaches the wall. Touching wall? True! So Billu bounces, and turns around.",
+      "scene": "else",
+      "focus": "true"
+    },
+    {
+      "start": 188.81,
+      "end": 200.49,
+      "caption": "One question, two paths",
+      "text": "See? It's just like the rain story from this morning. If raining, umbrella. Else, cap. One question, and two paths to choose from.",
+      "scene": "else",
+      "focus": "paths"
+    },
+    {
+      "start": 200.49,
+      "end": 210.62,
+      "caption": "Game time: True or false?",
+      "text": "Let's play, true or false! Remember, true means yes, and false means no. I'll show you Billu, and you tell me the answer.",
+      "scene": "truefalse",
+      "focus": "intro"
+    },
+    {
+      "start": 210.62,
+      "end": 220.33,
+      "caption": "Touching wall? True or false?",
+      "text": "The condition is, touching wall. Here's Billu, right up against the wall. True, or false?",
+      "scene": "truefalse",
+      "focus": "q1"
+    },
+    {
+      "start": 220.33,
+      "end": 224.72,
+      "caption": "TRUE! Billu is touching the wall",
+      "text": "True! Billu is touching the wall, so it would bounce.",
+      "scene": "truefalse",
+      "focus": "a1"
+    },
+    {
+      "start": 224.72,
+      "end": 234.49,
+      "caption": "Touching wall? True or false?",
+      "text": "Same condition, touching wall. Now Billu is far away, in the middle. True, or false?",
+      "scene": "truefalse",
+      "focus": "q2"
+    },
+    {
+      "start": 234.49,
+      "end": 243.53,
+      "caption": "FALSE! So the else part runs",
+      "text": "False! Billu is not touching anything. So if there's an else, the else part runs, and Billu keeps walking.",
+      "scene": "truefalse",
+      "focus": "a2"
+    },
+    {
+      "start": 243.53,
+      "end": 250.55,
+      "caption": "Story: ball touches goal \u2192 crowd cheers",
+      "text": "Now let's match a story to a block. Story: when the ball touches the goal, the crowd cheers.",
+      "scene": "match",
+      "focus": "story"
+    },
+    {
+      "start": 250.55,
+      "end": 264.34,
+      "caption": "if touching goal then play cheer sound",
+      "text": "What's the question here? Touching goal! And what happens? Play a cheer sound. So the block is, if touching goal, then play cheer sound. Easy, right?",
+      "scene": "match",
+      "focus": "block"
+    },
+    {
+      "start": 264.34,
+      "end": 277.68,
+      "caption": "Dog barks only when it touches the cat?",
+      "text": "Your turn. A dog in a game should bark, only when it touches the cat. Which block is right? Touching edge, touching cat, or forever say woof?",
+      "scene": "match",
+      "focus": "ask"
+    },
+    {
+      "start": 277.68,
+      "end": 287.61,
+      "caption": "if touching cat then say \"Woof!\"",
+      "text": "If touching cat, then say woof! The condition must be about the cat. Forever would bark all the time. So noisy!",
+      "scene": "match",
+      "focus": "answer"
+    },
+    {
+      "start": 287.61,
+      "end": 293.79,
+      "caption": "Tip: one condition at a time",
+      "text": "One last tip. When you're starting out, check just one condition in each if block.",
+      "scene": "one",
+      "focus": "intro"
+    },
+    {
+      "start": 293.79,
+      "end": 301.57,
+      "caption": "Too many questions at once = confusing!",
+      "text": "If you ask, is it raining, and is it Monday, and is it hot, all at once, it gets confusing, fast!",
+      "scene": "one",
+      "focus": "messy"
+    },
+    {
+      "start": 301.57,
+      "end": 317.29,
+      "caption": "One question \u2192 one clear answer",
+      "text": "One question. One clear answer. True, or false. Simple code is easier to read, and easier to fix. Bigger programs can ask more later. But for now, one at a time.",
+      "scene": "one",
+      "focus": "clean"
+    },
+    {
+      "start": 317.29,
+      "end": 321.84,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time. Just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 321.84,
+      "end": 332.82,
+      "caption": "Billu misses the coin. What happens?",
+      "text": "If touching coin, then add one to score. What happens when the character misses the coin? Pause, and think it through.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 332.82,
+      "end": 344.99,
+      "caption": "FALSE, no else \u2192 score stays the same",
+      "text": "Nothing changes! The condition is false, and there's no else part. So the inside block is skipped, and the score stays exactly the same. Great thinking!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 344.99,
+      "end": 359.43,
+      "caption": "Score 4 \u00b7 jumps over the star \u00b7 score = ?",
+      "text": "Bonus. If touching star, then change score by one. The score is four. Billu jumps over the star, without touching it. What's the score?",
+      "scene": "checkpoint",
+      "focus": "bonus"
+    },
+    {
+      "start": 359.43,
+      "end": 366.4,
+      "caption": "Still 4! Never touched \u2192 FALSE",
+      "text": "Still four! It never touched the star, so the condition was false. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "bonusA"
+    },
+    {
+      "start": 366.4,
+      "end": 371.63,
+      "caption": "TRUE \u2192 the inside blocks run",
+      "text": "Let's remember. If the condition is true, the blocks inside run.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 371.63,
+      "end": 376.38,
+      "caption": "FALSE \u2192 the else part runs",
+      "text": "Else runs when the condition is false. It means, otherwise.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 376.38,
+      "end": 380.18,
+      "caption": "One condition at a time",
+      "text": "Check one condition at a time. Keep it simple.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 380.18,
+      "end": 384.74,
+      "caption": "No else + FALSE = nothing happens",
+      "text": "And no else, plus a false condition? Nothing happens.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 384.74,
+      "end": 392.43,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four of Unit three, done! Your code can make choices now, champ. Super work!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 392.43,
+      "end": 399.23,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

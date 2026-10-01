@@ -1,0 +1,324 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 5.59,
+      "caption": "Welcome back, champ!",
+      "text": "Hi champ! Welcome back. I'm so happy to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 5.59,
+      "end": 13.37,
+      "caption": "Last time: sequencing = the right order",
+      "text": "Last time, you learned about sequencing. Putting steps in the right order, like socks first, and then shoes.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 13.37,
+      "end": 21.51,
+      "caption": "Chapter 3 \u00b7 Loops",
+      "text": "Today is chapter three of Thinking Like a Computer. It's called, Loops. Doing it again, and again!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 21.51,
+      "end": 32.88,
+      "caption": "Same thing, again and again? There's a trick!",
+      "text": "Do you ever do the same thing over and over? Brushing, skipping, clapping? Well, computers have a clever trick for that. Let's find out what it is!",
+      "scene": "open",
+      "focus": "hook"
+    },
+    {
+      "start": 32.88,
+      "end": 39.81,
+      "caption": "Sports Day! Robo, cheer for our team!",
+      "text": "It's Sports Day at school, and Robo wants to cheer for your team! You want him to clap five times.",
+      "scene": "clap",
+      "focus": "meet"
+    },
+    {
+      "start": 39.81,
+      "end": 51.3,
+      "caption": "Clap \u00b7 Clap \u00b7 Clap \u00b7 Clap \u00b7 Clap",
+      "text": "So you write, clap. Clap. Clap. Clap. Clap. Phew! That's the same word, five whole times.",
+      "scene": "clap",
+      "focus": "long"
+    },
+    {
+      "start": 51.3,
+      "end": 61.48,
+      "caption": "100 claps? That's a LOT of writing!",
+      "text": "Now imagine you want Robo to clap a hundred times. Would you write clap a hundred times? Oh no! Your hand would get so tired.",
+      "scene": "clap",
+      "focus": "more"
+    },
+    {
+      "start": 61.48,
+      "end": 68.7,
+      "caption": "Is there a shorter way? Think!",
+      "text": "Hmm. Is there a shorter way to say it? Think for a moment.",
+      "scene": "clap",
+      "focus": "think"
+    },
+    {
+      "start": 68.7,
+      "end": 81.31,
+      "caption": "\"Clap 5 times.\" Same claps, much shorter!",
+      "text": "Yes! You can just say, clap five times. And Robo claps. One, two, three, four, five. Same claps, much shorter!",
+      "scene": "clap",
+      "focus": "short"
+    },
+    {
+      "start": 81.31,
+      "end": 85.53,
+      "caption": "That trick is called a LOOP",
+      "text": "That clever trick has a special name. It's called a loop.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 85.53,
+      "end": 99.11,
+      "caption": "Loop = do the same steps again and again",
+      "text": "A loop is an instruction to do the same steps again and again. It simply means, do this again! Instead of writing the same thing many times, you write it once, and say how many times to do it.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 99.11,
+      "end": 110.53,
+      "caption": "Repeat 5 times: clap",
+      "text": "We can write a loop like this. Repeat five times, clap. The step inside the loop happens once, then again, and again, until all five are done.",
+      "scene": "define",
+      "focus": "block"
+    },
+    {
+      "start": 110.53,
+      "end": 119.49,
+      "caption": "Round and round, like a running track",
+      "text": "It's called a loop because it goes round and round, like running on a track. Once around, back to the start, and then around again!",
+      "scene": "define",
+      "focus": "track"
+    },
+    {
+      "start": 119.49,
+      "end": 124.87,
+      "caption": "Why are loops helpful?",
+      "text": "So why are loops so helpful? Let's compare two lists, side by side.",
+      "scene": "why",
+      "focus": "intro"
+    },
+    {
+      "start": 124.87,
+      "end": 138.14,
+      "caption": "10 lines \u2192 just 1 loop!",
+      "text": "Without a loop, a list for ten jumps is ten long lines. Jump, jump, jump, and on and on. With a loop, it's just one. Repeat ten times, jump.",
+      "scene": "why",
+      "focus": "compare"
+    },
+    {
+      "start": 138.14,
+      "end": 154.45,
+      "caption": "Short \u00b7 Saves time \u00b7 Fewer mistakes",
+      "text": "That's the magic. Loops keep instructions short. They save time. And with fewer lines, there are fewer places to make a mistake! Want a hundred jumps? Just change ten to a hundred. Easy!",
+      "scene": "why",
+      "focus": "save"
+    },
+    {
+      "start": 154.45,
+      "end": 162.21,
+      "caption": "Kind 1: repeat a fixed number of times",
+      "text": "There are two kinds of loops. The first kind repeats a fixed number of times. You decide the number.",
+      "scene": "count",
+      "focus": "intro"
+    },
+    {
+      "start": 162.21,
+      "end": 180.2,
+      "caption": "One over: repeat 6 times: bowl one ball",
+      "text": "Think about cricket! In one over, a bowler bowls six balls. Run up, and bowl. Run up, and bowl. The same action, six times. That's a loop! Repeat six times, bowl one ball.",
+      "scene": "count",
+      "focus": "cricket"
+    },
+    {
+      "start": 180.2,
+      "end": 190.87,
+      "caption": "Repeat 20 times: skip",
+      "text": "Skipping rope twenty times at recess? You don't say skip, skip, skip, twenty times. You just say, repeat twenty times, skip!",
+      "scene": "count",
+      "focus": "rope"
+    },
+    {
+      "start": 190.87,
+      "end": 199.36,
+      "caption": "You choose: 2, 5, 20\u2026 not always 10!",
+      "text": "And you get to choose the number. It could be two, or five, or twenty. A loop doesn't always have to be ten.",
+      "scene": "count",
+      "focus": "choose"
+    },
+    {
+      "start": 199.36,
+      "end": 204.89,
+      "caption": "Kind 2: repeat UNTIL something is done",
+      "text": "The second kind of loop is different. It keeps going until something is done.",
+      "scene": "until",
+      "focus": "intro"
+    },
+    {
+      "start": 204.89,
+      "end": 214.28,
+      "caption": "Stir until the sugar melts",
+      "text": "Remember making chai? When the sugar goes in, you stir, and stir, and stir, until the sugar melts. Then you stop.",
+      "scene": "until",
+      "focus": "chai"
+    },
+    {
+      "start": 214.28,
+      "end": 224.11,
+      "caption": "Brush each tooth until all are clean",
+      "text": "Brushing is a loop too. You brush one tooth, then the next, then the next, until all your teeth are clean. Then the loop stops.",
+      "scene": "until",
+      "focus": "teeth"
+    },
+    {
+      "start": 224.11,
+      "end": 235.69,
+      "caption": "It stops when the job is done!",
+      "text": "So when does a repeat until loop stop? Not after a number. It stops when the job is done! Like folding clothes, until the whole pile is finished.",
+      "scene": "until",
+      "focus": "stop"
+    },
+    {
+      "start": 235.69,
+      "end": 251.57,
+      "caption": "Which one is a loop?",
+      "text": "Quick game! Which one of these is a loop? Opening the fridge once. Switching on the TV once. Or stirring chai round and round, until the sugar melts. Think!",
+      "scene": "home",
+      "focus": "ask"
+    },
+    {
+      "start": 251.57,
+      "end": 268.44,
+      "caption": "Stirring until the sugar melts = a loop!",
+      "text": "Stirring the chai! You do it again and again, until it's done. Opening the fridge once? That happens just one time. Switching on the TV once? Also just one time. So those are not loops.",
+      "scene": "home",
+      "focus": "answer"
+    },
+    {
+      "start": 268.44,
+      "end": 280.77,
+      "caption": "Five jumps. Which loop is the same?",
+      "text": "One more. Robo's list says, jump, jump, jump, jump, jump. Which loop means the same thing? Count carefully.",
+      "scene": "jump",
+      "focus": "ask"
+    },
+    {
+      "start": 280.77,
+      "end": 291.48,
+      "caption": "Repeat 5 times: jump",
+      "text": "Five jumps, so, repeat five times, jump! Not three, not ten. Exactly five. Well counted, champ.",
+      "scene": "jump",
+      "focus": "answer"
+    },
+    {
+      "start": 291.48,
+      "end": 303.44,
+      "caption": "A square: 4 sides, 4 corners",
+      "text": "Now let's draw something with Robo. Robo holds a pen, and moves along the paper. Let's draw a square! A square has four sides, and four corners.",
+      "scene": "square",
+      "focus": "intro"
+    },
+    {
+      "start": 303.44,
+      "end": 317.33,
+      "caption": "Draw, turn \u00b7 Draw, turn \u00b7 Draw, turn \u00b7 Draw, turn",
+      "text": "Without a loop, Robo's steps are, draw a side, turn. Draw a side, turn. Draw a side, turn. Draw a side, turn. That's eight lines!",
+      "scene": "square",
+      "focus": "long"
+    },
+    {
+      "start": 317.33,
+      "end": 328.33,
+      "caption": "Same 2 steps, 4 times. A pattern!",
+      "text": "Do you see a pattern? Draw a side, then turn. The same two steps, four times over. Hmm. That sounds like a job for a loop!",
+      "scene": "square",
+      "focus": "spot"
+    },
+    {
+      "start": 328.33,
+      "end": 332.23,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's your practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 332.23,
+      "end": 341.34,
+      "caption": "Write a loop to draw a square",
+      "text": "Write a loop for drawing the four sides of a square. You can pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 341.34,
+      "end": 355.74,
+      "caption": "Repeat 4 times: draw a side, turn",
+      "text": "Here it is. Repeat four times. Draw one side, then turn at the corner. Four sides, four turns, one perfect square! Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 355.74,
+      "end": 360.92,
+      "caption": "Loop = do it again",
+      "text": "Let's remember what we learned today. A loop means, do it again.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 360.92,
+      "end": 365.51,
+      "caption": "Repeat N times, or repeat until done",
+      "text": "A loop can repeat a fixed number of times, or until something is done.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 365.51,
+      "end": 368.74,
+      "caption": "Loops keep steps short and save time",
+      "text": "Loops keep instructions short, and save time.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 368.74,
+      "end": 374.99,
+      "caption": "Square: repeat 4 times: draw a side, turn",
+      "text": "And to draw a square? Repeat four times. Draw a side, turn.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 374.99,
+      "end": 382.23,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You can make steps repeat with a loop. Super work, champ!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 382.23,
+      "end": 389.03,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

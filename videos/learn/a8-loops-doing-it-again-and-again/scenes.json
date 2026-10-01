@@ -1,0 +1,144 @@
+{
+  "id": "A8",
+  "title": "Loops — Doing It Again and Again",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "CS · Thinking Like a Computer",
+  "slug": "a8-loops-doing-it-again-and-again",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a8-welcome",
+      "beats": [
+        { "vo": "Hi champ! Welcome back. I'm so happy to see you again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you learned about sequencing. Putting steps in the right order, like socks first, and then shoes.", "caption": "Last time: sequencing = the right order", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Thinking Like a Computer. It's called, Loops. Doing it again, and again!", "caption": "Chapter 3 · Loops", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Do you ever do the same thing over and over? Brushing, skipping, clapping? Well, computers have a clever trick for that. Let's find out what it is!", "caption": "Same thing, again and again? There's a trick!", "focus": "hook", "sfx": "pop", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "clap",
+      "visual": "a8-hook",
+      "beats": [
+        { "vo": "It's Sports Day at school, and Robo wants to cheer for your team! You want him to clap five times.", "caption": "Sports Day! Robo, cheer for our team!", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "So you write, clap. Clap. Clap. Clap. Clap. Phew! That's the same word, five whole times.", "caption": "Clap · Clap · Clap · Clap · Clap", "focus": "long", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Now imagine you want Robo to clap a hundred times. Would you write clap a hundred times? Oh no! Your hand would get so tired.", "caption": "100 claps? That's a LOT of writing!", "focus": "more", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "Hmm. Is there a shorter way to say it? Think for a moment.", "caption": "Is there a shorter way? Think!", "focus": "think", "pause": 2.0 },
+        { "vo": "Yes! You can just say, clap five times. And Robo claps. One, two, three, four, five. Same claps, much shorter!", "caption": "\"Clap 5 times.\" Same claps, much shorter!", "focus": "short", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a8-define",
+      "beats": [
+        { "vo": "That clever trick has a special name. It's called a loop.", "caption": "That trick is called a LOOP", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "A loop is an instruction to do the same steps again and again. It simply means, do this again! Instead of writing the same thing many times, you write it once, and say how many times to do it.", "caption": "Loop = do the same steps again and again", "focus": "meaning" },
+        { "vo": "We can write a loop like this. Repeat five times, clap. The step inside the loop happens once, then again, and again, until all five are done.", "caption": "Repeat 5 times: clap", "focus": "block", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "It's called a loop because it goes round and round, like running on a track. Once around, back to the start, and then around again!", "caption": "Round and round, like a running track", "focus": "track", "sfx": "whoosh", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "why",
+      "visual": "a8-why",
+      "beats": [
+        { "vo": "So why are loops so helpful? Let's compare two lists, side by side.", "caption": "Why are loops helpful?", "focus": "intro", "sfx": "pop" },
+        { "vo": "Without a loop, a list for ten jumps is ten long lines. Jump, jump, jump, and on and on. With a loop, it's just one. Repeat ten times, jump.", "caption": "10 lines → just 1 loop!", "focus": "compare", "sfx": "whoosh", "sfxAt": 0.6 },
+        { "vo": "That's the magic. Loops keep instructions short. They save time. And with fewer lines, there are fewer places to make a mistake! Want a hundred jumps? Just change ten to a hundred. Easy!", "caption": "Short · Saves time · Fewer mistakes", "focus": "save", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "count",
+      "visual": "a8-count",
+      "beats": [
+        { "vo": "There are two kinds of loops. The first kind repeats a fixed number of times. You decide the number.", "caption": "Kind 1: repeat a fixed number of times", "focus": "intro", "sfx": "pop" },
+        { "vo": "Think about cricket! In one over, a bowler bowls six balls. Run up, and bowl. Run up, and bowl. The same action, six times. That's a loop! Repeat six times, bowl one ball.", "caption": "One over: repeat 6 times: bowl one ball", "focus": "cricket", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Skipping rope twenty times at recess? You don't say skip, skip, skip, twenty times. You just say, repeat twenty times, skip!", "caption": "Repeat 20 times: skip", "focus": "rope" },
+        { "vo": "And you get to choose the number. It could be two, or five, or twenty. A loop doesn't always have to be ten.", "caption": "You choose: 2, 5, 20… not always 10!", "focus": "choose", "sfx": "pop", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "until",
+      "visual": "a8-until",
+      "beats": [
+        { "vo": "The second kind of loop is different. It keeps going until something is done.", "caption": "Kind 2: repeat UNTIL something is done", "focus": "intro", "sfx": "pop" },
+        { "vo": "Remember making chai? When the sugar goes in, you stir, and stir, and stir, until the sugar melts. Then you stop.", "caption": "Stir until the sugar melts", "focus": "chai" },
+        { "vo": "Brushing is a loop too. You brush one tooth, then the next, then the next, until all your teeth are clean. Then the loop stops.", "caption": "Brush each tooth until all are clean", "focus": "teeth", "sfx": "chime", "sfxAt": 0.85 },
+        { "vo": "So when does a repeat until loop stop? Not after a number. It stops when the job is done! Like folding clothes, until the whole pile is finished.", "caption": "It stops when the job is done!", "focus": "stop", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "home",
+      "visual": "a8-home",
+      "beats": [
+        { "vo": "Quick game! Which one of these is a loop? Opening the fridge once. Switching on the TV once. Or stirring chai round and round, until the sugar melts. Think!", "caption": "Which one is a loop?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Stirring the chai! You do it again and again, until it's done. Opening the fridge once? That happens just one time. Switching on the TV once? Also just one time. So those are not loops.", "caption": "Stirring until the sugar melts = a loop!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "jump",
+      "visual": "a8-jump",
+      "beats": [
+        { "vo": "One more. Robo's list says, jump, jump, jump, jump, jump. Which loop means the same thing? Count carefully.", "caption": "Five jumps. Which loop is the same?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Five jumps, so, repeat five times, jump! Not three, not ten. Exactly five. Well counted, champ.", "caption": "Repeat 5 times: jump", "focus": "answer", "sfx": "success", "sfxAt": 0.15 }
+      ]
+    },
+    {
+      "id": "square",
+      "visual": "a8-square",
+      "beats": [
+        { "vo": "Now let's draw something with Robo. Robo holds a pen, and moves along the paper. Let's draw a square! A square has four sides, and four corners.", "caption": "A square: 4 sides, 4 corners", "focus": "intro", "sfx": "pop" },
+        { "vo": "Without a loop, Robo's steps are, draw a side, turn. Draw a side, turn. Draw a side, turn. Draw a side, turn. That's eight lines!", "caption": "Draw, turn · Draw, turn · Draw, turn · Draw, turn", "focus": "long", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Do you see a pattern? Draw a side, then turn. The same two steps, four times over. Hmm. That sounds like a job for a loop!", "caption": "Same 2 steps, 4 times. A pattern!", "focus": "spot", "pause": 0.5 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a8-check",
+      "beats": [
+        { "vo": "Okay champ, here's your practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Write a loop for drawing the four sides of a square. You can pause the video, and try it on paper.", "caption": "Write a loop to draw a square", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here it is. Repeat four times. Draw one side, then turn at the corner. Four sides, four turns, one perfect square! Did you get it? Brilliant!", "caption": "Repeat 4 times: draw a side, turn", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a8-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. A loop means, do it again.", "caption": "Loop = do it again", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "A loop can repeat a fixed number of times, or until something is done.", "caption": "Repeat N times, or repeat until done", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Loops keep instructions short, and save time.", "caption": "Loops keep steps short and save time", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And to draw a square? Repeat four times. Draw a side, turn.", "caption": "Square: repeat 4 times: draw a side, turn", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You can make steps repeat with a loop. Super work, champ!", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

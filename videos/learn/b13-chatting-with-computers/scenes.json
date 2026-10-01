@@ -1,0 +1,147 @@
+{
+  "id": "B13",
+  "title": "Chatting With Computers",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "AI · Sees, Hears & Talks",
+  "slug": "b13-chatting-with-computers",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b13-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy you're here again.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned how computers listen. First they hear the sound, then they turn it into words, and then they match those words to patterns.", "caption": "Last time: Sound → Words → Patterns", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three, and it's all about chatting with computers!", "caption": "Chapter 3 · Chatting With Computers", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Have you ever typed a question, and a computer typed an answer right back? Hmm. How does it decide what to say? Let's find out.", "caption": "How does a computer decide what to say?", "focus": "word", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "anaya",
+      "visual": "b13-hook",
+      "beats": [
+        { "vo": "Meet Anaya. She's ten, and she has a school project all about pandas.", "caption": "Meet Anaya and her panda project", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "With her papa sitting right beside her, she opens a chat helper app called Pip. And she types, what do pandas eat?", "caption": "Anaya types: \"What do pandas eat?\"", "focus": "ask" },
+        { "vo": "In a blink, Pip types back. Pandas mostly eat bamboo! Wow, that was fast.", "caption": "Pip: \"Pandas mostly eat bamboo!\"", "focus": "reply", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "So how did Pip know what to say? Is there a tiny person hiding inside, typing really fast? What do you think?", "caption": "How did Pip know? A tiny person inside?", "focus": "why", "pause": 2.0 },
+        { "vo": "Nope! No person at all. Pip is a chatbot. And today, you'll find out exactly how it works.", "caption": "No person inside. Pip is a chatbot!", "focus": "truth", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b13-define",
+      "beats": [
+        { "vo": "A chatbot is a computer program that chats with you, by typing replies.", "caption": "Chatbot = a program that chats by typing replies", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "You might find one in a homework app, behind a game's help button, or in a train ticket app that answers questions.", "caption": "Homework apps · Game help · Ticket apps", "focus": "where", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "But remember, it's a program. It's not a person, and it's not magic. So how does it pick its words?", "caption": "A program. Not a person, not magic.", "focus": "not", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "how",
+      "visual": "b13-how",
+      "beats": [
+        { "vo": "First, Pip spots the key words in your message. In, what do pandas eat, the key words are pandas, and eat.", "caption": "Step 1: spot the key words · pandas · eat", "focus": "keys", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Pip learned from lots and lots of examples of writing. And in those examples, pandas and eat often came together with the word, bamboo.", "caption": "It learned patterns from lots of examples", "focus": "patterns" },
+        { "vo": "So Pip predicts a reply. Predict means making a smart guess about what comes next, using patterns.", "caption": "Predict = a smart guess about what comes next", "focus": "predict", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "You can do it too! Twinkle, twinkle, little, what comes next? Say it out loud.", "caption": "Twinkle, twinkle, little ___?", "focus": "try", "pause": 2.0 },
+        { "vo": "Star! You predicted it, because you've heard that pattern so many times. A chatbot does the same thing, one word at a time.", "caption": "Star! You predicted from a pattern.", "focus": "star", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "tree",
+      "visual": "b13-tree",
+      "beats": [
+        { "vo": "Some simple chatbots use a chat tree. A chat tree is a map of choices. If the user says this, reply with that.", "caption": "Chat tree: if the user says this, reply that", "focus": "intro", "sfx": "pop" },
+        { "vo": "Say you type, I feel bored. The tree says, reply with, want a fun animal fact?", "caption": "\"I feel bored.\" → \"Want a fun animal fact?\"", "focus": "bored", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "If you say yes, it replies, an octopus has three hearts! If you say no, it asks, how about a riddle instead? Each answer leads down a different branch.", "caption": "Yes → octopus fact · No → a riddle", "focus": "branches", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "pick",
+      "visual": "b13-pick",
+      "beats": [
+        { "vo": "Your turn to be the chatbot! The user types, I feel bored. Which reply is best? A, want to hear a fun animal fact? B, the capital of France is Paris. C, please type your phone number. Or D, goodbye. Pause, and pick one.", "caption": "\"I feel bored.\" Which reply is best?", "focus": "ask", "pause": 2.2 },
+        { "vo": "A! It matches what the user said, and it's safe. And C? A good chatbot should never ask for your phone number.", "caption": "A: it matches, and it's safe!", "focus": "answer", "sfx": "success", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "friend",
+      "visual": "b13-friend",
+      "beats": [
+        { "vo": "Back to Anaya. After a while, Pip types, I'm your best friend! Aww. That sounds sweet, doesn't it?", "caption": "Pip: \"I'm your best friend!\"", "focus": "says", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "But is it true? Does Pip really know Anaya, and care about her? Think about it.", "caption": "Does Pip really know her? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "Here's the truth. A chatbot has no feelings, and it doesn't know you. It's just predicting friendly-sounding words, because friendly words fit the pattern.", "caption": "No feelings. Just predicting friendly words.", "focus": "truth", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "It can't come to your birthday, and it won't keep your secrets. Real friends are real people, like your classmates, your cousins, and your family.", "caption": "Real friends are real people!", "focus": "real", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "wrong",
+      "visual": "b13-wrong",
+      "beats": [
+        { "vo": "Next, Anaya asks, how many legs does a spider have? And Pip says, six legs. Hmm. Is that right?", "caption": "Pip: \"A spider has six legs.\" Right?", "focus": "ask", "pause": 1.6 },
+        { "vo": "Anaya checks her science book. A spider has eight legs! Pip got it wrong.", "caption": "The book says eight legs! Pip was wrong.", "focus": "check", "sfx": "buzz", "sfxAt": 0.5 },
+        { "vo": "Was Pip lying? Was it sleepy? No! A chatbot predicts from patterns, and patterns can be wrong. Insects have six legs, so the guess got mixed up.", "caption": "Predictions are guesses. They can be wrong.", "focus": "why" },
+        { "vo": "So for big facts, always check with a grown-up, or a good book.", "caption": "Check big facts with a grown-up or a book", "focus": "tip", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "safe",
+      "visual": "b13-safe",
+      "beats": [
+        { "vo": "Now, the most important part. Some things are safe to type to a chatbot. And some things are not.", "caption": "Safe or unsafe to type?", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Here are six. What do pandas eat? Your home address. Tell me a dragon story. Your password. Your school name. And where your house keys are hidden. Which ones are safe? Pause, and sort them.", "caption": "Which ones are safe to type?", "focus": "ask", "pause": 2.2 },
+        { "vo": "Pandas, and a dragon story? Safe! They share nothing private. Your address, password, school name, and where the keys hide? Never! That's private info, things only you and your family should know.", "caption": "Questions & stories: safe. Private info: never!", "focus": "answer", "sfx": "success", "sfxAt": 0.15 },
+        { "vo": "Why? Because what you type may be saved, and seen by other people. So always ask a grown-up before using a chat app. And if a chat ever asks for private things, stop, and tell a trusted adult.", "caption": "Chats can be saved. Ask a grown-up first!", "focus": "saved", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b13-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Should you tell a chatbot that your house keys hide under the mat? Why, or why not? Pause the video, and try it on paper.", "caption": "Tell a chatbot where the keys hide? Why?", "focus": "ask", "pause": 2.5 },
+        { "vo": "No way! That's private info. A chatbot isn't a friend, and what you type can be saved, or seen by others. Keep home secrets at home. Brilliant thinking!", "caption": "No! It's private, and chats can be saved.", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b13-recap",
+      "beats": [
+        { "vo": "Let's remember. A chatbot predicts its reply, from patterns in your words.", "caption": "Chatbots predict replies from patterns", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "It sounds friendly, but it has no feelings, and it doesn't know you.", "caption": "Chatbots have no feelings", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "It can give wrong answers, so check big facts.", "caption": "They can be wrong. Check big facts!", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And never share secrets, or private info, with a chatbot.", "caption": "Never share secrets or private info", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! Now you know how chatbots talk, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

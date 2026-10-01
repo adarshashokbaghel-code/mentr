@@ -1,0 +1,380 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.48,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! I'm so happy to see you.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.48,
+      "end": 14.31,
+      "caption": "Unit 3 \u00b7 Shapes, Grids & Coordinates \u00b7 done!",
+      "text": "Last time, you drew squares with Kachhu, the robot turtle. And you finished all of Unit three! Give yourself a big pat on the back.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.31,
+      "end": 20.07,
+      "caption": "Unit 4 \u00b7 Thinking Like a Problem Solver",
+      "text": "Today, we're starting Unit four. It's called, Thinking Like a Problem Solver.",
+      "scene": "open",
+      "focus": "unit"
+    },
+    {
+      "start": 20.07,
+      "end": 24.55,
+      "caption": "Chapter 1 \u00b7 Estimation & Guess-Check-Improve",
+      "text": "And chapter one is, Estimation, and Guess, Check, Improve.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.55,
+      "end": 32.74,
+      "caption": "A coder's trick for tricky questions!",
+      "text": "It's a clever trick for tricky questions. And real coders use it every single day. Let's find out how!",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 32.74,
+      "end": 41.17,
+      "caption": "Riya finds a jar of laddoos at the mela",
+      "text": "Meet Riya. Riya is at her school's Diwali mela, and she spots a big glass jar, full of round, yellow laddoos.",
+      "scene": "mela",
+      "focus": "meet"
+    },
+    {
+      "start": 41.17,
+      "end": 46.63,
+      "caption": "\"Guess how many laddoos and win the jar!\"",
+      "text": "A sign says, guess how many laddoos, and win the jar! Yum.",
+      "scene": "mela",
+      "focus": "contest"
+    },
+    {
+      "start": 46.63,
+      "end": 51.52,
+      "caption": "The lid is sealed. No counting!",
+      "text": "But the lid is sealed tight. She can't take them out to count.",
+      "scene": "mela",
+      "focus": "problem"
+    },
+    {
+      "start": 51.52,
+      "end": 58.58,
+      "caption": "What should Riya do? Think!",
+      "text": "Hmm. So what should Riya do? Think about it for a moment.",
+      "scene": "mela",
+      "focus": "why"
+    },
+    {
+      "start": 58.58,
+      "end": 68.93,
+      "caption": "\"A million!\" \"Three!\" Do those make sense?",
+      "text": "Her friend Kabir shouts, a million! Another kid says, three! But look at the jar. Neither of those makes sense, right?",
+      "scene": "mela",
+      "focus": "wild"
+    },
+    {
+      "start": 68.93,
+      "end": 77.79,
+      "caption": "Riya thinks: \"Hmm, about 20?\"",
+      "text": "Riya looks closely. The jar isn't tiny, and it isn't huge. So she thinks, hmm, maybe about twenty?",
+      "scene": "mela",
+      "focus": "smart"
+    },
+    {
+      "start": 77.79,
+      "end": 82.58,
+      "caption": "That's called an ESTIMATE",
+      "text": "What Riya just did has a special name. It's called an estimate.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 82.58,
+      "end": 86.82,
+      "caption": "A sensible guess, close to the real answer",
+      "text": "An estimate is a sensible guess, that's close to the real answer.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 86.82,
+      "end": 100.14,
+      "caption": "Not exact \u00b7 Not wild \u00b7 Smart and close",
+      "text": "It's not an exact count. That would take too long. And it's not a wild, random number, like a million. It's a smart guess, using what you can see, and what you already know.",
+      "scene": "define",
+      "focus": "parts"
+    },
+    {
+      "start": 100.14,
+      "end": 106.46,
+      "caption": "Use what you know to guess well",
+      "text": "Let's practise making sensible guesses. The secret is, use things you already know!",
+      "scene": "sensible",
+      "focus": "intro"
+    },
+    {
+      "start": 106.46,
+      "end": 124.67,
+      "caption": "Pencil: about 15 cm, not 15 m, not 1 cm",
+      "text": "How long is a pencil? Fifteen metres? That's longer than a whole bus! One centimetre? That's as small as your fingernail. A pencil fits nicely in your hand. So, about fifteen centimetres is sensible.",
+      "scene": "sensible",
+      "focus": "pencil"
+    },
+    {
+      "start": 124.67,
+      "end": 141.98,
+      "caption": "School bus: about 40 children",
+      "text": "How many children fit on a school bus? Four? That's just a car full. Four thousand? That's a whole stadium! A bus has about twenty seats, with two children on each. So, about forty children.",
+      "scene": "sensible",
+      "focus": "bus"
+    },
+    {
+      "start": 141.98,
+      "end": 152.1,
+      "caption": "Clues: too small \u00b7 too big \u00b7 just right",
+      "text": "Now, back to Riya. The mela uncle gives clues! After each guess, he says, too small, too big, or just right.",
+      "scene": "laddoo",
+      "focus": "intro"
+    },
+    {
+      "start": 152.1,
+      "end": 159.59,
+      "caption": "Guess 20 \u2192 \"Too small!\" \u2192 go bigger",
+      "text": "Riya guesses twenty. Uncle says, too small! So the real answer is bigger than twenty.",
+      "scene": "laddoo",
+      "focus": "g1"
+    },
+    {
+      "start": 159.59,
+      "end": 169.22,
+      "caption": "Guess 30 \u2192 \"Too big!\" \u2192 between 20 and 30",
+      "text": "So she goes bigger, and tries thirty. Uncle says, too big! Now she knows, the answer is between twenty and thirty.",
+      "scene": "laddoo",
+      "focus": "g2"
+    },
+    {
+      "start": 169.22,
+      "end": 178.37,
+      "caption": "Guess 25 \u2192 \"Just right!\" Riya wins!",
+      "text": "So she picks a number right in the middle. Twenty-five! And uncle says, just right! Riya wins the jar!",
+      "scene": "laddoo",
+      "focus": "g3"
+    },
+    {
+      "start": 178.37,
+      "end": 190.14,
+      "caption": "Guess \u2192 Check \u2192 Improve",
+      "text": "This is called, guess, check, improve. Make a guess. Check it with a clue. Then improve your next guess. Each clue gets you closer.",
+      "scene": "laddoo",
+      "focus": "name"
+    },
+    {
+      "start": 190.14,
+      "end": 197.27,
+      "caption": "Too small \u2192 go bigger. Too big \u2192 go smaller.",
+      "text": "So here's the rule. Too small means, go bigger. Too big means, go smaller.",
+      "scene": "clues",
+      "focus": "rule"
+    },
+    {
+      "start": 197.27,
+      "end": 214.34,
+      "caption": "40 is too big. 30 is too small. Where is it?",
+      "text": "Try this one. A new jar. You guess forty, and the clue says, too big. Then you guess thirty, and the clue says, too small. So where is the answer? Think!",
+      "scene": "clues",
+      "focus": "q"
+    },
+    {
+      "start": 214.34,
+      "end": 219.79,
+      "caption": "Between 30 and 40!",
+      "text": "Between thirty and forty! It's bigger than thirty, but smaller than forty.",
+      "scene": "clues",
+      "focus": "a"
+    },
+    {
+      "start": 219.79,
+      "end": 226.26,
+      "caption": "Secret number: between 1 and 100",
+      "text": "Now, a number game! Kabir thinks of a secret number, between one and one hundred.",
+      "scene": "secret",
+      "focus": "intro"
+    },
+    {
+      "start": 226.26,
+      "end": 237.97,
+      "caption": "50 is too big \u00b7 25 is too small",
+      "text": "Riya guesses fifty. Too big! Then she guesses twenty-five. Too small! So the secret number is somewhere between twenty-five and fifty.",
+      "scene": "secret",
+      "focus": "clues"
+    },
+    {
+      "start": 237.97,
+      "end": 248.99,
+      "caption": "What's the smartest next guess?",
+      "text": "What's the smartest next guess? Ten? Sixty? Or something else? Pause, and think.",
+      "scene": "secret",
+      "focus": "q"
+    },
+    {
+      "start": 248.99,
+      "end": 262.92,
+      "caption": "About 37 \u00b7 halfway between 25 and 50",
+      "text": "About thirty-seven! That's halfway between twenty-five and fifty. Ten and sixty are outside the gap, so they can't be right. A middle guess cuts the leftover numbers in half, every time.",
+      "scene": "secret",
+      "focus": "a"
+    },
+    {
+      "start": 262.92,
+      "end": 269.04,
+      "caption": "Coders guess, check and improve too!",
+      "text": "Here's something cool. Guess, check, improve is exactly how programmers work!",
+      "scene": "debug",
+      "focus": "intro"
+    },
+    {
+      "start": 269.04,
+      "end": 281.82,
+      "caption": "Try \u2192 Test \u2192 Fix = debugging",
+      "text": "Coders try their code. They test it, to see what happens. Then they fix what went wrong. Again and again, until it works. That's called debugging.",
+      "scene": "debug",
+      "focus": "loop"
+    },
+    {
+      "start": 281.82,
+      "end": 295.29,
+      "caption": "Meera's square: test, find the bug, fix it",
+      "text": "Remember Meera's square from last chapter? Kachhu drew only three sides. So she tested it, found the bug, and added one more forward four. Try, test, fix!",
+      "scene": "debug",
+      "focus": "kachhu"
+    },
+    {
+      "start": 295.29,
+      "end": 303.75,
+      "caption": "Riya's first guess was wrong. Is that bad?",
+      "text": "And here's the most important part. Riya's first guess, twenty, was wrong. Was that bad?",
+      "scene": "brave",
+      "focus": "wrong"
+    },
+    {
+      "start": 303.75,
+      "end": 318.92,
+      "caption": "Every try teaches you something!",
+      "text": "Not at all! That wrong guess gave her a clue. It told her to go bigger. Every try teaches you something. So never be shy of a first guess. Make it sensible, and keep improving!",
+      "scene": "brave",
+      "focus": "clue"
+    },
+    {
+      "start": 318.92,
+      "end": 326.29,
+      "caption": "How many steps across the hall?",
+      "text": "Estimating works for lengths too. Riya wonders, how many steps will it take to walk across the school hall?",
+      "scene": "hall",
+      "focus": "intro"
+    },
+    {
+      "start": 326.29,
+      "end": 332.76,
+      "caption": "Hall \u2248 10 m \u00b7 one step \u2248 50 cm",
+      "text": "The hall is about ten metres long. And each of Riya's steps is about fifty centimetres.",
+      "scene": "hall",
+      "focus": "facts"
+    },
+    {
+      "start": 332.76,
+      "end": 344.02,
+      "caption": "2 steps = 1 m \u2192 10 m \u2248 20 steps",
+      "text": "Fifty centimetres is half a metre. So two steps make one metre. Ten metres, with two steps for each metre? That's about twenty steps!",
+      "scene": "hall",
+      "focus": "work"
+    },
+    {
+      "start": 344.02,
+      "end": 354.29,
+      "caption": "1,000 cm \u00f7 50 cm = 20 steps",
+      "text": "Or think of it this way. Ten metres is one thousand centimetres. And one thousand divided by fifty is twenty. Same answer!",
+      "scene": "hall",
+      "focus": "also"
+    },
+    {
+      "start": 354.29,
+      "end": 359.67,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, your turn! Here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 359.67,
+      "end": 373.41,
+      "caption": "1 m shelf \u00b7 books 2 cm thick \u00b7 how many?",
+      "text": "A shelf is one metre long. Each book is about two centimetres thick. About how many books fit on the shelf? Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 373.41,
+      "end": 388.03,
+      "caption": "100 cm \u00f7 2 cm = about 50 books",
+      "text": "Here's how. One metre is one hundred centimetres. Each book takes two centimetres. One hundred divided by two is fifty. So, about fifty books fit! Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 388.03,
+      "end": 393.91,
+      "caption": "Estimate = a sensible guess",
+      "text": "Let's remember. An estimate is a sensible guess, close to the real answer.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 393.91,
+      "end": 398.44,
+      "caption": "Guess \u2192 Check \u2192 Improve",
+      "text": "Guess, check, improve. Each clue gets you closer.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 398.44,
+      "end": 404.53,
+      "caption": "Too small \u2192 bigger \u00b7 Too big \u2192 smaller",
+      "text": "Too small? Go bigger. Too big? Go smaller.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 404.53,
+      "end": 410.08,
+      "caption": "First guesses can be wrong. Keep improving!",
+      "text": "And first guesses are allowed to be wrong. That's how coders debug, too!",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 410.08,
+      "end": 416.48,
+      "caption": "Chapter 1 done!",
+      "text": "Chapter one of Unit four, done! You're already thinking like a problem solver, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 416.48,
+      "end": 423.28,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

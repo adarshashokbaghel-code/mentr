@@ -1,0 +1,149 @@
+{
+  "id": "A6",
+  "title": "What Is an Algorithm?",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "CS · Thinking Like a Computer",
+  "slug": "a6-what-is-an-algorithm",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a6-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm really happy you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "You finished all of Unit one. You learned how computers work, and how to stay safe online. That's a big deal, so give yourself a pat on the back!", "caption": "Unit 1 · How Computers Work · done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today, we're starting Unit two. It's called, Thinking Like a Computer.", "caption": "Unit 2 · Thinking Like a Computer", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one is all about one important question. What is an algorithm?", "caption": "Chapter 1 · What Is an Algorithm?", "focus": "chapter", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "Algorithm. Hmm. It sounds like a big, fancy word, doesn't it?", "caption": "Al · go · rithm. Sounds big, right?", "focus": "word", "pause": 0.4 },
+        { "vo": "But here's a little secret. It's something you already do, every single day. Let me show you how.", "caption": "You already do it every day!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "robo",
+      "visual": "a6-hook",
+      "beats": [
+        { "vo": "Picture this. You have a little robot helper at home. Let's call him, Robo.", "caption": "Meet Robo, your robot helper", "focus": "meet", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "One hot afternoon, you're really thirsty. So you say, Robo, please get me some water!", "caption": "\"Robo, please get me some water!\"", "focus": "ask" },
+        { "vo": "And Robo just stands there. Blinking. Not moving at all.", "caption": "Robo just stands there…", "focus": "stuck", "pause": 0.6 },
+        { "vo": "Why do you think that happened? Think about it for a moment.", "caption": "Why didn't Robo move? Think!", "focus": "why", "pause": 1.8 },
+        { "vo": "Here's the thing. Robo isn't lazy. Robo simply doesn't know how. A robot can't figure things out on its own. Someone has to tell it every single step.", "caption": "Robo needs every step, told clearly", "focus": "because" },
+        { "vo": "So let's try again, with steps. Step one, pick up a glass. Step two, go to the water filter. Step three, fill the glass with water. And step four, bring the glass to me.", "caption": "Glass → Filter → Fill → Bring it to me", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "And now, look at that! Robo does it perfectly. Same robot, same water. The only thing that changed? We gave him clear steps.", "caption": "Clear steps → Robo gets it right!", "focus": "works", "sfx": "success", "sfxAt": 0.35 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "a6-define",
+      "beats": [
+        { "vo": "That list of steps we just made has a special name. It's called an algorithm.", "caption": "That list is called an ALGORITHM", "focus": "name", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "An algorithm is a clear list of steps, in order, to get a job done.", "caption": "A clear list of steps, in order, to get a job done", "focus": "meaning" },
+        { "vo": "Let's look at that slowly. A list of steps means more than one small thing to do. In order means, first this, then that. And a job done means there's a goal at the end, like a glass of water in your hand.", "caption": "Steps · In order · A job done", "focus": "parts" }
+      ]
+    },
+    {
+      "id": "chai",
+      "visual": "a6-chai",
+      "beats": [
+        { "vo": "Now, have you ever watched someone at home make chai? Maybe your mum, or your nani?", "caption": "Have you watched someone make chai?", "focus": "ask", "pause": 0.5 },
+        { "vo": "They don't throw everything in at once, right? First, they boil some water. Then, they add the tea leaves. Next, the milk and sugar go in. And finally, they pour it into a cup.", "caption": "Boil water → Tea leaves → Milk & sugar → Pour", "focus": "steps", "sfx": "tick", "sfxAt": 0.15 },
+        { "vo": "So a recipe is really an algorithm for cooking! Follow the steps in order, and you get a lovely cup of chai.", "caption": "A recipe is an algorithm!", "focus": "recipe", "sfx": "success", "sfxAt": 0.4 },
+        { "vo": "But imagine doing it out of order. Pouring into the cup first, before anything is even boiled? That's just an empty cup! So the order of the steps really matters.", "caption": "Wrong order = no chai. Order matters!", "focus": "oops", "sfx": "buzz", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "morning",
+      "visual": "a6-morning",
+      "beats": [
+        { "vo": "Here's something cool. You follow an algorithm every morning, without even noticing!", "caption": "You follow an algorithm every morning!", "focus": "intro", "sfx": "pop" },
+        { "vo": "You brush your teeth. You take a bath. You put on your uniform. You pack your school bag. And, you don't forget your tiffin!", "caption": "Brush · Bath · Uniform · Bag · Tiffin", "focus": "steps", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "See? Five clear steps, in order, and the job is done. You're ready for school! You've been running algorithms since you were little.", "caption": "5 steps in order → ready for school!", "focus": "wow", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "clear",
+      "visual": "a6-clear",
+      "beats": [
+        { "vo": "Now, remember Robo? Robots follow your steps exactly as you say them. They can't guess what you mean.", "caption": "Robots follow exactly. They can't guess.", "focus": "intro" },
+        { "vo": "So if you tell Robo, help the plant, what will he do? Hmm. Help it how? Talk to it? Sing to it? Robo has no idea!", "caption": "\"Help the plant\" → Help it how?", "focus": "vague", "sfx": "buzz", "sfxAt": 0.35 },
+        { "vo": "But if you say, pour one cup of water on the soil, now Robo knows exactly what to do, and how much!", "caption": "Clear: \"Pour one cup of water on the soil\"", "focus": "clear", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "good",
+      "visual": "a6-good",
+      "beats": [
+        { "vo": "So, what makes an algorithm a really good one? Three things. It's short, it's clear, and it's complete.", "caption": "Good algorithms: Short · Clear · Complete", "focus": "intro", "sfx": "pop", "sfxAt": 0.45 },
+        { "vo": "Short means no extra steps you don't need. If your chai recipe said, do a little dance, that's fun, but it's not needed!", "caption": "Short: no extra steps (no chai dance!)", "focus": "short" },
+        { "vo": "Clear means every step says exactly what to do, just like we did for Robo.", "caption": "Clear: each step says exactly what to do", "focus": "clear" },
+        { "vo": "And complete means no step is missing. Because if even one step is missing, the whole job can go wrong.", "caption": "Complete: no missing steps", "focus": "complete" }
+      ]
+    },
+    {
+      "id": "missing",
+      "visual": "a6-missing",
+      "beats": [
+        { "vo": "Let's play a little detective game. Can you find the missing step?", "caption": "Detective game: find the missing step!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Step one, take a glass. Step two, hmm, something's missing here. Step three, drink the water. So, what's missing? Take your time.", "caption": "Take a glass → ??? → Drink the water", "focus": "q", "pause": 2.0 },
+        { "vo": "Pour the water into the glass! Without that step, you'd be drinking from an empty glass. That's why complete matters.", "caption": "Missing step: pour water into the glass!", "focus": "a", "sfx": "success", "sfxAt": 0.02 }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "a6-order",
+      "beats": [
+        { "vo": "One more! Oh no, these sandwich steps got all mixed up. Let's put them back in order.", "caption": "Uh-oh! The sandwich steps are mixed up", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Spread jam on one slice. Take two slices of bread. Cut it and enjoy. Put the other slice on top. Which one comes first? Pause, and think.", "caption": "Which step comes first?", "focus": "ask", "pause": 2.0 },
+        { "vo": "First, take two slices of bread. Then, spread jam on one slice. Next, put the other slice on top. And last, cut it, and enjoy! Yum.", "caption": "Bread → Jam → Top slice → Cut & enjoy", "focus": "answer", "sfx": "success", "sfxAt": 0.9 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a6-check",
+      "beats": [
+        { "vo": "Okay champ, now it's your turn to be the programmer. Here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Write four steps to water a plant, so clearly that Robo could follow them. You can pause the video, and try it on paper.", "caption": "Write 4 steps to water a plant, for Robo", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one way. One, pick up the watering can. Two, fill it with water. Three, walk to the plant. Four, pour the water on the soil. Did yours look something like that? Brilliant!", "caption": "Can → Fill → Walk → Pour on the soil", "focus": "answer", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a6-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. An algorithm is a clear list of steps, in order, to get a job done.", "caption": "Algorithm = clear steps, in order", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Recipes, and your morning routine? Those are algorithms too.", "caption": "Recipes & routines are algorithms", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Robots follow exactly. They can't guess, so every step must be clear.", "caption": "Robots can't guess, so be clear", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And good algorithms are short, clear, and complete.", "caption": "Good = Short · Clear · Complete", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit two, done! You're already thinking like a computer, champ.", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

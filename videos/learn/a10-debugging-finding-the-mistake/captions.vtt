@@ -1,0 +1,165 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:06.130
+Welcome back, champ!
+
+2
+00:00:06.130 --> 00:00:17.270
+Last time: If · Then · Else
+
+3
+00:00:17.270 --> 00:00:26.580
+Chapter 5 · Debugging — Finding the Mistake
+
+4
+00:00:26.580 --> 00:00:38.750
+De · bug · ging? Bugs?!
+
+5
+00:00:38.750 --> 00:00:55.480
+Open bag → Books → Tiffin → Walk to school
+
+6
+00:00:55.480 --> 00:01:08.360
+Oh no! Everything fell out!
+
+7
+00:01:08.360 --> 00:01:16.100
+Is Robo being naughty? Think!
+
+8
+00:01:16.100 --> 00:01:29.480
+Robo followed exactly. A step was wrong.
+
+9
+00:01:29.480 --> 00:01:33.840
+A mistake in the steps is called a BUG
+
+10
+00:01:33.840 --> 00:01:48.210
+Long ago, a real moth got stuck in a computer!
+
+11
+00:01:48.210 --> 00:01:56.780
+Not an insect. Not a naughty computer.
+
+12
+00:01:56.780 --> 00:02:07.990
+Debugging = finding the bug and fixing it
+
+13
+00:02:07.990 --> 00:02:14.160
+How to hunt a bug: 3 detective steps
+
+14
+00:02:14.160 --> 00:02:22.070
+1 · Read the steps slowly, one by one
+
+15
+00:02:22.070 --> 00:02:39.530
+2 · Find where it goes wrong: bag not closed!
+
+16
+00:02:39.530 --> 00:02:49.560
+3 · Change one thing: add "Close the bag"
+
+17
+00:02:49.560 --> 00:03:00.310
+Test again → it works! Bug squashed!
+
+18
+00:03:00.310 --> 00:03:04.580
+Three kinds of bugs
+
+19
+00:03:04.580 --> 00:03:10.410
+Missing step: something was forgotten
+
+20
+00:03:10.410 --> 00:03:15.130
+Wrong order: right steps, mixed up
+
+21
+00:03:15.130 --> 00:03:20.360
+Extra step: doesn't belong, take it out
+
+22
+00:03:20.360 --> 00:03:37.210
+Shoes → Socks → Go outside. What's the bug?
+
+23
+00:03:37.210 --> 00:03:48.530
+Wrong order! Swap: socks first, then shoes
+
+24
+00:03:48.530 --> 00:04:04.250
+Brush · Paste · Dance on the bed · Brush teeth
+
+25
+00:04:04.250 --> 00:04:14.840
+Extra step! Remove "Dance on the bed"
+
+26
+00:04:14.840 --> 00:04:21.170
+Why change just one thing at a time?
+
+27
+00:04:21.170 --> 00:04:34.060
+Changed 3 things at once… which one worked?
+
+28
+00:04:34.060 --> 00:04:48.990
+One change, then test → you know what worked
+
+29
+00:04:48.990 --> 00:04:58.660
+True or false? The computer is being naughty.
+
+30
+00:04:58.660 --> 00:05:10.260
+False! The mistake is in the steps
+
+31
+00:05:10.260 --> 00:05:21.340
+Every programmer finds bugs, every day!
+
+32
+00:05:21.340 --> 00:05:33.180
+Found a bug? Celebrate! "Bug squashed!"
+
+33
+00:05:33.180 --> 00:05:38.450
+Your turn: practice check
+
+34
+00:05:38.450 --> 00:05:55.810
+Tea steps: what's the bug?
+
+35
+00:05:55.810 --> 00:06:10.060
+Missing step: boil the water first!
+
+36
+00:06:10.060 --> 00:06:17.060
+Bug = a mistake in the steps
+
+37
+00:06:17.060 --> 00:06:20.240
+Debugging = find it and fix it
+
+38
+00:06:20.240 --> 00:06:24.530
+Missing · Extra · Wrong order
+
+39
+00:06:24.530 --> 00:06:27.650
+Change one thing, then test
+
+40
+00:06:27.650 --> 00:06:41.880
+Chapter 5 done · Unit 2 complete!
+
+41
+00:06:41.880 --> 00:06:48.680
+Next: Quiz · Tap Finish

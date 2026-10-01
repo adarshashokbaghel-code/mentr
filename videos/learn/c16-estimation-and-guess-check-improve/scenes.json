@@ -1,0 +1,157 @@
+{
+  "id": "C16",
+  "title": "Estimation and Guess-Check-Improve",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "Math · Problem Solver",
+  "slug": "c16-estimation-and-guess-check-improve",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c16-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! I'm so happy to see you.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you drew squares with Kachhu, the robot turtle. And you finished all of Unit three! Give yourself a big pat on the back.", "caption": "Unit 3 · Shapes, Grids & Coordinates · done!", "focus": "bridge", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "Today, we're starting Unit four. It's called, Thinking Like a Problem Solver.", "caption": "Unit 4 · Thinking Like a Problem Solver", "focus": "unit", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "And chapter one is, Estimation, and Guess, Check, Improve.", "caption": "Chapter 1 · Estimation & Guess-Check-Improve", "focus": "chapter", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "It's a clever trick for tricky questions. And real coders use it every single day. Let's find out how!", "caption": "A coder's trick for tricky questions!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "mela",
+      "visual": "c16-hook",
+      "beats": [
+        { "vo": "Meet Riya. Riya is at her school's Diwali mela, and she spots a big glass jar, full of round, yellow laddoos.", "caption": "Riya finds a jar of laddoos at the mela", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "A sign says, guess how many laddoos, and win the jar! Yum.", "caption": "\"Guess how many laddoos and win the jar!\"", "focus": "contest" },
+        { "vo": "But the lid is sealed tight. She can't take them out to count.", "caption": "The lid is sealed. No counting!", "focus": "problem", "pause": 0.4 },
+        { "vo": "Hmm. So what should Riya do? Think about it for a moment.", "caption": "What should Riya do? Think!", "focus": "why", "pause": 1.8 },
+        { "vo": "Her friend Kabir shouts, a million! Another kid says, three! But look at the jar. Neither of those makes sense, right?", "caption": "\"A million!\" \"Three!\" Do those make sense?", "focus": "wild", "sfx": "buzz", "sfxAt": 0.6 },
+        { "vo": "Riya looks closely. The jar isn't tiny, and it isn't huge. So she thinks, hmm, maybe about twenty?", "caption": "Riya thinks: \"Hmm, about 20?\"", "focus": "smart" }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c16-define",
+      "beats": [
+        { "vo": "What Riya just did has a special name. It's called an estimate.", "caption": "That's called an ESTIMATE", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "An estimate is a sensible guess, that's close to the real answer.", "caption": "A sensible guess, close to the real answer", "focus": "meaning" },
+        { "vo": "It's not an exact count. That would take too long. And it's not a wild, random number, like a million. It's a smart guess, using what you can see, and what you already know.", "caption": "Not exact · Not wild · Smart and close", "focus": "parts" }
+      ]
+    },
+    {
+      "id": "sensible",
+      "visual": "c16-sensible",
+      "beats": [
+        { "vo": "Let's practise making sensible guesses. The secret is, use things you already know!", "caption": "Use what you know to guess well", "focus": "intro", "sfx": "pop" },
+        { "vo": "How long is a pencil? Fifteen metres? That's longer than a whole bus! One centimetre? That's as small as your fingernail. A pencil fits nicely in your hand. So, about fifteen centimetres is sensible.", "caption": "Pencil: about 15 cm, not 15 m, not 1 cm", "focus": "pencil", "sfx": "tick", "sfxAt": 0.85 },
+        { "vo": "How many children fit on a school bus? Four? That's just a car full. Four thousand? That's a whole stadium! A bus has about twenty seats, with two children on each. So, about forty children.", "caption": "School bus: about 40 children", "focus": "bus", "sfx": "chime", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "laddoo",
+      "visual": "c16-loop",
+      "beats": [
+        { "vo": "Now, back to Riya. The mela uncle gives clues! After each guess, he says, too small, too big, or just right.", "caption": "Clues: too small · too big · just right", "focus": "intro" },
+        { "vo": "Riya guesses twenty. Uncle says, too small! So the real answer is bigger than twenty.", "caption": "Guess 20 → \"Too small!\" → go bigger", "focus": "g1", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "So she goes bigger, and tries thirty. Uncle says, too big! Now she knows, the answer is between twenty and thirty.", "caption": "Guess 30 → \"Too big!\" → between 20 and 30", "focus": "g2", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "So she picks a number right in the middle. Twenty-five! And uncle says, just right! Riya wins the jar!", "caption": "Guess 25 → \"Just right!\" Riya wins!", "focus": "g3", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "This is called, guess, check, improve. Make a guess. Check it with a clue. Then improve your next guess. Each clue gets you closer.", "caption": "Guess → Check → Improve", "focus": "name", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "clues",
+      "visual": "c16-clues",
+      "beats": [
+        { "vo": "So here's the rule. Too small means, go bigger. Too big means, go smaller.", "caption": "Too small → go bigger. Too big → go smaller.", "focus": "rule", "sfx": "pop" },
+        { "vo": "Try this one. A new jar. You guess forty, and the clue says, too big. Then you guess thirty, and the clue says, too small. So where is the answer? Think!", "caption": "40 is too big. 30 is too small. Where is it?", "focus": "q", "pause": 2.2 },
+        { "vo": "Between thirty and forty! It's bigger than thirty, but smaller than forty.", "caption": "Between 30 and 40!", "focus": "a", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "secret",
+      "visual": "c16-secret",
+      "beats": [
+        { "vo": "Now, a number game! Kabir thinks of a secret number, between one and one hundred.", "caption": "Secret number: between 1 and 100", "focus": "intro", "sfx": "pop" },
+        { "vo": "Riya guesses fifty. Too big! Then she guesses twenty-five. Too small! So the secret number is somewhere between twenty-five and fifty.", "caption": "50 is too big · 25 is too small", "focus": "clues" },
+        { "vo": "What's the smartest next guess? Ten? Sixty? Or something else? Pause, and think.", "caption": "What's the smartest next guess?", "focus": "q", "pause": 2.2 },
+        { "vo": "About thirty-seven! That's halfway between twenty-five and fifty. Ten and sixty are outside the gap, so they can't be right. A middle guess cuts the leftover numbers in half, every time.", "caption": "About 37 · halfway between 25 and 50", "focus": "a", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "debug",
+      "visual": "c16-debug",
+      "beats": [
+        { "vo": "Here's something cool. Guess, check, improve is exactly how programmers work!", "caption": "Coders guess, check and improve too!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Coders try their code. They test it, to see what happens. Then they fix what went wrong. Again and again, until it works. That's called debugging.", "caption": "Try → Test → Fix = debugging", "focus": "loop", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Remember Meera's square from last chapter? Kachhu drew only three sides. So she tested it, found the bug, and added one more forward four. Try, test, fix!", "caption": "Meera's square: test, find the bug, fix it", "focus": "kachhu", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "brave",
+      "visual": "c16-brave",
+      "beats": [
+        { "vo": "And here's the most important part. Riya's first guess, twenty, was wrong. Was that bad?", "caption": "Riya's first guess was wrong. Is that bad?", "focus": "wrong", "pause": 0.8 },
+        { "vo": "Not at all! That wrong guess gave her a clue. It told her to go bigger. Every try teaches you something. So never be shy of a first guess. Make it sensible, and keep improving!", "caption": "Every try teaches you something!", "focus": "clue", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "hall",
+      "visual": "c16-hall",
+      "beats": [
+        { "vo": "Estimating works for lengths too. Riya wonders, how many steps will it take to walk across the school hall?", "caption": "How many steps across the hall?", "focus": "intro" },
+        { "vo": "The hall is about ten metres long. And each of Riya's steps is about fifty centimetres.", "caption": "Hall ≈ 10 m · one step ≈ 50 cm", "focus": "facts", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Fifty centimetres is half a metre. So two steps make one metre. Ten metres, with two steps for each metre? That's about twenty steps!", "caption": "2 steps = 1 m → 10 m ≈ 20 steps", "focus": "work", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Or think of it this way. Ten metres is one thousand centimetres. And one thousand divided by fifty is twenty. Same answer!", "caption": "1,000 cm ÷ 50 cm = 20 steps", "focus": "also", "sfx": "chime", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c16-check",
+      "beats": [
+        { "vo": "Okay champ, your turn! Here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "A shelf is one metre long. Each book is about two centimetres thick. About how many books fit on the shelf? Pause the video, and try it on paper.", "caption": "1 m shelf · books 2 cm thick · how many?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's how. One metre is one hundred centimetres. Each book takes two centimetres. One hundred divided by two is fifty. So, about fifty books fit! Brilliant!", "caption": "100 cm ÷ 2 cm = about 50 books", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c16-recap",
+      "beats": [
+        { "vo": "Let's remember. An estimate is a sensible guess, close to the real answer.", "caption": "Estimate = a sensible guess", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Guess, check, improve. Each clue gets you closer.", "caption": "Guess → Check → Improve", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Too small? Go bigger. Too big? Go smaller.", "caption": "Too small → bigger · Too big → smaller", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And first guesses are allowed to be wrong. That's how coders debug, too!", "caption": "First guesses can be wrong. Keep improving!", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one of Unit four, done! You're already thinking like a problem solver, champ.", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

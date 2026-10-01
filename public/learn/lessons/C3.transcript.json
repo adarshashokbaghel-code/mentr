@@ -1,0 +1,372 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.99,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! Ready to power up your number skills?",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.99,
+      "end": 18.63,
+      "caption": "Last time: odd & even, with pairs of laddoos",
+      "text": "Last time, you sorted numbers into odd and even. Eight laddoos make four pairs, so eight is even. Seven laddoos leave one left over, so seven is odd. Remember?",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 18.63,
+      "end": 24.95,
+      "caption": "Chapter 3 \u00b7 Place Value Power-Up",
+      "text": "Today is chapter three of Numbers Computers Love. It's called, Place Value Power-Up!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 24.95,
+      "end": 36.24,
+      "caption": "23 and 32: same digits. Same number?",
+      "text": "Here's a puzzle for you. Twenty-three and thirty-two use the very same digits, a two and a three. So, are they the same number? Hmm.",
+      "scene": "open",
+      "focus": "puzzle"
+    },
+    {
+      "start": 36.24,
+      "end": 39.92,
+      "caption": "Let's find out at the sweet shop!",
+      "text": "Let's find out, with our friend Meera, at the sweet shop.",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 39.92,
+      "end": 49.04,
+      "caption": "Mum's note: 23 laddoos",
+      "text": "It's Diwali! Meera's mum writes a little note, and sends her to the sweet shop. The note says, twenty-three laddoos.",
+      "scene": "laddoos",
+      "focus": "note"
+    },
+    {
+      "start": 49.04,
+      "end": 58.55,
+      "caption": "3 boxes of ten + 2 loose laddoos",
+      "text": "Ramu uncle packs his laddoos in boxes of ten. He reads the note too quickly, and hands Meera three boxes, and two loose laddoos.",
+      "scene": "laddoos",
+      "focus": "shop"
+    },
+    {
+      "start": 58.55,
+      "end": 69.96,
+      "caption": "Mum counts: 32 laddoos! Too many!",
+      "text": "At home, Mum counts them. Ten, twenty, thirty, thirty-one, thirty-two. Thirty-two laddoos! Oh no, that's too many!",
+      "scene": "laddoos",
+      "focus": "home"
+    },
+    {
+      "start": 69.96,
+      "end": 81.9,
+      "caption": "Same digits, 2 and 3. What went wrong?",
+      "text": "But the note had a two and a three. And uncle gave three boxes, and two loose ones. So what went wrong? Think about it.",
+      "scene": "laddoos",
+      "focus": "why"
+    },
+    {
+      "start": 81.9,
+      "end": 96.89,
+      "caption": "23 = 2 tens + 3 ones \u00b7 32 = 3 tens + 2 ones",
+      "text": "Uncle mixed up the places! Twenty-three means two boxes of ten, and three loose laddoos. Thirty-two means three boxes of ten, and two loose. Same digits, different places, so different numbers.",
+      "scene": "laddoos",
+      "focus": "because"
+    },
+    {
+      "start": 96.89,
+      "end": 106.32,
+      "caption": "Digits: the ten symbols 0 to 9",
+      "text": "Let's learn some power words. We write every number using just ten symbols, zero to nine. Each one is called a digit.",
+      "scene": "define",
+      "focus": "digit"
+    },
+    {
+      "start": 106.32,
+      "end": 110.39,
+      "caption": "Place value: worth, because of WHERE it sits",
+      "text": "Place value means what a digit is worth, because of where it sits.",
+      "scene": "define",
+      "focus": "place"
+    },
+    {
+      "start": 110.39,
+      "end": 123.54,
+      "caption": "Right to left: ones \u00b7 tens \u00b7 hundreds",
+      "text": "Think of a number as a row of little houses. Starting from the right, the first house is the ones place. Next door is the tens place. And next to that, the hundreds place.",
+      "scene": "define",
+      "focus": "houses"
+    },
+    {
+      "start": 123.54,
+      "end": 133.62,
+      "caption": "In 58, the 8 is in the ones place",
+      "text": "So in fifty-eight, the eight sits on the far right. That's the ones place. And the five lives in the tens place, so it's worth fifty.",
+      "scene": "define",
+      "focus": "rightmost"
+    },
+    {
+      "start": 133.62,
+      "end": 145.7,
+      "caption": "10 sticks \u2192 1 bundle = 1 ten",
+      "text": "Now, let's build numbers with sticks. Here are ten loose sticks. Tie them with a rubber band, and you get one bundle. One bundle is one ten.",
+      "scene": "bundles",
+      "focus": "tie"
+    },
+    {
+      "start": 145.7,
+      "end": 151.24,
+      "caption": "4 bundles + 7 sticks = 47",
+      "text": "Let's make forty-seven. Four bundles of ten, and seven single sticks.",
+      "scene": "bundles",
+      "focus": "build"
+    },
+    {
+      "start": 151.24,
+      "end": 160.22,
+      "caption": "The 4 means 4 tens = 40. The 7 means 7 ones",
+      "text": "So in forty-seven, the four isn't just four. It means four tens, which is forty. And the seven means seven ones.",
+      "scene": "bundles",
+      "focus": "meaning"
+    },
+    {
+      "start": 160.22,
+      "end": 166.23,
+      "caption": "4 tens + 2 ones = ?",
+      "text": "Quick one! What do four tens and two ones make?",
+      "scene": "bundles",
+      "focus": "ask"
+    },
+    {
+      "start": 166.23,
+      "end": 170.06,
+      "caption": "40 + 2 = 42",
+      "text": "Forty, plus two more. That's forty-two!",
+      "scene": "bundles",
+      "focus": "answer"
+    },
+    {
+      "start": 170.06,
+      "end": 183.23,
+      "caption": "Swap 47 \u2192 74: 7 tens + 4 ones. Much bigger!",
+      "text": "Now watch what happens when we swap the digits of forty-seven. The seven jumps into the tens place, and the four moves to the ones place. Seventy-four! That's a much bigger number.",
+      "scene": "swap",
+      "focus": "swap"
+    },
+    {
+      "start": 183.23,
+      "end": 192.77,
+      "caption": "Swap the digits of 61. What do you get?",
+      "text": "Your turn. Swap the digits of sixty-one. What new number do you get? Think.",
+      "scene": "swap",
+      "focus": "ask"
+    },
+    {
+      "start": 192.77,
+      "end": 203.74,
+      "caption": "61 \u2192 16: 1 ten + 6 ones",
+      "text": "Sixteen! The one moves to the tens place, so now it's worth ten. And the six moves to the ones place. Ten plus six equals sixteen.",
+      "scene": "swap",
+      "focus": "answer"
+    },
+    {
+      "start": 203.74,
+      "end": 211.68,
+      "caption": "10 tens = 1 hundred",
+      "text": "What if we have lots of tens? Put ten tens together, and you get one big square. One hundred!",
+      "scene": "hundreds",
+      "focus": "flat"
+    },
+    {
+      "start": 211.68,
+      "end": 217.91,
+      "caption": "352 = 3 hundreds + 5 tens + 2 ones",
+      "text": "Let's build three hundred and fifty-two. Three hundreds, five tens, and two ones.",
+      "scene": "hundreds",
+      "focus": "build"
+    },
+    {
+      "start": 217.91,
+      "end": 228.84,
+      "caption": "The 5 in 352 is worth 50, not 5",
+      "text": "Now, what is the five worth in three hundred and fifty-two? Not five! It sits in the tens place, so it's five tens. That's fifty.",
+      "scene": "hundreds",
+      "focus": "five"
+    },
+    {
+      "start": 228.84,
+      "end": 240.38,
+      "caption": "Expanded form: 352 = 300 + 50 + 2",
+      "text": "We can also stretch a number out, to show every place. Three hundred and fifty-two equals three hundred, plus fifty, plus two. This is called expanded form.",
+      "scene": "expand",
+      "focus": "name"
+    },
+    {
+      "start": 240.38,
+      "end": 250.44,
+      "caption": "Which number is 300 + 40 + 7?",
+      "text": "Let's go backwards. Which number is three hundred, plus forty, plus seven? Pause, and think.",
+      "scene": "expand",
+      "focus": "ask"
+    },
+    {
+      "start": 250.44,
+      "end": 259.2,
+      "caption": "3 hundreds + 4 tens + 7 ones = 347",
+      "text": "Three hundreds, four tens, and seven ones. Three hundred and forty-seven! Each digit goes into its own house.",
+      "scene": "expand",
+      "focus": "answer"
+    },
+    {
+      "start": 259.2,
+      "end": 266.65,
+      "caption": "How many tens are in 90?",
+      "text": "Here's a tricky one. How many tens are there in ninety? Think.",
+      "scene": "zero",
+      "focus": "ask"
+    },
+    {
+      "start": 266.65,
+      "end": 274.26,
+      "caption": "90 = 9 tens + 0 ones",
+      "text": "Nine tens! The nine is in the tens place. And the zero tells us, there are no ones here.",
+      "scene": "zero",
+      "focus": "answer"
+    },
+    {
+      "start": 274.26,
+      "end": 284.58,
+      "caption": "Zero holds the place. Without it, 90 is just 9",
+      "text": "Zero is a super helper. It holds the ones place, so the nine stays in the tens house. Without the zero, ninety would just be nine!",
+      "scene": "zero",
+      "focus": "hero"
+    },
+    {
+      "start": 284.58,
+      "end": 300.26,
+      "caption": "27 pencils + 1 more bundle of ten = ?",
+      "text": "Story puzzle! Meera's friend Aarav has two bundles of ten pencils, and seven single pencils. Then Meera gives him one more bundle of ten. How many pencils does he have now?",
+      "scene": "pencils",
+      "focus": "ask"
+    },
+    {
+      "start": 300.26,
+      "end": 311.5,
+      "caption": "3 tens + 7 ones = 37 pencils",
+      "text": "At first, he had twenty-seven. One more bundle adds one more ten. So now it's three tens and seven ones. Thirty-seven pencils!",
+      "scene": "pencils",
+      "focus": "answer"
+    },
+    {
+      "start": 311.5,
+      "end": 323.98,
+      "caption": "Chapter 1: binary lights worth 4 \u00b7 2 \u00b7 1",
+      "text": "Now, remember chapter one, and Meera's three lamps? Computers count with lights that are on or off. With three lights, the places are worth four, two, and one.",
+      "scene": "binary",
+      "focus": "remember"
+    },
+    {
+      "start": 323.98,
+      "end": 332.08,
+      "caption": "Binary 100 = 4",
+      "text": "So if only the left light is on, we write one, zero, zero. And in binary, that means four.",
+      "scene": "binary",
+      "focus": "lights"
+    },
+    {
+      "start": 332.08,
+      "end": 340.9,
+      "caption": "Our numbers: 100 = one hundred",
+      "text": "But in our normal numbers, the places are hundreds, tens, and ones. So one, zero, zero means one hundred!",
+      "scene": "binary",
+      "focus": "ours"
+    },
+    {
+      "start": 340.9,
+      "end": 353.08,
+      "caption": "\u00d710 or \u00d72: either way, position matters!",
+      "text": "Our places grow ten times bigger at each step. Binary places grow two times bigger. Different place values, but the same big rule. Position matters!",
+      "scene": "binary",
+      "focus": "rule"
+    },
+    {
+      "start": 353.08,
+      "end": 356.96,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 356.96,
+      "end": 366.35,
+      "caption": "In 47, what does the 4 stand for?",
+      "text": "In forty-seven, what does the four stand for? Pause the video, and say your answer out loud.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 366.35,
+      "end": 375.7,
+      "caption": "4 tens = 40. It sits in the tens place!",
+      "text": "The four stands for four tens, which is forty! Because it sits in the tens place. Did you get it? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 375.7,
+      "end": 383.03,
+      "caption": "Places: hundreds \u00b7 tens \u00b7 ones",
+      "text": "Let's remember what we learned today. From right to left, the places are ones, tens, and hundreds.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 383.03,
+      "end": 385.45,
+      "caption": "The place tells a digit's value",
+      "text": "The place tells you what a digit is worth.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 385.45,
+      "end": 390.32,
+      "caption": "23 \u2260 32: position matters",
+      "text": "Twenty-three and thirty-two are different numbers. Position matters!",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 390.32,
+      "end": 392.84,
+      "caption": "Binary cares about position too",
+      "text": "And binary cares about position too.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 392.84,
+      "end": 397.95,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You've powered up your place value, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 397.95,
+      "end": 404.75,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

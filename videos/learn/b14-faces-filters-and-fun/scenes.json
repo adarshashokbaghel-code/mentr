@@ -1,0 +1,143 @@
+{
+  "id": "B14",
+  "title": "Faces, Filters, and Fun",
+  "chapterLabel": "Chapter 4 of 5",
+  "unitLabel": "AI · Sees, Hears & Talks",
+  "slug": "b14-faces-filters-and-fun",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b14-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready for something really fun today?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we met chatbots. They predict replies from patterns, they have no feelings, and we never share private info with them.", "caption": "Last time: chatbots predict · keep info private", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter four. Faces, filters, and fun!", "caption": "Chapter 4 · Faces, Filters, and Fun", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "You've probably seen a photo filter. Puppy ears, funny glasses, a shiny crown! But how does the phone know where to put them? Hmm. Let's find out.", "caption": "How does the phone know where to put them?", "focus": "word", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "kabir",
+      "visual": "b14-hook",
+      "beats": [
+        { "vo": "Meet Kabir. It's his cousin Meera's birthday, and the whole family is on a video call.", "caption": "Meet Kabir, on a birthday video call", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Kabir taps a button, and pop! Puppy ears appear on his head, with a long pink tongue. Everyone laughs!", "caption": "Pop! Puppy ears and a tongue!", "focus": "ears", "sfx": "pop", "sfxAt": 0.35 },
+        { "vo": "Then Kabir turns his head left, and right. And the ears follow him, staying right on top of his head!", "caption": "He turns his head. The ears follow!", "focus": "turn", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "How does the phone know where Kabir's head is? Is there a tiny artist inside, painting really fast? What do you think?", "caption": "How does the phone know? A tiny artist?", "focus": "why", "pause": 2.0 },
+        { "vo": "No tiny artist, and no magic. Just a clever computer program, finding patterns in the picture. Let's see how it works.", "caption": "No artist, no magic. A program finding patterns!", "focus": "tease", "sfx": "chime", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b14-define",
+      "beats": [
+        { "vo": "This kind of camera fun has a name. An A R filter. It's a camera effect that adds fun things, like ears or glasses, on top of the real picture.", "caption": "AR filter: adds fun things on top of the picture", "focus": "name", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Think of a clear sticker sheet, laid over a photo. The real picture of your face stays underneath. The fun drawings sit on top.", "caption": "Real picture below · fun drawings on top", "focus": "layers" },
+        { "vo": "So a filter does two big jobs. Find the face, then draw on top.", "caption": "Filter = find the face + draw on top", "focus": "short", "sfx": "pop", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "steps",
+      "visual": "b14-steps",
+      "beats": [
+        { "vo": "Step one. Find the face. The program looks at the camera picture, and searches for the pattern of a face. Two eyes, a nose, and a mouth.", "caption": "Step 1: find the face in the picture", "focus": "find", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Step two. Mark the face points. These are spots like the corners of your eyes, the tip of your nose, your mouth, and the top of your head.", "caption": "Step 2: mark points · eyes · nose · mouth · head", "focus": "points", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Step three. Draw on top. Puppy ears go on the head points. Glasses go on the eye points. Ta-da!", "caption": "Step 3: ears on head points, glasses on eyes", "focus": "draw", "sfx": "success", "sfxAt": 0.7 },
+        { "vo": "And the order matters. If the filter can't find a face first, it has nowhere to put the ears!", "caption": "No face found? Nowhere to put the ears!", "focus": "order", "sfx": "buzz", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "follow",
+      "visual": "b14-follow",
+      "beats": [
+        { "vo": "So why do the ears follow Kabir? Because the filter doesn't find his face just once. It finds his face points again, and again, many times every second.", "caption": "It finds face points again, many times a second", "focus": "again", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "When Kabir turns his head, the points move. And the filter draws the ears again, on the new points. It's like a flipbook. It happens so fast, it looks smooth.", "caption": "Points move → ears move. Like a flipbook!", "focus": "turn", "sfx": "whoosh", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "oops",
+      "visual": "b14-oops",
+      "beats": [
+        { "vo": "But filters can get confused. That night, Meera tries a glasses filter in a dim room. And the glasses land on her forehead! Why do you think that happened?", "caption": "Uh-oh! Glasses on Meera's forehead. Why?", "focus": "light", "pause": 1.8 },
+        { "vo": "In poor light, the filter marked her eye points in the wrong place. Wrong points, so the glasses went to the wrong spot.", "caption": "Poor light → wrong eye points → wrong spot", "focus": "lightans", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "Then Kabir's little sister, Pari, covers half her face with her hand. Poof! Her bunny ears disappear. The filter can't find enough face points.", "caption": "Half the face hidden? Not enough points!", "focus": "cover", "sfx": "whoosh", "sfxAt": 0.4 },
+        { "vo": "Remember, a filter is not magic, and it's not alive. It just finds patterns. When the pattern is hidden, or unclear, it makes mistakes.", "caption": "Not magic: hidden patterns cause mistakes", "focus": "why" }
+      ]
+    },
+    {
+      "id": "order",
+      "visual": "b14-order",
+      "beats": [
+        { "vo": "Quick game! These filter steps got mixed up. A, draw glasses on the eye points. B, find the face. C, mark points, like eyes and nose. What's the right order? Pause, and think.", "caption": "Put the filter steps in order!", "focus": "ask", "pause": 2.2 },
+        { "vo": "B, then C, then A! Find the face. Mark the points. Then draw on top. You've got it!", "caption": "B → C → A: Find · Mark · Draw", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "camera",
+      "visual": "b14-camera",
+      "beats": [
+        { "vo": "Now, here's something important. Filters are fun. But while you play, the camera is still taking a picture of your face.", "caption": "The camera still takes your face picture", "focus": "still", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "And a face picture is personal. It shows who you are, even with puppy ears and a funny tongue on top.", "caption": "A face picture is personal, even with a filter", "focus": "personal" },
+        { "vo": "Some filters even change how skin and faces look, to make them look perfect. But that's not how real faces look. Your real face is great, just as it is!", "caption": "Beauty filters aren't real. You're great as you are!", "focus": "beauty", "sfx": "chime", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "manners",
+      "visual": "b14-manners",
+      "beats": [
+        { "vo": "After the call, Kabir saves a funny picture of Meera, with bunny ears. He wants to post it. The filter hides who she is, right? So can he just post it? Hmm. Think.", "caption": "Post Meera's filtered photo without asking?", "focus": "post", "pause": 2.0 },
+        { "vo": "No! It's still Meera's face. So Kabir asks, Meera, can I share this? That's good filter manners.", "caption": "Still her face. Always ask first!", "focus": "ask", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Here are three filter manners. Ask before posting anyone's photo, even your cousin's. Never use filters to make fun of people. And ask a grown-up before you try a new filter app.", "caption": "Ask first · Be kind · Grown-up OK for new apps", "focus": "rules", "sfx": "pop", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b14-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "What does a filter need to find, before it can add puppy ears? Pause the video, and write your answer on paper.", "caption": "What must a filter find before adding ears?", "focus": "ask", "pause": 2.5 },
+        { "vo": "It needs to find your face, and mark its points, like the top of your head. Then it knows exactly where to put the ears. Super thinking!", "caption": "Your face and its points, like the head top!", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b14-recap",
+      "beats": [
+        { "vo": "Let's remember. A filter finds your face, then draws on top.", "caption": "Filter = find the face + draw on top", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "It needs face points first, and it finds them again and again.", "caption": "It needs face points first", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Even with a filter, the camera still takes your face picture.", "caption": "The camera still takes your face picture", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And always ask before posting someone's photo.", "caption": "Ask before posting someone's photo", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter four, done! Now you know the secret behind filters, champ.", "caption": "Chapter 4 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "id": "C18",
+  "title": "Working Backwards",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "Math · Problem Solver",
+  "slug": "c18-working-backwards",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c18-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready for another puzzle?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we talked about chances. Certain, likely, unlikely, and impossible. You were brilliant!", "caption": "Last time: certain · likely · unlikely · impossible", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Problem Solver. It's called, Working Backwards.", "caption": "Chapter 3 · Working Backwards", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "It's a real detective trick. When you know how a story ends, you can walk back, step by step, and find out how it began!", "caption": "Know the end? Walk back to the start!", "focus": "promise", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "laddoos",
+      "visual": "c18-hook",
+      "beats": [
+        { "vo": "Meet Kabir. He loves cricket, and he loves sweets even more! At lunch, he opens his tiffin, and finds some laddoos inside. Yum!", "caption": "Meet Kabir and his tiffin of laddoos", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Then his best friend Zoya gives him four more laddoos. Now Kabir has twelve laddoos!", "caption": "Zoya gives him 4 more. Now he has 12!", "focus": "gift", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "That evening, Nani asks, Kabir, how many laddoos did you have before Zoya gave you some? Hmm. Kabir forgot! Can you help him? Think.", "caption": "How many did he have at the start? Think!", "focus": "ask", "pause": 2.0 },
+        { "vo": "We don't know the start. But we do know the end, twelve. And we know what happened, four more were added. That's enough to solve it!", "caption": "We know the end (12) and the step (+4)", "focus": "clue", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c18-define",
+      "beats": [
+        { "vo": "This trick is called working backwards. You start from the end, and undo each step, to find the start.", "caption": "Working backwards: start at the end, undo steps", "focus": "name", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "It's most useful when you know how a story ends, but not how it began.", "caption": "Useful when you know the end, not the start", "focus": "when" },
+        { "vo": "It's a bit like rewinding a cricket replay. Everything goes back, to exactly where it started. Even the ball flies back to the bowler!", "caption": "Like rewinding a replay", "focus": "rewind", "sfx": "whoosh", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "draw",
+      "visual": "c18-draw",
+      "beats": [
+        { "vo": "First, draw the story. A box for the start, with a question mark. An arrow that says, plus four. And then the end, twelve.", "caption": "Draw it: ? → +4 → 12", "focus": "forward", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Now, reverse the arrow! Start at twelve, and go backwards. The opposite of adding four is taking away four.", "caption": "Reverse the arrow: +4 becomes −4", "focus": "reverse", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Twelve minus four equals eight. So Kabir started with eight laddoos!", "caption": "12 − 4 = 8. Kabir started with 8!", "focus": "solve", "sfx": "success", "sfxAt": 0.5 },
+        { "vo": "Always check by going forwards. Eight plus four equals twelve. Yes! It matches the end.", "caption": "Check forwards: 8 + 4 = 12. Yes!", "focus": "check", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "flip",
+      "visual": "c18-flip",
+      "beats": [
+        { "vo": "To undo a step, you do the opposite action. So the undo of add five is, subtract five. Let's learn the flips.", "caption": "Undo = do the opposite. Add 5 ↔ subtract 5", "focus": "intro", "sfx": "pop" },
+        { "vo": "If someone got more, found some, or bought some, you undo it by subtracting.", "caption": "Got · found · bought → undo by subtracting", "focus": "more", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "If someone lost some, gave some away, or ate some, you undo it by adding them back.", "caption": "Lost · gave away · ate → undo by adding", "focus": "less", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "And if something was doubled, you undo it by halving. Adding and subtracting undo each other. Doubling and halving undo each other too.", "caption": "Doubled → undo by halving", "focus": "double", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "try",
+      "visual": "c18-try",
+      "beats": [
+        { "vo": "Let's try one. Riya's mum gave her twenty rupees. Now Riya has fifty rupees. How much did she have before?", "caption": "Got 20 rupees, now has 50. How much before?", "focus": "riya", "pause": 2.0 },
+        { "vo": "She got more, so we subtract. Fifty minus twenty equals thirty. Riya had thirty rupees. Check: thirty plus twenty is fifty. Yes!", "caption": "50 − 20 = 30 rupees. Check: 30 + 20 = 50. Yes!", "focus": "riya_ans", "sfx": "success", "sfxAt": 0.3 },
+        { "vo": "Next one. Arjun gave five marbles to his sister. Now he has ten. How many did he have at first? Think!", "caption": "Gave away 5, now has 10. How many at first?", "focus": "arjun", "pause": 2.0 },
+        { "vo": "He gave them away, so we add them back. Ten plus five equals fifteen. Arjun had fifteen marbles.", "caption": "10 + 5 = 15 marbles", "focus": "arjun_ans", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "trap",
+      "visual": "c18-trap",
+      "beats": [
+        { "vo": "Detective game! Can you spot the mistake?", "caption": "Detective game: spot the mistake!", "focus": "intro", "sfx": "pop" },
+        { "vo": "Dev says, to undo, gave away three, you subtract three. Is Dev right? Hmm. Take a moment.", "caption": "\"To undo gave away 3, subtract 3.\" Right?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Not quite, Dev! Giving away took three off. So to undo it, you add three back. Subtracting again would make it even smaller!", "caption": "No! Undo gave away 3 by ADDING 3 back", "focus": "answer", "sfx": "buzz", "sfxAt": 0.05 }
+      ]
+    },
+    {
+      "id": "two",
+      "visual": "c18-two",
+      "beats": [
+        { "vo": "Now a two step story. Kabir got six cards. Then he gave away four. Now he has ten. How many did he start with?", "caption": "Got 6, gave away 4, now has 10. Start?", "focus": "story", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Here's the rule. Undo the last step first. Think of socks and shoes. You put your socks on first, then your shoes. But to take them off, the shoes come off first!", "caption": "Undo the LAST step first, like shoes then socks", "focus": "socks", "sfx": "pop", "sfxAt": 0.7 },
+        { "vo": "The last step was, gave away four. Undo it by adding. Ten plus four equals fourteen. Then undo, got six, by subtracting. Fourteen minus six equals eight.", "caption": "10 + 4 = 14, then 14 − 6 = 8", "focus": "solve", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "So Kabir started with eight cards. Check forwards. Eight plus six is fourteen. Fourteen minus four is ten. Perfect! You undid both steps.", "caption": "Check: 8 + 6 = 14, 14 − 4 = 10. Yes!", "focus": "check", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "puzzle",
+      "visual": "c18-puzzle",
+      "beats": [
+        { "vo": "Ready for a tricky one? I'm thinking of a number. I add seven, and then I double it. I get thirty. What was my number? Try it!", "caption": "? → +7 → double → 30. What's the number?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Work backwards. The last step was doubling, so we halve it. Half of thirty is fifteen.", "caption": "Undo double: half of 30 is 15", "focus": "halve", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Before that, I added seven, so take away seven. Fifteen minus seven equals eight. My number was eight!", "caption": "Undo +7: 15 − 7 = 8", "focus": "sub", "sfx": "success", "sfxAt": 0.6 },
+        { "vo": "Let's check it. Eight plus seven is fifteen. Double fifteen is thirty. Yes!", "caption": "Check: 8 + 7 = 15, double 15 = 30. Yes!", "focus": "check", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "undo",
+      "visual": "c18-undo",
+      "beats": [
+        { "vo": "Working backwards is also exactly what the Undo button does, in drawing apps, in games, and in code.", "caption": "Working backwards = the Undo button", "focus": "button", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Say you draw a tree, then a sun, then a big scribble. Oops! Press Undo, and the last thing you did disappears. The scribble goes first.", "caption": "Tree → sun → scribble. Undo: scribble goes!", "focus": "draw", "sfx": "whoosh", "sfxAt": 0.7 },
+        { "vo": "Press it again, and the sun goes. The computer undoes your steps backwards, last step first. Just like we did!", "caption": "Undo again: the sun goes. Last step first!", "focus": "again", "sfx": "whoosh", "sfxAt": 0.4 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c18-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Mina has nine stickers after losing three. How many did she start with? Pause the video, and try it on paper.", "caption": "9 stickers after losing 3. How many at start?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Twelve stickers! Losing is undone by adding. Nine plus three equals twelve. Check: twelve minus three is nine. Brilliant!", "caption": "9 + 3 = 12. Check: 12 − 3 = 9. Yes!", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c18-recap",
+      "beats": [
+        { "vo": "Let's remember. Know the end, but not the start? Work backwards.", "caption": "Know the end? Work backwards", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Flip each step. Adding and subtracting undo each other. Doubling and halving undo each other.", "caption": "Add ↔ subtract · Double ↔ halve", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "With two steps, undo the last step first.", "caption": "Undo the last step first", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And always check your answer, by going forwards.", "caption": "Check your answer going forwards", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You can rewind any story now, like a true detective, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

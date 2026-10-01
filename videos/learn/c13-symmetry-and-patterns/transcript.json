@@ -1,0 +1,348 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.7,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so nice to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.7,
+      "end": 11.48,
+      "caption": "Last time: grids \u00b7 across first, then up",
+      "text": "Last time, we found points on a grid. Across first, then up, like four, two.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 11.48,
+      "end": 18.66,
+      "caption": "Chapter 3 \u00b7 Symmetry and Patterns",
+      "text": "Today is chapter three of Shapes, Grids and Coordinates. It's called, Symmetry and Patterns!",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 18.66,
+      "end": 26.3,
+      "caption": "Fold \u00b7 Mirror \u00b7 Pattern",
+      "text": "We'll fold shapes, play with mirrors, and finish patterns like a real rangoli artist. Ready?",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 26.3,
+      "end": 33.2,
+      "caption": "Meet Riya, making a Diwali rangoli",
+      "text": "Picture this. It's Diwali morning, and Riya is making a rangoli at the front door, with her nani.",
+      "scene": "rangoli",
+      "focus": "meet"
+    },
+    {
+      "start": 33.2,
+      "end": 43.68,
+      "caption": "\"Draw the other wing. Make it match!\"",
+      "text": "Nani draws one wing of a butterfly with coloured powder. Then she smiles and says, Riya, you draw the other wing. But it must match exactly!",
+      "scene": "rangoli",
+      "focus": "half"
+    },
+    {
+      "start": 43.68,
+      "end": 51.69,
+      "caption": "How can Riya check? Think!",
+      "text": "Hmm. How can Riya check that both wings really match? What do you think?",
+      "scene": "rangoli",
+      "focus": "ask"
+    },
+    {
+      "start": 51.69,
+      "end": 58.62,
+      "caption": "Nani's trick: fold it down the middle",
+      "text": "Nani has a clever trick. She cuts out a paper butterfly, and folds it, right down the middle.",
+      "scene": "rangoli",
+      "focus": "fold"
+    },
+    {
+      "start": 58.62,
+      "end": 67.55,
+      "caption": "Both halves match exactly!",
+      "text": "Look! One wing sits exactly on top of the other. No bits sticking out. Both halves match perfectly!",
+      "scene": "rangoli",
+      "focus": "match"
+    },
+    {
+      "start": 67.55,
+      "end": 72.51,
+      "caption": "That fold line is a LINE OF SYMMETRY",
+      "text": "That fold line has a special name. It's called a line of symmetry.",
+      "scene": "define",
+      "focus": "name"
+    },
+    {
+      "start": 72.51,
+      "end": 76.78,
+      "caption": "A fold line where both halves match exactly",
+      "text": "A line of symmetry is a fold line where both halves match exactly.",
+      "scene": "define",
+      "focus": "meaning"
+    },
+    {
+      "start": 76.78,
+      "end": 84.11,
+      "caption": "It works just like a mirror",
+      "text": "It works just like a mirror. Stand a mirror on the line, and the reflection looks exactly like the other half.",
+      "scene": "define",
+      "focus": "mirror"
+    },
+    {
+      "start": 84.11,
+      "end": 90.99,
+      "caption": "Symmetrical: has at least one fold line",
+      "text": "A shape with at least one line of symmetry is called symmetrical. Riya's butterfly is symmetrical!",
+      "scene": "define",
+      "focus": "word"
+    },
+    {
+      "start": 90.99,
+      "end": 103.26,
+      "caption": "Not every line works! Halves must match",
+      "text": "But careful! Not every line works. Fold the butterfly across the middle instead, and the top and bottom don't match at all. So that's not a line of symmetry.",
+      "scene": "define",
+      "focus": "notany"
+    },
+    {
+      "start": 103.26,
+      "end": 115.97,
+      "caption": "House: fold down the middle \u2192 it matches!",
+      "text": "Let's try the fold test on more things. Here's a little house. Fold it straight down the middle. The roof matches, and the walls match. One line of symmetry!",
+      "scene": "foldtest",
+      "focus": "house"
+    },
+    {
+      "start": 115.97,
+      "end": 128.1,
+      "caption": "A or F: which one folds and matches?",
+      "text": "Now, letters! Here's A, and here's F. Which one can you fold down the middle, so both sides match? Think.",
+      "scene": "foldtest",
+      "focus": "ask"
+    },
+    {
+      "start": 128.1,
+      "end": 144.77,
+      "caption": "A matches! F, G and R don't",
+      "text": "A! Its left side is a mirror of its right side. But F? Its arms only point one way. Fold it, and the halves don't match. So F has no line of symmetry. Neither do G or R.",
+      "scene": "foldtest",
+      "focus": "answer"
+    },
+    {
+      "start": 144.77,
+      "end": 149.66,
+      "caption": "Some shapes have more than one!",
+      "text": "Some shapes have more than one line of symmetry. Let's count them!",
+      "scene": "count",
+      "focus": "intro"
+    },
+    {
+      "start": 149.66,
+      "end": 168.82,
+      "caption": "Square: 4 lines of symmetry",
+      "text": "Here's a square tile. Fold it up and down. It matches! Fold it across. It matches! Now fold it corner to corner. Matches again! And the other corner to corner, too. That's four lines of symmetry!",
+      "scene": "count",
+      "focus": "square"
+    },
+    {
+      "start": 168.82,
+      "end": 183.33,
+      "caption": "Rectangle: up-down and across",
+      "text": "Now a rectangle, like your notebook. It's longer than it is wide. Fold it up and down. Matches! Fold it across. Matches! That's two lines.",
+      "scene": "count",
+      "focus": "rect"
+    },
+    {
+      "start": 183.33,
+      "end": 197.28,
+      "caption": "Corner to corner? No match! Only 2 lines",
+      "text": "But what about corner to corner? Look closely. The corners stick out. The halves don't sit on top of each other. So a rectangle that isn't a square has just two lines of symmetry.",
+      "scene": "count",
+      "focus": "diag"
+    },
+    {
+      "start": 197.28,
+      "end": 207.38,
+      "caption": "The fold line works like a mirror",
+      "text": "Now, back to Riya's rangoli. She needs to draw the missing wing. Here's the secret. The fold line works like a mirror.",
+      "scene": "missing",
+      "focus": "intro"
+    },
+    {
+      "start": 207.38,
+      "end": 218.98,
+      "caption": "2 left of the fold \u2192 2 right of the fold",
+      "text": "Look at this dot. It's two squares to the left of the fold line. So its matching dot goes two squares to the right. Same distance, just on the other side.",
+      "scene": "missing",
+      "focus": "rule"
+    },
+    {
+      "start": 218.98,
+      "end": 229.69,
+      "caption": "3 squares left \u2192 where's its partner?",
+      "text": "Your turn. This dot is three squares to the left of the fold. Where does its partner go? Take your time.",
+      "scene": "missing",
+      "focus": "ask"
+    },
+    {
+      "start": 229.69,
+      "end": 240.51,
+      "caption": "3 squares right! Same distance, other side",
+      "text": "Three squares to the right! Riya does that for every dot, and joins them up. Ta-da! The wing is complete, and it matches perfectly.",
+      "scene": "missing",
+      "focus": "answer"
+    },
+    {
+      "start": 240.51,
+      "end": 246.64,
+      "caption": "The rangoli border is a pattern",
+      "text": "Riya's rangoli also has a pretty border around it. And that border is a pattern.",
+      "scene": "pattern",
+      "focus": "intro"
+    },
+    {
+      "start": 246.64,
+      "end": 255.32,
+      "caption": "Pattern unit: the small part that repeats",
+      "text": "Remember, a pattern repeats in the same order, again and again. The small part that repeats is called the pattern unit.",
+      "scene": "pattern",
+      "focus": "unit"
+    },
+    {
+      "start": 255.32,
+      "end": 265.51,
+      "caption": "Red, blue, red, blue, red \u2192 blue!",
+      "text": "Like red, blue, red, blue, red. What comes next? Blue! Because the pattern unit is red, blue.",
+      "scene": "pattern",
+      "focus": "colour"
+    },
+    {
+      "start": 265.51,
+      "end": 278.62,
+      "caption": "Star, dot, dot, star, dot, dot, star, ?, ?",
+      "text": "Now Riya's border. Star, dot, dot. Star, dot, dot. Star, and then? What are the next two?",
+      "scene": "pattern",
+      "focus": "ask"
+    },
+    {
+      "start": 278.62,
+      "end": 287.04,
+      "caption": "Dot, dot! The unit is star, dot, dot",
+      "text": "Dot, dot! The pattern unit is star, dot, dot. So after every star come two dots.",
+      "scene": "pattern",
+      "focus": "answer"
+    },
+    {
+      "start": 287.04,
+      "end": 301.88,
+      "caption": "Square, triangle, triangle\u2026 what's tile 10?",
+      "text": "Here's a real brain teaser. Floor tiles go square, triangle, triangle, square, triangle, triangle. What is the tenth tile? Take your time.",
+      "scene": "tiles",
+      "focus": "ask"
+    },
+    {
+      "start": 301.88,
+      "end": 311.13,
+      "caption": "Unit: square, triangle, triangle (3 tiles)",
+      "text": "First, find the pattern unit. Square, triangle, triangle. That's three tiles, and then it starts again.",
+      "scene": "tiles",
+      "focus": "unit"
+    },
+    {
+      "start": 311.13,
+      "end": 321.77,
+      "caption": "Tiles 1, 4, 7, 10 are squares \u2192 square!",
+      "text": "So a new unit starts at tile one, tile four, tile seven, and tile ten. Each of those is a square. So the tenth tile is a square!",
+      "scene": "tiles",
+      "focus": "count"
+    },
+    {
+      "start": 321.77,
+      "end": 330.07,
+      "caption": "Game art repeats one small tile",
+      "text": "Game artists use this trick too. They draw one small tile, and repeat it again and again, to fill a whole game world!",
+      "scene": "tiles",
+      "focus": "games"
+    },
+    {
+      "start": 330.07,
+      "end": 333.77,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, practice check time, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 333.77,
+      "end": 344.42,
+      "caption": "Does a heart have a line of symmetry?",
+      "text": "Does a heart have a line of symmetry? Draw it, or describe it. Pause the video, and try it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 344.42,
+      "end": 355.95,
+      "caption": "Yes! One line, top dip to bottom point",
+      "text": "Yes! One line, straight down the middle, from the dip at the top to the point at the bottom. Fold it there, and both halves match. Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 355.95,
+      "end": 362.31,
+      "caption": "Symmetry = fold, and both halves match",
+      "text": "Let's remember. Symmetry means you can fold a shape, and both halves match exactly.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 362.31,
+      "end": 367.1,
+      "caption": "Square: 4 lines \u00b7 Rectangle: 2 lines",
+      "text": "A square has four lines of symmetry. A rectangle has two.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 367.1,
+      "end": 371.95,
+      "caption": "Missing half: same distance, other side",
+      "text": "To draw a missing half, use the same distance, on the other side of the fold.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 371.95,
+      "end": 376.2,
+      "caption": "Find the repeating unit",
+      "text": "And to continue a pattern, find the pattern unit that repeats.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 376.2,
+      "end": 382.45,
+      "caption": "Chapter 3 done!",
+      "text": "Chapter three, done! You fold and pattern like a true rangoli artist, champ.",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 382.45,
+      "end": 389.25,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

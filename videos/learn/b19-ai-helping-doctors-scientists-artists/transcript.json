@@ -1,0 +1,340 @@
+{
+  "cues": [
+    {
+      "start": 0.0,
+      "end": 4.7,
+      "caption": "Welcome back, champ!",
+      "text": "Hey champ, welcome back! It's so nice to see you again.",
+      "scene": "open",
+      "focus": "hello"
+    },
+    {
+      "start": 4.7,
+      "end": 14.03,
+      "caption": "Last time: pause, then ask a grown-up",
+      "text": "Last time, we learned that some pictures are made by AI. So when you see something surprising, you pause, and you ask a grown-up.",
+      "scene": "open",
+      "focus": "bridge"
+    },
+    {
+      "start": 14.03,
+      "end": 23.0,
+      "caption": "Chapter 4 \u00b7 AI Helping Doctors, Scientists, Artists",
+      "text": "Today is chapter four of Being Smart and Safe With AI. It's called, AI Helping Doctors, Scientists, and Artists.",
+      "scene": "open",
+      "focus": "chapter"
+    },
+    {
+      "start": 23.0,
+      "end": 32.02,
+      "caption": "How can AI actually help people?",
+      "text": "We've talked a lot about being careful with AI. But here's a happy question. How can AI actually help people?",
+      "scene": "open",
+      "focus": "promise"
+    },
+    {
+      "start": 32.02,
+      "end": 37.75,
+      "caption": "Meet Meera and her nani",
+      "text": "Meet Meera. She's in class four, and she loves spending Sundays with her nani.",
+      "scene": "meera",
+      "focus": "meet"
+    },
+    {
+      "start": 37.75,
+      "end": 48.17,
+      "caption": "Nani can't read the tiny letters",
+      "text": "One Sunday, a letter arrives from Meera's cousin. But nani's eyes aren't so strong anymore. The letters look tiny and blurry to her.",
+      "scene": "meera",
+      "focus": "letter"
+    },
+    {
+      "start": 48.17,
+      "end": 57.42,
+      "caption": "How could nani read on her own? Think!",
+      "text": "Meera is at school all week. So how could nani read her letters on her own? Think about it.",
+      "scene": "meera",
+      "focus": "why"
+    },
+    {
+      "start": 57.42,
+      "end": 70.45,
+      "caption": "A read-aloud app reads it out loud!",
+      "text": "Here's one way. Nani points her phone at the page, and a read-aloud app reads every word out loud! Dear Nani, I miss you. Nani smiles. Yay!",
+      "scene": "meera",
+      "focus": "reads"
+    },
+    {
+      "start": 70.45,
+      "end": 77.64,
+      "caption": "Big idea: AI is a TOOL",
+      "text": "That app is an AI helper. And here's the big idea for today. AI is a tool.",
+      "scene": "tool",
+      "focus": "name"
+    },
+    {
+      "start": 77.64,
+      "end": 85.36,
+      "caption": "A tool helps people do a job",
+      "text": "A tool is something that helps people do a job. Like a pencil helps you write, and a map helps you find the way.",
+      "scene": "tool",
+      "focus": "meaning"
+    },
+    {
+      "start": 85.36,
+      "end": 96.68,
+      "caption": "Not magic, not alive: it learned patterns",
+      "text": "Remember, AI isn't magic, and it isn't alive. It learned patterns from lots and lots of examples. That's how it knows what letters look like.",
+      "scene": "tool",
+      "focus": "patterns"
+    },
+    {
+      "start": 96.68,
+      "end": 101.32,
+      "caption": "Three everyday AI helpers",
+      "text": "AI helpers are all around us. Let's see three of them.",
+      "scene": "everyday",
+      "focus": "intro"
+    },
+    {
+      "start": 101.32,
+      "end": 116.64,
+      "caption": "Plant spotter: photo of a leaf \u2192 its name",
+      "text": "In the park, Meera finds a leaf she doesn't know. What is it? She takes a photo, and a plant spotter app says, this is a neem leaf! It matched the leaf's shape and pattern with thousands of leaf photos.",
+      "scene": "everyday",
+      "focus": "plant"
+    },
+    {
+      "start": 116.64,
+      "end": 121.02,
+      "caption": "Read-aloud: helps people who can't see well",
+      "text": "The read-aloud app helps people who can't see well, just like nani.",
+      "scene": "everyday",
+      "focus": "read"
+    },
+    {
+      "start": 121.02,
+      "end": 129.8,
+      "caption": "Maps: finds a good route, warns about traffic",
+      "text": "And next Sunday, the maps app finds a good route to nani's house. It even warns, heavy traffic ahead, try this road instead!",
+      "scene": "everyday",
+      "focus": "maps"
+    },
+    {
+      "start": 129.8,
+      "end": 138.51,
+      "caption": "X-ray: a special photo of your bones",
+      "text": "Now, let's visit a hospital. Have you heard of an X-ray? It's a special photo that shows the bones inside your body.",
+      "scene": "doctor",
+      "focus": "xray"
+    },
+    {
+      "start": 138.51,
+      "end": 152.72,
+      "caption": "AI points out spots for the doctor to check",
+      "text": "AI has looked at thousands of X-rays. So it can point to a spot and say, doctor, please check this part. That's really useful, because doctors are very busy, and a tiny spot is easy to miss.",
+      "scene": "doctor",
+      "focus": "spot"
+    },
+    {
+      "start": 152.72,
+      "end": 163.41,
+      "caption": "AI points it out. The doctor decides.",
+      "text": "But who decides what's really wrong, and what medicine to give? The doctor! AI points things out. The doctor checks, and decides.",
+      "scene": "doctor",
+      "focus": "decides"
+    },
+    {
+      "start": 163.41,
+      "end": 172.75,
+      "caption": "Forest cameras click thousands of photos",
+      "text": "Scientists use AI too. In a forest, they hide cameras on trees. The cameras click thousands and thousands of photos.",
+      "scene": "science",
+      "focus": "camera"
+    },
+    {
+      "start": 172.75,
+      "end": 190.04,
+      "caption": "AI looks fast and counts the animals",
+      "text": "Counting animals in all those photos would take people weeks! But AI can look through them very quickly, and spot the patterns, like stripes, spots, and long trunks. Tiger, deer, deer, elephant! And it never gets tired.",
+      "scene": "science",
+      "focus": "count"
+    },
+    {
+      "start": 190.04,
+      "end": 199.99,
+      "caption": "AI spots storm patterns. Scientists check.",
+      "text": "AI can also spot weather patterns, like clouds that often come before a big storm. Then scientists check the work, and warn everyone in time.",
+      "scene": "science",
+      "focus": "storm"
+    },
+    {
+      "start": 199.99,
+      "end": 206.61,
+      "caption": "Meet Ritu ma'am, the art teacher",
+      "text": "And what about artists? Meera's art teacher, Ritu ma'am, loves painting peacocks.",
+      "scene": "artist",
+      "focus": "intro"
+    },
+    {
+      "start": 206.61,
+      "end": 219.03,
+      "caption": "AI is a new brush to try ideas",
+      "text": "Sometimes she uses AI like a new brush, to quickly try ideas. A blue peacock? A golden one? Then she picks her favourite, and paints it her own way.",
+      "scene": "artist",
+      "focus": "brush"
+    },
+    {
+      "start": 219.03,
+      "end": 228.51,
+      "caption": "Imagination leads. Copying isn't fair.",
+      "text": "The ideas, and the imagination, still come from the artist. And copying someone else's drawing isn't fair, even with AI.",
+      "scene": "artist",
+      "focus": "fair"
+    },
+    {
+      "start": 228.51,
+      "end": 233.21,
+      "caption": "AI can make mistakes",
+      "text": "Now here's the most important part. AI can make mistakes.",
+      "scene": "charge",
+      "focus": "oops"
+    },
+    {
+      "start": 233.21,
+      "end": 242.45,
+      "caption": "People must check AI's work",
+      "text": "Once, Meera's plant app called a tulsi leaf a mint leaf! Oops. That's why people must always check AI's work.",
+      "scene": "charge",
+      "focus": "check"
+    },
+    {
+      "start": 242.45,
+      "end": 254.07,
+      "caption": "AI is a helper, not the boss",
+      "text": "So think of AI as a helper on the team, not the boss. A doctor decides your medicine, not an app alone. People stay in charge of the important choices.",
+      "scene": "charge",
+      "focus": "team"
+    },
+    {
+      "start": 254.07,
+      "end": 269.99,
+      "caption": "Match each helper to who it helps",
+      "text": "Let's play a matching game! Three helpers, and three people. A read-aloud app, an X-ray helper, and an animal counter. Who does each one help? Have a think.",
+      "scene": "match",
+      "focus": "ask"
+    },
+    {
+      "start": 269.99,
+      "end": 280.96,
+      "caption": "Read-aloud \u00b7 X-ray \u00b7 Animal counter: matched!",
+      "text": "The read-aloud app helps someone who can't see well. The X-ray helper helps a doctor. And the animal counter helps a scientist. Well done!",
+      "scene": "match",
+      "focus": "answer"
+    },
+    {
+      "start": 280.96,
+      "end": 292.01,
+      "caption": "True or false? No need to check AI's work",
+      "text": "True or false? Once scientists use AI, they don't need to check its work. Hmm. What do you think?",
+      "scene": "truefalse",
+      "focus": "q1"
+    },
+    {
+      "start": 292.01,
+      "end": 296.55,
+      "caption": "False! People always check.",
+      "text": "False! AI can be wrong, so people always check.",
+      "scene": "truefalse",
+      "focus": "a1"
+    },
+    {
+      "start": 296.55,
+      "end": 305.01,
+      "caption": "True or false? AI is alive",
+      "text": "One more. True or false? AI is alive, and has its own ideas.",
+      "scene": "truefalse",
+      "focus": "q2"
+    },
+    {
+      "start": 305.01,
+      "end": 312.97,
+      "caption": "False! AI is a tool. People choose.",
+      "text": "False again! AI is a helpful tool that learned from examples. People make the important choices.",
+      "scene": "truefalse",
+      "focus": "a2"
+    },
+    {
+      "start": 312.97,
+      "end": 316.85,
+      "caption": "Your turn: practice check",
+      "text": "Okay champ, here's a practice check, just like the quiz.",
+      "scene": "checkpoint",
+      "focus": "intro"
+    },
+    {
+      "start": 316.85,
+      "end": 329.42,
+      "caption": "Should AI choose your medicine alone? Why?",
+      "text": "Should AI choose your medicine, without a doctor? And why? Pause the video, and say your answer out loud, or write it on paper.",
+      "scene": "checkpoint",
+      "focus": "ask"
+    },
+    {
+      "start": 329.42,
+      "end": 344.1,
+      "caption": "No! A doctor must check and decide.",
+      "text": "No! AI can make mistakes. It can help, but a doctor must check, and decide. People stay in charge of important choices. Did you say something like that? Brilliant!",
+      "scene": "checkpoint",
+      "focus": "answer"
+    },
+    {
+      "start": 344.1,
+      "end": 350.41,
+      "caption": "AI helps spot, read, and find routes",
+      "text": "Let's remember. AI helps spot plants, read aloud, and find routes.",
+      "scene": "recap",
+      "focus": "r1"
+    },
+    {
+      "start": 350.41,
+      "end": 354.19,
+      "caption": "AI helps doctors, scientists, artists",
+      "text": "AI helps doctors, scientists, and artists.",
+      "scene": "recap",
+      "focus": "r2"
+    },
+    {
+      "start": 354.19,
+      "end": 358.33,
+      "caption": "AI is a tool, not the boss",
+      "text": "AI is a tool. A helper, not the boss.",
+      "scene": "recap",
+      "focus": "r3"
+    },
+    {
+      "start": 358.33,
+      "end": 360.83,
+      "caption": "People make the important choices",
+      "text": "And people make the important choices.",
+      "scene": "recap",
+      "focus": "r4"
+    },
+    {
+      "start": 360.83,
+      "end": 369.89,
+      "caption": "Chapter 4 done!",
+      "text": "Chapter four, done! Just one more chapter to go, and it's a fun one. You'll imagine your very own AI helper!",
+      "scene": "recap",
+      "focus": "done"
+    },
+    {
+      "start": 369.89,
+      "end": 376.69,
+      "caption": "Next: Quiz \u00b7 Tap Finish",
+      "text": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!",
+      "scene": "recap",
+      "focus": "quiz"
+    }
+  ]
+}

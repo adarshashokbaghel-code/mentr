@@ -1,0 +1,151 @@
+{
+  "id": "A12",
+  "title": "Making a Character Move",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "CS · Building With Blocks",
+  "slug": "a12-making-a-character-move",
+  "track": "cs",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "a12-welcome",
+      "beats": [
+        { "vo": "Hi champ! Welcome back to Unit three, Building With Blocks. I missed you!", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you met block coding. You learned that a program is a stack of blocks, and you met the start, move, wait, and say blocks.", "caption": "Last time: Start · Move · Wait · Say", "focus": "bridge", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Today is chapter two. Making a Character Move!", "caption": "Chapter 2 · Making a Character Move", "focus": "chapter", "sfx": "chime", "sfxAt": 0.4 },
+        { "vo": "Have you ever wished you could make a cartoon walk around, all by itself? Today, you'll make Billu walk, and even turn corners. Ready? Let's go!", "caption": "Walk, and turn corners!", "focus": "promise", "sfx": "pop", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "hungry",
+      "visual": "a12-hook",
+      "beats": [
+        { "vo": "Remember Billu, our cat? Well, today Billu is hungry. Very, very hungry. Listen. Meow! That's his tummy talking.", "caption": "Billu is hungry!", "focus": "meet", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "His bowl of milk is over here. But look, it's not straight ahead. Billu has to walk, then turn the corner, then walk again.", "caption": "Walk → turn the corner → walk", "focus": "bowl", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "So, which blocks should we snap together, to get Billu to his milk? Remember, he can't guess. We have to tell him every step. Have a think.", "caption": "Which blocks get Billu there? Think!", "focus": "think", "pause": 2.0 }
+      ]
+    },
+    {
+      "id": "event",
+      "visual": "a12-event",
+      "beats": [
+        { "vo": "Every program needs a beginning. So first, we need an event block.", "caption": "First: an EVENT block", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "An event block starts things when something happens. It's like the school bell. When the bell rings, everyone goes to class! The bell ringing is the event. Going to class is what happens next.", "caption": "Event = starts when something happens", "focus": "bell", "sfx": "chime", "sfxAt": 0.55 },
+        { "vo": "Our event block is, when green flag clicked. When you click the green flag, the program starts. That's why it always sits on top.", "caption": "when green flag clicked · always on top", "focus": "flag", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "move",
+      "visual": "a12-move",
+      "beats": [
+        { "vo": "Next, we need a motion block. Motion blocks move or turn the character. Here's one. Move ten steps.", "caption": "Motion block: move 10 steps", "focus": "block" },
+        { "vo": "Steps tell Billu how far to go. Ten steps is a short walk forward, in the direction he's facing. Like this.", "caption": "Steps = how far Billu goes", "focus": "steps", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Now, what if we change ten to twenty? Twenty is double ten, so Billu goes twice as far!", "caption": "move 20 = twice as far as move 10", "focus": "double", "sfx": "pop", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "turn",
+      "visual": "a12-turn",
+      "beats": [
+        { "vo": "But walking straight isn't enough. Billu has to turn the corner. So we use, turn ninety degrees.", "caption": "Motion block: turn 90 degrees", "focus": "block" },
+        { "vo": "Ninety degrees is a quarter turn. Imagine walking to the end of your street, and turning the corner. That's one quarter turn.", "caption": "90 degrees = a quarter turn, like a corner", "focus": "quarter" },
+        { "vo": "Watch Billu. He was facing this way. And now, after one turn, he's facing a new way. Notice something? He didn't walk anywhere. He stayed in the same spot. Turning only changes which way he faces.", "caption": "One turn → facing a new way", "focus": "watch", "sfx": "whoosh", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "around",
+      "visual": "a12-around",
+      "beats": [
+        { "vo": "Let's keep turning! After one ninety degree turn, Billu has turned a corner.", "caption": "1 turn: a corner", "focus": "one", "sfx": "tick", "sfxAt": 0.3 },
+        { "vo": "Two turns, and now Billu faces the other way! Two quarter turns make a half turn.", "caption": "2 turns: facing the other way!", "focus": "two", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "And four turns? Billu spins all the way round, and faces exactly where he started. Wheee!", "caption": "4 turns: back where he started", "focus": "four", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "small",
+      "visual": "a12-small",
+      "beats": [
+        { "vo": "Here's a smart coder tip. When you start, use small numbers, like move ten, and turn ninety.", "caption": "Tip: start small · move 10 · turn 90", "focus": "rule" },
+        { "vo": "Why? Well, imagine you type move one thousand steps. Zoom! Billu shoots right off the screen. Oh no, where did he go?", "caption": "move 1000? Zoom, off the screen!", "focus": "big", "sfx": "whoosh", "sfxAt": 0.2, "pause": 0.5 },
+        { "vo": "Small steps are easy to watch, and easy to check. If Billu goes too short, you can always add a little more later.", "caption": "Small steps are easy to check", "focus": "why", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "path",
+      "visual": "a12-path",
+      "beats": [
+        { "vo": "Now, let's build Billu's path. When green flag clicked, on top. Then, move ten steps. Then, turn ninety degrees. Then, move ten steps again. One event block, and three motion blocks.", "caption": "Flag → Move 10 → Turn 90 → Move 10", "focus": "build", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "Click the green flag! Billu walks, turns the corner, and walks again. Yum, milk time!", "caption": "Walk, turn, walk… milk time!", "focus": "go", "sfx": "success", "sfxAt": 0.85 },
+        { "vo": "But what if we put the flag block at the bottom? That's the wrong order! The event always goes first, on top. Then the motion blocks follow, below it.", "caption": "Event on top, motion blocks below", "focus": "order", "sfx": "buzz", "sfxAt": 0.25 }
+      ]
+    },
+    {
+      "id": "debug",
+      "visual": "a12-debug",
+      "beats": [
+        { "vo": "The next day, Billu wants his ball of wool. But sometimes, a path goes wrong. That's okay! Coders use three magic words. Try, watch, change one block.", "caption": "Try · Watch · Change one block", "focus": "intro", "sfx": "chime", "sfxAt": 0.7 },
+        { "vo": "Try. Click the green flag, and let the program run, all the way to the end.", "caption": "Try: click the green flag", "focus": "try", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Watch. Where did Billu really go? Hmm. He turned too early! He didn't walk far enough.", "caption": "Watch: he turned too early!", "focus": "watch", "sfx": "buzz", "sfxAt": 0.8, "pause": 0.4 },
+        { "vo": "Change one block. Let's change only the first move ten, to move twenty, so he walks twice as far before turning. Try again, and, yes! He reaches the wool. Good job, Billu!", "caption": "Change one: move 10 → move 20", "focus": "change", "sfx": "success", "sfxAt": 0.85 },
+        { "vo": "Why only one change? Because if you change lots of blocks at once, you won't know which change fixed it!", "caption": "One change at a time, so you know what worked", "focus": "whyone" }
+      ]
+    },
+    {
+      "id": "straight",
+      "visual": "a12-straight",
+      "beats": [
+        { "vo": "Puzzle time! This stack makes Billu walk, turn, and walk. But what if we want him to go straight instead? Which block should we take out? Think.", "caption": "To go straight, which block comes out?", "focus": "ask", "sfx": "pop", "pause": 2.2 },
+        { "vo": "The turn ninety degrees block! Without the turn, both moves go the same way. Ten steps, and ten more steps, in one straight line. Straight ahead!", "caption": "Take out turn 90 → straight ahead!", "focus": "answer", "sfx": "success", "sfxAt": 0.7 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "a12-check",
+      "beats": [
+        { "vo": "Okay champ, practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "To make Billu face the other way, how many ninety degree turns do you need? Pause, and think.", "caption": "Face the other way: how many 90° turns?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Two! Each ninety degree turn is a quarter turn. So two of them make a half turn, and Billu faces the other way. And four turns? He'd be right back where he started facing. Brilliant!", "caption": "Two! 2 quarter turns = a half turn", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "a12-recap",
+      "beats": [
+        { "vo": "Let's remember. The event block, when green flag clicked, goes on top.", "caption": "Event on top: when green flag clicked", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Motion blocks, like move ten steps and turn ninety degrees, move and turn the character.", "caption": "Motion: move 10 steps · turn 90 degrees", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "One ninety degree turn is a corner. Two turns, and you face the other way.", "caption": "Two 90° turns = face the other way", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And when a path goes wrong, try, watch, and change one block.", "caption": "Try · Watch · Change one block", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! Billu is one happy cat, and you're a real coder now, champ.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now, tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

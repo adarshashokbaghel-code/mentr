@@ -1,0 +1,146 @@
+{
+  "id": "B2",
+  "title": "Smart vs. Simple",
+  "chapterLabel": "Chapter 2 of 5",
+  "unitLabel": "AI · What Is AI?",
+  "slug": "b2-smart-vs-simple",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b2-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Pixi and I are so glad you're here.", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, we learned that AI is maths, not magic. It finds patterns in lots of examples, and then it makes a guess. And sometimes, that guess is wrong!", "caption": "Last time: AI finds patterns, then guesses", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter two of, What Is AI? It's called, Smart versus Simple.", "caption": "Chapter 2 · Smart vs. Simple", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Here's a puzzle for you. Is every gadget with a button, AI? Hmm. Let's find out.", "caption": "Is every gadget with a button AI?", "focus": "question", "pause": 0.5 }
+      ]
+    },
+    {
+      "id": "mini",
+      "visual": "b2-hook",
+      "beats": [
+        { "vo": "It's Saturday morning at Kabir's house. Ring, ring, ring! His alarm clock goes off at six thirty. Ugh. It's a holiday!", "caption": "6:30 on a Saturday. Ring, ring!", "focus": "alarm", "sfx": "buzz", "sfxAt": 0.2 },
+        { "vo": "Later, the power goes out. His little sister Mini grabs a torch, clicks it on, and shouts, wow! This torch is so smart. It must be AI!", "caption": "Mini: \"This torch is so smart. It's AI!\"", "focus": "torch", "sfx": "pop", "sfxAt": 0.45 },
+        { "vo": "Is Mini right? Is a torch AI? What do you think?", "caption": "Is a torch AI? What do you think?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Let's find out. Because there are two kinds of programs. Simple ones, and smart ones. By the end of today, you'll tell them apart like a detective!", "caption": "Two kinds: simple and smart", "focus": "two", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "simple",
+      "visual": "b2-simple",
+      "beats": [
+        { "vo": "Simple programs follow fixed rules. A fixed rule is an instruction that never changes.", "caption": "Simple programs follow FIXED RULES", "focus": "rule", "sfx": "chime", "sfxAt": 0.3 },
+        { "vo": "Like a doorbell. If the button is pressed, play a sound. Press it today. Ding dong! Press it next week. Ding dong! Exactly the same.", "caption": "If the button is pressed → play a sound", "focus": "doorbell", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Kabir's alarm clock has a fixed rule too. At six thirty, ring. Monday, ring. Saturday, ring. Even on his birthday, ring!", "caption": "At 6:30 → ring. Every single day!", "focus": "alarm", "sfx": "buzz", "sfxAt": 0.8 },
+        { "vo": "And Mini's torch? Switch on, light on. Switch off, light off. That's it. One fixed rule.", "caption": "Torch: switch on → light on", "focus": "torch", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Here's the key thing. A simple program never learns anything new. The alarm clock will never figure out that Kabir likes to sleep in on Saturdays.", "caption": "Simple programs never learn anything new", "focus": "never", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "predict",
+      "visual": "b2-predict",
+      "beats": [
+        { "vo": "Quick question. Tomorrow is Sunday, and Kabir really wants to sleep late. What will his alarm clock do at six thirty? Think!", "caption": "Sunday, 6:30. What will the alarm do?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Ring, ring, ring! Of course. It follows its fixed rule, no matter what. It can't learn that Sunday is different. Poor Kabir!", "caption": "Ring! The fixed rule never changes.", "focus": "answer", "sfx": "buzz", "sfxAt": 0.08 }
+      ]
+    },
+    {
+      "id": "smart",
+      "visual": "b2-smart",
+      "beats": [
+        { "vo": "Now, smart programs, like AI, are different. They learn from examples. And they change what they do, after seeing more examples.", "caption": "AI learns from examples, and changes", "focus": "intro", "sfx": "pop" },
+        { "vo": "Learning here doesn't mean thinking like you do. It just means the program gets better at its job, by looking at more and more examples.", "caption": "Learning = getting better from more examples", "focus": "learn" },
+        { "vo": "Think of a voice assistant. At first, it might mix up your words. But it hears millions of voices. Voices from Delhi, Chennai, Kolkata, and everywhere!", "caption": "A voice assistant hears millions of voices", "focus": "voice", "sfx": "whoosh", "sfxAt": 0.5 },
+        { "vo": "Over time, it gets better at understanding all kinds of accents. More examples, better guesses!", "caption": "More examples → better at understanding", "focus": "better", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "spell",
+      "visual": "b2-spell",
+      "beats": [
+        { "vo": "Here's another one. Spellcheck. You're typing a message to your nani. You want to type, because, but oops, the letters get mixed up.", "caption": "Oops! You type \"becuase\"", "focus": "typo", "sfx": "buzz", "sfxAt": 0.7 },
+        { "vo": "And spellcheck suggests, because! How does it know? It learned common words from lots and lots of writing.", "caption": "Spellcheck learned words from lots of writing", "focus": "fix", "sfx": "success", "sfxAt": 0.15 },
+        { "vo": "Or photo search. Type dog in a photo app, and it finds all your dog pictures. It learned what dogs look like, from lots of example photos.", "caption": "Photo search learned from example photos", "focus": "photos", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "And remember Kabir's cricket cartoons? Video suggestions change too, as you watch more. Watch lots of animal videos, and soon, you'll see more animals!", "caption": "Video suggestions change as you watch more", "focus": "videos", "sfx": "pop", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "test",
+      "visual": "b2-test",
+      "beats": [
+        { "vo": "So here's a super question, to test any gadget. Does it change what it does, after more examples?", "caption": "Does it change after more examples?", "focus": "ask", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "If yes, it may be AI. Like the voice assistant, or spellcheck. They keep getting better with more examples.", "caption": "Yes → it may be AI", "focus": "yes", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "If no, it's a simple, fixed rule program. Like the doorbell. Does it have a screen? Is it expensive? Those questions don't help. Only this one does!", "caption": "No → a simple, fixed-rule program", "focus": "no", "sfx": "pop", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "b2-sort",
+      "beats": [
+        { "vo": "Let's play, sort it! Fixed rule, or learns from examples?", "caption": "Sort it: fixed rule, or learns?", "focus": "intro", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Alarm clock. Spellcheck. Doorbell. Voice assistant. Calculator. Photo search. Which ones learn from examples? Pause, and think.", "caption": "Which ones learn from examples?", "focus": "ask", "pause": 2.2 },
+        { "vo": "The alarm clock, doorbell, and calculator follow fixed rules. Spellcheck, the voice assistant, and photo search learn from examples. How did you do? Oh, and a ceiling fan switch? Fixed rule too!", "caption": "3 follow fixed rules · 3 learn from examples", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "people",
+      "visual": "b2-people",
+      "beats": [
+        { "vo": "Now, one more big idea. Who makes all these programs? People! The person who writes and plans a program is called a designer.", "caption": "A DESIGNER writes and plans a program", "focus": "design", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "People design the doorbell's simple rule. If pressed, play a sound. And people design AI too. They write the program, and they test it.", "caption": "People design simple programs AND AI", "focus": "both" },
+        { "vo": "People even choose the examples that AI learns from. Like picking thousands of cat photos, to teach it what a cat looks like.", "caption": "People choose the examples AI learns from", "focus": "examples", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "So AI doesn't build itself out of nothing. Every AI has human designers. People are still in charge.", "caption": "AI doesn't build itself. People are in charge!", "focus": "charge", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b2-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Remember Mini? Is a torch AI? Why, or why not? Pause the video, and think. Or write your answer on paper.", "caption": "Is a torch AI? Why or why not?", "focus": "ask", "pause": 2.5 },
+        { "vo": "No, it's not! A torch follows one fixed rule. Switch on, light on. It never learns from examples, and it never changes what it does. Sorry, Mini! Great thinking, champ.", "caption": "No! One fixed rule. It never learns or changes.", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b2-recap",
+      "beats": [
+        { "vo": "Let's remember. Simple programs follow fixed rules, like a doorbell.", "caption": "Simple programs follow fixed rules", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "AI changes what it does, after seeing more examples.", "caption": "AI changes after seeing more examples", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "A torch is not AI. It just follows a switch.", "caption": "A torch is not AI. It just follows a switch.", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And people design both simple programs, and AI.", "caption": "People design both", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter two, done! Now you can tell smart from simple, champ.", "caption": "Chapter 2 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

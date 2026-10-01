@@ -1,0 +1,156 @@
+{
+  "id": "C3",
+  "title": "Place Value Power-Up",
+  "chapterLabel": "Chapter 3 of 5",
+  "unitLabel": "Math · Numbers Computers Love",
+  "slug": "c3-place-value-power-up",
+  "track": "math",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "c3-welcome",
+      "beats": [
+        { "vo": "Hey champ, welcome back! Ready to power up your number skills?", "caption": "Welcome back, champ!", "focus": "hello", "sfx": "pop" },
+        { "vo": "Last time, you sorted numbers into odd and even. Eight laddoos make four pairs, so eight is even. Seven laddoos leave one left over, so seven is odd. Remember?", "caption": "Last time: odd & even, with pairs of laddoos", "focus": "bridge", "sfx": "chime", "sfxAt": 0.15 },
+        { "vo": "Today is chapter three of Numbers Computers Love. It's called, Place Value Power-Up!", "caption": "Chapter 3 · Place Value Power-Up", "focus": "chapter", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Here's a puzzle for you. Twenty-three and thirty-two use the very same digits, a two and a three. So, are they the same number? Hmm.", "caption": "23 and 32: same digits. Same number?", "focus": "puzzle", "pause": 0.6 },
+        { "vo": "Let's find out, with our friend Meera, at the sweet shop.", "caption": "Let's find out at the sweet shop!", "focus": "promise", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "laddoos",
+      "visual": "c3-hook",
+      "beats": [
+        { "vo": "It's Diwali! Meera's mum writes a little note, and sends her to the sweet shop. The note says, twenty-three laddoos.", "caption": "Mum's note: 23 laddoos", "focus": "note", "sfx": "pop", "sfxAt": 0.5 },
+        { "vo": "Ramu uncle packs his laddoos in boxes of ten. He reads the note too quickly, and hands Meera three boxes, and two loose laddoos.", "caption": "3 boxes of ten + 2 loose laddoos", "focus": "shop", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "At home, Mum counts them. Ten, twenty, thirty, thirty-one, thirty-two. Thirty-two laddoos! Oh no, that's too many!", "caption": "Mum counts: 32 laddoos! Too many!", "focus": "home", "sfx": "buzz", "sfxAt": 0.6, "pause": 0.5 },
+        { "vo": "But the note had a two and a three. And uncle gave three boxes, and two loose ones. So what went wrong? Think about it.", "caption": "Same digits, 2 and 3. What went wrong?", "focus": "why", "pause": 2.0 },
+        { "vo": "Uncle mixed up the places! Twenty-three means two boxes of ten, and three loose laddoos. Thirty-two means three boxes of ten, and two loose. Same digits, different places, so different numbers.", "caption": "23 = 2 tens + 3 ones · 32 = 3 tens + 2 ones", "focus": "because", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "c3-define",
+      "beats": [
+        { "vo": "Let's learn some power words. We write every number using just ten symbols, zero to nine. Each one is called a digit.", "caption": "Digits: the ten symbols 0 to 9", "focus": "digit", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "Place value means what a digit is worth, because of where it sits.", "caption": "Place value: worth, because of WHERE it sits", "focus": "place", "sfx": "chime", "sfxAt": 0.5 },
+        { "vo": "Think of a number as a row of little houses. Starting from the right, the first house is the ones place. Next door is the tens place. And next to that, the hundreds place.", "caption": "Right to left: ones · tens · hundreds", "focus": "houses", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So in fifty-eight, the eight sits on the far right. That's the ones place. And the five lives in the tens place, so it's worth fifty.", "caption": "In 58, the 8 is in the ones place", "focus": "rightmost" }
+      ]
+    },
+    {
+      "id": "bundles",
+      "visual": "c3-bundles",
+      "beats": [
+        { "vo": "Now, let's build numbers with sticks. Here are ten loose sticks. Tie them with a rubber band, and you get one bundle. One bundle is one ten.", "caption": "10 sticks → 1 bundle = 1 ten", "focus": "tie", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Let's make forty-seven. Four bundles of ten, and seven single sticks.", "caption": "4 bundles + 7 sticks = 47", "focus": "build", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "So in forty-seven, the four isn't just four. It means four tens, which is forty. And the seven means seven ones.", "caption": "The 4 means 4 tens = 40. The 7 means 7 ones", "focus": "meaning" },
+        { "vo": "Quick one! What do four tens and two ones make?", "caption": "4 tens + 2 ones = ?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Forty, plus two more. That's forty-two!", "caption": "40 + 2 = 42", "focus": "answer", "sfx": "success", "sfxAt": 0.1 }
+      ]
+    },
+    {
+      "id": "swap",
+      "visual": "c3-swap",
+      "beats": [
+        { "vo": "Now watch what happens when we swap the digits of forty-seven. The seven jumps into the tens place, and the four moves to the ones place. Seventy-four! That's a much bigger number.", "caption": "Swap 47 → 74: 7 tens + 4 ones. Much bigger!", "focus": "swap", "sfx": "whoosh", "sfxAt": 0.2 },
+        { "vo": "Your turn. Swap the digits of sixty-one. What new number do you get? Think.", "caption": "Swap the digits of 61. What do you get?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Sixteen! The one moves to the tens place, so now it's worth ten. And the six moves to the ones place. Ten plus six equals sixteen.", "caption": "61 → 16: 1 ten + 6 ones", "focus": "answer", "sfx": "success", "sfxAt": 0.15 }
+      ]
+    },
+    {
+      "id": "hundreds",
+      "visual": "c3-hundreds",
+      "beats": [
+        { "vo": "What if we have lots of tens? Put ten tens together, and you get one big square. One hundred!", "caption": "10 tens = 1 hundred", "focus": "flat", "sfx": "pop", "sfxAt": 0.6 },
+        { "vo": "Let's build three hundred and fifty-two. Three hundreds, five tens, and two ones.", "caption": "352 = 3 hundreds + 5 tens + 2 ones", "focus": "build", "sfx": "tick", "sfxAt": 0.2 },
+        { "vo": "Now, what is the five worth in three hundred and fifty-two? Not five! It sits in the tens place, so it's five tens. That's fifty.", "caption": "The 5 in 352 is worth 50, not 5", "focus": "five", "sfx": "chime", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "expand",
+      "visual": "c3-expand",
+      "beats": [
+        { "vo": "We can also stretch a number out, to show every place. Three hundred and fifty-two equals three hundred, plus fifty, plus two. This is called expanded form.", "caption": "Expanded form: 352 = 300 + 50 + 2", "focus": "name", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Let's go backwards. Which number is three hundred, plus forty, plus seven? Pause, and think.", "caption": "Which number is 300 + 40 + 7?", "focus": "ask", "pause": 2.0 },
+        { "vo": "Three hundreds, four tens, and seven ones. Three hundred and forty-seven! Each digit goes into its own house.", "caption": "3 hundreds + 4 tens + 7 ones = 347", "focus": "answer", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "zero",
+      "visual": "c3-zero",
+      "beats": [
+        { "vo": "Here's a tricky one. How many tens are there in ninety? Think.", "caption": "How many tens are in 90?", "focus": "ask", "pause": 1.8 },
+        { "vo": "Nine tens! The nine is in the tens place. And the zero tells us, there are no ones here.", "caption": "90 = 9 tens + 0 ones", "focus": "answer", "sfx": "success", "sfxAt": 0.1 },
+        { "vo": "Zero is a super helper. It holds the ones place, so the nine stays in the tens house. Without the zero, ninety would just be nine!", "caption": "Zero holds the place. Without it, 90 is just 9", "focus": "hero", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "pencils",
+      "visual": "c3-pencils",
+      "beats": [
+        { "vo": "Story puzzle! Meera's friend Aarav has two bundles of ten pencils, and seven single pencils. Then Meera gives him one more bundle of ten. How many pencils does he have now?", "caption": "27 pencils + 1 more bundle of ten = ?", "focus": "ask", "pause": 2.2 },
+        { "vo": "At first, he had twenty-seven. One more bundle adds one more ten. So now it's three tens and seven ones. Thirty-seven pencils!", "caption": "3 tens + 7 ones = 37 pencils", "focus": "answer", "sfx": "success", "sfxAt": 0.6 }
+      ]
+    },
+    {
+      "id": "binary",
+      "visual": "c3-binary",
+      "beats": [
+        { "vo": "Now, remember chapter one, and Meera's three lamps? Computers count with lights that are on or off. With three lights, the places are worth four, two, and one.", "caption": "Chapter 1: binary lights worth 4 · 2 · 1", "focus": "remember", "sfx": "chime", "sfxAt": 0.2 },
+        { "vo": "So if only the left light is on, we write one, zero, zero. And in binary, that means four.", "caption": "Binary 100 = 4", "focus": "lights", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "But in our normal numbers, the places are hundreds, tens, and ones. So one, zero, zero means one hundred!", "caption": "Our numbers: 100 = one hundred", "focus": "ours", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "Our places grow ten times bigger at each step. Binary places grow two times bigger. Different place values, but the same big rule. Position matters!", "caption": "×10 or ×2: either way, position matters!", "focus": "rule", "sfx": "success", "sfxAt": 0.8 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "c3-check",
+      "beats": [
+        { "vo": "Okay champ, here's a practice check, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "In forty-seven, what does the four stand for? Pause the video, and say your answer out loud.", "caption": "In 47, what does the 4 stand for?", "focus": "ask", "pause": 2.5 },
+        { "vo": "The four stands for four tens, which is forty! Because it sits in the tens place. Did you get it? Brilliant!", "caption": "4 tens = 40. It sits in the tens place!", "focus": "answer", "sfx": "success", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "c3-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned today. From right to left, the places are ones, tens, and hundreds.", "caption": "Places: hundreds · tens · ones", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "The place tells you what a digit is worth.", "caption": "The place tells a digit's value", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Twenty-three and thirty-two are different numbers. Position matters!", "caption": "23 ≠ 32: position matters", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And binary cares about position too.", "caption": "Binary cares about position too", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter three, done! You've powered up your place value, champ.", "caption": "Chapter 3 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}

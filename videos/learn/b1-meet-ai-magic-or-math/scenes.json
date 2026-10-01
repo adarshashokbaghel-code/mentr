@@ -1,0 +1,153 @@
+{
+  "id": "B1",
+  "title": "Meet AI — Magic or Math?",
+  "chapterLabel": "Chapter 1 of 5",
+  "unitLabel": "AI · What Is AI?",
+  "slug": "b1-meet-ai-magic-or-math",
+  "track": "ai",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voiceRate": "+4%",
+  "voicePitch": "+1Hz",
+  "trimSilence": true,
+  "beatGap": 0.34,
+  "voicePolish": true,
+  "fadeSec": 0.26,
+  "crf": 16,
+  "x264Preset": "slow",
+  "transition": "crossfade",
+  "sceneDots": true,
+  "supersample": 2,
+  "sfxVolume": 0.35,
+  "brand": {
+    "bg": "#FFF8EF",
+    "bgDeep": "#F3EDE3",
+    "ink": "#1C2434",
+    "muted": "#5A6472",
+    "coral": "#FF6A1A",
+    "coralSoft": "#FFF0E6",
+    "sage": "#0D9488",
+    "sageSoft": "#E6F7F4",
+    "panel": "#FFFFFF",
+    "line": "#E8E2D8"
+  },
+  "scenes": [
+    {
+      "id": "open",
+      "visual": "b1-welcome",
+      "beats": [
+        { "vo": "Hey champ! Welcome to a brand new adventure. I'm so happy you're here!", "caption": "Hello, champ! Welcome!", "focus": "hello", "sfx": "pop" },
+        { "vo": "If you've done our computer lessons, you already know that computers follow steps, written by people. Today, we're starting something new. The AI track!", "caption": "Something new: the AI track!", "focus": "track", "sfx": "chime", "sfxAt": 0.75 },
+        { "vo": "Our first unit is called, What Is AI? And chapter one asks a fun question. Meet AI. Is it magic, or is it maths?", "caption": "What Is AI? · Chapter 1 · Magic or Math?", "focus": "chapter", "sfx": "whoosh", "sfxAt": 0.1 },
+        { "vo": "Hmm. Phones that talk back. Apps that seem to know what you like. It can really feel like magic, can't it? Let's find out the truth, together.", "caption": "Magic? Or maths? Let's find out!", "focus": "question", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "kabir",
+      "visual": "b1-hook",
+      "beats": [
+        { "vo": "Meet Kabir. He's nine, and he loves cricket. One evening, he's watching a funny cricket cartoon on his mum's phone.", "caption": "Meet Kabir, a big cricket fan", "focus": "watch", "sfx": "pop", "sfxAt": 0.3 },
+        { "vo": "The cartoon ends. And straight away, the app shows him another cricket cartoon. And another. And another!", "caption": "The app shows more cricket cartoons!", "focus": "suggest", "sfx": "tick", "sfxAt": 0.4 },
+        { "vo": "Kabir's eyes go wide. How did the phone know I love cricket? Is it magic? Can it read my mind? What do you think?", "caption": "How did it know? Is it magic?", "focus": "magic", "pause": 2.0 },
+        { "vo": "Good thinking. The answer is, no. It's not magic. And by the end of today, you'll know exactly how the phone did it.", "caption": "Not magic! Let's find out how.", "focus": "tease", "sfx": "chime", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "define",
+      "visual": "b1-define",
+      "beats": [
+        { "vo": "The phone used something called AI. That's short for, Artificial Intelligence.", "caption": "AI = Artificial Intelligence", "focus": "name", "sfx": "chime", "sfxAt": 0.6 },
+        { "vo": "Artificial means made by people, not by nature. And intelligence means being clever. So AI is a clever tool that people made.", "caption": "Artificial: made by people · Intelligence: clever", "focus": "words" },
+        { "vo": "So what does AI actually do? AI is a computer program that learns patterns from lots of examples, and then makes a guess.", "caption": "AI learns patterns from examples, then guesses", "focus": "meaning", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Let me introduce our helper for this track. Say hi to Pixi! Pixi is just a cartoon, to help us learn. Real AI has no face, and no feelings.", "caption": "Meet Pixi, our cartoon AI helper", "focus": "pixi", "sfx": "pop", "sfxAt": 0.35 },
+        { "vo": "And that's important. AI is not alive. It doesn't think or feel like you do. It's a program, written by people, using maths. No spells inside!", "caption": "AI is not alive. It's a program made with maths.", "focus": "notalive" }
+      ]
+    },
+    {
+      "id": "pattern",
+      "visual": "b1-pattern",
+      "beats": [
+        { "vo": "So, what's a pattern? A pattern is something that repeats, or looks alike, again and again.", "caption": "Pattern: something that repeats or looks alike", "focus": "what", "sfx": "pop" },
+        { "vo": "Look at these beads. Red, yellow, blue. Red, yellow, blue. Red, yellow, and then? What comes next?", "caption": "Red, yellow, blue, red, yellow… what's next?", "focus": "beads", "pause": 1.8 },
+        { "vo": "Blue! You spotted the pattern. And that's exactly what AI is good at. Spotting patterns.", "caption": "Blue! You spotted the pattern!", "focus": "beadsans", "sfx": "success", "sfxAt": 0.05 },
+        { "vo": "Patterns are everywhere. Think about cats. Almost every cat has whiskers, fur, and pointy ears. That's a cat pattern!", "caption": "Cats: whiskers · fur · pointy ears", "focus": "cats", "sfx": "tick", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "cat",
+      "visual": "b1-cat",
+      "beats": [
+        { "vo": "So how could AI learn to spot a cat? First, people show it thousands and thousands of cat photos.", "caption": "AI is shown thousands of cat photos", "focus": "photos", "sfx": "whoosh", "sfxAt": 0.3 },
+        { "vo": "Big cats, small cats, sleepy cats. Slowly, the program notices the pattern. Whiskers. Fur. Pointy ears. Again, and again.", "caption": "It notices the pattern: whiskers, fur, ears", "focus": "notice", "sfx": "tick", "sfxAt": 0.5 },
+        { "vo": "Now we show it a brand new photo, one it has never seen before. And it guesses, this looks like a cat!", "caption": "New photo? \"This looks like a cat!\"", "focus": "guess", "sfx": "success", "sfxAt": 0.65 },
+        { "vo": "No magic at all. Just lots of examples, a pattern, and a good guess, all worked out with maths.", "caption": "Examples + a pattern + maths = a guess", "focus": "maths", "pause": 0.4 }
+      ]
+    },
+    {
+      "id": "calculator",
+      "visual": "b1-calc",
+      "beats": [
+        { "vo": "Now, let's compare AI with something you know well. A calculator. Type seven plus two. What does it show?", "caption": "Calculator: 7 + 2 = ?", "focus": "calc", "pause": 1.2 },
+        { "vo": "Nine! Type it again. Nine. Tomorrow? Next year? Still nine. A calculator follows a fixed rule. Same question, same answer, every single time.", "caption": "7 + 2 is always 9. A fixed rule.", "focus": "rule", "sfx": "tick", "sfxAt": 0.1 },
+        { "vo": "AI is different. It doesn't follow one fixed rule. It makes a guess, based on what it has seen before.", "caption": "AI guesses from what it has seen", "focus": "ai", "sfx": "pop", "sfxAt": 0.2 },
+        { "vo": "So here's the big difference. A calculator follows a fixed rule. AI makes a guess, from patterns.", "caption": "Calculator: fixed rule · AI: a guess", "focus": "compare", "sfx": "chime", "sfxAt": 0.5 }
+      ]
+    },
+    {
+      "id": "wrong",
+      "visual": "b1-wrong",
+      "beats": [
+        { "vo": "And guesses can go wrong! A cat spotter AI sees this photo, and says, cat! Hmm. Look closely.", "caption": "The AI says \"Cat!\" Hmm… look closely", "focus": "oops", "pause": 0.8 },
+        { "vo": "It's a fox! It has fur, pointy ears, and whiskers, a lot like a cat. So the AI made a wrong guess. Oops!", "caption": "Oops! It's a fox, not a cat", "focus": "fox", "sfx": "buzz", "sfxAt": 0.1 },
+        { "vo": "That's why we say, AI can be wrong. Good guesses are often right, but not always. A calculator doesn't guess. Seven plus two won't suddenly become ten!", "caption": "AI can be wrong. A calculator doesn't guess.", "focus": "why" }
+      ]
+    },
+    {
+      "id": "around",
+      "visual": "b1-around",
+      "beats": [
+        { "vo": "Now, remember Kabir and his cricket cartoons? The app saw that he watched lots of cricket videos. It found a pattern in what he likes, and guessed he'd enjoy another one. Not mind reading. Patterns!", "caption": "The app found a pattern in what Kabir watched", "focus": "video", "sfx": "chime", "sfxAt": 0.75 },
+        { "vo": "Or think of a voice assistant. When you say, play a song, it guesses the words you said, because it has heard many, many voices before.", "caption": "Voice assistants guess words from many voices", "focus": "voice", "sfx": "pop", "sfxAt": 0.3 }
+      ]
+    },
+    {
+      "id": "riya",
+      "visual": "b1-riya",
+      "beats": [
+        { "vo": "Kabir's friend Riya says, AI works by magic! What would you tell her? Think for a moment.", "caption": "Riya: \"AI works by magic!\" What do you say?", "focus": "ask", "pause": 2.0 },
+        { "vo": "You could say, no, Riya! AI uses maths to find patterns in examples. And people made it.", "caption": "No! AI uses maths to find patterns.", "focus": "answer", "sfx": "success", "sfxAt": 0.2 }
+      ]
+    },
+    {
+      "id": "sort",
+      "visual": "b1-sort",
+      "beats": [
+        { "vo": "Quick game! Which of these is most like AI? A ruler measuring a line. A video app suggesting a cartoon. A calculator adding five plus five. Or a switch turning on a bulb. Pause, and think.", "caption": "Which one is most like AI?", "focus": "ask", "pause": 2.2 },
+        { "vo": "The video suggestion! It guesses from patterns in what you watched. The ruler, the calculator, and the switch? They just do the same fixed thing, every time.", "caption": "The video suggestion! It guesses from patterns.", "focus": "answer", "sfx": "success", "sfxAt": 0.08 }
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "visual": "b1-check",
+      "beats": [
+        { "vo": "Okay champ, it's practice check time, just like the quiz.", "caption": "Your turn: practice check", "focus": "intro" },
+        { "vo": "Why is recommending a cartoon closer to AI than adding seven plus two? Pause the video, and think. Or write your answer on paper.", "caption": "Why is suggesting a cartoon more like AI?", "focus": "ask", "pause": 2.5 },
+        { "vo": "Here's one answer. Adding seven plus two follows one fixed rule, and always gives nine. But recommending a cartoon means guessing, from patterns in what you watched before. And that's what AI does! Great thinking.", "caption": "7 + 2: a fixed rule. A cartoon: a guess.", "focus": "answer", "sfx": "success", "sfxAt": 0.85 }
+      ]
+    },
+    {
+      "id": "recap",
+      "visual": "b1-recap",
+      "beats": [
+        { "vo": "Let's remember what we learned. AI is maths, not magic.", "caption": "AI is maths, not magic", "focus": "r1", "sfx": "pop", "sfxAt": 0.4 },
+        { "vo": "It finds patterns in lots of examples, like whiskers on cats.", "caption": "AI finds patterns in lots of examples", "focus": "r2", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "A calculator follows a fixed rule. AI makes a guess.", "caption": "Calculator: fixed rule. AI: a guess.", "focus": "r3", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "And AI is not alive, and it can be wrong.", "caption": "AI is not alive, and it can be wrong", "focus": "r4", "sfx": "pop", "sfxAt": 0.1 },
+        { "vo": "Chapter one, done! Welcome to the AI track, champ. You're officially an AI explorer!", "caption": "Chapter 1 done!", "focus": "done", "sfx": "success" },
+        { "vo": "Now let's see what you remember. Tap Finish, and try the quiz. You've got this!", "caption": "Next: Quiz · Tap Finish", "focus": "quiz" }
+      ]
+    }
+  ]
+}
