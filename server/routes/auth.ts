@@ -274,7 +274,7 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       expiresAt: { $gt: new Date() },
     }).sort({ createdAt: -1 });
 
-    if (activeSession) {
+    if (activeSession?.mailAccepted) {
       const cooldownMs = config.otp.resendCooldownSeconds * 1000;
       const elapsed = Date.now() - activeSession.createdAt.getTime();
       if (elapsed < cooldownMs) {
@@ -324,6 +324,14 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
         ? parsed.kind
         : undefined);
 
+    try {
+      await sendOtpEmail(email, code, purpose);
+    } catch (mailErr) {
+      console.error("send-otp mail error:", mailErr);
+      res.status(500).json({ error: "Failed to send verification code" });
+      return;
+    }
+
     noteIpHit(clientIp, "send");
 
     await OtpSession.create({
@@ -336,11 +344,10 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       acquisitionSlug,
       acquisitionKind,
       acceptedLegal: purpose === "signup" ? true : false,
+      mailAccepted: true,
       expiresAt: getOtpExpiryDate(),
       purgeAt: getOtpPurgeDate(),
     });
-
-    await sendOtpEmail(email, code, purpose);
 
     res.json({
       sessionId,

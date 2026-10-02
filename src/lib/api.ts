@@ -214,6 +214,7 @@ export const authApi = {
   ) =>
     request<SendOtpResponse>("/auth/send-otp", {
       method: "POST",
+      timeoutMs: 25_000,
       body: JSON.stringify({
         email,
         intent,
