@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 export const MENTR_WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/FUUpqvQeuxY3oaUV4E1WkT?mode=gi_t";
+  "https://chat.whatsapp.com/H6ZDDyJnNWeLUj5eRlKRAj?mode=gi_t";
 
 const DEFAULT_DESCRIPTION =
   "Daily updates, new postings, and quick answers from the Mentr team.";
