@@ -22,6 +22,8 @@ export interface IOtpSession extends Document {
   acquisitionKind?: "blog" | "page" | "referral" | "social";
   /** Signup only — user checked Terms + Privacy before OTP send. */
   acceptedLegal?: boolean;
+  /** True only after SMTP accepted the message. Failed sends are not stored. */
+  mailAccepted?: boolean;
   attempts: number;
   expiresAt: Date;
   consumed: boolean;
@@ -44,6 +46,7 @@ const otpSessionSchema = new Schema<IOtpSession>(
       enum: ["blog", "page", "referral", "social"],
     },
     acceptedLegal: { type: Boolean, default: false },
+    mailAccepted: { type: Boolean, default: false },
     attempts: { type: Number, default: 0 },
     expiresAt: { type: Date, required: true },
     consumed: { type: Boolean, default: false },

@@ -28,22 +28,33 @@ function mongoUriFromEnv(): string {
   return uri;
 }
 
+function isGmailUser(user = process.env.EMAIL_USER || ""): boolean {
+  return /@gmail\.com$/i.test(user);
+}
+
+/** Gmail while EMAIL_USER is a Gmail address. hello@mentr.in falls back to GoDaddy. */
+function smtpFromEnv(): { host: string; port: number; secure: boolean } {
+  if (isGmailUser()) {
+    return { host: "smtp.gmail.com", port: 465, secure: true };
+  }
+  const port = parseInt(process.env.SMTP_PORT || "465", 10);
+  return {
+    host: process.env.SMTP_HOST || "smtpout.secureserver.net",
+    port,
+    secure: (process.env.SMTP_SECURE ?? String(port === 465)) === "true",
+  };
+}
+
 export const config = {
   port: parseInt(process.env.BACKEND_PORT || "5000", 10),
   mongoUri: mongoUriFromEnv(),
   jwtSecret: requireEnv("JWT_SECRET"),
   emailUser: requireEnv("EMAIL_USER"),
   // Gmail app passwords are shown with spaces; other providers' passwords may contain real ones.
-  emailPass: /@gmail\.com$/i.test(process.env.EMAIL_USER || "")
+  emailPass: isGmailUser()
     ? requireEnv("EMAIL_PASS").replace(/\s/g, "")
     : requireEnv("EMAIL_PASS"),
-  /** SMTP server for outgoing mail. Defaults to GoDaddy-hosted Titan (hello@mentr.in). */
-  smtp: {
-    host: process.env.SMTP_HOST || "smtpout.secureserver.net",
-    port: parseInt(process.env.SMTP_PORT || "465", 10),
-    /** true = implicit TLS (465); false = STARTTLS (587). */
-    secure: (process.env.SMTP_SECURE ?? String((process.env.SMTP_PORT || "465") === "465")) === "true",
-  },
+  smtp: smtpFromEnv(),
   emailFromName: process.env.EMAIL_FROM_NAME || "Mentr by Paprly",
   frontendUrl:
     process.env.VERCEL === "1"
