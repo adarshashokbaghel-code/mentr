@@ -3,7 +3,7 @@ import type { UserRole } from "../models/User";
 
 const LINKEDIN_URL = "https://www.linkedin.com/company/mentrbypaprly/";
 const WHATSAPP_GROUP_URL =
-  "https://chat.whatsapp.com/FUUpqvQeuxY3oaUV4E1WkT?mode=gi_t";
+  "https://chat.whatsapp.com/H6ZDDyJnNWeLUj5eRlKRAj?mode=gi_t";
 const SITE = config.publicSiteUrl;
 
 export type MessengerTemplateId =
