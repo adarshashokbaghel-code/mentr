@@ -216,7 +216,8 @@ export type SendResult = {
 export async function sendMessengerEmails(
   templateId: MessengerTemplateId,
   userIds: string[],
-): Promise<{ sent: number; failed: number; results: SendResult[] }> {
+  opts?: { shouldAbort?: () => boolean },
+): Promise<{ sent: number; failed: number; aborted: boolean; results: SendResult[] }> {
   const template = listMessengerTemplates().find((t) => t.id === templateId);
   if (!template) throw new Error(`Unknown template: ${templateId}`);
 
@@ -231,6 +232,8 @@ export async function sendMessengerEmails(
   const results: SendResult[] = [];
   let sent = 0;
   let failed = 0;
+  let aborted = false;
+  const total = userIds.length;
 
   for (const userId of invalidIds) {
     results.push({ userId, email: "", ok: false, error: "Invalid user id" });
@@ -238,6 +241,12 @@ export async function sendMessengerEmails(
   }
 
   for (const userId of validIds) {
+    if (opts?.shouldAbort?.()) {
+      aborted = true;
+      console.log(`[messenger] ${templateId} stopped at ${sent}/${total}`);
+      break;
+    }
+
     const user = byId.get(userId);
     if (!user) {
       results.push({ userId, email: "", ok: false, error: "User not found" });
@@ -274,6 +283,7 @@ export async function sendMessengerEmails(
         ...(referralUrl ? { referralUrl } : {}),
       });
       sent += 1;
+      console.log(`[messenger] ${templateId} ${sent}/${total} ${user.email}`);
     } catch (err) {
       results.push({
         userId,
@@ -285,5 +295,5 @@ export async function sendMessengerEmails(
     }
   }
 
-  return { sent, failed, results };
+  return { sent, failed, aborted, results };
 }

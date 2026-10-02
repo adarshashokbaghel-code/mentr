@@ -13,6 +13,11 @@ function requireEnv(key: string): string {
   return value;
 }
 
+function positiveIntEnv(key: string, fallback: number): number {
+  const n = parseInt(process.env[key] || "", 10);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
 function mongoUriFromEnv(): string {
   const uri = process.env.MONGODB_URI || process.env.MONGO_URI;
   if (!uri) {
@@ -52,9 +57,14 @@ export const config = {
     expiryMinutes: 10,
     maxAttempts: 5,
     resendCooldownSeconds: 60,
-    maxSendsPerHour: 5,
+    /** Per email, not global. Other people logging in at the same time do not share this. */
+    maxSendsPerHour: positiveIntEnv("OTP_MAX_SENDS_PER_HOUR", 5),
     /** Session rows are kept this long for rate-limit accounting, then TTL-purged. */
     retentionMinutes: 60,
+    /** Shared-network cap (one office / school wifi). Each address is counted on its own. */
+    ipWindowMinutes: positiveIntEnv("OTP_IP_WINDOW_MINUTES", 15),
+    ipMaxSends: positiveIntEnv("OTP_IP_MAX_SENDS", 300),
+    ipMaxVerifies: positiveIntEnv("OTP_IP_MAX_VERIFIES", 1000),
   },
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "60d",
   /** Cookie max-age aligned with JWT — users stay logged in ~60 days. */

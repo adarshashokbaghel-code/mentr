@@ -11,6 +11,8 @@ type AdminPassDialogProps = {
   description: string;
   confirmLabel?: string;
   busy?: boolean;
+  /** Shown on the confirm button while busy. Falls back to “Working…”. */
+  busyLabel?: string;
   error?: string | null;
   onConfirm: (adminPass: string) => void;
   onClose: () => void;
@@ -22,6 +24,7 @@ export function AdminPassDialog({
   description,
   confirmLabel = "Confirm",
   busy,
+  busyLabel,
   error,
   onConfirm,
   onClose,
@@ -133,7 +136,7 @@ export function AdminPassDialog({
               disabled={busy || !pass.trim()}
               className="inline-flex h-10 items-center justify-center rounded-md bg-coral px-4 text-sm font-semibold text-white transition hover:bg-coral-dark disabled:opacity-60"
             >
-              {busy ? "Working…" : confirmLabel}
+              {busy ? busyLabel || "Working…" : confirmLabel}
             </button>
           </div>
         </form>

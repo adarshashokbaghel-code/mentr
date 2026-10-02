@@ -17,6 +17,45 @@ type Props = {
   adminKey: string;
 };
 
+const JOINED_FILTERS = [
+  { id: "all", label: "All joined", days: null },
+  { id: "7", label: "Last 7 days", days: 7 },
+  { id: "10", label: "Last 10 days", days: 10 },
+  { id: "15", label: "Last 15 days", days: 15 },
+] as const;
+
+type JoinedFilterId = (typeof JOINED_FILTERS)[number]["id"];
+
+function sentStorageKey(templateId: string) {
+  return `mentr-messenger-sent:${templateId}`;
+}
+
+function readSentIds(templateId: string): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = localStorage.getItem(sentStorageKey(templateId));
+    const ids = raw ? (JSON.parse(raw) as unknown) : [];
+    return new Set(Array.isArray(ids) ? ids.filter((id) => typeof id === "string") : []);
+  } catch {
+    return new Set();
+  }
+}
+
+function joinedWithin(iso: string, days: number) {
+  const t = new Date(iso).getTime();
+  if (!Number.isFinite(t)) return false;
+  return Date.now() - t <= days * 24 * 60 * 60 * 1000;
+}
+
+function joinedLabel(iso: string) {
+  const t = new Date(iso).getTime();
+  if (!Number.isFinite(t)) return "";
+  const days = Math.floor((Date.now() - t) / (24 * 60 * 60 * 1000));
+  if (days <= 0) return "joined today";
+  if (days === 1) return "joined yesterday";
+  return `joined ${days}d ago`;
+}
+
 export function AdminMessenger({ adminKey }: Props) {
   const [templates, setTemplates] = useState<MessengerTemplateMeta[]>([]);
   const [templateId, setTemplateId] = useState("initial-user");
@@ -26,11 +65,18 @@ export function AdminMessenger({ adminKey }: Props) {
   const [previewLoading, setPreviewLoading] = useState(false);
 
   const [query, setQuery] = useState("");
+  const [joinedFilter, setJoinedFilter] = useState<JoinedFilterId>("all");
   const [users, setUsers] = useState<AdminUserRow[]>([]);
   const [usersLoading, setUsersLoading] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
 
   const [sending, setSending] = useState(false);
+  const [sendProgress, setSendProgress] = useState<{
+    sent: number;
+    total: number;
+    active: number;
+  } | null>(null);
+  const [sentIds, setSentIds] = useState<Set<string>>(new Set());
   const [status, setStatus] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [passOpen, setPassOpen] = useState(false);
   const [passError, setPassError] = useState<string | null>(null);
@@ -48,11 +94,18 @@ export function AdminMessenger({ adminKey }: Props) {
 
   const activeTemplate = templates.find((t) => t.id === templateId);
   const templateAudience = activeTemplate?.audience;
+  const joinedDays = JOINED_FILTERS.find((f) => f.id === joinedFilter)?.days ?? null;
+  const visibleUsers =
+    joinedDays == null
+      ? users
+      : users.filter((u) => joinedWithin(u.createdAt, joinedDays));
 
   useEffect(() => {
     if (!activeTemplate) return;
     setPreviewName(activeTemplate.audience === "parent" ? "Parent" : "Educator");
     setSelected(new Set());
+    setJoinedFilter("all");
+    setSentIds(readSentIds(activeTemplate.id));
   }, [activeTemplate?.id, activeTemplate?.audience]);
 
   const loadPreview = useCallback(async () => {
@@ -94,6 +147,19 @@ export function AdminMessenger({ adminKey }: Props) {
     return () => clearTimeout(t);
   }, [loadUsers]);
 
+  useEffect(() => {
+    if (joinedDays == null) return;
+    setSelected((prev) => {
+      const next = new Set(
+        [...prev].filter((id) => {
+          const user = users.find((u) => u.id === id);
+          return user ? joinedWithin(user.createdAt, joinedDays) : false;
+        }),
+      );
+      return next.size === prev.size ? prev : next;
+    });
+  }, [joinedDays, users]);
+
   const toggleUser = (id: string) => {
     setSelected((prev) => {
       const next = new Set(prev);
@@ -103,26 +169,73 @@ export function AdminMessenger({ adminKey }: Props) {
     });
   };
 
+  const markSent = (id: string) => {
+    setSentIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      try {
+        localStorage.setItem(sentStorageKey(templateId), JSON.stringify([...next]));
+      } catch {
+        /* ignore quota */
+      }
+      return next;
+    });
+    setSelected((prev) => {
+      if (!prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.delete(id);
+      return next;
+    });
+  };
+
   const handleSend = async (adminPass: string) => {
-    if (selected.size === 0) return;
+    const ids = Array.from(selected);
+    if (ids.length === 0) return;
     setSending(true);
     setStatus(null);
     setPassError(null);
+    setSendProgress({ sent: 0, total: ids.length, active: 1 });
+    let sent = 0;
+    let failed = 0;
     try {
-      const result = await sendMessengerEmails(adminKey, {
-        templateId,
-        userIds: Array.from(selected),
-        adminPass,
-      });
+      for (let i = 0; i < ids.length; i++) {
+        const id = ids[i];
+        setSendProgress({ sent, total: ids.length, active: i + 1 });
+        try {
+          const result = await sendMessengerEmails(adminKey, {
+            templateId,
+            userIds: [id],
+            adminPass,
+          });
+          const row = result.results.find((r) => r.userId === id) ?? result.results[0];
+          if (row?.ok) {
+            sent += 1;
+            markSent(id);
+          } else {
+            failed += 1;
+            setPassError(row?.error || "Send failed");
+          }
+        } catch (e) {
+          const msg = e instanceof Error ? e.message : "Send failed";
+          setPassError(msg);
+          setStatus({
+            type: "err",
+            msg: `Stopped at ${sent}/${ids.length}. ${ids.length - sent} still to send.`,
+          });
+          setSendProgress({ sent, total: ids.length, active: i + 1 });
+          return;
+        }
+        setSendProgress({ sent, total: ids.length, active: Math.min(i + 2, ids.length) });
+      }
       setStatus({
-        type: "ok",
-        msg: `${result.sent} sent${result.failed ? `, ${result.failed} failed` : ""}`,
+        type: failed ? "err" : "ok",
+        msg: failed
+          ? `${sent}/${ids.length} sent, ${failed} failed — those stay selected`
+          : `${sent}/${ids.length} sent`,
       });
-      setSelected(new Set());
-      setPassOpen(false);
+      if (failed === 0) setPassOpen(false);
       void loadUsers();
-    } catch (e) {
-      setPassError(e instanceof Error ? e.message : "Send failed");
     } finally {
       setSending(false);
     }
@@ -182,8 +295,23 @@ export function AdminMessenger({ adminKey }: Props) {
           />
         </div>
 
-        <span className="hidden text-[11px] text-muted sm:inline">
-          {selected.size} selected
+        <select
+          value={joinedFilter}
+          onChange={(e) => setJoinedFilter(e.target.value as JoinedFilterId)}
+          aria-label="Filter by when they joined"
+          className="h-8 rounded border border-hairline bg-white px-2 text-xs font-medium text-ink outline-none focus:border-ink"
+        >
+          {JOINED_FILTERS.map((f) => (
+            <option key={f.id} value={f.id}>
+              {f.label}
+            </option>
+          ))}
+        </select>
+
+        <span className="text-[11px] font-medium text-ink">
+          {sending && sendProgress
+            ? `${sendProgress.sent}/${sendProgress.total}`
+            : `${selected.size} selected`}
         </span>
 
         <button
@@ -200,7 +328,9 @@ export function AdminMessenger({ adminKey }: Props) {
           ) : (
             <Send className="h-3.5 w-3.5" />
           )}
-          Send
+          {sending && sendProgress
+            ? `${sendProgress.sent}/${sendProgress.total}`
+            : "Send"}
         </button>
       </div>
 
@@ -228,25 +358,29 @@ export function AdminMessenger({ adminKey }: Props) {
                 : templateAudience === "faculty"
                   ? "Tutor recipients"
                   : "Recipients"}
-              {users.length > 0 && (
+              {visibleUsers.length > 0 && (
                 <span className="ml-1 font-normal normal-case text-muted/80">
-                  ({users.length})
+                  ({visibleUsers.length})
                 </span>
               )}
             </p>
             <button
               type="button"
-              onClick={() =>
-                setSelected(
-                  selected.size === users.length
-                    ? new Set()
-                    : new Set(users.map((u) => u.id)),
-                )
-              }
-              disabled={users.length === 0}
+              onClick={() => {
+                const selectable = visibleUsers
+                  .filter((u) => !sentIds.has(u.id))
+                  .map((u) => u.id);
+                const allSelected =
+                  selectable.length > 0 && selectable.every((id) => selected.has(id));
+                setSelected(allSelected ? new Set() : new Set(selectable));
+              }}
+              disabled={visibleUsers.length === 0 || sending}
               className="text-[10px] font-medium text-muted hover:text-ink disabled:opacity-40"
             >
-              {selected.size === users.length && users.length > 0 ? "None" : "All"}
+              {visibleUsers.filter((u) => !sentIds.has(u.id)).every((u) => selected.has(u.id)) &&
+              visibleUsers.some((u) => !sentIds.has(u.id))
+                ? "None"
+                : "All"}
             </button>
           </div>
 
@@ -256,18 +390,21 @@ export function AdminMessenger({ adminKey }: Props) {
                 <Loader2 className="h-3 w-3 animate-spin" />
                 Loading
               </p>
-            ) : users.length === 0 ? (
+            ) : visibleUsers.length === 0 ? (
               <p className="px-3 py-4 text-[11px] text-muted">
-                {templateAudience === "parent"
-                  ? "No parents found"
-                  : templateAudience === "faculty"
-                    ? "No tutors found"
-                    : "No users"}
+                {joinedDays
+                  ? `No ${templateAudience === "parent" ? "parents" : "tutors"} joined in the last ${joinedDays} days`
+                  : templateAudience === "parent"
+                    ? "No parents found"
+                    : templateAudience === "faculty"
+                      ? "No tutors found"
+                      : "No users"}
               </p>
             ) : (
               <ul>
-                {users.map((user) => {
+                {visibleUsers.map((user) => {
                   const checked = selected.has(user.id);
+                  const sent = sentIds.has(user.id);
                   return (
                     <li key={user.id} className="border-b border-hairline/60 last:border-0">
                       <button
@@ -293,10 +430,14 @@ export function AdminMessenger({ adminKey }: Props) {
                             {user.name}
                           </span>
                           <span className="block truncate text-[10px] text-muted">
-                            {user.email} · {user.role}
+                            {user.email} · {joinedLabel(user.createdAt)}
                           </span>
                         </span>
-                        {user.referralUrl ? (
+                        {sent ? (
+                          <span className="shrink-0 text-[9px] font-semibold uppercase tracking-wide text-sage">
+                            Sent
+                          </span>
+                        ) : user.referralUrl ? (
                           <span className="shrink-0 text-[9px] font-medium uppercase tracking-wide text-sage">
                             Ref
                           </span>
@@ -345,9 +486,16 @@ export function AdminMessenger({ adminKey }: Props) {
       <AdminPassDialog
         open={passOpen}
         title="Send emails?"
-        description={`Send “${activeTemplate?.label || "this template"}” to ${selected.size} recipient${selected.size === 1 ? "" : "s"}. Enter ADMIN_PASS to confirm.`}
+        description={
+          sending && sendProgress
+            ? `Sending “${activeTemplate?.label || "this template"}” — ${sendProgress.sent}/${sendProgress.total} sent.`
+            : `Send “${activeTemplate?.label || "this template"}” to ${selected.size} recipient${selected.size === 1 ? "" : "s"}. Enter ADMIN_PASS to confirm.`
+        }
         confirmLabel="Send emails"
         busy={sending}
+        busyLabel={
+          sendProgress ? `${sendProgress.sent}/${sendProgress.total}` : undefined
+        }
         error={passError}
         onConfirm={(pass) => void handleSend(pass)}
         onClose={() => {

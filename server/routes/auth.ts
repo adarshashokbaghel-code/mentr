@@ -145,36 +145,46 @@ function roleMismatchError(actualRole: UserRole) {
 }
 
 // ————————————————————————————————————————————————————————————————
-// Per-IP rate limiting (in-memory sliding window).
-// Single-instance guard on top of the per-email DB limits; move to
-// Redis if the API ever runs on more than one instance.
+// Per-address rate limiting (in-memory sliding window).
+// This is not a global login cap. Each client address has its own
+// window, on top of the per-email DB limit. On several server
+// instances each process keeps its own window.
 // ————————————————————————————————————————————————————————————————
 
-const IP_WINDOW_MS = 15 * 60 * 1000;
-const IP_MAX_SENDS = 20;
-const IP_MAX_VERIFIES = 60;
 const ipHits = new Map<string, number[]>();
 
-function ipLimited(ip: string, kind: "send" | "verify"): boolean {
-  const key = `${kind}:${ip}`;
+function ipWindowMs() {
+  return config.otp.ipWindowMinutes * 60 * 1000;
+}
+
+function otpClientIp(req: Request): string {
+  return clientIpFromRequest(req) || req.ip || "unknown";
+}
+
+function recentIpHits(key: string): number[] {
   const now = Date.now();
-  const hits = (ipHits.get(key) ?? []).filter((t) => now - t < IP_WINDOW_MS);
-  const max = kind === "send" ? IP_MAX_SENDS : IP_MAX_VERIFIES;
-  if (hits.length >= max) return true;
-  hits.push(now);
+  const fresh = (ipHits.get(key) ?? []).filter((t) => now - t < ipWindowMs());
+  if (fresh.length === 0) ipHits.delete(key);
+  else ipHits.set(key, fresh);
+  return fresh;
+}
+
+function ipOverLimit(ip: string, kind: "send" | "verify"): boolean {
+  const max = kind === "send" ? config.otp.ipMaxSends : config.otp.ipMaxVerifies;
+  return recentIpHits(`${kind}:${ip}`).length >= max;
+}
+
+function noteIpHit(ip: string, kind: "send" | "verify") {
+  const key = `${kind}:${ip}`;
+  const hits = recentIpHits(key);
+  hits.push(Date.now());
   ipHits.set(key, hits);
-  return false;
 }
 
 // Keep the map from growing unbounded
 setInterval(() => {
-  const now = Date.now();
-  for (const [key, hits] of ipHits) {
-    const fresh = hits.filter((t) => now - t < IP_WINDOW_MS);
-    if (fresh.length === 0) ipHits.delete(key);
-    else ipHits.set(key, fresh);
-  }
-}, IP_WINDOW_MS).unref();
+  for (const key of ipHits.keys()) recentIpHits(key);
+}, 15 * 60 * 1000).unref();
 
 // ————————————————————————————————————————————————————————————————
 // POST /send-otp — { email, intent: "login" | "signup", role: "faculty" | "parent" }
@@ -182,7 +192,8 @@ setInterval(() => {
 
 router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
   try {
-    if (ipLimited(req.ip ?? "unknown", "send")) {
+    const clientIp = otpClientIp(req);
+    if (ipOverLimit(clientIp, "send")) {
       res.status(429).json({ error: "Too many requests. Try again later." });
       return;
     }
@@ -313,6 +324,8 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
         ? parsed.kind
         : undefined);
 
+    noteIpHit(clientIp, "send");
+
     await OtpSession.create({
       sessionId,
       email,
@@ -350,10 +363,12 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
 
 router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
   try {
-    if (ipLimited(req.ip ?? "unknown", "verify")) {
+    const clientIp = otpClientIp(req);
+    if (ipOverLimit(clientIp, "verify")) {
       res.status(429).json({ error: "Too many requests. Try again later." });
       return;
     }
+    noteIpHit(clientIp, "verify");
 
     const email = normalizeEmail(String(req.body.email || ""));
     const sessionId = String(req.body.sessionId || "");
@@ -478,8 +493,8 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
       }
     }
 
-    const clientIp = clientIpFromRequest(req);
-    const ipCoords = clientIp ? await geocodeIp(clientIp) : null;
+    const ipCoords =
+      clientIp && clientIp !== "unknown" ? await geocodeIp(clientIp) : null;
     if (ipCoords) {
       user.loginMapLat = ipCoords.lat;
       user.loginMapLng = ipCoords.lng;
