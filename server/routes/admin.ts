@@ -425,7 +425,15 @@ router.post("/messenger/send", requireAdminPass, async (req, res) => {
       return;
     }
 
-    const result = await sendMessengerEmails(templateId, userIds);
+    let aborted = false;
+    res.on("close", () => {
+      if (!res.writableFinished) aborted = true;
+    });
+
+    const result = await sendMessengerEmails(templateId, userIds, {
+      shouldAbort: () => aborted,
+    });
+    if (aborted || res.writableEnded) return;
     res.json(result);
   } catch (err) {
     console.error("Admin messenger send error:", err);
