@@ -109,7 +109,7 @@ export function ShortlistCompareBar() {
 
   return (
     <>
-      <div className="fixed bottom-[calc(5.25rem+env(safe-area-inset-bottom))] left-1/2 z-40 w-[min(100%-1.5rem,420px)] -translate-x-1/2 sm:bottom-4 sm:w-[min(100%-2rem,420px)]">
+      <div className="fixed bottom-4 left-1/2 z-40 w-[min(100%-1.5rem,420px)] -translate-x-1/2 sm:w-[min(100%-2rem,420px)]">
         <div className="flex items-center gap-2 rounded-xl border border-hairline bg-white p-2 shadow-[0_12px_32px_rgba(26,35,28,0.14)]">
           <div className="min-w-0 flex-1 px-1">
             <p className="text-sm font-bold text-ink">

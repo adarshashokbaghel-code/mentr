@@ -416,7 +416,7 @@ export function PremiumMentorsLanding({
     <div className="min-h-screen bg-[#f6f5f2] text-ink">
       <Navbar />
 
-      <main className="pb-24 sm:pb-0">
+      <main>
         {/* Hero — same palette as the homepage Premium strip */}
         <section className="relative overflow-hidden">
           <div

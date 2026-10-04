@@ -46,7 +46,7 @@ export default function SearchLoading() {
       <main
         role="status"
         aria-label="Loading search results"
-        className="min-h-screen pb-24 bg-cream"
+        className="min-h-screen bg-cream sm:pb-24"
       >
         {/* Search header skeleton */}
         <div className="border-b border-hairline bg-white/70 backdrop-blur-xs">

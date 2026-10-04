@@ -250,7 +250,7 @@ export function ParentAcquireLanding({
             className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-[#fffaf5]/50"
           />
 
-          <div className="relative mx-auto flex min-h-0 max-w-[1200px] flex-col justify-center px-4 py-10 pb-28 sm:min-h-[min(92dvh,780px)] sm:px-6 sm:py-16 sm:pb-16 lg:px-8">
+          <div className="relative mx-auto flex min-h-0 max-w-[1200px] flex-col justify-center px-4 py-10 sm:min-h-[min(92dvh,780px)] sm:px-6 sm:py-16 sm:pb-16 lg:px-8">
             <div className="max-w-xl">
               <p className="text-sm font-bold tracking-tight text-ink sm:text-lg">
                 {SITE_BRAND}
