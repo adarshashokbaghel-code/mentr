@@ -82,22 +82,23 @@ main {
   overflow-x: clip;
 }
 
-/* Instant Connect bottom dock — keep page content clear of the fixed bar */
-body:has([data-ic-dock]) footer {
-  padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
-}
+/* Instant Connect bottom dock — desktop only. Mobile hides the dock. */
+@media (min-width: 640px) {
+  body:has([data-ic-dock]) footer {
+    padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+  }
 
-body:has([data-ic-dock]) main > :last-child {
-  scroll-margin-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
-}
+  body:has([data-ic-dock]) main > :last-child {
+    scroll-margin-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+  }
 
-/* Lift overlays above the Instant Connect dock */
-body:has([data-ic-dock]) [data-cookie-consent] {
-  bottom: calc(4.85rem + env(safe-area-inset-bottom, 0px)) !important;
-}
+  body:has([data-ic-dock]) [data-cookie-consent] {
+    bottom: calc(4.85rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
 
-body:has([data-ic-dock]) [data-toast-viewport] {
-  bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+  body:has([data-ic-dock]) [data-toast-viewport] {
+    bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
 }
 
 /* Short-laptop section rhythm — compress tall py without layout changes */

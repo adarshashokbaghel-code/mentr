@@ -181,7 +181,7 @@ export function InstantConnectDock({ className }: InstantConnectDockProps) {
     <div
       data-ic-dock=""
       className={cn(
-        "pointer-events-none fixed inset-x-0 bottom-0 z-40 flex justify-center px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] short:pb-[max(0.4rem,env(safe-area-inset-bottom))] sm:px-4 sm:pb-[max(0.65rem,env(safe-area-inset-bottom))] short:sm:pb-[max(0.5rem,env(safe-area-inset-bottom))] shorter:sm:pb-[max(0.35rem,env(safe-area-inset-bottom))]",
+        "pointer-events-none fixed inset-x-0 bottom-0 z-40 hidden justify-center px-4 sm:flex sm:px-4 sm:pb-[max(0.65rem,env(safe-area-inset-bottom))] short:sm:pb-[max(0.5rem,env(safe-area-inset-bottom))] shorter:sm:pb-[max(0.35rem,env(safe-area-inset-bottom))]",
         className,
       )}
     >

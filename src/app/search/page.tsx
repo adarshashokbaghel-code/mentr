@@ -294,7 +294,7 @@ function SearchContent() {
     <ShortlistProvider catalog={catalogTeachers}>
       <Navbar />
       {!user && <GuestSearchBanner />}
-      <main className="min-h-screen pb-24 short:pb-20">
+      <main className="min-h-screen sm:pb-24 short:sm:pb-20">
         <SearchHeader
           filters={filters}
           resultCount={results.length}
