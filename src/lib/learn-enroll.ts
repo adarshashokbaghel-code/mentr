@@ -10,6 +10,7 @@ export const LEARN_TRACK_LABEL = "Class 3–5 track";
 export const LEARN_COURSE_MODULES = 60;
 export { LEARN_APP_HREF };
 export const LEARN_ENROLL_STORAGE_KEY = "mentr_learn_enrolled_v1";
+const LEARN_ENROLL_USER_KEY = "mentr_learn_enrolled_user_v1";
 
 export type LearnEnrollmentDto = {
   courseId: string;
@@ -56,6 +57,7 @@ export type LearnEnrollResponse = {
   enrollment: LearnEnrollmentDto;
   created: boolean;
   message: string;
+  user?: { id: string };
 };
 
 async function learnRequest<T>(
@@ -84,9 +86,15 @@ async function learnRequest<T>(
   return data as T;
 }
 
-export function readLearnEnrollmentLocal(): LearnEnrollmentDto | null {
+export function readLearnEnrollmentLocal(
+  forUserId?: string | null,
+): LearnEnrollmentDto | null {
   if (typeof window === "undefined") return null;
   try {
+    if (forUserId) {
+      const owner = localStorage.getItem(LEARN_ENROLL_USER_KEY);
+      if (!owner || owner !== forUserId) return null;
+    }
     const raw = localStorage.getItem(LEARN_ENROLL_STORAGE_KEY);
     if (!raw) return null;
     return JSON.parse(raw) as LearnEnrollmentDto;
@@ -142,9 +150,21 @@ export function mergeLearnEnrollment(
   };
 }
 
-export function saveLearnEnrollmentLocal(enrollment: LearnEnrollmentDto) {
-  const next = mergeLearnEnrollment(enrollment, readLearnEnrollmentLocal());
+export function saveLearnEnrollmentLocal(
+  enrollment: LearnEnrollmentDto,
+  userId?: string | null,
+) {
+  const owner =
+    userId ||
+    (typeof window !== "undefined"
+      ? localStorage.getItem(LEARN_ENROLL_USER_KEY)
+      : null);
+  const next = mergeLearnEnrollment(
+    enrollment,
+    readLearnEnrollmentLocal(owner),
+  );
   localStorage.setItem(LEARN_ENROLL_STORAGE_KEY, JSON.stringify(next));
+  if (userId) localStorage.setItem(LEARN_ENROLL_USER_KEY, userId);
   if (typeof window !== "undefined") {
     window.dispatchEvent(new Event(LEARN_PROGRESS_EVENT));
   }
@@ -154,6 +174,7 @@ export function saveLearnEnrollmentLocal(enrollment: LearnEnrollmentDto) {
 /** Device caches for this Learn session. Cleared on logout. */
 const LEARN_CLIENT_CACHE_KEYS = [
   LEARN_ENROLL_STORAGE_KEY,
+  LEARN_ENROLL_USER_KEY,
   "mentr_learn_week_snap_v1",
   "mentr_learn_practice_answers",
   "mentr_learn_builds_v1",
@@ -166,21 +187,28 @@ export function clearLearnClientCache() {
   }
 }
 
-export async function fetchLearnEnrollment(): Promise<LearnEnrollmentDto | null> {
-  const token =
-    typeof window !== "undefined"
-      ? localStorage.getItem("champs_token")
-      : null;
-  if (!token) return null;
+export async function fetchLearnEnrollment(
+  userId?: string | null,
+): Promise<LearnEnrollmentDto | null> {
   try {
     const data = await learnRequest<{ enrollment: LearnEnrollmentDto | null }>(
       "/learn/enrollment",
     );
-    if (data.enrollment) return saveLearnEnrollmentLocal(data.enrollment);
+    if (data.enrollment) return saveLearnEnrollmentLocal(data.enrollment, userId);
     return data.enrollment;
   } catch {
     return null;
   }
+}
+
+/** Load this parent's Learn row, creating it when they are not enrolled yet. */
+export async function ensureLearnEnrollment(
+  userId?: string | null,
+): Promise<LearnEnrollmentDto> {
+  const existing = await fetchLearnEnrollment(userId);
+  if (existing) return existing;
+  const data = await enrollInMentrStarter();
+  return data.enrollment;
 }
 
 export async function enrollInMentrStarter(): Promise<LearnEnrollResponse> {
@@ -188,7 +216,7 @@ export async function enrollInMentrStarter(): Promise<LearnEnrollResponse> {
     method: "POST",
     body: "{}",
   });
-  saveLearnEnrollmentLocal(data.enrollment);
+  saveLearnEnrollmentLocal(data.enrollment, data.user?.id);
   return data;
 }
 

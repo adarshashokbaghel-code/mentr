@@ -30,6 +30,7 @@ function ParentProfilingContent() {
   const searchParams = useSearchParams();
   const next = searchParams?.get("next") || undefined;
 
+  const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("India");
   const [city, setCity] = useState("Bengaluru");
@@ -50,6 +51,7 @@ function ParentProfilingContent() {
       return;
     }
     if (!prefilled && user.parentProfile) {
+      setName(user.parentProfile.name ?? "");
       setPhoneNumber(user.parentProfile.phoneNumber ?? "");
       setCountry(user.parentProfile.country || "India");
       setCity(user.parentProfile.city || "Bengaluru");
@@ -65,6 +67,11 @@ function ParentProfilingContent() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      setError("Please add your name");
+      return;
+    }
     if (!country.trim() || !city.trim()) {
       setError("Please choose a country and city");
       return;
@@ -72,9 +79,8 @@ function ParentProfilingContent() {
     setSaving(true);
     try {
       const wasCompleted = Boolean(user?.profileCompleted);
-      const existingName = user?.parentProfile?.name?.trim();
       const { user: updated } = await profileApi.saveParent({
-        name: existingName || nameFromEmail(user?.email || ""),
+        name: trimmedName,
         phoneNumber: phoneNumber.trim(),
         country: country.trim(),
         city: city.trim(),
@@ -100,8 +106,7 @@ function ParentProfilingContent() {
     );
   }
 
-  const displayName =
-    user.parentProfile?.name?.trim() || nameFromEmail(user.email);
+  const displayName = name.trim() || nameFromEmail(user.email);
 
   return (
     <div className="flex min-h-screen flex-col bg-cream">
@@ -149,6 +154,21 @@ function ParentProfilingContent() {
               </div>
 
               <label className="block">
+                <span className="text-[13px] font-semibold text-ink">Your name</span>
+                <input
+                  type="text"
+                  required
+                  autoFocus
+                  autoComplete="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="How tutors should address you"
+                  maxLength={80}
+                  className={field}
+                />
+              </label>
+
+              <label className="block">
                 <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-ink">
                   <Phone className="h-3.5 w-3.5 text-muted" />
                   WhatsApp number
@@ -156,7 +176,6 @@ function ParentProfilingContent() {
                 <input
                   type="tel"
                   required
-                  autoFocus
                   autoComplete="tel"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}

@@ -3,20 +3,18 @@
 import { useAuth } from "@/components/auth/auth-provider";
 import { LmsShell } from "@/components/learn/lms/lms-shell";
 import {
-  fetchLearnEnrollment,
+  ensureLearnEnrollment,
   LEARN_START_ENROLL_HREF,
-  readLearnEnrollmentLocal,
 } from "@/lib/learn-enroll";
+import { recordDailyCheckIn } from "@/lib/learn-progress-client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 
 /**
- * Gates /learn/app — parent must be logged in and enrolled in Mentr Starter.
- * Otherwise redirects to /learn/start?enroll=1 (popup opens).
- *
- * Trusts local enrollment cache when the API is slow/unavailable so
- * "Open learning app" after enroll does not bounce into a modal flicker loop.
+ * Gates /learn/app — parent must be logged in.
+ * A logged-in parent with no Learn row is enrolled here, so progress
+ * is stored for accounts that signed up outside the Learn page too.
  */
 export function LmsAuthGate({ children }: { children: ReactNode }) {
   const { user, loading: authLoading } = useAuth();
@@ -37,20 +35,17 @@ export function LmsAuthGate({ children }: { children: ReactNode }) {
         return;
       }
 
-      const local = readLearnEnrollmentLocal();
-      if (local) {
+      try {
+        await ensureLearnEnrollment(user.id);
+        try {
+          await recordDailyCheckIn();
+        } catch {
+          // Row exists; the shell retries the daily check-in.
+        }
         if (!cancelled) setReady(true);
+      } catch {
+        if (!cancelled) router.replace(LEARN_START_ENROLL_HREF);
       }
-
-      const enrollment = await fetchLearnEnrollment();
-      if (cancelled) return;
-
-      if (enrollment || local) {
-        setReady(true);
-        return;
-      }
-
-      router.replace(LEARN_START_ENROLL_HREF);
     }
 
     void gate();
