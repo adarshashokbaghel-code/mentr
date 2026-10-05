@@ -57,7 +57,7 @@ function cityCostArticle(opts: {
             items: [
               `Open search for ${city} and filter by subject + class.`,
               "Shortlist 2–3 verified tutors in your fee band.",
-              "Post a requirement or message — connect on WhatsApp after they accept.",
+              "Book a demo, or post a requirement and accept a pitch.",
               "Book a trial, then agree fees and schedule directly.",
             ],
           },

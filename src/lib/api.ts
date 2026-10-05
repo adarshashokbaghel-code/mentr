@@ -685,6 +685,78 @@ export const guestRequirementsApi = {
     ),
 };
 
+export type DemoRequestStatus = "pending" | "accepted" | "declined";
+
+export interface ParentDemoRequest {
+  id: string;
+  teacherId: string;
+  teacherName: string;
+  subject: string;
+  classLevel: string;
+  board: string | null;
+  preferredDate: string;
+  preferredTime: string;
+  note: string;
+  status: DemoRequestStatus;
+  tutorNote: string | null;
+  sentAt: string;
+  respondedAt: string | null;
+}
+
+export interface TutorDemoRequest {
+  id: string;
+  parentName: string;
+  parentPhone: string;
+  parentEmail: string;
+  parentCity: string | null;
+  parentArea: string | null;
+  subject: string;
+  classLevel: string;
+  board: string | null;
+  preferredDate: string;
+  preferredTime: string;
+  note: string;
+  status: DemoRequestStatus;
+  tutorNote: string | null;
+  sentAt: string;
+  respondedAt: string | null;
+}
+
+export const demoRequestsApi = {
+  create: (body: {
+    teacherId: string;
+    subject: string;
+    classLevel: string;
+    board?: string;
+    preferredDate: string;
+    preferredTime: string;
+    note?: string;
+  }) =>
+    request<{ demo: ParentDemoRequest; message: string }>("/demo-requests", {
+      method: "POST",
+      body: JSON.stringify(body),
+    }),
+
+  mine: () =>
+    request<{ demos: ParentDemoRequest[] }>("/demo-requests/mine"),
+
+  inbox: () =>
+    request<{ demos: TutorDemoRequest[] }>("/demo-requests/inbox"),
+
+  respond: (
+    id: string,
+    action: "accept" | "decline",
+    tutorNote?: string,
+  ) =>
+    request<{ demo: TutorDemoRequest; message: string }>(
+      `/demo-requests/${id}/respond`,
+      {
+        method: "POST",
+        body: JSON.stringify({ action, tutorNote: tutorNote ?? "" }),
+      },
+    ),
+};
+
 export const connectionsApi = {
   send: (teacherId: string, message: string) =>
     request<{ connection: ParentConnection; message: string }>("/connections", {
@@ -988,7 +1060,7 @@ export interface ProfileViewer {
   connectionStatus: ConnectionStatus | "none";
   connectionId: string | null;
   requestedBy: "parent" | "teacher" | null;
-  /** Tutor can send a connect request with a message */
+  /** Tutor can book a demo with a message */
   canReachOut: boolean;
 }
 

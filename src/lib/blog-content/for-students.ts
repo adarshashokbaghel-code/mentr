@@ -19,7 +19,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "paragraph",
-            text: "Platforms like UrbanPro charge tutors for leads. Agencies take 15–30% from every month of tuition. WhatsApp groups are free but chaotic — no profiles, no verification, posts disappear in minutes. A free connector model lets you browse verified tutors, read their subjects and availability, and send a connect request without anyone paying upfront. That is the gap Mentr fills: search locally or online, message on WhatsApp only after the tutor accepts, arrange fees directly.",
+            text: "Platforms like UrbanPro charge tutors for leads. Agencies take 15–30% from every month of tuition. WhatsApp groups are free but chaotic — no profiles, no verification, posts disappear in minutes. A free connector model lets you browse verified tutors, read their subjects and availability, and book a demo without anyone paying upfront. That is the gap Mentr fills: search locally or online, message on WhatsApp only after the tutor accepts, arrange fees directly.",
           },
           {
             type: "list",
@@ -42,8 +42,8 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
               "Know what you need — subject, class, board (CBSE/ICSE/State), and whether you want online or home tuition nearby.",
               "Search on a free directory — filter by subject and area. On Mentr, use Find online tutors for India or browse Bengaluru if you are local.",
               "Open 3–5 profiles — check verification badge, subjects, experience, open slots, and intro video if available.",
-              "Send a connect request with a short note: your class, weak chapters, preferred timing, and online vs in-person.",
-              "Wait for acceptance — good tutors reply within 24–48 hours. WhatsApp unlocks only after they accept.",
+              "Book a demo with a short note: your class, weak chapters, preferred timing, and online vs in-person.",
+              "Book a demo — good tutors confirm within 24–48 hours.",
               "Do a trial session — one or two paid sessions with the tutor before committing monthly. Discuss fee directly with them; Mentr does not take a cut.",
             ],
           },
@@ -113,7 +113,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Can students find tutors online for free in India?",
         answer:
-          "Yes. On Mentr, searching, sending connect requests, and listing as a tutor are all free. You pay the tutor directly for sessions — the platform does not charge students or take a cut from tutor earnings.",
+          "Yes. On Mentr, searching, sending demo bookings, and listing as a tutor are all free. You pay the tutor directly for sessions — the platform does not charge students or take a cut from tutor earnings.",
       },
       {
         question: "What is the best free platform for students to find tutors in India?",
@@ -244,7 +244,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "The strongest study stack in 2026 is AI for daily micro-doubts plus a human tutor for weekly deep sessions. Search verified tutors on Mentr for your subject — send a connect request explaining which chapters AI did not fix. Tutors keep 100% of fees; you pay nothing to the platform. Mentr is also open source, so schools can audit how the connector works without hidden fees.",
+            text: "The strongest study stack in 2026 is AI for daily micro-doubts plus a human tutor for weekly deep sessions. Search verified tutors on Mentr for your subject — book a demo explaining which chapters AI did not fix. Tutors keep 100% of fees; you pay nothing to the platform. Mentr is also open source, so schools can audit how the connector works without hidden fees.",
           },
         ],
       },
@@ -376,7 +376,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Hire subject-specific help when self-study plus school has not moved a chapter above 50% in two consecutive tests. One good Physics tutor for EMI and Optics beats five generic 'all subject' packages. On Mentr, search verified Class 12 board tutors in your city or online — connect free, trial one session, pay the tutor directly with no platform cut.",
+            text: "Hire subject-specific help when self-study plus school has not moved a chapter above 50% in two consecutive tests. One good Physics tutor for EMI and Optics beats five generic 'all subject' packages. On Mentr, search verified Class 12 board tutors in your city or online — book a free demo, trial one session, pay the tutor directly with no platform cut.",
           },
         ],
       },
@@ -405,7 +405,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Where can I find CBSE Class 12 tutors online in India?",
         answer:
-          "Search verified online tutors on Mentr filtered for Class 11–12 and your subject. Parents and students connect free; session fees are agreed directly with the tutor.",
+          "Search verified online tutors on Mentr filtered for Class 11–12 and your subject. Parents and students book a free demo; session fees are agreed directly with the tutor.",
       },
     ],
     relatedLinks: [
@@ -430,7 +430,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "After a tutor accepts your connect request on Mentr and WhatsApp opens, send a short intro message before the first call or visit. Include your class, board, school test dates if known, and 2–3 specific chapters you struggle with. Attach a photo of your latest test paper if your parents agree — it saves 20 minutes of guessing on day one.",
+            text: "After a tutor accepts your demo booking on Mentr and WhatsApp opens, send a short intro message before the first call or visit. Include your class, board, school test dates if known, and 2–3 specific chapters you struggle with. Attach a photo of your latest test paper if your parents agree — it saves 20 minutes of guessing on day one.",
           },
           {
             type: "list",
@@ -526,7 +526,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Is finding tutors on Mentr free for students?",
         answer:
-          "Yes. Search, connect requests, and posting requirements are free. You pay tutors directly for sessions — Mentr takes zero commission.",
+          "Yes. Search, demo bookings, and posting requirements are free. You pay tutors directly for sessions — Mentr takes zero commission.",
       },
     ],
     relatedLinks: [
@@ -551,7 +551,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Free on Mentr is not a trial that expires. Parents can search verified tutors, send connect requests, and post requirements without buying coins or subscriptions. Tutors can list profiles, receive requests, and pitch on the requirements board without paying for leads. When a connection is accepted, WhatsApp numbers unlock and you arrange session fees directly — Mentr does not sit in the middle taking a percentage.",
+            text: "Free on Mentr is not a trial that expires. Parents can search verified tutors, book demos, and post requirements without buying coins or subscriptions. Tutors can list profiles, receive requests, and pitch on the requirements board without paying for leads. When a connection is accepted, WhatsApp numbers unlock and you arrange session fees directly — Mentr does not sit in the middle taking a percentage.",
           },
           {
             type: "list",
@@ -569,7 +569,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Open source means Mentr's software is public on GitHub. Developers, schools, and curious parents can read how connect requests work, how verification is handled, and confirm there is no hidden fee logic. The MIT license lets anyone fork the project for their community — useful for education nonprofits and university clubs building local tutor directories.",
+            text: "Open source means Mentr's software is public on GitHub. Developers, schools, and curious parents can read how demo bookings work, how verification is handled, and confirm there is no hidden fee logic. The MIT license lets anyone fork the project for their community — useful for education nonprofits and university clubs building local tutor directories.",
           },
           {
             type: "callout",
@@ -622,7 +622,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
             type: "list",
             ordered: true,
             items: [
-              "Parents/students: create a parent account, search or post a requirement, connect free",
+              "Parents/students: create a parent account, search or post a requirement, book a free demo",
               "Tutors: sign up at /faculty/signup, complete verification, list availability",
               "Developers: star the repo on GitHub, read CONTRIBUTING.md, open a pull request",
               "Everyone: read the open source page for mission and community links",
@@ -635,7 +635,7 @@ export const FOR_STUDENTS_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Is Mentr really free for students and parents?",
         answer:
-          "Yes. Mentr charges ₹0 platform fee to search tutors, send connect requests, and post requirements. You pay tutors directly for sessions; Mentr does not take a commission.",
+          "Yes. Mentr charges ₹0 platform fee to search tutors, book demos, and post requirements. You pay tutors directly for sessions; Mentr does not take a commission.",
       },
       {
         question: "Is Mentr open source?",

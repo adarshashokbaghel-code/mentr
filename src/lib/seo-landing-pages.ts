@@ -37,7 +37,7 @@ const GLOBAL_ONLINE_SECTIONS: LandingSection[] = [
     heading: "Why parents search for online tutors",
     paragraphs: [
       "Online tutoring removes commute time, opens a wider pool of subject experts, and fits families who move between cities or countries. Whether you need CBSE Maths for a child in Dubai, IGCSE Physics in London, or coding mentorship from India — the right tutor is often one video call away.",
-      "Mentr lists verified tutors and mentors who teach online worldwide. Search by subject, read profiles with credentials and availability, and send a free connect request. WhatsApp unlocks only after the tutor accepts — no agency markup, no lead fees.",
+      "Mentr lists verified tutors and mentors who teach online worldwide. Search by subject, read profiles with credentials and availability, and book a free demo. The tutor confirms the demo in their inbox — no agency markup, no lead fees.",
     ],
   },
   {
@@ -46,7 +46,7 @@ const GLOBAL_ONLINE_SECTIONS: LandingSection[] = [
     bullets: [
       "Search by subject — Maths, Physics, English, Coding, exam prep, career mentoring",
       "Filter for verified profiles with ID and qualification checks",
-      "Send a connect request with your class, board, and preferred timings",
+      "Book a demo with your class, board, and preferred timings",
       "Book a trial session before committing to a monthly package",
       "Arrange fees and schedule directly — Mentr takes zero commission",
     ],
@@ -105,7 +105,7 @@ function onlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
     global: {
       h1: "Find Online Tutors — Verified & Free to Connect",
       title: "Find Online Tutors — Verified, Free Worldwide",
-      desc: "Find online tutors verified on Mentr — search by subject, connect free worldwide. CBSE, IGCSE, JEE, coding & more. No lead fees.",
+      desc: "Find online tutors verified on Mentr — search by subject, book a free demo worldwide. CBSE, IGCSE, JEE, coding & more. No lead fees.",
     },
     india: {
       h1: "Find Online Tutors in India — Verified CBSE, ICSE & JEE",
@@ -144,7 +144,7 @@ function onlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
     eyebrow: geo === "global" ? "Worldwide" : geo === "india" ? "India" : "UAE",
     intro:
       geo === "global"
-        ? "Search verified online tutors for any subject — local or across time zones. Mentr is 100% free for parents: no lead fees, no commission. Send a connect request and chat on WhatsApp once the tutor accepts."
+        ? "Search verified online tutors for any subject — local or across time zones. Mentr is 100% free for parents: no lead fees, no commission. Book a demo and chat on WhatsApp once the tutor accepts."
         : geo === "india"
           ? "Indian families use Mentr to find verified online tutors for every board and exam — without paying UrbanPro-style lead fees. Browse profiles, post a requirement, or connect directly."
           : "UAE parents find verified online tutors for CBSE, IGCSE, and IB on Mentr — free to search and connect. Mention your emirate and schedule in your first message.",
@@ -153,7 +153,7 @@ function onlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
       {
         question: "Is Mentr free to find online tutors?",
         answer:
-          "Yes. Parents search, send connect requests, and post requirements for free. Mentr never charges parents or takes commission from session fees.",
+          "Yes. Parents search, book demos, and post requirements for free. Mentr never charges parents or takes commission from session fees.",
       },
       {
         question: "Are online tutors on Mentr verified?",
@@ -163,12 +163,12 @@ function onlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
       {
         question: "Can I find tutors online in my time zone?",
         answer:
-          "Yes. Profiles show availability slots and time zones. Mention your local evenings and weekends when you send a connect request.",
+          "Yes. Profiles show availability slots and time zones. Mention your local evenings and weekends when you book a demo.",
       },
       {
         question: "How do I contact a tutor after finding them online?",
         answer:
-          "Send a connect request with a short message. The tutor reviews it and accepts or declines. Their WhatsApp number unlocks for you only after acceptance.",
+          "Book a demo with a short message. The tutor reviews it and accepts or declines. Their WhatsApp number unlocks for you only after acceptance.",
       },
       {
         question: geo === "uae" ? "Can I hire an India-based tutor for UAE curriculum?" : "Do online tutors offer home visits too?",
@@ -232,7 +232,7 @@ function verifiedOnlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
     h1: copy.h1,
     eyebrow: "Trust & verification",
     intro:
-      "Every parent wants a verified tutor online — not a WhatsApp forward with fake credentials. Mentr checks government ID and qualifications before issuing the Verified badge. Search profiles, send a connect request with your requirements, and unlock WhatsApp only after the tutor accepts.",
+      "Every parent wants a verified tutor online — not a WhatsApp forward with fake credentials. Mentr checks government ID and qualifications before issuing the Verified badge. Search profiles, book a demo with your requirements, and unlock WhatsApp only after the tutor accepts.",
     sections: [
       {
         heading: "What verified means on Mentr",
@@ -249,13 +249,13 @@ function verifiedOnlineTutorsConfig(geo: LandingGeo): LandingPageConfig {
       {
         heading: "How to find online tutors verified on Mentr",
         paragraphs: [
-          "Use Mentr search or browse subject hubs. Look for the Verified badge, read the bio and subjects, check availability in your time zone, and send a connect request explaining your child's class and board.",
+          "Use Mentr search or browse subject hubs. Look for the Verified badge, read the bio and subjects, check availability in your time zone, and book a demo explaining your child's class and board.",
         ],
       },
       {
         heading: "Safety tips for verified online tutoring",
         paragraphs: [
-          "Keep early sessions on video with a parent nearby for children. Use platform connect requests before moving to personal channels. Never pay large advances to unverified contacts outside Mentr.",
+          "Keep early sessions on video with a parent nearby for children. Use platform demo bookings before moving to personal channels. Never pay large advances to unverified contacts outside Mentr.",
         ],
       },
     ],
@@ -346,7 +346,7 @@ function mentorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
         bullets: [
           "Search career mentoring, coding, or your subject area",
           "Open verified profiles — check experience and languages",
-          "Send a connect request with a specific question or goal",
+          "Book a demo with a specific question or goal",
           "Book a trial conversation before committing monthly",
         ],
       },
@@ -368,7 +368,7 @@ function mentorsNearMeConfig(geo: LandingGeo): LandingPageConfig {
           "Yes. Search coding or computer science mentors with online mode — many teach students worldwide from India.",
       },
       {
-        question: "What should I write in a mentor connect request?",
+        question: "What should I include when I book a demo?",
         answer:
           "State your goal in one paragraph — e.g. 'Class 12 student targeting JEE, need maths mentor for problem speed' or 'Switching to product design, need portfolio review'.",
       },
@@ -395,7 +395,7 @@ export const ONLINE_TUTOR_JOBS_PAGE: LandingPageConfig = {
   geo: "global",
   title: "Online Tutor Jobs — List Free, Keep 100%",
   metaDescription:
-    "Find online tutor jobs on Mentr — list free, receive parent connect requests, pitch on the requirements board. No lead fees, keep 100% of fees.",
+    "Find online tutor jobs on Mentr — list free, receive parent demo bookings, pitch on the requirements board. No lead fees, keep 100% of fees.",
   keywords: [
     "online tutor jobs",
     "find online tutor job",
@@ -406,17 +406,17 @@ export const ONLINE_TUTOR_JOBS_PAGE: LandingPageConfig = {
   h1: "Online Tutor Jobs — List Free on Mentr",
   eyebrow: "For tutors & mentors",
   intro:
-    "Looking for online tutor jobs without paying for leads? Mentr lets you list free, get verified, receive parent connect requests, and pitch on the requirements board — you keep 100% of what you charge. No coins, no commission, ever.",
+    "Looking for online tutor jobs without paying for leads? Mentr lets you list free, get verified, receive parent demo bookings, and pitch on the requirements board — you keep 100% of what you charge. No coins, no commission, ever.",
   sections: [
     {
       heading: "How online tutor jobs work on Mentr",
       paragraphs: [
-        "Create a faculty profile with subjects, availability, and teaching modes (online, home visit). After verification, parents find you via search and SEO pages. They send connect requests with a message; you accept to share WhatsApp. You can also pitch on parent requirements posted to the board.",
+        "Create a faculty profile with subjects, availability, and teaching modes (online, home visit). After verification, parents find you via search and SEO pages. They book demos with a message; you accept to share WhatsApp. You can also pitch on parent requirements posted to the board.",
       ],
       bullets: [
         "Free listing — no signup fee or monthly subscription",
         "Verified badge after ID and credential review",
-        "Parents send connect requests — you review before sharing WhatsApp",
+        "Parents book demos — you review before sharing WhatsApp",
         "Requirements board — pitch on posts matching your subjects",
         "Profile views dashboard — see which parents viewed your listing",
       ],
@@ -442,7 +442,7 @@ export const ONLINE_TUTOR_JOBS_PAGE: LandingPageConfig = {
     {
       question: "How do I get students as an online tutor?",
       answer:
-        "Complete your verified profile, keep availability updated, respond to connect requests quickly, and pitch on relevant parent requirements daily.",
+        "Complete your verified profile, keep availability updated, respond to demo bookings quickly, and pitch on relevant parent requirements daily.",
     },
     {
       question: "Do I need to pay for leads?",

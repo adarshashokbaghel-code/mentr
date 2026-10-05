@@ -1,6 +1,6 @@
 "use client";
 
-import { ConnectButton } from "@/components/connect/connect-button";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { useShortlist } from "@/components/search/shortlist-context";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { compareFeeDisplay, compareSlotsForTeacher } from "@/lib/shortlist";
@@ -165,7 +165,7 @@ export function ShortlistCompareBar() {
               <div>
                 <p className="text-base font-bold text-ink">Compare tutors</p>
                 <p className="text-xs text-muted">
-                  Side-by-side — pick your top choice and connect free
+                  Side-by-side — pick your top choice and book a demo
                 </p>
               </div>
               <button
@@ -258,13 +258,15 @@ export function ShortlistCompareBar() {
             {topPick && (
               <div className="border-t border-hairline bg-cream px-4 py-3">
                 <p className="mb-2 text-xs font-medium text-muted">
-                  Ready to decide? Connect with {topPick.name} — no platform fee.
+                  Ready to decide? Book a demo with {topPick.name} — no platform fee.
                 </p>
-                <ConnectButton
-                  teacher={topPick}
-                  label="Connect with your top pick"
-                  className="inline-flex h-10 w-full items-center justify-center rounded-lg bg-coral text-sm font-semibold text-white hover:bg-coral-dark"
-                  requestedClassName="inline-flex h-10 w-full items-center justify-center rounded-lg bg-cream text-sm font-semibold text-muted"
+                <BookDemoButton
+                  teacher={{
+                    id: topPick.id,
+                    name: topPick.name,
+                    subjects: topPick.subjects,
+                  }}
+                  className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-ink text-sm font-semibold text-white hover:bg-ink/85"
                 />
               </div>
             )}

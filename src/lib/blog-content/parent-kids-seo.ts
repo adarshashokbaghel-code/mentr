@@ -72,9 +72,9 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open Mentr Search or the Find online tutors (India) page. Filter by subject and online or home.",
               "Open 3–5 Verified or Premium profiles. Check class level, subjects, fee, and bio — not only photos.",
-              "Send a short connect request: class, board, gap, and preferred days. Or try Instant Connect if you need someone this week.",
+              "Book a demo: class, board, gap, and preferred days. Or try Instant Connect if you need someone this week.",
               "On a Premium mentor profile, you can also send a requirement without creating an account — name, phone, email, and what you need.",
-              "Talk on WhatsApp or phone after they accept. Book a paid trial (30–60 minutes) before any monthly package.",
+              "Book a demo, then a paid trial (30–60 minutes) before any monthly package.",
               "Sit nearby for the first online session. After the trial, ask your child one question: “Did that make sense?”",
             ],
           },
@@ -219,7 +219,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open Search and filter Mathematics + online (or home if you prefer).",
               "Read bios for Class 6–8 or middle school mention — not only “JEE expert”.",
-              "Send a connect note: “Class 8 CBSE, weak in linear equations and fractions, evenings after 6.”",
+              "When you book a demo, say: “Class 8 CBSE, weak in linear equations and fractions, evenings after 6.”",
               "Book a 45-minute trial on one chapter your child already struggled with in school.",
               "After the trial, ask your child to explain one sum back to you. That is your signal.",
             ],
@@ -255,7 +255,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "How do I find an online maths tutor for Class 8 on Mentr?",
         answer:
-          "Filter Mathematics on Search, shortlist Verified profiles, send class and board in the connect note, then run a paid trial before a monthly package.",
+          "Filter Mathematics on Search, shortlist Verified profiles, include class and board when you book a demo, then run a paid trial before a monthly package.",
       },
     ],
     relatedLinks: [
@@ -332,7 +332,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "How do I find a CBSE online tutor for Class 10?",
         answer:
-          "Search verified tutors by subject on Mentr, mention Class 10 CBSE and weak chapters in your connect note, run a trial with a past-paper style question, then book a weekly plan.",
+          "Search verified tutors by subject on Mentr, mention Class 10 CBSE and weak chapters when you book a demo, run a trial with a past-paper style question, then book a weekly plan.",
       },
       {
         question: "Is online tuition enough for Class 10 boards?",

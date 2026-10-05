@@ -28,7 +28,7 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Find verified tutors and mentors free on Mentr. Built for parents and adult students: search by subject, Instant Connect, or post a need — WhatsApp after they accept. Free classroom tools and guides. No fees, no commission.";
+  "Find verified tutors and mentors free on Mentr. Built for parents and adult students: search by subject, book a demo, Instant Connect, or post a need. Free classroom tools and guides. No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =

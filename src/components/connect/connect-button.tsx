@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState, type MouseEvent } from "react";
+import { createPortal } from "react-dom";
 
 const MESSAGE_MIN = 10;
 const MESSAGE_MAX = 500;
@@ -256,9 +257,11 @@ export function ConnectRequestModal({
     }
   }
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div
-      className="fixed inset-0 z-[110] flex items-end justify-center p-0 sm:items-center sm:p-4"
+      className="fixed inset-0 z-[200] flex items-end justify-center p-0 sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="connect-modal-title"
@@ -432,6 +435,7 @@ export function ConnectRequestModal({
           </>
         )}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

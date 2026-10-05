@@ -1488,7 +1488,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
               "Start with your city or country plus subject — 'online maths tutor Dubai CBSE' beats 'tutor near me'",
               "Filter for verified profiles with listed subjects, class levels, and teaching modes",
               "Read bios for curriculum keywords — NCERT, Edexcel, AP, JEE, 11+ exams",
-              "Check availability slots in your time zone before sending a connect request",
+              "Check availability slots in your time zone before booking a demo",
               "Send a short intro message explaining class, board, and preferred timings",
             ],
           },
@@ -1563,16 +1563,16 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
     updatedAt: "2026-07-19",
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
-    intro: "Indian parents increasingly find tutors online for CBSE, ICSE, and competitive exams — skipping traffic and agency markups. Mentr lists verified tutors across Bengaluru and India with free connect requests and no commission.",
+    intro: "Indian parents increasingly find tutors online for CBSE, ICSE, and competitive exams — skipping traffic and agency markups. Mentr lists verified tutors across Bengaluru and India with free demo bookings and no commission.",
     sections: [
       {
         heading: "Why this search matters",
         blocks: [
-          { type: "paragraph", text: "Indian parents increasingly find tutors online for CBSE, ICSE, and competitive exams — skipping traffic and agency markups. Mentr lists verified tutors across Bengaluru and India with free connect requests and no commission." },
+          { type: "paragraph", text: "Indian parents increasingly find tutors online for CBSE, ICSE, and competitive exams — skipping traffic and agency markups. Mentr lists verified tutors across Bengaluru and India with free demo bookings and no commission." },
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -1585,7 +1585,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -1612,7 +1612,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [
@@ -1637,7 +1637,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -1650,7 +1650,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -1677,7 +1677,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [
@@ -1693,16 +1693,16 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
     updatedAt: "2026-07-19",
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
-    intro: "English tutoring online covers spoken fluency, CBSE/ICSE literature, and exam writing. Verified English tutors on Mentr list boards, levels, and languages — connect free before sharing WhatsApp.",
+    intro: "English tutoring online covers spoken fluency, CBSE/ICSE literature, and exam writing. Verified English tutors on Mentr list boards, levels, and languages — book a free demo.",
     sections: [
       {
         heading: "Why this search matters",
         blocks: [
-          { type: "paragraph", text: "English tutoring online covers spoken fluency, CBSE/ICSE literature, and exam writing. Verified English tutors on Mentr list boards, levels, and languages — connect free before sharing WhatsApp." },
+          { type: "paragraph", text: "English tutoring online covers spoken fluency, CBSE/ICSE literature, and exam writing. Verified English tutors on Mentr list boards, levels, and languages — book a free demo." },
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -1715,7 +1715,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -1742,7 +1742,7 @@ export const FOR_PARENTS_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [

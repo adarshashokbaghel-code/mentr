@@ -33,8 +33,7 @@ export default function SearchBengaluruPage() {
           </h1>
           <p className="mt-3 text-base leading-relaxed text-muted">
             Browse verified tutors by subject and area. See open weekly slots and
-            send a free connect request — WhatsApp unlocks after the tutor
-            accepts.
+            book a free demo. The tutor confirms the time in their inbox.
           </p>
           <Link href="/search" className="mt-6 inline-block">
             <Button>Open search tool</Button>

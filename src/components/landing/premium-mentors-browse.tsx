@@ -1,6 +1,6 @@
 "use client";
 
-import { ConnectButton } from "@/components/connect/connect-button";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { Button } from "@/components/ui/button";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import {
@@ -136,29 +136,17 @@ function PremiumBrowseCard({ teacher }: { teacher: Teacher }) {
           ))}
         </div>
 
-        <div className="mt-auto flex gap-1.5 pt-0.5">
-          <ConnectButton
+        <div className="mt-auto flex flex-col gap-1.5 pt-0.5">
+          <BookDemoButton
             teacher={{
               id: teacher.id,
               name: teacher.name,
-              subjectLine: teacher.subjectLine,
-              phone: teacher.phone,
-              connectionStatus: teacher.connectionStatus,
-              live: teacher.live !== false,
-              premium: true,
+              subjects: teacher.subjects,
             }}
-            label="Connect"
-            className={cn(
-              "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg",
-              "bg-gradient-to-r from-[#5b7cfa] to-[#c4a574]",
-              "text-[11px] font-bold text-white",
-              "transition hover:brightness-105",
-            )}
-            requestedClassName={cn(
-              "inline-flex h-8 flex-1 items-center justify-center gap-1 rounded-lg",
-              "border border-hairline bg-cream text-[11px] font-semibold text-muted",
-            )}
+            label="Book a demo"
+            className="inline-flex h-8 w-full items-center justify-center gap-1 rounded-lg bg-ink text-[11px] font-bold text-white"
           />
+          <div className="flex gap-1.5">
           <Link href={profileHref} className="flex-1">
             <Button
               size="sm"
@@ -168,6 +156,7 @@ function PremiumBrowseCard({ teacher }: { teacher: Teacher }) {
               Profile
             </Button>
           </Link>
+          </div>
         </div>
       </div>
     </article>

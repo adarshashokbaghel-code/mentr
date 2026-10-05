@@ -4,18 +4,15 @@ import { cn } from "@/lib/utils";
 import {
   ApiError,
   connectionsApi,
-  type ConnectionRequest,
   type ProfileViewer,
   type ProfileViewsResponse,
 } from "@/lib/api";
 import {
-  Bell,
   Check,
   ChevronDown,
   Eye,
   Loader2,
   Send,
-  Sparkles,
   UserPlus,
   UsersRound,
   X,
@@ -156,17 +153,6 @@ export function StatCard({
 
 /* --------------------------- who viewed card --------------------------- */
 
-function viewerStatusLabel(v: ProfileViewer): string | null {
-  if (v.connectionStatus === "accepted") return "Connected";
-  if (v.connectionStatus === "pending" && v.requestedBy === "parent") {
-    return "In your inbox";
-  }
-  if (v.connectionStatus === "pending" && v.requestedBy === "teacher") {
-    return "Request sent";
-  }
-  return null;
-}
-
 function ViewerOutreachModal({
   viewer,
   onClose,
@@ -262,7 +248,7 @@ function ViewerOutreachModal({
                   id="outreach-modal-title"
                   className="text-lg font-bold text-ink"
                 >
-                  Connect with {viewer.name.split(" ")[0]}
+                  Message {viewer.name.split(" ")[0]}
                 </h2>
                 <p className="mt-0.5 text-xs text-muted">
                   {viewer.area ? `${viewer.area} · ` : ""}
@@ -281,7 +267,7 @@ function ViewerOutreachModal({
             </div>
 
             <p className="mt-4 rounded-lg bg-butter/40 px-3.5 py-3 text-xs leading-relaxed text-ink/80">
-              They looked at your listing but haven&apos;t connected yet. Send a
+              They looked at your listing but haven&apos;t booked a demo yet. Send a
               short intro — your WhatsApp number is shared only if they accept.
             </p>
 
@@ -460,7 +446,6 @@ export function WhoViewedCard({
           ) : (
             <ul className="max-h-[320px] overflow-y-auto py-1">
               {viewers.map((v, i) => {
-                const status = viewerStatusLabel(v);
                 return (
                   <li
                     key={v.id}
@@ -478,7 +463,6 @@ export function WhoViewedCard({
                       <p className="truncate text-xs text-muted">
                         {v.area ? `${v.area} · ` : ""}
                         {v.count > 1 ? `${v.count} visits` : "1 visit"}
-                        {status ? ` · ${status}` : ""}
                       </p>
                     </div>
                     <div className="flex shrink-0 flex-col items-end gap-1.5">
@@ -492,7 +476,7 @@ export function WhoViewedCard({
                           className="inline-flex h-7 items-center gap-1 rounded-md bg-coral px-2.5 text-[11px] font-bold text-white transition hover:bg-coral-dark"
                         >
                           <UserPlus className="h-3 w-3" />
-                          Connect
+                          Message
                         </button>
                       )}
                     </div>
@@ -520,168 +504,3 @@ export function WhoViewedCard({
   );
 }
 
-/* --------------------------- notifications bell --------------------------- */
-
-const SEEN_KEY = "mentr_notifications_seen_at";
-
-interface NotificationItem {
-  id: string;
-  text: string;
-  detail?: string;
-  at: string | null;
-  icon: "eye" | "spark" | "request";
-}
-
-export function NotificationsBell({
-  data,
-  requests = [],
-}: {
-  data: ProfileViewsResponse | null;
-  requests?: ConnectionRequest[];
-}) {
-  const [open, setOpen] = useState(false);
-  const [seenAt, setSeenAt] = useState<number>(() =>
-    typeof window === "undefined"
-      ? Date.now()
-      : Number(localStorage.getItem(SEEN_KEY) || 0),
-  );
-  const ref = useDismiss(open, () => setOpen(false));
-
-  const pendingRequests = requests.filter((r) => r.status === "pending");
-
-  const items: NotificationItem[] = [
-    ...pendingRequests.slice(0, 6).map((r) => ({
-      id: `request-${r.id}`,
-      text: `${r.parentName} wants to connect`,
-      detail: r.message,
-      at: r.sentAt,
-      icon: "request" as const,
-    })),
-    ...(data?.views ?? []).slice(0, 6).map((v) => ({
-      id: `view-${v.id}-${v.lastViewedAt}`,
-      text: `${v.name} viewed your profile`,
-      detail: v.area ?? undefined,
-      at: v.lastViewedAt,
-      icon: "eye" as const,
-    })),
-    {
-      id: "live",
-      text: "Your profile is live on Mentr",
-      detail: "Parents nearby can find and contact you",
-      at: null,
-      icon: "spark" as const,
-    },
-  ];
-
-  const unread =
-    (data?.views ?? []).filter(
-      (v) => new Date(v.lastViewedAt).getTime() > seenAt,
-    ).length +
-    pendingRequests.filter((r) => new Date(r.sentAt).getTime() > seenAt)
-      .length;
-
-  function toggle() {
-    setOpen((o) => {
-      const next = !o;
-      if (next) {
-        const now = Date.now();
-        localStorage.setItem(SEEN_KEY, String(now));
-        // delay clearing the badge until close so the count is visible in the panel
-      }
-      return next;
-    });
-  }
-
-  function close() {
-    setOpen(false);
-    setSeenAt(Number(localStorage.getItem(SEEN_KEY) || 0));
-  }
-
-  return (
-    <div ref={ref} className="relative">
-      <button
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-label={`Notifications${unread > 0 ? ` (${unread} new)` : ""}`}
-        onClick={() => (open ? close() : toggle())}
-        className={cn(
-          "relative flex h-10 w-10 items-center justify-center rounded-lg border border-hairline bg-white transition hover:bg-cream",
-          open && "bg-cream",
-        )}
-      >
-        <Bell className="h-[18px] w-[18px] text-ink" />
-        {unread > 0 && (
-          <span className="absolute -right-1 -top-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-coral px-1 text-[10px] font-bold text-white ring-2 ring-cream">
-            {unread > 9 ? "9+" : unread}
-          </span>
-        )}
-      </button>
-
-      {open && (
-        <div
-          role="menu"
-          aria-label="Notifications"
-          className="champs-pop absolute right-0 top-[calc(100%+8px)] z-40 w-[320px] rounded-xl border border-hairline bg-white p-1.5 shadow-[0_12px_32px_rgba(26,35,28,0.14)]"
-        >
-          <div className="flex items-center justify-between rounded-lg bg-cream px-3 py-2.5">
-            <p className="text-sm font-bold text-ink">Notifications</p>
-            {unread > 0 && (
-              <span className="rounded-md bg-coral px-2 py-0.5 text-[11px] font-bold text-white">
-                {unread} new
-              </span>
-            )}
-          </div>
-
-          <ul className="max-h-[320px] overflow-y-auto py-1">
-            {items.map((n) => {
-              const isNew =
-                n.at !== null && new Date(n.at).getTime() > seenAt;
-              return (
-                <li
-                  key={n.id}
-                  className={cn(
-                    "flex items-start gap-3 rounded-md px-3 py-2.5 transition-colors hover:bg-cream",
-                    isNew && "bg-coral-wash/50",
-                  )}
-                >
-                  <span
-                    className={cn(
-                      "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full",
-                      n.icon === "eye"
-                        ? "bg-coral-wash text-coral"
-                        : n.icon === "request"
-                          ? "bg-lavender text-ink"
-                          : "bg-sage-wash text-sage",
-                    )}
-                  >
-                    {n.icon === "eye" ? (
-                      <Eye className="h-4 w-4" />
-                    ) : n.icon === "request" ? (
-                      <UserPlus className="h-4 w-4" />
-                    ) : (
-                      <Sparkles className="h-4 w-4" />
-                    )}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[13px] font-semibold leading-snug text-ink">
-                      {n.text}
-                    </p>
-                    {n.detail && (
-                      <p className="truncate text-xs text-muted">{n.detail}</p>
-                    )}
-                  </div>
-                  {n.at && (
-                    <span className="shrink-0 text-[11px] font-medium text-muted">
-                      {timeAgo(n.at)}
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
-}

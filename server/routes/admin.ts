@@ -6,6 +6,7 @@ import {
   closeAdminRequirement,
   listAdminConnections,
   listAdminGuestRequirements,
+  listAdminDemoRequests,
   listAdminOtpActivity,
   listAdminProfileViews,
   listAdminRequirements,
@@ -184,6 +185,17 @@ router.get("/requirements", async (req, res) => {
   } catch (err) {
     console.error("Admin requirements list error:", err);
     res.status(500).json({ error: "Failed to load board posts" });
+  }
+});
+
+router.get("/demo-requests", async (req, res) => {
+  try {
+    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
+    const requests = await listAdminDemoRequests(limit);
+    res.json({ requests, total: requests.length });
+  } catch (err) {
+    console.error("Admin demo requests list error:", err);
+    res.status(500).json({ error: "Failed to load demo requests" });
   }
 });
 

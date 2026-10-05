@@ -39,7 +39,7 @@ const PAGE_FAQS = [
   {
     question: "Do parents pay for Premium?",
     answer:
-      "No. Parents never pay to search tutors or send connection requests. Premium is mentor-side only.",
+      "No. Parents never pay to search tutors or book a demo. Premium is mentor-side only.",
   },
   {
     question: "Where do I open the parent directory?",

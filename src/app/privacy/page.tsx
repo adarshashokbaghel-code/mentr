@@ -36,7 +36,7 @@ const sections = [
     body: [
       "Account: email address (verified with a one-time password / OTP), role, and login activity.",
       "Profile you provide: name, mobile/WhatsApp number, country, city, and area.",
-      "Hiring activity: tutoring requirements you post, connection requests you send or accept, pitches you receive, shortlists, and dashboard actions.",
+      "Hiring activity: tutoring requirements you post, demo bookings you send, pitches you receive or accept, shortlists, and dashboard actions.",
       "Optional products: Mentr Learn enrollment and progress if you enroll a child; Snap & Grade usage and credits if you use that tool.",
       "If you send a requirement without logging in (guest form), we collect the name, email, phone, and message you submit so we can notify matching mentors and show the lead in product inboxes.",
       "Parent interest records may also come from multiple lawful sources beyond a Mentr login — for example when a parent or student has enquired about tutoring, mentoring, coaching, or related education services on other websites or partners, and that enquiry is shared with us (including as a paid or partner lead where the enquiry is marked high-intent). We do not publicly name those source portals in this policy. Fields typically include name, phone, email, location signals, and enquiry context needed to offer connectivity.",
@@ -47,14 +47,14 @@ const sections = [
     body: [
       "Account: email (OTP-verified), role, and login activity.",
       "Public teaching profile: name, photo, bio, subjects, levels, languages, qualifications, experience, teaching modes, rates (if shared), availability, city/area, WhatsApp number, and optional credentials or links you add.",
-      "Platform activity: connection requests, board pitches, profile views, and Premium subscription / payment records (processed via Razorpay — we do not store full card numbers).",
+      "Platform activity: demo bookings, board pitches, profile views, and Premium subscription / payment records (processed via Razorpay — we do not store full card numbers).",
       "Approximate location derived from profile address or login IP may be used to place you on maps and improve local search — not to track you continuously.",
     ],
   },
   {
     title: "Why we collect it (purposes)",
     body: [
-      "To operate Mentr: accounts, search, connect requests, the requirements board, dashboards, and support.",
+      "To operate Mentr: accounts, search, demo bookings, the requirements board, dashboards, and support.",
       "To offer connectivity between people interested in tutoring/mentoring and mentors — including Premium directory tools for eligible mentors.",
       "To verify email ownership (for Mentr accounts), reduce spam and abuse, and investigate safety reports.",
       "To send transactional messages (OTP, important account notices). Marketing emails, if any, will follow applicable law and opt-out options.",

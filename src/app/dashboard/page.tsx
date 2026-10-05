@@ -3,24 +3,20 @@
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import {
-  NotificationsBell,
   StatCard,
   WhoViewedCard,
   timeAgo,
 } from "@/components/dashboard/widgets";
-import { ConnectionRequestsSection } from "@/components/dashboard/connection-requests";
-import { InstantConnectFacultySection } from "@/components/dashboard/instant-connect-faculty";
-import { ParentsReachedCard } from "@/components/dashboard/parents-reached-card";
+import { TutorInbox } from "@/components/dashboard/tutor-inbox";
+import { PitchesSection } from "@/components/requirements/pitches-section";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { PremiumMentorCard } from "@/components/dashboard/premium-mentor-card";
 import { WhatsappGroupCard } from "@/components/dashboard/whatsapp-group-card";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/auth/auth-provider";
 import {
-  connectionsApi,
   profileApi,
   type AvailabilitySlot,
-  type ConnectionRequest,
   type ProfileViewsResponse,
 } from "@/lib/api";
 import { absoluteUrl } from "@/lib/seo";
@@ -114,16 +110,13 @@ export default function DashboardPage() {
   const [views, setViews] = useState<ProfileViewsResponse | null>(null);
   const [viewsLoading, setViewsLoading] = useState(true);
 
-  // Incoming parent connection requests
-  const [requests, setRequests] = useState<ConnectionRequest[]>([]);
-  const [requestsLoading, setRequestsLoading] = useState(true);
-
   const [copied, setCopied] = useState(false);
   const [photoNudgeOpen, setPhotoNudgeOpen] = useState(false);
   const photoNudgeDismissed = useRef(false);
   const [dashTab, setDashTab] = useState<"inbox" | "schedule" | "grow">(
     "inbox",
   );
+  const [inboxAttention, setInboxAttention] = useState(0);
 
   async function copyListingLink() {
     if (!user) return;
@@ -160,15 +153,6 @@ export default function DashboardPage() {
       .catch(() => {})
       .finally(() => {
         if (!cancelled) setViewsLoading(false);
-      });
-    connectionsApi
-      .requests()
-      .then((data) => {
-        if (!cancelled) setRequests(data.requests);
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (!cancelled) setRequestsLoading(false);
       });
     return () => {
       cancelled = true;
@@ -428,7 +412,6 @@ export default function DashboardPage() {
               </p>
             </div>
             <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
-              <NotificationsBell data={views} requests={requests} />
               <Link href="/profiling">
                 <Button variant="secondary" size="sm">
                   <Pencil className="h-3.5 w-3.5" />
@@ -440,14 +423,12 @@ export default function DashboardPage() {
           </div>
 
           {/* ------------------------------ stats ------------------------------- */}
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
             <WhoViewedCard
               data={views}
               loading={viewsLoading}
               onRefresh={reloadViews}
             />
-
-            <ParentsReachedCard />
 
             <StatCard
               label="Open slots"
@@ -479,9 +460,7 @@ export default function DashboardPage() {
                       id: "inbox" as const,
                       label: "Inbox",
                       Icon: Inbox,
-                      count:
-                        requests.filter((r) => r.status === "pending").length ||
-                        undefined,
+                      count: inboxAttention || undefined,
                     },
                     {
                       id: "schedule" as const,
@@ -530,32 +509,7 @@ export default function DashboardPage() {
 
               <div className="mt-4 space-y-5">
                 {dashTab === "inbox" ? (
-                  <>
-                    <ConnectionRequestsSection
-                      requests={requests}
-                      loading={requestsLoading}
-                      onUpdated={(updated) =>
-                        setRequests((prev) =>
-                          prev.map((r) => (r.id === updated.id ? updated : r)),
-                        )
-                      }
-                    />
-                    <InstantConnectFacultySection
-                      acceptingStudents={
-                        user?.profile?.acceptingStudents !== false
-                      }
-                      onAcceptingChange={(next) => {
-                        if (!user?.profile) return;
-                        setUser({
-                          ...user,
-                          profile: {
-                            ...user.profile,
-                            acceptingStudents: next,
-                          },
-                        });
-                      }}
-                    />
-                  </>
+                  <TutorInbox onAttentionChange={setInboxAttention} />
                 ) : null}
 
                 {dashTab === "schedule" ? (
@@ -644,6 +598,8 @@ export default function DashboardPage() {
 
                 {dashTab === "grow" ? (
                   <>
+                    <PitchesSection />
+
                     <section className="overflow-hidden rounded-xl border-2 border-ink bg-white shadow-[3px_3px_0_0_#1a231c]">
                       <div className="border-b border-hairline bg-butter/40 px-4 py-3">
                         <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wide text-ink">
@@ -667,7 +623,7 @@ export default function DashboardPage() {
                             variant="secondary"
                             className="h-9 gap-1.5"
                           >
-                            Need board
+                            Requirements board
                           </Button>
                         </Link>
                       </div>

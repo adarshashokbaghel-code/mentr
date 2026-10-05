@@ -37,7 +37,7 @@ const PAGE_FAQS = [
   {
     question: "Do parents need Premium to contact mentors?",
     answer:
-      "No. Parents can search, shortlist, and send connection requests without paying. Mentors on Free still receive and can accept those requests.",
+      "No. Parents can search, shortlist, and book a demo without paying. Mentors on Free still receive and can confirm those demos.",
   },
   {
     question: "Do you charge GST on Premium?",

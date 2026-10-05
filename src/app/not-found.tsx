@@ -35,7 +35,7 @@ const SUGGESTED_LINKS = [
   },
   {
     title: "Frequently asked questions",
-    description: "Learn how connect requests, tutor verification, and free contacts work.",
+    description: "Learn how demo bookings, tutor verification, and free contacts work.",
     href: "/faq",
     icon: HelpCircle,
     tint: "bg-butter",

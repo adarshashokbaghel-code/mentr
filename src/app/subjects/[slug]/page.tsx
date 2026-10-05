@@ -33,7 +33,7 @@ export async function generateMetadata({
   const subject = parseSubjectHubSlug(slug);
   if (!subject) return { title: "Subject", robots: { index: false } };
   const title = `${subject} Tutors in Bengaluru — Verified Profiles`;
-  const description = `Find verified ${subject} tutors across Koramangala, Indiranagar, Whitefield & more in Bengaluru. Compare rates, connect free, or try Instant Connect on ${SITE_NAME}.`;
+  const description = `Find verified ${subject} tutors across Koramangala, Indiranagar, Whitefield & more in Bengaluru. Compare rates, book a free demo, or try Instant Connect on ${SITE_NAME}.`;
   return {
     title,
     description,

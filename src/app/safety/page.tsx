@@ -74,9 +74,9 @@ export default function SafetyPage() {
                   Contact privacy
                 </h2>
                 <p className="mt-2 text-base leading-relaxed text-muted">
-                  WhatsApp numbers stay hidden until a tutor accepts a parent
-                  request (or a parent accepts a pitch). That consent step cuts
-                  spam without charging either side for unlocks.
+                  A demo shares your number with the tutor you chose. On the
+                  requirements board, your name stays hidden until you accept a
+                  pitch. Contact stays free either way.
                 </p>
               </div>
             </div>

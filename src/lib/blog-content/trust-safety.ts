@@ -525,7 +525,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
             type: "list",
             items: [
               "Compare 3–5 profiles before messaging — fees, experience, languages",
-              "Send a connect request with your child's class, board, and schedule",
+              "Book a demo with your child's class, board, and schedule",
               "Schedule a video intro before paying for a full month",
               "Ask one curriculum-specific question to test subject depth",
               "Confirm cancellation and payment terms in writing",
@@ -566,7 +566,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Where can I find verified tutors for free search?",
         answer:
-          "Mentr lets parents search and send connect requests without lead fees. Tutors pay nothing to list. Browse verified profiles at mentr.com/search.",
+          "Mentr lets parents search and book demos without lead fees. Tutors pay nothing to list. Browse verified profiles at mentr.com/search.",
       },
     ],
     relatedLinks: [
@@ -591,7 +591,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -604,7 +604,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -631,7 +631,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [
@@ -656,7 +656,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -669,7 +669,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -696,7 +696,7 @@ export const TRUST_SAFETY_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [

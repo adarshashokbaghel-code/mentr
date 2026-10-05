@@ -80,7 +80,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
         {
           label: "How it works",
           href: "/how-it-works",
-          description: "Search, requirements, and WhatsApp unlock",
+          description: "Search, book a demo, or get pitches",
         },
       ],
     },

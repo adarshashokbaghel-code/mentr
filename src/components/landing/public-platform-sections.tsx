@@ -46,7 +46,7 @@ export function PublicPlatformSections() {
             <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
               Looking for a Class 8 Maths tutor or a coding mentor? Browse
               verified profiles by subject, class, and teaching mode — in-person
-              nearby or online across time zones. You send a connect request;
+              nearby or online across time zones. You book a demo;
               WhatsApp contact unlocks only after the tutor accepts, so numbers
               stay private until both sides agree.
             </p>
@@ -163,7 +163,7 @@ export function PublicPlatformSections() {
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-muted">
               Search verified tutors, post a requirement, or use Instant
-              Connect. You never pay Mentr to unlock a number or send a request.
+              Connect. You never pay Mentr to book a demo or accept a pitch.
             </p>
           </div>
           <div>
@@ -176,7 +176,7 @@ export function PublicPlatformSections() {
           <div>
             <h3 className="text-base font-bold text-ink">For tutors &amp; mentors</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted">
-              List for free, respond to connect requests, and keep 100% of
+              List for free, respond to demo bookings, and keep 100% of
               tuition fees. No lead coins. Classroom tools are free without a
               paid plan.
             </p>

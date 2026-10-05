@@ -5,7 +5,7 @@ import { PostRequirementButton } from "@/components/requirements/post-requiremen
 import { ParentActionLink } from "@/components/auth/role-guard-link";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { Button } from "@/components/ui/button";
-import { ConnectButton } from "@/components/connect/connect-button";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { PARENT_LP_TESTIMONIALS } from "@/lib/demo-users";
 import { useTestimonialNames } from "@/hooks/use-testimonial-names";
 import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
@@ -92,7 +92,7 @@ function useParentStats() {
       label: "WhatsApp",
       tint: "bg-coral-wash",
       icon: MessageCircle,
-      sub: "On tutor accept",
+      sub: "After a confirmed demo",
     },
   ];
 }
@@ -100,8 +100,8 @@ function useParentStats() {
 const searchSteps = [
   { title: "Search by subject & area", desc: "Filter Class 10 Physics in Indiranagar — see who's free nearby.", icon: Search },
   { title: "Open a verified profile", desc: "Credentials, intro video, open slots, and area — all upfront.", icon: BadgeCheck },
-  { title: "Send a connect request", desc: "A short note tells the tutor exactly what your child needs.", icon: MessageCircle },
-  { title: "WhatsApp unlocks on accept", desc: "Arrange timing, fees, and location yourselves. Mentr stays out.", icon: Handshake },
+  { title: "Book a demo", desc: "Pick the subject, class, and a time. The tutor confirms in their inbox.", icon: MessageCircle },
+  { title: "Agree the rest after the demo", desc: "Arrange timing, fees, and location yourselves. Mentr stays out.", icon: Handshake },
 ];
 
 const postSteps = [
@@ -112,7 +112,7 @@ const postSteps = [
   },
   {
     title: "Tutors pitch with their profile",
-    desc: "Each pitch sends a connection request to your dashboard. You see their profile and message — number stays hidden.",
+    desc: "Each pitch lands on your dashboard with their profile and message. Their number stays hidden.",
     icon: Users,
   },
   {
@@ -122,7 +122,7 @@ const postSteps = [
   },
   {
     title: "Accept → WhatsApp unlocks",
-    desc: "Accept the connection request. Their WhatsApp number unlocks and you arrange fees directly.",
+    desc: "Accept the pitch. Their WhatsApp number unlocks and you arrange fees directly.",
     icon: MessageCircle,
   },
 ];
@@ -137,7 +137,7 @@ const switchTabs = [
     headline: "Same tutors nearby.",
     accent: "Without agent fees.",
     description:
-      "UrbanPro routes parents through agents and charges tutors for coins. Mentr is direct — search verified tutors, send a connect request, and chat on WhatsApp once they accept. No middleman.",
+      "UrbanPro routes parents through agents and charges tutors for coins. Mentr is direct — search verified tutors and book a demo. No middleman.",
     letterBg: "bg-coral",
     cta: "Create free parent account",
     ctaHref: "/parent/signup",
@@ -157,7 +157,7 @@ const switchTabs = [
     headline: "Direct to the teacher.",
     accent: "No middleman.",
     description:
-      "Agencies take a cut and control the relationship. On Mentr you find the tutor yourself, send a request, and deal directly on WhatsApp — no commission on sessions.",
+      "Agencies take a cut and control the relationship. On Mentr you find the tutor yourself, book a demo, and agree fees directly — no commission on sessions.",
     letterBg: "bg-ink",
     cta: "Create free parent account",
     ctaHref: "/parent/signup",
@@ -177,7 +177,7 @@ const switchTabs = [
     headline: "Organized search.",
     accent: "Not group chaos.",
     description:
-      "Tuition groups bury posts in minutes. Mentr is a searchable directory — subjects, verified profiles, live availability, and one-tap connect requests.",
+      "Tuition groups bury posts in minutes. Mentr is a searchable directory — subjects, verified profiles, live availability, and one-tap demo bookings.",
     letterBg: "bg-sage",
     cta: "Create free parent account",
     ctaHref: "/parent/signup",
@@ -232,11 +232,17 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
         </div>
       </div>
       {available ? (
-        <ConnectButton
-          teacher={teacher}
-          className="inline-flex shrink-0 items-center gap-1 rounded-lg border-2 border-ink bg-coral px-3 py-1.5 text-[11px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17] transition hover:bg-coral-dark"
-          requestedClassName="inline-flex shrink-0 items-center gap-1 rounded-lg border-2 border-ink/20 bg-cream px-3 py-1.5 text-[11px] font-bold text-muted"
-        />
+        <div className="flex shrink-0 flex-col gap-1">
+          <BookDemoButton
+            teacher={{
+              id: teacher.id,
+              name: teacher.name,
+              subjects: teacher.subjects,
+            }}
+            label="Book a demo"
+            className="inline-flex items-center justify-center gap-1 rounded-lg border-2 border-ink bg-ink px-3 py-1.5 text-[11px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17]"
+          />
+        </div>
       ) : (
         <span className="shrink-0 rounded-md bg-hairline px-2 py-1 text-[10px] font-bold text-muted">Booked</span>
       )}
@@ -374,8 +380,8 @@ function ParentsHero() {
             <p className="mx-auto max-w-md text-base leading-relaxed text-muted lg:mx-0 sm:text-lg">
               Create a free parent account in under a minute — then search
               verified tutors locally or online, or post your requirement and
-              let tutors pitch you. WhatsApp unlocks when you accept. ₹0
-              platform fee.
+              let tutors pitch you. Book a demo when you have chosen a
+              tutor. ₹0 platform fee.
             </p>
             <p className="mx-auto max-w-md text-sm leading-relaxed text-muted/90 lg:mx-0">
               {GLOBAL_REACH_LINE}
@@ -511,20 +517,20 @@ function FlowMock({ path, step }: { path: "search" | "post"; step: number }) {
           </div>
         </div>
         <div className="rounded-lg border-2 border-ink/15 bg-butter/50 p-3">
-          <p className="text-[10px] font-bold text-muted">Your message</p>
-          <p className="mt-1 text-xs font-medium">Class 10 maths, weekends, board exam focus.</p>
+          <p className="text-[10px] font-bold text-muted">Demo</p>
+          <p className="mt-1 text-xs font-medium">Class 10 Maths · Saturday 10:00 · Online</p>
         </div>
       </div>,
       <div key="s2" className="space-y-2 p-4">
         <div className="flex items-center gap-2 rounded-lg border-2 border-ink/15 bg-butter/60 px-3 py-2">
           <Clock className="h-3.5 w-3.5" />
-          <p className="text-xs font-bold">Request sent — awaiting accept</p>
+          <p className="text-xs font-bold">Demo sent — tutor has your number</p>
         </div>
       </div>,
       <div key="s3" className="space-y-2 p-4">
         <div className="flex items-center gap-2 rounded-lg border-2 border-ink bg-sage-wash px-3 py-2">
           <MessageCircle className="h-3.5 w-3.5 text-sage" />
-          <p className="text-xs font-bold text-sage">WhatsApp unlocked!</p>
+          <p className="text-xs font-bold text-sage">Demo confirmed</p>
         </div>
         <div className="rounded-lg bg-[#ECE5DD] p-2.5">
           <div className="ml-auto max-w-[85%] rounded-lg rounded-tr-sm bg-[#DCF8C6] px-2.5 py-1.5 text-[11px]">Saturday 10–12 works?</div>
@@ -547,7 +553,7 @@ function FlowMock({ path, step }: { path: "search" | "post"; step: number }) {
       </div>
     </div>,
     <div key="p1" className="space-y-2 p-4">
-      <p className="text-[10px] font-bold text-coral">3 connection requests · auto-sent</p>
+      <p className="text-[10px] font-bold text-coral">3 pitches · on your dashboard</p>
       {[
         { name: "Verified maths tutor", sub: "Maths · your locality", verified: true },
         { name: "Verified physics tutor", sub: "Physics · nearby", verified: true },
@@ -613,7 +619,7 @@ function ParentFlowSection() {
           eyebrow="How it works"
           title="Two paths."
           accent="Same free outcome."
-          description="Search the directory yourself, or post your need — tutors pitch with their profile and each pitch becomes a connection request on your dashboard. Both end on WhatsApp when you accept."
+          description="Search the directory and book a demo, or post your need and let tutors pitch. You confirm a demo, or accept a pitch, then agree the rest directly."
         />
 
         <div className="mx-auto mt-10 flex max-w-md justify-center gap-2 rounded-xl border-2 border-ink/10 bg-cream p-1.5">
@@ -790,7 +796,7 @@ function RequirementBoardSection() {
                     </div>
                   </div>
                   <p className="mb-2 text-[10px] font-bold uppercase tracking-wide text-muted">
-                    Tutor responses · connection requests
+                    Tutor responses · pitches
                   </p>
                   <div className="space-y-2.5">
                     {pitches.map((pitch, i) => (
@@ -851,7 +857,7 @@ function RequirementBoardSection() {
               eyebrow="Or post your need"
               title="Let tutors"
               accent="come to you."
-              description="Post your requirement. Tutors pitch with their profile — each pitch auto-sends a connection request to your dashboard. Review profiles, accept who fits, WhatsApp unlocks."
+              description="Post your requirement. Tutors pitch with their profile. Review pitches on your dashboard, accept who fits, and their WhatsApp unlocks."
             />
             <ol className="mt-8 space-y-4">
               {postSteps.map((s, i) => (
@@ -944,7 +950,7 @@ export function ParentsLanding() {
       <LpFinalCta
         eyebrow="Ready to hire a tutor?"
         title="Create a free parent account."
-        description="Register with parent email OTP — then search verified tutors or post your requirement. Tutors pitch, you accept on your dashboard, WhatsApp unlocks. No agent fees, no commission."
+        description="Register with parent email OTP — then search verified tutors and book a demo, or post your requirement and accept a pitch. No agent fees, no commission."
         primaryLabel="Create free parent account"
         primaryHref="/parent/signup"
         secondaryLabel="Browse tutors first"

@@ -1,6 +1,6 @@
 "use client";
 
-import { ConnectButton } from "@/components/connect/connect-button";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { ParentActionLink, FacultyActionLink } from "@/components/auth/role-guard-link";
 import {
   hardShadowSm,
@@ -172,12 +172,17 @@ function TeacherRow({ teacher }: { teacher: Teacher }) {
         </div>
       </div>
       {available ? (
-        <ConnectButton
-          teacher={teacher}
-          label="Connect"
-          className="inline-flex shrink-0 items-center gap-1 rounded-lg border-2 border-ink bg-coral px-2.5 py-1.5 text-[11px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17] transition hover:bg-coral-dark"
-          requestedClassName="inline-flex shrink-0 items-center gap-1 rounded-lg border-2 border-hairline bg-cream px-2.5 py-1.5 text-[11px] font-bold text-muted"
-        />
+        <div className="flex shrink-0 flex-col gap-1">
+          <BookDemoButton
+            teacher={{
+              id: teacher.id,
+              name: teacher.name,
+              subjects: teacher.subjects,
+            }}
+            label="Book a demo"
+            className="inline-flex items-center justify-center gap-1 rounded-lg border-2 border-ink bg-ink px-2.5 py-1.5 text-[11px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17]"
+          />
+        </div>
       ) : (
         <span className="shrink-0 text-[11px] font-semibold text-muted">
           Booked
@@ -496,8 +501,8 @@ export function Hero() {
             </h1>
 
             <p className="mx-auto max-w-md text-base leading-relaxed text-pretty text-muted lg:mx-0 short:text-sm short:leading-snug sm:text-[17px]">
-              Browse profiles, send a request, or post what you need. Chat on
-              WhatsApp after they accept — no platform fee.
+              Browse profiles and book a demo, or post what you need and
+              get pitches — no platform fee.
             </p>
 
             <div className="flex w-full max-w-full flex-col items-stretch gap-3 short:gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">

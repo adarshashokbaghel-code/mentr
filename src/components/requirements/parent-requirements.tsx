@@ -24,7 +24,6 @@ import {
   MessageCircle,
   MonitorSmartphone,
   Phone,
-  Plus,
   Send,
   Share2,
   X,
@@ -94,8 +93,12 @@ const DETAILS_MAX = 500;
  */
 export function ParentRequirementsSection({
   onConnectionsChanged,
+  requestOpen = false,
+  onRequestOpenChange,
 }: {
   onConnectionsChanged?: () => void;
+  requestOpen?: boolean;
+  onRequestOpenChange?: (open: boolean) => void;
 }) {
   const [requirements, setRequirements] = useState<MyRequirement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -119,6 +122,10 @@ export function ParentRequirementsSection({
     }
   }, []);
 
+  useEffect(() => {
+    if (requestOpen) setModalOpen(true);
+  }, [requestOpen]);
+
   return (
     <section>
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -128,14 +135,6 @@ export function ParentRequirementsSection({
             Tutors pitch you — accept to unlock WhatsApp.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setModalOpen(true)}
-          className="inline-flex h-9 items-center gap-1.5 rounded-md bg-coral px-4 text-[13px] font-semibold text-white transition hover:bg-coral-dark"
-        >
-          <Plus className="h-3.5 w-3.5" />
-          Post a requirement
-        </button>
       </div>
 
       {loading ? (
@@ -170,9 +169,13 @@ export function ParentRequirementsSection({
 
       {modalOpen && (
         <PostRequirementModal
-          onClose={() => setModalOpen(false)}
+          onClose={() => {
+            setModalOpen(false);
+            onRequestOpenChange?.(false);
+          }}
           onPosted={() => {
             setModalOpen(false);
+            onRequestOpenChange?.(false);
             reload();
           }}
         />
@@ -628,8 +631,7 @@ function CloseConfirmModal({
           pitches.
         </p>
         <p className="mt-2 rounded-md bg-sage-wash px-3 py-2 text-[12px] font-medium leading-relaxed text-sage">
-          Connections you already made through this post stay in your history —
-          nothing is deleted.
+          Pitches already on this post stay here. Closing it only stops new ones.
         </p>
         <div className="mt-4 flex gap-2">
           <button

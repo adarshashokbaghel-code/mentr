@@ -12,7 +12,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
     readTimeMinutes: 8,
     author: "Mentr Editorial Team",
     intro:
-      "To find a tutor in Bengaluru: write down subject, class, board (CBSE/ICSE/State), and home vs online. Then browse verified profiles, shortlist 3–5, send a short connect request, and book a paid trial before any monthly package. Platforms that charge parents or sell “leads” to tutors often create noise — free search with verification is usually calmer.",
+      "To find a tutor in Bengaluru: write down subject, class, board (CBSE/ICSE/State), and home vs online. Then browse verified profiles, shortlist 3–5, book a demo, and book a paid trial before any monthly package. Platforms that charge parents or sell “leads” to tutors often create noise — free search with verification is usually calmer.",
     sections: [
       {
         heading: "What to decide before you search",
@@ -41,7 +41,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
             items: [
               "Open Find a Tutor on Mentr and filter by subject and Bengaluru (or online).",
               "Open Verified profiles — check class level, fee if shared, and bio.",
-              "Send a connect request with class, board, and chapters that need help.",
+              "Book a demo with class, board, and chapters that need help.",
               "After accept, WhatsApp unlocks. Book a 30–60 minute trial.",
               "Ask your child one question after the trial: “Did that make sense?”",
             ],
@@ -90,7 +90,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
     intro:
-      "A verified online tutor should show identity/credential checks, clear subjects and classes, a real bio, and a way to trial before you pay monthly. On Mentr, look for the Verified badge, filter Online mode, connect free, and unlock WhatsApp only after the tutor accepts.",
+      "A verified online tutor should show identity/credential checks, clear subjects and classes, a real bio, and a way to trial before you pay monthly. On Mentr, look for the Verified badge, filter Online mode, book a free demo. The tutor confirms the time.",
     sections: [
       {
         heading: "What “verified” should mean",
@@ -136,7 +136,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
       {
         question: "When does WhatsApp unlock?",
         answer:
-          "Only after the tutor accepts your connect request — so numbers stay private until both sides agree.",
+          "Only after the tutor accepts your demo booking — so numbers stay private until both sides agree.",
       },
     ],
     relatedLinks: [
@@ -174,7 +174,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Start at Find a Tutor, or open CBSE tutor hubs and Class pages (for example Class 10 Mathematics). Connect free — fees stay between you and the tutor.",
+            text: "Start at Find a Tutor, or open CBSE tutor hubs and Class pages (for example Class 10 Mathematics). Book a free demo — fees stay between you and the tutor.",
           },
         ],
       },
@@ -208,7 +208,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
     intro:
-      "To find a maths tutor online: name the class and topics that fail in tests, filter Verified tutors with Online mode, send a short connect request, and trial one chapter with your child on the call. Good maths tutors diagnose gaps — they do not only finish the textbook.",
+      "To find a maths tutor online: name the class and topics that fail in tests, filter Verified tutors with Online mode, book a demo, and trial one chapter with your child on the call. Good maths tutors diagnose gaps — they do not only finish the textbook.",
     sections: [
       {
         heading: "What to tell the tutor",
@@ -379,7 +379,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Share a range in your connect note (“₹500–₹800/hr, Class 10 CBSE maths”). Good tutors reply with fit or a counter. Avoid large cash advances before a trial.",
+            text: "Share a range when you book a demo (“₹500–₹800/hr, Class 10 CBSE maths”). Good tutors reply with fit or a counter. Avoid large cash advances before a trial.",
           },
         ],
       },
@@ -388,7 +388,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
       {
         question: "Does Mentr add a platform fee?",
         answer:
-          "No. Parents search and connect free. Tutors keep what you agree.",
+          "No. Parents search and book a free demo. Tutors keep what you agree.",
       },
     ],
     relatedLinks: [
@@ -429,7 +429,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Open Find a Tutor, set class-related subjects (Maths, Science, English), and connect free. Class hubs like Class 10 Mathematics tutors and CBSE Class 10 pages help you land on the right list quickly.",
+            text: "Open Find a Tutor, set class-related subjects (Maths, Science, English), and book a free demo. Class hubs like Class 10 Mathematics tutors and CBSE Class 10 pages help you land on the right list quickly.",
           },
         ],
       },

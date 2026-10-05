@@ -73,6 +73,15 @@ async function connectOnce(): Promise<void> {
   isConnected = true;
   console.log("MongoDB connected → champs database");
 
+  const removed = await Connection.deleteMany({
+    requestedBy: { $ne: "teacher" },
+  });
+  if (removed.deletedCount) {
+    console.log(
+      `Removed ${removed.deletedCount} old parent connect records`,
+    );
+  }
+
   if (process.env.VERCEL !== "1") {
     void syncIndexesOnce();
   }

@@ -56,7 +56,7 @@ const facultyStats = [
 const facultySteps = [
   { title: "Register free", desc: "Email OTP, subjects, bio, area, WhatsApp. Verified before you go live.", icon: UserPlus },
   { title: "Set availability", desc: "Toggle open slots on your dashboard. Parents see who's free nearby.", icon: CalendarDays },
-  { title: "Review requests", desc: "Every connect request includes the parent's note. Accept who fits.", icon: MessageCircle },
+  { title: "Confirm demos", desc: "Every demo includes the subject, class, and time. Confirm who fits.", icon: MessageCircle },
   { title: "WhatsApp · keep 100%", desc: "Arrange timing and fees directly. Mentr never takes a cut.", icon: Wallet },
 ];
 
@@ -159,8 +159,8 @@ function FacultyHero() {
             </h1>
 
             <p className="mx-auto max-w-md text-base leading-relaxed text-muted lg:mx-0 sm:text-lg">
-              List free from any country — set your time zone, review connect
-              requests, and pitch on the requirements board. No coins, no lead
+              List free from any country — set your time zone, confirm demo
+              bookings, and pitch on the requirements board. No coins, no lead
               packs, no commission.
             </p>
             <p className="mx-auto max-w-md text-sm leading-relaxed text-muted/90 lg:mx-0">
@@ -212,7 +212,7 @@ function FacultyHero() {
               <div className="h-8 w-px bg-hairline" />
               <div className="text-center lg:text-left">
                 <p className="text-2xl font-bold text-sage">12</p>
-                <p className="text-[10px] font-semibold text-muted">Connect requests/mo</p>
+                <p className="text-[10px] font-semibold text-muted">Demo bookings/mo</p>
               </div>
             </div>
           </div>
@@ -336,14 +336,14 @@ function DashboardMock({ step }: { step: number }) {
         {step >= 2 && (
           <div className="rounded-xl border-2 border-ink bg-white p-3">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-bold text-ink">New connect request</p>
+              <p className="text-xs font-bold text-ink">New demo booking</p>
               <span className="rounded-md bg-coral-wash px-1.5 py-0.5 text-[9px] font-bold text-coral">2h ago</span>
             </div>
             <p className="mt-2 rounded-lg bg-cream px-2.5 py-2 text-[11px] leading-relaxed text-muted">
-              &ldquo;Class 10 maths, weekends, board exam focus — are Saturdays open?&rdquo;
+              Class 10 Maths · Saturday 10:00 · Online
             </p>
             <div className="mt-2.5 flex gap-2">
-              <span className="flex-1 rounded-lg border-2 border-ink bg-sage py-2 text-center text-[10px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17]">Accept</span>
+              <span className="flex-1 rounded-lg border-2 border-ink bg-sage py-2 text-center text-[10px] font-bold text-white shadow-[2px_2px_0_0_#1c1a17]">Confirm</span>
               <span className="flex-1 rounded-lg border-2 border-ink/20 py-2 text-center text-[10px] font-bold text-muted">Decline</span>
             </div>
           </div>
@@ -372,7 +372,7 @@ function FacultyDashboardSection() {
           eyebrow="Your dashboard"
           title="Manage slots."
           accent="Review requests."
-          description="Toggle availability after bookings, see profile views, and accept connect requests — all from one dashboard."
+          description="Toggle availability after bookings, see profile views, and accept demo bookings — all from one dashboard."
         />
 
         <div className={cn("mt-14 overflow-hidden rounded-2xl border-2 border-ink lg:grid lg:grid-cols-[1fr_1.1fr]", hardShadow)}>
@@ -499,10 +499,10 @@ function RequirementsBoardSection() {
               eyebrow="Requirements board"
               title="Parents post needs."
               accent="You pitch. Free."
-              description="Browse open requirements and pitch with your profile + message. Each pitch auto-sends a connection request to the parent's dashboard. They accept → WhatsApp unlocks. No coins, no lead packs."
+              description="Browse open requirements and pitch with your profile + message. Each pitch lands on the parent's dashboard. They accept → WhatsApp unlocks. No coins, no lead packs."
             />
             <div className="mt-8 space-y-3">
-              {["Browse open requirements in your subjects", "Pitch with profile + message → auto connection request", "Parent accepts on dashboard → WhatsApp · you keep 100%"].map((s, i) => (
+              {["Browse open requirements in your subjects", "Pitch with your profile and a short message", "Parent accepts on dashboard → WhatsApp · you keep 100%"].map((s, i) => (
                 <div key={s} className="flex items-center gap-3 rounded-xl border-2 border-ink/10 bg-cream px-4 py-3">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border-2 border-ink bg-sage text-xs font-bold text-white shadow-[2px_2px_0_0_#1c1a17]">{i + 1}</span>
                   <span className="text-sm font-semibold text-ink">{s}</span>
@@ -622,7 +622,7 @@ export function FacultyLanding() {
         dark
         eyebrow="Ready to get listed?"
         title="Parents are searching for tutors right now."
-        description="Create your free profile, pass verification, and start receiving connect requests — local or online, anywhere in the world."
+        description="Create your free profile, pass verification, and start receiving demo bookings — local or online, anywhere in the world."
         primaryLabel="Register free"
         primaryHref="/faculty/signup"
         secondaryLabel="Faculty login"

@@ -617,7 +617,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Use platforms that keep intro messages on-record until both sides agree to connect. On Mentr, tutors only share WhatsApp numbers after a parent accepts a connect request — reducing spam and protecting children. Never pay large advances to unverified personal accounts.",
+            text: "Use platforms that keep intro messages on-record until both sides agree to connect. On Mentr, tutors only share WhatsApp numbers after a parent accepts a demo booking — reducing spam and protecting children. Never pay large advances to unverified personal accounts.",
           },
           {
             type: "callout",
@@ -636,12 +636,12 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "Does Mentr work outside India?",
         answer:
-          "Yes. Mentr supports global online search and connect requests. Tutors and mentors list their time zones and languages; parents search from any country.",
+          "Yes. Mentr supports global online search and demo bookings. Tutors and mentors list their time zones and languages; parents search from any country.",
       },
       {
         question: "What is the fastest way to hire a verified mentor?",
         answer:
-          "Browse 3–5 verified profiles, send connect requests with a clear intro, and book trial sessions with the two best replies within 48 hours.",
+          "Browse 3–5 verified profiles, book demos with a clear intro, and book trial sessions with the two best replies within 48 hours.",
       },
     ],
     relatedLinks: [
@@ -667,7 +667,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -680,7 +680,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -707,7 +707,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [
@@ -723,16 +723,16 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
     updatedAt: "2026-07-19",
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
-    intro: "A coding mentor online helps with DSA interviews, portfolio reviews, and project direction — beyond what YouTube tutorials provide. Find verified programming mentors on Mentr and send a connect request with your stack and goal.",
+    intro: "A coding mentor online helps with DSA interviews, portfolio reviews, and project direction — beyond what YouTube tutorials provide. Find verified programming mentors on Mentr and book a demo with your stack and goal.",
     sections: [
       {
         heading: "Why this search matters",
         blocks: [
-          { type: "paragraph", text: "A coding mentor online helps with DSA interviews, portfolio reviews, and project direction — beyond what YouTube tutorials provide. Find verified programming mentors on Mentr and send a connect request with your stack and goal." },
+          { type: "paragraph", text: "A coding mentor online helps with DSA interviews, portfolio reviews, and project direction — beyond what YouTube tutorials provide. Find verified programming mentors on Mentr and book a demo with your stack and goal." },
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -745,7 +745,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -772,7 +772,7 @@ export const CAREER_MENTORING_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [

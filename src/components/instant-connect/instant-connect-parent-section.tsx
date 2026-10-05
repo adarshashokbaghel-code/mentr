@@ -38,7 +38,16 @@ type CloseFlow =
       hiredIds: string[];
     };
 
-export function InstantConnectParentSection() {
+export function InstantConnectParentSection({
+  embedded = false,
+  listFilter = "all",
+  onRows,
+}: {
+  /** Inside the Connects list — no second heading or tab. */
+  embedded?: boolean;
+  listFilter?: "all" | "accepted" | "pending" | "declined";
+  onRows?: (rows: IcParentRequest[]) => void;
+}) {
   const [tab, setTab] = useState<"active" | "history">("active");
   const [rows, setRows] = useState<IcParentRequest[]>([]);
   const [loading, setLoading] = useState(true);
@@ -59,9 +68,25 @@ export function InstantConnectParentSection() {
 
   useEffect(reload, [reload]);
 
+  useEffect(() => {
+    if (!loading) onRows?.(rows);
+  }, [rows, onRows, loading]);
+
   const active = rows.filter((r) => r.status === "active");
   const history = rows.filter((r) => r.status !== "active");
-  const list = tab === "active" ? active : history;
+  const list = embedded
+    ? rows
+        .filter((r) => matchesConnectFilter(r, listFilter))
+        .slice()
+        .sort((a, b) => {
+          if ((a.status === "active") !== (b.status === "active")) {
+            return a.status === "active" ? -1 : 1;
+          }
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+        })
+    : tab === "active"
+      ? active
+      : history;
 
   function openClose(id: string) {
     setError("");
@@ -153,7 +178,8 @@ export function InstantConnectParentSection() {
   }
 
   return (
-    <section id="instant-connect" className="scroll-mt-24">
+    <section id={embedded ? undefined : "instant-connect"} className="scroll-mt-24">
+      {embedded ? null : (
       <div>
         <h2 className="flex items-center gap-1.5 text-lg font-semibold">
           <Zap className="h-5 w-5 text-ic-blue" />
@@ -163,8 +189,9 @@ export function InstantConnectParentSection() {
           Mentors you pick can call you while a request is active (or 48h).
         </p>
       </div>
+      )}
 
-      {active.length > 0 || history.length > 0 ? (
+      {!embedded && (active.length > 0 || history.length > 0) ? (
         <div className="mt-3 flex gap-2">
           {(["active", "history"] as const).map((t) => (
             <button
@@ -191,24 +218,37 @@ export function InstantConnectParentSection() {
       ) : null}
 
       {loading ? (
+        embedded ? null : (
         <p className="mt-3 text-sm text-muted">
           <Loader2 className="mr-2 inline h-4 w-4 animate-spin" />
           Loading…
         </p>
+        )
       ) : list.length === 0 ? (
+        embedded ? null : (
         <p className="mt-3 rounded-xl border border-dashed border-hairline bg-white px-4 py-6 text-center text-sm text-muted">
           {tab === "active"
             ? "No active quick matches. Use Instant Connect from home or search when you need a tutor fast."
             : "No history yet."}
         </p>
+        )
       ) : (
-        <ul className="mt-4 space-y-3">
+        <ul className={embedded ? "space-y-2.5" : "mt-4 space-y-3"}>
           {list.map((r) => (
             <li
               key={r.id}
-              className="rounded-xl border-2 border-ink/10 bg-white p-4"
+              className="overflow-hidden rounded-xl border border-hairline bg-white"
             >
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-center gap-1.5 bg-ic-blue-wash px-3.5 py-1.5">
+                <Zap className="h-3.5 w-3.5 text-ic-blue" />
+                <span className="text-[11px] font-bold text-ic-blue">
+                  Instant Connect
+                </span>
+                <span className="truncate text-[11px] text-ic-blue/80">
+                  · mentors you picked can call you
+                </span>
+              </div>
+              <div className="flex items-start justify-between gap-3 p-3.5 sm:p-4">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="font-bold text-ink">
@@ -529,6 +569,20 @@ function CloseRequestModal({
         </div>
       </div>
     </div>
+  );
+}
+
+export function matchesConnectFilter(
+  row: IcParentRequest,
+  filter: "all" | "accepted" | "pending" | "declined",
+): boolean {
+  if (filter === "all") return true;
+  if (filter === "pending") return row.status === "active";
+  if (filter === "accepted") return row.closeOutcome === "mentor_found";
+  return (
+    row.status === "expired" ||
+    row.closeOutcome === "dismissed" ||
+    (row.status === "closed" && row.closeOutcome !== "mentor_found")
   );
 }
 

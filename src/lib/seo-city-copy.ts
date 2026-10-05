@@ -126,13 +126,13 @@ export function citySubjectGuide(
       ? `Filter for Online, student's home, or tutor's home. ${meta.localNote}`
       : `Most ${cityName} listings emphasise online ${subject.toLowerCase()} sessions that fit your time zone. Where home visits exist, profiles show the mode clearly so you can choose before connecting.`,
     verification:
-      "Verified tutors on Mentr complete identity and credential checks. Look for the Verified badge, a clear bio, subjects/classes taught, and open slots. WhatsApp unlocks only after the tutor accepts your connect request — numbers stay private until both sides agree.",
+      "Verified tutors on Mentr complete identity and credential checks. Look for the Verified badge, a clear bio, subjects/classes taught, and open slots. Book a demo with a time. The tutor sees your number and confirms the slot.",
     subjectFocus: focus,
     sections: [
       {
         heading: `Finding a ${subject} tutor in ${cityName}`,
         body: local
-          ? `Parents searching “${subject.toLowerCase()} tutor in ${cityName}” usually care about ${meta.boards}, after-school timing, and whether the tutor can come to ${meta.areasHint} — or teach online when traffic is bad. On Mentr you browse verified profiles for free, then send a short connect request describing class, board, and the chapters that need help.`
+          ? `Parents searching “${subject.toLowerCase()} tutor in ${cityName}” usually care about ${meta.boards}, after-school timing, and whether the tutor can come to ${meta.areasHint} — or teach online when traffic is bad. On Mentr you browse verified profiles for free, then book a demo describing class, board, and the chapters that need help.`
           : `${cityName} families often need an Indian-curriculum ${subject} tutor online — ${meta.boards}. Start on Mentr’s free parent search, shortlist 3–5 verified profiles, and ask about trial sessions before any monthly package.`,
       },
       {
@@ -159,7 +159,7 @@ export function cityGuide(citySlug: SeoCitySlug, cityName: string, local: boolea
     sections: [
       {
         heading: `How to find a tutor in ${cityName}`,
-        body: `Write down subject, class, board (${meta.boards}), and home vs online. Browse verified tutors on Mentr, compare fees and open slots, then connect free — or get matched instantly if you are short on time.`,
+        body: `Write down subject, class, board (${meta.boards}), and home vs online. Browse verified tutors on Mentr, compare fees and open slots, then book a free demo — or get matched instantly if you are short on time.`,
       },
     ] as HubGuideSection[],
   };

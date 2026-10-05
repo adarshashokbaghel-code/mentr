@@ -1,4 +1,5 @@
 import { Connection } from "../models/Connection";
+import { DemoRequest } from "../models/DemoRequest";
 import { ProfileView } from "../models/ProfileView";
 import { Requirement } from "../models/Requirement";
 import { User, type IUser } from "../models/User";
@@ -42,11 +43,19 @@ export async function computeHiringProgress(
   const parentId = user._id.toString();
   const pp = user.parentProfile;
 
-  const [viewedProfile, connectionCount, acceptedCount, openRequirements] =
+  const [viewedProfile, connectionCount, acceptedCount, demoCount, openRequirements] =
     await Promise.all([
       ProfileView.exists({ viewer: user._id }),
-      Connection.countDocuments({ parent: user._id }),
-      Connection.countDocuments({ parent: user._id, status: "accepted" }),
+      Connection.countDocuments({ parent: user._id, requestedBy: "teacher" }),
+      Connection.countDocuments({
+        parent: user._id,
+        requestedBy: "teacher",
+        status: "accepted",
+      }),
+      DemoRequest.countDocuments({
+        parent: user._id,
+        status: { $ne: "declined" },
+      }),
       Requirement.find({
         parent: user._id,
         status: "open",
@@ -85,11 +94,14 @@ export async function computeHiringProgress(
 
   const steps: HiringSteps = {
     browse: Boolean(
-      viewedProfile || connectionCount > 0 || openRequirements.length > 0,
+      viewedProfile ||
+        connectionCount > 0 ||
+        demoCount > 0 ||
+        openRequirements.length > 0,
     ),
     shortlist: (pp?.shortlistedTeacherIds?.length ?? 0) > 0,
     trial: Boolean(pp?.trialLoggedAt),
-    connect: acceptedCount > 0,
+    connect: acceptedCount > 0 || demoCount > 0,
     firstSession: Boolean(pp?.firstSessionLoggedAt),
   };
 

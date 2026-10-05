@@ -52,7 +52,7 @@ const FREE_LINES: PlanLine[] = [
   },
   {
     title: "Unlimited accepts",
-    detail: "Accept as many parent connection requests as you want.",
+    detail: "Confirm as many demo bookings as you want.",
   },
   {
     title: "WhatsApp after you accept",
@@ -154,7 +154,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Do parents need Premium to contact mentors?",
-    a: "No. Parents can search, shortlist, and send connection requests without paying. Mentors on Free still receive and can accept those requests. Premium unlocks extra mentor-side tools to find and reach parents faster — it does not block parents from contacting Free mentors.",
+    a: "No. Parents can search, shortlist, and book a demo without paying. Mentors on Free still receive and can confirm those demos. Premium unlocks extra mentor-side tools to find and reach parents faster — it does not block parents from booking Free mentors.",
   },
   {
     q: "Is the Free plan really free forever?",

@@ -13,6 +13,7 @@ import { AdminInteractions } from "@/components/admin/admin-interactions";
 import { AdminLearnTrack } from "@/components/admin/admin-learn";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
+import { AdminDemoRequestsTable } from "@/components/admin/admin-demo-requests-table";
 import { AdminGuestRequirementsTable } from "@/components/admin/admin-guest-requirements-table";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
 import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
@@ -28,6 +29,7 @@ import {
   Activity,
   BarChart3,
   BookOpen,
+  CalendarDays,
   Camera,
   ChevronDown,
   Crown,
@@ -59,6 +61,7 @@ const NAV = [
   { id: "coupons", label: "Coupon codes", icon: Ticket },
   { id: "requirements", label: "Board posts", icon: Megaphone },
   { id: "guest-requests", label: "Guest requests", icon: Send },
+  { id: "demo-requests", label: "Demo requests", icon: CalendarDays },
   { id: "instant-connect", label: "Instant Connect", icon: Zap },
   { id: "snap-grade", label: "Snap & Grade", icon: Camera },
   { id: "connections", label: "Connections", icon: Link2 },
@@ -541,6 +544,16 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
               description="Parents who messaged a Premium mentor without creating an account — full contact, need, and mentor outcomes"
             >
               <AdminGuestRequirementsTable adminKey={adminKey} />
+            </AdminSection>
+          )}
+
+          {section === "demo-requests" && (
+            <AdminSection
+              id="demo-requests"
+              title="Demo requests"
+              description="Online demos parents booked with a tutor. The parent's phone is shared when the form is sent."
+            >
+              <AdminDemoRequestsTable adminKey={adminKey} />
             </AdminSection>
           )}
 

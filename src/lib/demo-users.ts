@@ -313,7 +313,7 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
   },
   {
     quote:
-      "As a JEE mentor I don't want a platform taking a cut. Mentr lists me, serious parents send connect requests, and we move to WhatsApp once I accept.",
+      "As a JEE mentor I don't want a platform taking a cut. Mentr lists me, serious parents book demos, and we move to WhatsApp once I accept.",
     role: "Mentor · Exam prep",
     tint: "bg-sage-wash",
     facultyEmail: "demo-mentor-vikram@mentr.local",
@@ -323,7 +323,7 @@ export const HOME_TESTIMONIALS: TestimonialItem[] = [
 export const PARENT_LP_TESTIMONIALS: TestimonialItem[] = [
   {
     quote:
-      "Found a Class 10 English tutor in one evening. Sent a connect request, they accepted, and we started the same week on WhatsApp. Zero fees.",
+      "Found a Class 10 English tutor in one evening. Booked a demo, they accepted, and we started the same week on WhatsApp. Zero fees.",
     role: "Parent · HSR Layout",
     tint: "bg-lavender",
     parentArea: "HSR Layout",
@@ -337,7 +337,7 @@ export const PARENT_LP_TESTIMONIALS: TestimonialItem[] = [
   },
   {
     quote:
-      "I was tired of lead platforms gating contact. Mentr let me search, read profiles, and send a connect request myself. Completely free.",
+      "I was tired of lead platforms gating contact. Mentr let me search, read profiles, and book a demo myself. Completely free.",
     role: "Parent · Whitefield",
     tint: "bg-sage-wash",
     parentArea: "Whitefield",
@@ -347,7 +347,7 @@ export const PARENT_LP_TESTIMONIALS: TestimonialItem[] = [
 export const FACULTY_LP_TESTIMONIALS: TestimonialItem[] = [
   {
     quote:
-      "I was spending on lead coins elsewhere for parents who never replied. On Mentr I listed free and started getting connect requests within a week. I keep every rupee.",
+      "I was spending on lead coins elsewhere for parents who never replied. On Mentr I listed free and started getting demo bookings within a week. I keep every rupee.",
     role: "Faculty · JEE prep",
     tint: "bg-cream-band",
     facultyEmail: "demo-mentor-vikram@mentr.local",
@@ -361,7 +361,7 @@ export const FACULTY_LP_TESTIMONIALS: TestimonialItem[] = [
   },
   {
     quote:
-      "Simple dashboard, toggle slots after WhatsApp bookings, and only serious parents reach out through connect requests.",
+      "Simple dashboard, toggle slots after WhatsApp bookings, and only serious parents reach out through demo bookings.",
     role: "Faculty · Career guidance",
     tint: "bg-sage-wash",
     facultyEmail: "demo-mentor-suresh@mentr.local",
@@ -371,7 +371,7 @@ export const FACULTY_LP_TESTIMONIALS: TestimonialItem[] = [
 export const PARENT_AUTH_TESTIMONIALS: TestimonialItem[] = [
   {
     quote:
-      "Found a physics tutor nearby and sent a connect request the same evening. Once they accepted, we arranged classes on WhatsApp.",
+      "Found a physics tutor nearby and booked a demo the same evening. Once they accepted, we arranged classes on WhatsApp.",
     role: "Parent · Koramangala",
     tint: "bg-lavender",
     parentArea: "Koramangala",

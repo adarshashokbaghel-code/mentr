@@ -26,7 +26,7 @@ const occupationJsonLd = {
     name: "Online Tutor",
     occupationalCategory: "Education",
     description:
-      "List as an online tutor or mentor on Mentr — free profile, verified badge, parent connect requests, no lead fees.",
+      "List as an online tutor or mentor on Mentr — free profile, verified badge, parent demo bookings, no lead fees.",
   },
 };
 

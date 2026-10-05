@@ -45,7 +45,7 @@ export default async function MentorTopicHubPage({
     <SeoHubPage
       eyebrow="Mentors"
       title={`Find ${topic.topic} online`}
-      intro={`Search verified ${topic.topic.toLowerCase()} on Mentr — local or online in your time zone. Send a free connect request with your goal; WhatsApp unlocks after the mentor accepts.`}
+      intro={`Search verified ${topic.topic.toLowerCase()} on Mentr — local or online in your time zone. Book a free demo with your goal; WhatsApp unlocks after the mentor accepts.`}
       teachers={teachers}
       schemaPath={path}
       breadcrumbs={[
