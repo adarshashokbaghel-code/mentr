@@ -312,9 +312,9 @@ export function LearnCoursePage() {
     }
     setCheckingEnroll(true);
     try {
-      if (readLearnEnrollmentLocal()) setEnrolled(true);
-      const enrollment = await fetchLearnEnrollment();
-      setEnrolled(!!enrollment || !!readLearnEnrollmentLocal());
+      if (readLearnEnrollmentLocal(user.id)) setEnrolled(true);
+      const enrollment = await fetchLearnEnrollment(user.id);
+      setEnrolled(!!enrollment);
     } finally {
       setCheckingEnroll(false);
     }
@@ -328,7 +328,7 @@ export function LearnCoursePage() {
   useEffect(() => {
     if (authLoading || checkingEnroll) return;
     if (searchParams?.get("enroll") === "1") {
-      if (enrolled || readLearnEnrollmentLocal()) {
+      if (enrolled) {
         window.location.assign(LEARN_APP_HREF);
         return;
       }

@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import { authApi, clearToken, type AuthUser } from "@/lib/api";
+import { clearLearnClientCache } from "@/lib/learn-enroll";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 
 /** Premium mentor target for guest "send without login" */
@@ -87,6 +88,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } catch {
       // Clear local session even if the API is unreachable (CORS, offline, etc.)
     } finally {
+      clearLearnClientCache();
       clearToken();
       setUser(null);
     }

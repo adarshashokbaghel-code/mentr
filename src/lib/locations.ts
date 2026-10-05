@@ -3,16 +3,16 @@
  * Keep SEO LOCALITIES in teachers.ts separately (hub pages); this list is UX-first.
  */
 
+import {
+  CITIES_BY_WORLD_COUNTRY,
+  WORLD_COUNTRIES,
+} from "@/lib/world-locations";
+
 export const LOCATION_OTHER = "__other__" as const;
 
 export const LOCATION_COUNTRIES = [
   "India",
-  "United Arab Emirates",
-  "Singapore",
-  "United Kingdom",
-  "United States",
-  "Australia",
-  "Canada",
+  ...WORLD_COUNTRIES.filter((c) => c !== "India"),
   "Other",
 ] as const;
 
@@ -34,6 +34,54 @@ export const CITIES_BY_COUNTRY: Record<string, readonly string[]> = {
     "Jaipur",
     "Chandigarh",
     "Bengaluru outskirts",
+    "Mysuru",
+    "Mangaluru",
+    "Hubballi",
+    "Kochi",
+    "Thiruvananthapuram",
+    "Kozhikode",
+    "Coimbatore",
+    "Madurai",
+    "Lucknow",
+    "Kanpur",
+    "Varanasi",
+    "Agra",
+    "Prayagraj",
+    "Indore",
+    "Bhopal",
+    "Nagpur",
+    "Nashik",
+    "Surat",
+    "Vadodara",
+    "Rajkot",
+    "Visakhapatnam",
+    "Vijayawada",
+    "Warangal",
+    "Bhubaneswar",
+    "Patna",
+    "Ranchi",
+    "Guwahati",
+    "Siliguri",
+    "Dehradun",
+    "Shimla",
+    "Amritsar",
+    "Ludhiana",
+    "Jodhpur",
+    "Udaipur",
+    "Kota",
+    "Panaji",
+    "Srinagar",
+    "Jammu",
+    "Raipur",
+    "Imphal",
+    "Shillong",
+    "Aizawl",
+    "Kohima",
+    "Agartala",
+    "Gangtok",
+    "Itanagar",
+    "Port Blair",
+    "Puducherry",
     ONLINE,
   ],
   "United Arab Emirates": [
@@ -224,7 +272,11 @@ export function countrySelectValue(raw: string | undefined | null): string {
 export function citiesForCountry(country: string): readonly string[] {
   const select = countrySelectValue(country);
   if (select === LOCATION_OTHER) return CITIES_BY_COUNTRY.Other;
-  return CITIES_BY_COUNTRY[select] ?? CITIES_BY_COUNTRY.Other;
+  const detailed = CITIES_BY_COUNTRY[select];
+  if (detailed) return detailed;
+  const main = CITIES_BY_WORLD_COUNTRY[select];
+  if (main?.length) return [...main, ONLINE];
+  return CITIES_BY_COUNTRY.Other;
 }
 
 /** Map stored city names onto dataset keys (e.g. Delhi → Delhi NCR). */
