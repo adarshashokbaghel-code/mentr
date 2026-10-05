@@ -37,7 +37,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "A Class 10 CBSE Maths tutor is not interchangeable with an ICSE English mentor or a JEE Physics specialist. Write your need in one line: board, class, subject, mode (online or home), and weekly hours. Use that line when you search and again in your connect note. Parents who skip board matching waste trials on tutors who teach the wrong textbook pattern.",
+            text: "A Class 10 CBSE Maths tutor is not interchangeable with an ICSE English mentor or a JEE Physics specialist. Write your need in one line: board, class, subject, mode (online or home), and weekly hours. Use that line when you search and again when you book a demo. Parents who skip board matching waste trials on tutors who teach the wrong textbook pattern.",
           },
           {
             type: "paragraph",
@@ -54,7 +54,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             items: [
               "Open Find online tutors (India) or Search and filter by subject and online mode",
               "Shortlist 3–5 verified profiles — check experience, slots, and bio for your board",
-              "Sign in as a parent and send a connect request with class, board, and timing",
+              "Sign in as a parent and book a demo with class, board, and timing",
               "Wait for acceptance — WhatsApp unlocks only then, which cuts spam for both sides",
               "Book a paid trial (one or two sessions) before a monthly package",
             ],
@@ -98,7 +98,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "Can I find tutors online in India without paying the platform?",
         answer:
-          "Yes. On Mentr, search, connect requests, and requirement posts are free. You only pay the tutor for sessions you agree to.",
+          "Yes. On Mentr, search, demo bookings, and requirement posts are free. You only pay the tutor for sessions you agree to.",
       },
       {
         question: "Is online tuition as effective as home tuition?",
@@ -113,7 +113,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "Where should I start searching?",
         answer:
-          "Use Find online tutors for India, filter your subject, then send connect requests to two or three shortlisted profiles the same day.",
+          "Use Find online tutors for India, filter your subject, then book demos to two or three shortlisted profiles the same day.",
       },
     ],
     relatedLinks: [
@@ -175,7 +175,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
               "Filter Search or Find verified online tutors for Mathematics",
               "Read bios for board keywords (CBSE, ICSE, JEE) and years of experience",
               "Check open slots against your weekday evenings or weekend block",
-              "Send a connect request naming class, board, and two weak topics",
+              "Book a demo naming class, board, and two weak topics",
               "After WhatsApp unlocks, book a paid trial before a monthly plan",
             ],
           },
@@ -213,7 +213,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "How do I find a verified maths tutor online?",
         answer:
-          "Use a platform that reviews ID and credentials, then run a teaching trial. On Mentr, filter for Mathematics, send a free connect request, and trial after WhatsApp unlocks.",
+          "Use a platform that reviews ID and credentials, then run a teaching trial. On Mentr, filter for Mathematics and book a free demo.",
       },
       {
         question: "Should I hire a school teacher or a JEE mentor for Class 9?",
@@ -241,7 +241,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
     readTimeMinutes: 11,
     author: "Mentr Editorial Team",
     intro:
-      "Online English tutors in India cover three very different jobs: spoken fluency, school literature and grammar (CBSE/ICSE), and exam writing (boards, IELTS foundation, or competitive English). Hiring the wrong type wastes months. This guide helps parents and students match the need, verify the tutor, and connect free on Mentr.",
+      "Online English tutors in India cover three very different jobs: spoken fluency, school literature and grammar (CBSE/ICSE), and exam writing (boards, IELTS foundation, or competitive English). Hiring the wrong type wastes months. This guide helps parents and students match the need, verify the tutor, and book a free demo on Mentr.",
     sections: [
       {
         heading: "Pick the English track before you search",
@@ -284,7 +284,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             items: [
               "Open Find online tutors (India) and filter for English",
               "Read profiles for board mentions, languages taught, and mode",
-              "Send a connect request with class, board, and whether you need spoken or school English",
+              "Book a demo with class, board, and whether you need spoken or school English",
               "After acceptance, schedule a trial with a real homework sample ready",
             ],
           },
@@ -321,7 +321,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "Can I find English tutors online free to contact?",
         answer:
-          "On Mentr, yes — search and connect requests are free. You pay only for sessions you book with the tutor.",
+          "On Mentr, yes — search and demo bookings are free. You pay only for sessions you book with the tutor.",
       },
       {
         question: "Home tutor or online for English?",
@@ -374,7 +374,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "When tutors pay per lead, they chase volume. When parents pay to unlock numbers, comparison shopping dies. Free connect on Mentr lets you shortlist calmly: send a request, wait for acceptance, then move to WhatsApp. Numbers stay hidden until both sides agree — which cuts spam.",
+            text: "When tutors pay per lead, they chase volume. When parents pay to unlock numbers, comparison shopping dies. On Mentr you shortlist calmly and book a free demo. The tutor confirms the time. No lead fees.",
           },
           {
             type: "callout",
@@ -392,7 +392,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             items: [
               "Open Find verified online tutors and filter subject + online mode",
               "Open 3–5 profiles — note experience, slots, and board language in the bio",
-              "Send connect requests with class, board, city/time zone, and goal",
+              "Book demos with class, board, city/time zone, and goal",
               "Accept or wait for tutor acceptance — then schedule a trial on WhatsApp",
               "Pay only for sessions you agree to; skip large advances pre-trial",
             ],
@@ -413,7 +413,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "Are verified tutors free to contact on Mentr?",
         answer:
-          "Yes. Search and connect requests are free. WhatsApp unlocks after the tutor accepts.",
+          "Yes. Search and demo bookings are free. The tutor confirms the time in their inbox.",
       },
       {
         question: "What does Mentr verify?",
@@ -448,7 +448,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Open Facebook groups and raw classifieds expose phone numbers immediately. Prefer systems where contact unlocks only after mutual acceptance. On Mentr, parents send a connect request; WhatsApp appears only when the tutor accepts. That single design choice blocks most spam.",
+            text: "Open Facebook groups and raw classifieds expose phone numbers immediately. Prefer systems where contact unlocks only after mutual acceptance. On Mentr, parents book a demo; WhatsApp appears only when the tutor accepts. That single design choice blocks most spam.",
           },
           {
             type: "list",
@@ -487,7 +487,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             ordered: true,
             items: [
               "Shortlist verified profiles on Mentr",
-              "Send connect notes that state age group and subject clearly",
+              "When you book a demo, state the age group and subject clearly",
               "Run a paid trial with a real homework problem",
               "Confirm fees, cancel policy, and tools in writing on WhatsApp",
               "Start with a small package (4–8 sessions) before longer commitments",
@@ -537,7 +537,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
     readTimeMinutes: 11,
     author: "Mentr Editorial Team",
     intro:
-      "“Mentors near me” can mean a career coach in your city — or an online mentor in your time zone who has already walked the path you want. Local helps for in-person accountability; online unlocks specialists you will never meet on your street. This guide shows how to decide, what to ask, and how to connect free on Mentr.",
+      "“Mentors near me” can mean a career coach in your city — or an online mentor in your time zone who has already walked the path you want. Local helps for in-person accountability; online unlocks specialists you will never meet on your street. This guide shows how to decide, what to ask, and how to book a free demo on Mentr.",
     sections: [
       {
         heading: "Mentor vs tutor — clarify the job",
@@ -566,7 +566,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
               "Write a one-paragraph goal: role you want, timeline, and what feedback you need",
               "Open Find mentors near me or filter Search by mentor / skill subjects",
               "Shortlist people whose bios match your stack or industry — not only nearby pin codes",
-              "Send a connect request with your goal paragraph attached",
+              "Book a demo with your goal paragraph attached",
               "Book a paid intro session; agree on cadence (biweekly is common)",
             ],
           },
@@ -676,7 +676,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             items: [
               "Open Find mentors → programming, or Search for Coding",
               "Read bios for DSA, web, or career keywords that match your need",
-              "Send a connect request with stack, goal, and time zone",
+              "Book a demo with stack, goal, and time zone",
               "After WhatsApp unlocks, share GitHub and book a trial",
               "Agree on tools (Meet, Replit, CodeSandbox) and homework cadence",
             ],
@@ -701,7 +701,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "How do I find a coding mentor online for free contact?",
         answer:
-          "Use Mentr’s programming mentor pages, send a free connect request, and move to WhatsApp after acceptance.",
+          "Use Mentr’s programming mentor pages and book a free demo. The tutor confirms the time.",
       },
       {
         question: "Tutor or mentor for DSA?",
@@ -758,7 +758,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             items: [
               "Open Mentr’s UAE online tutor pages or Find verified online tutors",
               "Filter subject and online mode; read bios for CBSE/IGCSE mentions",
-              "Send a connect request with city, curriculum, and preferred UTC offset",
+              "Book a demo with city, curriculum, and preferred UTC offset",
               "After acceptance, run a video trial with a recent school paper",
               "Start with a short package before term-long commitments",
             ],
@@ -801,7 +801,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "Can UAE parents find CBSE tutors online on Mentr?",
         answer:
-          "Yes. Search online tutors, mention CBSE in your connect note, and trial after WhatsApp unlocks.",
+          "Yes. Search online tutors, mention CBSE when you book a demo, then run a trial.",
       },
       {
         question: "Do tutors need to live in the UAE?",
@@ -829,7 +829,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
     readTimeMinutes: 12,
     author: "Mentr Editorial Team",
     intro:
-      "Online tutor jobs from home let educators set hours, skip commute, and teach students across cities — if you can get discovered without buying leads. This guide covers how to list, get verified, win connect requests, and pitch on parent requirements on Mentr while keeping 100% of your fees.",
+      "Online tutor jobs from home let educators set hours, skip commute, and teach students across cities — if you can get discovered without buying leads. This guide covers how to list, get verified, win demo bookings, and pitch on parent requirements on Mentr while keeping 100% of your fees.",
     sections: [
       {
         heading: "What “online tutor jobs from home” usually means in India",
@@ -868,7 +868,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
               "Create a faculty account and complete your profile (subjects, bio, photo, modes)",
               "Submit verification materials and wait for the Verified badge",
               "Toggle open weekly slots so parents see you are accepting students",
-              "Respond to connect requests within 24 hours — speed wins",
+              "Respond to demo bookings within 24 hours — speed wins",
               "Pitch daily on matching requirements with a specific note (class + approach)",
             ],
           },
@@ -898,7 +898,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
       {
         question: "Do I pay for leads?",
         answer:
-          "No. Listing and receiving connect requests is free. Pitching on the board is free within fair-use limits.",
+          "No. Listing and receiving demo bookings is free. Pitching on the board is free within fair-use limits.",
       },
       {
         question: "Can I teach students outside my city?",
@@ -962,7 +962,7 @@ export const ADSENSE_QUALITY_BATCH: Record<string, ArticleContent> = {
             type: "list",
             ordered: true,
             items: [
-              "Inbound: keep slots open — parents find you in search and send connect requests",
+              "Inbound: keep slots open — parents find you in search and book demos",
               "Outbound: browse the requirements board and pitch with a specific fit note",
               "After WhatsApp unlocks, propose a paid trial within 48 hours",
               "Convert trials with a simple 8-session plan and clear outcomes",

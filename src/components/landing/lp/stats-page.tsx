@@ -494,7 +494,7 @@ function AudienceSplit() {
                 "Browse verified home & online tutors — no login needed",
                 "Instant Connect: get matched with available tutors fast",
                 "Post your need once and let tutors come to you",
-                "Chat on WhatsApp only after the tutor accepts",
+                "Book a demo — the tutor confirms the time",
               ]}
               cta="Find a tutor — free"
               href={PARENT_SIGNUP}
@@ -508,7 +508,7 @@ function AudienceSplit() {
               accent="sage"
               points={[
                 "List free with a verified profile parents trust",
-                "Receive connect requests from parents near you or online",
+                "Receive demo bookings from parents near you or online",
                 "Pitch on the requirements board — 3 free pitches a day",
                 "Keep 100% of your fees — no coins, no commission",
               ]}
@@ -532,13 +532,13 @@ const STEPS = [
   },
   {
     icon: Send,
-    title: "Connect free",
-    desc: "Send a request. Tutors accept or pitch — no charge on either side.",
+    title: "Book a demo",
+    desc: "Pick a time, or post a requirement and accept a pitch. No charge on either side.",
   },
   {
     icon: MessageCircle,
-    title: "Talk on WhatsApp",
-    desc: "Numbers unlock after acceptance. Fix a trial and start classes.",
+    title: "Agree the rest directly",
+    desc: "The tutor confirms the demo. Fees stay between you.",
   },
 ];
 

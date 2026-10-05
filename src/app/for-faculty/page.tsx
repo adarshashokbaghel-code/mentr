@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Become a Tutor or Mentor — List Free, Keep 100% | Worldwide",
   description:
-    "Register free as a tutor or mentor — local or online, any country. List availability, receive connect requests, pitch on the requirements board, and keep 100% of your fees. No coins, no commission.",
+    "Register free as a tutor or mentor — local or online, any country. List availability, receive demo bookings, pitch on the requirements board, and keep 100% of your fees. No coins, no commission.",
   keywords: [
     "become a tutor online",
     "become a mentor",

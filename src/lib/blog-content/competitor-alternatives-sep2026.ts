@@ -56,7 +56,7 @@ export const COMPETITOR_ALTERNATIVES_SEP2026: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Mentr was built for the exact frustration Sulekha users describe. You search tutors by subject, class, board (CBSE, ICSE, state board, IGCSE) and area, and read each profile in full: experience, teaching style, availability and fees. When you find someone you like, you send a connection request. Your WhatsApp opens up only after the tutor accepts. Nobody buys your details, so nobody has a reason to spam you.",
+            text: "Mentr was built for the exact frustration Sulekha users describe. You search tutors by subject, class, board (CBSE, ICSE, state board, IGCSE) and area, and read each profile in full: experience, teaching style, availability and fees. When you find someone you like, you book a demo with a time. The tutor confirms in their inbox. Nobody buys your details, so nobody has a reason to spam you.",
           },
           {
             type: "list",
@@ -162,7 +162,7 @@ export const COMPETITOR_ALTERNATIVES_SEP2026: Record<string, ArticleContent> = {
             items: [
               "Write down exactly what you need: subject, class, board, days, home or online, and a budget range. This is what you would have typed into Sulekha.",
               "Search Mentr with those filters and shortlist two or three tutors whose profiles match. Don't contact ten people at once.",
-              "Send connection requests to your shortlist. If you're short on time, use Instant Connect so a tutor calls you.",
+              "Book a demo with your shortlist. If you're short on time, use Instant Connect so a tutor calls you.",
               "On the first call, ask how they would handle your child's specific gap, such as fractions, board-exam writing or English grammar.",
               "Book one paid or free trial class before you agree a monthly fee.",
               "If Sulekha callers keep ringing, tell them politely that you've found a tutor. Most stop after that.",

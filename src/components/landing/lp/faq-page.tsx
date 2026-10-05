@@ -150,7 +150,7 @@ function FaqHero() {
         </h1>
 
         <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-          {FAQS.length} answers on connect requests, WhatsApp contact, tutor
+          {FAQS.length} answers on demo bookings, WhatsApp contact, tutor
           verification, and why Mentr stays 100% free for parents and faculty
           worldwide.
         </p>
@@ -190,8 +190,8 @@ function AudienceCards() {
       tagColor: "text-coral",
       bg: "bg-lavender",
       title: "Find a tutor in one search.",
-      desc: "Search verified tutors locally or online worldwide, send a connect request, and chat on WhatsApp once they accept. Or post your requirement — tutors pitch with their profile.",
-      perks: ["Search local or online", "WhatsApp unlocks on accept", "₹0 fees · free forever", "Post requirements free"],
+      desc: "Search verified tutors locally or online worldwide and book a demo. Or post your requirement — tutors pitch with their profile.",
+      perks: ["Search local or online", "Book a demo with a time", "₹0 fees · free forever", "Post requirements free"],
       href: "/parents",
       cta: "Parents — full guide",
       icon: Search,
@@ -202,8 +202,8 @@ function AudienceCards() {
       tagColor: "text-sage",
       bg: "bg-butter",
       title: "List free. Keep 100%.",
-      desc: "No coins, no lead packs, no commission. Create a profile, set availability, review connect requests, and pitch on the requirements board.",
-      perks: ["Free to list & get contacted", "Number private until accept", "0% cut on tuition fees", "Requirements board access"],
+      desc: "No coins, no lead packs, no commission. Create a profile, set availability, review demo bookings, and pitch on the requirements board.",
+      perks: ["Free to list & get contacted", "Confirm demos in your inbox", "0% cut on tuition fees", "Requirements board access"],
       href: "/for-faculty",
       cta: "Faculty — full guide",
       icon: UserPlus,
@@ -267,8 +267,8 @@ function FlowPreview() {
       url: "mentr.in / parents / connect",
       steps: [
         "Search by subject & area",
-        "Send connect request with note",
-        "Tutor accepts → WhatsApp unlocks",
+        "Book a demo with a time",
+        "Tutor confirms the demo",
         "Arrange timing & fees directly",
       ],
     },
@@ -279,7 +279,7 @@ function FlowPreview() {
       steps: [
         "Register & pass verification",
         "Set open slots on dashboard",
-        "Review connect requests",
+        "Review demo bookings",
         "Accept → share WhatsApp · keep 100%",
       ],
     },

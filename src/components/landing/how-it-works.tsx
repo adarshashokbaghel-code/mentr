@@ -10,8 +10,8 @@ import { MessageCircle, Megaphone, Search } from "lucide-react";
 const searchSteps = [
   "Search by subject and area — nearby or online worldwide",
   "Browse verified profiles, slots, and intro videos",
-  "Send a connect request with a short note",
-  "Tutor accepts → WhatsApp unlocks. Arrange fees directly",
+  "Book a demo — subject, class, and a time",
+  "The tutor confirms. You agree fees directly after the demo",
 ];
 
 const postSteps = [
@@ -34,9 +34,9 @@ export function HowItWorks() {
             </h2>
           </div>
           <p className="mx-auto max-w-md text-base text-muted lg:mx-0 lg:text-right">
-            Parents search tutors locally or online worldwide, or post a
-            requirement and get pitches — both free. Faculty accept who they
-            want, then it&apos;s straight to WhatsApp.
+            Parents book a demo with a tutor they have chosen, or post a
+            requirement and get pitches — both free. Faculty confirm the demo
+            or the pitch, then you agree the rest directly.
           </p>
         </div>
 
@@ -53,10 +53,9 @@ export function HowItWorks() {
               <span className="block text-coral">Both paths. Zero fees.</span>
             </h3>
             <p className="mt-2 max-w-2xl text-base leading-relaxed text-muted">
-              Know who you want? Search and send a connect request. Not sure
-              yet? Post your requirement on the board — verified tutors pitch,
-              you pick who to connect with. WhatsApp unlocks only after you
-              accept.
+              Know who you want? Search and book a demo. Not sure yet? Post
+              your requirement on the board — verified tutors pitch, and you
+              pick who to continue with.
             </p>
           </div>
 
@@ -65,7 +64,7 @@ export function HowItWorks() {
             <div className="border-b border-hairline/60 p-6 sm:p-10 lg:border-b-0 lg:border-r">
               <p className="inline-flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-ink">
                 <Search className="h-3 w-3 text-coral" />
-                Path 1 · Search &amp; connect
+                Path 1 · Search &amp; book a demo
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 Browse the directory when you know the subject — in your city or
@@ -121,9 +120,9 @@ export function HowItWorks() {
 
           <div className="border-t border-hairline/60 bg-white/50 px-6 py-4 sm:px-10">
             <p className="text-sm leading-relaxed text-muted">
-              <strong className="text-ink">After they accept:</strong> WhatsApp
-              unlocks and you arrange timing, fees, and location directly —
-              Mentr never takes a cut.
+              <strong className="text-ink">After the demo or an accepted pitch:</strong>{" "}
+              you arrange timing, fees, and location directly — Mentr never
+              takes a cut.
             </p>
           </div>
         </div>
@@ -138,10 +137,9 @@ export function HowItWorks() {
               <span className="block text-coral">You choose who connects.</span>
             </h3>
             <p className="mt-3 text-base leading-relaxed text-muted">
-              Parents find your listing in search and send connect requests — or
-              they post on the requirements board and you pitch with your
-              profile. Your number stays private until you accept either way.
-              Every rupee stays yours.
+              Parents book a demo from your listing, or they post on the
+              requirements board and you pitch with your profile. You confirm
+              the ones that fit. Every rupee stays yours.
             </p>
             <FacultyActionLink href="/faculty/signup" className="mt-6 inline-block">
               <Button variant="secondary">
@@ -167,7 +165,7 @@ export function HowItWorks() {
                 <p className="mt-1 text-right text-[10px] text-muted">12:06</p>
               </div>
               <p className="mt-4 text-center text-[11px] font-semibold text-sage">
-                Search request or board pitch — same outcome. You arrange the rest.
+                Demo booked or pitch accepted — you arrange the rest.
               </p>
             </div>
           </BrowserFrame>
@@ -183,10 +181,9 @@ export function HowItWorks() {
               <span className="block text-coral">Then you take over.</span>
             </h3>
             <p className="mt-3 text-base leading-relaxed text-muted">
-              Whether a parent searched your profile or accepted your board
-              pitch — you review each request, accept the ones that fit, and
-              chat on WhatsApp. Mentr never sits in the middle of fees or
-              scheduling.
+              A parent books a demo from your profile, or accepts your pitch
+              on the board. You confirm, then arrange fees and schedule
+              yourselves. Mentr never sits in the middle.
             </p>
             <ParentActionLink href="/search" className="mt-6 inline-block">
               <Button variant="whatsapp">

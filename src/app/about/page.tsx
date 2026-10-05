@@ -34,12 +34,12 @@ const values = [
   {
     icon: IndianRupee,
     title: "Free means free",
-    body: "No coins, no lead packs, no commission on fees. Tutors keep 100% of what they earn, and parents never pay to see a profile or send a request.",
+    body: "No coins, no lead packs, no commission on fees. Tutors keep 100% of what they earn, and parents never pay to see a profile or book a demo.",
   },
   {
     icon: ShieldCheck,
     title: "Privacy before contact",
-    body: "Phone numbers stay hidden until both sides agree. A tutor's WhatsApp unlocks only after they accept a parent's request — spam can't reach either side.",
+    body: "A demo shares your number with the tutor you chose, so they can confirm the time. On the requirements board, your name stays hidden until you accept a pitch.",
   },
   {
     icon: Globe,
@@ -91,7 +91,7 @@ export default function AboutPage() {
               </a>
               , the team behind simple, free business tools for founders and
               growing teams. Post a requirement and tutors pitch you, or search
-              the directory and send a connect request yourself. Either way,
+              the directory and book a demo yourself. Either way,
               numbers stay private until you accept — then you arrange
               everything directly.
             </p>
@@ -105,7 +105,7 @@ export default function AboutPage() {
               Mentr is a tutor–parent connector, not a tuition agency. We do not
               employ tutors, set session fees, or take a cut from classes. Parents
               and students use Mentr to discover verified tutors by subject and
-              area, send connect requests, or post learning requirements where
+              area, book demos, or post learning requirements where
               tutors pitch interest. Faculty use Mentr to list profiles, manage
               availability, and respond to requests — all without buying lead
               credits.
@@ -145,10 +145,9 @@ export default function AboutPage() {
               experience, and fit before hiring.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Phone numbers stay hidden until a tutor accepts a parent&apos;s
-              connect request (or a parent accepts a pitch on a requirement).
-              That consent step is how we keep contact spam low without charging
-              either side for unlocks.
+              Booking a demo shares your number with that tutor so they can
+              confirm the time. On the requirements board, your name stays
+              hidden until you accept a pitch. Listing and contact stay free.
             </p>
           </div>
         </section>
@@ -159,7 +158,7 @@ export default function AboutPage() {
               How Mentr stays free
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Core marketplace features — search, profiles, connect requests, and
+              Core marketplace features — search, profiles, demo bookings, and
               the requirements flow — are free for parents and faculty. Public
               marketing and guide pages aimed at parents and tutors may show
               Google AdSense ads; logged-in dashboards and Mentr Learn (/learn)

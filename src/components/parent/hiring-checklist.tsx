@@ -45,9 +45,9 @@ const STEPS: {
   },
   {
     id: "connect",
-    label: "Connect on WhatsApp",
-    hint: "Accept a tutor to unlock chat",
-    href: "/parent/dashboard",
+    label: "Book a demo",
+    hint: "Or accept a pitch on My posts",
+    href: "/search",
   },
   {
     id: "firstSession",
@@ -267,7 +267,7 @@ export function HiringChecklist({
                   </button>
                 ) : (
                   <span className="text-[11px] text-muted">
-                    {locked ? "Connect first" : "—"}
+                    {locked ? "Book a demo first" : "—"}
                   </span>
                 )}
               </div>

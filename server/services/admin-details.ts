@@ -9,6 +9,7 @@ import {
   type IGuestActivity,
 } from "../models/NotLoggedInRequirement";
 import { User } from "../models/User";
+import { DemoRequest } from "../models/DemoRequest";
 
 async function demoUserIds(): Promise<Types.ObjectId[]> {
   const rows = await User.find({ email: { $regex: /@mentr\.local$/i } })
@@ -295,5 +296,70 @@ export async function listAdminGuestRequirements(
       row.updatedAt instanceof Date
         ? row.updatedAt.toISOString()
         : String(row.updatedAt),
+  }));
+}
+
+export type AdminDemoRequestRow = {
+  id: string;
+  teacherId: string;
+  teacherName: string;
+  teacherEmail: string;
+  parentName: string;
+  parentEmail: string;
+  parentPhone: string;
+  parentCity: string;
+  subject: string;
+  classLevel: string;
+  board: string;
+  preferredDate: string;
+  preferredTime: string;
+  note: string;
+  status: string;
+  tutorNote: string;
+  respondedAt?: string;
+  createdAt: string;
+};
+
+export async function listAdminDemoRequests(
+  limit = 200,
+): Promise<AdminDemoRequestRow[]> {
+  const cap = Math.min(Math.max(limit, 1), 500);
+  const rows = await DemoRequest.find({})
+    .sort({ createdAt: -1 })
+    .limit(cap)
+    .lean();
+
+  const teacherIds = rows.map((r) => r.teacher);
+  const teachers = await User.find({ _id: { $in: teacherIds } })
+    .select("email")
+    .lean();
+  const emailById = new Map(teachers.map((t) => [String(t._id), t.email]));
+
+  return rows.map((row) => ({
+    id: String(row._id),
+    teacherId: String(row.teacher),
+    teacherName: row.teacherName,
+    teacherEmail: emailById.get(String(row.teacher)) || "Deleted user",
+    parentName: row.parentName,
+    parentEmail: row.parentEmail,
+    parentPhone: row.parentPhone,
+    parentCity: row.parentCity || row.parentArea || "",
+    subject: row.subject,
+    classLevel: row.classLevel,
+    board: row.board || "",
+    preferredDate: row.preferredDate,
+    preferredTime: row.preferredTime,
+    note: row.note || "",
+    status: row.status,
+    tutorNote: row.tutorNote || "",
+    respondedAt: row.respondedAt
+      ? row.respondedAt instanceof Date
+        ? row.respondedAt.toISOString()
+        : String(row.respondedAt)
+      : undefined,
+    createdAt:
+      row.createdAt instanceof Date
+        ? row.createdAt.toISOString()
+        : String(row.createdAt),
   }));
 }

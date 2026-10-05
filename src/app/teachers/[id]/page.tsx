@@ -56,7 +56,7 @@ export async function generateMetadata({
     return { title: "Teacher profile", robots: { index: false } };
   }
   const title = `${teacher.name} — ${teacher.subjectLine} Tutor in ${teacher.area}, Bengaluru`;
-  const description = `${teacher.name} teaches ${teacher.subjectLine} in ${teacher.area}. View the verified profile and send a free connect request on WhatsApp.`;
+  const description = `${teacher.name} teaches ${teacher.subjectLine} in ${teacher.area}. View the verified profile and book a free demo.`;
   return {
     title,
     description,
@@ -377,6 +377,7 @@ export default async function TeacherProfilePage({
               <TeacherConnectPanel
                 teacher={teacher}
                 available={available}
+                subjects={teacher.subjects}
                 className="mt-0"
               />
 

@@ -294,7 +294,7 @@ export function classSubjectFaqs(
   return [
     {
       question: `How do I find a ${subject} tutor for Class ${level}?`,
-      answer: `Browse verified ${subject} tutors on Mentr who teach Class ${level} and nearby grades. Send a free connect request — WhatsApp unlocks after the tutor accepts. No lead fees.`,
+      answer: `Browse verified ${subject} tutors on Mentr who teach Class ${level} and nearby grades. Book a free demo with a time. The tutor confirms in their inbox. No lead fees.`,
     },
     {
       question: `What should I ask before hiring a Class ${level} ${subject} tutor?`,
@@ -311,7 +311,7 @@ export function boardFaqs(boardLabel: string): HubFaq[] {
   return [
     {
       question: `How do I find ${boardLabel} tutors near me?`,
-      answer: `Search ${boardLabel} tutors on Mentr by subject and class. Profiles show experience, verification, and open slots. Connect free — fees stay between you and the tutor.`,
+      answer: `Search ${boardLabel} tutors on Mentr by subject and class. Profiles show experience, verification, and open slots. Book a free demo — fees stay between you and the tutor.`,
     },
     {
       question: `Are ${boardLabel} tutors on Mentr verified?`,
@@ -329,7 +329,7 @@ export function cityFaqs(cityName: string, local: boolean): HubFaq[] {
     {
       question: `How do I find tutors in ${cityName}?`,
       answer: local
-        ? `Browse verified tutors across ${cityName} by subject and area on Mentr. Filter by open slots and send a free connect request — or use Instant Connect for a fast match.`
+        ? `Browse verified tutors across ${cityName} by subject and area on Mentr. Filter by open slots and book a free demo — or use Instant Connect for a fast match.`
         : `Mentr lists online tutors who work with ${cityName} families — video sessions in your time zone. Post a requirement to get pitches from tutors who serve ${cityName}.`,
     },
     {
@@ -351,7 +351,7 @@ export function citySubjectFaqs(
   return [
     {
       question: `How do I find a ${subject} tutor in ${cityName}?`,
-      answer: `Open Find a Tutor on Mentr, filter by ${subject} and ${cityName} (or online). Compare verified profiles, then send a free connect request — or use Get Matched Instantly if you need someone this week.`,
+      answer: `Open Find a Tutor on Mentr, filter by ${subject} and ${cityName} (or online). Compare verified profiles, then book a free demo — or use Get Matched Instantly if you need someone this week.`,
     },
     {
       question: `What do ${subject} tutors in ${cityName} typically charge?`,
@@ -363,7 +363,7 @@ export function citySubjectFaqs(
     },
     {
       question: `Are tutors on Mentr verified?`,
-      answer: `Verified tutors complete identity and credential checks. Look for the Verified badge, a clear bio, and the classes they teach. WhatsApp unlocks only after they accept your request.`,
+      answer: `Verified tutors complete identity and credential checks. Look for the Verified badge, a clear bio, and the classes they teach. Book a demo when the profile fits.`,
     },
     {
       question: `Is Mentr free for parents in ${cityName}?`,

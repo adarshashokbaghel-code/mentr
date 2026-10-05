@@ -16,7 +16,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Premium Tutors — 100% Verified Mentors for Parents · Mentr",
   description:
-    "Browse 100% verified Premium tutors on Mentr. Identity-checked profiles, clear fees, and connect free — with or without login. No agency fee for parents.",
+    "Browse 100% verified Premium tutors on Mentr. Identity-checked profiles, clear fees, and book a free demo — with or without login. No agency fee for parents.",
   keywords: [
     "premium tutors",
     "verified tutors",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Premium Tutors — 100% Verified · Mentr",
     description:
-      "Identity-verified Premium tutors for parents. Browse free, connect with or without login. No agency fee.",
+      "Identity-verified Premium tutors for parents. Browse free and book a demo. No agency fee.",
     url: absoluteUrl("/premiummentors"),
     type: "website",
   },
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Premium Tutors — 100% Verified · Mentr",
     description:
-      "Browse verified Premium tutors. Connect free — login optional for Premium mentors.",
+      "Browse verified Premium tutors. Book a free demo — login optional for Premium mentors.",
   },
 };
 

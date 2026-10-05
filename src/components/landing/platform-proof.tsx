@@ -111,8 +111,7 @@ export function PlatformProof({
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted lg:mx-0">
               {SITE_BRAND} helps parents find verified tutors and mentors for
               school, boards, and skills — search free, post a requirement, or
-              try Instant Connect. WhatsApp unlocks only after both sides
-              accept.
+              try Instant Connect. Book a demo when you have chosen a tutor.
             </p>
 
             <div className="mt-7 grid grid-cols-2 gap-2.5 sm:gap-3">

@@ -29,7 +29,7 @@ export async function generateMetadata({
   if (!parsed) return { title: "Not found", robots: { index: false } };
   const { subject, level: cls } = parsed;
   const title = `${subject} Tutor for Class ${cls} — Verified Profiles`;
-  const description = `Find a ${subject} tutor for Class ${cls} on ${SITE_NAME}. Browse verified profiles, compare fees, connect free — or post your requirement and let tutors come to you.`;
+  const description = `Find a ${subject} tutor for Class ${cls} on ${SITE_NAME}. Browse verified profiles, compare fees, book a free demo — or post your requirement and let tutors come to you.`;
   const path = classSubjectPath(cls, subject);
   return {
     title,

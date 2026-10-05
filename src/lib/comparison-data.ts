@@ -338,7 +338,7 @@ export const COMPARISON_FAQS = [
   {
     question: "Is Mentr really free for parents?",
     answer:
-      "Yes. Searching, shortlisting, posting a requirement, sending connection requests and chatting on WhatsApp after acceptance are all free. You agree fees directly with the tutor and Mentr takes no cut.",
+      "Yes. Searching, shortlisting, posting a requirement, booking a demo, and accepting a pitch are all free. You agree fees directly with the tutor and Mentr takes no cut.",
   },
   {
     question: "How does Mentr make money if parents don't pay?",

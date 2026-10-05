@@ -159,7 +159,7 @@ function SeoListingCard({ teacher }: { teacher: Teacher }) {
             </Link>
             <Link href={connectHref} className="flex-1">
               <Button size="sm" className="w-full">
-                Connect free
+                Book a demo
               </Button>
             </Link>
           </div>
@@ -198,7 +198,7 @@ function SeoListingCard({ teacher }: { teacher: Teacher }) {
             <Link href={connectHref}>
               <Button size="sm" className="w-full gap-1.5">
                 <MessageCircle className="h-3.5 w-3.5" />
-                Connect free
+                Book a demo
               </Button>
             </Link>
           </div>
@@ -366,10 +366,9 @@ export function SeoHubPage({
             </h2>
             <p>
               Browse verified profiles for free, compare subjects, fees, and
-              availability, then send a connect request. WhatsApp unlocks only
-              after the tutor accepts — numbers stay private until both sides
-              agree. Session fees are arranged directly; Mentr never takes a
-              commission.
+              availability, then book a demo. The tutor sees your number
+              and confirms the time. Session fees are arranged directly; Mentr
+              never takes a commission.
             </p>
           </section>
 

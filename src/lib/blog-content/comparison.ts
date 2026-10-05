@@ -19,7 +19,7 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "paragraph",
-            text: "Mentr works differently. Parents search verified tutor profiles by subject, class, and locality — or post a requirement on the board. When a tutor accepts a connect request, both sides get direct WhatsApp contact. There is no coin system on either side. Parents never pay to browse, message, or compare profiles. The trade-off today is reach: UrbanPro has a larger national tutor base built over many years, while Mentr is growing fastest in Bengaluru and among tutors who want a zero-fee model.",
+            text: "Mentr works differently. Parents search verified tutor profiles by subject, class, and locality — or post a requirement on the board. When a tutor accepts a demo booking, both sides get direct WhatsApp contact. There is no coin system on either side. Parents never pay to browse, message, or compare profiles. The trade-off today is reach: UrbanPro has a larger national tutor base built over many years, while Mentr is growing fastest in Bengaluru and among tutors who want a zero-fee model.",
           },
           {
             type: "list",
@@ -41,7 +41,7 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "paragraph",
-            text: "Mentr charges tutors nothing to list, pitch on requirements, or receive connect requests. There are no coin packs, no premium tiers for visibility, and no cut on session fees. A home tutor charging ₹800/hour in Indiranagar keeps the full ₹800. The platform's bet is that enough tutors will prefer a free directory over paying per lead, and enough parents will value verified profiles and direct WhatsApp contact.",
+            text: "Mentr charges tutors nothing to list, pitch on requirements, or receive demo bookings. There are no coin packs, no premium tiers for visibility, and no cut on session fees. A home tutor charging ₹800/hour in Indiranagar keeps the full ₹800. The platform's bet is that enough tutors will prefer a free directory over paying per lead, and enough parents will value verified profiles and direct WhatsApp contact.",
           },
           {
             type: "callout",
@@ -166,7 +166,7 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "paragraph",
-            text: "Mentr does not charge commission at any point. There is no fee on the first lesson, the tenth lesson, or any lesson. Tutors list free, parents connect free, and fees are agreed directly on WhatsApp. For a tutor doing ₹600/hour CBSE maths in Jayanagar, that difference matters: on Superprof, your first month with a new student can effectively cost you several thousand rupees in platform fees before you keep the full rate.",
+            text: "Mentr does not charge commission at any point. There is no fee on the first lesson, the tenth lesson, or any lesson. Tutors list free, parents book a free demo, and fees are agreed directly on WhatsApp. For a tutor doing ₹600/hour CBSE maths in Jayanagar, that difference matters: on Superprof, your first month with a new student can effectively cost you several thousand rupees in platform fees before you keep the full rate.",
           },
           {
             type: "callout",
@@ -206,7 +206,7 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "paragraph",
-            text: "On Mentr, parents search by subject and area, review Verified profiles with availability slots, and send a connect request. When the tutor accepts, both parties get WhatsApp contact immediately. There is no in-app payment layer — you agree fees, mode (home or online), and schedule directly. For Indian parents used to negotiating monthly packages on WhatsApp, this feels natural. For parents who prefer escrow-style booking, Superprof's structure may feel more structured.",
+            text: "On Mentr, parents search by subject and area, review Verified profiles with availability slots, and book a demo. When the tutor accepts, both parties get WhatsApp contact immediately. There is no in-app payment layer — you agree fees, mode (home or online), and schedule directly. For Indian parents used to negotiating monthly packages on WhatsApp, this feels natural. For parents who prefer escrow-style booking, Superprof's structure may feel more structured.",
           },
         ],
       },
@@ -315,7 +315,7 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Mentr is free for both parents and tutors. Parents search verified profiles by subject, class, and locality — or post a requirement on the board. Tutors list free, pitch on requirements free, and keep 100% of session fees. Contact happens on WhatsApp after a connect request is accepted. Every tutor is verified before going live.",
+            text: "Mentr is free for both parents and tutors. Parents search verified profiles by subject, class, and locality — or post a requirement on the board. Tutors list free, pitch on requirements free, and keep 100% of session fees. Contact happens on WhatsApp after a demo booking is accepted. Every tutor is verified before going live.",
           },
           {
             type: "list",

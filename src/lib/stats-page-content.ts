@@ -7,7 +7,7 @@ export const STATS_PRODUCTS = [
     name: "Mentr tutor marketplace",
     path: "/search",
     description:
-      "Find verified home and online tutors by subject, class, board and area. Connect free and chat on WhatsApp after the tutor accepts. Tutors keep 100% of fees.",
+      "Find verified home and online tutors by subject, class, board and area. Book a free demo and chat on WhatsApp after the tutor accepts. Tutors keep 100% of fees.",
   },
   {
     name: "Mentr Learn",
@@ -33,7 +33,7 @@ export const STATS_FAQS = [
   {
     question: "Is Mentr free for parents?",
     answer:
-      "Yes. Parents can browse verified tutors without logging in, send connect requests, use Instant Connect and post requirements for free. There is no upfront charge and no platform fee — you pay the tutor directly for classes.",
+      "Yes. Parents can browse verified tutors without logging in, book demos, use Instant Connect and post requirements for free. There is no upfront charge and no platform fee — you pay the tutor directly for classes.",
   },
   {
     question: "How are tutors on Mentr verified?",

@@ -37,7 +37,7 @@ function emailShell(
 export async function notifyFacultyGuestRequirement(
   row: INotLoggedInRequirement,
 ): Promise<void> {
-  const href = "/dashboard#parents-reached";
+  const href = "/dashboard#inbox";
   const title = "New parent request (no account)";
   const notifBody = `${row.name} · ${row.requirement}`;
 

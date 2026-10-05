@@ -46,7 +46,7 @@ const sections = [
     title: "Cookie notice",
     body: [
       "On first visit to public pages we may show a short cookie notice. Dismissing it stores your preference in local storage on your device so we do not repeat the same banner every page load.",
-      "For a full description of personal data we collect (accounts, profiles, connect requests), see our Privacy Policy.",
+      "For a full description of personal data we collect (accounts, profiles, demo bookings), see our Privacy Policy.",
     ],
   },
   {

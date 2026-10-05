@@ -7,8 +7,6 @@ export function isEligibleForInstantConnect(user: IUser): boolean {
   if (user.role !== "faculty") return false;
   if (!user.emailVerified || !user.profileCompleted) return false;
   if (!user.profile) return false;
-  // Default true when unset
-  if (user.profile.acceptingStudents === false) return false;
   return true;
 }
 

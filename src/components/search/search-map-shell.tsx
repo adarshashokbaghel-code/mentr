@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { resolveTeacherCoords } from "@/lib/teachers";
 import { SearchMap, type MapTeacher, type SearchMapHandle } from "@/components/search/search-map";
 import { type SearchFiltersState } from "@/components/search/search-header";
@@ -159,6 +160,15 @@ function MapTeacherPreview({
         <SaveTeacherButton teacherId={teacher.id} size="sm" />
       </div>
       <div className="flex gap-2 border-t border-hairline px-3 pb-3 pt-2 sm:px-4 sm:pb-4">
+        <BookDemoButton
+          teacher={{
+            id: teacher.id,
+            name: teacher.name,
+            subjects: teacher.subjects,
+          }}
+          label="Book a demo"
+          className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg bg-ink text-sm font-semibold text-white transition hover:bg-ink/85"
+        />
         {!user && guestBrowse ? (
           <button
             type="button"

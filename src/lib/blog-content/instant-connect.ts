@@ -109,7 +109,7 @@ export const INSTANT_CONNECT_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Mentr gives parents three complementary tools. Use Instant Connect when you want a fast, outbound path: mentors you pick can call you soon. Use Search when you want to browse many verified profiles, filter by area, and send connect requests one by one. Use the Requirements Board when you want tutors to pitch you after reading a public post — useful when timing is flexible or you want more options than three.",
+            text: "Mentr gives parents three complementary tools. Use Instant Connect when you want a fast, outbound path: mentors you pick can call you soon. Use Search when you want to browse many verified profiles, filter by area, and book demos one by one. Use the Requirements Board when you want tutors to pitch you after reading a public post — useful when timing is flexible or you want more options than three.",
           },
           {
             type: "list",
@@ -234,7 +234,7 @@ export const INSTANT_CONNECT_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "How is Instant Connect different from searching tutors?",
         answer:
-          "Search is browse-first: you explore many profiles and send connect requests. Instant Connect is urgency-first: Mentr shortlists matches and lets selected mentors contact you quickly for a limited window.",
+          "Search is browse-first: you explore many profiles and book demos. Instant Connect is urgency-first: Mentr shortlists matches and lets selected mentors contact you quickly for a limited window.",
       },
       {
         question: "Do notes and AI matching really help?",

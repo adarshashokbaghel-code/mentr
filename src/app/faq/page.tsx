@@ -6,7 +6,7 @@ import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentr by Paprly FAQ — Fees, Learn & How Connect Requests Work",
+  title: "Mentr by Paprly FAQ — Fees, Learn & How Demo bookings Work",
   description:
     "FAQ for Mentr by Paprly: tutor verification, WhatsApp connect, zero fees, and Mentr Learn (mentr.in/learn) — free Class 3–5 coding for kids.",
   keywords: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     "how to find tutor online",
     "tutor verification",
     "UrbanPro alternative",
-    "connect request WhatsApp",
+    "demo booking WhatsApp",
     "home tutor fees",
   ],
   alternates: { canonical: "/faq" },

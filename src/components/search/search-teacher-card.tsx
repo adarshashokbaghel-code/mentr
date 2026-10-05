@@ -1,6 +1,6 @@
 "use client";
 
-import { ConnectButton } from "@/components/connect/connect-button";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { SaveTeacherButton } from "@/components/search/save-teacher-button";
 import { MentorStatusBadges } from "@/components/ui/mentor-status-badges";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
@@ -282,30 +282,33 @@ export function SearchTeacherCard({
           )}
 
           {/* Mobile CTAs */}
-          <div className="flex gap-2 pt-0.5 sm:hidden" data-connect>
-            {available ? (
-              <ConnectButton
-                teacher={teacher}
-                label={teacher.premium ? "Connect" : "Connect free"}
-                className="inline-flex h-10 flex-1 items-center justify-center gap-1 rounded-lg bg-coral text-sm font-semibold text-white hover:bg-coral-dark"
-                requestedClassName="inline-flex h-10 flex-1 items-center justify-center gap-1 rounded-lg bg-cream text-sm font-semibold text-muted"
-              />
-            ) : (
-              <span className="inline-flex h-10 flex-1 items-center justify-center rounded-lg bg-cream text-sm font-semibold text-muted">
-                Fully booked
-              </span>
-            )}
-            <Link
-              href={profileHref}
-              className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-hairline text-sm font-semibold text-ink hover:bg-cream"
-            >
-              Profile
-            </Link>
+          <div className="flex flex-col gap-2 pt-0.5 sm:hidden" data-connect>
+            <BookDemoButton
+              teacher={{
+                id: teacher.id,
+                name: teacher.name,
+                subjects: teacher.subjects,
+              }}
+              className="inline-flex h-10 w-full items-center justify-center gap-1.5 rounded-lg bg-ink text-sm font-semibold text-white hover:bg-ink/85"
+            />
+            <div className="flex gap-2">
+              {!available ? (
+                <span className="inline-flex h-10 flex-1 items-center justify-center rounded-lg bg-cream text-sm font-semibold text-muted">
+                  Fully booked
+                </span>
+              ) : null}
+              <Link
+                href={profileHref}
+                className="inline-flex h-10 flex-1 items-center justify-center rounded-lg border border-hairline text-sm font-semibold text-ink hover:bg-cream"
+              >
+                Profile
+              </Link>
+            </div>
           </div>
         </div>
 
         {/* Desktop CTA rail */}
-        <div className="hidden w-[148px] shrink-0 flex-col items-stretch justify-between gap-2 border-l border-hairline pl-4 sm:flex">
+        <div className="hidden w-[168px] shrink-0 flex-col items-stretch justify-between gap-2 border-l border-hairline pl-4 sm:flex">
           <div className="text-right">
             {rate ? (
               <>
@@ -326,18 +329,20 @@ export function SearchTeacherCard({
             ) : null}
           </div>
           <div className="flex flex-col gap-1.5" data-connect>
-            {available ? (
-              <ConnectButton
-                teacher={teacher}
-                label={teacher.premium ? "Connect" : "Connect free"}
-                className="inline-flex h-9 w-full items-center justify-center rounded-lg bg-coral text-xs font-semibold text-white hover:bg-coral-dark"
-                requestedClassName="inline-flex h-9 w-full items-center justify-center rounded-lg bg-cream text-xs font-semibold text-muted"
-              />
-            ) : (
+            <BookDemoButton
+              teacher={{
+                id: teacher.id,
+                name: teacher.name,
+                subjects: teacher.subjects,
+              }}
+              label="Book a demo"
+              className="inline-flex h-9 w-full items-center justify-center gap-1 rounded-lg bg-ink text-xs font-semibold text-white hover:bg-ink/85"
+            />
+            {!available ? (
               <span className="inline-flex h-9 w-full items-center justify-center rounded-lg bg-cream text-xs font-semibold text-muted">
-                Notify me
+                Fully booked
               </span>
-            )}
+            ) : null}
             <Link
               href={profileHref}
               className="inline-flex h-8 w-full items-center justify-center rounded-lg border border-hairline text-xs font-semibold text-ink hover:bg-cream"

@@ -39,7 +39,7 @@ export const GUIDE_BATCH_SEP2026: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Clicking a tutor card, the View button, or Connect as a guest opens the sign-in chooser — parent or tutor. Choose parent, complete quick login, and you return to the profile or connect flow. WhatsApp numbers stay hidden until the tutor accepts your connect request, which protects both sides from spam.",
+            text: "Clicking a tutor card or Book a demo as a guest opens the sign-in chooser — parent or tutor. Choose parent, complete quick login, and you return to the profile to book the demo. The tutor confirms the time before you lock a regular schedule.",
           },
           {
             type: "list",
@@ -47,8 +47,8 @@ export const GUIDE_BATCH_SEP2026: Record<string, ArticleContent> = {
             items: [
               "Shortlist 3–5 tutors while browsing as a guest",
               "Click one profile — sign in as parent when prompted",
-              "Send a connect request with class, board, and preferred timing",
-              "WhatsApp unlocks after the tutor accepts (usually 24–48 hours)",
+              "Book a demo with class, board, and preferred timing",
+              "The tutor confirms the demo, usually within 24–48 hours",
               "Book a paid trial session before monthly commitment",
             ],
           },
@@ -87,7 +87,7 @@ export const GUIDE_BATCH_SEP2026: Record<string, ArticleContent> = {
       {
         question: "Can parents browse tutors on Mentr without creating an account?",
         answer:
-          "Yes. The /search page lists tutors for guests. Sign in only when you want to view full profile actions, send a connect request, or post a requirement.",
+          "Yes. The /search page lists tutors for guests. Sign in only when you want to view full profile actions, book a demo, or post a requirement.",
       },
       {
         question: "Is browsing tutors on Mentr free?",

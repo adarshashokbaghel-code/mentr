@@ -46,7 +46,7 @@ export const FAQS: FaqItem[] = [
     category: "general",
     question: "Is Mentr really 100% free?",
     answer:
-      "The tutor marketplace is free for both sides, forever — search, profiles, connect, and WhatsApp after accept, with no coins or commission. Mentr Learn (Class 3–5) is also free. Snap & Grade is a separate CBSE practice tool: 100 free credits once, then optional recharge from ₹1. Listing and contacting tutors is never paywalled.",
+      "The tutor marketplace is free for both sides, forever — search, profiles, booking a demo, and pitches, with no coins or commission. Mentr Learn (Class 3–5) is also free. Snap & Grade is a separate CBSE practice tool: 100 free credits once, then optional recharge from ₹1. Listing and contacting tutors is never paywalled.",
   },
   {
     category: "general",
@@ -82,25 +82,25 @@ export const FAQS: FaqItem[] = [
     category: "parents",
     question: "How do parents contact a teacher?",
     answer:
-      "Create a free parent account, search by subject near you or online worldwide, open a Verified profile and tap Connect. You send a short message with your request; once the tutor accepts, their WhatsApp number unlocks for you — contact is always free.",
+      "Create a free parent account, search by subject near you or online worldwide, open a Verified profile, and book a demo. You pick the subject, class, and a time. The tutor confirms in their inbox. Contact is always free.",
   },
   {
     category: "parents",
     question: "Why can't I see a teacher's number right away?",
     answer:
-      "Numbers stay private to protect teachers from spam. Your connect request and message go to the tutor first; the moment they accept, their WhatsApp opens up for you and you arrange timing, fees, and location directly — Mentr stays out of it.",
+      "A demo request goes to the tutor first, with the time you picked. They confirm before you lock a regular schedule. Fees and location are agreed between you after that — Mentr stays out of it.",
   },
   {
     question: "Can I post my requirement instead of searching?",
     answer:
-      "Yes. Post what your child needs on the requirements board. Verified tutors pitch with their profile and message — each pitch automatically creates a connection request on your parent dashboard. You review profiles, accept who fits, and their WhatsApp unlocks. Completely free.",
+      "Yes. Post what your child needs on the requirements board. Verified tutors pitch with their profile and message. You review pitches on your parent dashboard and accept who fits. Completely free.",
     category: "parents",
   },
   {
     category: "faculty",
     question: "How do faculty register and get contacted?",
     answer:
-      "Use Faculty register / login, create a profile with subjects and WhatsApp, pass verification, then list open slots. Parents send connect requests with a note — you accept the ones that fit, and only then is your number shared. No coins, no paying for leads that never reply.",
+      "Use Faculty register / login, create a profile with subjects and WhatsApp, pass verification, then list open slots. Parents book a demo from your profile — you confirm the ones that fit. You can also pitch on the requirements board. No coins, no paying for leads that never reply.",
   },
   {
     category: "faculty",
@@ -118,18 +118,18 @@ export const FAQS: FaqItem[] = [
     category: "parents",
     question: "How is personal information handled?",
     answer:
-      "Account basics (name, email, role) and optional profile details are stored to run search and connect requests. Tutor WhatsApp numbers stay hidden until the tutor accepts a parent’s request. Public pages may use analytics and AdSense cookies; dashboards do not show third-party ads. See the Privacy Policy and Cookie Policy for full detail, or email hello@mentr.in for deletion requests.",
+      "Account basics (name, email, role) and optional profile details are stored to run search, demo bookings, and pitches. Public pages may use analytics and AdSense cookies; dashboards do not show third-party ads. See the Privacy Policy and Cookie Policy for full detail, or email hello@mentr.in for deletion requests.",
   },
   {
     category: "faculty",
     question: "How can tutors join Mentr?",
     answer:
-      "Register as faculty, complete your profile (subjects, classes, availability, WhatsApp), and pass phone/identity verification. Once live, parents can find you in search and send connect requests. Listing and responding are free — no lead coins. Classroom tools on /tools are available without a paid plan.",
+      "Register as faculty, complete your profile (subjects, classes, availability, WhatsApp), and pass phone/identity verification. Once live, parents can find you in search and book a demo. Listing, confirming demos, and pitching are free — no lead coins. Classroom tools on /tools are available without a paid plan.",
   },
   {
     question: "What is the requirements board?",
     answer:
-      "Parents post what they need — subject, class, area, and timing. Tutors browse open posts worldwide and pitch with a short message and their full profile. Each pitch automatically sends a connection request to the parent's dashboard. The parent reviews profiles, accepts who fits, and WhatsApp unlocks — free for both sides.",
+      "Parents post what they need — subject, class, area, and timing. Tutors browse open posts worldwide and pitch with a short message and their full profile. The parent reviews pitches, accepts who fits, and you continue directly — free for both sides.",
     category: "faculty",
   },
 ];

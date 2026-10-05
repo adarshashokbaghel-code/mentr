@@ -34,7 +34,7 @@ export function CTA() {
             </h3>
             <p className="mt-3 flex-1 text-base leading-relaxed text-muted">
               Register with email OTP in under a minute. Then browse verified
-              teachers worldwide, send a connect request, or post your
+              teachers worldwide, book a demo, or post your
               requirement — tutors pitch, you pick who to connect with. WhatsApp
               unlocks once they accept. Mentr stays out of fees and scheduling.
             </p>
@@ -49,7 +49,7 @@ export function CTA() {
                 <span className="text-coral">→</span> Post a requirement — tutors pitch you
               </li>
               <li className="flex gap-2">
-                <span className="text-coral">→</span> Accept → WhatsApp unlocks · ₹0 fees
+                <span className="text-coral">→</span> Book a demo or accept a pitch · ₹0 fees
               </li>
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -77,7 +77,7 @@ export function CTA() {
             </h3>
             <p className="mt-3 flex-1 text-base leading-relaxed text-white/70">
               No coins. No paying for leads that never reply. No cut. Create a
-              profile, list availability, review connect requests, and pitch on
+              profile, list availability, review demo bookings, and pitch on
               the requirements board — your number is shared only with parents
               you accept.
             </p>

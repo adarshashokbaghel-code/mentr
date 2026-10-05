@@ -27,7 +27,7 @@ export async function generateMetadata({
   if (!boardId) return { title: "Not found", robots: { index: false } };
   const board = BOARDS.find((b) => b.id === boardId)!;
   const title = `${board.label} Tutors — Verified Home & Online`;
-  const description = `Find ${board.label} tutors on ${SITE_NAME} — verified profiles for Class 6–12, home and online. Connect free or post your requirement.`;
+  const description = `Find ${board.label} tutors on ${SITE_NAME} — verified profiles for Class 6–12, home and online. Book a free demo or post your requirement.`;
   const path = boardPath(boardId);
   return {
     title,
@@ -55,7 +55,7 @@ export default async function BoardHubPage({
     <SeoHubPage
       eyebrow={board.label}
       title={`${board.label} tutors`}
-      intro={`Looking for ${board.label} tutors? Mentr lists verified home and online tutors who teach ${board.label} syllabi across Class 6–12. Browse profiles below, send a free connect request, or post your requirement and let tutors pitch you.`}
+      intro={`Looking for ${board.label} tutors? Mentr lists verified home and online tutors who teach ${board.label} syllabi across Class 6–12. Browse profiles below, book a free demo, or post your requirement and let tutors pitch you.`}
       teachers={teachers}
       schemaPath={path}
       breadcrumbs={[

@@ -972,16 +972,16 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
     updatedAt: "2026-07-19",
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
-    intro: "Online tutor jobs from home suit educators who want flexible hours and zero commute. Mentr lets you list free, get verified, receive parent connect requests, and pitch on the requirements board — without paying per lead.",
+    intro: "Online tutor jobs from home suit educators who want flexible hours and zero commute. Mentr lets you list free, get verified, receive parent demo bookings, and pitch on the requirements board — without paying per lead.",
     sections: [
       {
         heading: "Why this search matters",
         blocks: [
-          { type: "paragraph", text: "Online tutor jobs from home suit educators who want flexible hours and zero commute. Mentr lets you list free, get verified, receive parent connect requests, and pitch on the requirements board — without paying per lead." },
+          { type: "paragraph", text: "Online tutor jobs from home suit educators who want flexible hours and zero commute. Mentr lets you list free, get verified, receive parent demo bookings, and pitch on the requirements board — without paying per lead." },
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -994,7 +994,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -1021,7 +1021,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [
@@ -1037,16 +1037,16 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
     updatedAt: "2026-07-19",
     readTimeMinutes: 7,
     author: "Mentr Editorial Team",
-    intro: "To become an online tutor and get students consistently, you need visibility without lead fees. Complete a verified Mentr profile, keep availability updated, respond fast to connect requests, and pitch daily on parent requirements.",
+    intro: "To become an online tutor and get students consistently, you need visibility without lead fees. Complete a verified Mentr profile, keep availability updated, respond fast to demo bookings, and pitch daily on parent requirements.",
     sections: [
       {
         heading: "Why this search matters",
         blocks: [
-          { type: "paragraph", text: "To become an online tutor and get students consistently, you need visibility without lead fees. Complete a verified Mentr profile, keep availability updated, respond fast to connect requests, and pitch daily on parent requirements." },
+          { type: "paragraph", text: "To become an online tutor and get students consistently, you need visibility without lead fees. Complete a verified Mentr profile, keep availability updated, respond fast to demo bookings, and pitch daily on parent requirements." },
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -1059,7 +1059,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -1086,7 +1086,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [
@@ -1110,7 +1110,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "Parents never pay to find tutors on Mentr. Free mentors keep a live profile, receive connection requests, and can pitch three requirement-board posts per day. Premium is for mentors who want to grow faster — more pitches, proactive parent outreach, and stronger visibility in search and on the homepage.",
+            text: "Parents never pay to find tutors on Mentr. Free mentors keep a live profile, receive demo bookings, and can pitch three requirement-board posts per day. Premium is for mentors who want to grow faster — more pitches, proactive parent outreach, and stronger visibility in search and on the homepage.",
           },
           {
             type: "callout",

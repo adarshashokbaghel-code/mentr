@@ -288,6 +288,34 @@ export type AdminGuestRequirementRow = {
   updatedAt: string;
 };
 
+export type AdminDemoRequestRow = {
+  id: string;
+  teacherId: string;
+  teacherName: string;
+  teacherEmail: string;
+  parentName: string;
+  parentEmail: string;
+  parentPhone: string;
+  parentCity: string;
+  subject: string;
+  classLevel: string;
+  board: string;
+  preferredDate: string;
+  preferredTime: string;
+  note: string;
+  status: string;
+  tutorNote: string;
+  respondedAt?: string;
+  createdAt: string;
+};
+
+export function fetchAdminDemoRequests(key: string) {
+  return adminFetch<{
+    requests: AdminDemoRequestRow[];
+    total: number;
+  }>(key, "/api/admin/demo-requests?limit=500");
+}
+
 export function fetchAdminGuestRequirements(key: string) {
   return adminFetch<{
     requests: AdminGuestRequirementRow[];

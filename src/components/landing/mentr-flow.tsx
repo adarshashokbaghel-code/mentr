@@ -27,7 +27,7 @@ const tabs: {
     id: "parents",
     letter: "P",
     label: "Parents & students",
-    blurb: "Search or post · pick · connect",
+    blurb: "Search or post · demo or pitch",
     letterBg: "bg-coral",
   },
   {
@@ -57,9 +57,9 @@ const content: Record<
   parents: {
     tag: "Parents & students → Mentr",
     headline: "Search a tutor or post your need.",
-    accent: "Pitches, connect, WhatsApp — free.",
+    accent: "Demos, pitches, WhatsApp — free.",
     description:
-      "Two free paths: search verified tutors by subject and send a connect request, or post your requirement on the board and let tutors pitch you. Your identity stays hidden until you accept. WhatsApp unlocks only then — no agents, no fees.",
+      "Two free paths: search verified tutors by subject and book a demo, or post your requirement on the board and let tutors pitch you. A demo shares your number with that tutor so they can confirm the time. On the board, your name stays hidden until you accept a pitch.",
     steps: [
       {
         title: "Search or post your requirement",
@@ -70,12 +70,12 @@ const content: Record<
         desc: "Profiles with slots & credentials, or tutor pitches explaining their fit.",
       },
       {
-        title: "Connect with who you like",
-        desc: "Send a connect request or accept a pitch — still your choice.",
+        title: "Book a demo or accept a pitch",
+        desc: "A demo if you already chose a tutor. A pitch if tutors came to you.",
       },
       {
-        title: "They accept → WhatsApp unlocks",
-        desc: "Numbers stay private until the tutor accepts. Then chat directly.",
+        title: "Confirm, then continue directly",
+        desc: "The tutor confirms the demo, or you accept a pitch. Then you arrange the rest.",
       },
       {
         title: "Arrange everything yourselves",
@@ -97,7 +97,7 @@ const content: Record<
     headline: "Get found by parents.",
     accent: "Search listings & board pitches.",
     description:
-      "List free with subjects, slots and credentials. Parents find you in search or post needs on the requirements board — pitch with your profile, they accept who they like. Your number stays private until you approve. Every rupee stays yours.",
+      "List free with subjects, slots and credentials. Parents book a demo from your profile, or you pitch open posts on the board. You confirm the demos that fit. Every rupee stays yours.",
     steps: [
       {
         title: "Create your free listing",
@@ -105,15 +105,15 @@ const content: Record<
       },
       {
         title: "Get requests two ways",
-        desc: "Connect requests from search, or pitch open parent posts on the board.",
+        desc: "Demo bookings from search, or pitch open parent posts on the board.",
       },
       {
-        title: "Review before you share",
-        desc: "Every request or pitch acceptance comes with the parent's note.",
+        title: "Confirm the ones that fit",
+        desc: "A demo already includes the subject, class, and time. A pitch includes your message.",
       },
       {
-        title: "Accept → chat on WhatsApp",
-        desc: "Your number is shared only then. You keep 100% of fees.",
+        title: "Continue directly",
+        desc: "Confirm the demo, or the parent accepts your pitch. You keep 100% of fees.",
       },
     ],
     deltas: [
@@ -363,14 +363,12 @@ function ParentMock() {
 
       <div className="mt-3.5 rounded-lg border-2 border-ink/15 bg-cream p-3">
         <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-muted">
-          Your message · required
+          Demo · Class 10 Maths
         </p>
         <p className="mt-1.5 text-[13px] font-medium leading-snug text-ink">
-          Looking for Class 10 maths for my daughter — weekends, board exam
-          focus. Can we connect on WhatsApp after you accept?
+          Saturday · 10:00 · Online · board exam focus
         </p>
-        <div className="mt-2.5 flex items-center justify-between">
-          <span className="text-[10px] font-bold text-muted">98/500</span>
+        <div className="mt-2.5 flex justify-end">
           <span
             className={cn(
               "inline-flex items-center gap-1.5 rounded-md border-2 border-ink bg-coral px-3 py-1.5 text-[11px] font-bold text-white",
@@ -378,7 +376,7 @@ function ParentMock() {
             )}
           >
             <Send className="h-3 w-3" />
-            Send connect request
+            Book a demo
           </span>
         </div>
       </div>
@@ -389,9 +387,9 @@ function ParentMock() {
             <Check className="h-3.5 w-3.5 text-ink" />
           </span>
           <p className="text-xs font-bold text-ink">
-            Request sent{" "}
+            Demo sent{" "}
             <span className="font-medium text-ink/60">
-              — tutor is reviewing your note
+              — tutor can see your number
             </span>
           </p>
         </div>
@@ -400,8 +398,7 @@ function ParentMock() {
             <MessageCircle className="h-3.5 w-3.5 text-white" />
           </span>
           <p className="text-xs font-bold text-ink">
-            Accepted! WhatsApp unlocked —{" "}
-            <span className="font-bold text-sage">+91 98•••• ••41</span>
+            Confirmed — Saturday 10:00
           </p>
         </div>
       </div>
@@ -413,7 +410,7 @@ function MentorMock() {
   return (
     <MockShell url="mentr.in / dashboard / requests">
       <div className="flex items-center justify-between">
-        <p className="text-sm font-bold text-ink">Connection requests</p>
+        <p className="text-sm font-bold text-ink">Inbox</p>
         <span className="rounded-md border border-ink/20 bg-coral-wash px-2 py-1 text-[10px] font-bold text-coral">
           2 new
         </span>
@@ -432,8 +429,7 @@ function MentorMock() {
           </div>
         </div>
         <p className="mt-2.5 rounded-md border border-ink/15 bg-white px-3 py-2 text-xs font-medium leading-snug text-ink">
-          &ldquo;Hi, looking for Class 10 maths for my daughter — weekends,
-          board exam focus. Are Saturdays open?&rdquo;
+          Class 10 Maths · Saturday 10:00 · Online · board exam focus
         </p>
         <div className="mt-3 flex items-center gap-2">
           <span
@@ -443,14 +439,14 @@ function MentorMock() {
             )}
           >
             <Check className="h-3.5 w-3.5" />
-            Accept
+            Confirm
           </span>
           <span className="inline-flex flex-1 items-center justify-center rounded-md border-2 border-ink/30 bg-white px-3 py-2 text-[11px] font-bold text-muted">
             Decline
           </span>
         </div>
         <p className="mt-2 text-center text-[10px] font-bold text-muted">
-          Accepting shares your WhatsApp number with Rohit only.
+          Confirm the slot. You already have Rohit&apos;s number.
         </p>
       </div>
 
@@ -459,9 +455,9 @@ function MentorMock() {
           <Check className="h-3.5 w-3.5 text-white" />
         </span>
         <p className="text-xs font-bold text-ink">
-          Accepted{" "}
+          Confirmed{" "}
           <span className="font-medium text-ink/60">
-            — Rohit can reach you on WhatsApp. You keep 100% of fees.
+            — Saturday 10:00. You keep 100% of fees.
           </span>
         </p>
       </div>

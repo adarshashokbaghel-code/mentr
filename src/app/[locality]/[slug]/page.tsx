@@ -31,7 +31,7 @@ export async function generateMetadata({
   const subject = parseComboSlug(slug);
   if (!area || !subject) return { title: "Tuition", robots: { index: false } };
   const title = `${subject} Tuition in ${area}, Bengaluru`;
-  const description = `Verified ${subject} tutors near ${area}, Bengaluru. See open slots and send a free connect request on ${SITE_NAME}.`;
+  const description = `Verified ${subject} tutors near ${area}, Bengaluru. See open slots and book a free demo on ${SITE_NAME}.`;
   return {
     title,
     description,

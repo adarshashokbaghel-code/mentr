@@ -60,7 +60,7 @@ export function SearchFacultyBlocked() {
     <RoleBlockedPage
       toastMessage={PARENT_ROLE_TOAST}
       title="Parent accounts search for tutors"
-      description="You're signed in as a tutor. Log in as a parent to browse mentors, send connect requests, and post requirements."
+      description="You're signed in as a tutor. Log in as a parent to browse mentors, book demos, and post requirements."
       icon={Users}
       actionHref="/dashboard"
       actionLabel="Go to tutor dashboard"

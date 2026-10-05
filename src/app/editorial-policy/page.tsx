@@ -20,7 +20,7 @@ const sections = [
   {
     title: "Who writes our content",
     body: [
-      "Guides on Mentr are written and reviewed by the Mentr editorial team at Paprly. We combine firsthand product knowledge (how connect requests, verification, and the requirements board work) with research on tutoring fees, exam timelines, and platform comparisons in India and abroad.",
+      "Guides on Mentr are written and reviewed by the Mentr editorial team at Paprly. We combine firsthand product knowledge (how demo bookings, verification, and the requirements board work) with research on tutoring fees, exam timelines, and platform comparisons in India and abroad.",
       "We do not publish unattributed third-party articles or pay-for-placement reviews. Comparison pages (such as Mentr vs UrbanPro) are written to help parents and tutors make informed choices — we disclose that Mentr is our own product.",
     ],
   },
@@ -41,7 +41,7 @@ const sections = [
   {
     title: "Advertising & independence",
     body: [
-      "Mentr is free for parents and tutors. Public marketing and guide pages aimed at parents and tutors may show Google AdSense ads. We do not show AdSense on Mentr Learn (/learn). Advertising does not influence which tutors appear in search results, who receives connect requests, or the order of editorial recommendations.",
+      "Mentr is free for parents and tutors. Public marketing and guide pages aimed at parents and tutors may show Google AdSense ads. We do not show AdSense on Mentr Learn (/learn). Advertising does not influence which tutors appear in search results, who receives demo bookings, or the order of editorial recommendations.",
       "Sponsored content or paid partnerships, if ever introduced, will be clearly labelled. Today, all guides are editorial.",
     ],
   },

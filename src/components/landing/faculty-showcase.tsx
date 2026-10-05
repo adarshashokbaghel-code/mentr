@@ -25,7 +25,7 @@ const steps = [
   {
     icon: MessageCircle,
     title: "Get contacted",
-    body: "Parents send connect requests with a note. Accept to share your WhatsApp — you keep 100%.",
+    body: "Parents book demos with a note. Accept to share your WhatsApp — you keep 100%.",
   },
 ];
 

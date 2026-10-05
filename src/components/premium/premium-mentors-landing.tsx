@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
-import { ConnectButton } from "@/components/connect/connect-button";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
@@ -51,17 +51,6 @@ const FAQS = [
     a: "Anyone can list on Mentr for free. Premium tutors have gone through extra checks and tend to respond faster, so they're a good place to start if you want a quick, serious match.",
   },
 ];
-
-const connectCls = cn(
-  "inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl",
-  "bg-gradient-to-r from-[#5b7cfa] to-[#c4a574] text-sm font-bold text-white",
-  "shadow-[0_8px_20px_rgba(91,124,250,0.28)] transition hover:brightness-105 active:scale-[0.99]",
-);
-
-const connectRequestedCls = cn(
-  "inline-flex h-11 flex-1 items-center justify-center gap-1.5 rounded-xl",
-  "border border-hairline bg-[#f6f5f2] text-sm font-semibold text-muted",
-);
 
 function displayName(name: string): string {
   const cleaned = name.replace(/\s+/g, " ").trim();
@@ -228,7 +217,7 @@ function MentorCard({ teacher }: { teacher: Teacher }) {
   return (
     <article
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl bg-white",
+        "group flex h-full flex-col overflow-hidden rounded-2xl bg-white",
         "ring-1 ring-[#c4a574]/30 shadow-[0_10px_30px_rgba(20,28,60,0.08)]",
         "transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(20,28,60,0.16)]",
       )}
@@ -269,13 +258,11 @@ function MentorCard({ teacher }: { teacher: Teacher }) {
       </div>
 
       <div className="flex flex-1 flex-col p-4">
-        {bio ? (
-          <p className="line-clamp-2 text-[13px] leading-relaxed text-muted">
-            {bio}
-          </p>
-        ) : null}
+        <p className="line-clamp-2 min-h-[2.6rem] text-[13px] leading-relaxed text-muted">
+          {bio || "Verified Premium tutor on Mentr."}
+        </p>
 
-        <div className="mb-4 mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] font-medium text-ink/70">
+        <div className="mb-4 mt-3 flex min-h-5 flex-wrap items-center gap-x-3 gap-y-1 text-[12px] font-medium text-ink/70">
           {place ? (
             <span className="inline-flex min-w-0 items-center gap-1">
               <MapPin className="h-3.5 w-3.5 shrink-0 text-[#c4a574]" />
@@ -294,24 +281,18 @@ function MentorCard({ teacher }: { teacher: Teacher }) {
           ))}
         </div>
 
-        <div className="mt-auto flex gap-2">
-          <ConnectButton
+        <div className="mt-auto flex flex-col gap-2">
+          <BookDemoButton
             teacher={{
               id: teacher.id,
               name: teacher.name,
-              subjectLine: teacher.subjectLine,
-              phone: teacher.phone,
-              connectionStatus: teacher.connectionStatus,
-              live: teacher.live !== false,
-              premium: true,
+              subjects: teacher.subjects,
             }}
-            label="Connect"
-            className={connectCls}
-            requestedClassName={connectRequestedCls}
+            className="inline-flex h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-ink text-sm font-semibold text-white transition hover:bg-ink/85"
           />
           <Link
             href={profileHref}
-            className="inline-flex h-11 items-center justify-center rounded-xl border border-hairline bg-white px-4 text-sm font-semibold text-ink transition hover:border-[#5b7cfa]/40 hover:text-[#3d4f9c]"
+            className="inline-flex h-11 w-full items-center justify-center rounded-xl border border-hairline bg-white px-4 text-sm font-semibold text-ink transition hover:border-[#5b7cfa]/40 hover:text-[#3d4f9c]"
           >
             Profile
           </Link>

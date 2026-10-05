@@ -23,7 +23,7 @@ const sections = [
   {
     title: "What Mentr is (and is not)",
     body: [
-      "Mentr is a connectivity platform between people seeking tutoring or mentoring and independent tutors/mentors. We host profiles, deliver connection requests, and (for Premium mentors) provide limited tools to discover parents or students who may need help.",
+      "Mentr is a connectivity platform between people seeking tutoring or mentoring and independent tutors/mentors. We host profiles, deliver demo bookings and pitches, and (for Premium mentors) provide limited tools to discover parents or students who may need help.",
       "We are not a party to any tutoring or mentoring contract. Fees, schedule, location, curriculum, and teaching quality are agreed directly between you and the other party.",
       "Mentr does not guarantee that any connection, reveal, enquiry, or Premium feature will result in a hire, trial class, reply, payment, or income. The platform offers connectivity and discovery tools only.",
       "The Verified badge means we checked phone/identity at onboarding where applicable. It is not a guarantee of teaching quality, employability, or an employment relationship with Mentr.",
@@ -66,7 +66,7 @@ const sections = [
   {
     title: "Premium for mentors — clear rules",
     body: [
-      "Free plan: list, appear in search, and receive connection requests (fair-use limits may apply, e.g. daily pitch caps).",
+      "Free plan: list, appear in search, and receive demo bookings (fair-use limits may apply, e.g. daily pitch caps).",
       "What Premium is: an optional paid upgrade so serious, verified mentors can use extra connectivity tools — mainly a parent/enquiry directory and limited daily contact reveals.",
       "Why it exists: to filter for mentors who invest in outreach tools. It is not a placement agency, staffing service, or “guaranteed students” product.",
       "What you get: access to those tools as described when you pay (directory browsing + reveal quota / unlock behaviour shown in the product).",

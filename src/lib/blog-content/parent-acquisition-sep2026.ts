@@ -144,7 +144,7 @@ export const PARENT_ACQUISITION_SEP2026: Record<string, ArticleContent> = {
       {
         question: "How do I find a verified tutor quickly?",
         answer:
-          "On Mentr you can browse verified tutors without login, filter by subject, class, and board, and send a free connect request. You can also post a requirement so interested tutors pitch to you.",
+          "On Mentr you can browse verified tutors without login, filter by subject, class, and board, and book a free demo. You can also post a requirement so interested tutors pitch to you.",
       },
       {
         question: "My child studies hard but still scores low. Why?",
@@ -262,7 +262,7 @@ export const PARENT_ACQUISITION_SEP2026: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Find a CBSE Class 10 tutor on Mentr",
-            text: "Browse verified CBSE tutors (home or online) by subject and area, compare profiles, and connect free. Short on time? Use Instant Connect to get matched quickly.",
+            text: "Browse verified CBSE tutors (home or online) by subject and area, compare profiles, and book a free demo. Short on time? Use Instant Connect to get matched quickly.",
           },
         ],
       },

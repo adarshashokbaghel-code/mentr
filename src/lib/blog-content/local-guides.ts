@@ -700,7 +700,7 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
               "Search by subject — Maths, Physics, English, Coding, etc.",
               "Filter teaching mode: online",
               "Open verified profiles; check languages and class levels",
-              "Send a connect request with your emirate, curriculum, and preferred times (GST)",
+              "Book a demo with your emirate, curriculum, and preferred times (GST)",
               "Book a trial session before monthly packages",
             ],
           },
@@ -759,7 +759,7 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Start on Mentr",
-            text: "Browse verified profiles and send a free connect request — WhatsApp unlocks only after acceptance. No lead fees for parents or tutors.",
+            text: "Browse verified profiles and book a free demo with a time. The tutor confirms in their inbox. No lead fees for parents or tutors.",
           },
         ],
       },
@@ -772,7 +772,7 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open the Mentr landing page for your search intent",
               "Compare verified profiles — subjects, languages, availability",
-              "Send a connect request with class, board, and schedule",
+              "Book a demo with class, board, and schedule",
               "Run a trial session before monthly booking",
             ],
           },
@@ -799,7 +799,7 @@ export const LOCAL_GUIDES_ARTICLES: Record<string, ArticleContent> = {
       },
       {
         question: "Where should I start?",
-        answer: "Use the primary Mentr page for your keyword — linked from this article — then send a connect request.",
+        answer: "Use the primary Mentr page for your keyword — linked from this article — then book a demo.",
       },
     ],
     relatedLinks: [

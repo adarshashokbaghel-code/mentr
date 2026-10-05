@@ -357,8 +357,8 @@ export function ParentAcquireLanding({
                 },
                 {
                   n: "3",
-                  t: "Connect on WhatsApp",
-                  d: "After the tutor accepts, WhatsApp unlocks. Fees stay between you.",
+                  t: "Book a demo",
+                  d: "Pick a time. The tutor confirms, then fees stay between you.",
                 },
               ].map((step) => (
                 <li key={step.n} className="min-w-0">

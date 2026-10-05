@@ -85,10 +85,10 @@ export const EXAM_PREP_PAGES = [
     slug: "jee-coaching-bengaluru",
     title: "JEE Physics & Maths Coaching in Bengaluru",
     description:
-      "Find verified JEE-prep tutors near you in Bengaluru. Compare profiles, check availability, connect free on WhatsApp.",
+      "Find verified JEE-prep tutors near you in Bengaluru. Compare profiles, check availability, book a free demo.",
     headline: "JEE coaching in Bengaluru",
     intro:
-      "Browse verified Physics and Mathematics tutors who prepare students for JEE mains and advanced. Filter by area, compare experience, and send a free connect request.",
+      "Browse verified Physics and Mathematics tutors who prepare students for JEE mains and advanced. Filter by area, compare experience, and book a free demo.",
     subjects: ["Physics", "Mathematics", "Exam Prep"],
     levels: ["jee", "class 11", "class 12"],
   },
@@ -96,7 +96,7 @@ export const EXAM_PREP_PAGES = [
     slug: "neet-foundation-bengaluru",
     title: "NEET Foundation Tutors in Bengaluru",
     description:
-      "Verified NEET foundation and Biology tutors across Bengaluru. Search by area, connect free, no agent fees.",
+      "Verified NEET foundation and Biology tutors across Bengaluru. Search by area, book a free demo, no agent fees.",
     headline: "NEET foundation tutors",
     intro:
       "Find Biology and Chemistry tutors who specialise in NEET foundation and Class 11–12 board prep across Bengaluru.",
@@ -118,7 +118,7 @@ export const EXAM_PREP_PAGES = [
     slug: "class-12-board-exam-tutors-bengaluru",
     title: "Class 12 Board Exam Tutors in Bengaluru",
     description:
-      "Verified Class 12 tutors for board exams and entrance prep across Bengaluru. Connect free on WhatsApp.",
+      "Verified Class 12 tutors for board exams and entrance prep across Bengaluru. Book a free demo.",
     headline: "Class 12 board exam tutors",
     intro:
       "Class 11–12 tutors for board exams, JEE/NEET foundation, and subject coaching — searchable by area across Bengaluru.",
@@ -153,7 +153,7 @@ export const VS_PAGES = [
     competitor: "UrbanPro",
     bullets: [
       "UrbanPro charges tutors for leads via coins and credits; Mentr is free to list and respond.",
-      "On Mentr, parents contact tutors on WhatsApp after a connect request is accepted — no per-lead fee.",
+      "On Mentr, parents contact tutors on WhatsApp after a demo booking is accepted — no per-lead fee.",
       "Tutors keep 100% of their session fees on Mentr; UrbanPro often layers platform costs on top.",
     ],
   },
@@ -166,7 +166,7 @@ export const VS_PAGES = [
     competitor: "Tuition agencies",
     bullets: [
       "Agencies typically take 15–30% of every session and own the parent relationship.",
-      "Mentr lists verified tutors free and lets parents send connect requests directly.",
+      "Mentr lists verified tutors free and lets parents book demos directly.",
       "Fees, timing, and location are arranged between parent and tutor — Mentr takes nothing.",
     ],
   },
@@ -180,7 +180,7 @@ export const VS_PAGES = [
     bullets: [
       "Group chats make it hard to search by subject, area, or availability.",
       "Mentr profiles show subjects, experience, verification, and open weekly slots.",
-      "Parents send a connect request; tutors accept before WhatsApp is shared — less spam for everyone.",
+      "Parents book a demo; tutors accept before WhatsApp is shared — less spam for everyone.",
     ],
   },
 ] as const;
@@ -190,9 +190,9 @@ export function subjectIntro(subject: string): string {
     Mathematics:
       "From Class 6–12 to board exams and JEE foundation — find verified Maths tutors across Koramangala, Indiranagar, HSR Layout, Whitefield, and more.",
     Physics:
-      "School Physics, board exams, and JEE prep — browse verified tutors by area in Bengaluru and connect free once they accept your request.",
+      "School Physics, board exams, and JEE prep — browse verified tutors by area in Bengaluru and book a free demo.",
     Chemistry:
-      "Organic, inorganic, and board-exam Chemistry tutors across Bengaluru. See open slots and send a free connect request on Mentr.",
+      "Organic, inorganic, and board-exam Chemistry tutors across Bengaluru. See open slots and book a free demo on Mentr.",
     English:
       "Spoken English, writing, and school English tutors in Bengaluru. Verified profiles, direct WhatsApp after acceptance.",
     "Computer Science":
@@ -208,9 +208,9 @@ export function subjectIntro(subject: string): string {
     Economics:
       "Class 11–12 Economics and board-exam tutors across Bengaluru — verified profiles, no agent fees.",
     History:
-      "School History and Social Science tutors across Bengaluru — CBSE, ICSE, and state board. Compare rates, areas, and teaching mode, then connect free.",
+      "School History and Social Science tutors across Bengaluru — CBSE, ICSE, and state board. Compare rates, areas, and teaching mode, then book a free demo.",
     Geography:
-      "Geography and Social Science tutors across Bengaluru for Classes 6–12. Browse verified profiles and connect free on Mentr.",
+      "Geography and Social Science tutors across Bengaluru for Classes 6–12. Browse verified profiles and book a free demo on Mentr.",
     Accountancy:
       "Class 11–12 Accountancy and commerce tutors across Bengaluru — verified profiles with rates where shared.",
     Music:
@@ -220,16 +220,16 @@ export function subjectIntro(subject: string): string {
   };
   return (
     intros[subject] ??
-    `Find verified ${subject} tutors across ${CITY}. Search by area, see availability, and connect free on WhatsApp.`
+    `Find verified ${subject} tutors across ${CITY}. Search by area, see availability, and book a free demo.`
   );
 }
 
 export function areaIntro(area: string): string {
-  return `Parents in ${area}, ${CITY} use Mentr to find verified home and online tutors for Mathematics, Physics, Chemistry, English, Coding, Biology, and exam prep. Compare experience, open weekly slots, and neighbourhood fit — every listing is free to view. Send a connect request when you are ready; WhatsApp unlocks only after the tutor accepts, so neither side gets spam. Session fees stay between you and the teacher with ₹0 platform commission.`;
+  return `Parents in ${area}, ${CITY} use Mentr to find verified home and online tutors for Mathematics, Physics, Chemistry, English, Coding, Biology, and exam prep. Compare experience, open weekly slots, and neighbourhood fit — every listing is free to view. Book a demo when you are ready. The tutor sees your number and confirms the time. Session fees stay between you and the teacher with ₹0 platform commission.`;
 }
 
 export function comboIntro(area: string, subject: string): string {
-  return `Looking for ${subject} tuition in ${area}, ${CITY}? These verified tutors teach ${subject} near ${area} — for school boards, homework support, or competitive foundations depending on the profile. Read bios for class range and teaching mode, check open slots, and send a free connect request. No lead fees for parents or tutors; arrange timing and fees directly after WhatsApp unlocks.`;
+  return `Looking for ${subject} tuition in ${area}, ${CITY}? These verified tutors teach ${subject} near ${area} — for school boards, homework support, or competitive foundations depending on the profile. Read bios for class range and teaching mode, check open slots, and book a free demo. No lead fees for parents or tutors; arrange timing and fees directly after WhatsApp unlocks.`;
 }
 
 /** Global online subject hubs — /online/{slug} */
@@ -245,7 +245,7 @@ export function parseOnlineSubjectSlug(slug: string): string | null {
 }
 
 export function onlineSubjectIntro(subject: string): string {
-  return `Find verified ${subject} tutors online worldwide — video sessions scheduled in your time zone for school, boards, or skill goals. Mentr lists ID-checked profiles with open availability so you can compare experience before messaging. Send a free connect request; WhatsApp unlocks after the tutor accepts. No lead fees, no commission on sessions — you arrange fees directly.`;
+  return `Find verified ${subject} tutors online worldwide — video sessions scheduled in your time zone for school, boards, or skill goals. Mentr lists ID-checked profiles with open availability so you can compare experience before messaging. Book a free demo with a time. The tutor confirms in their inbox. No lead fees, no commission on sessions — you arrange fees directly.`;
 }
 
 export function teachersOnline(subject: string): Teacher[] {
@@ -258,7 +258,7 @@ export const ONLINE_SUBJECT_PAGES = SUBJECTS.map((subject) => ({
   slug: onlineSubjectSlug(subject),
   subject,
   title: `${subject} Tutors Online — Verified Worldwide`,
-  description: `Find verified ${subject} tutors online on Mentr. Search worldwide, connect free — no lead fees.`,
+  description: `Find verified ${subject} tutors online on Mentr. Search worldwide, book a free demo — no lead fees.`,
 }));
 
 /** UAE city hubs — /uae/{slug} */

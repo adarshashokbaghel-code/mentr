@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDistanceKm, type UserLocation } from "@/lib/geo";
-import { resolveTeacherCoords, type Teacher, whatsappLink } from "@/lib/teachers";
+import { resolveTeacherCoords, type Teacher } from "@/lib/teachers";
 import { profilePlaceholderMapHtml } from "@/components/ui/profile-placeholder";
 import { Navigation } from "lucide-react";
 import {
@@ -67,11 +67,7 @@ function popupHtml(t: MapTeacher) {
   const contact =
     t.openSlots === 0
       ? `<span class="champs-pop-btn champs-pop-btn-muted">Fully booked</span>`
-      : t.connectionStatus === "accepted" && t.phone
-        ? `<a href="${whatsappLink(t)}" target="_blank" rel="noopener noreferrer" class="champs-pop-btn champs-pop-btn-primary">Chat on WhatsApp</a>`
-        : t.connectionStatus === "pending"
-          ? `<span class="champs-pop-btn champs-pop-btn-muted">Request sent</span>`
-          : `<a href="/teachers/${escapeHtml(t.id)}" class="champs-pop-btn champs-pop-btn-primary">View &amp; connect</a>`;
+      : `<a href="/teachers/${escapeHtml(t.id)}" class="champs-pop-btn champs-pop-btn-primary">Book a demo</a>`;
 
   const hero = profilePlaceholderMapHtml({
     name: t.name,
