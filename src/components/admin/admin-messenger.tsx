@@ -2,10 +2,12 @@
 
 import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
 import {
+  fetchAdminCoupons,
   fetchMessengerTemplates,
   previewMessengerEmail,
   searchAdminUsers,
   sendMessengerEmails,
+  type AdminCoupon,
   type AdminUserRow,
   type MessengerTemplateMeta,
 } from "@/lib/admin-api";
@@ -60,6 +62,8 @@ export function AdminMessenger({ adminKey }: Props) {
   const [templates, setTemplates] = useState<MessengerTemplateMeta[]>([]);
   const [templateId, setTemplateId] = useState("initial-user");
   const [previewName, setPreviewName] = useState("Educator");
+  const [couponCode, setCouponCode] = useState("");
+  const [couponOptions, setCouponOptions] = useState<AdminCoupon[]>([]);
   const [previewHtml, setPreviewHtml] = useState("");
   const [previewSubject, setPreviewSubject] = useState("");
   const [previewLoading, setPreviewLoading] = useState(false);
@@ -94,6 +98,8 @@ export function AdminMessenger({ adminKey }: Props) {
 
   const activeTemplate = templates.find((t) => t.id === templateId);
   const templateAudience = activeTemplate?.audience;
+  const needsCoupon = Boolean(activeTemplate?.requiresCoupon);
+  const couponReady = !needsCoupon || couponCode.trim().length > 0;
   const joinedDays = JOINED_FILTERS.find((f) => f.id === joinedFilter)?.days ?? null;
   const visibleUsers =
     joinedDays == null
@@ -108,6 +114,15 @@ export function AdminMessenger({ adminKey }: Props) {
     setSentIds(readSentIds(activeTemplate.id));
   }, [activeTemplate?.id, activeTemplate?.audience]);
 
+  useEffect(() => {
+    if (!needsCoupon) return;
+    void fetchAdminCoupons(adminKey)
+      .then((data) =>
+        setCouponOptions(data.coupons.filter((c) => c.status === "active")),
+      )
+      .catch(() => setCouponOptions([]));
+  }, [adminKey, needsCoupon]);
+
   const loadPreview = useCallback(async () => {
     setPreviewLoading(true);
     try {
@@ -115,15 +130,19 @@ export function AdminMessenger({ adminKey }: Props) {
         templateId,
         name: previewName,
         role: templateAudience,
+        ...(needsCoupon ? { couponCode } : {}),
       });
       setPreviewHtml(data.html);
       setPreviewSubject(data.subject);
+      setStatus((prev) => (prev?.type === "err" ? null : prev));
     } catch (e) {
+      setPreviewHtml("");
+      setPreviewSubject("");
       setStatus({ type: "err", msg: e instanceof Error ? e.message : "Preview failed" });
     } finally {
       setPreviewLoading(false);
     }
-  }, [adminKey, templateId, previewName, templateAudience]);
+  }, [adminKey, templateId, previewName, templateAudience, needsCoupon, couponCode]);
 
   useEffect(() => {
     const t = setTimeout(() => void loadPreview(), 250);
@@ -207,6 +226,7 @@ export function AdminMessenger({ adminKey }: Props) {
             templateId,
             userIds: [id],
             adminPass,
+            ...(needsCoupon ? { couponCode } : {}),
           });
           const row = result.results.find((r) => r.userId === id) ?? result.results[0];
           if (row?.ok) {
@@ -270,6 +290,28 @@ export function AdminMessenger({ adminKey }: Props) {
           </optgroup>
         </select>
 
+        {needsCoupon && (
+          <>
+            <input
+              value={couponCode}
+              onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+              list="messenger-coupon-codes"
+              spellCheck={false}
+              autoCapitalize="characters"
+              placeholder="Coupon code"
+              aria-label="Coupon code"
+              className="h-8 w-[148px] rounded border border-hairline bg-white px-2 font-mono text-xs uppercase tracking-wide text-ink outline-none focus:border-ink"
+            />
+            <datalist id="messenger-coupon-codes">
+              {couponOptions.map((coupon) => (
+                <option key={coupon.id} value={coupon.code}>
+                  {`₹${coupon.discountInr} off`}
+                </option>
+              ))}
+            </datalist>
+          </>
+        )}
+
         {activeTemplate && (
           <span className="hidden text-[10px] font-medium uppercase tracking-wide text-muted sm:inline">
             For {activeTemplate.audience === "faculty" ? "tutors" : "parents"}
@@ -320,7 +362,7 @@ export function AdminMessenger({ adminKey }: Props) {
             setPassError(null);
             setPassOpen(true);
           }}
-          disabled={sending || selected.size === 0}
+          disabled={sending || selected.size === 0 || !couponReady}
           className="ml-auto flex h-8 items-center gap-1.5 rounded bg-ink px-3 text-xs font-semibold text-white disabled:opacity-40"
         >
           {sending ? (

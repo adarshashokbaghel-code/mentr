@@ -406,7 +406,7 @@ router.get("/messenger/templates", (_req, res) => {
   res.json({ templates: getMessengerTemplates() });
 });
 
-router.post("/messenger/preview", (req, res) => {
+router.post("/messenger/preview", async (req, res) => {
   try {
     const templateId = String(req.body.templateId || "") as MessengerTemplateId;
     const name = req.body.name ? String(req.body.name) : undefined;
@@ -415,11 +415,18 @@ router.post("/messenger/preview", (req, res) => {
       req.body.role === "parent" || req.body.role === "faculty"
         ? req.body.role
         : undefined;
-    const preview = previewMessengerEmail(templateId, { name, referralUrl, role });
+    const couponCode = req.body.couponCode ? String(req.body.couponCode) : undefined;
+    const preview = await previewMessengerEmail(templateId, {
+      name,
+      referralUrl,
+      role,
+      couponCode,
+    });
     res.json(preview);
   } catch (err) {
     console.error("Admin messenger preview error:", err);
-    res.status(400).json({
+    const status = (err as { status?: number }).status || 400;
+    res.status(status).json({
       error: err instanceof Error ? err.message : "Preview failed",
     });
   }
@@ -442,14 +449,17 @@ router.post("/messenger/send", requireAdminPass, async (req, res) => {
       if (!res.writableFinished) aborted = true;
     });
 
+    const couponCode = req.body.couponCode ? String(req.body.couponCode) : undefined;
     const result = await sendMessengerEmails(templateId, userIds, {
       shouldAbort: () => aborted,
+      couponCode,
     });
     if (aborted || res.writableEnded) return;
     res.json(result);
   } catch (err) {
     console.error("Admin messenger send error:", err);
-    res.status(500).json({
+    const status = (err as { status?: number }).status || 500;
+    res.status(status).json({
       error: err instanceof Error ? err.message : "Send failed",
     });
   }

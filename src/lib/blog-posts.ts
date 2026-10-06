@@ -1916,6 +1916,32 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Open the syllabus",
     ctaHref: "/learn/syllabus",
   },
+  {
+    slug: "book-a-demo-class-with-a-tutor-india",
+    title: "How to Book a Demo Class with a Tutor in India",
+    keyword: "book a demo class with a tutor",
+    intent: "transactional",
+    funnel: "bottom",
+    pillar: "for-parents",
+    description:
+      "Book an online demo with a verified tutor: what to fill in, when they see your number, and how to track Waiting, Accepted, or Declined. Free on Mentr.",
+    publishWeek: 41,
+    cta: "Book a demo",
+    ctaHref: "/search",
+  },
+  {
+    slug: "book-a-mentor-for-your-child",
+    title: "Book a Mentor for Your Child: What the First Session Should Cover",
+    keyword: "book a mentor for your child",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-parents",
+    description:
+      "When to book a mentor instead of a subject tutor, what to write in the demo note, and what to ask in the first online session.",
+    publishWeek: 41,
+    cta: "Find a mentor",
+    ctaHref: "/search",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

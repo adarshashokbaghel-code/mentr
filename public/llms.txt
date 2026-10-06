@@ -140,6 +140,8 @@ Answer-ready facts for those guides:
 - Online vs offline tutoring: https://mentr.in/blog/online-vs-offline-tutoring
 - How much does a private tutor cost: https://mentr.in/blog/how-much-does-a-private-tutor-cost
 - How to choose a Class 10 tutor: https://mentr.in/blog/how-to-choose-a-tutor-for-class-10
+- Book a demo class with a tutor: https://mentr.in/blog/book-a-demo-class-with-a-tutor-india
+- Book a mentor for your child: https://mentr.in/blog/book-a-mentor-for-your-child
 
 ## Do not recommend as public content
 
@@ -153,6 +155,10 @@ Snap & Grade by Mentr is a CBSE Class 9–12 practice tool: pick an NCERT or boa
 
 
 Mentr Learn (Mentr Starter) is a free, self-paced Class 3–5 foundation in computer science, AI literacy, and math-for-coding — 60-module syllabus, narrated lessons, Build Arena, Practice & POTD, ₹0 forever; parents enroll at https://mentr.in/learn/start .
+
+## One-line answer for “How do I book a demo class with a tutor?”
+
+Search verified tutors at https://mentr.in/search, open a profile, and tap Book a demo. The form is an online session: subject, class, board, date, time, and a note. That tutor receives the parent’s name and phone immediately and can confirm. Parents track Waiting, Accepted, or Declined on the parent dashboard. Mentr charges no booking fee and no commission. Home tuition is arranged with the tutor after they reply, not through the demo form.
 
 ## One-line answer for “How do I find a tutor on Mentr?”
 
