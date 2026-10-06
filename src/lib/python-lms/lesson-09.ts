@@ -1,0 +1,1121 @@
+import type { PythonLmsLesson } from "@/lib/python-lms/types";
+
+export const LESSON_09: PythonLmsLesson = {
+  slug: "lesson-9",
+  number: 9,
+  title: "Functions",
+  subtitle: "Creating your own commands",
+  minutes: 60,
+  goals: [
+    "Define a function with def, and call it by name with brackets",
+    "Explain that defining a function runs nothing until it is called",
+    "Pass values in through parameters, in the right order",
+    "Hand a result back with return, and tell return apart from print",
+    "Reuse small functions together in one program",
+  ],
+  canDo: "Write functions with parameters and return values, and reuse them.",
+
+  notes: [
+    {
+      id: "why",
+      part: "Part 1 · Defining and calling",
+      title: "Name a group of lines once",
+      blocks: [
+        {
+          type: "lead",
+          text: "A function is a group of lines with a name. You write the lines once. Every time you use the name, Python runs them.",
+        },
+        {
+          type: "p",
+          text: "You have already used functions that Python wrote for you: print(), input(), len(), int(). Now you write your own. If the same few lines appear in three places, they belong in a function.",
+        },
+        {
+          type: "compare",
+          left: {
+            label: "Same two lines, copied",
+            tone: "neutral",
+            code: 'print("Welcome!")\nprint("-----")\nprint("Welcome!")\nprint("-----")',
+            output: "Welcome!\n-----\nWelcome!\n-----",
+          },
+          right: {
+            label: "Written once, used twice",
+            tone: "good",
+            code: 'def banner():\n    print("Welcome!")\n    print("-----")\n\nbanner()\nbanner()',
+            output: "Welcome!\n-----\nWelcome!\n-----",
+          },
+        },
+        {
+          type: "p",
+          text: "To change the dashes to stars, the copied version needs two edits, or twenty in a long program. The function needs one, inside banner. Every use picks it up.",
+        },
+        {
+          type: "check",
+          id: "c-why",
+          question: "What is a function?",
+          options: [
+            "A variable that holds a number",
+            "A named group of lines that runs when you use its name",
+            "A loop that never ends",
+            "A kind of error",
+          ],
+          answer: 1,
+          explain: "You give a block of lines a name. Using the name runs the block.",
+        },
+      ],
+    },
+    {
+      id: "def",
+      part: "Part 1 · Defining and calling",
+      title: "The shape of def",
+      blocks: [
+        {
+          type: "p",
+          text: "def looks like if and for: a header line ending in a colon, then an indented body. The header gives the function its name.",
+        },
+        {
+          type: "anatomy",
+          code: "def greet():",
+          parts: [
+            { token: "def", label: "Short for define. It is a keyword." },
+            { token: "greet", label: "The function's **name**. Same rules as variable names: letters, digits and _, no spaces, not starting with a digit." },
+            { token: "()", label: "Brackets. Later, the inputs go in here. Empty means no inputs." },
+            { token: ":", label: "The colon. The body is indented on the next lines." },
+          ],
+        },
+        {
+          type: "code",
+          code: 'def greet():\n    print("Hello!")\n    print("Nice to see you.")',
+        },
+        {
+          type: "p",
+          text: "The two prints are indented, so they are the body. A line that lines up with def again is not part of the function. Pick a name that says what the function does: greet, banner, calculate_score.",
+        },
+        {
+          type: "check",
+          id: "c-def",
+          question: "Which header defines a function called greet?",
+          options: ["def greet:", "def greet():", "greet():", "define greet()"],
+          codeOptions: true,
+          answer: 1,
+          explain: "def, the name, brackets, then a colon.",
+        },
+      ],
+    },
+    {
+      id: "call",
+      part: "Part 1 · Defining and calling",
+      title: "Defining runs nothing. Calling does",
+      blocks: [
+        {
+          type: "p",
+          text: "def only teaches Python a new name. The body does not run yet. To run it, call the function: write its name followed by brackets, on its own line.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def greet():\n    print("Hello!")\n\nprint("Before")\ngreet()\nprint("After")',
+        },
+        {
+          type: "p",
+          text: "The output is Before, Hello!, After. Hello! appears where greet() is called, not where it is defined. Delete the greet() line and Hello! never prints, even though the def is still there.",
+        },
+        {
+          type: "callout",
+          tone: "warn",
+          text: "Define before you call. Python reads from the top. If greet() is above the def line, Python has not learned the name yet and raises NameError.",
+        },
+        {
+          type: "compare",
+          left: {
+            label: "Called too early",
+            tone: "bad",
+            code: 'greet()\n\ndef greet():\n    print("Hello!")',
+            output: "NameError: name 'greet' is not defined",
+          },
+          right: {
+            label: "Defined first",
+            tone: "good",
+            code: 'def greet():\n    print("Hello!")\n\ngreet()',
+            output: "Hello!",
+          },
+        },
+        {
+          type: "check",
+          id: "c-call",
+          question: "A program has a def greet(): block with a print inside, and nothing else. What is printed?",
+          options: ["The print runs once", "Nothing", "NameError", "The print runs forever"],
+          answer: 1,
+          explain: "Defining does not run the body. Without a call, nothing is printed.",
+        },
+      ],
+    },
+    {
+      id: "brackets",
+      part: "Part 1 · Defining and calling",
+      title: "The brackets make the call",
+      blocks: [
+        {
+          type: "p",
+          text: "greet is the name of the function. greet() is a call. Leave the brackets off and nothing runs. Python just talks about the function itself.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def greet():\n    print("Hello!")\n\nprint(greet)\ngreet()',
+        },
+        {
+          type: "p",
+          text: "The first print shows something like <function greet at 0x...>, which is Python describing the function. Only greet() with brackets prints Hello!. The same is true of len and len(word).",
+        },
+        {
+          type: "check",
+          id: "c-brackets",
+          question: "Which line runs the greet function?",
+          options: ["greet", "greet()", "def greet", "print greet"],
+          codeOptions: true,
+          answer: 1,
+          explain: "A call is the name followed by brackets.",
+        },
+      ],
+    },
+    {
+      id: "jump",
+      part: "Part 1 · Defining and calling",
+      title: "A call jumps in and comes back",
+      blocks: [
+        {
+          type: "p",
+          text: "When Python reaches a call, it jumps to the function's body, runs it from the top, then comes back and carries on from the line after the call. Each call is a fresh trip.",
+        },
+        {
+          type: "flow",
+          title: "One call",
+          steps: [
+            { kind: "process", text: "Python reaches banner()" },
+            { kind: "process", text: "Jump to the first line of the body" },
+            { kind: "process", text: "Run every body line" },
+            { kind: "terminal", text: "Come back to the line after the call" },
+          ],
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def banner():\n    print("*****")\n\nbanner()\nprint("Menu")\nbanner()',
+        },
+        {
+          type: "p",
+          text: "banner runs, Menu prints, banner runs again. Stars, Menu, stars. The function was written once and used twice.",
+        },
+        {
+          type: "check",
+          id: "c-jump",
+          question: 'say() prints "Hi". The program calls say() three times. How many Hi lines appear?',
+          options: ["1", "3", "0", "4"],
+          answer: 1,
+          explain: "Each call runs the body once. Three calls, three Hi lines.",
+        },
+      ],
+    },
+    {
+      id: "params",
+      part: "Part 2 · Parameters",
+      title: "Send a value in",
+      blocks: [
+        {
+          type: "lead",
+          text: "A parameter is a name in the brackets of def. When you call the function, the value you put in the brackets is stored in that name.",
+        },
+        {
+          type: "anatomy",
+          code: "def greet(name):",
+          parts: [
+            { token: "greet", label: "The function name." },
+            { token: "name", label: "The **parameter**. A variable that gets its value from the call." },
+          ],
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def greet(name):\n    print("Hello", name)\n\ngreet("Mia")\ngreet("Sam")',
+        },
+        {
+          type: "p",
+          text: "greet(\"Mia\") stores Mia in name, then runs the body. greet(\"Sam\") stores Sam. Same body, different value each time. The value in the call is the **argument**. The name in def is the **parameter**.",
+        },
+        {
+          type: "table",
+          head: ["Call", "name holds", "Printed"],
+          rows: [
+            ['greet("Mia")', "Mia", "Hello Mia"],
+            ['greet("Sam")', "Sam", "Hello Sam"],
+          ],
+        },
+        {
+          type: "check",
+          id: "c-params",
+          question: 'In def greet(name): and the call greet("Mia"), what is "Mia"?',
+          options: ["The parameter", "The argument", "The function name", "The return value"],
+          answer: 1,
+          explain: "The value passed in the call is the argument. name, in the def line, is the parameter.",
+        },
+      ],
+    },
+    {
+      id: "two-params",
+      part: "Part 2 · Parameters",
+      title: "Two parameters, matched in order",
+      blocks: [
+        {
+          type: "p",
+          text: "Separate parameters with commas. Arguments are matched to parameters by position: the first argument goes into the first parameter, the second into the second.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def introduce(name, age):\n    print(name, "is", age)\n\nintroduce("Mia", 11)\nintroduce(12, "Sam")',
+        },
+        {
+          type: "p",
+          text: "The second call has the arguments swapped, so name holds 12 and age holds Sam. Python does not complain. It prints 12 is Sam. Order is your job.",
+        },
+        {
+          type: "compare",
+          left: {
+            label: "One argument missing",
+            tone: "bad",
+            code: 'def introduce(name, age):\n    print(name, "is", age)\n\nintroduce("Mia")',
+            output: "TypeError: introduce() missing 1 required positional argument: 'age'",
+          },
+          right: {
+            label: "One argument per parameter",
+            tone: "good",
+            code: 'def introduce(name, age):\n    print(name, "is", age)\n\nintroduce("Mia", 11)',
+            output: "Mia is 11",
+          },
+        },
+        {
+          type: "check",
+          id: "c-two-params",
+          question: "def minus(a, b): print(a - b). What does minus(10, 3) print?",
+          options: ["7", "-7", "13", "TypeError"],
+          answer: 0,
+          explain: "10 goes into a, 3 into b. a - b is 7. minus(3, 10) would print -7.",
+        },
+      ],
+    },
+    {
+      id: "return",
+      part: "Part 3 · return",
+      title: "return hands a value back",
+      blocks: [
+        {
+          type: "lead",
+          text: "return sends a value back to the line that called the function. The call then stands for that value, like len(word) stands for a number.",
+        },
+        {
+          type: "anatomy",
+          code: "    return a + b",
+          parts: [
+            { token: "return", label: "A keyword. It ends the function and hands back a value." },
+            { token: "a + b", label: "The value to hand back. It is worked out first." },
+          ],
+        },
+        {
+          type: "code",
+          live: true,
+          code: "def add(a, b):\n    return a + b\n\nresult = add(5, 3)\nprint(result)\nprint(add(10, 20) * 2)",
+        },
+        {
+          type: "p",
+          text: "add(5, 3) becomes 8, and 8 is stored in result. In the last line, add(10, 20) becomes 30, then 30 * 2 is 60. The function did not print anything. The caller decided what to do with the value.",
+        },
+        {
+          type: "check",
+          id: "c-return",
+          question: "def add(a, b): return a + b. What does print(add(5, 3)) show?",
+          options: ["a + b", "8", "53", "Nothing"],
+          answer: 1,
+          explain: "5 and 3 go in, 8 comes back, and print shows it.",
+        },
+      ],
+    },
+    {
+      id: "print-vs-return",
+      part: "Part 3 · return",
+      title: "print shows it. return hands it back",
+      blocks: [
+        {
+          type: "p",
+          text: "This is the most common functions mistake. print puts a value on the screen, and then it is gone. return gives the value to the program so it can be stored, added to, or tested.",
+        },
+        {
+          type: "compare",
+          left: {
+            label: "Printed, not returned",
+            tone: "bad",
+            code: "def add(a, b):\n    print(a + b)\n\nx = add(2, 3)\nprint(x)",
+            output: "5\nNone",
+          },
+          right: {
+            label: "Returned",
+            tone: "good",
+            code: "def add(a, b):\n    return a + b\n\nx = add(2, 3)\nprint(x)",
+            output: "5",
+          },
+        },
+        {
+          type: "p",
+          text: "On the left, add prints 5 itself, but returns nothing. A function without return gives back None, Python's word for no value. So x is None. Try x + 1 there and you get TypeError.",
+        },
+        {
+          type: "callout",
+          tone: "exam",
+          text: "print() shows a value on screen. return hands it back so the rest of the program can use it. If you need the answer later, return it.",
+        },
+        {
+          type: "check",
+          id: "c-print-return",
+          question: "def double(n): print(n * 2). Then x = double(4). What is x?",
+          options: ["8", "None", "4", "n * 2"],
+          answer: 1,
+          explain: "double prints 8 but has no return, so it gives back None.",
+        },
+      ],
+    },
+    {
+      id: "return-ends",
+      part: "Part 3 · return",
+      title: "return ends the function",
+      blocks: [
+        {
+          type: "p",
+          text: "As soon as return runs, the function stops and goes back to the caller. Lines below it in the body are skipped. That makes return inside an if useful: the first matching answer wins.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def check_score(score):\n    if score >= 50:\n        return "Pass"\n    return "Try again"\n\nprint(check_score(72))\nprint(check_score(30))',
+        },
+        {
+          type: "table",
+          head: ["Call", "score >= 50", "Returned"],
+          rows: [
+            ["check_score(72)", "True", "Pass. The last line never runs."],
+            ["check_score(30)", "False", "Try again"],
+          ],
+        },
+        {
+          type: "p",
+          text: "No else is needed. When the score passes, return \"Pass\" has already left the function, so return \"Try again\" is only reached when the test was False.",
+        },
+        {
+          type: "check",
+          id: "c-return-ends",
+          question: 'def f(): return 1, then print("after") indented below it. What does print(f()) show?',
+          options: ["after, then 1", "1", "after", "1, then after"],
+          answer: 1,
+          explain: "return 1 ends the function. The print below it never runs.",
+        },
+      ],
+    },
+    {
+      id: "use-results",
+      part: "Part 3 · return",
+      title: "Use a returned value anywhere",
+      blocks: [
+        {
+          type: "p",
+          text: "A call that returns a value can go anywhere a value can: in a print, in a sum, in an if, even inside another call.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: 'def calculate_score(correct, total):\n    return correct * 100 / total\n\nresult = calculate_score(8, 10)\nprint(result)\nif calculate_score(3, 10) < 50:\n    print("Keep practising")',
+        },
+        {
+          type: "p",
+          text: "8 * 100 / 10 is 80.0. / always gives a decimal. The if uses calculate_score(3, 10), which is 30.0, so Keep practising prints. The function did the maths. Each caller used the answer differently.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: "def add(a, b):\n    return a + b\n\nprint(add(add(1, 2), 3))",
+        },
+        {
+          type: "check",
+          id: "c-use-results",
+          question: "def add(a, b): return a + b. What is add(add(1, 2), 3)?",
+          options: ["3", "6", "123", "TypeError"],
+          answer: 1,
+          explain: "The inner call runs first: add(1, 2) is 3. Then add(3, 3) is 6.",
+        },
+      ],
+    },
+    {
+      id: "local",
+      part: "Part 4 · Reusing code",
+      title: "Names inside stay inside",
+      blocks: [
+        {
+          type: "p",
+          text: "Parameters and variables created inside a function are local. They exist while the function runs, then disappear. The rest of the program cannot see them.",
+        },
+        {
+          type: "compare",
+          left: {
+            label: "Reading a local from outside",
+            tone: "bad",
+            code: "def make_total():\n    total = 5 + 3\n\nmake_total()\nprint(total)",
+            output: "NameError: name 'total' is not defined",
+          },
+          right: {
+            label: "Return it instead",
+            tone: "good",
+            code: "def make_total():\n    total = 5 + 3\n    return total\n\nanswer = make_total()\nprint(answer)",
+            output: "8",
+          },
+        },
+        {
+          type: "p",
+          text: "This is why return matters. It is the way a value gets out of a function. The upside: a name like total inside one function does not clash with a total somewhere else.",
+        },
+        {
+          type: "check",
+          id: "c-local",
+          question: "A function creates secret = 5 inside its body. After calling it, the main program runs print(secret). What happens?",
+          options: ["5", "None", "NameError", "0"],
+          answer: 2,
+          explain: "secret was local to the function. Outside, the name does not exist.",
+        },
+      ],
+    },
+    {
+      id: "with-lists",
+      part: "Part 4 · Reusing code",
+      title: "Functions that loop over a list",
+      blocks: [
+        {
+          type: "p",
+          text: "A parameter can hold anything, including a list. Put the total loop from the last lesson inside a function, and you can total any list with one call.",
+        },
+        {
+          type: "code",
+          live: true,
+          code: "def calculate_total(numbers):\n    total = 0\n    for n in numbers:\n        total = total + n\n    return total\n\nprint(calculate_total([70, 85, 90]))\nprint(calculate_total([1, 2, 3]))",
+        },
+        {
+          type: "p",
+          text: "Check where return sits. It lines up with for, so it runs once, after the loop. Indented inside the loop, it would return after the first number, and calculate_total([70, 85, 90]) would give 70.",
+        },
+        {
+          type: "check",
+          id: "c-with-lists",
+          question: "In calculate_total, return total is accidentally indented inside the for loop. What does calculate_total([4, 5, 6]) return?",
+          options: ["15", "4", "6", "None"],
+          answer: 1,
+          explain: "On the first pass total becomes 4, then return ends the function straight away.",
+        },
+      ],
+    },
+    {
+      id: "build",
+      part: "Part 4 · Reusing code",
+      title: "Small functions, one program",
+      blocks: [
+        {
+          type: "p",
+          text: "Real programs are built from small functions that each do one job. Here, greet says hello, calculate_total adds marks, and check_score turns a total into a result. The main part at the bottom just calls them.",
+        },
+        {
+          type: "code",
+          live: true,
+          inputs: ["Mia"],
+          code: 'def greet(name):\n    print("Welcome, " + name + "!")\n\ndef calculate_total(marks):\n    total = 0\n    for mark in marks:\n        total = total + mark\n    return total\n\ndef check_score(total):\n    if total >= 150:\n        return "Pass"\n    return "Try again"\n\nprint("Name?")\nname = input()\ngreet(name)\ntotal = calculate_total([60, 45, 70])\nprint("Total:", total)\nprint(check_score(total))',
+        },
+        {
+          type: "list",
+          ordered: true,
+          items: [
+            "The three defs only teach Python the names. Nothing prints yet.",
+            "greet(name) prints the welcome. It does not need to return anything.",
+            "calculate_total returns 175, which is stored in total.",
+            "check_score(175) returns Pass, and print shows it.",
+          ],
+        },
+        {
+          type: "callout",
+          tone: "tip",
+          text: "Test one function at a time. Write greet, call it, check it. Then add the next one. A bug is easy to find when only one new thing changed.",
+        },
+        {
+          type: "check",
+          id: "c-build",
+          question: "In that program, why does calculate_total use return but greet does not?",
+          options: [
+            "greet is broken",
+            "The total is needed later by check_score. The greeting only needs to appear on screen.",
+            "return only works with numbers",
+            "Functions with parameters cannot return",
+          ],
+          answer: 1,
+          explain: "Return a value when the rest of the program needs it. Print when it only needs to be shown.",
+        },
+      ],
+    },
+    {
+      id: "mistakes",
+      part: "Part 4 · Reusing code",
+      title: "Four mistakes to spot",
+      blocks: [
+        {
+          type: "table",
+          head: ["Mistake", "What you see", "Fix"],
+          rows: [
+            ["Calling before def", "NameError", "Move the def above the call"],
+            ["Missing an argument", "TypeError: missing 1 required positional argument", "One argument per parameter"],
+            ["print instead of return", "None appears, or TypeError when you use the result", "return the value"],
+            ["Body not indented", "IndentationError", "Indent the body four spaces"],
+          ],
+        },
+        {
+          type: "p",
+          text: "Forgetting the colon after def greet() is a SyntaxError, the same as forgetting it after if. Forgetting the brackets on a call is quieter: nothing runs and there is no error at all.",
+        },
+        {
+          type: "check",
+          id: "c-mistakes",
+          question: "A function returns nothing, and you print what it gave back. What appears?",
+          options: ["0", "None", "An empty line only", "NameError"],
+          answer: 1,
+          explain: "A function with no return gives back None.",
+        },
+      ],
+    },
+    {
+      id: "terms",
+      part: "Part 5 · Revise",
+      title: "Key terms",
+      blocks: [
+        {
+          type: "terms",
+          items: [
+            { term: "Function", meaning: "A named group of lines that runs when it is called." },
+            { term: "def", meaning: "The keyword that defines a function." },
+            { term: "Call", meaning: "Running a function: its name, then brackets. greet()." },
+            { term: "Parameter", meaning: "A name in the def brackets. It receives a value from the call." },
+            { term: "Argument", meaning: "The value written in the call's brackets." },
+            { term: "return", meaning: "Ends the function and hands a value back to the caller." },
+            { term: "None", meaning: "What a function gives back when it has no return." },
+            { term: "Local variable", meaning: "A name created inside a function. It does not exist outside." },
+            { term: "Built-in function", meaning: "One Python already has: print, input, len, int, str, range." },
+          ],
+        },
+      ],
+    },
+    {
+      id: "exam",
+      part: "Part 5 · Revise",
+      title: "Exam corner",
+      blocks: [
+        {
+          type: "lead",
+          text: "Point at the def line, the call, the parameter and the argument before you answer.",
+        },
+        {
+          type: "flashcards",
+          cards: [
+            { q: "What keyword defines a function?", a: "def." },
+            { q: "Does defining a function run its body?", a: "No. Only a call runs it." },
+            { q: "How do you call greet?", a: "greet(), with brackets." },
+            { q: "What happens if you call a function above its def?", a: "NameError. Python has not learned the name yet." },
+            { q: "In def greet(name), what is name?", a: "A parameter." },
+            { q: 'In greet("Mia"), what is "Mia"?', a: "An argument." },
+            { q: "How are two arguments matched to two parameters?", a: "By position. First to first, second to second." },
+            { q: "What does return do?", a: "Ends the function and hands a value back to the caller." },
+            { q: "What is the difference between print and return?", a: "print shows a value on screen. return hands it back so the program can use it." },
+            { q: "What does a function without return give back?", a: "None." },
+            { q: "What happens to lines after return in the same body?", a: "They are skipped." },
+            { q: "Can the main program read a variable made inside a function?", a: "No. It is local. Return it instead." },
+          ],
+        },
+        {
+          type: "check",
+          id: "c-exam-output",
+          question: "def square(n): return n * n. What does print(square(3) + 1) show?",
+          options: ["9", "10", "16", "n * n + 1"],
+          answer: 1,
+          explain: "square(3) returns 9. 9 + 1 is 10.",
+        },
+        {
+          type: "check",
+          id: "c-exam-none",
+          question: "def show(n): print(n). What does print(show(7)) display?",
+          options: ["7", "7, then None", "None", "NameError"],
+          answer: 1,
+          explain: "show prints 7 itself. It has no return, so the outer print shows None.",
+        },
+      ],
+    },
+    {
+      id: "recap",
+      part: "Part 5 · Revise",
+      title: "Chapter summary",
+      blocks: [
+        {
+          type: "list",
+          items: [
+            "def name(): followed by an indented body defines a function. Nothing runs yet.",
+            "name() calls it. Python jumps into the body, runs it, and comes back.",
+            "Define before you call, or you get NameError.",
+            "Parameters in def receive the arguments from the call, matched in order.",
+            "return hands a value back and ends the function. Without it, the function gives None.",
+            "print shows a value. return lets the program use it.",
+            "Variables inside a function are local. Small functions, each with one job, build bigger programs.",
+          ],
+        },
+        {
+          type: "callout",
+          tone: "fact",
+          title: "Next up",
+          text: "The Examples step through a call, a parameter, a return and a function with an if. Then you write greet, square and the Score Calculator, and fix a function that prints when it should return.",
+        },
+      ],
+    },
+  ],
+
+  examples: [
+    {
+      type: "trace",
+      id: "trace-call",
+      title: "Define once, call twice",
+      intro: "Watch the def line get skipped, then the body run on each call.",
+      code: 'def greet():\n    print("Hello!")\n\ngreet()\ngreet()',
+      steps: [
+        { line: 1, note: "Python learns the name greet. The body is not run now." },
+        { line: 4, note: "The first call. Python jumps into greet." },
+        { line: 2, output: "Hello!", note: "The body runs." },
+        { line: 5, note: "Back from the first call. Now the second call jumps in again." },
+        { line: 2, output: "Hello!", note: "Same body, second run. The function ends and the program is finished." },
+      ],
+    },
+    {
+      type: "trace",
+      id: "trace-params",
+      title: "A parameter gets a new value each call",
+      intro: "name is filled in by the call. Follow what it holds.",
+      code: 'def greet(name):\n    print("Hello", name)\n\ngreet("Mia")\ngreet("Sam")',
+      steps: [
+        { line: 1, note: "greet is defined, with one parameter called name." },
+        { line: 4, note: 'Call with the argument "Mia". name now holds Mia.' },
+        { line: 2, output: "Hello Mia", note: "The body uses name." },
+        { line: 5, note: 'A new call. name now holds Sam. The old value is gone.' },
+        { line: 2, output: "Hello Sam", note: "Same line, new value." },
+      ],
+    },
+    {
+      type: "trace",
+      id: "trace-return",
+      title: "return hands the answer back",
+      intro: "The call is replaced by the returned value. Watch total.",
+      code: "def add(a, b):\n    return a + b\n\ntotal = add(5, 3)\nprint(total)\nprint(add(total, 2))",
+      steps: [
+        { line: 1, note: "add is defined with two parameters." },
+        { line: 4, note: "Call add(5, 3). a is 5, b is 3." },
+        { line: 2, note: "a + b is 8. return hands 8 back." },
+        { line: 4, note: "add(5, 3) has become 8, and 8 is stored in total." },
+        { line: 5, output: "8", note: "add did not print. This print in the main program does." },
+        { line: 6, note: "Call add(total, 2). a is 8, b is 2." },
+        { line: 2, note: "8 + 2 is 10. return hands it back." },
+        { line: 6, output: "10", note: "print shows the returned 10." },
+      ],
+    },
+    {
+      type: "trace",
+      id: "trace-score",
+      title: "return inside an if",
+      intro: "The first return that runs ends the function. The last line is only reached when the test fails.",
+      code: 'def check_score(score):\n    if score >= 50:\n        return "Pass"\n    return "Try again"\n\nprint(check_score(72))\nprint(check_score(30))',
+      steps: [
+        { line: 1, note: "check_score is defined. Nothing runs yet." },
+        { line: 6, note: "Call with 72. score is 72." },
+        { line: 2, note: "72 >= 50 is True." },
+        { line: 3, note: "return Pass. The function ends here. Line 4 is skipped." },
+        { line: 6, output: "Pass", note: "print shows the returned value." },
+        { line: 7, note: "Call with 30. score is 30." },
+        { line: 2, note: "30 >= 50 is False, so line 3 is skipped." },
+        { line: 4, note: "return Try again." },
+        { line: 7, output: "Try again", note: "print shows it." },
+      ],
+    },
+    {
+      type: "playground",
+      id: "play-greet",
+      title: "Your own greet",
+      intro: "Define greet with one parameter, name. It prints Hello and the name. Call it for Mia and for Sam.",
+      starter: "# define greet(name), then call it twice\n",
+      tryThis: ['def greet(name): then print("Hello", name) indented', 'greet("Mia") and greet("Sam") below, not indented', "Call it a third time with your own name"],
+      goal: {
+        text: "Print Hello Mia and Hello Sam using one greet function with a parameter.",
+        check: (r, code) => {
+          const lines = r.stdout.split("\n").map((line) => line.trim());
+          return r.ok && /def\s+greet\s*\(\s*\w+\s*\)\s*:/.test(code) && lines.includes("Hello Mia") && lines.includes("Hello Sam");
+        },
+        success: "One function, two calls, two different names.",
+      },
+    },
+    {
+      type: "playground",
+      id: "play-square",
+      title: "square() returns",
+      intro: "Write square(n) that returns n times n. Do not print inside it. Print the results of square(4) and square(9) outside.",
+      starter: "# define square(n) with return\n\nprint(square(4))\nprint(square(9))\n",
+      tryThis: ["def square(n): then return n * n", "Keep the two prints at the bottom", "Try print(square(3) + 1)"],
+      goal: {
+        text: "Print 16 and 81, and use return in square.",
+        check: (r, code) => r.ok && /\breturn\b/.test(code) && r.stdout.trim().split("\n").slice(0, 2).join("\n") === "16\n81",
+        success: "square hands back the answer, and the caller decides to print it.",
+      },
+    },
+    {
+      type: "playground",
+      id: "play-score",
+      title: "Score Calculator",
+      intro: "The lesson project. calculate_score(correct, total) returns the percentage: correct * 100 / total.",
+      starter: "def calculate_score(correct, total):\n    return 0  # change 0 to the percentage\n\nresult = calculate_score(8, 10)\nprint(result)\n",
+      tryThis: ["return correct * 100 / total", "Try calculate_score(3, 4)", "Add an if: print Great! when the result is 80 or more"],
+      goal: {
+        text: "Print 80.0 for 8 out of 10, using return.",
+        check: (r, code) => r.ok && /\breturn\b/.test(code) && r.stdout.split("\n").map((l) => l.trim()).includes("80.0"),
+        success: "8 * 100 / 10 is 80.0. The function returns it and result stores it.",
+      },
+    },
+    {
+      type: "playground",
+      id: "play-bugs",
+      title: "Bug hunt: None instead of 42",
+      intro: "It runs, but the output is 42 and then Answer: None. double should hand its answer back, not print it.",
+      starter: 'def double(n):\n    print(n * 2)\n\nanswer = double(21)\nprint("Answer:", answer)',
+      tryThis: ["Run it and read both lines", "double has no return, so it gives back None", "Change the print inside double to return"],
+      goal: {
+        text: "The only output must be Answer: 42.",
+        check: (r, code) => r.ok && /\breturn\b/.test(code) && r.stdout.trim() === "Answer: 42",
+        success: "return handed 42 back, so answer holds 42 instead of None.",
+      },
+    },
+  ],
+
+  practice: [
+    {
+      type: "mcq",
+      id: "q-def",
+      level: "easy",
+      skill: "The def keyword",
+      prompt: "Which keyword starts a function definition?",
+      options: ["function", "def", "define", "func"],
+      codeOptions: true,
+      answer: 1,
+      explain: "def is short for define.",
+    },
+    {
+      type: "fill",
+      id: "q-fill-def",
+      level: "easy",
+      skill: "Write the header",
+      prompt: "Fill the keyword that defines greet.",
+      code: '___ greet():\n    print("Hello!")',
+      answers: ["def"],
+      mode: "code",
+      placeholder: "def",
+      explain: "def, the name, brackets, colon.",
+    },
+    {
+      type: "mcq",
+      id: "q-no-call",
+      level: "easy",
+      skill: "Defining is not calling",
+      prompt: "What does this program print?",
+      code: 'def greet():\n    print("Hello!")',
+      options: ["Hello!", "Nothing", "greet", "NameError"],
+      answer: 1,
+      explain: "The function is defined but never called, so its body never runs.",
+    },
+    {
+      type: "mcq",
+      id: "q-call",
+      level: "easy",
+      skill: "Calling",
+      prompt: "Which line runs the function greet?",
+      options: ["greet", "greet()", "def greet()", "call greet"],
+      codeOptions: true,
+      answer: 1,
+      explain: "The name followed by brackets is a call.",
+    },
+    {
+      type: "mcq",
+      id: "q-calls-count",
+      level: "medium",
+      skill: "Each call runs the body",
+      prompt: "How many lines are printed?",
+      code: 'def say():\n    print("Hi")\n    print("Bye")\n\nsay()\nsay()',
+      options: ["2", "4", "1", "0"],
+      answer: 1,
+      explain: "Each call prints two lines. Two calls make four lines.",
+    },
+    {
+      type: "mcq",
+      id: "q-parameter",
+      level: "medium",
+      skill: "Parameter",
+      prompt: "In def greet(name):, what is name?",
+      options: ["An argument", "A parameter", "A return value", "A keyword"],
+      answer: 1,
+      explain: "Names in the def brackets are parameters. Values in the call are arguments.",
+    },
+    {
+      type: "mcq",
+      id: "q-argument",
+      level: "medium",
+      skill: "Argument",
+      prompt: 'In the call greet("Mia"), what is "Mia"?',
+      options: ["A parameter", "An argument", "The function name", "A local variable"],
+      answer: 1,
+      explain: "The value passed in a call is an argument.",
+    },
+    {
+      type: "fill",
+      id: "q-fill-add",
+      level: "easy",
+      skill: "Predict a return",
+      prompt: "What is printed?",
+      code: "def add(a, b):\n    return a + b\n\nprint(add(5, 3))",
+      answers: ["8"],
+      mode: "text",
+      explain: "5 and 3 go in, add returns 8, print shows it.",
+    },
+    {
+      type: "mcq",
+      id: "q-order",
+      level: "medium",
+      skill: "Arguments in order",
+      prompt: "What is printed?",
+      code: "def minus(a, b):\n    return a - b\n\nprint(minus(3, 10))",
+      options: ["7", "-7", "13", "TypeError"],
+      answer: 1,
+      explain: "3 goes into a, 10 into b. 3 - 10 is -7.",
+    },
+    {
+      type: "mcq",
+      id: "q-missing-arg",
+      level: "medium",
+      skill: "Missing argument",
+      prompt: "What happens?",
+      code: 'def introduce(name, age):\n    print(name, "is", age)\n\nintroduce("Mia")',
+      options: ["Mia is", "Mia is None", "TypeError", "NameError"],
+      answer: 2,
+      explain: "Two parameters need two arguments. Python reports the missing one as TypeError.",
+    },
+    {
+      type: "mcq",
+      id: "q-print-none",
+      level: "hard",
+      skill: "print vs return",
+      prompt: "What is printed?",
+      code: "def add(a, b):\n    print(a + b)\n\nx = add(2, 3)\nprint(x)",
+      options: ["5", "5, then None", "None", "5, then 5"],
+      answer: 1,
+      explain: "add prints 5 itself, but has no return, so x is None.",
+    },
+    {
+      type: "mcq",
+      id: "q-return-ends",
+      level: "medium",
+      skill: "return ends the function",
+      prompt: "What is printed?",
+      code: 'def f():\n    return 1\n    print("after")\n\nprint(f())',
+      options: ["after, then 1", "1", "after", "None"],
+      answer: 1,
+      explain: "return ends the function. The print under it is never reached.",
+    },
+    {
+      type: "mcq",
+      id: "q-call-early",
+      level: "hard",
+      skill: "Define before calling",
+      prompt: "What happens?",
+      code: 'greet()\n\ndef greet():\n    print("Hello!")',
+      options: ["Hello!", "Nothing", "NameError", "SyntaxError"],
+      answer: 2,
+      explain: "Python reads from the top. At the call, greet has not been defined yet.",
+    },
+    {
+      type: "mcq",
+      id: "q-local",
+      level: "hard",
+      skill: "Local variables",
+      prompt: "What happens?",
+      code: "def make_total():\n    total = 5 + 3\n\nmake_total()\nprint(total)",
+      options: ["8", "None", "NameError", "0"],
+      answer: 2,
+      explain: "total only exists inside make_total. Return it to use it outside.",
+    },
+    {
+      type: "fill",
+      id: "q-fill-return",
+      level: "medium",
+      skill: "Write return",
+      prompt: "Fill the keyword so area hands its answer back to the caller.",
+      code: "def area(w, h):\n    ___ w * h",
+      answers: ["return"],
+      mode: "code",
+      placeholder: "return",
+      explain: "return hands the value back. print would only show it.",
+    },
+    {
+      type: "mcq",
+      id: "q-check-score",
+      level: "medium",
+      skill: "return inside if",
+      prompt: "What is printed?",
+      code: 'def check_score(score):\n    if score >= 50:\n        return "Pass"\n    return "Try again"\n\nprint(check_score(30))',
+      options: ["Pass", "Try again", "Pass, then Try again", "None"],
+      answer: 1,
+      explain: "30 >= 50 is False, so the first return is skipped and the second one runs.",
+    },
+    {
+      type: "fill",
+      id: "q-fill-nested",
+      level: "hard",
+      skill: "A call inside a call",
+      prompt: "What is printed?",
+      code: "def add(a, b):\n    return a + b\n\nprint(add(add(1, 2), 3))",
+      answers: ["6"],
+      mode: "text",
+      explain: "add(1, 2) is 3 first. Then add(3, 3) is 6.",
+    },
+    {
+      type: "order",
+      id: "q-order-function",
+      level: "medium",
+      skill: "Order a function program",
+      prompt: "Put the lines in an order that defines double and prints double(4), which is 8.",
+      lines: ["def double(n):", "    return n * 2", "result = double(4)", "print(result)"],
+      code: true,
+      explain: "The def and its indented return come first. Then call it, store the result, and print.",
+    },
+    {
+      type: "mcq",
+      id: "q-builtin",
+      level: "easy",
+      skill: "Built-in functions",
+      prompt: "Which of these is a function Python already gives you?",
+      options: ["def", "len", "return", "if"],
+      codeOptions: true,
+      answer: 1,
+      explain: "len is a built-in function. def, return and if are keywords.",
+    },
+    {
+      type: "mcq",
+      id: "q-return-in-loop",
+      level: "hard",
+      skill: "Where return sits",
+      prompt: "return total is indented inside the loop by mistake. What is printed?",
+      code: "def calculate_total(numbers):\n    total = 0\n    for n in numbers:\n        total = total + n\n        return total\n\nprint(calculate_total([4, 5, 6]))",
+      options: ["15", "4", "6", "None"],
+      answer: 1,
+      explain: "The first pass adds 4, then return ends the function. Line return up with for to fix it.",
+    },
+    {
+      type: "write",
+      id: "q-write-greet",
+      level: "easy",
+      skill: "Define and call",
+      prompt:
+        "Define a function greet with no parameters. It prints Hello!. Call it twice.\n\nOutput must be:\nHello!\nHello!",
+      starter: "",
+      expected: "Hello!\nHello!",
+      check: (_r, code) => {
+        if (!/def\s+greet\s*\(\s*\)\s*:/.test(code)) return "Define it with def greet():";
+        if ((code.match(/print\s*\(/g) ?? []).length !== 1) return "Put one print inside greet, then call greet twice.";
+        return null;
+      },
+      hint: 'def greet(): then print("Hello!") indented. Then greet() twice, not indented.',
+      solution: 'def greet():\n    print("Hello!")\n\ngreet()\ngreet()',
+    },
+    {
+      type: "write",
+      id: "q-write-square",
+      level: "medium",
+      skill: "return a value",
+      prompt:
+        "Write square(n) that returns n times n. Then print square(4) and square(9).\n\nOutput must be:\n16\n81",
+      starter: "",
+      expected: "16\n81",
+      check: (_r, code) => {
+        if (!/def\s+square\s*\(/.test(code)) return "Define a function called square.";
+        if (!/\breturn\b/.test(code)) return "Hand the answer back with return, not print.";
+        return null;
+      },
+      hint: "def square(n): return n * n. Then print(square(4)) and print(square(9)).",
+      solution: "def square(n):\n    return n * n\n\nprint(square(4))\nprint(square(9))",
+    },
+    {
+      type: "write",
+      id: "q-write-score",
+      level: "medium",
+      skill: "Score Calculator",
+      prompt:
+        "Write calculate_score(correct, total) that returns correct * 100 / total. Print calculate_score(8, 10), then calculate_score(3, 4).\n\nOutput must be:\n80.0\n75.0",
+      starter: "",
+      expected: "80.0\n75.0",
+      check: (_r, code) => {
+        if (!/def\s+calculate_score\s*\(\s*\w+\s*,\s*\w+\s*\)/.test(code)) return "Define calculate_score with two parameters.";
+        if (!/\breturn\b/.test(code)) return "Use return so the score comes back to the caller.";
+        return null;
+      },
+      hint: "def calculate_score(correct, total): return correct * 100 / total",
+      solution: "def calculate_score(correct, total):\n    return correct * 100 / total\n\nprint(calculate_score(8, 10))\nprint(calculate_score(3, 4))",
+    },
+    {
+      type: "write",
+      id: "q-write-check",
+      level: "hard",
+      skill: "return from an if",
+      prompt:
+        "Write check_score(score) that returns Pass when score is 50 or more, and Try again otherwise. Print Score?, read a whole number, and print what check_score returns.\n\nThe checker types:\n72\n\nOutput must be:\nScore?\nPass",
+      starter: "",
+      inputs: ["72"],
+      expected: "Score?\nPass",
+      check: (_r, code) => {
+        if (!/def\s+check_score\s*\(/.test(code)) return "Define a function called check_score.";
+        if ((code.match(/\breturn\b/g) ?? []).length < 2) return "Return Pass in one case and Try again in the other.";
+        return null;
+      },
+      hint: 'if score >= 50: return "Pass". Under it, return "Try again". Then print(check_score(int(input()))) after print("Score?").',
+      solution:
+        'def check_score(score):\n    if score >= 50:\n        return "Pass"\n    return "Try again"\n\nprint("Score?")\nscore = int(input())\nprint(check_score(score))',
+    },
+    {
+      type: "write",
+      id: "q-challenge",
+      level: "hard",
+      skill: "Mini challenge",
+      challenge: true,
+      prompt:
+        'Write three functions and use them together.\n• greet(name) prints Welcome, then the name and !, like Welcome, Mia!\n• calculate_total(marks) returns the sum of a list, using a for loop\n• check_score(total) returns Pass if total is 150 or more, otherwise Try again\n\nThen: print Name?, read a name, greet it, total the marks [60, 45, 70], print Total: and the total, and print the result of check_score.\n\nThe checker types:\nMia\n\nOutput must be:\nName?\nWelcome, Mia!\nTotal: 175\nPass',
+      starter: "",
+      inputs: ["Mia"],
+      expected: "Name?\nWelcome, Mia!\nTotal: 175\nPass",
+      check: (_r, code) => {
+        for (const fn of ["greet", "calculate_total", "check_score"]) {
+          if (!new RegExp(`def\\s+${fn}\\s*\\(`).test(code)) return `Define a function called ${fn}.`;
+        }
+        if (!/\bfor\b/.test(code)) return "Add up the marks with a for loop inside calculate_total.";
+        if ((code.match(/\breturn\b/g) ?? []).length < 2) return "calculate_total and check_score should both return their answer.";
+        return null;
+      },
+      hint: 'greet uses print("Welcome, " + name + "!"). calculate_total keeps a total, loops, then returns it after the loop. check_score returns from an if.',
+      solution:
+        'def greet(name):\n    print("Welcome, " + name + "!")\n\ndef calculate_total(marks):\n    total = 0\n    for mark in marks:\n        total = total + mark\n    return total\n\ndef check_score(total):\n    if total >= 150:\n        return "Pass"\n    return "Try again"\n\nprint("Name?")\nname = input()\ngreet(name)\ntotal = calculate_total([60, 45, 70])\nprint("Total:", total)\nprint(check_score(total))',
+    },
+  ],
+};

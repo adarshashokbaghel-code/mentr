@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
       "./public/ncert/**",
       "./public/models/**",
       "./public/ort/**",
+      "./public/pyodide/**",
       "./public/learn/**",
       "./videos/**",
       "./.cache/**",
@@ -25,6 +26,7 @@ const nextConfig: NextConfig = {
       "./eng.traineddata",
     ],
     "/api/[[...all]]": [
+      "./public/pyodide/**",
       "./public/ncert/**",
       "./public/models/**",
       "./public/ort/**",
@@ -102,6 +104,49 @@ const nextConfig: NextConfig = {
             value: "public, max-age=31536000, immutable",
           },
           { key: "X-Content-Type-Options", value: "nosniff" },
+        ],
+      },
+      {
+        // Versioned path (/pyodide/v<version>/…), so contents never change.
+        source: "/pyodide/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+        ],
+      },
+      {
+        source: "/py-worker.js",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+          { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
+        ],
+      },
+      {
+        // Cross-origin isolation unlocks SharedArrayBuffer, so input() can pause and read from the console.
+        source: "/learnpython/lms/compiler",
+        headers: [
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+        ],
+      },
+      {
+        source: "/learnpython/lms/final",
+        headers: [
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+        ],
+      },
+      {
+        source: "/learnpython/lms/final/:path*",
+        headers: [
+          { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
         ],
       },
       {

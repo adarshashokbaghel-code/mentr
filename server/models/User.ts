@@ -160,6 +160,67 @@ export interface ILearnProfile {
   starter?: ILearnEnrollment;
 }
 
+/** Learn Python (/learnpython/lms) — created on the first signed-in visit, for any role. */
+export interface ILearnPythonCounts {
+  logins: number;
+  practiceEasy: number;
+  practiceMedium: number;
+  practiceHard: number;
+  videos: number;
+  examples: number;
+  lessonQuestions: number;
+  quickChecks: number;
+  projects: number;
+}
+
+/** Issued once, by the server, when every certificate rule is met. Public by id for verification. */
+export interface ILearnPythonCertificate {
+  id: string;
+  issuedAt: Date;
+  /** Name printed on the certificate, frozen at issue time. */
+  name: string;
+  course: string;
+  stats: {
+    xp: number;
+    lessonsStudied: number;
+    practiceSolved: number;
+    examplesSolved: number;
+    projectsCompleted: number;
+    projects: string[];
+  };
+}
+
+export interface ILearnPython {
+  visited: boolean;
+  firstVisitAt?: Date;
+  lastVisitAt?: Date;
+  xp: number;
+  level: number;
+  levelTitle?: string;
+  band?: string;
+  streakDays: number;
+  bestStreak: number;
+  lessonsCompleted: number;
+  /** Lesson slugs open to the learner: lesson 1, then each lesson whose previous Study was finished. */
+  unlockedLessons: string[];
+  /** Learner's local calendar days with a visit, YYYY-MM-DD. */
+  days: string[];
+  videosWatched: string[];
+  /** Award key (e.g. "bank:py001", "login:2026-10-06") → XP and when it was earned. */
+  awards: Record<string, { xp: number; at: string }>;
+  /** Lesson slug → PyLessonProgress. */
+  lessons: Record<string, unknown>;
+  /** Achievement id → ISO date unlocked. */
+  achievements: Record<string, string>;
+  /** Final Challenge project id → PyProjectProgress. */
+  projects: Record<string, unknown>;
+  projectsCompleted: number;
+  certificate?: ILearnPythonCertificate;
+  /** Set by Mentr staff to allow a claim without meeting the progress rules. */
+  certificateUnlocked?: boolean;
+  counts: ILearnPythonCounts;
+}
+
 export type PremiumMentorStatus = "none" | "pending" | "verified";
 
 export type MentrAccountType = "free" | "premium";
@@ -225,6 +286,7 @@ export interface IUser extends Document {
   parentProfile?: IParentProfile;
   /** Mentr Learn enrollments + progress (parents only). */
   learn?: ILearnProfile;
+  learnPython?: ILearnPython;
   /** Unique invite link generated when admin sends welcome email — used for referrals. */
   referralUrl?: string;
   /** Full signup URL the user arrived from (e.g. a referrer's link). */
@@ -431,6 +493,59 @@ const learnProfileSchema = new Schema<ILearnProfile>(
   { _id: false },
 );
 
+const learnPythonCountsSchema = new Schema<ILearnPythonCounts>(
+  {
+    logins: { type: Number, default: 0, min: 0 },
+    practiceEasy: { type: Number, default: 0, min: 0 },
+    practiceMedium: { type: Number, default: 0, min: 0 },
+    practiceHard: { type: Number, default: 0, min: 0 },
+    videos: { type: Number, default: 0, min: 0 },
+    examples: { type: Number, default: 0, min: 0 },
+    lessonQuestions: { type: Number, default: 0, min: 0 },
+    quickChecks: { type: Number, default: 0, min: 0 },
+    projects: { type: Number, default: 0, min: 0 },
+  },
+  { _id: false },
+);
+
+const learnPythonCertificateSchema = new Schema<ILearnPythonCertificate>(
+  {
+    id: { type: String, required: true, trim: true },
+    issuedAt: { type: Date, required: true },
+    name: { type: String, required: true, trim: true },
+    course: { type: String, required: true, trim: true },
+    stats: { type: Schema.Types.Mixed, default: () => ({}) },
+  },
+  { _id: false },
+);
+
+const learnPythonSchema = new Schema<ILearnPython>(
+  {
+    visited: { type: Boolean, default: false },
+    firstVisitAt: { type: Date },
+    lastVisitAt: { type: Date },
+    xp: { type: Number, default: 0, min: 0 },
+    level: { type: Number, default: 1, min: 1 },
+    levelTitle: { type: String, trim: true },
+    band: { type: String, trim: true },
+    streakDays: { type: Number, default: 0, min: 0 },
+    bestStreak: { type: Number, default: 0, min: 0 },
+    lessonsCompleted: { type: Number, default: 0, min: 0 },
+    unlockedLessons: { type: [String], default: [] },
+    days: { type: [String], default: [] },
+    videosWatched: { type: [String], default: [] },
+    awards: { type: Schema.Types.Mixed, default: () => ({}) },
+    lessons: { type: Schema.Types.Mixed, default: () => ({}) },
+    achievements: { type: Schema.Types.Mixed, default: () => ({}) },
+    projects: { type: Schema.Types.Mixed, default: () => ({}) },
+    projectsCompleted: { type: Number, default: 0, min: 0 },
+    certificate: { type: learnPythonCertificateSchema, required: false },
+    certificateUnlocked: { type: Boolean, required: false },
+    counts: { type: learnPythonCountsSchema, default: () => ({}) },
+  },
+  { _id: false, minimize: false },
+);
+
 const premiumMentorPaymentSchema = new Schema<IPremiumMentorPayment>(
   {
     receiptNumber: { type: String, required: true, trim: true },
@@ -498,6 +613,7 @@ const userSchema = new Schema<IUser>(
     profile: { type: facultyProfileSchema, required: false },
     parentProfile: { type: parentProfileSchema, required: false },
     learn: { type: learnProfileSchema, required: false },
+    learnPython: { type: learnPythonSchema, required: false },
     referralUrl: { type: String, trim: true },
     registrationSource: { type: String, trim: true },
     acquisitionSlug: { type: String, trim: true, lowercase: true },
@@ -541,6 +657,9 @@ userSchema.index({ registrationSource: 1 }, { sparse: true });
 userSchema.index({ acquisitionSlug: 1 }, { sparse: true });
 userSchema.index({ "learn.starter.enrolledAt": -1 }, { sparse: true });
 userSchema.index({ "learn.starter.track": 1 }, { sparse: true });
+userSchema.index({ "learnPython.lastVisitAt": -1 }, { sparse: true });
+userSchema.index({ "learnPython.xp": -1 }, { sparse: true });
+userSchema.index({ "learnPython.certificate.id": 1 }, { unique: true, sparse: true });
 userSchema.index(
   { "learn.starter.status": 1, "learn.starter.progress.xp": -1 },
   { sparse: true },

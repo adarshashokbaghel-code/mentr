@@ -4,7 +4,7 @@ import { useAuth } from "@/components/auth/auth-provider";
 import { LegalConsentCheckbox } from "@/components/auth/legal-consent-checkbox";
 import { trackSignUp } from "@/lib/analytics";
 import { resolveAcquisition } from "@/lib/marketing-client";
-import { isPublicBrowsePath } from "@/lib/public-browse";
+import { skipsProfiling } from "@/lib/public-browse";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { ApiError, authApi, saveToken, type UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
@@ -136,7 +136,7 @@ export function FacultyAuthForm({
       onComplete?.();
 
       if (data.user.role === "parent") {
-        const skipProfiling = next && isPublicBrowsePath(next);
+        const skipProfiling = next && skipsProfiling(next);
         router.push(
           data.profileCompleted || skipProfiling
             ? next || "/search"
@@ -146,7 +146,7 @@ export function FacultyAuthForm({
         const safeNext =
           next && next.startsWith("/") && !next.startsWith("//") ? next : null;
         router.push(
-          safeNext && isPublicBrowsePath(safeNext)
+          safeNext && skipsProfiling(safeNext)
             ? safeNext
             : data.profileCompleted
               ? safeNext || "/dashboard"

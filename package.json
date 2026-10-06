@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "concurrently -n next,api -c blue,magenta \"npm run dev:next\" \"npm run dev:server\"",
     "dev:3001": "concurrently -n next,api -c blue,magenta \"next dev -p 3001\" \"npm run dev:server\"",
+    "predev:next": "node scripts/copy-pyodide.mjs",
     "dev:next": "next dev",
     "dev:server": "tsx watch server/index.ts",
     "build": "next build",
@@ -21,7 +22,8 @@
     "db:wipe": "tsx scripts/wipe-db.ts --confirm",
     "seo:gsc-check": "node scripts/seo-gsc-check.mjs",
     "models:fetch": "node scripts/fetch-bg-models.mjs",
-    "prebuild": "node scripts/fetch-bg-models.mjs"
+    "python:copy": "node scripts/copy-pyodide.mjs",
+    "prebuild": "node scripts/fetch-bg-models.mjs && node scripts/copy-pyodide.mjs"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.3.0",
@@ -43,6 +45,7 @@
     "nodemailer": "^8.0.11",
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "^6.3.289",
+    "pyodide": "314.0.7",
     "radix-ui": "^1.6.2",
     "razorpay": "^2.9.8",
     "react": "19.2.4",

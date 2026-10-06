@@ -38,6 +38,11 @@ export function getPublicNavGroups(): PublicNavGroup[] {
             description: "What students cover, module by module",
           },
           {
+            label: "Learn Python",
+            href: "/learnpython",
+            description: "Free Python course — Beginner is live",
+          },
+          {
             label: "What is Mentr Learn?",
             href: "/blog/what-is-mentr-learn",
             description: "Learn by Mentr on mentr.in/learn explained",
@@ -206,6 +211,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
             { label: "Mentr Learn", href: "/learn" },
             { label: "Enroll free", href: "/learn/start" },
             { label: "Full syllabus", href: "/learn/syllabus" },
+            { label: "Learn Python", href: "/learnpython" },
             {
               label: "What is Mentr Learn?",
               href: "/blog/what-is-mentr-learn",
