@@ -11,11 +11,27 @@ export type MessengerTemplateId =
   | "mentor-go-live"
   | "mentor-referral"
   | "mentor-whatsapp-group"
+  | "mentor-coupon-alert"
   | "parent-welcome"
   | "parent-find-tutor"
   | "parent-whatsapp-group";
 
 export type MessengerAudience = "faculty" | "parent";
+
+export type CouponMailLine = {
+  label: string;
+  payableInr: number;
+  offInr: number;
+};
+
+export type CouponMailVars = {
+  code: string;
+  offInr: number;
+  sameOff: boolean;
+  validUntilLabel: string;
+  perUserLimit: number;
+  lines: CouponMailLine[];
+};
 
 export type MessengerTemplateVars = {
   name: string;
@@ -26,6 +42,7 @@ export type MessengerTemplateVars = {
   postRequirementUrl: string;
   profilingUrl: string;
   referralUrl: string;
+  coupon?: CouponMailVars;
 };
 
 export type MessengerTemplate = {
@@ -33,6 +50,8 @@ export type MessengerTemplate = {
   label: string;
   description: string;
   audience: MessengerAudience;
+  /** Admin must supply a live coupon; the mail fills code, off, and payable from it. */
+  requiresCoupon?: boolean;
   subject: (vars: MessengerTemplateVars) => string;
   text: (vars: MessengerTemplateVars) => string;
   html: (vars: MessengerTemplateVars) => string;
@@ -116,6 +135,18 @@ function checklist(items: string[]) {
 
 function textLink(href: string, label: string) {
   return `<a href="${href}" style="color:#2f9e6e;font-size:12px;font-weight:600;text-decoration:underline;">${label}</a>`;
+}
+
+function esc(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function inr(amount: number) {
+  return `₹${Math.round(amount).toLocaleString("en-IN")}`;
 }
 
 function sectionLabel(text: string, color = "#ef7a28") {
@@ -265,10 +296,21 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
         </table>
         ${whatsappLinkFallback()}
         <p style="margin:14px 0 0;font-size:12px;line-height:1.5;color:#6b756e;">
-          Only our team posts announcements, so the group stays quiet and useful. Free to join,
-          leave any time.
-        </p>
+        Only our team posts announcements, so the group stays quiet and useful. Free to join,
+        leave any time.
+      </p>
       `),
+  },
+
+  "mentor-coupon-alert": {
+    id: "mentor-coupon-alert",
+    label: "Mentor · Coupon alert",
+    description: "Live coupon: code, rupees off, and only what they pay at checkout.",
+    audience: "faculty",
+    requiresCoupon: true,
+    subject: (v) => couponSubject(v),
+    text: (v) => couponText(v),
+    html: (v) => emailShell(couponHtml(v)),
   },
 
   "parent-welcome": {
@@ -380,13 +422,120 @@ export function templateAudience(templateId: MessengerTemplateId): MessengerAudi
   return t.audience;
 }
 
+function couponSubject(v: MessengerTemplateVars) {
+  const coupon = v.coupon;
+  if (!coupon || coupon.lines.length === 0) return "Coupon alert";
+  const first = coupon.lines[0];
+  const pay =
+    coupon.lines.length > 1
+      ? `pay from ${inr(first.payableInr)}`
+      : `pay ${inr(first.payableInr)}`;
+  return `Coupon alert — Hi ${v.name}, use ${coupon.code}, ${pay}`;
+}
+
+function couponUseLine(coupon: CouponMailVars) {
+  if (coupon.perUserLimit <= 1) return "One use per mentor.";
+  return `Up to ${coupon.perUserLimit} uses per mentor.`;
+}
+
+function couponText(v: MessengerTemplateVars) {
+  const coupon = v.coupon;
+  if (!coupon || coupon.lines.length === 0) {
+    return `Hi ${v.name},\n\nAdd a coupon code in Messenger to fill this alert.\n\nMentr by Paprly`;
+  }
+  const off = coupon.sameOff
+    ? `${inr(coupon.lines[0].offInr)} off.\n`
+    : "";
+  const lines = coupon.lines
+    .map((line) =>
+      coupon.sameOff
+        ? `${line.label}: you pay ${inr(line.payableInr)}`
+        : `${line.label}: ${inr(line.offInr)} off, you pay ${inr(line.payableInr)}`,
+    )
+    .join("\n");
+  return `Hi ${v.name},\n\nCoupon alert. Use ${coupon.code} on Premium Mentor checkout.\n\n${off}${lines}\n\nValid through ${coupon.validUntilLabel}. ${couponUseLine(coupon)} Works on rupee checkout.\n\nUpgrade: ${v.dashboardUrl}\n\nMentr by Paprly`;
+}
+
+function couponPayableRows(coupon: CouponMailVars) {
+  if (coupon.lines.length === 1) {
+    const line = coupon.lines[0];
+    return `<p style="margin:16px 0 0;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6b756e;">You pay</p>
+      <p style="margin:2px 0 0;font-size:28px;line-height:1.1;font-weight:800;color:#1a231c;">${inr(line.payableInr)}</p>
+      <p style="margin:4px 0 0;font-size:13px;color:#525252;">${esc(line.label)} of Premium Mentor</p>`;
+  }
+  return `<p style="margin:16px 0 8px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6b756e;">You pay</p>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+      ${coupon.lines
+        .map(
+          (line, index) => `<tr>
+        <td style="padding:8px 0;border-top:${index === 0 ? "0" : "1px solid #e8dfd4"};font-size:13px;color:#525252;">${esc(line.label)}</td>
+        <td align="right" style="padding:8px 0;border-top:${index === 0 ? "0" : "1px solid #e8dfd4"};font-size:16px;font-weight:800;color:#1a231c;">${inr(line.payableInr)}</td>
+      </tr>`,
+        )
+        .join("")}
+    </table>`;
+}
+
+function couponHtml(v: MessengerTemplateVars) {
+  const name = esc(v.name);
+  const coupon = v.coupon;
+  if (!coupon || coupon.lines.length === 0) {
+    return `<p style="margin:0 0 12px;font-size:14px;line-height:1.5;color:#1a231c;">Hi <strong>${name}</strong>,</p>
+      <p style="margin:0;font-size:13px;line-height:1.55;color:#525252;">
+        Enter a coupon code above. This alert will fill in the code, the rupees off, and only what the mentor pays.
+      </p>`;
+  }
+
+  const offLine = coupon.sameOff
+    ? `<p style="margin:10px 0 0;font-size:13px;color:#525252;">${inr(coupon.lines[0].offInr)} off the plan price</p>`
+    : `<p style="margin:10px 0 0;font-size:13px;color:#525252;">The rupees off sit under each plan, because a shorter plan cannot go below ₹1.</p>`;
+
+  const mixedOff = coupon.sameOff
+    ? ""
+    : `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:8px;">
+        ${coupon.lines
+          .map(
+            (line) => `<tr>
+          <td style="padding:2px 0;font-size:12px;color:#6b756e;">${esc(line.label)} · ${inr(line.offInr)} off</td>
+        </tr>`,
+          )
+          .join("")}
+      </table>`;
+
+  return `<p style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#ef7a28;">Coupon alert</p>
+    <p style="margin:0 0 12px;font-size:14px;line-height:1.5;color:#1a231c;">Hi <strong>${name}</strong>,</p>
+    <p style="margin:0 0 16px;font-size:13px;line-height:1.55;color:#525252;">
+      Use this code when you upgrade to Premium Mentor. The amount below is what you pay — nothing else is added.
+    </p>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="padding:16px 16px 18px;background:#fffaf5;border:1px solid #e8dfd4;">
+          <p style="margin:0;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#6b756e;">Use this code</p>
+          <p style="margin:6px 0 0;font-size:22px;line-height:1.2;font-weight:800;letter-spacing:0.04em;color:#1a231c;font-family:ui-monospace,Menlo,Consolas,monospace;">${esc(coupon.code)}</p>
+          ${offLine}
+          ${mixedOff}
+          ${couponPayableRows(coupon)}
+        </td>
+      </tr>
+    </table>
+    <p style="margin:12px 0 16px;font-size:12px;line-height:1.5;color:#6b756e;">
+      Valid through ${esc(coupon.validUntilLabel)}. ${esc(couponUseLine(coupon))} Works on rupee checkout.
+    </p>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+      <tr><td>${primaryBtn(v.dashboardUrl, "Use this code")}</td></tr>
+    </table>`;
+}
+
 export function listMessengerTemplates() {
-  return Object.values(MESSENGER_TEMPLATES).map(({ id, label, description, audience }) => ({
-    id,
-    label,
-    description,
-    audience,
-  }));
+  return Object.values(MESSENGER_TEMPLATES).map(
+    ({ id, label, description, audience, requiresCoupon }) => ({
+      id,
+      label,
+      description,
+      audience,
+      requiresCoupon: Boolean(requiresCoupon),
+    }),
+  );
 }
 
 export function renderMessengerTemplate(

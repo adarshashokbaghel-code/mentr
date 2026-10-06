@@ -631,17 +631,19 @@ router.post(
         })) as IConnection;
       }
 
-      if (!alreadyConnected && !pitchedOnThisPost) {
-        void notifyParentRequirementPitch(
-          parent._id.toString(),
-          connection.teacherName,
-          teacher._id.toString(),
-          requirement._id.toString(),
-          requirement.subject,
-          requirement.classLevel,
-          connection._id.toString(),
-        );
-      }
+      void notifyParentRequirementPitch({
+        parentId: parent._id.toString(),
+        teacherName: connection.teacherName,
+        teacherId: teacher._id.toString(),
+        teacherArea: fields.teacherArea,
+        requirementId: requirement._id.toString(),
+        subject: requirement.subject,
+        classLevel: requirement.classLevel,
+        postArea: [requirement.area, requirement.city].filter(Boolean).join(", "),
+        message,
+        connectionId: connection._id.toString(),
+        alreadyConnected,
+      });
 
       if (!pitchedOnThisPost) {
         await Requirement.updateOne(

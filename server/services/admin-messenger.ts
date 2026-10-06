@@ -11,6 +11,7 @@ import {
   templateVarsForRole,
   type MessengerTemplateId,
 } from "./email-templates";
+import { quoteCouponForBroadcast, type CouponBroadcastQuote } from "./coupons";
 import { sendAdminEmail } from "./mail";
 
 export type AdminUserRow = {
@@ -191,17 +192,56 @@ export function getMessengerTemplates() {
   return listMessengerTemplates();
 }
 
-export function previewMessengerEmail(
+function couponVars(quote: CouponBroadcastQuote) {
+  return {
+    code: quote.code,
+    offInr: quote.discountInr,
+    sameOff: quote.sameOff,
+    validUntilLabel: quote.validUntilLabel,
+    perUserLimit: quote.perUserLimit,
+    lines: quote.lines,
+  };
+}
+
+async function couponForTemplate(
   templateId: MessengerTemplateId,
-  opts?: { name?: string; referralUrl?: string; role?: "faculty" | "parent" },
+  couponCode?: string,
+) {
+  const template = listMessengerTemplates().find((t) => t.id === templateId);
+  if (!template?.requiresCoupon) return undefined;
+  const code = couponCode?.trim() || "";
+  if (!code) return undefined;
+  const quoted = await quoteCouponForBroadcast(code);
+  if (!quoted.ok) {
+    const err = new Error(quoted.error) as Error & { status?: number };
+    err.status = 400;
+    throw err;
+  }
+  return couponVars(quoted.quote);
+}
+
+export async function previewMessengerEmail(
+  templateId: MessengerTemplateId,
+  opts?: {
+    name?: string;
+    referralUrl?: string;
+    role?: "faculty" | "parent";
+    couponCode?: string;
+  },
 ) {
   const audience = templateAudience(templateId);
   const role = opts?.role || audience;
   const defaults = templateVarsForRole(role, opts?.name, opts?.referralUrl);
+  const typedCode = opts?.couponCode?.trim() || "";
+  const coupon =
+    typedCode.length >= 3
+      ? await couponForTemplate(templateId, typedCode)
+      : undefined;
   return renderMessengerTemplate(templateId, {
     ...defaults,
     name: opts?.name?.trim() || defaults.name,
     referralUrl: opts?.referralUrl || defaults.referralUrl,
+    ...(coupon ? { coupon } : {}),
   });
 }
 
@@ -216,10 +256,19 @@ export type SendResult = {
 export async function sendMessengerEmails(
   templateId: MessengerTemplateId,
   userIds: string[],
-  opts?: { shouldAbort?: () => boolean },
+  opts?: { shouldAbort?: () => boolean; couponCode?: string },
 ): Promise<{ sent: number; failed: number; aborted: boolean; results: SendResult[] }> {
   const template = listMessengerTemplates().find((t) => t.id === templateId);
   if (!template) throw new Error(`Unknown template: ${templateId}`);
+
+  const coupon = template.requiresCoupon
+    ? await couponForTemplate(templateId, opts?.couponCode)
+    : undefined;
+  if (template.requiresCoupon && !coupon) {
+    const err = new Error("Enter a coupon code.") as Error & { status?: number };
+    err.status = 400;
+    throw err;
+  }
 
   const validIds = userIds.filter((id) => mongoose.Types.ObjectId.isValid(id));
   const invalidIds = userIds.filter((id) => !mongoose.Types.ObjectId.isValid(id));
@@ -273,6 +322,7 @@ export async function sendMessengerEmails(
         ...templateVarsForRole(user.role, displayName(user), referralUrl),
         name: displayName(user),
         ...(referralUrl ? { referralUrl } : {}),
+        ...(coupon ? { coupon } : {}),
       };
       const rendered = renderMessengerTemplate(templateId, vars);
       await sendAdminEmail(user.email, rendered.subject, rendered.text, rendered.html);

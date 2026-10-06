@@ -153,6 +153,7 @@ export type MessengerTemplateMeta = {
   label: string;
   description: string;
   audience: "faculty" | "parent";
+  requiresCoupon?: boolean;
 };
 
 export type MessengerPreview = {
@@ -593,6 +594,7 @@ export function previewMessengerEmail(
     name?: string;
     referralUrl?: string;
     role?: "faculty" | "parent";
+    couponCode?: string;
   },
 ) {
   return adminFetch<MessengerPreview>(key, "/api/admin/messenger/preview", {
@@ -603,7 +605,12 @@ export function previewMessengerEmail(
 
 export function sendMessengerEmails(
   key: string,
-  payload: { templateId: string; userIds: string[]; adminPass: string },
+  payload: {
+    templateId: string;
+    userIds: string[];
+    adminPass: string;
+    couponCode?: string;
+  },
 ) {
   return adminFetch<MessengerSendResult>(key, "/api/admin/messenger/send", {
     method: "POST",

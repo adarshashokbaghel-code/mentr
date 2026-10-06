@@ -67,6 +67,86 @@ async function paidRedemptions(couponId: Types.ObjectId, userId?: string) {
   });
 }
 
+export type CouponBroadcastLine = {
+  label: string;
+  payableInr: number;
+  /** Rupees actually removed on this plan (can be less than the face discount at the ₹1 floor). */
+  offInr: number;
+};
+
+export type CouponBroadcastQuote = {
+  code: string;
+  /** Face discount the admin set. */
+  discountInr: number;
+  /** True when every plan loses the same number of rupees. */
+  sameOff: boolean;
+  validUntilLabel: string;
+  perUserLimit: number;
+  lines: CouponBroadcastLine[];
+};
+
+/**
+ * Public offer for a mentor email. Does not check a single mentor's
+ * redemption count — that still happens at checkout.
+ */
+export async function quoteCouponForBroadcast(
+  raw: unknown,
+): Promise<{ ok: true; quote: CouponBroadcastQuote } | { ok: false; error: string }> {
+  const code = normalizeCouponCode(raw);
+  if (!code) return { ok: false, error: "Enter a coupon code." };
+  if (!CODE_RE.test(code)) return { ok: false, error: "Enter a valid coupon code." };
+
+  const coupon = (await Coupon.findOne({ code })) as ICoupon | null;
+  if (!coupon) return { ok: false, error: "This coupon code doesn't exist." };
+
+  const now = new Date();
+  if (!coupon.active) return { ok: false, error: "This coupon is no longer active." };
+  if (now < coupon.validFrom) return { ok: false, error: "This coupon isn't live yet." };
+  if (now > coupon.validUntil) return { ok: false, error: "This coupon has expired." };
+
+  if (coupon.maxRedemptions != null) {
+    const used = await paidRedemptions(coupon._id);
+    if (used >= coupon.maxRedemptions) {
+      return { ok: false, error: "This coupon has been fully used." };
+    }
+  }
+
+  const months = [...coupon.planMonths].sort((a, b) => a - b);
+  const lines: CouponBroadcastLine[] = [];
+  for (const monthsValue of months) {
+    const plan = getPremiumPlan(monthsValue);
+    if (!plan) continue;
+    const payableInr = Math.max(MIN_PAYABLE_INR, plan.payInr - coupon.discountInr);
+    lines.push({
+      label: plan.label,
+      payableInr,
+      offInr: plan.payInr - payableInr,
+    });
+  }
+  if (lines.length === 0) {
+    return { ok: false, error: "This coupon has no plan to apply to." };
+  }
+
+  const validUntilLabel = new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "Asia/Kolkata",
+  }).format(coupon.validUntil);
+
+  return {
+    ok: true,
+    quote: {
+      code: coupon.code,
+      discountInr: coupon.discountInr,
+      sameOff: lines.every((line) => line.offInr === lines[0].offInr),
+      validUntilLabel,
+      perUserLimit: coupon.perUserLimit,
+      lines,
+    },
+  };
+}
+
 /** Pure validation against the DB — no side effects. */
 export async function evaluateCoupon(opts: {
   code: unknown;

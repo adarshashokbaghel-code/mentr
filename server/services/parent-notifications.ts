@@ -21,6 +21,8 @@ type NotifyInput = {
   };
   /** Skip if a notification with this connectionId already exists */
   dedupeConnectionId?: string;
+  /** In-app notification only — caller sends its own email */
+  skipEmail?: boolean;
 };
 
 function dashboardUrl(path = "/parent/dashboard"): string {
@@ -71,6 +73,7 @@ export async function notifyParent(input: NotifyInput): Promise<void> {
     href = "/parent/dashboard",
     meta = {},
     dedupeConnectionId,
+    skipEmail = false,
   } = input;
 
   if (dedupeConnectionId) {
@@ -91,12 +94,129 @@ export async function notifyParent(input: NotifyInput): Promise<void> {
     meta: { ...meta, connectionId: dedupeConnectionId ?? meta.connectionId },
   });
 
-  void sendParentEmail(
-    parentId,
-    `${title} · Mentr`,
-    title,
-    body,
-    dashboardUrl(href),
+  if (!skipEmail) {
+    void sendParentEmail(
+      parentId,
+      `${title} · Mentr`,
+      title,
+      body,
+      dashboardUrl(href),
+    );
+  }
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function pitchEmailHtml(input: {
+  parentFirst: string;
+  teacherName: string;
+  teacherArea: string;
+  subject: string;
+  classLevel: string;
+  postArea: string;
+  message: string;
+  href: string;
+  alreadyConnected?: boolean;
+}): string {
+  const quote = escapeHtml(input.message).replace(/\n/g, "<br>");
+  const detail = [
+    ["Tutor", input.teacherName],
+    ["Area", input.teacherArea],
+    ["Your post", `${input.subject} · ${input.classLevel}`],
+    ["Where", input.postArea],
+  ]
+    .filter(([, value]) => value.trim())
+    .map(
+      ([label, value]) => `
+        <tr>
+          <td style="padding: 8px 12px 8px 0; color: #6b756e; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; vertical-align: top; white-space: nowrap;">${label}</td>
+          <td style="padding: 8px 0; color: #1a231c; font-size: 14px; line-height: 1.45;">${escapeHtml(value)}</td>
+        </tr>`,
+    )
+    .join("");
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<body style="margin: 0; padding: 0; background: #f6f4ef;">
+  <div style="font-family: Georgia, 'Iowan Old Style', serif; max-width: 520px; margin: 0 auto; padding: 28px 16px;">
+    <p style="margin: 0 0 4px; font-family: system-ui, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #c46a32;">Mentr</p>
+    <h1 style="margin: 0 0 8px; font-size: 26px; line-height: 1.2; color: #1a231c;">A tutor pitched on your post</h1>
+    <p style="margin: 0 0 20px; font-family: system-ui, sans-serif; font-size: 14px; line-height: 1.5; color: #525252;">Hi ${escapeHtml(input.parentFirst)}, ${escapeHtml(input.teacherName)} wants to teach your ${escapeHtml(input.subject)} requirement.${input.alreadyConnected ? " You're already connected, so you can reply on WhatsApp." : " Read the pitch, then accept on your dashboard if you want to chat on WhatsApp."}</p>
+    <div style="background: #ffffff; border: 1px solid #e6e1d8; border-radius: 16px; padding: 16px 18px; margin: 0 0 12px;">
+      <p style="margin: 0 0 8px; font-family: system-ui, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #6b756e;">Their pitch</p>
+      <p style="margin: 0; font-family: system-ui, sans-serif; font-size: 15px; line-height: 1.55; color: #1a231c;">${quote}</p>
+    </div>
+    <div style="background: #ffffff; border: 1px solid #e6e1d8; border-radius: 16px; padding: 8px 18px;">
+      <table role="presentation" style="width: 100%; border-collapse: collapse;">${detail}</table>
+    </div>
+    <a href="${input.href}" style="display: inline-block; margin-top: 20px; background: #1a231c; color: #ffffff; text-decoration: none; font-family: system-ui, sans-serif; font-weight: 700; font-size: 14px; padding: 12px 18px; border-radius: 10px;">Review this pitch</a>
+    <p style="margin: 18px 0 0; font-family: system-ui, sans-serif; font-size: 12px; line-height: 1.5; color: #8a847a;">${input.alreadyConnected ? "Mentr takes no fee." : "Your number stays private until you accept. WhatsApp unlocks only after you do. Mentr takes no fee."}</p>
+  </div>
+</body>
+</html>`;
+}
+
+async function sendRequirementPitchEmail(input: {
+  parentId: string;
+  teacherName: string;
+  teacherArea: string;
+  subject: string;
+  classLevel: string;
+  postArea: string;
+  message: string;
+  alreadyConnected?: boolean;
+}): Promise<void> {
+  const parent = await User.findById(input.parentId).select(
+    "email role parentProfile.name",
+  );
+  if (!parent?.email || parent.role !== "parent") return;
+
+  const parentName = parent.parentProfile?.name?.trim() || "there";
+  const parentFirst = parentName.split(" ")[0] || "there";
+  const href = dashboardUrl("/parent/dashboard#requirements");
+  const text = [
+    `Hi ${parentFirst},`,
+    "",
+    `${input.teacherName} pitched on your ${input.subject} post (${input.classLevel}).`,
+    "",
+    input.message,
+    "",
+    input.teacherArea ? `Tutor area: ${input.teacherArea}` : null,
+    input.postArea ? `Your post: ${input.postArea}` : null,
+    "",
+    input.alreadyConnected
+      ? "You're already connected. Their new pitch is on your dashboard:"
+      : "Review and accept on your dashboard to unlock WhatsApp:",
+    href,
+    "",
+    input.alreadyConnected
+      ? "Mentr takes no fee."
+      : "Your number stays private until you accept.",
+  ]
+    .filter((line): line is string => line !== null)
+    .join("\n");
+
+  await sendAdminEmail(
+    parent.email,
+    `${input.teacherName} pitched on your ${input.subject} post`,
+    text,
+    pitchEmailHtml({
+      parentFirst,
+      teacherName: input.teacherName,
+      teacherArea: input.teacherArea,
+      subject: input.subject,
+      classLevel: input.classLevel,
+      postArea: input.postArea,
+      message: input.message,
+      href,
+      alreadyConnected: input.alreadyConnected,
+    }),
   );
 }
 
@@ -134,15 +254,33 @@ export async function notifyParentConnectionDeclined(
   });
 }
 
-export async function notifyParentRequirementPitch(
-  parentId: string,
-  teacherName: string,
-  teacherId: string,
-  requirementId: string,
-  subject: string,
-  classLevel: string,
-  connectionId: string,
-) {
+export async function notifyParentRequirementPitch(input: {
+  parentId: string;
+  teacherName: string;
+  teacherId: string;
+  teacherArea?: string;
+  requirementId: string;
+  subject: string;
+  classLevel: string;
+  postArea?: string;
+  message: string;
+  connectionId: string;
+  alreadyConnected?: boolean;
+}) {
+  const {
+    parentId,
+    teacherName,
+    teacherId,
+    teacherArea = "",
+    requirementId,
+    subject,
+    classLevel,
+    postArea = "",
+    message,
+    connectionId,
+    alreadyConnected = false,
+  } = input;
+
   const pendingCount = await Connection.countDocuments({
     parent: parentId,
     requirement: requirementId,
@@ -166,9 +304,32 @@ export async function notifyParentRequirementPitch(
     title,
     body,
     href: "/parent/dashboard#requirements",
-    meta: { teacherId, teacherName, requirementId, subject, classLevel, connectionId },
+    meta: {
+      teacherId,
+      teacherName,
+      requirementId,
+      subject,
+      classLevel,
+      connectionId,
+    },
     dedupeConnectionId: connectionId,
+    skipEmail: true,
   });
+
+  try {
+    await sendRequirementPitchEmail({
+      parentId,
+      teacherName,
+      teacherArea,
+      subject,
+      classLevel,
+      postArea,
+      message,
+      alreadyConnected,
+    });
+  } catch (err) {
+    console.error("requirement pitch email failed:", err);
+  }
 }
 
 export async function notifyParentTeacherOutreach(
