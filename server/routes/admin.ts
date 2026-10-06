@@ -38,6 +38,10 @@ import {
   getAdminLearnTrack,
 } from "../services/admin-learn";
 import {
+  getAdminLearnPython,
+  getAdminLearnPythonDetail,
+} from "../services/admin-learn-python";
+import {
   getAdminFeaturedState,
   searchFacultyForFeatured,
   setFeaturedTeacherIds,
@@ -396,6 +400,32 @@ router.get("/learn/:track/user/:userId", async (req, res) => {
   } catch (err) {
     const status = (err as { status?: number }).status || 500;
     console.error("Admin learn detail error:", err);
+    res.status(status).json({
+      error: err instanceof Error ? err.message : "Failed to load detail",
+    });
+  }
+});
+
+router.get("/learnpython", async (_req, res) => {
+  try {
+    res.json(await getAdminLearnPython());
+  } catch (err) {
+    console.error("Admin Learn Python error:", err);
+    res.status(500).json({ error: "Failed to load Learn Python learners" });
+  }
+});
+
+router.get("/learnpython/user/:userId", async (req, res) => {
+  try {
+    const userId = String(req.params.userId || "");
+    if (!/^[a-f\d]{24}$/i.test(userId)) {
+      res.status(400).json({ error: "Invalid user" });
+      return;
+    }
+    res.json(await getAdminLearnPythonDetail(userId));
+  } catch (err) {
+    const status = (err as { status?: number }).status || 500;
+    console.error("Admin Learn Python detail error:", err);
     res.status(status).json({
       error: err instanceof Error ? err.message : "Failed to load detail",
     });

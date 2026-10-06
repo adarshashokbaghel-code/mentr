@@ -70,6 +70,7 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
             entry(learnPathFor(segment), 0.95, "weekly"),
           ),
           entry("/learn/syllabus", 0.9, "weekly"),
+          entry("/learnpython", 0.95, "weekly"),
           entry("/learn/start", 0.95, "daily"),
           entry("/learn/llms.txt", 0.5, "weekly"),
         ]

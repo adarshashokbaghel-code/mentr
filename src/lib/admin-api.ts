@@ -741,6 +741,100 @@ export function fetchAdminLearnEnrollmentDetail(
   );
 }
 
+/* ── Learn Python ─────────────────────────────────────────────── */
+
+export type AdminLearnPythonSummary = {
+  firstVisitAt: string | null;
+  lastVisitAt: string | null;
+  xp: number;
+  level: number;
+  levelTitle: string;
+  band: string;
+  streakDays: number;
+  bestStreak: number;
+  daysActive: number;
+  lessonsCompleted: number;
+  lessonsUnlocked: number;
+  videosWatched: number;
+  achievements: number;
+  projectsCompleted: number;
+  certificateId: string | null;
+  counts: {
+    logins: number;
+    practiceEasy: number;
+    practiceMedium: number;
+    practiceHard: number;
+    videos: number;
+    examples: number;
+    lessonQuestions: number;
+    quickChecks: number;
+  };
+};
+
+export type AdminLearnPythonRow = AdminLearnPythonSummary & {
+  userId: string;
+  email: string;
+  role: "parent" | "faculty";
+  name: string;
+  phone: string;
+  city: string;
+  country: string;
+};
+
+export type AdminLearnPythonResponse = {
+  totals: {
+    learners: number;
+    parents: number;
+    tutors: number;
+    newLast7Days: number;
+    activeLast7Days: number;
+    totalXp: number;
+  };
+  trend: { date: string; count: number }[];
+  rows: AdminLearnPythonRow[];
+};
+
+export type AdminLearnPythonDetail = AdminLearnPythonRow & {
+  lastLoginAt: string | null;
+  days: string[];
+  videos: string[];
+  projects: {
+    id: string;
+    title: string;
+    status: "not-started" | "in-progress" | "completed" | "solution-viewed";
+    completedAt: string | null;
+    solutionViewedAt: string | null;
+    hintsUsed: number;
+  }[];
+  certificateIssuedAt: string | null;
+  lessons: {
+    slug: string;
+    number: number;
+    title: string;
+    available: boolean;
+    unlocked: boolean;
+    notesDone: boolean;
+    examplesDone: boolean;
+    completedAt: string | null;
+    bestScore: number | null;
+    total: number | null;
+    stars: number;
+  }[];
+  achievementList: { id: string; title: string; at: string }[];
+  recentAwards: { key: string; xp: number; at: string }[];
+};
+
+export function fetchAdminLearnPython(key: string) {
+  return adminFetch<AdminLearnPythonResponse>(key, "/api/admin/learnpython");
+}
+
+export function fetchAdminLearnPythonDetail(key: string, userId: string) {
+  return adminFetch<AdminLearnPythonDetail>(
+    key,
+    `/api/admin/learnpython/user/${encodeURIComponent(userId)}`,
+  );
+}
+
 /* ── Snap & Grade ─────────────────────────────────────────────── */
 
 export type SnapGradeAdminQuestion = {

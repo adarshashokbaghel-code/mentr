@@ -47,6 +47,8 @@ const LEARN_DINO_ALLOWED = (pathname: string) => {
   if (!pathname.startsWith("/learn")) return false;
   // LMS app chrome has its own UI — no floating guide there.
   if (pathname.startsWith("/learn/app")) return false;
+  // Learn Python is a separate course with its own look.
+  if (pathname.startsWith("/learnpython")) return false;
   return true;
 };
 

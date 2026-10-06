@@ -16,6 +16,7 @@ import demoRequestRoutes from "./routes/demo-requests";
 import notificationRoutes from "./routes/notifications";
 import parentHiringRoutes from "./routes/parent-hiring";
 import learnRoutes from "./routes/learn";
+import learnPythonRoutes from "./routes/learn-python";
 import instantConnectRoutes from "./routes/instant-connect";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
@@ -175,6 +176,7 @@ app.use("/api/requirements", requirementRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/parent", parentHiringRoutes);
 app.use("/api/learn", learnRoutes);
+app.use("/api/learnpython", learnPythonRoutes);
 app.use("/api/instant-connect", instantConnectRoutes);
 // Lazy-load Snap & Grade (pulls sharp/tesseract) so other /api routes stay healthy on Vercel.
 app.use("/api/snap-grade", (req, res, next) => {

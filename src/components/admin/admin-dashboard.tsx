@@ -11,6 +11,7 @@ import { AdminCoupons } from "@/components/admin/admin-coupons";
 import { AdminEngagementTables } from "@/components/admin/admin-engagement-tables";
 import { AdminInteractions } from "@/components/admin/admin-interactions";
 import { AdminLearnTrack } from "@/components/admin/admin-learn";
+import { AdminLearnPython } from "@/components/admin/admin-learn-python";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminDemoRequestsTable } from "@/components/admin/admin-demo-requests-table";
@@ -95,7 +96,8 @@ const LEARN_TRACKS = [
 
 type SectionId =
   | (typeof NAV)[number]["id"]
-  | (typeof LEARN_TRACKS)[number]["id"];
+  | (typeof LEARN_TRACKS)[number]["id"]
+  | "learn-python";
 
 function formatTime(iso: string) {
   return new Date(iso).toLocaleString("en-IN", {
@@ -137,11 +139,15 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
     setSidebarOpen(false);
   };
 
-  const learnActive = LEARN_TRACKS.some((t) => t.id === section);
+  const learnActive =
+    section === "learn-python" || LEARN_TRACKS.some((t) => t.id === section);
   const activeLearnTrack = LEARN_TRACKS.find((t) => t.id === section);
-  const headerLabel = learnActive
-    ? (activeLearnTrack?.label ?? "Learn")
-    : section;
+  const headerLabel =
+    section === "learn-python"
+      ? "Learn Python"
+      : learnActive
+        ? (activeLearnTrack?.label ?? "Learn")
+        : section;
 
   return (
     <div className="flex min-h-screen bg-cream">
@@ -216,6 +222,18 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                     ) : null}
                   </button>
                 ))}
+                <button
+                  type="button"
+                  onClick={() => pick("learn-python")}
+                  className={cn(
+                    "flex min-h-9 w-full items-center gap-2 rounded-lg px-2.5 text-left text-[13px] font-medium touch-manipulation transition",
+                    section === "learn-python"
+                      ? "bg-white/10 text-butter"
+                      : "text-white/60 hover:bg-white/5 hover:text-white",
+                  )}
+                >
+                  <span className="flex-1 truncate">Learn Python</span>
+                </button>
               </div>
             ) : null}
           </div>
@@ -616,6 +634,8 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
               title={activeLearnTrack.label}
             />
           ) : null}
+
+          {section === "learn-python" ? <AdminLearnPython adminKey={adminKey} /> : null}
         </main>
       </div>
     </div>

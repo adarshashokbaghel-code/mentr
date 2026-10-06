@@ -452,8 +452,43 @@ main {
   animation: champs-pop 140ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@keyframes py-celebrate-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes py-celebrate-spark {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(1);
+  }
+}
+
+.py-celebrate-card {
+  animation: py-celebrate-in 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.py-celebrate-spark {
+  animation: py-celebrate-spark 780ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .champs-pop {
+  .champs-pop,
+  .py-celebrate-card,
+  .py-celebrate-spark {
     animation: none;
   }
 }
@@ -2588,5 +2623,188 @@ main {
   }
 }
 
+/* Learn Python — badges and terminal */
+@keyframes py-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes py-shine {
+  0% {
+    transform: translateX(-60px) skewX(-18deg);
+  }
+  45%,
+  100% {
+    transform: translateX(150px) skewX(-18deg);
+  }
+}
+@keyframes py-glow {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+@keyframes py-line {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes py-caret {
+  50% {
+    opacity: 0;
+  }
+}
+.py-badge-float {
+  animation: py-float 5.5s ease-in-out infinite;
+}
+.py-badge {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.py-shine {
+  animation: py-shine 4.8s ease-in-out infinite;
+}
+.py-glow {
+  animation: py-glow 3.6s ease-in-out infinite;
+}
+.py-line {
+  opacity: 0;
+  animation: py-line 0.35s ease-out forwards;
+}
+.py-caret {
+  animation: py-caret 1s steps(1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .py-badge-float,
+  .py-shine,
+  .py-glow,
+  .py-caret {
+    animation: none;
+  }
+  .py-line {
+    animation: none;
+    opacity: 1;
+  }
+}
 
 
+
+/* Learn Python LMS — slide and feedback motion */
+@keyframes py-slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes py-slide-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes py-pop {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes py-shake {
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+.py-slide-next {
+  animation: py-slide-next 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.py-slide-prev {
+  animation: py-slide-prev 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.py-pop {
+  animation: py-pop 0.28s ease-out;
+}
+.py-shake {
+  animation: py-shake 0.36s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .py-slide-next,
+  .py-slide-prev,
+  .py-pop,
+  .py-shake {
+    animation: none;
+  }
+}
+/* Learn Python — start sheet */
+@keyframes py-sheet-up {
+  from {
+    opacity: 0.6;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes py-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.py-sheet-up {
+  animation: py-sheet-up 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.py-fade {
+  animation: py-fade 0.25s ease-out;
+}
+@media (min-width: 640px) {
+  .py-sheet-up {
+    animation-name: py-sheet-rise;
+  }
+}
+@keyframes py-sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .py-sheet-up,
+  .py-fade {
+    animation: none;
+  }
+}
