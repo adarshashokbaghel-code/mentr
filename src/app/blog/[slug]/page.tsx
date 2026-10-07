@@ -12,6 +12,7 @@ import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { cn } from "@/lib/utils";
 import { getArticleContent } from "@/lib/blog-content";
+import { compilerForHref, compilerKeywords } from "@/lib/compilers";
 import { formatBlogDate } from "@/lib/blog-utils";
 import {
   BLOG_POSTS,
@@ -39,8 +40,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title =
     post.title.length > 52 ? `${post.title.slice(0, 49)}…` : post.title;
 
-  const keywords =
-    post.pillar === "kids-learn"
+  const compiler = compilerForHref(post.ctaHref);
+  const keywords = compiler
+    ? [post.keyword, ...compilerKeywords(compiler).slice(0, 8)]
+    : post.pillar === "kids-learn"
       ? [
           post.keyword,
           "Mentr Learn",
@@ -184,7 +187,9 @@ export default async function BlogPostPage({ params }: Props) {
               href={post.ctaHref}
               slug={post.slug}
               text={
-                post.pillar === "for-tutors"
+                compilerForHref(post.ctaHref)
+                  ? "Follow along in Mentr's free online compiler: it runs in your browser, on phone or desktop, with no sign-up."
+                  : post.pillar === "for-tutors"
                   ? "Ready to grow your tutoring practice? List your profile on Mentr for free — no lead fees, no commission."
                   : post.pillar === "for-students"
                     ? "Need a tutor or mentor? Search on Mentr for free — connect on WhatsApp once they accept. No platform fees, ever."

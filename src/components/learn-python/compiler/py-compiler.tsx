@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import {
   Check,
   ChevronDown,
+  CircleHelp,
   Copy,
   Download,
   Eraser,
@@ -54,7 +55,11 @@ function readSplit(): number {
 }
 
 /** Full-page compiler: code (and input) on the left, output on the right; tabs on small screens. */
-export function PyCompiler({ homeHref, homeLabel }: { homeHref?: string; homeLabel?: string } = {}) {
+export function PyCompiler({
+  homeHref,
+  homeLabel,
+  aboutHref,
+}: { homeHref?: string; homeLabel?: string; aboutHref?: string } = {}) {
   const { workspace } = usePyCompiler();
   const { code, stdin, setCode, setStdin, load } = workspace;
   const rt = usePythonRuntime();
@@ -219,7 +224,7 @@ export function PyCompiler({ homeHref, homeLabel }: { homeHref?: string; homeLab
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-[16px] font-extrabold leading-tight">{homeHref ? "Online Python compiler" : "Python compiler"}</h1>
+          <h1 className="truncate text-[16px] font-extrabold leading-tight">{homeHref ? "Online Python Compiler" : "Python compiler"}</h1>
           <RuntimeLabel />
         </div>
         <div className="flex items-center gap-1">
@@ -261,6 +266,16 @@ export function PyCompiler({ homeHref, homeLabel }: { homeHref?: string; homeLab
           >
             <RotateCcw className="h-4 w-4" />
           </ToolButton>
+          {aboutHref && (
+            <a
+              href={aboutHref}
+              aria-label="About this compiler and how it works"
+              title="About this compiler and how it works"
+              className="flex h-9 w-9 items-center justify-center text-white/55 transition hover:bg-white/5 hover:text-white"
+            >
+              <CircleHelp className="h-4 w-4" />
+            </a>
+          )}
           <span className="ml-2 hidden sm:block">{runBtn}</span>
         </div>
         <input ref={fileRef} type="file" accept=".py,.txt,text/x-python,text/plain" className="hidden" onChange={(e) => void upload(e.target.files?.[0])} />
