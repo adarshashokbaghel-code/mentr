@@ -54,7 +54,7 @@ function readSplit(): number {
 }
 
 /** Full-page compiler: code (and input) on the left, output on the right; tabs on small screens. */
-export function PyCompiler() {
+export function PyCompiler({ homeHref, homeLabel }: { homeHref?: string; homeLabel?: string } = {}) {
   const { workspace } = usePyCompiler();
   const { code, stdin, setCode, setStdin, load } = workspace;
   const rt = usePythonRuntime();
@@ -204,11 +204,22 @@ export function PyCompiler() {
   return (
     <div className="flex h-full min-h-0 flex-col bg-[#0f1612] text-white">
       <header className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b border-white/10 px-3 py-2.5 sm:px-5">
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-[#2f9e6e]">
-          <Terminal className="h-4 w-4" />
-        </span>
+        {homeHref ? (
+          <a
+            href={homeHref}
+            aria-label={homeLabel}
+            title={homeLabel}
+            className="flex h-9 w-9 shrink-0 items-center justify-center bg-[#2f9e6e] transition hover:bg-[#278a5f]"
+          >
+            <Terminal className="h-4 w-4" />
+          </a>
+        ) : (
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-[#2f9e6e]">
+            <Terminal className="h-4 w-4" />
+          </span>
+        )}
         <div className="min-w-0 flex-1">
-          <h1 className="truncate text-[16px] font-extrabold leading-tight">Python compiler</h1>
+          <h1 className="truncate text-[16px] font-extrabold leading-tight">{homeHref ? "Online Python compiler" : "Python compiler"}</h1>
           <RuntimeLabel />
         </div>
         <div className="flex items-center gap-1">

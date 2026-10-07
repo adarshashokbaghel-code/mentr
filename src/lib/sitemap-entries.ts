@@ -71,6 +71,8 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
           ),
           entry("/learn/syllabus", 0.9, "weekly"),
           entry("/learnpython", 0.95, "weekly"),
+          entry("/openpythoncompiler", 0.9, "monthly"),
+          entry("/openpythoncompiler/how-it-works", 0.7, "monthly"),
           entry("/learn/start", 0.95, "daily"),
           entry("/learn/llms.txt", 0.5, "weekly"),
         ]

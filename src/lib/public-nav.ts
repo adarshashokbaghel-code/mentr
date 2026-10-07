@@ -43,6 +43,11 @@ export function getPublicNavGroups(): PublicNavGroup[] {
             description: "Free Python course — Beginner is live",
           },
           {
+            label: "Online Python compiler",
+            href: "/openpythoncompiler",
+            description: "Write and run Python in your browser, free",
+          },
+          {
             label: "What is Mentr Learn?",
             href: "/blog/what-is-mentr-learn",
             description: "Learn by Mentr on mentr.in/learn explained",
