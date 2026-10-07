@@ -3,6 +3,7 @@
  * Application routes (dashboards, private board) stay out of primary public nav.
  */
 
+import { COMPILER_LINKS } from "@/lib/compilers/paths";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 
 export type PublicNavLink = {
@@ -42,11 +43,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
             href: "/learnpython",
             description: "Free Python course — Beginner is live",
           },
-          {
-            label: "Online Python compiler",
-            href: "/openpythoncompiler",
-            description: "Write and run Python in your browser, free",
-          },
+          ...COMPILER_LINKS,
           {
             label: "What is Mentr Learn?",
             href: "/blog/what-is-mentr-learn",
@@ -115,6 +112,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
           href: "/blog/what-is-snap-and-grade",
           description: "How the paid CBSE grader works",
         },
+        ...COMPILER_LINKS,
         {
           label: "All tools",
           href: "/tools",
@@ -217,6 +215,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
             { label: "Enroll free", href: "/learn/start" },
             { label: "Full syllabus", href: "/learn/syllabus" },
             { label: "Learn Python", href: "/learnpython" },
+            ...COMPILER_LINKS.map(({ label, href }) => ({ label, href })),
             {
               label: "What is Mentr Learn?",
               href: "/blog/what-is-mentr-learn",
@@ -232,6 +231,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
       { label: "Snap & Grade", href: "/snapandgrade" },
       { label: "Class 10 Maths marking", href: "/snapandgrade/class-10-maths" },
       { label: "CBSE marking scheme", href: "/snapandgrade/cbse-marking-scheme" },
+      ...COMPILER_LINKS.map(({ label, href }) => ({ label, href })),
       { label: "All free tools", href: "/tools" },
       { label: "Study timetable", href: "/tools/study-timetable" },
       { label: "CGPA calculator", href: "/tools/cgpa-calculator" },

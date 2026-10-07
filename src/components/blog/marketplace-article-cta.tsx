@@ -1,6 +1,7 @@
 import { TrackedLink } from "@/components/marketing/tracked-link";
 import { Button } from "@/components/ui/button";
 import type { BlogPost } from "@/lib/blog-posts";
+import { compilerForHref } from "@/lib/compilers";
 import {
   marketplaceLinksForPost,
   showMarketplaceCta,
@@ -57,6 +58,38 @@ export function MarketplaceArticleCta({ post }: { post: BlogPost }) {
               Full guide
             </Button>
           </TrackedLink>
+        </div>
+      </aside>
+    );
+  }
+
+  const compiler = compilerForHref(post.ctaHref);
+  if (compiler) {
+    return (
+      <aside className="mt-10 rounded-xl border-2 border-sage/40 bg-sage-wash p-5 sm:p-6">
+        <p className="text-sm font-bold uppercase tracking-wide text-sage">{compiler.name}</p>
+        <h2 className="mt-2 text-lg font-bold text-ink sm:text-xl">
+          Run {compiler.language} {compiler.runtime.version} free in your browser
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-muted sm:text-[15px]">
+          No sign-up, nothing to install, works on your phone. Your code runs on your own device.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <TrackedLink href={compiler.path} slug={post.slug} kind="blog" content="compiler-open">
+            <Button size="sm">{post.cta || "Open the compiler"}</Button>
+          </TrackedLink>
+          <TrackedLink href={compiler.howItWorksPath} slug={post.slug} kind="blog" content="compiler-how-it-works">
+            <Button size="sm" variant="secondary">
+              How we built it
+            </Button>
+          </TrackedLink>
+          {compiler.landing.learnCta && (
+            <TrackedLink href={compiler.landing.learnCta.href} slug={post.slug} kind="blog" content="compiler-learn">
+              <Button size="sm" variant="secondary">
+                Learn {compiler.language} free
+              </Button>
+            </TrackedLink>
+          )}
         </div>
       </aside>
     );

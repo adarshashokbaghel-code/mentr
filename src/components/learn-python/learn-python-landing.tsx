@@ -1,5 +1,4 @@
 import {
-  LEARN_PYTHON_COMPILER_PATH,
   LEARN_PYTHON_FAQS,
   LEARN_PYTHON_TUTOR_HREF,
   PYTHON_ASSESSMENT,
@@ -17,6 +16,7 @@ import {
   type PythonLesson,
   type PythonTrack,
 } from "@/lib/learn-python";
+import { COMPILER_PATHS, howItWorksPath } from "@/lib/compilers/paths";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, ChevronDown, Lock, Minus, Plus, X } from "lucide-react";
 import Link from "next/link";
@@ -61,14 +61,11 @@ function ToneIcon({ tone }: { tone: CompareTone }) {
 function Cta({
   children,
   href,
-  opens,
   variant = "coral",
 }: {
   children: ReactNode;
   /** Omit to open the course (sign-in sheet for guests). */
   href?: string;
-  /** With no href: open the compiler instead of the course home. */
-  opens?: "compiler";
   variant?: "coral" | "ghost-dark" | "ink";
 }) {
   const className = cn(
@@ -83,15 +80,7 @@ function Cta({
       {variant !== "ghost-dark" && <ArrowRight className="h-4 w-4" />}
     </>
   );
-  if (!href) {
-    return opens === "compiler" ? (
-      <PythonStartButton className={className} to={LEARN_PYTHON_COMPILER_PATH} fullLoad>
-        {body}
-      </PythonStartButton>
-    ) : (
-      <PythonStartButton className={className}>{body}</PythonStartButton>
-    );
-  }
+  if (!href) return <PythonStartButton className={className}>{body}</PythonStartButton>;
   return (
     <Link href={href} className={className}>
       {body}
@@ -577,8 +566,16 @@ export function LearnPythonLanding() {
                 type the answer right in the output, like a real terminal. Errors point to the exact
                 line and explain the fix in plain English.
               </p>
-              <div className="mt-6">
-                <Cta opens="compiler">Open the free compiler</Cta>
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+                <a
+                  href={COMPILER_PATHS.python}
+                  className="inline-flex h-12 items-center justify-center gap-2 bg-coral px-6 text-[15px] font-bold text-ink transition hover:bg-coral-dark hover:text-white"
+                >
+                  Open the free online Python compiler <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link href={howItWorksPath("python")} className="text-[14px] font-semibold text-white/70 underline underline-offset-4 hover:text-white">
+                  How we built it
+                </Link>
               </div>
             </div>
             <PythonTerminal lines={COMPILER_RUN} title="mentr python compiler" />

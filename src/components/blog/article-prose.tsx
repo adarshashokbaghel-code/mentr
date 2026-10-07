@@ -8,6 +8,13 @@ function Block({ block }: { block: ArticleBlock }) {
   if (block.type === "paragraph") {
     return <p>{block.text}</p>;
   }
+  if (block.type === "code") {
+    return (
+      <pre className="not-prose my-5 overflow-x-auto rounded-xl border-2 border-ink/80 bg-[#0f1411] px-4 py-3 font-mono text-[13px] leading-[1.7] text-[#e8ece9]">
+        <code>{block.code}</code>
+      </pre>
+    );
+  }
   if (block.type === "list") {
     const Tag = block.ordered ? "ol" : "ul";
     return (

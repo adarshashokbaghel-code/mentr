@@ -22,6 +22,14 @@ import type { ReactNode } from "react";
 
 const COMPILER = "/openpythoncompiler";
 
+const RELATED = [
+  [`${COMPILER}#faq`, "Online Python compiler: FAQ"],
+  ["/blog/online-python-compiler-with-input", "Online Python compiler with input(): how it works"],
+  ["/blog/python-compiler-for-mobile", "Python compiler for mobile: code Python on your phone"],
+  ["/blog/is-python-compiled-or-interpreted", "Is Python compiled or interpreted?"],
+  ["/blog/how-to-run-python-code-online", "How to run Python code online"],
+] as const;
+
 const SECTIONS = [
   ["problem", "The problem"],
   ["overview", "The big picture"],
@@ -648,6 +656,19 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
               </Link>
             </div>
           </section>
+
+          <nav aria-label="Related guides" className="border border-hairline bg-white px-6 py-6">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted">Related guides</p>
+            <ul className="mt-3 space-y-2 text-[15px]">
+              {RELATED.map(([href, label]) => (
+                <li key={href}>
+                  <Link href={href} className="font-semibold text-ink underline decoration-hairline underline-offset-4 transition hover:decoration-ink">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
     </article>

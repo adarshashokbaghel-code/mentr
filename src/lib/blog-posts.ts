@@ -1942,6 +1942,71 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Find a mentor",
     ctaHref: "/search",
   },
+  {
+    slug: "how-to-run-python-code-online",
+    title: "How to Run Python Code Online (Free, No Install)",
+    keyword: "how to run python code online",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "Run Python in your browser in under a minute: write code, press Run, answer input(), read errors and save your file. A free, no-install guide for beginners.",
+    publishWeek: 41,
+    cta: "Open the Python compiler",
+    ctaHref: "/openpythoncompiler",
+  },
+  {
+    slug: "online-python-compiler-with-input",
+    title: "Online Python Compiler With input(): How It Works",
+    keyword: "online python compiler with input",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-students",
+    description:
+      "Why input() breaks in many online Python compilers, the two ways browsers handle it, and how to run quizzes and games that ask questions as they go.",
+    publishWeek: 41,
+    cta: "Try input() in the compiler",
+    ctaHref: "/openpythoncompiler",
+  },
+  {
+    slug: "python-compiler-for-mobile",
+    title: "Python Compiler for Mobile: Code Python on Your Phone",
+    keyword: "python compiler for mobile",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-students",
+    description:
+      "How to write and run Python on an Android phone or iPhone without an app: what works, what doesn't, and tips for typing code on a small screen.",
+    publishWeek: 41,
+    cta: "Open it on your phone",
+    ctaHref: "/openpythoncompiler",
+  },
+  {
+    slug: "best-free-online-python-compiler-for-beginners",
+    title: "Best Free Online Python Compiler for Beginners: A Checklist",
+    keyword: "best free online python compiler for beginners",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-students",
+    description:
+      "Browser-based compiler, server-based compiler, notebook or full IDE? An honest checklist for picking a free online Python compiler as a beginner.",
+    publishWeek: 41,
+    cta: "Try Mentr's Python compiler",
+    ctaHref: "/openpythoncompiler",
+  },
+  {
+    slug: "is-python-compiled-or-interpreted",
+    title: "Is Python Compiled or Interpreted? A Clear Answer",
+    keyword: "is python compiled or interpreted",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "Python is both: CPython compiles your code to bytecode, then interprets it. What that means, why “online Python compiler” is still the right search, and how to see bytecode yourself.",
+    publishWeek: 41,
+    cta: "Run Python in your browser",
+    ctaHref: "/openpythoncompiler",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

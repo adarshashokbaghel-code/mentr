@@ -1,20 +1,23 @@
+import { CompilerLanding } from "@/components/compilers/compiler-landing";
+import { Footer } from "@/components/landing/footer";
 import { OpenPythonCompiler } from "@/components/learn-python/compiler/open-python-compiler";
-import { hubOpenGraph } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/json-ld";
+import { compilerJsonLd, compilerMetadata, getCompiler } from "@/lib/compilers";
 import type { Metadata } from "next";
 
-const PATH = "/openpythoncompiler";
-const TITLE = "Online Python Compiler: Free, Runs in Your Browser";
-const DESCRIPTION =
-  "Write and run Python 3 online for free. Full-screen editor, real input(), clear error messages, examples, and file download. No sign-up, nothing to install.";
+const def = getCompiler("python");
 
-export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
-  alternates: { canonical: PATH },
-  openGraph: hubOpenGraph(TITLE, DESCRIPTION, PATH),
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
-};
+export const metadata: Metadata = compilerMetadata(def);
 
 export default function OpenPythonCompilerPage() {
-  return <OpenPythonCompiler />;
+  return (
+    <>
+      <JsonLd data={compilerJsonLd(def)} />
+      <main>
+        <OpenPythonCompiler />
+        <CompilerLanding def={def} />
+      </main>
+      <Footer />
+    </>
+  );
 }

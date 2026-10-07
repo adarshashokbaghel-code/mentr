@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import path from "path";
 import dotenv from "dotenv";
+import { COMPILER_PATHS } from "./src/lib/compilers/paths";
 
 dotenv.config({
   path: path.resolve(/* turbopackIgnore: true */ process.cwd(), ".env"),
@@ -135,13 +136,13 @@ const nextConfig: NextConfig = {
           { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
         ],
       },
-      {
-        source: "/openpythoncompiler",
+      ...Object.values(COMPILER_PATHS).map((source) => ({
+        source,
         headers: [
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
           { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
         ],
-      },
+      })),
       {
         source: "/learnpython/lms/final",
         headers: [
