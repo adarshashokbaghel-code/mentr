@@ -6,15 +6,21 @@ import { PyLmsProvider } from "@/components/learn-python/lms/py-lms-provider";
 import { PyLmsShell } from "@/components/learn-python/lms/py-lms-shell";
 import { PythonStartSheet } from "@/components/learn-python/python-start-sheet";
 import { LEARN_PYTHON_PATH } from "@/lib/learn-python";
+import { markLearnPythonStarted } from "@/lib/marketing-client";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useCallback, type ReactNode } from "react";
+import { useCallback, useEffect, type ReactNode } from "react";
 
 /** /learnpython/lms is open to any signed-in parent or tutor; guests get the sign-in sheet. */
 export function PyLmsGate({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
   const router = useRouter();
   const leave = useCallback(() => router.push(LEARN_PYTHON_PATH), [router]);
+  const signedIn = Boolean(user);
+
+  useEffect(() => {
+    if (signedIn) markLearnPythonStarted();
+  }, [signedIn]);
 
   if (loading) {
     return (

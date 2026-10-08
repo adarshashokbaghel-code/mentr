@@ -419,7 +419,7 @@ export function MentrPricingPage() {
             <p className="mt-4 text-xs text-muted">
               Razorpay checkout · billed in INR ·{" "}
               <Link
-                href="/blog/mentr-premium-mentor-guide"
+                href="/pricing"
                 className="font-semibold text-coral underline-offset-2 hover:underline"
               >
                 Full Premium guide

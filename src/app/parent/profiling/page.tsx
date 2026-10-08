@@ -91,7 +91,7 @@ function ParentProfilingContent() {
         trackProfileComplete({ userId: updated.id, role: updated.role });
       }
       await syncShortlistAfterAuth(updated, setUser);
-      router.replace(next || "/search");
+      router.replace(next || homeFor(updated));
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
       setSaving(false);

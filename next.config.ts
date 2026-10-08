@@ -204,7 +204,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/mentrpremium",
-        destination: "/mentrpricing",
+        destination: "/pricing",
         permanent: true,
       },
       // Parent-friendly short subject URLs → canonical hub paths

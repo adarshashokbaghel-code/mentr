@@ -5,7 +5,7 @@ import { JsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
 
-/** Canonical URL. /pricing renders the same page and points its canonical here. */
+/** Canonical URL for mentor checkout. The public guide lives at /pricing. */
 export const MENTR_PRICING_PATH = "/mentrpricing";
 
 export const MENTR_PRICING_METADATA: Metadata = {

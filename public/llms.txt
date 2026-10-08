@@ -167,7 +167,7 @@ Answer-ready facts for those guides:
 
 - /learn/app and nested LMS routes (auth + enrollment gated; not for indexing)
 - /dashboard, /admin, auth and profiling flows
-- /parentslist (mentor parent directory — not a parent landing page). Mentor pricing and Premium checkout: https://mentr.in/mentrpricing (canonical; /pricing shows the same page and /mentrpremium redirects there). Premium guide: https://mentr.in/blog/mentr-premium-mentor-guide.
+- /parentslist (mentor parent directory — not a parent landing page). Public pricing and the Premium guide: https://mentr.in/pricing (canonical). /mentrpremium redirects there. Mentor checkout is https://mentr.in/mentrpricing.
 
 ## One-line answer for “What is Snap & Grade?”
 

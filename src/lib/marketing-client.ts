@@ -90,6 +90,28 @@ export function persistAttribution(touch: {
   return stored;
 }
 
+const PY_STARTED_KEY = "mentr_py_started";
+
+/** Arrived via the /learnpython page and hasn't opened the course in this browser yet. */
+export function pendingLearnPythonHandoff(): boolean {
+  if (typeof window === "undefined") return false;
+  if (getStoredAttribution()?.slug !== "learnpython") return false;
+  try {
+    return !localStorage.getItem(PY_STARTED_KEY);
+  } catch {
+    return false;
+  }
+}
+
+export function markLearnPythonStarted(): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(PY_STARTED_KEY, "1");
+  } catch {
+    /* ignore quota */
+  }
+}
+
 /** Capture UTM already on the current URL (shared links, ads, blog CTAs). */
 export function captureUrlAttribution(): StoredAttribution | undefined {
   if (typeof window === "undefined") return undefined;
