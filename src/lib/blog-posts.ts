@@ -708,8 +708,8 @@ export const BLOG_POSTS: BlogPost[] = [
     description:
       "Full walkthrough of Mentr Premium — Free vs Premium, upgrade steps, parent directory, unlimited pitches, Snap & Grade, and where to find every feature.",
     featured: true,
-    cta: "Read full Premium guide",
-    ctaHref: "/mentrpremium",
+    cta: "Compare plans & upgrade",
+    ctaHref: "/mentrpricing",
   },
   {
     slug: "how-to-become-a-home-tutor-india",

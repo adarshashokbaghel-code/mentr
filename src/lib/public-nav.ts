@@ -244,7 +244,7 @@ export function getFooterColumns(): Record<string, PublicNavLink[]> {
       { label: "FAQ", href: "/faq" },
       { label: "Online tutor jobs", href: "/online-tutor-jobs" },
       { label: "For faculty", href: "/for-faculty" },
-      { label: "Pricing", href: "/pricing" },
+      { label: "Pricing", href: "/mentrpricing" },
     ],
     Company: [
       { label: "About", href: "/about" },

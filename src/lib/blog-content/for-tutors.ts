@@ -1103,7 +1103,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
     readTimeMinutes: 8,
     author: "Mentr Editorial Team",
     intro:
-      "Mentr Premium is an optional mentor plan for tutors who want more outbound reach: unlimited board pitches, a parent directory with daily contact unlocks, featured landing placement, Premium badges in search, and unlimited Snap & Grade. Free forever still covers core listing and inbound connects. This article summarises the product; the illustrated walkthrough lives on /mentrpremium.",
+      "Mentr Premium is an optional mentor plan for tutors who want more outbound reach: unlimited board pitches, a parent directory with daily contact unlocks, featured landing placement, Premium badges in search, and unlimited Snap & Grade. Free forever still covers core listing and inbound connects. This article walks through the product; plans and checkout live on /mentrpricing.",
     sections: [
       {
         heading: "Why Premium exists",
@@ -1114,8 +1114,8 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "callout",
-            title: "Full illustrated guide",
-            text: "For Free vs Premium tables, step-by-step Razorpay upgrade, UI walkthroughs of /parentslist, /board, search toggles, Snap & Grade, and dashboard history, open the dedicated guide at /mentrpremium.",
+            title: "Compare plans",
+            text: "For the Free vs Premium comparison, current prices in INR and USD, and Razorpay checkout, open /mentrpricing.",
           },
         ],
       },
@@ -1177,9 +1177,9 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
           "No. Parents search and connect for free. Premium is mentor-side only.",
       },
       {
-        question: "Where is the full guide with screenshots?",
+        question: "Where do I compare plans and upgrade?",
         answer:
-          "Open /mentrpremium for the complete Free vs Premium comparison, steps, feature UI mocks, and FAQ.",
+          "Open /mentrpricing for the Free vs Premium comparison, prices, and Razorpay checkout. Mentors can also tap Get Premium on the Premium card in their dashboard.",
       },
       {
         question: "How many contact reveals do I get?",
@@ -1188,7 +1188,6 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       },
     ],
     relatedLinks: [
-      { label: "Full Premium guide", href: "/mentrpremium" },
       { label: "Mentor pricing", href: "/mentrpricing" },
       { label: "Parent directory", href: "/parentslist" },
       { label: "Create free profile", href: "/faculty/signup" },

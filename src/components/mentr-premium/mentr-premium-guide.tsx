@@ -238,7 +238,7 @@ export function MentrPremiumGuide() {
               </LpBadge>
             </div>
             <p className="mt-5 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
-              Mentr
+              Mentr pricing
             </p>
             <h1 className="mt-2 text-balance text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl lg:text-5xl">
               Premium for mentors —
@@ -273,7 +273,7 @@ export function MentrPremiumGuide() {
             </p>
           </div>
 
-          <BrowserFrame url="mentr.in / mentrpremium" className={hardShadowSm}>
+          <BrowserFrame url="mentr.in / pricing" className={hardShadowSm}>
             <div className="space-y-3 bg-cream p-4 sm:p-5">
               <div className="flex items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1 rounded-full bg-butter px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-ink">
