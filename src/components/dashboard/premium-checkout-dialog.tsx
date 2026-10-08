@@ -804,7 +804,7 @@ export function PremiumCheckoutDialog({
                 </li>
                 <li className="flex gap-2">
                   <span className="text-ink">·</span>
-                  5 parent contact unlocks every day
+                  3 parent contact unlocks every day, shared by the directory and Reveal parent on the pitch board
                 </li>
                 <li className="flex gap-2">
                   <span className="text-ink">·</span>

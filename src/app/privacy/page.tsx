@@ -77,7 +77,7 @@ const sections = [
     title: "What Premium is (and is not)",
     body: [
       "Premium is an optional paid plan for mentors. It is meant for serious, verified mentors who want extra connectivity tools.",
-      "What Premium is: access to tools such as a parent/enquiry directory and a limited number of daily contact “reveals” so you can introduce yourself about tutoring or mentoring.",
+      "What Premium is: access to tools such as a parent/enquiry directory and a limited number of daily contact “reveals” so you can introduce yourself about tutoring or mentoring. Reveal parent on the requirements (pitch) board and a reveal in the parent directory share one daily cap. They are not separate allowances.",
       "What Premium is not: a placement agency, a staffing service, a guaranteed-hire product, or a promise of students, replies, trials, fees, or income.",
       "Mentr only offers connectivity. Whether a parent replies or hires you depends on your outreach, fit, timing, and their choice — not on Premium payment alone.",
       "Reveal limits, unlock time windows, and who appears in the directory can change as the product evolves. Paying for Premium buys access to the tools described at purchase — not a conversion result.",
@@ -88,8 +88,9 @@ const sections = [
     title: "When your phone number and email are visible",
     body: [
       "Contacts are never a public open list for anonymous website visitors. Visibility depends on the situation:",
-      "Standard connect / pitch: a mentor’s WhatsApp is shown to a parent only after the mentor accepts that parent’s request (or the parent accepts the mentor’s pitch). A parent’s full contact unlocks for a mentor only after that acceptance. Decline or ignore → no full contact either way.",
-      "Premium directory: entries (from Mentr signup or multi-source enquiries above) may show name, area/city, and interest signals with contact masked. A Premium mentor may use a daily reveal to see phone and/or email for a limited unlock window (currently about two hours per reveal, with a daily cap). After that, it locks again for that mentor unless product rules say otherwise.",
+      "Standard connect / pitch: a mentor’s WhatsApp is shown to a parent only after the mentor accepts that parent’s request (or the parent accepts the mentor’s pitch). A parent’s full contact unlocks for a mentor only after that acceptance, unless the mentor uses a Premium reveal (directory or Reveal parent on the requirements board) under the daily cap below. Decline or ignore → no full contact either way.",
+      "Premium directory: entries (from Mentr signup or multi-source enquiries above) may show name, area/city, and interest signals with contact masked. A Premium mentor may use a daily reveal to see phone and/or email for a limited unlock window (currently about two hours per reveal, with a daily cap of 3 parent contacts, resetting at midnight IST). After that, it locks again for that mentor unless product rules say otherwise.",
+      "Requirements board (pitch board): a Premium mentor may also use Reveal parent on a posted requirement to see that parent’s contact. That action is a parent-contact reveal. It counts toward the same daily cap of 3 as a reveal in the Premium directory. Using it on the board does not add extra reveals, and using the directory does not add a separate board allowance. The same unlock window applies.",
       "Guest requirement forms: what you submit may go to the mentors you chose and to Mentr admins for delivery and abuse control.",
       "Admins may access data to run the service and safety — not to sell contacts as a data-broker product.",
     ],
@@ -132,7 +133,7 @@ const sections = [
     title: "Changes",
     body: [
       "Material changes will be noted on this page with an updated date. Continued use after changes means you accept the updated policy where permitted by law. Significant changes may also be flagged at next login or by email.",
-      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — children / Mentr Learn (no ads), publisher location, and AdSense path rules.`,
+      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — Premium parent reveals on the requirements board share the same daily cap as directory reveals.`,
     ],
   },
 ];

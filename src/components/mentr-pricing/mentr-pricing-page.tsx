@@ -71,7 +71,8 @@ const PREMIUM_LINES: PlanLine[] = [
   },
   {
     title: "3 parent contact unlocks / day",
-    detail: "Open listing details and reach parents directly.",
+    detail:
+      "The parent directory and Reveal parent on the pitch board share this same daily limit.",
   },
   {
     title: "Featured on the Mentr landing page",
@@ -123,7 +124,7 @@ const COMPARE: {
   },
   {
     label: "Parent contact unlocks",
-    why: "Open listing details & message first?",
+    why: "Directory and pitch-board Reveal parent share one cap",
     free: false,
     premium: "3 unlocks / day",
   },
@@ -150,7 +151,7 @@ const COMPARE: {
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is Mentr Premium for mentors?",
-    a: "Premium is an optional upgrade for mentors who want more reach: unlimited daily pitches, special access to parent listings with contact and requirement details, three parent contact unlocks every day, a dedicated support contact (SPOC), and featured placement on the Mentr landing page. The Free plan stays free forever for core mentoring.",
+    a: "Premium is an optional upgrade for mentors who want more reach: unlimited daily pitches, special access to parent listings with contact and requirement details, three parent contact unlocks every day, a dedicated support contact (SPOC), and featured placement on the Mentr landing page. Those three unlocks are one shared daily limit: a reveal in the parent directory and Reveal parent on the requirements board both count toward it. The Free plan stays free forever for core mentoring.",
   },
   {
     q: "Do parents need Premium to contact mentors?",
@@ -893,7 +894,9 @@ export function MentrPricingPage() {
             <p className="mt-3 text-[15px] leading-relaxed text-muted">
               We use your account email, mentor profile, and payment status to
               activate and support Premium. Parent contact unlocks are for
-              arranging tutoring only — not for spam or resale. Payment data is
+              arranging tutoring only — not for spam or resale. Reveal parent
+              on the requirements board counts toward the same daily unlock
+              limit as the parent directory. Payment data is
               handled by Razorpay. Read the{" "}
               <Link
                 href="/privacy"

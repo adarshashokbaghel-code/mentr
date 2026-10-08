@@ -57,8 +57,8 @@ const sections = [
   {
     title: "When contact details may be shared",
     body: [
-      "Standard connect / pitch: full phone/WhatsApp between parent and mentor only after the required acceptance (mentor accepts request, or parent accepts pitch).",
-      "Premium directory: contact stays masked until a Premium mentor uses a reveal; then phone/email show for the unlock window in the product UI and Privacy policy; then lock again per those rules.",
+      "Standard connect / pitch: full phone/WhatsApp between parent and mentor only after the required acceptance (mentor accepts request, or parent accepts pitch), unless a Premium reveal applies as described next.",
+      "Premium directory and requirements board: contact stays masked until a Premium mentor uses a reveal — either in the parent directory or with Reveal parent on a requirements-board post. Both actions share one daily reveal cap (currently 3 parent contacts per day, IST). They are not separate limits. Phone/email then show for the unlock window in the product UI and Privacy policy, then lock again per those rules.",
       "Guest requirement forms: shared with mentors you select and with Mentr operators for delivery.",
       "No scraping, harvesting, or republishing of profiles or contacts from Mentr.",
     ],
@@ -122,7 +122,7 @@ const sections = [
       "Mentr is provided “as is”. To the fullest extent permitted by law, we are not liable for disputes, payments, injuries, or outcomes between users — including failure to obtain students, clients, or income after using Premium or any other feature.",
       "We may suspend or terminate accounts that violate these Terms.",
       "We may update these Terms by posting a new version on this page. Material updates will change the “Last updated” date. Continued use after an update constitutes acceptance where allowed by law.",
-      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — children / Learn (no ads) and advertising path rules.`,
+      `Last substantive update: ${LEGAL_LAST_UPDATED_LABEL} — Reveal parent on the requirements board shares the Premium daily contact-reveal cap.`,
     ],
   },
 ];

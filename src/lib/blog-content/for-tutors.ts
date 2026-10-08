@@ -1126,7 +1126,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
             type: "list",
             items: [
               "Unlimited requirement-board pitches (Free cap is 3/day)",
-              "Parent directory at /parentslist with 3 contact reveals per day (IST)",
+              "3 parent contact reveals per day (IST), shared by /parentslist and Reveal parent on the requirements board",
               "Premium badge next to Verified in search and on your public profile",
               "Priority placement in the landing Featured mentors strip",
               "Unlimited Snap & Grade (no credit deduction for Premium faculty)",
@@ -1184,7 +1184,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "How many contact reveals do I get?",
         answer:
-          "Three new parent contacts per calendar day (IST). Unlocked contacts stay unlocked.",
+          "Three new parent contacts per calendar day (IST). Reveal parent on the requirements board and a reveal in the parent directory share that same limit of 3. They are not separate allowances.",
       },
     ],
     relatedLinks: [

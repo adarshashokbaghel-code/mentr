@@ -68,7 +68,7 @@ const COMPARE_ROWS: {
   {
     label: "Contact reveals / day",
     free: "—",
-    premium: "3 new unlocks",
+    premium: "3 / day, shared with the pitch board",
     premiumWin: true,
   },
   {
@@ -636,6 +636,10 @@ export function MentrPremiumGuide() {
               {
                 q: "Do reveals stack if I don’t use them?",
                 a: "No. Unused daily reveals do not roll over. Unlocked contacts stay unlocked for you.",
+              },
+              {
+                q: "Does Reveal parent on the pitch board use my daily limit?",
+                a: "Yes. You get 3 parent-contact reveals per day (IST). Reveal parent on the requirements board and a reveal in the parent directory share that same limit. A board reveal uses one of the 3. It is not an extra allowance.",
               },
               {
                 q: "Will parents only see Premium mentors?",

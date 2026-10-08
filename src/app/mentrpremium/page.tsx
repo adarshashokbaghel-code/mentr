@@ -34,7 +34,7 @@ const PAGE_FAQS = [
   {
     question: "What is Mentr Premium?",
     answer:
-      "Mentr Premium is an optional mentor plan at about $5/month (≈ ₹449). Free mentors keep core tools forever. Premium adds unlimited board pitches, the parent directory with 3 contact reveals per day, featured landing placement, Premium badges in search, unlimited Snap & Grade, and priority support (SPOC).",
+      "Mentr Premium is an optional mentor plan at about $5/month (≈ ₹449). Free mentors keep core tools forever. Premium adds unlimited board pitches, 3 parent-contact reveals per day shared by the parent directory and Reveal parent on the requirements board, featured landing placement, Premium badges in search, unlimited Snap & Grade, and priority support (SPOC).",
   },
   {
     question: "Do parents pay for Premium?",
@@ -49,7 +49,7 @@ const PAGE_FAQS = [
   {
     question: "How many parent contacts can I reveal?",
     answer:
-      "Three new parent contacts per day (IST midnight reset). Each unlock stays visible for 2 hours, then locks again with no re-reveal. History is on your dashboard under Pitch parents → Reveal history.",
+      "Three new parent contacts per day (IST midnight reset). Reveal parent on the requirements (pitch) board and a reveal in the parent directory count toward the same 3. They are not separate limits. Each unlock stays visible for 2 hours, then locks again with no re-reveal. History is on your dashboard under Pitch parents → Reveal history.",
   },
   {
     question: "How do I upgrade?",

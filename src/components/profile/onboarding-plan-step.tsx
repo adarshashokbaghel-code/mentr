@@ -15,7 +15,7 @@ const FREE_PERKS = [
 
 const PREMIUM_PERKS = [
   "Unlimited board pitches every day",
-  "3 parent contact unlocks / day",
+  "3 parent contact unlocks / day, shared by the directory and the pitch board",
   "Featured on the Mentr landing page",
   "Premium badge + dedicated human SPOC",
   "Everything in Free, plus reach tools",
