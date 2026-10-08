@@ -59,13 +59,13 @@ export function PyProgressGuide() {
           >
             <X className="h-5 w-5" />
           </button>
-          <div className="relative flex items-center gap-4 pr-8">
-            <LevelMark level={lvl.level} size={52} />
+          <div className="relative flex items-center gap-3 pr-8 sm:gap-4">
+            <LevelMark level={lvl.level} size={44} />
             <div className="min-w-0 flex-1">
               <p className="font-mono text-[10.5px] uppercase tracking-[0.16em]" style={{ color: "#5ee0a0" }}>
                 {lvl.band.name} band · Level {lvl.level} of 50
               </p>
-              <h2 id="py-guide-title" className="mt-0.5 truncate text-[20px] font-extrabold leading-tight sm:text-[22px]">
+              <h2 id="py-guide-title" className="mt-0.5 truncate text-[18px] font-extrabold leading-tight sm:text-[22px]">
                 {lvl.title}
               </h2>
               <div className="mt-2 h-1.5 bg-white/15">

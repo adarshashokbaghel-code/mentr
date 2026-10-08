@@ -68,20 +68,20 @@ function ToastItem({ t, onDone }: { t: PyToast; onDone: () => void }) {
 
   if (t.kind === "xp") {
     return (
-      <div className="py-pop flex items-center gap-2 border border-[#1f2a23] bg-[#0f1612] px-3 py-2 text-white shadow-lg">
-        <Zap className="h-4 w-4 fill-[#5ee0a0] text-[#5ee0a0]" />
-        <span className="font-mono text-[13px] font-bold text-[#5ee0a0]">+{t.xp} XP</span>
-        {t.label && <span className="text-[12.5px] text-white/70">{t.label}</span>}
+      <div className="py-pop flex max-w-full items-center gap-1.5 border border-[#1f2a23] bg-[#0f1612] px-2.5 py-1.5 text-white shadow-lg sm:gap-2 sm:px-3 sm:py-2">
+        <Zap className="h-3.5 w-3.5 shrink-0 fill-[#5ee0a0] text-[#5ee0a0] sm:h-4 sm:w-4" />
+        <span className="shrink-0 font-mono text-[12px] font-bold text-[#5ee0a0] sm:text-[13px]">+{t.xp} XP</span>
+        {t.label && <span className="min-w-0 truncate text-[11.5px] text-white/70 sm:text-[12.5px]">{t.label}</span>}
       </div>
     );
   }
   if (t.kind === "level") {
     return (
-      <div className="py-pop flex items-center gap-3 border border-[#1f2a23] bg-[#0f1612] px-4 py-3 text-white shadow-xl">
-        <LevelMark level={t.level} size={34} />
-        <div>
-          <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#5ee0a0]">Level up · {t.band}</p>
-          <p className="text-[15px] font-extrabold">
+      <div className="py-pop flex max-w-full items-center gap-2.5 border border-[#1f2a23] bg-[#0f1612] px-3 py-2 text-white shadow-xl sm:gap-3 sm:py-2.5">
+        <LevelMark level={t.level} size={26} />
+        <div className="min-w-0">
+          <p className="truncate font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#5ee0a0] sm:text-[10px]">Level up · {t.band}</p>
+          <p className="truncate text-[13px] font-extrabold sm:text-[14px]">
             Level {t.level} · {t.title}
           </p>
         </div>
@@ -90,14 +90,14 @@ function ToastItem({ t, onDone }: { t: PyToast; onDone: () => void }) {
   }
   const a = ACHIEVEMENTS[t.achievement];
   return (
-    <div className="py-pop flex items-center gap-3 border border-[#e0a83a] bg-white px-4 py-3 shadow-xl">
-      <AchievementBadge id={t.achievement} unlocked size={46} />
-      <div>
-        <p className="flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-[#b07a10]">
-          <Sparkles className="h-3 w-3" /> Badge unlocked
+    <div className="py-pop flex max-w-full items-center gap-2.5 border border-[#e0a83a] bg-white px-3 py-2 shadow-xl sm:gap-3 sm:py-2.5">
+      <AchievementBadge id={t.achievement} unlocked size={32} />
+      <div className="min-w-0">
+        <p className="flex items-center gap-1 font-mono text-[9.5px] uppercase tracking-[0.14em] text-[#b07a10] sm:text-[10px]">
+          <Sparkles className="h-3 w-3 shrink-0" /> Badge unlocked
         </p>
-        <p className="text-[15px] font-extrabold text-ink">{a.title}</p>
-        <p className="text-[12.5px] text-muted">{a.text}</p>
+        <p className="truncate text-[13px] font-extrabold text-ink sm:text-[14px]">{a.title}</p>
+        <p className="hidden text-[12px] leading-snug text-muted sm:line-clamp-2 sm:block">{a.text}</p>
       </div>
     </div>
   );
@@ -108,7 +108,7 @@ export function PyToasts() {
   return (
     <div
       aria-live="polite"
-      className="pointer-events-none fixed inset-x-3 top-[68px] z-[60] flex flex-col items-center gap-2 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:top-auto sm:items-end"
+      className="pointer-events-none fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[60] flex flex-col items-center gap-1.5 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:w-[320px] sm:items-end sm:gap-2"
     >
       {toasts.map((t) => (
         <ToastItem key={t.id} t={t} onDone={() => dismissToast(t.id)} />

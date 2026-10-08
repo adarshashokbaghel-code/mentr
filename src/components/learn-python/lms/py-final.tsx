@@ -193,10 +193,15 @@ const SPARKS = [
 
 function CompletePopup({ title, onClose }: { title: string; onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center" role="dialog" aria-modal="true" aria-label="Project complete">
+    <div
+      className="fixed inset-0 z-50 flex items-end justify-center p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:items-center sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Project complete"
+    >
       <button type="button" aria-label="Close" className="absolute inset-0 bg-ink/55" onClick={onClose} />
-      <div className="py-celebrate-card relative w-full max-w-[400px] border border-ink bg-white px-6 py-8 text-center shadow-2xl">
-        <div className="relative mx-auto h-16 w-16">
+      <div className="py-celebrate-card relative w-full max-w-[360px] border border-ink bg-white px-5 py-5 text-center shadow-2xl sm:px-6 sm:py-7">
+        <div className="relative mx-auto h-12 w-12 sm:h-14 sm:w-14">
           {SPARKS.map((spark) => (
             <span
               key={`${spark.x}${spark.y}`}
@@ -205,14 +210,18 @@ function CompletePopup({ title, onClose }: { title: string; onClose: () => void 
             />
           ))}
           <div className="absolute inset-0 flex items-center justify-center bg-[#eef8f2]">
-            <Check className="h-8 w-8 text-[#1d6b49]" strokeWidth={3} />
+            <Check className="h-6 w-6 text-[#1d6b49] sm:h-7 sm:w-7" strokeWidth={3} />
           </div>
         </div>
-        <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.18em] text-[#1d6b49]">Correct</p>
-        <h2 className="mt-1 text-[26px] font-extrabold leading-tight tracking-tight sm:text-[28px]">{title}</h2>
-        <p className="mt-1.5 text-[15px] text-muted">Marked complete</p>
-        <p className="mt-3 font-mono text-[14px] font-bold text-[#1d6b49]">+{PY_XP.project} XP</p>
-        <button type="button" onClick={onClose} className="mt-6 bg-ink px-6 py-2.5 text-[14px] font-bold text-white hover:bg-ink-soft">
+        <p className="mt-3 font-mono text-[10.5px] uppercase tracking-[0.18em] text-[#1d6b49] sm:mt-4">Correct</p>
+        <h2 className="mt-1 text-[19px] font-extrabold leading-tight tracking-tight sm:text-[22px]">{title}</h2>
+        <p className="mt-1 text-[13.5px] text-muted sm:text-[14px]">Marked complete</p>
+        <p className="mt-2 font-mono text-[13px] font-bold text-[#1d6b49]">+{PY_XP.project} XP</p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="mt-4 w-full bg-ink px-6 py-2.5 text-[14px] font-bold text-white hover:bg-ink-soft sm:mt-5 sm:w-auto"
+        >
           Continue
         </button>
       </div>

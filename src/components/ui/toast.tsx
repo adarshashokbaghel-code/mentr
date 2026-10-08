@@ -22,7 +22,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 
   const toast = useCallback((message: string) => {
     const id = crypto.randomUUID();
-    setToasts((prev) => [...prev, { id, message }]);
+    setToasts((prev) => [...prev.slice(-2), { id, message }]);
     window.setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, 4200);
@@ -36,13 +36,13 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       <div
         aria-live="polite"
         data-toast-viewport=""
-        className="pointer-events-none fixed bottom-4 right-4 z-[300] flex max-w-sm flex-col gap-2"
+        className="pointer-events-none fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[300] flex flex-col items-center gap-1.5 sm:inset-x-auto sm:bottom-4 sm:right-4 sm:max-w-sm sm:items-end sm:gap-2"
       >
         {toasts.map((t) => (
           <div
             key={t.id}
             className={cn(
-              "champs-pop rounded-lg border border-ink/10 bg-ink px-4 py-3 text-sm font-medium leading-snug text-white shadow-lg",
+              "champs-pop max-w-full rounded-lg border border-ink/10 bg-ink px-3 py-2 text-[13px] font-medium leading-snug text-white shadow-lg sm:px-4 sm:py-3 sm:text-sm",
             )}
           >
             {t.message}

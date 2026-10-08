@@ -17,6 +17,7 @@ const PRIVATE_PATHS = [
   "/login",
   "/tmp-wa-preview",
   "/learn/app",
+  "/learnpython/lms",
 ];
 
 /**

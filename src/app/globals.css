@@ -2686,12 +2686,77 @@ main {
 .py-caret {
   animation: py-caret 1s steps(1) infinite;
 }
+@keyframes py-cert-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-0.5deg);
+  }
+}
+@keyframes py-cert-sheen {
+  0%,
+  55% {
+    transform: translateX(-120%) skewX(-20deg);
+  }
+  100% {
+    transform: translateX(260%) skewX(-20deg);
+  }
+}
+@keyframes py-cert-stamp {
+  0% {
+    opacity: 0;
+    transform: scale(1.8) rotate(-24deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.92) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-12deg);
+  }
+}
+.py-cert-float {
+  animation: py-cert-float 7s ease-in-out infinite;
+}
+.py-cert-tilt {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transform: perspective(1400px) rotateX(6deg) rotateY(-8deg);
+}
+.group:hover .py-cert-tilt {
+  transform: perspective(1400px) rotateX(0deg) rotateY(0deg) scale(1.015);
+}
+.py-cert-sheen {
+  animation: py-cert-sheen 5.5s ease-in-out infinite;
+}
+.py-cert-stamp {
+  opacity: 0;
+  animation: py-cert-stamp 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
+}
+@media (max-width: 639px) {
+  .py-cert-tilt {
+    transform: none;
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .py-badge-float,
   .py-shine,
   .py-glow,
-  .py-caret {
+  .py-caret,
+  .py-cert-float,
+  .py-cert-sheen {
     animation: none;
+  }
+  .py-cert-stamp {
+    animation: none;
+    opacity: 1;
+    transform: rotate(-12deg);
+  }
+  .py-cert-tilt,
+  .group:hover .py-cert-tilt {
+    transform: none;
   }
   .py-line {
     animation: none;

@@ -17,10 +17,24 @@ import {
   type PythonTrack,
 } from "@/lib/learn-python";
 import { COMPILER_PATHS, howItWorksPath } from "@/lib/compilers/paths";
+import { PY_CERT_COURSE, PY_CERT_RULES, studyLessons } from "@/lib/python-lms/certificate";
+import type { PyCertificate } from "@/lib/python-lms/sync-client";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Check, ChevronDown, Lock, Minus, Plus, X } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Check,
+  ChevronDown,
+  Download,
+  Lock,
+  Minus,
+  Plus,
+  Share2,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { CertificateArt } from "./lms/py-certificate";
 import { PythonBadge } from "./python-badge";
 import { PythonStartButton } from "./python-start-button";
 import { PythonCode, PythonTerminal, type TerminalLine } from "./python-code";
@@ -339,7 +353,90 @@ const ON_THIS_PAGE = [
   { href: "#how-lessons-work", label: "How lessons work" },
   { href: "#beginner", label: "What you’ll learn" },
   { href: "#final-challenge", label: "Final project" },
+  { href: "#certificate", label: "Your certificate" },
+  { href: "#who-its-for", label: "Who it’s for" },
   { href: "#faq", label: "FAQ" },
+];
+
+const SAMPLE_CERT: PyCertificate = {
+  id: "MPY-7K2D-QX9M",
+  name: "Winni",
+  course: PY_CERT_COURSE,
+  issuedAt: "2026-02-04T12:00:00.000Z",
+  stats: {
+    xp: 2480,
+    lessonsStudied: studyLessons().length,
+    practiceSolved: 64,
+    examplesSolved: 58,
+    projectsCompleted: 1,
+    projects: ["quiz-game"],
+  },
+};
+
+const CERT_STEPS = [
+  { title: "Finish every lesson’s Study", text: "Go through the Study slides in all the lessons." },
+  { title: `Solve ${PY_CERT_RULES.practice}+ practice problems`, text: "Answers you reveal don’t count — only the ones you get right." },
+  { title: `Solve ${PY_CERT_RULES.examples}+ examples`, text: "Step through programs to the last line, or hit a playground’s goal." },
+  { title: `Build ${PY_CERT_RULES.projects} Final Challenge project`, text: "Write it, press Run. A working program is marked complete." },
+];
+
+const CERT_PERKS = [
+  { Icon: BadgeCheck, label: "Unique ID anyone can verify" },
+  { Icon: Download, label: "Download as a print-ready PDF" },
+  { Icon: Share2, label: "Add it to LinkedIn or your résumé" },
+];
+
+function CertificatePreview() {
+  return (
+    <div className="group relative mx-auto w-full max-w-[920px] pb-8 pt-5 sm:px-6">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-10 top-12 bottom-0 rounded-full bg-[#2f9e6e]/25 blur-[90px]"
+      />
+      <div className="py-cert-float relative">
+        <div className="py-cert-tilt relative">
+          <div
+            aria-hidden
+            className="absolute inset-0 translate-x-3 translate-y-3 rotate-[2.5deg] bg-[#efe6d2] shadow-sm"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 -translate-x-2 translate-y-2 -rotate-[1.5deg] bg-[#f6efe0] shadow-sm"
+          />
+          <div className="relative overflow-hidden">
+            <CertificateArt cert={SAMPLE_CERT} />
+            <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+              <div className="py-cert-sheen absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/45 to-transparent" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <span className="py-cert-stamp absolute -left-1 top-0 z-10 inline-flex items-center gap-1.5 bg-coral px-3 py-1.5 font-mono text-[10.5px] font-bold uppercase tracking-[0.14em] text-ink shadow-[3px_3px_0_0_#1c1a17] sm:left-0 sm:px-4 sm:py-2 sm:text-[12px]">
+        Sample
+      </span>
+      <div className="absolute -bottom-3 -right-2 z-10 w-[72px] sm:-right-2 sm:w-[110px] lg:w-[128px]">
+        <PythonBadge tier="beginner" idSuffix="-cert" floatDelay={1.6} />
+      </div>
+    </div>
+  );
+}
+
+const AUDIENCES = [
+  {
+    tag: "College students",
+    title: "Placements, internships, electives",
+    text: "Get comfortable with Python before your data, AI or programming courses — and have a project and a certificate to show for it.",
+  },
+  {
+    tag: "Career switchers",
+    title: "Your first step into tech",
+    text: "Automation, analytics and AI work all start with Python. Learn the fundamentals properly, at your own pace, around your job.",
+  },
+  {
+    tag: "School students",
+    title: "Class 6 and up",
+    text: "Python is the language of CBSE Computer Science in Class 11–12. Every lesson ends with a program you can run and show.",
+  },
 ];
 
 const PYTHON_USES = [
@@ -354,10 +451,6 @@ export function LearnPythonLanding() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-ink text-white">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(rgba(255,255,255,0.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.7)_1px,transparent_1px)] [background-size:44px_44px]"
-        />
         <div
           aria-hidden
           className="pointer-events-none absolute -right-40 top-10 h-[460px] w-[460px] rounded-full bg-sage/20 blur-[120px]"
@@ -378,26 +471,29 @@ export function LearnPythonLanding() {
               <span className="text-white/75">python</span>
             </nav>
             <h1 className="mt-6 text-[40px] font-extrabold leading-[1.04] tracking-tight sm:text-[58px] lg:text-[66px]">
-              Learn Python free.
-              <span className="block text-white/55">Start with one line of code.</span>
+              Learn Python by building.
+              <span className="mt-3 block text-[0.6em] leading-[1.12] text-white/55">
+                The language behind AI, data and the apps you use.
+              </span>
             </h1>
             <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-white/75 sm:text-[18px]">
-              A free Python course for beginners: 10 short lessons, 500+ practice questions and a
-              free Python compiler in your browser. Go from your first line of code to a quiz game
-              you build yourself. No 60-hour videos, no experience needed.
+              A hands-on Python course for college students and first-time coders. 10 focused
+              lessons, 500+ auto-checked exercises and a real Python compiler in your browser.
+              Finish with a project you wrote yourself and a verifiable certificate for your
+              LinkedIn.
             </p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Cta>Start learning Python — free</Cta>
+              <Cta>Start the course</Cta>
               <Cta href="#beginner" variant="ghost-dark">
-                See the 10 lessons
+                See the syllabus
               </Cta>
             </div>
             <dl className="mt-12 grid grid-cols-2 border-t border-white/10 sm:grid-cols-4">
               {[
-                ["Price", "₹0, no card"],
-                ["Level", "Total beginner"],
-                ["Lessons", "10, self-paced"],
-                ["Practice", "500+ questions"],
+                ["Format", "Hands-on, self-paced"],
+                ["Time", "About 8 hours"],
+                ["Practice", "500+ exercises"],
+                ["Outcome", "Verified certificate"],
               ].map(([k, v]) => (
                 <div key={k} className="border-b border-white/10 py-4 pr-4 sm:border-b-0">
                   <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/40">
@@ -437,12 +533,12 @@ export function LearnPythonLanding() {
               In short
             </p>
             <p className="mt-3 text-[17px] leading-relaxed text-ink sm:text-[19px]">
-              <strong>Mentr Learn Python</strong> is a free online Python course for beginners.
+              <strong>Mentr Learn Python</strong> is a hands-on online Python course for
+              beginners — college students, career switchers and school students from Class 6.
               Python Beginner has 10 lessons: printing text, variables, user input, if/else,
               logic, loops, strings, lists and functions, then a final project where you build a
-              quiz game. It includes 500+ practice questions, lesson notes and a free online
-              Python compiler. It costs ₹0, needs no card, and works for school students from
-              Class 6 as well as adults starting from zero.
+              quiz game. It includes 500+ auto-checked exercises, lesson notes, an in-browser
+              Python compiler and a verifiable certificate. No fee, no card.
             </p>
           </div>
           <nav aria-label="On this page" className="border-l-2 border-ink pl-5">
@@ -529,12 +625,12 @@ export function LearnPythonLanding() {
           <Chapter
             number="02"
             label="What you get"
-            title="Everything you need to learn Python. All free."
+            title="Everything you need to learn Python, in one place."
             intro={
               <p>
                 <strong className="text-ink">
-                  500+ practice questions, a free Python compiler, lesson notes and runnable
-                  examples
+                  500+ auto-checked exercises, an in-browser Python compiler, lesson notes and
+                  runnable examples
                 </strong>{" "}
                 — in one place, built for beginners, and working on any laptop or phone.
               </p>
@@ -555,7 +651,7 @@ export function LearnPythonLanding() {
           <div className="mt-10 grid gap-8 border border-hairline bg-ink p-6 text-white sm:p-8 lg:grid-cols-[1fr_1fr] lg:items-center [&>*]:min-w-0">
             <div>
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-coral">
-                Free Python compiler
+                In-browser Python compiler
               </p>
               <h3 className="mt-2 text-[24px] font-extrabold leading-tight tracking-tight sm:text-[28px]">
                 Write any program. Press Run. It works, even on your phone.
@@ -571,7 +667,7 @@ export function LearnPythonLanding() {
                   href={COMPILER_PATHS.python}
                   className="inline-flex h-12 items-center justify-center gap-2 bg-coral px-6 text-[15px] font-bold text-ink transition hover:bg-coral-dark hover:text-white"
                 >
-                  Open the free online Python compiler <ArrowRight className="h-4 w-4" />
+                  Open the online Python compiler <ArrowRight className="h-4 w-4" />
                 </a>
                 <Link href={howItWorksPath("python")} className="text-[14px] font-semibold text-white/70 underline underline-offset-4 hover:text-white">
                   How we built it
@@ -616,7 +712,7 @@ export function LearnPythonLanding() {
                     >
                       {i === 0 && (
                         <span className="mb-1 block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-coral">
-                          Free · this course
+                          This course
                         </span>
                       )}
                       {col}
@@ -660,7 +756,7 @@ export function LearnPythonLanding() {
             <p className="text-[15px] font-semibold text-ink">
               Skip the 60 hours of video. Start writing Python today.
             </p>
-            <Cta variant="ink">Start learning — free</Cta>
+            <Cta variant="ink">Start writing Python</Cta>
           </div>
         </div>
       </section>
@@ -839,7 +935,7 @@ export function LearnPythonLanding() {
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[15px] font-semibold text-ink">
-              All 10 lessons are free. Start with Lesson 1 today.
+              All 10 lessons are open. Start with Lesson 1 today.
             </p>
             <Cta variant="ink">Start Lesson 1</Cta>
           </div>
@@ -901,11 +997,74 @@ export function LearnPythonLanding() {
         </div>
       </section>
 
-      {/* 09 — Levels */}
+      {/* 09 — Certificate */}
+      <section
+        id="certificate"
+        className="relative scroll-mt-20 overflow-hidden border-t border-hairline bg-white py-20 sm:py-28"
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.5] [background-image:radial-gradient(#1c1a17_0.6px,transparent_0.6px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_50%_50%,black,transparent_70%)]"
+        />
+        <div className={cn(SHELL, "relative")}>
+          <Chapter
+            number="09"
+            label="Certificate"
+            title="Finish the course. Get a certificate with your name on it."
+            intro={
+              <p>
+                <strong className="text-ink">Verifiable, and earned — not handed out.</strong>{" "}
+                Complete the course and you get a Python Beginner certificate with your name, what
+                you built and a unique ID recruiters can check online. Here’s Winni’s.
+              </p>
+            }
+          />
+
+          <div className="mt-14 sm:mt-16">
+            <CertificatePreview />
+          </div>
+
+          <h3 className="mt-16 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-muted">
+            How to earn it
+          </h3>
+          <ol className="mt-3 grid border-t border-ink/80 sm:grid-cols-2 lg:grid-cols-4">
+            {CERT_STEPS.map((step, i) => (
+              <li
+                key={step.title}
+                className={cn(
+                  "border-b border-hairline py-6 sm:pr-6",
+                  i % 2 === 1 && "sm:border-l sm:pl-6",
+                  i > 0 && "lg:border-l lg:pl-6",
+                )}
+              >
+                <span className="font-mono text-[12px] text-coral-dark">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h4 className="mt-1 text-[16px] font-extrabold text-ink">{step.title}</h4>
+                <p className="mt-1.5 text-[13.5px] leading-relaxed text-ink/70">{step.text}</p>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8">
+              {CERT_PERKS.map(({ Icon, label }) => (
+                <li key={label} className="flex items-center gap-2.5 text-[14.5px] font-semibold text-ink">
+                  <Icon className="h-4 w-4 shrink-0 text-sage" />
+                  {label}
+                </li>
+              ))}
+            </ul>
+            <Cta variant="ink">Start earning yours</Cta>
+          </div>
+        </div>
+      </section>
+
+      {/* 10 — Levels */}
       <section id="tracks" className="scroll-mt-20 bg-cream py-20 sm:py-28">
         <div className={SHELL}>
           <Chapter
-            number="09"
+            number="10"
             label="Levels"
             title="What comes after Python Beginner?"
             intro={
@@ -924,52 +1083,49 @@ export function LearnPythonLanding() {
         </div>
       </section>
 
-      {/* 10 — Parents */}
-      <section id="parents" className="scroll-mt-20 border-t border-hairline bg-white py-20 sm:py-28">
+      {/* 11 — Who it's for */}
+      <section id="who-its-for" className="scroll-mt-20 border-t border-hairline bg-white py-20 sm:py-28">
         <div className={SHELL}>
           <Chapter
-            number="10"
-            label="For parents"
-            title="Is this Python course right for my child?"
+            number="11"
+            label="Who it’s for"
+            title="Built for anyone writing their first real Python."
             intro={
               <p>
                 <strong className="text-ink">
-                  Yes, if your child is in Class 6 or above and curious about how apps and games
-                  work.
+                  If you’ve never coded, or only copied code you didn’t understand, start here.
                 </strong>{" "}
-                No coding experience is needed.
+                No background needed — just a laptop or phone and a few focused hours.
               </p>
             }
           />
-          <div className="mt-12 grid gap-12 lg:ml-[220px] lg:grid-cols-[1.2fr_0.8fr]">
-            <ul className="space-y-5 text-[16px] leading-relaxed text-ink/80">
-              <li>
-                <strong className="text-ink">It helps at school.</strong> Python is the language
-                used in CBSE Computer Science in Class 11 and 12, and in most college coding
-                courses. Starting early makes those classes easier.
-              </li>
-              <li>
-                <strong className="text-ink">It’s really free.</strong> No trial, nothing locked,
-                no card. Mentr earns from optional tutor connections — not from course fees or
-                your child’s data.
-              </li>
-              <li>
-                <strong className="text-ink">You can see the progress.</strong> Every lesson ends
-                with a program your child wrote. Ask them to run it for you.
-              </li>
-              <li>
-                <strong className="text-ink">Younger child?</strong> For Class 3–5, start with{" "}
-                <Link href="/learn" className="font-semibold text-coral-dark hover:underline">
-                  Mentr Learn
-                </Link>{" "}
-                — free coding, AI and maths with no typing.
-              </li>
-            </ul>
+          <div className="mt-12 grid border-t border-ink/80 lg:ml-[220px] lg:grid-cols-3">
+            {AUDIENCES.map((a) => (
+              <div
+                key={a.title}
+                className="border-b border-hairline py-6 lg:border-b-0 lg:border-r lg:px-6 lg:first:pl-0 lg:last:border-r-0"
+              >
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-coral-dark">
+                  {a.tag}
+                </p>
+                <h3 className="mt-1.5 text-[17px] font-extrabold text-ink">{a.title}</h3>
+                <p className="mt-2 text-[14.5px] leading-relaxed text-ink/70">{a.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 grid gap-10 lg:ml-[220px] lg:grid-cols-2">
+            <p className="text-[14.5px] leading-relaxed text-ink/70">
+              <strong className="text-ink">Younger learner?</strong> For Class 3–5, start with{" "}
+              <Link href="/learn" className="font-semibold text-coral-dark hover:underline">
+                Mentr Learn
+              </Link>{" "}
+              — coding, AI and maths with no typing.
+            </p>
             <aside className="self-start border-l-2 border-coral pl-6">
-              <p className="text-[15px] font-bold text-ink">Want a tutor as well?</p>
+              <p className="text-[15px] font-bold text-ink">Want a mentor as well?</p>
               <p className="mt-2 text-[14.5px] leading-relaxed text-ink/70">
-                Find a Python tutor on Mentr and book a free online demo from their profile. The
-                course stays free either way.
+                Find a Python tutor on Mentr and book an online demo from their profile. The
+                course stays fully open either way.
               </p>
               <Link
                 href={LEARN_PYTHON_TUTOR_HREF}
@@ -983,10 +1139,10 @@ export function LearnPythonLanding() {
         </div>
       </section>
 
-      {/* 11 — FAQ */}
+      {/* 12 — FAQ */}
       <section id="faq" className="scroll-mt-20 border-t border-hairline bg-cream py-20 sm:py-28">
         <div className={SHELL}>
-          <Chapter number="11" label="FAQ" title="Learn Python free: questions people ask" />
+          <Chapter number="12" label="FAQ" title="Learn Python online: questions people ask" />
           <div className="mt-12 border-b border-hairline lg:ml-[220px]">
             {LEARN_PYTHON_FAQS.map((faq, i) => (
               <details key={faq.question} open={i < 2} className="group border-t border-hairline py-5">
@@ -1010,11 +1166,11 @@ export function LearnPythonLanding() {
               Ready to write your first line of Python?
             </h2>
             <p className="mt-4 max-w-xl text-[16px] leading-relaxed text-white/65">
-              It takes about a minute. The whole course is free, from Lesson 1 to the final
-              project.
+              It takes about a minute to start. Every lesson, the compiler and the certificate
+              are open to you from day one.
             </p>
             <div className="mt-8">
-              <Cta>Start learning Python — free</Cta>
+              <Cta>Start the course</Cta>
             </div>
           </div>
           <div className="mx-auto w-[150px] md:w-[180px]">
