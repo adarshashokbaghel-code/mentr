@@ -12,9 +12,9 @@ import {
 import { hubOpenGraph } from "@/lib/seo";
 import type { Metadata } from "next";
 
-const TITLE = "Learn Python Free: Beginner Course + Free Online Compiler";
+const TITLE = "Learn Python Online with Certificate — Hands-on Course for Beginners";
 const DESCRIPTION =
-  "Learn Python free: 10 interactive lessons, 500+ practice questions and a free online Python compiler. No 60-hour videos. From print() to your own quiz game. ₹0, no card.";
+  "Learn Python by writing real code: 10 hands-on lessons, 500+ auto-checked exercises, an in-browser Python compiler and a verifiable certificate for LinkedIn. Built for college students and first-time coders.";
 
 export const metadata: Metadata = {
   title: TITLE,

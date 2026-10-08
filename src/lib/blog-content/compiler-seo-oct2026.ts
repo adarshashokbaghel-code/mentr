@@ -23,7 +23,7 @@ export const COMPILER_SEO_OCT2026: Record<string, ArticleContent> = {
     readTimeMinutes: 6,
     author: AUTHOR,
     intro:
-      "You don't need to install anything to start writing Python. A browser-based compiler gives you an editor, a Run button and an output window in one tab, on a laptop, a school computer or a phone. This guide walks through running your first program, using input(), reading errors and saving your work, using Mentr's free online Python compiler as the example.",
+      "You don't need to install anything to start writing Python. A browser-based compiler gives you an editor, a Run button and an output window in one tab, on a laptop, a school computer or a phone. This guide walks through running your first program, using input(), reading errors and saving your work, using Mentr's free online Python compiler as the example. When you want lessons rather than only a place to run code, the free course is at mentr.in/learnpython.",
     sections: [
       {
         heading: "Step 1: Open a compiler and write one line",
@@ -147,7 +147,7 @@ export const COMPILER_SEO_OCT2026: Record<string, ArticleContent> = {
     readTimeMinutes: 7,
     author: AUTHOR,
     intro:
-      "Beginners' programs are full of input(): quizzes, calculators, number-guessing games. Yet input() is the feature online Python compilers most often get wrong. This article explains why it's hard, the two ways compilers handle it, and what to expect from each.",
+      "Beginners' programs are full of input(): quizzes, calculators, number-guessing games. Yet input() is the feature online Python compilers most often get wrong. This article explains why it's hard, the two ways compilers handle it, and what to expect from each. The quizzes and games below are also the projects in the free course at mentr.in/learnpython.",
     sections: [
       {
         heading: "Why input() is hard in a browser",
@@ -246,7 +246,7 @@ export const COMPILER_SEO_OCT2026: Record<string, ArticleContent> = {
     readTimeMinutes: 6,
     author: AUTHOR,
     intro:
-      "Plenty of students first meet Python on a phone. You don't need an app for that: a browser-based compiler runs Python in Chrome on Android or Safari on iPhone. Here is what works, what doesn't, and how to make typing code on a small screen less painful.",
+      "Plenty of students first meet Python on a phone. You don't need an app for that: a browser-based compiler runs Python in Chrome on Android or Safari on iPhone. Here is what works, what doesn't, and how to make typing code on a small screen less painful. The same phone can open the free beginner course at mentr.in/learnpython.",
     sections: [
       {
         heading: "Do you need an app?",
@@ -336,7 +336,7 @@ export const COMPILER_SEO_OCT2026: Record<string, ArticleContent> = {
     readTimeMinutes: 8,
     author: AUTHOR,
     intro:
-      "Searching “online Python compiler” gives you dozens of options that look the same. They are actually built in very different ways, and that decides how fast they are, whether input() works, whether you need an account, and where your code goes. This checklist helps a beginner pick, and is honest about where our own compiler fits.",
+      "Searching “online Python compiler” gives you dozens of options that look the same. They are actually built in very different ways, and that decides how fast they are, whether input() works, whether you need an account, and where your code goes. This checklist helps a beginner pick, and is honest about where our own compiler fits. If you want the lessons that go with it, start at the free course on mentr.in/learnpython.",
     sections: [
       {
         heading: "The four kinds of “online Python”",
@@ -429,7 +429,7 @@ export const COMPILER_SEO_OCT2026: Record<string, ArticleContent> = {
     readTimeMinutes: 6,
     author: AUTHOR,
     intro:
-      "It's one of the most common Python interview and exam questions, and the honest answer is “both”. The standard Python, CPython, first compiles your code to bytecode and then interprets that bytecode. Here's what that means in plain terms, and how to see it for yourself.",
+      "It's one of the most common Python interview and exam questions, and the honest answer is “both”. The standard Python, CPython, first compiles your code to bytecode and then interprets that bytecode. Here's what that means in plain terms, and how to see it for yourself. Beginners who want the lessons first can start free at mentr.in/learnpython.",
     sections: [
       {
         heading: "The short answer",

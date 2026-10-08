@@ -15,12 +15,10 @@ import { MentrFlow } from "@/components/landing/mentr-flow";
 import { Navbar } from "@/components/landing/navbar";
 import { PopularSearches } from "@/components/landing/popular-searches";
 import { PremiumMentorsBrowse } from "@/components/landing/premium-mentors-browse";
-import { ProductHuntSection } from "@/components/landing/product-hunt-section";
 import { PublicPlatformSections } from "@/components/landing/public-platform-sections";
 import { SeoGuidesStrip } from "@/components/landing/seo-guides-strip";
-import { StatsMarquee } from "@/components/landing/stats-marquee";
 import { SubjectGallery } from "@/components/landing/subject-gallery";
-import { SwitchToChamps } from "@/components/landing/switch-to-champs";
+import { LearnPythonSpotlight } from "@/components/landing/learn-python-spotlight";
 import { Testimonials } from "@/components/landing/testimonials";
 import { WaveSeparator } from "@/components/landing/wave-separator";
 import { ZeroFees } from "@/components/landing/zero-fees";
@@ -106,21 +104,19 @@ export default function Home() {
         <Hero />
         <LearnLaunchBand />
         <HomeMentorStatsBand />
-        <StatsMarquee />
         <ParentNeedFinder />
         <GlobalReachMap />
         <PremiumMentorsBrowse />
         <FeaturedMentors />
         <MentrFlow />
         <HowItWorks />
-        <SwitchToChamps />
+        <LearnPythonSpotlight />
         <WaveSeparator flip />
         <FacultyShowcase />
         <WaveSeparator className="bg-white" />
         <SubjectGallery />
         <ZeroFees />
         <Testimonials />
-        <ProductHuntSection />
         <SeoGuidesStrip />
         <PublicPlatformSections />
         <PopularSearches />

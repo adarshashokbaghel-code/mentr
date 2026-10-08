@@ -2007,6 +2007,71 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Run Python in your browser",
     ctaHref: "/openpythoncompiler",
   },
+  {
+    slug: "best-way-to-learn-python-free",
+    title: "The Best Way to Learn Python Free (Without a 60-Hour Course)",
+    keyword: "learn Python free",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-students",
+    description:
+      "The best free way to learn Python: 10 short lessons, 500+ practice questions and a browser compiler. ₹0, no card. From print() to a project you build.",
+    publishWeek: 42,
+    cta: "Learn Python free",
+    ctaHref: "/learnpython",
+  },
+  {
+    slug: "how-to-learn-python-for-beginners",
+    title: "How to Learn Python for Beginners, Step by Step",
+    keyword: "how to learn Python for beginners",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "A beginner order for Python: print, variables, input, if, logic, loops, strings, lists, functions, then one project. Ten free lessons you can run in the browser.",
+    publishWeek: 42,
+    cta: "Start the beginner course",
+    ctaHref: "/learnpython",
+  },
+  {
+    slug: "python-for-school-students-india",
+    title: "Python for School Students in India: A Free Beginner Course",
+    keyword: "Python for school students",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-students",
+    description:
+      "A free Python course for Class 6 and up in India: the same ideas school starts with, 500+ practice questions, and a compiler that runs on a phone. ₹0, no card.",
+    publishWeek: 42,
+    cta: "Learn Python free",
+    ctaHref: "/learnpython",
+  },
+  {
+    slug: "python-projects-for-beginners",
+    title: "Python Projects for Beginners: Quiz, Calculator and More",
+    keyword: "Python projects for beginners",
+    intent: "informational",
+    funnel: "mid",
+    pillar: "for-students",
+    description:
+      "Five beginner Python projects that use only input, decisions, loops, lists and functions. How a correct Run marks one complete, including after you open the solution.",
+    publishWeek: 42,
+    cta: "Build a project",
+    ctaHref: "/learnpython",
+  },
+  {
+    slug: "is-python-hard-to-learn",
+    title: "Is Python Hard to Learn? A Straight Answer for Beginners",
+    keyword: "is Python hard to learn",
+    intent: "informational",
+    funnel: "top",
+    pillar: "for-students",
+    description:
+      "Python is not hard as a first language if you take one idea at a time and run it. What usually feels hard, how long the basics take, and where to start free.",
+    publishWeek: 42,
+    cta: "Try the first lesson",
+    ctaHref: "/learnpython",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {

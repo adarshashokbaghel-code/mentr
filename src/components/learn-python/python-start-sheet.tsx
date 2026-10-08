@@ -158,7 +158,7 @@ export function PythonStartSheet({
           <div className="relative flex items-center gap-4">
             <PythonBadge tier="beginner" idSuffix="sheet" className="w-[62px] shrink-0" />
             <div className="min-w-0 pr-6">
-              <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[#5ee0a0]">Free · ₹0 · no card</p>
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-[#5ee0a0]">10 lessons · certificate · no card</p>
               <h2 id="py-start-title" className="mt-1 text-[20px] font-extrabold leading-tight sm:text-[22px]">
                 {step === "otp" ? "Check your email" : "Start Python Beginner"}
               </h2>

@@ -533,8 +533,8 @@ export const PYTHON_ASSESSMENT = [
 /** "The usual way" vs this course, for the positioning section. */
 export const PYTHON_OLD_VS_NEW: { old: string; now: string }[] = [
   { old: "A 60-hour video course you half-watch at 2× speed", now: "About 8 hours of short lessons where you do something every minute" },
-  { old: "₹3,000 to ₹50,000 for a paid program or class", now: "₹0. No trial, no card, nothing locked" },
-  { old: "Long documentation written for working engineers", now: "Plain English and school-level examples, one idea at a time" },
+  { old: "₹3,000 to ₹50,000 for a paid program or bootcamp", now: "No fee, no trial, nothing locked behind a paywall" },
+  { old: "Long documentation written for working engineers", now: "Plain English and real-world examples, one idea at a time" },
   { old: "Install Python and set up an editor before line one", now: "Code runs in your browser, even on a phone" },
   { old: "Nobody checks your work until the exam", now: "Every answer is checked instantly, with a hint when you're wrong" },
 ];
@@ -549,8 +549,8 @@ export const PYTHON_METHOD: { title: string; text: string }[] = [
 
 /** "What you get" cards. `stat` is the big headline number or word. */
 export const PYTHON_OFFER: { stat: string; title: string; text: string }[] = [
-  { stat: "500+", title: "Practice questions", text: "Multiple choice, predict the output, fix the bug, fill the blank, put lines in order and write your own code. All checked instantly." },
-  { stat: "Free", title: "Python compiler", text: "Write and run any Python program in your browser. Type input() answers right in the console, like a real terminal. Nothing to install." },
+  { stat: "500+", title: "Auto-checked exercises", text: "Multiple choice, predict the output, fix the bug, fill the blank, put lines in order and write your own code. All checked instantly." },
+  { stat: "Py3", title: "In-browser compiler", text: "Write and run any Python program in your browser. Type input() answers right in the console, like a real terminal. Nothing to install." },
   { stat: "10", title: "Lessons with notes", text: "Short slide notes for every lesson, with diagrams, tables, exam tips and flashcards. Read them again any time before a test." },
   { stat: "Live", title: "Runnable examples", text: "Step through code line by line and see each variable change. Then edit the example and run it yourself." },
   { stat: "1", title: "Final project", text: "Build a complete quiz game on your own, with hints one at a time if you get stuck." },
@@ -572,7 +572,7 @@ export const PYTHON_COMPARE_ROWS: { label: string; cells: { text: string; tone: 
   {
     label: "Price",
     cells: [
-      { text: "₹0, everything included", tone: "yes" },
+      { text: "No fee, everything included", tone: "yes" },
       { text: "Free, with ads", tone: "yes" },
       { text: "Paid course fee", tone: "no" },
       { text: "High fee, often monthly", tone: "no" },
@@ -640,9 +640,9 @@ export const PYTHON_COMPARE_ROWS: { label: string; cells: { text: string; tone: 
     ],
   },
   {
-    label: "Made for school students",
+    label: "Made for beginners",
     cells: [
-      { text: "Yes, Class 6+ and CBSE-friendly", tone: "yes" },
+      { text: "Yes — college students, career switchers, Class 6+", tone: "yes" },
       { text: "Mixed", tone: "some" },
       { text: "Mostly for adults", tone: "some" },
       { text: "Depends on the class", tone: "some" },
@@ -652,7 +652,7 @@ export const PYTHON_COMPARE_ROWS: { label: string; cells: { text: string; tone: 
   {
     label: "Progress you can see",
     cells: [
-      { text: "XP, 50 levels, badges, streak", tone: "yes" },
+      { text: "XP, levels, badges and a verifiable certificate", tone: "yes" },
       { text: "None", tone: "no" },
       { text: "Progress bar, certificate", tone: "some" },
       { text: "Teacher feedback", tone: "some" },
@@ -663,9 +663,19 @@ export const PYTHON_COMPARE_ROWS: { label: string; cells: { text: string; tone: 
 
 export const LEARN_PYTHON_FAQS = [
   {
+    question: "Do I get a certificate I can add to LinkedIn?",
+    answer:
+      "Yes. Meet the course requirements and you get a Python Beginner certificate with your name, what you built and a unique ID. Anyone — a recruiter or your college — can verify it on mentr.in. Add the link under Licenses & certifications on LinkedIn or on your résumé.",
+  },
+  {
+    question: "Is this Python course good for college students?",
+    answer:
+      "Yes. If you’re in college and haven’t coded in Python yet — for placements, internships, a data or AI elective, or just to get started — Python Beginner takes you from zero to writing complete programs in about 8 hours of hands-on lessons.",
+  },
+  {
     question: "Can I learn Python for free?",
     answer:
-      "Yes. Python Beginner on Mentr Learn is a full 10-lesson Python course that costs ₹0. There’s no trial, no card and nothing locked behind a payment.",
+      "Yes. Python Beginner on Mentr Learn is a full 10-lesson course with no fee. There’s no trial, no card and nothing locked behind a payment.",
   },
   {
     question: "Is Python good for beginners?",
@@ -680,7 +690,7 @@ export const LEARN_PYTHON_FAQS = [
   {
     question: "What age should a child start learning Python?",
     answer:
-      "Class 6 (around age 11) is a good time to start typed Python. For younger children in Class 3–5, Mentr Learn offers free coding, AI and maths lessons that don’t need typing.",
+      "Class 6 (around age 11) is a good time to start typed Python. For younger children in Class 3–5, Mentr Learn offers coding, AI and maths lessons that don’t need typing.",
   },
   {
     question: "How long does it take to learn Python basics?",
@@ -693,9 +703,9 @@ export const LEARN_PYTHON_FAQS = [
       "No. To learn the basics you need practice, not hours of video. Python Beginner is about 8 hours of short lessons where you predict, fix and write code yourself, with 500+ questions that are checked instantly.",
   },
   {
-    question: "Is there a free online Python compiler?",
+    question: "Is there an online Python compiler?",
     answer:
-      "Yes. Every learner gets a free Python compiler that runs in the browser, on laptops and phones. Write any program, press Run, and type answers to input() right in the output console. Nothing to install.",
+      "Yes. Every learner gets a Python compiler that runs in the browser, on laptops and phones. Write any program, press Run, and type answers to input() right in the output console. Nothing to install.",
   },
   {
     question: "Do I need any coding experience?",
@@ -725,22 +735,24 @@ export const LEARN_PYTHON_FAQS = [
   {
     question: "Can I get a Python tutor too?",
     answer:
-      "Yes. Search Python tutors on Mentr and book a free online demo from any tutor’s profile. The course stays free whether or not you hire a tutor.",
+      "Yes. Search Python tutors on Mentr and book an online demo from any tutor’s profile. The course stays fully open whether or not you hire a tutor.",
   },
 ];
 
 export const LEARN_PYTHON_KEYWORDS = [
-  "learn Python free",
-  "learn Python online free",
-  "free Python course",
+  "learn Python online",
+  "Python course with certificate",
+  "Python certification for beginners",
+  "Python for college students",
   "Python for beginners",
-  "Python course for beginners",
-  "Python course for kids",
-  "Python for school students",
-  "Python for Class 6",
-  "is Python hard to learn",
+  "interactive Python course",
+  "hands-on Python course",
+  "Python for AI and data science beginners",
+  "Python projects for beginners",
+  "online Python compiler",
+  "Python for placements",
   "Python basics course",
-  "Python course with projects",
+  "learn Python free",
   "Mentr Learn Python",
 ];
 
