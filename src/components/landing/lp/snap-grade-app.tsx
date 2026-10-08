@@ -1636,7 +1636,7 @@ export function SnapGradeApp() {
                           {credits ?? 0} credits still on file).
                         </p>
                         <a
-                          href="/mentrpremium"
+                          href="/blog/mentr-premium-mentor-guide"
                           className="mt-2 inline-flex items-center gap-1 text-[11px] font-bold text-butter hover:underline"
                         >
                           Premium guide

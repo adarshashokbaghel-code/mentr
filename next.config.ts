@@ -202,6 +202,11 @@ const nextConfig: NextConfig = {
         destination: "/about",
         permanent: true,
       },
+      {
+        source: "/mentrpremium",
+        destination: "/mentrpricing",
+        permanent: true,
+      },
       // Parent-friendly short subject URLs → canonical hub paths
       {
         source: "/tutors/:city/maths",
