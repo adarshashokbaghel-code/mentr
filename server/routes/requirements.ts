@@ -15,6 +15,7 @@ import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
 import { notifyParentRequirementPitch } from "../services/parent-notifications";
 import { isMentrPremiumActive } from "../services/premium-mentor-billing";
+import { getRevealQuota } from "../services/parent-contact-reveal";
 
 const router = Router();
 
@@ -39,13 +40,15 @@ function requirePostable(status: string, expiresAt: Date): boolean {
   return status === "open" && expiresAt.getTime() > Date.now();
 }
 
-/** Anonymized board row — never includes the parent's name or contact. */
+/** Anonymized board row — never includes the parent's name or contact. Premium mentors get the parent id so a reveal can be charged against the daily cap. */
 function serializeForBoard(
   r: IRequirement,
   myInterest?: IConnection,
+  parentId?: string,
 ) {
   return {
     id: r._id.toString(),
+    parentId: parentId ?? null,
     subject: r.subject,
     classLevel: r.classLevel,
     city: r.city,
@@ -383,11 +386,22 @@ router.get("/board", async (req: AuthenticatedRequest, res: Response) => {
     );
     const premium = mentor ? isMentrPremiumActive(mentor) : false;
     const dailyLimit = premium ? null : MAX_INTERESTS_PER_DAY;
+    const revealQuota = premium
+      ? await getRevealQuota(req.auth!.sub)
+      : null;
 
     res.json({
       requirements: requirements.map((r) =>
-        serializeForBoard(r, interestByRequirement.get(r._id.toString())),
+        serializeForBoard(
+          r,
+          interestByRequirement.get(r._id.toString()),
+          premium && requirePostable(r.status, r.expiresAt)
+            ? r.parent.toString()
+            : undefined,
+        ),
       ),
+      premiumMentor: premium,
+      revealQuota,
       dailyLimit,
       usedToday: premium
         ? usedToday

@@ -132,6 +132,12 @@ export const FAQS: FaqItem[] = [
       "Parents post what they need — subject, class, area, and timing. Tutors browse open posts worldwide and pitch with a short message and their full profile. The parent reviews pitches, accepts who fits, and you continue directly — free for both sides.",
     category: "faculty",
   },
+  {
+    category: "faculty",
+    question: "Does Reveal parent on the pitch board count toward my daily limit?",
+    answer:
+      "Yes. Premium mentors get 3 parent-contact reveals per day (midnight IST). Reveal parent on the requirements board and a reveal in the parent directory share that one limit. A reveal on the board uses one of the 3. It is not a separate allowance, and reveals in the directory do not add extra board reveals.",
+  },
 ];
 
 export const FAQ_CATEGORIES = [

@@ -851,6 +851,8 @@ export interface MyRequirement {
 /** An anonymized post as tutors see it on the board */
 export interface BoardRequirement {
   id: string;
+  /** Set only for a premium mentor, so Reveal parent can use the shared daily cap. */
+  parentId?: string | null;
   subject: string;
   classLevel: string;
   city: string;
@@ -922,6 +924,8 @@ export const requirementsApi = {
       dailyLimit: number | null;
       usedToday: number;
       unlimitedPitches?: boolean;
+      premiumMentor?: boolean;
+      revealQuota?: PremiumRevealQuota | null;
     }>("/requirements/board"),
 
   expressInterest: (id: string, message: string) =>

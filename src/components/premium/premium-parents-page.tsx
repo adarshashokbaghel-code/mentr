@@ -423,7 +423,9 @@ export function PremiumParentsPage() {
                     <span className="font-semibold text-ink">
                       {limit} reveals per day
                     </span>
-                    . When you hit the limit, new reveals open again at{" "}
+                    . Reveal parent on the requirements board counts toward
+                    this same daily limit. When you hit the limit, new reveals
+                    open again at{" "}
                     <span className="font-semibold text-ink">
                       midnight IST
                     </span>

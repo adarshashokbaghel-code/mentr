@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Mentor Pricing — Free Forever or Premium $5/mo",
   description:
-    "Mentr mentor plans: Free forever with 3 pitches a day, or Premium at $5/month for unlimited pitches, 5 daily parent contact unlocks, SPOC support, and featured landing placement. No GST added on top. Razorpay checkout.",
+    "Mentr mentor plans: Free forever with 3 pitches a day, or Premium at $5/month for unlimited pitches, 3 daily parent contact unlocks shared by the directory and the pitch board, SPOC support, and featured landing placement. No GST added on top. Razorpay checkout.",
   keywords: [
     "Mentr premium mentor",
     "mentor pricing",
@@ -32,7 +32,7 @@ const PAGE_FAQS = [
   {
     question: "What is Mentr Premium for mentors?",
     answer:
-      "Premium is an optional upgrade for mentors who want more reach: unlimited daily pitches, special access to parent listings with contact and requirement details, five parent contact unlocks every day, a dedicated support contact (SPOC), and featured placement on the Mentr landing page.",
+      "Premium is an optional upgrade for mentors who want more reach: unlimited daily pitches, special access to parent listings with contact and requirement details, three parent contact unlocks every day, a dedicated support contact (SPOC), and featured placement on the Mentr landing page. The parent directory and Reveal parent on the requirements board share that same daily limit of 3.",
   },
   {
     question: "Do parents need Premium to contact mentors?",

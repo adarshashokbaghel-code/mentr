@@ -2,8 +2,11 @@
 
 import {
   ApiError,
+  premiumMentorApi,
   requirementsApi,
   type BoardRequirement,
+  type PremiumRevealQuota,
+  type PremiumRevealRow,
 } from "@/lib/api";
 import { timeAgo } from "@/components/dashboard/widgets";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +32,7 @@ import {
   ChevronDown,
   ChevronUp,
   Clock3,
+  Download,
   Flame,
   Hourglass,
   IndianRupee,
@@ -189,7 +193,10 @@ export function RequirementsFeed() {
   const [dailyLimit, setDailyLimit] = useState<number | null>(3);
   const [usedToday, setUsedToday] = useState(0);
   const [unlimitedPitches, setUnlimitedPitches] = useState(false);
+  const [premiumMentor, setPremiumMentor] = useState(false);
+  const [revealLeft, setRevealLeft] = useState<number | null>(null);
   const [pitchFor, setPitchFor] = useState<BoardRequirement | null>(null);
+  const [revealFor, setRevealFor] = useState<BoardRequirement | null>(null);
 
   const [sort, setSort] = useState<SortMode>("new");
   const [subject, setSubject] = useState("All");
@@ -197,6 +204,10 @@ export function RequirementsFeed() {
   const [query, setQuery] = useState("");
   const [hidePitched, setHidePitched] = useState(false);
   const [statusFilter, setStatusFilter] = useState<"open" | "closed">("open");
+
+  const onRevealQuota = useCallback((quota: PremiumRevealQuota) => {
+    setRevealLeft(quota.remaining);
+  }, []);
 
   const reload = useCallback(() => {
     requirementsApi
@@ -206,6 +217,10 @@ export function RequirementsFeed() {
         setDailyLimit(data.dailyLimit);
         setUsedToday(data.usedToday);
         setUnlimitedPitches(Boolean(data.unlimitedPitches || data.dailyLimit == null));
+        setPremiumMentor(Boolean(data.premiumMentor));
+        setRevealLeft(
+          data.revealQuota ? data.revealQuota.remaining : null,
+        );
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -440,6 +455,15 @@ export function RequirementsFeed() {
                     ? `${openCount} open post${openCount === 1 ? "" : "s"}`
                     : `${closedCount} closed post${closedCount === 1 ? "" : "s"}`}
                 </p>
+                {premiumMentor && revealLeft != null && (
+                  <p className="mt-1 max-w-md text-xs leading-relaxed text-ink">
+                    <span className="font-semibold">
+                      Parent reveals: {revealLeft} of 3 left today.
+                    </span>{" "}
+                    Reveal parent on this pitch board counts toward that same
+                    daily limit as the parent directory.
+                  </p>
+                )}
               </div>
               <Badge
                 variant={atLimit ? "coral" : "sage"}
@@ -570,7 +594,9 @@ export function RequirementsFeed() {
                     key={p.id}
                     post={p}
                     quotaLeft={left}
+                    premium={premiumMentor}
                     onRespond={() => setPitchFor(p)}
+                    onReveal={() => setRevealFor(p)}
                   />
                 ))}
               </ul>
@@ -596,6 +622,16 @@ export function RequirementsFeed() {
                     ? ` You’ve sent ${usedToday} today.`
                     : ""}
                 </p>
+                {revealLeft != null && (
+                  <p className="mt-2 text-xs leading-relaxed text-ink">
+                    <span className="font-semibold">
+                      Parent reveals: {revealLeft} of 3 left today.
+                    </span>{" "}
+                    Reveal parent on this pitch board is included in that
+                    daily limit — the same 3 as the parent directory, not a
+                    separate allowance.
+                  </p>
+                )}
               </>
             ) : (
               <>
@@ -669,6 +705,11 @@ export function RequirementsFeed() {
         </aside>
       </div>
 
+      <RevealParentDialog
+        post={revealFor}
+        onClose={() => setRevealFor(null)}
+        onQuota={onRevealQuota}
+      />
       <PitchDialog
         post={pitchFor}
         onClose={() => setPitchFor(null)}
@@ -902,11 +943,15 @@ function interestStatusLabel(status: BoardRequirement["myInterestStatus"]) {
 function ThreadCard({
   post: p,
   quotaLeft,
+  premium,
   onRespond,
+  onReveal,
 }: {
   post: BoardRequirement;
   quotaLeft: number;
+  premium: boolean;
   onRespond: () => void;
+  onReveal: () => void;
 }) {
   const [expanded, setExpanded] = useState(false);
   const budget = budgetLabel(p);
@@ -1055,8 +1100,8 @@ function ThreadCard({
           </button>
         )}
 
-        {/* 5 — action footer: status left, CTA right (stacked on mobile) */}
-        <div className="mt-4 flex flex-col gap-3 border-t border-hairline pt-4 sm:flex-row sm:items-center sm:justify-between">
+        {/* 5 — action footer: status left, CTAs right (stacked until the row fits) */}
+        <div className="mt-4 flex flex-col gap-3 border-t border-hairline pt-4 md:flex-row md:items-center md:justify-between">
           <div className="min-w-0">
             {statusLabel ? (
               <span
@@ -1088,6 +1133,17 @@ function ThreadCard({
             )}
           </div>
 
+          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end">
+          {premium && p.parentId && !closed && (
+            <button
+              type="button"
+              onClick={onReveal}
+              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-ink/15 bg-white px-3 text-xs font-semibold whitespace-nowrap text-ink touch-manipulation transition-colors hover:border-ink/30 hover:bg-cream"
+            >
+              <Sparkles className="h-3.5 w-3.5 shrink-0 text-coral" />
+              Reveal parent
+            </button>
+          )}
           {showPitchCta && (
             <Button
               size="sm"
@@ -1101,7 +1157,7 @@ function ThreadCard({
                     : "primary"
               }
               className={cn(
-                "h-11 w-full shrink-0 gap-1.5 rounded-lg px-5 text-sm font-bold touch-manipulation sm:w-auto",
+                "h-11 w-full shrink-0 gap-1.5 rounded-lg px-5 text-sm font-bold whitespace-nowrap touch-manipulation sm:w-auto",
                 p.myInterestStatus === "accepted" || p.myInterestStatus === "declined"
                   ? "sm:min-w-[8.5rem]"
                   : "sm:min-w-[6.5rem]",
@@ -1121,10 +1177,286 @@ function ThreadCard({
               )}
             </Button>
           )}
+          </div>
         </div>
       </div>
       </div>
     </li>
+  );
+}
+
+function fileSlug(value: string) {
+  const slug = value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 40);
+  return slug || "parent";
+}
+
+function saveBlob(blob: Blob, name: string) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function csvCell(value: string) {
+  if (/[",\n]/.test(value)) return `"${value.replace(/"/g, '""')}"`;
+  return value;
+}
+
+function downloadParentCsv(reveal: PremiumRevealRow, post: BoardRequirement) {
+  const rows = [
+    ["Name", reveal.parentName],
+    ["Phone", reveal.parentPhone],
+    ["Email", reveal.parentEmail || ""],
+    ["City", reveal.parentCity || post.city],
+    ["Area", reveal.parentArea || post.area],
+    ["WhatsApp", reveal.whatsappUrl || ""],
+    ["Requirement", `${post.subject} · Class ${post.classLevel}`],
+    ["Requirement area", post.area],
+    ["Revealed at", reveal.revealedAt || new Date().toISOString()],
+  ];
+  const csv = rows.map((row) => row.map(csvCell).join(",")).join("\n");
+  saveBlob(
+    new Blob([csv], { type: "text/csv;charset=utf-8" }),
+    `${fileSlug(reveal.parentName)}-${fileSlug(post.subject)}.csv`,
+  );
+}
+
+function pdfSafe(value: string) {
+  const clean = value.replace(/[^\x20-\x7E]/g, " ").replace(/\s+/g, " ").trim();
+  return clean || "-";
+}
+
+async function downloadParentPdf(reveal: PremiumRevealRow, post: BoardRequirement) {
+  const { PDFDocument, StandardFonts, rgb } = await import("pdf-lib");
+  const doc = await PDFDocument.create();
+  const page = doc.addPage([420, 560]);
+  const font = await doc.embedFont(StandardFonts.Helvetica);
+  const bold = await doc.embedFont(StandardFonts.HelveticaBold);
+  const ink = rgb(0.1, 0.14, 0.11);
+  const muted = rgb(0.38, 0.4, 0.38);
+  page.drawText("Mentr parent contact", {
+    x: 36,
+    y: 520,
+    size: 11,
+    font,
+    color: muted,
+  });
+  page.drawText(pdfSafe(reveal.parentName).slice(0, 28), {
+    x: 36,
+    y: 490,
+    size: 22,
+    font: bold,
+    color: ink,
+  });
+  const lines: [string, string][] = [
+    ["Phone", reveal.parentPhone || "-"],
+    ["Email", reveal.parentEmail || "-"],
+    ["City", reveal.parentCity || post.city || "-"],
+    ["Area", reveal.parentArea || post.area || "-"],
+    ["WhatsApp", reveal.whatsappUrl || "-"],
+    ["Requirement", `${post.subject}, Class ${post.classLevel}`],
+    ["Looking in", post.area || post.city || "-"],
+    ["Saved", new Date(reveal.revealedAt || Date.now()).toLocaleString("en-IN")],
+  ];
+  let y = 450;
+  for (const [label, value] of lines) {
+    page.drawText(label, { x: 36, y, size: 9, font, color: muted });
+    const text = pdfSafe(value).slice(0, 52);
+    page.drawText(text, { x: 36, y: y - 14, size: 12, font: bold, color: ink });
+    y -= 40;
+  }
+  page.drawText("Counts as one of your 3 parent reveals today.", {
+    x: 36,
+    y: 48,
+    size: 9,
+    font,
+    color: muted,
+  });
+  const bytes = await doc.save();
+  saveBlob(
+    new Blob([bytes as BlobPart], { type: "application/pdf" }),
+    `${fileSlug(reveal.parentName)}-${fileSlug(post.subject)}.pdf`,
+  );
+}
+
+function RevealParentDialog({
+  post,
+  onClose,
+  onQuota,
+}: {
+  post: BoardRequirement | null;
+  onClose: () => void;
+  onQuota: (quota: PremiumRevealQuota) => void;
+}) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [reveal, setReveal] = useState<PremiumRevealRow | null>(null);
+  const [already, setAlready] = useState(false);
+  const [remaining, setRemaining] = useState<number | null>(null);
+  const [saving, setSaving] = useState<"csv" | "pdf" | null>(null);
+
+  useEffect(() => {
+    if (!post?.parentId) {
+      setReveal(null);
+      setError("");
+      setAlready(false);
+      setRemaining(null);
+      return;
+    }
+    let cancelled = false;
+    setLoading(true);
+    setError("");
+    setReveal(null);
+    premiumMentorApi
+      .revealParent(post.parentId)
+      .then((data) => {
+        if (cancelled) return;
+        setReveal(data.reveal);
+        setAlready(Boolean(data.alreadyRevealed));
+        setRemaining(data.quota.remaining);
+        onQuota(data.quota);
+      })
+      .catch((err: unknown) => {
+        if (cancelled) return;
+        const message =
+          err instanceof ApiError ? err.message : "Could not reveal this parent.";
+        setError(message);
+        const quota = err instanceof ApiError ? err.data?.quota : undefined;
+        if (
+          quota &&
+          typeof quota === "object" &&
+          "remaining" in quota &&
+          typeof (quota as PremiumRevealQuota).remaining === "number"
+        ) {
+          const next = quota as PremiumRevealQuota;
+          setRemaining(next.remaining);
+          onQuota(next);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [post, onQuota]);
+
+  return (
+    <Dialog open={post !== null} onOpenChange={(open) => !open && onClose()}>
+      <DialogContent className="max-w-[420px] gap-0 overflow-hidden p-0">
+        <DialogHeader className="border-b border-hairline px-5 py-4">
+          <DialogTitle className="text-base">Parent contact</DialogTitle>
+          <DialogDescription className="text-xs">
+            {post
+              ? `${post.subject} · Class ${post.classLevel} · ${post.area || post.city}`
+              : "Reveal uses one of your 3 parent contacts today."}
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="px-5 py-4">
+          {loading && (
+            <div className="flex items-center gap-2 py-8 text-sm text-muted">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Opening this parent…
+            </div>
+          )}
+
+          {!loading && error && (
+            <p className="rounded-xl bg-cream px-4 py-3 text-sm leading-relaxed text-ink">
+              {error}
+            </p>
+          )}
+
+          {!loading && reveal && (
+            <div className="rounded-2xl border border-hairline bg-cream/40 p-4">
+              <p className="text-lg font-bold text-ink">{reveal.parentName}</p>
+              <dl className="mt-3 space-y-2 text-sm">
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted">Phone</dt>
+                  <dd className="font-semibold text-ink">{reveal.parentPhone || "—"}</dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted">Email</dt>
+                  <dd className="truncate font-semibold text-ink">
+                    {reveal.parentEmail || "—"}
+                  </dd>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <dt className="text-muted">Area</dt>
+                  <dd className="text-right font-semibold text-ink">
+                    {[reveal.parentArea, reveal.parentCity].filter(Boolean).join(", ") ||
+                      post?.area ||
+                      "—"}
+                  </dd>
+                </div>
+              </dl>
+              {reveal.whatsappUrl && (
+                <a
+                  href={reveal.whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex text-sm font-bold text-sage hover:underline"
+                >
+                  Open WhatsApp
+                </a>
+              )}
+            </div>
+          )}
+
+          {!loading && remaining != null && (
+            <p className="mt-3 text-xs leading-relaxed text-muted">
+              {already
+                ? `This parent is already in today’s reveals, so it did not use another one. ${remaining} of 3 left. Download a copy to keep the details.`
+                : `${remaining} of 3 parent reveals left today. Download the CSV or PDF now — the card stays open for 2 hours.`}
+            </p>
+          )}
+        </div>
+
+        <DialogFooter className="border-t border-hairline px-5 py-3 sm:justify-between">
+          <Button type="button" variant="ghost" size="sm" onClick={onClose}>
+            Close
+          </Button>
+          {reveal && post && (
+            <div className="flex gap-2">
+              <Button
+                type="button"
+                variant="secondary"
+                size="sm"
+                disabled={saving !== null}
+                onClick={() => downloadParentCsv(reveal, post)}
+              >
+                <Download className="h-3.5 w-3.5" />
+                CSV
+              </Button>
+              <Button
+                type="button"
+                size="sm"
+                disabled={saving !== null}
+                onClick={() => {
+                  setSaving("pdf");
+                  void downloadParentPdf(reveal, post).finally(() => setSaving(null));
+                }}
+              >
+                {saving === "pdf" ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Download className="h-3.5 w-3.5" />
+                )}
+                PDF
+              </Button>
+            </div>
+          )}
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
 

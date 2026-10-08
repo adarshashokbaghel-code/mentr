@@ -43,7 +43,7 @@ export const STATS_FAQS = [
   {
     question: "Do tutors pay commission on Mentr?",
     answer:
-      "No. Tutors list free and keep 100% of their tuition fees. There are no coins or lead fees. An optional Premium plan ($5/month, ₹449 in India) adds unlimited pitches, daily parent contact unlocks, instant new-parent alerts and featured placement.",
+      "No. Tutors list free and keep 100% of their tuition fees. There are no coins or lead fees. An optional Premium plan ($5/month, ₹449 in India) adds unlimited pitches, 3 parent contact unlocks a day, instant new-parent alerts and featured placement. Those 3 unlocks are one shared daily limit for the parent directory and Reveal parent on the requirements board.",
   },
   {
     question: "What is Mentr Learn?",
