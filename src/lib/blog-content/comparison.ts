@@ -732,6 +732,8 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
       { label: "TeacherOn alternatives", href: "/blog/teacheron-alternatives" },
       { label: "Justdial tutor alternatives", href: "/blog/justdial-tutor-alternatives" },
       { label: "Best free tutor platforms in India", href: "/blog/best-free-tutor-platforms-india" },
+      { label: "Home tuition jobs near me (no agency fees)", href: "/blog/home-tuition-jobs-near-me" },
+      { label: "How to advertise home tuition", href: "/blog/how-to-advertise-home-tuition" },
       { label: "Become a tutor free", href: "/for-faculty" },
     ],
   },

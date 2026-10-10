@@ -2072,6 +2072,58 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Try the first lesson",
     ctaHref: "/learnpython",
   },
+  {
+    slug: "how-to-advertise-home-tuition",
+    title: "How to Advertise Home Tuition in 2026: 12 Ideas That Bring Students",
+    keyword: "how to advertise home tuition",
+    intent: "transactional",
+    funnel: "mid",
+    pillar: "for-tutors",
+    description:
+      "12 ways to advertise home tuition, free options first: a verified profile, replying to parent requirements, society WhatsApp groups and demos that convert. Includes a 14-day plan.",
+    publishWeek: 43,
+    cta: "List your tuition free",
+    ctaHref: "/faculty/signup",
+  },
+  {
+    slug: "home-tuition-jobs-near-me",
+    title: "Home Tuition Jobs Near Me: Where to Find Them in 2026 (No Agency Fees)",
+    keyword: "home tuition jobs near me",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "for-tutors",
+    description:
+      "Where real home tuition jobs come from, what they pay by class in 2026, part-time tuition for college students, and a safety checklist, without paying agencies or coins.",
+    publishWeek: 43,
+    cta: "Find tuition jobs free",
+    ctaHref: "/online-tutor-jobs",
+  },
+  {
+    slug: "online-indian-tutor-for-nri-kids",
+    title: "Online Indian Tutors for NRI Kids: CBSE, Maths & Hindi (UK, US, UAE, Canada)",
+    keyword: "online Indian tutor for NRI kids",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "How NRI families find an online tutor from India: matching CBSE, GCSE or US curriculum, session times across time zones, typical fees, and how to check a tutor before paying.",
+    publishWeek: 43,
+    cta: "Find a verified tutor",
+    ctaHref: "/find-tutor",
+  },
+  {
+    slug: "tuition-for-class-1-to-5",
+    title: "Tuition for Class 1–5: Does Your Child Need It? Fees & How to Choose (2026)",
+    keyword: "tuition for class 1 to 5",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "When primary-school tuition actually helps, home vs online for Class 1–5, 2026 fees in metros and tier-2 cities, and what makes a good tutor for young children.",
+    publishWeek: 43,
+    cta: "Find a primary tutor",
+    ctaHref: "/find-tutor",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {
