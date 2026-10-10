@@ -1,7 +1,6 @@
 import { BlogComparisonGlance } from "@/components/blog/blog-comparison-glance";
 import { BlogFeaturedCard } from "@/components/blog/blog-featured-card";
 import { BlogFeed } from "@/components/blog/blog-feed";
-import { BlogFilterBar } from "@/components/blog/blog-filter-bar";
 import { BlogHeader } from "@/components/blog/blog-header";
 import { BlogShell } from "@/components/blog/blog-shell";
 import { BLOG_PILLARS } from "@/lib/blog-posts";
@@ -25,7 +24,6 @@ export function BlogIndex({ pillar = "all" }: Props) {
   return (
     <div className="w-full">
       <BlogHeader pillar={pillar} />
-      <BlogFilterBar activePillar={pillar} />
 
       <BlogShell activePillar={pillar === "all" ? undefined : pillar}>
         {pillar === "comparison" && (

@@ -24,6 +24,7 @@ import { LEARN_PYTHON_SEO_OCT2026 } from "./learn-python-seo-oct2026";
 import { AI_ANSWER_GUIDES } from "./ai-answer-guides";
 import { PARENT_ACQUISITION_SEP2026 } from "./parent-acquisition-sep2026";
 import { COMPETITOR_ALTERNATIVES_SEP2026 } from "./competitor-alternatives-sep2026";
+import { ONBOARDING_OCT2026 } from "./onboarding-oct2026";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
@@ -52,6 +53,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...DEMO_BOOKING_OCT2026,
   ...COMPILER_SEO_OCT2026,
   ...LEARN_PYTHON_SEO_OCT2026,
+  ...ONBOARDING_OCT2026,
 };
 
 export function getArticleContent(slug: string): ArticleContent {
