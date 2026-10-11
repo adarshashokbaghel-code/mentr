@@ -62,6 +62,31 @@ function loadRazorpayScript(): Promise<boolean> {
   });
 }
 
+/**
+ * Razorpay mounts its iframe on <body>. A Radix modal dialog that is still open
+ * leaves body with pointer-events:none + focus trap + scroll lock, which makes
+ * the checkout untappable on mobile — wait until the dialog has fully unmounted.
+ */
+function waitForDialogRelease(timeoutMs = 1000): Promise<void> {
+  return new Promise((resolve) => {
+    const start = performance.now();
+    const tick = () => {
+      const released =
+        !document.querySelector('[data-slot="dialog-content"]') &&
+        getComputedStyle(document.body).pointerEvents !== "none";
+      if (released || performance.now() - start > timeoutMs) {
+        if (document.body.style.pointerEvents === "none") {
+          document.body.style.pointerEvents = "";
+        }
+        resolve();
+        return;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+
 function formatInr(n: number) {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -112,6 +137,7 @@ export function PremiumCheckoutDialog({
   const [months, setMonths] = useState<2 | 3 | 4>(2);
   const [loadingCatalog, setLoadingCatalog] = useState(false);
   const [paying, setPaying] = useState(false);
+  const [razorpayOpen, setRazorpayOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [acceptedLegal, setAcceptedLegal] = useState(true);
   const [couponOpen, setCouponOpen] = useState(false);
@@ -325,6 +351,7 @@ export function PremiumCheckoutDialog({
         theme: { color: "#1a231c" },
         modal: {
           ondismiss: () => {
+            setRazorpayOpen(false);
             setPaying(false);
             if (orderId) void premiumMentorApi.cancel(orderId);
           },
@@ -378,6 +405,7 @@ export function PremiumCheckoutDialog({
               checkoutSession.current.paid = true;
               onSuccess?.(verified.premium);
               setPaying(false);
+              setRazorpayOpen(false);
               onOpenChange(false);
               return;
             } catch (err) {
@@ -397,6 +425,7 @@ export function PremiumCheckoutDialog({
               ? lastErr.message
               : "If money was deducted, refresh your dashboard — Premium may already be active.",
           );
+          setRazorpayOpen(false);
           setPaying(false);
         },
       });
@@ -407,8 +436,11 @@ export function PremiumCheckoutDialog({
         if (orderId) void premiumMentorApi.cancel(orderId, "failed");
       });
 
+      setRazorpayOpen(true);
+      await waitForDialogRelease();
       rzp.open();
     } catch (e) {
+      setRazorpayOpen(false);
       setPaying(false);
       const code =
         e instanceof ApiError ? String(e.data?.code ?? "") : "";
@@ -433,10 +465,13 @@ export function PremiumCheckoutDialog({
   }
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
+    <Dialog open={open && !razorpayOpen} onOpenChange={handleOpenChange}>
       <DialogContent
         className="max-h-[min(92dvh,680px)] w-full gap-0 overflow-y-auto p-0 sm:max-w-[520px]"
         showCloseButton={!paying}
+        onCloseAutoFocus={(e) => {
+          if (razorpayOpen) e.preventDefault();
+        }}
       >
         <div className="border-b border-hairline px-4 pb-3 pt-4 sm:px-6 sm:pb-4 sm:pt-6">
           <DialogHeader className="gap-1 text-left sm:gap-1.5">
