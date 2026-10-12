@@ -21,6 +21,7 @@ import instantConnectRoutes from "./routes/instant-connect";
 import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
+import { sendParentProfileReminders } from "./services/parent-profile-reminder";
 import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers, getPublicPremiumTeachers, getPublicTeacherStats } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 import { ensureDb } from "./middleware/ensure-db";
@@ -162,6 +163,23 @@ app.post("/api/cron/pitch-digest", async (req, res) => {
   } catch (error) {
     console.error("cron pitch digest error:", error);
     res.status(500).json({ error: "Digest job failed" });
+  }
+});
+
+app.post("/api/cron/parent-profile-reminder", async (req, res) => {
+  const secret = process.env.CRON_SECRET;
+  const auth = req.headers.authorization;
+  if (!secret || auth !== `Bearer ${secret}`) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
+  try {
+    await connectDb();
+    const count = await sendParentProfileReminders();
+    res.json({ message: "Parent profile reminders sent", parents: count });
+  } catch (error) {
+    console.error("cron parent profile reminder error:", error);
+    res.status(500).json({ error: "Reminder job failed" });
   }
 });
 

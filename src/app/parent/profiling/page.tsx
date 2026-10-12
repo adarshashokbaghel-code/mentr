@@ -2,11 +2,11 @@
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { LocationFields } from "@/components/forms/location-fields";
-import { ProfileImageUploader } from "@/components/profile/profile-image-uploader";
 import { trackProfileComplete } from "@/lib/analytics";
 import { profileApi } from "@/lib/api";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 import { homeFor } from "@/lib/auth-routes";
+import { skipsProfiling } from "@/lib/public-browse";
 import { cn } from "@/lib/utils";
 import { MentrBrand } from "@/components/ui/mentr-brand";
 import { Loader2, Phone } from "lucide-react";
@@ -15,14 +15,6 @@ import { Suspense, useEffect, useState } from "react";
 
 const field =
   "mt-1.5 h-11 w-full rounded-md border border-[#e5e2dc] bg-white px-3 text-[15px] text-ink outline-none placeholder:text-[#a39e96] focus:border-ink";
-
-function nameFromEmail(email: string): string {
-  const local = email.split("@")[0]?.trim() || "Parent";
-  return local
-    .replace(/[._+-]+/g, " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase())
-    .slice(0, 80);
-}
 
 function ParentProfilingContent() {
   const { user, loading, setUser } = useAuth();
@@ -35,7 +27,6 @@ function ParentProfilingContent() {
   const [country, setCountry] = useState("India");
   const [city, setCity] = useState("Bengaluru");
   const [area, setArea] = useState("");
-  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [prefilled, setPrefilled] = useState(false);
@@ -56,10 +47,6 @@ function ParentProfilingContent() {
       setCountry(user.parentProfile.country || "India");
       setCity(user.parentProfile.city || "Bengaluru");
       setArea(user.parentProfile.area ?? "");
-      setProfileImageUrl(user.profileImageUrl || null);
-      setPrefilled(true);
-    } else if (!prefilled && user) {
-      setProfileImageUrl(user.profileImageUrl || null);
       setPrefilled(true);
     }
   }, [loading, user, router, next, prefilled]);
@@ -106,8 +93,6 @@ function ParentProfilingContent() {
     );
   }
 
-  const displayName = name.trim() || nameFromEmail(user.email);
-
   return (
     <div className="flex min-h-screen flex-col bg-cream">
       <header className="flex items-center justify-between px-5 py-4 sm:px-8">
@@ -134,25 +119,6 @@ function ParentProfilingContent() {
             className="rounded-lg border border-hairline bg-white p-5 sm:p-6"
           >
             <div className="space-y-5">
-              <div className="rounded-lg border border-dashed border-ink/15 bg-cream/40 p-4">
-                <ProfileImageUploader
-                  name={displayName}
-                  initials={displayName.slice(0, 1).toUpperCase()}
-                  imageUrl={profileImageUrl}
-                  onUploaded={(url) => {
-                    setProfileImageUrl(url);
-                    if (user) {
-                      setUser({
-                        ...user,
-                        profileImageUrl: url || undefined,
-                      });
-                    }
-                  }}
-                  title="Photo (optional)"
-                  description="Helps tutors recognize you on the public parents list. First name only is shown — skip anytime."
-                />
-              </div>
-
               <label className="block">
                 <span className="text-[13px] font-semibold text-ink">Your name</span>
                 <input
@@ -216,6 +182,16 @@ function ParentProfilingContent() {
               )}
             </button>
           </form>
+
+          <button
+            type="button"
+            onClick={() =>
+              router.push(next && skipsProfiling(next) ? next : "/search")
+            }
+            className="mt-3 w-full text-center text-sm font-medium text-muted underline-offset-4 hover:text-ink hover:underline"
+          >
+            Skip for now — browse tutors first
+          </button>
 
           <p className="mt-4 text-center text-xs text-muted">
             Free forever for parents. Tutors keep 100% of what you pay them.

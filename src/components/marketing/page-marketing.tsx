@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  captureLandingTouch,
   captureUrlAttribution,
   persistAttribution,
   trackMarketingEvent,
@@ -38,6 +39,7 @@ export function PageMarketing({
 /** Persist inbound UTM on every route so signup still attributes after navigation. */
 export function AttributionCapture() {
   useEffect(() => {
+    captureLandingTouch();
     captureUrlAttribution();
   }, []);
 
