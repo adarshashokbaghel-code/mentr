@@ -318,6 +318,8 @@ export interface IUser extends Document {
   parentRevealBonusCredits?: number;
   /** Set once premium mentors were emailed about this parent joining. */
   premiumMentorsNotifiedAt?: Date;
+  /** Set once the "finish your profile" email went to a parent who skipped profiling. */
+  profileReminderSentAt?: Date;
   lastLoginAt?: Date;
   /** IP geolocation captured at login — used until profile address is geocoded */
   loginMapLat?: number;
@@ -636,6 +638,7 @@ const userSchema = new Schema<IUser>(
     premiumPayments: { type: [premiumMentorPaymentSchema], default: [] },
     parentRevealBonusCredits: { type: Number, min: 0, default: 0 },
     premiumMentorsNotifiedAt: { type: Date },
+    profileReminderSentAt: { type: Date },
     lastLoginAt: { type: Date },
     loginMapLat: { type: Number },
     loginMapLng: { type: Number },

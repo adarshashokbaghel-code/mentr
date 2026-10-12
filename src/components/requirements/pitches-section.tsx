@@ -1,24 +1,20 @@
 "use client";
 
-import { FacultyActionLink } from "@/components/auth/role-guard-link";
 import { requirementsApi, type TutorPitch } from "@/lib/api";
 import { timeAgo } from "@/components/dashboard/widgets";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
-  ArrowUpRight,
   BadgeCheck,
   Check,
   ChevronLeft,
   ChevronRight,
   Clock3,
-  Megaphone,
   MessageCircle,
   Phone,
   Send,
   XCircle,
 } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 const PAGE_SIZE = 5;
@@ -86,18 +82,11 @@ export function PitchesSection() {
   const rangeStart = pitches.length === 0 ? 0 : (safePage - 1) * PAGE_SIZE + 1;
   const rangeEnd = Math.min(safePage * PAGE_SIZE, pitches.length);
 
+  if (!loading && pitches.length === 0) return null;
+
   return (
     <section>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-lg font-semibold">Your pitches</h2>
-        <FacultyActionLink
-          href="/board"
-          className="inline-flex h-9 items-center gap-1.5 rounded-md border border-hairline bg-white px-3.5 text-[13px] font-semibold text-ink transition hover:bg-cream"
-        >
-          <Megaphone className="h-3.5 w-3.5 text-coral" />
-          Requirement board
-        </FacultyActionLink>
-      </div>
+      <h2 className="text-lg font-semibold">Your pitches</h2>
 
       {loading ? (
         <ul className="mt-4 space-y-3">
@@ -118,17 +107,6 @@ export function PitchesSection() {
             </li>
           ))}
         </ul>
-      ) : pitches.length === 0 ? (
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-hairline bg-white px-4 py-4">
-          <p className="text-sm text-muted">No pitches yet.</p>
-          <FacultyActionLink
-            href="/board"
-            className="inline-flex h-8 items-center gap-1 rounded-md bg-coral px-3 text-[12px] font-semibold text-white hover:bg-coral-dark"
-          >
-            Browse board
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </FacultyActionLink>
-        </div>
       ) : (
         <>
           <ul className="mt-4 space-y-3">

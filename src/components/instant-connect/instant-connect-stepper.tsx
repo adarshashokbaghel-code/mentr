@@ -259,7 +259,9 @@ export const InstantConnectStepper = forwardRef<
       const pp = user?.parentProfile;
       if (!pp) {
         setError("Complete parent profiling first");
-        router.push("/parent/profiling");
+        router.push(
+          `/parent/profiling?next=${encodeURIComponent(loginReturnPath())}`,
+        );
         return;
       }
       await profileApi.saveParent({

@@ -134,7 +134,52 @@ export function captureUrlAttribution(): StoredAttribution | undefined {
   });
 }
 
-/** Signup source: current UTM/ref URL, else last blog/page touch. */
+const LANDING_KEY = "mentr_landing";
+
+/** First page of the visit plus external referrer, for signups with no UTM. */
+export function captureLandingTouch(): void {
+  if (typeof window === "undefined") return;
+  try {
+    const raw = localStorage.getItem(LANDING_KEY);
+    if (raw) {
+      const prev = JSON.parse(raw) as { capturedAt?: number };
+      if (prev.capturedAt && Date.now() - prev.capturedAt < ATTR_TTL_MS) return;
+    }
+    const url = new URL(window.location.href);
+    url.hash = "";
+    let referrerHost = "";
+    try {
+      if (document.referrer) {
+        const ref = new URL(document.referrer);
+        if (ref.host !== window.location.host) referrerHost = ref.host;
+      }
+    } catch {
+      /* malformed referrer */
+    }
+    url.searchParams.set("landing_ref", referrerHost || "direct");
+    localStorage.setItem(
+      LANDING_KEY,
+      JSON.stringify({ href: url.toString(), capturedAt: Date.now() }),
+    );
+  } catch {
+    /* ignore quota */
+  }
+}
+
+function getLandingTouch(): string | undefined {
+  try {
+    const raw = localStorage.getItem(LANDING_KEY);
+    if (!raw) return undefined;
+    const parsed = JSON.parse(raw) as { href?: string; capturedAt?: number };
+    if (!parsed.href || !parsed.capturedAt) return undefined;
+    if (Date.now() - parsed.capturedAt > ATTR_TTL_MS) return undefined;
+    return parsed.href;
+  } catch {
+    return undefined;
+  }
+}
+
+/** Signup source: current UTM/ref URL, else last blog/page touch, else landing page. */
 export function resolveRegistrationSource(): string | undefined {
   if (typeof window === "undefined") return undefined;
   const url = new URL(window.location.href);
@@ -142,7 +187,7 @@ export function resolveRegistrationSource(): string | undefined {
     (key) => key.startsWith("utm_") || key === "ref",
   );
   if (hasTrackable) return url.toString();
-  return getStoredAttribution()?.registrationSource;
+  return getStoredAttribution()?.registrationSource ?? getLandingTouch();
 }
 
 export function resolveAcquisition(): {

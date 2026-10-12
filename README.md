@@ -115,7 +115,7 @@ npm run seed:demo:reset    # wipe + reseed demo data
 npm run db:wipe               # wipe the database (requires --confirm)
 ```
 
-Optional: set `CRON_SECRET` and schedule `POST /api/cron/pitch-digest` (daily) for parent pitch digest emails when parents are inactive.
+Optional: set `CRON_SECRET` and schedule `POST /api/cron/pitch-digest` (daily) for parent pitch digest emails when parents are inactive, and `POST /api/cron/parent-profile-reminder` (hourly or daily) to email verified parents who never finished their profile (once each).
 
 ## Project structure
 
