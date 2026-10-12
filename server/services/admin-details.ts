@@ -1,6 +1,5 @@
 import { Types } from "mongoose";
 import { isDemoUserEmail } from "../lib/demo-users";
-import { Connection } from "../models/Connection";
 import { OtpSession } from "../models/OtpSession";
 import { ProfileView } from "../models/ProfileView";
 import { Requirement } from "../models/Requirement";
@@ -18,27 +17,6 @@ async function demoUserIds(): Promise<Types.ObjectId[]> {
   return rows.map((r) => r._id as Types.ObjectId);
 }
 
-function excludeDemoParticipants(demoIds: Types.ObjectId[]) {
-  if (demoIds.length === 0) return {};
-  return {
-    parent: { $nin: demoIds },
-    teacher: { $nin: demoIds },
-  };
-}
-
-export type AdminConnectionRow = {
-  id: string;
-  parentName: string;
-  parentEmail: string;
-  teacherName: string;
-  teacherEmail: string;
-  status: string;
-  requestedBy: string;
-  message: string;
-  createdAt: string;
-  respondedAt?: string;
-};
-
 export type AdminRequirementRow = {
   id: string;
   subject: string;
@@ -52,40 +30,6 @@ export type AdminRequirementRow = {
   expiresAt: string;
   createdAt: string;
 };
-
-export async function listAdminConnections(limit = 200): Promise<AdminConnectionRow[]> {
-  const demoIds = await demoUserIds();
-  const cap = Math.min(Math.max(limit, 1), 500);
-
-  const rows = await Connection.find(excludeDemoParticipants(demoIds))
-    .sort({ createdAt: -1 })
-    .limit(cap)
-    .lean();
-
-  const userIds = new Set<string>();
-  for (const row of rows) {
-    userIds.add(String(row.parent));
-    userIds.add(String(row.teacher));
-  }
-
-  const users = await User.find({ _id: { $in: Array.from(userIds) } })
-    .select("email")
-    .lean();
-  const emailById = new Map(users.map((u) => [String(u._id), u.email]));
-
-  return rows.map((row) => ({
-    id: String(row._id),
-    parentName: row.parentName,
-    parentEmail: emailById.get(String(row.parent)) || "Deleted user",
-    teacherName: row.teacherName,
-    teacherEmail: emailById.get(String(row.teacher)) || "Deleted user",
-    status: row.status,
-    requestedBy: row.requestedBy,
-    message: row.message,
-    createdAt: row.createdAt.toISOString(),
-    respondedAt: row.respondedAt?.toISOString(),
-  }));
-}
 
 export async function listAdminRequirements(limit = 200): Promise<AdminRequirementRow[]> {
   const demoIds = await demoUserIds();

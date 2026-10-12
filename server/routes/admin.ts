@@ -4,7 +4,6 @@ import { requireAdminKey } from "../middleware/admin-auth";
 import { requireAdminPass } from "../middleware/admin-pass";
 import {
   closeAdminRequirement,
-  listAdminConnections,
   listAdminGuestRequirements,
   listAdminDemoRequests,
   listAdminOtpActivity,
@@ -281,17 +280,6 @@ router.get("/coupons/:id/usage", async (req, res) => {
   } catch (err) {
     console.error("Admin coupon usage error:", err);
     res.status(500).json({ error: "Failed to load coupon usage" });
-  }
-});
-
-router.get("/connections", async (req, res) => {
-  try {
-    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
-    const connections = await listAdminConnections(limit);
-    res.json({ connections, total: connections.length });
-  } catch (err) {
-    console.error("Admin connections list error:", err);
-    res.status(500).json({ error: "Failed to load connections" });
   }
 });
 

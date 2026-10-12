@@ -560,6 +560,7 @@ export const ONBOARDING_OCT2026: Record<string, ArticleContent> = {
       { label: "Find a mentor in any country", href: "/blog/find-mentor-online-any-country" },
       { label: "Online tutoring safety for kids", href: "/blog/online-tutoring-safety-kids" },
       { label: "How parents evaluate a trial session", href: "/blog/how-parents-evaluate-tutor-trial-session" },
+      { label: "Hindi tutor online for kids", href: "/blog/hindi-tutor-online-for-kids" },
     ],
   },
 

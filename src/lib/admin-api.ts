@@ -29,15 +29,6 @@ export type AdminStats = {
       faculty: number;
     }[];
   };
-  connections: {
-    total: number;
-    pending: number;
-    accepted: number;
-    declined: number;
-    parentInitiated: number;
-    teacherInitiated: number;
-    acceptanceRate: number;
-  };
   requirements: {
     total: number;
     open: number;
@@ -231,19 +222,6 @@ export function updateAdminUser(
   );
 }
 
-export type AdminConnectionRow = {
-  id: string;
-  parentName: string;
-  parentEmail: string;
-  teacherName: string;
-  teacherEmail: string;
-  status: string;
-  requestedBy: string;
-  message: string;
-  createdAt: string;
-  respondedAt?: string;
-};
-
 export type AdminRequirementRow = {
   id: string;
   subject: string;
@@ -257,13 +235,6 @@ export type AdminRequirementRow = {
   expiresAt: string;
   createdAt: string;
 };
-
-export function fetchAdminConnections(key: string) {
-  return adminFetch<{ connections: AdminConnectionRow[]; total: number }>(
-    key,
-    "/api/admin/connections?limit=500",
-  );
-}
 
 export function fetchAdminRequirements(key: string) {
   return adminFetch<{ posts: AdminRequirementRow[]; total: number }>(

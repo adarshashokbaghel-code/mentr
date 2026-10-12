@@ -103,6 +103,7 @@ export function ParentRequirementsSection({
   const [requirements, setRequirements] = useState<MyRequirement[]>([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [initialSubject, setInitialSubject] = useState("");
 
   const reload = useCallback(() => {
     requirementsApi
@@ -119,6 +120,23 @@ export function ParentRequirementsSection({
     const params = new URLSearchParams(window.location.search);
     if (params.get("icFallback") === "1" || sessionStorage.getItem("ic_board_prefill")) {
       setModalOpen(true);
+      return;
+    }
+    // Blog CTAs link here as ?post=<Subject> to open the form with that subject picked.
+    const post = params.get("post");
+    if (post !== null) {
+      const subject = SUBJECT_OPTIONS.find(
+        (s) => s.toLowerCase() === post.trim().toLowerCase(),
+      );
+      setInitialSubject(subject ?? "");
+      setModalOpen(true);
+      params.delete("post");
+      const qs = params.toString();
+      window.history.replaceState(
+        null,
+        "",
+        `${window.location.pathname}${qs ? `?${qs}` : ""}${window.location.hash}`,
+      );
     }
   }, []);
 
@@ -169,6 +187,7 @@ export function ParentRequirementsSection({
 
       {modalOpen && (
         <PostRequirementModal
+          initialSubject={initialSubject}
           onClose={() => {
             setModalOpen(false);
             onRequestOpenChange?.(false);
@@ -657,13 +676,15 @@ function CloseConfirmModal({
 }
 
 function PostRequirementModal({
+  initialSubject = "",
   onClose,
   onPosted,
 }: {
+  initialSubject?: string;
   onClose: () => void;
   onPosted: () => void;
 }) {
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState(initialSubject);
   const [classLevel, setClassLevel] = useState("");
   const [area, setArea] = useState("");
   const [modes, setModes] = useState<string[]>([]);

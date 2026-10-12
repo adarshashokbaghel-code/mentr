@@ -2124,6 +2124,45 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Find a primary tutor",
     ctaHref: "/find-tutor",
   },
+  {
+    slug: "ib-pyp-tutor",
+    title: "IB PYP Tutor: When Your Child Needs One, What to Look For & Fees (2026)",
+    keyword: "IB PYP tutor",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "What an IB PYP tutor should actually do for Units of Inquiry, maths and the Grade 5 Exhibition, when tuition helps, red flags, and 2026 fees in Bengaluru, Gurugram and online.",
+    publishWeek: 43,
+    cta: "Post your IB requirement",
+    ctaHref: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3DScience",
+  },
+  {
+    slug: "kannada-tuition-for-kids-bengaluru",
+    title: "Kannada Tuition for Kids in Bengaluru: A Guide for Non-Kannada Families",
+    keyword: "Kannada tuition for kids Bangalore",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Why CBSE and ICSE schools in Bengaluru teach Kannada, where non-Kannada children get stuck, realistic goals by class, online vs home tuition and 2026 fees.",
+    publishWeek: 43,
+    cta: "Find a Kannada tutor",
+    ctaHref: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3DKannada",
+  },
+  {
+    slug: "hindi-tutor-online-for-kids",
+    title: "Hindi Tutor Online for Kids: CBSE Hindi A/B, Non-Hindi Homes & NRI Families",
+    keyword: "Hindi tutor online for kids",
+    intent: "commercial",
+    funnel: "mid",
+    pillar: "for-parents",
+    description:
+      "Pick the right kind of Hindi help: CBSE/ICSE exam marks, reading for non-Hindi-speaking homes, or speaking for kids abroad. Course A vs B, fees and how to check a tutor.",
+    publishWeek: 43,
+    cta: "Find a Hindi tutor",
+    ctaHref: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3DHindi",
+  },
 ];
 
 export function getPillar(id: BlogPillarId): BlogPillar {
