@@ -117,6 +117,10 @@ export function PremiumParentsPage() {
   const [filter, setFilter] = useState<FilterTab>("all");
   const [board, setBoard] = useState<BoardFilter>("all");
   const [revealingId, setRevealingId] = useState<string | null>(null);
+  const [revealError, setRevealError] = useState<{
+    id: string;
+    message: string;
+  } | null>(null);
   const [justUnlocked, setJustUnlocked] = useState<string | null>(null);
 
   useEffect(() => {
@@ -207,7 +211,7 @@ export function PremiumParentsPage() {
 
   async function reveal(parentId: string) {
     setRevealingId(parentId);
-    setError(null);
+    setRevealError(null);
     try {
       const res = await premiumMentorApi.revealParent(parentId);
       if (res.quota) setQuota(res.quota);
@@ -237,7 +241,10 @@ export function PremiumParentsPage() {
           ? (e.data as { quota?: PremiumRevealQuota } | undefined)?.quota
           : undefined;
       if (errQuota) setQuota(errQuota);
-      setError(e instanceof Error ? e.message : "Could not reveal contact");
+      setRevealError({
+        id: parentId,
+        message: e instanceof Error ? e.message : "Could not reveal contact",
+      });
     } finally {
       setRevealingId(null);
     }
@@ -499,6 +506,9 @@ export function PremiumParentsPage() {
                     parent={p}
                     revealing={revealingId === p.id}
                     canReveal={!limitReached || p.contactRevealed}
+                    revealError={
+                      revealError?.id === p.id ? revealError.message : null
+                    }
                     celebrating={justUnlocked === p.id}
                     onReveal={() => void reveal(p.id)}
                   />
@@ -517,12 +527,14 @@ function ParentCard({
   parent: p,
   revealing,
   canReveal,
+  revealError,
   celebrating,
   onReveal,
 }: {
   parent: PremiumParentRow;
   revealing: boolean;
   canReveal: boolean;
+  revealError: string | null;
   celebrating: boolean;
   onReveal: () => void;
 }) {
@@ -741,15 +753,34 @@ function ParentCard({
                 >
                   {revealing ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  ) : (
+                  ) : canReveal ? (
                     <Unlock className="h-3.5 w-3.5" />
+                  ) : (
+                    <Lock className="h-3.5 w-3.5" />
                   )}
-                  Reveal contact
+                  {canReveal ? "Reveal contact" : "Daily limit reached"}
                 </Button>
               )}
             </div>
           ) : null}
         </div>
+
+        {locked && (pending || alreadyUsed) ? (
+          <p className="-mt-1 text-[11px] leading-snug text-muted [@media(hover:hover)]:hidden">
+            {pending
+              ? "This parent is still adding their name and phone. Reveal opens once they finish; no credit is used."
+              : "Contact was unlocked for 2 hours and is locked again."}
+          </p>
+        ) : null}
+
+        {revealError ? (
+          <p
+            role="alert"
+            className="-mt-1 rounded-lg border border-coral/30 bg-coral-wash/40 px-3 py-2 text-xs leading-snug text-coral animate-in fade-in duration-200"
+          >
+            {revealError}
+          </p>
+        ) : null}
 
         {!locked && p.whatsappUrl ? (
           <a
