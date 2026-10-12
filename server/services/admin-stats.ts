@@ -1,6 +1,5 @@
 import { excludeDemoUsersFilter } from "../lib/demo-users";
 import { parseAcquisitionFromUrl } from "../lib/marketing-attribution";
-import { Connection } from "../models/Connection";
 import { OtpSession } from "../models/OtpSession";
 import { ProfileView } from "../models/ProfileView";
 import { Requirement } from "../models/Requirement";
@@ -72,15 +71,6 @@ export type AdminStats = {
       faculty: number;
     }[];
   };
-  connections: {
-    total: number;
-    pending: number;
-    accepted: number;
-    declined: number;
-    parentInitiated: number;
-    teacherInitiated: number;
-    acceptanceRate: number;
-  };
   requirements: {
     total: number;
     open: number;
@@ -120,12 +110,6 @@ export async function getAdminStats(): Promise<AdminStats> {
     parentsComplete,
     newLast7Days,
     activeLast30Days,
-    connTotal,
-    connPending,
-    connAccepted,
-    connDeclined,
-    connParentInit,
-    connTeacherInit,
     reqTotal,
     reqOpen,
     reqClosed,
@@ -159,12 +143,6 @@ export async function getAdminStats(): Promise<AdminStats> {
       ...excludeDemoUsersFilter,
       lastLoginAt: { $gte: d30 },
     }),
-    Connection.countDocuments(),
-    Connection.countDocuments({ status: "pending" }),
-    Connection.countDocuments({ status: "accepted" }),
-    Connection.countDocuments({ status: "declined" }),
-    Connection.countDocuments({ requestedBy: "parent" }),
-    Connection.countDocuments({ requestedBy: "teacher" }),
     Requirement.countDocuments(),
     Requirement.countDocuments({ status: "open", expiresAt: { $gt: now } }),
     Requirement.countDocuments({ status: "closed" }),
@@ -312,7 +290,6 @@ export async function getAdminStats(): Promise<AdminStats> {
   }
 
   const totalInterests = interestAgg[0]?.total ?? 0;
-  const decided = connAccepted + connDeclined;
 
   return {
     generatedAt: now.toISOString(),
@@ -331,16 +308,6 @@ export async function getAdminStats(): Promise<AdminStats> {
     registrations: {
       timeseries: [...dayMap.values()],
       bySource: [...sourceMap.values()].sort((a, b) => b.total - a.total),
-    },
-    connections: {
-      total: connTotal,
-      pending: connPending,
-      accepted: connAccepted,
-      declined: connDeclined,
-      parentInitiated: connParentInit,
-      teacherInitiated: connTeacherInit,
-      acceptanceRate:
-        decided > 0 ? Math.round((connAccepted / decided) * 100) : 0,
     },
     requirements: {
       total: reqTotal,

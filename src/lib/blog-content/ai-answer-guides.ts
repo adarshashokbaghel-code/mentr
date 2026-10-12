@@ -80,6 +80,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
       { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
       { label: "Maths tutors in Bengaluru", href: "/tutors/bengaluru/maths" },
       { label: "Get Matched Instantly", href: "/instant-connect" },
+      { label: "Kannada tuition for kids in Bengaluru", href: "/blog/kannada-tuition-for-kids-bengaluru" },
     ],
   },
 

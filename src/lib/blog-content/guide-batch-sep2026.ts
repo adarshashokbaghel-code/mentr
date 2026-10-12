@@ -294,6 +294,7 @@ export const GUIDE_BATCH_SEP2026: Record<string, ArticleContent> = {
       { label: "CBSE Class 10 study plan", href: "/blog/cbse-class-10-study-plan" },
       { label: "How to verify tutor credentials", href: "/blog/how-to-verify-tutor-credentials" },
       { label: "Home tutor vs online tutor", href: "/blog/home-tutor-vs-online-tutor" },
+      { label: "IB PYP tutor guide", href: "/blog/ib-pyp-tutor" },
     ],
   },
 

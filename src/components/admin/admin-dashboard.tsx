@@ -6,7 +6,6 @@ import {
   AdminStatCard,
   AdminTrendChart,
 } from "@/components/admin/admin-ui";
-import { AdminConnectionsTable } from "@/components/admin/admin-connections-table";
 import { AdminCoupons } from "@/components/admin/admin-coupons";
 import { AdminEngagementTables } from "@/components/admin/admin-engagement-tables";
 import { AdminInteractions } from "@/components/admin/admin-interactions";
@@ -38,7 +37,6 @@ import {
   GraduationCap,
   Heart,
   LayoutDashboard,
-  Link2,
   Lock,
   Mail,
   Megaphone,
@@ -65,7 +63,6 @@ const NAV = [
   { id: "demo-requests", label: "Demo requests", icon: CalendarDays },
   { id: "instant-connect", label: "Instant Connect", icon: Zap },
   { id: "snap-grade", label: "Snap & Grade", icon: Camera },
-  { id: "connections", label: "Connections", icon: Link2 },
   { id: "messenger", label: "Messenger", icon: Mail },
   { id: "engagement", label: "Engagement", icon: Activity },
   { id: "marketing", label: "Marketing", icon: Target },
@@ -336,40 +333,14 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                   accent="coral"
                   icon={Megaphone}
                 />
-                <AdminStatCard
-                  label="Connections"
-                  value={stats.connections.total}
-                  sub={`${stats.connections.accepted} accepted`}
-                  accent="butter"
-                  icon={Link2}
-                />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-xl border border-hairline bg-white p-4">
-                  <p className="text-xs font-bold text-ink">Marketplace pulse</p>
-                  <div className="mt-3 grid grid-cols-2 gap-3">
-                    <AdminStatCard label="Open posts" value={stats.requirements.open} />
-                    <AdminStatCard label="Board interests" value={stats.requirements.totalInterests} />
-                    <AdminStatCard label="Profile views" value={stats.engagement.profileViews} />
-                    <AdminStatCard label="New users (7d)" value={stats.users.newLast7Days} accent="coral" />
-                  </div>
-                </div>
-                <div className="rounded-xl border border-hairline bg-white p-4">
-                  <p className="text-xs font-bold text-ink">Connection funnel</p>
-                  <div className="mt-3 grid grid-cols-3 gap-2 text-center">
-                    <div className="rounded-lg bg-cream-band px-2 py-3">
-                      <p className="text-lg font-bold text-ink">{stats.connections.pending}</p>
-                      <p className="text-[10px] text-muted">Pending</p>
-                    </div>
-                    <div className="rounded-lg bg-sage-wash px-2 py-3">
-                      <p className="text-lg font-bold text-sage">{stats.connections.accepted}</p>
-                      <p className="text-[10px] text-muted">Accepted</p>
-                    </div>
-                    <div className="rounded-lg bg-cream-band px-2 py-3">
-                      <p className="text-lg font-bold text-ink">{stats.connections.acceptanceRate}%</p>
-                      <p className="text-[10px] text-muted">Accept rate</p>
-                    </div>
-                  </div>
+              <div className="rounded-xl border border-hairline bg-white p-4">
+                <p className="text-xs font-bold text-ink">Marketplace pulse</p>
+                <div className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-4">
+                  <AdminStatCard label="Open posts" value={stats.requirements.open} />
+                  <AdminStatCard label="Board interests" value={stats.requirements.totalInterests} />
+                  <AdminStatCard label="Profile views" value={stats.engagement.profileViews} />
+                  <AdminStatCard label="New users (7d)" value={stats.users.newLast7Days} accent="coral" />
                 </div>
               </div>
             </div>
@@ -505,25 +476,6 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
           {section === "snap-grade" && (
             <AdminSnapGrade adminKey={adminKey} />
-          )}
-
-          {stats && section === "connections" && (
-            <AdminSection
-              id="connections"
-              title="Connections"
-              description="Every parent ↔ tutor connect request — who reached out to whom"
-            >
-              <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                <AdminStatCard label="Total" value={stats.connections.total} />
-                <AdminStatCard label="Pending" value={stats.connections.pending} accent="butter" />
-                <AdminStatCard label="Accepted" value={stats.connections.accepted} accent="sage" />
-                <AdminStatCard label="Declined" value={stats.connections.declined} />
-                <AdminStatCard label="Parent initiated" value={stats.connections.parentInitiated} />
-                <AdminStatCard label="Tutor pitched" value={stats.connections.teacherInitiated} accent="coral" />
-                <AdminStatCard label="Acceptance rate" value={`${stats.connections.acceptanceRate}%`} accent="sage" />
-              </div>
-              <AdminConnectionsTable adminKey={adminKey} />
-            </AdminSection>
           )}
 
           {stats && section === "requirements" && (
