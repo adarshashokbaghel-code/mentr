@@ -13,7 +13,11 @@ import { PostRequirementButton } from "@/components/requirements/post-requiremen
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
-import { fetchPublicTeachers, type Teacher } from "@/lib/teachers";
+import {
+  fetchPremiumTeachers,
+  fetchPublicTeachers,
+  type Teacher,
+} from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -76,14 +80,17 @@ function useHeroTeachers() {
 
   useEffect(() => {
     let cancelled = false;
-    fetchPublicTeachers({ liveOnly: true }).then(({ teachers }) => {
+    // Premium list is a few KB; the full directory is only needed if it's empty.
+    void (async () => {
+      const { teachers: premium } = await fetchPremiumTeachers();
+      const pool =
+        premium.length > 0
+          ? premium
+          : (await fetchPublicTeachers()).teachers.filter((t) => t.live);
       if (cancelled) return;
-      const live = teachers.filter((t) => t.live);
-      const premium = live.filter((t) => t.premium);
-      // Prefer Premium mentors in the search mock (guest Connect is clear for all).
-      setPool(orderTeachers(premium.length > 0 ? premium : live));
+      setPool(orderTeachers(pool));
       setReady(true);
-    });
+    })();
     return () => {
       cancelled = true;
     };

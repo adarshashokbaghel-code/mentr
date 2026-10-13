@@ -12,6 +12,24 @@ import { NO_CONNECTION, toPublicTeacher } from "./serialize-teacher";
 const PUBLIC_LIST_TTL_MS = 60_000;
 const PUBLIC_COUNT_TTL_MS = 60_000;
 
+/**
+ * Browsers revalidate after a minute; the CDN keeps serving the last copy
+ * instantly for a day while it refreshes in the background, so visitors
+ * never wait on a cold database query.
+ */
+export const PUBLIC_CDN_CACHE =
+  "public, max-age=60, s-maxage=300, stale-while-revalidate=86400";
+
+const memo = new Map<string, { value: unknown; at: number }>();
+
+async function memoized<T>(key: string, load: () => Promise<T>): Promise<T> {
+  const hit = memo.get(key);
+  if (hit && Date.now() - hit.at < PUBLIC_LIST_TTL_MS) return hit.value as T;
+  const value = await load();
+  memo.set(key, { value, at: Date.now() });
+  return value;
+}
+
 let publicListCache: {
   teachers: Record<string, unknown>[];
   at: number;
@@ -128,7 +146,7 @@ export async function getPublicTeacherStats(res: Response): Promise<void> {
         return null;
       }),
     ]);
-    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=180");
+    res.set("Cache-Control", PUBLIC_CDN_CACHE);
     res.json({
       count,
       mentors: count,
@@ -144,9 +162,11 @@ export async function getPublicTeacherStats(res: Response): Promise<void> {
 /** Admin-curated featured tutors for the homepage (ordered). */
 export async function getPublicFeaturedTeachers(res: Response): Promise<void> {
   try {
-    await connectDb();
-    const teachers = await loadFeaturedPublicTeachers();
-    res.set("Cache-Control", "public, max-age=30, stale-while-revalidate=120");
+    const teachers = await memoized("featured", async () => {
+      await connectDb();
+      return loadFeaturedPublicTeachers();
+    });
+    res.set("Cache-Control", PUBLIC_CDN_CACHE);
     res.json({ teachers });
   } catch (error) {
     console.error("public featured teachers error:", error);
@@ -157,9 +177,11 @@ export async function getPublicFeaturedTeachers(res: Response): Promise<void> {
 /** All active Premium mentors for /premiummentors (public, no phones). */
 export async function getPublicPremiumTeachers(res: Response): Promise<void> {
   try {
-    await connectDb();
-    const teachers = await loadPublicPremiumTeachers();
-    res.set("Cache-Control", "public, max-age=30, stale-while-revalidate=120");
+    const teachers = await memoized("premium", async () => {
+      await connectDb();
+      return loadPublicPremiumTeachers();
+    });
+    res.set("Cache-Control", PUBLIC_CDN_CACHE);
     res.json({ teachers });
   } catch (error) {
     console.error("public premium teachers error:", error);
@@ -171,7 +193,7 @@ export async function getPublicPremiumTeachers(res: Response): Promise<void> {
 export async function getPublicTeachers(res: Response): Promise<void> {
   try {
     const teachers = await loadPublicTeachers();
-    res.set("Cache-Control", "public, max-age=60, stale-while-revalidate=180");
+    res.set("Cache-Control", PUBLIC_CDN_CACHE);
     res.json({ teachers });
   } catch (error) {
     console.error("public teachers list error:", error);

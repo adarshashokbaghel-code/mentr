@@ -323,7 +323,7 @@ const PHONE_RE = /^\+?[\d\s-]{10,15}$/;
 /**
  * Guest: post without an account. Creates (or reuses) an unverified parent
  * stub for the email — signing in with an email code later verifies it and
- * shows the pitches. Verified accounts must sign in instead.
+ * shows the pitches. Posts for an existing parent email land on that account.
  */
 router.post("/guest", async (req, res: Response) => {
   try {
@@ -363,13 +363,32 @@ router.post("/guest", async (req, res: Response) => {
     }
 
     let user = await User.findOne({ email });
-    if (user?.emailVerified) {
+    if (user?.emailVerified && user.role !== "parent") {
       res.status(409).json({
-        error:
-          user.role === "parent"
-            ? "You already have a Mentr account — log in to post this."
-            : "This email belongs to a tutor account. Use a parent email.",
-        code: user.role === "parent" ? "ACCOUNT_EXISTS" : "ROLE_MISMATCH",
+        error: "This email belongs to a tutor account. Use a parent email.",
+        code: "ROLE_MISMATCH",
+      });
+      return;
+    }
+
+    // Existing parent account: file the post under it without touching the
+    // profile. They see it on their dashboard after signing in with this email.
+    if (user?.emailVerified) {
+      const created = await createRequirement(user._id, city, parsed.data, {
+        contactName: name,
+        contactPhone: phone,
+        source: "guest",
+      });
+      if ("error" in created) {
+        res.status(409).json({ error: created.error });
+        return;
+      }
+      res.status(201).json({
+        requirement: serializeForOwner(created),
+        matches: await matchAndAlert(created, parsed.data, city),
+        email,
+        accountExists: true,
+        message: "Posted — tutors will pitch you by email",
       });
       return;
     }
@@ -418,6 +437,7 @@ router.post("/guest", async (req, res: Response) => {
       requirement: serializeForOwner(created),
       matches: await matchAndAlert(created, parsed.data, city),
       email,
+      accountExists: false,
       message: "Posted — tutors will pitch you by email",
     });
   } catch (error) {

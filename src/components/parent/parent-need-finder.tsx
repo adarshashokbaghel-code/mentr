@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight, Megaphone, Search, Sparkles } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const field =
   "h-11 w-full min-w-0 max-w-full rounded-lg border-2 border-ink/10 bg-white px-3 text-sm font-medium text-ink outline-none focus:border-ink/40";
@@ -51,14 +51,44 @@ export function ParentNeedFinder({ className }: { className?: string }) {
   });
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [ready, setReady] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const stored = getParentNeed();
     if (stored) setNeed(stored);
-    fetchPublicTeachers({ liveOnly: true }).then(({ teachers: list }) => {
-      setTeachers(list.filter((t) => t.live));
-      setReady(true);
-    });
+  }, []);
+
+  // The full directory is the heaviest payload on the page — fetch it only
+  // once this section is about to scroll into view.
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    let cancelled = false;
+    const load = () =>
+      fetchPublicTeachers().then(({ teachers: list }) => {
+        if (cancelled) return;
+        setTeachers(list.filter((t) => t.live));
+        setReady(true);
+      });
+    if (typeof IntersectionObserver === "undefined") {
+      void load();
+      return () => {
+        cancelled = true;
+      };
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        void load();
+      },
+      { rootMargin: "300px 0px" },
+    );
+    io.observe(el);
+    return () => {
+      cancelled = true;
+      io.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -81,6 +111,7 @@ export function ParentNeedFinder({ className }: { className?: string }) {
 
   return (
     <section
+      ref={sectionRef}
       className={cn(
         "min-w-0 overflow-x-clip border-b border-hairline bg-lavender/40",
         className,

@@ -974,6 +974,8 @@ export const requirementsApi = {
       requirement: MyRequirement;
       matches: RequirementMatch[];
       email: string;
+      /** Email already had a parent account — sign in rather than sign up */
+      accountExists?: boolean;
       message: string;
     }>("/requirements/guest", {
       method: "POST",
