@@ -33,7 +33,7 @@ export const STATS_FAQS = [
   {
     question: "Is Mentr free for parents?",
     answer:
-      "Yes. Parents can browse verified tutors without logging in, book demos, use Instant Connect and post requirements for free. There is no upfront charge and no platform fee — you pay the tutor directly for classes.",
+      "Yes. Parents can browse verified tutors without logging in, book demos and post requirements for free. There is no upfront charge and no platform fee — you pay the tutor directly for classes.",
   },
   {
     question: "How are tutors on Mentr verified?",

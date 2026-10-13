@@ -173,6 +173,46 @@ export function scoreTutor(user: IUser, input: MatchInput): number {
   return subject + klass + budget + mode + avail + quality;
 }
 
+export type MatchExplanation = {
+  /** 1.0–5.0, one decimal */
+  score: number;
+  reasons: string[];
+};
+
+/** Same scoring as matching, as a 5-point score plus short parent-facing reasons. */
+export function explainMatch(user: IUser, input: MatchInput): MatchExplanation {
+  const p = user.profile;
+  if (!p) return { score: 1, reasons: [] };
+  const raw = scoreTutor(user, input);
+  const reasons: string[] = [];
+  const subject = subjectScore(p.subjects || [], input.subject);
+  if (subject >= 0.75) reasons.push(`Teaches ${input.subject}`);
+  else if (subject >= 0.5) reasons.push(`Teaches related subjects`);
+  if (classScore(p.levels || [], input.classLevel) >= 0.7) {
+    reasons.push(`Teaches ${input.classLevel}`);
+  }
+  const modes = p.teachingModes || [];
+  if (input.mode === "online" && modes.includes("online")) reasons.push("Teaches online");
+  if (
+    input.mode !== "online" &&
+    (modes.includes("student_home") || modes.includes("tutor_home"))
+  ) {
+    reasons.push("Offers home tuition");
+  }
+  if (
+    p.hourlyRate != null &&
+    (input.budgetMin != null || input.budgetMax != null) &&
+    budgetScore(p.hourlyRate, input.budgetMin, input.budgetMax) === 1
+  ) {
+    reasons.push("Within your budget");
+  }
+  if ((p.experienceYears || 0) >= 2) reasons.push(`${p.experienceYears} yrs experience`);
+  return {
+    score: Math.min(5, Math.max(1, Math.round(raw * 50) / 10)),
+    reasons,
+  };
+}
+
 export function toMatchCard(user: IUser, score: number): MatchedTutorCard {
   const p = user.profile!;
   return {

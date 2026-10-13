@@ -31,7 +31,6 @@ import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchLoading, { SearchGridSkeleton } from "./loading";
-import { SearchInstantConnectDock } from "@/components/instant-connect/search-instant-connect-dock";
 
 const SearchMapShellDynamic = dynamic(
   () =>
@@ -342,7 +341,6 @@ function SearchContent() {
         </div>
       </main>
       <ShortlistCompareBar />
-      <SearchInstantConnectDock />
       <Footer />
     </ShortlistProvider>
   );

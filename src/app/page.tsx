@@ -5,7 +5,6 @@ import { FacultyShowcase } from "@/components/landing/faculty-showcase";
 import { FeaturedMentors } from "@/components/landing/featured-mentors";
 import { Footer } from "@/components/landing/footer";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
-import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { Hero } from "@/components/landing/hero";
 import { LearnLaunchBand } from "@/components/landing/learn-launch-band";
 import { HomeMentorStatsBand } from "@/components/landing/home-mentor-stats-band";
@@ -34,7 +33,7 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Find Verified Tutors & Mentors Free — Instant Connect · Mentr",
+  title: "Find Verified Tutors & Mentors Free · Mentr",
   description: SITE_DESCRIPTION,
   keywords: SITE_KEYWORDS,
   alternates: { canonical: "/" },
@@ -123,7 +122,6 @@ export default function Home() {
         <FAQ />
         <CTA />
       </main>
-      <InstantConnectDock />
       <Footer />
       <HomePremiumPopup />
     </>

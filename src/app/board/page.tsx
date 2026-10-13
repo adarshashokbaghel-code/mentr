@@ -5,6 +5,7 @@ import { BoardParentBlocked } from "@/components/auth/role-blocked-page";
 import { Navbar } from "@/components/landing/navbar";
 import { RequirementsFeed } from "@/components/requirements/tutor-board";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Megaphone } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -29,11 +30,10 @@ export default function BoardPage() {
         <Navbar />
         <main className="min-h-screen pb-20">
           <div className="mx-auto w-full max-w-[1400px] px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-            <Skeleton className="h-14 rounded-lg bg-white" />
-            <div className="mt-6 grid gap-6 2xl:grid-cols-[minmax(0,220px)_minmax(0,1fr)_minmax(0,260px)] xl:grid-cols-[minmax(0,1fr)_minmax(0,260px)]">
-              <Skeleton className="hidden h-72 rounded-xl bg-white xl:block" />
-              <Skeleton className="h-[520px] rounded-xl bg-white" />
-              <Skeleton className="hidden h-72 rounded-xl bg-white lg:block" />
+            <Skeleton className="h-20 max-w-xl rounded-2xl bg-white" />
+            <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">
+              <Skeleton className="h-[520px] rounded-2xl bg-white" />
+              <Skeleton className="hidden h-72 rounded-2xl bg-white xl:block" />
             </div>
           </div>
         </main>
@@ -55,19 +55,17 @@ export default function BoardPage() {
       <Navbar />
       <main className="min-h-screen pb-20">
         <div className="mx-auto w-full max-w-[1400px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-          <header className="mb-6 border-b border-hairline pb-5">
-            <h1 className="text-xl font-bold tracking-tight text-ink sm:text-2xl">
+          <header className="mb-5 sm:mb-6">
+            <p className="inline-flex items-center gap-1.5 rounded-full bg-coral-wash px-2.5 py-1 text-[11px] font-bold tracking-wide text-coral-dark uppercase">
+              <Megaphone className="h-3.5 w-3.5" />
               Requirements board
-              {firstName !== "there" && (
-                <span className="font-medium text-muted">
-                  {" "}
-                  · Hi, {firstName}
-                </span>
-              )}
+            </p>
+            <h1 className="mt-2.5 text-2xl font-bold tracking-tight text-ink sm:text-[28px]">
+              {firstName !== "there" ? `Hi ${firstName}, ` : ""}parents are looking for tutors
             </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted sm:text-[15px]">
-              Parents post what they need — anonymously. Send a free pitch with
-              your profile. If they accept, you&apos;re connected on WhatsApp.
+            <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-muted sm:text-[15px]">
+              Pitch the posts that fit you. Parents compare pitches and book a
+              free demo with the tutor they pick.
             </p>
           </header>
 

@@ -12,13 +12,6 @@ import { authApi, clearToken, type AuthUser } from "@/lib/api";
 import { clearLearnClientCache } from "@/lib/learn-enroll";
 import { syncShortlistAfterAuth } from "@/lib/shortlist";
 
-/** Premium mentor target for guest "send without login" */
-export type GuestPremiumConnect = {
-  teacherId: string;
-  teacherName: string;
-  subjectLine?: string;
-};
-
 interface AuthContextValue {
   user: AuthUser | null;
   loading: boolean;
@@ -27,12 +20,10 @@ interface AuthContextValue {
   closeLogin: () => void;
   /** "Who are you?" gate for unauthenticated users hitting a protected action */
   roleChooserOpen: boolean;
-  /** `next` is the path to return to after login. Pass guestPremium for Premium connect. */
-  openRoleChooser: (next?: string, guestPremium?: GuestPremiumConnect | null) => void;
+  /** `next` is the path to return to after login. */
+  openRoleChooser: (next?: string) => void;
   closeRoleChooser: () => void;
   roleChooserNext: string | null;
-  /** Set when guest taps Connect on a Premium mentor */
-  roleChooserGuestPremium: GuestPremiumConnect | null;
   setUser: (user: AuthUser | null) => void;
   logout: () => Promise<void>;
   refreshSession: () => Promise<void>;
@@ -46,8 +37,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loginOpen, setLoginOpen] = useState(false);
   const [roleChooserOpen, setRoleChooserOpen] = useState(false);
   const [roleChooserNext, setRoleChooserNext] = useState<string | null>(null);
-  const [roleChooserGuestPremium, setRoleChooserGuestPremium] =
-    useState<GuestPremiumConnect | null>(null);
 
   const refreshSession = useCallback(async () => {
     try {
@@ -70,16 +59,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const closeLogin = useCallback(() => setLoginOpen(false), []);
 
   const openRoleChooser = useCallback(
-    (next?: string, guestPremium?: GuestPremiumConnect | null) => {
+    (next?: string) => {
       setRoleChooserNext(next ?? null);
-      setRoleChooserGuestPremium(guestPremium ?? null);
       setRoleChooserOpen(true);
     },
     [],
   );
   const closeRoleChooser = useCallback(() => {
     setRoleChooserOpen(false);
-    setRoleChooserGuestPremium(null);
   }, []);
 
   const logout = useCallback(async () => {
@@ -109,7 +96,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       openRoleChooser,
       closeRoleChooser,
       roleChooserNext,
-      roleChooserGuestPremium,
       setUser: handleSetUser,
       logout,
       refreshSession,
@@ -124,7 +110,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       openRoleChooser,
       closeRoleChooser,
       roleChooserNext,
-      roleChooserGuestPremium,
       handleSetUser,
       logout,
       refreshSession,

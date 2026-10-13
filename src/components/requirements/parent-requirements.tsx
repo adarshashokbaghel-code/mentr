@@ -1,80 +1,34 @@
 "use client";
 
 import {
-  ApiError,
   requirementsApi,
   type MyRequirement,
-  type NewRequirement,
-  type RequirementInterest,
   type StartTimeline,
 } from "@/lib/api";
-import { connectionsApi } from "@/lib/api";
 import { timeAgo } from "@/components/dashboard/widgets";
 import { cn } from "@/lib/utils";
 import {
-  Check,
-  ChevronDown,
-  Clock3,
-  Hourglass,
-  IndianRupee,
-  Loader2,
-  Lock,
-  MapPin,
+  ChevronRight,
   Megaphone,
-  MessageCircle,
-  MonitorSmartphone,
-  Phone,
-  Send,
+  MoreHorizontal,
+  Plus,
   Share2,
+  Users,
   X,
 } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { PitchMessageDialog } from "@/components/requirements/pitch-message-dialog";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  ComparePitchesDialog,
+  rankPitches,
+  ScorePill,
+} from "@/components/requirements/compare-pitches";
+import {
+  PostRequirementWizard,
+  REQUIREMENT_DRAFT_KEY,
+  SUBJECT_OPTIONS,
+} from "@/components/requirements/post-requirement-wizard";
+import { REQUIREMENT_POSTED_EVENT } from "@/components/requirements/post-requirement-host";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
-
-const SUBJECT_OPTIONS = [
-  "Mathematics",
-  "Physics",
-  "Chemistry",
-  "Biology",
-  "English",
-  "Coding",
-  "Science",
-  "Hindi",
-  "Kannada",
-  "Social Science",
-  "Exam Prep",
-  "Music",
-];
-
-const LEVEL_OPTIONS = [
-  "Class 1–5",
-  "Class 6–8",
-  "Class 9–10",
-  "Class 11–12",
-  "JEE / NEET",
-  "College",
-  "Working professionals",
-];
-
-const MODE_OPTIONS = [
-  { id: "online", label: "Online" },
-  { id: "student_home", label: "At my home" },
-  { id: "tutor_home", label: "At tutor's place" },
-] as const;
-
-/** How soon classes should start — also decides how long the post stays up */
-const TIMELINE_OPTIONS: {
-  id: StartTimeline;
-  label: string;
-  ttl: string;
-}[] = [
-  { id: "immediately", label: "Immediately", ttl: "post live 3 days" },
-  { id: "within_week", label: "Within a week", ttl: "post live 7 days" },
-  { id: "within_month", label: "Within a month", ttl: "post live 14 days" },
-  { id: "flexible", label: "Flexible", ttl: "post live 14 days" },
-];
 
 export const TIMELINE_LABELS: Record<StartTimeline, string> = {
   immediately: "Starts immediately",
@@ -82,9 +36,6 @@ export const TIMELINE_LABELS: Record<StartTimeline, string> = {
   within_month: "Starts within a month",
   flexible: "Flexible start",
 };
-
-const DETAILS_MIN = 20;
-const DETAILS_MAX = 500;
 
 /**
  * "Post your need, tutors come to you" — the parent side of the
@@ -116,11 +67,19 @@ export function ParentRequirementsSection({
   useEffect(reload, [reload]);
 
   useEffect(() => {
+    window.addEventListener(REQUIREMENT_POSTED_EVENT, reload);
+    return () => window.removeEventListener(REQUIREMENT_POSTED_EVENT, reload);
+  }, [reload]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    if (params.get("icFallback") === "1" || sessionStorage.getItem("ic_board_prefill")) {
+    if (
+      params.get("icFallback") === "1" ||
+      sessionStorage.getItem("ic_board_prefill") ||
+      sessionStorage.getItem(REQUIREMENT_DRAFT_KEY)
+    ) {
       setModalOpen(true);
-      return;
     }
     // Blog CTAs link here as ?post=<Subject> to open the form with that subject picked.
     const post = params.get("post");
@@ -144,59 +103,65 @@ export function ParentRequirementsSection({
     if (requestOpen) setModalOpen(true);
   }, [requestOpen]);
 
+  const open = requirements.filter((r) => r.status === "open").length;
+
   return (
     <section>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-semibold">My posts</h2>
-          <p className="mt-0.5 text-sm text-muted">
-            Tutors pitch you — accept to unlock WhatsApp.
-          </p>
-        </div>
-      </div>
-
       {loading ? (
-        <div className="mt-4 rounded-lg border border-hairline bg-white px-5 py-8 text-center text-sm text-muted">
-          Loading…
+        <div className="space-y-3">
+          {[0, 1].map((i) => (
+            <div key={i} className="h-36 animate-pulse rounded-2xl bg-white" />
+          ))}
         </div>
       ) : requirements.length === 0 ? (
-        <div className="mt-4 rounded-lg border border-dashed border-hairline bg-white px-5 py-8 text-center">
-          <Megaphone className="mx-auto h-5 w-5 text-muted" />
-          <p className="mt-2 text-sm font-medium text-ink">
-            Don&apos;t want to search? Let tutors come to you
+        <div className="rounded-2xl border border-hairline bg-white px-5 py-10 text-center">
+          <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-coral-wash">
+            <Megaphone className="h-5 w-5 text-coral" />
+          </span>
+          <p className="mt-3 text-[15px] font-bold text-ink">
+            Let tutors come to you
           </p>
-          <p className="mx-auto mt-1 max-w-[360px] text-sm text-muted">
-            Post your need — subject, class, area and budget. Verified tutors
-            send you a pitch, and their WhatsApp unlocks only when you accept.
+          <p className="mx-auto mt-1 max-w-[340px] text-[13px] leading-relaxed text-muted">
+            Post what your child needs. Tutors pitch you, you compare them
+            side by side and book a free demo.
           </p>
+          <button
+            type="button"
+            onClick={() => setModalOpen(true)}
+            className="mt-4 inline-flex h-11 items-center gap-1.5 rounded-xl bg-coral px-5 text-[14px] font-bold text-white transition hover:bg-coral-dark"
+          >
+            <Plus className="h-4 w-4" />
+            Post a requirement
+          </button>
         </div>
       ) : (
-        <ul className="mt-4 space-y-3">
-          {requirements.map((r) => (
-            <RequirementCard
-              key={r.id}
-              requirement={r}
-              onChanged={() => {
-                reload();
-                onConnectionsChanged?.();
-              }}
-            />
-          ))}
-        </ul>
+        <>
+          <p className="mb-2 px-0.5 text-[12px] text-muted sm:mb-3 sm:text-[13px]">
+            {open} open post{open === 1 ? "" : "s"} · tutors pitch you, you pick
+          </p>
+          <ul className="space-y-2.5 sm:space-y-3">
+            {requirements.map((r) => (
+              <RequirementCard
+                key={r.id}
+                requirement={r}
+                onChanged={() => {
+                  reload();
+                  onConnectionsChanged?.();
+                }}
+              />
+            ))}
+          </ul>
+        </>
       )}
 
       {modalOpen && (
-        <PostRequirementModal
+        <PostRequirementWizard
           initialSubject={initialSubject}
           onClose={() => {
             setModalOpen(false);
             onRequestOpenChange?.(false);
           }}
-          onPosted={() => {
-            setModalOpen(false);
-            onRequestOpenChange?.(false);
-            reload();
-          }}
+          onPosted={reload}
         />
       )}
     </section>
@@ -205,9 +170,11 @@ export function ParentRequirementsSection({
 
 const MODE_LABELS: Record<string, string> = {
   online: "Online",
-  student_home: "At my home",
+  student_home: "At home",
   tutor_home: "At tutor's place",
 };
+
+const PREVIEW_COUNT = 3;
 
 function daysLeft(expiresAt: string): number {
   return Math.max(
@@ -222,6 +189,14 @@ function requirementShareUrl(shareToken: string): string {
   return `${origin}/looking/${shareToken}`;
 }
 
+function formatBudget(r: MyRequirement): string | null {
+  if (r.budgetMin == null && r.budgetMax == null) return null;
+  if (r.budgetMin != null && r.budgetMax != null) {
+    return `₹${r.budgetMin}–${r.budgetMax}/hr`;
+  }
+  return r.budgetMax != null ? `Up to ₹${r.budgetMax}/hr` : `₹${r.budgetMin}+/hr`;
+}
+
 function RequirementCard({
   requirement: r,
   onChanged,
@@ -229,13 +204,22 @@ function RequirementCard({
   requirement: MyRequirement;
   onChanged: () => void;
 }) {
-  const [expanded, setExpanded] = useState(
-    r.interests.some((i) => i.status === "pending"),
-  );
+  const [compareOpen, setCompareOpen] = useState(false);
   const [closing, setClosing] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
-  const pendingInterests = r.interests.filter((i) => i.status === "pending");
+
+  const ranked = rankPitches(r.interests);
+  const newCount = r.interests.filter((i) => i.status === "pending").length;
+  const isOpen = r.status === "open";
+  const expiresInDays = daysLeft(r.expiresAt);
+  const meta = [
+    r.modes.map((m) => MODE_LABELS[m]).filter(Boolean).join(" or "),
+    r.area,
+    formatBudget(r),
+    TIMELINE_LABELS[r.startTimeline],
+  ].filter(Boolean);
 
   async function copyShareLink() {
     if (!r.shareToken) return;
@@ -260,73 +244,168 @@ function RequirementCard({
     }
   }
 
-  const budget =
-    r.budgetMin != null || r.budgetMax != null
-      ? [
-          r.budgetMin != null ? `₹${r.budgetMin}` : null,
-          r.budgetMax != null ? `₹${r.budgetMax}` : null,
-        ]
-          .filter(Boolean)
-          .join("–") + "/hr"
-      : null;
-
-  const expiresInDays = daysLeft(r.expiresAt);
-
   return (
-    <li className="rounded-xl border border-hairline bg-white p-4 shadow-[0_1px_3px_rgba(28,26,23,0.05)] transition hover:border-ink/20 sm:p-5">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-coral-wash text-sm font-bold text-coral-dark">
-            {r.subject.charAt(0)}
-          </span>
+    <li className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_1px_3px_rgba(28,26,23,0.05)]">
+      <div className="px-3.5 pb-3 pt-3 sm:p-5">
+        <div className="flex items-start justify-between gap-2 sm:gap-3">
           <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-2">
-              <p className="text-[15px] font-bold text-ink">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <h3 className="text-[15px] font-bold leading-snug text-ink sm:text-[16px]">
                 {r.subject} · {r.classLevel}
-              </p>
+              </h3>
               <span
                 className={cn(
-                  "rounded-md px-2 py-0.5 text-[11px] font-semibold",
-                  r.status === "open"
-                    ? "bg-sage-wash text-sage"
-                    : "bg-cream-band text-muted",
+                  "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10.5px] font-bold sm:text-[11px]",
+                  isOpen ? "bg-sage-wash text-sage" : "bg-cream-band text-muted",
                 )}
               >
-                {r.status === "open" ? "Open" : "Closed"}
+                <span
+                  className={cn(
+                    "h-1.5 w-1.5 rounded-full",
+                    isOpen ? "bg-sage" : "bg-muted",
+                  )}
+                />
+                {isOpen
+                  ? expiresInDays === 0
+                    ? "Open · closes today"
+                    : `Open · ${expiresInDays}d left`
+                  : "Closed"}
               </span>
             </div>
-            <p className="mt-0.5 text-xs text-muted">
-              posted {timeAgo(r.postedAt)}
-              {r.status === "open"
-                ? ` · ${
-                    expiresInDays === 0
-                      ? "closes today"
-                      : `${expiresInDays}d left`
-                  }`
-                : ""}
+            <p className="mt-0.5 text-[12px] leading-snug text-muted sm:mt-1 sm:text-[13px]">
+              {meta.join(" · ")}
             </p>
           </div>
+          {isOpen && (
+            <CardMenu
+              shareLabel={shareCopied ? "Link copied" : "Share with family"}
+              onShare={() => void copyShareLink()}
+              onClosePost={() => setConfirmOpen(true)}
+            />
+          )}
         </div>
-        {r.status === "open" && (
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              onClick={() => void copyShareLink()}
-              className="inline-flex items-center gap-1 rounded-md border border-hairline bg-white px-2.5 py-1.5 text-xs font-semibold text-ink transition hover:bg-cream"
-            >
-              <Share2 className="h-3 w-3" />
-              {shareCopied ? "Link copied!" : "Share with family"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setConfirmOpen(true)}
-              className="rounded-md border border-hairline bg-white px-2.5 py-1.5 text-xs font-semibold text-muted transition hover:border-coral/40 hover:text-coral-dark"
-            >
-              Close post
-            </button>
+
+        <button
+          type="button"
+          onClick={() => setShowDetails((v) => !v)}
+          className={cn(
+            "mt-2 block w-full text-left text-[12.5px] leading-relaxed text-ink/75 sm:mt-2.5 sm:text-[13px]",
+            !showDetails && "line-clamp-2",
+          )}
+          aria-expanded={showDetails}
+        >
+          {r.details}
+        </button>
+        <p className="mt-1 text-[11px] text-muted">Posted {timeAgo(r.postedAt)}</p>
+      </div>
+
+      <div className="border-t border-hairline bg-cream/40 px-3 py-3 sm:px-5 sm:py-3.5">
+        {ranked.length === 0 ? (
+          <div className="flex items-center gap-2.5">
+            <span className="relative flex h-2.5 w-2.5">
+              {isOpen && (
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-coral/60" />
+              )}
+              <span
+                className={cn(
+                  "relative inline-flex h-2.5 w-2.5 rounded-full",
+                  isOpen ? "bg-coral" : "bg-muted",
+                )}
+              />
+            </span>
+            <p className="text-[13px] text-muted">
+              {isOpen
+                ? `Waiting for pitches. ${r.subject} tutors are being notified and we'll email you.`
+                : "No tutors pitched on this post."}
+            </p>
           </div>
+        ) : (
+          <>
+            <div className="flex items-center justify-between gap-2">
+              <p className="flex min-w-0 items-center gap-1.5 text-[12.5px] font-bold text-ink sm:text-[13px]">
+                <Users className="h-3.5 w-3.5 shrink-0 text-muted sm:h-4 sm:w-4" />
+                {ranked.length} tutor{ranked.length === 1 ? "" : "s"} pitched
+                {newCount > 0 && (
+                  <span className="rounded-full bg-coral px-1.5 py-0.5 text-[10px] font-extrabold text-white">
+                    {newCount} new
+                  </span>
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={() => setCompareOpen(true)}
+                className="inline-flex h-8 shrink-0 items-center gap-0.5 rounded-lg bg-ink px-3 text-[12px] font-bold text-white transition hover:opacity-90 sm:h-9 sm:gap-1 sm:px-3.5 sm:text-[13px]"
+              >
+                Compare all
+                <ChevronRight className="h-3.5 w-3.5" />
+              </button>
+            </div>
+
+            <ul className="mt-2 divide-y divide-hairline overflow-hidden rounded-xl border border-hairline bg-white sm:mt-2.5">
+              {ranked.slice(0, PREVIEW_COUNT).map((i) => (
+                <li key={i.id}>
+                  <button
+                    type="button"
+                    onClick={() => setCompareOpen(true)}
+                    className="flex w-full items-center gap-2.5 px-2.5 py-2 text-left transition hover:bg-cream/60 sm:gap-3 sm:px-3 sm:py-2.5"
+                  >
+                    <MentorPhoto
+                      name={i.teacherName}
+                      imageUrl={i.teacherImageUrl}
+                      size="xs"
+                      rounded="full"
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-center gap-1.5">
+                        <span className="truncate text-[13px] font-bold text-ink">
+                          {i.teacherName}
+                        </span>
+                        {i.status === "accepted" && (
+                          <span className="shrink-0 rounded-full bg-sage-wash px-1.5 py-0.5 text-[10px] font-bold text-sage">
+                            Connected
+                          </span>
+                        )}
+                        {i.status === "declined" && (
+                          <span className="shrink-0 rounded-full bg-cream-band px-1.5 py-0.5 text-[10px] font-bold text-muted">
+                            Passed
+                          </span>
+                        )}
+                      </span>
+                      <span className="block truncate text-[11.5px] text-muted sm:text-[12px]">
+                        {[
+                          i.hourlyRate != null ? `₹${i.hourlyRate}/hr` : null,
+                          i.experienceYears ? `${i.experienceYears} yrs` : null,
+                          timeAgo(i.sentAt),
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")}
+                      </span>
+                    </span>
+                    {(i.matchScore ?? 0) > 0 && <ScorePill score={i.matchScore!} />}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            {ranked.length > PREVIEW_COUNT && (
+              <button
+                type="button"
+                onClick={() => setCompareOpen(true)}
+                className="mt-2 text-[12px] font-semibold text-ink underline underline-offset-2"
+              >
+                +{ranked.length - PREVIEW_COUNT} more pitch
+                {ranked.length - PREVIEW_COUNT === 1 ? "" : "es"}
+              </button>
+            )}
+          </>
         )}
       </div>
+
+      {compareOpen && (
+        <ComparePitchesDialog
+          requirement={r}
+          onClose={() => setCompareOpen(false)}
+        />
+      )}
 
       {confirmOpen && (
         <CloseConfirmModal
@@ -337,263 +416,71 @@ function RequirementCard({
           onConfirm={handleClose}
         />
       )}
-
-      <div className="mt-3 flex flex-wrap gap-1.5">
-        <span className="inline-flex items-center gap-1 rounded-md bg-cream px-2 py-1 text-[11px] font-semibold text-ink/70">
-          <MapPin className="h-3 w-3" />
-          {r.area}
-        </span>
-        <span className="inline-flex items-center gap-1 rounded-md bg-cream px-2 py-1 text-[11px] font-semibold text-ink/70">
-          <MonitorSmartphone className="h-3 w-3" />
-          {r.modes.map((m) => MODE_LABELS[m]).join(" · ")}
-        </span>
-        {budget && (
-          <span className="inline-flex items-center gap-1 rounded-md bg-sage-wash px-2 py-1 text-[11px] font-bold text-sage">
-            <IndianRupee className="h-3 w-3" />
-            {budget}
-          </span>
-        )}
-        <span className="inline-flex items-center gap-1 rounded-md bg-cream px-2 py-1 text-[11px] font-semibold text-ink/70">
-          <Clock3 className="h-3 w-3" />
-          {TIMELINE_LABELS[r.startTimeline]}
-        </span>
-        {r.status === "open" && (
-          <span className="inline-flex items-center gap-1 rounded-md bg-cream px-2 py-1 text-[11px] font-semibold text-ink/70">
-            <Hourglass className="h-3 w-3" />
-            {expiresInDays === 0 ? "closes today" : `${expiresInDays}d left`}
-          </span>
-        )}
-      </div>
-
-      <p className="mt-3 rounded-lg bg-cream px-3.5 py-2.5 text-[13px] leading-relaxed text-ink/80">
-        {r.details}
-      </p>
-
-      {/* Tutor pitches */}
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        className="mt-3 flex w-full items-center justify-between rounded-md px-1 py-1 text-left"
-      >
-        <span className="text-[13px] font-semibold text-ink">
-          Tutor responses
-          <span
-            className={cn(
-              "ml-2 rounded-md px-1.5 py-0.5 text-[11px] font-bold",
-              pendingInterests.length > 0
-                ? "bg-coral-wash text-coral"
-                : "bg-cream-band text-muted",
-            )}
-          >
-            {r.interests.length}
-          </span>
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 text-muted transition-transform",
-            expanded && "rotate-180",
-          )}
-        />
-      </button>
-
-      {expanded &&
-        (r.interests.length === 0 ? (
-          <p className="mt-1 px-1 pb-1 text-[13px] text-muted">
-            No responses yet — tutors matching your subject will see this post.
-          </p>
-        ) : (
-          <ul className="mt-1 space-y-2">
-            {r.interests.map((i) => (
-              <InterestRow key={i.id} interest={i} onChanged={onChanged} />
-            ))}
-          </ul>
-        ))}
     </li>
   );
 }
 
-function InterestRow({
-  interest: i,
-  onChanged,
+function CardMenu({
+  shareLabel,
+  onShare,
+  onClosePost,
 }: {
-  interest: RequirementInterest;
-  onChanged: () => void;
+  shareLabel: string;
+  onShare: () => void;
+  onClosePost: () => void;
 }) {
-  const [acting, setActing] = useState<"accept" | "decline" | null>(null);
-  const [error, setError] = useState("");
-  const [messageOpen, setMessageOpen] = useState(false);
-  const longMessage = i.message.length > 120;
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
-  async function respond(action: "accept" | "decline") {
-    setActing(action);
-    setError("");
-    try {
-      await connectionsApi.respondAsParent(i.id, action);
-      onChanged();
-    } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Failed — try again");
-      setActing(null);
-    }
-  }
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
 
   return (
-    <li className="rounded-md border border-hairline bg-cream/60 p-3">
-      <div className="flex items-start gap-2.5">
-        {i.teacherName === "Deleted user" ? (
-          <span className="shrink-0" aria-label="Deleted user">
-            <MentorPhoto
-              name="Deleted user"
-              imageUrl={null}
-              size="xs"
-              rounded="full"
-            />
-          </span>
-        ) : (
-          <Link
-            href={`/teachers/${i.teacherId}`}
-            className="shrink-0"
-            aria-label={`${i.teacherName}'s profile`}
+    <div ref={ref} className="relative shrink-0">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex h-8 w-8 items-center justify-center rounded-full text-muted transition hover:bg-cream hover:text-ink"
+        aria-label="Post options"
+        aria-expanded={open}
+      >
+        <MoreHorizontal className="h-4 w-4" />
+      </button>
+      {open && (
+        <div className="absolute right-0 top-9 z-20 w-48 overflow-hidden rounded-xl border border-hairline bg-white py-1 shadow-lg">
+          <button
+            type="button"
+            onClick={() => {
+              onShare();
+              window.setTimeout(() => setOpen(false), 900);
+            }}
+            className="flex w-full items-center gap-2 px-3 py-2 text-left text-[13px] font-semibold text-ink transition hover:bg-cream"
           >
-            <MentorPhoto
-              name={i.teacherName}
-              imageUrl={i.teacherImageUrl}
-              size="xs"
-              rounded="full"
-            />
-          </Link>
-        )}
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5">
-            {i.teacherName === "Deleted user" ? (
-              <span className="text-[13px] font-bold text-muted">
-                Deleted user
-              </span>
-            ) : (
-              <Link
-                href={`/teachers/${i.teacherId}`}
-                className="text-[13px] font-bold text-ink hover:text-coral"
-              >
-                {i.teacherName}
-              </Link>
-            )}
-            {i.status === "accepted" && (
-              <span className="rounded-md bg-sage-wash px-1.5 py-0.5 text-[10px] font-bold text-sage">
-                Connected
-              </span>
-            )}
-            {i.status === "declined" && (
-              <span className="rounded-md bg-cream-band px-1.5 py-0.5 text-[10px] font-bold text-muted">
-                Declined
-              </span>
-            )}
-          </div>
-          <p className="text-[11px] text-muted">
-            {i.teacherArea ? `${i.teacherArea} · ` : ""}
-            {timeAgo(i.sentAt)}
-          </p>
-          <p
-            className={cn(
-              "mt-1.5 text-[13px] leading-snug text-ink/80",
-              longMessage && "line-clamp-2",
-            )}
+            <Share2 className="h-3.5 w-3.5" />
+            {shareLabel}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setOpen(false);
+              onClosePost();
+            }}
+            className="flex w-full items-center gap-2 px-3 py-2 text-left text-[13px] font-semibold text-coral-dark transition hover:bg-coral-wash"
           >
-            {i.message}
-          </p>
+            <X className="h-3.5 w-3.5" />
+            Close post
+          </button>
         </div>
-      </div>
-
-      <PitchMessageDialog
-        open={messageOpen}
-        onClose={() => setMessageOpen(false)}
-        teacherName={i.teacherName}
-        message={i.message}
-        subtitle={
-          i.teacherArea
-            ? `${i.teacherArea} · ${timeAgo(i.sentAt)}`
-            : timeAgo(i.sentAt)
-        }
-      />
-
-      {error && (
-        <p className="mt-2 text-[12px] font-medium text-coral-dark">{error}</p>
       )}
-
-      <div className="mt-2.5 flex flex-wrap items-center gap-2">
-        <button
-          type="button"
-          onClick={() => setMessageOpen(true)}
-          className="inline-flex h-8 items-center rounded-md border border-hairline bg-white px-3.5 text-xs font-bold text-ink transition hover:bg-cream"
-        >
-          View message
-        </button>
-        {i.status === "pending" ? (
-          <>
-            <button
-              type="button"
-              onClick={() => respond("accept")}
-              disabled={acting !== null}
-              className="inline-flex h-8 items-center gap-1.5 rounded-md bg-sage px-3.5 text-xs font-bold text-white transition hover:opacity-90 disabled:opacity-50"
-            >
-              {acting === "accept" ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                <Check className="h-3.5 w-3.5" />
-              )}
-              Accept &amp; connect
-            </button>
-            <button
-              type="button"
-              onClick={() => respond("decline")}
-              disabled={acting !== null}
-              className="inline-flex h-8 items-center rounded-md border border-hairline bg-white px-3.5 text-xs font-bold text-muted transition hover:bg-cream disabled:opacity-50"
-            >
-              {acting === "decline" ? (
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-              ) : (
-                "Decline"
-              )}
-            </button>
-            <span className="text-[11px] text-muted">
-              Accepting unlocks their WhatsApp for you
-            </span>
-          </>
-        ) : i.status === "accepted" ? (
-          <>
-            {i.phone && (
-              <span className="inline-flex h-8 items-center gap-1.5 rounded-md bg-sage-wash px-3 text-xs font-bold tabular-nums text-sage">
-                <Phone className="h-3.5 w-3.5" />
-                +{i.phone}
-              </span>
-            )}
-            {i.phone && (
-              <a
-                href={`https://wa.me/${i.phone}?text=${encodeURIComponent(
-                  `Hi ${i.teacherName.split(" ")[0]}, we connected on Mentr — when can we talk about classes?`,
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-8 items-center gap-1.5 rounded-md bg-sage px-3.5 text-xs font-bold text-white transition hover:opacity-90"
-              >
-                <MessageCircle className="h-3.5 w-3.5" />
-                Chat on WhatsApp
-              </a>
-            )}
-          </>
-        ) : null}
-        <Link
-          href={`/teachers/${i.teacherId}`}
-          className="ml-auto text-[12px] font-semibold text-ink underline-offset-2 hover:underline"
-        >
-          View profile
-        </Link>
-      </div>
-    </li>
+    </div>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/* Post modal                                                          */
-/* ------------------------------------------------------------------ */
 
 function CloseConfirmModal({
   subject,
@@ -670,367 +557,6 @@ function CloseConfirmModal({
             {closing ? "Closing…" : "Close post"}
           </button>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function PostRequirementModal({
-  initialSubject = "",
-  onClose,
-  onPosted,
-}: {
-  initialSubject?: string;
-  onClose: () => void;
-  onPosted: () => void;
-}) {
-  const [subject, setSubject] = useState(initialSubject);
-  const [classLevel, setClassLevel] = useState("");
-  const [area, setArea] = useState("");
-  const [modes, setModes] = useState<string[]>([]);
-  const [budgetMin, setBudgetMin] = useState("");
-  const [budgetMax, setBudgetMax] = useState("");
-  const [details, setDetails] = useState("");
-  const [startTimeline, setStartTimeline] = useState<StartTimeline | "">("");
-  const [error, setError] = useState("");
-  const [sending, setSending] = useState(false);
-
-  useEffect(() => {
-    try {
-      const raw = sessionStorage.getItem("ic_board_prefill");
-      if (!raw) return;
-      const data = JSON.parse(raw) as {
-        subject?: string;
-        classLevel?: string;
-        details?: string;
-        budgetMin?: number | null;
-        budgetMax?: number | null;
-        mode?: string;
-        location?: string;
-      };
-      if (data.subject) setSubject(data.subject);
-      if (data.classLevel) setClassLevel(data.classLevel);
-      if (data.details) setDetails(data.details);
-      if (data.budgetMin != null) setBudgetMin(String(data.budgetMin));
-      if (data.budgetMax != null && data.budgetMax < 100000)
-        setBudgetMax(String(data.budgetMax));
-      if (data.location) setArea(data.location);
-      if (data.mode === "online") setModes(["online"]);
-      else if (data.mode === "offline") setModes(["student_home"]);
-      else if (data.mode === "either") setModes(["online", "student_home"]);
-      setStartTimeline("immediately");
-      sessionStorage.removeItem("ic_board_prefill");
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  function toggleMode(id: string) {
-    setModes((prev) =>
-      prev.includes(id) ? prev.filter((m) => m !== id) : [...prev, id],
-    );
-  }
-
-  const valid =
-    subject &&
-    classLevel &&
-    area.trim().length > 1 &&
-    modes.length > 0 &&
-    startTimeline !== "" &&
-    details.trim().length >= DETAILS_MIN;
-
-  async function handlePost() {
-    if (!valid) {
-      setError(
-        "Fill in all the fields (including when you want to start) — details need 20+ characters",
-      );
-      return;
-    }
-    setError("");
-    setSending(true);
-    try {
-      await requirementsApi.post({
-        subject,
-        classLevel,
-        area: area.trim(),
-        modes: modes as NewRequirement["modes"],
-        budgetMin: budgetMin === "" ? "" : Number(budgetMin),
-        budgetMax: budgetMax === "" ? "" : Number(budgetMax),
-        details: details.trim(),
-        startTimeline: startTimeline as StartTimeline,
-      });
-      onPosted();
-    } catch (err) {
-      setError(
-        err instanceof ApiError ? err.message : "Failed to post. Try again.",
-      );
-      setSending(false);
-    }
-  }
-
-  const selectCls =
-    "h-10 w-full rounded-md border border-hairline bg-white px-3 text-sm text-ink outline-none transition focus:border-ink/40";
-
-  return (
-    <div
-      className="fixed inset-0 z-[110] flex items-end justify-center p-0 sm:items-center sm:p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="post-requirement-title"
-    >
-      <button
-        type="button"
-        className="absolute inset-0 bg-ink/40"
-        aria-label="Close"
-        onClick={onClose}
-      />
-
-      <div className="champs-pop relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-xl border border-hairline bg-white p-5 shadow-xl sm:rounded-xl sm:p-6">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <h2
-              id="post-requirement-title"
-              className="text-lg font-bold text-ink"
-            >
-              Post a requirement
-            </h2>
-            <p className="mt-0.5 text-xs text-muted">
-              Verified tutors see this anonymously and send you a pitch.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition hover:bg-cream"
-            aria-label="Close"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        </div>
-
-        <div className="mt-4 flex items-start gap-2.5 rounded-lg bg-butter/40 px-3.5 py-3">
-          <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-ink/60" />
-          <p className="text-xs leading-relaxed text-ink/80">
-            Your name and number are never shown on the board. Tutors pitch to
-            you; you decide who to connect with.
-          </p>
-        </div>
-
-        <div className="mt-4 grid gap-3.5 sm:grid-cols-2">
-          <label className="block">
-            <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-              Subject
-            </span>
-            <select
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              className={selectCls}
-            >
-              <option value="">Pick a subject</option>
-              {SUBJECT_OPTIONS.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="block">
-            <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-              Class level
-            </span>
-            <select
-              value={classLevel}
-              onChange={(e) => setClassLevel(e.target.value)}
-              className={selectCls}
-            >
-              <option value="">Pick a level</option>
-              {LEVEL_OPTIONS.map((l) => (
-                <option key={l} value={l}>
-                  {l}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        <label className="mt-3.5 block">
-          <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-            Area <span className="font-medium text-muted">(locality only)</span>
-          </span>
-          <input
-            value={area}
-            onChange={(e) => setArea(e.target.value.slice(0, 80))}
-            placeholder="e.g. HSR Layout"
-            className="h-10 w-full rounded-md border border-hairline bg-white px-3 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-ink/40"
-          />
-        </label>
-
-        <div className="mt-3.5">
-          <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-            Teaching mode
-          </span>
-          <div className="flex flex-wrap gap-2">
-            {MODE_OPTIONS.map((m) => (
-              <button
-                key={m.id}
-                type="button"
-                onClick={() => toggleMode(m.id)}
-                className={cn(
-                  "rounded-md border px-3.5 py-2 text-[13px] font-semibold transition",
-                  modes.includes(m.id)
-                    ? "border-ink bg-ink text-white"
-                    : "border-hairline bg-white text-ink hover:bg-cream",
-                )}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-3.5">
-          <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-            How soon do you want to start?
-          </span>
-          <div className="grid grid-cols-2 gap-2">
-            {TIMELINE_OPTIONS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setStartTimeline(t.id)}
-                className={cn(
-                  "rounded-md border px-3 py-2 text-left transition",
-                  startTimeline === t.id
-                    ? "border-ink bg-ink text-white"
-                    : "border-hairline bg-white text-ink hover:bg-cream",
-                )}
-              >
-                <span className="block text-[13px] font-semibold">
-                  {t.label}
-                </span>
-                <span
-                  className={cn(
-                    "mt-0.5 block text-[11px] font-medium",
-                    startTimeline === t.id ? "text-white/70" : "text-muted",
-                  )}
-                >
-                  {t.ttl}
-                </span>
-              </button>
-            ))}
-          </div>
-          <span className="mt-1.5 block text-[11px] text-muted">
-            Urgent posts are shown to tutors as closing soon — they respond
-            faster.
-          </span>
-        </div>
-
-        <div className="mt-3.5 grid gap-3.5 sm:grid-cols-2">
-          <label className="block">
-            <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-              Budget min{" "}
-              <span className="font-medium text-muted">(₹/hr, optional)</span>
-            </span>
-            <input
-              value={budgetMin}
-              onChange={(e) =>
-                setBudgetMin(e.target.value.replace(/\D/g, "").slice(0, 6))
-              }
-              inputMode="numeric"
-              placeholder="300"
-              className="h-10 w-full rounded-md border border-hairline bg-white px-3 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-ink/40"
-            />
-          </label>
-          <label className="block">
-            <span className="mb-1.5 block text-[13px] font-semibold text-ink">
-              Budget max{" "}
-              <span className="font-medium text-muted">(₹/hr, optional)</span>
-            </span>
-            <input
-              value={budgetMax}
-              onChange={(e) =>
-                setBudgetMax(e.target.value.replace(/\D/g, "").slice(0, 6))
-              }
-              inputMode="numeric"
-              placeholder="600"
-              className="h-10 w-full rounded-md border border-hairline bg-white px-3 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-ink/40"
-            />
-          </label>
-        </div>
-
-        <label className="mt-3.5 block">
-          <span className="mb-1.5 flex items-baseline justify-between text-[13px] font-semibold text-ink">
-            What do you need?
-            <span
-              className={cn(
-                "text-[11px] font-medium tabular-nums",
-                details.length > DETAILS_MAX ? "text-coral-dark" : "text-muted",
-              )}
-            >
-              {details.length}/{DETAILS_MAX}
-            </span>
-          </span>
-          <textarea
-            value={details}
-            onChange={(e) => setDetails(e.target.value.slice(0, DETAILS_MAX))}
-            rows={3}
-            placeholder="e.g. Class 10 CBSE maths for my daughter — board exam focus, weekend batches preferred. Looking to start this month."
-            className="w-full resize-none rounded-md border border-hairline bg-white px-3.5 py-3 text-sm leading-relaxed text-ink outline-none transition placeholder:text-muted/70 focus:border-ink/40"
-          />
-          <span className="mt-1 block text-[11px] text-muted">
-            Goals, timings, exam focus — the more specific, the better the
-            pitches.
-          </span>
-        </label>
-
-        {error && (
-          <p className="mt-3 rounded-md border border-coral/40 bg-coral-wash px-3 py-2 text-[13px] font-medium text-coral-dark">
-            {error}
-          </p>
-        )}
-
-        <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={sending}
-            className="flex h-11 flex-1 items-center justify-center rounded-md border border-hairline bg-white text-sm font-semibold text-ink transition hover:bg-cream disabled:opacity-50"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            onClick={handlePost}
-            disabled={sending || !valid}
-            className="flex h-11 flex-1 items-center justify-center gap-1.5 rounded-md bg-coral text-sm font-semibold text-white transition hover:bg-coral-dark disabled:opacity-50"
-          >
-            {sending ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Send className="h-4 w-4" />
-            )}
-            {sending ? "Posting…" : "Post to tutors"}
-          </button>
-        </div>
-
-        <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-muted">
-          <Clock3 className="h-3 w-3" />
-          Post stays live 3–14 days based on how soon you start · up to 3 open
-          posts at a time
-        </p>
       </div>
     </div>
   );

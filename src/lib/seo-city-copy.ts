@@ -137,11 +137,11 @@ export function citySubjectGuide(
       },
       {
         heading: "Online vs home tuition",
-        body: `Online works well for doubt-clearing and Class 9–12 revision when schedules are tight. Home visits help younger kids and exam-week discipline. Many ${cityName} families mix both. Pick a mode on each profile — then use Find a Tutor or Get Matched Instantly if you need someone this week.`,
+        body: `Online works well for doubt-clearing and Class 9–12 revision when schedules are tight. Home visits help younger kids and exam-week discipline. Many ${cityName} families mix both. Pick a mode on each profile — then use Find a Tutor or post a requirement if you need someone this week.`,
       },
       {
         heading: "What to check before you hire",
-        body: `${focus} Also confirm weekly hours, fee for a trial, and how they report progress to parents. If nothing fits, post a requirement or use Instant Connect — still free for parents, with no agency fee.`,
+        body: `${focus} Also confirm weekly hours, fee for a trial, and how they report progress to parents. If nothing fits, post a requirement — still free for parents, with no agency fee.`,
       },
     ],
   };
@@ -159,7 +159,7 @@ export function cityGuide(citySlug: SeoCitySlug, cityName: string, local: boolea
     sections: [
       {
         heading: `How to find a tutor in ${cityName}`,
-        body: `Write down subject, class, board (${meta.boards}), and home vs online. Browse verified tutors on Mentr, compare fees and open slots, then book a free demo — or get matched instantly if you are short on time.`,
+        body: `Write down subject, class, board (${meta.boards}), and home vs online. Browse verified tutors on Mentr, compare fees and open slots, then book a free demo — or post a requirement if you are short on time.`,
       },
     ] as HubGuideSection[],
   };

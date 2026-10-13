@@ -2,12 +2,13 @@
 
 /**
  * Parent-only acquisition landing — simple, no Premium.
- * Used by /parents, /find-tutor, /instant-connect.
+ * Used by /parents and /find-tutor.
  */
 
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
 import { Button } from "@/components/ui/button";
+import { POST_REQUIREMENT_HREF } from "@/components/requirements/post-requirement-host";
 import {
   getParentNeed,
   parentNeedSearchHref,
@@ -33,8 +34,7 @@ import { useEffect, useState } from "react";
 
 export type ParentAcquireIntent = "default" | "browse" | "instant";
 
-const INSTANT_HREF =
-  "/parent/signup?next=/parent/dashboard%23instant-connect";
+const INSTANT_HREF = POST_REQUIREMENT_HREF;
 
 const POPULAR_LINKS = [
   { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
@@ -197,7 +197,7 @@ function ParentNeedForm({
             )}
           >
             <Zap className="h-4 w-4" />
-            Get Matched Instantly
+            Post a requirement
           </Button>
         </Link>
       </div>
@@ -224,7 +224,7 @@ export function ParentAcquireLanding({
 
   const sub =
     intent === "instant"
-      ? "Tell us what you need — we'll match you with relevant mentors fast."
+      ? "Post what you need — verified tutors pitch, you compare and book a free demo."
       : "Free for parents. No commission. No agency fee.";
 
   return (
@@ -294,7 +294,7 @@ export function ParentAcquireLanding({
                     )}
                   >
                     <Zap className="h-4 w-4" />
-                    Get Matched Instantly
+                    Post a requirement
                   </Button>
                 </Link>
               </div>
@@ -325,8 +325,8 @@ export function ParentAcquireLanding({
               Tell us the subject, class, location and preferred mode
             </h2>
             <p className="mt-2 max-w-[48ch] text-base leading-relaxed text-muted">
-              We&apos;ll help you find relevant mentors — browse matches, or get
-              matched instantly if you&apos;re in a hurry.
+              We&apos;ll help you find relevant mentors — browse matches, or post
+              a requirement and let tutors pitch to you.
             </p>
             <div className="mt-8">
               <ParentNeedForm emphasize={formEmphasize} />
@@ -353,7 +353,7 @@ export function ParentAcquireLanding({
                 {
                   n: "2",
                   t: "See verified tutors",
-                  d: "Browse profiles — or get matched instantly when you're short on time.",
+                  d: "Browse profiles — or post a requirement and compare the tutors who pitch.",
                 },
                 {
                   n: "3",
@@ -426,7 +426,7 @@ export function ParentAcquireLanding({
                   variant="secondary"
                   className="h-12 w-full gap-2 border-white/25 bg-transparent px-6 font-bold text-white hover:bg-white/10 sm:w-auto"
                 >
-                  Get Matched Instantly
+                  Post a requirement
                 </Button>
               </Link>
             </div>

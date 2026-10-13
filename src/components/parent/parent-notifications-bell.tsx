@@ -32,6 +32,7 @@ function iconForType(type: ParentNotificationType) {
     case "teacher_outreach":
       return { Icon: UserPlus, className: "bg-coral-wash text-coral" };
     case "tutor_slots_open":
+    case "demo_update":
       return { Icon: Calendar, className: "bg-coral-wash text-coral" };
     default:
       return { Icon: Bell, className: "bg-cream-band text-ink" };

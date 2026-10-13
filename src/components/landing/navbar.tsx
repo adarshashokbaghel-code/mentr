@@ -130,6 +130,7 @@ export function Navbar() {
         <MentrBrand
           logoClassName="h-5 sm:h-6 lg:h-7"
           priority
+          showAttribution={false}
           className="min-w-0 shrink"
         />
 

@@ -16,11 +16,11 @@ import {
   BadgeCheck,
   BookOpen,
   MapPin,
+  Megaphone,
   MessageCircle,
   Search,
   Sparkles,
   Users,
-  Zap,
 } from "lucide-react";
 
 const highlights = [
@@ -30,14 +30,9 @@ const highlights = [
     body: "Filter Maths, History, Coding and more — home or online, near you in Bengaluru or across India.",
   },
   {
-    icon: Zap,
-    title: "Instant Connect",
-    body: "Need a tutor today? Match with verified mentors in minutes — free to try.",
-  },
-  {
     icon: MessageCircle,
     title: "Post a requirement",
-    body: "Tell us class, board, and budget. Tutors pitch you — you stay anonymous until you accept.",
+    body: "Tell us class, board, and budget. Tutors pitch you — compare them and book a free demo.",
   },
 ] as const;
 
@@ -110,8 +105,8 @@ export function PlatformProof({
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted lg:mx-0">
               {SITE_BRAND} helps parents find verified tutors and mentors for
-              school, boards, and skills — search free, post a requirement, or
-              try Instant Connect. Book a demo when you have chosen a tutor.
+              school, boards, and skills — search free or post a requirement and
+              compare pitches. Book a free demo when you have chosen a tutor.
             </p>
 
             <div className="mt-7 grid grid-cols-2 gap-2.5 sm:gap-3">
@@ -142,10 +137,10 @@ export function PlatformProof({
                   Browse tutors
                 </Button>
               </Link>
-              <Link href="/parent/signup?next=/parent/dashboard%23instant-connect">
+              <Link href="/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1">
                 <Button variant="secondary" className="gap-1.5">
-                  <Zap className="h-4 w-4" />
-                  Instant Connect
+                  <Megaphone className="h-4 w-4" />
+                  Post a requirement
                 </Button>
               </Link>
             </div>

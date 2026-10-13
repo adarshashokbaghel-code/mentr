@@ -195,7 +195,7 @@ const parentTestimonials = PARENT_LP_TESTIMONIALS;
 const trustPoints = [
   { icon: ShieldCheck, title: "Phone & identity verified", body: "Every tutor passes manual verification before going live." },
   { icon: BadgeCheck, title: "Verified badge on profiles", body: "Clear signal that this faculty cleared our checks." },
-  { icon: BookOpen, title: "Live tutors · many subjects", body: "Maths, History, Coding, boards and more — search free or try Instant Connect." },
+  { icon: BookOpen, title: "Live tutors · many subjects", body: "Maths, History, Coding, boards and more — search free or post a requirement." },
   { icon: Handshake, title: "You arrange everything", body: "Timing, fees, location — between you and the tutor only." },
 ];
 

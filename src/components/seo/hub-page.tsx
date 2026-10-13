@@ -26,7 +26,6 @@ import {
   MapPin,
   MessageCircle,
   Search,
-  Zap,
 } from "lucide-react";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import Link from "next/link";
@@ -224,9 +223,6 @@ export function SeoHubPage({
   requirementHref,
   requirementLabel = "Post your requirement",
   requirementBlurb,
-  instantHref,
-  instantLabel = "Get Matched Instantly",
-  instantBlurb,
   emptyMessage,
   mapHref,
   guideSections,
@@ -249,9 +245,6 @@ export function SeoHubPage({
   requirementHref?: string;
   requirementLabel?: string;
   requirementBlurb?: string;
-  instantHref?: string;
-  instantLabel?: string;
-  instantBlurb?: string;
   emptyMessage?: string;
   mapHref?: string;
   guideSections?: { heading: string; body: string }[];
@@ -304,14 +297,6 @@ export function SeoHubPage({
                 {ctaLabel}
               </Button>
             </Link>
-            {instantHref && (
-              <Link href={instantHref}>
-                <Button variant="secondary" className="gap-1.5">
-                  <Zap className="h-4 w-4" />
-                  {instantLabel}
-                </Button>
-              </Link>
-            )}
             {mapHref && (
               <Link href={mapHref}>
                 <Button variant="secondary">View on map</Button>
@@ -324,40 +309,21 @@ export function SeoHubPage({
             )}
           </div>
 
-          {(instantHref || requirementHref) && (
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {instantHref && (
-                <aside className="rounded-xl border border-coral/30 bg-coral/5 p-5">
-                  <p className="flex items-center gap-1.5 text-sm font-bold text-ink">
-                    <Zap className="h-4 w-4 text-coral" />
-                    {instantLabel}
-                  </p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                    {instantBlurb ??
-                      "Need a tutor fast? Match with verified mentors in minutes — free to try."}
-                  </p>
-                  <Link href={instantHref} className="mt-3 inline-block">
-                    <Button size="sm">{instantLabel}</Button>
-                  </Link>
-                </aside>
-              )}
-              {requirementHref && (
-                <aside className="rounded-xl border border-hairline bg-cream/70 p-5">
-                  <p className="text-sm font-bold text-ink">
-                    {requirementLabel}
-                  </p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                    {requirementBlurb ??
-                      "Can't find exactly what you need? Post your requirement and let verified tutors come to you — free on Mentr."}
-                  </p>
-                  <Link href={requirementHref} className="mt-3 inline-block">
-                    <Button variant="secondary" size="sm">
-                      {requirementLabel}
-                    </Button>
-                  </Link>
-                </aside>
-              )}
-            </div>
+          {requirementHref && (
+            <aside className="mt-6 rounded-xl border border-hairline bg-cream/70 p-5">
+              <p className="text-sm font-bold text-ink">
+                {requirementLabel}
+              </p>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted">
+                {requirementBlurb ??
+                  "Can't find exactly what you need? Post your requirement and let verified tutors come to you — free on Mentr."}
+              </p>
+              <Link href={requirementHref} className="mt-3 inline-block">
+                <Button variant="secondary" size="sm">
+                  {requirementLabel}
+                </Button>
+              </Link>
+            </aside>
           )}
 
           <section className="mt-8 max-w-2xl space-y-3 text-[15px] leading-relaxed text-muted">
@@ -426,15 +392,15 @@ export function SeoHubPage({
                   <Link href="/search" className="font-semibold text-coral">
                     browse all tutors
                   </Link>
-                  {instantHref && (
+                  {requirementHref && (
                     <>
                       {" "}
                       or{" "}
                       <Link
-                        href={instantHref}
+                        href={requirementHref}
                         className="font-semibold text-coral"
                       >
-                        try Instant Connect
+                        post a requirement
                       </Link>
                     </>
                   )}

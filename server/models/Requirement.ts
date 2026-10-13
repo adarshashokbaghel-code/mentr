@@ -26,6 +26,33 @@ export const TIMELINE_TTL_DAYS: Record<StartTimeline, number> = {
 /** A parent can have at most this many open posts at once. */
 export const MAX_OPEN_REQUIREMENTS = 3;
 
+export const REQUIREMENT_BOARDS = [
+  "CBSE",
+  "ICSE",
+  "State board",
+  "IB",
+  "IGCSE",
+  "Other",
+] as const;
+
+export const REQUIREMENT_GOALS = [
+  "Improve school marks",
+  "Board exam prep",
+  "JEE / NEET prep",
+  "Homework help",
+  "Learn a new skill",
+  "Spoken / language",
+] as const;
+
+export const CLASSES_PER_WEEK = ["1–2", "3–4", "5+"] as const;
+
+export const PREFERRED_TIMES = [
+  "Mornings",
+  "Evenings",
+  "Weekends",
+  "Any time",
+] as const;
+
 /**
  * A parent's learning need, posted anonymously to the tutor board.
  * Tutors express interest via a Connection (requestedBy: "teacher");
@@ -46,6 +73,15 @@ export interface IRequirement extends Document {
   details: string;
   /** How soon classes should start — drives the post's shelf life */
   startTimeline: StartTimeline;
+  board?: string;
+  goal?: string;
+  classesPerWeek?: string;
+  preferredTime?: string;
+  /** Who to address when the parent has no saved profile yet */
+  contactName?: string;
+  /** WhatsApp for this post — overrides the profile number on acceptance */
+  contactPhone?: string;
+  source?: "parent" | "guest";
   status: RequirementStatus;
   /** Board queries filter on this; expired posts simply stop showing */
   expiresAt: Date;
@@ -78,6 +114,13 @@ const requirementSchema = new Schema<IRequirement>(
       enum: START_TIMELINES,
       default: "flexible",
     },
+    board: { type: String, trim: true, maxlength: 40 },
+    goal: { type: String, trim: true, maxlength: 60 },
+    classesPerWeek: { type: String, trim: true, maxlength: 10 },
+    preferredTime: { type: String, trim: true, maxlength: 40 },
+    contactName: { type: String, trim: true, maxlength: 80 },
+    contactPhone: { type: String, trim: true, maxlength: 20 },
+    source: { type: String, enum: ["parent", "guest"], default: "parent" },
     status: {
       type: String,
       enum: REQUIREMENT_STATUSES,

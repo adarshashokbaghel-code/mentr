@@ -12,12 +12,14 @@ export function MentrBrand({
   variant = "dark",
   priority = false,
   href = "/",
+  showAttribution = true,
 }: {
   className?: string;
   logoClassName?: string;
   variant?: "dark" | "light";
   priority?: boolean;
   href?: string;
+  showAttribution?: boolean;
 }) {
   const isLight = variant === "light";
 
@@ -36,22 +38,24 @@ export function MentrBrand({
         />
       </Link>
 
-      <span
-        className={cn(
-          "inline-flex items-center gap-1.5 border-l pl-2.5 sm:pl-3",
-          isLight ? "border-[var(--paprly-blue-accent)]/30" : "border-hairline",
-        )}
-      >
+      {showAttribution && (
         <span
           className={cn(
-            "paprly-by",
-            isLight && "paprly-by-light",
+            "inline-flex items-center gap-1.5 border-l pl-2.5 sm:pl-3",
+            isLight ? "border-[var(--paprly-blue-accent)]/30" : "border-hairline",
           )}
         >
-          by
+          <span
+            className={cn(
+              "paprly-by",
+              isLight && "paprly-by-light",
+            )}
+          >
+            by
+          </span>
+          <PaprlyWordmark variant={variant} />
         </span>
-        <PaprlyWordmark variant={variant} />
-      </span>
+      )}
     </span>
   );
 }

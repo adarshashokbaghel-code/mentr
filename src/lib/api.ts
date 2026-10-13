@@ -630,64 +630,34 @@ export interface ConnectionRequest {
   respondedAt: string | null;
 }
 
-export type GuestRequirementStatus = "new" | "not_interested" | "got_hired";
+export type DemoRequestStatus = "pending" | "proposed" | "accepted" | "declined";
 
-export type GuestActivityAction =
-  | "created"
-  | "opened"
-  | "not_interested"
-  | "got_hired";
-
-export interface GuestRequirementLead {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  requirement: string;
-  description: string;
-  status: GuestRequirementStatus;
-  teacherName: string;
-  teacherId?: string;
-  activity: { action: GuestActivityAction; at: string }[];
-  respondedAt: string | null;
-  createdAt: string;
-  updatedAt: string;
+export interface DemoHistoryEntry {
+  by: "parent" | "tutor";
+  action:
+    | "requested"
+    | "accepted"
+    | "declined"
+    | "proposed"
+    | "parent_accepted"
+    | "parent_declined";
+  date: string | null;
+  time: string | null;
+  note: string | null;
+  at: string;
 }
 
-export const guestRequirementsApi = {
-  send: (body: {
-    teacherId: string;
-    name: string;
-    email: string;
-    phone: string;
-    requirement: string;
-    description: string;
-  }) =>
-    request<{ message: string; requirement: GuestRequirementLead }>(
-      "/guest-requirements",
-      { method: "POST", body: JSON.stringify(body) },
-    ),
+/** Shared lifecycle fields on both sides of a demo */
+export interface DemoLifecycle {
+  /** Tutor's counter-offer while status is "proposed" */
+  proposedDate: string | null;
+  proposedTime: string | null;
+  declinedBy: "parent" | "tutor" | null;
+  confirmedAt: string | null;
+  history: DemoHistoryEntry[];
+}
 
-  mine: () =>
-    request<{
-      total: number;
-      newCount: number;
-      requirements: GuestRequirementLead[];
-    }>("/guest-requirements/mine"),
-
-  action: (
-    id: string,
-    action: "opened" | "not_interested" | "got_hired",
-  ) =>
-    request<{ requirement: GuestRequirementLead }>(
-      `/guest-requirements/${id}`,
-      { method: "PATCH", body: JSON.stringify({ action }) },
-    ),
-};
-
-export type DemoRequestStatus = "pending" | "accepted" | "declined";
-
-export interface ParentDemoRequest {
+export interface ParentDemoRequest extends DemoLifecycle {
   id: string;
   teacherId: string;
   teacherName: string;
@@ -703,7 +673,29 @@ export interface ParentDemoRequest {
   respondedAt: string | null;
 }
 
-export interface TutorDemoRequest {
+export interface DemoSlots {
+  /** IANA zone the times are in (the tutor's) */
+  timezone: string;
+  /** False when the tutor hasn't set weekly hours */
+  hasHours: boolean;
+  /** Only days with at least one free time; times like "6:00 PM" */
+  days: { date: string; times: string[] }[];
+}
+
+export interface DemoPostContext {
+  postedAt: string;
+  details: string;
+  modes: string[];
+  area: string;
+  budgetMin: number | null;
+  budgetMax: number | null;
+  /** Set when this tutor pitched on the post before the parent booked */
+  pitch: { message: string; sentAt: string } | null;
+}
+
+export interface TutorDemoRequest extends DemoLifecycle {
+  /** The parent's post this demo was booked from */
+  fromPost?: DemoPostContext | null;
   id: string;
   parentName: string;
   parentPhone: string;
@@ -725,8 +717,10 @@ export interface TutorDemoRequest {
 export const demoRequestsApi = {
   create: (body: {
     teacherId: string;
-    subject: string;
-    classLevel: string;
+    /** Subject, class and board then come from this post */
+    requirementId?: string;
+    subject?: string;
+    classLevel?: string;
     board?: string;
     preferredDate: string;
     preferredTime: string;
@@ -740,20 +734,33 @@ export const demoRequestsApi = {
   mine: () =>
     request<{ demos: ParentDemoRequest[] }>("/demo-requests/mine"),
 
+  /** Free demo start times from the tutor's weekly hours, next 14 days */
+  slots: (teacherId: string) =>
+    request<DemoSlots>(`/demo-requests/slots/${encodeURIComponent(teacherId)}`),
+
   inbox: () =>
     request<{ demos: TutorDemoRequest[] }>("/demo-requests/inbox"),
 
+  /** Tutor: accept, decline, or propose another slot (proposedDate + proposedTime) */
   respond: (
     id: string,
-    action: "accept" | "decline",
-    tutorNote?: string,
+    body: {
+      action: "accept" | "decline" | "propose";
+      tutorNote?: string;
+      proposedDate?: string;
+      proposedTime?: string;
+    },
   ) =>
     request<{ demo: TutorDemoRequest; message: string }>(
       `/demo-requests/${id}/respond`,
-      {
-        method: "POST",
-        body: JSON.stringify({ action, tutorNote: tutorNote ?? "" }),
-      },
+      { method: "POST", body: JSON.stringify(body) },
+    ),
+
+  /** Parent: answer the tutor's proposed slot */
+  parentRespond: (id: string, action: "accept" | "decline") =>
+    request<{ demo: ParentDemoRequest; message: string }>(
+      `/demo-requests/${id}/parent-respond`,
+      { method: "POST", body: JSON.stringify({ action }) },
     ),
 };
 
@@ -814,6 +821,14 @@ export interface RequirementInterest {
   teacherArea: string | null;
   /** Public profile photo URL when the tutor has one */
   teacherImageUrl: string | null;
+  designation?: string | null;
+  hourlyRate?: number | null;
+  experienceYears?: number | null;
+  teachingModes?: string[];
+  subjects?: string[];
+  /** How well the tutor fits the post, 1.0–5.0 */
+  matchScore?: number;
+  matchReasons?: string[];
   message: string;
   status: ConnectionStatus;
   /** Tutor's wa.me-ready number — unlocked once the parent accepts */
@@ -840,6 +855,10 @@ export interface MyRequirement {
   budgetMax: number | null;
   details: string;
   startTimeline: StartTimeline;
+  board?: string | null;
+  goal?: string | null;
+  classesPerWeek?: string | null;
+  preferredTime?: string | null;
   status: "open" | "closed";
   interestCount: number;
   postedAt: string;
@@ -862,6 +881,10 @@ export interface BoardRequirement {
   budgetMax: number | null;
   details: string;
   startTimeline: StartTimeline;
+  board?: string | null;
+  goal?: string | null;
+  classesPerWeek?: string | null;
+  preferredTime?: string | null;
   status: "open" | "closed";
   interestCount: number;
   postedAt: string;
@@ -878,6 +901,38 @@ export interface NewRequirement {
   budgetMax?: number | "";
   details: string;
   startTimeline: StartTimeline;
+  board?: string;
+  goal?: string;
+  classesPerWeek?: string;
+  preferredTime?: string;
+  /** Logged-in parents without a saved profile */
+  contactName?: string;
+  /** Optional WhatsApp for this post */
+  contactPhone?: string;
+}
+
+export interface GuestRequirement extends NewRequirement {
+  name: string;
+  email: string;
+  phone: string;
+  acceptedLegal: true;
+  registrationSource?: string;
+}
+
+/** A tutor suggested right after posting */
+export interface RequirementMatch {
+  id: string;
+  name: string;
+  designation: string;
+  subjects: string[];
+  levels: string[];
+  teachingModes: string[];
+  city: string;
+  area: string;
+  hourlyRate: number | null;
+  profileImageUrl: string | null;
+  responseHint: string;
+  matchReason?: string | null;
 }
 
 /** A pitch the tutor sent from the board, as the tutor sees it */
@@ -904,8 +959,25 @@ export interface TutorPitch {
 
 export const requirementsApi = {
   post: (payload: NewRequirement) =>
-    request<{ requirement: MyRequirement; message: string }>("/requirements", {
+    request<{
+      requirement: MyRequirement;
+      matches: RequirementMatch[];
+      message: string;
+    }>("/requirements", {
       method: "POST",
+      timeoutMs: 25_000,
+      body: JSON.stringify(payload),
+    }),
+
+  postGuest: (payload: GuestRequirement) =>
+    request<{
+      requirement: MyRequirement;
+      matches: RequirementMatch[];
+      email: string;
+      message: string;
+    }>("/requirements/guest", {
+      method: "POST",
+      timeoutMs: 25_000,
       body: JSON.stringify(payload),
     }),
 
@@ -943,31 +1015,6 @@ export const requirementsApi = {
   pitches: () => request<{ pitches: TutorPitch[] }>("/requirements/pitches"),
 };
 
-export type HiringStepId =
-  | "browse"
-  | "shortlist"
-  | "trial"
-  | "connect"
-  | "firstSession";
-
-export type HiringSteps = Record<HiringStepId, boolean>;
-
-export interface RequirementPitchSummary {
-  requirementId: string;
-  subject: string;
-  classLevel: string;
-  area: string;
-  pendingCount: number;
-}
-
-export interface HiringProgress {
-  steps: HiringSteps;
-  completedCount: number;
-  totalSteps: number;
-  pendingPitchCount: number;
-  pitchSummaries: RequirementPitchSummary[];
-}
-
 export interface SharedRequirement {
   headline: string;
   subject: string;
@@ -983,16 +1030,6 @@ export interface SharedRequirement {
   postedAt: string;
   expiresAt: string;
 }
-
-export const parentHiringApi = {
-  progress: () => request<HiringProgress>("/parent/hiring-progress"),
-
-  completeStep: (step: "trial" | "firstSession") =>
-    request<{ user: AuthUser; progress: HiringProgress; message: string }>(
-      `/parent/hiring-progress/${step}`,
-      { method: "POST" },
-    ),
-};
 
 export async function fetchSharedRequirement(
   token: string,
@@ -1021,7 +1058,8 @@ export type ParentNotificationType =
   | "instant_connect_closed"
   | "instant_connect_mentor_found"
   | "instant_connect_expired"
-  | "guest_requirement";
+  | "guest_requirement"
+  | "demo_update";
 
 export interface ParentNotification {
   id: string;

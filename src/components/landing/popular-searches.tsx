@@ -9,7 +9,7 @@ import {
   GraduationCap,
   MapPin,
   Search,
-  Zap,
+  Megaphone,
 } from "lucide-react";
 
 type SearchLink = {
@@ -96,10 +96,9 @@ const POPULAR: SearchLink[] = [
 const QUICK = [
   { label: "Near me", href: "/find-tutors-near-me" },
   { label: "Online tutors", href: "/find-online-tutors" },
-  { label: "Post requirement", href: "/parent/signup?next=/parent/dashboard" },
   {
-    label: "Instant Connect",
-    href: "/parent/signup?next=/parent/dashboard%23instant-connect",
+    label: "Post requirement",
+    href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1",
   },
 ];
 
@@ -128,7 +127,7 @@ export function PopularSearches({
             </h2>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">
               Jump to {LAUNCH_HUB_CITY} subject pages parents search for — or
-              Instant Connect if you need a match today.
+              post a requirement and let tutors pitch to you.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -142,10 +141,10 @@ export function PopularSearches({
                 Open search
               </Button>
             </Link>
-            <Link href="/parent/signup?next=/parent/dashboard%23instant-connect">
+            <Link href="/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1">
               <Button size="sm" className="h-9 gap-1 rounded-lg text-xs">
-                <Zap className="h-3.5 w-3.5" />
-                Instant Connect
+                <Megaphone className="h-3.5 w-3.5" />
+                Post a requirement
               </Button>
             </Link>
           </div>

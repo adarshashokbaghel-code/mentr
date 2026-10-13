@@ -10,7 +10,6 @@ import {
   subjectIntro,
 } from "@/lib/seo-hubs";
 import {
-  INSTANT_CONNECT_CTA,
   REQUIREMENT_CTA,
 } from "@/lib/seo-programmatic";
 import { liveTeachersForSubject } from "@/lib/seo-live-teachers";
@@ -33,7 +32,7 @@ export async function generateMetadata({
   const subject = parseSubjectHubSlug(slug);
   if (!subject) return { title: "Subject", robots: { index: false } };
   const title = `${subject} Tutors in Bengaluru — Verified Profiles`;
-  const description = `Find verified ${subject} tutors across Koramangala, Indiranagar, Whitefield & more in Bengaluru. Compare rates, book a free demo, or try Instant Connect on ${SITE_NAME}.`;
+  const description = `Find verified ${subject} tutors across Koramangala, Indiranagar, Whitefield & more in Bengaluru. Compare rates, book a free demo on ${SITE_NAME}.`;
   return {
     title,
     description,
@@ -81,9 +80,6 @@ export default async function SubjectHubPage({
       requirementHref={REQUIREMENT_CTA.href}
       requirementLabel={REQUIREMENT_CTA.label}
       requirementBlurb={REQUIREMENT_CTA.blurb}
-      instantHref={INSTANT_CONNECT_CTA.href}
-      instantLabel={INSTANT_CONNECT_CTA.label}
-      instantBlurb={INSTANT_CONNECT_CTA.blurb}
     />
   );
 }

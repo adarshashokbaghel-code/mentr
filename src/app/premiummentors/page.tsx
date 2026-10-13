@@ -1,5 +1,4 @@
 import { PremiumMentorsLanding } from "@/components/premium/premium-mentors-landing";
-import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import {
   JsonLd,
@@ -109,7 +108,6 @@ export default async function PremiumMentorsPage() {
       />
       <PageMarketing slug="premiummentors" path="/premiummentors" />
       <PremiumMentorsLanding initialMentors={mentors} />
-      <InstantConnectDock />
     </>
   );
 }

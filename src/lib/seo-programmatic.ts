@@ -160,13 +160,6 @@ export const CITY_SUBJECT_PAGES: { city: SeoCitySlug; subject: string }[] =
     return subjects.map((subject) => ({ city: city.slug, subject }));
   });
 
-export const INSTANT_CONNECT_CTA = {
-  label: "Get Matched Instantly",
-  href: "/instant-connect",
-  blurb:
-    "Need a tutor today? Tell us what you need — we'll help you find relevant mentors fast. Free for parents.",
-};
-
 export function classSubjectPath(level: ClassLevel, subject: string): string {
   return `/class/${level}/${slugify(subject)}-tutors`;
 }
@@ -329,12 +322,12 @@ export function cityFaqs(cityName: string, local: boolean): HubFaq[] {
     {
       question: `How do I find tutors in ${cityName}?`,
       answer: local
-        ? `Browse verified tutors across ${cityName} by subject and area on Mentr. Filter by open slots and book a free demo — or use Instant Connect for a fast match.`
+        ? `Browse verified tutors across ${cityName} by subject and area on Mentr. Filter by open slots and book a free demo — or post a requirement and let tutors pitch to you.`
         : `Mentr lists online tutors who work with ${cityName} families — video sessions in your time zone. Post a requirement to get pitches from tutors who serve ${cityName}.`,
     },
     {
       question: `Is Mentr free for parents in ${cityName}?`,
-      answer: `Yes. Search, shortlist, connect, Instant Connect, and post requirements are free. Mentr takes no commission on tuition fees.`,
+      answer: `Yes. Search, shortlist, booking demos, and posting requirements are free. Mentr takes no commission on tuition fees.`,
     },
     {
       question: `Home tutor vs online tutor in ${cityName}?`,
@@ -351,7 +344,7 @@ export function citySubjectFaqs(
   return [
     {
       question: `How do I find a ${subject} tutor in ${cityName}?`,
-      answer: `Open Find a Tutor on Mentr, filter by ${subject} and ${cityName} (or online). Compare verified profiles, then book a free demo — or use Get Matched Instantly if you need someone this week.`,
+      answer: `Open Find a Tutor on Mentr, filter by ${subject} and ${cityName} (or online). Compare verified profiles, then book a free demo — or post a requirement and let tutors pitch to you.`,
     },
     {
       question: `What do ${subject} tutors in ${cityName} typically charge?`,
@@ -367,7 +360,7 @@ export function citySubjectFaqs(
     },
     {
       question: `Is Mentr free for parents in ${cityName}?`,
-      answer: `Yes. Search, connect, Instant Connect, and posting a requirement are free for parents. No agency fee and no commission on tuition.`,
+      answer: `Yes. Search, booking demos, and posting a requirement are free for parents. No agency fee and no commission on tuition.`,
     },
     {
       question: local
@@ -382,7 +375,7 @@ export function citySubjectFaqs(
 
 export const REQUIREMENT_CTA = {
   label: "Post your requirement",
-  href: "/parent/signup?next=/parent/dashboard",
+  href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1",
   blurb:
     "Can't find exactly what you need? Post your requirement and let verified tutors come to you — free on Mentr.",
 };

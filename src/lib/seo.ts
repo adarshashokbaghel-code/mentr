@@ -28,11 +28,11 @@ export const SITE_TAGLINE =
   "Find tutors & mentors near you or online — 100% free";
 
 export const SITE_DESCRIPTION =
-  "Find verified tutors and mentors free on Mentr. Built for parents and adult students: search by subject, book a demo, Instant Connect, or post a need. Free classroom tools and guides. No fees, no commission.";
+  "Find verified tutors and mentors free on Mentr. Built for parents and adult students: search by subject, book a demo, or post a need. Free classroom tools and guides. No fees, no commission.";
 
 /** One sentence for landing subcopy. */
 export const GLOBAL_REACH_LINE =
-  "Search verified tutors by subject, try Instant Connect, or post what you need. Free for parents and teachers.";
+  "Search verified tutors by subject or post what you need. Free for parents and teachers.";
 
 export const SITE_KEYWORDS = [
   "Mentr by Paprly",
@@ -62,7 +62,6 @@ export const SITE_KEYWORDS = [
   "find online tutors verified",
   "find mentors near me",
   "online tutor jobs",
-  "Instant Connect tutor",
   "Snap & Grade",
   "Snap and Grade",
   "mentr.in/snapandgrade",

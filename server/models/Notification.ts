@@ -12,6 +12,7 @@ export const PARENT_NOTIFICATION_TYPES = [
   "instant_connect_mentor_found",
   "instant_connect_expired",
   "guest_requirement",
+  "demo_update",
 ] as const;
 
 export type ParentNotificationType = (typeof PARENT_NOTIFICATION_TYPES)[number];
@@ -25,6 +26,7 @@ export interface INotificationMeta {
   connectionId?: string;
   openSlots?: number;
   instantConnectId?: string;
+  demoId?: string;
 }
 
 export interface INotification extends Document {
@@ -56,6 +58,7 @@ const notificationSchema = new Schema<INotification>(
         connectionId: String,
         openSlots: Number,
         instantConnectId: String,
+        demoId: String,
       },
       default: {},
     },

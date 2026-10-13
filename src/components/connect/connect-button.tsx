@@ -28,7 +28,7 @@ export interface ConnectTeacher {
   phone: string | null;
   connectionStatus?: "none" | ConnectionStatus;
   live?: boolean;
-  /** Active Mentr Premium — enables guest "send without login" */
+  /** Active Mentr Premium */
   premium?: boolean;
 }
 
@@ -88,18 +88,10 @@ export function ConnectButton({
   if (!user) {
     const openGuestGate = (e: MouseEvent) => {
       e.stopPropagation();
-      if (teacher.premium) {
-        openRoleChooser(`/teachers/${teacher.id}`, {
-          teacherId: teacher.id,
-          teacherName: teacher.name,
-          subjectLine: teacher.subjectLine,
-        });
-      } else {
-        openRoleChooser(`/teachers/${teacher.id}`);
-      }
+      openRoleChooser(`/teachers/${teacher.id}`);
     };
 
-    // Guests: clear Connect CTA → role chooser (Premium also offers send-without-login).
+    // Guests: clear Connect CTA → role chooser.
     return (
       <button type="button" onClick={openGuestGate} className={className}>
         <MessageCircle className="h-[1em] w-[1em]" />

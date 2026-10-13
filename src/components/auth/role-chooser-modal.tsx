@@ -1,32 +1,21 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
-import { GuestRequirementForm } from "@/components/connect/guest-requirement-form";
-import { ArrowRight, GraduationCap, Send, Users, X } from "lucide-react";
+import { ArrowRight, GraduationCap, Users, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 /**
  * "Who are you?" gate shown when an unauthenticated visitor hits a
  * login-protected action (find a teacher, contact a tutor, …).
- * For Premium mentors, also offers sending a need without an account.
  */
 export function RoleChooserModal() {
-  const {
-    roleChooserOpen,
-    closeRoleChooser,
-    roleChooserNext,
-    roleChooserGuestPremium,
-  } = useAuth();
-  const [guestFormOpen, setGuestFormOpen] = useState(false);
+  const { roleChooserOpen, closeRoleChooser, roleChooserNext } = useAuth();
 
   useEffect(() => {
-    if (!roleChooserOpen) {
-      setGuestFormOpen(false);
-      return;
-    }
+    if (!roleChooserOpen) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && !guestFormOpen) closeRoleChooser();
+      if (e.key === "Escape") closeRoleChooser();
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -34,27 +23,13 @@ export function RoleChooserModal() {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [roleChooserOpen, closeRoleChooser, guestFormOpen]);
-
-  if (guestFormOpen && roleChooserGuestPremium) {
-    return (
-      <GuestRequirementForm
-        teacher={roleChooserGuestPremium}
-        onClose={() => {
-          setGuestFormOpen(false);
-          closeRoleChooser();
-        }}
-      />
-    );
-  }
+  }, [roleChooserOpen, closeRoleChooser]);
 
   if (!roleChooserOpen) return null;
 
   const nextSuffix = roleChooserNext
     ? `?next=${encodeURIComponent(roleChooserNext)}`
     : "";
-  const guestPremium = roleChooserGuestPremium;
-  const mentorFirst = guestPremium?.teacherName.split(" ")[0];
 
   return (
     <div
@@ -108,27 +83,6 @@ export function RoleChooserModal() {
             </span>
             <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
           </Link>
-
-          {guestPremium ? (
-            <button
-              type="button"
-              onClick={() => setGuestFormOpen(true)}
-              className="group flex w-full items-center gap-3 rounded-xl border-2 border-dashed border-ink/35 bg-cream/60 p-3 text-left transition hover:border-ink hover:bg-cream sm:gap-4 sm:p-4"
-            >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-ink ring-1 ring-ink/10 sm:h-11 sm:w-11">
-                <Send className="h-4 w-4 sm:h-5 sm:w-5" />
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block text-[14px] font-bold text-ink sm:text-[15px]">
-                  Send requirement without login
-                </span>
-                <span className="block text-[11px] text-muted sm:text-xs">
-                  Tell {mentorFirst} what you need — they get your contact
-                </span>
-              </span>
-              <ArrowRight className="h-4 w-4 shrink-0 text-ink transition group-hover:translate-x-0.5" />
-            </button>
-          ) : null}
 
           <Link
             href={`/faculty${nextSuffix}`}

@@ -111,7 +111,7 @@ export function MobileNavDrawer({
         )}
       >
         <div className="flex h-14 shrink-0 items-center justify-between border-b border-hairline px-4">
-          <MentrBrand logoClassName="h-5" />
+          <MentrBrand logoClassName="h-5" showAttribution={false} />
           <button
             type="button"
             aria-label="Close menu"
