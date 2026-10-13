@@ -7,7 +7,7 @@ import {
   WhoViewedCard,
   timeAgo,
 } from "@/components/dashboard/widgets";
-import { TutorInbox } from "@/components/dashboard/tutor-inbox";
+import { TutorDemos } from "@/components/dashboard/tutor-demos";
 import { PitchesSection } from "@/components/requirements/pitches-section";
 import { PhotoNudgeDialog } from "@/components/dashboard/photo-nudge-dialog";
 import { PremiumMentorCard } from "@/components/dashboard/premium-mentor-card";
@@ -28,7 +28,7 @@ import {
   Copy,
   Crown,
   ExternalLink,
-  Inbox,
+  Video,
   Loader2,
   MessageCircle,
   Pencil,
@@ -113,10 +113,10 @@ export default function DashboardPage() {
   const [copied, setCopied] = useState(false);
   const [photoNudgeOpen, setPhotoNudgeOpen] = useState(false);
   const photoNudgeDismissed = useRef(false);
-  const [dashTab, setDashTab] = useState<"inbox" | "schedule" | "grow">(
-    "inbox",
+  const [dashTab, setDashTab] = useState<"demos" | "schedule" | "grow">(
+    "demos",
   );
-  const [inboxAttention, setInboxAttention] = useState(0);
+  const [demoAttention, setDemoAttention] = useState(0);
 
   async function copyListingLink() {
     if (!user) return;
@@ -457,10 +457,10 @@ export default function DashboardPage() {
                 {(
                   [
                     {
-                      id: "inbox" as const,
-                      label: "Inbox",
-                      Icon: Inbox,
-                      count: inboxAttention || undefined,
+                      id: "demos" as const,
+                      label: "Demos",
+                      Icon: Video,
+                      count: demoAttention || undefined,
                     },
                     {
                       id: "schedule" as const,
@@ -508,8 +508,8 @@ export default function DashboardPage() {
               </div>
 
               <div className="mt-4 space-y-5">
-                {dashTab === "inbox" ? (
-                  <TutorInbox onAttentionChange={setInboxAttention} />
+                {dashTab === "demos" ? (
+                  <TutorDemos onAttentionChange={setDemoAttention} />
                 ) : null}
 
                 {dashTab === "schedule" ? (

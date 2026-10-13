@@ -188,6 +188,11 @@ const nextConfig: NextConfig = {
     // (primary host). App-level redirects fighting Vercel cause ERR_TOO_MANY_REDIRECTS.
     return [
       {
+        source: "/instant-connect",
+        destination: "/find-tutor",
+        permanent: true,
+      },
+      {
         source: "/become-a-mentor-bengaluru",
         destination: "/for-faculty",
         permanent: true,

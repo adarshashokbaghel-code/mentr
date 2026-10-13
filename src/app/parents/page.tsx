@@ -1,5 +1,4 @@
 import { ParentAcquireLanding } from "@/components/landing/lp/parent-acquire-landing";
-import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import {
@@ -13,7 +12,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Find a Verified Tutor — Free for Parents · Mentr",
   description:
-    "Find a verified tutor free for parents. No commission. No agency fee. Browse tutors or get matched instantly — subject, class, location, and mode.",
+    "Find a verified tutor free for parents. No commission. No agency fee. Browse tutors or post a requirement — subject, class, location, and mode.",
   keywords: [
     "find a tutor",
     "verified tutor",
@@ -28,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Find a Verified Tutor — Free for Parents · Mentr",
     description:
-      "Free for parents. No commission. No agency fee. Find a tutor or get matched instantly.",
+      "Free for parents. No commission. No agency fee. Find a tutor or post a requirement.",
     url: absoluteUrl("/parents"),
     type: "website",
   },
@@ -66,7 +65,6 @@ export default function ParentsPage() {
       />
       <PageMarketing slug="parents" path="/parents" />
       <ParentAcquireLanding intent="default" />
-      <InstantConnectDock />
     </>
   );
 }

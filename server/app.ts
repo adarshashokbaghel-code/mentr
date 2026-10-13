@@ -11,10 +11,8 @@ import teacherRoutes from "./routes/teachers";
 import adminRoutes from "./routes/admin";
 import marketingRoutes from "./routes/marketing";
 import feedbackRoutes from "./routes/feedback";
-import guestRequirementRoutes from "./routes/guest-requirements";
 import demoRequestRoutes from "./routes/demo-requests";
 import notificationRoutes from "./routes/notifications";
-import parentHiringRoutes from "./routes/parent-hiring";
 import learnRoutes from "./routes/learn";
 import learnPythonRoutes from "./routes/learn-python";
 import instantConnectRoutes from "./routes/instant-connect";
@@ -185,14 +183,12 @@ app.post("/api/cron/parent-profile-reminder", async (req, res) => {
 
 app.use("/api/marketing", marketingRoutes);
 app.use("/api/feedback", feedbackRoutes);
-app.use("/api/guest-requirements", guestRequirementRoutes);
 app.use("/api/demo-requests", demoRequestRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/connections", connectionRoutes);
 app.use("/api/profile", profileRoutes);
 app.use("/api/requirements", requirementRoutes);
 app.use("/api/notifications", notificationRoutes);
-app.use("/api/parent", parentHiringRoutes);
 app.use("/api/learn", learnRoutes);
 app.use("/api/learnpython", learnPythonRoutes);
 app.use("/api/instant-connect", instantConnectRoutes);

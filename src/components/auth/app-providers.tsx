@@ -5,6 +5,7 @@ import { FacultyLoginModal } from "@/components/auth/faculty-login-modal";
 import { ParentProfileNudge } from "@/components/auth/parent-profile-nudge";
 import { RoleChooserModal } from "@/components/auth/role-chooser-modal";
 import { AttributionCapture } from "@/components/marketing/page-marketing";
+import { PostRequirementHost } from "@/components/requirements/post-requirement-host";
 import { ToastProvider } from "@/components/ui/toast";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
@@ -13,6 +14,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
       <AuthProvider>
         <AttributionCapture />
         <ParentProfileNudge />
+        <PostRequirementHost />
         {children}
         <FacultyLoginModal />
         <RoleChooserModal />

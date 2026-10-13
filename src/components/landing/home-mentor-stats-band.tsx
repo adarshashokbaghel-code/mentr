@@ -54,7 +54,7 @@ export function HomeMentorStatsBand() {
         label: "To connect",
         tint: "bg-coral-wash",
         icon: MessageCircle,
-        sub: "Search or Instant Connect",
+        sub: "Search or post a requirement",
       },
     ],
     [mentorCount, subjectCount],

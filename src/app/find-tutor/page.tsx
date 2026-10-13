@@ -1,5 +1,4 @@
 import { ParentAcquireLanding } from "@/components/landing/lp/parent-acquire-landing";
-import { InstantConnectDock } from "@/components/instant-connect/instant-connect-dock";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
 import { absoluteUrl, LAUNCH_HUB_CITY, SITE_BRAND } from "@/lib/seo";
@@ -51,7 +50,6 @@ export default function FindTutorPage() {
       />
       <PageMarketing slug="find-tutor" path="/find-tutor" />
       <ParentAcquireLanding intent="browse" />
-      <InstantConnectDock />
     </>
   );
 }

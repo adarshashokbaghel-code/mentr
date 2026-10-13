@@ -9,7 +9,6 @@ import {
   type PremiumRevealRow,
 } from "@/lib/api";
 import { timeAgo } from "@/components/dashboard/widgets";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -21,32 +20,39 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { cn, formatCountdown, msUntilLocalMidnight } from "@/lib/utils";
 import {
-  ArrowUpRight,
+  CalendarClock,
   Check,
   ChevronDown,
   ChevronUp,
   Clock3,
+  DoorOpen,
   Download,
   Flame,
+  GraduationCap,
   Hourglass,
-  IndianRupee,
+  House,
+  Inbox,
+  Laptop,
   Loader2,
   Lock,
   MapPin,
   Megaphone,
-  MessageSquare,
-  MonitorSmartphone,
+  Repeat,
   Search,
   Send,
+  ShieldCheck,
   Sparkles,
+  Sun,
+  Target,
   TrendingUp,
+  Users,
+  Wallet,
   X,
+  type LucideIcon,
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -78,10 +84,16 @@ const MODE_LABELS: Record<string, string> = {
 };
 
 const TIMELINE_LABELS: Record<string, string> = {
-  immediately: "Starts immediately",
-  within_week: "Starts within a week",
-  within_month: "Starts within a month",
-  flexible: "Flexible start",
+  immediately: "Immediately",
+  within_week: "Within a week",
+  within_month: "Within a month",
+  flexible: "Flexible",
+};
+
+const MODE_ICONS: Record<string, LucideIcon> = {
+  online: Laptop,
+  student_home: House,
+  tutor_home: DoorOpen,
 };
 
 const MODE_FILTERS = [
@@ -91,14 +103,14 @@ const MODE_FILTERS = [
 ] as const;
 
 const SUBJECT_TONES = [
-  "bg-coral text-white",
-  "bg-sage text-white",
-  "bg-lavender-deep text-ink",
-  "bg-butter-deep text-ink",
-  "bg-sky text-ink",
+  { tile: "bg-coral-wash text-coral-dark", dot: "bg-coral" },
+  { tile: "bg-sage-wash text-sage", dot: "bg-sage" },
+  { tile: "bg-lavender text-ink", dot: "bg-lavender-deep" },
+  { tile: "bg-butter text-ink", dot: "bg-butter-deep" },
+  { tile: "bg-sky text-ink", dot: "bg-sky" },
 ];
 
-function subjectTone(subject: string): string {
+function subjectTone(subject: string): (typeof SUBJECT_TONES)[number] {
   let hash = 0;
   for (let i = 0; i < subject.length; i++) {
     hash = (hash * 31 + subject.charCodeAt(i)) | 0;
@@ -132,10 +144,10 @@ const SORTS: { id: SortMode; label: string; icon: typeof Sparkles }[] = [
   { id: "new", label: "New", icon: Sparkles },
   { id: "top", label: "Top", icon: Flame },
   { id: "closing", label: "Closing", icon: Hourglass },
-  { id: "budget", label: "Budget", icon: TrendingUp },
+  { id: "budget", label: "Top budget", icon: TrendingUp },
 ];
 
-function BoardStatusToggle({
+function StatusToggle({
   statusFilter,
   closedCount,
   onChange,
@@ -150,7 +162,7 @@ function BoardStatusToggle({
     <div
       role="tablist"
       aria-label="Post status"
-      className="inline-flex h-7 shrink-0 items-center rounded-full border border-hairline bg-white p-0.5 shadow-sm"
+      className="inline-flex h-9 shrink-0 items-center rounded-full border border-hairline bg-cream/60 p-1"
     >
       {(["open", "closed"] as const).map((id) => {
         const active = statusFilter === id;
@@ -162,20 +174,13 @@ function BoardStatusToggle({
             aria-selected={active}
             onClick={() => onChange(id)}
             className={cn(
-              "inline-flex h-6 items-center gap-1 rounded-full px-2.5 text-[11px] font-bold transition touch-manipulation",
-              active
-                ? "bg-ink text-white"
-                : "text-muted hover:bg-cream hover:text-ink",
+              "inline-flex h-7 items-center gap-1.5 rounded-full px-3 text-xs font-bold transition touch-manipulation",
+              active ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink",
             )}
           >
             {id === "open" ? "Open" : "Closed"}
             {id === "closed" && (
-              <span
-                className={cn(
-                  "min-w-[1.1rem] rounded-full px-1 text-center text-[10px] font-bold tabular-nums",
-                  active ? "bg-white/20 text-white" : "bg-cream-band text-muted",
-                )}
-              >
+              <span className="rounded-full bg-cream-band px-1.5 text-[10px] tabular-nums text-muted">
                 {closedCount}
               </span>
             )}
@@ -186,7 +191,7 @@ function BoardStatusToggle({
   );
 }
 
-/** Tutor-facing requirements board — Reddit-style feed with shadcn primitives. */
+/** Tutor-facing requirements board: filter toolbar, post cards, quota sidebar. */
 export function RequirementsFeed() {
   const [posts, setPosts] = useState<BoardRequirement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -300,97 +305,96 @@ export function RequirementsFeed() {
   const filtersActive =
     subject !== "All" || modeFilter !== "all" || hidePitched || query.trim();
 
-  const communityLabel =
-    subject === "All" ? "r/all" : `r/${subject.replace(/\s+/g, "")}`;
+  function clearFilters() {
+    setSubject("All");
+    setModeFilter("all");
+    setHidePitched(false);
+    setQuery("");
+  }
+
+  const quota = (
+    <QuotaCard
+      left={left}
+      limit={dailyLimit ?? 3}
+      usedToday={usedToday}
+      unlimited={unlimitedPitches}
+      atLimit={atLimit}
+      revealLeft={premiumMentor ? revealLeft : null}
+    />
+  );
 
   return (
     <>
-      {/* mobile: quota + quick stats */}
-      <div className="mb-4 grid grid-cols-2 gap-3 lg:hidden">
-        <MobileQuotaCard
-          left={unlimitedPitches ? usedToday : left}
-          dailyLimit={unlimitedPitches ? null : dailyLimit}
-          atLimit={atLimit}
-          usedToday={usedToday}
-          unlimited={unlimitedPitches}
-        />
-        <div className="rounded-xl border border-hairline bg-white p-4">
-          <p className="text-[11px] font-bold tracking-[0.12em] text-muted uppercase">
-            Board pulse
-          </p>
-          <div className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1.5">
-            <PulseStat label="Open" value={openCount} />
-            <PulseStat label="New" value={newToday} />
-          </div>
-        </div>
-      </div>
-
-      <div className="grid gap-6 lg:gap-8 2xl:grid-cols-[minmax(0,220px)_minmax(0,1fr)_minmax(0,260px)] xl:grid-cols-[minmax(0,1fr)_minmax(0,260px)]">
-        {/* ── left: communities (wide screens only) ── */}
-        <aside className="hidden 2xl:block">
-          <div className="sticky top-[5rem] space-y-4">
-            <SidebarPanel title="Subjects">
-              <nav className="space-y-0.5">
-                <SidebarLink
-                  active={subject === "All"}
-                  onClick={() => setSubject("All")}
-                  icon="∞"
-                  label="All subjects"
-                  count={pool.length}
-                />
-                {subjectCounts.map(([s, count]) => (
-                  <SidebarLink
-                    key={s}
-                    active={subject === s}
-                    onClick={() => setSubject(subject === s ? "All" : s)}
-                    icon={s.charAt(0)}
-                    label={s}
-                    count={count}
-                    tone={subjectTone(s)}
-                  />
-                ))}
-              </nav>
-            </SidebarPanel>
-
-            <SidebarPanel title="Mode">
-              <nav className="space-y-0.5">
-                <SidebarLink
-                  active={modeFilter === "all"}
-                  onClick={() => setModeFilter("all")}
-                  label="Any mode"
-                />
-                {MODE_FILTERS.map((m) => (
-                  <SidebarLink
-                    key={m.id}
-                    active={modeFilter === m.id}
-                    onClick={() =>
-                      setModeFilter(modeFilter === m.id ? "all" : m.id)
-                    }
-                    label={m.label}
-                  />
-                ))}
-              </nav>
-              <Separator className="my-3 bg-hairline" />
-              <label className="flex cursor-pointer items-center gap-2.5 px-2 py-1">
-                <Checkbox
-                  checked={hidePitched}
-                  onCheckedChange={(v) => setHidePitched(v === true)}
-                  className="border-hairline data-[state=checked]:border-coral data-[state=checked]:bg-coral"
-                />
-                <span className="text-[13px] font-medium text-ink">
-                  Hide pitched
-                </span>
-              </label>
-            </SidebarPanel>
-          </div>
-        </aside>
-
-        {/* ── center: feed ── */}
+      <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_300px] xl:gap-7">
         <div className="min-w-0">
-          {/* mobile / tablet filters */}
-          <div className="mb-4 space-y-3 2xl:hidden">
-            <div className="-mx-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex min-w-max gap-2">
+          {/* small screens: quota + pulse above the feed */}
+          <div className="mb-4 grid gap-3 sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:hidden">
+            {quota}
+            <PulseCard
+              className="hidden sm:block"
+              open={openCount}
+              fresh={newToday}
+              mine={myPitchCount}
+              responses={totalResponses}
+            />
+          </div>
+
+          {/* toolbar */}
+          <div className="rounded-2xl border border-hairline bg-white p-3 shadow-[0_1px_2px_rgba(28,26,23,0.04)] sm:p-4">
+            <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+              <div className="relative min-w-0 flex-1">
+                <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-muted" />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search subject, class, area…"
+                  className="h-11 rounded-xl border-hairline bg-cream/50 pl-10 pr-10 text-base shadow-none touch-manipulation focus-visible:border-ink/30 focus-visible:ring-coral/20 sm:text-sm"
+                />
+                {query && (
+                  <button
+                    type="button"
+                    onClick={() => setQuery("")}
+                    className="absolute top-1/2 right-1.5 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-muted touch-manipulation hover:bg-cream"
+                    aria-label="Clear search"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+              <div
+                role="tablist"
+                aria-label="Sort posts"
+                className="-mx-1 flex shrink-0 gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              >
+                {SORTS.map((s) => {
+                  const active = sort === s.id;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={active}
+                      onClick={() => setSort(s.id)}
+                      className={cn(
+                        "inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl px-3.5 text-sm font-bold transition touch-manipulation",
+                        active
+                          ? "bg-ink text-white"
+                          : "text-ink/70 hover:bg-cream hover:text-ink",
+                      )}
+                    >
+                      <s.icon className={cn("h-4 w-4", active ? "text-coral" : "text-muted")} />
+                      {s.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="mt-3 border-t border-hairline pt-3">
+              <p className="mb-2 text-[11px] font-bold tracking-wide text-muted uppercase">
+                Subject
+              </p>
+              <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none] sm:flex-wrap [&::-webkit-scrollbar]:hidden">
                 <FilterChip
                   active={subject === "All"}
                   onClick={() => setSubject("All")}
@@ -404,304 +408,147 @@ export function RequirementsFeed() {
                     onClick={() => setSubject(subject === s ? "All" : s)}
                     label={s}
                     count={count}
+                    dot={subjectTone(s).dot}
                   />
                 ))}
               </div>
             </div>
-            <div className="-mx-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <div className="flex min-w-max items-center gap-2">
-                <FilterChip
-                  active={modeFilter === "all"}
-                  onClick={() => setModeFilter("all")}
-                  label="Any mode"
-                />
-                {MODE_FILTERS.map((m) => (
-                  <FilterChip
-                    key={m.id}
-                    active={modeFilter === m.id}
-                    onClick={() =>
-                      setModeFilter(modeFilter === m.id ? "all" : m.id)
-                    }
-                    label={m.label}
-                  />
-                ))}
-                <FilterChip
-                  active={hidePitched}
-                  onClick={() => setHidePitched((v) => !v)}
-                  label="Hide pitched"
-                />
-              </div>
-            </div>
-          </div>
 
-          <div className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_1px_0_rgba(26,35,28,0.04)]">
-            <div className="flex flex-wrap items-center gap-4 border-b border-hairline px-4 py-4 sm:px-6 sm:py-5">
-              <span
-                className={cn(
-                  "flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg font-bold",
-                  subject === "All"
-                    ? "bg-ink text-white"
-                    : subjectTone(subject),
-                )}
-              >
-                {subject === "All" ? "∞" : subject.charAt(0)}
-              </span>
-              <div className="min-w-0 flex-1">
-                <h2 className="text-xl font-bold text-ink sm:text-[22px]">
-                  {communityLabel}
-                </h2>
-                <p className="mt-0.5 text-sm text-muted">
-                  {statusFilter === "open"
-                    ? `${openCount} open post${openCount === 1 ? "" : "s"}`
-                    : `${closedCount} closed post${closedCount === 1 ? "" : "s"}`}
+            <div className="mt-3 flex flex-col gap-3 border-t border-hairline pt-3 md:flex-row md:items-end md:justify-between">
+              <div className="min-w-0">
+                <p className="mb-2 text-[11px] font-bold tracking-wide text-muted uppercase">
+                  Teaching mode
                 </p>
-                {premiumMentor && revealLeft != null && (
-                  <p className="mt-1 max-w-md text-xs leading-relaxed text-ink">
-                    <span className="font-semibold">
-                      Parent reveals: {revealLeft} of 3 left today.
-                    </span>{" "}
-                    Reveal parent on this pitch board counts toward that same
-                    daily limit as the parent directory.
-                  </p>
-                )}
+                <div className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none] sm:flex-wrap [&::-webkit-scrollbar]:hidden">
+                  <FilterChip
+                    active={modeFilter === "all"}
+                    onClick={() => setModeFilter("all")}
+                    label="Any"
+                  />
+                  {MODE_FILTERS.map((m) => (
+                    <FilterChip
+                      key={m.id}
+                      active={modeFilter === m.id}
+                      onClick={() =>
+                        setModeFilter(modeFilter === m.id ? "all" : m.id)
+                      }
+                      label={m.label}
+                      icon={MODE_ICONS[m.id]}
+                    />
+                  ))}
+                </div>
               </div>
-              <Badge
-                variant={atLimit ? "coral" : "sage"}
-                className="shrink-0 px-3 py-1 text-xs font-bold"
-              >
-                {unlimitedPitches
-                  ? "Unlimited pitches"
-                  : `${left}/${dailyLimit ?? 3} left today`}
-              </Badge>
+              <label className="inline-flex shrink-0 cursor-pointer items-center gap-2.5 self-start rounded-xl border border-hairline px-3 py-2 md:self-auto">
+                <Checkbox
+                  checked={hidePitched}
+                  onCheckedChange={(v) => setHidePitched(v === true)}
+                  className="border-ink/25 data-[state=checked]:border-coral data-[state=checked]:bg-coral"
+                />
+                <span className="text-[13px] font-semibold text-ink">
+                  Hide posts I pitched
+                </span>
+              </label>
             </div>
-
-            {/* toolbar: search + status + sort */}
-            <div className="border-b border-hairline px-4 py-4 sm:px-6">
-            <div className="relative">
-              <Search className="pointer-events-none absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-muted" />
-              <Input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search posts…"
-                className="h-11 border-hairline bg-cream/50 pl-11 pr-11 text-base shadow-none touch-manipulation focus-visible:border-ink/30 focus-visible:ring-coral/20 sm:text-sm"
-              />
-              {query && (
-                <button
-                  type="button"
-                  onClick={() => setQuery("")}
-                  className="absolute top-1/2 right-2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-muted touch-manipulation hover:bg-cream"
-                  aria-label="Clear search"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              )}
-            </div>
-
-            <div className="mt-3 -mx-1 overflow-x-auto px-1 pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                <Tabs
-                  value={sort}
-                  onValueChange={(v) => setSort(v as SortMode)}
-                >
-                  <TabsList
-                    variant="line"
-                    className="h-10 min-w-max gap-0 bg-transparent p-0"
-                  >
-                    {SORTS.map((s) => (
-                      <TabsTrigger
-                        key={s.id}
-                        value={s.id}
-                        className="h-10 min-w-[4.25rem] rounded-lg px-3.5 text-sm font-bold text-muted touch-manipulation data-[state=active]:bg-cream data-[state=active]:text-ink data-[state=active]:after:bg-coral"
-                      >
-                        <s.icon className="mr-1.5 h-4 w-4" />
-                        {s.label}
-                      </TabsTrigger>
-                    ))}
-                  </TabsList>
-                </Tabs>
-              </div>
           </div>
 
           {/* result meta */}
-          {!loading && (
-            <div className="flex items-center justify-between gap-3 border-x border-b border-hairline bg-cream/40 px-4 py-2 sm:px-6">
-              <p className="text-xs font-semibold text-muted">
-                {visible.length} {statusFilter}{" "}
-                {visible.length === 1 ? "post" : "posts"}
-                {filtersActive ? " · filtered" : ""}
-              </p>
-              <div className="flex shrink-0 items-center gap-3">
-                <BoardStatusToggle
-                  statusFilter={statusFilter}
-                  closedCount={closedCount}
-                  onChange={(next) => {
-                    setStatusFilter(next);
-                    setSubject("All");
-                  }}
-                />
-                {filtersActive && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSubject("All");
-                      setModeFilter("all");
-                      setHidePitched(false);
-                      setQuery("");
-                    }}
-                    className="text-xs font-bold text-coral hover:text-coral-dark"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* feed list — single card, divided rows (classic Reddit) */}
-          <div className="overflow-hidden border-x border-b border-hairline bg-white">
-            {loading ? (
-              <div className="divide-y divide-hairline">
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="flex gap-3 p-3">
-                    <Skeleton className="h-14 w-10 shrink-0 rounded-sm bg-cream-band" />
-                    <div className="flex-1 space-y-2 py-1">
-                      <Skeleton className="h-3 w-1/3 bg-cream-band" />
-                      <Skeleton className="h-4 w-2/3 bg-cream-band" />
-                      <Skeleton className="h-3 w-full bg-cream-band" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : visible.length === 0 ? (
-              <div className="px-4 py-10 text-center sm:px-6 sm:py-16">
-                <Megaphone className="mx-auto h-8 w-8 text-muted" />
-                <p className="mt-4 text-base font-semibold text-ink">
-                  {filtersActive
-                    ? "No posts match your filters"
-                    : statusFilter === "closed"
-                      ? "No closed posts yet"
-                      : "No open posts right now"}
-                </p>
-                <p className="mx-auto mt-2 max-w-md text-sm text-muted">
-                  {filtersActive
-                    ? "Try clearing filters or switching subject."
-                    : "New parent requirements show up here — check back soon."}
-                </p>
-              </div>
-            ) : (
-              <ul className="divide-y divide-hairline">
-                {visible.map((p) => (
-                  <ThreadCard
-                    key={p.id}
-                    post={p}
-                    quotaLeft={left}
-                    premium={premiumMentor}
-                    onRespond={() => setPitchFor(p)}
-                    onReveal={() => setRevealFor(p)}
-                  />
-                ))}
-              </ul>
-            )}
-          </div>
-          </div>
-        </div>
-
-        {/* ── right: widgets (desktop) ── */}
-        <aside className="hidden space-y-4 xl:sticky xl:top-[5rem] xl:block xl:self-start">
-          <WidgetCard title="Daily quota">
-            {unlimitedPitches ? (
-              <>
-                <p className="text-2xl font-bold tabular-nums text-ink">
-                  ∞
-                  <span className="ml-1 text-sm font-semibold text-sage">
-                    Premium
-                  </span>
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-muted">
-                  Unlimited pitches while Premium is active.
-                  {usedToday > 0
-                    ? ` You’ve sent ${usedToday} today.`
-                    : ""}
-                </p>
-                {revealLeft != null && (
-                  <p className="mt-2 text-xs leading-relaxed text-ink">
-                    <span className="font-semibold">
-                      Parent reveals: {revealLeft} of 3 left today.
-                    </span>{" "}
-                    Reveal parent on this pitch board is included in that
-                    daily limit — the same 3 as the parent directory, not a
-                    separate allowance.
-                  </p>
-                )}
-              </>
-            ) : (
-              <>
-            <p className="text-2xl font-bold tabular-nums text-ink">
-              {left}
-              <span className="text-sm font-semibold text-muted">
-                /{dailyLimit ?? 3}
-              </span>
-            </p>
-            <div className="mt-2 h-1 overflow-hidden rounded-full bg-cream-band">
-              <div
-                className={cn(
-                  "h-full rounded-full transition-all",
-                  left > 0 ? "bg-sage" : "bg-coral",
-                )}
-                style={{
-                  width: `${(left / (dailyLimit || 3)) * 100}%`,
-                }}
-              />
-            </div>
-            <p className="mt-2 text-xs leading-relaxed text-muted">
-              {atLimit ? (
-                <>
-                  Daily limit reached.
-                  <span className="mt-1 block">
-                    <MidnightCountdown />
-                  </span>
-                </>
+          <div className="mt-4 mb-3 flex items-center justify-between gap-3 px-1">
+            <p className="text-sm font-semibold text-ink">
+              {loading ? (
+                "Loading posts…"
               ) : (
-                `${left} pitch${left === 1 ? "" : "es"} left today — resets at midnight.`
+                <>
+                  {visible.length} {statusFilter}{" "}
+                  {visible.length === 1 ? "post" : "posts"}
+                  {filtersActive ? (
+                    <button
+                      type="button"
+                      onClick={clearFilters}
+                      className="ml-2 text-xs font-bold text-coral hover:text-coral-dark"
+                    >
+                      Clear filters
+                    </button>
+                  ) : null}
+                </>
               )}
             </p>
-            {usedToday > 0 && (
-              <>
-                <Separator className="my-3 bg-hairline" />
-                <p className="flex items-center gap-1.5 text-sm font-semibold text-ink">
-                  <Send className="h-3.5 w-3.5 text-sage" />
-                  {usedToday} of {dailyLimit ?? 3} used today
-                  {myPitchCount > usedToday && (
-                    <span className="font-normal text-muted">
-                      · {myPitchCount} all time
-                    </span>
-                  )}
-                </p>
-              </>
-            )}
-              </>
-            )}
-          </WidgetCard>
+            <StatusToggle
+              statusFilter={statusFilter}
+              closedCount={closedCount}
+              onChange={(next) => {
+                setStatusFilter(next);
+                setSubject("All");
+              }}
+            />
+          </div>
 
-          <WidgetCard title="Board pulse">
-            <dl className="space-y-2">
-              {[
-                { label: "Open", value: openCount },
-                { label: "Closed", value: closedCount },
-                { label: "New today", value: newToday },
-                { label: "Responses", value: totalResponses },
-              ].map((row) => (
-                <div
-                  key={row.label}
-                  className="flex items-center justify-between gap-2"
-                >
-                  <dt className="text-sm text-muted">{row.label}</dt>
-                  <dd className="text-sm font-bold tabular-nums text-ink">
-                    {row.value}
-                  </dd>
-                </div>
+          {loading ? (
+            <ul className="space-y-3">
+              {[0, 1, 2].map((i) => (
+                <li key={i} className="rounded-2xl border border-hairline bg-white p-5">
+                  <div className="flex gap-3">
+                    <Skeleton className="h-12 w-12 rounded-xl bg-cream-band" />
+                    <div className="flex-1 space-y-2 py-1">
+                      <Skeleton className="h-4 w-1/2 bg-cream-band" />
+                      <Skeleton className="h-3 w-1/3 bg-cream-band" />
+                    </div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    {[0, 1, 2, 3].map((j) => (
+                      <Skeleton key={j} className="h-14 rounded-xl bg-cream-band" />
+                    ))}
+                  </div>
+                </li>
               ))}
-            </dl>
-          </WidgetCard>
+            </ul>
+          ) : visible.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-hairline bg-white px-4 py-12 text-center sm:py-16">
+              <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-coral-wash">
+                <Megaphone className="h-5 w-5 text-coral" />
+              </span>
+              <p className="mt-4 text-base font-bold text-ink">
+                {filtersActive
+                  ? "No posts match your filters"
+                  : statusFilter === "closed"
+                    ? "No closed posts yet"
+                    : "No open posts right now"}
+              </p>
+              <p className="mx-auto mt-1.5 max-w-sm text-sm text-muted">
+                {filtersActive
+                  ? "Try another subject or clear the filters."
+                  : "New parent requirements show up here — check back soon."}
+              </p>
+              {filtersActive ? (
+                <Button size="sm" variant="secondary" className="mt-5" onClick={clearFilters}>
+                  Clear filters
+                </Button>
+              ) : null}
+            </div>
+          ) : (
+            <ul className="space-y-3">
+              {visible.map((p) => (
+                <PostCard
+                  key={p.id}
+                  post={p}
+                  quotaLeft={left}
+                  premium={premiumMentor}
+                  onRespond={() => setPitchFor(p)}
+                  onReveal={() => setRevealFor(p)}
+                />
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <aside className="hidden space-y-4 xl:sticky xl:top-[5rem] xl:block xl:self-start">
+          {quota}
+          <PulseCard
+            open={openCount}
+            fresh={newToday}
+            mine={myPitchCount}
+            responses={totalResponses}
+          />
+          <HowItWorksCard />
         </aside>
       </div>
 
@@ -722,74 +569,158 @@ export function RequirementsFeed() {
   );
 }
 
-function MobileQuotaCard({
+function QuotaCard({
   left,
-  dailyLimit,
-  atLimit,
+  limit,
   usedToday,
   unlimited,
+  atLimit,
+  revealLeft,
 }: {
   left: number;
-  dailyLimit: number | null;
-  atLimit: boolean;
+  limit: number;
   usedToday: number;
-  unlimited?: boolean;
+  unlimited: boolean;
+  atLimit: boolean;
+  revealLeft: number | null;
 }) {
-  if (unlimited) {
-    return (
-      <div className="rounded-xl border border-hairline bg-white p-4">
-        <p className="text-[11px] font-bold tracking-[0.12em] text-muted uppercase">
-          Daily quota
-        </p>
-        <p className="mt-1 text-2xl font-bold tabular-nums text-ink">
-          ∞
-          <span className="ml-1 text-sm font-semibold text-sage">Premium</span>
-        </p>
-        <p className="mt-2 text-xs leading-relaxed text-muted">
-          Unlimited pitches
-          {usedToday > 0 ? ` · ${usedToday} sent today` : ""}
-        </p>
-      </div>
-    );
-  }
-
-  const limit = dailyLimit ?? 3;
   return (
-    <div className="rounded-xl border border-hairline bg-white p-4">
-      <p className="text-[11px] font-bold tracking-[0.12em] text-muted uppercase">
-        Daily quota
-      </p>
-      <p className="mt-1 text-2xl font-bold tabular-nums text-ink">
-        {left}
-        <span className="text-sm font-semibold text-muted">/{limit}</span>
-      </p>
-      <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-cream-band">
-        <div
-          className={cn(
-            "h-full rounded-full transition-all",
-            left > 0 ? "bg-sage" : "bg-coral",
+    <section className="rounded-2xl border border-hairline bg-white p-4 shadow-[0_1px_2px_rgba(28,26,23,0.04)] sm:p-5">
+      <div className="flex items-center gap-2.5">
+        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-coral-wash">
+          <Send className="h-4 w-4 text-coral" />
+        </span>
+        <div className="min-w-0">
+          <p className="text-sm font-bold text-ink">Today&apos;s pitches</p>
+          <p className="text-[11.5px] text-muted">
+            {unlimited ? "Premium · no daily cap" : "Resets at midnight"}
+          </p>
+        </div>
+        <p className="ml-auto text-right text-2xl font-extrabold tabular-nums text-ink">
+          {unlimited ? "∞" : left}
+          {!unlimited && (
+            <span className="text-sm font-semibold text-muted">/{limit}</span>
           )}
-          style={{ width: `${(left / limit) * 100}%` }}
-        />
+        </p>
       </div>
-      <p className="mt-2 text-xs leading-relaxed text-muted">
-        {atLimit ? <MidnightCountdown /> : `${left} left today`}
+
+      {!unlimited && (
+        <div className="mt-3.5 flex gap-1.5" aria-hidden>
+          {Array.from({ length: limit }, (_, i) => (
+            <span
+              key={i}
+              className={cn(
+                "h-2 flex-1 rounded-full",
+                i < left ? "bg-sage" : "bg-cream-band",
+              )}
+            />
+          ))}
+        </div>
+      )}
+
+      <p className="mt-3 text-xs leading-relaxed text-muted">
+        {atLimit ? (
+          <MidnightCountdown />
+        ) : unlimited ? (
+          usedToday > 0 ? `${usedToday} sent today.` : "Pitch as many posts as you like."
+        ) : (
+          <>
+            <span className="font-semibold text-ink">
+              {left} pitch{left === 1 ? "" : "es"} left
+            </span>{" "}
+            · {usedToday} used today
+          </>
+        )}
       </p>
-      {usedToday > 0 && (
-        <p className="mt-1 text-xs font-semibold text-ink">
-          {usedToday} used today
+
+      {revealLeft != null && (
+        <p className="mt-3 flex items-start gap-2 rounded-xl bg-cream px-3 py-2 text-xs leading-relaxed text-ink/80">
+          <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-coral" />
+          <span>
+            <span className="font-semibold text-ink">
+              {revealLeft} of 3 parent reveals left.
+            </span>{" "}
+            Shared with the parent directory.
+          </span>
         </p>
       )}
-    </div>
+    </section>
   );
 }
 
-function PulseStat({ label, value }: { label: string; value: number }) {
+function PulseCard({
+  open,
+  fresh,
+  mine,
+  responses,
+  className,
+}: {
+  className?: string;
+  open: number;
+  fresh: number;
+  mine: number;
+  responses: number;
+}) {
+  const stats = [
+    { label: "Open posts", value: open, icon: Inbox, tone: "bg-sky/50 text-ink" },
+    { label: "New today", value: fresh, icon: Sparkles, tone: "bg-coral-wash text-coral" },
+    { label: "You pitched", value: mine, icon: Send, tone: "bg-sage-wash text-sage" },
+    { label: "All pitches", value: responses, icon: Users, tone: "bg-butter/70 text-ink" },
+  ];
   return (
-    <div className="flex items-baseline justify-between gap-2">
-      <span className="text-xs text-muted">{label}</span>
-      <span className="text-sm font-bold tabular-nums text-ink">{value}</span>
-    </div>
+    <section
+      className={cn(
+        "rounded-2xl border border-hairline bg-white p-4 shadow-[0_1px_2px_rgba(28,26,23,0.04)] sm:p-5",
+        className,
+      )}
+    >
+      <p className="text-sm font-bold text-ink">Board at a glance</p>
+      <dl className="mt-3 grid grid-cols-2 gap-2">
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-xl border border-hairline px-3 py-2.5">
+            <dt className="flex items-center gap-1.5 text-[11px] font-semibold text-muted">
+              <span className={cn("flex h-5 w-5 items-center justify-center rounded-md", s.tone)}>
+                <s.icon className="h-3 w-3" />
+              </span>
+              {s.label}
+            </dt>
+            <dd className="mt-1 text-lg font-extrabold tabular-nums text-ink">{s.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function HowItWorksCard() {
+  const steps = [
+    { title: "Pitch a post", body: "A short note on why you fit." },
+    { title: "Parent compares", body: "They see your pitch and profile." },
+    { title: "Free demo booked", body: "You get their number and confirm a time." },
+  ];
+  return (
+    <section className="rounded-2xl border border-hairline bg-cream/60 p-5">
+      <p className="flex items-center gap-1.5 text-sm font-bold text-ink">
+        <ShieldCheck className="h-4 w-4 text-sage" />
+        How it works
+      </p>
+      <ol className="mt-3 space-y-3">
+        {steps.map((s, i) => (
+          <li key={s.title} className="flex gap-3">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-ink ring-1 ring-hairline">
+              {i + 1}
+            </span>
+            <div>
+              <p className="text-[13px] font-semibold text-ink">{s.title}</p>
+              <p className="text-xs text-muted">{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p className="mt-4 border-t border-hairline pt-3 text-[11.5px] text-muted">
+        No coins, no commission.
+      </p>
+    </section>
   );
 }
 
@@ -798,28 +729,35 @@ function FilterChip({
   onClick,
   label,
   count,
+  dot,
+  icon: Icon,
 }: {
   active: boolean;
   onClick: () => void;
   label: string;
   count?: number;
+  dot?: string;
+  icon?: LucideIcon;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
-        "inline-flex h-10 shrink-0 items-center gap-2 rounded-full border px-4 text-sm font-semibold transition touch-manipulation",
+        "inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-[13px] font-semibold transition touch-manipulation",
         active
-          ? "border-coral bg-coral text-white"
-          : "border-hairline bg-white text-ink hover:bg-cream",
+          ? "border-ink bg-ink text-white"
+          : "border-hairline bg-white text-ink hover:border-ink/30",
       )}
     >
+      {dot ? <span className={cn("h-2 w-2 rounded-full", dot)} /> : null}
+      {Icon ? <Icon className={cn("h-3.5 w-3.5", active ? "text-white" : "text-muted")} /> : null}
       {label}
       {count != null && (
         <span
           className={cn(
-            "rounded-full px-1.5 py-0.5 text-[11px] font-bold tabular-nums",
+            "rounded-full px-1.5 text-[11px] font-bold tabular-nums",
             active ? "bg-white/20 text-white" : "bg-cream-band text-muted",
           )}
         >
@@ -827,90 +765,6 @@ function FilterChip({
         </span>
       )}
     </button>
-  );
-}
-
-function SidebarPanel({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="overflow-hidden rounded-2xl border border-hairline bg-white">
-      <div className="border-b border-hairline bg-cream/50 px-4 py-3">
-        <p className="text-[11px] font-bold tracking-[0.14em] text-muted uppercase">
-          {title}
-        </p>
-      </div>
-      <div className="p-2.5">{children}</div>
-    </section>
-  );
-}
-
-function SidebarLink({
-  active,
-  onClick,
-  icon,
-  label,
-  count,
-  tone,
-}: {
-  active: boolean;
-  onClick: () => void;
-  icon?: string;
-  label: string;
-  count?: number;
-  tone?: string;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-left text-sm font-semibold transition touch-manipulation",
-        active
-          ? "border-l-2 border-coral bg-cream-band pl-[10px] text-ink"
-          : "border-l-2 border-transparent text-muted hover:bg-cream hover:text-ink",
-      )}
-    >
-      {icon && (
-        <span
-          className={cn(
-            "flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold",
-            tone ?? "bg-cream-band text-ink",
-          )}
-        >
-          {icon}
-        </span>
-      )}
-      <span className="min-w-0 flex-1 truncate">{label}</span>
-      {count != null && (
-        <span className="text-xs font-bold tabular-nums text-muted">
-          {count}
-        </span>
-      )}
-    </button>
-  );
-}
-
-function WidgetCard({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="overflow-hidden rounded-2xl border border-hairline bg-white">
-      <div className="border-b border-hairline bg-cream/50 px-4 py-3">
-        <p className="text-[11px] font-bold tracking-[0.14em] text-muted uppercase">
-          {title}
-        </p>
-      </div>
-      <div className="p-5">{children}</div>
-    </section>
   );
 }
 
@@ -926,21 +780,56 @@ function displayLocation(area: string, city: string): string {
   return city.trim() || "Bengaluru";
 }
 
-function interestStatusLabel(status: BoardRequirement["myInterestStatus"]) {
-  switch (status) {
-    case "pending":
-      return "Awaiting parent";
-    case "accepted":
-      return "Connected on WhatsApp";
-    case "declined":
-      return "Declined";
-    default:
-      return null;
-  }
+const MY_STATUS: Record<
+  NonNullable<BoardRequirement["myInterestStatus"]>,
+  { label: string; cls: string; icon: LucideIcon }
+> = {
+  pending: { label: "Pitched · waiting for parent", cls: "bg-butter/60 text-ink", icon: Clock3 },
+  accepted: { label: "Connected with parent", cls: "bg-sage-wash text-sage", icon: Check },
+  declined: { label: "Not picked this time", cls: "bg-cream-band text-muted", icon: X },
+};
+
+function Fact({
+  icon: Icon,
+  label,
+  value,
+  tone = "default",
+}: {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  tone?: "default" | "good" | "hot";
+}) {
+  return (
+    <div
+      className={cn(
+        "flex min-w-0 items-center gap-2 rounded-xl border px-2.5 py-2 sm:gap-2.5 sm:px-3 sm:py-2.5",
+        tone === "good"
+          ? "border-sage/25 bg-sage-wash/60"
+          : tone === "hot"
+            ? "border-coral/25 bg-coral-wash/60"
+            : "border-hairline bg-cream/40",
+      )}
+    >
+      <span
+        className={cn(
+          "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-white shadow-[0_1px_2px_rgba(28,26,23,0.06)] sm:h-8 sm:w-8",
+          tone === "good" ? "text-sage" : tone === "hot" ? "text-coral" : "text-ink/70",
+        )}
+      >
+        <Icon className="h-4 w-4" />
+      </span>
+      <div className="min-w-0">
+        <p className="text-[10px] font-semibold tracking-wide text-muted uppercase sm:text-[10.5px]">{label}</p>
+        <p className="line-clamp-2 text-[12.5px] leading-snug font-bold break-words text-ink sm:text-[13px]" title={value}>
+          {value}
+        </p>
+      </div>
+    </div>
+  );
 }
 
-/** Post card — scan-friendly hierarchy with a clear action footer. */
-function ThreadCard({
+function PostCard({
   post: p,
   quotaLeft,
   premium,
@@ -960,227 +849,229 @@ function ThreadCard({
   const closingSoon = !closed && expires <= 2;
   const urgent = !closed && p.startTimeline === "immediately";
   const fresh = !closed && isNewPost(p.postedAt);
-  const clampable = p.details.length > 160;
+  const clampable = p.details.length > 180;
   const location = displayLocation(p.area, p.city);
-  const statusLabel = interestStatusLabel(p.myInterestStatus);
-  const showPitchCta =
-    !closed && p.myInterestStatus !== "pending";
+  const tone = subjectTone(p.subject);
+  const mine = p.myInterestStatus ? MY_STATUS[p.myInterestStatus] : null;
+  const showPitchCta = !closed && p.myInterestStatus !== "pending";
   const canPitch =
     showPitchCta && (quotaLeft > 0 || p.myInterestStatus === "accepted");
+  const extras = [
+    p.goal ? { icon: Target, text: p.goal } : null,
+    p.classesPerWeek ? { icon: Repeat, text: p.classesPerWeek } : null,
+    p.preferredTime ? { icon: Sun, text: p.preferredTime } : null,
+  ].filter((x): x is { icon: LucideIcon; text: string } => x !== null);
 
   return (
-    <li className="group transition-colors hover:bg-cream/30 active:bg-cream/50">
-      <div className="flex flex-col sm:flex-row">
-      {/* engagement rail — desktop only */}
-      <div className="hidden w-16 shrink-0 flex-col items-center justify-center border-b border-hairline bg-cream/25 py-5 sm:flex sm:border-r sm:border-b-0">
-        <MessageSquare
-          className={cn(
-            "h-4 w-4",
-            p.interestCount > 0 ? "text-coral" : "text-muted/60",
-          )}
-        />
-        <span
-          className={cn(
-            "mt-1.5 text-sm font-bold tabular-nums",
-            p.interestCount > 0 ? "text-ink" : "text-muted",
-          )}
-        >
-          {p.interestCount}
-        </span>
-        <span className="text-[10px] font-semibold text-muted uppercase">
-          {p.interestCount === 1 ? "pitch" : "pitches"}
-        </span>
-      </div>
-
-      {/* content */}
-      <div className="flex min-w-0 flex-1 flex-col px-4 py-4 sm:px-6 sm:py-5">
-        {/* 1 — scan line: what + when */}
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-muted sm:text-[13px]">
-            <span
-              className={cn(
-                "inline-flex h-6 items-center rounded-md px-2 text-[11px] font-bold uppercase tracking-wide",
-                subjectTone(p.subject),
-              )}
-            >
-              {p.subject}
-            </span>
-            <span className="font-medium text-ink/70">{p.classLevel}</span>
-            <span aria-hidden className="text-hairline">
-              ·
-            </span>
-            <span>{timeAgo(p.postedAt)}</span>
-            {fresh && (
-              <Badge
-                variant="coral"
-                className="px-2 py-0.5 text-[10px] font-bold uppercase"
-              >
-                New
-              </Badge>
+    <li>
+      <article
+        className={cn(
+          "rounded-2xl border bg-white p-4 shadow-[0_1px_2px_rgba(28,26,23,0.04)] transition sm:p-5",
+          closed
+            ? "border-hairline bg-white/70"
+            : p.myInterestStatus === "pending"
+              ? "border-butter-deep/60"
+              : "border-hairline hover:border-ink/15 hover:shadow-[0_8px_24px_-12px_rgba(28,26,23,0.18)]",
+        )}
+      >
+        {/* header */}
+        <div className="flex items-start gap-3">
+          <span
+            className={cn(
+              "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-lg font-extrabold",
+              closed ? "bg-cream-band text-muted" : tone.tile,
             )}
-            <span className="inline-flex items-center gap-1 rounded-full bg-cream-band px-2 py-0.5 text-[11px] font-bold text-ink sm:hidden">
-              <MessageSquare className="h-3 w-3 text-coral" />
-              {p.interestCount}
-            </span>
+            aria-hidden
+          >
+            {p.subject.charAt(0)}
+          </span>
+          <div className="min-w-0 flex-1">
+            <h3 className={cn("text-base font-bold leading-snug sm:text-lg", closed ? "text-ink/70" : "text-ink")}>
+              {p.subject} tutor
+            </h3>
+            <p className="mt-0.5 flex flex-wrap items-center gap-x-1.5 text-[13px] text-ink/75">
+              <GraduationCap className="h-3.5 w-3.5 text-muted" />
+              <span className="font-semibold">{p.classLevel}</span>
+              {p.board ? (
+                <>
+                  <span className="text-muted">·</span>
+                  <span>{p.board}</span>
+                </>
+              ) : null}
+              <span className="hidden text-muted sm:inline">·</span>
+              <span className="basis-full text-muted sm:basis-auto">
+                Posted {timeAgo(p.postedAt)}
+              </span>
+            </p>
           </div>
-          {closed ? (
-            <Badge variant="muted" className="gap-1 px-2.5 py-1 text-[11px]">
-              <Lock className="h-3 w-3" />
-              Closed
-            </Badge>
-          ) : closingSoon ? (
-            <Badge
-              variant="coral"
-              className="gap-1 px-2.5 py-1 text-[11px] font-bold"
-            >
-              <Hourglass className="h-3 w-3" />
-              {expires === 0 ? "Expires today" : `${expires}d left`}
-            </Badge>
-          ) : (
-            <span className="text-[11px] font-semibold tabular-nums text-muted">
-              {expires}d left
-            </span>
-          )}
-        </div>
-
-        {/* 2 — headline */}
-        <h3 className="mt-2.5 text-lg leading-snug font-bold text-ink group-hover:text-coral-dark sm:text-xl">
-          {p.subject} tutor · {p.classLevel}
-        </h3>
-
-        {/* 3 — decision factors (budget & logistics first) */}
-        <div className="mt-3 flex flex-wrap gap-2">
-          {budget ? (
-            <Badge variant="sage" className="gap-1.5 px-2.5 py-1 text-xs font-bold">
-              <IndianRupee className="h-3 w-3" />
-              {budget}
-            </Badge>
-          ) : null}
-          <Badge variant="cream" className="gap-1.5 px-2.5 py-1 text-xs font-medium">
-            <MapPin className="h-3 w-3" />
-            {location}
-          </Badge>
-          <Badge variant="cream" className="gap-1.5 px-2.5 py-1 text-xs font-medium">
-            <MonitorSmartphone className="h-3 w-3" />
-            {p.modes.map((m) => MODE_LABELS[m]).join(" · ")}
-          </Badge>
-          <Badge
-            variant={urgent ? "coral" : "cream"}
-            className="gap-1.5 px-2.5 py-1 text-xs font-medium"
-          >
-            <Clock3 className="h-3 w-3" />
-            {TIMELINE_LABELS[p.startTimeline] ?? "Flexible"}
-          </Badge>
-        </div>
-
-        {/* 4 — details */}
-        <p
-          className={cn(
-            "mt-3 text-[15px] leading-relaxed text-ink/80 sm:text-sm",
-            !expanded && clampable && "line-clamp-3 sm:line-clamp-2",
-          )}
-        >
-          {p.details}
-        </p>
-        {clampable && (
-          <button
-            type="button"
-            onClick={() => setExpanded((v) => !v)}
-            className="mt-1.5 inline-flex min-h-9 items-center gap-1 text-sm font-bold text-coral touch-manipulation hover:text-coral-dark"
-          >
-            {expanded ? (
-              <>
-                Show less <ChevronUp className="h-4 w-4" />
-              </>
-            ) : (
-              <>
-                Read more <ChevronDown className="h-4 w-4" />
-              </>
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
+            {fresh && (
+              <span className="rounded-full bg-coral px-2 py-0.5 text-[10px] font-bold tracking-wide text-white uppercase">
+                New
+              </span>
             )}
-          </button>
+            {closed ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-cream-band px-2.5 py-1 text-[11px] font-bold text-muted">
+                <Lock className="h-3 w-3" />
+                Closed
+              </span>
+            ) : closingSoon ? (
+              <span className="inline-flex items-center gap-1 rounded-full bg-coral-wash px-2.5 py-1 text-[11px] font-bold text-coral-dark">
+                <Hourglass className="h-3 w-3" />
+                {expires === 0 ? "Ends today" : `${expires}d left`}
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 rounded-full bg-cream px-2.5 py-1 text-[11px] font-semibold tabular-nums text-muted">
+                <Hourglass className="h-3 w-3" />
+                {expires}d left
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* key facts */}
+        <div className="mt-4 grid grid-cols-2 gap-2 lg:grid-cols-4">
+          <Fact
+            icon={Wallet}
+            label="Budget"
+            value={budget ?? "Open to quotes"}
+            tone={budget ? "good" : "default"}
+          />
+          <Fact
+            icon={p.modes.length === 1 ? MODE_ICONS[p.modes[0]] ?? Laptop : Laptop}
+            label="Mode"
+            value={p.modes.map((m) => MODE_LABELS[m]).join(", ")}
+          />
+          <Fact
+            icon={CalendarClock}
+            label="Starts"
+            value={TIMELINE_LABELS[p.startTimeline] ?? "Flexible"}
+            tone={urgent ? "hot" : "default"}
+          />
+          <Fact icon={MapPin} label="Area" value={location} />
+        </div>
+
+        {extras.length > 0 && (
+          <div className="mt-2.5 flex flex-wrap gap-1.5">
+            {extras.map((x) => (
+              <span
+                key={x.text}
+                className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-white px-2.5 py-1 text-xs font-medium text-ink/80"
+              >
+                <x.icon className="h-3.5 w-3.5 text-muted" />
+                {x.text}
+              </span>
+            ))}
+          </div>
         )}
 
-        {/* 5 — action footer: status left, CTAs right (stacked until the row fits) */}
-        <div className="mt-4 flex flex-col gap-3 border-t border-hairline pt-4 md:flex-row md:items-center md:justify-between">
-          <div className="min-w-0">
-            {statusLabel ? (
-              <span
-                className={cn(
-                  "inline-flex max-w-full items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold",
-                  p.myInterestStatus === "pending" && "bg-butter/60 text-ink",
-                  p.myInterestStatus === "accepted" && "bg-sage-wash text-sage",
-                  p.myInterestStatus === "declined" && "bg-cream-band text-muted",
-                )}
-              >
-                {p.myInterestStatus === "pending" && (
-                  <Clock3 className="h-3.5 w-3.5 shrink-0" />
-                )}
-                {p.myInterestStatus === "accepted" && (
-                  <Check className="h-3.5 w-3.5 shrink-0" />
-                )}
-                <span className="truncate">{statusLabel}</span>
-              </span>
-            ) : closed ? (
-              <span className="text-sm font-medium text-muted">Post closed</span>
-            ) : p.interestCount > 0 ? (
-              <span className="text-sm font-medium text-muted">
-                {p.interestCount} tutor{p.interestCount === 1 ? "" : "s"} pitched
-              </span>
-            ) : (
-              <span className="text-sm font-medium text-coral">
-                Be first to pitch
-              </span>
+        {/* parent's note */}
+        <div className="mt-3.5">
+          <p
+            className={cn(
+              "text-[14px] leading-relaxed text-ink/80",
+              !expanded && clampable && "line-clamp-3 sm:line-clamp-2",
             )}
-          </div>
-
-          <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end">
-          {premium && p.parentId && !closed && (
+          >
+            {p.details}
+          </p>
+          {clampable && (
             <button
               type="button"
-              onClick={onReveal}
-              className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full border border-ink/15 bg-white px-3 text-xs font-semibold whitespace-nowrap text-ink touch-manipulation transition-colors hover:border-ink/30 hover:bg-cream"
+              onClick={() => setExpanded((v) => !v)}
+              className="mt-1 inline-flex min-h-8 items-center gap-1 text-[13px] font-bold text-coral touch-manipulation hover:text-coral-dark"
             >
-              <Sparkles className="h-3.5 w-3.5 shrink-0 text-coral" />
-              Reveal parent
-            </button>
-          )}
-          {showPitchCta && (
-            <Button
-              size="sm"
-              onClick={onRespond}
-              disabled={!canPitch}
-              variant={
-                p.myInterestStatus === "accepted"
-                  ? "secondary"
-                  : p.myInterestStatus === "declined"
-                    ? "secondary"
-                    : "primary"
-              }
-              className={cn(
-                "h-11 w-full shrink-0 gap-1.5 rounded-lg px-5 text-sm font-bold whitespace-nowrap touch-manipulation sm:w-auto",
-                p.myInterestStatus === "accepted" || p.myInterestStatus === "declined"
-                  ? "sm:min-w-[8.5rem]"
-                  : "sm:min-w-[6.5rem]",
-              )}
-            >
-              {!canPitch ? (
-                "Limit reached"
-              ) : p.myInterestStatus === "accepted" ? (
-                "Pitch again"
-              ) : p.myInterestStatus === "declined" ? (
-                "Try again"
+              {expanded ? (
+                <>
+                  Show less <ChevronUp className="h-4 w-4" />
+                </>
               ) : (
                 <>
-                  Pitch
-                  <ArrowUpRight className="h-4 w-4" />
+                  Read more <ChevronDown className="h-4 w-4" />
                 </>
               )}
-            </Button>
+            </button>
           )}
-          </div>
         </div>
-      </div>
-      </div>
+
+        {/* footer */}
+        <div className="mt-4 flex flex-col gap-3 border-t border-hairline pt-3.5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
+            <span
+              className={cn(
+                "inline-flex items-center gap-1.5 text-[13px] font-semibold",
+                p.interestCount > 0 ? "text-ink" : closed ? "text-muted" : "text-coral-dark",
+              )}
+            >
+              <span
+                className={cn(
+                  "flex h-7 w-7 items-center justify-center rounded-full",
+                  p.interestCount > 0 ? "bg-cream-band" : "bg-coral-wash",
+                )}
+              >
+                <Users className={cn("h-3.5 w-3.5", p.interestCount > 0 ? "text-ink/70" : "text-coral")} />
+              </span>
+              {p.interestCount > 0
+                ? `${p.interestCount} tutor${p.interestCount === 1 ? "" : "s"} pitched`
+                : closed
+                  ? "No pitches"
+                  : "No pitches yet — be first"}
+            </span>
+            {mine ? (
+              <span
+                className={cn(
+                  "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold",
+                  mine.cls,
+                )}
+              >
+                <mine.icon className="h-3.5 w-3.5" />
+                {mine.label}
+              </span>
+            ) : null}
+          </div>
+
+          {(showPitchCta || (premium && p.parentId && !closed)) && (
+            <div className="flex w-full items-center gap-2 sm:w-auto">
+              {premium && p.parentId && !closed && (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={onReveal}
+                  className="h-11 flex-1 gap-1.5 rounded-xl px-4 text-sm font-bold sm:flex-none"
+                >
+                  <Sparkles className="h-4 w-4 text-coral" />
+                  Reveal parent
+                </Button>
+              )}
+              {showPitchCta && (
+                <Button
+                  onClick={onRespond}
+                  disabled={!canPitch}
+                  variant={p.myInterestStatus ? "secondary" : "primary"}
+                  className="h-11 flex-1 gap-1.5 rounded-xl px-5 text-sm font-bold whitespace-nowrap touch-manipulation sm:min-w-[9rem] sm:flex-none"
+                >
+                  {!canPitch ? (
+                    <>
+                      <Lock className="h-4 w-4" />
+                      Limit reached
+                    </>
+                  ) : p.myInterestStatus ? (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Pitch again
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Pitch this post
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
+          )}
+        </div>
+      </article>
     </li>
   );
 }
@@ -1526,7 +1417,7 @@ function PitchDialog({
               <DialogDescription className="text-sm text-muted">
                 {alreadyConnected
                   ? "Your pitch was saved. You're already connected with this parent on WhatsApp."
-                  : "The parent will review your profile. If they accept, you're connected on WhatsApp — free, no fees."}
+                  : "The parent compares pitches. If they pick you, they book a free demo and you get their number — no fees."}
               </DialogDescription>
             </DialogHeader>
             <Button className="mt-6 w-full" onClick={onSent}>
@@ -1535,21 +1426,44 @@ function PitchDialog({
           </div>
         ) : (
           <>
-            <DialogHeader className="border-b border-hairline bg-cream/30 px-6 py-5">
-              <DialogTitle className="text-lg font-bold text-ink">
-                Pitch this post
-              </DialogTitle>
-              <DialogDescription className="text-sm text-muted">
-                {post?.subject} · {post?.classLevel} · {post?.area}
-              </DialogDescription>
+            <DialogHeader className="border-b border-hairline bg-cream/40 px-6 py-5 text-left">
+              <div className="flex items-center gap-3">
+                {post ? (
+                  <span
+                    className={cn(
+                      "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-extrabold",
+                      subjectTone(post.subject).tile,
+                    )}
+                    aria-hidden
+                  >
+                    {post.subject.charAt(0)}
+                  </span>
+                ) : null}
+                <div className="min-w-0">
+                  <DialogTitle className="text-lg font-bold text-ink">
+                    Pitch · {post?.subject} tutor
+                  </DialogTitle>
+                  <DialogDescription className="text-sm text-muted">
+                    {post
+                      ? [
+                          post.classLevel,
+                          displayLocation(post.area, post.city),
+                          budgetLabel(post),
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")
+                      : null}
+                  </DialogDescription>
+                </div>
+              </div>
             </DialogHeader>
 
             <div className="space-y-4 bg-white px-6 py-5">
               <div className="flex items-start gap-2.5 rounded-lg bg-butter/40 px-4 py-3">
                 <Lock className="mt-0.5 h-4 w-4 shrink-0 text-ink/50" />
                 <p className="text-xs leading-relaxed text-ink/80">
-                  Parent sees your pitch + profile. WhatsApp unlocks only if
-                  they accept — no coins, ever.
+                  Parent sees your pitch + profile. You get their number when
+                  they book a demo with you — no coins, ever.
                 </p>
               </div>
 
@@ -1592,19 +1506,17 @@ function PitchDialog({
               )}
             </div>
 
-            <DialogFooter className="border-t border-hairline bg-cream/20 px-6 py-4 sm:justify-stretch">
+            <DialogFooter className="gap-2 border-t border-hairline bg-cream/20 px-6 py-4 sm:justify-stretch">
               <Button
                 variant="secondary"
-                size="sm"
-                className="flex-1"
+                className="h-11 w-full rounded-xl sm:w-auto sm:flex-1"
                 onClick={onClose}
                 disabled={sending}
               >
                 Cancel
               </Button>
               <Button
-                size="sm"
-                className="flex-1"
+                className="h-11 w-full rounded-xl sm:w-auto sm:flex-1"
                 onClick={handleSend}
                 disabled={sending || message.trim().length < PITCH_MIN}
               >

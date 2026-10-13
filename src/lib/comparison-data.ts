@@ -115,7 +115,7 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   {
     label: "Speed to first conversation",
     cells: {
-      mentr: { tone: "good", text: "Minutes with Instant Connect" },
+      mentr: { tone: "good", text: "Tutors pitch within hours" },
       urbanpro: { tone: "mixed", text: "Hours to days" },
       superprof: { tone: "mixed", text: "Depends on tutor reply" },
       vedantu: { tone: "good", text: "Fast sales callback" },

@@ -35,8 +35,8 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
     post.slug.includes("instant-connect")
   ) {
     links.push({
-      label: "Get Matched Instantly",
-      href: "/instant-connect",
+      label: "Post a requirement",
+      href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1",
     });
     links.push({
       label: "Find a Tutor",
@@ -107,7 +107,7 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
 
   links.push({
     label: "Post your requirement",
-    href: "/parent/signup?next=/parent/dashboard",
+    href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1",
   });
 
   const seen = new Set<string>();

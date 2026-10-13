@@ -54,8 +54,7 @@ const LEARN_CONTENT_HOURS = 5;
 const floorForDisplay = (n: number) =>
   n >= 1000 ? Math.floor(n / 100) * 100 : n;
 
-const PARENT_SIGNUP =
-  "/parent/signup?next=/parent/dashboard%23instant-connect";
+const PARENT_SIGNUP = "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1";
 const MENTOR_SIGNUP = "/faculty/signup";
 
 /* ── Motion helpers ─────────────────────────────────────────────── */
@@ -492,8 +491,8 @@ function AudienceSplit() {
               accent="coral"
               points={[
                 "Browse verified home & online tutors — no login needed",
-                "Instant Connect: get matched with available tutors fast",
-                "Post your need once and let tutors come to you",
+                "Post your need once and let tutors pitch to you",
+                "Compare pitches by match score, out of 5",
                 "Book a demo — the tutor confirms the time",
               ]}
               cta="Find a tutor — free"

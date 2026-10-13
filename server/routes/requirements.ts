@@ -1,27 +1,37 @@
 import { Router, Response } from "express";
 import { randomBytes } from "crypto";
+import type { Types } from "mongoose";
 import { Connection, type IConnection } from "../models/Connection";
 import {
+  CLASSES_PER_WEEK,
   MAX_OPEN_REQUIREMENTS,
+  PREFERRED_TIMES,
+  REQUIREMENT_BOARDS,
+  REQUIREMENT_GOALS,
   Requirement,
   START_TIMELINES,
   TIMELINE_TTL_DAYS,
   type IRequirement,
   type StartTimeline,
 } from "../models/Requirement";
+import { LEGAL_DOCS_VERSION } from "../../src/lib/legal";
+import {
+  explainMatch,
+  findTopMatches,
+  type MatchInput,
+} from "../services/instant-connect-match";
 import { TEACHING_MODES, User, type TeachingMode } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "./auth";
 import { notifyParentRequirementPitch } from "../services/parent-notifications";
+import { alertTutorsOfNewPost } from "../services/requirement-tutor-alert";
 import { isMentrPremiumActive } from "../services/premium-mentor-billing";
 import { getRevealQuota } from "../services/parent-contact-reveal";
 
 const router = Router();
 
 router.use(ensureDb);
-
-router.use(requireAuth);
 
 const DETAILS_MIN = 20;
 const DETAILS_MAX = 500;
@@ -58,6 +68,10 @@ function serializeForBoard(
     budgetMax: r.budgetMax ?? null,
     details: r.details,
     startTimeline: r.startTimeline ?? "flexible",
+    board: r.board ?? null,
+    goal: r.goal ?? null,
+    classesPerWeek: r.classesPerWeek ?? null,
+    preferredTime: r.preferredTime ?? null,
     status: requirePostable(r.status, r.expiresAt) ? "open" : "closed",
     interestCount: r.interestCount,
     postedAt: r.createdAt,
@@ -80,6 +94,10 @@ function serializeForOwner(r: IRequirement) {
     budgetMax: r.budgetMax ?? null,
     details: r.details,
     startTimeline: r.startTimeline ?? "flexible",
+    board: r.board ?? null,
+    goal: r.goal ?? null,
+    classesPerWeek: r.classesPerWeek ?? null,
+    preferredTime: r.preferredTime ?? null,
     status: requirePostable(r.status, r.expiresAt) ? "open" : "closed",
     interestCount: r.interestCount,
     postedAt: r.createdAt,
@@ -99,6 +117,317 @@ async function ensureShareToken(r: IRequirement): Promise<string> {
   return r.shareToken;
 }
 
+type ParsedPost = {
+  subject: string;
+  classLevel: string;
+  area: string;
+  modes: TeachingMode[];
+  budgetMin?: number;
+  budgetMax?: number;
+  details: string;
+  startTimeline: StartTimeline;
+  board?: string;
+  goal?: string;
+  classesPerWeek?: string;
+  preferredTime?: string;
+};
+
+function pickFrom<T extends readonly string[]>(
+  list: T,
+  raw: unknown,
+): T[number] | undefined {
+  const value = String(raw ?? "").trim();
+  return (list as readonly string[]).includes(value)
+    ? (value as T[number])
+    : undefined;
+}
+
+function parsePost(
+  body: Record<string, unknown> | undefined,
+): { ok: true; data: ParsedPost } | { ok: false; error: string } {
+  const b = body ?? {};
+  const subject = String(b.subject || "").trim();
+  const classLevel = String(b.classLevel || "").trim();
+  const area = String(b.area || "").trim();
+  const note = String(b.details || "").trim();
+  const startTimeline = String(b.startTimeline || "") as StartTimeline;
+  const rawModes = Array.isArray(b.modes) ? b.modes : [];
+  const modes = rawModes.filter((m: unknown): m is TeachingMode =>
+    (TEACHING_MODES as readonly string[]).includes(String(m)),
+  );
+
+  if (!subject || subject.length > 60) return { ok: false, error: "Pick a subject" };
+  if (!classLevel || classLevel.length > 40) {
+    return { ok: false, error: "Pick a class level" };
+  }
+  if (modes.length === 0) {
+    return { ok: false, error: "Pick at least one teaching mode" };
+  }
+  if (area.length > 80 || (modes.includes("student_home") && !area)) {
+    return { ok: false, error: "Add your area (locality only)" };
+  }
+  if (!START_TIMELINES.includes(startTimeline)) {
+    return { ok: false, error: "Pick when you want to start" };
+  }
+  if (note.length > DETAILS_MAX) {
+    return { ok: false, error: `Keep details under ${DETAILS_MAX} characters` };
+  }
+
+  let budgetMin: number | undefined;
+  let budgetMax: number | undefined;
+  if (b.budgetMin != null && b.budgetMin !== "") {
+    budgetMin = Number(b.budgetMin);
+    if (!Number.isFinite(budgetMin) || budgetMin < 0 || budgetMin > 100000) {
+      return { ok: false, error: "Invalid minimum budget" };
+    }
+  }
+  if (b.budgetMax != null && b.budgetMax !== "") {
+    budgetMax = Number(b.budgetMax);
+    if (!Number.isFinite(budgetMax) || budgetMax < 0 || budgetMax > 100000) {
+      return { ok: false, error: "Invalid maximum budget" };
+    }
+  }
+  if (budgetMin != null && budgetMax != null && budgetMin > budgetMax) {
+    return { ok: false, error: "Minimum budget can't exceed maximum" };
+  }
+
+  const board = pickFrom(REQUIREMENT_BOARDS, b.board);
+  const goal = pickFrom(REQUIREMENT_GOALS, b.goal);
+  const classesPerWeek = pickFrom(CLASSES_PER_WEEK, b.classesPerWeek);
+  const preferredTime = pickFrom(PREFERRED_TIMES, b.preferredTime);
+
+  // Tutors read `details` on the board — compose one from the picked
+  // options so a post is useful even when the parent skips the note.
+  const summary = [
+    `Looking for a ${subject} tutor for ${classLevel}${board && board !== "Other" ? ` (${board})` : ""}.`,
+    goal ? `Goal: ${goal.toLowerCase()}.` : "",
+    classesPerWeek ? `${classesPerWeek} classes a week.` : "",
+    preferredTime && preferredTime !== "Any time"
+      ? `Prefers ${preferredTime.toLowerCase()}.`
+      : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const details =
+    note.length >= DETAILS_MIN ? note : [summary, note].filter(Boolean).join(" ").slice(0, DETAILS_MAX);
+
+  return {
+    ok: true,
+    data: {
+      subject,
+      classLevel,
+      area,
+      modes,
+      budgetMin,
+      budgetMax,
+      details,
+      startTimeline,
+      board,
+      goal,
+      classesPerWeek,
+      preferredTime,
+    },
+  };
+}
+
+function matchInputFor(
+  data: Pick<
+    ParsedPost,
+    "subject" | "classLevel" | "modes" | "area" | "budgetMin" | "budgetMax" | "board"
+  >,
+  city: string,
+): MatchInput {
+  const online = data.modes.includes("online");
+  const offline = data.modes.some((m) => m !== "online");
+  return {
+    subject: data.subject,
+    classLevel: data.classLevel,
+    mode: online && offline ? "either" : online ? "online" : "offline",
+    location: [data.area, city].filter(Boolean).join(", "),
+    budgetMin: data.budgetMin ?? undefined,
+    budgetMax: data.budgetMax ?? undefined,
+    board: data.board,
+  };
+}
+
+const SHOWN_MATCHES = 4;
+const ALERTED_TUTORS = 10;
+
+/** Top matches for the parent, and an email nudge to the best-fit tutors. */
+async function matchAndAlert(requirement: IRequirement, data: ParsedPost, city: string) {
+  try {
+    const { matches } = await findTopMatches(matchInputFor(data, city), ALERTED_TUTORS);
+    void alertTutorsOfNewPost(
+      requirement,
+      matches.map((m) => m.id),
+    ).catch((err) => console.error("new post tutor alert failed:", err));
+    return matches.slice(0, SHOWN_MATCHES);
+  } catch (err) {
+    console.error("requirement match error:", err);
+    return [];
+  }
+}
+
+async function createRequirement(
+  parentId: Types.ObjectId,
+  city: string,
+  data: ParsedPost,
+  extra: { contactName?: string; contactPhone?: string; source: "parent" | "guest" },
+): Promise<IRequirement | { error: string }> {
+  const openCount = await Requirement.countDocuments({
+    parent: parentId,
+    status: "open",
+    expiresAt: { $gt: new Date() },
+  });
+  if (openCount >= MAX_OPEN_REQUIREMENTS) {
+    return {
+      error: `You can have up to ${MAX_OPEN_REQUIREMENTS} open posts — close one to post a new need`,
+    };
+  }
+  return (await Requirement.create({
+    parent: parentId,
+    city,
+    ...data,
+    area: data.area || city,
+    ...extra,
+    status: "open",
+    shareToken: newShareToken(),
+    // Urgent needs expire fast; flexible ones stay up longer
+    expiresAt: new Date(
+      Date.now() + TIMELINE_TTL_DAYS[data.startTimeline] * 24 * 60 * 60 * 1000,
+    ),
+  })) as IRequirement;
+}
+
+const GUEST_IP_WINDOW_MS = 60 * 60 * 1000;
+const GUEST_IP_MAX = 5;
+const guestIpHits = new Map<string, number[]>();
+
+function guestIpLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (guestIpHits.get(ip) ?? []).filter(
+    (t) => now - t < GUEST_IP_WINDOW_MS,
+  );
+  if (hits.length >= GUEST_IP_MAX) {
+    guestIpHits.set(ip, hits);
+    return true;
+  }
+  hits.push(now);
+  guestIpHits.set(ip, hits);
+  return false;
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^\+?[\d\s-]{10,15}$/;
+
+/**
+ * Guest: post without an account. Creates (or reuses) an unverified parent
+ * stub for the email — signing in with an email code later verifies it and
+ * shows the pitches. Verified accounts must sign in instead.
+ */
+router.post("/guest", async (req, res: Response) => {
+  try {
+    if (guestIpLimited(req.ip ?? "unknown")) {
+      res.status(429).json({ error: "Too many posts. Try again in an hour." });
+      return;
+    }
+
+    const name = String(req.body?.name || "").trim().slice(0, 80);
+    const email = String(req.body?.email || "").trim().toLowerCase().slice(0, 160);
+    const phone = String(req.body?.phone || "").trim().slice(0, 20);
+    const city = String(req.body?.city || "").trim().slice(0, 60) || "Bengaluru";
+
+    if (!name) {
+      res.status(400).json({ error: "Add your name" });
+      return;
+    }
+    if (!EMAIL_RE.test(email)) {
+      res.status(400).json({ error: "Enter a valid email" });
+      return;
+    }
+    if (!PHONE_RE.test(phone)) {
+      res.status(400).json({ error: "Enter a valid WhatsApp number" });
+      return;
+    }
+    if (req.body?.acceptedLegal !== true) {
+      res.status(400).json({
+        error: "Please accept the Terms of service and Privacy policy to continue.",
+      });
+      return;
+    }
+
+    const parsed = parsePost(req.body);
+    if (!parsed.ok) {
+      res.status(400).json({ error: parsed.error });
+      return;
+    }
+
+    let user = await User.findOne({ email });
+    if (user?.emailVerified) {
+      res.status(409).json({
+        error:
+          user.role === "parent"
+            ? "You already have a Mentr account — log in to post this."
+            : "This email belongs to a tutor account. Use a parent email.",
+        code: user.role === "parent" ? "ACCOUNT_EXISTS" : "ROLE_MISMATCH",
+      });
+      return;
+    }
+
+    const parentProfile = {
+      name,
+      phoneNumber: phone,
+      country: "India",
+      city,
+      area: parsed.data.area,
+    };
+    const acquisition = {
+      ...(typeof req.body?.registrationSource === "string" &&
+      req.body.registrationSource.trim()
+        ? { registrationSource: req.body.registrationSource.trim().slice(0, 2048) }
+        : {}),
+    };
+    if (user) {
+      user.role = "parent";
+      user.parentProfile = parentProfile as NonNullable<typeof user.parentProfile>;
+      if (!user.registrationSource && acquisition.registrationSource) {
+        user.registrationSource = acquisition.registrationSource;
+      }
+      await user.save();
+    } else {
+      user = await User.create({
+        email,
+        role: "parent",
+        emailVerified: false,
+        parentProfile,
+        legalAcceptedAt: new Date(),
+        legalAcceptedVersion: LEGAL_DOCS_VERSION,
+        ...acquisition,
+      });
+    }
+
+    const created = await createRequirement(user._id, city, parsed.data, {
+      source: "guest",
+    });
+    if ("error" in created) {
+      res.status(409).json({ error: created.error });
+      return;
+    }
+
+    res.status(201).json({
+      requirement: serializeForOwner(created),
+      matches: await matchAndAlert(created, parsed.data, city),
+      email,
+      message: "Posted — tutors will pitch you by email",
+    });
+  } catch (error) {
+    console.error("guest post requirement error:", error);
+    res.status(500).json({ error: "Failed to post requirement" });
+  }
+});
+
+router.use(requireAuth);
+
 /**
  * Parent: post a learning need to the board. Anonymous by design — tutors
  * see subject/class/area/budget/details, never the parent's identity.
@@ -113,112 +442,62 @@ router.post("/", async (req: AuthenticatedRequest, res: Response) => {
     }
 
     const parent = await User.findById(req.auth!.sub);
-    if (!parent?.parentProfile?.name) {
-      res
-        .status(400)
-        .json({ error: "Complete your details before posting a requirement" });
+    if (!parent) {
+      res.status(404).json({ error: "Account not found" });
       return;
     }
 
-    const subject = String(req.body?.subject || "").trim();
-    const classLevel = String(req.body?.classLevel || "").trim();
-    const area = String(req.body?.area || "").trim();
-    const details = String(req.body?.details || "").trim();
-    const startTimeline = String(
-      req.body?.startTimeline || "",
-    ) as StartTimeline;
-    const rawModes = Array.isArray(req.body?.modes) ? req.body.modes : [];
-    const modes = rawModes.filter((m: unknown): m is TeachingMode =>
-      (TEACHING_MODES as readonly string[]).includes(String(m)),
-    );
-
-    if (!subject || subject.length > 60) {
-      res.status(400).json({ error: "Pick a subject" });
+    const contactName = String(req.body?.contactName || "").trim().slice(0, 80);
+    const contactPhone = String(req.body?.contactPhone || "").trim().slice(0, 20);
+    if (contactPhone && !PHONE_RE.test(contactPhone)) {
+      res.status(400).json({ error: "Enter a valid WhatsApp number" });
       return;
     }
-    if (!classLevel || classLevel.length > 40) {
-      res.status(400).json({ error: "Pick a class level" });
-      return;
-    }
-    if (!area || area.length > 80) {
-      res.status(400).json({ error: "Add your area (locality only)" });
-      return;
-    }
-    if (modes.length === 0) {
-      res.status(400).json({ error: "Pick at least one teaching mode" });
-      return;
-    }
-    if (!START_TIMELINES.includes(startTimeline)) {
-      res.status(400).json({ error: "Pick when you want to start" });
-      return;
-    }
-    if (details.length < DETAILS_MIN) {
-      res.status(400).json({
-        error: `Describe what you need (at least ${DETAILS_MIN} characters)`,
-      });
-      return;
-    }
-    if (details.length > DETAILS_MAX) {
-      res
-        .status(400)
-        .json({ error: `Keep details under ${DETAILS_MAX} characters` });
+    const name = parent.parentProfile?.name || contactName;
+    if (!name) {
+      res.status(400).json({ error: "Add your name so tutors know who to address" });
       return;
     }
 
-    let budgetMin: number | undefined;
-    let budgetMax: number | undefined;
-    if (req.body?.budgetMin != null && req.body.budgetMin !== "") {
-      budgetMin = Number(req.body.budgetMin);
-      if (!Number.isFinite(budgetMin) || budgetMin < 0 || budgetMin > 100000) {
-        res.status(400).json({ error: "Invalid minimum budget" });
-        return;
-      }
-    }
-    if (req.body?.budgetMax != null && req.body.budgetMax !== "") {
-      budgetMax = Number(req.body.budgetMax);
-      if (!Number.isFinite(budgetMax) || budgetMax < 0 || budgetMax > 100000) {
-        res.status(400).json({ error: "Invalid maximum budget" });
-        return;
-      }
-    }
-    if (budgetMin != null && budgetMax != null && budgetMin > budgetMax) {
-      res.status(400).json({ error: "Minimum budget can't exceed maximum" });
+    const parsed = parsePost(req.body);
+    if (!parsed.ok) {
+      res.status(400).json({ error: parsed.error });
       return;
     }
 
-    const openCount = await Requirement.countDocuments({
-      parent: parent._id,
-      status: "open",
-      expiresAt: { $gt: new Date() },
+    const city = parent.parentProfile?.city || "Bengaluru";
+    // A number given here completes a missing profile; otherwise it only
+    // applies to this post.
+    if (!parent.parentProfile?.phoneNumber && contactPhone) {
+      parent.parentProfile = {
+        ...(parent.parentProfile ?? {}),
+        name,
+        phoneNumber: contactPhone,
+        country: parent.parentProfile?.country || "India",
+        city,
+        area: parent.parentProfile?.area || parsed.data.area,
+      } as NonNullable<typeof parent.parentProfile>;
+      parent.profileCompleted = true;
+      parent.markModified("parentProfile");
+      await parent.save();
+    }
+
+    const created = await createRequirement(parent._id, city, parsed.data, {
+      contactName: parent.parentProfile?.name ? undefined : contactName,
+      contactPhone:
+        contactPhone && contactPhone !== parent.parentProfile?.phoneNumber
+          ? contactPhone
+          : undefined,
+      source: "parent",
     });
-    if (openCount >= MAX_OPEN_REQUIREMENTS) {
-      res.status(409).json({
-        error: `You can have up to ${MAX_OPEN_REQUIREMENTS} open posts — close one to post a new need`,
-      });
+    if ("error" in created) {
+      res.status(409).json({ error: created.error });
       return;
     }
-
-    const requirement = (await Requirement.create({
-      parent: parent._id,
-      subject,
-      classLevel,
-      city: parent.parentProfile.city || "Bengaluru",
-      area,
-      modes,
-      budgetMin,
-      budgetMax,
-      details,
-      startTimeline,
-      status: "open",
-      shareToken: newShareToken(),
-      // Urgent needs expire fast; flexible ones stay up longer
-      expiresAt: new Date(
-        Date.now() + TIMELINE_TTL_DAYS[startTimeline] * 24 * 60 * 60 * 1000,
-      ),
-    })) as IRequirement;
 
     res.status(201).json({
-      requirement: serializeForOwner(requirement),
+      requirement: serializeForOwner(created),
+      matches: await matchAndAlert(created, parsed.data, city),
       message: "Posted — verified tutors can now reach out to you",
     });
   } catch (error) {
@@ -253,19 +532,10 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
     const teacherIds = [...new Set(interests.map((c) => c.teacher.toString()))];
     const teachers = teacherIds.length
       ? await User.find({ _id: { $in: teacherIds } }).select(
-          "profile.phoneNumber profileImageUrl",
+          "role profile profileImageUrl",
         )
       : [];
-    const teacherById = new Map(
-      teachers.map((t) => [
-        t._id.toString(),
-        {
-          phone: waPhone(t.profile?.phoneNumber || ""),
-          teacherImageUrl: (t.profileImageUrl || "").trim() || null,
-        },
-      ]),
-    );
-    const liveTeacherIds = new Set(teacherById.keys());
+    const teacherById = new Map(teachers.map((t) => [t._id.toString(), t]));
 
     const byRequirement = new Map<string, IConnection[]>();
     for (const c of interests) {
@@ -280,11 +550,15 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
       requirements: await Promise.all(
         requirements.map(async (r) => {
           await ensureShareToken(r);
+          const input = matchInputFor(r, r.city);
           return {
             ...serializeForOwner(r),
             interests: (byRequirement.get(r._id.toString()) ?? []).map((c) => {
-              const extra = teacherById.get(c.teacher.toString());
-              const teacherGone = !liveTeacherIds.has(c.teacher.toString());
+              const teacher = teacherById.get(c.teacher.toString());
+              const p = teacher?.profile;
+              const teacherGone = !teacher;
+              const match =
+                teacher && p ? explainMatch(teacher, input) : { score: 0, reasons: [] };
               return {
                 id: c._id.toString(),
                 teacherId: c.teacher.toString(),
@@ -294,12 +568,19 @@ router.get("/mine", async (req: AuthenticatedRequest, res: Response) => {
                 teacherArea: teacherGone ? null : (c.teacherArea ?? null),
                 teacherImageUrl: teacherGone
                   ? null
-                  : (extra?.teacherImageUrl ?? null),
+                  : (teacher.profileImageUrl || "").trim() || null,
+                designation: p?.designation || null,
+                hourlyRate: p?.hourlyRate ?? null,
+                experienceYears: p?.experienceYears ?? null,
+                teachingModes: p?.teachingModes ?? [],
+                subjects: p?.subjects ?? [],
+                matchScore: match.score,
+                matchReasons: match.reasons,
                 message: c.message,
                 status: c.status,
                 phone:
-                  c.status === "accepted" && !teacherGone
-                    ? (extra?.phone ?? null)
+                  c.status === "accepted" && p
+                    ? waPhone(p.phoneNumber || "") || null
                     : null,
                 sentAt: c.createdAt,
                 respondedAt: c.respondedAt ?? null,
@@ -439,7 +720,7 @@ router.get("/pitches", async (req: AuthenticatedRequest, res: Response) => {
     const requirements = (await Requirement.find({
       _id: { $in: reqIds },
     }).select(
-      "subject classLevel area city startTimeline status expiresAt",
+      "subject classLevel area city startTimeline status expiresAt contactPhone",
     )) as IRequirement[];
     const reqById = new Map(requirements.map((r) => [r._id.toString(), r]));
 
@@ -477,7 +758,9 @@ router.get("/pitches", async (req: AuthenticatedRequest, res: Response) => {
             : null,
           parentPhone:
             c.status === "accepted"
-              ? (parentPhoneById.get(c.parent.toString()) ?? null)
+              ? (r?.contactPhone
+                  ? waPhone(r.contactPhone)
+                  : parentPhoneById.get(c.parent.toString())) || null
               : null,
           parentArea: c.parentArea ?? null,
           requirement: r
@@ -577,7 +860,9 @@ router.post(
       const usedToday = await interestsUsedToday(req.auth!.sub);
 
       const parent = await User.findById(requirement.parent);
-      if (!parent?.parentProfile?.name) {
+      const parentName =
+        parent?.parentProfile?.name || requirement.contactName || "";
+      if (!parent || !parentName) {
         res.status(404).json({ error: "This post is no longer open" });
         return;
       }
@@ -591,7 +876,10 @@ router.post(
         existing?.requirement?.toString() === requirement._id.toString();
       const countsTowardLimit = !pitchedOnThisPost;
 
-      if (existing?.status === "pending") {
+      if (
+        existing?.status === "pending" &&
+        (existing.requestedBy !== "teacher" || pitchedOnThisPost)
+      ) {
         res.status(409).json({
           error:
             existing.requestedBy === "parent"
@@ -624,9 +912,12 @@ router.post(
           | "pending",
         requestedBy: "teacher" as const,
         requirement: requirement._id,
-        parentName: parent.parentProfile.name,
+        parentName,
         parentArea:
-          parent.parentProfile.area || parent.parentProfile.city || undefined,
+          parent.parentProfile?.area ||
+          parent.parentProfile?.city ||
+          requirement.area ||
+          undefined,
         teacherName: tp.name,
         teacherArea: [tp.area, tp.city].filter(Boolean).join(", ") || undefined,
         respondedAt: alreadyConnected ? existing!.respondedAt : undefined,

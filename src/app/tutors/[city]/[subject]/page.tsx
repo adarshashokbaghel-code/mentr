@@ -5,7 +5,6 @@ import { slugify, subjectHubSlug } from "@/lib/seo-hubs";
 import { SUBJECTS } from "@/lib/teachers";
 import {
   CITY_SUBJECT_PAGES,
-  INSTANT_CONNECT_CTA,
   REQUIREMENT_CTA,
   SEO_CITIES,
   citySubjectFaqs,
@@ -51,7 +50,7 @@ export async function generateMetadata({
   const parsed = parseCitySubject(resolved.city, resolved.subject);
   if (!parsed) return { title: "Not found", robots: { index: false } };
   const title = `${parsed.subject} Tutors in ${parsed.city.name}`;
-  const description = `Find a verified ${parsed.subject} tutor in ${parsed.city.name}. Free for parents — no commission, no agency fee. Browse or get matched instantly.`;
+  const description = `Find a verified ${parsed.subject} tutor in ${parsed.city.name}. Free for parents — no commission, no agency fee. Browse or post a requirement.`;
   const path = citySubjectPath(parsed.city.slug, parsed.subject);
   return {
     title,
@@ -88,7 +87,7 @@ export default async function CitySubjectHubPage({
     <SeoHubPage
       eyebrow={`${parsed.subject} · ${parsed.city.name}`}
       title={`Find a verified ${parsed.subject} tutor in ${parsed.city.name}`}
-      intro={`Free for parents. No commission. No agency fee. Looking for ${parsed.subject} tutors in ${parsed.city.name}? Browse verified profiles below — or get matched instantly if you need someone today.`}
+      intro={`Free for parents. No commission. No agency fee. Looking for ${parsed.subject} tutors in ${parsed.city.name}? Browse verified profiles below — or post a requirement and let tutors pitch to you.`}
       teachers={teachers}
       schemaPath={path}
       breadcrumbs={[
@@ -108,9 +107,6 @@ export default async function CitySubjectHubPage({
       requirementHref={REQUIREMENT_CTA.href}
       requirementLabel={REQUIREMENT_CTA.label}
       requirementBlurb={REQUIREMENT_CTA.blurb}
-      instantHref={INSTANT_CONNECT_CTA.href}
-      instantLabel={INSTANT_CONNECT_CTA.label}
-      instantBlurb={INSTANT_CONNECT_CTA.blurb}
       guideSections={guide.sections}
       pricingContext={guide.pricing}
       modesContext={guide.modes}
@@ -125,7 +121,6 @@ export default async function CitySubjectHubPage({
           href: `/subjects/${subjectHubSlug(parsed.subject)}`,
         },
         { label: "Find a Tutor", href: "/find-tutor" },
-        { label: "Get Matched Instantly", href: INSTANT_CONNECT_CTA.href },
       ]}
     />
   );

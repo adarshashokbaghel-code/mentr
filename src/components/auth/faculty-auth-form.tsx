@@ -38,7 +38,7 @@ export function FacultyAuthForm({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [step, setStep] = useState<Step>("email");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(() => searchParams?.get("email") ?? "");
   const [sessionId, setSessionId] = useState("");
   const [isNewUser, setIsNewUser] = useState(false);
   const [otp, setOtp] = useState("");

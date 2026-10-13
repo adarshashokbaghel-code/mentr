@@ -427,10 +427,10 @@ export default function ComparisonPage() {
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                href="/instant-connect"
+                href="/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1"
                 className="inline-flex h-12 items-center justify-center rounded-xl border-2 border-white/30 px-6 text-sm font-bold text-white transition hover:bg-white/10"
               >
-                Get a tutor to call in minutes
+                Post a requirement
               </Link>
             </div>
           </section>
@@ -459,7 +459,7 @@ export default function ComparisonPage() {
                 },
                 {
                   t: "You want someone else to choose for you",
-                  d: "If you'd rather hand the whole search to someone, an agency does that for a fee. Instant Connect is the closest thing on Mentr: a tutor calls you, but you still decide.",
+                  d: "If you'd rather hand the whole search to someone, an agency does that for a fee. Posting a requirement is the closest thing on Mentr: tutors pitch to you, but you still decide.",
                 },
               ].map((x) => (
                 <li key={x.t} className="rounded-2xl border border-hairline bg-white p-5">

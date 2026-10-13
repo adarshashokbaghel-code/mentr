@@ -227,7 +227,19 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       return;
     }
 
-    if (intent === "login" && (!existingUser || !existingUser.emailVerified)) {
+    // Guests who posted a requirement got an unverified stub that already
+    // accepted the Terms; the emailed code is enough to sign them in.
+    const guestStub = Boolean(
+      existingUser &&
+        !existingUser.emailVerified &&
+        existingUser.legalAcceptedAt &&
+        existingUser.role === role,
+    );
+
+    if (
+      intent === "login" &&
+      (!existingUser || (!existingUser.emailVerified && !guestStub))
+    ) {
       res.status(404).json({
         error: "No account found with this email. Create a free account.",
         code: "NO_ACCOUNT",
@@ -245,7 +257,7 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       existingUser && existingUser.emailVerified ? "login" : "signup";
 
     // Signup requires explicit Terms + Privacy acceptance (checkbox).
-    const acceptedLegal = req.body.acceptedLegal === true;
+    const acceptedLegal = req.body.acceptedLegal === true || guestStub;
     if (purpose === "signup" && !acceptedLegal) {
       res.status(400).json({
         error: "Please accept the Terms of service and Privacy policy to continue.",

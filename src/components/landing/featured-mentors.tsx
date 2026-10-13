@@ -19,7 +19,7 @@ import {
   Home,
   MapPin,
   Sparkles,
-  Zap,
+  Megaphone,
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -449,10 +449,10 @@ export function FeaturedMentors({
                 Browse Premium
               </Button>
             </Link>
-            <Link href="/parent/signup?next=/parent/dashboard%23instant-connect">
+            <Link href="/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1">
               <Button size="sm" className="h-9 gap-1 rounded-lg text-xs">
-                <Zap className="h-3.5 w-3.5" />
-                Instant Connect
+                <Megaphone className="h-3.5 w-3.5" />
+                Post a requirement
               </Button>
             </Link>
           </div>

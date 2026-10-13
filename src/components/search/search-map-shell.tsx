@@ -172,17 +172,7 @@ function MapTeacherPreview({
         {!user && guestBrowse ? (
           <button
             type="button"
-            onClick={() => {
-              if (teacher.premium) {
-                openRoleChooser(`/teachers/${teacher.id}`, {
-                  teacherId: teacher.id,
-                  teacherName: teacher.name,
-                  subjectLine: teacher.subjectLine,
-                });
-              } else {
-                openRoleChooser(`/teachers/${teacher.id}`);
-              }
-            }}
+            onClick={() => openRoleChooser(`/teachers/${teacher.id}`)}
             className="inline-flex h-10 flex-1 items-center justify-center gap-1.5 rounded-lg bg-coral text-sm font-semibold text-white transition hover:bg-coral-dark"
           >
             Connect

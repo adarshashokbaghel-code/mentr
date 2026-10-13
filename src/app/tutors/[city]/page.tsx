@@ -3,7 +3,6 @@ import { hubOpenGraph } from "@/lib/seo";
 import { cityGuide } from "@/lib/seo-city-copy";
 import {
   CITY_SUBJECT_PAGES,
-  INSTANT_CONNECT_CTA,
   REQUIREMENT_CTA,
   SEO_CITIES,
   cityFaqs,
@@ -29,7 +28,7 @@ export async function generateMetadata({
   const city = SEO_CITIES.find((c) => c.slug === citySlug);
   if (!city) return { title: "Not found", robots: { index: false } };
   const title = `Tutors in ${city.name} — Verified Home & Online`;
-  const description = `Find a verified tutor in ${city.name}. Free for parents — no commission, no agency fee. Browse profiles or get matched instantly.`;
+  const description = `Find a verified tutor in ${city.name}. Free for parents — no commission, no agency fee. Browse profiles or post a requirement.`;
   const path = cityPath(city.slug);
   return {
     title,
@@ -66,8 +65,8 @@ export default async function CityTutorsHubPage({
       title={`Find a verified tutor in ${city.name}`}
       intro={
         city.local
-          ? `Free for parents. No commission. No agency fee. Browse verified tutors across ${city.name} — home visits and online. Tell us the subject and class, or get matched instantly.`
-          : `Free for parents. No commission. No agency fee. ${city.name} families browse verified online tutors — or get matched instantly when you need someone fast.`
+          ? `Free for parents. No commission. No agency fee. Browse verified tutors across ${city.name} — home visits and online. Tell us the subject and class, or post a requirement.`
+          : `Free for parents. No commission. No agency fee. ${city.name} families browse verified online tutors — or post a requirement and let tutors pitch to you.`
       }
       teachers={teachers}
       schemaPath={path}
@@ -85,9 +84,6 @@ export default async function CityTutorsHubPage({
       requirementHref={REQUIREMENT_CTA.href}
       requirementLabel={REQUIREMENT_CTA.label}
       requirementBlurb={REQUIREMENT_CTA.blurb}
-      instantHref={INSTANT_CONNECT_CTA.href}
-      instantLabel={INSTANT_CONNECT_CTA.label}
-      instantBlurb={INSTANT_CONNECT_CTA.blurb}
       guideSections={guide.sections}
       pricingContext={guide.pricing}
       modesContext={guide.modes}
@@ -103,7 +99,6 @@ export default async function CityTutorsHubPage({
           href: citySubjectPath(city.slug, s),
         })),
         { label: "Find a Tutor", href: "/find-tutor" },
-        { label: "Get Matched Instantly", href: "/instant-connect" },
         ...(city.slug !== "bengaluru"
           ? [{ label: "Tutors in Bengaluru", href: "/tutors/bengaluru" }]
           : []),
