@@ -30,7 +30,7 @@ export async function fetchPlatformStats(): Promise<PlatformStats | null> {
   if (!inflight) {
     inflight = (async () => {
       try {
-        const res = await fetch("/api/teachers/stats", { cache: "no-store" });
+        const res = await fetch("/api/teachers/stats");
         if (!res.ok) return null;
         const data = (await res.json()) as {
           count?: number;

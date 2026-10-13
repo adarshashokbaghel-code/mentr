@@ -338,17 +338,31 @@ export async function fetchPublicTeachers(_opts?: {
   return { teachers: live, failed: false };
 }
 
-/** Active Mentr Premium mentors for /premiummentors (public, no phones). */
+let premiumMemory: PublicTeachersCache | null = null;
+let premiumInflight: Promise<FetchTeachersResult> | null = null;
+
+/** Active Mentr Premium mentors (public, no phones). Shared by every caller on the page. */
 export async function fetchPremiumTeachers(): Promise<FetchTeachersResult> {
-  try {
-    const res = await fetch("/api/teachers/premium", { cache: "no-store" });
-    if (!res.ok) return { teachers: [], failed: true };
-    const data = (await res.json()) as { teachers: ApiTeacher[] };
-    const live = (data.teachers || []).map(fromApiTeacher);
-    return { teachers: live, failed: false };
-  } catch {
-    return { teachers: [], failed: true };
+  if (premiumMemory && Date.now() - premiumMemory.at < PUBLIC_TEACHERS_TTL_MS) {
+    return { teachers: premiumMemory.teachers, failed: false };
   }
+  if (!premiumInflight) {
+    premiumInflight = (async () => {
+      try {
+        const res = await fetch("/api/teachers/premium");
+        if (!res.ok) return { teachers: [], failed: true };
+        const data = (await res.json()) as { teachers: ApiTeacher[] };
+        const live = (data.teachers || []).map(fromApiTeacher);
+        premiumMemory = { teachers: live, at: Date.now() };
+        return { teachers: live, failed: false };
+      } catch {
+        return { teachers: [], failed: true };
+      } finally {
+        premiumInflight = null;
+      }
+    })();
+  }
+  return premiumInflight;
 }
 
 /** Real faculty with completed profiles, straight from the database. */

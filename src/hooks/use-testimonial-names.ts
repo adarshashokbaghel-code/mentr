@@ -20,7 +20,7 @@ export function useTestimonialNames(items: TestimonialItem[]): TestimonialItem[]
 
     async function load() {
       try {
-        const res = await fetch("/api/testimonials/names", { cache: "no-store" });
+        const res = await fetch("/api/testimonials/names");
         if (!res.ok) return;
         const maps = (await res.json()) as TestimonialNameMaps;
         if (!cancelled) {

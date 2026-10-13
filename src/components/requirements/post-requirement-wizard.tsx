@@ -217,7 +217,7 @@ export function PostRequirementWizard({
   /** Signed-in parents: refresh "My posts" */
   onPosted?: () => void;
 }) {
-  const { user, openRoleChooser } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
   const isParent = user?.role === "parent";
   const profile = isParent ? user?.parentProfile : undefined;
@@ -245,6 +245,8 @@ export function PostRequirementWizard({
     matches: RequirementMatch[];
     email: string;
     post?: DemoFromPost;
+    /** Posted while signed out; `accountExists` when the email already has an account */
+    guest?: { accountExists: boolean };
   } | null>(null);
 
   useEffect(() => {
@@ -349,22 +351,13 @@ export function PostRequirementWizard({
           acceptedLegal: true,
           registrationSource: resolveRegistrationSource(),
         });
-        setResult({ matches: data.matches, email: data.email });
+        setResult({
+          matches: data.matches,
+          email: data.email,
+          guest: { accountExists: Boolean(data.accountExists) },
+        });
       }
     } catch (err) {
-      if (err instanceof ApiError && err.data?.code === "ACCOUNT_EXISTS") {
-        try {
-          sessionStorage.setItem(
-            REQUIREMENT_DRAFT_KEY,
-            JSON.stringify({ ...draft, subject, classLevel }),
-          );
-        } catch {
-          /* ignore quota */
-        }
-        onClose();
-        openRoleChooser("/parent/dashboard?post=draft");
-        return;
-      }
       setError(err instanceof ApiError ? err.message : "Couldn't post. Try again.");
     } finally {
       setSending(false);
@@ -459,6 +452,7 @@ export function PostRequirementWizard({
               matches={result.matches}
               email={result.email}
               subject={subject}
+              guest={result.guest}
             />
           ) : step === 0 ? (
             <div className="space-y-4 sm:space-y-5">
@@ -777,9 +771,7 @@ export function PostRequirementWizard({
                     router.push("/parent/dashboard#requirements");
                   }
                 } else {
-                  router.push(
-                    `/parent?email=${encodeURIComponent(result.email)}&next=${encodeURIComponent("/parent/dashboard#requirements")}`,
-                  );
+                  router.push(trackHref("/parent", result.email));
                 }
               }}
               className="flex h-11 flex-[1.4] items-center justify-center gap-1.5 rounded-xl bg-ink text-[14px] font-bold sm:h-12 sm:text-[15px] text-white transition hover:opacity-90 sm:flex-none sm:px-7"
@@ -827,16 +819,25 @@ export function PostRequirementWizard({
   );
 }
 
+/** Parent login / signup with the posting email prefilled, landing on their posts. */
+function trackHref(base: "/parent" | "/parent/signup", email: string): string {
+  return `${base}?email=${encodeURIComponent(email)}&next=${encodeURIComponent(
+    "/parent/dashboard#requirements",
+  )}`;
+}
+
 function ResultView({
   post,
   matches,
   email,
   subject,
+  guest,
 }: {
   post?: DemoFromPost;
   matches: RequirementMatch[];
   email: string;
   subject: string;
+  guest?: { accountExists: boolean };
 }) {
   return (
     <div className="space-y-4 sm:space-y-5">
@@ -850,11 +851,54 @@ function ResultView({
         >
           Requirement posted successfully
         </h2>
-        <p className="mx-auto mt-1 max-w-md break-words text-[12px] leading-relaxed text-ink/70 sm:text-sm">
-          Verified {subject} tutors are being notified. Every pitch lands in{" "}
-          <span className="font-semibold text-ink">{email}</span> and on your
-          dashboard. Accept one to unlock their WhatsApp.
-        </p>
+        {guest ? (
+          <p className="mx-auto mt-1 max-w-md break-words text-[12px] leading-relaxed text-ink/70 sm:text-sm">
+            When tutors pitch on your requirement, you&apos;ll be notified at{" "}
+            <span className="font-semibold text-ink">{email}</span>.
+          </p>
+        ) : (
+          <p className="mx-auto mt-1 max-w-md break-words text-[12px] leading-relaxed text-ink/70 sm:text-sm">
+            Verified {subject} tutors are being notified. Every pitch lands in{" "}
+            <span className="font-semibold text-ink">{email}</span> and on your
+            dashboard. Accept one to unlock their WhatsApp.
+          </p>
+        )}
+
+        {guest && (
+          <div className="mx-auto mt-3.5 max-w-md rounded-xl border border-sage/30 bg-white px-3.5 py-3 text-left sm:mt-4 sm:px-4">
+            <p className="flex items-center gap-1.5 text-[13px] font-bold text-ink sm:text-[14px]">
+              <Mail className="h-3.5 w-3.5 shrink-0 text-sage" />
+              {guest.accountExists
+                ? "Log in to track your requirement"
+                : "Create an account or log in to track your requirement"}
+            </p>
+            <p className="mt-0.5 break-words text-[12px] leading-relaxed text-muted">
+              Use <span className="font-semibold text-ink">{email}</span> — this
+              post and every pitch show up on your dashboard automatically.
+            </p>
+            <div className="mt-2.5 flex gap-2">
+              {!guest.accountExists && (
+                <Link
+                  href={trackHref("/parent/signup", email)}
+                  className="flex h-9 flex-1 items-center justify-center rounded-lg bg-coral text-[12.5px] font-bold text-white transition hover:bg-coral-dark sm:text-[13px]"
+                >
+                  Create free account
+                </Link>
+              )}
+              <Link
+                href={trackHref("/parent", email)}
+                className={cn(
+                  "flex h-9 flex-1 items-center justify-center rounded-lg text-[12.5px] font-bold transition sm:text-[13px]",
+                  guest.accountExists
+                    ? "bg-coral text-white hover:bg-coral-dark"
+                    : "border border-hairline text-ink hover:bg-cream",
+                )}
+              >
+                Log in
+              </Link>
+            </div>
+          </div>
+        )}
       </section>
 
       <section>
