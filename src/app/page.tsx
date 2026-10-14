@@ -6,7 +6,6 @@ import { FeaturedMentors } from "@/components/landing/featured-mentors";
 import { Footer } from "@/components/landing/footer";
 import { GlobalReachMap } from "@/components/landing/global-reach-map";
 import { Hero } from "@/components/landing/hero";
-import { LearnLaunchBand } from "@/components/landing/learn-launch-band";
 import { HomeMentorStatsBand } from "@/components/landing/home-mentor-stats-band";
 import { HomePremiumPopup } from "@/components/landing/home-premium-popup";
 import { HowItWorks } from "@/components/landing/how-it-works";
@@ -101,7 +100,6 @@ export default function Home() {
       <Navbar />
       <main className="w-full max-w-full overflow-x-clip">
         <Hero />
-        <LearnLaunchBand />
         <HomeMentorStatsBand />
         <ParentNeedFinder />
         <GlobalReachMap />

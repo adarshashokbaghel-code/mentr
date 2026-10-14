@@ -56,19 +56,21 @@ export function PostRequirementHost() {
   const [subject, setSubject] = useState<string | null>(null);
 
   const open = useCallback(
-    (raw: string) => {
+    (subject: string) => {
       if (user && user.role !== "parent") {
         toast(PARENT_ROLE_TOAST);
         return;
       }
-      setSubject(matchSubject(raw));
+      setSubject(subject);
     },
     [user, toast],
   );
 
   useEffect(() => {
+    // Typed subjects that aren't presets open the form as "Other: <text>".
     const onOpen = (e: Event) => {
-      open((e as CustomEvent<{ subject?: string }>).detail?.subject ?? "");
+      const raw = (e as CustomEvent<{ subject?: string }>).detail?.subject ?? "";
+      open(matchSubject(raw) || raw.trim().slice(0, 60));
     };
     const onClick = (e: MouseEvent) => {
       if (loading || e.defaultPrevented || e.button !== 0) return;
@@ -79,7 +81,7 @@ export function PostRequirementHost() {
       const post = postParam(anchor.getAttribute("href") ?? "");
       if (post === null) return;
       e.preventDefault();
-      open(post);
+      open(matchSubject(post));
     };
     window.addEventListener(POST_REQUIREMENT_EVENT, onOpen);
     document.addEventListener("click", onClick, true);

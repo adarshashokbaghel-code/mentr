@@ -9,8 +9,8 @@ import {
   LpLiveDot,
   LpMockStage,
 } from "@/components/landing/lp/shared";
-import { PostRequirementButton } from "@/components/requirements/post-requirement-cta";
-import { Button } from "@/components/ui/button";
+import { openPostRequirement } from "@/components/requirements/post-requirement-host";
+import { SUBJECT_OPTIONS } from "@/components/requirements/post-requirement-wizard";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
 import {
@@ -483,6 +483,104 @@ function HeroInteractiveMock({
   );
 }
 
+const POPULAR_NEEDS = [
+  "Mathematics",
+  "Science",
+  "English",
+  "Coding",
+  "Physics",
+  "Hindi",
+] as const;
+
+const SUBJECT_ALIASES: [RegExp, string][] = [
+  [/\bmaths?\b/i, "Mathematics"],
+  [/\bspoken english\b|\bielts\b/i, "English"],
+  [/\bpython\b|\bprogramming\b|\bcomputer\b/i, "Coding"],
+  [/\bjee\b|\bneet\b/i, "Exam Prep"],
+  [/\bsocial\b|\bsst\b/i, "Social Science"],
+];
+
+/** Map free text like "class 10 maths" to a preset subject, else keep it as typed. */
+function guessSubject(text: string): string {
+  const q = text.trim();
+  if (!q) return "";
+  const preset = [...SUBJECT_OPTIONS]
+    .sort((a, b) => b.length - a.length)
+    .find((s) => q.toLowerCase().includes(s.toLowerCase()));
+  if (preset) return preset;
+  return SUBJECT_ALIASES.find(([re]) => re.test(q))?.[1] ?? q;
+}
+
+/** "Tell us what you need" — one box that opens the post-requirement form prefilled. */
+function HeroNeedBox() {
+  const [need, setNeed] = useState("");
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    openPostRequirement(guessSubject(need));
+  }
+
+  return (
+    <div className="mx-auto w-full max-w-xl lg:mx-0">
+      <form
+        onSubmit={submit}
+        className={cn(
+          "rounded-2xl border-2 border-ink bg-white p-2 text-left",
+          hardShadowSm,
+        )}
+      >
+        <label htmlFor="hero-need" className="sr-only">
+          What are you looking for?
+        </label>
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div className="relative min-w-0 flex-1">
+            <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+            <input
+              id="hero-need"
+              value={need}
+              onChange={(e) => setNeed(e.target.value.slice(0, 60))}
+              placeholder="What do you want to learn? e.g. Class 10 Maths"
+              autoComplete="off"
+              className="h-12 w-full rounded-xl bg-transparent pl-10 pr-3 text-[16px] font-medium text-ink outline-none placeholder:text-muted/80 short:h-11 sm:text-[15px]"
+            />
+          </div>
+          <button
+            type="submit"
+            className="inline-flex h-12 shrink-0 items-center justify-center gap-1.5 rounded-xl bg-coral px-5 text-[15px] font-bold text-white transition hover:bg-coral-dark short:h-11 short:text-sm"
+          >
+            Get free tutor pitches
+            <ArrowRight className="h-4 w-4 shrink-0" />
+          </button>
+        </div>
+      </form>
+
+      <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5 short:mt-2 lg:justify-start">
+        <span className="mr-0.5 text-[12px] font-semibold text-muted">Popular:</span>
+        {POPULAR_NEEDS.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => openPostRequirement(s)}
+            className="rounded-full border border-ink/15 bg-white px-3 py-1 text-[12px] font-semibold text-ink transition hover:border-ink"
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+
+      <p className="mt-2.5 text-center text-[12.5px] text-muted short:mt-1.5 lg:text-left">
+        Tell us your need once — verified tutors reach out with a plan.{" "}
+        <ParentActionLink
+          href="/search"
+          className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+        >
+          Or browse tutors
+        </ParentActionLink>
+      </p>
+    </div>
+  );
+}
+
 export function Hero() {
   const { pool, ready } = useHeroTeachers();
   const previewFaces = pool.slice(0, 4);
@@ -512,23 +610,7 @@ export function Hero() {
               get pitches — no platform fee.
             </p>
 
-            <div className="flex w-full max-w-full flex-col items-stretch gap-3 short:gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
-              <ParentActionLink href="/search" className="block w-full max-w-full sm:w-auto">
-                <Button
-                  size="lg"
-                  className="h-13 w-full max-w-full gap-2 px-5 text-base shadow-[3px_3px_0_0_#1c1a17] short:h-11 short:text-sm sm:w-auto sm:px-8 short:sm:h-12"
-                >
-                  <Search className="h-4 w-4 shrink-0" />
-                  Find a teacher
-                  <ArrowRight className="h-4 w-4 shrink-0" />
-                </Button>
-              </ParentActionLink>
-              <PostRequirementButton
-                size="lg"
-                variant="secondary"
-                className="h-13 w-full max-w-full border-2 border-ink px-5 shadow-[3px_3px_0_0_#1c1a17] short:h-11 short:text-sm sm:w-auto sm:px-8 short:sm:h-12"
-              />
-            </div>
+            <HeroNeedBox />
 
             <div className="grid w-full min-w-0 gap-2.5 short:gap-2 shorter:hidden sm:grid-cols-2">
               <Link
