@@ -215,7 +215,7 @@ export function SeoHubPage({
   breadcrumbs,
   schemaPath,
   relatedLinks,
-  ctaHref = "/find-tutor",
+  ctaHref = "/search?tier=regular",
   ctaLabel = "Find a Tutor",
   promoHref,
   promoLabel = "Find a Tutor",

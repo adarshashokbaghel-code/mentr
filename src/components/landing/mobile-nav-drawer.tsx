@@ -77,7 +77,7 @@ export function MobileNavDrawer({
     ? isParent
       ? [
           { href: "/parent/dashboard", label: "Dashboard", icon: LayoutDashboard },
-          { href: "/search", label: "Find a mentor", icon: Search },
+          { href: "/search?tier=regular", label: "Find a mentor", icon: Search },
         ]
       : [
           { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -182,7 +182,7 @@ export function MobileNavDrawer({
               </p>
             </Link>
             <Link
-              href="/search"
+              href="/search?tier=regular"
               onClick={onClose}
               className="rounded-2xl bg-white p-3.5 ring-1 ring-hairline transition hover:ring-ink/20"
             >

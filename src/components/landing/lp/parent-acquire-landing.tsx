@@ -2,7 +2,7 @@
 
 /**
  * Parent-only acquisition landing — simple, no Premium.
- * Used by /parents and /find-tutor.
+ * Used by /parents.
  */
 
 import { Footer } from "@/components/landing/footer";

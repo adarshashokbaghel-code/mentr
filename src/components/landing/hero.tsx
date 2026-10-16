@@ -508,8 +508,8 @@ export function Hero() {
             </h1>
 
             <p className="mx-auto max-w-md text-base leading-relaxed text-pretty text-muted lg:mx-0 short:text-sm short:leading-snug sm:text-[17px]">
-              Browse profiles and book a demo, or post what you need and
-              get pitches — no platform fee.
+              Search tutors yourself, or tell us what you need and get quotes
+              from verified tutors — no platform fee.
             </p>
 
             <div className="flex w-full max-w-full flex-col items-stretch gap-3 short:gap-2 sm:flex-row sm:flex-wrap sm:items-center lg:justify-start">
@@ -524,6 +524,7 @@ export function Hero() {
                 </Button>
               </ParentActionLink>
               <PostRequirementButton
+                label="Tell us what you need"
                 size="lg"
                 variant="secondary"
                 className="h-13 w-full max-w-full border-2 border-ink px-5 shadow-[3px_3px_0_0_#1c1a17] short:h-11 short:text-sm sm:w-auto sm:px-8 short:sm:h-12"

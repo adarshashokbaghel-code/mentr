@@ -66,7 +66,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
       links: [
         {
           label: "Find tutors",
-          href: "/find-tutor",
+          href: "/search?tier=regular",
           description: "Verified tutors nearby or online",
         },
         {
@@ -81,7 +81,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
         },
         {
           label: "Find mentors",
-          href: "/search",
+          href: "/search?tier=regular",
           description: "Career, coding, and skill mentors",
         },
         {
@@ -200,7 +200,7 @@ export function getPublicNavGroups(): PublicNavGroup[] {
 export function getFooterColumns(): Record<string, PublicNavLink[]> {
   return {
     Find: [
-      { label: "Find a Tutor", href: "/find-tutor" },
+      { label: "Find a Tutor", href: "/search?tier=regular" },
       { label: "Post a requirement", href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1" },
       { label: "For parents", href: "/parents" },
       { label: "Browse tutors", href: "/search" },

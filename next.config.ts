@@ -189,7 +189,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/instant-connect",
-        destination: "/find-tutor",
+        destination: "/search?tier=regular",
+        permanent: true,
+      },
+      {
+        source: "/find-tutor",
+        destination: "/search?tier=regular",
         permanent: true,
       },
       {

@@ -75,10 +75,10 @@ export default async function CityTutorsHubPage({
         { label: "For parents", href: "/parents" },
         { label: city.name },
       ]}
-      ctaHref="/find-tutor"
+      ctaHref="/search?tier=regular"
       ctaLabel="Find a Tutor"
       mapHref={`${searchHref}&view=map`}
-      promoHref="/find-tutor"
+      promoHref="/search?tier=regular"
       promoLabel="Find a Tutor"
       faqs={cityFaqs(city.name, city.local)}
       requirementHref={REQUIREMENT_CTA.href}
@@ -98,7 +98,7 @@ export default async function CityTutorsHubPage({
           label: `${s} tutors in ${city.name}`,
           href: citySubjectPath(city.slug, s),
         })),
-        { label: "Find a Tutor", href: "/find-tutor" },
+        { label: "Find a Tutor", href: "/search?tier=regular" },
         ...(city.slug !== "bengaluru"
           ? [{ label: "Tutors in Bengaluru", href: "/tutors/bengaluru" }]
           : []),

@@ -129,11 +129,66 @@ const EMPTY_DRAFT: Draft = {
 };
 
 const STEPS = [
-  { title: "What does your child need?", hint: "Subject and class" },
-  { title: "Where and when?", hint: "Online or at home, and when to start" },
-  { title: "Budget and goal", hint: "Helps tutors pitch the right plan" },
-  { title: "Where should tutors reach you?", hint: "Shared only with a tutor you book" },
+  {
+    title: "What are you looking for?",
+    hint: "Choose a subject and class or level",
+    short: "Subject",
+  },
+  {
+    title: "How do you want to learn?",
+    hint: "Online or at home, and when you'd like to start",
+    short: "Schedule",
+  },
+  {
+    title: "Budget and goals",
+    hint: "Optional — helps tutors send a useful quote",
+    short: "Details",
+  },
+  {
+    title: "Where should we send quotes?",
+    hint: "Your number is shared only with a tutor you choose",
+    short: "Contact",
+  },
 ];
+
+function InlineStepNav({ step }: { step: number }) {
+  return (
+    <nav aria-label="Form progress" className="border-b border-hairline px-3 py-3 sm:px-5">
+      <ol className="flex gap-1 sm:gap-2">
+        {STEPS.map((s, i) => {
+          const done = i < step;
+          const current = i === step;
+          return (
+            <li key={s.short} className="flex min-w-0 flex-1 flex-col items-center gap-1">
+              <span
+                className={cn(
+                  "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-[11px] font-bold tabular-nums transition sm:h-8 sm:w-8 sm:text-xs",
+                  done && "bg-sage text-white",
+                  current && "bg-coral text-white ring-2 ring-coral/30 ring-offset-2 ring-offset-white",
+                  !done && !current && "bg-cream text-muted",
+                )}
+                aria-current={current ? "step" : undefined}
+              >
+                {done ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : i + 1}
+              </span>
+              <span
+                className={cn(
+                  "hidden w-full truncate text-center text-[10px] font-semibold sm:block sm:text-[11px]",
+                  current ? "text-ink" : "text-muted",
+                )}
+              >
+                {s.short}
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+      <p className="mt-2 text-center text-[11px] font-medium text-muted sm:hidden">
+        Step {step + 1} of {STEPS.length}: {STEPS[step].short}
+      </p>
+    </nav>
+  );
+}
 
 function initialDraft(initialSubject: string): Draft {
   const draft: Draft = { ...EMPTY_DRAFT, subject: initialSubject };
@@ -168,7 +223,7 @@ function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "rounded-full border px-3 py-1.5 text-[12.5px] font-semibold transition sm:px-3.5 sm:py-2 sm:text-[13px]",
+        "min-h-[40px] rounded-full border px-3 py-2 text-[12.5px] font-semibold transition active:scale-[0.98] sm:min-h-0 sm:px-3.5 sm:py-2 sm:text-[13px]",
         active
           ? "border-ink bg-ink text-white"
           : "border-hairline bg-white text-ink hover:border-ink/30",
@@ -211,12 +266,18 @@ export function PostRequirementWizard({
   initialSubject = "",
   onClose,
   onPosted,
+  presentation = "modal",
+  className,
 }: {
   initialSubject?: string;
   onClose: () => void;
   /** Signed-in parents: refresh "My posts" */
   onPosted?: () => void;
+  /** Modal overlay (popup host) vs embedded stepper on the page */
+  presentation?: "modal" | "inline";
+  className?: string;
 }) {
+  const isModal = presentation === "modal";
   const { user } = useAuth();
   const router = useRouter();
   const isParent = user?.role === "parent";
@@ -258,6 +319,7 @@ export function PostRequirementWizard({
   }, []);
 
   useEffect(() => {
+    if (!isModal) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -268,7 +330,12 @@ export function PostRequirementWizard({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [onClose]);
+  }, [onClose, isModal]);
+
+  useEffect(() => {
+    if (isParent && profile?.name) setName(profile.name);
+    if (isParent && profile?.phoneNumber) setPhone(profile.phoneNumber);
+  }, [isParent, profile?.name, profile?.phoneNumber]);
 
   function update<K extends keyof Draft>(key: K, value: Draft[K]) {
     setDraft((d) => ({ ...d, [key]: value }));
@@ -282,15 +349,15 @@ export function PostRequirementWizard({
 
   const stepError = useMemo(() => {
     if (step === 0) {
-      if (!subject) return "Pick a subject";
-      if (!classLevel) return "Pick the class or level";
+      if (!subject) return "Please choose a subject";
+      if (!classLevel) return "Please choose a class or level";
     }
     if (step === 1) {
-      if (draft.modes.length === 0) return "Pick at least one way to learn";
+      if (draft.modes.length === 0) return "Choose online, at home, or both";
       if (atHome && draft.area.trim().length < 2) {
-        return "Add your area so nearby tutors see it";
+        return "Add your area so local tutors can find you";
       }
-      if (!draft.startTimeline) return "Pick when you want to start";
+      if (!draft.startTimeline) return "Choose when you'd like to start";
     }
     if (step === 3) {
       if (!name.trim()) return "Add your name";
@@ -364,7 +431,34 @@ export function PostRequirementWizard({
     }
   }
 
+  function resetFlow() {
+    const fresh = initialDraft(initialSubject);
+    setStep(0);
+    setResult(null);
+    setError("");
+    setSending(false);
+    setDraft({
+      ...fresh,
+      subject: asChoice(fresh.subject, SUBJECT_OPTIONS),
+      classLevel: asChoice(fresh.classLevel, LEVEL_OPTIONS),
+    });
+    const subjectChoice = asChoice(fresh.subject, SUBJECT_OPTIONS);
+    const levelChoice = asChoice(fresh.classLevel, LEVEL_OPTIONS);
+    setCustomSubject(subjectChoice === OTHER ? fresh.subject : "");
+    setCustomLevel(levelChoice === OTHER ? fresh.classLevel : "");
+    setAcceptedLegal(false);
+  }
+
+  function finishOrReset() {
+    if (isModal) onClose();
+    else resetFlow();
+  }
+
   function next() {
+    if (user && user.role !== "parent") {
+      setError("Switch to a parent account to post a requirement.");
+      return;
+    }
     if (stepError) {
       setError(stepError);
       return;
@@ -377,29 +471,29 @@ export function PostRequirementWizard({
     void submit();
   }
 
-  const progress = result ? 100 : ((step + 1) / (STEPS.length + 1)) * 100;
+  const progress = result ? 100 : ((step + 1) / STEPS.length) * 100;
 
-  return createPortal(
-    <div
-      className="fixed inset-0 z-[90] flex items-end justify-center text-left sm:items-center sm:p-4"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="post-wizard-title"
-    >
-      <button
-        type="button"
-        className="absolute inset-0 bg-ink/40"
-        aria-label="Close"
-        onClick={onClose}
-      />
+  useEffect(() => {
+    if (!result || isModal) return;
+    document.getElementById("post-requirement")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [result, isModal]);
 
+  const panel = (
       <div
         className={cn(
-          "champs-pop relative z-10 flex max-h-[94dvh] w-full flex-col overflow-hidden rounded-t-2xl bg-white shadow-xl transition-[max-width] duration-300 sm:max-h-[90dvh] sm:rounded-2xl",
-          result ? "max-w-3xl" : "max-w-lg",
+          "champs-pop relative flex w-full flex-col overflow-hidden bg-white transition-[max-width] duration-300",
+          isModal
+            ? cn(
+                "z-10 max-h-[94dvh] rounded-t-2xl shadow-xl sm:max-h-[90dvh] sm:rounded-2xl",
+                result ? "max-w-3xl" : "max-w-lg",
+              )
+            : "max-h-[min(78dvh,720px)] rounded-xl border border-ink/10 shadow-sm sm:max-h-none",
         )}
       >
-        <div className="h-1 w-full bg-cream">
+        <div className="h-1 w-full shrink-0 bg-cream" aria-hidden>
           <div
             className="h-full bg-coral transition-all duration-300"
             style={{ width: `${progress}%` }}
@@ -407,15 +501,17 @@ export function PostRequirementWizard({
         </div>
 
         {result ? (
-          <button
-            type="button"
-            onClick={onClose}
-            className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full text-muted transition hover:bg-white/70"
-            aria-label="Close"
-          >
-            <X className="h-4 w-4" />
-          </button>
-        ) : (
+          isModal ? (
+            <button
+              type="button"
+              onClick={onClose}
+              className="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full text-muted transition hover:bg-white/70"
+              aria-label="Close"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          ) : null
+        ) : isModal ? (
           <div className="flex items-start justify-between gap-3 px-4 pb-1.5 pt-3 sm:px-6 sm:pb-2 sm:pt-4">
             <div className="min-w-0">
               <p className="text-[11px] font-bold uppercase tracking-wider text-coral">
@@ -438,12 +534,27 @@ export function PostRequirementWizard({
               <X className="h-4 w-4" />
             </button>
           </div>
+        ) : (
+          <>
+            <InlineStepNav step={step} />
+            <div className="border-b border-hairline px-4 py-3 sm:px-5">
+              <h2
+                id="post-wizard-title"
+                className="text-base font-bold leading-snug text-ink sm:text-lg"
+              >
+                {STEPS[step].title}
+              </h2>
+              <p className="mt-0.5 text-[13px] leading-relaxed text-muted">
+                {STEPS[step].hint}
+              </p>
+            </div>
+          </>
         )}
 
         <div
           className={cn(
-            "flex-1 overflow-y-auto px-4 pb-4 sm:px-6",
-            result ? "pt-0" : "pt-2",
+            "min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 pb-4 sm:px-5 sm:pb-5",
+            result ? "pt-0" : isModal ? "pt-2" : "pt-3",
           )}
         >
           {result ? (
@@ -565,7 +676,7 @@ export function PostRequirementWizard({
                 </Field>
               )}
               <Field label="When do you want to start?">
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2">
                   {TIMELINE_OPTIONS.map((t) => (
                     <Chip
                       key={t.id}
@@ -595,6 +706,9 @@ export function PostRequirementWizard({
             </div>
           ) : step === 2 ? (
             <div className="space-y-4 sm:space-y-5">
+              <p className="rounded-lg bg-cream/80 px-3 py-2 text-[12.5px] leading-relaxed text-muted">
+                All optional — tap Continue to skip.
+              </p>
               <Field label="Budget per hour" optional>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {BUDGET_OPTIONS.map((b) => (
@@ -638,8 +752,8 @@ export function PostRequirementWizard({
               <div className="flex items-start gap-2.5 rounded-lg bg-sage-wash px-3.5 py-3">
                 <Lock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-sage" />
                 <p className="text-[12px] leading-relaxed text-ink/80">
-                  Tutors see your need, not your name or number. Your contact
-                  unlocks only for the tutor you accept.
+                  Tutors see your requirement, not your contact details. We share
+                  your name and number only when you pick a tutor.
                 </p>
               </div>
 
@@ -688,8 +802,8 @@ export function PostRequirementWizard({
                     className={inputCls}
                   />
                   <span className="mt-1 block text-[12px] text-muted">
-                    Tutor pitches arrive here. Sign in with this email anytime to
-                    compare them.
+                    Tutor quotes will be sent here. Use this email to sign in and
+                    compare responses.
                   </span>
                 </label>
               )}
@@ -753,15 +867,15 @@ export function PostRequirementWizard({
           <div className="flex gap-2 border-t border-hairline px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2.5 sm:justify-end sm:px-6 sm:pb-4 sm:pt-3">
             <button
               type="button"
-              onClick={onClose}
+              onClick={finishOrReset}
               className="flex h-11 flex-1 items-center justify-center rounded-xl border border-hairline text-[14px] font-semibold sm:h-12 sm:text-[15px] text-ink transition hover:bg-cream sm:flex-none sm:px-6"
             >
-              Not now
+              {isModal ? "Not now" : "Post another need"}
             </button>
             <button
               type="button"
               onClick={() => {
-                onClose();
+                if (isModal) onClose();
                 if (isParent) {
                   if (window.location.pathname === "/parent/dashboard") {
                     document
@@ -783,7 +897,12 @@ export function PostRequirementWizard({
         )}
 
         {!result && (
-          <div className="flex gap-2 border-t border-hairline px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2.5 sm:px-6 sm:pb-4 sm:pt-3">
+          <div
+            className={cn(
+              "flex shrink-0 gap-2 border-t border-hairline bg-white px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-2.5 sm:px-5 sm:pb-4 sm:pt-3",
+              !isModal && "sticky bottom-0 shadow-[0_-4px_12px_rgba(28,26,23,0.06)]",
+            )}
+          >
             {step > 0 && (
               <button
                 type="button"
@@ -806,14 +925,40 @@ export function PostRequirementWizard({
             >
               {sending && <Loader2 className="h-4 w-4 animate-spin" />}
               {sending
-                ? "Finding tutors…"
+                ? "Submitting…"
                 : step === STEPS.length - 1
-                  ? "Post & see matching tutors"
+                  ? isModal
+                    ? "Submit and see tutors"
+                    : "Get quotes from tutors"
                   : "Continue"}
             </button>
           </div>
         )}
       </div>
+  );
+
+  if (!isModal) {
+    return (
+      <div className={cn("min-w-0 text-left", className)} aria-labelledby="post-wizard-title">
+        {panel}
+      </div>
+    );
+  }
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[90] flex items-end justify-center text-left sm:items-center sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="post-wizard-title"
+    >
+      <button
+        type="button"
+        className="absolute inset-0 bg-ink/40"
+        aria-label="Close"
+        onClick={onClose}
+      />
+      {panel}
     </div>,
     document.body,
   );
@@ -849,18 +994,18 @@ function ResultView({
           id="post-wizard-title"
           className="mt-2.5 text-base font-bold leading-snug text-ink sm:mt-3 sm:text-xl"
         >
-          Requirement posted successfully
+          You&apos;re all set — tutors can respond now
         </h2>
         {guest ? (
           <p className="mx-auto mt-1 max-w-md break-words text-[12px] leading-relaxed text-ink/70 sm:text-sm">
-            When tutors pitch on your requirement, you&apos;ll be notified at{" "}
+            Quotes from verified tutors will go to{" "}
             <span className="font-semibold text-ink">{email}</span>.
           </p>
         ) : (
           <p className="mx-auto mt-1 max-w-md break-words text-[12px] leading-relaxed text-ink/70 sm:text-sm">
-            Verified {subject} tutors are being notified. Every pitch lands in{" "}
+            We&apos;re notifying {subject} tutors. Quotes will arrive at{" "}
             <span className="font-semibold text-ink">{email}</span> and on your
-            dashboard. Accept one to unlock their WhatsApp.
+            dashboard. Choose a tutor to connect on WhatsApp.
           </p>
         )}
 
@@ -869,12 +1014,12 @@ function ResultView({
             <p className="flex items-center gap-1.5 text-[13px] font-bold text-ink sm:text-[14px]">
               <Mail className="h-3.5 w-3.5 shrink-0 text-sage" />
               {guest.accountExists
-                ? "Log in to track your requirement"
-                : "Create an account or log in to track your requirement"}
+                ? "Log in to see tutor quotes"
+                : "Sign up or log in to see all quotes"}
             </p>
             <p className="mt-0.5 break-words text-[12px] leading-relaxed text-muted">
-              Use <span className="font-semibold text-ink">{email}</span> — this
-              post and every pitch show up on your dashboard automatically.
+              Use <span className="font-semibold text-ink">{email}</span> — your
+              requirement and every response appear on your dashboard.
             </p>
             <div className="mt-2.5 flex gap-2">
               {!guest.accountExists && (
@@ -904,12 +1049,12 @@ function ResultView({
       <section>
         <p className="flex items-center gap-1.5 text-[15px] font-bold text-ink">
           <Sparkles className="h-4 w-4 text-coral" />
-          Need a tutor right away?
+          Need a tutor sooner?
         </p>
         <p className="mt-0.5 text-[13px] text-muted">
           {matches.length > 0
-            ? "These profiles match your need. Review one and book a free demo."
-            : "No instant match for this combination yet. Tutors on the board will pitch you directly."}
+            ? "These tutors match what you asked for. View a profile or book a free demo."
+            : "No close match yet — tutors who see your post can still send you a quote."}
         </p>
         {matches.length > 0 && (
           <ul className="mt-3 grid gap-2.5 sm:grid-cols-2 sm:gap-3">
@@ -971,7 +1116,7 @@ function ResultView({
 
       <p className="flex items-center justify-center gap-1.5 text-[12px] text-muted">
         <Clock3 className="h-3.5 w-3.5" />
-        Prefer to wait? We&apos;ll email you as each pitch arrives.
+        Happy to wait? We&apos;ll email you when each tutor responds.
       </p>
     </div>
   );

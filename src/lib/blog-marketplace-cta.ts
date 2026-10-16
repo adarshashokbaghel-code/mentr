@@ -40,7 +40,7 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
     });
     links.push({
       label: "Find a Tutor",
-      href: "/find-tutor",
+      href: "/search?tier=regular",
     });
   }
 
@@ -96,13 +96,13 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
   ) {
     links.push({
       label: "Find a Tutor",
-      href: "/find-tutor",
+      href: "/search?tier=regular",
     });
   }
 
   // Default acquisition CTA for commercial / transactional parent guides
-  if (!links.some((l) => l.href === "/find-tutor")) {
-    links.push({ label: "Find a Tutor", href: "/find-tutor" });
+  if (!links.some((l) => l.href === "/search?tier=regular")) {
+    links.push({ label: "Find a Tutor", href: "/search?tier=regular" });
   }
 
   links.push({

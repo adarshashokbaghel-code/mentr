@@ -56,7 +56,6 @@ export function coreSitemapEntries(): MetadataRoute.Sitemap {
   return [
     entry("/", 1, "daily"),
     entry("/parents", 0.95, "weekly"),
-    entry("/find-tutor", 0.95, "weekly"),
     entry("/premiummentors", 0.95, "weekly"),
     entry("/snapandgrade", 0.95, "weekly"),
     entry("/snapandgrade/grade", 0.9, "weekly"),

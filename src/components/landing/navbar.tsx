@@ -162,7 +162,7 @@ export function Navbar() {
           {!loading && !user && (
             <>
               <Link
-                href="/search"
+                href="/search?tier=regular"
                 className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-hairline bg-white px-3.5 text-sm font-semibold text-ink transition hover:border-ink/30 hover:bg-cream"
               >
                 <Search className="h-4 w-4 text-coral" />
