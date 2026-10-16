@@ -96,7 +96,7 @@ export default async function CitySubjectHubPage({
         { label: parsed.city.name, href: `/tutors/${parsed.city.slug}` },
         { label: parsed.subject },
       ]}
-      ctaHref="/find-tutor"
+      ctaHref="/search?tier=regular"
       ctaLabel="Find a Tutor"
       mapHref={mapHref}
       faqs={citySubjectFaqs(
@@ -120,7 +120,7 @@ export default async function CitySubjectHubPage({
           label: `${parsed.subject} subject hub`,
           href: `/subjects/${subjectHubSlug(parsed.subject)}`,
         },
-        { label: "Find a Tutor", href: "/find-tutor" },
+        { label: "Find a Tutor", href: "/search?tier=regular" },
       ]}
     />
   );

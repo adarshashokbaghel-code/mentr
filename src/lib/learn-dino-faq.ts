@@ -106,7 +106,7 @@ export const DINO_FAQ: Record<string, DinoFaqNode> = {
       "Not for Learn — it’s self-paced and free. Many families use Learn first, then book a Mentr tutor later for school or exams if they want live help.",
     next: ["find-tutor", "what-is-mentr", "how-to-start", "is-it-free", "how-it-works", "who-is-it-for"],
     action: "handshake",
-    cta: { label: "Find tutors", href: "/search" },
+    cta: { label: "Find tutors", href: "/search?tier=regular" },
   },
   "find-tutor": {
     id: "find-tutor",
@@ -115,7 +115,7 @@ export const DINO_FAQ: Record<string, DinoFaqNode> = {
       "Open Find tutors, filter by subject and city (or online), shortlist, and connect. Tutor bookings are separate from free Learn lessons.",
     next: ["need-tutor", "what-is-mentr", "how-to-start", "is-it-free", "parent-email", "what-is-learn"],
     action: "wave",
-    cta: { label: "Browse tutors", href: "/search" },
+    cta: { label: "Browse tutors", href: "/search?tier=regular" },
   },
   syllabus: {
     id: "syllabus",

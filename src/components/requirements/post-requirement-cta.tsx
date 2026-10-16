@@ -16,7 +16,7 @@ type PostRequirementButtonProps = {
 
 /** Post a learning need — parents and guests both go straight to the form. */
 export function PostRequirementButton({
-  label = "Post your requirement",
+  label = "Tell us what you need",
   size = "md",
   variant = "secondary",
   className,
