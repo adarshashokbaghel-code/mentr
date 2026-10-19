@@ -1,4 +1,12 @@
-import { PY_LESSON_INDEX, PY_LESSON_ORDER, getPyLesson } from "../../src/lib/python-lms";
+import {
+  PY_INT_LESSON_INDEX,
+  PY_INT_LESSON_ORDER,
+  PY_LESSON_INDEX,
+  PY_LESSON_ORDER,
+  getPyLesson,
+} from "../../src/lib/python-lms";
+import { beginnerPathUnlocksIntermediate } from "../../src/lib/python-lms/course-access";
+import { PLACEMENT_PASS_RATIO } from "../../src/lib/python-lms/placement";
 import { ACHIEVEMENTS, bestStreakFor, levelFor, streakFor } from "../../src/lib/python-lms/game";
 import {
   cleanLessonProgress,
@@ -36,6 +44,7 @@ export type LearnPythonState = {
   unlockedLessons: string[];
   projects: Record<string, PyProjectProgress>;
   certificateId: string | null;
+  intermediateAccess: boolean;
 };
 
 let catalog: Map<string, number> | null = null;
@@ -50,7 +59,7 @@ function awardCatalog(): Map<string, number> {
     map.set(bankAwardKey(item.id), PY_XP.practice[item.level]);
     bankLevels.set(bankAwardKey(item.id), item.level);
   }
-  for (const entry of PY_LESSON_INDEX) {
+  for (const entry of [...PY_LESSON_INDEX, ...PY_INT_LESSON_INDEX]) {
     map.set(videoAwardKey(entry.slug), PY_XP.video);
     const lesson = getPyLesson(entry.slug);
     if (!lesson) continue;
@@ -144,6 +153,7 @@ function toState(lp: Partial<ILearnPython> | undefined, loginAwarded: boolean): 
     unlockedLessons: lp?.unlockedLessons ?? [],
     projects: (lp?.projects ?? {}) as Record<string, PyProjectProgress>,
     certificateId: lp?.certificate?.id ?? null,
+    intermediateAccess: Boolean(lp?.intermediateAccess),
   };
 }
 
@@ -153,6 +163,7 @@ export type LearnPythonSyncInput = {
   lessons?: unknown;
   achievements?: unknown;
   projects?: unknown;
+  placement?: unknown;
 };
 
 /** Times come from the server, not the browser. A project can be completed after its solution was opened. */
@@ -205,16 +216,44 @@ export async function syncLearnPython(userId: string, input: LearnPythonSyncInpu
       ? (input.lessons as Record<string, unknown>)
       : {};
   const merged: Record<string, PyLessonProgress> = { ...curLessons };
-  for (const slug of PY_LESSON_ORDER) {
-    if (!(slug in incoming) || !unlockedLessons(PY_LESSON_ORDER, merged).has(slug)) continue;
-    const clean = cleanLessonProgress(incoming[slug]);
-    if (!clean) continue;
-    const lastSlide = (getPyLesson(slug)?.notes.length ?? 1) - 1;
-    if (clean.notesDone && Math.max(clean.slidesSeen ?? 0, curLessons[slug]?.slidesSeen ?? 0) < lastSlide) delete clean.notesDone;
-    merged[slug] = mergeLessonProgress(curLessons[slug], clean);
-    set[`learnPython.lessons.${slug}`] = merged[slug];
+
+  const placementRaw = input.placement as { score?: unknown; total?: unknown } | undefined;
+  const pScore = typeof placementRaw?.score === "number" ? placementRaw.score : NaN;
+  const pTotal = typeof placementRaw?.total === "number" ? placementRaw.total : NaN;
+  if (Number.isFinite(pScore) && Number.isFinite(pTotal) && pTotal > 0 && pScore / pTotal >= PLACEMENT_PASS_RATIO) {
+    set["learnPython.intermediateAccess"] = true;
+    set["learnPython.placement"] = { passed: true, score: pScore, total: pTotal, at: now };
   }
-  const open = unlockedLessons(PY_LESSON_ORDER, merged);
+
+  const applyIncoming = (order: string[]) => {
+    for (const slug of order) {
+      if (!(slug in incoming) || !unlockedLessons(order, merged).has(slug)) continue;
+      const clean = cleanLessonProgress(incoming[slug]);
+      if (!clean) continue;
+      const lastSlide = (getPyLesson(slug)?.notes.length ?? 1) - 1;
+      if (clean.notesDone && Math.max(clean.slidesSeen ?? 0, curLessons[slug]?.slidesSeen ?? 0) < lastSlide) delete clean.notesDone;
+      merged[slug] = mergeLessonProgress(curLessons[slug], clean);
+      set[`learnPython.lessons.${slug}`] = merged[slug];
+    }
+  };
+
+  applyIncoming(PY_LESSON_ORDER);
+
+  let intermediateAccess =
+    Boolean(cur?.intermediateAccess) ||
+    (Number.isFinite(pScore) && Number.isFinite(pTotal) && pTotal > 0 && pScore / pTotal >= PLACEMENT_PASS_RATIO) ||
+    beginnerPathUnlocksIntermediate(merged);
+
+  if (intermediateAccess && !cur?.intermediateAccess && beginnerPathUnlocksIntermediate(merged)) {
+    set["learnPython.intermediateAccess"] = true;
+  }
+
+  if (intermediateAccess) applyIncoming(PY_INT_LESSON_ORDER);
+
+  const open = new Set([
+    ...unlockedLessons(PY_LESSON_ORDER, merged),
+    ...(intermediateAccess ? unlockedLessons(PY_INT_LESSON_ORDER, merged) : []),
+  ]);
 
   const keys = Array.isArray(input.awards) ? input.awards.slice(0, MAX_AWARDS_PER_SYNC) : [];
   const login = loginAwardKey(day);
@@ -263,7 +302,12 @@ export async function syncLearnPython(userId: string, input: LearnPythonSyncInpu
   const lvl = levelFor(xp);
   const finalLessons = (lp?.lessons ?? {}) as Record<string, PyLessonProgress>;
   const lessonsCompleted = Object.values(finalLessons).filter((l) => l?.completedAt).length;
-  const unlocked = [...unlockedLessons(PY_LESSON_ORDER, finalLessons)];
+  const intAccess =
+    Boolean(lp?.intermediateAccess) || beginnerPathUnlocksIntermediate(finalLessons);
+  const unlocked = [
+    ...unlockedLessons(PY_LESSON_ORDER, finalLessons),
+    ...(intAccess ? unlockedLessons(PY_INT_LESSON_ORDER, finalLessons) : []),
+  ];
   const projectsCompleted = completedProjects((lp?.projects ?? {}) as Record<string, PyProjectProgress>).length;
 
   await User.updateOne(
@@ -285,5 +329,8 @@ export async function syncLearnPython(userId: string, input: LearnPythonSyncInpu
     },
   );
 
-  return toState({ ...lp, xp, days, unlockedLessons: unlocked }, `learnPython.awards.${login}` in set);
+  return toState(
+    { ...lp, xp, days, unlockedLessons: unlocked, intermediateAccess: intAccess || lp?.intermediateAccess },
+    `learnPython.awards.${login}` in set,
+  );
 }

@@ -4,15 +4,18 @@ import { AdminPassDialog } from "@/components/admin/admin-pass-dialog";
 import {
   fetchAdminCoupons,
   fetchMessengerTemplates,
+  fetchMessengerWelcomeSettings,
   previewMessengerEmail,
+  saveMessengerWelcomeSettings,
   searchAdminUsers,
   sendMessengerEmails,
   type AdminCoupon,
   type AdminUserRow,
   type MessengerTemplateMeta,
+  type MessengerWelcomeSettings,
 } from "@/lib/admin-api";
 import { cn } from "@/lib/utils";
-import { Check, Loader2, Search, Send } from "lucide-react";
+import { Check, ChevronDown, Loader2, Search, Send } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
 type Props = {
@@ -84,6 +87,15 @@ export function AdminMessenger({ adminKey }: Props) {
   const [status, setStatus] = useState<{ type: "ok" | "err"; msg: string } | null>(null);
   const [passOpen, setPassOpen] = useState(false);
   const [passError, setPassError] = useState<string | null>(null);
+  const [welcomeOpen, setWelcomeOpen] = useState(true);
+  const [welcomeSettings, setWelcomeSettings] =
+    useState<MessengerWelcomeSettings | null>(null);
+  const [welcomeDraft, setWelcomeDraft] = useState<MessengerWelcomeSettings | null>(
+    null,
+  );
+  const [welcomeSaving, setWelcomeSaving] = useState(false);
+  const [welcomePassOpen, setWelcomePassOpen] = useState(false);
+  const [welcomePassError, setWelcomePassError] = useState<string | null>(null);
 
   useEffect(() => {
     void fetchMessengerTemplates(adminKey)
@@ -94,10 +106,20 @@ export function AdminMessenger({ adminKey }: Props) {
       .catch((e) =>
         setStatus({ type: "err", msg: e instanceof Error ? e.message : "Load failed" }),
       );
+    void fetchMessengerWelcomeSettings(adminKey)
+      .then((data) => {
+        setWelcomeSettings(data.settings);
+        setWelcomeDraft(data.settings);
+      })
+      .catch(() => {
+        /* optional panel */
+      });
   }, [adminKey]);
 
   const activeTemplate = templates.find((t) => t.id === templateId);
   const templateAudience = activeTemplate?.audience;
+  const usesWelcomeSettings =
+    templateId === "initial-user" || templateId === "parent-welcome";
   const needsCoupon = Boolean(activeTemplate?.requiresCoupon);
   const couponReady = !needsCoupon || couponCode.trim().length > 0;
   const joinedDays = JOINED_FILTERS.find((f) => f.id === joinedFilter)?.days ?? null;
@@ -115,13 +137,12 @@ export function AdminMessenger({ adminKey }: Props) {
   }, [activeTemplate?.id, activeTemplate?.audience]);
 
   useEffect(() => {
-    if (!needsCoupon) return;
     void fetchAdminCoupons(adminKey)
       .then((data) =>
         setCouponOptions(data.coupons.filter((c) => c.status === "active")),
       )
       .catch(() => setCouponOptions([]));
-  }, [adminKey, needsCoupon]);
+  }, [adminKey]);
 
   const loadPreview = useCallback(async () => {
     setPreviewLoading(true);
@@ -261,8 +282,183 @@ export function AdminMessenger({ adminKey }: Props) {
     }
   };
 
+  const saveWelcome = async (adminPass: string) => {
+    if (!welcomeDraft) return;
+    setWelcomeSaving(true);
+    setWelcomePassError(null);
+    try {
+      const data = await saveMessengerWelcomeSettings(
+        adminKey,
+        welcomeDraft,
+        adminPass,
+      );
+      setWelcomeSettings(data.settings);
+      setWelcomeDraft(data.settings);
+      setWelcomePassOpen(false);
+      setStatus({ type: "ok", msg: "Signup welcome settings saved" });
+      void loadPreview();
+    } catch (e) {
+      setWelcomePassError(e instanceof Error ? e.message : "Save failed");
+    } finally {
+      setWelcomeSaving(false);
+    }
+  };
+
   return (
     <div className="flex h-[calc(100vh-57px)] flex-col lg:h-[calc(100vh-65px)]">
+      {/* Signup welcome configuration */}
+      <div className="shrink-0 border-b border-hairline bg-cream-band/50">
+        <button
+          type="button"
+          onClick={() => setWelcomeOpen((o) => !o)}
+          className="flex w-full items-center justify-between gap-2 px-4 py-2.5 text-left sm:px-5"
+        >
+          <span>
+            <span className="text-xs font-bold text-ink">Signup welcome emails</span>
+            <span className="mt-0.5 block text-[10px] text-muted">
+              Auto-sent on first verify · edits apply to Mentor · Initial welcome &amp; Parent · Welcome
+            </span>
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 shrink-0 text-muted transition",
+              welcomeOpen && "rotate-180",
+            )}
+          />
+        </button>
+        {welcomeOpen && welcomeDraft && (
+          <div className="space-y-3 border-t border-hairline px-4 pb-3 pt-2 sm:px-5">
+            <div className="flex flex-wrap gap-4">
+              <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-ink">
+                <input
+                  type="checkbox"
+                  checked={welcomeDraft.autoWelcomeMentor}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d ? { ...d, autoWelcomeMentor: e.target.checked } : d,
+                    )
+                  }
+                  className="rounded border-hairline"
+                />
+                Auto-send mentor welcome
+              </label>
+              <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-ink">
+                <input
+                  type="checkbox"
+                  checked={welcomeDraft.autoWelcomeParent}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d ? { ...d, autoWelcomeParent: e.target.checked } : d,
+                    )
+                  }
+                  className="rounded border-hairline"
+                />
+                Auto-send parent welcome
+              </label>
+            </div>
+            <div className="grid gap-3 lg:grid-cols-2">
+              <div>
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-muted">
+                  Mentor message
+                </p>
+                <textarea
+                  value={welcomeDraft.mentorIntro}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d ? { ...d, mentorIntro: e.target.value } : d,
+                    )
+                  }
+                  rows={4}
+                  placeholder="Leave empty for default intro. Use {{name}} for their name."
+                  className="w-full rounded border border-hairline bg-white px-2 py-1.5 text-xs text-ink outline-none focus:border-ink"
+                />
+                <input
+                  value={welcomeDraft.mentorSubject}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d ? { ...d, mentorSubject: e.target.value } : d,
+                    )
+                  }
+                  placeholder="Optional subject override ({{name}})"
+                  className="mt-1.5 h-8 w-full rounded border border-hairline bg-white px-2 text-xs text-ink outline-none focus:border-ink"
+                />
+                <input
+                  value={welcomeDraft.mentorWelcomeCouponCode}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d
+                        ? {
+                            ...d,
+                            mentorWelcomeCouponCode: e.target.value.toUpperCase(),
+                          }
+                        : d,
+                    )
+                  }
+                  list="welcome-coupon-codes"
+                  placeholder="Optional Premium coupon in mentor welcome"
+                  className="mt-1.5 h-8 w-full rounded border border-hairline bg-white px-2 font-mono text-xs uppercase text-ink outline-none focus:border-ink"
+                />
+              </div>
+              <div>
+                <p className="mb-1 text-[10px] font-bold uppercase tracking-wide text-muted">
+                  Parent message
+                </p>
+                <textarea
+                  value={welcomeDraft.parentIntro}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d ? { ...d, parentIntro: e.target.value } : d,
+                    )
+                  }
+                  rows={4}
+                  placeholder="Leave empty for default intro. Use {{name}}."
+                  className="w-full rounded border border-hairline bg-white px-2 py-1.5 text-xs text-ink outline-none focus:border-ink"
+                />
+                <input
+                  value={welcomeDraft.parentSubject}
+                  onChange={(e) =>
+                    setWelcomeDraft((d) =>
+                      d ? { ...d, parentSubject: e.target.value } : d,
+                    )
+                  }
+                  placeholder="Optional subject override ({{name}})"
+                  className="mt-1.5 h-8 w-full rounded border border-hairline bg-white px-2 text-xs text-ink outline-none focus:border-ink"
+                />
+              </div>
+            </div>
+            <datalist id="welcome-coupon-codes">
+              {couponOptions.map((coupon) => (
+                <option key={coupon.id} value={coupon.code}>
+                  {`₹${coupon.discountInr} off`}
+                </option>
+              ))}
+            </datalist>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                disabled={
+                  welcomeSaving ||
+                  !welcomeSettings ||
+                  JSON.stringify(welcomeDraft) === JSON.stringify(welcomeSettings)
+                }
+                onClick={() => {
+                  setWelcomePassError(null);
+                  setWelcomePassOpen(true);
+                }}
+                className="h-8 rounded bg-ink px-3 text-xs font-semibold text-white disabled:opacity-40"
+              >
+                Save welcome settings
+              </button>
+              {usesWelcomeSettings && (
+                <span className="text-[10px] text-muted">
+                  Preview below uses these settings for the selected welcome template.
+                </span>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Toolbar */}
       <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-hairline bg-white px-4 py-2.5 sm:px-5">
         <select
@@ -524,6 +720,22 @@ export function AdminMessenger({ adminKey }: Props) {
           </div>
         </div>
       </div>
+
+      <AdminPassDialog
+        open={welcomePassOpen}
+        title="Save welcome settings?"
+        description="Updates auto signup emails and welcome template previews. Enter ADMIN_PASS."
+        confirmLabel="Save"
+        busy={welcomeSaving}
+        error={welcomePassError}
+        onConfirm={(pass) => void saveWelcome(pass)}
+        onClose={() => {
+          if (!welcomeSaving) {
+            setWelcomePassOpen(false);
+            setWelcomePassError(null);
+          }
+        }}
+      />
 
       <AdminPassDialog
         open={passOpen}

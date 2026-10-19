@@ -37,18 +37,18 @@ export const PYTHON_TRACKS: PythonTrack[] = [
   {
     tier: "intermediate",
     name: "Python Intermediate",
-    status: "soon",
-    lessons: null,
+    status: "live",
+    lessons: 12,
     summary:
-      "Write longer programs that hold real data, recover from errors and stay organised.",
+      "Job-ready Python: specs, dicts, parsing, errors, JSON, OOP and shipping — with practice every step.",
     covers: [
-      "dictionaries, tuples and sets",
-      "reading and writing files",
-      "handling errors with try / except",
-      "modules and the standard library",
-      "classes and objects, first steps",
+      "problem-solving workflow & edge cases",
+      "dictionaries, sets and parsing strings",
+      "functions, errors and JSON data",
+      "stdlib tools, classes and simple tests",
+      "capstone: JSON expense tracker",
     ],
-    outcome: "Build small tools that save and load data",
+    outcome: "Ship a small tool you can show in an internship interview",
   },
   {
     tier: "advanced",
@@ -549,12 +549,36 @@ export const PYTHON_METHOD: { title: string; text: string }[] = [
 
 /** "What you get" cards. `stat` is the big headline number or word. */
 export const PYTHON_OFFER: { stat: string; title: string; text: string }[] = [
-  { stat: "500+", title: "Auto-checked exercises", text: "Multiple choice, predict the output, fix the bug, fill the blank, put lines in order and write your own code. All checked instantly." },
-  { stat: "Py3", title: "In-browser compiler", text: "Write and run any Python program in your browser. Type input() answers right in the console, like a real terminal. Nothing to install." },
-  { stat: "10", title: "Lessons with notes", text: "Short slide notes for every lesson, with diagrams, tables, exam tips and flashcards. Read them again any time before a test." },
-  { stat: "Live", title: "Runnable examples", text: "Step through code line by line and see each variable change. Then edit the example and run it yourself." },
-  { stat: "1", title: "Final project", text: "Build a complete quiz game on your own, with hints one at a time if you get stuck." },
-  { stat: "50", title: "Levels, badges, streak", text: "Earn XP for every right answer, climb 50 levels, unlock 10 badges and keep a daily streak." },
+  {
+    stat: "500+",
+    title: "Auto-checked exercises",
+    text: "Beginner practice bank plus checks in every Intermediate lesson — multiple choice, predict output, fix the bug, fill the blank, order lines and write code. All instant.",
+  },
+  {
+    stat: "Py3",
+    title: "In-browser compiler",
+    text: "One compiler for both tracks. Write and run any Python program in your browser; type input() answers in the console like a real terminal. Nothing to install.",
+  },
+  {
+    stat: "22",
+    title: "Lessons with notes",
+    text: "10 Beginner + 12 Intermediate slide decks — diagrams, tables, tips and flashcards. Same Study → Examples → Practice loop on each path.",
+  },
+  {
+    stat: "Live",
+    title: "Runnable examples",
+    text: "Step through code line by line in every lesson on Beginner and Intermediate. See variables change, then edit and run yourself.",
+  },
+  {
+    stat: "2",
+    title: "Capstone projects",
+    text: "Beginner: a quiz game you build with hints. Intermediate: a JSON expense tracker you can walk through in an internship interview.",
+  },
+  {
+    stat: "50",
+    title: "Levels, badges, streak",
+    text: "XP from both tracks feeds one profile — climb 50 levels, unlock 10 badges and keep a daily streak.",
+  },
 ];
 
 export type CompareTone = "yes" | "some" | "no";
@@ -582,7 +606,7 @@ export const PYTHON_COMPARE_ROWS: { label: string; cells: { text: string; tone: 
   {
     label: "Time to learn the basics",
     cells: [
-      { text: "About 8 hours, hands-on", tone: "yes" },
+      { text: "~8 hr Beginner · 12-lesson Intermediate path", tone: "yes" },
       { text: "10–60 hours of video", tone: "no" },
       { text: "20–60+ hours of video", tone: "no" },
       { text: "Months of fixed classes", tone: "no" },
@@ -725,7 +749,12 @@ export const LEARN_PYTHON_FAQS = [
   {
     question: "When will Python Intermediate and Advanced open?",
     answer:
-      "Python Beginner is open now. Python Intermediate and Python Advanced are being built and will open on this page. Finishing Beginner is the right way to prepare for both.",
+      "Python Beginner and Python Intermediate are live. Take the free placement quiz on the Learn Python page if you already know basics. Python Advanced is still in development.",
+  },
+  {
+    question: "How do I start Python Intermediate?",
+    answer:
+      "Pass the 12-question placement quiz (70%+) or finish Beginner through Functions (Lesson 9). Intermediate uses the same Study → Examples → Practice flow with harder, job-focused projects.",
   },
   {
     question: "How is this different from Mentr Learn for Class 3–5?",

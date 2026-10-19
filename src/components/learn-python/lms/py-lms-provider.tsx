@@ -9,16 +9,23 @@ import {
   todayKey,
   type AchievementId,
 } from "@/lib/python-lms/game";
-import { PY_LESSON_ORDER } from "@/lib/python-lms";
+import { PY_INT_LESSON_ORDER, PY_LESSON_ORDER } from "@/lib/python-lms";
+import {
+  hasIntermediateAccess,
+  isIntermediateSlug,
+  unlockedIntermediateLessonSlugs,
+} from "@/lib/python-lms/course-access";
 import { mergeLessonProgress, unlockedLessons } from "@/lib/python-lms/lesson-progress";
 import {
   MAX_DAYS_KEPT,
   readPyProgress,
   writePyProgress,
   type PyLessonProgress,
+  type PyPlacement,
   type PyProjectProgress,
   type PyStore,
 } from "@/lib/python-lms/progress";
+import { readPlacementLocal } from "@/lib/python-lms/placement-storage";
 import { mergeProjectProgress } from "@/lib/python-lms/project-progress";
 import { loginAwardKey, projectAwardKey } from "@/lib/python-lms/rules";
 import { syncPyProgress, type PyServerState } from "@/lib/python-lms/sync-client";
@@ -56,6 +63,8 @@ type PyLmsContextValue = {
   setCertificateId: (id: string) => void;
   /** Sends anything not yet saved to the server and waits for it. */
   syncNow: () => Promise<void>;
+  canAccessIntermediate: boolean;
+  savePlacement: (result: PyPlacement) => void;
   toasts: PyToast[];
   dismissToast: (id: number) => void;
   guide: GuideState;
@@ -70,9 +79,21 @@ const sumXp = (s: PyStore) => Object.values(s.awarded).reduce((a, b) => a + b, 0
 const SYNC_DELAY_MS = 1200;
 const RETRY_DELAY_MS = 15000;
 
-type Pending = { awards: Set<string>; lessons: Set<string>; achievements: Set<string>; projects: Set<string> };
+type Pending = {
+  awards: Set<string>;
+  lessons: Set<string>;
+  achievements: Set<string>;
+  projects: Set<string>;
+  placement: boolean;
+};
 
-const emptyPending = (): Pending => ({ awards: new Set(), lessons: new Set(), achievements: new Set(), projects: new Set() });
+const emptyPending = (): Pending => ({
+  awards: new Set(),
+  lessons: new Set(),
+  achievements: new Set(),
+  projects: new Set(),
+  placement: false,
+});
 
 /** Adds any total-based achievements (streak, level) the store now qualifies for. */
 function withAutoAchievements(s: PyStore): { store: PyStore; unlocked: AchievementId[] } {
@@ -87,7 +108,11 @@ function withAutoAchievements(s: PyStore): { store: PyStore; unlocked: Achieveme
 
 /** Opening the course while signed in is today's login: it adds a streak day and the daily login XP (announced once the server confirms). */
 function bootstrap(userId: string): { store: PyStore; toasts: PyToast[] } {
-  const read = readPyProgress(userId);
+  let read = readPyProgress(userId);
+  if (!read.placement) {
+    const guest = readPlacementLocal();
+    if (guest) read = { ...read, placement: guest };
+  }
   const today = todayKey();
   const login = loginAwardKey(today);
   const logged: PyStore = {
@@ -133,6 +158,7 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
   const [guide, setGuide] = useState<GuideState>({ open: false, tab: "achievements" });
   const [ready, setReady] = useState(false);
   const [serverUnlocked, setServerUnlocked] = useState<string[]>([]);
+  const [serverIntermediateAccess, setServerIntermediateAccess] = useState(false);
   const [certificateId, setCertificateId] = useState<string | null>(null);
   const toastId = useRef(1);
 
@@ -142,6 +168,7 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
     lessons: new Set(Object.keys(initial.store.lessons)),
     achievements: new Set(Object.keys(initial.store.achievements)),
     projects: new Set(Object.keys(initial.store.projects)),
+    placement: Boolean(initial.store.placement?.passed),
   });
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inFlight = useRef(false);
@@ -164,6 +191,7 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
       lessons: new Set(p.lessons),
       achievements: new Set(p.achievements),
       projects: new Set(p.projects),
+      placement: p.placement,
     };
     pending.current = emptyPending();
     const payload = {
@@ -172,6 +200,9 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
       lessons: Object.fromEntries([...snapshot.lessons].filter((slug) => s.lessons[slug]).map((slug) => [slug, s.lessons[slug]])),
       achievements: Object.fromEntries([...snapshot.achievements].filter((id) => s.achievements[id]).map((id) => [id, s.achievements[id]])),
       projects: Object.fromEntries([...snapshot.projects].filter((id) => s.projects[id]).map((id) => [id, s.projects[id]])),
+      ...(snapshot.placement && s.placement?.passed
+        ? { placement: { score: s.placement.score, total: s.placement.total } }
+        : {}),
     };
     return { snapshot, payload };
   }, []);
@@ -181,6 +212,7 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
     snapshot.lessons.forEach((k) => pending.current.lessons.add(k));
     snapshot.achievements.forEach((k) => pending.current.achievements.add(k));
     snapshot.projects.forEach((k) => pending.current.projects.add(k));
+    if (snapshot.placement) pending.current.placement = true;
   }, []);
 
   const flush = useCallback(async () => {
@@ -203,6 +235,7 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
       writePyProgress(userId, final);
       setStore(final);
       setServerUnlocked(server.unlockedLessons ?? []);
+      setServerIntermediateAccess(Boolean(server.intermediateAccess));
       setCertificateId(server.certificateId ?? null);
       setReady(true);
       if (unlocked.length) again.current = true;
@@ -372,12 +405,35 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
   const openGuide = useCallback((tab: GuideTab, focus?: AchievementId) => setGuide({ open: true, tab, focus }), []);
   const closeGuide = useCallback(() => setGuide((g) => ({ ...g, open: false })), []);
 
+  const canAccessIntermediate = useMemo(
+    () => hasIntermediateAccess(store.lessons, store.placement, serverIntermediateAccess),
+    [store.lessons, store.placement, serverIntermediateAccess],
+  );
+
   const unlockedSet = useMemo(() => {
     const open = unlockedLessons(PY_LESSON_ORDER, store.lessons);
+    if (canAccessIntermediate) {
+      unlockedIntermediateLessonSlugs(PY_INT_LESSON_ORDER, store.lessons, true).forEach((s) => open.add(s));
+    }
     serverUnlocked.forEach((slug) => open.add(slug));
     return open;
-  }, [store.lessons, serverUnlocked]);
-  const isLessonUnlocked = useCallback((slug: string) => unlockedSet.has(slug), [unlockedSet]);
+  }, [store.lessons, serverUnlocked, canAccessIntermediate]);
+
+  const isLessonUnlocked = useCallback(
+    (slug: string) => {
+      if (isIntermediateSlug(slug) && !canAccessIntermediate) return false;
+      return unlockedSet.has(slug);
+    },
+    [unlockedSet, canAccessIntermediate],
+  );
+
+  const savePlacement = useCallback(
+    (result: PyPlacement) => {
+      pending.current.placement = true;
+      commit({ ...storeRef.current, placement: result });
+    },
+    [commit],
+  );
 
   const value = useMemo(
     () => ({
@@ -400,6 +456,8 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
       certificateId,
       setCertificateId,
       syncNow,
+      canAccessIntermediate,
+      savePlacement,
       toasts,
       dismissToast,
       guide,
@@ -421,6 +479,8 @@ export function PyLmsProvider({ userId, children }: { userId: string; children: 
       recordProjectHint,
       certificateId,
       syncNow,
+      canAccessIntermediate,
+      savePlacement,
       toasts,
       dismissToast,
       guide,

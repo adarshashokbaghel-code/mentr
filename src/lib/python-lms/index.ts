@@ -1,4 +1,6 @@
 import { PYTHON_BEGINNER_LESSONS } from "@/lib/learn-python";
+import { PYTHON_INTERMEDIATE_LESSONS } from "@/lib/learn-python-intermediate";
+import { INT_LESSON_01 } from "@/lib/python-lms/int-lesson-01";
 import { LESSON_01 } from "@/lib/python-lms/lesson-01";
 import { LESSON_02 } from "@/lib/python-lms/lesson-02";
 import { LESSON_03 } from "@/lib/python-lms/lesson-03";
@@ -11,6 +13,10 @@ import { LESSON_09 } from "@/lib/python-lms/lesson-09";
 import type { PythonLmsLesson } from "@/lib/python-lms/types";
 
 export const PY_LMS_BASE = "/learnpython/lms";
+export const PY_LMS_INTERMEDIATE = `${PY_LMS_BASE}/intermediate`;
+export const PY_PLACEMENT_PATH = "/learnpython/placement";
+/** Timed Path to Intermediate test inside the LMS (sidebar stays visible). */
+export const PY_LMS_PATH_TEST = `${PY_LMS_BASE}/path-to-intermediate`;
 export const PY_COMPILER_PATH = `${PY_LMS_BASE}/compiler`;
 export const PY_PRACTICE_PATH = `${PY_LMS_BASE}/practice`;
 export const PY_FINAL_PATH = `${PY_LMS_BASE}/final`;
@@ -20,7 +26,7 @@ export const PY_FINAL_SLUG = "lesson-10";
 
 export const pyProjectHref = (id: string) => `${PY_FINAL_PATH}/${id}`;
 
-const CONTENT: Record<string, PythonLmsLesson> = {
+const BEGINNER_CONTENT: Record<string, PythonLmsLesson> = {
   [LESSON_01.slug]: LESSON_01,
   [LESSON_02.slug]: LESSON_02,
   [LESSON_03.slug]: LESSON_03,
@@ -32,6 +38,15 @@ const CONTENT: Record<string, PythonLmsLesson> = {
   [LESSON_09.slug]: LESSON_09,
 };
 
+const INTERMEDIATE_CONTENT: Record<string, PythonLmsLesson> = {
+  [INT_LESSON_01.slug]: INT_LESSON_01,
+};
+
+const ALL_CONTENT: Record<string, PythonLmsLesson> = {
+  ...BEGINNER_CONTENT,
+  ...INTERMEDIATE_CONTENT,
+};
+
 export type PyLessonEntry = {
   slug: string;
   number: number;
@@ -40,7 +55,12 @@ export type PyLessonEntry = {
   concepts: string[];
   available: boolean;
   final: boolean;
+  course: "beginner" | "intermediate";
 };
+
+function intSlug(n: number) {
+  return `int-${String(n).padStart(2, "0")}`;
+}
 
 export const PY_LESSON_INDEX: PyLessonEntry[] = PYTHON_BEGINNER_LESSONS.map((l) => {
   const slug = `lesson-${l.number}`;
@@ -50,23 +70,61 @@ export const PY_LESSON_INDEX: PyLessonEntry[] = PYTHON_BEGINNER_LESSONS.map((l) 
     title: l.title,
     subtitle: l.subtitle,
     concepts: l.concepts,
-    available: slug in CONTENT || slug === PY_FINAL_SLUG,
+    available: slug in BEGINNER_CONTENT || slug === PY_FINAL_SLUG,
     final: slug === PY_FINAL_SLUG,
+    course: "beginner",
   };
 });
+
+export const PY_INT_LESSON_INDEX: PyLessonEntry[] = PYTHON_INTERMEDIATE_LESSONS.map((l) => {
+  const slug = intSlug(l.number);
+  return {
+    slug,
+    number: l.number,
+    title: l.title,
+    subtitle: l.subtitle,
+    concepts: l.concepts,
+    available: slug in INTERMEDIATE_CONTENT,
+    final: false,
+    course: "intermediate",
+  };
+});
+
+export const PY_LESSON_ORDER: string[] = [...PY_LESSON_INDEX].sort((a, b) => a.number - b.number).map((l) => l.slug);
+export const PY_INT_LESSON_ORDER: string[] = PY_INT_LESSON_INDEX.map((l) => l.slug);
+export const PY_ALL_LESSON_ORDERS = [PY_LESSON_ORDER, PY_INT_LESSON_ORDER] as const;
+
+export function lessonIndexForSlug(slug: string): PyLessonEntry[] {
+  return slug.startsWith("int-") ? PY_INT_LESSON_INDEX : PY_LESSON_INDEX;
+}
+
+export function lessonEntry(slug: string): PyLessonEntry | undefined {
+  return lessonIndexForSlug(slug).find((l) => l.slug === slug);
+}
 
 /** Lessons open by Study progress; the Final Challenge is always open. */
 export function isPyEntryOpen(entry: PyLessonEntry, isLessonUnlocked: (slug: string) => boolean): boolean {
   return entry.final || (entry.available && isLessonUnlocked(entry.slug));
 }
 
-export const PY_LESSON_ORDER: string[] = [...PY_LESSON_INDEX].sort((a, b) => a.number - b.number).map((l) => l.slug);
-
 export function getPyLesson(slug: string): PythonLmsLesson | null {
-  return CONTENT[slug] ?? null;
+  return ALL_CONTENT[slug] ?? null;
 }
 
 export function pyLessonHref(slug: string): string {
   if (slug === PY_FINAL_SLUG) return PY_FINAL_PATH;
   return `${PY_LMS_BASE}/${slug}`;
 }
+
+/** Intermediate course home or any int-* lesson player route. */
+export function isPlacementLmsPath(pathname: string): boolean {
+  return pathname === PY_LMS_PATH_TEST || pathname.startsWith(`${PY_LMS_PATH_TEST}/`);
+}
+
+export function isIntermediateLmsPath(pathname: string): boolean {
+  if (isPlacementLmsPath(pathname)) return false;
+  if (pathname === PY_LMS_INTERMEDIATE || pathname.startsWith(`${PY_LMS_INTERMEDIATE}/`)) return true;
+  return pathname.startsWith(`${PY_LMS_BASE}/int-`);
+}
+
+export { PY_TRACK_THEMES, pyTrackTheme, pyTrackThemeForSlug, type PyTrackTheme } from "@/lib/python-lms/track-theme";

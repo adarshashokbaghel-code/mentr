@@ -1,7 +1,7 @@
 "use client";
 
 import { isAnalyticsBlockedPath } from "@/lib/adsense-paths";
-import { GA_MEASUREMENT_ID } from "@/lib/seo";
+import { GA_MEASUREMENT_ID } from "@/lib/site-scripts";
 import Script from "next/script";
 import { usePathname } from "next/navigation";
 

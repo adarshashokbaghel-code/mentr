@@ -8,6 +8,8 @@ export type PySyncPayload = {
   lessons: Record<string, PyLessonProgress>;
   achievements: Record<string, string>;
   projects: Record<string, PyProjectProgress>;
+  /** Server validates ratio and sets intermediateAccess. */
+  placement?: { score: number; total: number };
 };
 
 export type PyServerState = {
@@ -21,6 +23,7 @@ export type PyServerState = {
   unlockedLessons: string[];
   projects: Record<string, PyProjectProgress>;
   certificateId: string | null;
+  intermediateAccess: boolean;
 };
 
 export type PyCertificate = {
@@ -98,3 +101,31 @@ export const fetchPyLeaderboard = () => request<PyLeaderboard>("/leaderboard");
 export const claimPyCertificate = (name: string) =>
   request<PyCertificate>("/certificate", { method: "POST", body: JSON.stringify({ name }) });
 export const verifyPyCertificate = (id: string) => request<PyCertificate>(`/certificate/${encodeURIComponent(id)}`);
+
+export type PyPlacementPublicQuestion = {
+  id: string;
+  type: "mcq" | "predict";
+  prompt: string;
+  code?: string;
+  options: string[];
+};
+
+export type PyPlacementStart = {
+  sessionId: string;
+  expiresAt: string;
+  questions: PyPlacementPublicQuestion[];
+  totalInBank: number;
+  sessionSize: number;
+  timeLimitSec: number;
+};
+
+export function startPyPlacementSessionApi() {
+  return request<PyPlacementStart>("/placement/start", { method: "POST", body: "{}" });
+}
+
+export function submitPyPlacementSessionApi(sessionId: string, answers: Record<string, number>) {
+  return request<{ score: number; total: number; passed: boolean; byId: Record<string, boolean>; intermediateAccess: boolean }>(
+    "/placement/submit",
+    { method: "POST", body: JSON.stringify({ sessionId, answers }) },
+  );
+}

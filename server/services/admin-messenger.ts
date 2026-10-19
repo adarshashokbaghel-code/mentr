@@ -12,6 +12,7 @@ import {
   type MessengerTemplateId,
 } from "./email-templates";
 import { quoteCouponForBroadcast, type CouponBroadcastQuote } from "./coupons";
+import { welcomeExtrasForRole } from "./messenger-welcome-settings";
 import { sendAdminEmail } from "./mail";
 
 export type AdminUserRow = {
@@ -125,7 +126,7 @@ function userSearchFilter(q: string, role?: UserRole) {
   return filter;
 }
 
-function displayName(user: IUser): string {
+export function displayName(user: IUser): string {
   if (user.profile?.name?.trim()) return user.profile.name.trim();
   if (user.parentProfile?.name?.trim()) return user.parentProfile.name.trim();
   const local = user.email.split("@")[0] || "there";
@@ -237,12 +238,25 @@ export async function previewMessengerEmail(
     typedCode.length >= 3
       ? await couponForTemplate(templateId, typedCode)
       : undefined;
-  return renderMessengerTemplate(templateId, {
+  const previewName = opts?.name?.trim() || defaults.name;
+  const vars: Parameters<typeof renderMessengerTemplate>[1] = {
     ...defaults,
-    name: opts?.name?.trim() || defaults.name,
+    name: previewName,
     referralUrl: opts?.referralUrl || defaults.referralUrl,
-    ...(coupon ? { coupon } : {}),
-  });
+  };
+  if (templateId === "initial-user" || templateId === "parent-welcome") {
+    Object.assign(
+      vars,
+      await welcomeExtrasForRole(role, previewName, {
+        couponCode: templateId === "initial-user" ? typedCode : undefined,
+        useStoredMentorCoupon:
+          templateId === "initial-user" && typedCode.length === 0,
+      }),
+    );
+  } else if (coupon) {
+    vars.coupon = coupon;
+  }
+  return renderMessengerTemplate(templateId, vars);
 }
 
 export type SendResult = {
@@ -318,12 +332,25 @@ export async function sendMessengerEmails(
     try {
       const referralUrl =
         user.role === "faculty" ? await ensureReferralUrl(user) : undefined;
-      const vars = {
-        ...templateVarsForRole(user.role, displayName(user), referralUrl),
-        name: displayName(user),
+      const mentorName = displayName(user);
+      const vars: Parameters<typeof renderMessengerTemplate>[1] = {
+        ...templateVarsForRole(user.role, mentorName, referralUrl),
+        name: mentorName,
         ...(referralUrl ? { referralUrl } : {}),
-        ...(coupon ? { coupon } : {}),
       };
+      if (templateId === "initial-user" || templateId === "parent-welcome") {
+        Object.assign(
+          vars,
+          await welcomeExtrasForRole(user.role, mentorName, {
+            couponCode:
+              templateId === "initial-user" ? opts?.couponCode : undefined,
+            useStoredMentorCoupon:
+              templateId === "initial-user" && !opts?.couponCode?.trim(),
+          }),
+        );
+      } else if (coupon) {
+        vars.coupon = coupon;
+      }
       const rendered = renderMessengerTemplate(templateId, vars);
       await sendAdminEmail(user.email, rendered.subject, rendered.text, rendered.html);
       results.push({

@@ -122,6 +122,7 @@ export type PythonLmsLesson = {
   title: string;
   subtitle: string;
   minutes: number;
+  course?: "beginner" | "intermediate";
   goals: string[];
   notes: NoteSlide[];
   examples: ExampleItem[];

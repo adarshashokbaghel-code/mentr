@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { isAdSenseBlockedPath } from "@/lib/adsense-paths";
+import { ADSENSE_ENABLED, GA_MEASUREMENT_ID } from "@/lib/site-scripts";
 import { X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -53,6 +54,8 @@ export function CookieConsent() {
 
   if (skip || !visible) return null;
 
+  const thirdParty = ADSENSE_ENABLED || Boolean(GA_MEASUREMENT_ID);
+
   return (
     <div
       role="region"
@@ -63,7 +66,8 @@ export function CookieConsent() {
       <div className="pointer-events-auto mx-auto flex w-full max-w-[1100px] items-center gap-3 rounded-xl border border-hairline bg-white py-2.5 pl-3.5 pr-2 shadow-[0_6px_24px_rgba(28,26,23,0.14)] sm:gap-4 sm:py-3 sm:pl-5 sm:pr-3">
         <p className="min-w-0 flex-1 text-xs leading-snug text-muted sm:text-sm sm:leading-relaxed">
           <span className="sm:hidden">
-            We use cookies for sign-in and analytics.{" "}
+            We use cookies to keep you signed in
+            {thirdParty ? " and for analytics or ads on public pages" : ""}.{" "}
             <Link
               href="/cookie-policy"
               className="font-semibold text-ink underline underline-offset-2"
@@ -72,9 +76,11 @@ export function CookieConsent() {
             </Link>
           </span>
           <span className="hidden sm:inline">
-            We use cookies for sign-in and, on public parent/tutor pages, Google
-            Analytics and Google AdSense. We do not run ads on Mentr Learn. See
-            our{" "}
+            We use cookies for sign-in and site functionality
+            {thirdParty
+              ? ", and on public parent/tutor pages Google Analytics and/or AdSense"
+              : ""}
+            . We do not run third-party ads on Mentr Learn. See our{" "}
             <Link
               href="/privacy"
               className="font-semibold text-ink underline-offset-2 hover:underline"

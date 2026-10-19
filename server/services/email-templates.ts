@@ -42,6 +42,10 @@ export type MessengerTemplateVars = {
   postRequirementUrl: string;
   profilingUrl: string;
   referralUrl: string;
+  premiumPricingUrl?: string;
+  /** Resolved intro paragraph (admin Messenger welcome settings). */
+  welcomeIntro?: string;
+  welcomeSubjectOverride?: string;
   coupon?: CouponMailVars;
 };
 
@@ -161,6 +165,56 @@ function signOff() {
   return `<p style="margin:14px 0 0;font-size:12px;line-height:1.5;color:#6b756e;">Questions? Reply to this email — we're here to help.</p>`;
 }
 
+function introParagraph(v: MessengerTemplateVars, fallback: string) {
+  const text = v.welcomeIntro?.trim() || fallback;
+  return `<p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:#525252;">${esc(text)}</p>`;
+}
+
+function premiumMentorWelcomeBlock(v: MessengerTemplateVars) {
+  const pricing = v.premiumPricingUrl || `${SITE}/mentrpricing`;
+  const coupon = v.coupon;
+  const couponBit =
+    coupon && coupon.lines.length > 0
+      ? `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:12px;">
+          <tr>
+            <td style="padding:10px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(250,204,21,0.45);">
+              <p style="margin:0;font-size:12px;line-height:1.55;color:#ffffff;">
+                <strong style="color:#facc15;">Launch offer:</strong>
+                <span style="color:rgba(255,255,255,0.92);"> use code </span>
+                <span style="font-family:ui-monospace,Menlo,monospace;font-weight:800;color:#fffaf5;letter-spacing:0.04em;">${esc(coupon.code)}</span>
+                <span style="color:rgba(255,255,255,0.92);"> at checkout${coupon.sameOff ? ` (${inr(coupon.lines[0].offInr)} off)` : ""}.</span>
+              </p>
+              <p style="margin:6px 0 0;font-size:11px;line-height:1.45;color:rgba(255,255,255,0.75);">
+                Valid through ${esc(coupon.validUntilLabel)}.
+              </p>
+            </td>
+          </tr>
+        </table>`
+      : "";
+
+  return `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 14px;">
+    <tr>
+      <td style="padding:14px 14px 16px;background:#1a231c;border:1px solid #1a231c;">
+        ${sectionLabel("Optional · Premium Mentor", "#facc15")}
+        <p style="margin:0;font-size:13px;line-height:1.55;color:#ffffff;">
+          Core mentoring stays <strong>free forever</strong>. When you want more reach, Premium adds
+          unlimited daily pitches, 3 parent contact unlocks per day, a human SPOC, featured landing placement, and a Premium badge — from <strong>$5/mo (≈ ₹449)</strong>, price as shown.
+        </p>
+        <ul style="margin:10px 0 0;padding:0 0 0 16px;font-size:12px;line-height:1.55;color:rgba(255,255,255,0.85);">
+          <li>Unlimited pitches (no 3-a-day cap)</li>
+          <li>Parent directory + pitch board unlocks, direct parent contact</li>
+          <li>Featured on mentr.in for Premium mentors</li>
+        </ul>
+        ${couponBit}
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:12px;">
+          <tr><td style="padding-bottom:6px;">${primaryBtn(pricing, "Get Premium — view plans")}</td></tr>
+          <tr><td><a href="${v.dashboardUrl}" style="color:#a7f3d0;font-size:12px;font-weight:600;text-decoration:underline;">Or open your dashboard</a></td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>`;
+}
+
 function referralBlock(v: MessengerTemplateVars) {
   return `<table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:14px 0 0;">
     <tr>
@@ -181,24 +235,35 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
   "initial-user": {
     id: "initial-user",
     label: "Mentor · Initial welcome",
-    description: "Welcome early tutors, upcoming free tools, and referral link.",
+    description:
+      "Auto/manual signup welcome — profile CTAs, Premium pitch, optional coupon (Messenger settings).",
     audience: "faculty",
-    subject: (v) => `Welcome to Mentr, ${v.name}`,
-    text: (v) =>
-      `Dear ${v.name},\n\nThank you for joining Mentr by Paprly as an initial user.\n\nLog in: ${v.loginUrl}\nComplete profile: ${v.profilingUrl}\nReferral: ${v.referralUrl}\n\nMentr by Paprly`,
+    subject: (v) =>
+      v.welcomeSubjectOverride?.trim() || `Welcome to Mentr, ${v.name}`,
+    text: (v) => {
+      const intro =
+        v.welcomeIntro?.trim() ||
+        "Thank you for joining Mentr by Paprly. Your mentor profile stays free forever.";
+      const pricing = v.premiumPricingUrl || `${SITE}/mentrpricing`;
+      const couponLine =
+        v.coupon && v.coupon.lines.length > 0
+          ? `\nPremium coupon: ${v.coupon.code} (${v.coupon.sameOff ? inr(v.coupon.lines[0].offInr) + " off" : "see plans"})\n`
+          : "";
+      return `Dear ${v.name},\n\n${intro}\n\nLog in: ${v.loginUrl}\nComplete profile: ${v.profilingUrl}\nGet Premium: ${pricing}${couponLine}\nReferral: ${v.referralUrl}\n\nMentr by Paprly`;
+    },
     html: (v) =>
       emailShell(`
         ${greeting(v.name)}
-        <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:#525252;">
-          Thank you for choosing <strong>Mentr by Paprly</strong>. As an
-          <span style="background:#fff3a3;padding:0 4px;font-weight:600;">initial user</span>,
-          you get our full teaching stack free — LMS, scheduling, and class tools as we launch them.
-        </p>
+        ${introParagraph(
+          v,
+          "Thank you for joining Mentr by Paprly. Your mentor profile stays free forever — complete it so parents can find you in search.",
+        )}
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 14px;">
           <tr><td style="padding-bottom:8px;">${sectionLabel("Get started", "#1a231c")}</td></tr>
           <tr><td style="padding-bottom:6px;">${primaryBtn(v.loginUrl, "Log in to Mentr")}</td></tr>
           <tr><td>${secondaryBtn(v.profilingUrl, "Complete your mentor profile")}</td></tr>
         </table>
+        ${premiumMentorWelcomeBlock(v)}
         ${referralBlock(v)}
         ${signOff()}
       `),
@@ -316,18 +381,24 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
   "parent-welcome": {
     id: "parent-welcome",
     label: "Parent · Welcome",
-    description: "Welcome parents — find verified tutors free, no commissions.",
+    description:
+      "Auto/manual signup welcome for parents — search & book free (Messenger settings).",
     audience: "parent",
-    subject: (v) => `Welcome to Mentr, ${v.name}`,
-    text: (v) =>
-      `Dear ${v.name},\n\nWelcome to Mentr by Paprly — find verified tutors near you or online, 100% free.\n\nSearch tutors: ${v.searchUrl}\nLog in: ${v.loginUrl}\n\nMentr by Paprly`,
+    subject: (v) =>
+      v.welcomeSubjectOverride?.trim() || `Welcome to Mentr, ${v.name}`,
+    text: (v) => {
+      const intro =
+        v.welcomeIntro?.trim() ||
+        "Welcome to Mentr by Paprly — find verified tutors near you or online, 100% free.";
+      return `Dear ${v.name},\n\n${intro}\n\nSearch tutors: ${v.searchUrl}\nLog in: ${v.loginUrl}\n\nMentr by Paprly`;
+    },
     html: (v) =>
       emailShell(`
         ${greeting(v.name)}
-        <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:#525252;">
-          Welcome to <strong>Mentr by Paprly</strong>. Find verified tutors for your child —
-          online or nearby — with <strong>no platform fees</strong> and no hidden charges.
-        </p>
+        ${introParagraph(
+          v,
+          "Welcome to Mentr by Paprly. Find verified tutors for your child — online or nearby — with no platform fees and no hidden charges.",
+        )}
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 14px;">
           <tr>
             <td style="padding:12px 14px;background:#e6f6ee;border-left:3px solid #2f9e6e;">
@@ -578,6 +649,7 @@ export function templateVarsForRole(
     postRequirementUrl: `${base}/parent/dashboard`,
     profilingUrl: `${base}/profiling`,
     referralUrl: referralUrl || `${base}/faculty/signup?ref=preview`,
+    premiumPricingUrl: `${base}/mentrpricing`,
   };
 }
 

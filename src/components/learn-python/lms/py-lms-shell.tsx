@@ -4,17 +4,26 @@ import { useAuth } from "@/components/auth/auth-provider";
 import { PythonBadge } from "@/components/learn-python/python-badge";
 import { PyToasts, Stars, XpChip } from "@/components/learn-python/lms/py-game-ui";
 import { PyProgressGuide } from "@/components/learn-python/lms/py-progress-guide";
+import { PyTrackPathNav } from "@/components/learn-python/lms/py-track-path-nav";
 import { usePyLms } from "@/components/learn-python/lms/py-lms-provider";
 import { LEARN_PYTHON_PATH } from "@/lib/learn-python";
 import {
   PY_COMPILER_PATH,
   PY_FINAL_PATH,
+  PY_INT_LESSON_INDEX,
   PY_LESSON_INDEX,
   PY_LMS_BASE,
+  PY_LMS_INTERMEDIATE,
+  PY_LMS_PATH_TEST,
   PY_PRACTICE_PATH,
   PY_PROFILE_PATH,
+  isIntermediateLmsPath,
+  isPlacementLmsPath,
   isPyEntryOpen,
   pyLessonHref,
+  pyTrackTheme,
+  type PyLessonEntry,
+  type PyTrackTheme,
 } from "@/lib/python-lms";
 import { PY_STAGES, resumeStage, stageDone } from "@/lib/python-lms/progress";
 import { completedProjects } from "@/lib/python-lms/project-progress";
@@ -28,7 +37,11 @@ import { Suspense, useEffect, useState, type ReactNode } from "react";
 export function PyLmsShell({ children }: { children: ReactNode }) {
   const pathname = usePathname() ?? "";
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const activeLesson = PY_LESSON_INDEX.find((l) => !l.final && pathname === pyLessonHref(l.slug));
+  const placementView = isPlacementLmsPath(pathname);
+  const intermediateView = isIntermediateLmsPath(pathname);
+  const trackTheme = pyTrackTheme(intermediateView ? "intermediate" : "beginner");
+  const navLessons = intermediateView ? PY_INT_LESSON_INDEX : PY_LESSON_INDEX;
+  const activeLesson = navLessons.find((l) => !l.final && pathname === pyLessonHref(l.slug));
   const onFinal = pathname === PY_FINAL_PATH || pathname.startsWith(`${PY_FINAL_PATH}/`);
   const activeProject = pathname.startsWith(`${PY_FINAL_PATH}/`) ? getPyProject(pathname.slice(PY_FINAL_PATH.length + 1)) : null;
 
@@ -42,9 +55,12 @@ export function PyLmsShell({ children }: { children: ReactNode }) {
   }, [drawerOpen]);
 
   return (
-    <div className="flex h-dvh max-h-dvh flex-col overflow-hidden bg-[#f7f5f0] text-ink lg:flex-row">
+    <div
+      className="flex h-dvh max-h-dvh flex-col overflow-hidden text-ink lg:flex-row"
+      style={{ backgroundColor: trackTheme.shellBg }}
+    >
       <aside className="hidden h-full w-[288px] shrink-0 flex-col border-r border-hairline bg-white lg:flex">
-        <Sidebar id="desk" onNavigate={() => undefined} />
+        <Sidebar id="desk" theme={trackTheme} onNavigate={() => undefined} />
       </aside>
 
       {drawerOpen && (
@@ -56,7 +72,7 @@ export function PyLmsShell({ children }: { children: ReactNode }) {
             onClick={() => setDrawerOpen(false)}
           />
           <div className="py-slide-prev absolute inset-y-0 left-0 flex w-full max-w-[420px] flex-col bg-white shadow-xl sm:max-w-[360px]">
-            <Sidebar id="drawer" dense onNavigate={() => setDrawerOpen(false)} onClose={() => setDrawerOpen(false)} />
+            <Sidebar id="drawer" theme={trackTheme} dense onNavigate={() => setDrawerOpen(false)} onClose={() => setDrawerOpen(false)} />
           </div>
         </div>
       )}
@@ -73,9 +89,21 @@ export function PyLmsShell({ children }: { children: ReactNode }) {
             Menu
           </button>
           <nav aria-label="Breadcrumb" className="min-w-0 flex-1 truncate font-mono text-[12px] text-muted">
-            <Link href={PY_LMS_BASE} className="hover:text-ink">
-              Python Beginner
+            <Link href={intermediateView ? PY_LMS_INTERMEDIATE : PY_LMS_BASE} className="hover:text-ink">
+              {intermediateView ? "Python Intermediate" : "Python Beginner"}
             </Link>
+            {pathname === PY_LMS_INTERMEDIATE && (
+              <>
+                <span className="mx-1.5 text-hairline">/</span>
+                <span className="text-ink">Home</span>
+              </>
+            )}
+            {placementView && (
+              <>
+                <span className="mx-1.5 text-hairline">/</span>
+                <span className="text-ink">Test to Intermediate</span>
+              </>
+            )}
             {activeLesson && (
               <>
                 <span className="mx-1.5 text-hairline">/</span>
@@ -117,7 +145,7 @@ export function PyLmsShell({ children }: { children: ReactNode }) {
               </>
             )}
           </nav>
-          <CompilerHeaderButton />
+          <CompilerHeaderButton theme={trackTheme} />
           <XpChip />
           <Link
             href={LEARN_PYTHON_PATH}
@@ -147,7 +175,11 @@ function MobileNav({
   lessonsOpen: boolean;
   onOpenLessons: () => void;
 }) {
-  const onLesson = PY_LESSON_INDEX.some((l) => !l.final && pathname === pyLessonHref(l.slug));
+  const onLesson =
+    PY_LESSON_INDEX.some((l) => !l.final && pathname === pyLessonHref(l.slug)) ||
+    PY_INT_LESSON_INDEX.some((l) => pathname === pyLessonHref(l.slug)) ||
+    pathname === PY_LMS_INTERMEDIATE ||
+    pathname === PY_LMS_PATH_TEST;
   const onFinal = pathname === PY_FINAL_PATH || pathname.startsWith(`${PY_FINAL_PATH}/`);
   const item = "flex min-h-11 min-w-0 touch-manipulation flex-col items-center justify-center gap-0.5 px-0.5 py-1.5 text-[10px] font-semibold leading-none";
   return (
@@ -179,13 +211,27 @@ function MobileNav({
   );
 }
 
-function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNavigate: () => void; dense?: boolean; onClose?: () => void }) {
+function Sidebar({
+  id,
+  theme,
+  onNavigate,
+  dense = false,
+  onClose,
+}: {
+  id: string;
+  theme: PyTrackTheme;
+  onNavigate: () => void;
+  dense?: boolean;
+  onClose?: () => void;
+}) {
   const pathname = usePathname() ?? "";
   const { user } = useAuth();
-  const { progress, isLessonUnlocked, projects } = usePyLms();
+  const { progress, isLessonUnlocked, projects, canAccessIntermediate } = usePyLms();
+  const intermediateView = theme.course === "intermediate";
+  const lessonIndex: PyLessonEntry[] = intermediateView ? PY_INT_LESSON_INDEX : PY_LESSON_INDEX;
   const projectsDone = completedProjects(projects).length;
-  const entryDone = (l: (typeof PY_LESSON_INDEX)[number]) => (l.final ? projectsDone > 0 : Boolean(progress[l.slug]?.completedAt));
-  const done = PY_LESSON_INDEX.filter(entryDone).length;
+  const entryDone = (l: PyLessonEntry) => (l.final ? projectsDone > 0 : Boolean(progress[l.slug]?.completedAt));
+  const done = lessonIndex.filter(entryDone).length;
   const name =
     (user?.role === "parent" ? user.parentProfile?.name : user?.profile?.name)?.trim() || user?.email || "";
 
@@ -193,10 +239,17 @@ function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNav
     <div className="flex min-h-0 flex-1 flex-col">
       <div className={cn("flex shrink-0 items-center gap-2 border-b border-hairline", dense ? "px-3 py-2.5" : "px-5 py-4")}>
         <Link href={LEARN_PYTHON_PATH} onClick={onNavigate} className="flex min-w-0 flex-1 items-center gap-2.5">
-          <PythonBadge tier="beginner" idSuffix={`sidebar-${id}`} still className={dense ? "w-8 shrink-0" : "w-10 shrink-0"} />
+          <PythonBadge
+            tier={intermediateView ? "intermediate" : "beginner"}
+            idSuffix={`sidebar-${id}`}
+            still
+            className={dense ? "w-8 shrink-0" : "w-10 shrink-0"}
+          />
           <span className="min-w-0">
             <span className={cn("block font-extrabold leading-tight", dense ? "text-[13px]" : "text-[15px]")}>Learn Python</span>
-            <span className="block font-mono text-[10.5px] text-muted">Beginner · free</span>
+            <span className="block font-mono text-[10.5px] text-muted">
+              {intermediateView ? "Intermediate · job prep" : "Beginner · free"}
+            </span>
           </span>
         </Link>
         {onClose && (
@@ -215,35 +268,32 @@ function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNav
         <div className="flex items-baseline justify-between">
           <span className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">Progress</span>
           <span className="font-mono text-[12px] font-semibold">
-            {done} / {PY_LESSON_INDEX.length}
+            {done} / {lessonIndex.length}
           </span>
         </div>
-        <div className="mt-2 grid grid-cols-10 gap-[3px]" aria-hidden>
-          {PY_LESSON_INDEX.map((l) => (
+        <div
+          className="mt-2 grid gap-[3px]"
+          style={{ gridTemplateColumns: `repeat(${lessonIndex.length}, minmax(0, 1fr))` }}
+          aria-hidden
+        >
+          {lessonIndex.map((l) => (
             <span
               key={l.slug}
-              className={cn("h-1.5", entryDone(l) ? "bg-[#2f9e6e]" : "bg-[#ece8e0]")}
+              className={cn("h-1.5", !entryDone(l) && "bg-[#ece8e0]")}
+              style={entryDone(l) ? { backgroundColor: theme.accent } : undefined}
             />
           ))}
         </div>
       </div>
 
       <nav className={cn("min-h-0 flex-1 overflow-y-auto overscroll-contain", dense ? "px-2 py-2" : "px-3 py-3")} aria-label="Lessons">
-        <Link
-          href={PY_LMS_BASE}
-          onClick={onNavigate}
-          className={cn(
-            "mb-1.5 flex items-center gap-2 px-2 py-1.5 font-semibold transition",
-            dense ? "text-[12.5px]" : "text-[13.5px]",
-            pathname === PY_LMS_BASE ? "bg-[#f3f0e9] text-ink" : "text-muted hover:text-ink",
-          )}
-        >
-          <LayoutGrid className="h-4 w-4" /> Course home
-        </Link>
+        <PyTrackPathNav dense={dense} onNavigate={onNavigate} placementPassed={canAccessIntermediate} />
 
-        <p className="px-2.5 pb-1.5 pt-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">Lessons</p>
+        <p className="px-2.5 pb-1.5 pt-2 font-mono text-[10.5px] uppercase tracking-[0.14em] text-muted">
+          {intermediateView ? "Intermediate lessons" : "Beginner lessons"}
+        </p>
         <ol className="space-y-0.5">
-          {PY_LESSON_INDEX.map((l) => {
+          {lessonIndex.map((l) => {
             const href = pyLessonHref(l.slug);
             const active = l.final ? pathname === href || pathname.startsWith(`${href}/`) : pathname === href;
             const lessonDone = entryDone(l);
@@ -255,13 +305,18 @@ function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNav
                     "flex shrink-0 items-center justify-center border font-mono font-semibold",
                     dense ? "h-6 w-6 text-[10.5px]" : "h-7 w-7 text-[11.5px]",
                     lessonDone
-                      ? "border-[#2f9e6e] bg-[#2f9e6e] text-white"
+                      ? "text-white"
                       : active
                         ? "border-ink bg-ink text-white"
                         : open
                           ? "border-ink/25 text-ink"
                           : "border-hairline text-muted/70",
                   )}
+                  style={
+                    lessonDone
+                      ? { borderColor: theme.accent, backgroundColor: theme.accent }
+                      : undefined
+                  }
                 >
                   {lessonDone ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : String(l.number).padStart(2, "0")}
                 </span>
@@ -296,8 +351,13 @@ function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNav
                     aria-current={active ? "page" : undefined}
                     className={cn(
                       "flex items-center gap-2.5 border-l-2 px-2 py-1.5 transition",
-                      active ? "border-coral bg-[#fbf7f1]" : "border-transparent hover:bg-[#faf8f4]",
+                      active ? "text-ink" : "border-transparent hover:bg-[#faf8f4]",
                     )}
+                    style={
+                      active
+                        ? { borderColor: theme.accent, backgroundColor: theme.accentWash }
+                        : undefined
+                    }
                   >
                     {rowInner}
                   </Link>
@@ -308,7 +368,7 @@ function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNav
                 )}
                 {active && !l.final && (
                   <Suspense fallback={null}>
-                    <StageLinks slug={l.slug} onNavigate={onNavigate} />
+                    <StageLinks slug={l.slug} theme={theme} onNavigate={onNavigate} />
                   </Suspense>
                 )}
               </li>
@@ -364,8 +424,10 @@ function Sidebar({ id, onNavigate, dense = false, onClose }: { id: string; onNav
   );
 }
 
-function CompilerHeaderButton() {
-  const active = (usePathname() ?? "") === PY_COMPILER_PATH;
+function CompilerHeaderButton({ theme }: { theme: PyTrackTheme }) {
+  const pathname = usePathname() ?? "";
+  const active = pathname === PY_COMPILER_PATH;
+  const onTrack = isIntermediateLmsPath(pathname);
   return (
     <a
       href={PY_COMPILER_PATH}
@@ -374,8 +436,13 @@ function CompilerHeaderButton() {
       title="Python compiler"
       className={cn(
         "flex h-8 items-center gap-1.5 border px-2 text-[12.5px] font-bold transition",
-        active ? "border-[#1f2a23] bg-[#0f1612] text-white" : "border-hairline bg-white text-ink hover:border-ink",
+        active ? "text-white" : "border-hairline bg-white text-ink hover:border-ink",
       )}
+      style={
+        active
+          ? { borderColor: theme.heroBorder, backgroundColor: onTrack ? theme.heroBg : "#0f1612" }
+          : undefined
+      }
     >
       <Terminal className="h-3.5 w-3.5" />
       <span className="hidden 2xl:inline">Compiler</span>
@@ -383,7 +450,7 @@ function CompilerHeaderButton() {
   );
 }
 
-function StageLinks({ slug, onNavigate }: { slug: string; onNavigate: () => void }) {
+function StageLinks({ slug, theme, onNavigate }: { slug: string; theme: PyTrackTheme; onNavigate: () => void }) {
   const params = useSearchParams();
   const { progress } = usePyLms();
   const p = progress[slug];
@@ -399,8 +466,15 @@ function StageLinks({ slug, onNavigate }: { slug: string; onNavigate: () => void
           <span
             className={cn(
               "h-2 w-2 shrink-0",
-              isDone ? "bg-[#2f9e6e]" : isCurrent ? "bg-coral" : "border border-muted/40",
+              !isDone && !isCurrent && "border border-muted/40",
             )}
+            style={
+              isDone
+                ? { backgroundColor: theme.accent }
+                : isCurrent
+                  ? { backgroundColor: theme.accent }
+                  : undefined
+            }
           />
         );
         return (

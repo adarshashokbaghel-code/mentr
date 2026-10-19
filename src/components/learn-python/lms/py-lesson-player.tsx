@@ -7,7 +7,19 @@ import { Stars } from "@/components/learn-python/lms/py-game-ui";
 import { usePyLms } from "@/components/learn-python/lms/py-lms-provider";
 import { PyNotesDeck } from "@/components/learn-python/lms/py-notes-deck";
 import { PyPractice, type Outcome } from "@/components/learn-python/lms/py-practice";
-import { PY_LESSON_INDEX, PY_LMS_BASE, getPyLesson, isPyEntryOpen, pyLessonHref } from "@/lib/python-lms";
+import {
+  PY_LMS_BASE,
+  PY_LMS_INTERMEDIATE,
+  PY_PLACEMENT_PATH,
+  getPyLesson,
+  isPyEntryOpen,
+  lessonEntry,
+  lessonIndexForSlug,
+  pyLessonHref,
+  pyTrackTheme,
+  type PyTrackTheme,
+} from "@/lib/python-lms";
+import { isIntermediateSlug } from "@/lib/python-lms/course-access";
 import { downloadPythonNotesPdf } from "@/lib/python-lms/notes-pdf";
 import { ACHIEVEMENT_ORDER, levelFor, starsFor } from "@/lib/python-lms/game";
 import { PY_STAGES, resumeStage, stageDone } from "@/lib/python-lms/progress";
@@ -20,7 +32,8 @@ import { useCallback, useState } from "react";
 
 export function PyLessonPlayer({ slug }: { slug: string }) {
   const lesson = getPyLesson(slug);
-  const entry = PY_LESSON_INDEX.find((l) => l.slug === slug);
+  const index = lessonIndexForSlug(slug);
+  const entry = index.find((l) => l.slug === slug);
 
   if (!lesson) {
     return (
@@ -43,7 +56,19 @@ export function PyLessonPlayer({ slug }: { slug: string }) {
 }
 
 function Gate({ lesson }: { lesson: PythonLmsLesson }) {
-  const { ready, isLessonUnlocked } = usePyLms();
+  const { ready, isLessonUnlocked, canAccessIntermediate } = usePyLms();
+  if (isIntermediateSlug(lesson.slug) && !canAccessIntermediate) {
+    return (
+      <div className="mx-auto max-w-[620px] px-5 py-16 text-center">
+        <Lock className="mx-auto h-10 w-10 text-muted" />
+        <h1 className="mt-4 text-[26px] font-extrabold">Intermediate locked</h1>
+        <p className="mt-2 text-[15px] text-muted">Pass placement or finish Beginner Lesson 9.</p>
+        <Link href={PY_PLACEMENT_PATH} className="mt-6 inline-flex items-center gap-2 bg-coral px-5 py-2.5 text-[14px] font-bold text-ink">
+          Placement quiz <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    );
+  }
   if (isLessonUnlocked(lesson.slug)) return <Player lesson={lesson} />;
   if (!ready) {
     return (
@@ -52,7 +77,8 @@ function Gate({ lesson }: { lesson: PythonLmsLesson }) {
       </div>
     );
   }
-  const prev = PY_LESSON_INDEX.find((l) => l.number === lesson.number - 1);
+  const courseIndex = lessonIndexForSlug(lesson.slug);
+  const prev = courseIndex.find((l) => l.number === lesson.number - 1);
   return (
     <div className="mx-auto max-w-[620px] px-5 py-16 text-center">
       <span className="mx-auto flex h-12 w-12 items-center justify-center border border-hairline bg-white">
@@ -80,7 +106,9 @@ function Gate({ lesson }: { lesson: PythonLmsLesson }) {
 }
 
 function Player({ lesson }: { lesson: PythonLmsLesson }) {
+  const theme = pyTrackTheme(lesson.course === "intermediate" ? "intermediate" : "beginner");
   const { progress, store, updateLesson, resetPractice, unlock, isLessonUnlocked } = usePyLms();
+  const courseIndex = lessonIndexForSlug(lesson.slug);
   const router = useRouter();
   const params = useSearchParams();
   const p = progress[lesson.slug];
@@ -108,7 +136,7 @@ function Player({ lesson }: { lesson: PythonLmsLesson }) {
     [updateLesson, lesson.slug, store.lessons, lastSlide],
   );
 
-  const nextEntry = PY_LESSON_INDEX.find((l) => l.number === lesson.number + 1);
+  const nextEntry = courseIndex.find((l) => l.number === lesson.number + 1);
   const [pdfBusy, setPdfBusy] = useState(false);
 
   async function downloadNotes() {
@@ -126,7 +154,7 @@ function Player({ lesson }: { lesson: PythonLmsLesson }) {
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="flex items-center gap-2 font-mono text-[11.5px] text-muted">
-            <span className="text-coral">Lesson {String(lesson.number).padStart(2, "0")}</span>
+            <span style={{ color: theme.accent }}>Lesson {String(lesson.number).padStart(2, "0")}</span>
             <span aria-hidden>·</span>
             <Clock className="h-3.5 w-3.5" /> {lesson.minutes} min
           </p>
@@ -163,17 +191,16 @@ function Player({ lesson }: { lesson: PythonLmsLesson }) {
                 <span
                   className={cn(
                     "flex h-6 w-6 shrink-0 items-center justify-center border font-mono text-[11px]",
-                    done
-                      ? "border-[#2f9e6e] bg-[#2f9e6e] text-white"
-                      : current
-                        ? "border-ink bg-ink text-white"
-                        : "border-hairline",
+                    done ? "text-white" : current ? "border-ink bg-ink text-white" : "border-hairline",
                   )}
+                  style={done ? { borderColor: theme.accent, backgroundColor: theme.accent } : undefined}
                 >
                   {done ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : i + 1}
                 </span>
                 {s.label}
-                {current && <span className="absolute inset-x-0 -bottom-px h-[3px] bg-coral" />}
+                {current && (
+                  <span className="absolute inset-x-0 -bottom-px h-[3px]" style={{ backgroundColor: theme.accent }} />
+                )}
               </button>
             </li>
           );
@@ -225,6 +252,7 @@ function Player({ lesson }: { lesson: PythonLmsLesson }) {
             }}
             renderResults={({ outcomes, earned, bestCombo, retake }) => (
               <Results
+                theme={theme}
                 lesson={lesson}
                 outcomes={outcomes}
                 earned={earned}
@@ -246,6 +274,7 @@ function Player({ lesson }: { lesson: PythonLmsLesson }) {
 }
 
 function Results({
+  theme,
   lesson,
   outcomes,
   earned,
@@ -255,6 +284,7 @@ function Results({
   nextLockedReason,
   onRetake,
 }: {
+  theme: PyTrackTheme;
   lesson: PythonLmsLesson;
   outcomes: Record<string, Outcome>;
   earned: number;
@@ -275,10 +305,15 @@ function Results({
 
   return (
     <section className="py-pop border border-hairline bg-white">
-      <div className="grid gap-6 border-b border-hairline bg-[#0f1612] px-5 py-7 text-white sm:grid-cols-[auto_1fr] sm:items-center sm:px-8">
-        <PythonBadge tier="beginner" idSuffix="results" className="mx-auto w-24 sm:mx-0" />
+      <div
+        className="grid gap-6 border-b border-hairline px-5 py-7 text-white sm:grid-cols-[auto_1fr] sm:items-center sm:px-8"
+        style={{ background: theme.heroGradient }}
+      >
+        <PythonBadge tier={lesson.course === "intermediate" ? "intermediate" : "beginner"} idSuffix="results" className="mx-auto w-24 sm:mx-0" />
         <div className="text-center sm:text-left">
-          <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#5ee0a0]">Lesson {lesson.number} complete</p>
+          <p className="font-mono text-[11px] uppercase tracking-[0.16em]" style={{ color: theme.accentLight }}>
+            Lesson {lesson.number} complete
+          </p>
           <div className="mt-2 flex flex-wrap items-end justify-center gap-x-4 gap-y-2 sm:justify-start">
             <p className="text-[42px] font-extrabold leading-none">
               {score}

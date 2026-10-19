@@ -27,12 +27,12 @@ const TIER_STYLE: Record<
   intermediate: {
     label: "INTERMEDIATE",
     pips: 2,
-    rim: ["#ffe1c2", "#ff9a4d", "#a4470b"],
-    face: ["#b0561a", "#401b07"],
-    snakeA: "#fff4e8",
-    snakeB: "#ffc58f",
-    ribbon: ["#ef7a28", "#a4470b"],
-    glow: "#ff9a4d",
+    rim: ["#fff0b8", "#e0a83a", "#7a5a00"],
+    face: ["#a67c00", "#3d2e00"],
+    snakeA: "#fff9e6",
+    snakeB: "#ffd96a",
+    ribbon: ["#e0a83a", "#7a5a00"],
+    glow: "#ffd96a",
   },
   advanced: {
     label: "ADVANCED",

@@ -1,6 +1,7 @@
 "use client";
 
 import type { PyLessonProgress } from "@/lib/python-lms/lesson-progress";
+import { readPlacementLocal } from "@/lib/python-lms/placement-storage";
 import type { PyProjectProgress } from "@/lib/python-lms/project-progress";
 import type { LessonStage } from "@/lib/python-lms/types";
 
@@ -12,9 +13,18 @@ export const PY_STAGES: { id: LessonStage; label: string }[] = [
   { id: "practice", label: "Practice" },
 ];
 
+export type PyPlacement = {
+  passed: boolean;
+  score: number;
+  total: number;
+  at: string;
+};
+
 export type PyStore = {
-  v: 3;
+  v: 4;
   lessons: Record<string, PyLessonProgress>;
+  /** Unlocks Python Intermediate (placement or server). */
+  placement?: PyPlacement;
   /** Award key → XP, so each action is rewarded once. The server's copy is the source of truth. */
   awarded: Record<string, number>;
   /** Achievement id → ISO date unlocked. */
@@ -25,7 +35,14 @@ export type PyStore = {
   projects: Record<string, PyProjectProgress>;
 };
 
-export const emptyStore = (): PyStore => ({ v: 3, lessons: {}, awarded: {}, achievements: {}, days: [], projects: {} });
+export const emptyStore = (): PyStore => ({
+  v: 4,
+  lessons: {},
+  awarded: {},
+  achievements: {},
+  days: [],
+  projects: {},
+});
 
 const draftKey = (userId: string, projectId: string) => `mentr:learnpython:project:${userId}:${projectId}`;
 
@@ -74,8 +91,16 @@ export function readPyProgress(userId: string): PyStore {
     const raw = window.localStorage.getItem(key(userId));
     if (!raw) return emptyStore();
     const parsed = JSON.parse(raw);
-    if (parsed?.v === 3) return { ...emptyStore(), ...parsed };
-    if (parsed?.v === 2) return { ...emptyStore(), ...parsed, v: 3, awarded: migrateAwarded(parsed.awarded) };
+    if (parsed?.v === 4) {
+      const store = { ...emptyStore(), ...parsed } as PyStore;
+      if (!store.placement) {
+        const guest = readPlacementLocal();
+        if (guest) store.placement = guest;
+      }
+      return store;
+    }
+    if (parsed?.v === 3) return { ...emptyStore(), ...parsed, v: 4 };
+    if (parsed?.v === 2) return { ...emptyStore(), ...parsed, v: 4, awarded: migrateAwarded(parsed.awarded) };
     return { ...emptyStore(), lessons: parsed ?? {} };
   } catch {
     return emptyStore();

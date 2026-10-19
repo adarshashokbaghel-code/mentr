@@ -531,8 +531,18 @@ router.post("/verify-otp", ensureDb, async (req: Request, res: Response) => {
     );
 
     // Awaited (bounded) because Vercel may freeze the function after res.json.
-    if (user.role === "parent" && !wasVerified) {
-      await notifyPremiumMentorsOfNewParent(user._id.toString());
+    if (session.purpose === "signup" && !wasVerified) {
+      if (user.role === "parent") {
+        await notifyPremiumMentorsOfNewParent(user._id.toString());
+      }
+      try {
+        const { sendSignupWelcomeEmail } = await import(
+          "../services/signup-welcome-email"
+        );
+        await sendSignupWelcomeEmail(user);
+      } catch (welcomeErr) {
+        console.error("signup welcome email error:", welcomeErr);
+      }
     }
 
     const token = signAuthToken(user._id.toString(), user.email, user.role);

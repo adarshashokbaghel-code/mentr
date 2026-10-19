@@ -558,6 +558,38 @@ export function fetchMessengerTemplates(key: string) {
   );
 }
 
+export type MessengerWelcomeSettings = {
+  autoWelcomeMentor: boolean;
+  autoWelcomeParent: boolean;
+  mentorIntro: string;
+  parentIntro: string;
+  mentorSubject: string;
+  parentSubject: string;
+  mentorWelcomeCouponCode: string;
+};
+
+export function fetchMessengerWelcomeSettings(key: string) {
+  return adminFetch<{ settings: MessengerWelcomeSettings }>(
+    key,
+    "/api/admin/messenger/welcome-settings",
+  );
+}
+
+export function saveMessengerWelcomeSettings(
+  key: string,
+  settings: Partial<MessengerWelcomeSettings>,
+  adminPass: string,
+) {
+  return adminFetch<{ settings: MessengerWelcomeSettings }>(
+    key,
+    "/api/admin/messenger/welcome-settings",
+    {
+      method: "PUT",
+      body: JSON.stringify({ ...settings, adminPass }),
+    },
+  );
+}
+
 export function previewMessengerEmail(
   key: string,
   payload: {

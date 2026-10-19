@@ -156,9 +156,21 @@ export function Navbar() {
               Premium mentors
             </Button>
           </Link>
+          <Link
+            href="/mentrpricing"
+            className="ml-0.5 inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-cream-band hover:text-ink"
+          >
+            Get Premium
+          </Link>
         </nav>
 
         <div className="hidden items-center gap-2.5 md:flex">
+          <Link
+            href="/mentrpricing"
+            className="lg:hidden inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-cream-band hover:text-ink"
+          >
+            Get Premium
+          </Link>
           {!loading && !user && (
             <>
               <Link

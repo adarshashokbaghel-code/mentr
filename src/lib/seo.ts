@@ -119,6 +119,4 @@ export {
   GOOGLE_SITE_VERIFICATION,
 } from "@/components/seo/google-verification";
 
-/** Google Analytics measurement ID (gtag.js), e.g. G-ME7KM87RG4 */
-export const GA_MEASUREMENT_ID =
-  process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "G-ME7KM87RG4";
+export { ADSENSE_ENABLED, GA_MEASUREMENT_ID } from "@/lib/site-scripts";

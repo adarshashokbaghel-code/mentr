@@ -1,5 +1,5 @@
 import { PyLessonPlayer } from "@/components/learn-python/lms/py-lesson-player";
-import { PY_FINAL_PATH, PY_FINAL_SLUG, PY_LESSON_INDEX } from "@/lib/python-lms";
+import { PY_FINAL_PATH, PY_FINAL_SLUG, lessonEntry } from "@/lib/python-lms";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -8,7 +8,7 @@ type Props = { params: Promise<{ lesson: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lesson } = await params;
-  const entry = PY_LESSON_INDEX.find((l) => l.slug === lesson);
+  const entry = lessonEntry(lesson);
   return { title: entry ? `Lesson ${entry.number}: ${entry.title} | Learn Python` : "Lesson | Learn Python" };
 }
 

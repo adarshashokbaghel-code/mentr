@@ -194,6 +194,19 @@ export function MobileNavDrawer({
                 Nearby or online
               </p>
             </Link>
+            <Link
+              href="/mentrpricing"
+              onClick={onClose}
+              className="col-span-2 flex items-center justify-between rounded-2xl bg-ink px-4 py-3.5 text-white transition hover:bg-ink/90"
+            >
+              <div>
+                <p className="text-sm font-bold leading-tight">Get Premium</p>
+                <p className="mt-0.5 text-[11px] leading-snug text-white/70">
+                  Mentor plans &amp; checkout
+                </p>
+              </div>
+              <ArrowRight className="h-4 w-4 shrink-0 text-white/80" />
+            </Link>
           </div>
 
           <p className="mb-1 mt-6 px-1 text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
