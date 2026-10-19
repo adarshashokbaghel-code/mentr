@@ -243,23 +243,6 @@ export function fetchAdminRequirements(key: string) {
   );
 }
 
-export type AdminGuestRequirementRow = {
-  id: string;
-  teacherId: string;
-  teacherName: string;
-  teacherEmail: string;
-  name: string;
-  email: string;
-  phone: string;
-  requirement: string;
-  description: string;
-  status: string;
-  activity: { action: string; at: string }[];
-  respondedAt?: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
 export type AdminDemoRequestRow = {
   id: string;
   teacherId: string;
@@ -286,13 +269,6 @@ export function fetchAdminDemoRequests(key: string) {
     requests: AdminDemoRequestRow[];
     total: number;
   }>(key, "/api/admin/demo-requests?limit=500");
-}
-
-export function fetchAdminGuestRequirements(key: string) {
-  return adminFetch<{
-    requests: AdminGuestRequirementRow[];
-    total: number;
-  }>(key, "/api/admin/guest-requirements?limit=500");
 }
 
 export function closeAdminRequirement(

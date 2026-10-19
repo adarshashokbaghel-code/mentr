@@ -292,22 +292,6 @@ export const BLOG_POSTS: BlogPost[] = [
     cta: "Find a Tutor",
     ctaHref: "/find-tutor",
   },
-  // ── Instant Connect (flagship parent SEO) ──────────────────────
-  {
-    slug: "instant-connect-find-tutor-fast-parents",
-    title:
-      "Instant Connect: How Parents Find a Verified Tutor Fast Online (Free on Mentr)",
-    keyword: "find tutor instantly online",
-    intent: "commercial",
-    funnel: "bottom",
-    pillar: "for-parents",
-    description:
-      "Need a tutor this week? Instant Connect matches parents with up to 3 verified mentors, optional AI notes, and temporary phone contact — free, no agency fees. Step-by-step + safety checklist.",
-    publishWeek: 39,
-    featured: true,
-    cta: "Create free parent account",
-    ctaHref: "/parent/signup",
-  },
   // ── Pillar 1: Find-a-Tutor Guides ──────────────────────────────
   {
     slug: "how-to-find-a-good-home-tutor",

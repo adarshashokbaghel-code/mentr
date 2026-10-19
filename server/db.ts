@@ -8,6 +8,8 @@ import { User } from "./models/User";
 
 let isConnected = false;
 let connectPromise: Promise<void> | null = null;
+/** Background index sync from connectOnce — awaited on disconnect so CLI scripts do not race close. */
+let indexSyncPromise: Promise<void> | null = null;
 
 function newShareToken(): string {
   return randomBytes(9).toString("base64url");
@@ -83,7 +85,9 @@ async function connectOnce(): Promise<void> {
   }
 
   if (process.env.VERCEL !== "1") {
-    void syncIndexesOnce();
+    indexSyncPromise = syncIndexesOnce().finally(() => {
+      indexSyncPromise = null;
+    });
   }
 }
 
@@ -127,6 +131,9 @@ export async function connectDb(): Promise<void> {
 
 export async function disconnectDb(): Promise<void> {
   if (!isConnected) return;
+  if (indexSyncPromise) {
+    await indexSyncPromise.catch(() => undefined);
+  }
   await mongoose.disconnect();
   isConnected = false;
 }

@@ -13,7 +13,6 @@ import { GUIDE_BATCH_SEP2026 } from "./guide-batch-sep2026";
 import { ADSENSE_QUALITY_BATCH } from "./adsense-quality-batch";
 import { SEO_GROWTH_SEP2026 } from "./seo-growth-sep2026";
 import { TOOLS_SEO_BATCH } from "./tools-seo-batch";
-import { INSTANT_CONNECT_ARTICLES } from "./instant-connect";
 import { OPEN_SOURCE_SEO_ARTICLES } from "./open-source-seo";
 import { SNAP_GRADE_ARTICLES } from "./snap-grade";
 import { PARENT_KIDS_SEO_ARTICLES } from "./parent-kids-seo";
@@ -43,7 +42,6 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...ADSENSE_QUALITY_BATCH,
   ...SEO_GROWTH_SEP2026,
   ...TOOLS_SEO_BATCH,
-  ...INSTANT_CONNECT_ARTICLES,
   ...OPEN_SOURCE_SEO_ARTICLES,
   ...SNAP_GRADE_ARTICLES,
   ...PARENT_KIDS_SEO_ARTICLES,

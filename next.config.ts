@@ -193,6 +193,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/instant-connect-find-tutor-fast-parents",
+        destination: "/search?tier=regular",
+        permanent: true,
+      },
+      {
         source: "/find-tutor",
         destination: "/search?tier=regular",
         permanent: true,

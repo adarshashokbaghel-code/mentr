@@ -29,11 +29,7 @@ export function marketplaceLinksForPost(post: BlogPost): MarketplaceLink[] {
   const hay = `${post.slug} ${post.title} ${post.keyword}`.toLowerCase();
   const links: MarketplaceLink[] = [];
 
-  if (
-    hay.includes("instant connect") ||
-    hay.includes("find tutor instantly") ||
-    post.slug.includes("instant-connect")
-  ) {
+  if (hay.includes("find tutor instantly")) {
     links.push({
       label: "Post a requirement",
       href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1",

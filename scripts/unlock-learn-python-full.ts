@@ -72,6 +72,7 @@ function lessonComplete(slug: string) {
   };
 
   for (const slug of allSlugs) {
+    if (!getPyLesson(slug)) continue;
     set[`learnPython.lessons.${slug}`] = lessonComplete(slug);
   }
 

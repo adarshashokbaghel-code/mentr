@@ -828,7 +828,7 @@ export const COMPARISON_ARTICLES: Record<string, ArticleContent> = {
               "No lead fees for tutors; no browse fees for parents",
               "Profiles reviewed before they go live",
               "Requirements board that mirrors the “post a need” habit parents already have",
-              "Instant Connect for parents who want a shortlist of mentors fast",
+              "A requirements board for parents who want tutors to pitch them",
               "Stronger today in metros like Bengaluru; expanding elsewhere",
             ],
           },

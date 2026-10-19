@@ -58,7 +58,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
         blocks: [
           {
             type: "paragraph",
-            text: "City hub: Tutors in Bengaluru. Subject pages such as Maths tutors in Bengaluru list live profiles with modes and fees where shared. Search and Instant Connect stay ₹0 for parents — no agency fee.",
+            text: "City hub: Tutors in Bengaluru. Subject pages such as Maths tutors in Bengaluru list live profiles with modes and fees where shared. Search stays ₹0 for parents — no agency fee.",
           },
         ],
       },
@@ -79,7 +79,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
       { label: "Find a Tutor", href: "/find-tutor" },
       { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
       { label: "Maths tutors in Bengaluru", href: "/tutors/bengaluru/maths" },
-      { label: "Get Matched Instantly", href: "/instant-connect" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
       { label: "Kannada tuition for kids in Bengaluru", href: "/blog/kannada-tuition-for-kids-bengaluru" },
     ],
   },
@@ -132,7 +132,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
       {
         question: "Do I need an account to browse?",
         answer:
-          "You can browse public search and tutor pages. Connecting and Instant Connect use a free parent account.",
+          "You can browse public search and tutor pages. Booking a demo or posting a requirement uses a free parent account.",
       },
       {
         question: "When does WhatsApp unlock?",
@@ -143,7 +143,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
     relatedLinks: [
       { label: "Find a Tutor", href: "/find-tutor" },
       { label: "Find online tutors", href: "/find-online-tutors" },
-      { label: "Get Matched Instantly", href: "/instant-connect" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
     ],
   },
 
@@ -245,7 +245,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
     relatedLinks: [
       { label: "Find a Tutor", href: "/find-tutor" },
       { label: "Maths tutors in Bengaluru", href: "/tutors/bengaluru/maths" },
-      { label: "Get Matched Instantly", href: "/instant-connect" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
     ],
   },
 
@@ -344,7 +344,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
     relatedLinks: [
       { label: "Find a Tutor", href: "/find-tutor" },
       { label: "Home tutor vs online tutor", href: "/blog/home-tutor-vs-online-tutor" },
-      { label: "Get Matched Instantly", href: "/instant-connect" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
     ],
   },
 
@@ -444,7 +444,7 @@ export const AI_ANSWER_GUIDES: Record<string, ArticleContent> = {
       {
         question: "When should we start?",
         answer:
-          "Ideally months before boards — not only in the last four weeks. Instant Connect helps if you are late.",
+          "Ideally months before boards — not only in the last four weeks. Post a requirement or book a demo if you are late.",
       },
     ],
     relatedLinks: [

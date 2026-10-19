@@ -5,7 +5,11 @@ import {
   PY_LESSON_ORDER,
   getPyLesson,
 } from "../../src/lib/python-lms";
-import { beginnerPathUnlocksIntermediate } from "../../src/lib/python-lms/course-access";
+import {
+  beginnerPathUnlocksIntermediate,
+  lessonOpenForSync,
+  mergeStoredUnlockedLessons,
+} from "../../src/lib/python-lms/course-access";
 import { PLACEMENT_PASS_RATIO } from "../../src/lib/python-lms/placement";
 import { ACHIEVEMENTS, bestStreakFor, levelFor, streakFor } from "../../src/lib/python-lms/game";
 import {
@@ -225,9 +229,11 @@ export async function syncLearnPython(userId: string, input: LearnPythonSyncInpu
     set["learnPython.placement"] = { passed: true, score: pScore, total: pTotal, at: now };
   }
 
+  const storedUnlock = cur?.unlockedLessons ?? [];
+
   const applyIncoming = (order: string[]) => {
     for (const slug of order) {
-      if (!(slug in incoming) || !unlockedLessons(order, merged).has(slug)) continue;
+      if (!(slug in incoming) || !lessonOpenForSync(order, slug, merged, storedUnlock)) continue;
       const clean = cleanLessonProgress(incoming[slug]);
       if (!clean) continue;
       const lastSlide = (getPyLesson(slug)?.notes.length ?? 1) - 1;
@@ -250,10 +256,16 @@ export async function syncLearnPython(userId: string, input: LearnPythonSyncInpu
 
   if (intermediateAccess) applyIncoming(PY_INT_LESSON_ORDER);
 
-  const open = new Set([
-    ...unlockedLessons(PY_LESSON_ORDER, merged),
-    ...(intermediateAccess ? unlockedLessons(PY_INT_LESSON_ORDER, merged) : []),
-  ]);
+  const open = new Set(
+    mergeStoredUnlockedLessons(
+      [
+        ...unlockedLessons(PY_LESSON_ORDER, merged),
+        ...(intermediateAccess ? unlockedLessons(PY_INT_LESSON_ORDER, merged) : []),
+      ],
+      storedUnlock,
+      intermediateAccess,
+    ),
+  );
 
   const keys = Array.isArray(input.awards) ? input.awards.slice(0, MAX_AWARDS_PER_SYNC) : [];
   const login = loginAwardKey(day);
@@ -304,10 +316,14 @@ export async function syncLearnPython(userId: string, input: LearnPythonSyncInpu
   const lessonsCompleted = Object.values(finalLessons).filter((l) => l?.completedAt).length;
   const intAccess =
     Boolean(lp?.intermediateAccess) || beginnerPathUnlocksIntermediate(finalLessons);
-  const unlocked = [
-    ...unlockedLessons(PY_LESSON_ORDER, finalLessons),
-    ...(intAccess ? unlockedLessons(PY_INT_LESSON_ORDER, finalLessons) : []),
-  ];
+  const unlocked = mergeStoredUnlockedLessons(
+    [
+      ...unlockedLessons(PY_LESSON_ORDER, finalLessons),
+      ...(intAccess ? unlockedLessons(PY_INT_LESSON_ORDER, finalLessons) : []),
+    ],
+    cur?.unlockedLessons,
+    intAccess,
+  );
   const projectsCompleted = completedProjects((lp?.projects ?? {}) as Record<string, PyProjectProgress>).length;
 
   await User.updateOne(

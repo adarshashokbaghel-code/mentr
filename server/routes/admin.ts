@@ -4,7 +4,6 @@ import { requireAdminKey } from "../middleware/admin-auth";
 import { requireAdminPass } from "../middleware/admin-pass";
 import {
   closeAdminRequirement,
-  listAdminGuestRequirements,
   listAdminDemoRequests,
   listAdminOtpActivity,
   listAdminProfileViews,
@@ -199,17 +198,6 @@ router.get("/demo-requests", async (req, res) => {
   } catch (err) {
     console.error("Admin demo requests list error:", err);
     res.status(500).json({ error: "Failed to load demo requests" });
-  }
-});
-
-router.get("/guest-requirements", async (req, res) => {
-  try {
-    const limit = Math.min(parseInt(String(req.query.limit || "200"), 10) || 200, 500);
-    const requests = await listAdminGuestRequirements(limit);
-    res.json({ requests, total: requests.length });
-  } catch (err) {
-    console.error("Admin guest requirements list error:", err);
-    res.status(500).json({ error: "Failed to load guest requests" });
   }
 });
 

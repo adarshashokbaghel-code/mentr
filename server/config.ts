@@ -84,7 +84,7 @@ export const config = {
   adminSecretKey: process.env.ADMIN_SECRET_KEY || "",
   /** Password required for admin write actions (delete, send mail, etc.) */
   adminPass: process.env.ADMIN_PASS || "",
-  /** Prefer gpt-4o for Snap & Grade vision marking; IC can stay on mini */
+  /** Prefer gpt-4o for Snap & Grade vision marking; tutor match can stay on mini */
   openaiApiKey: process.env.OPENAI_API_KEY || "",
   openaiIcModel: process.env.OPENAI_IC_MODEL || "gpt-4o-mini",
   /**

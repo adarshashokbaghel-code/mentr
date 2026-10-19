@@ -262,7 +262,7 @@ export const PARENT_ACQUISITION_SEP2026: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Find a CBSE Class 10 tutor on Mentr",
-            text: "Browse verified CBSE tutors (home or online) by subject and area, compare profiles, and book a free demo. Short on time? Use Instant Connect to get matched quickly.",
+            text: "Browse verified CBSE tutors (home or online) by subject and area, compare profiles, and book a free demo. Short on time? Post a requirement so tutors can pitch you.",
           },
         ],
       },
@@ -299,7 +299,7 @@ export const PARENT_ACQUISITION_SEP2026: Record<string, ArticleContent> = {
       { label: "How to choose a tutor for Class 10", href: "/blog/how-to-choose-a-tutor-for-class-10" },
       { label: "CBSE Class 10: last 60-day study plan", href: "/blog/cbse-class-10-study-plan" },
       { label: "Write CBSE answers that keep step marks", href: "/blog/how-to-write-cbse-answers-to-keep-step-marks" },
-      { label: "Instant Connect — find a tutor fast", href: "/instant-connect" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
     ],
   },
 };
