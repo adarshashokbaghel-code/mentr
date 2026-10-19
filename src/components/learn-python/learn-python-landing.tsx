@@ -14,8 +14,14 @@ import {
   WHY_PYTHON,
   type CompareTone,
   type PythonLesson,
-  type PythonTrack,
+  type PythonTier,
 } from "@/lib/learn-python";
+import {
+  PYTHON_INTERMEDIATE_CAPSTONE,
+  PYTHON_INTERMEDIATE_LESSONS,
+} from "@/lib/learn-python-intermediate";
+import { PY_LMS_INTERMEDIATE, PY_LMS_PATH_TEST } from "@/lib/python-lms";
+import { pyTrackTheme } from "@/lib/python-lms/track-theme";
 import { COMPILER_PATHS, howItWorksPath } from "@/lib/compilers/paths";
 import { PY_CERT_COURSE, PY_CERT_RULES, studyLessons } from "@/lib/python-lms/certificate";
 import type { PyCertificate } from "@/lib/python-lms/sync-client";
@@ -149,12 +155,12 @@ function Chapter({
   );
 }
 
-function LessonDetail({ lesson }: { lesson: PythonLesson }) {
+function LessonDetail({ lesson, initialOpen }: { lesson: PythonLesson; initialOpen?: boolean }) {
   const final = Boolean(lesson.requirements);
   const pad = String(lesson.number).padStart(2, "0");
   return (
     <details
-      open={lesson.number === 1}
+      open={initialOpen ?? lesson.number === 1}
       className={cn("group border-t border-hairline", final && "bg-coral-wash/40")}
     >
       <summary className="grid cursor-pointer list-none grid-cols-[52px_1fr_auto] items-center gap-4 py-5 sm:grid-cols-[72px_1fr_auto] [&::-webkit-details-marker]:hidden">
@@ -288,70 +294,166 @@ function LessonDetail({ lesson }: { lesson: PythonLesson }) {
   );
 }
 
-function LevelColumn({ track, index }: { track: PythonTrack; index: number }) {
-  const live = track.status === "live";
+function TrackPathCard({
+  tier,
+  name,
+  summary,
+  meta,
+  covers,
+  outcome,
+  syllabusHref,
+  primary,
+  footnote,
+  floatDelay,
+}: {
+  tier: PythonTier;
+  name: string;
+  summary: string;
+  meta: string;
+  covers: string[];
+  outcome: string;
+  syllabusHref: string;
+  primary: { label: string; href?: string };
+  footnote: ReactNode;
+  floatDelay?: number;
+}) {
+  const theme = pyTrackTheme(tier === "intermediate" ? "intermediate" : "beginner");
+  const tierLabel = tier === "intermediate" ? "Intermediate" : "Beginner";
+
   return (
-    <article className={cn("flex flex-col bg-white p-6 sm:p-8", !live && "bg-cream/60")}>
-      <div className="flex items-start justify-between">
-        <div className="w-[104px]">
-          <PythonBadge
-            tier={track.tier}
-            idSuffix="-level"
-            locked={!live}
-            floatDelay={index * 0.8}
-          />
-        </div>
-        {live ? (
-          <span className="inline-flex items-center gap-1.5 bg-sage px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+    <article className="flex min-h-[420px] flex-col border-2 border-ink bg-white shadow-[4px_4px_0_0_#1c1a17] sm:min-h-[440px]">
+      <div className="h-1.5 shrink-0" style={{ backgroundColor: theme.accent }} aria-hidden />
+      <div className="flex flex-1 flex-col p-5 sm:p-6" style={{ backgroundColor: theme.accentWash }}>
+        <div className="flex items-start justify-between gap-3">
+          <p className="font-mono text-[10.5px] font-bold uppercase tracking-[0.14em]" style={{ color: theme.accent }}>
+            {tierLabel}
+          </p>
+          <span className="shrink-0 bg-ink px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-white">
             Live
           </span>
-        ) : (
-          <span className="inline-flex items-center gap-1.5 border border-hairline px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
-            <Lock className="h-3 w-3" />
-            Coming soon
-          </span>
-        )}
-      </div>
-      <p className="mt-6 font-mono text-[12px] text-muted">Level {index + 1}</p>
-      <h3 className="mt-1 text-[22px] font-extrabold tracking-tight text-ink">{track.name}</h3>
-      <p className="mt-2 text-[14.5px] leading-relaxed text-ink/75">{track.summary}</p>
-      <ul className="mt-5 border-t border-hairline">
-        {track.covers.map((item) => (
-          <li
-            key={item}
-            className={cn(
-              "border-b border-hairline py-2 text-[13.5px]",
-              live ? "text-ink" : "text-ink/55",
-            )}
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
-      <p className="mt-5 text-[13px] text-muted">
-        <span className="font-bold text-ink">Badge earned by: </span>
-        {track.outcome.charAt(0).toLowerCase() + track.outcome.slice(1)}
-      </p>
-      <div className="mt-auto pt-6">
-        {live ? (
-          <Cta variant="ink">Start {track.name}</Cta>
-        ) : (
-          <p className="text-[13px] font-semibold text-muted">Coming soon</p>
-        )}
+        </div>
+
+        <div className="mt-4 flex items-center gap-4">
+          <div className="w-[72px] shrink-0 sm:w-[80px]">
+            <PythonBadge tier={tier} idSuffix="-path" floatDelay={floatDelay} still />
+          </div>
+          <div className="min-w-0">
+            <h3 className="text-[19px] font-extrabold leading-tight text-ink sm:text-[21px]">{name}</h3>
+            <p className="mt-1.5 font-mono text-[11px] text-muted">{meta}</p>
+          </div>
+        </div>
+
+        <p className="mt-4 text-[14px] leading-relaxed text-ink/80">{summary}</p>
+
+        <ul className="mt-4 space-y-1.5 border-t border-ink/10 pt-4">
+          {covers.slice(0, 4).map((line) => (
+            <li key={line} className="flex gap-2 text-[13px] leading-snug text-ink/75">
+              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: theme.accent }} strokeWidth={3} aria-hidden />
+              {line}
+            </li>
+          ))}
+        </ul>
+
+        <p
+          className="mt-4 border-l-[3px] py-2 pl-3 text-[13px] font-semibold leading-snug text-ink"
+          style={{ borderColor: theme.accent, backgroundColor: "rgba(255,255,255,0.55)" }}
+        >
+          {outcome}
+        </p>
+
+        <div className="mt-auto flex flex-wrap gap-2 pt-6">
+          {primary.href ? (
+            <Cta href={primary.href} variant="ink">
+              {primary.label}
+            </Cta>
+          ) : (
+            <Cta variant="ink">{primary.label}</Cta>
+          )}
+          <Cta href={syllabusHref} variant="coral">
+            Syllabus
+          </Cta>
+        </div>
+        <p className="mt-3 text-[12.5px] leading-snug text-ink/65">{footnote}</p>
       </div>
     </article>
   );
 }
 
+/** Compact Beginner + Intermediate — matching cards, track-colored accents. */
+function TrackPathCards() {
+  const beginner = PYTHON_TRACKS.find((t) => t.tier === "beginner")!;
+  const intermediate = PYTHON_TRACKS.find((t) => t.tier === "intermediate")!;
+
+  return (
+    <section id="tracks" className="scroll-mt-20 border-b border-hairline bg-cream/40 py-12 sm:py-16">
+      <div className={SHELL}>
+        <div className="max-w-2xl">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-coral-dark">
+            Choose a path
+          </p>
+          <h2 className="mt-2 text-[26px] font-extrabold tracking-tight text-ink sm:text-[30px]">
+            Beginner or Intermediate — both live
+          </h2>
+          <p className="mt-2 text-[15px] leading-relaxed text-ink/70">
+            Same browser compiler and lesson loop. Beginner is open to everyone. Intermediate unlocks
+            after a short <Link href={PY_LMS_PATH_TEST} className="font-semibold text-ink underline underline-offset-2">test</Link>{" "}
+            or Beginner Lesson 9.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-2 lg:gap-8">
+          <TrackPathCard
+            tier="beginner"
+            name={beginner.name}
+            summary={beginner.summary}
+            meta={`${beginner.lessons} lessons · ~8 hr · certificate`}
+            covers={beginner.covers}
+            outcome={beginner.outcome}
+            syllabusHref="#beginner"
+            primary={{ label: "Start Beginner" }}
+            footnote="Free forever · certificate when you finish all lessons and the Final Challenge."
+          />
+          <TrackPathCard
+            tier="intermediate"
+            name={intermediate.name}
+            summary={intermediate.summary}
+            meta={`${intermediate.lessons} lessons · job & internship · capstone`}
+            covers={intermediate.covers}
+            outcome={intermediate.outcome}
+            syllabusHref="#intermediate"
+            primary={{ label: "Open course", href: PY_LMS_INTERMEDIATE }}
+            footnote={
+              <>
+                Unlock with{" "}
+                <Link href={PY_LMS_PATH_TEST} className="font-semibold text-ink underline underline-offset-2">
+                  Test to Intermediate
+                </Link>{" "}
+                or Beginner Lesson 9.
+              </>
+            }
+            floatDelay={0.6}
+          />
+        </div>
+
+        <p className="mt-6 text-center text-[13px] text-muted sm:text-left">
+          <Lock className="mr-1 inline h-3.5 w-3.5 align-[-2px]" aria-hidden />
+          Python Advanced — coming soon · Intermediate locked until test or Lesson 9
+        </p>
+      </div>
+    </section>
+  );
+}
+
 const ON_THIS_PAGE = [
+  { href: "#tracks", label: "Beginner & Intermediate" },
   { href: "#new-way", label: "No 60-hour course needed" },
   { href: "#what-you-get", label: "What you get" },
   { href: "#compare", label: "Compare with other courses" },
   { href: "#what-is-python", label: "What is Python?" },
   { href: "#why-python", label: "Why learn Python first?" },
   { href: "#how-lessons-work", label: "How lessons work" },
-  { href: "#beginner", label: "What you’ll learn" },
+  { href: "#beginner", label: "Beginner syllabus" },
+  { href: "#intermediate", label: "Intermediate syllabus" },
   { href: "#final-challenge", label: "Final project" },
   { href: "#certificate", label: "Your certificate" },
   { href: "#who-its-for", label: "Who it’s for" },
@@ -476,24 +578,26 @@ export function LearnPythonLanding() {
                 The language behind AI, data and the apps you use.
               </span>
             </h1>
-            <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-white/75 sm:text-[18px]">
-              A hands-on Python course for college students and first-time coders. 10 focused
-              lessons, 500+ auto-checked exercises and a real Python compiler in your browser.
-              Finish with a project you wrote yourself and a verifiable certificate for your
-              LinkedIn.
+            <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-white/75 sm:text-[17px]">
+              Two free tracks: <strong className="font-semibold text-white/90">Beginner</strong> from
+              your first line of code, and <strong className="font-semibold text-white/90">Intermediate</strong>{" "}
+              for placements and internships. Browser compiler, instant practice, no card.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Cta>Start the course</Cta>
-              <Cta href="#beginner" variant="ghost-dark">
-                See the syllabus
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Cta>Start Beginner</Cta>
+              <Cta href={PY_LMS_PATH_TEST} variant="ghost-dark">
+                Test to Intermediate
+              </Cta>
+              <Cta href="#tracks" variant="ghost-dark">
+                Compare paths
               </Cta>
             </div>
-            <dl className="mt-12 grid grid-cols-2 border-t border-white/10 sm:grid-cols-4">
+            <dl className="mt-10 grid grid-cols-2 border-t border-white/10 sm:grid-cols-4">
               {[
-                ["Format", "Hands-on, self-paced"],
-                ["Time", "About 8 hours"],
-                ["Practice", "500+ exercises"],
-                ["Outcome", "Verified certificate"],
+                ["Beginner", "10 lessons"],
+                ["Intermediate", "12 lessons"],
+                ["Practice", "500+ checks"],
+                ["Price", "₹0 forever"],
               ].map(([k, v]) => (
                 <div key={k} className="border-b border-white/10 py-4 pr-4 sm:border-b-0">
                   <dt className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/40">
@@ -511,7 +615,7 @@ export function LearnPythonLanding() {
                 <PythonBadge tier="beginner" idSuffix="-hero" />
               </div>
               <div className="w-[78px] sm:w-[98px]">
-                <PythonBadge tier="intermediate" idSuffix="-hero" locked floatDelay={1.2} />
+                <PythonBadge tier="intermediate" idSuffix="-hero" floatDelay={1.2} />
               </div>
               <div className="w-[78px] sm:w-[98px]">
                 <PythonBadge tier="advanced" idSuffix="-hero" locked floatDelay={2.4} />
@@ -519,26 +623,26 @@ export function LearnPythonLanding() {
             </div>
             <PythonTerminal lines={QUIZ_RUN} animated />
             <p className="mt-3 font-mono text-[11.5px] text-white/40">
-              ↑ The quiz game you build in Lesson 10.
+              ↑ Beginner capstone (Lesson 10). Intermediate ships a JSON expense tracker.
             </p>
           </div>
         </div>
       </section>
 
+      <TrackPathCards />
+
       {/* Quick answer + on this page */}
-      <section className="border-b border-hairline bg-white">
+      <section className="border-b border-hairline bg-cream/40">
         <div className={cn(SHELL, "grid gap-8 py-10 lg:grid-cols-[1fr_280px] lg:gap-16")}>
           <div>
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-coral-dark">
               In short
             </p>
-            <p className="mt-3 text-[17px] leading-relaxed text-ink sm:text-[19px]">
-              <strong>Mentr Learn Python</strong> is a hands-on online Python course for
-              beginners — college students, career switchers and school students from Class 6.
-              Python Beginner has 10 lessons: printing text, variables, user input, if/else,
-              logic, loops, strings, lists and functions, then a final project where you build a
-              quiz game. It includes 500+ auto-checked exercises, lesson notes, an in-browser
-              Python compiler and a verifiable certificate. No fee, no card.
+            <p className="mt-3 text-[16px] leading-relaxed text-ink sm:text-[17px]">
+              <strong>Mentr Learn Python</strong> is hands-on, not video-heavy:{" "}
+              <strong className="text-ink">Beginner</strong> (10 lessons to a quiz-game project + certificate) and{" "}
+              <strong className="text-ink">Intermediate</strong> (12 job-focused lessons — dicts, JSON, OOP, shipping).
+              Unlock Intermediate with Test to Intermediate or after Beginner Lesson 9. Free compiler, ₹0.
             </p>
           </div>
           <nav aria-label="On this page" className="border-l-2 border-ink pl-5">
@@ -575,9 +679,10 @@ export function LearnPythonLanding() {
                   and fixing it.
                 </p>
                 <p>
-                  So that’s the whole course: short lessons where you do something every minute,
-                  questions that check you instantly, and a compiler right in your browser. No paid
-                  program, no 400-page documentation, nothing to install.
+                  Mentr gives you two live paths — <strong className="text-ink">Beginner</strong> (10
+                  lessons to a quiz game + certificate) and <strong className="text-ink">Intermediate</strong>{" "}
+                  (12 job-focused lessons + capstone). Same loop: short lessons, instant checks and a
+                  compiler in your browser. No paid program, nothing to install.
                 </p>
               </>
             }
@@ -625,14 +730,15 @@ export function LearnPythonLanding() {
           <Chapter
             number="02"
             label="What you get"
-            title="Everything you need to learn Python, in one place."
+            title="Everything you need for Beginner and Intermediate, in one place."
             intro={
               <p>
                 <strong className="text-ink">
-                  500+ auto-checked exercises, an in-browser Python compiler, lesson notes and
-                  runnable examples
+                  500+ auto-checked exercises, an in-browser Python compiler, 22 lessons with notes
+                  and runnable examples
                 </strong>{" "}
-                — in one place, built for beginners, and working on any laptop or phone.
+                — shared across both tracks, built for first-time coders and placement prep, on any
+                laptop or phone.
               </p>
             }
           />
@@ -657,10 +763,11 @@ export function LearnPythonLanding() {
                 Write any program. Press Run. It works, even on your phone.
               </h3>
               <p className="mt-3 text-[15px] leading-relaxed text-white/70">
-                Real Python 3, running in your browser. When your program asks a question with{" "}
+                Real Python 3 for Beginner lessons, Intermediate capstone work and anything you
+                write on your own. When your program uses{" "}
                 <code className="bg-white/10 px-1.5 py-0.5 font-mono text-[0.9em]">input()</code>, you
-                type the answer right in the output, like a real terminal. Errors point to the exact
-                line and explain the fix in plain English.
+                type answers in the output like a real terminal. Errors point to the line and explain
+                the fix in plain English.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
                 <a
@@ -754,9 +861,11 @@ export function LearnPythonLanding() {
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-[15px] font-semibold text-ink">
-              Skip the 60 hours of video. Start writing Python today.
+              Pick Beginner or Intermediate — same tools, same compiler.
             </p>
-            <Cta variant="ink">Start writing Python</Cta>
+            <Cta href="#tracks" variant="ink">
+              Compare both tracks
+            </Cta>
           </div>
         </div>
       </section>
@@ -891,9 +1000,9 @@ export function LearnPythonLanding() {
             title="How does each lesson work?"
             intro={
               <p>
-                <strong className="text-ink">Every lesson follows the same five steps</strong>, so
-                you always know what comes next. And every lesson ends with you writing a small
-                program on your own — not just answering a quiz.
+                <strong className="text-ink">Every Beginner and Intermediate lesson uses the same steps</strong>, so
+                you always know what comes next. Practice ends with real code — not just
+                multiple choice.
               </p>
             }
           />
@@ -917,20 +1026,25 @@ export function LearnPythonLanding() {
           <Chapter
             number="07"
             label="Syllabus"
-            title="What will you learn in Python Beginner?"
+            title="Python Beginner syllabus"
             intro={
               <p>
-                <strong className="text-ink">
-                  10 lessons, from your first line of code to your first full project.
-                </strong>{" "}
-                Tap a lesson to see what’s inside: the topics, the code you’ll write, a practice
-                question to try, the mistake to avoid and a small challenge.
+                <strong className="text-ink">New to coding? Start here.</strong> Ten lessons to your
+                first full project. Already comfortable? Use the{" "}
+                <Link href={PY_LMS_PATH_TEST} className="font-semibold text-coral-dark hover:underline">
+                  Test to Intermediate
+                </Link>{" "}
+                and jump to{" "}
+                <Link href={PY_LMS_INTERMEDIATE} className="font-semibold text-coral-dark hover:underline">
+                  Intermediate
+                </Link>
+                .
               </p>
             }
           />
           <div className="mt-12 border-b border-hairline">
             {lessons.map((lesson) => (
-              <LessonDetail key={lesson.number} lesson={lesson} />
+              <LessonDetail key={lesson.number} lesson={lesson} initialOpen={lesson.number === 1} />
             ))}
           </div>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -942,62 +1056,169 @@ export function LearnPythonLanding() {
         </div>
       </section>
 
-      {/* 08 — Final challenge */}
-      <section id="final-challenge" className="scroll-mt-20 bg-ink py-20 text-white sm:py-28">
+      {/* 08 — Intermediate syllabus */}
+      <section id="intermediate" className="scroll-mt-20 border-t border-hairline bg-white py-20 sm:py-28">
         <div className={SHELL}>
           <Chapter
-            dark
             number="08"
-            label="Final project"
-            title="What do you build at the end?"
+            label="Syllabus"
+            title="Python Intermediate syllabus"
             intro={
               <p>
-                <strong className="text-white">A quiz game, written by you.</strong> Lesson 10
-                has no video. You get a task: build a game that asks questions, checks the answers
-                and keeps score. You won’t see the full answer. If you get stuck, open a hint.
+                <strong className="text-ink">For placements and internships.</strong> Twelve lessons
+                on problem-solving, data in Python, JSON, OOP and shipping — same Study → Examples →
+                Practice loop as Beginner.{" "}
+                <Link href={PY_LMS_PATH_TEST} className="font-semibold text-coral-dark hover:underline">
+                  Test to Intermediate
+                </Link>{" "}
+                or finish Beginner through Functions to unlock.
               </p>
             }
           />
-          <div className="mt-14 grid gap-12 lg:ml-[220px] lg:grid-cols-2 [&>*]:min-w-0">
-            <div>
-              <h3 className="font-mono text-[11px] uppercase tracking-[0.12em] text-white/45">
-                Stuck? Hints, one at a time
-              </h3>
-              <ol className="mt-3 border-t border-white/10">
-                {PYTHON_FINAL_HINTS.map((hint, i) => (
-                  <li key={hint} className="flex gap-4 border-b border-white/10 py-3.5">
-                    <span className="font-mono text-[12px] text-coral">{i + 1}</span>
-                    <span className="text-[15px] text-white/85">{hint}</span>
-                  </li>
-                ))}
-              </ol>
-
-              <h3 className="mt-10 font-mono text-[11px] uppercase tracking-[0.12em] text-white/45">
-                Then a final check-up
-              </h3>
-              <ul className="mt-3 border-t border-white/10">
-                {PYTHON_ASSESSMENT.map((row) => (
-                  <li key={row.part} className="grid grid-cols-[28px_96px_1fr] gap-2 border-b border-white/10 py-3 text-[14px]">
-                    <span className="font-mono text-coral">{row.part}</span>
-                    <span className="font-bold">{row.name}</span>
-                    <span className="text-white/60">{row.detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <PythonTerminal lines={QUIZ_RUN} />
-              <p className="mt-4 text-[14px] leading-relaxed text-white/60">
-                The game uses everything from the course: variables, input, text, if/else, loops,
-                lists and functions. When it runs, you’ve written a complete program on your own
-                — and you earn the Python Beginner badge.
-              </p>
+          <div className="mt-12 border-b border-hairline">
+            {PYTHON_INTERMEDIATE_LESSONS.map((lesson) => (
+              <LessonDetail key={lesson.number} lesson={lesson} initialOpen={lesson.number === 1} />
+            ))}
+            <details className="group border-t border-hairline bg-coral-wash/40">
+              <summary className="grid cursor-pointer list-none grid-cols-[52px_1fr_auto] items-center gap-4 py-5 sm:grid-cols-[72px_1fr_auto] [&::-webkit-details-marker]:hidden">
+                <span className="font-mono text-[26px] font-bold leading-none text-coral-dark sm:text-[34px]">
+                  13
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[17px] font-extrabold leading-snug text-ink sm:text-[19px]">
+                    Capstone · {PYTHON_INTERMEDIATE_CAPSTONE.title}
+                  </span>
+                  <span className="block text-[14px] text-muted">Portfolio project</span>
+                </span>
+                <Plus className="h-5 w-5 text-muted transition group-open:rotate-45" />
+              </summary>
+              <div className="grid gap-8 pb-10 sm:pl-[88px] lg:grid-cols-[1fr_1fr] lg:gap-10 [&>*]:min-w-0">
+                <div className="space-y-7">
+                  <p className="border-l-2 border-ink pl-4 text-[16px] leading-relaxed text-ink">
+                    {PYTHON_INTERMEDIATE_CAPSTONE.summary}
+                  </p>
+                  <div>
+                    <h4 className="text-[11px] font-bold uppercase tracking-[0.12em] text-muted">
+                      The program must
+                    </h4>
+                    <ol className="mt-2.5 space-y-1.5">
+                      {[
+                        "Add and list expenses with categories",
+                        "Filter and summarize totals",
+                        "Persist data as JSON export",
+                        "Pass hidden tests in the LMS compiler",
+                      ].map((r, i) => (
+                        <li key={r} className="flex gap-3 text-[14px] text-ink">
+                          <span className="w-5 shrink-0 font-mono text-[12px] text-muted">{i + 1}.</span>
+                          {r}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                </div>
+                <div className="bg-ink px-4 py-3.5 text-white">
+                  <h4 className="text-[11px] font-bold uppercase tracking-[0.12em] text-coral">
+                    Your task
+                  </h4>
+                  <p className="mt-1 text-[14.5px] font-semibold leading-snug">
+                    Ship a working expense tracker you can walk through in an internship interview.
+                  </p>
+                </div>
+              </div>
+            </details>
+          </div>
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[15px] font-semibold text-ink">
+              Lesson 1 is live; more lessons ship weekly. Unlock with placement or Beginner L9.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <Cta href={PY_LMS_PATH_TEST} variant="ink">
+                Test to Intermediate
+              </Cta>
+              <Cta href={PY_LMS_INTERMEDIATE} variant="coral">
+                Open Intermediate
+              </Cta>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 09 — Certificate */}
+      {/* 09 — Final challenge */}
+      <section id="final-challenge" className="scroll-mt-20 bg-ink py-20 text-white sm:py-28">
+        <div className={SHELL}>
+          <Chapter
+            dark
+            number="09"
+            label="Final project"
+            title="What do you build at the end of each track?"
+            intro={
+              <p>
+                <strong className="text-white">Beginner:</strong> a quiz game you write yourself (Lesson
+                10). <strong className="text-white">Intermediate:</strong> a JSON expense tracker you can
+                demo in interviews. Both use hints, hidden tests and the same in-browser compiler.
+              </p>
+            }
+          />
+          <div className="mt-14 grid gap-10 lg:ml-[220px] lg:grid-cols-2 [&>*]:min-w-0">
+            <div className="border border-white/15 bg-white/[0.04] p-5 sm:p-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#5ee0a0]">Beginner · Lesson 10</p>
+              <h3 className="mt-2 text-[20px] font-extrabold">Quiz game capstone</h3>
+              <ol className="mt-4 border-t border-white/10">
+                {PYTHON_FINAL_HINTS.slice(0, 4).map((hint, i) => (
+                  <li key={hint} className="flex gap-3 border-b border-white/10 py-3 text-[14px] text-white/85">
+                    <span className="font-mono text-[12px] text-coral">{i + 1}</span>
+                    {hint}
+                  </li>
+                ))}
+              </ol>
+              <PythonTerminal lines={QUIZ_RUN} className="mt-4" />
+              <p className="mt-3 text-[13.5px] leading-relaxed text-white/60">
+                Variables, input, if/else, loops, lists and functions — then the Python Beginner badge
+                and certificate path.
+              </p>
+            </div>
+            <div className="border border-white/15 bg-white/[0.04] p-5 sm:p-6">
+              <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#ffd96a]">Intermediate · Capstone</p>
+              <h3 className="mt-2 text-[20px] font-extrabold">{PYTHON_INTERMEDIATE_CAPSTONE.title}</h3>
+              <p className="mt-3 text-[14.5px] leading-relaxed text-white/75">{PYTHON_INTERMEDIATE_CAPSTONE.summary}</p>
+              <ul className="mt-4 space-y-2 border-t border-white/10 pt-4 text-[14px] text-white/85">
+                {[
+                  "Add and list expenses with categories",
+                  "Filter and summarize totals",
+                  "Persist data as JSON export",
+                  "Pass hidden tests in the LMS compiler",
+                ].map((r) => (
+                  <li key={r} className="flex gap-2">
+                    <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#ffd96a]" strokeWidth={3} />
+                    {r}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[13.5px] leading-relaxed text-white/60">
+                Dicts, parsing, errors, JSON and OOP from the 12 Intermediate lessons — portfolio-ready
+                for placements.
+              </p>
+              <Link
+                href="#intermediate"
+                className="mt-4 inline-flex text-[14px] font-bold text-coral underline underline-offset-4"
+              >
+                Intermediate syllabus
+              </Link>
+            </div>
+          </div>
+          <ul className="mt-10 border-t border-white/10 lg:ml-[220px]">
+            {PYTHON_ASSESSMENT.map((row) => (
+              <li key={row.part} className="grid grid-cols-[28px_96px_1fr] gap-2 border-b border-white/10 py-3 text-[14px] text-white/80">
+                <span className="font-mono text-coral">{row.part}</span>
+                <span className="font-bold text-white">{row.name}</span>
+                <span className="text-white/60">{row.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* 10 — Certificate */}
       <section
         id="certificate"
         className="relative scroll-mt-20 overflow-hidden border-t border-hairline bg-white py-20 sm:py-28"
@@ -1008,14 +1229,15 @@ export function LearnPythonLanding() {
         />
         <div className={cn(SHELL, "relative")}>
           <Chapter
-            number="09"
+            number="10"
             label="Certificate"
-            title="Finish the course. Get a certificate with your name on it."
+            title="Finish Beginner. Get a certificate with your name on it."
             intro={
               <p>
                 <strong className="text-ink">Verifiable, and earned — not handed out.</strong>{" "}
-                Complete the course and you get a Python Beginner certificate with your name, what
-                you built and a unique ID recruiters can check online. Here’s Winni’s.
+                Complete the Beginner track and you get a Python Beginner certificate with your name,
+                what you built and a unique ID recruiters can check online. Intermediate focuses on
+                a portfolio capstone for interviews. Here’s a sample Beginner certificate.
               </p>
             }
           />
@@ -1060,42 +1282,18 @@ export function LearnPythonLanding() {
         </div>
       </section>
 
-      {/* 10 — Levels */}
-      <section id="tracks" className="scroll-mt-20 bg-cream py-20 sm:py-28">
-        <div className={SHELL}>
-          <Chapter
-            number="10"
-            label="Levels"
-            title="What comes after Python Beginner?"
-            intro={
-              <p>
-                <strong className="text-ink">Python Intermediate, then Python Advanced.</strong>{" "}
-                Finish a level to earn its badge. Beginner is open now; the next two levels are
-                coming soon and will open on this page.
-              </p>
-            }
-          />
-          <div className="mt-14 grid gap-px border border-hairline bg-hairline md:grid-cols-3">
-            {PYTHON_TRACKS.map((track, i) => (
-              <LevelColumn key={track.tier} track={track} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 11 — Who it's for */}
       <section id="who-its-for" className="scroll-mt-20 border-t border-hairline bg-white py-20 sm:py-28">
         <div className={SHELL}>
           <Chapter
             number="11"
             label="Who it’s for"
-            title="Built for anyone writing their first real Python."
+            title="Beginners and placement prep — same platform."
             intro={
               <p>
-                <strong className="text-ink">
-                  If you’ve never coded, or only copied code you didn’t understand, start here.
-                </strong>{" "}
-                No background needed — just a laptop or phone and a few focused hours.
+                <strong className="text-ink">Beginner</strong> if you’ve never coded.{" "}
+                <strong className="text-ink">Intermediate</strong> if you’re aiming at internships,
+                projects on your résumé, or interview-style problem solving.
               </p>
             }
           />

@@ -8,6 +8,7 @@ import {
   getLearnPythonProfile,
   verifyLearnPythonCertificate,
 } from "../services/learn-python-profile";
+import { startPyPlacementSession, submitPyPlacementSession } from "../services/py-placement";
 
 const router = Router();
 
@@ -33,6 +34,26 @@ router.get("/certificate/:id", async (req, res) => {
 router.use(requireAuth);
 
 /** Open to every signed-in account (parent or tutor). Also counts as today's visit and login. */
+router.post("/placement/start", async (req: AuthenticatedRequest, res) => {
+  try {
+    res.json(await startPyPlacementSession(req.auth!.sub));
+  } catch (err) {
+    fail(res, err, "Failed to start placement");
+  }
+});
+
+router.post("/placement/submit", async (req: AuthenticatedRequest, res) => {
+  try {
+    const body = (req.body ?? {}) as { sessionId?: unknown; answers?: unknown };
+    const sessionId = typeof body.sessionId === "string" ? body.sessionId : "";
+    const answers = body.answers && typeof body.answers === "object" ? (body.answers as Record<string, number>) : {};
+    if (!sessionId) return res.status(400).json({ error: "sessionId required" });
+    res.json(await submitPyPlacementSession(req.auth!.sub, sessionId, answers));
+  } catch (err) {
+    fail(res, err, "Failed to submit placement");
+  }
+});
+
 router.post("/sync", async (req: AuthenticatedRequest, res) => {
   try {
     const body = (req.body ?? {}) as Record<string, unknown>;

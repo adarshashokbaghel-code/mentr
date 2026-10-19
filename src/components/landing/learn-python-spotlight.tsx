@@ -12,20 +12,20 @@ const hardShadowSm = "shadow-[3px_3px_0_0_#1c1a17]";
 const highlights = [
   {
     Icon: Code2,
-    label: "10 short lessons",
-    blurb: "print() to a quiz game",
+    label: "10 + 12 lessons",
+    blurb: "Beginner & Intermediate",
     bg: "bg-coral",
   },
   {
     Icon: ListChecks,
-    label: "500+ questions",
-    blurb: "Instant feedback",
+    label: "500+ checks",
+    blurb: "Both tracks · instant",
     bg: "bg-ink",
   },
   {
     Icon: Terminal,
     label: "Free compiler",
-    blurb: "Runs in your browser",
+    blurb: "Shared · phone OK",
     bg: "bg-sage",
   },
 ];
@@ -51,8 +51,8 @@ export function LearnPythonSpotlight() {
             <span className="text-coral">free, from line one.</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            A beginner Python course for students and first-time coders. No
-            60-hour videos — you write code every minute. ₹0, no card.
+            Beginner (certificate + quiz game) and Intermediate (12 lessons + capstone).
+            Test to Intermediate to skip ahead. No 60-hour videos — you write code every minute. ₹0.
           </p>
         </div>
 

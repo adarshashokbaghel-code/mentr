@@ -1,3 +1,5 @@
+import { ADSENSE_ENABLED } from "@/lib/site-scripts";
+
 /**
  * Hardcoded Google verification tags — no env vars required on production.
  *
@@ -21,7 +23,9 @@ export const GOOGLE_SITE_VERIFICATION = "";
 export function GoogleVerificationTags() {
   return (
     <>
-      <meta name="google-adsense-account" content={ADSENSE_CLIENT_ID} />
+      {ADSENSE_ENABLED ? (
+        <meta name="google-adsense-account" content={ADSENSE_CLIENT_ID} />
+      ) : null}
       {GOOGLE_SITE_VERIFICATION ? (
         <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
       ) : null}

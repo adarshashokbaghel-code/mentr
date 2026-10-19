@@ -210,6 +210,17 @@ export interface ILearnPython {
   awards: Record<string, { xp: number; at: string }>;
   /** Lesson slug → PyLessonProgress. */
   lessons: Record<string, unknown>;
+  /** Placement quiz passed — unlocks Python Intermediate track. */
+  intermediateAccess?: boolean;
+  placement?: { passed: boolean; score: number; total: number; at: Date };
+  /** Question ids already served on Path to Intermediate attempts (reduces repeats). */
+  placementSeenIds?: string[];
+  placementSession?: {
+    id: string;
+    questionIds: string[];
+    startedAt: Date;
+    expiresAt: Date;
+  };
   /** Achievement id → ISO date unlocked. */
   achievements: Record<string, string>;
   /** Final Challenge project id → PyProjectProgress. */
@@ -289,6 +300,8 @@ export interface IUser extends Document {
   learnPython?: ILearnPython;
   /** Unique invite link generated when admin sends welcome email — used for referrals. */
   referralUrl?: string;
+  /** Auto signup welcome email (Messenger) sent once after first email verify */
+  signupWelcomeSentAt?: Date;
   /** Full signup URL the user arrived from (e.g. a referrer's link). */
   registrationSource?: string;
   /** Blog/page slug that last-touched this signup (utm_campaign or /blog/{slug}). */
@@ -538,6 +551,10 @@ const learnPythonSchema = new Schema<ILearnPython>(
     videosWatched: { type: [String], default: [] },
     awards: { type: Schema.Types.Mixed, default: () => ({}) },
     lessons: { type: Schema.Types.Mixed, default: () => ({}) },
+    intermediateAccess: { type: Boolean, default: false },
+    placement: { type: Schema.Types.Mixed, required: false },
+    placementSeenIds: { type: [String], default: [] },
+    placementSession: { type: Schema.Types.Mixed, required: false },
     achievements: { type: Schema.Types.Mixed, default: () => ({}) },
     projects: { type: Schema.Types.Mixed, default: () => ({}) },
     projectsCompleted: { type: Number, default: 0, min: 0 },
@@ -617,6 +634,7 @@ const userSchema = new Schema<IUser>(
     learn: { type: learnProfileSchema, required: false },
     learnPython: { type: learnPythonSchema, required: false },
     referralUrl: { type: String, trim: true },
+    signupWelcomeSentAt: { type: Date },
     registrationSource: { type: String, trim: true },
     acquisitionSlug: { type: String, trim: true, lowercase: true },
     acquisitionKind: {

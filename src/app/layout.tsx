@@ -8,10 +8,10 @@ import { GoogleAnalytics } from "@/components/seo/google-analytics";
 import { SkipLink } from "@/components/ui/skip-link";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import {
-  ADSENSE_CLIENT_ID,
   GOOGLE_SITE_VERIFICATION,
   GoogleVerificationTags,
 } from "@/components/seo/google-verification";
+import { ADSENSE_ENABLED } from "@/lib/site-scripts";
 import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
@@ -81,9 +81,15 @@ export const metadata: Metadata = {
     },
   },
   formatDetection: { telephone: false },
-  other: {
-    "google-adsense-account": ADSENSE_CLIENT_ID,
-  },
+  ...(ADSENSE_ENABLED
+    ? {
+        other: {
+          "google-adsense-account":
+            process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ||
+            "ca-pub-4918938808225819",
+        },
+      }
+    : {}),
   ...(GOOGLE_SITE_VERIFICATION
     ? { verification: { google: GOOGLE_SITE_VERIFICATION } }
     : {}),
@@ -102,13 +108,9 @@ export default function RootLayout({
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <SkipLink />
         <AppProviders>{children}</AppProviders>
-        {/*
-          AdSense + GA only on adult/parent public pages — never on /learn (child-directed).
-          Ownership verification uses the google-adsense-account meta in <head>.
-        */}
+        {/* Third-party scripts off by default — see .env.example */}
         <AdSenseLoader />
         <GoogleAnalytics />
-        {/* Dino guide only on /learn — keep the rest of the site adult/parent-facing for AdSense. */}
         {LEARN_PUBLIC ? <LearnDinoGuide /> : null}
         <CookieConsent />
         <Analytics />

@@ -424,6 +424,54 @@ router.get("/messenger/templates", (_req, res) => {
   res.json({ templates: getMessengerTemplates() });
 });
 
+router.get("/messenger/welcome-settings", async (_req, res) => {
+  try {
+    const { getMessengerWelcomeSettings } = await import(
+      "../services/messenger-welcome-settings"
+    );
+    const settings = await getMessengerWelcomeSettings();
+    res.json({ settings });
+  } catch (err) {
+    console.error("Admin messenger welcome settings GET error:", err);
+    res.status(500).json({ error: "Failed to load welcome settings" });
+  }
+});
+
+router.put("/messenger/welcome-settings", requireAdminPass, async (req, res) => {
+  try {
+    const { saveMessengerWelcomeSettings } = await import(
+      "../services/messenger-welcome-settings"
+    );
+    const body = req.body ?? {};
+    const settings = await saveMessengerWelcomeSettings({
+      autoWelcomeMentor:
+        typeof body.autoWelcomeMentor === "boolean"
+          ? body.autoWelcomeMentor
+          : undefined,
+      autoWelcomeParent:
+        typeof body.autoWelcomeParent === "boolean"
+          ? body.autoWelcomeParent
+          : undefined,
+      mentorIntro:
+        typeof body.mentorIntro === "string" ? body.mentorIntro : undefined,
+      parentIntro:
+        typeof body.parentIntro === "string" ? body.parentIntro : undefined,
+      mentorSubject:
+        typeof body.mentorSubject === "string" ? body.mentorSubject : undefined,
+      parentSubject:
+        typeof body.parentSubject === "string" ? body.parentSubject : undefined,
+      mentorWelcomeCouponCode:
+        typeof body.mentorWelcomeCouponCode === "string"
+          ? body.mentorWelcomeCouponCode
+          : undefined,
+    });
+    res.json({ settings });
+  } catch (err) {
+    console.error("Admin messenger welcome settings PUT error:", err);
+    res.status(500).json({ error: "Failed to save welcome settings" });
+  }
+});
+
 router.post("/messenger/preview", async (req, res) => {
   try {
     const templateId = String(req.body.templateId || "") as MessengerTemplateId;

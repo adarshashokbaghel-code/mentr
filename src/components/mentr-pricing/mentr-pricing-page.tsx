@@ -1,13 +1,12 @@
 "use client";
 
-import { PremiumCheckoutDialog } from "@/components/dashboard/premium-checkout-dialog";
+import { PremiumExploreDialog } from "@/components/mentr-pricing/premium-explore-dialog";
 import {
   LpBadge,
   LpBlob,
   LpGridBg,
 } from "@/components/landing/lp/shared";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/components/auth/auth-provider";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -25,7 +24,6 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 /** Full-bleed shell — edges breathe on phone, wide on desktop. */
@@ -319,20 +317,10 @@ function PlanFeatureList({
 }
 
 export function MentrPricingPage() {
-  const { user } = useAuth();
-  const router = useRouter();
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [exploreOpen, setExploreOpen] = useState(false);
 
   function openExplore() {
-    if (!user) {
-      router.push("/login?next=/mentrpricing");
-      return;
-    }
-    if (user.role !== "faculty") {
-      router.push("/dashboard");
-      return;
-    }
-    setCheckoutOpen(true);
+    setExploreOpen(true);
   }
 
   return (
@@ -969,10 +957,7 @@ export function MentrPricingPage() {
         </div>
       </section>
 
-      <PremiumCheckoutDialog
-        open={checkoutOpen}
-        onOpenChange={setCheckoutOpen}
-      />
+      <PremiumExploreDialog open={exploreOpen} onOpenChange={setExploreOpen} />
     </main>
   );
 }

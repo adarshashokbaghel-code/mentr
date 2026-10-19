@@ -19,6 +19,7 @@
     "seed:parents": "tsx scripts/seed-parent-profiles.ts",
     "seed:parents:reset": "tsx scripts/seed-parent-profiles.ts --reset",
     "seed:learn-quiz": "tsx scripts/seed-learn-quiz.ts",
+    "seed:py-placement": "tsx scripts/seed-py-placement.ts",
     "db:wipe": "tsx scripts/wipe-db.ts --confirm",
     "seo:gsc-check": "node scripts/seo-gsc-check.mjs",
     "models:fetch": "node scripts/fetch-bg-models.mjs",
