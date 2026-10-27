@@ -27,10 +27,6 @@
   --paprly-blue-text: #67b5eb;
   --paprly-yellow-text-light: #fde047;
   --paprly-blue-text-light: #93c5fd;
-  /* Instant Connect — warm espresso chrome (fits cream/coral, not electric blue) */
-  --ic-blue: #3d3429;
-  --ic-blue-dark: #2a231c;
-  --ic-blue-wash: #f3ebe3;
 }
 
 @theme inline {
@@ -50,9 +46,6 @@
   --color-cream-band: var(--cream-band);
   --color-hairline: var(--hairline);
   --color-white: var(--white);
-  --color-ic-blue: var(--ic-blue);
-  --color-ic-blue-dark: var(--ic-blue-dark);
-  --color-ic-blue-wash: var(--ic-blue-wash);
   --font-sans: var(--font-sans-face);
 }
 
@@ -2463,7 +2456,7 @@ main {
 }
 
 @media (max-width: 767px) {
-  /* Free bottom space for Instant Connect — no floating dino on phones */
+  /* Hide floating dino on phones so the bottom of the page stays clear */
   .learn-dino-guide {
     display: none !important;
   }

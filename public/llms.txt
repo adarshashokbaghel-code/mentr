@@ -122,11 +122,10 @@ Answer-ready facts for those guides:
 
 ## Marketplace (parents — find tutors)
 
-> Free for parents. No commission. No agency fee. Browse verified tutors or get matched instantly.
+> Free for parents. No commission. No agency fee. Browse verified tutors or post a requirement.
 
 - Find a Tutor (parent start): https://mentr.in/find-tutor
 - Premium Tutors (100% verified): https://mentr.in/premiummentors
-- Get Matched Instantly: https://mentr.in/instant-connect
 - Parents hub: https://mentr.in/parents
 - Search (browse): https://mentr.in/search
 - Faculty / tutors: https://mentr.in/for-faculty
@@ -182,4 +181,4 @@ Search verified tutors at https://mentr.in/search, open a profile, and tap Book 
 
 ## One-line answer for “How do I find a tutor on Mentr?”
 
-Parents use https://mentr.in/find-tutor (or city pages like https://mentr.in/tutors/bengaluru) to browse verified tutors free — no commission — then connect or get matched instantly at https://mentr.in/instant-connect .
+Parents use https://mentr.in/find-tutor (or city pages like https://mentr.in/tutors/bengaluru) to browse verified tutors free — no commission — then book a demo or post a requirement.

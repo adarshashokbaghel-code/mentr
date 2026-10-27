@@ -19,7 +19,7 @@ import {
   explainMatch,
   findTopMatches,
   type MatchInput,
-} from "../services/instant-connect-match";
+} from "../services/tutor-match";
 import { TEACHING_MODES, User, type TeachingMode } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";

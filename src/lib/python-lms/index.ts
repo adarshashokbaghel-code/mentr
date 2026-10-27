@@ -1,6 +1,17 @@
 import { PYTHON_BEGINNER_LESSONS } from "@/lib/learn-python";
 import { PYTHON_INTERMEDIATE_LESSONS } from "@/lib/learn-python-intermediate";
 import { INT_LESSON_01 } from "@/lib/python-lms/int-lesson-01";
+import { INT_LESSON_02 } from "@/lib/python-lms/int-lesson-02";
+import { INT_LESSON_03 } from "@/lib/python-lms/int-lesson-03";
+import { INT_LESSON_04 } from "@/lib/python-lms/int-lesson-04";
+import { INT_LESSON_05 } from "@/lib/python-lms/int-lesson-05";
+import { INT_LESSON_06 } from "@/lib/python-lms/int-lesson-06";
+import { INT_LESSON_07 } from "@/lib/python-lms/int-lesson-07";
+import { INT_LESSON_08 } from "@/lib/python-lms/int-lesson-08";
+import { INT_LESSON_09 } from "@/lib/python-lms/int-lesson-09";
+import { INT_LESSON_10 } from "@/lib/python-lms/int-lesson-10";
+import { INT_LESSON_11 } from "@/lib/python-lms/int-lesson-11";
+import { INT_LESSON_12 } from "@/lib/python-lms/int-lesson-12";
 import { LESSON_01 } from "@/lib/python-lms/lesson-01";
 import { LESSON_02 } from "@/lib/python-lms/lesson-02";
 import { LESSON_03 } from "@/lib/python-lms/lesson-03";
@@ -40,6 +51,17 @@ const BEGINNER_CONTENT: Record<string, PythonLmsLesson> = {
 
 const INTERMEDIATE_CONTENT: Record<string, PythonLmsLesson> = {
   [INT_LESSON_01.slug]: INT_LESSON_01,
+  [INT_LESSON_02.slug]: INT_LESSON_02,
+  [INT_LESSON_03.slug]: INT_LESSON_03,
+  [INT_LESSON_04.slug]: INT_LESSON_04,
+  [INT_LESSON_05.slug]: INT_LESSON_05,
+  [INT_LESSON_06.slug]: INT_LESSON_06,
+  [INT_LESSON_07.slug]: INT_LESSON_07,
+  [INT_LESSON_08.slug]: INT_LESSON_08,
+  [INT_LESSON_09.slug]: INT_LESSON_09,
+  [INT_LESSON_10.slug]: INT_LESSON_10,
+  [INT_LESSON_11.slug]: INT_LESSON_11,
+  [INT_LESSON_12.slug]: INT_LESSON_12,
 };
 
 const ALL_CONTENT: Record<string, PythonLmsLesson> = {
@@ -92,6 +114,7 @@ export const PY_INT_LESSON_INDEX: PyLessonEntry[] = PYTHON_INTERMEDIATE_LESSONS.
 
 export const PY_LESSON_ORDER: string[] = [...PY_LESSON_INDEX].sort((a, b) => a.number - b.number).map((l) => l.slug);
 export const PY_INT_LESSON_ORDER: string[] = PY_INT_LESSON_INDEX.map((l) => l.slug);
+export const PY_ALL_LMS_SLUGS = [...PY_LESSON_ORDER, ...PY_INT_LESSON_ORDER];
 export const PY_ALL_LESSON_ORDERS = [PY_LESSON_ORDER, PY_INT_LESSON_ORDER] as const;
 
 export function lessonIndexForSlug(slug: string): PyLessonEntry[] {

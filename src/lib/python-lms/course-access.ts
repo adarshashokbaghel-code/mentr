@@ -29,3 +29,27 @@ export function unlockedIntermediateLessonSlugs(
 export function isIntermediateSlug(slug: string): boolean {
   return slug.startsWith("int-");
 }
+
+/** Progress-based unlock list plus admin/QA slugs stored on the user (not removed on sync). */
+export function mergeStoredUnlockedLessons(
+  computed: string[],
+  stored: string[] | undefined,
+  intermediateAccess: boolean,
+): string[] {
+  const set = new Set(computed);
+  for (const slug of stored ?? []) {
+    if (typeof slug !== "string" || !slug) continue;
+    if (isIntermediateSlug(slug) && !intermediateAccess) continue;
+    set.add(slug);
+  }
+  return [...set];
+}
+
+export function lessonOpenForSync(
+  order: string[],
+  slug: string,
+  lessons: Record<string, PyLessonProgress | undefined>,
+  storedUnlocked: string[] | undefined,
+): boolean {
+  return unlockedLessons(order, lessons).has(slug) || (storedUnlocked?.includes(slug) ?? false);
+}

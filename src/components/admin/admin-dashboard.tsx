@@ -14,9 +14,7 @@ import { AdminLearnPython } from "@/components/admin/admin-learn-python";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminDemoRequestsTable } from "@/components/admin/admin-demo-requests-table";
-import { AdminGuestRequirementsTable } from "@/components/admin/admin-guest-requirements-table";
 import { AdminRequirementsTable } from "@/components/admin/admin-requirements-table";
-import { AdminInstantConnect } from "@/components/admin/admin-instant-connect";
 import { AdminFeaturedTutors } from "@/components/admin/admin-featured-tutors";
 import { AdminPremiumMentors } from "@/components/admin/admin-premium-mentors";
 import { AdminPremiumCheckoutLeads } from "@/components/admin/admin-premium-checkout-leads";
@@ -42,12 +40,10 @@ import {
   Megaphone,
   RefreshCw,
   MessageSquareText,
-  Send,
   Star,
   Target,
   Ticket,
   Users,
-  Zap,
 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 
@@ -59,9 +55,7 @@ const NAV = [
   { id: "premium-reveals", label: "Premium reveals", icon: Eye },
   { id: "coupons", label: "Coupon codes", icon: Ticket },
   { id: "requirements", label: "Board posts", icon: Megaphone },
-  { id: "guest-requests", label: "Guest requests", icon: Send },
   { id: "demo-requests", label: "Demo requests", icon: CalendarDays },
-  { id: "instant-connect", label: "Instant Connect", icon: Zap },
   { id: "snap-grade", label: "Snap & Grade", icon: Camera },
   { id: "messenger", label: "Messenger", icon: Mail },
   { id: "engagement", label: "Engagement", icon: Activity },
@@ -470,10 +464,6 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
           {section === "coupons" && <AdminCoupons adminKey={adminKey} />}
 
-          {section === "instant-connect" && (
-            <AdminInstantConnect adminKey={adminKey} />
-          )}
-
           {section === "snap-grade" && (
             <AdminSnapGrade adminKey={adminKey} />
           )}
@@ -504,16 +494,6 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
                 </div>
               </div>
               <AdminRequirementsTable adminKey={adminKey} />
-            </AdminSection>
-          )}
-
-          {section === "guest-requests" && (
-            <AdminSection
-              id="guest-requests"
-              title="Guest requests"
-              description="Parents who messaged a Premium mentor without creating an account — full contact, need, and mentor outcomes"
-            >
-              <AdminGuestRequirementsTable adminKey={adminKey} />
             </AdminSection>
           )}
 

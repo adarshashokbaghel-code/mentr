@@ -198,7 +198,7 @@ function premiumMentorWelcomeBlock(v: MessengerTemplateVars) {
         ${sectionLabel("Optional · Premium Mentor", "#facc15")}
         <p style="margin:0;font-size:13px;line-height:1.55;color:#ffffff;">
           Core mentoring stays <strong>free forever</strong>. When you want more reach, Premium adds
-          unlimited daily pitches, 3 parent contact unlocks per day, a human SPOC, featured landing placement, and a Premium badge — from <strong>$5/mo (≈ ₹449)</strong>, price as shown.
+          unlimited daily pitches, 5 parent contact unlocks per day, a human SPOC, featured landing placement, and a Premium badge — from <strong>$5/mo (≈ ₹449)</strong>, price as shown.
         </p>
         <ul style="margin:10px 0 0;padding:0 0 0 16px;font-size:12px;line-height:1.55;color:rgba(255,255,255,0.85);">
           <li>Unlimited pitches (no 3-a-day cap)</li>

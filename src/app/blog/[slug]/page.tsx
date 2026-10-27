@@ -62,20 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             "grade NCERT answers photo",
             "Class 9 10 11 12 CBSE",
           ]
-      : post.slug.includes("instant-connect")
-        ? [
-            post.keyword,
-            "Instant Connect Mentr",
-            "find tutor fast online",
-            "same day online tutor India",
-            "verified tutor for parents",
-            "hire tutor without agency",
-            "quick tutor matching",
-            "get mentor to call you",
-            "free tutor platform India",
-            "online home tutor parents",
-          ]
-        : [post.keyword, "Mentr", "home tutor", "tutor guide"];
+      : [post.keyword, "Mentr", "home tutor", "tutor guide"];
 
   return {
     title: `${title} — Mentr Blog`,

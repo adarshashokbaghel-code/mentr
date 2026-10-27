@@ -1,9 +1,10 @@
 import { User, type IUser } from "../models/User";
-import type { IcLookingFor, IcMode } from "../models/InstantConnectRequest";
-import { rerankInstantConnectWithAi } from "./instant-connect-ai";
+import { rerankMatchesWithAi } from "./tutor-match-ai";
 
-/** Tunable later — V1 eligibility gate for Instant Connect matching pool. */
-export function isEligibleForInstantConnect(user: IUser): boolean {
+export type MatchMode = "online" | "offline" | "either";
+
+/** Verified faculty with a completed profile — used by the requirements board. */
+export function isEligibleTutor(user: IUser): boolean {
   if (user.role !== "faculty") return false;
   if (!user.emailVerified || !user.profileCompleted) return false;
   if (!user.profile) return false;
@@ -13,11 +14,11 @@ export function isEligibleForInstantConnect(user: IUser): boolean {
 export type MatchInput = {
   subject: string;
   classLevel: string;
-  mode: IcMode;
+  mode: MatchMode;
   location?: string;
   budgetMin?: number;
   budgetMax?: number;
-  lookingFor?: IcLookingFor;
+  lookingFor?: "tutor" | "mentor" | "either";
   board?: string;
   /** Optional free-text notes — triggers AI re-rank when OpenAI key is set */
   message?: string;
@@ -117,7 +118,7 @@ function budgetScore(rate: number | undefined, min?: number, max?: number): numb
 
 function modeScore(
   modes: string[],
-  want: IcMode,
+  want: MatchMode,
   tutorCity: string,
   location?: string,
 ): number {
@@ -247,7 +248,7 @@ export async function findTopMatches(
 
   const scored: { user: IUser; score: number }[] = [];
   for (const u of faculty) {
-    if (!isEligibleForInstantConnect(u)) continue;
+    if (!isEligibleTutor(u)) continue;
     const score = scoreTutor(u, input);
     if (score < MIN_SCORE) continue;
     // Require some subject signal
@@ -262,7 +263,7 @@ export async function findTopMatches(
 
   const notes = (input.message || "").trim();
   if (notes && pool.length > 0) {
-    const ai = await rerankInstantConnectWithAi(input, pool, limit);
+    const ai = await rerankMatchesWithAi(input, pool, limit);
     if (ai && ai.orderedIds.length > 0) {
       const byId = new Map(pool.map((c) => [c.id, c]));
       const matches = ai.orderedIds

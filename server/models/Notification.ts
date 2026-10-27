@@ -6,6 +6,7 @@ export const PARENT_NOTIFICATION_TYPES = [
   "requirement_pitch",
   "teacher_outreach",
   "tutor_slots_open",
+  // Legacy Instant Connect / guest-connect types — kept so old inbox rows still load
   "instant_connect_request",
   "instant_connect_submitted",
   "instant_connect_closed",

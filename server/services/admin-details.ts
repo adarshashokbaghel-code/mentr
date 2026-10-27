@@ -3,10 +3,6 @@ import { isDemoUserEmail } from "../lib/demo-users";
 import { OtpSession } from "../models/OtpSession";
 import { ProfileView } from "../models/ProfileView";
 import { Requirement } from "../models/Requirement";
-import {
-  NotLoggedInRequirement,
-  type IGuestActivity,
-} from "../models/NotLoggedInRequirement";
 import { User } from "../models/User";
 import { DemoRequest } from "../models/DemoRequest";
 
@@ -176,70 +172,6 @@ export async function listAdminOtpActivity(limit = 100): Promise<AdminOtpRow[]> 
     consumed: row.consumed,
     attempts: row.attempts,
     createdAt: row.createdAt.toISOString(),
-  }));
-}
-
-export type AdminGuestRequirementRow = {
-  id: string;
-  teacherId: string;
-  teacherName: string;
-  teacherEmail: string;
-  name: string;
-  email: string;
-  phone: string;
-  requirement: string;
-  description: string;
-  status: string;
-  activity: { action: string; at: string }[];
-  respondedAt?: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export async function listAdminGuestRequirements(
-  limit = 200,
-): Promise<AdminGuestRequirementRow[]> {
-  const cap = Math.min(Math.max(limit, 1), 500);
-
-  const rows = await NotLoggedInRequirement.find({})
-    .sort({ createdAt: -1 })
-    .limit(cap)
-    .lean();
-
-  const teacherIds = rows.map((r) => r.teacher);
-  const teachers = await User.find({ _id: { $in: teacherIds } })
-    .select("email")
-    .lean();
-  const emailById = new Map(teachers.map((t) => [String(t._id), t.email]));
-
-  return rows.map((row) => ({
-    id: String(row._id),
-    teacherId: String(row.teacher),
-    teacherName: row.teacherName,
-    teacherEmail: emailById.get(String(row.teacher)) || "Deleted user",
-    name: row.name,
-    email: row.email,
-    phone: row.phone,
-    requirement: row.requirement,
-    description: row.description,
-    status: row.status,
-    activity: ((row.activity ?? []) as IGuestActivity[]).map((a) => ({
-      action: a.action,
-      at: a.at instanceof Date ? a.at.toISOString() : String(a.at),
-    })),
-    respondedAt: row.respondedAt
-      ? row.respondedAt instanceof Date
-        ? row.respondedAt.toISOString()
-        : String(row.respondedAt)
-      : undefined,
-    createdAt:
-      row.createdAt instanceof Date
-        ? row.createdAt.toISOString()
-        : String(row.createdAt),
-    updatedAt:
-      row.updatedAt instanceof Date
-        ? row.updatedAt.toISOString()
-        : String(row.updatedAt),
   }));
 }
 

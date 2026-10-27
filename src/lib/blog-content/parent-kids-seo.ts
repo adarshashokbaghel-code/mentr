@@ -72,8 +72,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
             items: [
               "Open Mentr Search or the Find online tutors (India) page. Filter by subject and online or home.",
               "Open 3–5 Verified or Premium profiles. Check class level, subjects, fee, and bio — not only photos.",
-              "Book a demo: class, board, gap, and preferred days. Or try Instant Connect if you need someone this week.",
-              "On a Premium mentor profile, you can also send a requirement without creating an account — name, phone, email, and what you need.",
+              "Book a demo: class, board, gap, and preferred days. Or post a requirement if you want tutors to pitch you.",
               "Book a demo, then a paid trial (30–60 minutes) before any monthly package.",
               "Sit nearby for the first online session. After the trial, ask your child one question: “Did that make sense?”",
             ],
@@ -81,7 +80,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
           {
             type: "callout",
             title: "Mentr is free for parents",
-            text: "Searching, connecting, Instant Connect, and posting a need do not cost parents anything. Session fees are agreed between you and the tutor. Mentr does not take a commission on tuition.",
+            text: "Searching, connecting, and posting a need do not cost parents anything. Session fees are agreed between you and the tutor. Mentr does not take a commission on tuition.",
           },
         ],
       },
@@ -94,7 +93,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "paragraph",
-            text: "Premium mentors are tutors who subscribe to grow on the platform. Parents often see them earlier on the homepage and can send a need without login. Still treat them like any hire: talk, trial, then decide. Hand-picked placement helps discovery — your judgement decides the fit.",
+            text: "Premium mentors are tutors who subscribe to grow on the platform. Parents often see them earlier on the homepage. Still treat them like any hire: talk, trial, then decide. Hand-picked placement helps discovery — your judgement decides the fit.",
           },
         ],
       },
@@ -148,12 +147,12 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "How do I find tutors online for my kids without paying the platform?",
         answer:
-          "Use a free-to-parent marketplace. On Mentr you can search, connect, use Instant Connect, or post a need at ₹0. You only pay the tutor for sessions you agree to.",
+          "Use a free-to-parent marketplace. On Mentr you can search, book a demo, or post a need at ₹0. You only pay the tutor for sessions you agree to.",
       },
       {
         question: "Is online tutoring safe for school kids?",
         answer:
-          "It can be, if you use verified profiles, keep sessions in a common room, start with a trial, and keep fee talks clear. Close unused Instant Connect requests when you have hired someone.",
+          "It can be, if you use verified profiles, keep sessions in a common room, start with a trial, and keep fee talks clear.",
       },
       {
         question: "Should I hire a home tutor or an online tutor for my child?",
@@ -161,9 +160,9 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
           "Home helps younger kids who need presence. Online works well for older classes, busy schedules, and specialist subjects. Try one trial of each if you are unsure.",
       },
       {
-        question: "Can I contact a Premium mentor without signing up?",
+        question: "Do I need an account to contact a tutor?",
         answer:
-          "Yes on Mentr. On a Premium mentor profile you can send a requirement with your name, phone, and email without creating an account. They can call or email you directly.",
+          "You can browse profiles without signing in. Booking a demo or posting a requirement uses a free parent account.",
       },
       {
         question: "How many tutors should I talk to before hiring?",
@@ -180,7 +179,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
       { label: "Find online tutors in India", href: "/find-online-tutors/india" },
       { label: "Parents hub", href: "/parents" },
       { label: "Search tutors", href: "/search" },
-      { label: "Instant Connect guide", href: "/blog/instant-connect-find-tutor-fast-parents" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
       { label: "Home vs online tutor", href: "/blog/home-tutor-vs-online-tutor" },
       { label: "Online maths tutor for Class 8", href: "/blog/how-to-find-online-maths-tutor-class-8" },
       { label: "CBSE online tutor for Class 10", href: "/blog/how-to-find-cbse-online-tutor-class-10" },
@@ -304,8 +303,8 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
           },
           {
             type: "callout",
-            title: "Instant Connect when time is short",
-            text: "If pre-boards are close and you need someone this week, try Instant Connect on Mentr. You shortlist up to three verified mentors who can contact you while the request is active. Close it once you hire.",
+            title: "When time is short",
+            text: "If pre-boards are close and you need someone this week, post a requirement on Mentr or book a demo with a verified tutor from search.",
           },
         ],
       },
@@ -347,7 +346,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "How to find tutors online for my kids", href: "/blog/how-to-find-tutors-online-for-my-kids" },
-      { label: "Instant Connect for parents", href: "/blog/instant-connect-find-tutor-fast-parents" },
+      { label: "Find a tutor", href: "/search?tier=regular" },
       { label: "Find online tutors India", href: "/find-online-tutors/india" },
       { label: "Parents hub", href: "/parents" },
     ],

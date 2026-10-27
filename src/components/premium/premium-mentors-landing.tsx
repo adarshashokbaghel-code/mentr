@@ -51,7 +51,7 @@ const FAQS = [
   },
   {
     q: "Do I need an account?",
-    a: "Not for Premium tutors. Tap Connect, tell them what your child needs, and they'll reach out. An account just lets you track replies in one place.",
+    a: "You can browse Premium tutors without signing in. Booking a demo uses a free parent account so you can track replies in one place.",
   },
   {
     q: "How is this different from regular tutors?",

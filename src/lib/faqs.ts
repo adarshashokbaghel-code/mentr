@@ -136,7 +136,7 @@ export const FAQS: FaqItem[] = [
     category: "faculty",
     question: "Does Reveal parent on the pitch board count toward my daily limit?",
     answer:
-      "Yes. Premium mentors get 3 parent-contact reveals per day (midnight IST). Reveal parent on the requirements board and a reveal in the parent directory share that one limit. A reveal on the board uses one of the 3. It is not a separate allowance, and reveals in the directory do not add extra board reveals.",
+      "Yes. Premium mentors get 5 parent-contact reveals per day (midnight IST). Reveal parent on the requirements board and a reveal in the parent directory share that one limit. A reveal on the board uses one of the 5. It is not a separate allowance, and reveals in the directory do not add extra board reveals.",
   },
 ];
 

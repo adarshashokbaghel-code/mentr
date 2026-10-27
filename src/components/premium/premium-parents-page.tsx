@@ -271,7 +271,7 @@ export function PremiumParentsPage() {
 
   const quotaLoaded = quota !== null;
   const used = quota?.usedToday ?? 0;
-  const limit = quota?.dailyLimit ?? 3;
+  const limit = quota?.dailyLimit ?? 5;
   const remaining = quota?.remaining ?? 0;
   const limitReached = quotaLoaded && remaining === 0;
   const quotaPct = Math.min(100, Math.round((used / limit) * 100));
@@ -870,7 +870,7 @@ function UpgradeGate() {
           Unlock the parent directory
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-muted">
-          Photo cards, hiring signals, and 3 contact reveals a day — built for
+          Photo cards, hiring signals, and 5 contact reveals a day — built for
           mentors ready to scale.
         </p>
         <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:justify-center">

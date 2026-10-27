@@ -193,7 +193,7 @@ function DailyCredits({ row }: { row: AdminPremiumMentorRow }) {
       </p>
     );
   }
-  const limit = row.dailyRevealLimit ?? 3;
+  const limit = row.dailyRevealLimit ?? 5;
   const used = row.revealsUsedToday ?? 0;
   const left = row.revealsRemainingToday ?? Math.max(0, limit - used);
   const bonus = row.revealBonusCredits ?? 0;

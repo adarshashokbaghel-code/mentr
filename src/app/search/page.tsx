@@ -87,8 +87,7 @@ function GuestSearchBanner() {
       <div className="mx-auto flex max-w-[1400px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-ink">
           <span className="font-semibold">Browsing is free.</span>{" "}
-          Premium mentors: connect or send a need without an account. Regular
-          tutors need a quick parent sign-in.
+          Sign in as a parent to book a demo or connect with a tutor.
         </p>
         <Button
           size="sm"

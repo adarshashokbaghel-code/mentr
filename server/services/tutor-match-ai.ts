@@ -1,5 +1,5 @@
 import { config } from "../config";
-import type { MatchInput, MatchedTutorCard } from "./instant-connect-match";
+import type { MatchInput, MatchedTutorCard } from "./tutor-match";
 
 type AiRerankResult = {
   orderedIds: string[];
@@ -34,7 +34,7 @@ function buildPrompt(
     ruleScore: c.score,
   }));
 
-  return `You help Mentr Instant Connect pick the best tutors for a parent.
+  return `You help Mentr pick the best tutors for a parent requirement.
 
 Parent need (JSON):
 ${JSON.stringify(need)}
@@ -52,10 +52,10 @@ Rules:
 }
 
 /**
- * Re-rank rule-scored Instant Connect candidates with OpenAI.
+ * Re-rank rule-scored tutor candidates with OpenAI.
  * Returns null on missing key, empty notes, or any failure (caller falls back to rules).
  */
-export async function rerankInstantConnectWithAi(
+export async function rerankMatchesWithAi(
   input: MatchInput,
   candidates: MatchedTutorCard[],
   limit = 3,
@@ -94,7 +94,7 @@ export async function rerankInstantConnectWithAi(
     if (!res.ok) {
       const errText = await res.text().catch(() => "");
       console.warn(
-        "[ic-ai] OpenAI error",
+        "[tutor-match-ai] OpenAI error",
         res.status,
         errText.slice(0, 200),
       );
@@ -127,7 +127,7 @@ export async function rerankInstantConnectWithAi(
 
     return { orderedIds, reasons };
   } catch (err) {
-    console.warn("[ic-ai] rerank failed:", err);
+    console.warn("[tutor-match-ai] rerank failed:", err);
     return null;
   } finally {
     clearTimeout(timeout);
