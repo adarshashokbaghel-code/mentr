@@ -68,7 +68,7 @@ const PREMIUM_LINES: PlanLine[] = [
     detail: "No 3-a-day cap — pitch every parent post that fits you.",
   },
   {
-    title: "3 parent contact unlocks / day",
+    title: "5 parent contact unlocks / day",
     detail:
       "The parent directory and Reveal parent on the pitch board share this same daily limit.",
   },
@@ -124,7 +124,7 @@ const COMPARE: {
     label: "Parent contact unlocks",
     why: "Directory and pitch-board Reveal parent share one cap",
     free: false,
-    premium: "3 unlocks / day",
+    premium: "5 unlocks / day",
   },
   {
     label: "Featured on landing page",
@@ -149,7 +149,7 @@ const COMPARE: {
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is Mentr Premium for mentors?",
-    a: "Premium is an optional upgrade for mentors who want more reach: unlimited daily pitches, special access to parent listings with contact and requirement details, three parent contact unlocks every day, a dedicated support contact (SPOC), and featured placement on the Mentr landing page. Those three unlocks are one shared daily limit: a reveal in the parent directory and Reveal parent on the requirements board both count toward it. The Free plan stays free forever for core mentoring.",
+    a: "Premium is an optional upgrade for mentors who want more reach: unlimited daily pitches, special access to parent listings with contact and requirement details, five parent contact unlocks every day, a dedicated support contact (SPOC), and featured placement on the Mentr landing page. Those five unlocks are one shared daily limit: a reveal in the parent directory and Reveal parent on the requirements board both count toward it. The Free plan stays free forever for core mentoring.",
   },
   {
     q: "Do parents need Premium to contact mentors?",
@@ -448,7 +448,7 @@ export function MentrPricingPage() {
                 </span>
               </p>
               <p className="mt-1 text-sm text-white/65">
-                Unlimited pitches · 3 unlocks/day · SPOC · featured
+                Unlimited pitches · 5 unlocks/day · SPOC · featured
               </p>
             </div>
           </div>

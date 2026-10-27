@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Types } from "mongoose";
 
 /**
  * Premium mentor unlock of a parent's contact details.
- * Cap enforced in service: 3 reveals / mentor / calendar day (IST).
+ * Cap enforced in service: 5 reveals / mentor / calendar day (IST).
  */
 export interface IParentContactReveal extends Document {
   _id: Types.ObjectId;

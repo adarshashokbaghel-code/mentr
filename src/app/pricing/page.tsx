@@ -11,7 +11,7 @@ const CANONICAL = absoluteUrl(CANONICAL_PATH);
 export const metadata: Metadata = {
   title: "Mentr Pricing — Free Forever & Premium for Mentors",
   description:
-    "Mentr pricing: ₹0 for parents and free mentors. Optional Premium is about $5/month (₹449) — unlimited pitches, 3 shared parent-contact reveals a day, the parent directory, featured listing, and Snap & Grade. Full guide to what is included and how to upgrade.",
+    "Mentr pricing: ₹0 for parents and free mentors. Optional Premium is about $5/month (₹449) — unlimited pitches, 5 shared parent-contact reveals a day, the parent directory, featured listing, and Snap & Grade. Full guide to what is included and how to upgrade.",
   keywords: [
     "Mentr pricing",
     "Mentr Premium price",
@@ -50,7 +50,7 @@ const FAQS = [
   {
     question: "What is Mentr Premium?",
     answer:
-      "Mentr Premium is an optional mentor plan at about $5/month (≈ ₹449). Premium adds unlimited board pitches, 3 parent-contact reveals per day shared by the parent directory and Reveal parent on the requirements board, featured landing placement, Premium badges in search, unlimited Snap & Grade, and priority support (SPOC).",
+      "Mentr Premium is an optional mentor plan at about $5/month (≈ ₹449). Premium adds unlimited board pitches, 5 parent-contact reveals per day shared by the parent directory and Reveal parent on the requirements board, featured landing placement, Premium badges in search, unlimited Snap & Grade, and priority support (SPOC).",
   },
   {
     question: "Do parents pay for Premium?",
@@ -60,7 +60,7 @@ const FAQS = [
   {
     question: "How many parent contacts can I reveal?",
     answer:
-      "Three new parent contacts per day (IST midnight reset). Reveal parent on the requirements board and a reveal in the parent directory count toward the same 3. They are not separate limits. Each unlock stays visible for 2 hours, then locks again.",
+      "Five new parent contacts per day (IST midnight reset). Reveal parent on the requirements board and a reveal in the parent directory count toward the same 5. They are not separate limits. Each unlock stays visible for 2 hours, then locks again.",
   },
   {
     question: "How do I upgrade?",

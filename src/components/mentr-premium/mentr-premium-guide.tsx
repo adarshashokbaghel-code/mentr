@@ -68,7 +68,7 @@ const COMPARE_ROWS: {
   {
     label: "Contact reveals / day",
     free: "—",
-    premium: "3 / day, shared with the pitch board",
+    premium: "5 / day, shared with the pitch board",
     premiumWin: true,
   },
   {
@@ -281,7 +281,7 @@ export function MentrPremiumGuide() {
                   Premium active
                 </span>
                 <span className="text-[11px] font-semibold text-muted">
-                  3 reveals left today
+                  5 reveals left today
                 </span>
               </div>
               <div className="grid grid-cols-2 gap-2">
@@ -565,7 +565,7 @@ export function MentrPremiumGuide() {
                 steps: [
                   "Open /parentslist",
                   "Filter Hiring",
-                  "Reveal up to 3 contacts",
+                  "Reveal up to 5 contacts",
                   "WhatsApp with a short intro",
                 ],
                 icon: Unlock,
@@ -639,7 +639,7 @@ export function MentrPremiumGuide() {
               },
               {
                 q: "Does Reveal parent on the pitch board use my daily limit?",
-                a: "Yes. You get 3 parent-contact reveals per day (IST). Reveal parent on the requirements board and a reveal in the parent directory share that same limit. A board reveal uses one of the 3. It is not an extra allowance.",
+                a: "Yes. You get 5 parent-contact reveals per day (IST). Reveal parent on the requirements board and a reveal in the parent directory share that same limit. A board reveal uses one of the 5. It is not an extra allowance.",
               },
               {
                 q: "Will parents only see Premium mentors?",

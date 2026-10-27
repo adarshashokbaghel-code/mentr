@@ -200,6 +200,7 @@ export function RequirementsFeed() {
   const [unlimitedPitches, setUnlimitedPitches] = useState(false);
   const [premiumMentor, setPremiumMentor] = useState(false);
   const [revealLeft, setRevealLeft] = useState<number | null>(null);
+  const [revealLimit, setRevealLimit] = useState(5);
   const [pitchFor, setPitchFor] = useState<BoardRequirement | null>(null);
   const [revealFor, setRevealFor] = useState<BoardRequirement | null>(null);
 
@@ -212,6 +213,7 @@ export function RequirementsFeed() {
 
   const onRevealQuota = useCallback((quota: PremiumRevealQuota) => {
     setRevealLeft(quota.remaining);
+    if (quota.dailyLimit > 0) setRevealLimit(quota.dailyLimit);
   }, []);
 
   const reload = useCallback(() => {
@@ -226,6 +228,9 @@ export function RequirementsFeed() {
         setRevealLeft(
           data.revealQuota ? data.revealQuota.remaining : null,
         );
+        if (data.revealQuota?.dailyLimit) {
+          setRevealLimit(data.revealQuota.dailyLimit);
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -320,6 +325,7 @@ export function RequirementsFeed() {
       unlimited={unlimitedPitches}
       atLimit={atLimit}
       revealLeft={premiumMentor ? revealLeft : null}
+      revealLimit={revealLimit}
     />
   );
 
@@ -576,6 +582,7 @@ function QuotaCard({
   unlimited,
   atLimit,
   revealLeft,
+  revealLimit,
 }: {
   left: number;
   limit: number;
@@ -583,6 +590,7 @@ function QuotaCard({
   unlimited: boolean;
   atLimit: boolean;
   revealLeft: number | null;
+  revealLimit: number;
 }) {
   return (
     <section className="rounded-2xl border border-hairline bg-white p-4 shadow-[0_1px_2px_rgba(28,26,23,0.04)] sm:p-5">
@@ -638,7 +646,7 @@ function QuotaCard({
           <Sparkles className="mt-0.5 h-3.5 w-3.5 shrink-0 text-coral" />
           <span>
             <span className="font-semibold text-ink">
-              {revealLeft} of 3 parent reveals left.
+              {revealLeft} of {revealLimit} parent reveals left.
             </span>{" "}
             Shared with the parent directory.
           </span>
@@ -1164,7 +1172,7 @@ async function downloadParentPdf(reveal: PremiumRevealRow, post: BoardRequiremen
     page.drawText(text, { x: 36, y: y - 14, size: 12, font: bold, color: ink });
     y -= 40;
   }
-  page.drawText("Counts as one of your 3 parent reveals today.", {
+  page.drawText("Counts as one of your 5 parent reveals today.", {
     x: 36,
     y: 48,
     size: 9,
@@ -1192,6 +1200,7 @@ function RevealParentDialog({
   const [reveal, setReveal] = useState<PremiumRevealRow | null>(null);
   const [already, setAlready] = useState(false);
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [dailyLimit, setDailyLimit] = useState(5);
   const [saving, setSaving] = useState<"csv" | "pdf" | null>(null);
 
   useEffect(() => {
@@ -1213,6 +1222,7 @@ function RevealParentDialog({
         setReveal(data.reveal);
         setAlready(Boolean(data.alreadyRevealed));
         setRemaining(data.quota.remaining);
+        if (data.quota.dailyLimit > 0) setDailyLimit(data.quota.dailyLimit);
         onQuota(data.quota);
       })
       .catch((err: unknown) => {
@@ -1229,6 +1239,7 @@ function RevealParentDialog({
         ) {
           const next = quota as PremiumRevealQuota;
           setRemaining(next.remaining);
+          if (next.dailyLimit > 0) setDailyLimit(next.dailyLimit);
           onQuota(next);
         }
       })
@@ -1248,7 +1259,7 @@ function RevealParentDialog({
           <DialogDescription className="text-xs">
             {post
               ? `${post.subject} · Class ${post.classLevel} · ${post.area || post.city}`
-              : "Reveal uses one of your 3 parent contacts today."}
+              : "Reveal uses one of your 5 parent contacts today."}
           </DialogDescription>
         </DialogHeader>
 
@@ -1305,8 +1316,8 @@ function RevealParentDialog({
           {!loading && remaining != null && (
             <p className="mt-3 text-xs leading-relaxed text-muted">
               {already
-                ? `This parent is already in today’s reveals, so it did not use another one. ${remaining} of 3 left. Download a copy to keep the details.`
-                : `${remaining} of 3 parent reveals left today. Download the CSV or PDF now — the card stays open for 2 hours.`}
+                ? `This parent is already in today’s reveals, so it did not use another one. ${remaining} of ${dailyLimit} left. Download a copy to keep the details.`
+                : `${remaining} of ${dailyLimit} parent reveals left today. Download the CSV or PDF now — the card stays open for 2 hours.`}
             </p>
           )}
         </div>

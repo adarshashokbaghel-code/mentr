@@ -607,7 +607,7 @@ export default function DashboardPage() {
                           Premium parent directory
                         </p>
                         <h2 className="mt-1 text-base font-bold text-ink">
-                          Browse parents · reveal 3 contacts / day
+                          Browse parents · reveal 5 contacts / day
                         </h2>
                       </div>
                       <div className="flex flex-wrap gap-2 px-4 py-3">

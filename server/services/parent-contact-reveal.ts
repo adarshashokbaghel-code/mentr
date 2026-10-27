@@ -8,7 +8,7 @@ import { Requirement } from "../models/Requirement";
 import { User, type IUser } from "../models/User";
 import { isMentrPremiumActive } from "./premium-mentor-billing";
 
-export const PARENT_REVEALS_PER_DAY = 3;
+export const PARENT_REVEALS_PER_DAY = 5;
 /** Contact stays unlocked this long after reveal, then locks permanently for that mentor. */
 export const REVEAL_UNLOCK_MS = 2 * 60 * 60 * 1000;
 

@@ -1126,7 +1126,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
             type: "list",
             items: [
               "Unlimited requirement-board pitches (Free cap is 3/day)",
-              "3 parent contact reveals per day (IST), shared by /parentslist and Reveal parent on the requirements board",
+              "5 parent contact reveals per day (IST), shared by /parentslist and Reveal parent on the requirements board",
               "Premium badge next to Verified in search and on your public profile",
               "Priority placement in the landing Featured mentors strip",
               "Unlimited Snap & Grade (no credit deduction for Premium faculty)",
@@ -1149,7 +1149,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
               "Open /mentrpricing or the Premium card on your mentor dashboard",
               "Choose 2, 3, or 4 months (volume discounts apply)",
               "Pay with Razorpay and wait for verify to activate expiresAt",
-              "Open /parentslist and start revealing contacts (3/day)",
+              "Open /parentslist and start revealing contacts (5/day)",
             ],
           },
         ],
@@ -1184,7 +1184,7 @@ export const FOR_TUTORS_ARTICLES: Record<string, ArticleContent> = {
       {
         question: "How many contact reveals do I get?",
         answer:
-          "Three new parent contacts per calendar day (IST). Reveal parent on the requirements board and a reveal in the parent directory share that same limit of 3. They are not separate allowances.",
+          "Five new parent contacts per calendar day (IST). Reveal parent on the requirements board and a reveal in the parent directory share that same limit of 5. They are not separate allowances.",
       },
     ],
     relatedLinks: [

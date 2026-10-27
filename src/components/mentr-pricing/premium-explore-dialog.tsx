@@ -365,7 +365,7 @@ export function PremiumExploreDialog({
               <ul className="space-y-2.5 text-sm text-ink">
                 {[
                   "Unlimited pitches every day",
-                  "3 parent contact unlocks / day (directory + board)",
+                  "5 parent contact unlocks / day (directory + board)",
                   "Featured on the Mentr landing page & Premium badge",
                 ].map((line) => (
                   <li key={line} className="flex gap-2.5">

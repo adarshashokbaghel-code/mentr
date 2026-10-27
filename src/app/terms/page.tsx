@@ -58,7 +58,7 @@ const sections = [
     title: "When contact details may be shared",
     body: [
       "Standard connect / pitch: full phone/WhatsApp between parent and mentor only after the required acceptance (mentor accepts request, or parent accepts pitch), unless a Premium reveal applies as described next.",
-      "Premium directory and requirements board: contact stays masked until a Premium mentor uses a reveal — either in the parent directory or with Reveal parent on a requirements-board post. Both actions share one daily reveal cap (currently 3 parent contacts per day, IST). They are not separate limits. Phone/email then show for the unlock window in the product UI and Privacy policy, then lock again per those rules.",
+      "Premium directory and requirements board: contact stays masked until a Premium mentor uses a reveal — either in the parent directory or with Reveal parent on a requirements-board post. Both actions share one daily reveal cap (currently 5 parent contacts per day, IST). They are not separate limits. Phone/email then show for the unlock window in the product UI and Privacy policy, then lock again per those rules.",
       "Guest requirement forms: shared with mentors you select and with Mentr operators for delivery.",
       "No scraping, harvesting, or republishing of profiles or contacts from Mentr.",
     ],
