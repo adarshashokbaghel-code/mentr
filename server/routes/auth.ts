@@ -18,9 +18,11 @@ import { notifyPremiumMentorsOfNewParent } from "../services/premium-new-parent-
 import { signAuthToken } from "../services/jwt";
 import {
   AuthenticatedRequest,
+  clearAuthCookie,
   requireAuth,
   setAuthCookie,
 } from "../middleware/auth";
+import { deleteAdminUser } from "../services/admin-delete-user";
 import { ensureDb } from "../middleware/ensure-db";
 import { isProfileComplete } from "../lib/profile-complete";
 import {
@@ -583,5 +585,30 @@ router.get("/me", requireAuth, ensureDb, async (req: AuthenticatedRequest, res: 
     res.status(500).json({ error: "Failed to fetch session" });
   }
 });
+
+router.post(
+  "/delete-account",
+  requireAuth,
+  ensureDb,
+  async (req: AuthenticatedRequest, res: Response) => {
+    try {
+      const confirm = String(req.body?.confirm || "").trim();
+      if (confirm !== "delete") {
+        res.status(400).json({ error: "Type delete to confirm." });
+        return;
+      }
+      const result = await deleteAdminUser(req.auth!.sub);
+      if ("error" in result) {
+        res.status(result.status).json({ error: result.error });
+        return;
+      }
+      clearAuthCookie(res);
+      res.json({ message: "Account deleted" });
+    } catch (error) {
+      console.error("delete-account error:", error);
+      res.status(500).json({ error: "Could not delete this account" });
+    }
+  },
+);
 
 export default router;

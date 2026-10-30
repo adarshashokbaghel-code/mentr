@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteAccountSection } from "@/components/account/delete-account-section";
 import { useAuth } from "@/components/auth/auth-provider";
 import { ParentRequirementsSection } from "@/components/requirements/parent-requirements";
 import { ParentDemos } from "@/components/demo/parent-demos";
@@ -174,6 +175,7 @@ export default function ParentDashboardPage() {
               </div>
             </div>
           </div>
+          <DeleteAccountSection />
         </div>
       </main>
       <Footer />

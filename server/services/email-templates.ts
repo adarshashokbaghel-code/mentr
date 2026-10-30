@@ -12,6 +12,7 @@ export type MessengerTemplateId =
   | "mentor-referral"
   | "mentor-whatsapp-group"
   | "mentor-coupon-alert"
+  | "mentor-premium-active"
   | "parent-welcome"
   | "parent-find-tutor"
   | "parent-whatsapp-group";
@@ -231,6 +232,130 @@ function referralBlock(v: MessengerTemplateVars) {
   </table>`;
 }
 
+function premiumActiveText(v: MessengerTemplateVars) {
+  const privacy = `${SITE}/privacy`;
+  const terms = `${SITE}/terms`;
+  return `Dear ${v.name},
+
+Congratulations — your Mentr Premium plan is active. This note sets out what Premium includes, how parent contact is handled, and the only refunds we offer. Please keep it.
+
+What you get
+- Unlimited pitches on the requirements board. Free stays at 3 a day.
+- 5 parent-contact reveals a day (midnight IST), shared by the parent directory and Reveal parent on the board. Unused reveals do not roll over. A revealed contact stays open for 2 hours, then locks again.
+- Premium badge in search, and featured placement on the Mentr landing page.
+- A human SPOC for Premium support.
+- Unlimited Snap & Grade while Premium is active.
+
+Privacy
+A parent's phone or email is shown only after you use a reveal, and only so you can contact that parent about tutoring. Do not resell, publish, or pass those details on. How we handle personal data is in our Privacy Policy: ${privacy}
+Terms: ${terms}
+
+Snap & Grade is not a 100% correction service
+Snap & Grade is an assistive marking aid. It can miss a step, misread handwriting, or mark a right answer wrong. It is not a certified examiner and not a guarantee that any grade or comment is complete or correct. Review every result yourself before you share it with a student or a parent. Mentr does not warrant error-free correction.
+
+Refunds
+Premium is a tool for reach. It is not a promise of students, a minimum number of leads, or income. There are only two ways a Premium payment can be returned, and both go back to the same account that was charged. We do not pay refunds as cash, wallet balance, or extra credits. Sending a request does not approve it — we check it against these rules.
+
+1. Within 7 days. If you want a refund, write to us within 7 days of that Premium payment. If the request is in time and accepted, we return 80% of the amount paid. 20% is kept as a platform fee and is not refunded.
+
+2. No genuine lead closed. If your paid Premium period ends and you did not close a lead, you may ask for 50% of that payment back — but only where the leads made available to you were not genuine. A parent who did not reply, a pitch you did not send, or a demo that did not convert is not a non-genuine lead and is not a ground for this refund.
+
+Credits
+There is no refund of Snap & Grade credits, and used credits are not re-added. Daily reveal credits that expire at midnight IST are not restored. Outside the two cases above, Premium fees are not refundable.
+
+Parent directory: ${SITE}/parentslist
+Requirements board: ${SITE}/board
+Dashboard: ${v.dashboardUrl}
+
+Reply to this email if you have a question, or to file a refund request.
+
+Mentr by Paprly`;
+}
+
+function premiumActiveHtml(v: MessengerTemplateVars) {
+  const privacy = `${SITE}/privacy`;
+  const terms = `${SITE}/terms`;
+  const parents = `${SITE}/parentslist`;
+  const board = `${SITE}/board`;
+  return `
+    ${greeting(esc(v.name))}
+    <p style="margin:0 0 14px;font-size:13px;line-height:1.55;color:#525252;">
+      Congratulations — your <strong style="color:#1a231c;">Mentr Premium</strong> plan is active.
+      Below is what it includes, how parent contact works, and the only refunds we offer. Please keep this email.
+    </p>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 14px;">
+      <tr>
+        <td style="padding:12px 14px;background:#e6f6ee;border-left:3px solid #2f9e6e;">
+          ${sectionLabel("What Premium includes", "#2f9e6e")}
+          ${checklist([
+            "Unlimited pitches on the requirements board (Free stays at 3 a day)",
+            "5 parent-contact reveals a day, midnight IST — shared by the parent directory and Reveal parent on the board",
+            "Unused reveals do not roll over. A revealed contact stays open for 2 hours, then locks",
+            "Premium badge in search, and featured placement on the landing page",
+            "A human SPOC for Premium support",
+            "Unlimited Snap &amp; Grade while Premium is active",
+          ])}
+        </td>
+      </tr>
+    </table>
+    <p style="margin:0 0 14px;font-size:12px;line-height:1.55;color:#525252;">
+      A parent's phone or email is shown only after you use a reveal, and only so you can contact that parent about tutoring.
+      Do not resell, publish, or pass those details on.
+      Read our <a href="${privacy}" style="color:#2f9e6e;font-weight:600;">Privacy Policy</a>
+      and <a href="${terms}" style="color:#2f9e6e;font-weight:600;">Terms</a>.
+    </p>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 14px;">
+      <tr>
+        <td style="padding:12px 14px;background:#fff1e4;border-left:3px solid #ff9a4d;">
+          ${sectionLabel("Snap &amp; Grade is not 100% correction")}
+          <p style="margin:0;font-size:12px;line-height:1.55;color:#525252;">
+            Snap &amp; Grade is an assistive marking aid. It can miss a step, misread handwriting, or mark a right answer wrong.
+            It is not a certified examiner, and it is not a guarantee that any grade or comment is complete or correct.
+            Review every result yourself before you share it with a student or a parent.
+            Mentr does not warrant error-free correction.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 14px;">
+      <tr>
+        <td style="padding:12px 14px;background:#fffaf5;border:1px solid #e8dfd4;">
+          ${sectionLabel("Refunds — two cases only", "#1a231c")}
+          <p style="margin:0 0 8px;font-size:12px;line-height:1.55;color:#525252;">
+            Premium is a tool for reach. It is not a promise of students, a minimum number of leads, or income.
+            A refund, if accepted, goes back only to the <strong>same account</strong> that was charged.
+            We do not pay it as cash, wallet balance, or extra credits. Writing to us does not by itself approve a refund.
+          </p>
+          <p style="margin:0 0 8px;font-size:12px;line-height:1.55;color:#525252;">
+            <strong style="color:#1a231c;">1. Within 7 days — 80% back.</strong>
+            If you want a refund, write to us within 7 days of that Premium payment.
+            If the request is in time and accepted, we return 80% of the amount paid.
+            <strong>20% is kept as a platform fee</strong> and is not refunded.
+          </p>
+          <p style="margin:0 0 8px;font-size:12px;line-height:1.55;color:#525252;">
+            <strong style="color:#1a231c;">2. No genuine lead closed — 50% back.</strong>
+            If your paid Premium period ends and you did not close a lead, you may ask for 50% of that payment back to the same account,
+            <strong>only where the leads made available to you were not genuine</strong>.
+            A parent who did not reply, a pitch you did not send, or a demo that did not convert is not a non-genuine lead, and it is not a ground for this refund.
+          </p>
+          <p style="margin:0;font-size:12px;line-height:1.55;color:#525252;">
+            <strong style="color:#1a231c;">Credits.</strong>
+            There is no refund of Snap &amp; Grade credits, and used credits are not re-added.
+            Daily reveal credits that expire at midnight IST are not restored.
+            Outside the two cases above, Premium fees are not refundable.
+          </p>
+        </td>
+      </tr>
+    </table>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
+      <tr><td style="padding-bottom:6px;">${primaryBtn(parents, "Open the parent directory")}</td></tr>
+      <tr><td style="padding-bottom:6px;">${secondaryBtn(board, "Open the requirements board")}</td></tr>
+      <tr><td>${textLink(v.dashboardUrl, "Go to your dashboard")}</td></tr>
+    </table>
+    ${signOff()}
+  `;
+}
+
 export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate> = {
   "initial-user": {
     id: "initial-user",
@@ -376,6 +501,17 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
     subject: (v) => couponSubject(v),
     text: (v) => couponText(v),
     html: (v) => emailShell(couponHtml(v)),
+  },
+
+  "mentor-premium-active": {
+    id: "mentor-premium-active",
+    label: "Mentor · Premium is active",
+    description:
+      "Congrats for active Premium tutors — features, privacy, Snap & Grade limits, and the refund rules.",
+    audience: "faculty",
+    subject: (v) => `${v.name}, your Mentr Premium is active`,
+    text: (v) => premiumActiveText(v),
+    html: (v) => emailShell(premiumActiveHtml(v)),
   },
 
   "parent-welcome": {

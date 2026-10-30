@@ -234,6 +234,12 @@ export const authApi = {
 
   me: () => request<{ user: AuthUser }>("/auth/me"),
 
+  deleteAccount: () =>
+    request<{ message: string }>("/auth/delete-account", {
+      method: "POST",
+      body: JSON.stringify({ confirm: "delete" }),
+    }),
+
   logout: () =>
     request<{ message: string }>("/auth/logout", { method: "POST" }).finally(
       clearToken,
