@@ -2552,6 +2552,34 @@ main {
 .py-caret {
   animation: py-caret 1s steps(1) infinite;
 }
+
+/* Python syntax. Dark by default; the compiler light theme recolors these. */
+.py-tok-comment { color: #7f8a83; font-style: italic; }
+.py-tok-string { color: #9be3b8; }
+.py-tok-keyword { color: #ffb27a; }
+.py-tok-builtin { color: #a9c7ff; }
+.py-tok-number { color: #f3d27a; }
+.py-out-out { color: #e8ece9; }
+.py-out-err { color: #ff9b8a; }
+.py-out-in { color: #5ee0a0; }
+
+.py-ide[data-theme="light"] .py-tok-comment { color: #6d7c8d; }
+.py-ide[data-theme="light"] .py-tok-string { color: #1d6fb5; }
+.py-ide[data-theme="light"] .py-tok-keyword { color: #245a94; }
+.py-ide[data-theme="light"] .py-tok-builtin { color: #3d6fbf; }
+.py-ide[data-theme="light"] .py-tok-number { color: #3d6494; }
+.py-ide[data-theme="light"] .py-out-out { color: #1c3348; }
+.py-ide[data-theme="light"] .py-out-err { color: #c2410c; }
+.py-ide[data-theme="light"] .py-out-in { color: #1d6fb5; }
+
+.py-compiler[data-theme="dark"] .py-ide { background-color: #1c2836; color: #e7eef6; }
+.py-compiler[data-theme="dark"] .py-tok-comment { color: #8ea0b3; }
+.py-compiler[data-theme="dark"] .py-tok-string { color: #9ec5ef; }
+.py-compiler[data-theme="dark"] .py-tok-keyword { color: #8eb4e8; }
+.py-compiler[data-theme="dark"] .py-tok-builtin { color: #b7d4f5; }
+.py-compiler[data-theme="dark"] .py-tok-number { color: #d6c48a; }
+.py-compiler[data-theme="dark"] .py-out-out { color: #e7eef6; }
+.py-compiler[data-theme="dark"] .py-out-in { color: #9ec5ef; }
 @keyframes py-cert-float {
   0%,
   100% {

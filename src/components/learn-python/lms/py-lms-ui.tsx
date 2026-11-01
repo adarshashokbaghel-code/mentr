@@ -5,7 +5,7 @@ import type { PythonRunResult } from "@/lib/python-runner";
 import { usePythonRuntime } from "@/lib/python/use-python-runtime";
 import { cn } from "@/lib/utils";
 import { Loader2, Play } from "lucide-react";
-import { Fragment, useRef, type KeyboardEvent, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, type KeyboardEvent, type ReactNode } from "react";
 
 /** Renders `code` spans and **bold** inside plain strings. */
 export function Rich({ text }: { text: string }) {
@@ -91,6 +91,8 @@ export function PyEditor({
   minLines = 4,
   label = "Code editor",
   markLine,
+  activeLine,
+  theme = "dark",
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -99,10 +101,20 @@ export function PyEditor({
   label?: string;
   /** 1-based line to flag, e.g. where an error was raised. */
   markLine?: number;
+  /** 1-based line the visualizer is standing on. */
+  activeLine?: number;
+  theme?: "dark" | "light";
 }) {
   const ref = useRef<HTMLTextAreaElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
   const lines = value.split("\n");
   const rows = Math.max(minLines, lines.length);
+  const light = theme === "light";
+
+  useEffect(() => {
+    if (!activeLine || !rootRef.current) return;
+    rootRef.current.querySelector(`[data-py-line="${activeLine}"]`)?.scrollIntoView({ block: "nearest", inline: "nearest" });
+  }, [activeLine]);
 
   function edit(next: string, caret: number) {
     onChange(next);
@@ -138,10 +150,23 @@ export function PyEditor({
   }
 
   return (
-    <div className="flex bg-[#141b16] font-mono text-[16px] leading-[1.7] sm:text-[13.5px]">
-      <div aria-hidden className="select-none py-3 pl-3 pr-2 text-right text-white/25">
+    <div
+      ref={rootRef}
+      data-theme={theme}
+      className={cn(
+        "py-ide flex font-mono text-[16px] leading-[1.7] sm:text-[13.5px]",
+        light ? "bg-white text-ink" : "bg-[#141b16]",
+      )}
+    >
+      <div aria-hidden className={cn("select-none py-3 pl-3 pr-2 text-right", light ? "text-muted/80" : "text-white/25")}>
         {Array.from({ length: rows }, (_, i) => (
-          <div key={i} className={cn(markLine === i + 1 && "font-bold text-[#ff9b8a]")}>
+          <div
+            key={i}
+            className={cn(
+              activeLine === i + 1 && "font-bold text-[#3d84c6]",
+              activeLine !== i + 1 && markLine === i + 1 && (light ? "font-bold text-[#c2410c]" : "font-bold text-[#ff9b8a]"),
+            )}
+          >
             {i + 1}
           </div>
         ))}
@@ -150,11 +175,22 @@ export function PyEditor({
         <div className="grid min-w-full w-max">
           <pre
             aria-hidden
-            className="pointer-events-none m-0 whitespace-pre px-3 py-3 text-[#e8ece9] [grid-area:1/1]"
+            className={cn("pointer-events-none m-0 whitespace-pre px-3 py-3 [grid-area:1/1]", light ? "text-ink" : "text-[#e8ece9]")}
             style={{ minHeight: `calc(${rows} * 1.7em + 1.5rem)` }}
           >
             {lines.map((line, i) => (
-              <div key={i} className={cn(markLine === i + 1 && "-mx-3 bg-[#ff9b8a]/15 px-3 shadow-[inset_2px_0_0_#ff9b8a]")}>
+              <div
+                key={i}
+                data-py-line={i + 1}
+                className={cn(
+                  activeLine === i + 1 && "-mx-3 bg-[#3d84c6]/12 px-3 shadow-[inset_2px_0_0_#3d84c6]",
+                  activeLine !== i + 1 &&
+                    markLine === i + 1 &&
+                    (light
+                      ? "-mx-3 bg-[#c2410c]/10 px-3 shadow-[inset_2px_0_0_#c2410c]"
+                      : "-mx-3 bg-[#ff9b8a]/15 px-3 shadow-[inset_2px_0_0_#ff9b8a]"),
+                )}
+              >
                 {line ? highlight(line, i) : " "}
               </div>
             ))}
@@ -170,7 +206,10 @@ export function PyEditor({
             autoComplete="off"
             autoCorrect="off"
             wrap="off"
-            className="m-0 h-full w-full resize-none overflow-hidden whitespace-pre bg-transparent px-3 py-3 text-transparent caret-[#ffb27a] outline-none selection:bg-white/20 [grid-area:1/1]"
+            className={cn(
+              "m-0 h-full w-full resize-none overflow-hidden whitespace-pre bg-transparent px-3 py-3 text-transparent outline-none [grid-area:1/1]",
+              light ? "caret-[#3d84c6] selection:bg-[#3d84c6]/20" : "caret-[#ffb27a] selection:bg-white/20",
+            )}
           />
         </div>
       </div>

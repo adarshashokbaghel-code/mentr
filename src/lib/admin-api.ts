@@ -808,6 +808,37 @@ export function fetchAdminLearnPython(key: string) {
   return adminFetch<AdminLearnPythonResponse>(key, "/api/admin/learnpython");
 }
 
+export type AdminPythonCompilerResponse = {
+  trackingSince: string | null;
+  note: string;
+  totals: {
+    runs: number;
+    ok: number;
+    failed: number;
+    timeouts: number;
+    signedIn: number;
+    anonymous: number;
+  };
+  surfaces: { id: string; label: string; runs: number; failed: number }[];
+  projects: { id: string; title: string; runs: number; passed: number; failed: number }[];
+  errors: { type: string; count: number; sample: string }[];
+  recentFailures: {
+    at: string;
+    surface: string;
+    projectId: string | null;
+    status: string;
+    errorType: string;
+    errorMessage: string;
+    line: number | null;
+    durationMs: number;
+  }[];
+  trend: { date: string; runs: number; failed: number }[];
+};
+
+export function fetchAdminPythonCompiler(key: string) {
+  return adminFetch<AdminPythonCompilerResponse>(key, "/api/admin/python-compiler");
+}
+
 export function fetchAdminLearnPythonDetail(key: string, userId: string) {
   return adminFetch<AdminLearnPythonDetail>(
     key,

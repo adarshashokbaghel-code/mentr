@@ -13,14 +13,14 @@ export function highlight(line: string, lineKey: number): ReactNode[] {
     if (match.index > last) out.push(line.slice(last, match.index));
     const [text, comment, string, keyword, builtin] = match;
     const cls = comment
-      ? "text-[#7f8a83] italic"
+      ? "py-tok-comment"
       : string
-        ? "text-[#9be3b8]"
+        ? "py-tok-string"
         : keyword
-          ? "text-[#ffb27a]"
+          ? "py-tok-keyword"
           : builtin
-            ? "text-[#a9c7ff]"
-            : "text-[#f3d27a]";
+            ? "py-tok-builtin"
+            : "py-tok-number";
     out.push(
       <span key={`${lineKey}-${match.index}`} className={cls}>
         {text}

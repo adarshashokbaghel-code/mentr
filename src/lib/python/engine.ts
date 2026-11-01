@@ -15,6 +15,7 @@ import {
   type ToWorker,
   type WorkerError,
 } from "@/lib/python/protocol";
+import type { TutorResult } from "@/lib/python/trace";
 
 export type RuntimePhase = "idle" | "loading" | "ready" | "running" | "error";
 
@@ -82,6 +83,16 @@ const HINTS: Record<string, string> = {
   ZeroDivisionError: "A number was divided by zero.",
 };
 
+export type TraceOutcome = { ok: true; data: TutorResult } | { ok: false; error: string };
+
+const TRACE_TIMEOUT_MS = 20_000;
+
+type PendingTrace = {
+  id: number;
+  resolve: (r: TraceOutcome) => void;
+  timer: ReturnType<typeof setTimeout>;
+};
+
 type Active = {
   id: number;
   opts: RunOptions;
@@ -104,6 +115,7 @@ export class PythonEngine {
   private worker: Worker | null = null;
   private ready: Promise<void> | null = null;
   private active: Active | null = null;
+  private tracing: PendingTrace | null = null;
   private nextId = 1;
   private state: RuntimeState = INITIAL;
   private listeners = new Set<() => void>();
@@ -219,11 +231,52 @@ export class PythonEngine {
         });
         return;
       }
+      case "trace": {
+        const t = this.tracing;
+        if (!t || t.id !== msg.id) return;
+        this.tracing = null;
+        clearTimeout(t.timer);
+        this.set({ phase: "ready", detail: null });
+        t.resolve(msg.ok ? { ok: true, data: msg.data } : { ok: false, error: msg.error });
+        return;
+      }
     }
+  }
+
+  /** Step-through trace of the editor's code. Uses the same Python runtime. */
+  traceCode(code: string, stdin: string): Promise<TraceOutcome> {
+    if (this.active) this.abort("stopped");
+    this.cancelTrace("Cancelled");
+    return this.preload()
+      .catch(() => undefined)
+      .then(
+        () =>
+          new Promise<TraceOutcome>((resolve) => {
+            if (this.state.phase === "error" || !this.worker) {
+              resolve({ ok: false, error: this.state.error ?? "Couldn't load Python." });
+              return;
+            }
+            const id = this.nextId++;
+            const timer = setTimeout(() => {
+              if (this.tracing?.id !== id) return;
+              this.tracing = null;
+              this.teardown();
+              resolve({
+                ok: false,
+                error: "This program is too long to step through. Shorten it, or look for a loop that runs many times.",
+              });
+              void this.preload().catch(() => undefined);
+            }, TRACE_TIMEOUT_MS);
+            this.tracing = { id, resolve, timer };
+            this.set({ phase: "running", detail: "tracing" });
+            this.send({ type: "trace", id, code, stdin });
+          }),
+      );
   }
 
   /** Runs one program. A run already in progress is stopped first. */
   async run(code: string, opts: RunOptions = {}): Promise<RunResult> {
+    this.cancelTrace("Cancelled");
     if (this.active) this.abort("stopped");
     try {
       await this.preload();
@@ -298,6 +351,15 @@ export class PythonEngine {
     return this.preload();
   }
 
+  private cancelTrace(error: string) {
+    const t = this.tracing;
+    if (!t) return;
+    this.tracing = null;
+    clearTimeout(t.timer);
+    t.resolve({ ok: false, error });
+    this.teardown();
+  }
+
   private abort(status: "timeout" | "stopped") {
     const a = this.active;
     if (!a) return;
@@ -327,7 +389,10 @@ export class PythonEngine {
 
   private crash(message: string) {
     const a = this.active;
+    const t = this.tracing;
     this.active = null;
+    this.tracing = null;
+    if (t) clearTimeout(t.timer);
     this.teardown();
     this.set({ phase: "error", error: message, detail: null, progress: null });
     if (a) {
@@ -342,6 +407,7 @@ export class PythonEngine {
         truncated: false,
       });
     }
+    t?.resolve({ ok: false, error: message });
   }
 
   private teardown() {

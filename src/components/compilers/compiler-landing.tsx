@@ -33,7 +33,7 @@ export function CompilerLanding({ def }: { def: CompilerDef }) {
             ))}
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href={toTop} className="inline-flex items-center gap-2 bg-[#2f9e6e] px-5 py-3 text-[15px] font-bold text-white transition hover:bg-[#278a5f]">
+            <a href={toTop} className="inline-flex items-center gap-2 bg-[#3d84c6] px-5 py-3 text-[15px] font-bold text-white transition hover:bg-[#2f6fad]">
               <ArrowUp className="h-4 w-4" /> Open the compiler
             </a>
             <Link href={def.howItWorksPath} className="inline-flex items-center gap-2 border border-ink px-5 py-3 text-[15px] font-bold transition hover:bg-white">
@@ -60,7 +60,7 @@ export function CompilerLanding({ def }: { def: CompilerDef }) {
               {landing.features.map((f) => (
                 <li key={f.title} className="bg-white px-5 py-4">
                   <p className="flex items-center gap-2 text-[15.5px] font-bold">
-                    <Check className="h-4 w-4 shrink-0 text-[#2f9e6e]" /> {f.title}
+                    <Check className="h-4 w-4 shrink-0 text-[#3d84c6]" /> {f.title}
                   </p>
                   <p className="mt-1 text-[14.5px] leading-relaxed text-muted">{f.text}</p>
                 </li>
@@ -97,10 +97,10 @@ export function CompilerLanding({ def }: { def: CompilerDef }) {
           ))}
 
           <Block id="examples" kicker="Examples" title={`${def.language} examples to run right now`}>
-            <p>These are in the Examples menu at the top of the compiler. Pick one and press Run.</p>
+            <p>Copy one into the compiler and press Run.</p>
             <div className="grid gap-4">
               {landing.examples.map((e) => (
-                <figure key={e.title} className="overflow-hidden border border-[#2a332d] bg-[#0f1411]">
+                <figure key={e.title} className="overflow-hidden border border-[#2a3848] bg-[#0f1411]">
                   <figcaption className="flex items-center gap-2 border-b border-white/10 px-4 py-2 font-mono text-[11px] text-white/50">
                     <FileCode2 className="h-3.5 w-3.5" /> {e.title}
                   </figcaption>
@@ -110,8 +110,8 @@ export function CompilerLanding({ def }: { def: CompilerDef }) {
             </div>
           </Block>
 
-          <section className="border border-[#2a332d] bg-[#0f1612] px-6 py-7 text-white sm:px-8">
-            <p className="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.16em] text-[#5ee0a0]">
+          <section className="border border-[#2a3848] bg-[#15202c] px-6 py-7 text-white sm:px-8">
+            <p className="flex items-center gap-2 font-mono text-[11.5px] uppercase tracking-[0.16em] text-[#7eb6ea]">
               <Cpu className="h-4 w-4" /> Engineering
             </p>
             <h2 className="mt-2 text-[24px] font-extrabold leading-tight sm:text-[28px]">How this {def.language} compiler runs in your browser</h2>
@@ -121,7 +121,7 @@ export function CompilerLanding({ def }: { def: CompilerDef }) {
             </p>
             <Link
               href={def.howItWorksPath}
-              className="mt-5 inline-flex items-center gap-2 bg-[#2f9e6e] px-5 py-3 text-[15px] font-bold text-white transition hover:bg-[#278a5f]"
+              className="mt-5 inline-flex items-center gap-2 bg-[#3d84c6] px-5 py-3 text-[15px] font-bold text-white transition hover:bg-[#2f6fad]"
             >
               Read how we built it <ArrowRight className="h-4 w-4" />
             </Link>
@@ -152,7 +152,7 @@ export function CompilerLanding({ def }: { def: CompilerDef }) {
               {def.faqs.map((f, i) => (
                 <details key={f.question} open={i < 2} className="group border-b border-hairline px-5 py-4 last:border-b-0">
                   <summary className="cursor-pointer list-none text-[16px] font-bold marker:hidden">
-                    <span className="mr-2 inline-block text-[#2f9e6e] transition group-open:rotate-45">+</span>
+                    <span className="mr-2 inline-block text-[#3d84c6] transition group-open:rotate-45">+</span>
                     {f.question}
                   </summary>
                   <p className="mt-2 text-[15px] leading-relaxed text-muted">{f.answer}</p>

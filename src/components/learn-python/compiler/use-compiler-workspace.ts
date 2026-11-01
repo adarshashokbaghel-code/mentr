@@ -7,6 +7,8 @@ type Workspace = { code: string; stdin: string };
 
 const key = (userId: string) => `mentr:pycompiler:v1:${userId}`;
 
+const PREVIOUS_STARTER = '# Write Python here and press Run (Ctrl/⌘ + Enter)\nprint("Hello, world!")\nprint("2 + 3 =", 2 + 3)';
+
 function write(userId: string, ws: Workspace) {
   try {
     window.localStorage.setItem(key(userId), JSON.stringify(ws));
@@ -20,7 +22,10 @@ function read(userId: string): Workspace {
     const raw = window.localStorage.getItem(key(userId));
     if (raw) {
       const parsed = JSON.parse(raw) as Partial<Workspace>;
-      if (typeof parsed.code === "string") return { code: parsed.code, stdin: parsed.stdin ?? "" };
+      if (typeof parsed.code === "string") {
+        if (parsed.code.trim() === PREVIOUS_STARTER) return { code: DEFAULT_TEMPLATE.code, stdin: "" };
+        return { code: parsed.code, stdin: parsed.stdin ?? "" };
+      }
     }
   } catch {
     // Fall through to the starter program.

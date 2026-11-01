@@ -195,6 +195,51 @@ async function run({ id, code, stdin, packages, maxOutput, inputBuffer }) {
   post({ type: "done", id, ok: result.ok, error: result.error, durationMs: result.durationMs || 0, truncated });
 }
 
+/** live-py-tutor's tracer, loaded once. Returns the Python `run` function. */
+let traceFn = null;
+let loadingTracer = null;
+
+function ensureTracer() {
+  if (traceFn) return Promise.resolve(traceFn);
+  if (!loadingTracer) {
+    loadingTracer = (async () => {
+      const res = await fetch(new URL("/live-py-tutor/run.py", self.location.origin));
+      if (!res.ok) throw new Error("Could not load the visualizer");
+      const fn = pyodide.runPython(await res.text());
+      traceFn = fn;
+      return fn;
+    })().catch((err) => {
+      loadingTracer = null;
+      throw err;
+    });
+  }
+  return loadingTracer;
+}
+
+async function traceProgram({ id, code, stdin }) {
+  try {
+    const fn = await ensureTracer();
+    const queue = stdin ? stdin.replace(/\r\n/g, "\n").replace(/\n$/, "").split("\n") : [];
+    pyodide.setStdin({
+      stdin: () => (queue.length ? `${queue.shift()}\n` : null),
+      autoEOF: true,
+    });
+    const raw = fn(code);
+    const text = typeof raw === "string" ? raw : String(raw);
+    if (raw && typeof raw.destroy === "function") raw.destroy();
+    post({ type: "trace", id, ok: true, data: JSON.parse(text) });
+  } catch (err) {
+    const message = String(err && err.message ? err.message : err);
+    post({ type: "trace", id, ok: false, error: message.split("\n").pop() || "Could not visualize this program" });
+  } finally {
+    try {
+      pyodide.runPython("import sys\nsys.settrace(None)");
+    } catch {
+      // Tracer already finished.
+    }
+  }
+}
+
 self.onmessage = async (e) => {
   const msg = e.data;
   if (msg.type === "init") {
@@ -211,5 +256,14 @@ self.onmessage = async (e) => {
       return;
     }
     await run(msg);
+    return;
+  }
+  if (msg.type === "trace") {
+    await booting;
+    if (!pyodide) {
+      post({ type: "trace", id: msg.id, ok: false, error: "Python is not loaded" });
+      return;
+    }
+    await traceProgram(msg);
   }
 };
