@@ -29,8 +29,8 @@ export interface SearchFiltersState {
   locality?: string;
   onlyOpen: boolean;
   onlyVerified: boolean;
-  /** Default premium on /search — Regular tab shows free mentors */
-  mentorTier: "regular" | "premium";
+  /** Default premium on /search. Regular is free mentors. "all" is the compiler promo link. */
+  mentorTier: "regular" | "premium" | "all";
   kind: KindFilter;
   /** Delivery mode: online, in person, or teachers offering both */
   mode: ModeFilter;
