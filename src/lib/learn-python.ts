@@ -1,3 +1,4 @@
+import { PYTHON_INTERMEDIATE_LESSONS } from "@/lib/learn-python-intermediate";
 import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 
 export const LEARN_PYTHON_PATH = "/learnpython";
@@ -689,7 +690,7 @@ export const LEARN_PYTHON_FAQS = [
   {
     question: "Do I get a certificate I can add to LinkedIn?",
     answer:
-      "Yes. Meet the course requirements and you get a Python Beginner certificate with your name, what you built and a unique ID. Anyone — a recruiter or your college — can verify it on mentr.in. Add the link under Licenses & certifications on LinkedIn or on your résumé.",
+      "Yes. Python Beginner and Python Intermediate each issue a certificate with your name and a unique ID. Anyone can verify it at mentr.in/learnpython/certificate/your-id. Intermediate requires every lesson finished and 30% of its questions solved. Add the verify link under Licenses & certifications on LinkedIn.",
   },
   {
     question: "Is this Python course good for college students?",
@@ -782,6 +783,12 @@ export const LEARN_PYTHON_KEYWORDS = [
   "Python for placements",
   "Python basics course",
   "learn Python free",
+  "Python intermediate course",
+  "Python intermediate certificate",
+  "learn Python intermediate India",
+  "free Python course Bengaluru",
+  "free Python course Mumbai",
+  "free Python course Delhi",
   "Mentr Learn Python",
 ];
 
@@ -802,6 +809,14 @@ export function learnPythonCourseJsonLd(description: string) {
     isAccessibleForFree: true,
     teaches: PYTHON_OUTCOMES,
     numberOfCredits: PYTHON_BEGINNER_LESSONS.length,
+    areaServed: [
+      { "@type": "Country", name: "India" },
+      { "@type": "City", name: "Bengaluru" },
+      { "@type": "City", name: "Mumbai" },
+      { "@type": "City", name: "Delhi" },
+      { "@type": "City", name: "Hyderabad" },
+      { "@type": "City", name: "Pune" },
+    ],
     offers: {
       "@type": "Offer",
       price: "0",
@@ -816,6 +831,53 @@ export function learnPythonCourseJsonLd(description: string) {
       name: "Python Beginner — self-paced",
     },
     syllabusSections: PYTHON_BEGINNER_LESSONS.map((lesson) => ({
+      "@type": "Syllabus",
+      name: `Lesson ${lesson.number}: ${lesson.title}`,
+      description: `${lesson.subtitle}. ${lesson.concepts.join(", ")}.`,
+    })),
+  };
+}
+
+/** Job-prep track. Same public URL as Beginner; Google gets a second Course node. */
+export function learnPythonIntermediateJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "Python Intermediate — Mentr Learn",
+    description:
+      "Free Python Intermediate for internships and first jobs in India: tickets, dictionaries, JSON, errors, classes, and a verifiable certificate after every lesson and 30% of the questions.",
+    url: absoluteUrl(`${LEARN_PYTHON_PATH}#intermediate`),
+    provider: {
+      "@type": "Organization",
+      name: SITE_BRAND,
+      url: absoluteUrl("/"),
+    },
+    educationalLevel: "Intermediate",
+    inLanguage: "en",
+    isAccessibleForFree: true,
+    areaServed: [
+      { "@type": "Country", name: "India" },
+      { "@type": "City", name: "Bengaluru" },
+      { "@type": "City", name: "Mumbai" },
+      { "@type": "City", name: "Delhi" },
+      { "@type": "City", name: "Hyderabad" },
+      { "@type": "City", name: "Pune" },
+    ],
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      category: "Free",
+      url: absoluteUrl(LEARN_PYTHON_PATH),
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: "PT12H",
+      name: "Python Intermediate — self-paced",
+    },
+    syllabusSections: PYTHON_INTERMEDIATE_LESSONS.map((lesson) => ({
       "@type": "Syllabus",
       name: `Lesson ${lesson.number}: ${lesson.title}`,
       description: `${lesson.subtitle}. ${lesson.concepts.join(", ")}.`,

@@ -23,6 +23,7 @@ import { isIntermediateSlug } from "@/lib/python-lms/course-access";
 import { downloadPythonNotesPdf } from "@/lib/python-lms/notes-pdf";
 import { ACHIEVEMENT_ORDER, levelFor, starsFor } from "@/lib/python-lms/game";
 import { PY_STAGES, resumeStage, stageDone } from "@/lib/python-lms/progress";
+import { PY_XP, videoAwardKey } from "@/lib/python-lms/rules";
 import type { LessonStage, PythonLmsLesson } from "@/lib/python-lms/types";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Check, Clock, Download, Loader2, Lock, RotateCcw } from "lucide-react";
@@ -107,7 +108,7 @@ function Gate({ lesson }: { lesson: PythonLmsLesson }) {
 
 function Player({ lesson }: { lesson: PythonLmsLesson }) {
   const theme = pyTrackTheme(lesson.course === "intermediate" ? "intermediate" : "beginner");
-  const { progress, store, updateLesson, resetPractice, unlock, isLessonUnlocked } = usePyLms();
+  const { progress, store, updateLesson, resetPractice, unlock, isLessonUnlocked, award } = usePyLms();
   const courseIndex = lessonIndexForSlug(lesson.slug);
   const router = useRouter();
   const params = useSearchParams();
@@ -217,6 +218,7 @@ function Player({ lesson }: { lesson: PythonLmsLesson }) {
             onSlide={onSlide}
             onFinish={() => {
               updateLesson(lesson.slug, { notesDone: true, slidesSeen: lastSlide });
+              award(videoAwardKey(lesson.slug), PY_XP.video, lesson.title);
               unlock("note-master");
               const checkIds = lesson.notes.flatMap((sl) => sl.blocks.filter((b) => b.type === "check").map((b) => (b as { id: string }).id));
               const checks = store.lessons[lesson.slug]?.checks ?? {};

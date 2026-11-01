@@ -91,7 +91,7 @@ export function PyIntermediateHome() {
               </Link>
             </>
           ) : (
-            <p className="text-[15px] text-white/70">More lessons rolling out weekly — Lesson 1 is live now.</p>
+            <p className="text-[15px] text-white/70">All 12 lessons are open once the previous study is finished.</p>
           )}
         </div>
       </section>

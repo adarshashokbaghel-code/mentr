@@ -3,7 +3,9 @@ import {
   CERT_ID_ALPHABET,
   CERT_ID_RE,
   PY_CERT_COURSE,
+  PY_INT_CERT_COURSE,
   certificateProgress,
+  intermediateCertificateProgress,
   type CertProgress,
 } from "../../src/lib/python-lms/certificate";
 import type { PyLessonProgress } from "../../src/lib/python-lms/lesson-progress";
@@ -37,6 +39,13 @@ function progressOf(lp: ILearnPython | undefined): CertProgress {
     lessons: (lp?.lessons ?? {}) as Record<string, PyLessonProgress>,
     awardKeys: Object.keys(lp?.awards ?? {}),
     projects: (lp?.projects ?? {}) as Record<string, PyProjectProgress>,
+  });
+}
+
+function intermediateProgressOf(lp: ILearnPython | undefined): CertProgress {
+  return intermediateCertificateProgress({
+    lessons: (lp?.lessons ?? {}) as Record<string, PyLessonProgress>,
+    awardKeys: Object.keys(lp?.awards ?? {}),
   });
 }
 
@@ -83,6 +92,9 @@ export async function getLearnPythonProfile(userId: string) {
     certificate: lp?.certificate ? toPublic(lp.certificate) : null,
     certificateUnlocked: Boolean(lp?.certificateUnlocked),
     progress: progressOf(lp),
+    intermediateCertificate: lp?.intermediateCertificate ? toPublic(lp.intermediateCertificate) : null,
+    intermediateProgress: intermediateProgressOf(lp),
+    intermediateAccess: Boolean(lp?.intermediateAccess),
   };
 }
 
@@ -96,6 +108,8 @@ export type LeaderboardRow = {
   band: string;
   streakDays: number;
   lessonsStudied: number;
+  beginnerLessons: number;
+  intermediateLessons: number;
   projectsCompleted: number;
   certified: boolean;
   isMe: boolean;
@@ -105,6 +119,7 @@ function toRow(u: NamedUser, rank: number, meId: string): LeaderboardRow {
   const lp = u.learnPython;
   const name = boardName(u);
   const lessons = (lp?.lessons ?? {}) as Record<string, PyLessonProgress>;
+  const studied = Object.entries(lessons).filter(([, l]) => l?.notesDone);
   return {
     rank,
     name,
@@ -119,9 +134,11 @@ function toRow(u: NamedUser, rank: number, meId: string): LeaderboardRow {
     levelTitle: lp?.levelTitle ?? "",
     band: lp?.band ?? "",
     streakDays: lp?.streakDays ?? 0,
-    lessonsStudied: Object.values(lessons).filter((l) => l?.notesDone).length,
+    lessonsStudied: studied.length,
+    beginnerLessons: studied.filter(([slug]) => slug.startsWith("lesson-")).length,
+    intermediateLessons: studied.filter(([slug]) => slug.startsWith("int-")).length,
     projectsCompleted: lp?.projectsCompleted ?? 0,
-    certified: Boolean(lp?.certificate?.id),
+    certified: Boolean(lp?.certificate?.id || lp?.intermediateCertificate?.id),
     isMe: String(u._id) === meId,
   };
 }
@@ -129,7 +146,7 @@ function toRow(u: NamedUser, rank: number, meId: string): LeaderboardRow {
 /** Ranked by XP. Equal XP shares a rank; the earlier learner is listed first. */
 export async function getLearnPythonLeaderboard(userId: string) {
   const filter = { "learnPython.visited": true, "learnPython.xp": { $gt: 0 } };
-  const fields = `${NAME_FIELDS} learnPython.xp learnPython.level learnPython.levelTitle learnPython.band learnPython.streakDays learnPython.lessons learnPython.projectsCompleted learnPython.certificate.id`;
+  const fields = `${NAME_FIELDS} learnPython.xp learnPython.level learnPython.levelTitle learnPython.band learnPython.streakDays learnPython.lessons learnPython.projectsCompleted learnPython.certificate.id learnPython.intermediateCertificate.id`;
   const [docs, learners] = await Promise.all([
     User.find(filter).sort({ "learnPython.xp": -1, "learnPython.firstVisitAt": 1 }).limit(LEADERBOARD_SIZE).select(fields).lean<NamedUser[]>(),
     User.countDocuments(filter),
@@ -150,9 +167,10 @@ export async function getLearnPythonLeaderboard(userId: string) {
   return { rows, me, learners };
 }
 
-function newCertificateId(): string {
+function newCertificateId(course: "beginner" | "intermediate"): string {
   const pick = () => Array.from({ length: 4 }, () => CERT_ID_ALPHABET[randomInt(CERT_ID_ALPHABET.length)]).join("");
-  return `MPY-${pick()}-${pick()}`;
+  const prefix = course === "intermediate" ? "MPI" : "MPY";
+  return `${prefix}-${pick()}-${pick()}`;
 }
 
 /** Letters (any script), spaces, dots, apostrophes and hyphens; 2–60 characters. */
@@ -168,14 +186,28 @@ export function cleanCertificateName(raw: unknown): string | null {
  * Issues the certificate when the stored progress meets every rule (or Mentr unlocked it).
  * The learner picks the printed name once; calling again returns the same certificate and name.
  */
-export async function claimLearnPythonCertificate(userId: string, rawName: unknown): Promise<PublicCertificate> {
+export async function claimLearnPythonCertificate(
+  userId: string,
+  rawName: unknown,
+  rawCourse: unknown,
+): Promise<PublicCertificate> {
+  const course = rawCourse === "intermediate" ? "intermediate" : rawCourse === "beginner" || rawCourse == null ? "beginner" : null;
+  if (!course) {
+    throw Object.assign(new Error("Course must be beginner or intermediate."), { status: 400 });
+  }
   const user = await User.findById(userId).select(`${NAME_FIELDS} learnPython`).lean<NamedUser>();
   if (!user) throw Object.assign(new Error("User not found"), { status: 404 });
   const lp = user.learnPython;
-  if (lp?.certificate) return toPublic(lp.certificate);
+  const existing = course === "intermediate" ? lp?.intermediateCertificate : lp?.certificate;
+  if (existing) return toPublic(existing);
 
-  const progress = progressOf(lp);
-  if (!progress.eligible && !lp?.certificateUnlocked) {
+  if (course === "intermediate" && !lp?.intermediateAccess) {
+    throw Object.assign(new Error("Pass the placement quiz or finish Beginner through Functions before claiming Intermediate."), { status: 403 });
+  }
+
+  const progress = course === "intermediate" ? intermediateProgressOf(lp) : progressOf(lp);
+  const staffUnlock = course === "beginner" && Boolean(lp?.certificateUnlocked);
+  if (!progress.eligible && !staffUnlock) {
     const missing = progress.requirements.filter((r) => !r.done).map((r) => `${r.title} (${r.have}/${r.need})`);
     throw Object.assign(new Error(`Not yet eligible: ${missing.join(", ")}`), { status: 400 });
   }
@@ -184,12 +216,13 @@ export async function claimLearnPythonCertificate(userId: string, rawName: unkno
     throw Object.assign(new Error("Enter the name to print: 2–60 letters, spaces, dots, apostrophes or hyphens."), { status: 400 });
   }
 
+  const field = course === "intermediate" ? "intermediateCertificate" : "certificate";
   for (let attempt = 0; attempt < 5; attempt++) {
     const cert: ILearnPythonCertificate = {
-      id: newCertificateId(),
+      id: newCertificateId(course),
       issuedAt: new Date(),
       name,
-      course: PY_CERT_COURSE,
+      course: course === "intermediate" ? PY_INT_CERT_COURSE : PY_CERT_COURSE,
       stats: {
         xp: lp?.xp ?? 0,
         lessonsStudied: progress.stats.lessonsStudied,
@@ -201,12 +234,13 @@ export async function claimLearnPythonCertificate(userId: string, rawName: unkno
     };
     try {
       const res = await User.updateOne(
-        { _id: userId, "learnPython.certificate.id": { $exists: false } },
-        { $set: { "learnPython.certificate": cert } },
+        { _id: userId, [`learnPython.${field}.id`]: { $exists: false } },
+        { $set: { [`learnPython.${field}`]: cert } },
       );
       if (res.modifiedCount === 1) return toPublic(cert);
-      const again = await User.findById(userId).select("learnPython.certificate").lean<NamedUser>();
-      if (again?.learnPython?.certificate) return toPublic(again.learnPython.certificate);
+      const again = await User.findById(userId).select(`learnPython.${field}`).lean<NamedUser>();
+      const saved = course === "intermediate" ? again?.learnPython?.intermediateCertificate : again?.learnPython?.certificate;
+      if (saved) return toPublic(saved);
     } catch (err) {
       if ((err as { code?: number }).code !== 11000) throw err;
     }
@@ -217,6 +251,12 @@ export async function claimLearnPythonCertificate(userId: string, rawName: unkno
 export async function verifyLearnPythonCertificate(id: string): Promise<PublicCertificate | null> {
   const clean = id.trim().toUpperCase();
   if (!CERT_ID_RE.test(clean)) return null;
-  const user = await User.findOne({ "learnPython.certificate.id": clean }).select("learnPython.certificate").lean<NamedUser>();
-  return user?.learnPython?.certificate ? toPublic(user.learnPython.certificate) : null;
+  const user = await User.findOne({
+    $or: [{ "learnPython.certificate.id": clean }, { "learnPython.intermediateCertificate.id": clean }],
+  })
+    .select("learnPython.certificate learnPython.intermediateCertificate")
+    .lean<NamedUser>();
+  const certs = [user?.learnPython?.certificate, user?.learnPython?.intermediateCertificate];
+  const match = certs.find((c) => c?.id === clean);
+  return match ? toPublic(match) : null;
 }

@@ -11,8 +11,10 @@ import {
 } from "@/lib/python-lms";
 import {
   PY_CERT_COURSE,
+  PY_INT_CERT_COURSE,
   certificateProgress,
   certificateVerifyPath,
+  intermediateCertificateProgress,
   type CertRequirement,
   type CertRequirementId,
 } from "@/lib/python-lms/certificate";
@@ -167,7 +169,16 @@ export function PyProfilePage() {
       <div className="mt-6">
         {tab === "profile" && <ProfileTab profile={profile} />}
         {tab === "leaderboard" && <LeaderboardTab board={board} />}
-        {tab === "certificate" && <CertificateTab profile={profile} onIssued={(c) => setProfile((p) => (p ? { ...p, certificate: c } : p))} />}
+        {tab === "certificate" && (
+          <CertificateTab
+            profile={profile}
+            onIssued={(c, course) =>
+              setProfile((p) =>
+                p ? { ...p, ...(course === "intermediate" ? { intermediateCertificate: c } : { certificate: c }) } : p,
+              )
+            }
+          />
+        )}
       </div>
     </div>
   );
@@ -286,7 +297,7 @@ function LeaderboardTab({ board }: { board: PyLeaderboard | null }) {
   return (
     <div className="space-y-6">
       <section className="border border-[#1f2a23] bg-[radial-gradient(ellipse_at_top,#1d3a2b_0%,#0f1612_70%)] px-4 pb-0 pt-6 text-white sm:px-8">
-        <p className="text-center font-mono text-[11px] uppercase tracking-[0.18em] text-[#5ee0a0]">Top learners · by XP</p>
+        <p className="text-center font-mono text-[11px] uppercase tracking-[0.18em] text-[#5ee0a0]">Beginner + Intermediate · one board</p>
         <div className="mx-auto mt-6 grid max-w-[560px] grid-cols-3 items-end gap-2 sm:gap-4">
           {PODIUM.map((slot) => {
             const row = rows[slot.place - 1];
@@ -362,7 +373,7 @@ function LeaderboardTab({ board }: { board: PyLeaderboard | null }) {
           </ol>
         )}
         <p className="border-t border-hairline px-5 py-3 text-[12px] leading-relaxed text-muted">
-          Ranked by total XP. Equal XP shares a rank. Names show first name and last initial only.
+          One board for Beginner and Intermediate, ranked by total XP from both. The book count is beginner lessons + intermediate lessons. Equal XP shares a rank. Names show first name and last initial only.
         </p>
       </section>
     </div>
@@ -387,9 +398,9 @@ function BoardRow({ row }: { row: PyLeaderboardRow }) {
           Lv {row.level} · {row.levelTitle}
         </p>
       </div>
-      <span className="hidden w-[74px] text-right font-mono text-[12px] text-muted sm:block" title="Lessons studied">
+      <span className="hidden w-[88px] text-right font-mono text-[12px] text-muted sm:block" title="Beginner lessons + Intermediate lessons">
         <BookOpen className="mr-1 inline h-3.5 w-3.5" />
-        {row.lessonsStudied}
+        {row.beginnerLessons}+{row.intermediateLessons}
       </span>
       <span className="hidden w-[60px] text-right font-mono text-[12px] text-muted sm:block" title="Projects completed">
         <FlaskConical className="mr-1 inline h-3.5 w-3.5" />
@@ -528,7 +539,13 @@ function requirementLink(r: CertRequirement, nextStudy: string | undefined): { h
   return { href: PY_FINAL_PATH, label: "Go to Final Challenge" };
 }
 
-function CertificateTab({ profile, onIssued }: { profile: PyProfile | null; onIssued: (c: PyCertificate) => void }) {
+function CertificateTab({
+  profile,
+  onIssued,
+}: {
+  profile: PyProfile | null;
+  onIssued: (c: PyCertificate, course: "beginner" | "intermediate") => void;
+}) {
   const { certificateId, setCertificateId, syncNow, xp } = usePyLms();
   const progress = useLiveProgress();
   const [claiming, setClaiming] = useState(false);
@@ -543,6 +560,7 @@ function CertificateTab({ profile, onIssued }: { profile: PyProfile | null; onIs
   if (cert) {
     const url = `${window.location.origin}${certificateVerifyPath(cert.id)}`;
     return (
+      <>
       <div className="space-y-5">
         <div className="flex flex-wrap items-center gap-3">
           <p className="mr-auto flex items-center gap-2 text-[16px] font-extrabold">
@@ -591,7 +609,9 @@ function CertificateTab({ profile, onIssued }: { profile: PyProfile | null; onIs
           it was issued and come from your saved progress. It is a Mentr course certificate, not a school or board qualification.
         </p>
       </div>
-    );
+      <IntermediateCertificateSection profile={profile} onIssued={onIssued} />
+    </>
+  );
   }
 
   const met = progress.requirements.filter((r) => r.done).length;
@@ -607,7 +627,7 @@ function CertificateTab({ profile, onIssued }: { profile: PyProfile | null; onIs
       const c = await claimPyCertificate(name);
       setCertificateId(c.id);
       setAskName(false);
-      onIssued(c);
+      onIssued(c, "beginner");
       await downloadPdf(c);
     } catch (e) {
       setClaimError(e instanceof Error ? e.message : "Could not issue the certificate");
@@ -761,6 +781,154 @@ function CertificateTab({ profile, onIssued }: { profile: PyProfile | null; onIs
         </div>
         <p className="mt-2 text-[12.5px] text-muted">The real one shows your actual numbers on the day you claim it, plus a unique id.</p>
       </section>
+      <IntermediateCertificateSection profile={profile} onIssued={onIssued} />
     </div>
+  );
+}
+
+function IntermediateCertificateSection({
+  profile,
+  onIssued,
+}: {
+  profile: PyProfile;
+  onIssued: (c: PyCertificate, course: "beginner" | "intermediate") => void;
+}) {
+  const { store, syncNow } = usePyLms();
+  const progress = useMemo(
+    () => intermediateCertificateProgress({ lessons: store.lessons, awardKeys: Object.keys(store.awarded) }),
+    [store.lessons, store.awarded],
+  );
+  const cert = profile.intermediateCertificate;
+  const [claiming, setClaiming] = useState(false);
+  const [claimError, setClaimError] = useState<string | null>(null);
+  const [askName, setAskName] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+
+  if (!profile.intermediateAccess && !cert) {
+    return (
+      <section className="border border-hairline bg-white px-5 py-5">
+        <h2 className="text-[18px] font-extrabold">Python Intermediate certificate</h2>
+        <p className="mt-1 text-[14px] text-muted">
+          Pass the placement quiz, or finish Beginner through Functions, to unlock this certificate.
+        </p>
+      </section>
+    );
+  }
+
+  if (cert) {
+    const url = `${window.location.origin}${certificateVerifyPath(cert.id)}`;
+    return (
+      <section className="space-y-4 border-t border-hairline pt-8">
+        <div className="flex flex-wrap items-center gap-3">
+          <p className="mr-auto flex items-center gap-2 text-[16px] font-extrabold">
+            <Award className="h-5 w-5 text-[#c98a12]" /> Intermediate · issued {new Date(cert.issuedAt).toLocaleDateString("en-IN", { dateStyle: "medium" })}
+          </p>
+          <button
+            type="button"
+            disabled={downloading}
+            onClick={async () => {
+              setDownloading(true);
+              try {
+                await downloadPdf(cert);
+              } finally {
+                setDownloading(false);
+              }
+            }}
+            className="inline-flex items-center gap-2 bg-ink px-4 py-2.5 text-[14px] font-bold text-white disabled:opacity-70"
+          >
+            {downloading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />} Download PDF
+          </button>
+          <button
+            type="button"
+            onClick={async () => {
+              await navigator.clipboard.writeText(url);
+              setCopied(true);
+              setTimeout(() => setCopied(false), 1800);
+            }}
+            className="inline-flex items-center gap-2 border border-ink px-4 py-2.5 text-[14px] font-bold"
+          >
+            {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />} {copied ? "Copied" : "Copy verify link"}
+          </button>
+        </div>
+        <CertificateArt cert={cert} />
+      </section>
+    );
+  }
+
+  const met = progress.requirements.filter((r) => r.done).length;
+  const nextStudy = progress.studied.find((s) => !s.done)?.slug;
+
+  async function claim(name: string) {
+    setClaiming(true);
+    setClaimError(null);
+    try {
+      await syncNow();
+      const c = await claimPyCertificate(name, "intermediate");
+      setAskName(false);
+      onIssued(c, "intermediate");
+      await downloadPdf(c);
+    } catch (e) {
+      setClaimError(e instanceof Error ? e.message : "Could not issue the certificate");
+    } finally {
+      setClaiming(false);
+    }
+  }
+
+  return (
+    <section className="space-y-4 border-t border-hairline pt-8">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <h2 className="text-[20px] font-extrabold">Earn your {PY_INT_CERT_COURSE} certificate</h2>
+          <p className="mt-1 max-w-[62ch] text-[14px] leading-relaxed text-muted">
+            Finish every lesson, then solve 30% of the Intermediate questions. The verify link works the same way as Beginner.
+          </p>
+        </div>
+        <p className="font-mono text-[13px] font-bold">
+          {met}/{progress.requirements.length} met
+        </p>
+      </div>
+      <div className="grid gap-3 md:grid-cols-2">
+        {progress.requirements.map((r) => (
+          <div key={r.id} className={cn("border bg-white px-5 py-4", r.done ? "border-[#2f9e6e]" : "border-hairline")}>
+            <p className="text-[15px] font-extrabold">{r.title}</p>
+            <p className="mt-0.5 text-[13px] leading-relaxed text-muted">{r.detail}</p>
+            <p className="mt-2 font-mono text-[12.5px] font-bold">
+              {Math.min(r.have, r.need)}/{r.need}
+            </p>
+            {!r.done && (
+              <Link
+                href={r.id === "practice" ? `${PY_PRACTICE_PATH}?track=intermediate` : pyLessonHref(nextStudy ?? "int-01")}
+                className="mt-2 inline-flex items-center gap-1 text-[13px] font-bold underline underline-offset-4"
+              >
+                {r.id === "practice" ? "Open Intermediate practice" : "Continue the lesson"} <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            )}
+          </div>
+        ))}
+      </div>
+      {claimError && !askName && <p className="text-[13px] text-[#b2401f]">{claimError}</p>}
+      <button
+        type="button"
+        disabled={!progress.eligible || claiming}
+        onClick={() => {
+          setClaimError(null);
+          setAskName(true);
+        }}
+        className="inline-flex items-center gap-2 bg-[#2f9e6e] px-5 py-3 text-[15px] font-bold text-white disabled:cursor-not-allowed disabled:opacity-40"
+      >
+        {claiming ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+        {progress.eligible ? "Claim Intermediate certificate" : "Claim certificate"}
+      </button>
+      {askName && (
+        <CertificateNameDialog
+          initial={profile.name}
+          busy={claiming}
+          error={claimError}
+          onCancel={() => setAskName(false)}
+          onConfirm={(name) => void claim(name)}
+        />
+      )}
+    </section>
   );
 }

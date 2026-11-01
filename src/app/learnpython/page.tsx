@@ -8,13 +8,14 @@ import {
   LEARN_PYTHON_KEYWORDS,
   LEARN_PYTHON_PATH,
   learnPythonCourseJsonLd,
+  learnPythonIntermediateJsonLd,
 } from "@/lib/learn-python";
 import { hubOpenGraph } from "@/lib/seo";
 import type { Metadata } from "next";
 
 const TITLE = "Learn Python Free — Beginner & Intermediate | Mentr";
 const DESCRIPTION =
-  "Hands-on Python Beginner (10 lessons, certificate) and job-focused Intermediate (12 lessons, placement quiz). Browser compiler, 500+ exercises, ₹0.";
+  "Free Python Beginner and Intermediate for India. Certificates you can verify, a browser compiler, and practice on real tickets — Bengaluru, Mumbai, Delhi and remote. ₹0.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -40,6 +41,7 @@ export default function LearnPythonPage() {
             { name: "Learn Python", path: LEARN_PYTHON_PATH },
           ]),
           learnPythonCourseJsonLd(DESCRIPTION),
+          learnPythonIntermediateJsonLd(),
           faqJsonLd(LEARN_PYTHON_FAQS),
         ]}
       />
