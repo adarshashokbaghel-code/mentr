@@ -2,6 +2,7 @@ import { MentrBrand } from "@/components/ui/mentr-brand";
 import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import { ProductHuntBadges } from "@/components/ui/product-hunt-badge";
 import { getFooterColumns } from "@/lib/public-nav";
+import { SEO_CITIES } from "@/lib/seo-programmatic";
 import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
@@ -68,7 +69,22 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-8 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+        <nav
+          aria-label="Tutors by city"
+          className="mt-10 flex flex-wrap gap-x-4 gap-y-2 border-t border-white/10 pt-8"
+        >
+          {SEO_CITIES.map((city) => (
+            <a
+              key={city.slug}
+              href={`/tutors/${city.slug}`}
+              className="text-sm text-white/70 transition-colors hover:text-white"
+            >
+              Tutors in {city.name}
+            </a>
+          ))}
+        </nav>
+
+        <div className="mt-8 flex flex-col gap-2 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()}{" "}
             <PaprlyWordmark variant="light" className="align-middle" />. Mentr

@@ -52,7 +52,12 @@ const jsonLd = [
     name: SITE_BRAND,
     alternateName: [SITE_NAME, "Paprly Mentr"],
     url: SITE_URL,
-    logo: absoluteUrl("/mentr-logo.png"),
+    logo: {
+      "@type": "ImageObject",
+      url: absoluteUrl("/icon.png"),
+      width: 512,
+      height: 512,
+    },
     description: SITE_DESCRIPTION,
     parentOrganization: PARENT_ORG_JSON_LD,
     address: {
