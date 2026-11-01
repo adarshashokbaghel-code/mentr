@@ -3,8 +3,8 @@ export type CompilerTemplate = { id: string; label: string; code: string; stdin?
 export const COMPILER_TEMPLATES: CompilerTemplate[] = [
   {
     id: "hello",
-    label: "Hello, world",
-    code: '# Write Python here and press Run (Ctrl/⌘ + Enter)\nprint("Hello, world!")\nprint("2 + 3 =", 2 + 3)\n',
+    label: "Visualize",
+    code: 'print("Mentr Python compiler — visualize this code")\ntopic = "visualize"\nsteps = ["write", "run", "learn"]\nprint(topic, steps)\n',
   },
   {
     id: "input",

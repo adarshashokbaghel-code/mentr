@@ -1,5 +1,6 @@
 export type PracticeKind = "tf" | "mcq" | "code";
 export type PracticeLevel = "easy" | "medium" | "hard";
+export type PracticeCourse = "beginner" | "intermediate";
 
 export type PracticeTest = {
   label: string;
@@ -10,6 +11,7 @@ export type PracticeTest = {
 export type PracticeItem = {
   id: string;
   lesson: number;
+  course: PracticeCourse;
   unit: string;
   level: PracticeLevel;
   kind: PracticeKind;
@@ -40,7 +42,7 @@ const UNIT: Record<number, string> = Object.fromEntries(
   PRACTICE_UNITS.map((u) => [u.lesson, `Lesson ${String(u.lesson).padStart(2, "0")} · ${u.title}`]),
 );
 
-type Draft = Omit<PracticeItem, "id" | "unit">;
+type Draft = Omit<PracticeItem, "id" | "unit" | "course">;
 
 let seq = 0;
 
@@ -50,6 +52,7 @@ function add(draft: Draft): PracticeItem {
     id: `py${String(seq).padStart(3, "0")}`,
     unit: UNIT[draft.lesson],
     ...draft,
+    course: "beginner",
   };
 }
 

@@ -26,6 +26,7 @@ import {
   type PyProjectProgress,
 } from "../../src/lib/python-lms/project-progress";
 import { getPyProject } from "../../src/lib/python-lms/projects";
+import { INTERMEDIATE_PRACTICE_BANK } from "../../src/lib/python-lms/intermediate-practice";
 import { PY_XP, awardKind, bankAwardKey, loginAwardKey, projectAwardKey, videoAwardKey } from "../../src/lib/python-lms/rules";
 import { User, type ILearnPython, type ILearnPythonCounts } from "../models/User";
 
@@ -59,7 +60,7 @@ function awardCatalog(): Map<string, number> {
   if (catalog) return catalog;
   const map = new Map<string, number>();
   bankLevels = new Map();
-  for (const item of PRACTICE_BANK) {
+  for (const item of [...PRACTICE_BANK, ...INTERMEDIATE_PRACTICE_BANK]) {
     map.set(bankAwardKey(item.id), PY_XP.practice[item.level]);
     bankLevels.set(bankAwardKey(item.id), item.level);
   }

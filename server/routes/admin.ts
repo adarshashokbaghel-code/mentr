@@ -39,6 +39,7 @@ import {
   getAdminLearnPython,
   getAdminLearnPythonDetail,
 } from "../services/admin-learn-python";
+import { getPythonCompilerStats } from "../services/python-compiler-stats";
 import {
   getAdminFeaturedState,
   searchFacultyForFeatured,
@@ -405,6 +406,15 @@ router.get("/learnpython/user/:userId", async (req, res) => {
     res.status(status).json({
       error: err instanceof Error ? err.message : "Failed to load detail",
     });
+  }
+});
+
+router.get("/python-compiler", async (_req, res) => {
+  try {
+    res.json(await getPythonCompilerStats());
+  } catch (err) {
+    console.error("Admin python compiler error:", err);
+    res.status(500).json({ error: "Failed to load Python compiler stats" });
   }
 });
 

@@ -181,6 +181,7 @@ function MobileNav({
     pathname === PY_LMS_INTERMEDIATE ||
     pathname === PY_LMS_PATH_TEST;
   const onFinal = pathname === PY_FINAL_PATH || pathname.startsWith(`${PY_FINAL_PATH}/`);
+  const practiceHref = isIntermediateLmsPath(pathname) ? `${PY_PRACTICE_PATH}?track=intermediate` : PY_PRACTICE_PATH;
   const item = "flex min-h-11 min-w-0 touch-manipulation flex-col items-center justify-center gap-0.5 px-0.5 py-1.5 text-[10px] font-semibold leading-none";
   return (
     <nav
@@ -195,7 +196,7 @@ function MobileNav({
         <List className="h-4 w-4" />
         Lessons
       </button>
-      <Link href={PY_PRACTICE_PATH} className={cn(item, pathname === PY_PRACTICE_PATH ? "text-ink" : "text-muted")}>
+      <Link href={practiceHref} className={cn(item, pathname === PY_PRACTICE_PATH ? "text-ink" : "text-muted")}>
         <ListChecks className="h-4 w-4" />
         Practice
       </Link>
@@ -377,7 +378,7 @@ function Sidebar({
         </ol>
 
         <Link
-          href={PY_PRACTICE_PATH}
+          href={intermediateView ? `${PY_PRACTICE_PATH}?track=intermediate` : PY_PRACTICE_PATH}
           onClick={onNavigate}
           aria-current={pathname === PY_PRACTICE_PATH ? "page" : undefined}
           className={cn(

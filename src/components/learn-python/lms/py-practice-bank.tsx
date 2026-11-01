@@ -2,6 +2,7 @@
 
 import { CodeView, PyEditor, RunButton } from "@/components/learn-python/lms/py-lms-ui";
 import { usePyLms } from "@/components/learn-python/lms/py-lms-provider";
+import { INTERMEDIATE_PRACTICE_BANK, INTERMEDIATE_PRACTICE_UNITS } from "@/lib/python-lms/intermediate-practice";
 import {
   PRACTICE_BANK,
   PRACTICE_UNITS,
@@ -55,9 +56,12 @@ function preview(prompt: string) {
   return line.replace(/\s+/g, " ").trim();
 }
 
-export function PyPracticeBank() {
+type PracticeTrack = "beginner" | "intermediate" | "all";
+
+export function PyPracticeBank({ initialTrack = "beginner" }: { initialTrack?: PracticeTrack }) {
   const { award, hasAward } = usePyLms();
   const [query, setQuery] = useState("");
+  const [track, setTrack] = useState<PracticeTrack>(initialTrack);
   const [lesson, setLesson] = useState<number | "all">("all");
   const [level, setLevel] = useState<PracticeLevel | "all">("all");
   const [kind, setKind] = useState<PracticeKind | "all">("all");
@@ -71,18 +75,23 @@ export function PyPracticeBank() {
   const [markLine, setMarkLine] = useState<number | undefined>();
   const [summary, setSummary] = useState(false);
 
-  const solved = PRACTICE_BANK.filter((item) => hasAward(awardKey(item.id))).length;
+  const bank =
+    track === "intermediate" ? INTERMEDIATE_PRACTICE_BANK : track === "beginner" ? PRACTICE_BANK : [...PRACTICE_BANK, ...INTERMEDIATE_PRACTICE_BANK];
+  const units = track === "intermediate" ? INTERMEDIATE_PRACTICE_UNITS : PRACTICE_UNITS;
+  const solved = bank.filter((item) => hasAward(awardKey(item.id))).length;
   const q = round?.[index];
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return PRACTICE_BANK.filter((item) => {
-      if (lesson !== "all" && item.lesson !== lesson) return false;
+    const source =
+      track === "intermediate" ? INTERMEDIATE_PRACTICE_BANK : track === "beginner" ? PRACTICE_BANK : [...PRACTICE_BANK, ...INTERMEDIATE_PRACTICE_BANK];
+    return source.filter((item) => {
+      if (track !== "all" && lesson !== "all" && item.lesson !== lesson) return false;
       if (level !== "all" && item.level !== level) return false;
       if (kind !== "all" && item.kind !== kind) return false;
       if (!needle) return true;
       return `${item.prompt} ${item.unit} ${item.explain}`.toLowerCase().includes(needle);
     });
-  }, [query, lesson, level, kind]);
+  }, [query, lesson, level, kind, track]);
 
   useEffect(() => {
     void preloadPython().catch(() => undefined);
@@ -181,7 +190,7 @@ export function PyPracticeBank() {
       <div className="w-full px-4 pb-16 pt-6 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
           <h1 className="text-[28px] font-extrabold leading-tight tracking-tight">Practice</h1>
-          <p className="font-mono text-[13px] text-muted">{solved} / 500 correct</p>
+          <p className="font-mono text-[13px] text-muted">{solved} / {bank.length} correct</p>
         </div>
         <p className="mt-1 text-[13.5px] text-muted">
           Easy <strong className="text-ink">+{PY_XP.practice.easy} XP</strong> · Medium <strong className="text-ink">+{PY_XP.practice.medium} XP</strong> · Hard{" "}
@@ -199,15 +208,39 @@ export function PyPracticeBank() {
                 className="h-11 w-full border border-hairline bg-white pl-9 pr-3 text-[14px] outline-none focus:border-ink"
               />
             </label>
+            <div className="flex shrink-0 border border-hairline bg-white" role="group" aria-label="Question set">
+              {(
+                [
+                  ["beginner", "Beginner"],
+                  ["intermediate", "Intermediate"],
+                  ["all", "All"],
+                ] as const
+              ).map(([id, label]) => (
+                <button
+                  key={id}
+                  type="button"
+                  aria-pressed={track === id}
+                  onClick={() => {
+                    setTrack(id);
+                    setLesson("all");
+                  }}
+                  className={cn("h-11 px-3 text-[13px] font-bold", track === id ? "bg-ink text-white" : "text-muted hover:text-ink")}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
             <div className="grid grid-cols-3 gap-2 lg:flex lg:shrink-0">
-              <FilterSelect className="lg:w-[260px]" label="Lesson" value={lesson === "all" ? "all" : String(lesson)} onChange={(value) => setLesson(value === "all" ? "all" : Number(value))}>
-                <option value="all">All lessons</option>
-                {PRACTICE_UNITS.map((unit) => (
-                  <option key={unit.lesson} value={unit.lesson}>
-                    {String(unit.lesson).padStart(2, "0")} {unit.title}
-                  </option>
-                ))}
-              </FilterSelect>
+              {track !== "all" ? (
+                <FilterSelect className="lg:w-[260px]" label="Lesson" value={lesson === "all" ? "all" : String(lesson)} onChange={(value) => setLesson(value === "all" ? "all" : Number(value))}>
+                  <option value="all">All lessons</option>
+                  {units.map((unit) => (
+                    <option key={unit.lesson} value={unit.lesson}>
+                      {String(unit.lesson).padStart(2, "0")} {unit.title}
+                    </option>
+                  ))}
+                </FilterSelect>
+              ) : null}
               <FilterSelect label="Level" value={level} onChange={(value) => setLevel(value as PracticeLevel | "all")}>
                 <option value="all">All levels</option>
                 <option value="easy">Easy</option>

@@ -59,7 +59,7 @@ function Section({ id, kicker, title, children }: { id: string; kicker: string; 
 
 function Code({ title, children }: { title: string; children: string }) {
   return (
-    <figure className="overflow-hidden border border-[#2a332d] bg-[#0f1411]">
+    <figure className="overflow-hidden border border-[#2a3848] bg-[#0f1411]">
       <figcaption className="flex items-center gap-2 border-b border-white/10 px-4 py-2 font-mono text-[11px] text-white/45">
         <FileCode2 className="h-3.5 w-3.5" /> {title}
       </figcaption>
@@ -73,7 +73,7 @@ function Note({ children, tone = "info" }: { children: ReactNode; tone?: "info" 
     <div
       className={cn(
         "border-l-4 px-4 py-3 text-[15px] leading-relaxed",
-        tone === "warn" ? "border-[#e0a83a] bg-[#fff7e6] text-[#5c4300]" : "border-[#2f9e6e] bg-[#eef8f2] text-[#1d4a35]",
+        tone === "warn" ? "border-[#e0a83a] bg-[#fff7e6] text-[#5c4300]" : "border-[#3d84c6] bg-[#e7f1fb] text-[#1e4f7a]",
       )}
     >
       {children}
@@ -83,8 +83,8 @@ function Note({ children, tone = "info" }: { children: ReactNode; tone?: "info" 
 
 function Box({ icon: Icon, title, sub, dark, className }: { icon: typeof Cpu; title: string; sub?: string; dark?: boolean; className?: string }) {
   return (
-    <div className={cn("flex items-start gap-3 border px-4 py-3", dark ? "border-[#2a332d] bg-[#0f1612] text-white" : "border-hairline bg-white", className)}>
-      <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", dark ? "text-[#5ee0a0]" : "text-[#2f9e6e]")} />
+    <div className={cn("flex items-start gap-3 border px-4 py-3", dark ? "border-[#2a3848] bg-[#15202c] text-white" : "border-hairline bg-white", className)}>
+      <Icon className={cn("mt-0.5 h-5 w-5 shrink-0", dark ? "text-[#7eb6ea]" : "text-[#3d84c6]")} />
       <div className="min-w-0">
         <p className="text-[14.5px] font-bold leading-snug">{title}</p>
         {sub && <p className={cn("mt-0.5 text-[13px] leading-snug", dark ? "text-white/60" : "text-muted")}>{sub}</p>}
@@ -230,11 +230,11 @@ export function CompilerArchitectureArticle() {
                   <Box icon={Cpu} title="PythonEngine" sub="one per tab: start, run, stop, timeouts" />
                 </div>
                 <div className="flex flex-row items-center justify-center gap-2 py-1 md:flex-col">
-                  <ArrowLeftRight className="h-6 w-6 rotate-90 text-[#2f9e6e] md:rotate-0" />
+                  <ArrowLeftRight className="h-6 w-6 rotate-90 text-[#3d84c6] md:rotate-0" />
                   <p className="max-w-[120px] text-center font-mono text-[10.5px] leading-tight text-muted">postMessage + SharedArrayBuffer</p>
                 </div>
-                <div className="space-y-2 border border-[#2a332d] bg-[#0f1612] p-3 text-white">
-                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#5ee0a0]">Web Worker · background thread</p>
+                <div className="space-y-2 border border-[#2a3848] bg-[#15202c] p-3 text-white">
+                  <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#7eb6ea]">Web Worker · background thread</p>
                   <Box dark icon={Zap} title="Pyodide" sub="CPython 3.14.2 compiled to WebAssembly" />
                   <Box dark icon={HardDrive} title="Python standard library" sub="python_stdlib.zip, in-memory files" />
                   <Box dark icon={Keyboard} title="stdin / stdout / stderr" sub="wired to the page" />
@@ -306,7 +306,7 @@ removeOlderVersions();`}</Code>
             <div className="flex flex-wrap items-center gap-2 font-mono text-[12.5px]">
               {["idle", "loading", "ready", "running", "ready"].map((s, i, a) => (
                 <span key={i} className="flex items-center gap-2">
-                  <span className={cn("border px-2.5 py-1", s === "running" ? "border-[#2f9e6e] bg-[#eef8f2]" : "border-hairline bg-white")}>{s}</span>
+                  <span className={cn("border px-2.5 py-1", s === "running" ? "border-[#3d84c6] bg-[#e7f1fb]" : "border-hairline bg-white")}>{s}</span>
                   {i < a.length - 1 && <ArrowRight className="h-3.5 w-3.5 text-muted" />}
                 </span>
               ))}
@@ -358,8 +358,8 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
               The answer: the worker <b>does</b> block, on purpose, using a shared piece of memory that both threads can see.
             </p>
             <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
-              <div className="border border-[#2a332d] bg-[#0f1612] p-4 text-white">
-                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#5ee0a0]">Worker (Python)</p>
+              <div className="border border-[#2a3848] bg-[#15202c] p-4 text-white">
+                <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-[#7eb6ea]">Worker (Python)</p>
                 <ol className="mt-2 list-decimal space-y-1 pl-5 text-[13.5px] text-white/80">
                   <li>Python calls input() and wants bytes</li>
                   <li>Sets the flag to 0, posts &ldquo;input-request&rdquo;</li>
@@ -370,7 +370,7 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
                 </ol>
               </div>
               <div className="flex flex-col items-center gap-1 text-center font-mono text-[10.5px] text-muted">
-                <ArrowLeftRight className="h-6 w-6 text-[#2f9e6e]" />
+                <ArrowLeftRight className="h-6 w-6 text-[#3d84c6]" />
                 SharedArrayBuffer
               </div>
               <div className="border border-hairline bg-white p-4">
@@ -397,7 +397,7 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
                 <br />
                 <span className="text-muted">byte length · −1 = end</span>
               </div>
-              <div className="min-w-[220px] flex-1 border border-l-0 border-ink/30 bg-[#eef8f2] px-3 py-2">
+              <div className="min-w-[220px] flex-1 border border-l-0 border-ink/30 bg-[#e7f1fb] px-3 py-2">
                 bytes 8 … 65,543
                 <br />
                 <span className="text-muted">the typed line, UTF-8 (64 KB max)</span>
@@ -502,13 +502,13 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
             </p>
             <div className="grid gap-6 md:grid-cols-[1.4fr_1fr]">
               <figure>
-                <div className="border border-[#2a332d] bg-[#0f1612] p-2">
+                <div className="border border-[#2a3848] bg-[#15202c] p-2">
                   <div className="flex items-center gap-2 border-b border-white/10 px-2 pb-2 text-[10px] text-white/50">
-                    <span className="h-3 w-3 bg-[#2f9e6e]" /> Online Python compiler
-                    <span className="ml-auto bg-[#2f9e6e] px-2 py-0.5 font-bold text-white">▶ Run</span>
+                    <span className="h-3 w-3 bg-[#3d84c6]" /> Online Python compiler
+                    <span className="ml-auto bg-[#3d84c6] px-2 py-0.5 font-bold text-white">▶ Run</span>
                   </div>
                   <div className="flex h-[170px]">
-                    <div className="w-[55%] space-y-1 bg-[#141b16] p-2 font-mono text-[9px] text-white/60">
+                    <div className="w-[55%] space-y-1 bg-[#1c2836] p-2 font-mono text-[9px] text-white/60">
                       <p>
                         <span className="text-[#a9c7ff]">print</span>(<span className="text-[#9be3b8]">&quot;Hi&quot;</span>)
                       </p>
@@ -517,7 +517,7 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
                       </p>
                       <p className="pl-3">print(i)</p>
                     </div>
-                    <div className="w-[5px] bg-[#5ee0a0]/50" />
+                    <div className="w-[5px] bg-[#7eb6ea]/50" />
                     <div className="flex-1 bg-[#0b100d] p-2 font-mono text-[9px] text-white/70">
                       Hi
                       <br />0<br />1<br />2
@@ -529,20 +529,20 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
                 </figcaption>
               </figure>
               <figure className="flex flex-col items-center">
-                <div className="w-[170px] border-[6px] border-[#1d1d1d] bg-[#0f1612] rounded-[22px] p-1.5">
+                <div className="w-[170px] border-[6px] border-[#1d1d1d] bg-[#15202c] rounded-[22px] p-1.5">
                   <div className="grid grid-cols-3 border-b border-white/10 text-center text-[8.5px] font-bold text-white/50">
-                    <span className="border-b-2 border-[#5ee0a0] py-1 text-white">Code</span>
+                    <span className="border-b-2 border-[#7eb6ea] py-1 text-white">Code</span>
                     <span className="py-1">Input</span>
                     <span className="py-1">Output</span>
                   </div>
-                  <div className="h-[150px] space-y-1 bg-[#141b16] p-2 font-mono text-[8.5px] text-white/60">
+                  <div className="h-[150px] space-y-1 bg-[#1c2836] p-2 font-mono text-[8.5px] text-white/60">
                     <p>
                       <span className="text-[#a9c7ff]">print</span>(<span className="text-[#9be3b8]">&quot;Hi&quot;</span>)
                     </p>
                   </div>
-                  <div className="flex items-center justify-between bg-[#141b16] px-1.5 py-1.5 text-[8px] text-white/45">
+                  <div className="flex items-center justify-between bg-[#1c2836] px-1.5 py-1.5 text-[8px] text-white/45">
                     Runs on your device
-                    <span className="bg-[#2f9e6e] px-1.5 py-0.5 font-bold text-white">▶ Run</span>
+                    <span className="bg-[#3d84c6] px-1.5 py-0.5 font-bold text-white">▶ Run</span>
                   </div>
                 </div>
                 <figcaption className="mt-2 flex items-center gap-1.5 text-[13px] text-muted">
@@ -573,10 +573,6 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
               <li>
                 Code and input are <b>autosaved to the browser&apos;s localStorage</b> 300 ms after you stop typing. Reload and it&apos;s still
                 there. Nothing is uploaded.
-              </li>
-              <li>
-                <b>Examples menu</b> loads ready programs (hello world, input(), loops, if/elif, lists and functions, random dice, star
-                pattern).
               </li>
               <li>
                 <b>Open a .py file</b> (up to 200 KB), <b>Download main.py</b>, and <b>Copy</b>: everything happens locally.
@@ -642,13 +638,13 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
             </div>
           </Section>
 
-          <section className="border border-[#1f2a23] bg-[#0f1612] px-6 py-8 text-white sm:px-8">
+          <section className="border border-[#243044] bg-[#15202c] px-6 py-8 text-white sm:px-8">
             <h2 className="text-[24px] font-extrabold leading-tight sm:text-[28px]">Try it yourself</h2>
             <p className="mt-2 max-w-[56ch] text-[15px] leading-relaxed text-white/70">
               Free, no sign-up. Open it on your phone and on your laptop. It&apos;s the same compiler.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
-              <Link href={COMPILER} className="inline-flex items-center gap-2 bg-[#2f9e6e] px-5 py-3 text-[15px] font-bold transition hover:bg-[#278a5f]">
+              <Link href={COMPILER} className="inline-flex items-center gap-2 bg-[#3d84c6] px-5 py-3 text-[15px] font-bold transition hover:bg-[#2f6fad]">
                 Open the Python compiler <ArrowRight className="h-4 w-4" />
               </Link>
               <Link href="/learnpython" className="inline-flex items-center gap-2 border border-white/30 px-5 py-3 text-[15px] font-bold transition hover:border-white">

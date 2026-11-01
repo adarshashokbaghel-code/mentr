@@ -57,6 +57,9 @@ export type PyProfile = {
   certificate: PyCertificate | null;
   certificateUnlocked: boolean;
   progress: CertProgress;
+  intermediateCertificate: PyCertificate | null;
+  intermediateProgress: CertProgress;
+  intermediateAccess: boolean;
 };
 
 export type PyLeaderboardRow = {
@@ -69,6 +72,8 @@ export type PyLeaderboardRow = {
   band: string;
   streakDays: number;
   lessonsStudied: number;
+  beginnerLessons: number;
+  intermediateLessons: number;
   projectsCompleted: number;
   certified: boolean;
   isMe: boolean;
@@ -98,8 +103,8 @@ export function syncPyProgress(payload: PySyncPayload, opts?: { keepalive?: bool
 
 export const fetchPyProfile = () => request<PyProfile>("/profile");
 export const fetchPyLeaderboard = () => request<PyLeaderboard>("/leaderboard");
-export const claimPyCertificate = (name: string) =>
-  request<PyCertificate>("/certificate", { method: "POST", body: JSON.stringify({ name }) });
+export const claimPyCertificate = (name: string, course: "beginner" | "intermediate" = "beginner") =>
+  request<PyCertificate>("/certificate", { method: "POST", body: JSON.stringify({ name, course }) });
 export const verifyPyCertificate = (id: string) => request<PyCertificate>(`/certificate/${encodeURIComponent(id)}`);
 
 export type PyPlacementPublicQuestion = {

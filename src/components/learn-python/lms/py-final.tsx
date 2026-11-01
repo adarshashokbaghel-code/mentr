@@ -11,6 +11,7 @@ import { PY_XP } from "@/lib/python-lms/rules";
 import { COMPILER_TIMEOUT_MS } from "@/lib/python/config";
 import { getPythonEngine, supportsInteractiveInput, type OutputChunk, type RunResult } from "@/lib/python/engine";
 import { preloadPython, runPython } from "@/lib/python-runner";
+import { trackPythonRun } from "@/lib/python-compiler-track";
 import { cn } from "@/lib/utils";
 import {
   ArrowLeft,
@@ -296,13 +297,14 @@ function Workspace({ project }: { project: PyProject }) {
     setRunResult(null);
     setAwaitingInput(false);
     setMarkLine(undefined);
+    let checksPassed: boolean | undefined;
     if (!p?.completedAt) {
       setJudging(true);
       setChunks([{ stream: "stdout", text: "Checking your program…\n" }]);
-      const ok = await programPasses(code);
+      checksPassed = await programPasses(code);
       setJudging(false);
       setChunks([]);
-      if (ok) {
+      if (checksPassed) {
         completeProject(project.id, code);
         setCelebrate(true);
       }
@@ -319,6 +321,18 @@ function Workspace({ project }: { project: PyProject }) {
     setRunning(false);
     setRunResult(r);
     setMarkLine(r.error?.line);
+    trackPythonRun({
+      surface: "project",
+      projectId: project.id,
+      ok: r.ok,
+      status: r.status,
+      passed: checksPassed,
+      errorType: r.error?.type,
+      errorMessage: r.error?.message,
+      line: r.error?.line,
+      durationMs: r.durationMs,
+      chars: code.length,
+    });
   }
 
   function submitInput(line: string | null) {

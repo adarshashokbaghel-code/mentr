@@ -9,7 +9,7 @@ export function OpenPythonCompiler() {
   return (
     <PyCompilerProvider userId="open">
       <div id="compiler" className="h-dvh max-h-dvh overflow-hidden">
-        <PyCompiler homeHref={LEARN_PYTHON_PATH} homeLabel="Learn Python free on Mentr" aboutHref="#about" />
+        <PyCompiler surface="open" homeHref={LEARN_PYTHON_PATH} homeLabel="Learn Python free on Mentr" aboutHref="#about" />
       </div>
     </PyCompilerProvider>
   );

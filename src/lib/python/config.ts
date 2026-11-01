@@ -5,7 +5,7 @@
 export const PYODIDE_VERSION = "314.0.7";
 
 /** Bump when public/py-worker.js changes so browsers drop the cached copy. */
-export const WORKER_REVISION = 3;
+export const WORKER_REVISION = 4;
 
 /** Same-origin copy, served by Vercel's CDN with immutable caching. */
 export const SELF_HOSTED_INDEX_URL = `/pyodide/v${PYODIDE_VERSION}/`;

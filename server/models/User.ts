@@ -225,7 +225,9 @@ export interface ILearnPython {
   projects: Record<string, unknown>;
   projectsCompleted: number;
   certificate?: ILearnPythonCertificate;
-  /** Set by Mentr staff to allow a claim without meeting the progress rules. */
+  /** Python Intermediate certificate. Separate id, same public verify page. */
+  intermediateCertificate?: ILearnPythonCertificate;
+  /** Set by Mentr staff to allow a Beginner claim without meeting the progress rules. */
   certificateUnlocked?: boolean;
   counts: ILearnPythonCounts;
 }
@@ -556,6 +558,7 @@ const learnPythonSchema = new Schema<ILearnPython>(
     projects: { type: Schema.Types.Mixed, default: () => ({}) },
     projectsCompleted: { type: Number, default: 0, min: 0 },
     certificate: { type: learnPythonCertificateSchema, required: false },
+    intermediateCertificate: { type: learnPythonCertificateSchema, required: false },
     certificateUnlocked: { type: Boolean, required: false },
     counts: { type: learnPythonCountsSchema, default: () => ({}) },
   },
@@ -678,6 +681,7 @@ userSchema.index({ "learn.starter.track": 1 }, { sparse: true });
 userSchema.index({ "learnPython.lastVisitAt": -1 }, { sparse: true });
 userSchema.index({ "learnPython.xp": -1 }, { sparse: true });
 userSchema.index({ "learnPython.certificate.id": 1 }, { unique: true, sparse: true });
+userSchema.index({ "learnPython.intermediateCertificate.id": 1 }, { unique: true, sparse: true });
 userSchema.index(
   { "learn.starter.status": 1, "learn.starter.progress.xp": -1 },
   { sparse: true },

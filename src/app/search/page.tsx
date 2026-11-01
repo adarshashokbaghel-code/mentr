@@ -118,7 +118,11 @@ function SearchContent() {
     searchParams?.get("view") === "map" ? "map" : "list";
   const tierParam = searchParams?.get("tier");
   const initialTier =
-    tierParam === "regular" ? "regular" : "premium";
+    tierParam === "regular" ? "regular" : tierParam === "all" ? "all" : "premium";
+  const matchAny =
+    searchParams?.get("match") === "any" &&
+    Boolean(initialSubject) &&
+    Boolean(initialQuery.trim());
 
   const [filters, setFilters] = useState<SearchFiltersState>({
     ...DEFAULT_FILTERS,
@@ -174,6 +178,10 @@ function SearchContent() {
         language: filters.language,
         minExp: filters.minExp,
         query: filters.query,
+        matchAny:
+          matchAny &&
+          filters.subject === initialSubject &&
+          filters.query.trim().toLowerCase() === initialQuery.trim().toLowerCase(),
         sort: userLocation
           ? filters.sort === "relevance"
             ? "distance"
@@ -186,7 +194,7 @@ function SearchContent() {
             ? filters.radiusKm
             : undefined,
       }),
-    [filters, userLocation, catalogTeachers],
+    [filters, userLocation, catalogTeachers, matchAny, initialSubject, initialQuery],
   );
 
   const mapSelectedId =

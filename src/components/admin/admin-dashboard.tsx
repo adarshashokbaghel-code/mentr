@@ -11,6 +11,7 @@ import { AdminEngagementTables } from "@/components/admin/admin-engagement-table
 import { AdminInteractions } from "@/components/admin/admin-interactions";
 import { AdminLearnTrack } from "@/components/admin/admin-learn";
 import { AdminLearnPython } from "@/components/admin/admin-learn-python";
+import { AdminPythonCompiler } from "@/components/admin/admin-python-compiler";
 import { AdminMarketing } from "@/components/admin/admin-marketing";
 import { AdminMessenger } from "@/components/admin/admin-messenger";
 import { AdminDemoRequestsTable } from "@/components/admin/admin-demo-requests-table";
@@ -43,6 +44,7 @@ import {
   Star,
   Target,
   Ticket,
+  Terminal,
   Users,
 } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
@@ -88,7 +90,8 @@ const LEARN_TRACKS = [
 type SectionId =
   | (typeof NAV)[number]["id"]
   | (typeof LEARN_TRACKS)[number]["id"]
-  | "learn-python";
+  | "learn-python"
+  | "python-compiler";
 
 function formatTime(iso: string) {
   return new Date(iso).toLocaleString("en-IN", {
@@ -106,6 +109,7 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
   const [section, setSection] = useState<SectionId>("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [learnOpen, setLearnOpen] = useState(true);
+  const [compilerOpen, setCompilerOpen] = useState(true);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -132,13 +136,16 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
 
   const learnActive =
     section === "learn-python" || LEARN_TRACKS.some((t) => t.id === section);
+  const compilerActive = section === "python-compiler";
   const activeLearnTrack = LEARN_TRACKS.find((t) => t.id === section);
   const headerLabel =
     section === "learn-python"
       ? "Learn Python"
-      : learnActive
-        ? (activeLearnTrack?.label ?? "Learn")
-        : section;
+      : section === "python-compiler"
+        ? "Python compiler"
+        : learnActive
+          ? (activeLearnTrack?.label ?? "Learn")
+          : section;
 
   return (
     <div className="flex min-h-screen bg-cream">
@@ -228,6 +235,44 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
               </div>
             ) : null}
           </div>
+
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => setCompilerOpen((o) => !o)}
+              className={cn(
+                "flex min-h-10 w-full items-center gap-2.5 rounded-lg px-3 text-left text-sm font-medium touch-manipulation transition",
+                compilerActive
+                  ? "bg-white/10 text-butter"
+                  : "text-white/70 hover:bg-white/5 hover:text-white",
+              )}
+            >
+              <Terminal className="h-4 w-4 shrink-0" />
+              <span className="flex-1">Compiler</span>
+              <ChevronDown
+                className={cn(
+                  "h-3.5 w-3.5 shrink-0 opacity-70 transition",
+                  compilerOpen && "rotate-180",
+                )}
+              />
+            </button>
+            {compilerOpen ? (
+              <div className="ml-4 mt-0.5 space-y-0.5 border-l border-white/10 pl-2">
+                <button
+                  type="button"
+                  onClick={() => pick("python-compiler")}
+                  className={cn(
+                    "flex min-h-9 w-full items-center gap-2 rounded-lg px-2.5 text-left text-[13px] font-medium touch-manipulation transition",
+                    section === "python-compiler"
+                      ? "bg-white/10 text-butter"
+                      : "text-white/60 hover:bg-white/5 hover:text-white",
+                  )}
+                >
+                  <span className="flex-1 truncate">Python compiler</span>
+                </button>
+              </div>
+            ) : null}
+          </div>
         </nav>
 
         <div className="border-t border-white/10 p-3">
@@ -282,13 +327,13 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
             section === "messenger" ? "overflow-hidden p-0" : "p-4 sm:p-5 lg:p-6",
           )}
         >
-          {error && section !== "messenger" && !learnActive && (
+          {error && section !== "messenger" && !learnActive && !compilerActive && (
             <div className="mb-4 rounded-xl border-2 border-ink bg-butter/50 px-4 py-3 text-sm text-ink">
               {error}
             </div>
           )}
 
-          {loading && !stats && !learnActive && (
+          {loading && !stats && !learnActive && !compilerActive && (
             <p className="text-sm text-muted">Loading analytics…</p>
           )}
 
@@ -568,6 +613,7 @@ export function AdminDashboard({ adminKey }: { adminKey: string }) {
           ) : null}
 
           {section === "learn-python" ? <AdminLearnPython adminKey={adminKey} /> : null}
+          {section === "python-compiler" ? <AdminPythonCompiler adminKey={adminKey} /> : null}
         </main>
       </div>
     </div>

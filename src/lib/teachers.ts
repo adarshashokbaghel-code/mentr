@@ -393,6 +393,8 @@ export function searchTeachers(opts: {
   /** Minimum years of experience */
   minExp?: number;
   query?: string;
+  /** Subject and query match either one, instead of both. */
+  matchAny?: boolean;
   sort?: SearchSort;
   /** User latitude for distance match */
   nearLat?: number;
@@ -407,7 +409,26 @@ export function searchTeachers(opts: {
     ...(opts.teachers ?? []),
   ];
 
-  if (opts.subject) {
+  const queryText = opts.query?.trim().toLowerCase() ?? "";
+  const subjectText = opts.subject?.toLowerCase();
+  if (opts.matchAny && (subjectText || queryText)) {
+    list = list.filter((t) => {
+      const subjectHit = Boolean(
+        subjectText && t.subjects.some((s) => s.toLowerCase() === subjectText),
+      );
+      const queryHit = Boolean(
+        queryText &&
+          (t.name.toLowerCase().includes(queryText) ||
+            t.subjectLine.toLowerCase().includes(queryText) ||
+            t.subjects.some((s) => s.toLowerCase().includes(queryText)) ||
+            t.area.toLowerCase().includes(queryText) ||
+            t.locality.toLowerCase().includes(queryText) ||
+            t.levels.toLowerCase().includes(queryText) ||
+            (t.languages || []).some((l) => l.toLowerCase().includes(queryText))),
+      );
+      return subjectHit || queryHit;
+    });
+  } else if (opts.subject) {
     list = list.filter((t) =>
       t.subjects.some((s) => s.toLowerCase() === opts.subject!.toLowerCase()),
     );
@@ -417,7 +438,7 @@ export function searchTeachers(opts: {
       (t) => t.locality.toLowerCase() === opts.locality!.toLowerCase(),
     );
   }
-  if (opts.query?.trim()) {
+  if (!opts.matchAny && opts.query?.trim()) {
     const q = opts.query.trim().toLowerCase();
     list = list.filter(
       (t) =>

@@ -1,3 +1,5 @@
+import type { TutorResult } from "@/lib/python/trace";
+
 /** Message contract with public/py-worker.js. */
 
 export type OutputStream = "stdout" | "stderr" | "stdin";
@@ -23,7 +25,8 @@ export type ToWorker =
       maxOutput: number;
       /** When set, input() blocks and asks the page for each line (see INPUT_* layout). */
       inputBuffer?: SharedArrayBuffer;
-    };
+    }
+  | { type: "trace"; id: number; code: string; stdin: string };
 
 /**
  * Shared input buffer layout: Int32 [0] = flag (0 waiting, 1 answered), Int32 [1] = byte length (-1 = end of input),
@@ -42,4 +45,6 @@ export type FromWorker =
   | { type: "started"; id: number }
   | { type: "input-request"; id: number }
   | { type: "output"; id: number; stream: OutputStream; text: string }
-  | { type: "done"; id: number; ok: boolean; error: WorkerError | null; durationMs: number; truncated: boolean };
+  | { type: "done"; id: number; ok: boolean; error: WorkerError | null; durationMs: number; truncated: boolean }
+  | { type: "trace"; id: number; ok: true; data: TutorResult }
+  | { type: "trace"; id: number; ok: false; error: string };

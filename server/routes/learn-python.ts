@@ -88,7 +88,8 @@ router.get("/leaderboard", async (req: AuthenticatedRequest, res) => {
 
 router.post("/certificate", async (req: AuthenticatedRequest, res) => {
   try {
-    res.json(await claimLearnPythonCertificate(req.auth!.sub, (req.body as { name?: unknown } | undefined)?.name));
+    const body = (req.body ?? {}) as { name?: unknown; course?: unknown };
+    res.json(await claimLearnPythonCertificate(req.auth!.sub, body.name, body.course));
   } catch (err) {
     fail(res, err, "Failed to issue certificate");
   }
