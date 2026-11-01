@@ -34,6 +34,7 @@ const sections = [
     body: [
       "One person, one verified email. An email used for a parent account cannot be reused for a faculty account, and vice versa.",
       "You must provide accurate information. You are responsible for activity under your account.",
+      "You can delete your account from the bottom of your dashboard by typing delete. Deletion removes the profile and signs you out. It does not by itself refund a Premium payment.",
       "At signup you must accept these Terms and the Privacy policy via the on-screen checkbox. Login does not re-ask that checkbox; continued use remains subject to the current Terms.",
     ],
   },

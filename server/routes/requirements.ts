@@ -665,6 +665,9 @@ router.get("/board", async (req: AuthenticatedRequest, res: Response) => {
     // Closed/expired posts stay on the board (filterable client-side) so
     // tutors keep the context of pitches they already sent.
     const requirements = (await Requirement.find({})
+      .select(
+        "parent subject classLevel city area modes budgetMin budgetMax details startTimeline board goal classesPerWeek preferredTime status expiresAt interestCount createdAt",
+      )
       .sort({ createdAt: -1 })
       .limit(100)) as IRequirement[];
 

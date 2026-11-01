@@ -3,11 +3,7 @@
 import { useAuth } from "@/components/auth/auth-provider";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { PremiumMentorBadge } from "@/components/ui/mentor-status-badges";
-import {
-  fetchPublicTeachers,
-  formatHourlyRate,
-  type Teacher,
-} from "@/lib/teachers";
+import { formatHourlyRate, type Teacher } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Clock3, X, Zap } from "lucide-react";
 import Link from "next/link";
@@ -70,14 +66,10 @@ async function loadPremiumMentors(): Promise<Teacher[]> {
       if (curated.length > 0) return curated.slice(0, MENTOR_LIMIT);
     }
   } catch {
-    /* fall through */
+    /* featured list is enough */
   }
 
-  const { teachers, failed } = await fetchPublicTeachers();
-  if (failed || teachers.length === 0) return [];
-  const premium = teachers.filter((t) => t.premium);
-  const pool = premium.length > 0 ? premium : teachers;
-  return pool.slice(0, MENTOR_LIMIT);
+  return [];
 }
 
 function MentorScrollCard({ teacher }: { teacher: Teacher }) {

@@ -392,7 +392,7 @@ export const ONBOARDING_OCT2026: Record<string, ArticleContent> = {
     relatedLinks: [
       { label: "Find tuition jobs on Mentr", href: "/online-tutor-jobs" },
       { label: "How to advertise home tuition", href: "/blog/how-to-advertise-home-tuition" },
-      { label: "Online tutor jobs from home", href: "/blog/online-tutor-jobs-from-home" },
+      { label: "Online tutor jobs", href: "/online-tutor-jobs" },
       { label: "How to become a home tutor in India", href: "/blog/how-to-become-a-home-tutor-india" },
       { label: "Tuition agency commission explained", href: "/blog/tuition-agency-commission-india" },
     ],

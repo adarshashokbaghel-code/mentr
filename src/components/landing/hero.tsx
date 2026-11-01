@@ -13,11 +13,7 @@ import { PostRequirementButton } from "@/components/requirements/post-requiremen
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { formatMentorCount, useMentorCount } from "@/lib/mentor-stats";
-import {
-  fetchPremiumTeachers,
-  fetchPublicTeachers,
-  type Teacher,
-} from "@/lib/teachers";
+import { fetchPremiumTeachers, type Teacher } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
@@ -80,13 +76,10 @@ function useHeroTeachers() {
 
   useEffect(() => {
     let cancelled = false;
-    // Premium list is a few KB; the full directory is only needed if it's empty.
+    // Premium list only. The full directory is too large for the homepage.
     void (async () => {
       const { teachers: premium } = await fetchPremiumTeachers();
-      const pool =
-        premium.length > 0
-          ? premium
-          : (await fetchPublicTeachers()).teachers.filter((t) => t.live);
+      const pool = premium;
       if (cancelled) return;
       setPool(orderTeachers(pool));
       setReady(true);

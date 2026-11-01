@@ -103,6 +103,7 @@ export type AdminUserRow = {
   role: string;
   profileComplete: boolean;
   emailVerified: boolean;
+  premiumActive?: boolean;
   city: string;
   area: string;
   country: string;

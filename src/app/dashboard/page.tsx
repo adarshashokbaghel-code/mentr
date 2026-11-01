@@ -1,5 +1,6 @@
 "use client";
 
+import { DeleteAccountSection } from "@/components/account/delete-account-section";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import {
@@ -826,6 +827,7 @@ export default function DashboardPage() {
               ) : null}
             </aside>
           </div>
+          <DeleteAccountSection />
         </div>
       </main>
       <Footer />

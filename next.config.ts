@@ -218,6 +218,26 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/blog/find-online-tutors-verified-free",
+        destination: "/find-verified-online-tutors",
+        permanent: true,
+      },
+      {
+        source: "/blog/find-mentors-near-me-online",
+        destination: "/find-mentors-near-me",
+        permanent: true,
+      },
+      {
+        source: "/blog/online-tutor-jobs-from-home",
+        destination: "/online-tutor-jobs",
+        permanent: true,
+      },
+      {
+        source: "/blog/find-maths-tutor-online-verified",
+        destination: "/blog/find-a-maths-tutor-online",
+        permanent: true,
+      },
+      {
         source: "/mentrpremium",
         destination: "/pricing",
         permanent: true,

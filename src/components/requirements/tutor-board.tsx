@@ -210,6 +210,7 @@ export function RequirementsFeed() {
   const [query, setQuery] = useState("");
   const [hidePitched, setHidePitched] = useState(false);
   const [statusFilter, setStatusFilter] = useState<"open" | "closed">("open");
+  const [shown, setShown] = useState(16);
 
   const onRevealQuota = useCallback((quota: PremiumRevealQuota) => {
     setRevealLeft(quota.remaining);
@@ -298,6 +299,12 @@ export function RequirementsFeed() {
     }
     return sorted;
   }, [pool, subject, modeFilter, hidePitched, query, sort]);
+
+  useEffect(() => {
+    setShown(16);
+  }, [statusFilter, subject, modeFilter, query, hidePitched, sort]);
+
+  const page = visible.slice(0, shown);
 
   const left = unlimitedPitches
     ? Number.POSITIVE_INFINITY
@@ -531,18 +538,30 @@ export function RequirementsFeed() {
               ) : null}
             </div>
           ) : (
-            <ul className="space-y-3">
-              {visible.map((p) => (
-                <PostCard
-                  key={p.id}
-                  post={p}
-                  quotaLeft={left}
-                  premium={premiumMentor}
-                  onRespond={() => setPitchFor(p)}
-                  onReveal={() => setRevealFor(p)}
-                />
-              ))}
-            </ul>
+            <>
+              <ul className="space-y-3">
+                {page.map((p) => (
+                  <PostCard
+                    key={p.id}
+                    post={p}
+                    quotaLeft={left}
+                    premium={premiumMentor}
+                    onRespond={() => setPitchFor(p)}
+                    onReveal={() => setRevealFor(p)}
+                  />
+                ))}
+              </ul>
+              {visible.length > page.length ? (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="mt-3 w-full"
+                  onClick={() => setShown((n) => n + 16)}
+                >
+                  Show {Math.min(16, visible.length - page.length)} more
+                </Button>
+              ) : null}
+            </>
           )}
         </div>
 

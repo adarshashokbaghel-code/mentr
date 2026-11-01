@@ -30,6 +30,9 @@ const JOINED_FILTERS = [
 ] as const;
 
 type JoinedFilterId = (typeof JOINED_FILTERS)[number]["id"];
+type PlanFilterId = "all" | "premium";
+
+const PREMIUM_TEMPLATE_ID = "mentor-premium-active";
 
 function sentStorageKey(templateId: string) {
   return `mentr-messenger-sent:${templateId}`;
@@ -73,6 +76,7 @@ export function AdminMessenger({ adminKey }: Props) {
 
   const [query, setQuery] = useState("");
   const [joinedFilter, setJoinedFilter] = useState<JoinedFilterId>("all");
+  const [planFilter, setPlanFilter] = useState<PlanFilterId>("all");
   const [users, setUsers] = useState<AdminUserRow[]>([]);
   const [usersLoading, setUsersLoading] = useState(false);
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -123,16 +127,24 @@ export function AdminMessenger({ adminKey }: Props) {
   const needsCoupon = Boolean(activeTemplate?.requiresCoupon);
   const couponReady = !needsCoupon || couponCode.trim().length > 0;
   const joinedDays = JOINED_FILTERS.find((f) => f.id === joinedFilter)?.days ?? null;
-  const visibleUsers =
-    joinedDays == null
-      ? users
-      : users.filter((u) => joinedWithin(u.createdAt, joinedDays));
+  const visibleUsers = users.filter((u) => {
+    if (joinedDays != null && !joinedWithin(u.createdAt, joinedDays)) return false;
+    if (
+      templateAudience === "faculty" &&
+      planFilter === "premium" &&
+      !u.premiumActive
+    ) {
+      return false;
+    }
+    return true;
+  });
 
   useEffect(() => {
     if (!activeTemplate) return;
     setPreviewName(activeTemplate.audience === "parent" ? "Parent" : "Educator");
     setSelected(new Set());
     setJoinedFilter("all");
+    setPlanFilter(activeTemplate.id === PREMIUM_TEMPLATE_ID ? "premium" : "all");
     setSentIds(readSentIds(activeTemplate.id));
   }, [activeTemplate?.id, activeTemplate?.audience]);
 
@@ -188,17 +200,17 @@ export function AdminMessenger({ adminKey }: Props) {
   }, [loadUsers]);
 
   useEffect(() => {
-    if (joinedDays == null) return;
+    const visible = new Set(visibleUsers.map((u) => u.id));
     setSelected((prev) => {
-      const next = new Set(
-        [...prev].filter((id) => {
-          const user = users.find((u) => u.id === id);
-          return user ? joinedWithin(user.createdAt, joinedDays) : false;
-        }),
-      );
-      return next.size === prev.size ? prev : next;
+      let changed = false;
+      const next = new Set<string>();
+      for (const id of prev) {
+        if (visible.has(id)) next.add(id);
+        else changed = true;
+      }
+      return changed ? next : prev;
     });
-  }, [joinedDays, users]);
+  }, [visibleUsers]);
 
   const toggleUser = (id: string) => {
     setSelected((prev) => {
@@ -546,6 +558,18 @@ export function AdminMessenger({ adminKey }: Props) {
           ))}
         </select>
 
+        {templateAudience === "faculty" && (
+          <select
+            value={planFilter}
+            onChange={(e) => setPlanFilter(e.target.value as PlanFilterId)}
+            aria-label="Filter by Premium"
+            className="h-8 rounded border border-hairline bg-white px-2 text-xs font-medium text-ink outline-none focus:border-ink"
+          >
+            <option value="all">All tutors</option>
+            <option value="premium">Premium tutors</option>
+          </select>
+        )}
+
         <span className="text-[11px] font-medium text-ink">
           {sending && sendProgress
             ? `${sendProgress.sent}/${sendProgress.total}`
@@ -630,7 +654,9 @@ export function AdminMessenger({ adminKey }: Props) {
               </p>
             ) : visibleUsers.length === 0 ? (
               <p className="px-3 py-4 text-[11px] text-muted">
-                {joinedDays
+                {planFilter === "premium" && templateAudience === "faculty"
+                  ? "No Premium tutors in this filter"
+                  : joinedDays
                   ? `No ${templateAudience === "parent" ? "parents" : "tutors"} joined in the last ${joinedDays} days`
                   : templateAudience === "parent"
                     ? "No parents found"
@@ -669,6 +695,7 @@ export function AdminMessenger({ adminKey }: Props) {
                           </span>
                           <span className="block truncate text-[10px] text-muted">
                             {user.email} · {joinedLabel(user.createdAt)}
+                            {user.premiumActive ? " · Premium" : ""}
                           </span>
                         </span>
                         {sent ? (

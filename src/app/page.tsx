@@ -62,8 +62,14 @@ const jsonLd = [
       addressCountry: "IN",
     },
     areaServed: [
-      { "@type": "Place", name: "Worldwide" },
+      { "@type": "Country", name: "India" },
       { "@type": "City", name: "Bengaluru" },
+      { "@type": "City", name: "Mumbai" },
+      { "@type": "City", name: "Delhi" },
+      { "@type": "City", name: "Hyderabad" },
+      { "@type": "City", name: "Pune" },
+      { "@type": "City", name: "Chennai" },
+      { "@type": "City", name: "Kolkata" },
     ],
     contactPoint: {
       "@type": "ContactPoint",

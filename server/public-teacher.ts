@@ -1,6 +1,6 @@
 import type { Response } from "express";
 import { connectDb } from "./db";
-import { backfillMapCoords, ensureFacultyMapLocation } from "./lib/map-location";
+import { ensureFacultyMapLocation } from "./lib/map-location";
 import { isProfileComplete } from "./lib/profile-complete";
 import { User, type IUser } from "./models/User";
 import {
@@ -77,10 +77,6 @@ export async function loadPublicTeachers(): Promise<Record<string, unknown>[]> {
     .limit(2000)) as IUser[];
 
   const complete = users.filter((u) => isProfileComplete(u));
-
-  void backfillMapCoords(complete).catch((err) =>
-    console.error("map coords backfill:", err),
-  );
 
   const teachers = complete.map((u) =>
     JSON.parse(JSON.stringify(toPublicTeacher(u, NO_CONNECTION))) as Record<

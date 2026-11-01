@@ -25,6 +25,7 @@ import { PARENT_ACQUISITION_SEP2026 } from "./parent-acquisition-sep2026";
 import { COMPETITOR_ALTERNATIVES_SEP2026 } from "./competitor-alternatives-sep2026";
 import { ONBOARDING_OCT2026 } from "./onboarding-oct2026";
 import { PARENT_REGISTRATION_OCT2026 } from "./parent-registration-oct2026";
+import { GEO_KEYWORD_NOV2026 } from "./geo-keyword-nov2026";
 
 const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...FOR_PARENTS_ARTICLES,
@@ -54,6 +55,7 @@ const ALL_ARTICLES: Record<string, ArticleContent> = {
   ...LEARN_PYTHON_SEO_OCT2026,
   ...ONBOARDING_OCT2026,
   ...PARENT_REGISTRATION_OCT2026,
+  ...GEO_KEYWORD_NOV2026,
 };
 
 export function getArticleContent(slug: string): ArticleContent {

@@ -14,6 +14,7 @@ import {
 import { quoteCouponForBroadcast, type CouponBroadcastQuote } from "./coupons";
 import { welcomeExtrasForRole } from "./messenger-welcome-settings";
 import { sendAdminEmail } from "./mail";
+import { isMentrPremiumActive } from "./premium-mentor-billing";
 
 export type AdminUserRow = {
   id: string;
@@ -22,6 +23,8 @@ export type AdminUserRow = {
   role: string;
   profileComplete: boolean;
   emailVerified: boolean;
+  /** Faculty with a live Premium plan. Parents are always false. */
+  premiumActive: boolean;
   city: string;
   area: string;
   country: string;
@@ -68,6 +71,7 @@ export function toAdminUserRow(u: IUser & { _id: unknown; createdAt: Date; updat
     role: u.role,
     profileComplete: isProfileComplete(u),
     emailVerified: u.emailVerified,
+    premiumActive: u.role === "faculty" && isMentrPremiumActive(u),
     city: u.profile?.city || u.parentProfile?.city || "—",
     area: u.profile?.area || u.parentProfile?.area || "—",
     country: u.profile?.country || u.parentProfile?.country || "—",

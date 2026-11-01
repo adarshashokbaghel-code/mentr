@@ -1,10 +1,17 @@
 import mongoose from "mongoose";
 import { isDemoUserEmail } from "../lib/demo-users";
 import { Connection } from "../models/Connection";
+import { CouponUsage } from "../models/CouponUsage";
+import { DemoRequest } from "../models/DemoRequest";
+import { LearnPotdAttempt } from "../models/LearnPotdAttempt";
+import { LearnPracticeAttempt } from "../models/LearnPracticeAttempt";
 import { Notification } from "../models/Notification";
 import { OtpSession } from "../models/OtpSession";
+import { ParentContactReveal } from "../models/ParentContactReveal";
+import { PremiumCheckoutEvent } from "../models/PremiumCheckoutEvent";
 import { ProfileView } from "../models/ProfileView";
 import { Requirement } from "../models/Requirement";
+import { SnapGradeEvaluation, SnapGradeWallet } from "../models/SnapGrade";
 import { User } from "../models/User";
 import { UserInteraction } from "../models/UserInteraction";
 import { removeMentorProfileImage } from "./mentor-profile-image";
@@ -61,6 +68,7 @@ export async function deleteAdminUser(
         $set: {
           parentName: DELETED_USER_LABEL,
           parentArea: "",
+          message: "",
           status: "declined",
           respondedAt: new Date(),
         },
@@ -72,6 +80,7 @@ export async function deleteAdminUser(
         $set: {
           teacherName: DELETED_USER_LABEL,
           teacherArea: "",
+          message: "",
           status: "declined",
           respondedAt: new Date(),
         },
@@ -104,6 +113,21 @@ export async function deleteAdminUser(
       { "parentProfile.shortlistedTeacherIds": userId },
       { $pull: { "parentProfile.shortlistedTeacherIds": userId } },
     ),
+    ParentContactReveal.deleteMany({
+      $or: [{ mentor: oid }, { parent: oid }],
+    }),
+    LearnPracticeAttempt.deleteMany({ user: oid }),
+    LearnPotdAttempt.deleteMany({ user: oid }),
+    CouponUsage.deleteMany({ $or: [{ user: oid }, { email }] }),
+    PremiumCheckoutEvent.deleteMany({ $or: [{ user: oid }, { email }] }),
+    SnapGradeEvaluation.deleteMany({ user: oid }),
+    SnapGradeWallet.deleteMany({ user: oid }),
+    role === "parent"
+      ? DemoRequest.deleteMany({ parent: oid })
+      : DemoRequest.updateMany(
+          { teacher: oid },
+          { $set: { teacherName: DELETED_USER_LABEL } },
+        ),
   ]);
 
   // Notifications that mention this tutor by id

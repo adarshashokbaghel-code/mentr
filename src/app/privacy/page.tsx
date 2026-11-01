@@ -125,7 +125,7 @@ const sections = [
     title: "Your controls",
     body: [
       "Edit profile details anytime from your dashboard.",
-      "Request account deletion via hello@mentr.in from your registered email.",
+      "Delete your account from the bottom of your dashboard. You must type delete to confirm. You can also email hello@mentr.in from your registered address. Razorpay may keep the payment record for a charge that already went through.",
       "Public pages show a cookie notice; your choice is stored on your device.",
     ],
   },
