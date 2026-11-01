@@ -4,12 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { MentorPhoto } from "@/components/ui/mentor-photo";
 import { MentorStatusBadges, PremiumMentorBadge } from "@/components/ui/mentor-status-badges";
-import {
-  fetchPublicTeachers,
-  formatHourlyRate,
-  modeLabels,
-  type Teacher,
-} from "@/lib/teachers";
+import { formatHourlyRate, modeLabels, type Teacher } from "@/lib/teachers";
 import { cn } from "@/lib/utils";
 import {
   ChevronLeft,
@@ -23,33 +18,9 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const FEATURED_LIMIT = 12;
 /** 5 per row on desktop, fewer on smaller screens (gap is 1rem / 1.25rem). */
 const CARD_WIDTH =
   "w-[72%] sm:w-[calc((100%-2.5rem)/3)] lg:w-[calc((100%-3.75rem)/4)] xl:w-[calc((100%-5rem)/5)]";
-
-function scoreTeacher(t: Teacher): number {
-  let score = 0;
-  if (t.premium) score += 50;
-  if (t.imageUrl?.trim()) score += 40;
-  if (t.verified) score += 25;
-  if (t.hourlyRate != null && t.hourlyRate > 0) score += 15;
-  if (t.bio?.trim() && t.bio.trim().length > 40) score += 10;
-  if (t.openSlots > 0) score += 8;
-  if ((t.modes || []).length > 0) score += 5;
-  if (t.experienceYears >= 3) score += 5;
-  return score;
-}
-
-function pickFeatured(teachers: Teacher[]): Teacher[] {
-  return [...teachers]
-    .sort((a, b) => {
-      const d = scoreTeacher(b) - scoreTeacher(a);
-      if (d !== 0) return d;
-      return (b.createdAt || "").localeCompare(a.createdAt || "");
-    })
-    .slice(0, FEATURED_LIMIT);
-}
 
 function displayName(name: string): string {
   const cleaned = name.replace(/\s+/g, " ").trim();
@@ -390,16 +361,10 @@ export function FeaturedMentors({
           }
         }
       } catch {
-        /* fall through to auto pick */
+        /* featured list is enough — do not download the full directory */
       }
 
-      const { teachers: live, failed } = await fetchPublicTeachers();
-      if (cancelled) return;
-      if (failed || live.length === 0) {
-        setTeachers([]);
-        return;
-      }
-      setTeachers(pickFeatured(live));
+      if (!cancelled) setTeachers([]);
     })();
     return () => {
       cancelled = true;

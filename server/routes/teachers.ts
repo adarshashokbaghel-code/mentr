@@ -1,6 +1,5 @@
 import { Router, Response } from "express";
 import { recordProfileView } from "../lib/record-profile-view";
-import { backfillMapCoords } from "../lib/map-location";
 import { User, type IUser } from "../models/User";
 import {
   NO_CONNECTION,
@@ -29,10 +28,6 @@ router.get("/", async (req: AuthenticatedRequest, res: Response) => {
       .limit(200);
 
     const complete = users.filter((u: IUser) => isProfileComplete(u));
-
-    void backfillMapCoords(complete).catch((err) =>
-      console.error("map coords backfill:", err),
-    );
 
     const connections = await viewerConnections(
       req.auth!.sub,

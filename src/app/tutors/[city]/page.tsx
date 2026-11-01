@@ -88,6 +88,7 @@ export default async function CityTutorsHubPage({
       pricingContext={guide.pricing}
       modesContext={guide.modes}
       verificationContext={guide.verification}
+      geo={{ city: city.name, lat: city.lat, lng: city.lng }}
       emptyMessage={
         city.local
           ? undefined

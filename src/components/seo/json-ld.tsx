@@ -1,4 +1,4 @@
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Teacher } from "@/lib/teachers";
 
 export function JsonLd({ data }: { data: object | object[] }) {
@@ -47,6 +47,51 @@ export function collectionJsonLd(opts: {
         url: absoluteUrl(`/teachers/${t.id}`),
         name: t.name,
       })),
+    },
+  };
+}
+
+/** City tutoring page — the query Google should attach to a place. */
+export function cityTutorServiceJsonLd(opts: {
+  name: string;
+  description: string;
+  path: string;
+  city: string;
+  lat: number;
+  lng: number;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: opts.name,
+    serviceType: "Private tutoring",
+    description: opts.description,
+    url: absoluteUrl(opts.path),
+    provider: {
+      "@type": "EducationalOrganization",
+      name: SITE_BRAND,
+      url: absoluteUrl("/"),
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Bengaluru",
+        addressRegion: "Karnataka",
+        addressCountry: "IN",
+      },
+    },
+    areaServed: {
+      "@type": "City",
+      name: opts.city,
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: opts.lat,
+        longitude: opts.lng,
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "INR",
+      description: "Free for parents. Tutors keep their fees.",
     },
   };
 }

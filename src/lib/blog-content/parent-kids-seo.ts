@@ -259,7 +259,7 @@ export const PARENT_KIDS_SEO_ARTICLES: Record<string, ArticleContent> = {
     ],
     relatedLinks: [
       { label: "How to find tutors online for my kids", href: "/blog/how-to-find-tutors-online-for-my-kids" },
-      { label: "Find maths tutor online", href: "/blog/find-maths-tutor-online-verified" },
+      { label: "Find a maths tutor online", href: "/blog/find-a-maths-tutor-online" },
       { label: "Search tutors", href: "/search" },
       { label: "Find online tutors India", href: "/find-online-tutors/india" },
     ],

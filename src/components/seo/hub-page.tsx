@@ -3,6 +3,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { Button } from "@/components/ui/button";
 import {
   breadcrumbJsonLd,
+  cityTutorServiceJsonLd,
   collectionJsonLd,
   faqJsonLd,
   JsonLd,
@@ -229,6 +230,7 @@ export function SeoHubPage({
   pricingContext,
   modesContext,
   verificationContext,
+  geo,
 }: {
   eyebrow: string;
   title: string;
@@ -251,6 +253,7 @@ export function SeoHubPage({
   pricingContext?: string;
   modesContext?: string;
   verificationContext?: string;
+  geo?: { city: string; lat: number; lng: number };
 }) {
   const schemaBreadcrumbs = breadcrumbs.map((b, i) => ({
     name: b.label,
@@ -274,6 +277,18 @@ export function SeoHubPage({
             teachers,
           }),
           ...(faqs && faqs.length > 0 ? [faqJsonLd(faqs)] : []),
+          ...(geo
+            ? [
+                cityTutorServiceJsonLd({
+                  name: title,
+                  description: intro,
+                  path: schemaPath,
+                  city: geo.city,
+                  lat: geo.lat,
+                  lng: geo.lng,
+                }),
+              ]
+            : []),
         ]}
       />
       <Navbar />

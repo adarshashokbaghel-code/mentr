@@ -22,6 +22,7 @@ export async function fetchTestimonialNameMaps(): Promise<TestimonialNameMaps> {
       "parentProfile.area": { $exists: true, $nin: ["", null] },
     })
       .select("parentProfile.area parentProfile.name")
+      .limit(40)
       .lean(),
     User.find({
       role: "faculty",
@@ -29,6 +30,7 @@ export async function fetchTestimonialNameMaps(): Promise<TestimonialNameMaps> {
       "profile.name": { $exists: true, $nin: ["", null] },
     })
       .select("email profile.name")
+      .limit(40)
       .lean(),
   ]);
 

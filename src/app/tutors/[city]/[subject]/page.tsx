@@ -111,6 +111,11 @@ export default async function CitySubjectHubPage({
       pricingContext={guide.pricing}
       modesContext={guide.modes}
       verificationContext={guide.verification}
+      geo={{
+        city: parsed.city.name,
+        lat: parsed.city.lat,
+        lng: parsed.city.lng,
+      }}
       relatedLinks={[
         {
           label: `All tutors in ${parsed.city.name}`,

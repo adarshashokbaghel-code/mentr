@@ -49,41 +49,13 @@ export const BOARDS = [
 export type BoardId = (typeof BOARDS)[number]["id"];
 
 export const SEO_CITIES = [
-  {
-    slug: "bengaluru",
-    name: "Bengaluru",
-    local: true,
-  },
-  {
-    slug: "hyderabad",
-    name: "Hyderabad",
-    local: false,
-  },
-  {
-    slug: "delhi",
-    name: "Delhi",
-    local: false,
-  },
-  {
-    slug: "mumbai",
-    name: "Mumbai",
-    local: false,
-  },
-  {
-    slug: "pune",
-    name: "Pune",
-    local: false,
-  },
-  {
-    slug: "chennai",
-    name: "Chennai",
-    local: false,
-  },
-  {
-    slug: "kolkata",
-    name: "Kolkata",
-    local: false,
-  },
+  { slug: "bengaluru", name: "Bengaluru", local: true, lat: 12.9716, lng: 77.5946 },
+  { slug: "hyderabad", name: "Hyderabad", local: false, lat: 17.385, lng: 78.4867 },
+  { slug: "delhi", name: "Delhi", local: false, lat: 28.6139, lng: 77.209 },
+  { slug: "mumbai", name: "Mumbai", local: false, lat: 19.076, lng: 72.8777 },
+  { slug: "pune", name: "Pune", local: false, lat: 18.5204, lng: 73.8567 },
+  { slug: "chennai", name: "Chennai", local: false, lat: 13.0827, lng: 80.2707 },
+  { slug: "kolkata", name: "Kolkata", local: false, lat: 22.5726, lng: 88.3639 },
 ] as const;
 
 export type SeoCitySlug = (typeof SEO_CITIES)[number]["slug"];
