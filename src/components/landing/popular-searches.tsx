@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LAUNCH_HUB_CITY } from "@/lib/seo";
+import { SEO_CITIES } from "@/lib/seo-programmatic";
 import { slugify } from "@/lib/seo-hubs";
 import { cn } from "@/lib/utils";
 import {
@@ -180,6 +181,15 @@ export function PopularSearches({
           <span className="text-xs font-semibold uppercase tracking-wide text-muted">
             Quick links
           </span>
+          {SEO_CITIES.filter((c) => c.slug !== "bengaluru").map((city) => (
+            <Link
+              key={city.slug}
+              href={`/tutors/${city.slug}`}
+              className="inline-flex rounded-full border border-hairline bg-white px-3 py-1.5 text-xs font-semibold text-ink transition hover:border-coral/40 hover:text-coral"
+            >
+              Tutors in {city.name}
+            </Link>
+          ))}
           {QUICK.map((q) => (
             <Link
               key={q.href}
