@@ -40,8 +40,7 @@ import {
 } from "@/lib/parent-need";
 import {
   fetchLiveTeachers,
-  fetchPremiumTeachers,
-  fetchPublicTeachers,
+  fetchReelTeachers,
   searchTeachers,
   type Teacher,
 } from "@/lib/teachers";
@@ -55,13 +54,28 @@ import {
   Search,
 } from "lucide-react";
 import Link from "next/link";
-import { Suspense, useEffect, useState, useSyncExternalStore } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 
 export type ParentAcquireIntent = "default" | "browse" | "instant";
 
-function PremiumTutorCard({ teacher }: { teacher: Teacher }) {
+function PremiumTutorCard({
+  teacher,
+  showPhoto,
+  priority,
+  onPhotoSettled,
+}: {
+  teacher: Teacher;
+  showPhoto: boolean;
+  priority: boolean;
+  onPhotoSettled: (id: string) => void;
+}) {
   const name = teacher.name.replace(/\s+/g, " ").trim();
   const subject = teacher.subjects[0] || teacher.subjectLine;
+
+  useEffect(() => {
+    if (showPhoto && !teacher.imageUrl?.trim()) onPhotoSettled(teacher.id);
+  }, [showPhoto, teacher.id, teacher.imageUrl, onPhotoSettled]);
+
   return (
     <article className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_8px_24px_rgba(26,35,28,0.06)]">
       <div className="tutor-photo relative h-36 bg-cream-band">
@@ -69,12 +83,15 @@ function PremiumTutorCard({ teacher }: { teacher: Teacher }) {
           name={name}
           initials={teacher.initials}
           kind={teacher.kind}
-          imageUrl={teacher.imageUrl}
+          imageUrl={showPhoto ? teacher.imageUrl : null}
           size="fill"
           showInitials={false}
           rounded="xl"
           className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
           alt=""
+          priority={priority}
+          thumb={showPhoto}
+          onSettled={showPhoto ? () => onPhotoSettled(teacher.id) : undefined}
         />
         {teacher.premium ? (
           <span className="absolute left-3 top-3">
@@ -117,32 +134,50 @@ function useWideTutorReel() {
 
 function PremiumTutorReel() {
   const [tutors, setTutors] = useState<Teacher[]>([]);
+  const [ready, setReady] = useState(false);
+  const [photoSlots, setPhotoSlots] = useState(2);
+  const settledRef = useRef(new Set<string>());
   const wide = useWideTutorReel();
+  const tutorKey = tutors.map((teacher) => teacher.id).join("|");
+  const [slotKey, setSlotKey] = useState(tutorKey);
+  if (slotKey !== tutorKey) {
+    setSlotKey(tutorKey);
+    setPhotoSlots(2);
+    settledRef.current = new Set();
+  }
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const [{ teachers: everyone }, { teachers: premium }] = await Promise.all([
-        fetchPublicTeachers(),
-        fetchPremiumTeachers(),
-      ]);
+      const { teachers } = await fetchReelTeachers();
       if (cancelled) return;
-      const seen = new Set<string>();
-      const ordered: Teacher[] = [];
-      const rest = everyone.filter((teacher) => !teacher.premium);
-      for (const teacher of [...premium, ...everyone.filter((t) => t.premium), ...rest]) {
-        if (seen.has(teacher.id)) continue;
-        seen.add(teacher.id);
-        ordered.push(teacher);
-      }
-      setTutors(ordered);
+      setTutors(teachers);
+      setReady(true);
     })();
     return () => {
       cancelled = true;
     };
   }, []);
 
-  if (tutors.length === 0) {
+  const onPhotoSettled = useCallback(
+    (id: string) => {
+      const settled = settledRef.current;
+      if (settled.has(id)) return;
+      settled.add(id);
+      setPhotoSlots((current) => {
+        const windowIds = tutors.slice(0, current).map((teacher) => teacher.id);
+        if (windowIds.length === 0) return current;
+        if (!windowIds.every((windowId) => settled.has(windowId))) return current;
+        return Math.min(tutors.length, current + 2);
+      });
+    },
+    [tutors],
+  );
+
+  const revealed = new Set(tutors.slice(0, photoSlots).map((teacher) => teacher.id));
+  const priorityIds = new Set(tutors.slice(0, 2).map((teacher) => teacher.id));
+
+  if (!ready) {
     return (
       <div className="overflow-hidden">
         <div className="w-[min(78vw,280px)] overflow-hidden rounded-2xl border border-hairline bg-white lg:w-full">
@@ -174,7 +209,12 @@ function PremiumTutorReel() {
         >
           {slide.map((teacher, index) => (
             <div key={`${teacher.id}-m-${index}`} className="w-[min(78vw,280px)] max-w-[280px] shrink-0">
-              <PremiumTutorCard teacher={teacher} />
+              <PremiumTutorCard
+                teacher={teacher}
+                showPhoto={revealed.has(teacher.id)}
+                priority={priorityIds.has(teacher.id)}
+                onPhotoSettled={onPhotoSettled}
+              />
             </div>
           ))}
         </div>
@@ -206,7 +246,13 @@ function PremiumTutorReel() {
         {loop.map((row, rowIndex) => (
           <div key={rowIndex} className="grid grid-cols-2 gap-4">
             {row.map((teacher) => (
-              <PremiumTutorCard key={`${teacher.id}-${rowIndex}`} teacher={teacher} />
+              <PremiumTutorCard
+                key={`${teacher.id}-${rowIndex}`}
+                teacher={teacher}
+                showPhoto={revealed.has(teacher.id)}
+                priority={priorityIds.has(teacher.id)}
+                onPhotoSettled={onPhotoSettled}
+              />
             ))}
           </div>
         ))}

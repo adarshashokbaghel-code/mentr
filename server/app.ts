@@ -20,7 +20,7 @@ import { getPublicRequirementShare } from "./public-requirement-share";
 import { connectDb } from "./db";
 import { sendAllPitchDigests } from "./services/pitch-digest";
 import { sendParentProfileReminders } from "./services/parent-profile-reminder";
-import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers, getPublicPremiumTeachers, getPublicTeacherStats } from "./public-teacher";
+import { getPublicTeacher, getPublicTeachers, getPublicFeaturedTeachers, getPublicPremiumTeachers, getPublicReelTeachers, getPublicTeacherStats } from "./public-teacher";
 import { getPublicTestimonialNames } from "./public-testimonial-names";
 import { ensureDb } from "./middleware/ensure-db";
 
@@ -133,6 +133,10 @@ app.get("/api/teachers/featured", (_req, res) => {
 
 app.get("/api/teachers/premium", (_req, res) => {
   void getPublicPremiumTeachers(res);
+});
+
+app.get("/api/teachers/reel", (_req, res) => {
+  void getPublicReelTeachers(res);
 });
 
 app.get("/api/teachers/public/:id", (req, res) => {
