@@ -23,6 +23,7 @@ import {
 import { TEACHING_MODES, User, type TeachingMode } from "../models/User";
 import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { ensureDb } from "../middleware/ensure-db";
+import { parseAcquisitionFromUrl } from "../lib/marketing-attribution";
 import { isProfileComplete } from "./auth";
 import { notifyParentRequirementPitch } from "../services/parent-notifications";
 import { alertTutorsOfNewPost } from "../services/requirement-tutor-alert";
@@ -400,10 +401,23 @@ router.post("/guest", async (req, res: Response) => {
       city,
       area: parsed.data.area,
     };
-    const acquisition = {
-      ...(typeof req.body?.registrationSource === "string" &&
+    const registrationSource =
+      typeof req.body?.registrationSource === "string" &&
       req.body.registrationSource.trim()
-        ? { registrationSource: req.body.registrationSource.trim().slice(0, 2048) }
+        ? req.body.registrationSource.trim().slice(0, 2048)
+        : undefined;
+    const parsedSource = parseAcquisitionFromUrl(registrationSource);
+    const acquisition = {
+      ...(registrationSource ? { registrationSource } : {}),
+      ...(parsedSource.slug &&
+      (parsedSource.kind === "blog" ||
+        parsedSource.kind === "page" ||
+        parsedSource.kind === "social" ||
+        parsedSource.kind === "ads")
+        ? {
+            acquisitionSlug: parsedSource.slug,
+            acquisitionKind: parsedSource.kind,
+          }
         : {}),
     };
     if (user) {
@@ -411,6 +425,8 @@ router.post("/guest", async (req, res: Response) => {
       user.parentProfile = parentProfile as NonNullable<typeof user.parentProfile>;
       if (!user.registrationSource && acquisition.registrationSource) {
         user.registrationSource = acquisition.registrationSource;
+        if (acquisition.acquisitionSlug) user.acquisitionSlug = acquisition.acquisitionSlug;
+        if (acquisition.acquisitionKind) user.acquisitionKind = acquisition.acquisitionKind;
       }
       await user.save();
     } else {

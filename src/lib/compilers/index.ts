@@ -1,5 +1,11 @@
 import { breadcrumbJsonLd, faqJsonLd } from "@/components/seo/json-ld";
-import { absoluteUrl, hubOpenGraph, PARENT_ORG_JSON_LD, SITE_BRAND } from "@/lib/seo";
+import {
+  absoluteUrl,
+  hubOpenGraph,
+  PARENT_ORG_JSON_LD,
+  SITE_BRAND,
+  SITE_LOGO_URL,
+} from "@/lib/seo";
 import type { Metadata, MetadataRoute } from "next";
 import { COMPILERS_HUB_PATH, type CompilerId } from "./paths";
 import { PYTHON_COMPILER } from "./python";
@@ -29,6 +35,7 @@ const PUBLISHER = {
   "@type": "Organization",
   name: SITE_BRAND,
   url: absoluteUrl("/"),
+  logo: SITE_LOGO_URL,
   parentOrganization: PARENT_ORG_JSON_LD,
 };
 

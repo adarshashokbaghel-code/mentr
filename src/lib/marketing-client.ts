@@ -112,10 +112,36 @@ export function markLearnPythonStarted(): void {
   }
 }
 
+function rememberAttribution(stored: StoredAttribution): StoredAttribution {
+  try {
+    localStorage.setItem(ATTR_KEY, JSON.stringify(stored));
+  } catch {
+    /* ignore quota */
+  }
+  return stored;
+}
+
+/** True when this page load itself is a Google Ads click, not a later page in the visit. */
+export function isPaidAdsLanding(): boolean {
+  if (typeof window === "undefined") return false;
+  return parseAcquisitionFromUrl(window.location.href).kind === "ads";
+}
+
 /** Capture UTM already on the current URL (shared links, ads, blog CTAs). */
 export function captureUrlAttribution(): StoredAttribution | undefined {
   if (typeof window === "undefined") return undefined;
   const parsed = parseAcquisitionFromUrl(window.location.href);
+  if (parsed.kind === "ads" && parsed.slug) {
+    const href = window.location.href.split("#")[0];
+    return rememberAttribution({
+      slug: parsed.slug,
+      kind: "ads",
+      path: window.location.pathname,
+      href,
+      registrationSource: href,
+      capturedAt: Date.now(),
+    });
+  }
   if (parsed.kind === "referral" || !parsed.slug || !parsed.kind) {
     return getStoredAttribution();
   }
@@ -184,7 +210,12 @@ export function resolveRegistrationSource(): string | undefined {
   if (typeof window === "undefined") return undefined;
   const url = new URL(window.location.href);
   const hasTrackable = [...url.searchParams.keys()].some(
-    (key) => key.startsWith("utm_") || key === "ref",
+    (key) =>
+      key.startsWith("utm_") ||
+      key === "ref" ||
+      key === "gclid" ||
+      key === "gbraid" ||
+      key === "wbraid",
   );
   if (hasTrackable) return url.toString();
   return getStoredAttribution()?.registrationSource ?? getLandingTouch();
@@ -202,7 +233,8 @@ export function resolveAcquisition(): {
   const kind =
     parsed.kind === "blog" ||
     parsed.kind === "page" ||
-    parsed.kind === "social"
+    parsed.kind === "social" ||
+    parsed.kind === "ads"
       ? parsed.kind
       : stored?.kind;
 

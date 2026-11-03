@@ -19,7 +19,7 @@ export interface IOtpSession extends Document {
   /** Signup URL captured at OTP send — stored on new user at verify. */
   registrationSource?: string;
   acquisitionSlug?: string;
-  acquisitionKind?: "blog" | "page" | "referral" | "social";
+  acquisitionKind?: "blog" | "page" | "referral" | "social" | "ads";
   /** Signup only — user checked Terms + Privacy before OTP send. */
   acceptedLegal?: boolean;
   /** True only after SMTP accepted the message. Failed sends are not stored. */
@@ -43,7 +43,7 @@ const otpSessionSchema = new Schema<IOtpSession>(
     acquisitionSlug: { type: String, trim: true, lowercase: true },
     acquisitionKind: {
       type: String,
-      enum: ["blog", "page", "referral", "social"],
+      enum: ["blog", "page", "referral", "social", "ads"],
     },
     acceptedLegal: { type: Boolean, default: false },
     mailAccepted: { type: Boolean, default: false },

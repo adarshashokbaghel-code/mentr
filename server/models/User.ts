@@ -306,7 +306,7 @@ export interface IUser extends Document {
   registrationSource?: string;
   /** Blog/page slug that last-touched this signup (utm_campaign or /blog/{slug}). */
   acquisitionSlug?: string;
-  acquisitionKind?: "blog" | "page" | "referral" | "social";
+  acquisitionKind?: "blog" | "page" | "referral" | "social" | "ads";
   /** Public Supabase URL for mentor headshot */
   profileImageUrl?: string;
   /** Storage object path inside `mentrs_profile` (for replace/delete) */
@@ -639,7 +639,7 @@ const userSchema = new Schema<IUser>(
     acquisitionSlug: { type: String, trim: true, lowercase: true },
     acquisitionKind: {
       type: String,
-      enum: ["blog", "page", "referral", "social"],
+      enum: ["blog", "page", "referral", "social", "ads"],
     },
     profileImageUrl: { type: String, trim: true },
     profileImagePath: { type: String, trim: true },

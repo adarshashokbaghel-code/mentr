@@ -6,7 +6,10 @@ import {
   persistAttribution,
   trackMarketingEvent,
 } from "@/lib/marketing-client";
-import type { MarketingKind } from "@/lib/marketing-utm";
+import {
+  parseAcquisitionFromUrl,
+  type MarketingKind,
+} from "@/lib/marketing-utm";
 import { useEffect } from "react";
 
 /**
@@ -23,11 +26,21 @@ export function PageMarketing({
   kind?: MarketingKind;
 }) {
   useEffect(() => {
-    captureUrlAttribution();
-    persistAttribution({ slug, kind, path });
+    const captured = captureUrlAttribution();
+    // A Google click must survive this page's own slug, through signup.
+    if (captured?.kind !== "ads") {
+      persistAttribution({ slug, kind, path });
+    }
 
     const timer = window.setTimeout(() => {
-      void trackMarketingEvent({ type: "view", slug, kind, path });
+      const current = parseAcquisitionFromUrl(window.location.href);
+      const fromAd = current.kind === "ads" && current.slug;
+      void trackMarketingEvent({
+        type: "view",
+        slug: fromAd ? current.slug! : slug,
+        kind: fromAd ? "ads" : kind,
+        path,
+      });
     }, 400);
 
     return () => window.clearTimeout(timer);

@@ -1,4 +1,4 @@
-export type MarketingKind = "blog" | "page" | "social";
+export type MarketingKind = "blog" | "page" | "social" | "ads";
 
 const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,118}$/;
 const BLOG_PATH = /\/blog\/([a-z0-9][a-z0-9-]{0,118})/i;
@@ -14,9 +14,32 @@ export function sanitizeMarketingSlug(value: unknown): string | undefined {
 export function sanitizeMarketingKind(
   value: unknown,
 ): MarketingKind | undefined {
-  return value === "blog" || value === "page" || value === "social"
+  return value === "blog" || value === "page" || value === "social" || value === "ads"
     ? value
     : undefined;
+}
+
+/** Google Ads campaign names become slugs: "Parents India" → parents-india. */
+export function adsCampaignSlug(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const normalized = value
+    .trim()
+    .toLowerCase()
+    .replace(/[_\s]+/g, "-")
+    .replace(/[^a-z0-9-]/g, "");
+  return sanitizeMarketingSlug(normalized);
+}
+
+export function isPaidAdsClick(input: {
+  source?: string | null;
+  medium?: string | null;
+  hasClickId?: boolean;
+}): boolean {
+  if (input.hasClickId) return true;
+  const medium = input.medium?.toLowerCase();
+  if (medium === "cpc" || medium === "ppc" || medium === "paid") return true;
+  const source = input.source?.toLowerCase();
+  return source === "google" || source === "googleads" || source === "adwords";
 }
 
 export function normalizeSocialSource(
@@ -42,10 +65,17 @@ export function parseAcquisitionFromUrl(raw?: string | null): {
   if (!raw) return {};
   try {
     const url = new URL(raw);
-    const campaign = sanitizeMarketingSlug(url.searchParams.get("utm_campaign"));
+    const rawCampaign = url.searchParams.get("utm_campaign");
+    const campaign = sanitizeMarketingSlug(rawCampaign);
     const source = url.searchParams.get("utm_source")?.toLowerCase();
     const medium = url.searchParams.get("utm_medium")?.toLowerCase();
+    const hasClickId = ["gclid", "gbraid", "wbraid"].some((key) =>
+      Boolean(url.searchParams.get(key)),
+    );
     const ref = url.searchParams.get("ref");
+    if (isPaidAdsClick({ source, medium, hasClickId })) {
+      return { slug: adsCampaignSlug(rawCampaign) || "google-ads", kind: "ads" };
+    }
     const blogMatch = url.pathname.match(
       /^\/blog\/([a-z0-9][a-z0-9-]{0,118})/i,
     );

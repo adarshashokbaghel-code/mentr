@@ -12,12 +12,14 @@ import {
   GoogleVerificationTags,
 } from "@/components/seo/google-verification";
 import { ADSENSE_ENABLED } from "@/lib/site-scripts";
+import { JsonLd, organizationJsonLd } from "@/components/seo/json-ld";
 import {
   PARENT_COMPANY_NAME,
   PARENT_COMPANY_URL,
   SITE_BRAND,
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
+  SITE_LOGO_URL,
   SITE_NAME,
   SITE_TAGLINE,
   SITE_URL,
@@ -49,12 +51,10 @@ export const metadata: Metadata = {
   publisher: PARENT_COMPANY_NAME,
   alternates: { canonical: "/" },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
-      { url: "/icon-48.png", sizes: "48x48", type: "image/png" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-    ],
-    apple: "/apple-icon.png",
+    // One square PNG larger than 48px. Google Search uses a single favicon per hostname.
+    icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
+    shortcut: [{ url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" }],
+    apple: [{ url: "/apple-icon.png", sizes: "512x512", type: "image/png" }],
   },
   openGraph: {
     type: "website",
@@ -104,6 +104,22 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <head>
         <GoogleVerificationTags />
+        {/* In the raw HTML. Googlebot reads these; it does not use the metadata API. */}
+        <link
+          rel="icon"
+          href={`${SITE_URL}/icon-192.png`}
+          sizes="192x192"
+          type="image/png"
+        />
+        <link
+          rel="shortcut icon"
+          href={`${SITE_URL}/favicon.ico`}
+          type="image/x-icon"
+        />
+        <link rel="apple-touch-icon" href={`${SITE_URL}/apple-icon.png`} />
+        <meta name="msapplication-TileImage" content={SITE_LOGO_URL} />
+        <meta name="msapplication-TileColor" content="#fff6ee" />
+        <JsonLd data={organizationJsonLd} />
       </head>
       <body className="min-h-screen overflow-x-clip bg-cream font-sans text-ink antialiased">
         <SkipLink />

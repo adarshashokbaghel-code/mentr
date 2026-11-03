@@ -358,6 +358,34 @@ main {
   animation-play-state: paused;
 }
 
+.tutor-rise {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+
+.tutor-rise-track {
+  animation: tutor-rise 32s linear infinite;
+}
+
+.tutor-rise:hover .tutor-rise-track {
+  animation-play-state: paused;
+}
+
+@keyframes tutor-rise {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tutor-rise-track {
+    animation: none;
+  }
+}
+
 @keyframes home-premium-marquee {
   from {
     transform: translateX(0);

@@ -21,10 +21,12 @@ import { Testimonials } from "@/components/landing/testimonials";
 import { WaveSeparator } from "@/components/landing/wave-separator";
 import { ZeroFees } from "@/components/landing/zero-fees";
 import {
+  ORGANIZATION_LOGO_JSON_LD,
   PARENT_ORG_JSON_LD,
   SITE_BRAND,
   SITE_DESCRIPTION,
   SITE_KEYWORDS,
+  SITE_LOGO_URL,
   SITE_NAME,
   SITE_URL,
   absoluteUrl,
@@ -52,12 +54,8 @@ const jsonLd = [
     name: SITE_BRAND,
     alternateName: [SITE_NAME, "Paprly Mentr"],
     url: SITE_URL,
-    logo: {
-      "@type": "ImageObject",
-      url: absoluteUrl("/icon.png"),
-      width: 512,
-      height: 512,
-    },
+    logo: ORGANIZATION_LOGO_JSON_LD,
+    image: SITE_LOGO_URL,
     description: SITE_DESCRIPTION,
     parentOrganization: PARENT_ORG_JSON_LD,
     address: {

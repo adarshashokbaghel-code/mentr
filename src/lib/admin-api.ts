@@ -368,7 +368,7 @@ export type MarketingSignup = {
 
 export type MarketingPageRow = {
   slug: string;
-  kind: "blog" | "page" | "social";
+  kind: "blog" | "page" | "social" | "ads";
   views: number;
   uniqueViews: number;
   redirects: number;
@@ -396,7 +396,7 @@ export type MarketingDayPoint = {
 export type MarketingSourceSlice = {
   key: string;
   label: string;
-  kind: "blog" | "page" | "social" | "other";
+  kind: "blog" | "page" | "social" | "ads" | "other";
   signups: number;
   parents: number;
   faculty: number;

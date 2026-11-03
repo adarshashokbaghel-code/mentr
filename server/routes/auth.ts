@@ -334,7 +334,8 @@ router.post("/send-otp", ensureDb, async (req: Request, res: Response) => {
       (parsed.kind === "blog" ||
       parsed.kind === "page" ||
       parsed.kind === "referral" ||
-      parsed.kind === "social"
+      parsed.kind === "social" ||
+      parsed.kind === "ads"
         ? parsed.kind
         : undefined);
 

@@ -59,6 +59,19 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ADS_BOT_DISALLOW,
       },
       {
+        // Search favicon crawl: Googlebot reads the homepage, Googlebot-Image fetches the file.
+        userAgent: ["Googlebot", "Googlebot-Image"],
+        allow: [
+          "/",
+          "/favicon.ico",
+          "/icon-192.png",
+          "/icon.png",
+          "/logo.png",
+          "/apple-icon.png",
+        ],
+        disallow: privatePaths,
+      },
+      {
         userAgent: ANSWER_ENGINE_BOTS,
         allow: [
           "/",
@@ -72,7 +85,22 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "*",
-        allow: ["/", "/ads.txt", "/llms.txt", "/learn/llms.txt"],
+        allow: [
+          "/",
+          "/ads.txt",
+          "/llms.txt",
+          "/learn/llms.txt",
+          "/favicon.ico",
+          "/logo.png",
+          "/logo.jpg",
+          "/logo-1200.png",
+          "/icon.png",
+          "/icon-48.png",
+          "/icon-96.png",
+          "/icon-192.png",
+          "/apple-touch-icon.png",
+          "/apple-icon.png",
+        ],
         disallow: privatePaths,
       },
     ],
