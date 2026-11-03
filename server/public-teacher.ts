@@ -3,6 +3,7 @@ import { connectDb } from "./db";
 import { ensureFacultyMapLocation } from "./lib/map-location";
 import { isProfileComplete } from "./lib/profile-complete";
 import { User, type IUser } from "./models/User";
+import { isMentrPremiumActive } from "./services/premium-mentor-billing";
 import {
   loadFeaturedPublicTeachers,
   loadPublicPremiumTeachers,
@@ -167,6 +168,70 @@ export async function getPublicFeaturedTeachers(res: Response): Promise<void> {
   } catch (error) {
     console.error("public featured teachers error:", error);
     res.status(500).json({ error: "Failed to load featured teachers" });
+  }
+}
+
+function reelInitials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]!.toUpperCase())
+    .join("");
+}
+
+/**
+ * Card-sized reel for the parents landing. Photos only, no bios or phones.
+ * Kept small so the first two headshots can start downloading immediately.
+ */
+export async function loadReelTeachers(): Promise<Record<string, unknown>[]> {
+  await connectDb();
+  const users = (await User.find({
+    role: { $ne: "parent" },
+    "profile.name": { $exists: true, $ne: "" },
+    profileImageUrl: { $exists: true, $nin: ["", null] },
+  })
+    .select(
+      "profile.name profile.phoneNumber profile.subjects profile.designation profileCompleted profileImageUrl mentrPremium premiumMentorStatus",
+    )
+    .sort({ createdAt: -1 })
+    .limit(24)) as IUser[];
+
+  const withPhotos = users.filter((user) => {
+    if (!(user.profileImageUrl || "").trim()) return false;
+    if (user.profileCompleted) return true;
+    return Boolean(user.profile?.name && user.profile?.phoneNumber);
+  });
+
+  withPhotos.sort(
+    (a, b) => Number(isMentrPremiumActive(b)) - Number(isMentrPremiumActive(a)),
+  );
+
+  return withPhotos.slice(0, 12).map((user) => {
+    const name = user.profile?.name?.trim() || "Tutor";
+    const subjects = user.profile?.subjects || [];
+    const designation = user.profile?.designation || "Tutor";
+    return {
+      id: user._id.toString(),
+      name,
+      initials: reelInitials(name),
+      imageUrl: (user.profileImageUrl || "").trim(),
+      subjects,
+      subjectLine: subjects.slice(0, 2).join(" & ") || "Faculty",
+      kind: ["Coach", "Trainer"].includes(designation) ? "mentor" : "tutor",
+      premium: isMentrPremiumActive(user),
+    };
+  });
+}
+
+export async function getPublicReelTeachers(res: Response): Promise<void> {
+  try {
+    const teachers = await memoized("reel", () => loadReelTeachers());
+    res.set("Cache-Control", PUBLIC_CDN_CACHE);
+    res.json({ teachers });
+  } catch (error) {
+    console.error("public reel teachers error:", error);
+    res.status(500).json({ error: "Failed to load tutors" });
   }
 }
 

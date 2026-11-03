@@ -1,6 +1,7 @@
 "use client";
 
 import { ProfilePlaceholder } from "@/components/ui/profile-placeholder";
+import { tutorCardPhotoUrl } from "@/lib/tutor-photo";
 import { cn } from "@/lib/utils";
 import type { ProfilePlaceholderSize } from "@/components/ui/profile-placeholder";
 import { useEffect, useState } from "react";
@@ -15,6 +16,12 @@ type MentorPhotoProps = {
   rounded?: "md" | "lg" | "xl" | "2xl" | "full";
   className?: string;
   alt?: string;
+  /** First cards on screen. Starts the download immediately. */
+  priority?: boolean;
+  /** Request the small CDN rendition, then the original if that fails. */
+  thumb?: boolean;
+  /** Fires when the photo has loaded or will not load. */
+  onSettled?: () => void;
 };
 
 const SIZE_BOX: Record<ProfilePlaceholderSize, string> = {
@@ -52,13 +59,20 @@ export function MentorPhoto({
   rounded = "lg",
   className,
   alt,
+  priority = false,
+  thumb = false,
+  onSettled,
 }: MentorPhotoProps) {
-  const src = cleanImageUrl(imageUrl);
+  const full = cleanImageUrl(imageUrl);
+  const thumbSrc = thumb && full ? tutorCardPhotoUrl(full) : full;
+  const [useFull, setUseFull] = useState(false);
   const [failed, setFailed] = useState(false);
+  const src = !full ? null : useFull ? full : thumbSrc;
 
   useEffect(() => {
     setFailed(false);
-  }, [src]);
+    setUseFull(false);
+  }, [full]);
 
   if (src && !failed) {
     return (
@@ -66,9 +80,18 @@ export function MentorPhoto({
       <img
         src={src}
         alt={alt || name || "Mentor photo"}
-        loading="lazy"
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         decoding="async"
-        onError={() => setFailed(true)}
+        onLoad={() => onSettled?.()}
+        onError={() => {
+          if (!useFull && full && src !== full) {
+            setUseFull(true);
+            return;
+          }
+          setFailed(true);
+          onSettled?.();
+        }}
         className={cn(
           "shrink-0 bg-cream-band object-cover object-center",
           size !== "fill" && "ring-1 ring-ink/8",

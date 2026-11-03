@@ -341,6 +341,62 @@ export async function fetchPublicTeachers(_opts?: {
 let premiumMemory: PublicTeachersCache | null = null;
 let premiumInflight: Promise<FetchTeachersResult> | null = null;
 
+type ReelCard = {
+  id: string;
+  name: string;
+  initials: string;
+  imageUrl: string;
+  subjects: string[];
+  subjectLine: string;
+  kind: "tutor" | "mentor";
+  premium: boolean;
+};
+
+function reelCardToTeacher(card: ReelCard): Teacher {
+  return {
+    id: card.id,
+    name: card.name,
+    initials: card.initials,
+    imageUrl: card.imageUrl,
+    subjects: card.subjects || [],
+    subjectLine: card.subjectLine || "Faculty",
+    experienceYears: 0,
+    rating: 0,
+    reviewCount: 0,
+    openSlots: 0,
+    designation: "Tutor",
+    area: "",
+    locality: "",
+    lat: NaN,
+    lng: NaN,
+    bio: "",
+    levels: "",
+    modes: [],
+    languages: [],
+    slots: [],
+    phone: null,
+    verified: false,
+    premium: Boolean(card.premium),
+    kind: card.kind === "mentor" ? "mentor" : "tutor",
+    live: true,
+  };
+}
+
+/** Photo cards for the parents reel — short payload, headshots only. */
+export async function fetchReelTeachers(): Promise<FetchTeachersResult> {
+  try {
+    const res = await fetch("/api/teachers/reel");
+    if (!res.ok) return { teachers: [], failed: true };
+    const data = (await res.json()) as { teachers?: ReelCard[] };
+    return {
+      teachers: (data.teachers || []).map(reelCardToTeacher),
+      failed: false,
+    };
+  } catch {
+    return { teachers: [], failed: true };
+  }
+}
+
 /** Active Mentr Premium mentors (public, no phones). Shared by every caller on the page. */
 export async function fetchPremiumTeachers(): Promise<FetchTeachersResult> {
   if (premiumMemory && Date.now() - premiumMemory.at < PUBLIC_TEACHERS_TTL_MS) {
