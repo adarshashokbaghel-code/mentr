@@ -97,6 +97,25 @@ export function absoluteUrl(path = "/"): string {
   return `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
+/**
+ * Square wordmark for Organization schema (knowledge panel).
+ * `/icon.png` is the same artwork and is what production already serves.
+ * `/logo.png` is rewritten to it when the dedicated file is not deployed.
+ */
+export const SITE_LOGO_PATH = "/logo.png";
+export const SITE_LOGO_URL = `${SITE_URL}/logo.png`;
+export const SITE_LOGO_WIDTH = 512;
+export const SITE_LOGO_HEIGHT = 512;
+
+export const ORGANIZATION_LOGO_JSON_LD = {
+  "@type": "ImageObject" as const,
+  url: SITE_LOGO_URL,
+  contentUrl: SITE_LOGO_URL,
+  width: SITE_LOGO_WIDTH,
+  height: SITE_LOGO_HEIGHT,
+  caption: SITE_BRAND,
+};
+
 /** Shared Open Graph fields for programmatic hub pages. */
 export function hubOpenGraph(
   title: string,

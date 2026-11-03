@@ -25,6 +25,8 @@ interface FacultyAuthFormProps {
   /** Path to return to after a parent finishes logging in (e.g. /search) */
   next?: string;
   onComplete?: () => void;
+  /** Stay on the current page after a successful code. Used by the ad landing. */
+  stay?: boolean;
 }
 
 export function FacultyAuthForm({
@@ -33,6 +35,7 @@ export function FacultyAuthForm({
   role = "faculty",
   next,
   onComplete,
+  stay = false,
 }: FacultyAuthFormProps) {
   const { setUser } = useAuth();
   const router = useRouter();
@@ -49,14 +52,15 @@ export function FacultyAuthForm({
   const [cooldown, setCooldown] = useState(0);
   /** Signup only — must be explicitly checked (legal apps do not pre-tick). */
   const [acceptedLegal, setAcceptedLegal] = useState(false);
+  const [mode, setMode] = useState<"login" | "signup">(variant ?? "login");
 
   const base = role === "parent" ? "/parent" : "/faculty";
   const nextSuffix = next ? `?next=${encodeURIComponent(next)}` : "";
 
   const acquisition = useMemo(() => {
-    if (variant !== "signup") return {};
+    if (mode !== "signup") return {};
     return resolveAcquisition();
-  }, [variant, searchParams]);
+  }, [mode, searchParams]);
 
   useEffect(() => {
     if (cooldown <= 0) return;
@@ -68,7 +72,7 @@ export function FacultyAuthForm({
     setError("");
     setErrorCode("");
     setMismatchRole(null);
-    if (variant === "signup" && !acceptedLegal) {
+    if (mode === "signup" && !acceptedLegal) {
       setError("Please accept the Terms of service and Privacy policy to continue.");
       return;
     }
@@ -76,14 +80,14 @@ export function FacultyAuthForm({
     try {
       const data = await authApi.sendOtp(
         email.trim(),
-        variant,
+        mode,
         role,
         acquisition.registrationSource,
         {
           slug: acquisition.acquisitionSlug,
           kind: acquisition.acquisitionKind,
         },
-        variant === "signup" ? { acceptedLegal: true } : undefined,
+        mode === "signup" ? { acceptedLegal: true } : undefined,
       );
       setSessionId(data.sessionId);
       setIsNewUser(Boolean(data.isNewUser));
@@ -107,7 +111,7 @@ export function FacultyAuthForm({
     } finally {
       setLoading(false);
     }
-  }, [email, variant, role, acquisition, acceptedLegal]);
+  }, [email, mode, role, acquisition, acceptedLegal]);
 
   async function handleSendOtp(e: React.FormEvent) {
     e.preventDefault();
@@ -134,6 +138,7 @@ export function FacultyAuthForm({
         await syncShortlistAfterAuth(data.user, setUser);
       }
       onComplete?.();
+      if (stay) return;
 
       if (data.user.role === "parent") {
         const skipProfiling = next && skipsProfiling(next);
@@ -169,13 +174,13 @@ export function FacultyAuthForm({
   const title =
     step === "otp"
       ? "Enter the code"
-      : variant === "signup"
+      : mode === "signup"
         ? "Create a new account"
         : "Sign in to your account";
 
   const subtitle =
     step === "email"
-      ? variant === "signup"
+      ? mode === "signup"
         ? role === "parent"
           ? "Find trusted tutors near you. Contact free on WhatsApp."
           : "List worldwide. Parents reach you on WhatsApp."
@@ -184,10 +189,14 @@ export function FacultyAuthForm({
 
   return (
     <div className={cn("w-full", className)}>
-      <div className="mb-7">
-        <h1 className="text-[26px] font-bold tracking-tight text-ink sm:text-[28px]">
-          {title}
-        </h1>
+      <div className={stay ? "mb-4" : "mb-7"}>
+        {stay ? (
+          <h2 className="text-xl font-bold tracking-tight text-ink">{title}</h2>
+        ) : (
+          <h1 className="text-[26px] font-bold tracking-tight text-ink sm:text-[28px]">
+            {title}
+          </h1>
+        )}
         {subtitle && <p className="mt-1.5 text-sm text-muted">{subtitle}</p>}
       </div>
 
@@ -241,7 +250,7 @@ export function FacultyAuthForm({
             />
           </label>
 
-          {variant === "signup" ? (
+          {mode === "signup" ? (
             <LegalConsentCheckbox
               checked={acceptedLegal}
               onCheckedChange={setAcceptedLegal}
@@ -250,12 +259,12 @@ export function FacultyAuthForm({
 
           <button
             type="submit"
-            disabled={loading || (variant === "signup" && !acceptedLegal)}
+            disabled={loading || (mode === "signup" && !acceptedLegal)}
             className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-coral text-[15px] font-semibold text-white transition hover:bg-coral-dark disabled:opacity-60"
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
-            ) : variant === "signup" ? (
+            ) : mode === "signup" ? (
               "Create free account"
             ) : (
               "Sign in"
@@ -263,32 +272,52 @@ export function FacultyAuthForm({
           </button>
 
           <p className="pt-1 text-center text-sm text-muted">
-            {variant === "login" ? (
+            {mode === "login" ? (
               <>
                 Or{" "}
-                <Link
-                  href={`${base}/signup${nextSuffix}`}
-                  className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
-                >
-                  create a new account
-                </Link>
+                {stay ? (
+                  <button
+                    type="button"
+                    onClick={() => setMode("signup")}
+                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                  >
+                    create a new account
+                  </button>
+                ) : (
+                  <Link
+                    href={`${base}/signup${nextSuffix}`}
+                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                  >
+                    create a new account
+                  </Link>
+                )}
               </>
             ) : (
               <>
                 Already have an account?{" "}
-                <Link
-                  href={`${base}${nextSuffix}`}
-                  className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
-                >
-                  Login
-                </Link>
+                {stay ? (
+                  <button
+                    type="button"
+                    onClick={() => setMode("login")}
+                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                  >
+                    Login
+                  </button>
+                ) : (
+                  <Link
+                    href={`${base}${nextSuffix}`}
+                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                  >
+                    Login
+                  </Link>
+                )}
               </>
             )}
           </p>
 
           <p className="text-center text-xs text-muted">
             We&apos;ll email a one-time code. No password needed.
-            {variant === "login" ? (
+            {mode === "login" ? (
               <>
                 {" "}
                 By signing in you continue under our{" "}

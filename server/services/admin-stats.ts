@@ -26,6 +26,7 @@ function sourceLabel(
     return `Social · ${slug}`;
   }
   if (kind === "page" && slug) return `Page · ${slug}`;
+  if (kind === "ads" && slug) return `Google Ads · ${slug}`;
   if (kind === "referral") return "Referral";
   if (registrationSource) {
     try {
@@ -264,7 +265,8 @@ export async function getAdminStats(): Promise<AdminStats> {
       (user.acquisitionKind === "blog" ||
         user.acquisitionKind === "page" ||
         user.acquisitionKind === "social" ||
-        user.acquisitionKind === "referral")
+        user.acquisitionKind === "referral" ||
+        user.acquisitionKind === "ads")
         ? {
             slug: user.acquisitionSlug as string,
             kind: user.acquisitionKind as string,

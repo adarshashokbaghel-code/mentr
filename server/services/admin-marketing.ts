@@ -21,7 +21,7 @@ export type MarketingSignup = {
 
 export type MarketingPageRow = {
   slug: string;
-  kind: "blog" | "page" | "social";
+  kind: "blog" | "page" | "social" | "ads";
   views: number;
   uniqueViews: number;
   redirects: number;
@@ -49,7 +49,7 @@ export type MarketingDayPoint = {
 export type MarketingSourceSlice = {
   key: string;
   label: string;
-  kind: "blog" | "page" | "social" | "other";
+  kind: "blog" | "page" | "social" | "ads" | "other";
   signups: number;
   parents: number;
   faculty: number;
@@ -104,7 +104,7 @@ function dayKey(d: Date): string {
 
 function emptyRow(
   slug: string,
-  kind: "blog" | "page" | "social",
+  kind: "blog" | "page" | "social" | "ads",
 ): MarketingPageRow {
   return {
     slug,
@@ -145,7 +145,7 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
     MarketingStat.aggregate<{
       _id: {
         slug: string;
-        kind: "blog" | "page" | "social";
+        kind: "blog" | "page" | "social" | "ads";
         event: "view" | "redirect";
       };
       total: number;
@@ -207,13 +207,13 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
 
   const rows = new Map<string, MarketingPageRow>();
 
-  function rowKey(slug: string, kind: "blog" | "page" | "social") {
+  function rowKey(slug: string, kind: "blog" | "page" | "social" | "ads") {
     return `${kind}:${slug}`;
   }
 
   function ensure(
     slug: string,
-    kind: "blog" | "page" | "social",
+    kind: "blog" | "page" | "social" | "ads",
   ): MarketingPageRow {
     const key = rowKey(slug, kind);
     const existing = rows.get(key);
@@ -229,7 +229,10 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
 
   for (const item of aggregates) {
     const { slug, kind, event } = item._id;
-    if (!slug || (kind !== "blog" && kind !== "page" && kind !== "social")) {
+    if (
+      !slug ||
+      (kind !== "blog" && kind !== "page" && kind !== "social" && kind !== "ads")
+    ) {
       continue;
     }
     const row = ensure(slug, kind);
@@ -324,10 +327,11 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
       user.acquisitionSlug &&
       (user.acquisitionKind === "blog" ||
         user.acquisitionKind === "page" ||
-        user.acquisitionKind === "social")
+        user.acquisitionKind === "social" ||
+        user.acquisitionKind === "ads")
         ? {
             slug: user.acquisitionSlug as string,
-            kind: user.acquisitionKind as "blog" | "page" | "social",
+            kind: user.acquisitionKind as "blog" | "page" | "social" | "ads",
           }
         : parseAcquisitionFromUrl(user.registrationSource);
 
@@ -339,7 +343,8 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
       fromField.slug &&
       (fromField.kind === "blog" ||
         fromField.kind === "page" ||
-        fromField.kind === "social")
+        fromField.kind === "social" ||
+        fromField.kind === "ads")
     ) {
       const row = ensure(fromField.slug, fromField.kind);
       applySignup(row, user, connections);
@@ -354,7 +359,8 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
       }
 
       if (day) {
-        day[fromField.kind] += 1;
+        if (fromField.kind === "ads") day.page += 1;
+        else day[fromField.kind] += 1;
         day.total += 1;
       }
 
@@ -369,7 +375,9 @@ export async function getAdminMarketing(): Promise<MarketingOverview> {
                 : `Social · ${fromField.slug}`
           : fromField.kind === "blog"
             ? `Blog · ${fromField.slug}`
-            : `Page · ${fromField.slug}`;
+            : fromField.kind === "ads"
+              ? `Google Ads · ${fromField.slug}`
+              : `Page · ${fromField.slug}`;
       bumpSource(
         `${fromField.kind}:${fromField.slug}`,
         label,

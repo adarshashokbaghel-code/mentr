@@ -97,6 +97,27 @@ const nextConfig: NextConfig = {
           { key: "X-Content-Type-Options", value: "nosniff" },
         ],
       },
+      ...[
+        "/favicon.ico",
+        "/icon.png",
+        "/icon.jpg",
+        "/icon-48.png",
+        "/icon-96.png",
+        "/icon-192.png",
+        "/logo.png",
+        "/logo.jpg",
+        "/logo-1200.png",
+        "/apple-icon.png",
+        "/apple-touch-icon.png",
+        "/apple-touch-icon-precomposed.png",
+      ].map((source) => ({
+        source,
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+        ],
+      })),
       {
         source: "/models/:path*",
         headers: [
@@ -170,13 +191,22 @@ const nextConfig: NextConfig = {
     ];
   },
   async rewrites() {
+    // If public/logo.png is not in the deploy, the schema URL still returns the icon.
+    // A real file in public/ wins over this rewrite.
+    const logoFallback = [
+      { source: "/logo.png", destination: "/icon.png" },
+      { source: "/logo.jpg", destination: "/icon.png" },
+      { source: "/logo-1200.png", destination: "/icon.png" },
+    ];
+
     // Local dev: proxy /api to the standalone Express process (tsx watch).
     // Production (Vercel): /api is served by pages/api/[[...all]].ts.
     if (process.env.NODE_ENV !== "development") {
-      return [];
+      return logoFallback;
     }
 
     return [
+      ...logoFallback,
       {
         source: "/api/:path*",
         destination: `http://localhost:${backendPort}/api/:path*`,

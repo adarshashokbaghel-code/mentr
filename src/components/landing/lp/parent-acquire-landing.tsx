@@ -5,19 +5,46 @@
  * Used by /parents.
  */
 
+import { useAuth } from "@/components/auth/auth-provider";
+import { FacultyAuthForm } from "@/components/auth/faculty-auth-form";
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
+import { CTA } from "@/components/landing/cta";
+import { FAQ } from "@/components/landing/faq";
+import { FeaturedMentors } from "@/components/landing/featured-mentors";
+import { HomeMentorStatsBand } from "@/components/landing/home-mentor-stats-band";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { MentrFlow } from "@/components/landing/mentr-flow";
+import { PopularSearches } from "@/components/landing/popular-searches";
+import { SubjectGallery } from "@/components/landing/subject-gallery";
+import { Testimonials } from "@/components/landing/testimonials";
+import { ZeroFees } from "@/components/landing/zero-fees";
+import { BookDemoButton } from "@/components/demo/book-demo-button";
+import { SearchTeacherCard } from "@/components/search/search-teacher-card";
 import { Button } from "@/components/ui/button";
-import { POST_REQUIREMENT_HREF } from "@/components/requirements/post-requirement-host";
+import { ShortlistProvider } from "@/components/search/shortlist-context";
+import { MentorPhoto } from "@/components/ui/mentor-photo";
+import { PremiumMentorBadge } from "@/components/ui/mentor-status-badges";
+import {
+  getStoredAttribution,
+  isPaidAdsLanding,
+  trackMarketingEvent,
+} from "@/lib/marketing-client";
 import {
   getParentNeed,
-  parentNeedSearchHref,
   PARENT_NEED_CITIES,
   PARENT_NEED_LEVELS,
   PARENT_NEED_SUBJECTS,
   saveParentNeed,
   type ParentNeed,
 } from "@/lib/parent-need";
+import {
+  fetchLiveTeachers,
+  fetchPremiumTeachers,
+  fetchPublicTeachers,
+  searchTeachers,
+  type Teacher,
+} from "@/lib/teachers";
 import { SITE_BRAND } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import {
@@ -26,35 +53,175 @@ import {
   BookOpen,
   MapPin,
   Search,
-  Zap,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useSyncExternalStore } from "react";
 
 export type ParentAcquireIntent = "default" | "browse" | "instant";
 
-const INSTANT_HREF = POST_REQUIREMENT_HREF;
+function PremiumTutorCard({ teacher }: { teacher: Teacher }) {
+  const name = teacher.name.replace(/\s+/g, " ").trim();
+  const subject = teacher.subjects[0] || teacher.subjectLine;
+  return (
+    <article className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-[0_8px_24px_rgba(26,35,28,0.06)]">
+      <div className="tutor-photo relative h-36 bg-cream-band">
+        <MentorPhoto
+          name={name}
+          initials={teacher.initials}
+          kind={teacher.kind}
+          imageUrl={teacher.imageUrl}
+          size="fill"
+          showInitials={false}
+          rounded="xl"
+          className="!absolute !inset-0 !h-full !w-full !rounded-none !border-0"
+          alt=""
+        />
+        {teacher.premium ? (
+          <span className="absolute left-3 top-3">
+            <PremiumMentorBadge size="sm" />
+          </span>
+        ) : null}
+      </div>
+      <div className="p-2.5">
+        <p className="truncate text-sm font-bold text-ink">{name}</p>
+        <p className="mt-0.5 truncate text-xs font-medium text-muted">{subject}</p>
+        <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+          <Link
+            href={`/teachers/${teacher.id}`}
+            className="inline-flex h-9 w-full items-center justify-center rounded-md border border-hairline bg-cream px-2 text-xs font-semibold text-ink hover:bg-cream-band"
+          >
+            View profile
+          </Link>
+          <BookDemoButton
+            teacher={{ id: teacher.id, name, subjects: teacher.subjects }}
+            label="Book demo"
+            className="inline-flex h-9 w-full items-center justify-center gap-1.5 rounded-md bg-coral px-2 text-xs font-semibold text-white hover:bg-coral-dark"
+          />
+        </div>
+      </div>
+    </article>
+  );
+}
 
-const POPULAR_LINKS = [
-  { label: "Tutors in Bengaluru", href: "/tutors/bengaluru" },
-  { label: "Maths tutors", href: "/tutors/bengaluru/maths" },
-  { label: "Physics tutors", href: "/tutors/bengaluru/physics" },
-  { label: "Chemistry tutors", href: "/tutors/bengaluru/chemistry" },
-  { label: "English tutors", href: "/tutors/bengaluru/english" },
-  { label: "Coding tutors", href: "/tutors/bengaluru/coding" },
-  { label: "Hyderabad tutors", href: "/tutors/hyderabad" },
-  { label: "Delhi tutors", href: "/tutors/delhi" },
-  { label: "Mumbai tutors", href: "/tutors/mumbai" },
-] as const;
+function useWideTutorReel() {
+  return useSyncExternalStore(
+    (onChange) => {
+      const query = window.matchMedia("(min-width: 1024px)");
+      query.addEventListener("change", onChange);
+      return () => query.removeEventListener("change", onChange);
+    },
+    () => window.matchMedia("(min-width: 1024px)").matches,
+    () => false,
+  );
+}
+
+function PremiumTutorReel() {
+  const [tutors, setTutors] = useState<Teacher[]>([]);
+  const wide = useWideTutorReel();
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const [{ teachers: everyone }, { teachers: premium }] = await Promise.all([
+        fetchPublicTeachers(),
+        fetchPremiumTeachers(),
+      ]);
+      if (cancelled) return;
+      const seen = new Set<string>();
+      const ordered: Teacher[] = [];
+      const rest = everyone.filter((teacher) => !teacher.premium);
+      for (const teacher of [...premium, ...everyone.filter((t) => t.premium), ...rest]) {
+        if (seen.has(teacher.id)) continue;
+        seen.add(teacher.id);
+        ordered.push(teacher);
+      }
+      setTutors(ordered);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (tutors.length === 0) {
+    return (
+      <div className="overflow-hidden">
+        <div className="w-[min(78vw,280px)] overflow-hidden rounded-2xl border border-hairline bg-white lg:w-full">
+          <div className="h-36 animate-pulse bg-cream-band" />
+          <div className="space-y-2 p-2.5">
+            <div className="h-4 w-24 animate-pulse rounded bg-cream-band" />
+            <div className="h-3 w-16 animate-pulse rounded bg-cream-band" />
+            <div className="mt-2.5 h-9 animate-pulse rounded-md bg-cream-band" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const slide = tutors.length > 1 ? [...tutors, ...tutors] : tutors;
+  const glideSeconds = Math.max(24, tutors.length * 4);
+
+  if (!wide) {
+    return (
+      <div className="max-w-full overflow-hidden">
+        <style>{`@keyframes tutor-glide{from{transform:translateX(0)}to{transform:translateX(-50%)}}.tutor-photo img{object-fit:contain !important;object-position:center center;}@media (prefers-reduced-motion:reduce){.tutor-glide-track{animation:none !important;}}`}</style>
+        <div
+          className={tutors.length > 1 ? "tutor-glide-track flex w-max gap-3" : "flex gap-3"}
+          style={
+            tutors.length > 1
+              ? { animation: `tutor-glide ${glideSeconds}s linear infinite` }
+              : undefined
+          }
+        >
+          {slide.map((teacher, index) => (
+            <div key={`${teacher.id}-m-${index}`} className="w-[min(78vw,280px)] max-w-[280px] shrink-0">
+              <PremiumTutorCard teacher={teacher} />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  const rows: Teacher[][] = [];
+  for (let i = 0; i < tutors.length; i += 2) rows.push(tutors.slice(i, i + 2));
+  const loop = rows.length > 1 ? [...rows, ...rows] : rows;
+
+  return (
+    <div className="tutor-rise h-[520px] overflow-hidden sm:h-[560px]">
+      <style>{`@keyframes tutor-rise{from{transform:translateY(0)}to{transform:translateY(-50%)}}.tutor-photo img{object-fit:contain !important;object-position:center center;}`}</style>
+      <div
+        className={rows.length > 1 ? "tutor-rise-track flex flex-col gap-4" : "flex flex-col gap-4"}
+        style={
+          rows.length > 1
+            ? { animation: `tutor-rise ${Math.max(28, rows.length * 5)}s linear infinite` }
+            : undefined
+        }
+        onMouseEnter={(e) => {
+          e.currentTarget.style.animationPlayState = "paused";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.animationPlayState = "running";
+        }}
+      >
+        {loop.map((row, rowIndex) => (
+          <div key={rowIndex} className="grid grid-cols-2 gap-4">
+            {row.map((teacher) => (
+              <PremiumTutorCard key={`${teacher.id}-${rowIndex}`} teacher={teacher} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const field =
   "h-12 w-full min-w-0 rounded-lg border border-ink/15 bg-white px-3.5 text-sm font-medium text-ink outline-none transition focus:border-coral focus:ring-2 focus:ring-coral/20";
 
 function ParentNeedForm({
-  emphasize,
+  onShow,
 }: {
-  emphasize: "browse" | "instant" | "balanced";
+  onShow: (need: ParentNeed) => void;
 }) {
   const [need, setNeed] = useState<ParentNeed>({
     subject: "Mathematics",
@@ -65,14 +232,36 @@ function ParentNeedForm({
 
   useEffect(() => {
     const stored = getParentNeed();
-    if (stored) setNeed(stored);
+    if (stored) {
+      setNeed(stored);
+      return;
+    }
+    if (isPaidAdsLanding()) {
+      setNeed({
+        subject: "Mathematics",
+        level: "Class 9–10",
+        city: "Online / any city",
+        mode: "online",
+      });
+    }
   }, []);
 
   useEffect(() => {
     saveParentNeed(need);
   }, [need]);
 
-  const searchHref = parentNeedSearchHref(need);
+  function showHere() {
+    const ads = getStoredAttribution();
+    const fromAd = ads?.kind === "ads";
+    void trackMarketingEvent({
+      type: "redirect",
+      slug: fromAd ? ads.slug : "parents",
+      kind: fromAd ? "ads" : "page",
+      path: "/parents",
+      href: "/parents",
+    });
+    onShow(need);
+  }
 
   return (
     <div className="w-full">
@@ -158,48 +347,17 @@ function ParentNeedForm({
         </fieldset>
       </div>
 
-      <div className="mt-5 flex flex-col gap-2.5 sm:flex-row sm:items-center">
-        <Link
-          href={searchHref}
-          className={cn(
-            "block w-full sm:w-auto",
-            emphasize === "instant" && "sm:order-2",
-          )}
+      <div className="mt-4">
+        <Button
+          type="button"
+          size="lg"
+          onClick={showHere}
+          className="h-12 w-full gap-2 text-[15px] font-bold shadow-[3px_3px_0_0_#1a231c]"
         >
-          <Button
-            size="lg"
-            variant={emphasize === "instant" ? "secondary" : "primary"}
-            className={cn(
-              "h-12 w-full gap-2 px-6 text-[15px] font-bold sm:w-auto",
-              emphasize !== "instant" &&
-                "shadow-[3px_3px_0_0_#1a231c]",
-            )}
-          >
-            <Search className="h-4 w-4" />
-            Find a Tutor
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-        </Link>
-        <Link
-          href={INSTANT_HREF}
-          className={cn(
-            "block w-full sm:w-auto",
-            emphasize === "instant" && "sm:order-1",
-          )}
-        >
-          <Button
-            size="lg"
-            variant={emphasize === "instant" ? "primary" : "secondary"}
-            className={cn(
-              "h-12 w-full gap-2 border-2 border-ink px-6 text-[15px] font-bold sm:w-auto",
-              emphasize === "instant" &&
-                "border-0 shadow-[3px_3px_0_0_#1a231c]",
-            )}
-          >
-            <Zap className="h-4 w-4" />
-            Post a requirement
-          </Button>
-        </Link>
+          <Search className="h-4 w-4" />
+          Show tutors
+          <ArrowRight className="h-4 w-4" />
+        </Button>
       </div>
     </div>
   );
@@ -210,100 +368,62 @@ export function ParentAcquireLanding({
 }: {
   intent?: ParentAcquireIntent;
 }) {
-  const formEmphasize =
-    intent === "instant"
-      ? "instant"
-      : intent === "browse"
-        ? "browse"
-        : "balanced";
+  const { user, loading: authLoading } = useAuth();
+  const parentReady = user?.role === "parent";
+  const [results, setResults] = useState<Teacher[] | null>(null);
+  const [searching, setSearching] = useState(false);
+  const [searchFailed, setSearchFailed] = useState(false);
+  const [catalog, setCatalog] = useState<Teacher[]>([]);
 
-  const headline =
-    intent === "instant"
-      ? "Get matched with a verified tutor"
-      : "Find a verified tutor";
+  const headline = parentReady
+    ? "Find tutors for your child"
+    : intent === "instant"
+      ? "Create an account and get tutor pitches"
+      : "Create an account and find tutors";
 
-  const sub =
-    intent === "instant"
-      ? "Post what you need — verified tutors pitch, you compare and book a free demo."
-      : "Free for parents. No commission. No agency fee.";
+  async function showTutors(need: ParentNeed, tier: "premium" | "all" = "premium") {
+    setSearching(true);
+    setSearchFailed(false);
+    const { teachers, failed } = await fetchLiveTeachers();
+    setSearching(false);
+    if (failed) {
+      setSearchFailed(true);
+      setResults([]);
+      return;
+    }
+    setCatalog(teachers);
+    const cityQuery = need.city !== "Online / any city" ? need.city : undefined;
+    setResults(
+      searchTeachers({
+        teachers,
+        subject: need.subject,
+        query: cityQuery,
+        mode: need.mode === "home" ? "inperson" : "online",
+        mentorTier: tier,
+        kind: "all",
+      }),
+    );
+    window.requestAnimationFrame(() => {
+      document.getElementById("tutor-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
 
   return (
     <>
       <Navbar />
       <main className="w-full overflow-x-clip bg-cream">
-        {/* Hero — one composition, full-bleed visual */}
-        <section className="relative isolate min-h-0 overflow-hidden border-b border-hairline sm:min-h-[min(92dvh,780px)]">
-          <Image
-            src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=2000&q=80"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[center_30%]"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-r from-[#fffaf5]/97 via-[#fffaf5]/88 to-[#fffaf5]/55 sm:to-[#fffaf5]/40"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-cream via-transparent to-[#fffaf5]/50"
-          />
-
-          <div className="relative mx-auto flex min-h-0 max-w-[1200px] flex-col justify-center px-4 py-10 sm:min-h-[min(92dvh,780px)] sm:px-6 sm:py-16 sm:pb-16 lg:px-8">
-            <div className="max-w-xl">
-              <p className="text-sm font-bold tracking-tight text-ink sm:text-lg">
-                {SITE_BRAND}
-              </p>
-              <h1 className="mt-2 max-w-[14ch] text-[2rem] font-bold leading-[1.06] tracking-tight text-ink sm:mt-3 sm:text-5xl lg:text-[3.5rem]">
+        <section className="border-b border-hairline bg-cream">
+          <div className="mx-auto grid max-w-[1100px] items-start gap-8 px-4 py-8 sm:px-6 sm:py-12 lg:grid-cols-2 lg:items-start lg:gap-10 lg:px-8">
+            <div className="min-w-0">
+              <p className="text-sm font-bold tracking-tight text-ink">{SITE_BRAND}</p>
+              <h1 className="mt-2 max-w-[14ch] text-[2rem] font-bold leading-[1.08] tracking-tight text-ink sm:text-5xl">
                 {headline}
               </h1>
-              <p className="mt-3 max-w-[34ch] text-[15px] leading-relaxed text-ink/75 sm:mt-4 sm:text-lg">
-                {sub}
-              </p>
-
-              <div className="mt-8 flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
-                <Link
-                  href="#tell-us"
-                  className={cn(intent === "instant" && "sm:order-2")}
-                >
-                  <Button
-                    size="lg"
-                    variant={intent === "instant" ? "secondary" : "primary"}
-                    className={cn(
-                      "h-12 w-full gap-2 px-7 text-[15px] font-bold sm:w-auto",
-                      intent !== "instant" &&
-                        "shadow-[4px_4px_0_0_#1a231c]",
-                    )}
-                  >
-                    <Search className="h-4 w-4" />
-                    Find a Tutor
-                  </Button>
-                </Link>
-                <Link
-                  href={INSTANT_HREF}
-                  className={cn(intent === "instant" && "sm:order-1")}
-                >
-                  <Button
-                    size="lg"
-                    variant={intent === "instant" ? "primary" : "secondary"}
-                    className={cn(
-                      "h-12 w-full gap-2 border-2 border-ink bg-white/90 px-7 text-[15px] font-bold backdrop-blur-sm sm:w-auto",
-                      intent === "instant" &&
-                        "border-0 bg-coral shadow-[4px_4px_0_0_#1a231c]",
-                    )}
-                  >
-                    <Zap className="h-4 w-4" />
-                    Post a requirement
-                  </Button>
-                </Link>
-              </div>
-
-              <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-ink/80">
+              <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold text-ink/80">
                 {[
                   "Verified tutors",
                   "₹0 for parents",
-                  "Direct WhatsApp on accept",
+                  "No commission",
                 ].map((item) => (
                   <li key={item} className="inline-flex items-center gap-1.5">
                     <BadgeCheck className="h-4 w-4 shrink-0 text-sage" />
@@ -311,127 +431,79 @@ export function ParentAcquireLanding({
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Need form */}
-        <section
-          id="tell-us"
-          className="scroll-mt-20 border-b border-hairline bg-white"
-        >
-          <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
-            <h2 className="max-w-[28ch] text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-              Tell us the subject, class, location and preferred mode
-            </h2>
-            <p className="mt-2 max-w-[48ch] text-base leading-relaxed text-muted">
-              We&apos;ll help you find relevant mentors — browse matches, or post
-              a requirement and let tutors pitch to you.
-            </p>
-            <div className="mt-8">
-              <ParentNeedForm emphasize={formEmphasize} />
-            </div>
-          </div>
-        </section>
-
-        {/* How it works — one job */}
-        <section className="border-b border-hairline bg-cream-band/60">
-          <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
-            <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-              How it works
-            </h2>
-            <p className="mt-2 max-w-[40ch] text-base text-muted">
-              Three steps. No agency in the middle.
-            </p>
-            <ol className="mt-8 grid gap-6 sm:grid-cols-3">
-              {[
-                {
-                  n: "1",
-                  t: "Tell us what you need",
-                  d: "Subject, class, location, and home or online.",
-                },
-                {
-                  n: "2",
-                  t: "See verified tutors",
-                  d: "Browse profiles — or post a requirement and compare the tutors who pitch.",
-                },
-                {
-                  n: "3",
-                  t: "Book a demo",
-                  d: "Pick a time. The tutor confirms, then fees stay between you.",
-                },
-              ].map((step) => (
-                <li key={step.n} className="min-w-0">
-                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-ink text-sm font-bold text-white">
-                    {step.n}
-                  </span>
-                  <h3 className="mt-3 text-base font-bold text-ink">{step.t}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                    {step.d}
+              <div id="find" className="mt-5 rounded-2xl border border-ink/10 bg-white p-4 shadow-[0_12px_40px_rgba(26,35,28,0.06)] sm:p-5">
+                {authLoading ? (
+                  <p className="py-8 text-center text-sm text-muted">Loading…</p>
+                ) : parentReady ? (
+                  <>
+                    <ParentNeedForm onShow={(need) => void showTutors(need)} />
+                    <p className="mt-3 text-xs leading-relaxed text-muted">
+                      City not listed? Choose Online / any city. Tutors stay on this page.
+                    </p>
+                  </>
+                ) : user ? (
+                  <p className="text-sm leading-relaxed text-ink">
+                    This signup is for parents. Use a parent email to see tutors here.
                   </p>
-                </li>
-              ))}
-            </ol>
+                ) : (
+                  <Suspense fallback={<p className="py-8 text-center text-sm text-muted">Loading…</p>}>
+                    <FacultyAuthForm variant="signup" role="parent" stay />
+                  </Suspense>
+                )}
+              </div>
+            </div>
+            <div className="min-w-0">
+              <p className="mb-3 text-sm font-bold text-ink">Tutors</p>
+              <PremiumTutorReel />
+            </div>
           </div>
         </section>
 
-        {/* Popular searches */}
-        <section className="border-b border-hairline bg-white">
-          <div className="mx-auto max-w-[1200px] px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
-            <h2 className="text-2xl font-bold tracking-tight text-ink">
-              Popular searches
-            </h2>
-            <p className="mt-2 text-base text-muted">
-              Start with a city or subject — free for parents.
-            </p>
-            <ul className="mt-6 flex flex-wrap gap-2.5">
-              {POPULAR_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="inline-flex h-10 items-center rounded-lg border border-ink/12 bg-cream px-4 text-sm font-semibold text-ink transition hover:border-coral hover:bg-coral-wash"
+        {parentReady && (searching || results) && (
+          <section id="tutor-results" className="scroll-mt-20 border-b border-hairline bg-white">
+            <div className="mx-auto max-w-[1100px] px-4 py-8 sm:px-6 lg:px-8">
+              <h2 className="text-2xl font-bold tracking-tight text-ink">Tutors for you</h2>
+              {searching ? (
+                <p className="mt-4 text-sm text-muted">Finding tutors…</p>
+              ) : searchFailed ? (
+                <p className="mt-4 text-sm text-ink">Could not load tutors. Try Show tutors again.</p>
+              ) : results && results.length === 0 ? (
+                <div className="mt-4">
+                  <p className="text-sm text-ink">No tutors match that yet.</p>
+                  <button
+                    type="button"
+                    className="mt-3 text-sm font-semibold text-ink underline underline-offset-4"
+                    onClick={() => {
+                      const stored = getParentNeed();
+                      if (stored) void showTutors(stored, "all");
+                    }}
                   >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
+                    Include regular tutors too
+                  </button>
+                </div>
+              ) : (
+                <ShortlistProvider catalog={catalog}>
+                  <div className="mt-4 flex flex-col gap-3">
+                    {results?.map((teacher) => (
+                      <SearchTeacherCard key={teacher.id} teacher={teacher} />
+                    ))}
+                  </div>
+                </ShortlistProvider>
+              )}
+            </div>
+          </section>
+        )}
 
-        {/* Closing CTA */}
-        <section className="bg-ink text-white">
-          <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-14 lg:px-8">
-            <div>
-              <p className="text-sm font-bold text-coral">{SITE_BRAND}</p>
-              <h2 className="mt-2 max-w-[20ch] text-2xl font-bold tracking-tight sm:text-3xl">
-                Ready to find a tutor?
-              </h2>
-              <p className="mt-2 text-sm text-white/65 sm:text-base">
-                Free for parents. No commission. No agency fee.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2.5 sm:flex-row">
-              <Link href="/search">
-                <Button
-                  size="lg"
-                  className="h-12 w-full gap-2 bg-coral px-6 font-bold text-ink hover:bg-coral-dark sm:w-auto"
-                >
-                  Find a Tutor
-                </Button>
-              </Link>
-              <Link href={INSTANT_HREF}>
-                <Button
-                  size="lg"
-                  variant="secondary"
-                  className="h-12 w-full gap-2 border-white/25 bg-transparent px-6 font-bold text-white hover:bg-white/10 sm:w-auto"
-                >
-                  Post a requirement
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
+        <HomeMentorStatsBand />
+        <HowItWorks />
+        <MentrFlow />
+        <FeaturedMentors />
+        <SubjectGallery />
+        <ZeroFees />
+        <Testimonials />
+        <PopularSearches />
+        <FAQ />
+        <CTA />
       </main>
       <Footer />
     </>

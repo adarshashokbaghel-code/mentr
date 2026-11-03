@@ -1,5 +1,29 @@
-import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
+import {
+  absoluteUrl,
+  LINKEDIN_URL,
+  ORGANIZATION_LOGO_JSON_LD,
+  PARENT_ORG_JSON_LD,
+  SITE_BRAND,
+  SITE_DESCRIPTION,
+  SITE_LOGO_URL,
+  SITE_NAME,
+  SITE_URL,
+} from "@/lib/seo";
 import type { Teacher } from "@/lib/teachers";
+
+/** On every public page so AdsBot / Googlebot always see a crawlable logo. */
+export const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE_BRAND,
+  alternateName: [SITE_NAME, "Paprly Mentr", "Mentr"],
+  url: SITE_URL,
+  logo: ORGANIZATION_LOGO_JSON_LD,
+  image: SITE_LOGO_URL,
+  description: SITE_DESCRIPTION,
+  parentOrganization: PARENT_ORG_JSON_LD,
+  sameAs: [LINKEDIN_URL],
+};
 
 export function JsonLd({ data }: { data: object | object[] }) {
   const payload = Array.isArray(data) ? data : [data];
@@ -71,6 +95,7 @@ export function cityTutorServiceJsonLd(opts: {
       "@type": "EducationalOrganization",
       name: SITE_BRAND,
       url: absoluteUrl("/"),
+      logo: SITE_LOGO_URL,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Bengaluru",

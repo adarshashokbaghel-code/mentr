@@ -10,9 +10,9 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Find a Verified Tutor — Free for Parents · Mentr",
+  title: "Create an Account and Find Tutors — Free for Parents · Mentr",
   description:
-    "Find a verified tutor free for parents. No commission. No agency fee. Browse tutors or post a requirement — subject, class, location, and mode.",
+    "Create a free parent account and find verified tutors. No commission. Choose subject, class, and city on the same page.",
   keywords: [
     "find a tutor",
     "verified tutor",
@@ -25,9 +25,9 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/parents" },
   openGraph: {
-    title: "Find a Verified Tutor — Free for Parents · Mentr",
+    title: "Create an Account and Find Tutors — Free for Parents · Mentr",
     description:
-      "Free for parents. No commission. No agency fee. Find a tutor or post a requirement.",
+      "Create a free parent account and find verified tutors. No commission.",
     url: absoluteUrl("/parents"),
     type: "website",
   },
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Find a Verified Tutor — Free for Parents | Mentr",
+  name: "Create an Account and Find Tutors — Free for Parents | Mentr",
   description: GLOBAL_REACH_LINE,
   url: absoluteUrl("/parents"),
   isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },

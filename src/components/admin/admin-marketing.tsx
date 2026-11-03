@@ -41,7 +41,7 @@ import {
 } from "lucide-react";
 import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 
-type TabId = "blogs" | "socials" | "graphs";
+type TabId = "blogs" | "socials" | "ads" | "graphs";
 
 const LINK_PATH_OPTIONS = [
   { value: "/", label: "Home" },
@@ -56,7 +56,7 @@ const LINK_PATH_OPTIONS = [
 
 function emptyRow(
   slug: string,
-  kind: "blog" | "page" | "social",
+  kind: "blog" | "page" | "social" | "ads",
 ): MarketingPageRow {
   return {
     slug,
@@ -685,9 +685,11 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
     setPassGate({ kind: "delete", link });
   }
 
+  const adRows = (data?.rows ?? []).filter((row) => row.kind === "ads");
   const tabs: { id: TabId; label: string }[] = [
     { id: "blogs", label: "Blogs" },
     { id: "socials", label: "Socials" },
+    { id: "ads", label: "Google Ads" },
     { id: "graphs", label: "Graphs" },
   ];
 
@@ -695,7 +697,7 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
     <AdminSection
       id="marketing"
       title="Marketing · UTM + IP click tracking"
-      description="Blogs, socials, and page CTAs: unique views/clicks count each new IP once; repeats add to totals. Signups still attribute via UTM."
+      description="Blogs, socials, Google Ads, and page CTAs. A parent who opens the ad and later signs up stays on that campaign."
     >
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <AdminStatCard
@@ -1003,6 +1005,44 @@ export function AdminMarketing({ adminKey }: { adminKey: string }) {
               <SignupList users={selectedSocialStats.recentSignups} />
             </div>
           </div>
+        </div>
+      )}
+
+      {tab === "ads" && (
+        <div className="mt-4 space-y-4">
+          <div className="rounded-xl border border-hairline bg-white p-4">
+            <p className="text-sm font-bold text-ink">Final URL for the parents campaign</p>
+            <p className="mt-1 max-w-[62ch] text-[11px] leading-relaxed text-muted">
+              Paste this into the ad. Google also adds a click id. Views are people who opened the page. Clicks are people who pressed Show tutors. Signups are parents who created an account afterwards.
+            </p>
+            <div className="mt-3">
+              <CopyField
+                label="Parents · India"
+                value={`${SITE_URL}/parents?utm_source=google&utm_medium=cpc&utm_campaign=parents-india`}
+              />
+            </div>
+          </div>
+          {adRows.length === 0 ? (
+            <p className="rounded-xl border border-hairline bg-white px-4 py-6 text-xs text-muted">
+              No ad visits yet. This fills in after the page is live and someone opens the ad.
+            </p>
+          ) : (
+            adRows.map((row) => (
+              <div
+                key={row.slug}
+                className="rounded-xl border border-hairline bg-white p-4"
+              >
+                <p className="text-sm font-bold text-ink">Google Ads · {row.slug}</p>
+                <BehaviorCards row={row} />
+                <div className="mt-3 rounded-lg border border-hairline bg-cream/60 px-3 py-2">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">
+                    Signups from this ad · {row.signups}
+                  </p>
+                  <SignupList users={row.recentSignups} />
+                </div>
+              </div>
+            ))
+          )}
         </div>
       )}
 
