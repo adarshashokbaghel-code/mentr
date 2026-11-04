@@ -4,11 +4,8 @@ import { Navbar } from "@/components/landing/navbar";
 import { hardShadowSm } from "@/components/landing/lp/shared";
 import { PageMarketing } from "@/components/marketing/page-marketing";
 import { JsonLd, breadcrumbJsonLd } from "@/components/seo/json-ld";
-import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import {
   LAUNCH_HUB_CITY,
-  PARENT_COMPANY_NAME,
-  PARENT_COMPANY_URL,
   PUBLISHER_LOCATION,
   PUBLISHER_AUDIENCE,
   SITE_BRAND,
@@ -161,20 +158,6 @@ export function FeedbackPage({
                 <div>
                   <dt className="font-semibold text-ink">Product</dt>
                   <dd>{SITE_BRAND}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-ink">Operated by</dt>
-                  <dd>
-                    {PARENT_COMPANY_NAME} —{" "}
-                    <a
-                      href={PARENT_COMPANY_URL}
-                      className="font-semibold text-coral hover:underline"
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <PaprlyWordmark className="align-middle" />
-                    </a>
-                  </dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-ink">Location</dt>

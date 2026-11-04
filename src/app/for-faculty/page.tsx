@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/for-faculty" },
   openGraph: {
-    title: "Become a Tutor or Mentor — Free on Mentr by Paprly",
+    title: "Become a Tutor or Mentor — Free on Mentr",
     description:
       "List free worldwide. Get verified, receive parent requests, pitch on the board. Keep 100% of tuition fees.",
     url: absoluteUrl("/for-faculty"),
@@ -42,7 +42,9 @@ export const metadata: Metadata = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Become a Tutor or Mentor on Mentr by Paprly",
+  name: "Become a Tutor or Mentor on Mentr",
+  keywords:
+    "become a tutor, list as tutor free, online tutor jobs, no commission tutoring",
   description: GLOBAL_REACH_LINE,
   url: absoluteUrl("/for-faculty"),
   isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },

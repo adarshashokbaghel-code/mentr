@@ -391,4 +391,202 @@ export const GEO_KEYWORD_NOV2026: Record<string, ArticleContent> = {
       { label: "Post a requirement", href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1" },
     ],
   },
+  "home-tutor-in-chennai": {
+    slug: "home-tutor-in-chennai",
+    publishedAt: "2026-11-04",
+    updatedAt: "2026-11-04",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro:
+      "A home tutor in Chennai is usually hired for CBSE or the Tamil Nadu state board, one subject, two evenings a week. Parents searching in 2026 are concentrated in Adyar, Velachery, Anna Nagar, and OMR. This guide covers which tutors will actually travel, what an hour costs, and how to post the requirement without paying a bureau.",
+    sections: [
+      {
+        heading: "Where Chennai home tutors will travel",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "South Chennai tutors cluster in Adyar, Besant Nagar, and Thiruvanmiyur. They will usually add Velachery or a short hop onto OMR, and they rarely accept a daily trip to Ambattur. Anna Nagar and Kilpauk have their own pool for CBSE Class 9–12. Porur, Valasaravakkam, and the western suburbs should be posted separately. A tutor who lists 'Chennai' and lives in Adyar will not cross the city twice a week.",
+          },
+          {
+            type: "list",
+            items: [
+              "Adyar, Besant Nagar, Thiruvanmiyur — CBSE maths and science, evening slots fill before the board term",
+              "Velachery and Pallikaranai — home visits still common for Classes 8–10",
+              "Anna Nagar and Kilpauk — strong for Class 11–12 and JEE foundations",
+              "OMR and Sholinganallur — name the apartment, not just the road",
+              "Porur and Valasaravakkam — treat as a separate search from south Chennai",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Home tutor fees in Chennai in 2026",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Chennai sits below Mumbai and close to Hyderabad for one-on-one home tuition. Classes 6–8 are commonly ₹400–₹700 an hour. Class 9–10 CBSE maths or science is ₹600–₹1,000. Class 11–12 and JEE-focused hours are ₹900–₹1,500. State-board tuition is often at the lower end of the same band. A tutor already booked in your apartment block will not discount the first month.",
+          },
+          {
+            type: "table",
+            caption: "Typical one-on-one home-visit rates, Chennai, 2026",
+            headers: ["Level", "Hourly range", "Notes"],
+            rows: [
+              ["Classes 6–8", "₹400–₹700", "Maths and science are billed separately"],
+              ["Class 9–10 CBSE", "₹600–₹1,000", "Pre-board months sit at the top"],
+              ["Class 11–12 / JEE", "₹900–₹1,500", "Ask if test correction is included"],
+              ["State board", "₹400–₹800", "Confirm the medium of instruction"],
+            ],
+          },
+        ],
+      },
+      {
+        heading: "What to put in the requirement",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Board, class, and the subject that is actually weak.",
+              "Locality — 'Velachery, near the Phoenix' is usable; 'Chennai' is not.",
+              "Two fixed evenings. Tutors decline posts that say any day.",
+              "An hourly range, not 'best price'.",
+              "Whether one of the two classes can be online.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "On Mentr the parent post is free. Tutors who already teach in your area pitch with their fee. You choose who to reply to. There is no lead fee and no commission on the classes.",
+          },
+          {
+            type: "cta",
+            title: "Chennai tutors already listed",
+            text: "Browse verified profiles for the city, or post the requirement and wait for pitches from tutors who travel your neighbourhood.",
+            label: "See tutors in Chennai",
+            href: "/tutors/chennai",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "How much is a home tutor in Chennai?",
+        answer:
+          "Class 9–10 CBSE maths or science is about ₹600–₹1,000 an hour in 2026. Class 12 and JEE hours are ₹900–₹1,500. South Chennai and Anna Nagar are both inside that range.",
+      },
+      {
+        question: "Which Chennai area has the most CBSE tutors?",
+        answer:
+          "Adyar, Besant Nagar, and Anna Nagar. Post the locality. A city-wide Chennai post gets fewer replies from tutors who will actually come home.",
+      },
+      {
+        question: "Can I find a Chennai tutor on Mentr for free?",
+        answer:
+          "Yes. Creating a parent account, searching tutors, and posting a requirement are free. You pay the tutor directly for classes. Mentr does not take a commission.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Tutors in Chennai", href: "/tutors/chennai" },
+      { label: "Maths tutors in Chennai", href: "/tutors/chennai/mathematics-tutors" },
+      { label: "Post a requirement", href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1" },
+    ],
+  },
+  "home-tutor-in-kolkata": {
+    slug: "home-tutor-in-kolkata",
+    publishedAt: "2026-11-04",
+    updatedAt: "2026-11-04",
+    readTimeMinutes: 7,
+    author: "Mentr Editorial Team",
+    intro:
+      "Home tuition in Kolkata is still the default for CBSE and ICSE Classes 8–12. Parents searching in 2026 are mostly in Salt Lake, New Town, Ballygunge, and South Kolkata. This guide covers where tutors will travel, what an hour costs, and how to post one subject instead of 'all subjects, Kolkata'.",
+    sections: [
+      {
+        heading: "Where Kolkata home tutors will travel",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Salt Lake and New Town tutors stay on the eastern side. They will add a sector nearby and they rarely accept a rush-hour trip to Behala. South Kolkata — Ballygunge, Gariahat, Jadavpur — has the deepest CBSE and ICSE bench. Howrah and the river-crossing should be a separate post. A tutor who writes 'Kolkata' and lives in Salt Lake will not add Behala twice a week.",
+          },
+          {
+            type: "list",
+            items: [
+              "Salt Lake and New Town — Class 9–12 CBSE, evening slots after coaching",
+              "Ballygunge, Gariahat, Southern Avenue — ICSE and CBSE, home visits still normal",
+              "Jadavpur and Garia — maths and science for board years",
+              "Park Street and central Kolkata — fewer home tutors; students often travel",
+              "Howrah — post it on its own; most Kolkata tutors will not cross",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Home tutor fees in Kolkata in 2026",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Kolkata is one of the more affordable metros for one-on-one tuition. Classes 6–8 are commonly ₹300–₹600 an hour. Class 9–10 maths or science is ₹500–₹900. Class 11–12 and JEE foundations are ₹700–₹1,300. ICSE English often matches the maths rate in south Kolkata. Fees jump in the two months before boards.",
+          },
+          {
+            type: "table",
+            caption: "Typical one-on-one home-visit rates, Kolkata, 2026",
+            headers: ["Level", "Hourly range", "Notes"],
+            rows: [
+              ["Classes 6–8", "₹300–₹600", "Two subjects are often two tutors"],
+              ["Class 9–10", "₹500–₹900", "Maths sits at the top of the band"],
+              ["Class 11–12", "₹700–₹1,300", "Confirm whether notes are included"],
+              ["Primary", "₹250–₹500", "English and maths together is common"],
+            ],
+          },
+        ],
+      },
+      {
+        heading: "What to put in the requirement",
+        blocks: [
+          {
+            type: "list",
+            ordered: true,
+            items: [
+              "Board, class, and one subject.",
+              "Neighbourhood — Salt Lake sector, or Ballygunge place, not just Kolkata.",
+              "Two evenings and a start time.",
+              "An hourly range.",
+              "Home visit, online, or a mix.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "Posting on Mentr is free. Tutors who teach in that part of the city pitch their fee. You pick who to message. The class fee stays between you and the tutor.",
+          },
+          {
+            type: "cta",
+            title: "Kolkata tutors already listed",
+            text: "Start with the Kolkata list, then post a requirement if you want pitches from tutors who already travel your area.",
+            label: "See tutors in Kolkata",
+            href: "/tutors/kolkata",
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: "How much does a home tutor cost in Kolkata?",
+        answer:
+          "Class 9–10 maths or science is about ₹500–₹900 an hour in 2026. Class 12 is ₹700–₹1,300. Salt Lake and south Kolkata are both inside that range.",
+      },
+      {
+        question: "Which Kolkata area has the most tutors?",
+        answer:
+          "Salt Lake, New Town, and south Kolkata around Ballygunge and Jadavpur. Name the neighbourhood in the post.",
+      },
+      {
+        question: "Is finding a Kolkata tutor on Mentr free?",
+        answer:
+          "Yes. The parent account, the search, and the requirement post are free. You pay the tutor for classes. Mentr does not charge commission.",
+      },
+    ],
+    relatedLinks: [
+      { label: "Tutors in Kolkata", href: "/tutors/kolkata" },
+      { label: "Maths tutors in Kolkata", href: "/tutors/kolkata/mathematics-tutors" },
+      { label: "Post a requirement", href: "/parent/signup?next=%2Fparent%2Fdashboard%3Fpost%3D1" },
+    ],
+  },
 };

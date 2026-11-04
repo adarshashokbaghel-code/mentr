@@ -6,12 +6,12 @@ import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Mentr by Paprly FAQ — Fees, Learn & How Demo bookings Work",
+  title: "Mentr FAQ — Fees, Learn, and How Demo Bookings Work",
   description:
-    "FAQ for Mentr by Paprly: tutor verification, WhatsApp connect, zero fees, and Mentr Learn (mentr.in/learn) — free Class 3–5 coding for kids.",
+    "FAQ for Mentr: tutor verification, WhatsApp connect, zero fees, and Mentr Learn (mentr.in/learn) — free Class 3–5 coding for kids.",
   keywords: [
-    "Mentr by Paprly FAQ",
-    "Paprly Mentr",
+    "Mentr FAQ",
+    "Mentr app",
     "What is Mentr Learn",
     "Learn by Mentr",
     "mentr.in/learn",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   ],
   alternates: { canonical: "/faq" },
   openGraph: {
-    title: "Mentr by Paprly FAQ — free tutors + Mentr Learn",
+    title: "Mentr FAQ — free tutors and Mentr Learn",
     description:
       "How Mentr stays free for parents and faculty — plus what Mentr Learn is at mentr.in/learn (Class 3–5 coding, ₹0).",
     url: absoluteUrl("/faq"),
@@ -48,9 +48,9 @@ const faqJsonLd = {
 const webPageJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "Mentr by Paprly FAQ",
+  name: "Mentr FAQ",
   description:
-    "Frequently asked questions about finding tutors, faculty registration, fees, and verification on Mentr by Paprly.",
+    "Frequently asked questions about finding tutors, faculty registration, fees, and verification on Mentr.",
   url: absoluteUrl("/faq"),
   isPartOf: { "@type": "WebSite", name: SITE_BRAND, url: absoluteUrl("/") },
 };

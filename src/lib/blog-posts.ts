@@ -1045,6 +1045,32 @@ export const BLOG_POSTS: BlogPost[] = [
     ctaHref: "/tutors/pune",
   },
   {
+    slug: "home-tutor-in-chennai",
+    title: "Home Tutor in Chennai: Fees, Areas, and How to Book",
+    keyword: "home tutor in Chennai",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "local-guides",
+    featured: true,
+    description:
+      "How Chennai parents find a home tutor for CBSE and state board — Adyar, Velachery, and Anna Nagar fees, and a free way to post the requirement.",
+    cta: "See tutors in Chennai",
+    ctaHref: "/tutors/chennai",
+  },
+  {
+    slug: "home-tutor-in-kolkata",
+    title: "Home Tutor in Kolkata: Fees, Areas, and How to Book",
+    keyword: "home tutor in Kolkata",
+    intent: "commercial",
+    funnel: "bottom",
+    pillar: "local-guides",
+    featured: true,
+    description:
+      "Home tutors in Kolkata for CBSE and ICSE — Salt Lake, New Town, and south Kolkata, with 2026 hourly ranges.",
+    cta: "See tutors in Kolkata",
+    ctaHref: "/tutors/kolkata",
+  },
+  {
     slug: "find-coding-mentor-online",
     title: "Find a Coding Mentor Online — Python, Web & DSA",
     keyword: "find coding mentor online",

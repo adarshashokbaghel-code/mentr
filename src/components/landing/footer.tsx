@@ -1,12 +1,7 @@
 import { MentrBrand } from "@/components/ui/mentr-brand";
-import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import { ProductHuntBadges } from "@/components/ui/product-hunt-badge";
 import { getFooterColumns } from "@/lib/public-nav";
 import { SEO_CITIES } from "@/lib/seo-programmatic";
-import {
-  PARENT_COMPANY_NAME,
-  PARENT_COMPANY_URL,
-} from "@/lib/seo";
 
 export function Footer() {
   const columns = getFooterColumns();
@@ -18,11 +13,9 @@ export function Footer() {
           <div>
             <MentrBrand variant="light" logoClassName="h-8" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/65">
-              Free tutor &amp; mentor finder, classroom tools, and learning
-              resources — a{" "}
-              <PaprlyWordmark variant="light" className="align-middle" />{" "}
-              product. Search locally or online, connect on WhatsApp after both
-              sides accept — zero fees, zero commission.
+              Free tutor and mentor finder, classroom tools, and learning
+              resources. Search locally or online, connect on WhatsApp after
+              both sides accept — zero fees, zero commission.
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="rounded-md bg-white/10 px-3 py-1.5 text-xs font-semibold text-butter">
@@ -86,18 +79,7 @@ export function Footer() {
 
         <div className="mt-8 flex flex-col gap-2 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()}{" "}
-            <PaprlyWordmark variant="light" className="align-middle" />. Mentr
-            is a {PARENT_COMPANY_NAME} product (
-            <a
-              href={PARENT_COMPANY_URL}
-              className="text-white/60 underline-offset-2 hover:text-white hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              paprly.in
-            </a>
-            ).
+            © {new Date().getFullYear()} Mentr.
           </p>
           <p>Parents find teachers. Faculty get found. Free.</p>
         </div>

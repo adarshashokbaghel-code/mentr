@@ -7,7 +7,6 @@ import {
 } from "@/lib/demo-users";
 import { useTestimonialNames } from "@/hooks/use-testimonial-names";
 import { MentrBrand } from "@/components/ui/mentr-brand";
-import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import { TestimonialAvatar } from "@/components/ui/testimonial-avatar";
 import { Quote } from "lucide-react";
 import Link from "next/link";
@@ -108,7 +107,7 @@ export function FacultyAuthShell({
         </div>
 
         <p className="relative z-10 shrink-0 text-xs text-muted">
-          © {new Date().getFullYear()} <PaprlyWordmark />
+          © {new Date().getFullYear()} Mentr
         </p>
       </aside>
 

@@ -42,7 +42,7 @@ export default function LoginChooserPage() {
             "@type": "WebPage",
             name: "Mentr Login",
             description:
-              "Choose parent or tutor login for Mentr by Paprly.",
+              "Choose parent or tutor login for Mentr.",
             url: absoluteUrl("/login"),
             isPartOf: {
               "@type": "WebSite",

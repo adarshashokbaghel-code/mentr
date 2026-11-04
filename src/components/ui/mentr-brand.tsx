@@ -12,7 +12,7 @@ export function MentrBrand({
   variant = "dark",
   priority = false,
   href = "/",
-  showAttribution = true,
+  showAttribution = false,
 }: {
   className?: string;
   logoClassName?: string;

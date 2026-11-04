@@ -20,7 +20,7 @@ import {
   getPillar,
   postsByPillar,
 } from "@/lib/blog-posts";
-import { absoluteUrl, SITE_BRAND } from "@/lib/seo";
+import { absoluteUrl, SITE_LOGO_URL, SITE_NAME } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -94,12 +94,30 @@ export default async function BlogPostPage({ params }: Props) {
 
   const date = formatBlogDate(content.publishedAt, "long");
 
+  const city = [
+    "Mumbai",
+    "Delhi",
+    "Hyderabad",
+    "Pune",
+    "Chennai",
+    "Kolkata",
+    "Bengaluru",
+    "Bangalore",
+  ].find((name) =>
+    `${post.title} ${post.keyword} ${post.slug}`
+      .toLowerCase()
+      .includes(name.toLowerCase()),
+  );
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
+    keywords: post.keyword,
+    image: SITE_LOGO_URL,
     url: absoluteUrl(`/blog/${post.slug}`),
+    mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
     datePublished: content.publishedAt,
     dateModified: content.updatedAt,
     author: {
@@ -109,11 +127,46 @@ export default async function BlogPostPage({ params }: Props) {
     },
     publisher: {
       "@type": "Organization",
-      name: SITE_BRAND,
+      name: SITE_NAME,
       url: absoluteUrl("/"),
+      logo: {
+        "@type": "ImageObject",
+        url: SITE_LOGO_URL,
+      },
     },
     isPartOf: { "@type": "Blog", name: "Mentr Blog", url: absoluteUrl("/blog") },
     articleSection: pillar.label,
+    ...(city
+      ? {
+          about: { "@type": "City", name: city === "Bangalore" ? "Bengaluru" : city },
+          contentLocation: {
+            "@type": "Place",
+            name: city === "Bangalore" ? "Bengaluru" : city,
+            address: { "@type": "PostalAddress", addressCountry: "IN" },
+          },
+        }
+      : {}),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
+      { "@type": "ListItem", position: 2, name: "Blog", item: absoluteUrl("/blog") },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: pillar.label,
+        item: absoluteUrl(`/blog/category/${pillar.id}`),
+      },
+      {
+        "@type": "ListItem",
+        position: 4,
+        name: post.title,
+        item: absoluteUrl(`/blog/${post.slug}`),
+      },
+    ],
   };
 
   const faqJsonLd = {
@@ -131,7 +184,11 @@ export default async function BlogPostPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([articleJsonLd, faqJsonLd]),
+          __html: JSON.stringify(
+            content.faqs.length
+              ? [articleJsonLd, breadcrumbJsonLd, faqJsonLd]
+              : [articleJsonLd, breadcrumbJsonLd],
+          ),
         }}
       />
       <Navbar />

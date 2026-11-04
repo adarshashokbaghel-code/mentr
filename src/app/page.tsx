@@ -96,7 +96,73 @@ const jsonLd = [
       "query-input": "required name=search_term_string",
     },
   },
-  // Learn Course schema stays on /learn — not on the homepage (AdSense audience clarity)
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: SITE_NAME,
+    applicationCategory: "EducationalApplication",
+    applicationSubCategory: "Tutor finder",
+    operatingSystem: "Web, Android, iOS",
+    url: SITE_URL,
+    image: SITE_LOGO_URL,
+    screenshot: SITE_LOGO_URL,
+    description: SITE_DESCRIPTION,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "INR",
+    },
+    featureList: [
+      "Search verified tutors by subject and city",
+      "Free parent account and demo booking",
+      "Tutor listings with no commission",
+      "Mentr Learn for Class 3–5",
+      "Snap & Grade for CBSE answer photos",
+    ],
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: ORGANIZATION_LOGO_JSON_LD,
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Mentr products",
+    itemListElement: [
+      {
+        "@type": "SiteNavigationElement",
+        position: 1,
+        name: "Find a tutor",
+        url: absoluteUrl("/parents"),
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 2,
+        name: "Mentr Learn",
+        url: absoluteUrl("/learn"),
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 3,
+        name: "Snap & Grade",
+        url: absoluteUrl("/snapandgrade"),
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 4,
+        name: "Become a tutor",
+        url: absoluteUrl("/for-faculty"),
+      },
+      {
+        "@type": "SiteNavigationElement",
+        position: 5,
+        name: "Tutor guides",
+        url: absoluteUrl("/blog"),
+      },
+    ],
+  },
 ];
 
 export default function Home() {

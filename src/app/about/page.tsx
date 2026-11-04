@@ -8,24 +8,20 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
-import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
-import {
-  PARENT_COMPANY_NAME,
-  PARENT_COMPANY_URL,
-  SITE_BRAND,
-} from "@/lib/seo";
+import { SITE_NAME } from "@/lib/seo";
 import { LEARN_PUBLIC } from "@/lib/learn-flags";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Mentr by Paprly — Free Open Source Tutor Platform",
+  title: "About Mentr — Free Tutor Platform",
   description:
-    "Mentr by Paprly connects parents and verified tutors worldwide — free, MIT open source, zero commission. Contribute on GitHub or find tutors at ₹0.",
+    "Mentr connects parents and verified tutors worldwide — free, zero commission. Find a tutor or list as faculty at ₹0.",
   keywords: [
     "about Mentr",
-    "Paprly open source",
     "free tutor platform",
+    "verified tutors India",
+    "Mentr app",
   ],
   alternates: { canonical: "/about" },
 };
@@ -61,7 +57,7 @@ export default function AboutPage() {
         <section className="border-b border-hairline bg-white">
           <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-16">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-coral">
-              About {SITE_BRAND}
+              About {SITE_NAME}
             </p>
             <h1 className="mt-3 text-3xl font-bold tracking-tight text-ink sm:text-4xl">
               Parents find teachers. Faculty get found. Free.
@@ -69,31 +65,20 @@ export default function AboutPage() {
             <p className="mt-5 text-base leading-relaxed text-muted">
               Finding a good tutor usually means paying a platform — parents
               pay to unlock contacts, tutors pay for leads that never reply.
-              Mentr by Paprly removes that toll booth. We verify tutors, let
-              parents search locally or online worldwide, and connect the two
-              sides directly on WhatsApp. Our platform fee is ₹0, forever.
+              Mentr removes that toll booth. We verify tutors, let parents
+              search locally or online worldwide, and connect the two sides
+              directly on WhatsApp. Our platform fee is ₹0, forever.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
               Who it is for: parents, guardians, adult students, and tutors
               (18+). Optional children&apos;s learning products are
-              parent-enrolled and supervised. Operated by {PARENT_COMPANY_NAME},{" "}
-              Bengaluru, Karnataka, India.
+              parent-enrolled and supervised. Based in Bengaluru, Karnataka,
+              India.
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              Mentr is built by{" "}
-              <a
-                href={PARENT_COMPANY_URL}
-                className="font-semibold text-coral hover:underline"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <PaprlyWordmark className="align-middle" />
-              </a>
-              , the team behind simple, free business tools for founders and
-              growing teams. Post a requirement and tutors pitch you, or search
-              the directory and book a demo yourself. Either way,
-              numbers stay private until you accept — then you arrange
-              everything directly.
+              Post a requirement and tutors pitch you, or search the directory
+              and book a demo yourself. Numbers stay private until you accept
+              — then you arrange everything directly.
             </p>
           </div>
         </section>
@@ -193,17 +178,9 @@ export default function AboutPage() {
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
             <h2 className="text-2xl font-bold text-ink">Who we are</h2>
             <p className="mt-4 text-base leading-relaxed text-muted">
-              {SITE_BRAND} is a product of {PARENT_COMPANY_NAME} (
-              <a
-                href={PARENT_COMPANY_URL}
-                className="font-semibold text-coral hover:underline"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                paprly.in
-              </a>
-              ). We build free tools for education and business. Mentr&apos;s
-              codebase is MIT open source — developers can contribute on our{" "}
+              {SITE_NAME} is a free tutor and mentor finder based in
+              Bengaluru. The codebase is MIT open source — developers can
+              contribute on our{" "}
               <Link href="/open-source" className="font-semibold text-coral hover:underline">
                 open source page
               </Link>
