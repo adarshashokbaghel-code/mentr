@@ -30,7 +30,6 @@ export function compilerOgImage({
         <div style={{ display: "flex", flexDirection: "column", flex: 1, paddingRight: 48 }}>
           <div style={{ display: "flex", alignItems: "center", fontSize: 30, fontWeight: 800 }}>
             mentr
-            <span style={{ marginLeft: 12, fontSize: 22, fontWeight: 500, color: "rgba(255,255,255,0.5)" }}>by Paprly</span>
           </div>
           <div style={{ marginTop: 56, fontSize: 22, letterSpacing: 4, textTransform: "uppercase", color: "#5ee0a0" }}>{kicker}</div>
           <div style={{ marginTop: 16, fontSize: 64, fontWeight: 800, lineHeight: 1.08, letterSpacing: -1.5 }}>{title}</div>

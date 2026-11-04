@@ -946,7 +946,7 @@ export function MentrPricingPage() {
           </div>
 
           <p className="text-xs text-muted">
-            Last updated: September 2026 · Mentr by Paprly ·{" "}
+            Last updated: September 2026 · Mentr ·{" "}
             <a
               href="mailto:hello@mentr.in"
               className="font-medium text-ink hover:underline"

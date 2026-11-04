@@ -7,7 +7,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { BrowserFrame } from "@/components/ui/browser-frame";
 import { ProductHuntBadges, ProductHuntFeaturedBadge } from "@/components/ui/product-hunt-badge";
-import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
 import {
   GITHUB_REPO_URL,
   GLOBAL_REACH_LINE,
@@ -836,10 +835,9 @@ export function OpenSourceLanding({
             </h1>
 
             <p className="os-hero-reveal os-hero-reveal-delay-2 mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
-              The free tutor-parent connector — built in the open by{" "}
-              <PaprlyWordmark className="align-middle" />. 100% zero cut for
-              parents and faculty. {SATISFIED_PARENTS}+ satisfied parents worldwide. Fork
-              it, contribute, or deploy it for your community.
+              The free tutor-parent connector, built in the open. 100% zero
+              cut for parents and faculty. {SATISFIED_PARENTS}+ satisfied parents
+              worldwide. Fork it, contribute, or deploy it for your community.
             </p>
 
             <div className="os-hero-reveal os-hero-reveal-delay-3 mt-6 flex flex-wrap items-center justify-center gap-2">

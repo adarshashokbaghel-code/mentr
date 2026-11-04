@@ -1,18 +1,13 @@
 import { Footer } from "@/components/landing/footer";
 import { Navbar } from "@/components/landing/navbar";
-import { PaprlyWordmark } from "@/components/ui/paprly-wordmark";
-import {
-  PARENT_COMPANY_NAME,
-  PARENT_COMPANY_URL,
-  SITE_BRAND,
-} from "@/lib/seo";
+import { SITE_NAME } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Editorial policy — how Mentr creates guides & listings",
   description:
-    "How Mentr by Paprly researches, writes, and updates tutor guides, blog articles, and city listings. Our standards for accuracy, originality, and corrections.",
+    "How Mentr researches, writes, and updates tutor guides, blog articles, and city listings. Our standards for accuracy, originality, and corrections.",
   alternates: { canonical: "/editorial-policy" },
 };
 
@@ -20,7 +15,7 @@ const sections = [
   {
     title: "Who writes our content",
     body: [
-      "Guides on Mentr are written and reviewed by the Mentr editorial team at Paprly. We combine firsthand product knowledge (how demo bookings, verification, and the requirements board work) with research on tutoring fees, exam timelines, and platform comparisons in India and abroad.",
+      "Guides on Mentr are written and reviewed by the Mentr editorial team. We combine firsthand product knowledge (how demo bookings, verification, and the requirements board work) with research on tutoring fees, exam timelines, and platform comparisons in India and abroad.",
       "We do not publish unattributed third-party articles or pay-for-placement reviews. Comparison pages (such as Mentr vs UrbanPro) are written to help parents and tutors make informed choices — we disclose that Mentr is our own product.",
     ],
   },
@@ -70,7 +65,7 @@ export default function EditorialPolicyPage() {
               Last updated: September 2026
             </p>
             <p className="mt-5 text-base leading-relaxed text-muted">
-              {SITE_BRAND} publishes free guides to help parents, students, and
+              {SITE_NAME} publishes free guides to help parents, students, and
               tutors find each other safely. This page explains how we create
               content, how we handle corrections, and how advertising relates to
               our editorial work.
@@ -96,16 +91,7 @@ export default function EditorialPolicyPage() {
             <div className="rounded-xl border border-hairline bg-white p-6">
               <h2 className="text-lg font-bold text-ink">Publisher</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted">
-                Mentr is operated by{" "}
-                <a
-                  href={PARENT_COMPANY_URL}
-                  className="font-semibold text-coral hover:underline"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <PaprlyWordmark className="align-middle" />
-                </a>{" "}
-                ({PARENT_COMPANY_NAME}), Bengaluru, Karnataka, India. Questions
+                Mentr is based in Bengaluru, Karnataka, India. Questions
                 about this policy:{" "}
                 <a
                   href="mailto:hello@mentr.in"
