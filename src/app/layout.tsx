@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     // One file only. Google fetches /favicon.ico and gives up if that file is a PNG inside an ICO.
     icon: [{ url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" }],
     shortcut: "/favicon.ico",
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", sizes: "512x512", type: "image/png" }],
   },
   openGraph: {
     type: "website",
