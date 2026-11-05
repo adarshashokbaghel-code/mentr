@@ -51,10 +51,10 @@ export const metadata: Metadata = {
   publisher: PARENT_COMPANY_NAME,
   alternates: { canonical: "/" },
   icons: {
-    // One square PNG larger than 48px. Google Search uses a single favicon per hostname.
-    icon: [{ url: "/icon-192.png", sizes: "192x192", type: "image/png" }],
-    shortcut: [{ url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" }],
-    apple: [{ url: "/apple-icon.png", sizes: "512x512", type: "image/png" }],
+    // One file only. Google fetches /favicon.ico and gives up if that file is a PNG inside an ICO.
+    icon: [{ url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" }],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
     type: "website",
@@ -104,19 +104,8 @@ export default function RootLayout({
     <html lang="en" className={`${plusJakarta.variable} scroll-smooth`}>
       <head>
         <GoogleVerificationTags />
-        {/* In the raw HTML. Googlebot reads these; it does not use the metadata API. */}
-        <link
-          rel="icon"
-          href={`${SITE_URL}/icon-192.png`}
-          sizes="192x192"
-          type="image/png"
-        />
-        <link
-          rel="shortcut icon"
-          href={`${SITE_URL}/favicon.ico`}
-          type="image/x-icon"
-        />
-        <link rel="apple-touch-icon" href={`${SITE_URL}/apple-icon.png`} />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <meta name="msapplication-TileImage" content={SITE_LOGO_URL} />
         <meta name="msapplication-TileColor" content="#fff6ee" />
         <JsonLd data={organizationJsonLd} />
