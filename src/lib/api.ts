@@ -1329,3 +1329,17 @@ export const snapGradeApi = {
     }),
 };
 
+export type PythonWorkspaceEntry = { path: string; kind: "file" | "folder"; content: string };
+
+export const pythonFilesApi = {
+  get: () =>
+    request<{ email: string; activePath: string; entries: PythonWorkspaceEntry[] }>(
+      "/python-compiler/files",
+    ),
+  save: (payload: { activePath: string; entries: PythonWorkspaceEntry[] }) =>
+    request<{ email: string; activePath: string; entries: PythonWorkspaceEntry[] }>(
+      "/python-compiler/files",
+      { method: "PUT", body: JSON.stringify(payload) },
+    ),
+};
+

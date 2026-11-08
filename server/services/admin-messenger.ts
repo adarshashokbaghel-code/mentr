@@ -1,4 +1,6 @@
 import { randomBytes } from "crypto";
+import { readFileSync } from "fs";
+import path from "path";
 import mongoose from "mongoose";
 import { config } from "../config";
 import { excludeDemoUsersFilter } from "../lib/demo-users";
@@ -260,7 +262,29 @@ export async function previewMessengerEmail(
   } else if (coupon) {
     vars.coupon = coupon;
   }
-  return renderMessengerTemplate(templateId, vars);
+  const rendered = renderMessengerTemplate(templateId, vars);
+  if (templateId === "mentor-diwali") {
+    rendered.html = rendered.html.replace(
+      diwaliImageUrl(),
+      diwaliImageDataUri(),
+    );
+  }
+  return rendered;
+}
+
+const DIWALI_CID = "diwali-diya";
+
+function diwaliImagePath() {
+  return path.resolve(process.cwd(), "public/email/diwali-diya.jpg");
+}
+
+function diwaliImageUrl() {
+  return `${config.publicSiteUrl}/email/diwali-diya.jpg`;
+}
+
+function diwaliImageDataUri() {
+  const bytes = readFileSync(diwaliImagePath());
+  return `data:image/jpeg;base64,${bytes.toString("base64")}`;
 }
 
 export type SendResult = {
@@ -356,7 +380,28 @@ export async function sendMessengerEmails(
         vars.coupon = coupon;
       }
       const rendered = renderMessengerTemplate(templateId, vars);
-      await sendAdminEmail(user.email, rendered.subject, rendered.text, rendered.html);
+      const diwali = templateId === "mentor-diwali";
+      if (diwali) {
+        rendered.html = rendered.html.replace(
+          diwaliImageUrl(),
+          `cid:${DIWALI_CID}`,
+        );
+      }
+      await sendAdminEmail(
+        user.email,
+        rendered.subject,
+        rendered.text,
+        rendered.html,
+        diwali
+          ? [
+              {
+                filename: "diwali-diya.jpg",
+                path: diwaliImagePath(),
+                cid: DIWALI_CID,
+              },
+            ]
+          : undefined,
+      );
       results.push({
         userId,
         email: user.email,

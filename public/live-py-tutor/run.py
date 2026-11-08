@@ -697,18 +697,45 @@ class RawInputException(Exception):
     pass
 
 
-def raw_input_wrapper(prompt=""):
-    # global input_string_queue
-    print(raw_input_wrapper.input_string_queue)
-    if raw_input_wrapper.input_string_queue:
-        input_str = raw_input_wrapper.input_string_queue.pop(0)
+class _StdoutTee(io.TextIOBase):
+    """Captures prints for the trace, and can mirror them to the page while input() is waiting."""
 
-        # write the prompt and user input to stdout, to emulate what happens
-        # at the terminal
-        sys.stdout.write(str(prompt))  # always convert prompt into a string
-        sys.stdout.write(input_str + "\n")  # newline to simulate the user hitting Enter
-        return input_str
-    # raise RawInputException(str(prompt))  # always convert prompt into a string
+    hook = None
+
+    def __init__(self, buf):
+        self.buf = buf
+
+    def write(self, s):
+        if not s:
+            return 0
+        self.buf.write(s)
+        if _StdoutTee.hook is not None:
+            _StdoutTee.hook(s)
+        return len(s)
+
+    def flush(self):
+        return None
+
+
+def raw_input_wrapper(prompt=""):
+    # One line per input() call. Prefilled lines come from the Input box; when
+    # those run out, fetch() blocks until the page sends the next typed line.
+    prompt = "" if prompt is None else str(prompt)
+    sys.stdout.write(prompt)
+    if raw_input_wrapper.queue:
+        line = raw_input_wrapper.queue.pop(0)
+    else:
+        fetch = raw_input_wrapper.fetch
+        got = None if fetch is None else fetch()
+        if got is None:
+            raise EOFError("EOF when reading a line")
+        line = str(got)
+    sys.stdout.write(line + "\n")
+    return line
+
+
+raw_input_wrapper.queue = []
+raw_input_wrapper.fetch = None
 
 
 class MouseInputException(Exception):
@@ -1704,10 +1731,10 @@ class PGLogger(bdb.Bdb):
             builtin_items.append((k, getattr(__builtins__, k)))
 
         for k, v in builtin_items:
-            # if k == "input":
-            #     user_builtins[k] = raw_input_wrapper
-            # else:
-            user_builtins[k] = v
+            if k == "input":
+                user_builtins[k] = raw_input_wrapper
+            else:
+                user_builtins[k] = v
 
         # user_builtins["mouse_input"] = mouse_input_wrapper
 
@@ -1723,7 +1750,7 @@ class PGLogger(bdb.Bdb):
         else:
             # default -- a single unified stdout stream
             self.user_stdout = io.StringIO()
-            sys.stdout = self.user_stdout
+            sys.stdout = _StdoutTee(self.user_stdout)
 
         self.ORIGINAL_STDERR = sys.stderr
 

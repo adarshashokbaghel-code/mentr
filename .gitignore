@@ -48,6 +48,13 @@ videos/**/voiceover.wav
 # Render masters stay on disk. The site plays public/learn/lessons/*.mp4.
 videos/**/*.mp4
 
+# Remotion project local deps / binaries / renders (not app code)
+/video/node_modules/
+/video/tools/
+/video/output/
+/video/.qa-token
+/video/.DS_Store
+
 # Pyodide runtime (copied from node_modules by scripts/copy-pyodide.mjs)
 /public/pyodide/
 
@@ -71,3 +78,6 @@ public/ncert/**/*.pdf
 
 # Real contact data for local seeding — never commit
 /scripts/private/
+
+# Piper / TTS voice models (local Remotion tooling)
+/video/assets/voices/

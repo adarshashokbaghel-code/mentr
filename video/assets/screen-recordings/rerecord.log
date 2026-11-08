@@ -1,0 +1,66 @@
+ffmpeg version 9.0.2 Copyright (c) 2000-2026 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/Users/adarshsinghj/homebrew/Cellar/ffmpeg/9.0.2 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvmaf --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon
+  libavutil      61.  1.102 / 61.  1.102
+  libavcodec     63.  1.102 / 63.  1.102
+  libavformat    63.  1.102 / 63.  1.102
+  libavdevice    63.  1.102 / 63.  1.102
+  libavfilter    12.  1.102 / 12.  1.102
+  libswscale     10.  1.102 / 10.  1.102
+  libswresample   7.  1.102 /  7.  1.102
+Input #0, matroska,webm, from '/Users/adarshsinghj/Desktop/champs/video/assets/screen-recordings/02-int-home.webm':
+  Metadata:
+    ENCODER         : Lavf61.1.100
+  Duration: 00:00:12.56, start: 0.000000, bitrate: 892 kb/s
+  Stream #0:0: Video: vp8, yuv420p(progressive), 1920x1080, SAR 1:1 DAR 16:9, 25 fps, 25 tbr, 1k tbn
+    Metadata:
+      ENCODER         : Lavc61.3.100 libvpx
+      DURATION        : 00:00:12.560000000
+Stream mapping:
+  Stream #0:0 -> #0:0 (vp8 (native) -> h264 (libx264))
+Press [q] to stop, [?] for help
+[libx264 @ 0x126906cc0] using SAR=1/1
+[libx264 @ 0x126906cc0] using cpu capabilities: ARMv8 NEON DotProd
+[libx264 @ 0x126906cc0] profile High, level 4.0, 4:2:0, 8-bit
+[libx264 @ 0x126906cc0] 264 - core 165 r3222 b35605a - H.264/MPEG-4 AVC codec - Copyleft 2003-2025 - http://www.videolan.org/x264.html - options: cabac=1 ref=3 deblock=1:0:0 analyse=0x3:0x113 me=hex subme=7 psy=1 psy_rd=1.00:0.00 mixed_ref=1 me_range=16 chroma_me=1 trellis=1 8x8dct=1 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=-2 threads=15 lookahead_threads=2 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=2 keyint=250 keyint_min=25 scenecut=40 intra_refresh=0 rc_lookahead=40 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 ip_ratio=1.40 aq=1:1.00
+Output #0, mp4, to '/Users/adarshsinghj/Desktop/champs/video/public/clips/02-int-home.mp4':
+  Metadata:
+    encoder         : Lavf63.1.102
+  Stream #0:0: Video: h264 (avc1 / 0x31637661), yuv420p(tv, bt470bg/unknown/unknown, progressive), 1920x1080 [SAR 1:1 DAR 16:9], q=2-31, 30 fps, 15360 tbn
+    Metadata:
+      encoder         : Lavc63.1.102 libx264
+      DURATION        : 00:00:12.560000000
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/0 buffer size: 0 vbv_delay: N/A
+frame=  111 fps=0.0 q=29.0 size=     256KiB time=00:00:03.63 bitrate= 577.3kbits/s dup=29 drop=0 speed=7.19x elapsed=0:00:00.50    frame=  256 fps=254 q=29.0 size=    1024KiB time=00:00:08.46 bitrate= 990.8kbits/s dup=53 drop=0 speed= 8.4x elapsed=0:00:01.00    [mp4 @ 0x1269055c0] Starting second pass: moving the moov atom to the beginning of the file
+[out#0/mp4 @ 0x126905ba0] video:1398KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.361616%
+frame=  377 fps=275 q=-1.0 Lsize=    1403KiB time=00:00:12.50 bitrate= 919.4kbits/s dup=63 drop=0 speed=9.11x elapsed=0:00:01.37    
+[libx264 @ 0x126906cc0] frame I:4     Avg QP:13.52  size: 32525
+[libx264 @ 0x126906cc0] frame P:126   Avg QP:18.77  size:  8721
+[libx264 @ 0x126906cc0] frame B:247   Avg QP:19.44  size:   817
+[libx264 @ 0x126906cc0] consecutive B-frames:  8.8%  8.0% 11.1% 72.1%
+[libx264 @ 0x126906cc0] mb I  I16..4: 70.8% 21.6%  7.6%
+[libx264 @ 0x126906cc0] mb P  I16..4:  6.1%  8.0%  1.0%  P16..4:  6.1%  0.6%  0.4%  0.0%  0.0%    skip:77.9%
+[libx264 @ 0x126906cc0] mb B  I16..4:  0.4%  0.2%  0.0%  B16..8:  5.1%  0.1%  0.0%  direct: 2.4%  skip:91.8%  L0:37.9% L1:61.8% BI: 0.3%
+[libx264 @ 0x126906cc0] 8x8 transform intra:46.4% inter:26.9%
+[libx264 @ 0x126906cc0] coded y,uvDC,uvAC intra: 7.1% 5.7% 2.4% inter: 0.9% 2.3% 0.1%
+[libx264 @ 0x126906cc0] i16 v,h,dc,p: 52% 44%  3%  0%
+[libx264 @ 0x126906cc0] i8 v,h,dc,ddl,ddr,vr,hd,vl,hu: 29% 12% 58%  0%  0%  0%  0%  0%  0%
+[libx264 @ 0x126906cc0] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 31% 30% 21%  2%  3%  3%  4%  2%  4%
+[libx264 @ 0x126906cc0] i8c dc,h,v,p: 76% 20%  4%  0%
+[libx264 @ 0x126906cc0] Weighted P-Frames: Y:3.2% UV:0.0%
+[libx264 @ 0x126906cc0] ref P L0: 72.9% 12.4% 10.8%  3.9%  0.0%
+[libx264 @ 0x126906cc0] ref B L0: 74.2% 22.6%  3.2%
+[libx264 @ 0x126906cc0] ref B L1: 97.5%  2.5%
+[libx264 @ 0x126906cc0] kb/s:910.77
+ok 02-int-home
+locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for locator('textarea').first() to be visible
+    35 × locator resolved to hidden <textarea wrap="off" autocorrect="off" spellcheck="false" autocomplete="off" autocapitalize="off" aria-label="Python code (main.py)" class="m-0 h-full w-full resize-none overflow-hidden whitespace-pre bg-transparent px-3 py-3 text-transparent outline-none [grid-area:1/1] caret-[#3d84c6] selection:bg-[#3d84c6]/20">print("Mentr Python compiler — visualize this cod…</textarea>
+
+    at <anonymous> (/Users/adarshsinghj/Desktop/champs/video/scripts/rerecord-key-clips.ts:158:18)
+    at async record (/Users/adarshsinghj/Desktop/champs/video/scripts/rerecord-key-clips.ts:78:3)
+    at async main (/Users/adarshsinghj/Desktop/champs/video/scripts/rerecord-key-clips.ts:137:3) {
+  name: 'TimeoutError'
+}

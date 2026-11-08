@@ -1,8 +1,11 @@
 import { Router } from "express";
 import { ensureDb } from "../middleware/ensure-db";
+import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { verifyAuthToken, type AuthTokenPayload } from "../services/jwt";
 import { config } from "../config";
 import { recordPythonCompilerRun } from "../services/python-compiler-stats";
+import { normalizeWorkspace, readPythonWorkspace, savePythonWorkspace } from "../services/python-workspace";
+import { User } from "../models/User";
 import type { Request } from "express";
 
 const router = Router();
@@ -69,6 +72,49 @@ router.post("/runs", async (req, res) => {
   } catch (err) {
     console.error("python compiler track:", err);
     res.status(204).end();
+  }
+});
+
+async function fileAccount(req: AuthenticatedRequest) {
+  const user = await User.findById(req.auth!.sub).select("email role");
+  if (!user || (user.role !== "faculty" && user.role !== "parent") || !user.email) return null;
+  return user;
+}
+
+/** Signed-in tutors and parents. Files are stored against their account email. */
+router.get("/files", requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const user = await fileAccount(req);
+    if (!user) {
+      res.status(403).json({ error: "Sign in as a tutor or parent to keep files." });
+      return;
+    }
+    const workspace = await readPythonWorkspace(req.auth!.sub, user.email);
+    res.json(workspace);
+  } catch (err) {
+    console.error("python workspace read:", err);
+    res.status(500).json({ error: "Could not open your files." });
+  }
+});
+
+router.put("/files", requireAuth, async (req: AuthenticatedRequest, res) => {
+  try {
+    const user = await fileAccount(req);
+    if (!user) {
+      res.status(403).json({ error: "Sign in as a tutor or parent to keep files." });
+      return;
+    }
+    const body = (req.body ?? {}) as { entries?: unknown; activePath?: unknown };
+    const normalized = normalizeWorkspace(body.entries, body.activePath);
+    if ("error" in normalized) {
+      res.status(400).json({ error: normalized.error });
+      return;
+    }
+    const workspace = await savePythonWorkspace(req.auth!.sub, user.email, normalized.entries, normalized.activePath);
+    res.json(workspace);
+  } catch (err) {
+    console.error("python workspace save:", err);
+    res.status(500).json({ error: "Could not save your files." });
   }
 });
 

@@ -818,6 +818,17 @@ export type AdminPythonCompilerResponse = {
     timeouts: number;
     signedIn: number;
     anonymous: number;
+    stopped: number;
+    loadFailed: number;
+    remote: number;
+  };
+  week: {
+    runs: number;
+    previousRuns: number;
+    ok: number;
+    previousOk: number;
+    openRuns: number;
+    previousOpenRuns: number;
   };
   surfaces: { id: string; label: string; runs: number; failed: number }[];
   projects: { id: string; title: string; runs: number; passed: number; failed: number }[];
@@ -832,7 +843,7 @@ export type AdminPythonCompilerResponse = {
     line: number | null;
     durationMs: number;
   }[];
-  trend: { date: string; runs: number; failed: number }[];
+  trend: { date: string; runs: number; ok: number }[];
 };
 
 export function fetchAdminPythonCompiler(key: string) {

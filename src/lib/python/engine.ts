@@ -14,6 +14,7 @@ import {
   type OutputStream,
   type ToWorker,
   type WorkerError,
+  type WorkerWorkspaceFile,
 } from "@/lib/python/protocol";
 import type { TutorResult } from "@/lib/python/trace";
 
@@ -61,6 +62,10 @@ export type RunOptions = {
    */
   interactive?: boolean;
   onInputRequest?: () => void;
+  /** Account files mounted so this program can import them. */
+  files?: WorkerWorkspaceFile[];
+  /** Path of the open file, such as week/app.py. */
+  filename?: string;
 };
 
 /** True when input() can pause the program and wait for typing (needs a cross-origin isolated page). */
@@ -75,7 +80,8 @@ const START_TIMEOUT_MS = 90_000;
 
 const HINTS: Record<string, string> = {
   EOFError: "Your program called input() but there was nothing left to read. Type your input in the Input box, one value per line.",
-  ModuleNotFoundError: "That module isn't available here. The Python standard library works, plus popular packages like numpy.",
+  ModuleNotFoundError:
+    "Python couldn't find that module. Another file in your account can be imported by its name, such as import notes from notes.py. The standard library and packages like numpy also work.",
   IndentationError: "Check the spaces at the start of the line. Lines in the same block must line up exactly.",
   SyntaxError: "Python couldn't read this line. Look for a missing bracket, quote or colon.",
   NameError: "A name is used before it's defined, or it's misspelt. Python is case-sensitive.",
@@ -91,6 +97,10 @@ type PendingTrace = {
   id: number;
   resolve: (r: TraceOutcome) => void;
   timer: ReturnType<typeof setTimeout>;
+  inputBuffer?: SharedArrayBuffer;
+  waitingForInput: boolean;
+  onInputRequest?: () => void;
+  onOutput?: (chunk: OutputChunk) => void;
 };
 
 type Active = {
@@ -105,6 +115,19 @@ type Active = {
 
 function stdoutOf(output: OutputChunk[]): string {
   return output.filter((c) => c.stream === "stdout").map((c) => c.text).join("");
+}
+
+function writeInputLine(buffer: SharedArrayBuffer, line: string | null) {
+  const ctrl = new Int32Array(buffer, 0, 2);
+  if (line === null) {
+    Atomics.store(ctrl, 1, -1);
+  } else {
+    const bytes = new TextEncoder().encode(line).slice(0, INPUT_BUFFER_BYTES);
+    new Uint8Array(buffer, INPUT_HEADER_BYTES, INPUT_BUFFER_BYTES).set(bytes);
+    Atomics.store(ctrl, 1, bytes.length);
+  }
+  Atomics.store(ctrl, 0, 1);
+  Atomics.notify(ctrl, 0);
 }
 
 /**
@@ -205,6 +228,12 @@ export class PythonEngine {
           clearTimeout(this.active.timer);
           this.active.waitingForInput = true;
           this.active.opts.onInputRequest?.();
+          return;
+        }
+        if (this.tracing?.id === msg.id) {
+          clearTimeout(this.tracing.timer);
+          this.tracing.waitingForInput = true;
+          this.tracing.onInputRequest?.();
         }
         return;
       case "output":
@@ -212,6 +241,10 @@ export class PythonEngine {
           const chunk = { stream: msg.stream, text: msg.text };
           this.active.output.push(chunk);
           this.active.opts.onOutput?.(chunk);
+          return;
+        }
+        if (this.tracing?.id === msg.id) {
+          this.tracing.onOutput?.({ stream: msg.stream, text: msg.text });
         }
         return;
       case "done": {
@@ -244,7 +277,17 @@ export class PythonEngine {
   }
 
   /** Step-through trace of the editor's code. Uses the same Python runtime. */
-  traceCode(code: string, stdin: string): Promise<TraceOutcome> {
+  traceCode(
+    code: string,
+    stdin: string,
+    opts?: {
+      interactive?: boolean;
+      onInputRequest?: () => void;
+      onOutput?: (chunk: OutputChunk) => void;
+      files?: WorkerWorkspaceFile[];
+      filename?: string;
+    },
+  ): Promise<TraceOutcome> {
     if (this.active) this.abort("stopped");
     this.cancelTrace("Cancelled");
     return this.preload()
@@ -257,19 +300,23 @@ export class PythonEngine {
               return;
             }
             const id = this.nextId++;
-            const timer = setTimeout(() => {
-              if (this.tracing?.id !== id) return;
-              this.tracing = null;
-              this.teardown();
-              resolve({
-                ok: false,
-                error: "This program is too long to step through. Shorten it, or look for a loop that runs many times.",
-              });
-              void this.preload().catch(() => undefined);
-            }, TRACE_TIMEOUT_MS);
-            this.tracing = { id, resolve, timer };
+            const inputBuffer =
+              opts?.interactive && supportsInteractiveInput()
+                ? new SharedArrayBuffer(INPUT_HEADER_BYTES + INPUT_BUFFER_BYTES)
+                : undefined;
+            const pending: PendingTrace = {
+              id,
+              resolve,
+              timer: setTimeout(() => undefined, TRACE_TIMEOUT_MS),
+              inputBuffer,
+              waitingForInput: false,
+              onInputRequest: opts?.onInputRequest,
+              onOutput: opts?.onOutput,
+            };
+            this.tracing = pending;
+            this.armTraceTimer(pending);
             this.set({ phase: "running", detail: "tracing" });
-            this.send({ type: "trace", id, code, stdin });
+            this.send({ type: "trace", id, code, stdin, inputBuffer, files: opts?.files, filename: opts?.filename });
           }),
       );
   }
@@ -313,26 +360,40 @@ export class PythonEngine {
         packages: Boolean(opts.packages),
         maxOutput: MAX_OUTPUT_CHARS,
         inputBuffer,
+        files: opts.files,
+        filename: opts.filename,
       });
     });
   }
 
   /** Answers the input() the program is waiting on. `null` sends end of input (EOFError in Python). */
   provideInput(line: string | null) {
-    const a = this.active;
-    if (!a?.inputBuffer || !a.waitingForInput) return;
-    a.waitingForInput = false;
-    const ctrl = new Int32Array(a.inputBuffer, 0, 2);
-    if (line === null) {
-      Atomics.store(ctrl, 1, -1);
-    } else {
-      const bytes = new TextEncoder().encode(line).slice(0, INPUT_BUFFER_BYTES);
-      new Uint8Array(a.inputBuffer, INPUT_HEADER_BYTES, INPUT_BUFFER_BYTES).set(bytes);
-      Atomics.store(ctrl, 1, bytes.length);
+    if (this.active?.waitingForInput && this.active.inputBuffer) {
+      this.active.waitingForInput = false;
+      writeInputLine(this.active.inputBuffer, line);
+      this.startTimer(this.active);
+      return;
     }
-    Atomics.store(ctrl, 0, 1);
-    Atomics.notify(ctrl, 0);
-    this.startTimer(a);
+    const trace = this.tracing;
+    if (trace?.waitingForInput && trace.inputBuffer) {
+      trace.waitingForInput = false;
+      writeInputLine(trace.inputBuffer, line);
+      this.armTraceTimer(trace);
+    }
+  }
+
+  private armTraceTimer(t: PendingTrace) {
+    clearTimeout(t.timer);
+    t.timer = setTimeout(() => {
+      if (this.tracing?.id !== t.id) return;
+      this.tracing = null;
+      this.teardown();
+      t.resolve({
+        ok: false,
+        error: "This program is too long to step through. Shorten it, or look for a loop that runs many times.",
+      });
+      void this.preload().catch(() => undefined);
+    }, TRACE_TIMEOUT_MS);
   }
 
   private startTimer(a: Active) {
