@@ -14,6 +14,9 @@ export type WorkerError = {
   traceback: string;
 };
 
+/** One saved compiler file. `kind` defaults to a file. */
+export type WorkerWorkspaceFile = { path: string; content: string; kind?: "file" | "folder" };
+
 export type ToWorker =
   | { type: "init"; indexURL: string; fallbackIndexURL: string; packageBaseUrl: string }
   | {
@@ -25,8 +28,20 @@ export type ToWorker =
       maxOutput: number;
       /** When set, input() blocks and asks the page for each line (see INPUT_* layout). */
       inputBuffer?: SharedArrayBuffer;
+      /** Other files in the account, so `import notes` can load notes.py. */
+      files?: WorkerWorkspaceFile[];
+      /** Path of the file being run, such as week/app.py. Omitted for a single buffer. */
+      filename?: string;
     }
-  | { type: "trace"; id: number; code: string; stdin: string };
+  | {
+      type: "trace";
+      id: number;
+      code: string;
+      stdin: string;
+      inputBuffer?: SharedArrayBuffer;
+      files?: WorkerWorkspaceFile[];
+      filename?: string;
+    };
 
 /**
  * Shared input buffer layout: Int32 [0] = flag (0 waiting, 1 answered), Int32 [1] = byte length (-1 = end of input),

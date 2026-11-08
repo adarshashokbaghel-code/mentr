@@ -178,7 +178,10 @@ export function CompilerPromo({ className }: { className?: string }) {
     const shell = shellRef.current;
     const top = topRef.current;
     const bottom = bottomRef.current;
-    if (shell) shell.style.overflow = "visible";
+    if (shell) {
+      shell.style.overflow = "visible";
+      shell.style.boxShadow = "none";
+    }
     if (!top || !bottom) {
       setVisible(false);
       return;
@@ -211,15 +214,16 @@ export function CompilerPromo({ className }: { className?: string }) {
         className,
       )}
     >
-      <div ref={shellRef} className="relative overflow-hidden rounded-2xl border border-[#5d94c4] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7),0_14px_34px_rgba(40,90,140,0.22)]">
+      <div ref={shellRef} className="relative overflow-hidden rounded-2xl shadow-[0_14px_34px_rgba(40,90,140,0.22)]">
         <div ref={topRef} className="overflow-hidden rounded-2xl">
-          <PromoFace tutors={tutors} total={total} more={more} onClose={close} />
+          <div className="rounded-2xl border border-[#5d94c4] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7)]">
+            <PromoFace tutors={tutors} total={total} more={more} onClose={close} />
+          </div>
         </div>
-        <div
-          ref={bottomRef}
-          className="absolute inset-0 overflow-hidden rounded-2xl"
-        >
-          <PromoFace tutors={tutors} total={total} more={more} onClose={close} />
+        <div ref={bottomRef} className="absolute inset-0 overflow-hidden rounded-2xl">
+          <div className="h-full rounded-2xl border border-[#5d94c4] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7)]">
+            <PromoFace tutors={tutors} total={total} more={more} onClose={close} />
+          </div>
         </div>
       </div>
     </aside>

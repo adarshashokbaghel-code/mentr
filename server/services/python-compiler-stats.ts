@@ -92,8 +92,20 @@ export async function getPythonCompilerStats() {
   from.setUTCDate(from.getUTCDate() - 13);
   from.setUTCHours(0, 0, 0, 0);
 
-  const [totals, bySurface, byProject, errorGroups, recent, days] = await Promise.all([
-    PythonCompilerRun.aggregate<{ runs: number; ok: number; failed: number; timeouts: number; signedIn: number }>([
+  const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const twoWeeksAgo = new Date(now.getTime() - 14 * 24 * 60 * 60 * 1000);
+
+  const [totals, bySurface, byProject, errorGroups, recent, days, windows] = await Promise.all([
+    PythonCompilerRun.aggregate<{
+      runs: number;
+      ok: number;
+      failed: number;
+      timeouts: number;
+      stopped: number;
+      loadFailed: number;
+      remote: number;
+      signedIn: number;
+    }>([
       {
         $group: {
           _id: null,
@@ -101,6 +113,9 @@ export async function getPythonCompilerStats() {
           ok: { $sum: { $cond: ["$ok", 1, 0] } },
           failed: { $sum: { $cond: ["$ok", 0, 1] } },
           timeouts: { $sum: { $cond: [{ $eq: ["$status", "timeout"] }, 1, 0] } },
+          stopped: { $sum: { $cond: [{ $eq: ["$status", "stopped"] }, 1, 0] } },
+          loadFailed: { $sum: { $cond: [{ $eq: ["$status", "load-failed"] }, 1, 0] } },
+          remote: { $sum: { $cond: [{ $eq: ["$errorType", "RemoteDisconnected"] }, 1, 0] } },
           signedIn: { $sum: { $cond: [{ $ifNull: ["$userId", false] }, 1, 0] } },
         },
       },
@@ -137,19 +152,41 @@ export async function getPythonCompilerStats() {
       .limit(25)
       .select("surface projectId status errorType errorMessage line durationMs createdAt")
       .lean(),
-    PythonCompilerRun.aggregate<{ _id: string; runs: number; failed: number }>([
+    PythonCompilerRun.aggregate<{ _id: string; runs: number; ok: number }>([
       { $match: { createdAt: { $gte: from } } },
       {
         $group: {
           _id: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
           runs: { $sum: 1 },
-          failed: { $sum: { $cond: ["$ok", 0, 1] } },
+          ok: { $sum: { $cond: ["$ok", 1, 0] } },
+        },
+      },
+    ]),
+    PythonCompilerRun.aggregate<{ _id: { window: "current" | "previous"; surface: string }; runs: number; ok: number }>([
+      { $match: { createdAt: { $gte: twoWeeksAgo } } },
+      {
+        $group: {
+          _id: {
+            window: { $cond: [{ $gte: ["$createdAt", weekAgo] }, "current", "previous"] },
+            surface: "$surface",
+          },
+          runs: { $sum: 1 },
+          ok: { $sum: { $cond: ["$ok", 1, 0] } },
         },
       },
     ]),
   ]);
 
-  const total = totals[0] ?? { runs: 0, ok: 0, failed: 0, timeouts: 0, signedIn: 0 };
+  const total = totals[0] ?? {
+    runs: 0,
+    ok: 0,
+    failed: 0,
+    timeouts: 0,
+    stopped: 0,
+    loadFailed: 0,
+    remote: 0,
+    signedIn: 0,
+  };
   const surfaceMap = new Map(bySurface.map((row) => [row._id, row]));
   const projectMap = new Map(byProject.map((row) => [row._id, row]));
   const dayMap = new Map(days.map((row) => [row._id, row]));
@@ -158,8 +195,24 @@ export async function getPythonCompilerStats() {
     d.setUTCDate(from.getUTCDate() + i);
     const key = dayKey(d);
     const row = dayMap.get(key);
-    return { date: key, runs: row?.runs ?? 0, failed: row?.failed ?? 0 };
+    return { date: key, runs: row?.runs ?? 0, ok: row?.ok ?? 0 };
   });
+
+  function windowSum(window: "current" | "previous", surface?: string) {
+    return windows.reduce(
+      (sum, row) => {
+        if (row._id.window !== window) return sum;
+        if (surface && row._id.surface !== surface) return sum;
+        return { runs: sum.runs + row.runs, ok: sum.ok + row.ok };
+      },
+      { runs: 0, ok: 0 },
+    );
+  }
+
+  const currentWeek = windowSum("current");
+  const previousWeek = windowSum("previous");
+  const currentOpen = windowSum("current", "open");
+  const previousOpen = windowSum("previous", "open");
 
   return {
     trackingSince: sinceDoc?.createdAt ? new Date(sinceDoc.createdAt).toISOString() : null,
@@ -171,6 +224,17 @@ export async function getPythonCompilerStats() {
       timeouts: total.timeouts,
       signedIn: total.signedIn,
       anonymous: Math.max(0, total.runs - total.signedIn),
+      stopped: total.stopped,
+      loadFailed: total.loadFailed,
+      remote: total.remote,
+    },
+    week: {
+      runs: currentWeek.runs,
+      previousRuns: previousWeek.runs,
+      ok: currentWeek.ok,
+      previousOk: previousWeek.ok,
+      openRuns: currentOpen.runs,
+      previousOpenRuns: previousOpen.runs,
     },
     surfaces: (["open", "lms", "project"] as const).map((id) => ({
       id,

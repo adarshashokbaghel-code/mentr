@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import type { ComponentType } from "react";
 
 export function AdminStatCard({
@@ -8,6 +9,7 @@ export function AdminStatCard({
   accent = "default",
   icon: Icon,
   onClick,
+  delta,
 }: {
   label: string;
   value: string | number;
@@ -15,6 +17,8 @@ export function AdminStatCard({
   accent?: "default" | "coral" | "sage" | "butter" | "premium";
   icon?: ComponentType<{ className?: string }>;
   onClick?: () => void;
+  /** Last 7 days against the 7 days before. Shown only on the card. */
+  delta?: { current: number; previous: number };
 }) {
   const accents = {
     default: "bg-white",
@@ -51,6 +55,7 @@ export function AdminStatCard({
         ) : null}
       </div>
       <p className="mt-1 text-2xl font-bold tabular-nums text-ink">{value}</p>
+      {delta ? <WeekDelta current={delta.current} previous={delta.previous} /> : null}
       {sub && <p className="mt-0.5 text-[11px] text-muted">{sub}</p>}
     </>
   );
@@ -76,6 +81,27 @@ export function AdminStatCard({
   }
 
   return <div className={className}>{body}</div>;
+}
+
+function WeekDelta({ current, previous }: { current: number; previous: number }) {
+  const diff = current - previous;
+  if (diff === 0) {
+    return <p className="mt-1 text-[11px] font-semibold text-muted">Flat vs the prior 7 days</p>;
+  }
+  const up = diff > 0;
+  const pct = previous > 0 ? Math.round((Math.abs(diff) / previous) * 100) : null;
+  const label = pct === null ? Math.abs(diff).toLocaleString("en-IN") : `${pct}%`;
+  const Icon = up ? ArrowUp : ArrowDown;
+  return (
+    <p className={cn("mt-1 flex items-center gap-1 text-[11px] font-semibold", up ? "text-[#1f7a4d]" : "text-[#c2410c]")}>
+      <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden />
+      <span>
+        {up ? "+" : "−"}
+        {label}
+      </span>
+      <span className="font-medium text-muted">vs prior 7 days</span>
+    </p>
+  );
 }
 
 export function AdminSection({

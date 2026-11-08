@@ -8,6 +8,7 @@ type LegalConsentCheckboxProps = {
   onCheckedChange: (checked: boolean) => void;
   id?: string;
   className?: string;
+  linkClassName?: string;
 };
 
 /**
@@ -19,6 +20,7 @@ export function LegalConsentCheckbox({
   onCheckedChange,
   id = "legal-consent",
   className,
+  linkClassName = "font-semibold text-ink underline underline-offset-2 hover:text-coral",
 }: LegalConsentCheckboxProps) {
   return (
     <div className={className}>
@@ -39,7 +41,7 @@ export function LegalConsentCheckbox({
             href="/terms"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+            className={linkClassName}
             onClick={(e) => e.stopPropagation()}
           >
             Terms of service
@@ -49,7 +51,7 @@ export function LegalConsentCheckbox({
             href="/privacy"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+            className={linkClassName}
             onClick={(e) => e.stopPropagation()}
           >
             Privacy policy

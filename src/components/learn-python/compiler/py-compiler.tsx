@@ -1,9 +1,12 @@
 "use client";
 
+import { useAuth } from "@/components/auth/auth-provider";
 import { CompilerPromo } from "@/components/learn-python/compiler/compiler-promo";
 import { ExecutionView } from "@/components/learn-python/compiler/execution-view";
+import { CompilerTour } from "@/components/learn-python/compiler/compiler-tour";
+import { CompilerAuthDialog, PythonExplorer } from "@/components/learn-python/compiler/file-explorer";
+import { usePythonFiles, type PythonFileEntry } from "@/components/learn-python/compiler/use-python-files";
 import { usePyCompiler } from "@/components/learn-python/compiler/compiler-provider";
-import { COMPILER_TEMPLATES } from "@/components/learn-python/compiler/templates";
 import { PyEditor } from "@/components/learn-python/lms/py-lms-ui";
 import { COMPILER_TIMEOUT_MS, MAX_OUTPUT_CHARS } from "@/lib/python/config";
 import { trackPythonRun } from "@/lib/python-compiler-track";
@@ -12,21 +15,16 @@ import { getPythonEngine, supportsInteractiveInput, type OutputChunk, type RunRe
 import { usePythonRuntime } from "@/lib/python/use-python-runtime";
 import { cn } from "@/lib/utils";
 import {
-  Check,
   ChevronDown,
-  CircleHelp,
-  Copy,
-  Download,
   Eraser,
   Keyboard,
   Loader2,
   Play,
-  RotateCcw,
+  FolderPlus,
   Moon,
   Square,
   Sun,
   Terminal,
-  Upload,
   Workflow,
 } from "lucide-react";
 import {
@@ -42,9 +40,8 @@ import {
   type ReactNode,
 } from "react";
 
-type Tab = "code" | "input" | "output";
+type Tab = "code" | "files" | "input" | "output";
 
-const MAX_UPLOAD_BYTES = 200_000;
 const USES_INPUT = /\binput\s*\(/;
 const SPLIT_KEY = "mentr:pycompiler:split";
 const THEME_KEY = "mentr:pycompiler:theme";
@@ -62,6 +59,18 @@ function mergeChunk(list: OutputChunk[], chunk: OutputChunk): OutputChunk[] {
   return [...list, chunk];
 }
 
+function workspaceSnapshot(entries: PythonFileEntry[], activePath: string, code: string) {
+  if (!activePath || entries.length === 0) return null;
+  return {
+    filename: activePath,
+    files: entries.map((entry) => ({
+      path: entry.path,
+      kind: entry.kind,
+      content: entry.kind === "file" && entry.path === activePath ? code : entry.content,
+    })),
+  };
+}
+
 const noopSubscribe = () => () => undefined;
 
 function readSplit(): number {
@@ -74,20 +83,33 @@ function readSplit(): number {
 export function PyCompiler({
   homeHref,
   homeLabel,
-  aboutHref,
   surface = "lms",
 }: {
   homeHref?: string;
   homeLabel?: string;
-  aboutHref?: string;
   surface?: "open" | "lms";
 } = {}) {
+  const { user, loading: authLoading } = useAuth();
+  const keepFiles = user?.role === "parent" || user?.role === "faculty";
+  const files = usePythonFiles(keepFiles);
+  const [filesOpen, setFilesOpen] = useState(false);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [folderRequest, setFolderRequest] = useState(0);
+  const [folderPending, setFolderPending] = useState(false);
+  const [demoQueued, setDemoQueued] = useState(false);
+  const [tourOpen, setTourOpen] = useState(false);
+  const afterAuth = useRef<"demo" | "folder" | null>(null);
+  const showTree = keepFiles && filesOpen;
   const { workspace } = usePyCompiler();
   const { code, stdin, setCode, setStdin, load } = workspace;
+  const filesRef = useRef(files.entries);
+  filesRef.current = files.entries;
+  const stdinRef = useRef(stdin);
+  stdinRef.current = stdin;
   const rt = usePythonRuntime();
   const interactive = useSyncExternalStore(noopSubscribe, supportsInteractiveInput, () => false);
   const [tabState, setTab] = useState<Tab>("code");
-  const tab = interactive && tabState === "input" ? "code" : tabState;
+  const tab = (interactive && tabState === "input") || (!showTree && tabState === "files") ? "code" : tabState;
   const [chunks, setChunks] = useState<OutputChunk[]>([]);
   const [result, setResult] = useState<RunResult | null>(null);
   const [running, setRunning] = useState(false);
@@ -101,8 +123,8 @@ export function PyCompiler({
   const [vizLine, setVizLine] = useState<number | undefined>();
   const [tracing, setTracing] = useState(false);
   const [traceError, setTraceError] = useState<string | null>(null);
+  const [vizChunks, setVizChunks] = useState<OutputChunk[]>([]);
   const vizGen = useRef(0);
-  const [copied, setCopied] = useState(false);
   const [split, setSplit] = useState(readSplit);
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const light = theme === "light";
@@ -120,7 +142,6 @@ export function PyCompiler({
     });
   }
   const outputRef = useRef<HTMLDivElement>(null);
-  const fileRef = useRef<HTMLInputElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
   const needsInput = USES_INPUT.test(code);
@@ -129,6 +150,76 @@ export function PyCompiler({
   useEffect(() => {
     void getPythonEngine().preload().catch(() => undefined);
   }, []);
+
+  useEffect(() => {
+    if (files.ready && files.entries.length > 0) setFilesOpen(true);
+  }, [files.ready, files.entries.length]);
+
+  function openFolderUi() {
+    setFilesOpen(true);
+    setFolderRequest((n) => n + 1);
+    if (window.matchMedia("(max-width: 1023px)").matches) setTab("files");
+  }
+
+  function onCreateFolder() {
+    if (authLoading) {
+      afterAuth.current = "folder";
+      setFolderPending(true);
+      return;
+    }
+    if (!user) {
+      afterAuth.current = "folder";
+      setAuthOpen(true);
+      return;
+    }
+    openFolderUi();
+  }
+
+  function onPreviewDemo() {
+    if (authLoading || (user && !files.ready)) {
+      afterAuth.current = "demo";
+      setFolderPending(true);
+      return;
+    }
+    if (!user) {
+      afterAuth.current = "demo";
+      setAuthOpen(true);
+      return;
+    }
+    files.seedDemo();
+    setFilesOpen(true);
+    setTab("code");
+  }
+
+  useEffect(() => {
+    if (!folderPending || authLoading) return;
+    setFolderPending(false);
+    if (!user) {
+      setAuthOpen(true);
+      return;
+    }
+    if (afterAuth.current === "demo") {
+      afterAuth.current = null;
+      setDemoQueued(true);
+      setFilesOpen(true);
+      return;
+    }
+    openFolderUi();
+  }, [folderPending, authLoading, user]);
+
+  useEffect(() => {
+    if (!demoQueued || !files.ready) return;
+    setDemoQueued(false);
+    files.seedDemo();
+    setFilesOpen(true);
+    setTab("code");
+  }, [demoQueued, files.ready, files.seedDemo]);
+
+  useEffect(() => {
+    if (!files.ready || !files.activePath) return;
+    const content = filesRef.current.find((entry) => entry.kind === "file" && entry.path === files.activePath)?.content ?? "";
+    load(content, stdinRef.current);
+  }, [files.ready, files.activePath, load]);
 
   useEffect(() => {
     const el = outputRef.current;
@@ -145,12 +236,15 @@ export function PyCompiler({
     setMarkLine(undefined);
     setRunning(true);
     setTab("output");
+    const linked = workspaceSnapshot(filesRef.current, files.activePath, code);
     const r = await getPythonEngine().run(code, {
       stdin,
       interactive: true,
       onInputRequest: () => setAwaitingInput(true),
       timeoutMs: COMPILER_TIMEOUT_MS,
       packages: true,
+      files: linked?.files,
+      filename: linked?.filename,
       onOutput: (c) => setChunks((list) => mergeChunk(list, c)),
     });
     setAwaitingInput(false);
@@ -183,16 +277,7 @@ export function PyCompiler({
   function onCodeChange(next: string) {
     setCode(next);
     if (markLine) setMarkLine(undefined);
-  }
-
-  async function copyCode() {
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      // Clipboard blocked; nothing to do.
-    }
+    files.updateActive(next);
   }
 
   async function visualize() {
@@ -208,7 +293,20 @@ export function PyCompiler({
     }
     setTracing(true);
     setTraceError(null);
-    const result = await getPythonEngine().traceCode(code, stdin);
+    setVizChunks([]);
+    setAwaitingInput(false);
+    const linked = workspaceSnapshot(filesRef.current, files.activePath, code);
+    const result = await getPythonEngine().traceCode(code, stdin, {
+      interactive,
+      files: linked?.files,
+      filename: linked?.filename,
+      onInputRequest: () => {
+        setAwaitingInput(true);
+        setTab("output");
+      },
+      onOutput: (chunk) => setVizChunks((list) => mergeChunk(list, chunk)),
+    });
+    setAwaitingInput(false);
     if (gen !== vizGen.current) return;
     setTracing(false);
     if (!result.ok) {
@@ -220,27 +318,6 @@ export function PyCompiler({
     setTrace(result.data.trace);
     setTraceCode(code);
     setTraceStdin(stdin);
-  }
-
-  function download() {
-    const url = URL.createObjectURL(new Blob([code], { type: "text/x-python" }));
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "main.py";
-    a.click();
-    URL.revokeObjectURL(url);
-  }
-
-  async function upload(file: File | undefined) {
-    if (!file) return;
-    if (file.size > MAX_UPLOAD_BYTES) {
-      window.alert("That file is too large. Pick a .py file under 200 KB.");
-      return;
-    }
-    load(await file.text(), stdin);
-    clearOutput();
-    setTab("code");
-    if (fileRef.current) fileRef.current.value = "";
   }
 
   const onSplitDown = useCallback((e: PointerEvent<HTMLDivElement>) => {
@@ -266,18 +343,18 @@ export function PyCompiler({
     <button
       type="button"
       onClick={() => getPythonEngine().stop()}
-      className="inline-flex items-center gap-2 bg-[#c2410c] px-5 py-2 text-[14px] font-bold text-white transition hover:bg-[#a83a0b]"
+      className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[#c2410c] px-3.5 text-[12.5px] font-semibold text-white transition hover:bg-[#a83a0b]"
     >
-      <Square className="h-3.5 w-3.5 fill-current" /> Stop
+      <Square className="h-3 w-3 fill-current" /> Stop
     </button>
   ) : (
     <button
       type="button"
       onClick={run}
       title="Run (Ctrl/⌘ + Enter)"
-      className="inline-flex items-center gap-2 bg-[#3d84c6] px-5 py-2 text-[14px] font-bold text-white transition hover:bg-[#2f6fad]"
+      className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[#3d84c6] px-3.5 text-[12.5px] font-semibold text-white shadow-[0_1px_2px_rgba(61,132,198,0.35)] transition hover:bg-[#2f6fad]"
     >
-      <Play className="h-3.5 w-3.5 fill-current" /> Run
+      <Play className="h-3 w-3 fill-current" /> Run
     </button>
   );
 
@@ -291,13 +368,14 @@ export function PyCompiler({
       disabled={tracing}
       title="Step through this program in the output pane"
       className={cn(
-        "inline-flex items-center gap-1.5 border px-3 py-2 text-[13px] font-bold transition disabled:opacity-60",
+        "inline-flex h-8 items-center gap-1.5 rounded-full border px-3 text-[12.5px] font-medium transition disabled:opacity-60",
         view === "viz"
-          ? "border-[#3d84c6] text-[#3d84c6]"
+          ? light
+            ? "border-[#3d84c6]/40 bg-[#3d84c6]/10 text-[#2f6fad]"
+            : "border-[#7eb6ea]/40 bg-[#7eb6ea]/15 text-[#9ec9ec]"
           : light
-            ? "border-hairline bg-white text-ink hover:bg-[#e7f1fb]"
-            : "border-white/15 bg-transparent text-white hover:bg-white/10",
-        light && view === "viz" && "bg-white",
+            ? "border-transparent bg-black/[0.04] text-[#4a5a6a] hover:bg-black/[0.07]"
+            : "border-transparent bg-white/[0.06] text-white/70 hover:bg-white/10 hover:text-white",
       )}
     >
       {tracing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Workflow className="h-3.5 w-3.5" />} Visualize
@@ -306,8 +384,8 @@ export function PyCompiler({
 
   return (
     <CompilerLightContext.Provider value={light}>
-    <div data-theme={theme} className={cn("py-compiler py-ide relative flex h-full min-h-0 flex-col", light ? "bg-[#eef4fb] text-ink" : "bg-[#15202c] text-white")}>
-      <header className={cn("flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b px-3 py-2.5 sm:px-5", light ? "border-hairline bg-white" : "border-white/10")}>
+    <div data-theme={theme} className={cn("py-compiler py-ide relative flex h-full min-h-0 flex-col", light ? "bg-[#e7eef6] text-ink" : "bg-[#101820] text-white")}>
+      <header className={cn("flex shrink-0 flex-wrap items-center gap-x-3 gap-y-2 border-b px-3 py-2.5 backdrop-blur-xl sm:px-5", light ? "border-white/60 bg-white/55" : "border-white/10 bg-white/5")}>
         {homeHref ? (
           <a
             href={homeHref}
@@ -326,46 +404,37 @@ export function PyCompiler({
           <h1 className="truncate text-[16px] font-extrabold leading-tight">{homeHref ? "Online Python Compiler" : "Python compiler"}</h1>
           <RuntimeLabel />
         </div>
-        <div className="flex items-center gap-1">
-          <ToolButton label="Open a .py file" onClick={() => fileRef.current?.click()}>
-            <Upload className="h-4 w-4" />
-          </ToolButton>
-          <ToolButton label="Download main.py" onClick={download}>
-            <Download className="h-4 w-4" />
-          </ToolButton>
-          <ToolButton label={copied ? "Copied" : "Copy code"} onClick={copyCode}>
-            {copied ? <Check className="h-4 w-4 text-[#7eb6ea]" /> : <Copy className="h-4 w-4" />}
-          </ToolButton>
-          <ToolButton
-            label="Start over"
-            onClick={() => {
-              if (window.confirm("Clear your code and start from the visualize example?")) {
-                load(COMPILER_TEMPLATES[0].code);
-                clearOutput();
-              }
-            }}
+        <div className="flex items-center gap-1.5">
+          <button
+            type="button"
+            onClick={onCreateFolder}
+            className={cn(
+              "inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[12.5px] font-medium transition",
+              light
+                ? "bg-black/[0.04] text-[#3a4553] hover:bg-black/[0.07]"
+                : "bg-white/[0.06] text-white/75 hover:bg-white/10 hover:text-white",
+            )}
           >
-            <RotateCcw className="h-4 w-4" />
-          </ToolButton>
-          <ToolButton label={light ? "Dark mode" : "Light mode"} onClick={toggleTheme}>
-            {light ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-          </ToolButton>
-          {aboutHref && (
-            <a
-              href={aboutHref}
-              aria-label="About this compiler and how it works"
-              title="About this compiler and how it works"
-              className={cn(
-                "flex h-9 w-9 items-center justify-center transition",
-                light ? "text-muted hover:bg-[#e7f1fb] hover:text-ink" : "text-white/55 hover:bg-white/5 hover:text-white",
-              )}
-            >
-              <CircleHelp className="h-4 w-4" />
-            </a>
-          )}
-          <span className="ml-2 hidden items-center gap-2 sm:flex">{vizBtn}{runBtn}</span>
+            <FolderPlus className="h-3.5 w-3.5 opacity-70" />
+            Create folder
+          </button>
+          <ThemeToggle light={light} onToggle={toggleTheme} />
+          <button
+            type="button"
+            onClick={() => setTourOpen(true)}
+            aria-label="How it works"
+            title="How it works"
+            className={cn(
+              "flex h-8 w-8 items-center justify-center rounded-full text-[13px] font-semibold transition",
+              light
+                ? "bg-black/[0.04] text-[#6b7c90] hover:bg-black/[0.07] hover:text-ink"
+                : "bg-white/[0.06] text-white/55 hover:bg-white/10 hover:text-white",
+            )}
+          >
+            ?
+          </button>
+          <span className="ml-1 hidden items-center gap-1.5 sm:flex">{vizBtn}{runBtn}</span>
         </div>
-        <input ref={fileRef} type="file" accept=".py,.txt,text/x-python,text/plain" className="hidden" onChange={(e) => void upload(e.target.files?.[0])} />
       </header>
 
       {rt.phase === "loading" && (
@@ -375,18 +444,23 @@ export function PyCompiler({
       )}
 
       <div
-        className={cn("grid shrink-0 border-b lg:hidden", light ? "border-hairline bg-white" : "border-white/10", interactive ? "grid-cols-2" : "grid-cols-3")}
+        className={cn(
+          "grid shrink-0 border-b lg:hidden",
+          light ? "border-hairline bg-white" : "border-white/10",
+          showTree ? (interactive ? "grid-cols-3" : "grid-cols-4") : interactive ? "grid-cols-2" : "grid-cols-3",
+        )}
         role="tablist"
         aria-label="Compiler views"
       >
         {(
           [
             { id: "code", label: "Code" },
+            { id: "files", label: "Files" },
             { id: "input", label: inputMissing ? "Input •" : "Input" },
             { id: "output", label: view === "viz" ? (tracing ? "Visualize…" : "Visualize") : awaitingInput ? "Output •" : running ? "Output…" : "Output" },
           ] as const
         )
-          .filter((t) => !(interactive && t.id === "input"))
+          .filter((t) => !(interactive && t.id === "input") && !(!showTree && t.id === "files"))
           .map((t) => (
           <button
             key={t.id}
@@ -414,13 +488,32 @@ export function PyCompiler({
       </div>
 
       <div ref={gridRef} className="flex min-h-0 flex-1" style={{ ["--py-split" as string]: `${split}%` }}>
-        <div className={cn("min-h-0 w-full min-w-0 flex-col lg:flex lg:w-[var(--py-split)] lg:shrink-0", tab === "output" ? "hidden" : "flex")}>
+        <div className={cn("min-h-0 w-full min-w-0 flex-row lg:flex lg:w-[var(--py-split)] lg:shrink-0", tab === "output" ? "hidden" : "flex")}>
+          {showTree && files.ready && (
+            <PythonExplorer
+              light={light}
+              email={files.email}
+              entries={files.entries}
+              activePath={files.activePath}
+              saving={files.saving}
+              error={files.error}
+              folderRequest={folderRequest}
+              onOpen={(path) => {
+                files.openFile(path);
+                setTab("code");
+              }}
+              onCreate={files.createEntry}
+              onRemove={files.removeEntry}
+              className={cn("w-full lg:w-52", tab === "files" ? "flex" : "hidden lg:flex")}
+            />
+          )}
+          <div className={cn("min-h-0 min-w-0 flex-1 flex-col", tab === "files" ? "hidden lg:flex" : "flex")}>
           <PaneTitle className="hidden lg:flex">
-            main.py
+            {files.activePath || "main.py"}
             <span className={cn("ml-auto normal-case tracking-normal", light ? "text-muted" : "text-white/35")}>Ctrl/⌘ + Enter to run</span>
           </PaneTitle>
-          <section aria-label="main.py" className={cn("min-h-0 flex-1 overflow-auto overscroll-contain lg:block", light ? "bg-white" : "bg-[#1c2836]", tab === "code" ? "block" : "hidden")}>
-            <PyEditor theme={theme} value={code} onChange={onCodeChange} onRun={run} minLines={18} label="Python code (main.py)" markLine={view === "viz" ? undefined : markLine} activeLine={activeLine} />
+          <section aria-label={files.activePath || "main.py"} className={cn("min-h-0 flex-1 overflow-auto overscroll-contain lg:block", light ? "bg-white" : "bg-[#1c2836]", tab === "code" ? "block" : "hidden")}>
+            <PyEditor theme={theme} value={code} onChange={onCodeChange} onRun={run} minLines={18} label={`Python code (${files.activePath || "main.py"})`} markLine={view === "viz" ? undefined : markLine} activeLine={activeLine} />
           </section>
 
           {!interactive && (
@@ -460,6 +553,7 @@ export function PyCompiler({
             </div>
           </section>
           )}
+          </div>
         </div>
 
         <div
@@ -514,9 +608,36 @@ export function PyCompiler({
           {view === "viz" ? (
             <div className="min-h-0 flex-1">
               {tracing ? (
-                <p className={cn("flex h-full items-center justify-center gap-2 text-[13px]", light ? "text-muted" : "text-white/55")}>
-                  <Loader2 className="h-4 w-4 animate-spin" /> Stepping through your code…
-                </p>
+                <div
+                  className="flex h-full min-h-0 flex-col"
+                  onClick={() => {
+                    if (awaitingInput && !window.getSelection()?.toString()) {
+                      document.querySelector<HTMLInputElement>("[data-py-stdin]")?.focus();
+                    }
+                  }}
+                >
+                  <div className="min-h-0 flex-1 overflow-auto px-4 py-3 font-mono text-[13.5px] leading-[1.65]">
+                    {vizChunks.length > 0 || awaitingInput ? (
+                      <pre className="whitespace-pre-wrap break-words">
+                        {vizChunks.map((c, i) => (
+                          <span key={i} className={c.stream === "stderr" ? "py-out-err" : c.stream === "stdin" ? "py-out-in" : "py-out-out"}>
+                            {c.text}
+                          </span>
+                        ))}
+                        {awaitingInput && <ConsoleInput onSubmit={submitInput} />}
+                      </pre>
+                    ) : (
+                      <p className={cn("flex items-center gap-2 text-[13px]", light ? "text-muted" : "text-white/55")}>
+                        <Loader2 className="h-4 w-4 animate-spin" /> Stepping through your code…
+                      </p>
+                    )}
+                  </div>
+                  {awaitingInput && (
+                    <p className={cn("shrink-0 px-4 pb-3 text-[12.5px]", light ? "text-muted" : "text-white/50")}>
+                      Type the answer for <code className="text-[#c2410c]">input()</code> and press Enter.
+                    </p>
+                  )}
+                </div>
               ) : traceError ? (
                 <p className="p-4 text-[13px] text-[#c2410c]">{traceError}</p>
               ) : trace ? (
@@ -560,6 +681,28 @@ export function PyCompiler({
         </section>
       </div>
 
+      {tourOpen && (
+        <CompilerTour
+          light={light}
+          onClose={() => setTourOpen(false)}
+          onPreview={onPreviewDemo}
+        />
+      )}
+      {authOpen && (
+        <CompilerAuthDialog
+          onClose={() => setAuthOpen(false)}
+          onDone={() => {
+            setAuthOpen(false);
+            setFilesOpen(true);
+            if (afterAuth.current === "demo") {
+              afterAuth.current = null;
+              setDemoQueued(true);
+            } else {
+              setFolderRequest((n) => n + 1);
+            }
+          }}
+        />
+      )}
       <CompilerPromo />
       <div className={cn("shrink-0 border-t px-3 py-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] sm:hidden", light ? "border-hairline bg-white" : "border-white/10 bg-[#1c2836]")}>
         <div className="flex items-center gap-2">
@@ -588,20 +731,29 @@ function PaneTitle({ children, className }: { children: ReactNode; className?: s
   );
 }
 
-function ToolButton({ label, onClick, children }: { label: string; onClick: () => void; children: ReactNode }) {
-  const light = useCompilerLight();
+function ThemeToggle({ light, onToggle }: { light: boolean; onToggle: () => void }) {
   return (
     <button
       type="button"
-      onClick={onClick}
-      aria-label={label}
-      title={label}
+      onClick={onToggle}
+      role="switch"
+      aria-checked={!light}
+      aria-label={light ? "Switch to dark mode" : "Switch to light mode"}
+      title={light ? "Dark mode" : "Light mode"}
       className={cn(
-        "flex h-9 w-9 items-center justify-center transition",
-        light ? "text-muted hover:bg-[#e7f1fb] hover:text-ink" : "text-white/55 hover:bg-white/5 hover:text-white",
+        "relative inline-flex h-8 w-[52px] shrink-0 items-center rounded-full p-1 transition",
+        light ? "bg-black/[0.06]" : "bg-white/10",
       )}
     >
-      {children}
+      <span
+        className={cn(
+          "flex h-6 w-6 items-center justify-center rounded-full shadow-sm transition-transform duration-200 ease-out",
+          light ? "translate-x-0 bg-white text-[#c9a227]" : "translate-x-[20px] bg-[#1c2836] text-[#9ec9ec]",
+        )}
+        aria-hidden
+      >
+        {light ? <Sun className="h-3 w-3" /> : <Moon className="h-3 w-3" />}
+      </span>
     </button>
   );
 }

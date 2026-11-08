@@ -26,6 +26,7 @@ export async function sendAdminEmail(
   subject: string,
   text: string,
   html: string,
+  attachments?: { filename: string; path: string; cid: string }[],
 ): Promise<void> {
   await transporter.sendMail({
     from: FROM,
@@ -33,6 +34,7 @@ export async function sendAdminEmail(
     subject,
     text,
     html,
+    ...(attachments?.length ? { attachments } : {}),
   });
 }
 

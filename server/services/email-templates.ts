@@ -12,6 +12,7 @@ export type MessengerTemplateId =
   | "mentor-referral"
   | "mentor-whatsapp-group"
   | "mentor-coupon-alert"
+  | "mentor-diwali"
   | "mentor-premium-active"
   | "parent-welcome"
   | "parent-find-tutor"
@@ -503,6 +504,18 @@ export const MESSENGER_TEMPLATES: Record<MessengerTemplateId, MessengerTemplate>
     html: (v) => emailShell(couponHtml(v)),
   },
 
+  "mentor-diwali": {
+    id: "mentor-diwali",
+    label: "Mentor · Happy Diwali",
+    description:
+      "Festive Diwali note for mentors, with the premium code and a Get Premium button.",
+    audience: "faculty",
+    requiresCoupon: true,
+    subject: (v) => `Happy Diwali, ${v.name} — a Premium gift from Mentr`,
+    text: (v) => diwaliText(v),
+    html: (v) => diwaliHtml(v),
+  },
+
   "mentor-premium-active": {
     id: "mentor-premium-active",
     label: "Mentor · Premium is active",
@@ -731,6 +744,109 @@ function couponHtml(v: MessengerTemplateVars) {
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0">
       <tr><td>${primaryBtn(v.dashboardUrl, "Use this code")}</td></tr>
     </table>`;
+}
+
+function diwaliText(v: MessengerTemplateVars) {
+  const coupon = v.coupon;
+  const pricing = v.premiumPricingUrl || `${SITE}/mentrpricing`;
+  if (!coupon || coupon.lines.length === 0) {
+    return `Dear ${v.name},\n\nHappy Diwali from Mentr.\n\nAdd a premium code in Messenger to fill this note.\n\nGet Premium: ${pricing}\n\nMentr`;
+  }
+  const pay = coupon.lines
+    .map((line) => `${line.label}: you pay ${inr(line.payableInr)}`)
+    .join("\n");
+  return `Dear ${v.name},\n\nHappy Diwali from everyone at Mentr. May this festival bring you a bright season of teaching.\n\nYour Premium code: ${coupon.code}\n${pay}\n\nValid through ${coupon.validUntilLabel}. Apply it at checkout.\n\nGet Premium: ${pricing}\n\nMentr`;
+}
+
+function diwaliHtml(v: MessengerTemplateVars) {
+  const name = esc(v.name);
+  const coupon = v.coupon;
+  const pricing = v.premiumPricingUrl || `${SITE}/mentrpricing`;
+  const image = `${SITE}/email/diwali-diya.jpg`;
+  const codeBlock =
+    coupon && coupon.lines.length > 0
+      ? `<p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a16207;">Your Premium code</p>
+          <p style="margin:8px 0 0;font-size:26px;line-height:1.15;font-weight:800;letter-spacing:0.08em;color:#7c2d12;font-family:ui-monospace,Menlo,Consolas,monospace;">${esc(coupon.code)}</p>
+          <p style="margin:8px 0 0;font-size:13px;line-height:1.5;color:#57534e;">${
+            coupon.sameOff
+              ? `${inr(coupon.lines[0].offInr)} off · you pay ${coupon.lines
+                  .map((line) => `${inr(line.payableInr)} for ${esc(line.label)}`)
+                  .join(" · ")}`
+              : coupon.lines
+                  .map(
+                    (line) =>
+                      `${esc(line.label)}: ${inr(line.offInr)} off, you pay ${inr(line.payableInr)}`,
+                  )
+                  .join(" · ")
+          }</p>
+          <p style="margin:8px 0 0;font-size:12px;line-height:1.5;color:#78716c;">Valid through ${esc(coupon.validUntilLabel)}. ${esc(couponUseLine(coupon))} Enter this code at checkout.</p>`
+      : `<p style="margin:0;font-size:13px;line-height:1.55;color:#57534e;">Enter a premium code in Messenger. This note will show the code and what the mentor pays.</p>`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Diwali from Mentr</title>
+</head>
+<body style="margin:0;padding:0;background:#1c1410;font-family:Georgia,'Times New Roman',serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#1c1410;">
+    <tr>
+      <td align="center" style="padding:28px 12px;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#fffaf3;border:1px solid #e7d3b0;">
+          <tr>
+            <td style="padding:0;line-height:0;font-size:0;">
+              <img src="${image}" alt="Glowing Diwali diyas" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;" />
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:22px 28px 8px;background:#fffaf3;">
+              <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#b45309;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">Mentr</p>
+              <p style="margin:8px 0 0;font-size:28px;line-height:1.15;font-weight:700;color:#7c2d12;">Happy Diwali</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:8px 28px 24px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+              <p style="margin:0 0 12px;font-size:15px;line-height:1.5;color:#1c1917;">Dear <strong>${name}</strong>,</p>
+              <p style="margin:0 0 18px;font-size:14px;line-height:1.65;color:#44403c;">
+                From all of us at Mentr, wishing you and your family a warm, bright Diwali.
+                Thank you for the light you bring to every student you teach.
+              </p>
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin:0 0 18px;">
+                <tr>
+                  <td style="padding:16px 18px;background:#fff7ed;border:1px solid #f5d7a1;">
+                    ${codeBlock}
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:0 0 16px;font-size:14px;line-height:1.65;color:#44403c;">
+                Use it when you upgrade to Premium — more reach with parents, a Premium badge, and Snap &amp; Grade without the daily cap.
+              </p>
+              <table role="presentation" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td style="background:#9a3412;border-radius:2px;">
+                    <a href="${pricing}" style="display:inline-block;padding:12px 22px;color:#fffaf3;font-size:14px;font-weight:700;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">Get Premium</a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:14px 0 0;font-size:12px;line-height:1.5;color:#78716c;">
+                Or open <a href="${pricing}" style="color:#9a3412;font-weight:600;">${pricing}</a> and enter the code at checkout.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:14px 28px;background:#7c2d12;">
+              <p style="margin:0;font-size:12px;line-height:1.5;color:#ffedd5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
+                Happy Diwali · Mentr · <a href="${SITE}" style="color:#ffedd5;text-decoration:underline;">mentr.in</a>
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
 }
 
 export function listMessengerTemplates() {

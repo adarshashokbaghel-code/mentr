@@ -27,6 +27,11 @@ interface FacultyAuthFormProps {
   onComplete?: () => void;
   /** Stay on the current page after a successful code. Used by the ad landing. */
   stay?: boolean;
+  /** When `stay` is set, a role mismatch switches the form instead of leaving the page. */
+  onSwitchRole?: (role: UserRole) => void;
+  /** Compiler popup uses the blue IDE buttons and lets the dialog own the title. */
+  tone?: "default" | "compiler";
+  onStage?: (stage: { step: Step; mode: "login" | "signup"; email: string }) => void;
 }
 
 export function FacultyAuthForm({
@@ -36,6 +41,9 @@ export function FacultyAuthForm({
   next,
   onComplete,
   stay = false,
+  onSwitchRole,
+  tone = "default",
+  onStage,
 }: FacultyAuthFormProps) {
   const { setUser } = useAuth();
   const router = useRouter();
@@ -67,6 +75,19 @@ export function FacultyAuthForm({
     const t = setInterval(() => setCooldown((c) => c - 1), 1000);
     return () => clearInterval(t);
   }, [cooldown]);
+
+  useEffect(() => {
+    onStage?.({ step, mode, email });
+  }, [onStage, step, mode, email]);
+
+  const compiler = tone === "compiler";
+  const linkClass = compiler
+    ? "font-semibold text-ink underline underline-offset-2 hover:text-[#3d84c6]"
+    : "font-semibold text-ink underline underline-offset-2 hover:text-coral";
+  const submitClass = compiler
+    ? "flex h-10 w-full items-center justify-center gap-2 bg-[#3d84c6] text-[13px] font-bold text-white transition hover:bg-[#2f6fad] disabled:cursor-not-allowed disabled:hover:bg-[#3d84c6]"
+    : "flex h-11 w-full items-center justify-center gap-2 rounded-md bg-coral text-[15px] font-semibold text-white transition hover:bg-coral-dark disabled:opacity-60";
+  const inputClass = cn(field, compiler && "focus:border-[#3d84c6]");
 
   const sendOtpRequest = useCallback(async () => {
     setError("");
@@ -189,6 +210,7 @@ export function FacultyAuthForm({
 
   return (
     <div className={cn("w-full", className)}>
+      {compiler ? null : (
       <div className={stay ? "mb-4" : "mb-7"}>
         {stay ? (
           <h2 className="text-xl font-bold tracking-tight text-ink">{title}</h2>
@@ -199,36 +221,70 @@ export function FacultyAuthForm({
         )}
         {subtitle && <p className="mt-1.5 text-sm text-muted">{subtitle}</p>}
       </div>
+      )}
 
       {error && (
         <div className="mb-4 text-sm font-medium text-coral-dark">
           <p>{error}</p>
-          {errorCode === "EMAIL_EXISTS" && (
-            <Link
-              href={`${base}${nextSuffix}`}
-              className="mt-1 inline-block font-semibold text-ink underline underline-offset-2"
-            >
-              Go to login
-            </Link>
-          )}
-          {errorCode === "NO_ACCOUNT" && (
-            <Link
-              href={`${base}/signup${nextSuffix}`}
-              className="mt-1 inline-block font-semibold text-ink underline underline-offset-2"
-            >
-              Create a free account
-            </Link>
-          )}
-          {errorCode === "ROLE_MISMATCH" && mismatchRole && (
-            <Link
-              href={mismatchRole === "parent" ? `/parent${nextSuffix}` : "/faculty"}
-              className="mt-1 inline-block font-semibold text-ink underline underline-offset-2"
-            >
-              {mismatchRole === "parent"
-                ? "Go to parent login"
-                : "Go to tutor login"}
-            </Link>
-          )}
+          {errorCode === "EMAIL_EXISTS" &&
+            (stay ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setMode("login");
+                  setError("");
+                  setErrorCode("");
+                }}
+                className={cn("mt-1 inline-block", linkClass)}
+              >
+                Go to login
+              </button>
+            ) : (
+              <Link
+                href={`${base}${nextSuffix}`}
+                className={cn("mt-1 inline-block", linkClass)}
+              >
+                Go to login
+              </Link>
+            ))}
+          {errorCode === "NO_ACCOUNT" &&
+            (stay ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setMode("signup");
+                  setError("");
+                  setErrorCode("");
+                }}
+                className={cn("mt-1 inline-block", linkClass)}
+              >
+                Create a free account
+              </button>
+            ) : (
+              <Link
+                href={`${base}/signup${nextSuffix}`}
+                className={cn("mt-1 inline-block", linkClass)}
+              >
+                Create a free account
+              </Link>
+            ))}
+          {errorCode === "ROLE_MISMATCH" && mismatchRole &&
+            (stay && onSwitchRole ? (
+              <button
+                type="button"
+                onClick={() => onSwitchRole(mismatchRole)}
+                className={cn("mt-1 inline-block", linkClass)}
+              >
+                {mismatchRole === "parent" ? "Sign in as a parent" : "Sign in as a tutor"}
+              </button>
+            ) : (
+              <Link
+                href={mismatchRole === "parent" ? `/parent${nextSuffix}` : "/faculty"}
+                className={cn("mt-1 inline-block", linkClass)}
+              >
+                {mismatchRole === "parent" ? "Go to parent login" : "Go to tutor login"}
+              </Link>
+            ))}
         </div>
       )}
 
@@ -246,7 +302,7 @@ export function FacultyAuthForm({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={role === "parent" ? "you@gmail.com" : "you@school.edu"}
-              className={field}
+              className={inputClass}
             />
           </label>
 
@@ -254,13 +310,14 @@ export function FacultyAuthForm({
             <LegalConsentCheckbox
               checked={acceptedLegal}
               onCheckedChange={setAcceptedLegal}
+              linkClassName={linkClass}
             />
           ) : null}
 
           <button
             type="submit"
             disabled={loading || (mode === "signup" && !acceptedLegal)}
-            className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-coral text-[15px] font-semibold text-white transition hover:bg-coral-dark disabled:opacity-60"
+            className={submitClass}
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -279,14 +336,14 @@ export function FacultyAuthForm({
                   <button
                     type="button"
                     onClick={() => setMode("signup")}
-                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                    className={linkClass}
                   >
                     create a new account
                   </button>
                 ) : (
                   <Link
                     href={`${base}/signup${nextSuffix}`}
-                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                    className={linkClass}
                   >
                     create a new account
                   </Link>
@@ -299,14 +356,14 @@ export function FacultyAuthForm({
                   <button
                     type="button"
                     onClick={() => setMode("login")}
-                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                    className={linkClass}
                   >
                     Login
                   </button>
                 ) : (
                   <Link
                     href={`${base}${nextSuffix}`}
-                    className="font-semibold text-ink underline underline-offset-2 hover:text-coral"
+                    className={linkClass}
                   >
                     Login
                   </Link>
@@ -321,17 +378,11 @@ export function FacultyAuthForm({
               <>
                 {" "}
                 By signing in you continue under our{" "}
-                <Link
-                  href="/terms"
-                  className="font-semibold text-ink underline underline-offset-2"
-                >
+                <Link href="/terms" className={linkClass}>
                   Terms
                 </Link>{" "}
                 and{" "}
-                <Link
-                  href="/privacy"
-                  className="font-semibold text-ink underline underline-offset-2"
-                >
+                <Link href="/privacy" className={linkClass}>
                   Privacy policy
                 </Link>
                 .
@@ -361,7 +412,7 @@ export function FacultyAuthForm({
               }
               placeholder="000000"
               className={cn(
-                field,
+                inputClass,
                 "h-12 text-center text-xl font-semibold tracking-[0.3em]",
               )}
             />
@@ -369,7 +420,7 @@ export function FacultyAuthForm({
           <button
             type="submit"
             disabled={loading || otp.length < 6}
-            className="flex h-11 w-full items-center justify-center gap-2 rounded-md bg-coral text-[15px] font-semibold text-white transition hover:bg-coral-dark disabled:opacity-60"
+            className={submitClass}
           >
             {loading ? (
               <Loader2 className="h-4 w-4 animate-spin" />
@@ -382,10 +433,7 @@ export function FacultyAuthForm({
               type="button"
               disabled={cooldown > 0 || loading}
               onClick={sendOtpRequest}
-              className={cn(
-                "font-semibold",
-                cooldown > 0 ? "text-muted" : "text-ink underline underline-offset-2",
-              )}
+              className={cn("font-semibold", cooldown > 0 ? "text-muted" : linkClass)}
             >
               {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend code"}
             </button>
