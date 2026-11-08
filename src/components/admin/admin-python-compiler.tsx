@@ -66,13 +66,7 @@ export function AdminPythonCompiler({ adminKey }: { adminKey: string }) {
     return <p className="text-sm text-coral">{error || "Could not load compiler stats."}</p>;
   }
 
-  const totals = {
-    stopped: 0,
-    loadFailed: 0,
-    remote: 0,
-    timeouts: 0,
-    ...data.totals,
-  };
+  const totals = data.totals;
   const week = data.week ?? {
     runs: 0,
     previousRuns: 0,
