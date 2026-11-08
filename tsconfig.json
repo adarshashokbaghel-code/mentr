@@ -32,6 +32,7 @@
   ],
   "exclude": [
     "node_modules",
+    "video",
     "scripts/private",
     "scripts/seed-parent-profiles.ts"
   ]
