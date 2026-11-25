@@ -2795,3 +2795,21 @@ main {
     animation: none;
   }
 }
+
+/* Monaco Python compiler decorations */
+.py-monaco-active-line {
+  background: rgba(61, 132, 198, 0.12) !important;
+}
+.py-monaco-active-gutter {
+  background: #3d84c6;
+  width: 3px !important;
+  margin-left: 3px;
+}
+.py-monaco-error-line {
+  background: rgba(194, 65, 12, 0.1) !important;
+}
+.py-monaco-error-gutter {
+  background: #c2410c;
+  width: 3px !important;
+  margin-left: 3px;
+}

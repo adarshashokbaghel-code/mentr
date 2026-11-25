@@ -4,7 +4,8 @@ export type ArticleBlock =
   | { type: "list"; items: string[]; ordered?: boolean }
   | { type: "callout"; title: string; text: string }
   | { type: "cta"; title: string; text: string; label: string; href: string }
-  | { type: "table"; caption: string; headers: string[]; rows: string[][] };
+  | { type: "table"; caption: string; headers: string[]; rows: string[][] }
+  | { type: "image"; src: string; alt: string; caption?: string };
 
 export type ArticleSection = {
   heading: string;

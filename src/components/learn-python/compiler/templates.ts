@@ -1,4 +1,4 @@
-export type CompilerTemplate = { id: string; label: string; code: string; stdin?: string };
+export type CompilerTemplate = { id: string; label: string; code: string; stdin?: string; seedDemo?: boolean };
 
 export const COMPILER_TEMPLATES: CompilerTemplate[] = [
   {
@@ -36,6 +36,19 @@ export const COMPILER_TEMPLATES: CompilerTemplate[] = [
     id: "pattern",
     label: "Star pattern",
     code: 'rows = 5\nfor i in range(1, rows + 1):\n    print(" " * (rows - i) + "*" * (2 * i - 1))\n',
+  },
+  {
+    id: "packages",
+    label: "Folders + imports",
+    seedDemo: true,
+    code: `from greetings.hello import hello
+from maths.score import average
+
+name = "Aarav"
+marks = [18, 20, 16]
+print(hello(name))
+print("Average", average(marks))
+`,
   },
 ];
 

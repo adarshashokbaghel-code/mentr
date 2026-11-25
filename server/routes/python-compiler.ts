@@ -4,6 +4,7 @@ import { AuthenticatedRequest, requireAuth } from "../middleware/auth";
 import { verifyAuthToken, type AuthTokenPayload } from "../services/jwt";
 import { config } from "../config";
 import { recordPythonCompilerRun } from "../services/python-compiler-stats";
+import { createPythonShare, readPythonShare } from "../services/python-share";
 import { normalizeWorkspace, readPythonWorkspace, savePythonWorkspace } from "../services/python-workspace";
 import { User } from "../models/User";
 import type { Request } from "express";
@@ -115,6 +116,49 @@ router.put("/files", requireAuth, async (req: AuthenticatedRequest, res) => {
   } catch (err) {
     console.error("python workspace save:", err);
     res.status(500).json({ error: "Could not save your files." });
+  }
+});
+
+/** Public. Snapshot of code/workspace for a share link. */
+router.post("/share", async (req, res) => {
+  try {
+    if (limited(req)) {
+      res.status(429).json({ error: "Too many share requests. Wait a minute and try again." });
+      return;
+    }
+    const body = (req.body ?? {}) as Record<string, unknown>;
+    const created = await createPythonShare({
+      title: typeof body.title === "string" ? body.title : undefined,
+      stdin: typeof body.stdin === "string" ? body.stdin : undefined,
+      activePath: typeof body.activePath === "string" ? body.activePath : undefined,
+      entries: body.entries,
+      code: typeof body.code === "string" ? body.code : undefined,
+    });
+    if ("error" in created) {
+      res.status(400).json({ error: created.error });
+      return;
+    }
+    res.status(201).json({
+      shareId: created.shareId,
+      path: `/c/${created.shareId}`,
+    });
+  } catch (err) {
+    console.error("python share create:", err);
+    res.status(500).json({ error: "Could not create a share link." });
+  }
+});
+
+router.get("/share/:shareId", async (req, res) => {
+  try {
+    const share = await readPythonShare(String(req.params.shareId || ""));
+    if (!share) {
+      res.status(404).json({ error: "Share not found." });
+      return;
+    }
+    res.json(share);
+  } catch (err) {
+    console.error("python share read:", err);
+    res.status(500).json({ error: "Could not open that share." });
   }
 });
 

@@ -4,12 +4,19 @@ import { ApiError, pythonFilesApi, type PythonWorkspaceEntry } from "@/lib/api";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 const NAME = /^[A-Za-z_][A-Za-z0-9._-]{0,48}$/;
+const LOCAL_KEY = "mentr:pycompiler:files:v1";
 
 export type PythonFileEntry = PythonWorkspaceEntry;
+export type PythonFilesMode = "off" | "local" | "cloud";
 
 function parentOf(path: string) {
   const i = path.lastIndexOf("/");
   return i === -1 ? "" : path.slice(0, i);
+}
+
+function baseName(path: string) {
+  const i = path.lastIndexOf("/");
+  return i === -1 ? path : path.slice(i + 1);
 }
 
 export const DEMO_MAIN = `from greetings.hello import hello
@@ -51,7 +58,28 @@ export function workspacePath(parent: string, name: string) {
     .join("/");
 }
 
-export function usePythonFiles(enabled: boolean) {
+function readLocal(): { entries: PythonFileEntry[]; activePath: string } {
+  try {
+    const raw = window.localStorage.getItem(LOCAL_KEY);
+    if (!raw) return { entries: [], activePath: "" };
+    const parsed = JSON.parse(raw) as { entries?: PythonFileEntry[]; activePath?: string };
+    if (!Array.isArray(parsed.entries)) return { entries: [], activePath: "" };
+    return { entries: parsed.entries, activePath: parsed.activePath || "" };
+  } catch {
+    return { entries: [], activePath: "" };
+  }
+}
+
+function writeLocal(entries: PythonFileEntry[], activePath: string) {
+  try {
+    window.localStorage.setItem(LOCAL_KEY, JSON.stringify({ entries, activePath }));
+  } catch {
+    // Storage full or blocked.
+  }
+}
+
+export function usePythonFiles(mode: PythonFilesMode) {
+  const enabled = mode !== "off";
   const [entries, setEntries] = useState<PythonFileEntry[]>([]);
   const [activePath, setActivePath] = useState("");
   const [email, setEmail] = useState("");
@@ -62,12 +90,23 @@ export function usePythonFiles(enabled: boolean) {
   const saveTimer = useRef<number | null>(null);
   const generation = useRef(0);
   const pending = useRef<{ entries: PythonFileEntry[]; active: string } | null>(null);
+  const modeRef = useRef(mode);
+  modeRef.current = mode;
 
   const flush = useCallback(() => {
     const payload = pending.current;
     if (!payload) return;
     pending.current = null;
     if (saveTimer.current) window.clearTimeout(saveTimer.current);
+
+    if (modeRef.current === "local") {
+      writeLocal(payload.entries, payload.active);
+      setSaving(false);
+      setError(null);
+      return;
+    }
+    if (modeRef.current !== "cloud") return;
+
     setSaving(true);
     const gen = generation.current;
     void pythonFilesApi
@@ -86,11 +125,18 @@ export function usePythonFiles(enabled: boolean) {
       });
   }, []);
 
-  const persist = useCallback((nextEntries: PythonFileEntry[], nextActive: string) => {
-    pending.current = { entries: nextEntries, active: nextActive };
-    if (saveTimer.current) window.clearTimeout(saveTimer.current);
-    saveTimer.current = window.setTimeout(flush, 450);
-  }, [flush]);
+  const persist = useCallback(
+    (nextEntries: PythonFileEntry[], nextActive: string) => {
+      pending.current = { entries: nextEntries, active: nextActive };
+      if (saveTimer.current) window.clearTimeout(saveTimer.current);
+      if (modeRef.current === "local") {
+        writeLocal(nextEntries, nextActive);
+        return;
+      }
+      saveTimer.current = window.setTimeout(flush, 450);
+    },
+    [flush],
+  );
 
   useEffect(() => {
     window.addEventListener("pagehide", flush);
@@ -101,13 +147,28 @@ export function usePythonFiles(enabled: boolean) {
   }, [flush]);
 
   useEffect(() => {
-    if (!enabled) {
+    if (mode === "off") {
       setReady(false);
       setShowSetup(false);
+      setEntries([]);
+      setActivePath("");
       return;
     }
     const gen = ++generation.current;
     setReady(false);
+
+    if (mode === "local") {
+      const local = readLocal();
+      if (generation.current !== gen) return;
+      setEmail("");
+      setEntries(local.entries);
+      setActivePath(local.activePath);
+      setShowSetup(local.entries.length === 0);
+      setError(null);
+      setReady(true);
+      return;
+    }
+
     void pythonFilesApi
       .get()
       .then((data) => {
@@ -128,7 +189,7 @@ export function usePythonFiles(enabled: boolean) {
         setError(err instanceof ApiError ? err.message : "Could not open your files.");
         setReady(true);
       });
-  }, [enabled]);
+  }, [mode]);
 
   const commit = useCallback(
     (nextEntries: PythonFileEntry[], nextActive: string) => {
@@ -198,6 +259,110 @@ export function usePythonFiles(enabled: boolean) {
     [activePath, commit, entries],
   );
 
+  const renameEntry = useCallback(
+    (path: string, nextName: string) => {
+      const name = nextName.trim();
+      if (!NAME.test(name)) return "Use letters, numbers, dots or dashes.";
+      const parent = parentOf(path);
+      const nextPath = workspacePath(parent, name);
+      if (nextPath === path) return null;
+      if (entries.some((entry) => entry.path === nextPath || entry.path.startsWith(`${nextPath}/`))) {
+        return "That name is already used.";
+      }
+      const source = entries.find((entry) => entry.path === path);
+      if (!source) return "File not found.";
+
+      const next = entries.map((entry) => {
+        if (entry.path === path) return { ...entry, path: nextPath };
+        if (entry.path.startsWith(`${path}/`)) {
+          return { ...entry, path: `${nextPath}${entry.path.slice(path.length)}` };
+        }
+        return entry;
+      });
+      const nextActive =
+        activePath === path
+          ? nextPath
+          : activePath.startsWith(`${path}/`)
+            ? `${nextPath}${activePath.slice(path.length)}`
+            : activePath;
+      commit(next, nextActive);
+      return null;
+    },
+    [activePath, commit, entries],
+  );
+
+  const moveToFolder = useCallback(
+    (path: string, newParentRaw: string) => {
+      const newParent = newParentRaw
+        .replace(/\\/g, "/")
+        .split("/")
+        .map((part) => part.trim())
+        .filter(Boolean)
+        .join("/");
+      if (newParent === path || newParent.startsWith(`${path}/`)) return "Cannot move a folder into itself.";
+      if (parentOf(path) === newParent) return null;
+      if (newParent) {
+        const parentEntry = entries.find((entry) => entry.path === newParent);
+        if (parentEntry && parentEntry.kind !== "folder") return "Destination must be a folder.";
+        const parts = newParent.split("/");
+        if (parts.some((part) => !NAME.test(part))) return "Use a simple destination folder.";
+      }
+      const leaf = baseName(path);
+      const nextPath = newParent ? `${newParent}/${leaf}` : leaf;
+      if (entries.some((entry) => entry.path === nextPath || entry.path.startsWith(`${nextPath}/`))) {
+        return "That name is already used in the destination.";
+      }
+      const next = [...entries];
+      if (newParent) {
+        const parts = newParent.split("/");
+        for (let i = 1; i <= parts.length; i += 1) {
+          const folder = parts.slice(0, i).join("/");
+          if (!next.some((entry) => entry.path === folder)) next.push({ path: folder, kind: "folder", content: "" });
+        }
+      }
+      const remapped = next.map((entry) => {
+        if (entry.path === path) return { ...entry, path: nextPath };
+        if (entry.path.startsWith(`${path}/`)) return { ...entry, path: `${nextPath}${entry.path.slice(path.length)}` };
+        return entry;
+      });
+      const nextActive =
+        activePath === path
+          ? nextPath
+          : activePath.startsWith(`${path}/`)
+            ? `${nextPath}${activePath.slice(path.length)}`
+            : activePath;
+      commit(remapped, nextActive);
+      return null;
+    },
+    [activePath, commit, entries],
+  );
+
+  const replaceWorkspace = useCallback(
+    (nextEntries: PythonFileEntry[], nextActive: string) => {
+      commit(nextEntries, nextActive);
+    },
+    [commit],
+  );
+
+  const ensureFile = useCallback(
+    (path: string, content: string) => {
+      const parts = path.split("/").filter(Boolean);
+      if (parts.length === 0 || parts.some((part) => !NAME.test(part))) return "Use a simple file name.";
+      const next = [...entries];
+      for (let i = 1; i < parts.length; i += 1) {
+        const folder = parts.slice(0, i).join("/");
+        if (!next.some((entry) => entry.path === folder)) next.push({ path: folder, kind: "folder", content: "" });
+      }
+      const existing = next.find((entry) => entry.path === path);
+      if (existing?.kind === "folder") return "A folder already uses that name.";
+      if (existing) existing.content = content;
+      else next.push({ path, kind: "file", content });
+      commit(next, path);
+      return null;
+    },
+    [commit, entries],
+  );
+
   const seedDemo = useCallback(() => {
     const next = entries.map((entry) => ({ ...entry }));
     for (const entry of DEMO_FILES) {
@@ -233,6 +398,7 @@ export function usePythonFiles(enabled: boolean) {
 
   return {
     enabled,
+    mode,
     ready,
     email,
     entries,
@@ -245,6 +411,10 @@ export function usePythonFiles(enabled: boolean) {
     createEntry,
     seedDemo,
     removeEntry,
+    renameEntry,
+    moveEntry: moveToFolder,
+    replaceWorkspace,
+    ensureFile,
     startWorkspace,
     parentOf,
   };

@@ -40,6 +40,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title =
     post.title.length > 52 ? `${post.title.slice(0, 49)}…` : post.title;
 
+  const cover = content.sections
+    .flatMap((section) => section.blocks)
+    .find((block) => block.type === "image");
+  const coverUrl = cover && cover.type === "image" ? absoluteUrl(cover.src) : SITE_LOGO_URL;
+
   const compiler = compilerForHref(post.ctaHref);
   const keywords = compiler
     ? [post.keyword, ...compilerKeywords(compiler).slice(0, 8)]
@@ -77,6 +82,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: content.publishedAt,
       modifiedTime: content.updatedAt,
       authors: [content.author],
+      images: [{ url: coverUrl, alt: cover && cover.type === "image" ? cover.alt : post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: [coverUrl],
     },
   };
 }
@@ -109,13 +121,36 @@ export default async function BlogPostPage({ params }: Props) {
       .includes(name.toLowerCase()),
   );
 
+  const cover = content.sections
+    .flatMap((section) => section.blocks)
+    .find((block) => block.type === "image");
+  const coverUrl = cover && cover.type === "image" ? absoluteUrl(cover.src) : SITE_LOGO_URL;
+
+  const aboutEntities = [
+    ...(city
+      ? [{ "@type": "City" as const, name: city === "Bangalore" ? "Bengaluru" : city }]
+      : []),
+    ...(post.ctaHref.startsWith("/openpythoncompiler")
+      ? [
+          {
+            "@type": "SoftwareApplication" as const,
+            name: "Mentr Online Python Compiler",
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Web browser",
+            offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+            url: absoluteUrl("/openpythoncompiler"),
+          },
+        ]
+      : []),
+  ];
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     keywords: post.keyword,
-    image: SITE_LOGO_URL,
+    image: coverUrl,
     url: absoluteUrl(`/blog/${post.slug}`),
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),
     datePublished: content.publishedAt,
@@ -136,9 +171,13 @@ export default async function BlogPostPage({ params }: Props) {
     },
     isPartOf: { "@type": "Blog", name: "Mentr Blog", url: absoluteUrl("/blog") },
     articleSection: pillar.label,
+    ...(aboutEntities.length === 1
+      ? { about: aboutEntities[0] }
+      : aboutEntities.length > 1
+        ? { about: aboutEntities }
+        : {}),
     ...(city
       ? {
-          about: { "@type": "City", name: city === "Bangalore" ? "Bengaluru" : city },
           contentLocation: {
             "@type": "Place",
             name: city === "Bangalore" ? "Bengaluru" : city,

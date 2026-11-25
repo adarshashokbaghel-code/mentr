@@ -1343,3 +1343,26 @@ export const pythonFilesApi = {
     ),
 };
 
+export type PythonSharePayload = {
+  shareId: string;
+  title: string;
+  stdin: string;
+  activePath: string;
+  entries: PythonWorkspaceEntry[];
+};
+
+export const pythonShareApi = {
+  create: (payload: {
+    title?: string;
+    stdin?: string;
+    activePath?: string;
+    entries?: PythonWorkspaceEntry[];
+    code?: string;
+  }) =>
+    request<{ shareId: string; path: string }>("/python-compiler/share", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+  get: (shareId: string) => request<PythonSharePayload>(`/python-compiler/share/${encodeURIComponent(shareId)}`),
+};
+
