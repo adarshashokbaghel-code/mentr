@@ -1,13 +1,24 @@
 "use client";
 
 import { useAuth } from "@/components/auth/auth-provider";
+import { CompilerIdeMenu } from "@/components/learn-python/compiler/compiler-ide-menu";
 import { CompilerPromo } from "@/components/learn-python/compiler/compiler-promo";
 import { ExecutionView } from "@/components/learn-python/compiler/execution-view";
 import { CompilerTour } from "@/components/learn-python/compiler/compiler-tour";
 import { CompilerAuthDialog, PythonExplorer } from "@/components/learn-python/compiler/file-explorer";
+import { MonacoPyEditor } from "@/components/learn-python/compiler/monaco-py-editor";
+import type { CompilerTemplate } from "@/components/learn-python/compiler/templates";
 import { usePythonFiles, type PythonFileEntry } from "@/components/learn-python/compiler/use-python-files";
+import {
+  copyText,
+  downloadTextFile,
+  downloadWorkspaceZip,
+  entriesFromZip,
+  pickPythonFile,
+  pickZipFile,
+} from "@/components/learn-python/compiler/workspace-io";
 import { usePyCompiler } from "@/components/learn-python/compiler/compiler-provider";
-import { PyEditor } from "@/components/learn-python/lms/py-lms-ui";
+import { pythonShareApi, type PythonSharePayload } from "@/lib/api";
 import { COMPILER_TIMEOUT_MS, MAX_OUTPUT_CHARS } from "@/lib/python/config";
 import { trackPythonRun } from "@/lib/python-compiler-track";
 import type { TraceStep } from "@/lib/python/trace";
@@ -84,22 +95,34 @@ export function PyCompiler({
   homeHref,
   homeLabel,
   surface = "lms",
+  initialShare = null,
+  readOnly = false,
 }: {
   homeHref?: string;
   homeLabel?: string;
   surface?: "open" | "lms";
+  initialShare?: PythonSharePayload | null;
+  readOnly?: boolean;
 } = {}) {
   const { user, loading: authLoading } = useAuth();
-  const keepFiles = user?.role === "parent" || user?.role === "faculty";
-  const files = usePythonFiles(keepFiles);
-  const [filesOpen, setFilesOpen] = useState(false);
+  const cloudFiles = user?.role === "parent" || user?.role === "faculty";
+  const filesMode = cloudFiles ? "cloud" : "local";
+  const files = usePythonFiles(filesMode);
+  const [filesOpen, setFilesOpen] = useState(true);
   const [authOpen, setAuthOpen] = useState(false);
   const [folderRequest, setFolderRequest] = useState(0);
   const [folderPending, setFolderPending] = useState(false);
   const [demoQueued, setDemoQueued] = useState(false);
   const [tourOpen, setTourOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [sharing, setSharing] = useState(false);
+  const [sharedUrl, setSharedUrl] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+  const [locked, setLocked] = useState(Boolean(readOnly && initialShare));
+  const shareBootstrapped = useRef(false);
+  const skipActiveLoad = useRef(false);
   const afterAuth = useRef<"demo" | "folder" | null>(null);
-  const showTree = keepFiles && filesOpen;
+  const showTree = files.enabled && filesOpen;
   const { workspace } = usePyCompiler();
   const { code, stdin, setCode, setStdin, load } = workspace;
   const filesRef = useRef(files.entries);
@@ -155,13 +178,30 @@ export function PyCompiler({
     if (files.ready && files.entries.length > 0) setFilesOpen(true);
   }, [files.ready, files.entries.length]);
 
+  const seededMain = useRef(false);
+  useEffect(() => {
+    if (!files.ready || files.entries.length > 0 || seededMain.current || initialShare) return;
+    seededMain.current = true;
+    skipActiveLoad.current = true;
+    files.ensureFile("main.py", code || 'print("Hello, world!")\n');
+  }, [files.ready, files.entries.length, files.ensureFile, code, initialShare]);
+
   function openFolderUi() {
     setFilesOpen(true);
     setFolderRequest((n) => n + 1);
     if (window.matchMedia("(max-width: 1023px)").matches) setTab("files");
   }
 
+  function flash(message: string) {
+    setToast(message);
+    window.setTimeout(() => setToast(null), 2400);
+  }
+
   function onCreateFolder() {
+    if (files.mode === "local") {
+      openFolderUi();
+      return;
+    }
     if (authLoading) {
       afterAuth.current = "folder";
       setFolderPending(true);
@@ -176,6 +216,12 @@ export function PyCompiler({
   }
 
   function onPreviewDemo() {
+    if (files.mode === "local") {
+      files.seedDemo();
+      setFilesOpen(true);
+      setTab("code");
+      return;
+    }
     if (authLoading || (user && !files.ready)) {
       afterAuth.current = "demo";
       setFolderPending(true);
@@ -189,6 +235,123 @@ export function PyCompiler({
     files.seedDemo();
     setFilesOpen(true);
     setTab("code");
+  }
+
+  useEffect(() => {
+    if (!initialShare || shareBootstrapped.current || !files.ready) return;
+    shareBootstrapped.current = true;
+    skipActiveLoad.current = true;
+    files.replaceWorkspace(initialShare.entries, initialShare.activePath);
+    setFilesOpen(true);
+    const active =
+      initialShare.entries.find((entry) => entry.kind === "file" && entry.path === initialShare.activePath)?.content ??
+      initialShare.entries.find((entry) => entry.kind === "file")?.content ??
+      "";
+    load(active, initialShare.stdin || "");
+    setTab("code");
+  }, [initialShare, files.ready, files.replaceWorkspace, load]);
+
+  async function onExample(template: CompilerTemplate) {
+    if (locked) return;
+    if (template.seedDemo) {
+      onPreviewDemo();
+      load(template.code, template.stdin || "");
+      flash("Loaded folders + imports example");
+      return;
+    }
+    const path = files.activePath || "main.py";
+    if (files.entries.length === 0) {
+      files.ensureFile(path, template.code);
+    } else {
+      files.ensureFile(path, template.code);
+    }
+    load(template.code, template.stdin || "");
+    setInputOpen(Boolean(template.stdin));
+    flash(`Loaded “${template.label}”`);
+  }
+
+  async function onOpenFile() {
+    if (locked) return;
+    const picked = await pickPythonFile();
+    if (!picked) return;
+    const path = picked.name.endsWith(".py") ? picked.name : `${picked.name}.py`;
+    files.ensureFile(path, picked.content);
+    load(picked.content, stdin);
+    setFilesOpen(true);
+    setTab("code");
+    flash(`Opened ${path}`);
+  }
+
+  function onDownloadFile() {
+    const name = (files.activePath || "main.py").split("/").pop() || "main.py";
+    downloadTextFile(name.endsWith(".py") ? name : `${name}.py`, code);
+  }
+
+  async function onDownloadZip() {
+    const entries =
+      files.entries.length > 0
+        ? files.entries.map((entry) =>
+            entry.kind === "file" && entry.path === (files.activePath || "main.py")
+              ? { ...entry, content: code }
+              : entry,
+          )
+        : [{ path: "main.py", kind: "file" as const, content: code }];
+    await downloadWorkspaceZip(entries);
+    flash("Workspace zip downloaded");
+  }
+
+  async function onImportZip() {
+    if (locked) return;
+    const file = await pickZipFile();
+    if (!file) return;
+    const parsed = await entriesFromZip(file);
+    if ("error" in parsed) {
+      flash(parsed.error);
+      return;
+    }
+    files.replaceWorkspace(parsed.entries, parsed.activePath);
+    const active = parsed.entries.find((entry) => entry.path === parsed.activePath)?.content ?? "";
+    load(active, "");
+    setFilesOpen(true);
+    setTab("code");
+    flash("Zip imported");
+  }
+
+  async function onCopyCode() {
+    await copyText(code);
+    setCopied(true);
+    flash("Code copied");
+    window.setTimeout(() => setCopied(false), 1600);
+  }
+
+  async function onShare() {
+    setSharing(true);
+    setSharedUrl(null);
+    try {
+      const entries =
+        files.entries.length > 0
+          ? files.entries.map((entry) =>
+              entry.kind === "file" && entry.path === (files.activePath || "main.py")
+                ? { ...entry, content: code }
+                : entry,
+            )
+          : [{ path: "main.py", kind: "file" as const, content: code }];
+      const created = await pythonShareApi.create({
+        title: files.activePath || "main.py",
+        stdin,
+        activePath: files.activePath || "main.py",
+        entries,
+        code,
+      });
+      const url = `${window.location.origin}${created.path}`;
+      setSharedUrl(url);
+      await copyText(url);
+      flash("Share link copied");
+    } catch (err) {
+      flash(err instanceof Error ? err.message : "Could not create share link");
+    } finally {
+      setSharing(false);
+    }
   }
 
   useEffect(() => {
@@ -217,6 +380,10 @@ export function PyCompiler({
 
   useEffect(() => {
     if (!files.ready || !files.activePath) return;
+    if (skipActiveLoad.current) {
+      skipActiveLoad.current = false;
+      return;
+    }
     const content = filesRef.current.find((entry) => entry.kind === "file" && entry.path === files.activePath)?.content ?? "";
     load(content, stdinRef.current);
   }, [files.ready, files.activePath, load]);
@@ -275,6 +442,7 @@ export function PyCompiler({
   }
 
   function onCodeChange(next: string) {
+    if (locked) return;
     setCode(next);
     if (markLine) setMarkLine(undefined);
     files.updateActive(next);
@@ -404,19 +572,33 @@ export function PyCompiler({
           <h1 className="truncate text-[16px] font-extrabold leading-tight">{homeHref ? "Online Python Compiler" : "Python compiler"}</h1>
           <RuntimeLabel />
         </div>
-        <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-1.5">
+          <CompilerIdeMenu
+            light={light}
+            onExample={(template) => void onExample(template)}
+            onOpenFile={() => void onOpenFile()}
+            onDownloadFile={onDownloadFile}
+            onDownloadZip={() => void onDownloadZip()}
+            onImportZip={() => void onImportZip()}
+            onCopy={() => void onCopyCode()}
+            onShare={() => void onShare()}
+            sharing={sharing}
+            copied={copied}
+            sharedUrl={sharedUrl}
+          />
           <button
             type="button"
             onClick={onCreateFolder}
+            disabled={locked}
             className={cn(
-              "inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[12.5px] font-medium transition",
+              "inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[12.5px] font-medium transition disabled:opacity-50",
               light
                 ? "bg-black/[0.04] text-[#3a4553] hover:bg-black/[0.07]"
                 : "bg-white/[0.06] text-white/75 hover:bg-white/10 hover:text-white",
             )}
           >
             <FolderPlus className="h-3.5 w-3.5 opacity-70" />
-            Create folder
+            <span className="hidden md:inline">Create folder</span>
           </button>
           <ThemeToggle light={light} onToggle={toggleTheme} />
           <button
@@ -436,6 +618,39 @@ export function PyCompiler({
           <span className="ml-1 hidden items-center gap-1.5 sm:flex">{vizBtn}{runBtn}</span>
         </div>
       </header>
+
+      {toast ? (
+        <div className="pointer-events-none absolute left-1/2 top-16 z-50 -translate-x-1/2 rounded-full bg-[#101820]/90 px-3 py-1.5 text-[12px] font-medium text-white shadow-lg">
+          {toast}
+        </div>
+      ) : null}
+      {sharedUrl ? (
+        <div className={cn("flex shrink-0 items-center gap-2 border-b px-3 py-1.5 text-[12px] sm:px-5", light ? "border-hairline bg-white/70 text-[#3a4553]" : "border-white/10 bg-white/5 text-white/75")}>
+          <span className="truncate">Share: {sharedUrl}</span>
+          <button
+            type="button"
+            className="shrink-0 font-semibold text-[#3d84c6]"
+            onClick={() => void copyText(sharedUrl).then(() => flash("Share link copied"))}
+          >
+            Copy
+          </button>
+        </div>
+      ) : null}
+      {locked ? (
+        <div className={cn("flex shrink-0 items-center justify-between gap-2 border-b px-3 py-1.5 text-[12px] sm:px-5", light ? "border-hairline bg-[#fff7ed] text-[#9a3412]" : "border-white/10 bg-[#3b2416] text-[#fdba74]")}>
+          <span>Read-only share. Fork to edit on your device.</span>
+          <button
+            type="button"
+            className="rounded-full bg-[#3d84c6] px-2.5 py-1 text-[12px] font-semibold text-white"
+            onClick={() => {
+              setLocked(false);
+              flash("Forked — you can edit now");
+            }}
+          >
+            Fork
+          </button>
+        </div>
+      ) : null}
 
       {rt.phase === "loading" && (
         <div className={cn("h-0.5 shrink-0", light ? "bg-hairline" : "bg-white/10")} aria-hidden>
@@ -498,12 +713,15 @@ export function PyCompiler({
               saving={files.saving}
               error={files.error}
               folderRequest={folderRequest}
+              localHint={files.mode === "local"}
               onOpen={(path) => {
                 files.openFile(path);
                 setTab("code");
               }}
-              onCreate={files.createEntry}
-              onRemove={files.removeEntry}
+              onCreate={locked ? () => "This share is read-only." : files.createEntry}
+              onRemove={locked ? () => undefined : files.removeEntry}
+              onRename={locked ? () => "This share is read-only." : files.renameEntry}
+              onMove={locked ? () => "This share is read-only." : files.moveEntry}
               className={cn("w-full lg:w-52", tab === "files" ? "flex" : "hidden lg:flex")}
             />
           )}
@@ -512,8 +730,17 @@ export function PyCompiler({
             {files.activePath || "main.py"}
             <span className={cn("ml-auto normal-case tracking-normal", light ? "text-muted" : "text-white/35")}>Ctrl/⌘ + Enter to run</span>
           </PaneTitle>
-          <section aria-label={files.activePath || "main.py"} className={cn("min-h-0 flex-1 overflow-auto overscroll-contain lg:block", light ? "bg-white" : "bg-[#1c2836]", tab === "code" ? "block" : "hidden")}>
-            <PyEditor theme={theme} value={code} onChange={onCodeChange} onRun={run} minLines={18} label={`Python code (${files.activePath || "main.py"})`} markLine={view === "viz" ? undefined : markLine} activeLine={activeLine} />
+          <section aria-label={files.activePath || "main.py"} className={cn("min-h-0 flex-1 overflow-hidden overscroll-contain lg:block", light ? "bg-white" : "bg-[#1c2836]", tab === "code" ? "block" : "hidden")}>
+            <MonacoPyEditor
+              theme={theme}
+              value={code}
+              onChange={onCodeChange}
+              onRun={run}
+              readOnly={locked}
+              label={`Python code (${files.activePath || "main.py"})`}
+              markLine={view === "viz" ? undefined : markLine}
+              activeLine={activeLine}
+            />
           </section>
 
           {!interactive && (

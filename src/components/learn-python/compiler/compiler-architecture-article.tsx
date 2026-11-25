@@ -24,13 +24,16 @@ const COMPILER = "/openpythoncompiler";
 
 const RELATED = [
   [`${COMPILER}#faq`, "Online Python compiler: FAQ"],
+  ["/blog/online-python-ide", "Online Python IDE: editor, folders, share"],
+  ["/blog/share-python-code-online", "Share Python code online with a link"],
   ["/blog/online-python-compiler-with-input", "Online Python compiler with input(): how it works"],
-  ["/blog/python-compiler-for-mobile", "Python compiler for mobile: code Python on your phone"],
-  ["/blog/is-python-compiled-or-interpreted", "Is Python compiled or interpreted?"],
-  ["/blog/how-to-run-python-code-online", "How to run Python code online"],
+  ["/blog/python-compiler-for-mobile", "Python compiler for mobile"],
+  ["/blog/python-in-browser-webassembly", "How Python runs in the browser (WebAssembly)"],
+  ["/blog/online-python-compiler-for-students-india", "Online Python compiler for students in India"],
 ] as const;
 
 const SECTIONS = [
+  ["simple", "Simple version (session)"],
   ["problem", "The problem"],
   ["overview", "The big picture"],
   ["runtime", "1. Python in the browser"],
@@ -39,10 +42,13 @@ const SECTIONS = [
   ["input", "4. Making input() work"],
   ["safety", "5. Safety nets"],
   ["errors", "6. Errors a beginner can read"],
-  ["editor", "7. The editor"],
-  ["devices", "8. Phone and desktop"],
-  ["saving", "9. Saving your work"],
-  ["packages", "10. numpy and friends"],
+  ["editor", "7. Monaco editor"],
+  ["files", "8. Folders, imports & zip"],
+  ["share", "9. Share links"],
+  ["viz", "10. Visualize"],
+  ["devices", "11. Phone and desktop"],
+  ["saving", "12. Saving your work"],
+  ["packages", "13. numpy and friends"],
   ["limits", "What it can't do"],
   ["numbers", "The numbers"],
 ] as const;
@@ -146,20 +152,23 @@ export function CompilerArchitectureArticle() {
   return (
     <article className="mx-auto w-full max-w-[1120px] px-4 pb-24 pt-10 sm:px-6 lg:px-8">
       <header className="max-w-[820px]">
-        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-coral">Engineering · Mentr Learn</p>
+        <p className="font-mono text-[12px] uppercase tracking-[0.16em] text-coral">Engineering · Session notes · Mentr Learn</p>
         <h1 className="mt-2 text-[34px] font-extrabold leading-[1.1] tracking-tight sm:text-[46px]">
-          How we built a Python compiler that runs entirely in your browser
+          How we built a full browser Python IDE — simple and technical
         </h1>
         <p className="mt-4 text-[17px] leading-relaxed text-muted sm:text-[18px]">
-          No server runs your code. Python itself is downloaded once, then runs on your own phone or laptop. This is the full architecture,
-          step by step, with the real numbers and the real trade-offs.
+          Start with the <a href="#simple" className="font-semibold text-ink underline underline-offset-4">simple session brief</a>, then dive into
+          the architecture: Pyodide, Web Workers, Monaco, folders + imports, share links, zip IO, and Visualize. No server runs your student code.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link href={COMPILER} className="inline-flex items-center gap-2 bg-ink px-5 py-3 text-[15px] font-bold text-white transition hover:bg-black">
-            Try the compiler <ArrowRight className="h-4 w-4" />
+            Open the IDE <ArrowRight className="h-4 w-4" />
           </Link>
-          <a href="#overview" className="inline-flex items-center gap-2 border border-ink px-5 py-3 text-[15px] font-bold">
-            Jump to the diagram
+          <a href="#simple" className="inline-flex items-center gap-2 border border-ink px-5 py-3 text-[15px] font-bold">
+            Simple version
+          </a>
+          <a href="#overview" className="inline-flex items-center gap-2 border border-ink/30 px-5 py-3 text-[15px] font-bold text-ink/80">
+            Technical diagram
           </a>
         </div>
       </header>
@@ -195,6 +204,42 @@ export function CompilerArchitectureArticle() {
         </nav>
 
         <div className="min-w-0 max-w-[780px] space-y-12">
+          <Section id="simple" kicker="Session brief" title="Simple version — what to demo in class">
+            <p>
+              Tell the room: <b>“A compiler becomes an IDE when files, share, and editor quality exist.”</b> Then show these five moves on{" "}
+              <Link href={COMPILER} className="font-semibold underline underline-offset-4">
+                mentr.in/openpythoncompiler
+              </Link>
+              .
+            </p>
+            <Flow
+              steps={[
+                { who: "demo 1", what: "Monaco editor — find (⌘/Ctrl+F), multi-cursor, autocomplete feel, ⌘/Ctrl+Enter to Run." },
+                { who: "demo 2", what: "Examples → Folders + imports. Run. Show greetings/ and maths/ in the explorer." },
+                { who: "demo 3", what: "Rename a file, Move it into a folder. Real package-style imports still work." },
+                { who: "demo 4", what: "Share → copy /c/… link. Open in a new tab (read-only). Fork to edit." },
+                { who: "demo 5", what: "File → Export zip / Import zip. Open .py and Download .py." },
+              ]}
+            />
+            <Table
+              head={["Layer", "Plain English", "Where it lives"]}
+              rows={[
+                ["UI", "Buttons, Monaco, folders, share toast", "React on the main thread"],
+                ["Engine", "Load Python, Run, Stop, packages", "Web Worker + Pyodide (WASM)"],
+                ["Files", "Workspace tree on this device (or account)", "localStorage or Mongo workspace API"],
+                ["Share", "Snapshot of code + folders → short link", "POST /api/python-compiler/share → /c/:id"],
+              ]}
+            />
+            <Note>
+              <b>One sentence for the whiteboard:</b> ship CPython to the browser once (WebAssembly), run it in a background Worker so the page
+              never freezes, keep projects as folders that {mono("import")} each other, and share a snapshot URL instead of emailing .py files.
+            </Note>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Box icon={Laptop} title="Student path" sub="Write → Run → Visualize → Share with teacher" />
+              <Box icon={Cpu} title="Builder path" sub="Pyodide → Worker → Monaco → FS → Share API" />
+            </div>
+          </Section>
+
           <Section id="problem" kicker="Why" title="The problem we were solving">
             <p>
               Our students learn Python in short lessons. Every lesson needs them to <b>run code</b>: in quick examples, in practice questions,
@@ -219,39 +264,44 @@ export function CompilerArchitectureArticle() {
           </Section>
 
           <Section id="overview" kicker="Architecture" title="The big picture">
-            <p>There are only three moving parts. Our server never sees or executes the program; it only serves static files.</p>
+            <p>
+              Four moving parts. The server still <b>never executes</b> student programs. It only serves the runtime, optional workspace sync, and
+              share snapshots.
+            </p>
             <div className="border border-hairline bg-[#faf8f4] p-4 sm:p-6">
               <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Inside one browser tab</p>
               <div className="grid items-stretch gap-3 md:grid-cols-[1fr_auto_1fr]">
                 <div className="space-y-2 border border-ink/15 bg-white p-3">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-ink">Main thread · React UI</p>
-                  <Box icon={FileCode2} title="Editor" sub="textarea + syntax colours" />
-                  <Box icon={Layers} title="Output console" sub="streams text as it arrives" />
+                  <Box icon={FileCode2} title="Monaco editor" sub="find, multi-cursor, Python language" />
+                  <Box icon={HardDrive} title="File explorer" sub="folders, rename, move, zip IO" />
+                  <Box icon={Layers} title="Output + Visualize" sub="streams + step-through tutor" />
                   <Box icon={Cpu} title="PythonEngine" sub="one per tab: start, run, stop, timeouts" />
                 </div>
                 <div className="flex flex-row items-center justify-center gap-2 py-1 md:flex-col">
                   <ArrowLeftRight className="h-6 w-6 rotate-90 text-[#3d84c6] md:rotate-0" />
-                  <p className="max-w-[120px] text-center font-mono text-[10.5px] leading-tight text-muted">postMessage + SharedArrayBuffer</p>
+                  <p className="max-w-[120px] text-center font-mono text-[10.5px] leading-tight text-muted">postMessage + SharedArrayBuffer + virtual FS</p>
                 </div>
                 <div className="space-y-2 border border-[#2a3848] bg-[#15202c] p-3 text-white">
                   <p className="font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-[#7eb6ea]">Web Worker · background thread</p>
                   <Box dark icon={Zap} title="Pyodide" sub="CPython 3.14.2 compiled to WebAssembly" />
-                  <Box dark icon={HardDrive} title="Python standard library" sub="python_stdlib.zip, in-memory files" />
+                  <Box dark icon={HardDrive} title="In-memory packages" sub="multi-file imports mounted before run" />
                   <Box dark icon={Keyboard} title="stdin / stdout / stderr" sub="wired to the page" />
                 </div>
               </div>
               <div className="my-3 flex justify-center">
                 <ArrowDown className="h-5 w-5 text-muted" />
               </div>
-              <p className="mb-2 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Downloaded once, then cached for a year</p>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <Box icon={Server} title="mentr.in/pyodide/v314.0.7/" sub="our own copy of the runtime (first choice)" />
-                <Box icon={Globe} title="cdn.jsdelivr.net" sub="backup copy, and optional packages like numpy" />
+              <p className="mb-2 text-center font-mono text-[11px] uppercase tracking-[0.14em] text-muted">Static runtime + optional APIs</p>
+              <div className="grid gap-3 sm:grid-cols-3">
+                <Box icon={Server} title="mentr.in/pyodide/v314.0.7/" sub="immutable runtime (first choice)" />
+                <Box icon={Globe} title="cdn.jsdelivr.net" sub="backup + numpy-class packages" />
+                <Box icon={ShieldCheck} title="/api/python-compiler/*" sub="share snapshots + tutor workspaces" />
               </div>
             </div>
             <Note>
-              The same engine powers four places: lesson examples, practice questions, Final Challenge projects and the full-screen compiler.
-              Build it once, use it everywhere.
+              The same engine powers lesson examples, practice, Final Challenge projects, and the full IDE. Monaco + folders are the IDE layer on
+              top of that engine.
             </Note>
           </Section>
 
@@ -480,23 +530,85 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
             />
           </Section>
 
-          <Section id="editor" kicker="Step 7" title="A small editor, built for students">
+          <Section id="editor" kicker="Step 7" title="Monaco — the IDE-quality editor">
             <p>
-              We didn&apos;t pull in a heavyweight code-editor library. The editor is a normal {mono("<textarea>")} with transparent text,
-              laid exactly over a coloured copy of the same code. You type into the real textarea, so the phone&apos;s own keyboard, selection,
-              copy-paste and accessibility all work, and you see the coloured layer underneath.
+              The full-screen compiler now uses <b>Monaco</b> (the same editor family as VS Code) via {mono("@monaco-editor/react")}. That gives
+              find/replace, multi-cursor, bracket matching, and a Python language mode without shipping a separate desktop app.
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Box icon={Layers} title="Two layers, one grid cell" sub="highlighted <pre> below, transparent <textarea> on top" />
-              <Box icon={Keyboard} title="Python-aware keys" sub="Tab = 4 spaces · auto-indent after a colon · Ctrl/⌘ + Enter runs" />
+              <Box icon={Layers} title="Run shortcut" sub="Ctrl/⌘ + Enter bound in onMount" />
+              <Box icon={Keyboard} title="Decorations" sub="error line + Visualize active line as whole-line highlights" />
             </div>
             <p>
-              Syntax colours come from a single regular expression that recognises comments, strings, keywords, common built-ins and numbers.
-              It is deliberately simple: fast enough to re-colour on every keystroke.
+              Lesson screens still use a lighter textarea highlighter where a full IDE would be overkill. The public compiler is where we want the
+              “this isn’t a textarea” moment for demos and SEO queries like <b>online Python IDE</b>.
+            </p>
+            <Note>
+              Monaco loads asynchronously. The first open shows “Loading editor…”, then hydrates. Theme follows the compiler light/dark toggle
+              ({mono("vs")} / {mono("vs-dark")}).
+            </Note>
+          </Section>
+
+          <Section id="files" kicker="Step 8" title="Folders, imports, rename, move, zip">
+            <p>
+              A single {mono("main.py")} is fine for Hello World. Real Python teaching needs packages. The explorer stores a workspace of{" "}
+              {mono("{ path, kind: file|folder, content }")} entries.
+            </p>
+            <ul className="list-disc space-y-1.5 pl-6">
+              <li>
+                <b>Anonymous / student:</b> workspace persists in {mono("localStorage")} ({mono("mentr:pycompiler:files:v1")}).
+              </li>
+              <li>
+                <b>Parent / tutor signed in:</b> same shape synced to Mongo via {mono("GET/PUT /api/python-compiler/files")}.
+              </li>
+              <li>
+                Before Run, the page mounts files into the worker’s virtual FS and sets the active filename so{" "}
+                {mono("from greetings.hello import hello")} resolves.
+              </li>
+              <li>
+                <b>Rename / move</b> remap paths (including children under a folder). <b>Import/export zip</b> uses JSZip in the browser — no
+                upload of the zip to our servers.
+              </li>
+            </ul>
+            <Code title="demo package layout">{`greetings/
+  __init__.py
+  hello.py          # def hello(name): ...
+maths/
+  __init__.py
+  score.py          # def average(marks): ...
+main.py             # from greetings.hello import hello`}</Code>
+            <Note>
+              Depth is capped (6), entry count (80), and per-file size so a shared school laptop can’t paste a giant dump into the workspace.
+            </Note>
+          </Section>
+
+          <Section id="share" kicker="Step 9" title="Share links — /c/abc123">
+            <p>
+              Share creates an immutable snapshot (code + optional multi-file workspace + stdin). The page copies a URL like{" "}
+              {mono("mentr.in/c/<id>")}. Opening it loads a <b>read-only</b> compiler; <b>Fork</b> unlocks editing on the viewer’s device.
+            </p>
+            <Flow
+              steps={[
+                { who: "browser", what: "POST /api/python-compiler/share with entries + activePath + stdin (rate-limited)." },
+                { who: "API", what: "Normalize workspace, mint a short base64url id, store PythonShare in Mongo." },
+                { who: "browser", what: "Copy origin + /c/:id to the clipboard; banner shows the link." },
+                { who: "viewer", what: "/c/[id] fetches the snapshot, mounts it, starts read-only until Fork." },
+              ]}
+            />
+            <p>
+              COOP/COEP isolation headers also apply on {mono("/c/:path*")} so interactive {mono("input()")} still works on shared links.
             </p>
           </Section>
 
-          <Section id="devices" kicker="Step 8" title="One compiler, two very different screens">
+          <Section id="viz" kicker="Step 10" title="Visualize — step through the program">
+            <p>
+              Visualize asks the worker to run the live-py-tutor tracer and returns a list of steps (stack, heap, stdout). The UI steps through
+              them and highlights the active line in Monaco. It’s teaching scaffolding, not a full debugger with breakpoints — good for showing{" "}
+              {mono("for")} loops and {mono("input()")} state in a session.
+            </p>
+          </Section>
+
+          <Section id="devices" kicker="Step 11" title="One compiler, two very different screens">
             <p>
               Same component, same engine. Only the layout changes, using CSS breakpoints. No separate mobile app or mobile version.
             </p>
@@ -568,20 +680,25 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
             </Note>
           </Section>
 
-          <Section id="saving" kicker="Step 9" title="Saving your work without an account">
+          <Section id="saving" kicker="Step 12" title="Saving your work">
             <ul className="list-disc space-y-1.5 pl-6">
               <li>
-                Code and input are <b>autosaved to the browser&apos;s localStorage</b> 300 ms after you stop typing. Reload and it&apos;s still
-                there. Nothing is uploaded.
+                Active buffer + stdin autosave to {mono("localStorage")} ({mono("mentr:pycompiler:v1:*")}) as you type.
               </li>
               <li>
-                <b>Open a .py file</b> (up to 200 KB), <b>Download main.py</b>, and <b>Copy</b>: everything happens locally.
+                Multi-file workspace autosaves locally for everyone; tutors/parents can sync to the account API.
               </li>
-              <li>Inside the course, lessons can hand code to the compiler with an &ldquo;Open in compiler&rdquo; button.</li>
+              <li>
+                <b>File menu:</b> Open .py, Download .py, Copy, Import zip, Export zip — all client-side.
+              </li>
+              <li>
+                <b>Share</b> is the cross-device path: send a link instead of clearing site data or switching phones.
+              </li>
+              <li>Course lessons can still hand code to the compiler with “Open in compiler”.</li>
             </ul>
           </Section>
 
-          <Section id="packages" kicker="Step 10" title="numpy and friends, on demand">
+          <Section id="packages" kicker="Step 13" title="numpy and friends, on demand">
             <p>
               The standard library ships with the runtime. For anything else, the compiler reads the program&apos;s {mono("import")} lines
               before running and asks Pyodide to install matching packages ({mono("loadPackagesFromImports")}). The Pyodide distribution we
@@ -612,7 +729,13 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
                 <b>Long jobs are cut off</b> at 15 seconds. This is a learning tool, not a place to train models.
               </li>
               <li>
-                <b>Your code lives on one device.</b> Clearing site data, or switching to another phone, starts fresh.
+                <b>Local files live on one device</b> until you Share or sync as a tutor/parent. Clearing site data starts a fresh local workspace.
+              </li>
+              <li>
+                <b>No full LSP / breakpoints yet.</b> Monaco gives IDE editing; Visualize is step-through, not a gdb-style debugger.
+              </li>
+              <li>
+                <b>Plots:</b> matplotlib can import, but canvases are not rendered in the output pane yet.
               </li>
             </ul>
           </Section>
@@ -627,14 +750,15 @@ await py.runPythonAsync(code, { globals: ns, filename: "main.py" });`}</Code>
                 ["Run time limit", "15 s compiler · 6 s lessons (input wait not counted)"],
                 ["Output cap", "200,000 characters"],
                 ["Max line for input()", "64 KB"],
-                ["Upload limit", ".py files up to 200 KB"],
+                ["Workspace", "≤ 80 entries · depth ≤ 6 · ~80 KB/file"],
                 ["Optional packages available", "357 (loaded on first import)"],
-                ["Core code", "Worker ≈ 215 lines · engine ≈ 360 lines · compiler UI ≈ 600 lines"],
+                ["Editor", "Monaco (@monaco-editor/react)"],
+                ["Share", "Short id snapshot → /c/:id (read-only + fork)"],
               ]}
             />
             <div className="grid gap-3 sm:grid-cols-2">
-              <Box icon={MonitorSmartphone} title="Stack" sub="Next.js + React + TypeScript · Pyodide (CPython → WebAssembly) · Web Worker · SharedArrayBuffer + Atomics" />
-              <Box icon={Server} title="Server's job" sub="Serve static files with the right cache and isolation headers. That's it." />
+              <Box icon={MonitorSmartphone} title="Stack" sub="Next.js + React + TypeScript · Monaco · Pyodide (CPython → WASM) · Web Worker · SharedArrayBuffer · JSZip" />
+              <Box icon={Server} title="Server's job" sub="Static runtime + isolation headers + optional workspace/share APIs. Never executes student code." />
             </div>
           </Section>
 

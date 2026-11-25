@@ -4,7 +4,7 @@ import { FacultyAuthForm } from "@/components/auth/faculty-auth-form";
 import { workspacePath, type PythonFileEntry } from "@/components/learn-python/compiler/use-python-files";
 import type { UserRole } from "@/lib/api";
 import { cn } from "@/lib/utils";
-import { ChevronRight, FileCode, Folder, FolderOpen, FolderPlus, Loader2, Plus, Trash2, X } from "lucide-react";
+import { ChevronRight, FileCode, Folder, FolderOpen, FolderPlus, Loader2, Pencil, Plus, Trash2, X } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 
 type TreeNode = { name: string; path: string; kind: "file" | "folder"; children: TreeNode[] };
@@ -61,8 +61,11 @@ export function PythonExplorer({
   onOpen,
   onCreate,
   onRemove,
+  onRename,
+  onMove,
   className,
   folderRequest = 0,
+  localHint = false,
 }: {
   light: boolean;
   email: string;
@@ -73,16 +76,29 @@ export function PythonExplorer({
   onOpen: (path: string) => void;
   onCreate: (parent: string, name: string, kind: "file" | "folder") => string | null;
   onRemove: (path: string) => void;
+  onRename: (path: string, nextName: string) => string | null;
+  onMove: (path: string, newParent: string) => string | null;
   className?: string;
   /** Bump to open the new-folder field. */
   folderRequest?: number;
+  localHint?: boolean;
 }) {
   const tree = useMemo(() => buildTree(entries), [entries]);
+  const folders = useMemo(
+    () => entries.filter((entry) => entry.kind === "folder").map((entry) => entry.path).sort(),
+    [entries],
+  );
   const [closed, setClosed] = useState<Set<string>>(new Set());
   const [selectedPath, setSelectedPath] = useState(activePath);
   const [draft, setDraft] = useState<{ kind: "file" | "folder"; parent: string } | null>(null);
   const [name, setName] = useState("");
   const [draftError, setDraftError] = useState<string | null>(null);
+  const [renamePath, setRenamePath] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState("");
+  const [renameError, setRenameError] = useState<string | null>(null);
+  const [movePath, setMovePath] = useState<string | null>(null);
+  const [moveParent, setMoveParent] = useState("");
+  const [moveError, setMoveError] = useState<string | null>(null);
   const [pendingDelete, setPendingDelete] = useState<{ path: string; name: string; kind: "file" | "folder" } | null>(null);
   const selected = entries.find((entry) => entry.path === selectedPath);
   const creationParent = selected?.kind === "folder" ? selected.path : parentPath(selectedPath || activePath);
@@ -128,6 +144,46 @@ export function PythonExplorer({
     reveal(created);
     if (draft.kind === "folder") setSelectedPath(created);
     setDraft(null);
+  }
+
+  function beginRename(path: string) {
+    setRenamePath(path);
+    setRenameValue(baseName(path));
+    setRenameError(null);
+    setMovePath(null);
+  }
+
+  function submitRename() {
+    if (!renamePath) return;
+    const message = onRename(renamePath, renameValue);
+    if (message) {
+      setRenameError(message);
+      return;
+    }
+    const next = workspacePath(parentPath(renamePath), renameValue.trim());
+    setSelectedPath(next);
+    reveal(next);
+    setRenamePath(null);
+  }
+
+  function beginMove(path: string) {
+    setMovePath(path);
+    setMoveParent(parentPath(path));
+    setMoveError(null);
+    setRenamePath(null);
+  }
+
+  function submitMove() {
+    if (!movePath) return;
+    const message = onMove(movePath, moveParent);
+    if (message) {
+      setMoveError(message);
+      return;
+    }
+    const next = workspacePath(moveParent, baseName(movePath));
+    setSelectedPath(next);
+    reveal(next);
+    setMovePath(null);
   }
 
   return (
@@ -181,6 +237,74 @@ export function PythonExplorer({
           </div>
         </form>
       )}
+      {renamePath && (
+        <form
+          className="border-b border-white/10 px-2 py-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitRename();
+          }}
+        >
+          <p className={cn("mb-1 font-mono text-[10px] uppercase tracking-[0.12em]", light ? "text-muted" : "text-white/45")}>Rename</p>
+          <input
+            autoFocus
+            value={renameValue}
+            onChange={(e) => setRenameValue(e.target.value)}
+            className={cn(
+              "w-full border px-2 py-1 font-mono text-[12px] outline-none",
+              light ? "border-hairline bg-white text-ink" : "border-white/15 bg-[#1c2836] text-white",
+            )}
+          />
+          {renameError && <p className="mt-1 text-[11px] text-[#c2410c]">{renameError}</p>}
+          <div className="mt-1.5 flex gap-1.5">
+            <button type="submit" className="bg-[#3d84c6] px-2 py-1 text-[11px] font-bold text-white">
+              Save
+            </button>
+            <button type="button" onClick={() => setRenamePath(null)} className={cn("px-2 py-1 text-[11px]", light ? "text-muted" : "text-white/55")}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
+      {movePath && (
+        <form
+          className="border-b border-white/10 px-2 py-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            submitMove();
+          }}
+        >
+          <p className={cn("mb-1 font-mono text-[10px] uppercase tracking-[0.12em]", light ? "text-muted" : "text-white/45")}>
+            Move {baseName(movePath)}
+          </p>
+          <select
+            value={moveParent}
+            onChange={(e) => setMoveParent(e.target.value)}
+            className={cn(
+              "w-full border px-2 py-1 font-mono text-[12px] outline-none",
+              light ? "border-hairline bg-white text-ink" : "border-white/15 bg-[#1c2836] text-white",
+            )}
+          >
+            <option value="">Workspace root</option>
+            {folders
+              .filter((folder) => folder !== movePath && !folder.startsWith(`${movePath}/`))
+              .map((folder) => (
+                <option key={folder} value={folder}>
+                  {folder}
+                </option>
+              ))}
+          </select>
+          {moveError && <p className="mt-1 text-[11px] text-[#c2410c]">{moveError}</p>}
+          <div className="mt-1.5 flex gap-1.5">
+            <button type="submit" className="bg-[#3d84c6] px-2 py-1 text-[11px] font-bold text-white">
+              Move
+            </button>
+            <button type="button" onClick={() => setMovePath(null)} className={cn("px-2 py-1 text-[11px]", light ? "text-muted" : "text-white/55")}>
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
       <div className="min-h-0 flex-1 overflow-auto py-1">
         {tree.length === 0 ? (
           <p className={cn("px-3 py-2 text-[12px]", light ? "text-muted" : "text-white/45")}>No files yet.</p>
@@ -211,6 +335,8 @@ export function PythonExplorer({
                 reveal(path);
               }}
               onCreateIn={(path, kind) => begin(kind, path)}
+              onAskRename={beginRename}
+              onAskMove={beginMove}
               onAskRemove={setPendingDelete}
             />
           ))
@@ -218,7 +344,15 @@ export function PythonExplorer({
       </div>
       <p className={cn("flex items-center gap-1 border-t px-2 py-1 font-mono text-[10px]", light ? "border-hairline text-muted" : "border-white/10 text-white/40")}>
         {saving ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
-        {error ? <span className="text-[#c2410c]">{error}</span> : saving ? "Saving…" : "Saved to your account"}
+        {error ? (
+          <span className="text-[#c2410c]">{error}</span>
+        ) : saving ? (
+          "Saving…"
+        ) : localHint ? (
+          "Saved on this device"
+        ) : (
+          "Saved to your account"
+        )}
       </p>
       {pendingDelete && (
         <div className="fixed inset-0 z-[70] flex items-end justify-center p-0 sm:items-center sm:p-4" role="dialog" aria-modal="true" aria-labelledby="py-delete-title">
@@ -265,6 +399,8 @@ function TreeRow({
   onOpen,
   onSelectFolder,
   onCreateIn,
+  onAskRename,
+  onAskMove,
   onAskRemove,
 }: {
   node: TreeNode;
@@ -277,6 +413,8 @@ function TreeRow({
   onOpen: (path: string) => void;
   onSelectFolder: (path: string) => void;
   onCreateIn: (path: string, kind: "file" | "folder") => void;
+  onAskRename: (path: string) => void;
+  onAskMove: (path: string) => void;
   onAskRemove: (item: { path: string; name: string; kind: "file" | "folder" }) => void;
 }) {
   const open = !closed.has(node.path);
@@ -300,6 +438,7 @@ function TreeRow({
         <button
           type="button"
           onClick={() => (node.kind === "folder" ? onSelectFolder(node.path) : onOpen(node.path))}
+          onDoubleClick={() => onAskRename(node.path)}
           className="flex min-w-0 flex-1 items-center gap-1.5 py-1 text-left"
         >
           {node.kind === "folder" ? (
@@ -333,6 +472,30 @@ function TreeRow({
         ) : null}
         <button
           type="button"
+          aria-label={`Rename ${node.name}`}
+          title="Rename"
+          onClick={(e) => {
+            e.stopPropagation();
+            onAskRename(node.path);
+          }}
+          className={cn("p-1 opacity-70 transition sm:opacity-0 sm:group-hover:opacity-100", light ? "text-muted hover:text-ink" : "text-white/40 hover:text-white")}
+        >
+          <Pencil className="h-3 w-3" />
+        </button>
+        <button
+          type="button"
+          aria-label={`Move ${node.name}`}
+          title="Move"
+          onClick={(e) => {
+            e.stopPropagation();
+            onAskMove(node.path);
+          }}
+          className={cn("px-1 py-0.5 text-[10px] font-semibold opacity-70 transition sm:opacity-0 sm:group-hover:opacity-100", light ? "text-muted hover:text-ink" : "text-white/40 hover:text-white")}
+        >
+          Mv
+        </button>
+        <button
+          type="button"
           aria-label={`Delete ${node.name}`}
           onClick={(e) => {
             e.stopPropagation();
@@ -357,6 +520,8 @@ function TreeRow({
             onOpen={onOpen}
             onSelectFolder={onSelectFolder}
             onCreateIn={onCreateIn}
+            onAskRename={onAskRename}
+            onAskMove={onAskMove}
             onAskRemove={onAskRemove}
           />
         ))}

@@ -79,6 +79,19 @@ function Block({ block }: { block: ArticleBlock }) {
       </div>
     );
   }
+  if (block.type === "image") {
+    return (
+      <figure className="not-prose my-7 overflow-hidden rounded-2xl border-2 border-ink/80 bg-white">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={block.src} alt={block.alt} className="h-auto w-full object-cover" loading="lazy" />
+        {block.caption ? (
+          <figcaption className="border-t border-hairline px-4 py-2.5 text-sm leading-snug text-muted">
+            {block.caption}
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  }
   return (
     <aside className="blog-callout">
       <p className="blog-callout-title">{block.title}</p>
